@@ -14,7 +14,7 @@ export class Quantity extends Expression {
     this.unit = json.unit;
   }
 
-  exec(_ctx: Context) {
+  async exec(_ctx: Context) {
     return new DT.Quantity(this.value, this.unit);
   }
 }

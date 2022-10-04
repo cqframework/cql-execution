@@ -14,10 +14,10 @@ export class Property extends Expression {
     this.path = json.path;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     let obj = this.scope != null ? ctx.get(this.scope) : this.source;
     if (obj instanceof Expression) {
-      obj = obj.execute(ctx);
+      obj = await obj.execute(ctx);
     }
     let val = getPropertyFromObject(obj, this.path);
     if (val == null) {
@@ -66,10 +66,10 @@ export class Tuple extends Expression {
     return true;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     const val: any = {};
     for (const el of this.elements) {
-      val[el.name] = el.value != null ? el.value.execute(ctx) : undefined;
+      val[el.name] = el.value != null ? await el.value.execute(ctx) : undefined;
     }
     return val;
   }

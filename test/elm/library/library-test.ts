@@ -8,9 +8,11 @@ import { Repository, Code } from '../../../src/cql';
 const { p1, p2 } = require('./patients');
 
 describe('In Age Demographic', () => {
-  beforeEach(function () {
+  beforeEach(async function () {
     setup(this, data, [p1, p2]);
-    this.results = this.executor.withLibrary(this.lib).exec_patient_context(this.patientSource);
+    this.results = await this.executor
+      .withLibrary(this.lib)
+      .exec_patient_context(this.patientSource);
   });
 
   it('should have correct patient results', function () {
@@ -43,18 +45,20 @@ describe('Using CommonLib', () => {
     this.lib.includes.should.not.be.empty();
   });
 
-  it('should be able to execute expression from included library', function () {
-    this.results = this.executor.withLibrary(this.lib).exec_patient_context(this.patientSource);
+  it('should be able to execute expression from included library', async function () {
+    this.results = await this.executor
+      .withLibrary(this.lib)
+      .exec_patient_context(this.patientSource);
     this.results.patientResults['1'].ID.should.equal(false);
     this.results.patientResults['2'].ID.should.equal(true);
     this.results.patientResults['2'].FuncTest.should.equal(7);
     this.results.patientResults['1'].FuncTest.should.equal(7);
   });
 
-  it('should find the code defined in the included library', function () {
-    should.exist(this.supportLibCode.exec(this.ctx));
+  it('should find the code defined in the included library', async function () {
+    should.exist(await this.supportLibCode.exec(this.ctx));
     equivalent(
-      this.supportLibCode.exec(this.ctx),
+      await this.supportLibCode.exec(this.ctx),
       new Code('428371000124100', '2.16.840.1.113883.6.96', 'foo', 'directReferenceCode')
     ).should.be.true();
   });
@@ -65,71 +69,81 @@ describe('Using CommonLib2', () => {
     setup(this, data, [], {}, { AnotherNumber: 50 }, new Repository(data));
   });
 
-  it('should execute expression from included library that uses parameter', function () {
-    this.exprUsesParam.exec(this.ctx).should.equal(17);
+  it('should execute expression from included library that uses parameter', async function () {
+    (await this.exprUsesParam.exec(this.ctx)).should.equal(17);
   });
 
-  it('should execute expression from included library that uses sent-in parameter', function () {
-    this.exprUsesParam.exec(this.ctx.withParameters({ SomeNumber: 42 })).should.equal(42);
+  it('should execute expression from included library that uses sent-in parameter', async function () {
+    (await this.exprUsesParam.exec(this.ctx.withParameters({ SomeNumber: 42 }))).should.equal(42);
   });
 
-  it('should execute parameter from included library', function () {
-    this.exprUsesParamDirectly.exec(this.ctx).should.equal(17);
+  it('should execute parameter from included library', async function () {
+    (await this.exprUsesParamDirectly.exec(this.ctx)).should.equal(17);
   });
 
-  it('should execute sent-in parameter from included library', function () {
-    this.exprUsesParamDirectly.exec(this.ctx.withParameters({ SomeNumber: 73 })).should.equal(73);
+  it('should execute sent-in parameter from included library', async function () {
+    (
+      await this.exprUsesParamDirectly.exec(this.ctx.withParameters({ SomeNumber: 73 }))
+    ).should.equal(73);
   });
 
-  it('should execute expression from included library that uses parameter', function () {
-    this.exprUsesAnotherParam.exec(this.ctx).should.equal(50);
+  it('should execute expression from included library that uses parameter', async function () {
+    (await this.exprUsesAnotherParam.exec(this.ctx)).should.equal(50);
   });
 
-  it('should execute expression from included library that uses sent-in parameter', function () {
-    this.exprUsesAnotherParam.exec(this.ctx.withParameters({ AnotherNumber: 66 })).should.equal(66);
+  it('should execute expression from included library that uses sent-in parameter', async function () {
+    (
+      await this.exprUsesAnotherParam.exec(this.ctx.withParameters({ AnotherNumber: 66 }))
+    ).should.equal(66);
   });
 
-  it('should execute parameter from included library', function () {
-    this.exprUsesAnotherParamDirectly.exec(this.ctx).should.equal(50);
+  it('should execute parameter from included library', async function () {
+    (await this.exprUsesAnotherParamDirectly.exec(this.ctx)).should.equal(50);
   });
 
-  it('should execute sent-in parameter from included library', function () {
-    this.exprUsesAnotherParamDirectly
-      .exec(this.ctx.withParameters({ AnotherNumber: 73 }))
-      .should.equal(73);
+  it('should execute sent-in parameter from included library', async function () {
+    (
+      await this.exprUsesAnotherParamDirectly.exec(this.ctx.withParameters({ AnotherNumber: 73 }))
+    ).should.equal(73);
   });
 
-  it('should execute function from included library that uses parameter', function () {
-    this.funcUsesParam.exec(this.ctx).should.equal(22);
+  it('should execute function from included library that uses parameter', async function () {
+    (await this.funcUsesParam.exec(this.ctx)).should.equal(22);
   });
 
-  it('should execute expression from included library that calls function', function () {
-    this.exprCallsFunc.exec(this.ctx).should.equal(6);
+  it('should execute expression from included library that calls function', async function () {
+    (await this.exprCallsFunc.exec(this.ctx)).should.equal(6);
   });
 
-  it('should execute function from included library that calls function', function () {
-    this.funcCallsFunc.exec(this.ctx).should.equal(25);
+  it('should execute function from included library that calls function', async function () {
+    (await this.funcCallsFunc.exec(this.ctx)).should.equal(25);
   });
 
-  it('should execute expression from included library that uses expression', function () {
-    this.exprUsesExpr.exec(this.ctx).should.equal(3);
+  it('should execute expression from included library that uses expression', async function () {
+    (await this.exprUsesExpr.exec(this.ctx)).should.equal(3);
   });
 
-  it('should execute function from included library that uses expression', function () {
-    this.funcUsesExpr.exec(this.ctx).should.equal(7);
+  it('should execute function from included library that uses expression', async function () {
+    (await this.funcUsesExpr.exec(this.ctx)).should.equal(7);
   });
 
-  it('should execute function from included library that uses expression', function () {
-    this.exprSortsOnFunc
-      .exec(this.ctx)
-      .should.eql([{ N: 1 }, { N: 2 }, { N: 3 }, { N: 4 }, { N: 5 }]);
+  it('should execute function from included library that uses expression', async function () {
+    (await this.exprSortsOnFunc.exec(this.ctx)).should.eql([
+      { N: 1 },
+      { N: 2 },
+      { N: 3 },
+      { N: 4 },
+      { N: 5 }
+    ]);
   });
 });
 
 describe('Using CommonLib and CommonLib2', () => {
-  beforeEach(function () {
+  beforeEach(async function () {
     setup(this, data, [p1], {}, {}, new Repository(data));
-    this.results = this.executor.withLibrary(this.lib).exec_patient_context(this.patientSource);
+    this.results = await this.executor
+      .withLibrary(this.lib)
+      .exec_patient_context(this.patientSource);
     this.commonLocalIdObject = this.results.localIdPatientResultsMap['1'].Common;
     this.common2LocalIdObject = this.results.localIdPatientResultsMap['1'].Common2;
   });
@@ -164,9 +178,11 @@ describe('Using CommonLib and CommonLib2', () => {
 // NOTE: These all use the manually maintained fixture, see
 //       https://github.com/cqframework/cql-execution/pull/251
 describe('Using CommonLib and CommonLib2 with namespace support', () => {
-  beforeEach(function () {
+  beforeEach(async function () {
     setup(this, dataWithNamespace, [p1], {}, {}, new Repository(dataWithNamespace));
-    this.results = this.executor.withLibrary(this.lib).exec_patient_context(this.patientSource);
+    this.results = await this.executor
+      .withLibrary(this.lib)
+      .exec_patient_context(this.patientSource);
     this.commonLocalIdObject = this.results.localIdPatientResultsMap['1'].Common;
     this.common2LocalIdObject = this.results.localIdPatientResultsMap['1'].Common2;
   });

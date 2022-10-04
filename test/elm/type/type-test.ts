@@ -9,14 +9,14 @@ describe('IsSystemType', () => {
     setup(this, data);
   });
 
-  it('should correctly accept matching types', function () {
-    this.fiveIsInteger.exec(this.ctx).should.be.true();
-    this.stringFiveIsString.exec(this.ctx).should.be.true();
+  it('should correctly accept matching types', async function () {
+    (await this.fiveIsInteger.exec(this.ctx)).should.be.true();
+    (await this.stringFiveIsString.exec(this.ctx)).should.be.true();
   });
 
-  it('should correctly reject non-matching types', function () {
-    this.fiveIsString.exec(this.ctx).should.be.false();
-    this.stringFiveIsInteger.exec(this.ctx).should.be.false();
+  it('should correctly reject non-matching types', async function () {
+    (await this.fiveIsString.exec(this.ctx)).should.be.false();
+    (await this.stringFiveIsInteger.exec(this.ctx)).should.be.false();
   });
 });
 
@@ -25,12 +25,12 @@ describe('IsListType', () => {
     setup(this, data);
   });
 
-  it('should correctly accept matching types', function () {
-    this.listOfIntegersIsListOfIntegers.exec(this.ctx).should.be.true();
+  it('should correctly accept matching types', async function () {
+    (await this.listOfIntegersIsListOfIntegers.exec(this.ctx)).should.be.true();
   });
 
-  it('should correctly reject non-matching types', function () {
-    this.listOfDecimalsIsListOfIntegers.exec(this.ctx).should.be.false();
+  it('should correctly reject non-matching types', async function () {
+    (await this.listOfDecimalsIsListOfIntegers.exec(this.ctx)).should.be.false();
   });
 });
 
@@ -39,12 +39,12 @@ describe('IsIntervalType', () => {
     setup(this, data);
   });
 
-  it('should correctly accept matching types', function () {
-    this.intervalOfIntegersIsIntervalOfIntegers.exec(this.ctx).should.be.true();
+  it('should correctly accept matching types', async function () {
+    (await this.intervalOfIntegersIsIntervalOfIntegers.exec(this.ctx)).should.be.true();
   });
 
-  it('should correctly reject non-matching types', function () {
-    this.intervalOfDecimalsIsIntervalOfIntegers.exec(this.ctx).should.be.false();
+  it('should correctly reject non-matching types', async function () {
+    (await this.intervalOfDecimalsIsIntervalOfIntegers.exec(this.ctx)).should.be.false();
   });
 });
 
@@ -53,12 +53,12 @@ describe('IsTupleType', () => {
     setup(this, data);
   });
 
-  it('should correctly accept matching types', function () {
-    this.tupleOfIntegersIsTupleOfIntegers.exec(this.ctx).should.be.true();
+  it('should correctly accept matching types', async function () {
+    (await this.tupleOfIntegersIsTupleOfIntegers.exec(this.ctx)).should.be.true();
   });
 
-  it('should correctly reject non-matching types', function () {
-    this.tupleOfDecimalsIsTupleOfIntegers.exec(this.ctx).should.be.false();
+  it('should correctly reject non-matching types', async function () {
+    (await this.tupleOfDecimalsIsTupleOfIntegers.exec(this.ctx)).should.be.false();
   });
 });
 
@@ -67,13 +67,13 @@ describe('IsChoiceType', () => {
     setup(this, data);
   });
 
-  it('should correctly accept matching types', function () {
-    this.integerIsChoiceOfIntegersAndDecimals.exec(this.ctx).should.be.true();
-    this.decimalIsChoiceOfIntegersAndDecimals.exec(this.ctx).should.be.true();
+  it('should correctly accept matching types', async function () {
+    (await this.integerIsChoiceOfIntegersAndDecimals.exec(this.ctx)).should.be.true();
+    (await this.decimalIsChoiceOfIntegersAndDecimals.exec(this.ctx)).should.be.true();
   });
 
-  it('should correctly reject non-matching types', function () {
-    this.stringIsChoiceOfIntegersAndDecimals.exec(this.ctx).should.be.false();
+  it('should correctly reject non-matching types', async function () {
+    (await this.stringIsChoiceOfIntegersAndDecimals.exec(this.ctx)).should.be.false();
   });
 });
 
@@ -82,15 +82,15 @@ describe('IsCustomDataModelType', () => {
     setup(this, data, [p1]);
   });
 
-  it('should correctly accept matching types', function () {
-    this.encounterIsEncounter.exec(this.ctx).should.be.true();
-    this.encounterIsRecord.exec(this.ctx).should.be.true();
-    this.encounterIsAny.exec(this.ctx).should.be.true();
+  it('should correctly accept matching types', async function () {
+    (await this.encounterIsEncounter.exec(this.ctx)).should.be.true();
+    (await this.encounterIsRecord.exec(this.ctx)).should.be.true();
+    (await this.encounterIsAny.exec(this.ctx)).should.be.true();
   });
 
-  it('should correctly reject non-matching types', function () {
-    this.encounterIsCondition.exec(this.ctx).should.be.false();
-    this.encounterIsString.exec(this.ctx).should.be.false();
+  it('should correctly reject non-matching types', async function () {
+    (await this.encounterIsCondition.exec(this.ctx)).should.be.false();
+    (await this.encounterIsString.exec(this.ctx)).should.be.false();
   });
 });
 
@@ -99,37 +99,47 @@ describe('AsSystemType', () => {
     setup(this, data);
   });
 
-  it('should return back matching types', function () {
-    this.fiveAsInteger.exec(this.ctx).should.equal(5);
-    this.stringFiveAsString.exec(this.ctx).should.equal('5');
-    this.castFiveAsInteger.exec(this.ctx).should.equal(5);
-    this.castStringFiveAsString.exec(this.ctx).should.equal('5');
+  it('should return back matching types', async function () {
+    (await this.fiveAsInteger.exec(this.ctx)).should.equal(5);
+    (await this.stringFiveAsString.exec(this.ctx)).should.equal('5');
+    (await this.castFiveAsInteger.exec(this.ctx)).should.equal(5);
+    (await this.castStringFiveAsString.exec(this.ctx)).should.equal('5');
   });
 
-  it('should return null on non-matching types for non-strict cast', function () {
-    should(this.fiveAsString.exec(this.ctx)).be.null();
-    should(this.stringFiveAsInteger.exec(this.ctx)).be.null();
-    should(this.listAsInteger.exec(this.ctx)).be.null();
-    should(this.intervalAsInteger.exec(this.ctx)).be.null();
-    should(this.tupleAsInteger.exec(this.ctx)).be.null();
+  it('should return null on non-matching types for non-strict cast', async function () {
+    should(await this.fiveAsString.exec(this.ctx)).be.null();
+    should(await this.stringFiveAsInteger.exec(this.ctx)).be.null();
+    should(await this.listAsInteger.exec(this.ctx)).be.null();
+    should(await this.intervalAsInteger.exec(this.ctx)).be.null();
+    should(await this.tupleAsInteger.exec(this.ctx)).be.null();
   });
 
-  it('should throw on non-matching types for strict cast', function () {
-    (() => this.castFiveAsString.exec(this.ctx)).should.throw(
-      /Cannot cast {urn:hl7-org:elm-types:r1}Integer as {urn:hl7-org:elm-types:r1}String/
-    );
-    (() => this.castStringFiveAsInteger.exec(this.ctx)).should.throw(
-      /Cannot cast {urn:hl7-org:elm-types:r1}String as {urn:hl7-org:elm-types:r1}Integer/
-    );
-    (() => this.castListAsInteger.exec(this.ctx)).should.throw(
-      /Cannot cast List<{urn:hl7-org:elm-types:r1}Integer> as {urn:hl7-org:elm-types:r1}Integer/
-    );
-    (() => this.castIntervalAsInteger.exec(this.ctx)).should.throw(
-      /Cannot cast Interval<{urn:hl7-org:elm-types:r1}Integer> as {urn:hl7-org:elm-types:r1}Integer/
-    );
-    (() => this.castTupleAsInteger.exec(this.ctx)).should.throw(
-      /Cannot cast Tuple<A {urn:hl7-org:elm-types:r1}Integer> as {urn:hl7-org:elm-types:r1}Integer/
-    );
+  it('should throw on non-matching types for strict cast', async function () {
+    await this.castFiveAsString
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast {urn:hl7-org:elm-types:r1}Integer as {urn:hl7-org:elm-types:r1}String/
+      );
+    await this.castStringFiveAsInteger
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast {urn:hl7-org:elm-types:r1}String as {urn:hl7-org:elm-types:r1}Integer/
+      );
+    await this.castListAsInteger
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast List<{urn:hl7-org:elm-types:r1}Integer> as {urn:hl7-org:elm-types:r1}Integer/
+      );
+    await this.castIntervalAsInteger
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast Interval<{urn:hl7-org:elm-types:r1}Integer> as {urn:hl7-org:elm-types:r1}Integer/
+      );
+    await this.castTupleAsInteger
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast Tuple<A {urn:hl7-org:elm-types:r1}Integer> as {urn:hl7-org:elm-types:r1}Integer/
+      );
   });
 });
 
@@ -138,31 +148,39 @@ describe('AsListType', () => {
     setup(this, data);
   });
 
-  it('should return back matching types', function () {
-    this.listOfIntegersAsListOfIntegers.exec(this.ctx).should.eql([1, 2, 3, 4, 5]);
-    this.castListOfIntegersAsListOfIntegers.exec(this.ctx).should.eql([1, 2, 3, 4, 5]);
+  it('should return back matching types', async function () {
+    (await this.listOfIntegersAsListOfIntegers.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
+    (await this.castListOfIntegersAsListOfIntegers.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
   });
 
-  it('should return null on non-matching types for non-strict cast', function () {
-    should(this.listOfStringsAsListOfIntegers.exec(this.ctx)).be.null();
-    should(this.integerAsListOfIntegers.exec(this.ctx)).be.null();
-    should(this.intervalAsListOfIntegers.exec(this.ctx)).be.null();
-    should(this.tupleAsListOfIntegers.exec(this.ctx)).be.null();
+  it('should return null on non-matching types for non-strict cast', async function () {
+    should(await this.listOfStringsAsListOfIntegers.exec(this.ctx)).be.null();
+    should(await this.integerAsListOfIntegers.exec(this.ctx)).be.null();
+    should(await this.intervalAsListOfIntegers.exec(this.ctx)).be.null();
+    should(await this.tupleAsListOfIntegers.exec(this.ctx)).be.null();
   });
 
-  it('should throw on non-matching types for strict cast', function () {
-    (() => this.castListOfStringsAsListOfIntegers.exec(this.ctx)).should.throw(
-      /Cannot cast List<{urn:hl7-org:elm-types:r1}String> as List<{urn:hl7-org:elm-types:r1}Integer>/
-    );
-    (() => this.castIntegerAsListOfIntegers.exec(this.ctx)).should.throw(
-      /Cannot cast {urn:hl7-org:elm-types:r1}Integer as List<{urn:hl7-org:elm-types:r1}Integer>/
-    );
-    (() => this.castIntervalAsListOfIntegers.exec(this.ctx)).should.throw(
-      /Cannot cast Interval<{urn:hl7-org:elm-types:r1}Integer> as List<{urn:hl7-org:elm-types:r1}Integer>/
-    );
-    (() => this.castTupleAsListOfIntegers.exec(this.ctx)).should.throw(
-      /Cannot cast Tuple<A {urn:hl7-org:elm-types:r1}Integer> as List<{urn:hl7-org:elm-types:r1}Integer>/
-    );
+  it('should throw on non-matching types for strict cast', async function () {
+    await this.castListOfStringsAsListOfIntegers
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast List<{urn:hl7-org:elm-types:r1}String> as List<{urn:hl7-org:elm-types:r1}Integer>/
+      );
+    await this.castIntegerAsListOfIntegers
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast {urn:hl7-org:elm-types:r1}Integer as List<{urn:hl7-org:elm-types:r1}Integer>/
+      );
+    await this.castIntervalAsListOfIntegers
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast Interval<{urn:hl7-org:elm-types:r1}Integer> as List<{urn:hl7-org:elm-types:r1}Integer>/
+      );
+    await this.castTupleAsListOfIntegers
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast Tuple<A {urn:hl7-org:elm-types:r1}Integer> as List<{urn:hl7-org:elm-types:r1}Integer>/
+      );
   });
 });
 
@@ -171,35 +189,43 @@ describe('AsIntervalType', () => {
     setup(this, data);
   });
 
-  it('should return back matching types', function () {
-    this.intervalOfIntegersAsIntervalOfIntegers
-      .exec(this.ctx)
-      .should.eql(new Interval(1, 5, true, true));
-    this.castIntervalOfIntegersAsIntervalOfIntegers
-      .exec(this.ctx)
-      .should.eql(new Interval(1, 5, true, true));
+  it('should return back matching types', async function () {
+    (await this.intervalOfIntegersAsIntervalOfIntegers.exec(this.ctx)).should.eql(
+      new Interval(1, 5, true, true)
+    );
+    (await this.castIntervalOfIntegersAsIntervalOfIntegers.exec(this.ctx)).should.eql(
+      new Interval(1, 5, true, true)
+    );
   });
 
-  it('should return null on non-matching types for non-strict cast', function () {
-    should(this.intervalOfDatesAsIntervalOfIntegers.exec(this.ctx)).be.null();
-    should(this.integerAsIntervalOfIntegers.exec(this.ctx)).be.null();
-    should(this.listAsIntervalOfIntegers.exec(this.ctx)).be.null();
-    should(this.tupleAsIntervalOfIntegers.exec(this.ctx)).be.null();
+  it('should return null on non-matching types for non-strict cast', async function () {
+    should(await this.intervalOfDatesAsIntervalOfIntegers.exec(this.ctx)).be.null();
+    should(await this.integerAsIntervalOfIntegers.exec(this.ctx)).be.null();
+    should(await this.listAsIntervalOfIntegers.exec(this.ctx)).be.null();
+    should(await this.tupleAsIntervalOfIntegers.exec(this.ctx)).be.null();
   });
 
-  it('should throw on non-matching types for strict cast', function () {
-    (() => this.castIntervalOfDatesAsIntervalOfIntegers.exec(this.ctx)).should.throw(
-      /Cannot cast Interval<{urn:hl7-org:elm-types:r1}Date> as Interval<{urn:hl7-org:elm-types:r1}Integer>/
-    );
-    (() => this.castIntegerAsIntervalOfIntegers.exec(this.ctx)).should.throw(
-      /Cannot cast {urn:hl7-org:elm-types:r1}Integer as Interval<{urn:hl7-org:elm-types:r1}Integer>/
-    );
-    (() => this.castListAsIntervalOfIntegers.exec(this.ctx)).should.throw(
-      /Cannot cast List<{urn:hl7-org:elm-types:r1}Integer> as Interval<{urn:hl7-org:elm-types:r1}Integer>/
-    );
-    (() => this.castTupleAsIntervalOfIntegers.exec(this.ctx)).should.throw(
-      /Cannot cast Tuple<A {urn:hl7-org:elm-types:r1}Integer> as Interval<{urn:hl7-org:elm-types:r1}Integer>/
-    );
+  it('should throw on non-matching types for strict cast', async function () {
+    await this.castIntervalOfDatesAsIntervalOfIntegers
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast Interval<{urn:hl7-org:elm-types:r1}Date> as Interval<{urn:hl7-org:elm-types:r1}Integer>/
+      );
+    await this.castIntegerAsIntervalOfIntegers
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast {urn:hl7-org:elm-types:r1}Integer as Interval<{urn:hl7-org:elm-types:r1}Integer>/
+      );
+    await this.castListAsIntervalOfIntegers
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast List<{urn:hl7-org:elm-types:r1}Integer> as Interval<{urn:hl7-org:elm-types:r1}Integer>/
+      );
+    await this.castTupleAsIntervalOfIntegers
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast Tuple<A {urn:hl7-org:elm-types:r1}Integer> as Interval<{urn:hl7-org:elm-types:r1}Integer>/
+      );
   });
 });
 
@@ -208,33 +234,45 @@ describe('AsTupleType', () => {
     setup(this, data);
   });
 
-  it('should return back matching types', function () {
-    this.tupleOfAIntegerBStringAsTupleOfAIntegerBString.exec(this.ctx).should.eql({ A: 1, B: '2' });
-    this.castTupleOfAIntegerBStringAsTupleOfAIntegerBString
+  it('should return back matching types', async function () {
+    (await this.tupleOfAIntegerBStringAsTupleOfAIntegerBString.exec(this.ctx)).should.eql({
+      A: 1,
+      B: '2'
+    });
+    (await this.castTupleOfAIntegerBStringAsTupleOfAIntegerBString.exec(this.ctx)).should.eql({
+      A: 1,
+      B: '2'
+    });
+  });
+
+  it('should return null on non-matching types for non-strict cast', async function () {
+    should(await this.tupleOfAStringBIntegerAsTupleOfAIntegerBString.exec(this.ctx)).be.null();
+    should(await this.integerAsTupleOfInteger.exec(this.ctx)).be.null();
+    should(await this.listAsTupleOfInteger.exec(this.ctx)).be.null();
+    should(await this.intervalAsTupleOfInteger.exec(this.ctx)).be.null();
+  });
+
+  it('should throw on non-matching types for strict cast', async function () {
+    await this.castTupleOfAStringBIntegerAsTupleOfAIntegerBString
       .exec(this.ctx)
-      .should.eql({ A: 1, B: '2' });
-  });
-
-  it('should return null on non-matching types for non-strict cast', function () {
-    should(this.tupleOfAStringBIntegerAsTupleOfAIntegerBString.exec(this.ctx)).be.null();
-    should(this.integerAsTupleOfInteger.exec(this.ctx)).be.null();
-    should(this.listAsTupleOfInteger.exec(this.ctx)).be.null();
-    should(this.intervalAsTupleOfInteger.exec(this.ctx)).be.null();
-  });
-
-  it('should throw on non-matching types for strict cast', function () {
-    (() => this.castTupleOfAStringBIntegerAsTupleOfAIntegerBString.exec(this.ctx)).should.throw(
-      /Cannot cast Tuple<A {urn:hl7-org:elm-types:r1}String, B {urn:hl7-org:elm-types:r1}Integer> as Tuple<A {urn:hl7-org:elm-types:r1}Integer, B {urn:hl7-org:elm-types:r1}String>/
-    );
-    (() => this.castIntegerAsTupleOfInteger.exec(this.ctx)).should.throw(
-      /Cannot cast {urn:hl7-org:elm-types:r1}Integer as Tuple<A {urn:hl7-org:elm-types:r1}Integer>/
-    );
-    (() => this.castListAsTupleOfInteger.exec(this.ctx)).should.throw(
-      /Cannot cast List<{urn:hl7-org:elm-types:r1}Integer> as Tuple<A {urn:hl7-org:elm-types:r1}Integer>/
-    );
-    (() => this.castIntervalAsTupleOfInteger.exec(this.ctx)).should.throw(
-      /Cannot cast Interval<{urn:hl7-org:elm-types:r1}Integer> as Tuple<A {urn:hl7-org:elm-types:r1}Integer>/
-    );
+      .should.be.rejectedWith(
+        /Cannot cast Tuple<A {urn:hl7-org:elm-types:r1}String, B {urn:hl7-org:elm-types:r1}Integer> as Tuple<A {urn:hl7-org:elm-types:r1}Integer, B {urn:hl7-org:elm-types:r1}String>/
+      );
+    await this.castIntegerAsTupleOfInteger
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast {urn:hl7-org:elm-types:r1}Integer as Tuple<A {urn:hl7-org:elm-types:r1}Integer>/
+      );
+    await this.castListAsTupleOfInteger
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast List<{urn:hl7-org:elm-types:r1}Integer> as Tuple<A {urn:hl7-org:elm-types:r1}Integer>/
+      );
+    await this.castIntervalAsTupleOfInteger
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast Interval<{urn:hl7-org:elm-types:r1}Integer> as Tuple<A {urn:hl7-org:elm-types:r1}Integer>/
+      );
   });
 });
 
@@ -243,33 +281,41 @@ describe('AsChoiceType', () => {
     setup(this, data);
   });
 
-  it('should return back matching types', function () {
-    this.integerAsChoiceOfIntegersAndStrings.exec(this.ctx).should.eql(5);
-    this.castIntegerAsChoiceOfIntegersAndStrings.exec(this.ctx).should.eql(5);
-    this.stringAsChoiceOfIntegersAndStrings.exec(this.ctx).should.eql('Foo');
-    this.castStringAsChoiceOfIntegersAndStrings.exec(this.ctx).should.eql('Foo');
+  it('should return back matching types', async function () {
+    (await this.integerAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.eql(5);
+    (await this.castIntegerAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.eql(5);
+    (await this.stringAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.eql('Foo');
+    (await this.castStringAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.eql('Foo');
   });
 
-  it('should return null on non-matching types for non-strict cast', function () {
-    should(this.decimalAsChoiceOfIntegersAndStrings.exec(this.ctx)).be.null();
-    should(this.listAsChoiceOfIntegersAndStrings.exec(this.ctx)).be.null();
-    should(this.intervalAsChoiceOfIntegersAndStrings.exec(this.ctx)).be.null();
-    should(this.tupleAsChoiceOfIntegersAndStrings.exec(this.ctx)).be.null();
+  it('should return null on non-matching types for non-strict cast', async function () {
+    should(await this.decimalAsChoiceOfIntegersAndStrings.exec(this.ctx)).be.null();
+    should(await this.listAsChoiceOfIntegersAndStrings.exec(this.ctx)).be.null();
+    should(await this.intervalAsChoiceOfIntegersAndStrings.exec(this.ctx)).be.null();
+    should(await this.tupleAsChoiceOfIntegersAndStrings.exec(this.ctx)).be.null();
   });
 
-  it('should throw on non-matching types for strict cast', function () {
-    (() => this.castDecimalAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.throw(
-      /Cannot cast {urn:hl7-org:elm-types:r1}Decimal as Choice<{urn:hl7-org:elm-types:r1}Integer, {urn:hl7-org:elm-types:r1}String>/
-    );
-    (() => this.castListAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.throw(
-      /Cannot cast List<Choice<{urn:hl7-org:elm-types:r1}Integer, {urn:hl7-org:elm-types:r1}String>> as Choice<{urn:hl7-org:elm-types:r1}Integer, {urn:hl7-org:elm-types:r1}String>/
-    );
-    (() => this.castIntervalAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.throw(
-      /Cannot cast Interval<{urn:hl7-org:elm-types:r1}Integer> as Choice<{urn:hl7-org:elm-types:r1}Integer, {urn:hl7-org:elm-types:r1}String>/
-    );
-    (() => this.castTupleAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.throw(
-      /Cannot cast Tuple<A {urn:hl7-org:elm-types:r1}Integer, B {urn:hl7-org:elm-types:r1}String> as Choice<{urn:hl7-org:elm-types:r1}Integer, {urn:hl7-org:elm-types:r1}String>/
-    );
+  it('should throw on non-matching types for strict cast', async function () {
+    await this.castDecimalAsChoiceOfIntegersAndStrings
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast {urn:hl7-org:elm-types:r1}Decimal as Choice<{urn:hl7-org:elm-types:r1}Integer, {urn:hl7-org:elm-types:r1}String>/
+      );
+    await this.castListAsChoiceOfIntegersAndStrings
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast List<Choice<{urn:hl7-org:elm-types:r1}Integer, {urn:hl7-org:elm-types:r1}String>> as Choice<{urn:hl7-org:elm-types:r1}Integer, {urn:hl7-org:elm-types:r1}String>/
+      );
+    await this.castIntervalAsChoiceOfIntegersAndStrings
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast Interval<{urn:hl7-org:elm-types:r1}Integer> as Choice<{urn:hl7-org:elm-types:r1}Integer, {urn:hl7-org:elm-types:r1}String>/
+      );
+    await this.castTupleAsChoiceOfIntegersAndStrings
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast Tuple<A {urn:hl7-org:elm-types:r1}Integer, B {urn:hl7-org:elm-types:r1}String> as Choice<{urn:hl7-org:elm-types:r1}Integer, {urn:hl7-org:elm-types:r1}String>/
+      );
   });
 });
 
@@ -278,40 +324,50 @@ describe('AsCustomDataModelType', () => {
     setup(this, data, [p1]);
   });
 
-  it('should return back matching types', function () {
-    this.encounterAsEncounter.exec(this.ctx).id.should.equal('http://cqframework.org/3/1');
-    this.castEncounterAsEncounter.exec(this.ctx).id.should.equal('http://cqframework.org/3/1');
-    this.encounterAsRecord.exec(this.ctx).id.should.equal('http://cqframework.org/3/1');
-    this.castEncounterAsRecord.exec(this.ctx).id.should.equal('http://cqframework.org/3/1');
-    this.encounterAsAny.exec(this.ctx).id.should.equal('http://cqframework.org/3/1');
-    this.castEncounterAsAny.exec(this.ctx).id.should.equal('http://cqframework.org/3/1');
-    this.namedTupleAsEncounter.exec(this.ctx).id.should.equal('1');
-    this.castNamedTupleAsEncounter.exec(this.ctx).id.should.equal('1');
+  it('should return back matching types', async function () {
+    (await this.encounterAsEncounter.exec(this.ctx)).id.should.equal('http://cqframework.org/3/1');
+    (await this.castEncounterAsEncounter.exec(this.ctx)).id.should.equal(
+      'http://cqframework.org/3/1'
+    );
+    (await this.encounterAsRecord.exec(this.ctx)).id.should.equal('http://cqframework.org/3/1');
+    (await this.castEncounterAsRecord.exec(this.ctx)).id.should.equal('http://cqframework.org/3/1');
+    (await this.encounterAsAny.exec(this.ctx)).id.should.equal('http://cqframework.org/3/1');
+    (await this.castEncounterAsAny.exec(this.ctx)).id.should.equal('http://cqframework.org/3/1');
+    (await this.namedTupleAsEncounter.exec(this.ctx)).id.should.equal('1');
+    (await this.castNamedTupleAsEncounter.exec(this.ctx)).id.should.equal('1');
   });
 
-  it('should return null on non-matching types for non-strict cast', function () {
-    should(this.encounterAsCondition.exec(this.ctx)).be.null();
-    should(this.encounterAsString.exec(this.ctx)).be.null();
-    should(this.listAsEncounter.exec(this.ctx)).be.null();
-    should(this.intervalAsEncounter.exec(this.ctx)).be.null();
+  it('should return null on non-matching types for non-strict cast', async function () {
+    should(await this.encounterAsCondition.exec(this.ctx)).be.null();
+    should(await this.encounterAsString.exec(this.ctx)).be.null();
+    should(await this.listAsEncounter.exec(this.ctx)).be.null();
+    should(await this.intervalAsEncounter.exec(this.ctx)).be.null();
     // Technically, this cast should fail, but this is a known bug that would require significant work to overcome
-    // should(this.tupleAsEncounter.exec(this.ctx)).be.null();
+    // should((await this.tupleAsEncounter.exec(this.ctx))).be.null();
   });
 
-  it('should throw on non-matching types for strict cast', function () {
-    (() => this.castEncounterAsCondition.exec(this.ctx)).should.throw(
-      /Cannot cast {https:\/\/github\.com\/cqframework\/cql-execution\/simple}Encounter as {https:\/\/github\.com\/cqframework\/cql-execution\/simple}Condition/
-    );
-    (() => this.castEncounterAsString.exec(this.ctx)).should.throw(
-      /Cannot cast {https:\/\/github\.com\/cqframework\/cql-execution\/simple}Encounter as {urn:hl7-org:elm-types:r1}String/
-    );
-    (() => this.castListAsEncounter.exec(this.ctx)).should.throw(
-      /Cannot cast List<{https:\/\/github\.com\/cqframework\/cql-execution\/simple}Encounter> as {https:\/\/github\.com\/cqframework\/cql-execution\/simple}Encounter/
-    );
-    (() => this.castIntervalAsEncounter.exec(this.ctx)).should.throw(
-      /Cannot cast Interval<{urn:hl7-org:elm-types:r1}Integer> as {https:\/\/github\.com\/cqframework\/cql-execution\/simple}Encounter/
-    );
+  it('should throw on non-matching types for strict cast', async function () {
+    await this.castEncounterAsCondition
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast {https:\/\/github\.com\/cqframework\/cql-execution\/simple}Encounter as {https:\/\/github\.com\/cqframework\/cql-execution\/simple}Condition/
+      );
+    await this.castEncounterAsString
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast {https:\/\/github\.com\/cqframework\/cql-execution\/simple}Encounter as {urn:hl7-org:elm-types:r1}String/
+      );
+    await this.castListAsEncounter
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast List<{https:\/\/github\.com\/cqframework\/cql-execution\/simple}Encounter> as {https:\/\/github\.com\/cqframework\/cql-execution\/simple}Encounter/
+      );
+    await this.castIntervalAsEncounter
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Cannot cast Interval<{urn:hl7-org:elm-types:r1}Integer> as {https:\/\/github\.com\/cqframework\/cql-execution\/simple}Encounter/
+      );
     // Technically, this cast should fail, but this is a known bug that would require significant work to overcome
-    // (() => this.castTupleAsEncounter.exec(this.ctx)).should.throw(/Cannot cast Tuple<id {urn:hl7-org:elm-types:r1}String> as {urn:hl7-org:elm-types:r1}Encounter/);
+    // await this.castTupleAsEncounter.exec(this.ctx).should.be.rejectedWith(/Cannot cast Tuple<id {urn:hl7-org:elm-types:r1}String> as {urn:hl7-org:elm-types:r1}Encounter/);
   });
 });

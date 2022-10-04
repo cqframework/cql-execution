@@ -1,3 +1,4 @@
+import should from 'should';
 import setup from '../../setup';
 const data = require('./data');
 const { p1 } = require('./patients');
@@ -9,15 +10,15 @@ describe('ExpressionDef', () => {
   });
 
   it('should have a name', function () {
-    this.def.name.should.equal('Foo');
+    should(this.def.name).equal('Foo');
   });
 
   it('should have the correct context', function () {
-    this.def.context.should.equal('Patient');
+    should(this.def.context).equal('Patient');
   });
 
-  it('should execute to its value', function () {
-    this.def.exec(this.ctx).should.equal('Bar');
+  it('should execute to its value', async function () {
+    (await this.def.exec(this.ctx)).should.equal('Bar');
   });
 });
 
@@ -30,8 +31,8 @@ describe('ExpressionRef', () => {
     this.foo.name.should.equal('Life');
   });
 
-  it('should execute to expression value', function () {
-    this.foo.exec(this.ctx).should.equal(42);
+  it('should execute to expression value', async function () {
+    (await this.foo.exec(this.ctx)).should.equal(42);
   });
 });
 
@@ -40,62 +41,62 @@ describe('FunctionDefinitions', () => {
     setup(this, data);
   });
 
-  it('should be able to define and use a simple function', function () {
-    const e = this.testValue.exec(this.ctx);
+  it('should be able to define and use a simple function', async function () {
+    const e = await this.testValue.exec(this.ctx);
     e.should.equal(3);
   });
 });
 
-describe('FunctionOverloadsWithSingleArgument', function () {
+describe('FunctionOverloadsWithSingleArgument', async function () {
   beforeEach(function () {
     setup(this, data);
   });
 
-  it('should be able to invoke the correct function based on argument type', function () {
-    let e = this.testValue1.exec(this.ctx);
+  it('should be able to invoke the correct function based on argument type', async function () {
+    let e = await this.testValue1.exec(this.ctx);
     e.should.equal(2);
-    e = this.testValue2.exec(this.ctx);
+    e = await this.testValue2.exec(this.ctx);
     e.should.equal('Hello World');
   });
 });
 
-describe('FunctionOverloadsWithMultipleArguments', function () {
+describe('FunctionOverloadsWithMultipleArguments', async function () {
   beforeEach(function () {
     setup(this, data);
   });
 
-  it('should be able to invoke the correct function based on argument type', function () {
-    let e = this.testValue1.exec(this.ctx);
+  it('should be able to invoke the correct function based on argument type', async function () {
+    let e = await this.testValue1.exec(this.ctx);
     e.should.equal(0);
-    e = this.testValue2.exec(this.ctx);
+    e = await this.testValue2.exec(this.ctx);
     e.should.equal('Goodbye World');
   });
 });
 
-describe('FunctionOverloadsWithDifferentNumberOfArguments', function () {
+describe('FunctionOverloadsWithDifferentNumberOfArguments', async function () {
   beforeEach(function () {
     setup(this, data);
   });
 
-  it('should be able to invoke the correct function based on number of arguments', function () {
-    let e = this.testValue1.exec(this.ctx);
+  it('should be able to invoke the correct function based on number of arguments', async function () {
+    let e = await this.testValue1.exec(this.ctx);
     e.should.equal('Hello World');
-    e = this.testValue2.exec(this.ctx);
+    e = await this.testValue2.exec(this.ctx);
     e.should.equal('Hola World from Spain');
-    e = this.testValue3.exec(this.ctx);
+    e = await this.testValue3.exec(this.ctx);
     e.should.equal('Hello World from England');
   });
 });
 
-describe('FunctionOverloadsWithArgumentsFromCustomDataModel', function () {
+describe('FunctionOverloadsWithArgumentsFromCustomDataModel', async function () {
   beforeEach(function () {
     setup(this, data, [p1]);
   });
 
-  it('should be able to invoke the correct function based on argument type', function () {
-    let e = this.testValue1.exec(this.ctx);
+  it('should be able to invoke the correct function based on argument type', async function () {
+    let e = await this.testValue1.exec(this.ctx);
     e.should.equal('Encounter http://cqframework.org/3/1');
-    e = this.testValue2.exec(this.ctx);
+    e = await this.testValue2.exec(this.ctx);
     e.should.equal('Condition http://cqframework.org/3/2');
   });
 });

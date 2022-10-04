@@ -17,8 +17,8 @@ export class Add extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
     if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
@@ -60,8 +60,8 @@ export class Subtract extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
     if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
@@ -98,8 +98,8 @@ export class Multiply extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
     if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
@@ -136,8 +136,8 @@ export class Divide extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
     if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
@@ -176,8 +176,8 @@ export class TruncatedDivide extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
     if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
@@ -197,8 +197,8 @@ export class Modulo extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
     if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
@@ -214,8 +214,8 @@ export class Ceiling extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg == null) {
       return null;
     }
@@ -229,8 +229,8 @@ export class Floor extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg == null) {
       return null;
     }
@@ -244,8 +244,8 @@ export class Truncate extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg == null) {
       return null;
     }
@@ -258,8 +258,8 @@ export class Abs extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg == null) {
       return null;
     } else if (arg.isQuantity) {
@@ -275,8 +275,8 @@ export class Negate extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg == null) {
       return null;
     } else if (arg.isQuantity) {
@@ -295,13 +295,13 @@ export class Round extends Expression {
     this.precision = build(json.precision);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg == null) {
       return null;
     }
 
-    const dec = this.precision != null ? this.precision.execute(ctx) : 0;
+    const dec = this.precision != null ? await this.precision.execute(ctx) : 0;
     return Math.round(arg * Math.pow(10, dec)) / Math.pow(10, dec);
   }
 }
@@ -311,8 +311,8 @@ export class Ln extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg == null) {
       return null;
     }
@@ -328,8 +328,8 @@ export class Exp extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg == null) {
       return null;
     }
@@ -348,8 +348,8 @@ export class Log extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
     if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
@@ -365,8 +365,8 @@ export class Power extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
     if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
@@ -396,7 +396,7 @@ export class MinValue extends Expression {
     this.valueType = json.valueType;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     if (MinValue.MIN_VALUES[this.valueType]) {
       if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
         const minDateTime = (MinValue.MIN_VALUES[this.valueType] as DateTime).copy();
@@ -427,7 +427,7 @@ export class MaxValue extends Expression {
     this.valueType = json.valueType;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     if (MaxValue.MAX_VALUES[this.valueType] != null) {
       if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
         const maxDateTime = (MaxValue.MAX_VALUES[this.valueType] as DateTime).copy();
@@ -447,8 +447,8 @@ export class Successor extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg == null) {
       return null;
     }
@@ -476,8 +476,8 @@ export class Predecessor extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg == null) {
       return null;
     }
