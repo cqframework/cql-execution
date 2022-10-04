@@ -7,16 +7,16 @@ import { Library } from './library';
 export class Expression {
   localId?: string;
   locator?: string;
-  arg?: any;
-  args?: any[];
+  arg?: Expression;
+  args?: Expression[];
 
   constructor(json: any) {
     if (json.operand != null) {
       const op = build(json.operand);
       if (typeIsArray(json.operand)) {
-        this.args = op;
+        this.args = op as Expression[];
       } else {
-        this.arg = op;
+        this.arg = op as Expression;
       }
     }
 
@@ -29,15 +29,17 @@ export class Expression {
     }
   }
 
-  execute(ctx: Context) {
+  async execute(ctx: Context) {
     try {
       if (this.localId != null) {
         // Store the localId and result on the root context of this library
-        const execValue = this.exec(ctx);
+        const execValue = await this.exec(ctx);
         ctx.rootContext().setLocalIdWithResult(this.localId, execValue);
         return execValue;
       } else {
-        return this.exec(ctx);
+        // Ensure we await this.exec before returning so AnnotatedError logic gets hit
+        const execValue = await this.exec(ctx);
+        return execValue;
       }
     } catch (e: any) {
       if (e instanceof AnnotatedError) {
@@ -54,13 +56,13 @@ export class Expression {
     }
   }
 
-  exec(_ctx: Context): any {
+  async exec(_ctx: Context): Promise<any> {
     return this;
   }
 
-  execArgs(ctx: Context) {
+  async execArgs(ctx: Context) {
     if (this.args != null) {
-      return this.args.map(arg => arg.execute(ctx));
+      return Promise.all(this.args.map(async arg => arg.execute(ctx)));
     } else if (this.arg != null) {
       return this.arg.execute(ctx);
     } else {
@@ -92,7 +94,7 @@ export class UnimplementedExpression extends Expression {
     this.json = json;
   }
 
-  exec(_ctx: Context) {
+  async exec(_ctx: Context) {
     throw new Error(`Unimplemented Expression: ${this.json.type}`);
   }
 }

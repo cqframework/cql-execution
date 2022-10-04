@@ -12,7 +12,7 @@ class Element {
     this.name = json.name;
     this.value = build(json.value);
   }
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     return this.value != null ? this.value.execute(ctx) : undefined;
   }
 }
@@ -27,10 +27,10 @@ export class Instance extends Expression {
     this.element = json.element.map((child: any) => new Element(child));
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     const obj: any = {};
     for (const el of this.element) {
-      obj[el.name] = el.exec(ctx);
+      obj[el.name] = await el.exec(ctx);
     }
     switch (this.classType) {
       case '{urn:hl7-org:elm-types:r1}Quantity':

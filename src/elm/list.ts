@@ -5,19 +5,19 @@ import { equals } from '../util/comparison';
 import { Context } from '../runtime/context';
 
 export class List extends Expression {
-  elements: any[];
+  elements: Expression[];
 
   constructor(json: any) {
     super(json);
-    this.elements = build(json.element) || [];
+    this.elements = (build(json.element) as Expression[]) || [];
   }
 
   get isList() {
     return true;
   }
 
-  exec(ctx: Context) {
-    return this.elements.map(item => item.execute(ctx));
+  async exec(ctx: Context) {
+    return await Promise.all(this.elements.map(item => item.execute(ctx)));
   }
 }
 
@@ -26,8 +26,8 @@ export class Exists extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const list = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const list = await this.execArgs(ctx);
     // if list exists and has non empty length we need to make sure it isnt just full of nulls
     if (list) {
       return list.some((item: any) => item != null);
@@ -71,8 +71,8 @@ export class SingletonFrom extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg != null && arg.length > 1) {
       throw new Error("IllegalArgument: 'SingletonFrom' requires a 0 or 1 arg array");
     } else if (arg != null && arg.length === 1) {
@@ -88,8 +88,8 @@ export class ToList extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg != null) {
       return [arg];
     } else {
@@ -99,19 +99,19 @@ export class ToList extends Expression {
 }
 
 export class IndexOf extends Expression {
-  source: any;
-  element: any;
+  source: Expression;
+  element: Expression;
 
   constructor(json: any) {
     super(json);
-    this.source = build(json.source);
-    this.element = build(json.element);
+    this.source = build(json.source) as Expression;
+    this.element = build(json.element) as Expression;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     let index;
-    const src = this.source.execute(ctx);
-    const el = this.element.execute(ctx);
+    const src = await this.source.execute(ctx);
+    const el = await this.element.execute(ctx);
     if (src == null || el == null) {
       return null;
     }
@@ -157,8 +157,8 @@ export class Flatten extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (typeIsArray(arg) && (arg as any[]).every(x => typeIsArray(x))) {
       return (arg as any[]).reduce((x, y) => x.concat(y), []);
     } else {
@@ -172,8 +172,8 @@ export class Distinct extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const result = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const result = await this.execArgs(ctx);
     if (result == null) {
       return null;
     }
@@ -211,15 +211,15 @@ function removeDuplicateNulls(list: any[]) {
 export class Current extends UnimplementedExpression {}
 
 export class First extends Expression {
-  source: any;
+  source: Expression;
 
   constructor(json: any) {
     super(json);
-    this.source = build(json.source);
+    this.source = build(json.source) as Expression;
   }
 
-  exec(ctx: Context) {
-    const src = this.source.exec(ctx);
+  async exec(ctx: Context) {
+    const src = await this.source.exec(ctx);
     if (src != null && typeIsArray(src) && src.length > 0) {
       return src[0];
     } else {
@@ -229,15 +229,15 @@ export class First extends Expression {
 }
 
 export class Last extends Expression {
-  source: any;
+  source: Expression;
 
   constructor(json: any) {
     super(json);
-    this.source = build(json.source);
+    this.source = build(json.source) as Expression;
   }
 
-  exec(ctx: Context) {
-    const src = this.source.exec(ctx);
+  async exec(ctx: Context) {
+    const src = await this.source.exec(ctx);
     if (src != null && typeIsArray(src) && src.length > 0) {
       return src[src.length - 1];
     } else {
@@ -247,22 +247,22 @@ export class Last extends Expression {
 }
 
 export class Slice extends Expression {
-  source: any;
-  startIndex: any;
-  endIndex: any;
+  source: Expression;
+  startIndex: Expression;
+  endIndex: Expression;
 
   constructor(json: any) {
     super(json);
-    this.source = build(json.source);
-    this.startIndex = build(json.startIndex);
-    this.endIndex = build(json.endIndex);
+    this.source = build(json.source) as Expression;
+    this.startIndex = build(json.startIndex) as Expression;
+    this.endIndex = build(json.endIndex) as Expression;
   }
 
-  exec(ctx: Context) {
-    const src = this.source.exec(ctx);
+  async exec(ctx: Context) {
+    const src = await this.source.exec(ctx);
     if (src != null && typeIsArray(src)) {
-      const startIndex = this.startIndex.exec(ctx);
-      const endIndex = this.endIndex.exec(ctx);
+      const startIndex = await this.startIndex.exec(ctx);
+      const endIndex = await this.endIndex.exec(ctx);
       const start = startIndex != null ? startIndex : 0;
       const end = endIndex != null ? endIndex : src.length;
       if (src.length === 0 || start < 0 || end < 0 || end < start) {

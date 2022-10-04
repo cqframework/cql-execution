@@ -11,8 +11,8 @@ export class Less extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx).map((x: any) => Uncertainty.from(x));
+  async exec(ctx: Context) {
+    const args = (await this.execArgs(ctx)).map((x: any) => Uncertainty.from(x));
     if (args[0] == null || args[1] == null) {
       return null;
     }
@@ -25,8 +25,8 @@ export class LessOrEqual extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx).map((x: any) => Uncertainty.from(x));
+  async exec(ctx: Context) {
+    const args = (await this.execArgs(ctx)).map((x: any) => Uncertainty.from(x));
     if (args[0] == null || args[1] == null) {
       return null;
     }
@@ -39,8 +39,8 @@ export class Greater extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx).map((x: any) => Uncertainty.from(x));
+  async exec(ctx: Context) {
+    const args = (await this.execArgs(ctx)).map((x: any) => Uncertainty.from(x));
     if (args[0] == null || args[1] == null) {
       return null;
     }
@@ -53,8 +53,8 @@ export class GreaterOrEqual extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx).map((x: any) => Uncertainty.from(x));
+  async exec(ctx: Context) {
+    const args = (await this.execArgs(ctx)).map((x: any) => Uncertainty.from(x));
     if (args[0] == null || args[1] == null) {
       return null;
     }
