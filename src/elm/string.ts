@@ -7,8 +7,8 @@ export class Concatenate extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
     if (args.some((x: any) => x == null)) {
       return null;
     } else {
@@ -27,9 +27,9 @@ export class Combine extends Expression {
     this.separator = build(json.separator);
   }
 
-  exec(ctx: Context) {
-    const source = this.source.execute(ctx);
-    const separator = this.separator != null ? this.separator.execute(ctx) : '';
+  async exec(ctx: Context) {
+    const source = await this.source.execute(ctx);
+    const separator = this.separator != null ? await this.separator.execute(ctx) : '';
     if (source == null) {
       return null;
     } else {
@@ -53,9 +53,9 @@ export class Split extends Expression {
     this.separator = build(json.separator);
   }
 
-  exec(ctx: Context) {
-    const stringToSplit = this.stringToSplit.execute(ctx);
-    const separator = this.separator.execute(ctx);
+  async exec(ctx: Context) {
+    const stringToSplit = await this.stringToSplit.execute(ctx);
+    const separator = await this.separator.execute(ctx);
     if (stringToSplit && separator) {
       return stringToSplit.split(separator);
     }
@@ -73,9 +73,9 @@ export class SplitOnMatches extends Expression {
     this.separatorPattern = build(json.separatorPattern);
   }
 
-  exec(ctx: Context) {
-    const stringToSplit = this.stringToSplit.execute(ctx);
-    const separatorPattern = this.separatorPattern.execute(ctx);
+  async exec(ctx: Context) {
+    const stringToSplit = await this.stringToSplit.execute(ctx);
+    const separatorPattern = await this.separatorPattern.execute(ctx);
     if (stringToSplit && separatorPattern) {
       return stringToSplit.split(new RegExp(separatorPattern));
     }
@@ -90,8 +90,8 @@ export class Upper extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg != null) {
       return arg.toUpperCase();
     } else {
@@ -105,8 +105,8 @@ export class Lower extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const arg = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
     if (arg != null) {
       return arg.toLowerCase();
     } else {
@@ -127,9 +127,9 @@ export class PositionOf extends Expression {
     this.string = build(json.string);
   }
 
-  exec(ctx: Context) {
-    const pattern = this.pattern.execute(ctx);
-    const string = this.string.execute(ctx);
+  async exec(ctx: Context) {
+    const pattern = await this.pattern.execute(ctx);
+    const string = await this.string.execute(ctx);
     if (pattern == null || string == null) {
       return null;
     } else {
@@ -148,9 +148,9 @@ export class LastPositionOf extends Expression {
     this.string = build(json.string);
   }
 
-  exec(ctx: Context) {
-    const pattern = this.pattern.execute(ctx);
-    const string = this.string.execute(ctx);
+  async exec(ctx: Context) {
+    const pattern = await this.pattern.execute(ctx);
+    const string = await this.string.execute(ctx);
     if (pattern == null || string == null) {
       return null;
     } else {
@@ -164,8 +164,8 @@ export class Matches extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const [string, pattern] = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const [string, pattern] = await this.execArgs(ctx);
     if (string == null || pattern == null) {
       return null;
     }
@@ -186,10 +186,10 @@ export class Substring extends Expression {
     this.length = build(json['length']);
   }
 
-  exec(ctx: Context) {
-    const stringToSub = this.stringToSub.execute(ctx);
-    const startIndex = this.startIndex.execute(ctx);
-    const length = this.length != null ? this.length.execute(ctx) : null;
+  async exec(ctx: Context) {
+    const stringToSub = await this.stringToSub.execute(ctx);
+    const startIndex = await this.startIndex.execute(ctx);
+    const length = this.length != null ? await this.length.execute(ctx) : null;
     // According to spec: If stringToSub or startIndex is null, or startIndex is out of range, the result is null.
     if (
       stringToSub == null ||
@@ -211,8 +211,8 @@ export class StartsWith extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
     if (args.some((x: any) => x == null)) {
       return null;
     } else {
@@ -226,8 +226,8 @@ export class EndsWith extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
     if (args.some((x: any) => x == null)) {
       return null;
     } else {
@@ -241,8 +241,8 @@ export class ReplaceMatches extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const args = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
     if (args.some((x: any) => x == null)) {
       return null;
     } else {

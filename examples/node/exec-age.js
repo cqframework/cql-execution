@@ -23,5 +23,11 @@ const psource = new cql.PatientSource([
   }
 ]);
 
-const result = executor.exec(psource);
-console.log(JSON.stringify(result, undefined, 2));
+executor
+  .exec(psource)
+  .then(result => {
+    console.log(JSON.stringify(result, undefined, 2));
+  })
+  .catch(err => {
+    console.error(err);
+  });

@@ -1,3 +1,4 @@
+import should from 'should';
 import setup from '../../setup';
 const data = require('./data');
 
@@ -6,12 +7,12 @@ describe('If', () => {
     setup(this, data);
   });
 
-  it('should return the correct value when the expression is true', function () {
-    this.exp.exec(this.ctx.withParameters({ var: true })).should.equal('true return');
+  it('should return the correct value when the expression is true', async function () {
+    should(await this.exp.exec(this.ctx.withParameters({ var: true }))).equal('true return');
   });
 
-  it('should return the correct value when the expression is false', function () {
-    this.exp.exec(this.ctx.withParameters({ var: false })).should.equal('false return');
+  it('should return the correct value when the expression is false', async function () {
+    should(await this.exp.exec(this.ctx.withParameters({ var: false }))).equal('false return');
   });
 });
 
@@ -20,7 +21,7 @@ describe('Case', () => {
     setup(this, data);
   });
 
-  it('should be able to execute a standard case statement', function () {
+  it('should be able to execute a standard case statement', async function () {
     const vals = [
       { x: 1, y: 2, message: 'X < Y' },
       { x: 2, y: 1, message: 'X > Y' },
@@ -28,11 +29,11 @@ describe('Case', () => {
     ];
     for (const item of vals) {
       this.ctx.withParameters({ X: item.x, Y: item.y });
-      this.standard.exec(this.ctx).should.equal(item.message);
+      should(await this.standard.exec(this.ctx)).equal(item.message);
     }
   });
 
-  it('should be able to execute a selected case statement', function () {
+  it('should be able to execute a selected case statement', async function () {
     const vals = [
       { var: 1, message: 'one' },
       { var: 2, message: 'two' },
@@ -40,7 +41,7 @@ describe('Case', () => {
     ];
     for (const item of vals) {
       this.ctx.withParameters({ var: item.var });
-      this.selected.exec(this.ctx).should.equal(item.message);
+      should(await this.selected.exec(this.ctx)).equal(item.message);
     }
   });
 });
