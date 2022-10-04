@@ -30,17 +30,17 @@ export class Interval extends Expression {
     return true;
   }
 
-  exec(ctx: Context) {
-    const lowValue = this.low.execute(ctx);
-    const highValue = this.high.execute(ctx);
+  async exec(ctx: Context) {
+    const lowValue = await this.low.execute(ctx);
+    const highValue = await this.high.execute(ctx);
     const lowClosed =
       this.lowClosed != null
         ? this.lowClosed
-        : this.lowClosedExpression && this.lowClosedExpression.execute(ctx);
+        : this.lowClosedExpression && (await this.lowClosedExpression.execute(ctx));
     const highClosed =
       this.highClosed != null
         ? this.highClosed
-        : this.highClosedExpression && this.highClosedExpression.execute(ctx);
+        : this.highClosedExpression && (await this.highClosedExpression.execute(ctx));
     let defaultPointType;
     if (lowValue == null && highValue == null) {
       // try to get the default point type from a cast
@@ -94,8 +94,8 @@ export class Meets extends Expression {
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx: Context) {
-    const [a, b] = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const [a, b] = await this.execArgs(ctx);
     if (a != null && b != null) {
       return a.meets(b, this.precision);
     } else {
@@ -112,8 +112,8 @@ export class MeetsAfter extends Expression {
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx: Context) {
-    const [a, b] = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const [a, b] = await this.execArgs(ctx);
     if (a != null && b != null) {
       return a.meetsAfter(b, this.precision);
     } else {
@@ -130,8 +130,8 @@ export class MeetsBefore extends Expression {
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx: Context) {
-    const [a, b] = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const [a, b] = await this.execArgs(ctx);
     if (a != null && b != null) {
       return a.meetsBefore(b, this.precision);
     } else {
@@ -148,8 +148,8 @@ export class Overlaps extends Expression {
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx: Context) {
-    const [a, b] = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const [a, b] = await this.execArgs(ctx);
     if (a != null && b != null) {
       return a.overlaps(b, this.precision);
     } else {
@@ -166,8 +166,8 @@ export class OverlapsAfter extends Expression {
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx: Context) {
-    const [a, b] = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const [a, b] = await this.execArgs(ctx);
     if (a != null && b != null) {
       return a.overlapsAfter(b, this.precision);
     } else {
@@ -184,8 +184,8 @@ export class OverlapsBefore extends Expression {
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx: Context) {
-    const [a, b] = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const [a, b] = await this.execArgs(ctx);
     if (a != null && b != null) {
       return a.overlapsBefore(b, this.precision);
     } else {
@@ -222,8 +222,8 @@ export class Width extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const interval = this.arg.execute(ctx);
+  async exec(ctx: Context) {
+    const interval = await this.arg?.execute(ctx);
     if (interval == null) {
       return null;
     }
@@ -236,8 +236,8 @@ export class Size extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const interval = this.arg.execute(ctx);
+  async exec(ctx: Context) {
+    const interval = await this.arg?.execute(ctx);
     if (interval == null) {
       return null;
     }
@@ -250,8 +250,8 @@ export class Start extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const interval = this.arg.execute(ctx);
+  async exec(ctx: Context) {
+    const interval = await this.arg?.execute(ctx);
     if (interval == null) {
       return null;
     }
@@ -269,8 +269,8 @@ export class End extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const interval = this.arg.execute(ctx);
+  async exec(ctx: Context) {
+    const interval = await this.arg?.execute(ctx);
     if (interval == null) {
       return null;
     }
@@ -291,8 +291,8 @@ export class Starts extends Expression {
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx: Context) {
-    const [a, b] = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const [a, b] = await this.execArgs(ctx);
     if (a != null && b != null) {
       return a.starts(b, this.precision);
     } else {
@@ -309,8 +309,8 @@ export class Ends extends Expression {
     this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
   }
 
-  exec(ctx: Context) {
-    const [a, b] = this.execArgs(ctx);
+  async exec(ctx: Context) {
+    const [a, b] = await this.execArgs(ctx);
     if (a != null && b != null) {
       return a.ends(b, this.precision);
     } else {
@@ -405,10 +405,10 @@ export class Expand extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     // expand(argument List<Interval<T>>, per Quantity) List<Interval<T>>
     let defaultPer, expandFunction;
-    let [intervals, per] = this.execArgs(ctx);
+    let [intervals, per] = await this.execArgs(ctx);
     // CQL 1.5 introduced an overload to allow singular intervals; make it a list so we can use the same logic for either overload
     if (!Array.isArray(intervals)) {
       intervals = [intervals];
@@ -640,9 +640,9 @@ export class Collapse extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     // collapse(argument List<Interval<T>>, per Quantity) List<Interval<T>>
-    const [intervals, perWidth] = this.execArgs(ctx);
+    const [intervals, perWidth] = await this.execArgs(ctx);
     return collapseIntervals(intervals, perWidth);
   }
 }

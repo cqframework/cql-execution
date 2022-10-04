@@ -1,6 +1,6 @@
 import { Expression, UnimplementedExpression } from './expression';
 import { Context } from '../runtime/context';
-import { typeIsArray, allTrue, Direction } from '../util/util';
+import { typeIsArray, allTrue, Direction, asyncMergeSort } from '../util/util';
 import { equals } from '../util/comparison';
 import { build } from './builder';
 
@@ -27,24 +27,25 @@ export class LetClause {
 export class With extends Expression {
   alias: any;
   expression: any;
-  suchThat: any;
+  suchThat: Expression;
 
   constructor(json: any) {
     super(json);
     this.alias = json.alias;
     this.expression = build(json.expression);
-    this.suchThat = build(json.suchThat);
+    this.suchThat = build(json.suchThat) as Expression;
   }
-  exec(ctx: Context) {
-    let records = this.expression.execute(ctx);
+  async exec(ctx: Context) {
+    let records: any[] = await this.expression.execute(ctx);
     if (!typeIsArray(records)) {
       records = [records];
     }
-    const returns = records.map((rec: any) => {
+    const returns: any[] = [];
+    for (const rec of records) {
       const childCtx = ctx.childContext();
       childCtx.set(this.alias, rec);
-      return this.suchThat.execute(childCtx);
-    });
+      returns.push(await this.suchThat.execute(childCtx));
+    }
     return returns.some((x: any) => x);
   }
 }
@@ -53,8 +54,8 @@ export class Without extends With {
   constructor(json: any) {
     super(json);
   }
-  exec(ctx: Context) {
-    return !super.exec(ctx);
+  async exec(ctx: Context) {
+    return !(await super.exec(ctx));
   }
 }
 
@@ -75,7 +76,7 @@ export class ByDirection extends Expression {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  exec(ctx: Context, a: any, b: any) {
+  async exec(ctx: Context, a: any, b: any) {
     if (a === b) {
       return 0;
     } else if (a.isQuantity && b.isQuantity) {
@@ -108,11 +109,11 @@ export class ByExpression extends Expression {
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  exec(ctx: Context, a: any, b: any) {
+  async exec(ctx: Context, a: any, b: any) {
     let sctx = ctx.childContext(a);
-    const a_val = this.expression.execute(sctx);
+    const a_val = await this.expression.execute(sctx);
     sctx = ctx.childContext(b);
-    const b_val = this.expression.execute(sctx);
+    const b_val = await this.expression.execute(sctx);
 
     if (a_val === b_val || (a_val == null && b_val == null)) {
       return 0;
@@ -153,13 +154,13 @@ export class SortClause {
     this.by = build(json != null ? json.by : undefined);
   }
 
-  sort(ctx: Context, values: any) {
+  async sort(ctx: Context, values: any[]) {
     if (this.by) {
-      return values.sort((a: any, b: any) => {
+      return asyncMergeSort(values, async (a: any, b: any) => {
         let order = 0;
         for (const item of this.by) {
           // Do not use execute here because the value of the sort order is not important.
-          order = item.exec(ctx, a, b);
+          order = await item.exec(ctx, a, b);
           if (order !== 0) {
             break;
           }
@@ -167,6 +168,7 @@ export class SortClause {
         return order;
       });
     }
+    return values;
   }
 }
 
@@ -194,13 +196,13 @@ class AggregateClause extends Expression {
     this.distinct = json.distinct != null ? json.distinct : true;
   }
 
-  aggregate(returnedValues: any, ctx: Context) {
-    let aggregateValue = this.starting != null ? this.starting.exec(ctx) : null;
-    returnedValues.forEach((contextValues: any) => {
+  async aggregate(returnedValues: any, ctx: Context) {
+    let aggregateValue = this.starting != null ? await this.starting.exec(ctx) : null;
+    for (const contextValues of returnedValues) {
       const childContext = ctx.childContext(contextValues);
       childContext.set(this.identifier, aggregateValue);
-      aggregateValue = this.expression.exec(childContext);
-    });
+      aggregateValue = await this.expression.exec(childContext);
+    }
     return aggregateValue;
   }
 }
@@ -208,7 +210,7 @@ class AggregateClause extends Expression {
 export class Query extends Expression {
   sources: AliasedQuerySource[];
   letClauses: LetClause[];
-  relationship: any[];
+  relationship: Expression[];
   where: any;
   returnClause: ReturnClause | null;
   aggregateClause: AggregateClause | null;
@@ -220,7 +222,7 @@ export class Query extends Expression {
     this.sources = json.source.map((s: any) => new AliasedQuerySource(s));
     this.aliases = json.source.map((s: any) => s.alias);
     this.letClauses = json.let != null ? json.let.map((d: any) => new LetClause(d)) : [];
-    this.relationship = json.relationship != null ? build(json.relationship) : [];
+    this.relationship = json.relationship != null ? (build(json.relationship) as Expression[]) : [];
     this.where = build(json.where);
     this.returnClause = json.return != null ? new ReturnClause(json.return) : null;
     this.aggregateClause = json.aggregate != null ? new AggregateClause(json.aggregate) : null;
@@ -236,8 +238,8 @@ export class Query extends Expression {
     return true;
   }
 
-  exec(ctx: Context) {
-    let sourceResults = this.sources.map(s => s.expression.execute(ctx));
+  async exec(ctx: Context) {
+    let sourceResults = await Promise.all(this.sources.map(s => s.expression.execute(ctx)));
     // If every source is null, the result is null
     // See: https://jira.hl7.org/browse/FHIR-40225
     if (sourceResults.every(r => r == null)) {
@@ -260,22 +262,23 @@ export class Query extends Expression {
     // See: https://cql.hl7.org/03-developersguide.html#multi-source-queries
     const cartesian = cartesianProductOf(sourceResults);
     let returnedValues: any[] = [];
-    cartesian.forEach((combo: any[]) => {
+    for (const combo of cartesian) {
       const rctx = ctx.childContext();
       combo.forEach((r: any, i: number) => rctx.set(this.aliases[i], r));
 
       for (const def of this.letClauses) {
-        rctx.set(def.identifier, def.expression.execute(rctx));
+        rctx.set(def.identifier, await def.expression.execute(rctx));
       }
 
-      const relations = this.relationship.map(rel => {
+      const relations: any[] = [];
+      for (const rel of this.relationship) {
         const child_ctx = rctx.childContext();
-        return rel.execute(child_ctx);
-      });
-      const passed = allTrue(relations) && (this.where ? this.where.execute(rctx) : true);
+        relations.push(await rel.execute(child_ctx));
+      }
+      const passed = allTrue(relations) && (this.where ? await this.where.execute(rctx) : true);
       if (passed) {
         if (this.returnClause != null) {
-          const val = this.returnClause.expression.execute(rctx);
+          const val = await this.returnClause.expression.execute(rctx);
           returnedValues.push(val);
         } else {
           if (this.aliases.length === 1 && this.aggregateClause == null) {
@@ -285,18 +288,18 @@ export class Query extends Expression {
           }
         }
       }
-    });
+    }
 
     if (this.isDistinct()) {
       returnedValues = toDistinctList(returnedValues);
     }
 
     if (this.aggregateClause != null) {
-      returnedValues = this.aggregateClause.aggregate(returnedValues, ctx);
+      returnedValues = await this.aggregateClause.aggregate(returnedValues, ctx);
     }
 
     if (this.sortClause != null) {
-      this.sortClause.sort(ctx, returnedValues);
+      returnedValues = await this.sortClause.sort(ctx, returnedValues);
     }
     if (isList || this.aggregateClause != null) {
       return returnedValues;
@@ -314,7 +317,7 @@ export class AliasRef extends Expression {
     this.name = json.name;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     return ctx != null ? ctx.get(this.name) : undefined;
   }
 }

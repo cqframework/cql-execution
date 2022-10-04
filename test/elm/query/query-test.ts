@@ -12,20 +12,20 @@ describe('DateRangeOptimizedQuery', () => {
     setup(this, data, [p1], vsets);
   });
 
-  it('should find encounters performed during the MP', function () {
-    const e = this.encountersDuringMP.exec(this.ctx);
+  it('should find encounters performed during the MP', async function () {
+    const e = await this.encountersDuringMP.exec(this.ctx);
     e.should.have.length(1);
     e[0].id.should.equal('http://cqframework.org/3/5');
   });
 
-  it('should find ambulatory encounters performed during the MP', function () {
-    const e = this.ambulatoryEncountersDuringMP.exec(this.ctx);
+  it('should find ambulatory encounters performed during the MP', async function () {
+    const e = await this.ambulatoryEncountersDuringMP.exec(this.ctx);
     e.should.have.length(1);
     e[0].id.should.equal('http://cqframework.org/3/5');
   });
 
-  it('should find ambulatory encounter performances included in the MP', function () {
-    const e = this.ambulatoryEncountersIncludedInMP.exec(this.ctx);
+  it('should find ambulatory encounter performances included in the MP', async function () {
+    const e = await this.ambulatoryEncountersIncludedInMP.exec(this.ctx);
     e.should.have.length(1);
     e[0].id.should.equal('http://cqframework.org/3/5');
   });
@@ -36,19 +36,19 @@ describe('FunctionQuery', () => {
     setup(this, data, [p1], vsets);
   });
 
-  it('function with this', function () {
-    const functionReturnsDates = this.queryWithThis.exec(this.ctx);
+  it('function with this', async function () {
+    const functionReturnsDates = await this.queryWithThis.exec(this.ctx);
     functionReturnsDates.should.eql(true);
   });
 });
 
-describe('IncludesQuery', function () {
+describe('IncludesQuery', async function () {
   beforeEach(function () {
     setup(this, data, [p1], vsets);
   });
 
-  it('should find ambulatory encounter performances included in the MP', function () {
-    const e = this.mPIncludedAmbulatoryEncounters.exec(this.ctx);
+  it('should find ambulatory encounter performances included in the MP', async function () {
+    const e = await this.mPIncludedAmbulatoryEncounters.exec(this.ctx);
     e.should.have.length(1);
     e[0].id.should.equal('http://cqframework.org/3/5');
   });
@@ -59,8 +59,8 @@ describe('MultiSourceQuery', () => {
     setup(this, data, [p1], vsets);
   });
 
-  it('should find all Encounters performed and Conditions', function () {
-    const e = this.msQuery.exec(this.ctx);
+  it('should find all Encounters performed and Conditions', async function () {
+    const e = await this.msQuery.exec(this.ctx);
     e.should.have.length(6);
     e[0].E.id.should.equal('http://cqframework.org/3/1');
     e[0].C.id.should.equal('http://cqframework.org/3/4');
@@ -76,8 +76,8 @@ describe('MultiSourceQuery', () => {
     e[5].C.id.should.equal('http://cqframework.org/3/2');
   });
 
-  it('should find encounters performed during the MP and All conditions', function () {
-    const e = this.msQueryWhere.exec(this.ctx);
+  it('should find encounters performed during the MP and All conditions', async function () {
+    const e = await this.msQueryWhere.exec(this.ctx);
     e.should.have.length(2);
     e[0].E.id.should.equal('http://cqframework.org/3/5');
     e[0].C.id.should.equal('http://cqframework.org/3/4');
@@ -85,16 +85,16 @@ describe('MultiSourceQuery', () => {
     e[1].C.id.should.equal('http://cqframework.org/3/2');
   });
 
-  it('should be able to filter items in the where clause', function () {
-    const e = this.msQueryWhere2.exec(this.ctx);
+  it('should be able to filter items in the where clause', async function () {
+    const e = await this.msQueryWhere2.exec(this.ctx);
     e.should.have.length(1);
     e[0].E.id.should.equal('http://cqframework.org/3/5');
     e[0].C.id.should.equal('http://cqframework.org/3/2');
   });
 
   //multiSourceWithArrays
-  it('should correctly handle individual results that are arrays', function () {
-    const e = this.multiSourceWithArrays.exec(this.ctx);
+  it('should correctly handle individual results that are arrays', async function () {
+    const e = await this.multiSourceWithArrays.exec(this.ctx);
     e.should.eql([
       { A: 'a', X: ['x'] },
       { A: 'a', X: ['y'] },
@@ -109,28 +109,28 @@ describe('MultiSourceQuery', () => {
   });
 });
 
-describe('QueryRelationship', function () {
+describe('QueryRelationship', async function () {
   beforeEach(function () {
     setup(this, data, [p1]);
   });
 
-  it('should be able to filter items with a with clause', function () {
-    const e = this.withQuery.exec(this.ctx);
+  it('should be able to filter items with a with clause', async function () {
+    const e = await this.withQuery.exec(this.ctx);
     e.should.have.length(3);
   });
 
-  it('with clause should filter out items not available', function () {
-    const e = this.withQuery2.exec(this.ctx);
+  it('with clause should filter out items not available', async function () {
+    const e = await this.withQuery2.exec(this.ctx);
     e.should.have.length(0);
   });
 
-  it('should be able to filter items with a without clause', function () {
-    const e = this.withOutQuery.exec(this.ctx);
+  it('should be able to filter items with a without clause', async function () {
+    const e = await this.withOutQuery.exec(this.ctx);
     e.should.have.length(3);
   });
 
-  it('without clause should be able to filter items with a without clause', function () {
-    const e = this.withOutQuery2.exec(this.ctx);
+  it('without clause should be able to filter items with a without clause', async function () {
+    const e = await this.withOutQuery2.exec(this.ctx);
     e.should.have.length(0);
   });
 });
@@ -140,8 +140,8 @@ describe('QueryLet', () => {
     setup(this, data, [p1]);
   });
 
-  it('should be able to define a variable in a query and use it', function () {
-    const e = this.query.exec(this.ctx);
+  it('should be able to define a variable in a query and use it', async function () {
+    const e = await this.query.exec(this.ctx);
     e.should.have.length(3);
     e[0]['a'].should.equal(e[0]['E']);
     e[1]['a'].should.equal(e[1]['E']);
@@ -154,8 +154,8 @@ describe('Tuple', () => {
     setup(this, data, [p1]);
   });
 
-  it('should be able to return tuple from a query', function () {
-    const e = this.query.exec(this.ctx);
+  it('should be able to return tuple from a query', async function () {
+    const e = await this.query.exec(this.ctx);
     e.should.have.length(3);
   });
 });
@@ -165,8 +165,8 @@ describe('QueryFilterNulls', () => {
     setup(this, data, [p1]);
   });
 
-  it('should properly handle querying over nulls', function () {
-    const e = this.query.exec(this.ctx);
+  it('should properly handle querying over nulls', async function () {
+    const e = await this.query.exec(this.ctx);
     e.should.have.length(2);
     e.should.eql(['One', 'Two']);
   });
@@ -177,103 +177,129 @@ describe('Sorting', () => {
     setup(this, data, [p1]);
   });
 
-  it('should correctly sort quantities asc', function () {
-    const e = this.quantityListAsc.exec(this.ctx);
+  it('should correctly sort quantities asc', async function () {
+    const e = await this.quantityListAsc.exec(this.ctx);
     e.should.have.length(2);
     e[0]['value'].should.equal(2);
   });
 
-  it('should correctly sort quantities', function () {
-    const e = this.quantityListSort.exec(this.ctx);
+  it('should correctly sort quantities', async function () {
+    const e = await this.quantityListSort.exec(this.ctx);
     e[0]['N']['value'].should.equal(2);
   });
 
-  it('should be able to sort by a tuple field asc', function () {
-    let e = this.tupleAsc.exec(this.ctx);
+  it('should be able to sort by a tuple field asc', async function () {
+    let e = await this.tupleAsc.exec(this.ctx);
     e.should.have.length(3);
     e[0].id.should.equal('http://cqframework.org/3/1');
     e[1].id.should.equal('http://cqframework.org/3/3');
     e[2].id.should.equal('http://cqframework.org/3/5');
 
-    e = this.tupleReturnAsc.exec(this.ctx);
+    e = await this.tupleReturnAsc.exec(this.ctx);
     e.should.have.length(3);
     e[0].id.should.equal('http://cqframework.org/3/1');
     e[1].id.should.equal('http://cqframework.org/3/3');
     e[2].id.should.equal('http://cqframework.org/3/5');
 
-    e = this.tupleReturnTupleAsc.exec(this.ctx);
+    e = await this.tupleReturnTupleAsc.exec(this.ctx);
     e.should.have.length(3);
     e[0].E.id.should.equal('http://cqframework.org/3/1');
     e[1].E.id.should.equal('http://cqframework.org/3/3');
     e[2].E.id.should.equal('http://cqframework.org/3/5');
   });
 
-  it('should be able to sort by a tuple field desc', function () {
-    let e = this.tupleDesc.exec(this.ctx);
+  it('should be able to sort by a tuple field desc', async function () {
+    let e = await this.tupleDesc.exec(this.ctx);
     e.should.have.length(3);
     e[2].id.should.equal('http://cqframework.org/3/1');
     e[1].id.should.equal('http://cqframework.org/3/3');
     e[0].id.should.equal('http://cqframework.org/3/5');
 
-    e = this.tupleReturnDesc.exec(this.ctx);
+    e = await this.tupleReturnDesc.exec(this.ctx);
     e.should.have.length(3);
     e[2].id.should.equal('http://cqframework.org/3/1');
     e[1].id.should.equal('http://cqframework.org/3/3');
     e[0].id.should.equal('http://cqframework.org/3/5');
 
-    e = this.tupleReturnTupleDesc.exec(this.ctx);
+    e = await this.tupleReturnTupleDesc.exec(this.ctx);
     e.should.have.length(3);
     e[2].E.id.should.equal('http://cqframework.org/3/1');
     e[1].E.id.should.equal('http://cqframework.org/3/3');
     e[0].E.id.should.equal('http://cqframework.org/3/5');
   });
 
-  it('should be able to sort dates by this', function () {
-    const unsortedDate = this.lastDateUnsorted.exec(this.ctx);
+  it('should be able to sort dates by this', async function () {
+    const unsortedDate = await this.lastDateUnsorted.exec(this.ctx);
     unsortedDate.year.should.eql(1982);
-    const sortedDate = this.lastDateByThis.exec(this.ctx);
+    const sortedDate = await this.lastDateByThis.exec(this.ctx);
     sortedDate.year.should.eql(2010);
   });
 
-  it('should be able to sort by number asc', function () {
-    const e = this.numberAsc.exec(this.ctx);
+  it('should be able to sort by number asc', async function () {
+    const e = await this.numberAsc.exec(this.ctx);
     e.should.eql([0, 3, 5, 6, 7, 8, 9]);
   });
 
-  it('should be able to sort by number desc', function () {
-    const e = this.numberDesc.exec(this.ctx);
+  it('should be able to sort by number desc', async function () {
+    const e = await this.numberDesc.exec(this.ctx);
     e.should.eql([9, 8, 7, 6, 5, 3, 0]);
   });
 
-  it('should be able to sort by string asc', function () {
-    this.stringAsc.exec(this.ctx).should.eql(['change', 'dont', 'jenny', 'number', 'your']);
-    this.stringReturnAsc.exec(this.ctx).should.eql(['change', 'dont', 'jenny', 'number', 'your']);
+  it('should be able to sort by string asc', async function () {
+    (await this.stringAsc.exec(this.ctx)).should.eql(['change', 'dont', 'jenny', 'number', 'your']);
+    (await this.stringReturnAsc.exec(this.ctx)).should.eql([
+      'change',
+      'dont',
+      'jenny',
+      'number',
+      'your'
+    ]);
   });
 
-  it('should be able to sort by string desc', function () {
-    this.stringDesc.exec(this.ctx).should.eql(['your', 'number', 'jenny', 'dont', 'change']);
-    this.stringReturnDesc.exec(this.ctx).should.eql(['your', 'number', 'jenny', 'dont', 'change']);
+  it('should be able to sort by string desc', async function () {
+    (await this.stringDesc.exec(this.ctx)).should.eql([
+      'your',
+      'number',
+      'jenny',
+      'dont',
+      'change'
+    ]);
+    (await this.stringReturnDesc.exec(this.ctx)).should.eql([
+      'your',
+      'number',
+      'jenny',
+      'dont',
+      'change'
+    ]);
   });
 
-  it('should be able to sort by an expression that uses another expression in the library', function () {
-    this.sortByExpression
-      .exec(this.ctx)
-      .should.eql([{ N: 0 }, { N: 3 }, { N: 5 }, { N: 6 }, { N: 7 }, { N: 8 }, { N: 9 }]);
+  it('should be able to sort by an expression that uses another expression in the library', async function () {
+    (await this.sortByExpression.exec(this.ctx)).should.eql([
+      { N: 0 },
+      { N: 3 },
+      { N: 5 },
+      { N: 6 },
+      { N: 7 },
+      { N: 8 },
+      { N: 9 }
+    ]);
   });
 
-  it('should be able to sort by an expression when some results are null', function () {
-    this.sortByExpressionWithNullResults
-      .exec(this.ctx)
-      .should.eql([{ N: null }, { N: 7 }, { N: 8 }]);
+  it('should be able to sort by an expression when some results are null', async function () {
+    (await this.sortByExpressionWithNullResults.exec(this.ctx)).should.eql([
+      { N: null },
+      { N: 7 },
+      { N: 8 }
+    ]);
   });
 
-  it('should be able to sort using the ascending keyword', function () {
-    const e = this.sortWithAscendingKeyword.exec(this.ctx);
+  it('should be able to sort using the ascending keyword', async function () {
+    const e = await this.sortWithAscendingKeyword.exec(this.ctx);
     e.should.eql([0, 3, 5, 6, 7, 8, 9]);
   });
 
-  it('should be able to sort using the descending keyword', function () {
-    const e = this.sortWithDescendingKeyword.exec(this.ctx);
+  it('should be able to sort using the descending keyword', async function () {
+    const e = await this.sortWithDescendingKeyword.exec(this.ctx);
     e.should.eql([9, 8, 7, 6, 5, 3, 0]);
   });
 });
@@ -283,28 +309,45 @@ describe('Distinct', () => {
     setup(this, data);
   });
 
-  it('should return distinct by default', function () {
-    this.defaultNumbers.exec(this.ctx).should.eql([1, 2, 3, 4]);
-    this.defaultStrings.exec(this.ctx).should.eql(['foo', 'bar', 'baz']);
-    this.defaultTuples.exec(this.ctx).should.eql([
+  it('should return distinct by default', async function () {
+    (await this.defaultNumbers.exec(this.ctx)).should.eql([1, 2, 3, 4]);
+    (await this.defaultStrings.exec(this.ctx)).should.eql(['foo', 'bar', 'baz']);
+    (await this.defaultTuples.exec(this.ctx)).should.eql([
       { a: 1, b: 2 },
       { a: 2, b: 3 }
     ]);
   });
 
-  it('should eliminate duplicates when returning distinct', function () {
-    this.distinctNumbers.exec(this.ctx).should.eql([1, 2, 3, 4]);
-    this.distinctStrings.exec(this.ctx).should.eql(['foo', 'bar', 'baz']);
-    this.distinctTuples.exec(this.ctx).should.eql([
+  it('should eliminate duplicates when returning distinct', async function () {
+    (await this.distinctNumbers.exec(this.ctx)).should.eql([1, 2, 3, 4]);
+    (await this.distinctStrings.exec(this.ctx)).should.eql(['foo', 'bar', 'baz']);
+    (await this.distinctTuples.exec(this.ctx)).should.eql([
       { a: 1, b: 2 },
       { a: 2, b: 3 }
     ]);
   });
 
-  it('should not eliminate duplicates when returning all', function () {
-    this.allNumbers.exec(this.ctx).should.eql([1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 3, 3, 3, 2, 2, 1]);
-    this.allStrings.exec(this.ctx).should.eql(['foo', 'bar', 'baz', 'bar']);
-    this.allTuples.exec(this.ctx).should.eql([
+  it('should not eliminate duplicates when returning all', async function () {
+    (await this.allNumbers.exec(this.ctx)).should.eql([
+      1,
+      2,
+      2,
+      3,
+      3,
+      3,
+      4,
+      4,
+      4,
+      4,
+      3,
+      3,
+      3,
+      2,
+      2,
+      1
+    ]);
+    (await this.allStrings.exec(this.ctx)).should.eql(['foo', 'bar', 'baz', 'bar']);
+    (await this.allTuples.exec(this.ctx)).should.eql([
       { a: 1, b: 2 },
       { a: 2, b: 3 },
       { a: 1, b: 2 }
@@ -317,60 +360,60 @@ describe('SingleObjectAlias', () => {
     setup(this, data, [p1]);
   });
 
-  it('should return object for single object alias', function () {
-    const firstEncounter = this.firstEncounter.exec(this.ctx);
-    this.singleAlias.exec(this.ctx).should.eql(firstEncounter);
+  it('should return object for single object alias', async function () {
+    const firstEncounter = await this.firstEncounter.exec(this.ctx);
+    (await this.singleAlias.exec(this.ctx)).should.eql(firstEncounter);
   });
 
-  it('should return object for single object alias with a where clause', function () {
-    const firstEncounter = this.firstEncounter.exec(this.ctx);
-    this.singleAliasWhere.exec(this.ctx).should.eql(firstEncounter);
+  it('should return object for single object alias with a where clause', async function () {
+    const firstEncounter = await this.firstEncounter.exec(this.ctx);
+    (await this.singleAliasWhere.exec(this.ctx)).should.eql(firstEncounter);
   });
 
-  it('should return single object when multisource query is based on single alias queries', function () {
-    const firstEncounter = this.firstEncounter.exec(this.ctx);
-    const firstConditon = this.firstCondition.exec(this.ctx);
-    this.singleAliases.exec(this.ctx).should.eql({ E: firstEncounter, C: firstConditon });
+  it('should return single object when multisource query is based on single alias queries', async function () {
+    const firstEncounter = await this.firstEncounter.exec(this.ctx);
+    const firstConditon = await this.firstCondition.exec(this.ctx);
+    (await this.singleAliases.exec(this.ctx)).should.eql({ E: firstEncounter, C: firstConditon });
   });
 
-  it('should return list for multisource query that contains and single alias and list sources', function () {
-    const conditions = this.conditions.exec(this.ctx);
-    const firstEncounter = this.firstEncounter.exec(this.ctx);
-    const firstCondition = this.firstCondition.exec(this.ctx);
+  it('should return list for multisource query that contains and single alias and list sources', async function () {
+    const conditions = await this.conditions.exec(this.ctx);
+    const firstEncounter = await this.firstEncounter.exec(this.ctx);
+    const firstCondition = await this.firstCondition.exec(this.ctx);
     const expt = conditions.map((con: any) => ({ Con: con, E: firstEncounter, C: firstCondition }));
-    const q = this.singleAliasesAndList.exec(this.ctx);
+    const q = await this.singleAliasesAndList.exec(this.ctx);
     q.should.have.length(conditions.length);
     q.should.eql(expt);
   });
 
-  it('should be able to filter to null with where clause ', function () {
-    should.not.exist(this.singleAliasWhereToNull.exec(this.ctx));
+  it('should be able to filter to null with where clause ', async function () {
+    should.not.exist(await this.singleAliasWhereToNull.exec(this.ctx));
   });
 
-  it('should be able to return different object ', function () {
-    this.singleAliasReturnTuple.exec(this.ctx).should.eql({ a: 1 });
+  it('should be able to return different object ', async function () {
+    (await this.singleAliasReturnTuple.exec(this.ctx)).should.eql({ a: 1 });
   });
 
-  it('should be able to return different object that is a list', function () {
-    this.singleAliasReturnList.exec(this.ctx).should.eql(['foo', 'bar', 'baz', 'bar']);
+  it('should be able to return different object that is a list', async function () {
+    (await this.singleAliasReturnList.exec(this.ctx)).should.eql(['foo', 'bar', 'baz', 'bar']);
   });
 
-  it('should be able to use a single object alias in a with clause', function () {
-    const encounters = this.encounters.exec(this.ctx);
-    const aw = this.singleAliasWith.exec(this.ctx);
+  it('should be able to use a single object alias in a with clause', async function () {
+    const encounters = await this.encounters.exec(this.ctx);
+    const aw = await this.singleAliasWith.exec(this.ctx);
     aw.should.eql(encounters);
-    const awe = this.singleAliasWithEmpty.exec(this.ctx);
+    const awe = await this.singleAliasWithEmpty.exec(this.ctx);
     awe.should.have.length(0);
   });
 
-  it('should be able to use a single object alias in a withOut clause', function () {
-    const encounters = this.encounters.exec(this.ctx);
-    this.singleAliasWithOut.exec(this.ctx).should.eql(encounters);
-    this.singleAliasWithOutEmpty.exec(this.ctx).should.have.length(0);
+  it('should be able to use a single object alias in a withOut clause', async function () {
+    const encounters = await this.encounters.exec(this.ctx);
+    (await this.singleAliasWithOut.exec(this.ctx)).should.eql(encounters);
+    (await this.singleAliasWithOutEmpty.exec(this.ctx)).should.have.length(0);
   });
 
-  it('should allow single source queries to be null and return null', function () {
-    should.not.exist(this.nullQuery.exec(this.ctx));
+  it('should allow single source queries to be null and return null', async function () {
+    should.not.exist(await this.nullQuery.exec(this.ctx));
   });
 });
 
@@ -379,33 +422,33 @@ describe('AggregateQuery', () => {
     setup(this, data, [p1]);
   });
 
-  it('should aggregate without a starting value', function () {
-    this.noStartingAggregation.exec(this.ctx).should.eql(120);
+  it('should aggregate without a starting value', async function () {
+    (await this.noStartingAggregation.exec(this.ctx)).should.eql(120);
   });
 
-  it('should be able to aggregate with an expression as the starting value', function () {
+  it('should be able to aggregate with an expression as the starting value', async function () {
     const ret = [
       new Interval(new DateTime(1970, 1, 1), new DateTime(1978, 7, 15, 10, 0)),
       new Interval(new DateTime(1978, 7, 16, 10, 0), new DateTime(1982, 3, 15, 15, 0)),
       new Interval(new DateTime(1982, 3, 16, 15, 0), new DateTime(2013, 5, 23, 10, 0))
     ];
-    this.expressionStartingAggregation.exec(this.ctx).should.eql(ret);
+    (await this.expressionStartingAggregation.exec(this.ctx)).should.eql(ret);
   });
 
-  it('should be able to aggregate over distinct values', function () {
-    this.distinctAggregation.exec(this.ctx).should.eql(15);
+  it('should be able to aggregate over distinct values', async function () {
+    (await this.distinctAggregation.exec(this.ctx)).should.eql(15);
   });
 
-  it('should be able to aggregate over non-distinct values', function () {
-    this.allAggregation.exec(this.ctx).should.eql(30);
+  it('should be able to aggregate over non-distinct values', async function () {
+    (await this.allAggregation.exec(this.ctx)).should.eql(30);
   });
 
-  it('should be able to aggregate with a String as the starting value', function () {
-    this.literalStartingAggregation.exec(this.ctx).should.eql('Start12345');
+  it('should be able to aggregate with a String as the starting value', async function () {
+    (await this.literalStartingAggregation.exec(this.ctx)).should.eql('Start12345');
   });
 
-  it('should be able to aggregate with a Quantity as the starting value', function () {
-    this.quantityStartingAggregation.exec(this.ctx).should.eql(new Quantity(15, 'ml'));
+  it('should be able to aggregate with a Quantity as the starting value', async function () {
+    (await this.quantityStartingAggregation.exec(this.ctx)).should.eql(new Quantity(15, 'ml'));
   });
 });
 
@@ -414,23 +457,23 @@ describe('NullSourceQuery', () => {
     setup(this, data, [p1], vsets);
   });
 
-  it('should return null when source is a null list', function () {
-    const result = this.nullListQuery.exec(this.ctx);
+  it('should return null when source is a null list', async function () {
+    const result = await this.nullListQuery.exec(this.ctx);
     should(result).be.null();
   });
 
-  it('should return null when source is a null object', function () {
-    const result = this.nullObjectQuery.exec(this.ctx);
+  it('should return null when source is a null object', async function () {
+    const result = await this.nullObjectQuery.exec(this.ctx);
     should(result).be.null();
   });
 
-  it('should return null when every source in a multi-source query null list', function () {
-    const result = this.allNullMultiSourceQuery.exec(this.ctx);
+  it('should return null when every source in a multi-source query null list', async function () {
+    const result = await this.allNullMultiSourceQuery.exec(this.ctx);
     should(result).be.null();
   });
 
-  it('should return empty list when one source is a list and the other is null', function () {
-    const result = this.someNullMultiSourceQuery.exec(this.ctx);
+  it('should return empty list when one source is a list and the other is null', async function () {
+    const result = await this.someNullMultiSourceQuery.exec(this.ctx);
     result.should.eql([]);
   });
 });

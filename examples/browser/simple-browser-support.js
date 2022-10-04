@@ -10,7 +10,7 @@
  */
 window.cql = require('../../lib/cql');
 
-window.executeSimpleELM = function (
+window.executeSimpleELM = async function (
   elm,
   patientSource,
   valueSets,

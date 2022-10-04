@@ -2,7 +2,7 @@
   <head>
     <script src="cql4browsers.js"></script>
     <script>
-      function exec() {
+      async function exec() {
         f = document.getElementById('form');
         eval('elm = ' + f.elm.value)
         if (f.parameters.value.trim()) {
@@ -10,7 +10,7 @@
         } else {
           params = {}
         }
-        f.results.value = JSON.stringify(executeSimpleELM(elm, new cql.PatientSource([]), [], 'Math', '1', null, params), null, 2)
+        f.results.value = JSON.stringify(await executeSimpleELM(elm, new cql.PatientSource([]), [], 'Math', '1', null, params), null, 2)
       }
     </script>
   </head>

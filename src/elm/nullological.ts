@@ -6,7 +6,7 @@ export class Null extends Expression {
     super(json);
   }
 
-  exec(_ctx: Context): any {
+  async exec(_ctx: Context): Promise<any> {
     return null;
   }
 }
@@ -16,8 +16,8 @@ export class IsNull extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    return this.execArgs(ctx) == null;
+  async exec(ctx: Context) {
+    return (await this.execArgs(ctx)) == null;
   }
 }
 
@@ -26,10 +26,10 @@ export class Coalesce extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     if (this.args) {
       for (const arg of this.args) {
-        const result = arg.execute(ctx);
+        const result = await arg.execute(ctx);
         // if a single arg that's a list, coalesce over the list
         if (this.args.length === 1 && Array.isArray(result)) {
           const item = result.find(item => item != null);

@@ -18,13 +18,13 @@ export class Message extends Expression {
     this.message = build(json.message);
   }
 
-  exec(ctx: Context) {
-    const source = this.source.execute(ctx);
-    const condition = this.condition.execute(ctx);
+  async exec(ctx: Context) {
+    const source = await this.source.execute(ctx);
+    const condition = await this.condition.execute(ctx);
     if (condition) {
-      const code = this.code.execute(ctx);
-      const severity = this.severity.execute(ctx);
-      const message = this.message.execute(ctx);
+      const code = await this.code.execute(ctx);
+      const severity = await this.severity.execute(ctx);
+      const message = await this.message.execute(ctx);
       const listener = ctx.getMessageListener();
       if (listener && typeof listener.onMessage === 'function') {
         listener.onMessage(source, code, severity, message);
