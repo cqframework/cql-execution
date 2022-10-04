@@ -14,7 +14,7 @@ export class ParameterDef extends Expression {
     this.parameterTypeSpecifier = json.parameterTypeSpecifier;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     // If context parameters contains the name, return value.
     if (ctx && ctx.parameters[this.name] !== undefined) {
       return ctx.parameters[this.name];
@@ -24,7 +24,7 @@ export class ParameterDef extends Expression {
       return parentParam.default != null ? parentParam.default.execute(ctx) : parentParam;
       // If default type exists, execute the default type
     } else if (this.default != null) {
-      this.default.execute(ctx);
+      await this.default.execute(ctx);
     }
   }
 }
@@ -39,7 +39,7 @@ export class ParameterRef extends Expression {
     this.library = json.libraryName;
   }
 
-  exec(ctx: Context) {
+  async exec(ctx: Context) {
     ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
     const param = ctx.getParameter(this.name);
     return param != null ? param.execute(ctx) : undefined;

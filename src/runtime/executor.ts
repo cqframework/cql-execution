@@ -33,28 +33,31 @@ export class Executor {
     return this;
   }
 
-  exec_expression(expression: any, patientSource: DataProvider, executionDateTime: DateTime) {
+  async exec_expression(expression: any, patientSource: DataProvider, executionDateTime: DateTime) {
     const r = new Results();
     const expr = this.library.expressions[expression];
     if (expr != null) {
-      while (patientSource.currentPatient()) {
+      // NOTE: Using await to support async data providers whose implementations return promise
+      // await has no effect on functions that don't return promises, so it is safe to use in all cases
+      let currentPatient = await patientSource.currentPatient();
+      while (currentPatient) {
         const patient_ctx = new PatientContext(
           this.library,
-          patientSource.currentPatient(),
+          currentPatient,
           this.codeService,
           this.parameters,
           executionDateTime,
           this.messageListener
         );
         r.recordPatientResults(patient_ctx, { [expression]: expr.execute(patient_ctx) });
-        patientSource.nextPatient();
+        currentPatient = await patientSource.nextPatient();
       }
     }
     return r;
   }
 
-  exec(patientSource: DataProvider, executionDateTime?: DateTime) {
-    const r = this.exec_patient_context(patientSource, executionDateTime);
+  async exec(patientSource: DataProvider, executionDateTime?: DateTime) {
+    const r = await this.exec_patient_context(patientSource, executionDateTime);
     const unfilteredContext = new UnfilteredContext(
       this.library,
       r,
@@ -67,19 +70,23 @@ export class Executor {
     for (const key in this.library.expressions) {
       const expr = this.library.expressions[key];
       if (expr.context === 'Unfiltered') {
-        resultMap[key] = expr.exec(unfilteredContext);
+        resultMap[key] = await expr.exec(unfilteredContext);
       }
     }
     r.recordUnfilteredResults(resultMap);
     return r;
   }
 
-  exec_patient_context(patientSource: DataProvider, executionDateTime?: DateTime) {
+  async exec_patient_context(patientSource: DataProvider, executionDateTime?: DateTime) {
     const r = new Results();
-    while (patientSource.currentPatient()) {
+
+    // NOTE: Using await to support async data providers whose implementations return promise
+    // await has no effect on functions that don't return promises, so it is safe to use in all cases
+    let currentPatient = await patientSource.currentPatient();
+    while (currentPatient) {
       const patient_ctx = new PatientContext(
         this.library,
-        patientSource.currentPatient(),
+        currentPatient,
         this.codeService,
         this.parameters,
         executionDateTime,
@@ -89,11 +96,11 @@ export class Executor {
       for (const key in this.library.expressions) {
         const expr = this.library.expressions[key];
         if (expr.context === 'Patient') {
-          resultMap[key] = expr.execute(patient_ctx);
+          resultMap[key] = await expr.execute(patient_ctx);
         }
       }
       r.recordPatientResults(patient_ctx, resultMap);
-      patientSource.nextPatient();
+      currentPatient = await patientSource.nextPatient();
     }
     return r;
   }

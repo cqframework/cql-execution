@@ -7,22 +7,22 @@ describe('And', () => {
     setup(this, data);
   });
 
-  it('should execute true and...', function () {
-    this.tT.exec(this.ctx).should.be.true();
-    this.tF.exec(this.ctx).should.be.false();
-    should(this.tN.exec(this.ctx)).be.null();
+  it('should execute true and...', async function () {
+    (await this.tT.exec(this.ctx)).should.be.true();
+    (await this.tF.exec(this.ctx)).should.be.false();
+    should(await this.tN.exec(this.ctx)).be.null();
   });
 
-  it('should execute false and...', function () {
-    this.fF.exec(this.ctx).should.be.false();
-    this.fT.exec(this.ctx).should.be.false();
-    this.fN.exec(this.ctx).should.be.false();
+  it('should execute false and...', async function () {
+    (await this.fF.exec(this.ctx)).should.be.false();
+    (await this.fT.exec(this.ctx)).should.be.false();
+    (await this.fN.exec(this.ctx)).should.be.false();
   });
 
-  it('should execute null and...', function () {
-    should(this.nN.exec(this.ctx)).be.null();
-    should(this.nT.exec(this.ctx)).be.null();
-    this.nF.exec(this.ctx).should.be.false();
+  it('should execute null and...', async function () {
+    should(await this.nN.exec(this.ctx)).be.null();
+    should(await this.nT.exec(this.ctx)).be.null();
+    (await this.nF.exec(this.ctx)).should.be.false();
   });
 });
 
@@ -31,22 +31,22 @@ describe('Or', () => {
     setup(this, data);
   });
 
-  it('should execute true or...', function () {
-    this.tT.exec(this.ctx).should.be.true();
-    this.tF.exec(this.ctx).should.be.true();
-    this.tN.exec(this.ctx).should.be.true();
+  it('should execute true or...', async function () {
+    (await this.tT.exec(this.ctx)).should.be.true();
+    (await this.tF.exec(this.ctx)).should.be.true();
+    (await this.tN.exec(this.ctx)).should.be.true();
   });
 
-  it('should execute false or...', function () {
-    this.fF.exec(this.ctx).should.be.false();
-    this.fT.exec(this.ctx).should.be.true();
-    should(this.fN.exec(this.ctx)).be.null();
+  it('should execute false or...', async function () {
+    (await this.fF.exec(this.ctx)).should.be.false();
+    (await this.fT.exec(this.ctx)).should.be.true();
+    should(await this.fN.exec(this.ctx)).be.null();
   });
 
-  it('should execute null or...', function () {
-    should(this.nN.exec(this.ctx)).be.null();
-    this.nT.exec(this.ctx).should.be.true();
-    should(this.nF.exec(this.ctx)).be.null();
+  it('should execute null or...', async function () {
+    should(await this.nN.exec(this.ctx)).be.null();
+    (await this.nT.exec(this.ctx)).should.be.true();
+    should(await this.nF.exec(this.ctx)).be.null();
   });
 });
 
@@ -55,16 +55,16 @@ describe('Not', () => {
     setup(this, data);
   });
 
-  it('should execute not true as false', function () {
-    this.notTrue.exec(this.ctx).should.be.false();
+  it('should execute not true as false', async function () {
+    (await this.notTrue.exec(this.ctx)).should.be.false();
   });
 
-  it('should execute not false as true', function () {
-    this.notFalse.exec(this.ctx).should.be.true();
+  it('should execute not false as true', async function () {
+    (await this.notFalse.exec(this.ctx)).should.be.true();
   });
 
-  it('should execute not null as null', function () {
-    should(this.notNull.exec(this.ctx)).be.null();
+  it('should execute not null as null', async function () {
+    should(await this.notNull.exec(this.ctx)).be.null();
   });
 });
 
@@ -73,22 +73,22 @@ describe('XOr', () => {
     setup(this, data);
   });
 
-  it('should execute true xor...', function () {
-    this.tT.exec(this.ctx).should.be.false();
-    this.tF.exec(this.ctx).should.be.true();
-    should(this.tN.exec(this.ctx)).be.null();
+  it('should execute true xor...', async function () {
+    (await this.tT.exec(this.ctx)).should.be.false();
+    (await this.tF.exec(this.ctx)).should.be.true();
+    should(await this.tN.exec(this.ctx)).be.null();
   });
 
-  it('should execute false xor...', function () {
-    this.fF.exec(this.ctx).should.be.false();
-    this.fT.exec(this.ctx).should.be.true();
-    should(this.fN.exec(this.ctx)).be.null();
+  it('should execute false xor...', async function () {
+    (await this.fF.exec(this.ctx)).should.be.false();
+    (await this.fT.exec(this.ctx)).should.be.true();
+    should(await this.fN.exec(this.ctx)).be.null();
   });
 
-  it('should execute null xor...', function () {
-    should(this.nN.exec(this.ctx)).be.null();
-    should(this.nT.exec(this.ctx)).be.null();
-    should(this.nF.exec(this.ctx)).be.null();
+  it('should execute null xor...', async function () {
+    should(await this.nN.exec(this.ctx)).be.null();
+    should(await this.nT.exec(this.ctx)).be.null();
+    should(await this.nF.exec(this.ctx)).be.null();
   });
 });
 
@@ -97,16 +97,16 @@ describe('IsTrue', () => {
     setup(this, data);
   });
 
-  it('should execute true is true...', function () {
-    this.trueIsTrue.exec(this.ctx).should.be.true();
+  it('should execute true is true...', async function () {
+    (await this.trueIsTrue.exec(this.ctx)).should.be.true();
   });
 
-  it('should execute false is true...', function () {
-    this.falseIsTrue.exec(this.ctx).should.be.false();
+  it('should execute false is true...', async function () {
+    (await this.falseIsTrue.exec(this.ctx)).should.be.false();
   });
 
-  it('should execute null is true...', function () {
-    this.nullIsTrue.exec(this.ctx).should.be.false();
+  it('should execute null is true...', async function () {
+    (await this.nullIsTrue.exec(this.ctx)).should.be.false();
   });
 });
 
@@ -115,15 +115,15 @@ describe('IsFalse', () => {
     setup(this, data);
   });
 
-  it('should execute true is false...', function () {
-    this.trueIsFalse.exec(this.ctx).should.be.false();
+  it('should execute true is false...', async function () {
+    (await this.trueIsFalse.exec(this.ctx)).should.be.false();
   });
 
-  it('should execute false is false...', function () {
-    this.falseIsFalse.exec(this.ctx).should.be.true();
+  it('should execute false is false...', async function () {
+    (await this.falseIsFalse.exec(this.ctx)).should.be.true();
   });
 
-  it('should execute null is false...', function () {
-    this.nullIsFalse.exec(this.ctx).should.be.false();
+  it('should execute null is false...', async function () {
+    (await this.nullIsFalse.exec(this.ctx)).should.be.false();
   });
 });

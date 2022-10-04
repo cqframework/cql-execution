@@ -20,8 +20,8 @@ export class Count extends AggregateExpression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const items = this.source.execute(ctx);
+  async exec(ctx: Context) {
+    const items = await this.source.execute(ctx);
     if (typeIsArray(items)) {
       return removeNulls(items).length;
     }
@@ -34,8 +34,8 @@ export class Sum extends AggregateExpression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    let items = this.source.execute(ctx);
+  async exec(ctx: Context) {
+    let items = await this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
     }
@@ -65,8 +65,8 @@ export class Min extends AggregateExpression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const list = this.source.execute(ctx);
+  async exec(ctx: Context) {
+    const list = await this.source.execute(ctx);
     if (list == null) {
       return null;
     }
@@ -99,8 +99,8 @@ export class Max extends AggregateExpression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const items = this.source.execute(ctx);
+  async exec(ctx: Context) {
+    const items = await this.source.execute(ctx);
     if (items == null) {
       return null;
     }
@@ -133,8 +133,8 @@ export class Avg extends AggregateExpression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    let items = this.source.execute(ctx);
+  async exec(ctx: Context) {
+    let items = await this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
     }
@@ -165,8 +165,8 @@ export class Median extends AggregateExpression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    let items = this.source.execute(ctx);
+  async exec(ctx: Context) {
+    let items = await this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
     }
@@ -195,8 +195,8 @@ export class Mode extends AggregateExpression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const items = this.source.execute(ctx);
+  async exec(ctx: Context) {
+    const items = await this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
     }
@@ -261,8 +261,8 @@ export class StdDev extends AggregateExpression {
     this.type = 'standard_deviation';
   }
 
-  exec(ctx: Context) {
-    let items = this.source.execute(ctx);
+  async exec(ctx: Context) {
+    let items = await this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
     }
@@ -320,8 +320,8 @@ export class Product extends AggregateExpression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    let items = this.source.execute(ctx);
+  async exec(ctx: Context) {
+    let items = await this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
     }
@@ -351,8 +351,8 @@ export class GeometricMean extends AggregateExpression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    let items = this.source.execute(ctx);
+  async exec(ctx: Context) {
+    let items = await this.source.execute(ctx);
     if (!typeIsArray(items)) {
       return null;
     }
@@ -405,8 +405,8 @@ export class AllTrue extends AggregateExpression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const items = this.source.execute(ctx);
+  async exec(ctx: Context) {
+    const items = await this.source.execute(ctx);
     return allTrue(removeNulls(items));
   }
 }
@@ -416,8 +416,8 @@ export class AnyTrue extends AggregateExpression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    const items = this.source.execute(ctx);
+  async exec(ctx: Context) {
+    const items = await this.source.execute(ctx);
     return anyTrue(items);
   }
 }

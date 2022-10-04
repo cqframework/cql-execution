@@ -7,8 +7,8 @@ export class And extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    return ThreeValuedLogic.and(...this.execArgs(ctx));
+  async exec(ctx: Context) {
+    return ThreeValuedLogic.and(...(await this.execArgs(ctx)));
   }
 }
 
@@ -17,8 +17,8 @@ export class Or extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    return ThreeValuedLogic.or(...this.execArgs(ctx));
+  async exec(ctx: Context) {
+    return ThreeValuedLogic.or(...(await this.execArgs(ctx)));
   }
 }
 
@@ -27,8 +27,8 @@ export class Not extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    return ThreeValuedLogic.not(this.execArgs(ctx));
+  async exec(ctx: Context) {
+    return ThreeValuedLogic.not(await this.execArgs(ctx));
   }
 }
 
@@ -37,8 +37,8 @@ export class Xor extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    return ThreeValuedLogic.xor(...this.execArgs(ctx));
+  async exec(ctx: Context) {
+    return ThreeValuedLogic.xor(...(await this.execArgs(ctx)));
   }
 }
 
@@ -47,8 +47,8 @@ export class IsTrue extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    return true === this.execArgs(ctx);
+  async exec(ctx: Context) {
+    return true === (await this.execArgs(ctx));
   }
 }
 
@@ -57,7 +57,7 @@ export class IsFalse extends Expression {
     super(json);
   }
 
-  exec(ctx: Context) {
-    return false === this.execArgs(ctx);
+  async exec(ctx: Context) {
+    return false === (await this.execArgs(ctx));
   }
 }
