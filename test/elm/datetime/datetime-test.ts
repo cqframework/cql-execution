@@ -11,8 +11,8 @@ describe('DateTime', () => {
     this.defaultOffset = (new Date().getTimezoneOffset() / 60) * -1;
   });
 
-  it('should execute year precision correctly', function () {
-    const d = this.year.exec(this.ctx);
+  it('should execute year precision correctly', async function () {
+    const d = await this.year.exec(this.ctx);
     d.isTime().should.be.false();
     d.year.should.equal(2012);
     d.timezoneOffset.should.equal(this.defaultOffset);
@@ -21,8 +21,8 @@ describe('DateTime', () => {
     );
   });
 
-  it('should execute month precision correctly', function () {
-    const d = this.month.exec(this.ctx);
+  it('should execute month precision correctly', async function () {
+    const d = await this.month.exec(this.ctx);
     d.isTime().should.be.false();
     d.year.should.equal(2012);
     d.month.should.equal(2);
@@ -30,8 +30,8 @@ describe('DateTime', () => {
     ['day', 'hour', 'minute', 'second', 'millisecond'].forEach(field => should.not.exist(d[field]));
   });
 
-  it('should execute day precision correctly', function () {
-    const d = this.day.exec(this.ctx);
+  it('should execute day precision correctly', async function () {
+    const d = await this.day.exec(this.ctx);
     d.isTime().should.be.false();
     d.year.should.equal(2012);
     d.month.should.equal(2);
@@ -40,8 +40,8 @@ describe('DateTime', () => {
     ['hour', 'minute', 'second', 'millisecond'].forEach(field => should.not.exist(d[field]));
   });
 
-  it('should execute hour precision correctly', function () {
-    const d = this.hour.exec(this.ctx);
+  it('should execute hour precision correctly', async function () {
+    const d = await this.hour.exec(this.ctx);
     d.isTime().should.be.false();
     d.year.should.equal(2012);
     d.month.should.equal(2);
@@ -51,8 +51,8 @@ describe('DateTime', () => {
     ['minute', 'second', 'millisecond'].forEach(field => should.not.exist(d[field]));
   });
 
-  it('should execute minute precision correctly', function () {
-    const d = this.minute.exec(this.ctx);
+  it('should execute minute precision correctly', async function () {
+    const d = await this.minute.exec(this.ctx);
     d.isTime().should.be.false();
     d.year.should.equal(2012);
     d.month.should.equal(2);
@@ -63,8 +63,8 @@ describe('DateTime', () => {
     ['second', 'millisecond'].forEach(field => should.not.exist(d[field]));
   });
 
-  it('should execute second precision correctly', function () {
-    const d = this.second.exec(this.ctx);
+  it('should execute second precision correctly', async function () {
+    const d = await this.second.exec(this.ctx);
     d.isTime().should.be.false();
     d.year.should.equal(2012);
     d.month.should.equal(2);
@@ -76,8 +76,8 @@ describe('DateTime', () => {
     should.not.exist(d.millisecond);
   });
 
-  it('should execute millisecond precision correctly', function () {
-    const d = this.millisecond.exec(this.ctx);
+  it('should execute millisecond precision correctly', async function () {
+    const d = await this.millisecond.exec(this.ctx);
     d.isTime().should.be.false();
     d.year.should.equal(2012);
     d.month.should.equal(2);
@@ -89,8 +89,8 @@ describe('DateTime', () => {
     d.timezoneOffset.should.equal(this.defaultOffset);
   });
 
-  it('should execute timezone offsets correctly', function () {
-    const d = this.timezoneOffset.exec(this.ctx);
+  it('should execute timezone offsets correctly', async function () {
+    const d = await this.timezoneOffset.exec(this.ctx);
     d.isTime().should.be.false();
     d.year.should.equal(2012);
     d.month.should.equal(2);
@@ -108,8 +108,8 @@ describe('Time', () => {
     setup(this, data);
   });
 
-  it('should execute hour precision correctly', function () {
-    const d = this.hour.exec(this.ctx);
+  it('should execute hour precision correctly', async function () {
+    const d = await this.hour.exec(this.ctx);
     d.isTime().should.be.true();
     d.year.should.equal(0);
     d.month.should.equal(1);
@@ -120,8 +120,8 @@ describe('Time', () => {
     );
   });
 
-  it('should execute minute precision correctly', function () {
-    const d = this.minute.exec(this.ctx);
+  it('should execute minute precision correctly', async function () {
+    const d = await this.minute.exec(this.ctx);
     d.isTime().should.be.true();
     d.year.should.equal(0);
     d.month.should.equal(1);
@@ -132,8 +132,8 @@ describe('Time', () => {
     ['second', 'millisecond', 'timezoneOffset'].forEach(field => should.not.exist(d[field]));
   });
 
-  it('should execute second precision correctly', function () {
-    const d = this.second.exec(this.ctx);
+  it('should execute second precision correctly', async function () {
+    const d = await this.second.exec(this.ctx);
     d.isTime().should.be.true();
     d.year.should.equal(0);
     d.month.should.equal(1);
@@ -145,8 +145,8 @@ describe('Time', () => {
     should.not.exist(d.millisecond);
   });
 
-  it('should execute millisecond precision correctly', function () {
-    const d = this.millisecond.exec(this.ctx);
+  it('should execute millisecond precision correctly', async function () {
+    const d = await this.millisecond.exec(this.ctx);
     d.isTime().should.be.true();
     d.year.should.equal(0);
     d.month.should.equal(1);
@@ -170,8 +170,8 @@ describe('Today', () => {
     );
   });
 
-  it('should return date of today', function () {
-    const today = this.todayVar.exec(this.ctx);
+  it('should return date of today', async function () {
+    const today = await this.todayVar.exec(this.ctx);
     today.isDate.should.be.true();
     today.year.should.equal(this.ctx.getExecutionDateTime().year);
     today.month.should.equal(this.ctx.getExecutionDateTime().month);
@@ -179,9 +179,10 @@ describe('Today', () => {
     ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset'].forEach(field =>
       should.not.exist(today[field])
     );
+    return this.todayVar.exec(this.ctx).should.not.be.rejected();
   });
 
-  it('should throw an exception because no execution datetime has been set', function () {
+  it('should throw an exception because no execution datetime has been set', async function () {
     this.ctx = new PatientContext(
       this.ctx.library,
       this.ctx.patient,
@@ -190,7 +191,9 @@ describe('Today', () => {
       DT.DateTime.fromJSDate(new Date(), '0')
     );
     this.ctx.executionDateTime = null;
-    should(() => this.todayVar.exec(this.ctx)).throw('No Execution DateTime has been set');
+    return this.todayVar
+      .exec(this.ctx)
+      .should.be.rejectedWith('No Execution DateTime has been set');
   });
 });
 
@@ -205,8 +208,8 @@ describe('Now', () => {
     );
   });
 
-  it('should return all date components representing now', function () {
-    const now = this.nowVar.exec(this.ctx);
+  it('should return all date components representing now', async function () {
+    const now = await this.nowVar.exec(this.ctx);
     now.isTime().should.be.false();
     now.year.should.equal(this.ctx.getExecutionDateTime().year);
     now.month.should.equal(this.ctx.getExecutionDateTime().month);
@@ -218,7 +221,7 @@ describe('Now', () => {
     now.timezoneOffset.should.equal(this.ctx.getTimezoneOffset());
   });
 
-  it('should return all date components representing now using a passed in timezone', function () {
+  it('should return all date components representing now using a passed in timezone', async function () {
     this.ctx = new PatientContext(
       this.ctx.library,
       this.ctx.patient,
@@ -226,7 +229,7 @@ describe('Now', () => {
       this.ctx.parameters,
       DT.DateTime.fromJSDate(new Date(), '0')
     );
-    const now = this.nowVar.exec(this.ctx);
+    const now = await this.nowVar.exec(this.ctx);
     now.isTime().should.be.false();
     now.year.should.equal(this.ctx.getExecutionDateTime().year);
     now.month.should.equal(this.ctx.getExecutionDateTime().month);
@@ -238,7 +241,7 @@ describe('Now', () => {
     now.timezoneOffset.should.equal('0');
   });
 
-  it('should return all date components representing now using a passed in timezone using a child context', function () {
+  it('should return all date components representing now using a passed in timezone using a child context', async function () {
     this.ctx = new PatientContext(
       this.ctx.library,
       this.ctx.patient,
@@ -247,7 +250,7 @@ describe('Now', () => {
       DT.DateTime.fromJSDate(new Date(), '0')
     );
     this.child_ctx = this.ctx.childContext();
-    const now = this.nowVar.exec(this.child_ctx);
+    const now = await this.nowVar.exec(this.child_ctx);
     now.isTime().should.be.false();
     now.year.should.equal(this.child_ctx.getExecutionDateTime().year);
     now.month.should.equal(this.child_ctx.getExecutionDateTime().month);
@@ -266,9 +269,9 @@ describe('TimeOfDay', () => {
     setup(this, data);
   });
 
-  it('should return all date components representing now', function () {
+  it('should return all date components representing now', async function () {
     const jsDate = new Date();
-    const tod = this.timeOfDayVar.exec(this.ctx);
+    const tod = await this.timeOfDayVar.exec(this.ctx);
     tod.isTime().should.be.true();
     tod.year.should.equal(0);
     tod.month.should.equal(1);
@@ -286,36 +289,36 @@ describe('DateTimeComponentFrom', () => {
     setup(this, data);
   });
 
-  it('should return the year from the date', function () {
-    this.year.exec(this.ctx).should.equal(2000);
+  it('should return the year from the date', async function () {
+    (await this.year.exec(this.ctx)).should.equal(2000);
   });
 
-  it('should return the month from the date', function () {
-    this.month.exec(this.ctx).should.equal(3);
+  it('should return the month from the date', async function () {
+    (await this.month.exec(this.ctx)).should.equal(3);
   });
 
-  it('should return the day from the date', function () {
-    this.day.exec(this.ctx).should.equal(15);
+  it('should return the day from the date', async function () {
+    (await this.day.exec(this.ctx)).should.equal(15);
   });
 
-  it('should return the hour from the date', function () {
-    this.hour.exec(this.ctx).should.equal(13);
+  it('should return the hour from the date', async function () {
+    (await this.hour.exec(this.ctx)).should.equal(13);
   });
 
-  it('should return the minute from the date', function () {
-    this.minute.exec(this.ctx).should.equal(30);
+  it('should return the minute from the date', async function () {
+    (await this.minute.exec(this.ctx)).should.equal(30);
   });
 
-  it('should return the second from the date', function () {
-    this.second.exec(this.ctx).should.equal(25);
+  it('should return the second from the date', async function () {
+    (await this.second.exec(this.ctx)).should.equal(25);
   });
 
-  it('should return the millisecond from the date', function () {
-    this.millisecond.exec(this.ctx).should.equal(200);
+  it('should return the millisecond from the date', async function () {
+    (await this.millisecond.exec(this.ctx)).should.equal(200);
   });
 
-  it('should return null for imprecise components', function () {
-    const result = this.impreciseComponentTuple.exec(this.ctx);
+  it('should return null for imprecise components', async function () {
+    const result = await this.impreciseComponentTuple.exec(this.ctx);
     result.should.eql({
       Year: 2000,
       Month: 3,
@@ -327,8 +330,8 @@ describe('DateTimeComponentFrom', () => {
     });
   });
 
-  it('should return null for null date', function () {
-    should(this.nullDate.exec(this.ctx)).be.null();
+  it('should return null for null date', async function () {
+    should(await this.nullDate.exec(this.ctx)).be.null();
   });
 });
 
@@ -337,8 +340,8 @@ describe('DateFrom', () => {
     setup(this, data);
   });
 
-  it('should return the date from a fully defined DateTime', function () {
-    const date = this.date.exec(this.ctx);
+  it('should return the date from a fully defined DateTime', async function () {
+    const date = await this.date.exec(this.ctx);
     date.year.should.equal(2000);
     date.month.should.equal(3);
     date.day.should.equal(15);
@@ -349,8 +352,8 @@ describe('DateFrom', () => {
     should.not.exist(date.millisecond);
   });
 
-  it('should return the defined date components from an imprecise date', function () {
-    const date = this.impreciseDate.exec(this.ctx);
+  it('should return the defined date components from an imprecise date', async function () {
+    const date = await this.impreciseDate.exec(this.ctx);
     date.year.should.equal(2000);
     should.not.exist(date.month);
     should.not.exist(date.day);
@@ -360,8 +363,8 @@ describe('DateFrom', () => {
     should.not.exist(date.millisecond);
   });
 
-  it('should return null for null date', function () {
-    should(this.nullDate.exec(this.ctx)).be.null();
+  it('should return null for null date', async function () {
+    should(await this.nullDate.exec(this.ctx)).be.null();
   });
 });
 
@@ -370,8 +373,8 @@ describe('TimeFrom', () => {
     setup(this, data);
   });
 
-  it('should return the time from a fully defined DateTime (and date should be lowest expressible date)', function () {
-    const time = this.time.exec(this.ctx);
+  it('should return the time from a fully defined DateTime (and date should be lowest expressible date)', async function () {
+    const time = await this.time.exec(this.ctx);
     time.year.should.equal(0);
     time.month.should.equal(1);
     time.day.should.equal(1);
@@ -382,8 +385,8 @@ describe('TimeFrom', () => {
     should(time.timezoneOffset).be.null();
   });
 
-  it('should return the null time components from a date with no time', function () {
-    const noTime = this.noTime.exec(this.ctx);
+  it('should return the null time components from a date with no time', async function () {
+    const noTime = await this.noTime.exec(this.ctx);
     noTime.year.should.equal(0);
     noTime.month.should.equal(1);
     noTime.day.should.equal(1);
@@ -394,8 +397,8 @@ describe('TimeFrom', () => {
     should(noTime.timezoneOffset).be.null();
   });
 
-  it('should return null for null date', function () {
-    should(this.nullDate.exec(this.ctx)).be.null();
+  it('should return null for null date', async function () {
+    should(await this.nullDate.exec(this.ctx)).be.null();
   });
 });
 
@@ -404,17 +407,19 @@ describe('TimezoneOffsetFrom', () => {
     setup(this, data);
   });
 
-  it('should return the timezoneoffset from a fully defined DateTime', function () {
-    this.centralEuropean.exec(this.ctx).should.equal(1);
-    this.easternStandard.exec(this.ctx).should.equal(-5);
+  it('should return the timezoneoffset from a fully defined DateTime', async function () {
+    (await this.centralEuropean.exec(this.ctx)).should.equal(1);
+    (await this.easternStandard.exec(this.ctx)).should.equal(-5);
   });
 
-  it('should return the default timezone when not specified', function () {
-    this.defaultTimezone.exec(this.ctx).should.equal((new Date().getTimezoneOffset() / 60) * -1);
+  it('should return the default timezone when not specified', async function () {
+    (await this.defaultTimezone.exec(this.ctx)).should.equal(
+      (new Date().getTimezoneOffset() / 60) * -1
+    );
   });
 
-  it('should return null for null date', function () {
-    should(this.nullDate.exec(this.ctx)).be.null();
+  it('should return null for null date', async function () {
+    should(await this.nullDate.exec(this.ctx)).be.null();
   });
 });
 
@@ -423,66 +428,66 @@ describe('SameAs', () => {
     setup(this, data);
   });
 
-  it('should properly determine when year is the same', function () {
-    this.sameYear.exec(this.ctx).should.be.true();
-    this.notSameYear.exec(this.ctx).should.be.false();
+  it('should properly determine when year is the same', async function () {
+    (await this.sameYear.exec(this.ctx)).should.be.true();
+    (await this.notSameYear.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when month is the same', function () {
-    this.sameMonth.exec(this.ctx).should.be.true();
-    this.notSameMonth.exec(this.ctx).should.be.false();
-    this.sameMonthWrongYear.exec(this.ctx).should.be.false();
+  it('should properly determine when month is the same', async function () {
+    (await this.sameMonth.exec(this.ctx)).should.be.true();
+    (await this.notSameMonth.exec(this.ctx)).should.be.false();
+    (await this.sameMonthWrongYear.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when day is the same', function () {
-    this.sameDay.exec(this.ctx).should.be.true();
-    this.notSameDay.exec(this.ctx).should.be.false();
-    this.sameDayWrongMonth.exec(this.ctx).should.be.false();
+  it('should properly determine when day is the same', async function () {
+    (await this.sameDay.exec(this.ctx)).should.be.true();
+    (await this.notSameDay.exec(this.ctx)).should.be.false();
+    (await this.sameDayWrongMonth.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when hour is the same', function () {
-    this.sameHour.exec(this.ctx).should.be.true();
-    this.notSameHour.exec(this.ctx).should.be.false();
-    this.sameHourWrongDay.exec(this.ctx).should.be.false();
+  it('should properly determine when hour is the same', async function () {
+    (await this.sameHour.exec(this.ctx)).should.be.true();
+    (await this.notSameHour.exec(this.ctx)).should.be.false();
+    (await this.sameHourWrongDay.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when minute is the same', function () {
-    this.sameMinute.exec(this.ctx).should.be.true();
-    this.notSameMinute.exec(this.ctx).should.be.false();
-    this.sameMinuteWrongHour.exec(this.ctx).should.be.false();
+  it('should properly determine when minute is the same', async function () {
+    (await this.sameMinute.exec(this.ctx)).should.be.true();
+    (await this.notSameMinute.exec(this.ctx)).should.be.false();
+    (await this.sameMinuteWrongHour.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when second is the same', function () {
-    this.sameSecond.exec(this.ctx).should.be.true();
-    this.notSameSecond.exec(this.ctx).should.be.false();
-    this.sameSecondWrongMinute.exec(this.ctx).should.be.false();
+  it('should properly determine when second is the same', async function () {
+    (await this.sameSecond.exec(this.ctx)).should.be.true();
+    (await this.notSameSecond.exec(this.ctx)).should.be.false();
+    (await this.sameSecondWrongMinute.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when millisecond is the same', function () {
-    this.sameMillisecond.exec(this.ctx).should.be.true();
-    this.notSameMillisecond.exec(this.ctx).should.be.false();
-    this.sameMillisecondWrongSecond.exec(this.ctx).should.be.false();
+  it('should properly determine when millisecond is the same', async function () {
+    (await this.sameMillisecond.exec(this.ctx)).should.be.true();
+    (await this.notSameMillisecond.exec(this.ctx)).should.be.false();
+    (await this.sameMillisecondWrongSecond.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine same as using milliseconds', function () {
-    this.same.exec(this.ctx).should.be.true();
-    this.notSame.exec(this.ctx).should.be.false();
+  it('should properly determine same as using milliseconds', async function () {
+    (await this.same.exec(this.ctx)).should.be.true();
+    (await this.notSame.exec(this.ctx)).should.be.false();
   });
 
-  it('should normalize timezones when determining sameness', function () {
-    this.sameNormalized.exec(this.ctx).should.be.true();
-    this.sameHourWrongTimezone.exec(this.ctx).should.be.false();
+  it('should normalize timezones when determining sameness', async function () {
+    (await this.sameNormalized.exec(this.ctx)).should.be.true();
+    (await this.sameHourWrongTimezone.exec(this.ctx)).should.be.false();
   });
 
-  it('should handle imprecision', function () {
-    should(this.impreciseHour.exec(this.ctx)).be.null();
-    this.impreciseHourWrongDay.exec(this.ctx).should.be.false();
+  it('should handle imprecision', async function () {
+    should(await this.impreciseHour.exec(this.ctx)).be.null();
+    (await this.impreciseHourWrongDay.exec(this.ctx)).should.be.false();
   });
 
-  it('should return null when either argument is null', function () {
-    should(this.nullLeft.exec(this.ctx)).be.null();
-    should(this.nullRight.exec(this.ctx)).be.null();
-    should(this.nullBoth.exec(this.ctx)).be.null();
+  it('should return null when either argument is null', async function () {
+    should(await this.nullLeft.exec(this.ctx)).be.null();
+    should(await this.nullRight.exec(this.ctx)).be.null();
+    should(await this.nullBoth.exec(this.ctx)).be.null();
   });
 });
 
@@ -491,94 +496,94 @@ describe('SameOrAfter', () => {
     setup(this, data);
   });
 
-  it('should properly determine when year is same or after', function () {
-    this.sameYear.exec(this.ctx).should.be.true();
-    this.yearAfter.exec(this.ctx).should.be.true();
-    this.yearBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when year is same or after', async function () {
+    (await this.sameYear.exec(this.ctx)).should.be.true();
+    (await this.yearAfter.exec(this.ctx)).should.be.true();
+    (await this.yearBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when month is same or after', function () {
-    this.sameMonth.exec(this.ctx).should.be.true();
-    this.monthAfter.exec(this.ctx).should.be.true();
-    this.monthBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when month is same or after', async function () {
+    (await this.sameMonth.exec(this.ctx)).should.be.true();
+    (await this.monthAfter.exec(this.ctx)).should.be.true();
+    (await this.monthBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when day is same or after', function () {
-    this.sameDay.exec(this.ctx).should.be.true();
-    this.dayAfter.exec(this.ctx).should.be.true();
-    this.dayBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when day is same or after', async function () {
+    (await this.sameDay.exec(this.ctx)).should.be.true();
+    (await this.dayAfter.exec(this.ctx)).should.be.true();
+    (await this.dayBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when hour is same or after', function () {
-    this.sameHour.exec(this.ctx).should.be.true();
-    this.hourAfter.exec(this.ctx).should.be.true();
-    this.hourBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when hour is same or after', async function () {
+    (await this.sameHour.exec(this.ctx)).should.be.true();
+    (await this.hourAfter.exec(this.ctx)).should.be.true();
+    (await this.hourBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when minute is same or after', function () {
-    this.sameMinute.exec(this.ctx).should.be.true();
-    this.minuteAfter.exec(this.ctx).should.be.true();
-    this.minuteBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when minute is same or after', async function () {
+    (await this.sameMinute.exec(this.ctx)).should.be.true();
+    (await this.minuteAfter.exec(this.ctx)).should.be.true();
+    (await this.minuteBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when second is same or after', function () {
-    this.sameSecond.exec(this.ctx).should.be.true();
-    this.secondAfter.exec(this.ctx).should.be.true();
-    this.secondBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when second is same or after', async function () {
+    (await this.sameSecond.exec(this.ctx)).should.be.true();
+    (await this.secondAfter.exec(this.ctx)).should.be.true();
+    (await this.secondBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when millisecond is same or after', function () {
-    this.sameMillisecond.exec(this.ctx).should.be.true();
-    this.millisecondAfter.exec(this.ctx).should.be.true();
-    this.millisecondBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when millisecond is same or after', async function () {
+    (await this.sameMillisecond.exec(this.ctx)).should.be.true();
+    (await this.millisecondAfter.exec(this.ctx)).should.be.true();
+    (await this.millisecondBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine same or after using ms when no precision defined', function () {
-    this.same.exec(this.ctx).should.be.true();
-    this.after.exec(this.ctx).should.be.true();
-    this.before.exec(this.ctx).should.be.false();
+  it('should properly determine same or after using ms when no precision defined', async function () {
+    (await this.same.exec(this.ctx)).should.be.true();
+    (await this.after.exec(this.ctx)).should.be.true();
+    (await this.before.exec(this.ctx)).should.be.false();
   });
 
-  it('should consider precision units above the specified unit', function () {
-    this.sameDayMonthBefore.exec(this.ctx).should.be.false();
-    this.dayAfterMonthBefore.exec(this.ctx).should.be.false();
-    this.dayBeforeMonthAfter.exec(this.ctx).should.be.true();
+  it('should consider precision units above the specified unit', async function () {
+    (await this.sameDayMonthBefore.exec(this.ctx)).should.be.false();
+    (await this.dayAfterMonthBefore.exec(this.ctx)).should.be.false();
+    (await this.dayBeforeMonthAfter.exec(this.ctx)).should.be.true();
   });
 
-  it('should handle imprecision', function () {
-    should(this.impreciseDay.exec(this.ctx)).be.null();
-    this.impreciseDayMonthAfter.exec(this.ctx).should.be.true();
-    this.impreciseDayMonthBefore.exec(this.ctx).should.be.false();
+  it('should handle imprecision', async function () {
+    should(await this.impreciseDay.exec(this.ctx)).be.null();
+    (await this.impreciseDayMonthAfter.exec(this.ctx)).should.be.true();
+    (await this.impreciseDayMonthBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should normalize timezones', function () {
-    this.sameHourNormalizeZones.exec(this.ctx).should.be.true();
-    this.hourAfterNormalizeZones.exec(this.ctx).should.be.true();
-    this.hourBeforeNormalizeZones.exec(this.ctx).should.be.false();
+  it('should normalize timezones', async function () {
+    (await this.sameHourNormalizeZones.exec(this.ctx)).should.be.true();
+    (await this.hourAfterNormalizeZones.exec(this.ctx)).should.be.true();
+    (await this.hourBeforeNormalizeZones.exec(this.ctx)).should.be.false();
   });
 
-  it('should return null when either argument is null', function () {
-    should(this.nullLeft.exec(this.ctx)).be.null();
-    should(this.nullRight.exec(this.ctx)).be.null();
-    should(this.nullBoth.exec(this.ctx)).be.null();
+  it('should return null when either argument is null', async function () {
+    should(await this.nullLeft.exec(this.ctx)).be.null();
+    should(await this.nullRight.exec(this.ctx)).be.null();
+    should(await this.nullBoth.exec(this.ctx)).be.null();
   });
 
-  it('should properly treat "on or after" the same as "same or after"', function () {
-    this.sameOOA.exec(this.ctx).should.be.true();
-    this.afterOOA.exec(this.ctx).should.be.true();
-    this.beforeOOA.exec(this.ctx).should.be.false();
-    should(this.nullLeftOOA.exec(this.ctx)).be.null();
-    should(this.nullRightOOA.exec(this.ctx)).be.null();
-    should(this.nullBothOOA.exec(this.ctx)).be.null();
+  it('should properly treat "on or after" the same as "same or after"', async function () {
+    (await this.sameOOA.exec(this.ctx)).should.be.true();
+    (await this.afterOOA.exec(this.ctx)).should.be.true();
+    (await this.beforeOOA.exec(this.ctx)).should.be.false();
+    should(await this.nullLeftOOA.exec(this.ctx)).be.null();
+    should(await this.nullRightOOA.exec(this.ctx)).be.null();
+    should(await this.nullBothOOA.exec(this.ctx)).be.null();
   });
 
-  it('should properly treat "after or on" the same as "same or after"', function () {
-    this.sameAOO.exec(this.ctx).should.be.true();
-    this.afterAOO.exec(this.ctx).should.be.true();
-    this.beforeAOO.exec(this.ctx).should.be.false();
-    should(this.nullLeftAOO.exec(this.ctx)).be.null();
-    should(this.nullRightAOO.exec(this.ctx)).be.null();
-    should(this.nullBothAOO.exec(this.ctx)).be.null();
+  it('should properly treat "after or on" the same as "same or after"', async function () {
+    (await this.sameAOO.exec(this.ctx)).should.be.true();
+    (await this.afterAOO.exec(this.ctx)).should.be.true();
+    (await this.beforeAOO.exec(this.ctx)).should.be.false();
+    should(await this.nullLeftAOO.exec(this.ctx)).be.null();
+    should(await this.nullRightAOO.exec(this.ctx)).be.null();
+    should(await this.nullBothAOO.exec(this.ctx)).be.null();
   });
 });
 
@@ -587,94 +592,94 @@ describe('SameOrBefore', () => {
     setup(this, data);
   });
 
-  it('should properly determine when year is same or after', function () {
-    this.sameYear.exec(this.ctx).should.be.true();
-    this.yearAfter.exec(this.ctx).should.be.false();
-    this.yearBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when year is same or after', async function () {
+    (await this.sameYear.exec(this.ctx)).should.be.true();
+    (await this.yearAfter.exec(this.ctx)).should.be.false();
+    (await this.yearBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine when month is same or after', function () {
-    this.sameMonth.exec(this.ctx).should.be.true();
-    this.monthAfter.exec(this.ctx).should.be.false();
-    this.monthBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when month is same or after', async function () {
+    (await this.sameMonth.exec(this.ctx)).should.be.true();
+    (await this.monthAfter.exec(this.ctx)).should.be.false();
+    (await this.monthBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine when day is same or after', function () {
-    this.sameDay.exec(this.ctx).should.be.true();
-    this.dayAfter.exec(this.ctx).should.be.false();
-    this.dayBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when day is same or after', async function () {
+    (await this.sameDay.exec(this.ctx)).should.be.true();
+    (await this.dayAfter.exec(this.ctx)).should.be.false();
+    (await this.dayBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine when hour is same or after', function () {
-    this.sameHour.exec(this.ctx).should.be.true();
-    this.hourAfter.exec(this.ctx).should.be.false();
-    this.hourBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when hour is same or after', async function () {
+    (await this.sameHour.exec(this.ctx)).should.be.true();
+    (await this.hourAfter.exec(this.ctx)).should.be.false();
+    (await this.hourBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine when minute is same or after', function () {
-    this.sameMinute.exec(this.ctx).should.be.true();
-    this.minuteAfter.exec(this.ctx).should.be.false();
-    this.minuteBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when minute is same or after', async function () {
+    (await this.sameMinute.exec(this.ctx)).should.be.true();
+    (await this.minuteAfter.exec(this.ctx)).should.be.false();
+    (await this.minuteBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine when second is same or after', function () {
-    this.sameSecond.exec(this.ctx).should.be.true();
-    this.secondAfter.exec(this.ctx).should.be.false();
-    this.secondBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when second is same or after', async function () {
+    (await this.sameSecond.exec(this.ctx)).should.be.true();
+    (await this.secondAfter.exec(this.ctx)).should.be.false();
+    (await this.secondBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine when millisecond is same or after', function () {
-    this.sameMillisecond.exec(this.ctx).should.be.true();
-    this.millisecondAfter.exec(this.ctx).should.be.false();
-    this.millisecondBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when millisecond is same or after', async function () {
+    (await this.sameMillisecond.exec(this.ctx)).should.be.true();
+    (await this.millisecondAfter.exec(this.ctx)).should.be.false();
+    (await this.millisecondBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine same or after using ms when no precision defined', function () {
-    this.same.exec(this.ctx).should.be.true();
-    this.after.exec(this.ctx).should.be.false();
-    this.before.exec(this.ctx).should.be.true();
+  it('should properly determine same or after using ms when no precision defined', async function () {
+    (await this.same.exec(this.ctx)).should.be.true();
+    (await this.after.exec(this.ctx)).should.be.false();
+    (await this.before.exec(this.ctx)).should.be.true();
   });
 
-  it('should consider precision units above the specified unit', function () {
-    this.sameDayMonthBefore.exec(this.ctx).should.be.true();
-    this.dayAfterMonthBefore.exec(this.ctx).should.be.true();
-    this.dayBeforeMonthAfter.exec(this.ctx).should.be.false();
+  it('should consider precision units above the specified unit', async function () {
+    (await this.sameDayMonthBefore.exec(this.ctx)).should.be.true();
+    (await this.dayAfterMonthBefore.exec(this.ctx)).should.be.true();
+    (await this.dayBeforeMonthAfter.exec(this.ctx)).should.be.false();
   });
 
-  it('should handle imprecision', function () {
-    should(this.impreciseDay.exec(this.ctx)).be.null();
-    this.impreciseDayMonthAfter.exec(this.ctx).should.be.false();
-    this.impreciseDayMonthBefore.exec(this.ctx).should.be.true();
+  it('should handle imprecision', async function () {
+    should(await this.impreciseDay.exec(this.ctx)).be.null();
+    (await this.impreciseDayMonthAfter.exec(this.ctx)).should.be.false();
+    (await this.impreciseDayMonthBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should normalize timezones', function () {
-    this.sameHourNormalizeZones.exec(this.ctx).should.be.true();
-    this.hourAfterNormalizeZones.exec(this.ctx).should.be.false();
-    this.hourBeforeNormalizeZones.exec(this.ctx).should.be.true();
+  it('should normalize timezones', async function () {
+    (await this.sameHourNormalizeZones.exec(this.ctx)).should.be.true();
+    (await this.hourAfterNormalizeZones.exec(this.ctx)).should.be.false();
+    (await this.hourBeforeNormalizeZones.exec(this.ctx)).should.be.true();
   });
 
-  it('should return null when either argument is null', function () {
-    should(this.nullLeft.exec(this.ctx)).be.null();
-    should(this.nullRight.exec(this.ctx)).be.null();
-    should(this.nullBoth.exec(this.ctx)).be.null();
+  it('should return null when either argument is null', async function () {
+    should(await this.nullLeft.exec(this.ctx)).be.null();
+    should(await this.nullRight.exec(this.ctx)).be.null();
+    should(await this.nullBoth.exec(this.ctx)).be.null();
   });
 
-  it('should properly treat "on or before" the same as "same or before"', function () {
-    this.sameOOB.exec(this.ctx).should.be.true();
-    this.afterOOB.exec(this.ctx).should.be.false();
-    this.beforeOOB.exec(this.ctx).should.be.true();
-    should(this.nullLeftOOB.exec(this.ctx)).be.null();
-    should(this.nullRightOOB.exec(this.ctx)).be.null();
-    should(this.nullBothOOB.exec(this.ctx)).be.null();
+  it('should properly treat "on or before" the same as "same or before"', async function () {
+    (await this.sameOOB.exec(this.ctx)).should.be.true();
+    (await this.afterOOB.exec(this.ctx)).should.be.false();
+    (await this.beforeOOB.exec(this.ctx)).should.be.true();
+    should(await this.nullLeftOOB.exec(this.ctx)).be.null();
+    should(await this.nullRightOOB.exec(this.ctx)).be.null();
+    should(await this.nullBothOOB.exec(this.ctx)).be.null();
   });
 
-  it('should properly treat "before or on" the same as "same or before"', function () {
-    this.sameBOO.exec(this.ctx).should.be.true();
-    this.afterBOO.exec(this.ctx).should.be.false();
-    this.beforeBOO.exec(this.ctx).should.be.true();
-    should(this.nullLeftBOO.exec(this.ctx)).be.null();
-    should(this.nullRightBOO.exec(this.ctx)).be.null();
-    should(this.nullBothBOO.exec(this.ctx)).be.null();
+  it('should properly treat "before or on" the same as "same or before"', async function () {
+    (await this.sameBOO.exec(this.ctx)).should.be.true();
+    (await this.afterBOO.exec(this.ctx)).should.be.false();
+    (await this.beforeBOO.exec(this.ctx)).should.be.true();
+    should(await this.nullLeftBOO.exec(this.ctx)).be.null();
+    should(await this.nullRightBOO.exec(this.ctx)).be.null();
+    should(await this.nullBothBOO.exec(this.ctx)).be.null();
   });
 });
 
@@ -683,70 +688,70 @@ describe('After', () => {
     setup(this, data);
   });
 
-  it('should properly determine when year is same or after', function () {
-    this.sameYear.exec(this.ctx).should.be.false();
-    this.yearAfter.exec(this.ctx).should.be.true();
-    this.yearBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when year is same or after', async function () {
+    (await this.sameYear.exec(this.ctx)).should.be.false();
+    (await this.yearAfter.exec(this.ctx)).should.be.true();
+    (await this.yearBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when month is same or after', function () {
-    this.sameMonth.exec(this.ctx).should.be.false();
-    this.monthAfter.exec(this.ctx).should.be.true();
-    this.monthBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when month is same or after', async function () {
+    (await this.sameMonth.exec(this.ctx)).should.be.false();
+    (await this.monthAfter.exec(this.ctx)).should.be.true();
+    (await this.monthBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when day is same or after', function () {
-    this.sameDay.exec(this.ctx).should.be.false();
-    this.dayAfter.exec(this.ctx).should.be.true();
-    this.dayBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when day is same or after', async function () {
+    (await this.sameDay.exec(this.ctx)).should.be.false();
+    (await this.dayAfter.exec(this.ctx)).should.be.true();
+    (await this.dayBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when hour is same or after', function () {
-    this.sameHour.exec(this.ctx).should.be.false();
-    this.hourAfter.exec(this.ctx).should.be.true();
-    this.hourBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when hour is same or after', async function () {
+    (await this.sameHour.exec(this.ctx)).should.be.false();
+    (await this.hourAfter.exec(this.ctx)).should.be.true();
+    (await this.hourBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when minute is same or after', function () {
-    this.sameMinute.exec(this.ctx).should.be.false();
-    this.minuteAfter.exec(this.ctx).should.be.true();
-    this.minuteBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when minute is same or after', async function () {
+    (await this.sameMinute.exec(this.ctx)).should.be.false();
+    (await this.minuteAfter.exec(this.ctx)).should.be.true();
+    (await this.minuteBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when second is same or after', function () {
-    this.sameSecond.exec(this.ctx).should.be.false();
-    this.secondAfter.exec(this.ctx).should.be.true();
-    this.secondBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when second is same or after', async function () {
+    (await this.sameSecond.exec(this.ctx)).should.be.false();
+    (await this.secondAfter.exec(this.ctx)).should.be.true();
+    (await this.secondBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine when millisecond is same or after', function () {
-    this.sameMillisecond.exec(this.ctx).should.be.false();
-    this.millisecondAfter.exec(this.ctx).should.be.true();
-    this.millisecondBefore.exec(this.ctx).should.be.false();
+  it('should properly determine when millisecond is same or after', async function () {
+    (await this.sameMillisecond.exec(this.ctx)).should.be.false();
+    (await this.millisecondAfter.exec(this.ctx)).should.be.true();
+    (await this.millisecondBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine same or after using ms when no precision defined', function () {
-    this.same.exec(this.ctx).should.be.false();
-    this.after.exec(this.ctx).should.be.true();
-    this.before.exec(this.ctx).should.be.false();
+  it('should properly determine same or after using ms when no precision defined', async function () {
+    (await this.same.exec(this.ctx)).should.be.false();
+    (await this.after.exec(this.ctx)).should.be.true();
+    (await this.before.exec(this.ctx)).should.be.false();
   });
 
-  it('should handle imprecision', function () {
-    should(this.impreciseDay.exec(this.ctx)).be.null();
-    this.impreciseDayMonthAfter.exec(this.ctx).should.be.true();
-    this.impreciseDayMonthBefore.exec(this.ctx).should.be.false();
+  it('should handle imprecision', async function () {
+    should(await this.impreciseDay.exec(this.ctx)).be.null();
+    (await this.impreciseDayMonthAfter.exec(this.ctx)).should.be.true();
+    (await this.impreciseDayMonthBefore.exec(this.ctx)).should.be.false();
   });
 
-  it('should normalize timezones', function () {
-    this.sameHourNormalizeZones.exec(this.ctx).should.be.false();
-    this.hourAfterNormalizeZones.exec(this.ctx).should.be.true();
-    this.hourBeforeNormalizeZones.exec(this.ctx).should.be.false();
+  it('should normalize timezones', async function () {
+    (await this.sameHourNormalizeZones.exec(this.ctx)).should.be.false();
+    (await this.hourAfterNormalizeZones.exec(this.ctx)).should.be.true();
+    (await this.hourBeforeNormalizeZones.exec(this.ctx)).should.be.false();
   });
 
-  it('should return null when either argument is null', function () {
-    should(this.nullLeft.exec(this.ctx)).be.null();
-    should(this.nullRight.exec(this.ctx)).be.null();
-    should(this.nullBoth.exec(this.ctx)).be.null();
+  it('should return null when either argument is null', async function () {
+    should(await this.nullLeft.exec(this.ctx)).be.null();
+    should(await this.nullRight.exec(this.ctx)).be.null();
+    should(await this.nullBoth.exec(this.ctx)).be.null();
   });
 });
 
@@ -755,70 +760,70 @@ describe('Before', () => {
     setup(this, data);
   });
 
-  it('should properly determine when year is same or after', function () {
-    this.sameYear.exec(this.ctx).should.be.false();
-    this.yearAfter.exec(this.ctx).should.be.false();
-    this.yearBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when year is same or after', async function () {
+    (await this.sameYear.exec(this.ctx)).should.be.false();
+    (await this.yearAfter.exec(this.ctx)).should.be.false();
+    (await this.yearBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine when month is same or after', function () {
-    this.sameMonth.exec(this.ctx).should.be.false();
-    this.monthAfter.exec(this.ctx).should.be.false();
-    this.monthBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when month is same or after', async function () {
+    (await this.sameMonth.exec(this.ctx)).should.be.false();
+    (await this.monthAfter.exec(this.ctx)).should.be.false();
+    (await this.monthBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine when day is same or after', function () {
-    this.sameDay.exec(this.ctx).should.be.false();
-    this.dayAfter.exec(this.ctx).should.be.false();
-    this.dayBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when day is same or after', async function () {
+    (await this.sameDay.exec(this.ctx)).should.be.false();
+    (await this.dayAfter.exec(this.ctx)).should.be.false();
+    (await this.dayBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine when hour is same or after', function () {
-    this.sameHour.exec(this.ctx).should.be.false();
-    this.hourAfter.exec(this.ctx).should.be.false();
-    this.hourBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when hour is same or after', async function () {
+    (await this.sameHour.exec(this.ctx)).should.be.false();
+    (await this.hourAfter.exec(this.ctx)).should.be.false();
+    (await this.hourBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine when minute is same or after', function () {
-    this.sameMinute.exec(this.ctx).should.be.false();
-    this.minuteAfter.exec(this.ctx).should.be.false();
-    this.minuteBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when minute is same or after', async function () {
+    (await this.sameMinute.exec(this.ctx)).should.be.false();
+    (await this.minuteAfter.exec(this.ctx)).should.be.false();
+    (await this.minuteBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine when second is same or after', function () {
-    this.sameSecond.exec(this.ctx).should.be.false();
-    this.secondAfter.exec(this.ctx).should.be.false();
-    this.secondBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when second is same or after', async function () {
+    (await this.sameSecond.exec(this.ctx)).should.be.false();
+    (await this.secondAfter.exec(this.ctx)).should.be.false();
+    (await this.secondBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine when millisecond is same or after', function () {
-    this.sameMillisecond.exec(this.ctx).should.be.false();
-    this.millisecondAfter.exec(this.ctx).should.be.false();
-    this.millisecondBefore.exec(this.ctx).should.be.true();
+  it('should properly determine when millisecond is same or after', async function () {
+    (await this.sameMillisecond.exec(this.ctx)).should.be.false();
+    (await this.millisecondAfter.exec(this.ctx)).should.be.false();
+    (await this.millisecondBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should properly determine same or after using ms when no precision defined', function () {
-    this.same.exec(this.ctx).should.be.false();
-    this.after.exec(this.ctx).should.be.false();
-    this.before.exec(this.ctx).should.be.true();
+  it('should properly determine same or after using ms when no precision defined', async function () {
+    (await this.same.exec(this.ctx)).should.be.false();
+    (await this.after.exec(this.ctx)).should.be.false();
+    (await this.before.exec(this.ctx)).should.be.true();
   });
 
-  it('should handle imprecision', function () {
-    should(this.impreciseDay.exec(this.ctx)).be.null();
-    this.impreciseDayMonthAfter.exec(this.ctx).should.be.false();
-    this.impreciseDayMonthBefore.exec(this.ctx).should.be.true();
+  it('should handle imprecision', async function () {
+    should(await this.impreciseDay.exec(this.ctx)).be.null();
+    (await this.impreciseDayMonthAfter.exec(this.ctx)).should.be.false();
+    (await this.impreciseDayMonthBefore.exec(this.ctx)).should.be.true();
   });
 
-  it('should normalize timezones', function () {
-    this.sameHourNormalizeZones.exec(this.ctx).should.be.false();
-    this.hourAfterNormalizeZones.exec(this.ctx).should.be.false();
-    this.hourBeforeNormalizeZones.exec(this.ctx).should.be.true();
+  it('should normalize timezones', async function () {
+    (await this.sameHourNormalizeZones.exec(this.ctx)).should.be.false();
+    (await this.hourAfterNormalizeZones.exec(this.ctx)).should.be.false();
+    (await this.hourBeforeNormalizeZones.exec(this.ctx)).should.be.true();
   });
 
-  it('should return null when either argument is null', function () {
-    should(this.nullLeft.exec(this.ctx)).be.null();
-    should(this.nullRight.exec(this.ctx)).be.null();
-    should(this.nullBoth.exec(this.ctx)).be.null();
+  it('should return null when either argument is null', async function () {
+    should(await this.nullLeft.exec(this.ctx)).be.null();
+    should(await this.nullRight.exec(this.ctx)).be.null();
+    should(await this.nullBoth.exec(this.ctx)).be.null();
   });
 });
 
@@ -827,86 +832,90 @@ describe('DifferenceBetween', () => {
     setup(this, data);
   });
 
-  it('should properly execute years between', function () {
-    this.yearsBetween.exec(this.ctx).should.equal(1);
+  it('should properly execute years between', async function () {
+    (await this.yearsBetween.exec(this.ctx)).should.equal(1);
   });
 
-  it('should properly execute months between', function () {
-    this.monthsBetween.exec(this.ctx).should.equal(12);
+  it('should properly execute months between', async function () {
+    (await this.monthsBetween.exec(this.ctx)).should.equal(12);
   });
 
-  it('should properly execute weeks between', function () {
-    this.weeksBetween.exec(this.ctx).should.equal(52);
+  it('should properly execute weeks between', async function () {
+    (await this.weeksBetween.exec(this.ctx)).should.equal(52);
   });
 
-  it('should properly execute days between', function () {
-    this.daysBetween.exec(this.ctx).should.equal(365);
+  it('should properly execute days between', async function () {
+    (await this.daysBetween.exec(this.ctx)).should.equal(365);
   });
 
-  it('should properly execute hours between', function () {
-    this.hoursBetween.exec(this.ctx).should.equal(24 * 365);
+  it('should properly execute hours between', async function () {
+    (await this.hoursBetween.exec(this.ctx)).should.equal(24 * 365);
   });
 
-  it('should properly execute minutes between', function () {
-    this.minutesBetween.exec(this.ctx).should.equal(60 * 24 * 365);
+  it('should properly execute minutes between', async function () {
+    (await this.minutesBetween.exec(this.ctx)).should.equal(60 * 24 * 365);
   });
 
-  it('should properly execute seconds between', function () {
-    this.secondsBetween.exec(this.ctx).should.equal(60 * 60 * 24 * 365);
+  it('should properly execute seconds between', async function () {
+    (await this.secondsBetween.exec(this.ctx)).should.equal(60 * 60 * 24 * 365);
   });
 
-  it('should properly execute milliseconds between', function () {
-    this.millisecondsBetween.exec(this.ctx).should.equal(1000 * 60 * 60 * 24 * 365);
+  it('should properly execute milliseconds between', async function () {
+    (await this.millisecondsBetween.exec(this.ctx)).should.equal(1000 * 60 * 60 * 24 * 365);
   });
 
-  it('should properly execute milliseconds between when date 1 is after date 2', function () {
-    this.millisecondsBetweenReversed.exec(this.ctx).should.equal(-1 * 1000 * 60 * 60 * 24 * 365);
+  it('should properly execute milliseconds between when date 1 is after date 2', async function () {
+    (await this.millisecondsBetweenReversed.exec(this.ctx)).should.equal(
+      -1 * 1000 * 60 * 60 * 24 * 365
+    );
   });
 
-  it('should properly execute years between with an uncertainty', function () {
-    this.yearsBetweenUncertainty.exec(this.ctx).should.equal(0);
+  it('should properly execute years between with an uncertainty', async function () {
+    (await this.yearsBetweenUncertainty.exec(this.ctx)).should.equal(0);
   });
 
-  it('should properly execute months between with an uncertainty', function () {
-    this.monthsBetweenUncertainty.exec(this.ctx).should.equal(0);
+  it('should properly execute months between with an uncertainty', async function () {
+    (await this.monthsBetweenUncertainty.exec(this.ctx)).should.equal(0);
   });
 
-  it('should properly execute weeks between with an uncertainty', function () {
-    this.weeksBetweenUncertainty.exec(this.ctx).should.eql(new Uncertainty(0, 4));
+  it('should properly execute weeks between with an uncertainty', async function () {
+    (await this.weeksBetweenUncertainty.exec(this.ctx)).should.eql(new Uncertainty(0, 4));
   });
 
-  it('should properly execute days between with an uncertainty', function () {
-    this.daysBetweenUncertainty.exec(this.ctx).should.eql(new Uncertainty(0, 30));
+  it('should properly execute days between with an uncertainty', async function () {
+    (await this.daysBetweenUncertainty.exec(this.ctx)).should.eql(new Uncertainty(0, 30));
   });
 
-  it('should properly execute hours between with an uncertainty', function () {
-    this.hoursBetweenUncertainty.exec(this.ctx).should.eql(new Uncertainty(0, 743));
+  it('should properly execute hours between with an uncertainty', async function () {
+    (await this.hoursBetweenUncertainty.exec(this.ctx)).should.eql(new Uncertainty(0, 743));
   });
 
-  it('should properly execute minutes between with an uncertainty', function () {
-    this.minutesBetweenUncertainty.exec(this.ctx).should.eql(new Uncertainty(0, 44639));
+  it('should properly execute minutes between with an uncertainty', async function () {
+    (await this.minutesBetweenUncertainty.exec(this.ctx)).should.eql(new Uncertainty(0, 44639));
   });
 
-  it('should properly execute seconds between with an uncertainty', function () {
-    this.secondsBetweenUncertainty.exec(this.ctx).should.eql(new Uncertainty(0, 2678399));
+  it('should properly execute seconds between with an uncertainty', async function () {
+    (await this.secondsBetweenUncertainty.exec(this.ctx)).should.eql(new Uncertainty(0, 2678399));
   });
 
-  it('should properly execute milliseconds between with an uncertainty', function () {
-    this.millisecondsBetweenUncertainty.exec(this.ctx).should.eql(new Uncertainty(0, 2678399999));
+  it('should properly execute milliseconds between with an uncertainty', async function () {
+    (await this.millisecondsBetweenUncertainty.exec(this.ctx)).should.eql(
+      new Uncertainty(0, 2678399999)
+    );
   });
 
-  it('should properly execute seconds between when date 1 is after date 2 with an uncertainty', function () {
-    this.millisecondsBetweenReversedUncertainty
-      .exec(this.ctx)
-      .should.eql(new Uncertainty(-2678399999, 0));
+  it('should properly execute seconds between when date 1 is after date 2 with an uncertainty', async function () {
+    (await this.millisecondsBetweenReversedUncertainty.exec(this.ctx)).should.eql(
+      new Uncertainty(-2678399999, 0)
+    );
   });
 
-  it('should properly execute hours between when springing ahead for DST', function () {
-    this.hoursBetween1and3CrossingSpringDST.exec(this.ctx).should.equal(1);
+  it('should properly execute hours between when springing ahead for DST', async function () {
+    (await this.hoursBetween1and3CrossingSpringDST.exec(this.ctx)).should.equal(1);
   });
 
-  it('should properly execute hours between when falling back for DST', function () {
-    this.hoursBetween1and3CrossingFallDST.exec(this.ctx).should.equal(3);
+  it('should properly execute hours between when falling back for DST', async function () {
+    (await this.hoursBetween1and3CrossingFallDST.exec(this.ctx)).should.equal(3);
   });
 });
 
@@ -915,49 +924,49 @@ describe('DifferenceBetween Comparisons', () => {
     setup(this, data);
   });
 
-  it('should calculate days between > x', function () {
-    this.greaterThan25DaysAfter.exec(this.ctx).should.be.true();
-    should(this.greaterThan40DaysAfter.exec(this.ctx)).be.null();
-    this.greaterThan80DaysAfter.exec(this.ctx).should.be.false();
+  it('should calculate days between > x', async function () {
+    (await this.greaterThan25DaysAfter.exec(this.ctx)).should.be.true();
+    should(await this.greaterThan40DaysAfter.exec(this.ctx)).be.null();
+    (await this.greaterThan80DaysAfter.exec(this.ctx)).should.be.false();
   });
 
-  it('should calculate days between >= x', function () {
-    this.greaterOrEqualTo25DaysAfter.exec(this.ctx).should.be.true();
-    should(this.greaterOrEqualTo40DaysAfter.exec(this.ctx)).be.null();
-    this.greaterOrEqualTo80DaysAfter.exec(this.ctx).should.be.false();
+  it('should calculate days between >= x', async function () {
+    (await this.greaterOrEqualTo25DaysAfter.exec(this.ctx)).should.be.true();
+    should(await this.greaterOrEqualTo40DaysAfter.exec(this.ctx)).be.null();
+    (await this.greaterOrEqualTo80DaysAfter.exec(this.ctx)).should.be.false();
   });
 
-  it('should calculate days between = x', function () {
-    this.equalTo25DaysAfter.exec(this.ctx).should.be.false();
-    should(this.equalTo40DaysAfter.exec(this.ctx)).be.null();
-    this.equalTo80DaysAfter.exec(this.ctx).should.be.false();
+  it('should calculate days between = x', async function () {
+    (await this.equalTo25DaysAfter.exec(this.ctx)).should.be.false();
+    should(await this.equalTo40DaysAfter.exec(this.ctx)).be.null();
+    (await this.equalTo80DaysAfter.exec(this.ctx)).should.be.false();
   });
 
-  it('should calculate days between <= x', function () {
-    this.lessOrEqualTo25DaysAfter.exec(this.ctx).should.be.false();
-    should(this.lessOrEqualTo40DaysAfter.exec(this.ctx)).be.null();
-    this.lessOrEqualTo80DaysAfter.exec(this.ctx).should.be.true();
+  it('should calculate days between <= x', async function () {
+    (await this.lessOrEqualTo25DaysAfter.exec(this.ctx)).should.be.false();
+    should(await this.lessOrEqualTo40DaysAfter.exec(this.ctx)).be.null();
+    (await this.lessOrEqualTo80DaysAfter.exec(this.ctx)).should.be.true();
   });
 
-  it('should calculate days between < x', function () {
-    this.lessThan25DaysAfter.exec(this.ctx).should.be.false();
-    should(this.lessThan40DaysAfter.exec(this.ctx)).be.null();
-    this.lessThan80DaysAfter.exec(this.ctx).should.be.true();
+  it('should calculate days between < x', async function () {
+    (await this.lessThan25DaysAfter.exec(this.ctx)).should.be.false();
+    should(await this.lessThan40DaysAfter.exec(this.ctx)).be.null();
+    (await this.lessThan80DaysAfter.exec(this.ctx)).should.be.true();
   });
 
-  it('should calculate other way too', function () {
-    this.twentyFiveDaysLessThanDaysBetween.exec(this.ctx).should.be.true();
-    should(this.fortyDaysEqualToDaysBetween.exec(this.ctx)).be.null();
-    this.twentyFiveDaysGreaterThanDaysBetween.exec(this.ctx).should.be.false();
+  it('should calculate other way too', async function () {
+    (await this.twentyFiveDaysLessThanDaysBetween.exec(this.ctx)).should.be.true();
+    should(await this.fortyDaysEqualToDaysBetween.exec(this.ctx)).be.null();
+    (await this.twentyFiveDaysGreaterThanDaysBetween.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine that Sep to Dec is NOT <= 2 months', function () {
-    this.bonnieTestCase.exec(this.ctx).should.be.false();
+  it('should properly determine that Sep to Dec is NOT <= 2 months', async function () {
+    (await this.bonnieTestCase.exec(this.ctx)).should.be.false();
   });
 
-  it('should properly determine that Sep to Dec is NOT <= 2 months with 0 timezone offset (Zulu)', function () {
+  it('should properly determine that Sep to Dec is NOT <= 2 months with 0 timezone offset (Zulu)', async function () {
     // THIS for some reason is BROKEN!
-    this.bonnieTestCaseZulu.exec(this.ctx).should.be.false();
+    (await this.bonnieTestCaseZulu.exec(this.ctx)).should.be.false();
   });
 });
 
@@ -966,90 +975,94 @@ describe('DurationBetween', () => {
     setup(this, data);
   });
 
-  it('should properly execute years between', function () {
-    this.yearsBetween.exec(this.ctx).should.equal(1);
+  it('should properly execute years between', async function () {
+    (await this.yearsBetween.exec(this.ctx)).should.equal(1);
   });
 
-  it('should properly execute months between', function () {
-    this.monthsBetween.exec(this.ctx).should.equal(12);
+  it('should properly execute months between', async function () {
+    (await this.monthsBetween.exec(this.ctx)).should.equal(12);
   });
 
-  it('should properly execute days between', function () {
-    this.daysBetween.exec(this.ctx).should.equal(365 + 21);
+  it('should properly execute days between', async function () {
+    (await this.daysBetween.exec(this.ctx)).should.equal(365 + 21);
   });
 
-  it('should properly execute weeks between', function () {
-    this.weeksBetween.exec(this.ctx).should.equal(55);
+  it('should properly execute weeks between', async function () {
+    (await this.weeksBetween.exec(this.ctx)).should.equal(55);
   });
 
-  it('should properly execute hours between', function () {
-    this.hoursBetween.exec(this.ctx).should.equal(24 * (365 + 21) + 11);
+  it('should properly execute hours between', async function () {
+    (await this.hoursBetween.exec(this.ctx)).should.equal(24 * (365 + 21) + 11);
   });
 
-  it('should properly execute minutes between', function () {
-    this.minutesBetween.exec(this.ctx).should.equal(60 * (24 * (365 + 21) + 11) + 29);
+  it('should properly execute minutes between', async function () {
+    (await this.minutesBetween.exec(this.ctx)).should.equal(60 * (24 * (365 + 21) + 11) + 29);
   });
 
-  it('should properly execute seconds between', function () {
-    this.secondsBetween.exec(this.ctx).should.equal(60 * (60 * (24 * (365 + 21) + 11) + 29) + 29);
+  it('should properly execute seconds between', async function () {
+    (await this.secondsBetween.exec(this.ctx)).should.equal(
+      60 * (60 * (24 * (365 + 21) + 11) + 29) + 29
+    );
   });
 
-  it('should properly execute milliseconds between', function () {
-    this.millisecondsBetween
-      .exec(this.ctx)
-      .should.equal(1000 * (60 * (60 * (24 * (365 + 21) + 11) + 29) + 29) + 500);
+  it('should properly execute milliseconds between', async function () {
+    (await this.millisecondsBetween.exec(this.ctx)).should.equal(
+      1000 * (60 * (60 * (24 * (365 + 21) + 11) + 29) + 29) + 500
+    );
   });
 
-  it('should properly execute milliseconds between when date 1 is after date 2', function () {
-    this.millisecondsBetweenReversed
-      .exec(this.ctx)
-      .should.equal(-1 * 1000 * (60 * (60 * (24 * (365 + 21) + 11) + 29) + 29) - 500);
+  it('should properly execute milliseconds between when date 1 is after date 2', async function () {
+    (await this.millisecondsBetweenReversed.exec(this.ctx)).should.equal(
+      -1 * 1000 * (60 * (60 * (24 * (365 + 21) + 11) + 29) + 29) - 500
+    );
   });
 
-  it('should properly execute years between with an uncertainty', function () {
-    this.yearsBetweenUncertainty.exec(this.ctx).should.equal(0);
+  it('should properly execute years between with an uncertainty', async function () {
+    (await this.yearsBetweenUncertainty.exec(this.ctx)).should.equal(0);
   });
 
-  it('should properly execute months between with an uncertainty', function () {
-    this.monthsBetweenUncertainty.exec(this.ctx).should.equal(0);
+  it('should properly execute months between with an uncertainty', async function () {
+    (await this.monthsBetweenUncertainty.exec(this.ctx)).should.equal(0);
   });
 
-  it('should properly execute weeks between with an uncertainty', function () {
-    this.weeksBetweenUncertainty.exec(this.ctx).should.eql(new Uncertainty(0, 4));
+  it('should properly execute weeks between with an uncertainty', async function () {
+    (await this.weeksBetweenUncertainty.exec(this.ctx)).should.eql(new Uncertainty(0, 4));
   });
 
-  it('should properly execute days between with an uncertainty', function () {
-    this.daysBetweenUncertainty.exec(this.ctx).should.eql(new Uncertainty(0, 30));
+  it('should properly execute days between with an uncertainty', async function () {
+    (await this.daysBetweenUncertainty.exec(this.ctx)).should.eql(new Uncertainty(0, 30));
   });
 
-  it('should properly execute hours between with an uncertainty', function () {
-    this.hoursBetweenUncertainty.exec(this.ctx).should.eql(new Uncertainty(0, 743));
+  it('should properly execute hours between with an uncertainty', async function () {
+    (await this.hoursBetweenUncertainty.exec(this.ctx)).should.eql(new Uncertainty(0, 743));
   });
 
-  it('should properly execute minutes between with an uncertainty', function () {
-    this.minutesBetweenUncertainty.exec(this.ctx).should.eql(new Uncertainty(0, 44639));
+  it('should properly execute minutes between with an uncertainty', async function () {
+    (await this.minutesBetweenUncertainty.exec(this.ctx)).should.eql(new Uncertainty(0, 44639));
   });
 
-  it('should properly execute seconds between with an uncertainty', function () {
-    this.secondsBetweenUncertainty.exec(this.ctx).should.eql(new Uncertainty(0, 2678399));
+  it('should properly execute seconds between with an uncertainty', async function () {
+    (await this.secondsBetweenUncertainty.exec(this.ctx)).should.eql(new Uncertainty(0, 2678399));
   });
 
-  it('should properly execute milliseconds between with an uncertainty', function () {
-    this.millisecondsBetweenUncertainty.exec(this.ctx).should.eql(new Uncertainty(0, 2678399999));
+  it('should properly execute milliseconds between with an uncertainty', async function () {
+    (await this.millisecondsBetweenUncertainty.exec(this.ctx)).should.eql(
+      new Uncertainty(0, 2678399999)
+    );
   });
 
-  it('should properly execute seconds between when date 1 is after date 2 with an uncertainty', function () {
-    this.millisecondsBetweenReversedUncertainty
-      .exec(this.ctx)
-      .should.eql(new Uncertainty(-2678399999, 0));
+  it('should properly execute seconds between when date 1 is after date 2 with an uncertainty', async function () {
+    (await this.millisecondsBetweenReversedUncertainty.exec(this.ctx)).should.eql(
+      new Uncertainty(-2678399999, 0)
+    );
   });
 
-  it('should properly execute hours between when falling back for DST', function () {
-    this.hoursBetween1and3CrossingSpringDST.exec(this.ctx).should.equal(1);
+  it('should properly execute hours between when falling back for DST', async function () {
+    (await this.hoursBetween1and3CrossingSpringDST.exec(this.ctx)).should.equal(1);
   });
 
-  it('should properly execute hours between when springing ahead for DST', function () {
-    this.hoursBetween1and3CrossingFallDST.exec(this.ctx).should.equal(3);
+  it('should properly execute hours between when springing ahead for DST', async function () {
+    (await this.hoursBetween1and3CrossingFallDST.exec(this.ctx)).should.equal(3);
   });
 });
 
@@ -1058,59 +1071,59 @@ describe('DateMath', () => {
     setup(this, data);
   });
 
-  it('should properly add and subtract years', function () {
-    let d = this.plusThreeYears.exec(this.ctx);
+  it('should properly add and subtract years', async function () {
+    let d = await this.plusThreeYears.exec(this.ctx);
     dateCheck(d, 2016, 6, 15, 0, 0, 0, 0);
-    d = this.minusThreeYears.exec(this.ctx);
+    d = await this.minusThreeYears.exec(this.ctx);
     dateCheck(d, 2010, 6, 15, 0, 0, 0, 0);
   });
 
-  it('should properly add and subtract months', function () {
-    let d = this.plusEightMonths.exec(this.ctx);
+  it('should properly add and subtract months', async function () {
+    let d = await this.plusEightMonths.exec(this.ctx);
     dateCheck(d, 2014, 2, 15, 0, 0, 0, 0);
-    d = this.minusEightMonths.exec(this.ctx);
+    d = await this.minusEightMonths.exec(this.ctx);
     dateCheck(d, 2012, 10, 15, 0, 0, 0, 0);
   });
 
-  it('should properly add and subtract weeks', function () {
-    let d = this.plusThreeWeeks.exec(this.ctx);
+  it('should properly add and subtract weeks', async function () {
+    let d = await this.plusThreeWeeks.exec(this.ctx);
     dateCheck(d, 2013, 7, 6, 0, 0, 0, 0);
-    d = this.minusThreeWeeks.exec(this.ctx);
+    d = await this.minusThreeWeeks.exec(this.ctx);
     dateCheck(d, 2013, 5, 25, 0, 0, 0, 0);
   });
 
-  it('should properly add and subtract days', function () {
-    let d = this.plusTwentyDays.exec(this.ctx);
+  it('should properly add and subtract days', async function () {
+    let d = await this.plusTwentyDays.exec(this.ctx);
     dateCheck(d, 2013, 7, 5, 0, 0, 0, 0);
-    d = this.minusTwentyDays.exec(this.ctx);
+    d = await this.minusTwentyDays.exec(this.ctx);
     dateCheck(d, 2013, 5, 26, 0, 0, 0, 0);
   });
 
-  it('should properly add and subtract hours', function () {
-    let d = this.plusThreeHours.exec(this.ctx);
+  it('should properly add and subtract hours', async function () {
+    let d = await this.plusThreeHours.exec(this.ctx);
     dateCheck(d, 2013, 6, 15, 3, 0, 0, 0);
-    d = this.minusThreeHours.exec(this.ctx);
+    d = await this.minusThreeHours.exec(this.ctx);
     dateCheck(d, 2013, 6, 14, 21, 0, 0, 0);
   });
 
-  it('should properly add and subtract minutes', function () {
-    let d = this.plusThreeMinutes.exec(this.ctx);
+  it('should properly add and subtract minutes', async function () {
+    let d = await this.plusThreeMinutes.exec(this.ctx);
     dateCheck(d, 2013, 6, 15, 0, 3, 0, 0);
-    d = this.minusThreeMinutes.exec(this.ctx);
+    d = await this.minusThreeMinutes.exec(this.ctx);
     dateCheck(d, 2013, 6, 14, 23, 57, 0, 0);
   });
 
-  it('should properly add and subtract seconds', function () {
-    let d = this.plusThreeSeconds.exec(this.ctx);
+  it('should properly add and subtract seconds', async function () {
+    let d = await this.plusThreeSeconds.exec(this.ctx);
     dateCheck(d, 2013, 6, 15, 0, 0, 3, 0);
-    d = this.minusThreeSeconds.exec(this.ctx);
+    d = await this.minusThreeSeconds.exec(this.ctx);
     dateCheck(d, 2013, 6, 14, 23, 59, 57, 0);
   });
 
-  it('should properly add and subtract milliseconds', function () {
-    let d = this.plusThreeMilliseconds.exec(this.ctx);
+  it('should properly add and subtract milliseconds', async function () {
+    let d = await this.plusThreeMilliseconds.exec(this.ctx);
     dateCheck(d, 2013, 6, 15, 0, 0, 0, 3);
-    d = this.minusThreeMilliseconds.exec(this.ctx);
+    d = await this.minusThreeMilliseconds.exec(this.ctx);
     dateCheck(d, 2013, 6, 14, 23, 59, 59, 997);
   });
 });

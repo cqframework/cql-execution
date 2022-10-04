@@ -51,9 +51,9 @@ describe('CQL Spec Tests (from XML)', () => {
               if (testCaseMap.has('expression') && testCaseMap.has('output')) {
                 const ctx = new PatientContext(library);
                 ctx.getExecutionDateTime().timezoneOffset = 0;
-                const actualExp = build(testCaseMap.get('expression'));
+                const actualExp = build(testCaseMap.get('expression')) as any;
                 let actual = actualExp.execute(ctx);
-                const expectedExp = build(testCaseMap.get('output'));
+                const expectedExp = build(testCaseMap.get('output')) as any;
                 let expected = expectedExp.execute(ctx);
                 if (expectedExp.json && expectedExp.json.type === 'Null') {
                   should(actual).be.null();

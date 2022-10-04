@@ -2,13 +2,13 @@
 import * as E from './expressions';
 import { typeIsArray } from '../util/util';
 
-export function build(json: any): any {
+export function build(json: any): E.Expression | E.Expression[] | null {
   if (json == null) {
     return json;
   }
 
   if (typeIsArray(json)) {
-    return (json as any[]).map(child => build(child));
+    return (json as any[]).map(child => build(child) as E.Expression);
   }
 
   if (json.type === 'FunctionRef') {
@@ -27,7 +27,7 @@ function functionExists(name: string) {
   return typeof E[name] === 'function';
 }
 
-function constructByName(name: string, json: any) {
+function constructByName(name: string, json: any): E.Expression {
   // @ts-ignore
   return new E[name](json);
 }
