@@ -6,14 +6,6 @@ import { convertUnit } from './units';
 
 const ucumUtilInstance = ucum.UcumLhcUtils.getInstance();
 
-/**
- * Options for Memoize classes
- */
-export interface IMemoizeOptions {
-  useCache?: boolean;
-  cacheMax?: number;
-}
-
 type Primitive = string | number | boolean | bigint | symbol | undefined | null;
 type KeyValuePair<KEY, VALUE> = { key: KEY; value: VALUE };
 
@@ -221,7 +213,9 @@ abstract class InMemoryCacheMemoizer<
       // Check the cache
       const cacheKey = this.getListCacheKey(...list);
       const cacheValue = this.getListCacheValue(cacheKey);
-      if (cacheValue) return cacheValue;
+      if (cacheValue) {
+        return cacheValue;
+      }
 
       // Evaluate the function
       const functionResult = fn(...list);
@@ -248,9 +242,10 @@ abstract class InMemoryCacheMemoizer<
   protected convertToValueList = (list: Q[]): T[] => list.map(x => x.value);
 
   public memoize = (fn: (...list: P[][]) => Q[]): ((...list: S[][]) => T[]) => {
-    if (this.options && this.options.useCache)
+    if (this.options && this.options.useCache) {
       return (...list: S[][]) =>
         this.convertToValueList(this.addCacheToFunction(fn)(...this.convertToKeyList(...list)));
+    }
 
     return (...list: S[][]) => this.convertToValueList(fn(...this.convertToKeyList(...list)));
   };
@@ -320,8 +315,9 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
         this.options.useCache &&
         this.options.cacheMax &&
         map.size == this.options.cacheMax
-      )
+      ) {
         map.delete(map.keySeq().first());
+      }
 
       map.set(key, value);
     });
@@ -330,17 +326,22 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
   public toImmutableObjectKey = (js: any): ImmutableObjectKey => {
     // This is necessary because of the oddities of CQL
     // It allows ignoring non-set values in tuples to be compared correctly with set as null values in tuples
-    if (js === null || js === undefined) return null;
+    if (js === null || js === undefined) {
+      return null;
+    }
 
     // Handle the edge case of functions
-    if (typeof js === 'function')
+    if (typeof js === 'function') {
       return Immutable.Map({
         name: js.toString(),
         __instance: js.constructor.name
       });
+    }
 
     // Simple return non-objects
-    if (typeof js !== 'object') return js;
+    if (typeof js !== 'object') {
+      return js;
+    }
 
     // Handle objects - normalize as necessary to generate unique keys
     switch (js.constructor) {
@@ -363,16 +364,18 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
         });
 
       case DateTime:
-        if (typeof js.timezoneOffset === 'number' && js.timezoneOffset !== 0)
+        if (typeof js.timezoneOffset === 'number' && js.timezoneOffset !== 0) {
           return Immutable.Seq(js.convertToTimezoneOffset(0))
             .map((x: any) => this.toImmutableObjectKey(x))
             .toMap()
             .set('__instance', js.constructor.name);
-        else
+        }
+        else {
           return Immutable.Seq(js)
             .map((x: any) => this.toImmutableObjectKey(x))
             .toMap()
             .set('__instance', js.constructor.name);
+        }
 
       case Interval:
         return Immutable.Seq(js.toClosed())
@@ -428,12 +431,15 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
         });
 
       case Uncertainty:
-        if (js.isPoint()) return this.toImmutableObjectKey(js.low);
-        else
+        if (js.isPoint()) {
+          return this.toImmutableObjectKey(js.low);
+        }
+        else {
           return Immutable.Seq(js)
             .map((x: any) => this.toImmutableObjectKey(x))
             .toMap()
             .set('__instance', js.constructor?.name);
+        }
 
       default:
         return Immutable.Seq(js)

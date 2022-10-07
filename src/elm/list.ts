@@ -80,10 +80,10 @@ export const doIntersect = (a: unknown[], b: unknown[]) =>
   doIntersectMemoizer.memoize(immutableDoIntersect)(a, b);
 
 // ELM-only, not a product of CQL
-export class Times extends UnimplementedExpression {}
+export class Times extends UnimplementedExpression { }
 
 // ELM-only, not a product of CQL
-export class Filter extends UnimplementedExpression {}
+export class Filter extends UnimplementedExpression { }
 
 export class SingletonFrom extends Expression {
   constructor(json: any) {
@@ -169,7 +169,7 @@ export function doProperIncludes(list: any, sublist: any) {
 }
 
 // ELM-only, not a product of CQL
-export class ForEach extends UnimplementedExpression {}
+export class ForEach extends UnimplementedExpression { }
 
 export class Flatten extends Expression {
   constructor(json: any) {
@@ -217,7 +217,9 @@ const immutableDoDistinct = <S>(
       y.add(x.key);
 
       // If inserted, then size will increase; push to distinct
-      if (y.count() > setSize) distinct.push(x);
+      if (y.count() > setSize) {
+        distinct.push(x);
+      }
     });
   });
 
@@ -227,7 +229,7 @@ export const doDistinct = (list: unknown[]): unknown[] =>
   doDistinctMemoizer.memoize(immutableDoDistinct)(list);
 
 // ELM-only, not a product of CQL
-export class Current extends UnimplementedExpression {}
+export class Current extends UnimplementedExpression { }
 
 export class First extends Expression {
   source: Expression;

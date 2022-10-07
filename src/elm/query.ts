@@ -61,7 +61,7 @@ export class Without extends With {
 }
 
 // ELM-only, not a product of CQL
-export class Sort extends UnimplementedExpression {}
+export class Sort extends UnimplementedExpression { }
 
 export class ByDirection extends Expression {
   direction: Direction;
@@ -189,7 +189,9 @@ const immutableToDistinctList = <S>(
       y.add(x.key);
 
       // If inserted, then size will increase; push to distinct
-      if (y.count() > setSize) distinct.push(x);
+      if (y.count() > setSize) {
+        distinct.push(x);
+      }
     });
   });
 

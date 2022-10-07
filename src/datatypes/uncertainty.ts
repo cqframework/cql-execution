@@ -57,7 +57,9 @@ export class Uncertainty {
     // Note: Can't use normal equality, as that fails for Javascript dates
     // TODO: Fix after we don't need to support Javascript date uncertainties anymore
     const lte = (a: any, b: any): boolean | null => {
-      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name) return null;
+      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name) {
+        return null;
+      }
 
       if (typeof a.sameOrBefore === 'function') {
         return a.sameOrBefore(b);
@@ -66,7 +68,9 @@ export class Uncertainty {
       }
     };
     const gte = (a: any, b: any): boolean | null => {
-      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name) return null;
+      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name) {
+        return null;
+      }
 
       if (typeof a.sameOrBefore === 'function') {
         return a.sameOrAfter(b);
@@ -85,9 +89,13 @@ export class Uncertainty {
   equals(other: any) {
     // if this is a point, and other is not an uncertainty or a point, then we can compare directly
     if (this.isPoint()) {
-      if (!(other instanceof Uncertainty)) return equals(this.low, other);
+      if (!(other instanceof Uncertainty)) {
+        return equals(this.low, other);
+      }
 
-      if (other instanceof Uncertainty && other.isPoint()) return equals(this.low, other.low);
+      if (other.isPoint()) {
+        return equals(this.low, other.low);
+      }
     }
 
     other = Uncertainty.from(other);
@@ -96,7 +104,9 @@ export class Uncertainty {
 
   lessThan(other: any) {
     const lt = (a: any, b: any) => {
-      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name) return null;
+      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name) {
+        return null;
+      }
 
       if (typeof a.before === 'function') {
         return a.before(b);
