@@ -204,8 +204,9 @@ class Patient extends Record {
             return [];
         }
         const match = profile.match(/(\{https:\/\/github\.com\/cqframework\/cql-execution\/simple\})?(.*)/);
-        if (match == null)
+        if (match == null) {
             return [];
+        }
         const recordType = match[2];
         if (recordType === 'Patient') {
             return [this];
@@ -2641,8 +2642,9 @@ class Uncertainty {
         // TODO: Fix after we don't need to support Javascript date uncertainties anymore
         const lte = (a, b) => {
             var _a, _b;
-            if (typeof a !== typeof b || ((_a = a === null || a === void 0 ? void 0 : a.constructor) === null || _a === void 0 ? void 0 : _a.name) !== ((_b = b === null || b === void 0 ? void 0 : b.constructor) === null || _b === void 0 ? void 0 : _b.name))
+            if (typeof a !== typeof b || ((_a = a === null || a === void 0 ? void 0 : a.constructor) === null || _a === void 0 ? void 0 : _a.name) !== ((_b = b === null || b === void 0 ? void 0 : b.constructor) === null || _b === void 0 ? void 0 : _b.name)) {
                 return null;
+            }
             if (typeof a.sameOrBefore === 'function') {
                 return a.sameOrBefore(b);
             }
@@ -2652,8 +2654,9 @@ class Uncertainty {
         };
         const gte = (a, b) => {
             var _a, _b;
-            if (typeof a !== typeof b || ((_a = a === null || a === void 0 ? void 0 : a.constructor) === null || _a === void 0 ? void 0 : _a.name) !== ((_b = b === null || b === void 0 ? void 0 : b.constructor) === null || _b === void 0 ? void 0 : _b.name))
+            if (typeof a !== typeof b || ((_a = a === null || a === void 0 ? void 0 : a.constructor) === null || _a === void 0 ? void 0 : _a.name) !== ((_b = b === null || b === void 0 ? void 0 : b.constructor) === null || _b === void 0 ? void 0 : _b.name)) {
                 return null;
+            }
             if (typeof a.sameOrBefore === 'function') {
                 return a.sameOrAfter(b);
             }
@@ -2669,10 +2672,12 @@ class Uncertainty {
     equals(other) {
         // if this is a point, and other is not an uncertainty or a point, then we can compare directly
         if (this.isPoint()) {
-            if (!(other instanceof Uncertainty))
+            if (!(other instanceof Uncertainty)) {
                 return (0, comparison_1.equals)(this.low, other);
-            if (other instanceof Uncertainty && other.isPoint())
+            }
+            if (other.isPoint()) {
                 return (0, comparison_1.equals)(this.low, other.low);
+            }
         }
         other = Uncertainty.from(other);
         return logic_1.ThreeValuedLogic.not(logic_1.ThreeValuedLogic.or(this.lessThan(other), this.greaterThan(other)));
@@ -2680,8 +2685,9 @@ class Uncertainty {
     lessThan(other) {
         const lt = (a, b) => {
             var _a, _b;
-            if (typeof a !== typeof b || ((_a = a === null || a === void 0 ? void 0 : a.constructor) === null || _a === void 0 ? void 0 : _a.name) !== ((_b = b === null || b === void 0 ? void 0 : b.constructor) === null || _b === void 0 ? void 0 : _b.name))
+            if (typeof a !== typeof b || ((_a = a === null || a === void 0 ? void 0 : a.constructor) === null || _a === void 0 ? void 0 : _a.name) !== ((_b = b === null || b === void 0 ? void 0 : b.constructor) === null || _b === void 0 ? void 0 : _b.name)) {
                 return null;
+            }
             if (typeof a.before === 'function') {
                 return a.before(b);
             }
@@ -5613,8 +5619,9 @@ const immutableDoDistinct = (list) => {
             // Attempt to insert
             y.add(x.key);
             // If inserted, then size will increase; push to distinct
-            if (y.count() > setSize)
+            if (y.count() > setSize) {
                 distinct.push(x);
+            }
         });
     });
     return distinct;
@@ -6557,8 +6564,9 @@ const immutableToDistinctList = (list) => {
             // Attempt to insert
             y.add(x.key);
             // If inserted, then size will increase; push to distinct
-            if (y.count() > setSize)
+            if (y.count() > setSize) {
                 distinct.push(x);
+            }
         });
     });
     return distinct;
@@ -9222,8 +9230,9 @@ class InMemoryCacheMemoizer extends Memoizer {
                 // Check the cache
                 const cacheKey = this.getListCacheKey(...list);
                 const cacheValue = this.getListCacheValue(cacheKey);
-                if (cacheValue)
+                if (cacheValue) {
                     return cacheValue;
+                }
                 // Evaluate the function
                 const functionResult = fn(...list);
                 // Set the cache value
@@ -9244,8 +9253,9 @@ class InMemoryCacheMemoizer extends Memoizer {
         };
         this.convertToValueList = (list) => list.map(x => x.value);
         this.memoize = (fn) => {
-            if (this.options && this.options.useCache)
+            if (this.options && this.options.useCache) {
                 return (...list) => this.convertToValueList(this.addCacheToFunction(fn)(...this.convertToKeyList(...list)));
+            }
             return (...list) => this.convertToValueList(fn(...this.convertToKeyList(...list)));
         };
     }
@@ -9281,8 +9291,9 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
                 if (this.options &&
                     this.options.useCache &&
                     this.options.cacheMax &&
-                    map.size == this.options.cacheMax)
+                    map.size == this.options.cacheMax) {
                     map.delete(map.keySeq().first());
+                }
                 map.set(key, value);
             });
         };
@@ -9290,17 +9301,20 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
             var _a, _b, _c, _d, _e;
             // This is necessary because of the oddities of CQL
             // It allows ignoring non-set values in tuples to be compared correctly with set as null values in tuples
-            if (js === null || js === undefined)
+            if (js === null || js === undefined) {
                 return null;
+            }
             // Handle the edge case of functions
-            if (typeof js === 'function')
+            if (typeof js === 'function') {
                 return immutable_1.default.Map({
                     name: js.toString(),
                     __instance: js.constructor.name
                 });
+            }
             // Simple return non-objects
-            if (typeof js !== 'object')
+            if (typeof js !== 'object') {
                 return js;
+            }
             // Handle objects - normalize as necessary to generate unique keys
             switch (js.constructor) {
                 case Array:
@@ -9319,16 +9333,18 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
                         __instance: js.constructor.name
                     });
                 case datatypes_1.DateTime:
-                    if (typeof js.timezoneOffset === 'number' && js.timezoneOffset !== 0)
+                    if (typeof js.timezoneOffset === 'number' && js.timezoneOffset !== 0) {
                         return immutable_1.default.Seq(js.convertToTimezoneOffset(0))
                             .map((x) => this.toImmutableObjectKey(x))
                             .toMap()
                             .set('__instance', js.constructor.name);
-                    else
+                    }
+                    else {
                         return immutable_1.default.Seq(js)
                             .map((x) => this.toImmutableObjectKey(x))
                             .toMap()
                             .set('__instance', js.constructor.name);
+                    }
                 case datatypes_1.Interval:
                     return immutable_1.default.Seq(js.toClosed())
                         .map((x) => this.toImmutableObjectKey(x))
@@ -9378,13 +9394,15 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
                         __instance: js.constructor.name
                     });
                 case datatypes_1.Uncertainty:
-                    if (js.isPoint())
+                    if (js.isPoint()) {
                         return this.toImmutableObjectKey(js.low);
-                    else
+                    }
+                    else {
                         return immutable_1.default.Seq(js)
                             .map((x) => this.toImmutableObjectKey(x))
                             .toMap()
                             .set('__instance', (_d = js.constructor) === null || _d === void 0 ? void 0 : _d.name);
+                    }
                 default:
                     return immutable_1.default.Seq(js)
                         .map((x) => this.toImmutableObjectKey(x))

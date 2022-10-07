@@ -41,7 +41,7 @@ abstract class Memoizer<
   Q extends KeyValuePair<T_KEY, T>,
   CACHEKEY
 > {
-  constructor(protected readonly options?: IMemoizeOptions) { }
+  constructor(protected readonly options?: IMemoizeOptions) {}
 
   /**
    * Generate a unique CACHEKEY for P[][].
@@ -369,8 +369,7 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
             .map((x: any) => this.toImmutableObjectKey(x))
             .toMap()
             .set('__instance', js.constructor.name);
-        }
-        else {
+        } else {
           return Immutable.Seq(js)
             .map((x: any) => this.toImmutableObjectKey(x))
             .toMap()
@@ -433,8 +432,7 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
       case Uncertainty:
         if (js.isPoint()) {
           return this.toImmutableObjectKey(js.low);
-        }
-        else {
+        } else {
           return Immutable.Seq(js)
             .map((x: any) => this.toImmutableObjectKey(x))
             .toMap()
