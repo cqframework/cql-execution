@@ -18,7 +18,8 @@ module.exports = {
     'no-loss-of-precision': 'off',
     'no-unused-vars': ['error', { vars: 'all', args: 'none' }],
     quotes: ['error', 'single', { allowTemplateLiterals: true, avoidEscape: true }],
-    semi: ['error', 'always']
+    semi: ['error', 'always'],
+    curly: 'error'
   },
   overrides: [
     {
