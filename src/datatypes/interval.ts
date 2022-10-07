@@ -61,7 +61,7 @@ export class Interval {
       newHigh = this.high.copy();
     }
 
-    return new Interval(newLow, newHigh, this.lowClosed, this.highClosed);
+    return new Interval(newLow, newHigh, this.lowClosed, this.highClosed, this.defaultPointType);
   }
 
   contains(item: any, precision?: any) {

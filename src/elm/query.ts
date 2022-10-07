@@ -1,6 +1,5 @@
-import Immutable from 'immutable';
 import { Context } from '../runtime/context';
-import * as Memoizer from '../util/memoizer';
+import { getNormalizedHash } from '../util/normalize';
 import { allTrue, Direction, typeIsArray } from '../util/util';
 import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
@@ -171,32 +170,16 @@ export class SortClause {
   }
 }
 
-const toDistinctListMemoizer = new Memoizer.ImmutableMemoizer();
-const immutableToDistinctList = <S>(
-  list: Memoizer.ImmutableKeyValuePair<S>[]
-): Memoizer.ImmutableKeyValuePair<S>[] => {
-  const set = Immutable.Set<Memoizer.ImmutableObjectKey>().asMutable();
-  const distinct: Memoizer.ImmutableKeyValuePair<S>[] = [];
-
-  set.withMutations(y => {
-    list.forEach(x => {
-      // Check set size
-      const setSize = y.count();
-
-      // Attempt to insert
-      y.add(x.key);
-
-      // If inserted, then size will increase; push to distinct
-      if (y.count() > setSize) {
-        distinct.push(x);
-      }
-    });
+export const toDistinctList = (list: unknown[]): unknown[] => {
+  const itemMap = new Map<string, any>();
+  list.forEach(item => {
+    const key = getNormalizedHash(item);
+    if (!itemMap.has(key)) {
+      itemMap.set(key, item);
+    }
   });
-
-  return distinct;
+  return Array.from(itemMap.values());
 };
-export const toDistinctList = (list: unknown[]): unknown[] =>
-  toDistinctListMemoizer.memoize(immutableToDistinctList)(list);
 
 class AggregateClause extends Expression {
   identifier: string;
