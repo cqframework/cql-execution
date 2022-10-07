@@ -60,7 +60,7 @@ export class Without extends With {
 }
 
 // ELM-only, not a product of CQL
-export class Sort extends UnimplementedExpression { }
+export class Sort extends UnimplementedExpression {}
 
 export class ByDirection extends Expression {
   direction: Direction;
