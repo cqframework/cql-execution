@@ -1,6 +1,7 @@
-import Immutable from 'immutable';
+//import Immutable from 'immutable';
 import { Context } from '../runtime/context';
-import * as Memoizer from '../util/memoizer';
+//import * as Memoizer from '../util/memoizer';
+import { getNormalizedHash } from '../util/normalize';
 import { allTrue, Direction, typeIsArray } from '../util/util';
 import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
@@ -171,6 +172,7 @@ export class SortClause {
   }
 }
 
+/*
 const toDistinctListMemoizer = new Memoizer.ImmutableMemoizer();
 const immutableToDistinctList = <S>(
   list: Memoizer.ImmutableKeyValuePair<S>[]
@@ -197,6 +199,18 @@ const immutableToDistinctList = <S>(
 };
 export const toDistinctList = (list: unknown[]): unknown[] =>
   toDistinctListMemoizer.memoize(immutableToDistinctList)(list);
+*/
+
+export const toDistinctList = (list: unknown[]): unknown[] => {
+  const itemMap = new Map<string, any>();
+  list.forEach(item => {
+    const key = getNormalizedHash(item);
+    if (!itemMap.has(key)) {
+      itemMap.set(key, item);
+    }
+  });
+  return Array.from(itemMap.values());
+};
 
 class AggregateClause extends Expression {
   identifier: string;

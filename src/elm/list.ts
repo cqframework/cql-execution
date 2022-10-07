@@ -1,7 +1,8 @@
-import Immutable from 'immutable';
+//import Immutable from 'immutable';
 import { Context } from '../runtime/context';
 import { equals } from '../util/comparison';
-import * as Memoizer from '../util/memoizer';
+//import * as Memoizer from '../util/memoizer';
+import { getNormalizedHash } from '../util/normalize';
 import { typeIsArray } from '../util/util';
 import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
@@ -48,6 +49,7 @@ export function doUnion(a: any, b: any) {
 }
 
 // Delegated to by overloaded#Except
+/*
 const doExceptMemoizer = new Memoizer.ImmutableMemoizer();
 const immutableDoExcept = <S>(
   a: Memoizer.ImmutableKeyValuePair<S>[],
@@ -62,8 +64,27 @@ const immutableDoExcept = <S>(
 };
 export const doExcept = (a: unknown[], b: unknown[]) =>
   doExceptMemoizer.memoize(immutableDoExcept)(a, b);
+*/
+
+export const doExcept = (a: unknown[], b: unknown[]) => {
+  const itemMap = new Map<string, any>();
+  a.forEach(item => {
+    const key = getNormalizedHash(item);
+    if (!itemMap.has(key)) {
+      itemMap.set(key, item);
+    }
+  });
+  b.forEach(item => {
+    const key = getNormalizedHash(item);
+    if (itemMap.has(key)) {
+      itemMap.delete(key);
+    }
+  });
+  return Array.from(itemMap.values());
+};
 
 // Delegated to by overloaded#Intersect
+/*
 const doIntersectMemoizer = new Memoizer.ImmutableMemoizer();
 const immutableDoIntersect = <S>(
   a: Memoizer.ImmutableKeyValuePair<S>[],
@@ -78,6 +99,26 @@ const immutableDoIntersect = <S>(
 };
 export const doIntersect = (a: unknown[], b: unknown[]) =>
   doIntersectMemoizer.memoize(immutableDoIntersect)(a, b);
+*/
+
+export const doIntersect = (a: unknown[], b: unknown[]) => {
+  const itemMap = new Map<string, any>();
+  b.forEach(item => {
+    const key = getNormalizedHash(item);
+    if (!itemMap.has(key)) {
+      itemMap.set(key, item);
+    }
+  });
+  const results: any = [];
+  a.forEach(item => {
+    const key = getNormalizedHash(item);
+    if (itemMap.has(key)) {
+      results.push(itemMap.get(key));
+      itemMap.delete(key);
+    }
+  });
+  return results;
+};
 
 // ELM-only, not a product of CQL
 export class Times extends UnimplementedExpression {}
@@ -200,6 +241,7 @@ export class Distinct extends Expression {
   }
 }
 
+/*
 // Cacheable and optimized doDistinct
 const doDistinctMemoizer = new Memoizer.ImmutableMemoizer();
 const immutableDoDistinct = <S>(
@@ -227,6 +269,18 @@ const immutableDoDistinct = <S>(
 };
 export const doDistinct = (list: unknown[]): unknown[] =>
   doDistinctMemoizer.memoize(immutableDoDistinct)(list);
+*/
+
+export const doDistinct = (list: unknown[]): unknown[] => {
+  const itemMap = new Map<string, any>();
+  list.forEach(item => {
+    const key = getNormalizedHash(item);
+    if (!itemMap.has(key)) {
+      itemMap.set(key, item);
+    }
+  });
+  return Array.from(itemMap.values());
+};
 
 // ELM-only, not a product of CQL
 export class Current extends UnimplementedExpression {}
