@@ -5466,7 +5466,7 @@ const doExceptMemoizer = new Memoizer.ImmutableMemoizer();
 const immutableDoExcept = (a, b) => {
     const keys_b = immutable_1.default.Set(b.map(x => x.key));
     const distinct_a = immutableDoDistinct(a);
-    const a_except_b = distinct_a.filter(x => !keys_b.includes(x.key));
+    const a_except_b = distinct_a.filter(x => !keys_b.has(x.key));
     return a_except_b;
 };
 const doExcept = (a, b) => doExceptMemoizer.memoize(immutableDoExcept)(a, b);
@@ -5476,7 +5476,7 @@ const doIntersectMemoizer = new Memoizer.ImmutableMemoizer();
 const immutableDoIntersect = (a, b) => {
     const keys_b = immutable_1.default.Set(b.map(x => x.key));
     const distinct_a = immutableDoDistinct(a);
-    const a_intersect_b = distinct_a.filter(z => keys_b.includes(z.key));
+    const a_intersect_b = distinct_a.filter(z => keys_b.has(z.key));
     return a_intersect_b;
 };
 const doIntersect = (a, b) => doIntersectMemoizer.memoize(immutableDoIntersect)(a, b);
