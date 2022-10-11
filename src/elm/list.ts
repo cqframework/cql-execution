@@ -56,7 +56,7 @@ const immutableDoExcept = <S>(
   const keys_b = Immutable.Set(b.map(x => x.key));
 
   const distinct_a = immutableDoDistinct(a);
-  const a_except_b = distinct_a.filter(x => !keys_b.includes(x.key));
+  const a_except_b = distinct_a.filter(x => !keys_b.has(x.key));
 
   return a_except_b;
 };
@@ -72,7 +72,7 @@ const immutableDoIntersect = <S>(
   const keys_b = Immutable.Set(b.map(x => x.key));
 
   const distinct_a = immutableDoDistinct(a);
-  const a_intersect_b = distinct_a.filter(z => keys_b.includes(z.key));
+  const a_intersect_b = distinct_a.filter(z => keys_b.has(z.key));
 
   return a_intersect_b;
 };
