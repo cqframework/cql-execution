@@ -465,4 +465,19 @@ describe('Uncertainty', () => {
     equals(d2, u2).should.be.true();
     equals(u2, d2).should.be.true();
   });
+
+  it('point should distinguish similar but different types', () => {
+    // This is an unrealistic example, but is intended to catch the difference between
+    // typeof a !== typeof b and
+    // typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name
+    const baseDate = new Date(2022, 1, 1);
+    const u1 = new Uncertainty(new Date(2022, 1, 1), {
+      day: 1,
+      month: 1,
+      year: 2022,
+      isDate: baseDate.isDate,
+      isDateTime: baseDate.isDateTime
+    });
+    u1.isPoint().should.be.false();
+  });
 });
