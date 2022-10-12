@@ -12,7 +12,7 @@ export class Uncertainty {
 
   constructor(public low: any = null, public high?: any) {
     const gt = (a: any, b: any) => {
-      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name) {
+      if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
         // TODO: This should probably throw rather than return false.
         // Uncertainties with different types probably shouldn't be supported.
         return false;
@@ -57,7 +57,7 @@ export class Uncertainty {
     // Note: Can't use normal equality, as that fails for Javascript dates
     // TODO: Fix after we don't need to support Javascript date uncertainties anymore
     const lte = (a: any, b: any): boolean | null => {
-      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name) {
+      if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
         return null;
       }
 
@@ -68,7 +68,7 @@ export class Uncertainty {
       }
     };
     const gte = (a: any, b: any): boolean | null => {
-      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name) {
+      if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
         return null;
       }
 
@@ -104,7 +104,7 @@ export class Uncertainty {
 
   lessThan(other: any) {
     const lt = (a: any, b: any) => {
-      if (typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name) {
+      if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
         return null;
       }
 

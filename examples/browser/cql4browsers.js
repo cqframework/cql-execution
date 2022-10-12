@@ -2590,8 +2590,7 @@ class Uncertainty {
         this.low = low;
         this.high = high;
         const gt = (a, b) => {
-            var _a, _b;
-            if (typeof a !== typeof b || ((_a = a === null || a === void 0 ? void 0 : a.constructor) === null || _a === void 0 ? void 0 : _a.name) !== ((_b = b === null || b === void 0 ? void 0 : b.constructor) === null || _b === void 0 ? void 0 : _b.name)) {
+            if (typeof a !== typeof b || (a === null || a === void 0 ? void 0 : a.constructor) !== (b === null || b === void 0 ? void 0 : b.constructor)) {
                 // TODO: This should probably throw rather than return false.
                 // Uncertainties with different types probably shouldn't be supported.
                 return false;
@@ -2641,8 +2640,7 @@ class Uncertainty {
         // Note: Can't use normal equality, as that fails for Javascript dates
         // TODO: Fix after we don't need to support Javascript date uncertainties anymore
         const lte = (a, b) => {
-            var _a, _b;
-            if (typeof a !== typeof b || ((_a = a === null || a === void 0 ? void 0 : a.constructor) === null || _a === void 0 ? void 0 : _a.name) !== ((_b = b === null || b === void 0 ? void 0 : b.constructor) === null || _b === void 0 ? void 0 : _b.name)) {
+            if (typeof a !== typeof b || (a === null || a === void 0 ? void 0 : a.constructor) !== (b === null || b === void 0 ? void 0 : b.constructor)) {
                 return null;
             }
             if (typeof a.sameOrBefore === 'function') {
@@ -2653,8 +2651,7 @@ class Uncertainty {
             }
         };
         const gte = (a, b) => {
-            var _a, _b;
-            if (typeof a !== typeof b || ((_a = a === null || a === void 0 ? void 0 : a.constructor) === null || _a === void 0 ? void 0 : _a.name) !== ((_b = b === null || b === void 0 ? void 0 : b.constructor) === null || _b === void 0 ? void 0 : _b.name)) {
+            if (typeof a !== typeof b || (a === null || a === void 0 ? void 0 : a.constructor) !== (b === null || b === void 0 ? void 0 : b.constructor)) {
                 return null;
             }
             if (typeof a.sameOrBefore === 'function') {
@@ -2684,8 +2681,7 @@ class Uncertainty {
     }
     lessThan(other) {
         const lt = (a, b) => {
-            var _a, _b;
-            if (typeof a !== typeof b || ((_a = a === null || a === void 0 ? void 0 : a.constructor) === null || _a === void 0 ? void 0 : _a.name) !== ((_b = b === null || b === void 0 ? void 0 : b.constructor) === null || _b === void 0 ? void 0 : _b.name)) {
+            if (typeof a !== typeof b || (a === null || a === void 0 ? void 0 : a.constructor) !== (b === null || b === void 0 ? void 0 : b.constructor)) {
                 return null;
             }
             if (typeof a.before === 'function') {
