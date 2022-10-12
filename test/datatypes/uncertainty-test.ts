@@ -469,7 +469,7 @@ describe('Uncertainty', () => {
   it('point should distinguish similar but different types', () => {
     // This is an unrealistic example, but is intended to catch the difference between
     // typeof a !== typeof b and
-    // typeof a !== typeof b || a?.constructor?.name !== b?.constructor?.name
+    // typeof a !== typeof b || a?.constructor !== b?.constructor
     const baseDate = new Date(2022, 1, 1);
     const u1 = new Uncertainty(new Date(2022, 1, 1), {
       day: 1,
