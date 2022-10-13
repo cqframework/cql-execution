@@ -354,13 +354,13 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
         return Immutable.Map({
           code: this.toImmutableObjectKey(js.code),
           system: this.toImmutableObjectKey(js.system),
-          __instance: 'CQL.Code'
+          __instance: js.constructor
         });
 
       case Date:
         return Immutable.Map({
           epochMs: js.getTime(),
-          __instance: 'JS.Date'
+          __instance: js.constructor
         });
 
       case DateTime:
@@ -368,26 +368,26 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
           return Immutable.Seq(js.convertToTimezoneOffset(0))
             .map((x: any) => this.toImmutableObjectKey(x))
             .toMap()
-            .set('__instance', 'CQL.DateTime');
+            .set('__instance', js.constructor);
         } else {
           return Immutable.Seq(js)
             .map((x: any) => this.toImmutableObjectKey(x))
             .toMap()
-            .set('__instance', 'CQL.DateTime');
+            .set('__instance', js.constructor);
         }
 
       case Interval:
         return Immutable.Seq(js.toClosed())
           .map((x: any) => this.toImmutableObjectKey(x))
           .toMap()
-          .set('__instance', 'CQL.Interval');
+          .set('__instance', js.constructor);
 
       case Quantity:
         if (!js.unit) {
           return Immutable.Map({
             value: js.value ?? null,
             unit: null,
-            __instance: 'CQL.Quantity'
+            __instance: js.constructor
           });
         }
 
@@ -399,7 +399,7 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
           return Immutable.Map({
             value: js.value ?? null,
             unit: js.unit ?? null,
-            __instance: 'CQL.Quantity'
+            __instance: js.constructor
           });
         } else {
           // Unit was found - convert to baseUnit and normalize
@@ -409,7 +409,7 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
           return Immutable.Map({
             value: finalValue ?? null,
             unit: baseUnitKeyCode ?? null,
-            __instance: 'CQL.Quantity'
+            __instance: js.constructor
           });
         }
 
@@ -417,7 +417,7 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
         return Immutable.Map({
           numerator: this.toImmutableObjectKey(js.numerator),
           denominator: this.toImmutableObjectKey(js.denominator),
-          __instance: 'CQL.Ratio'
+          __instance: js.constructor
         });
 
       case RegExp:
@@ -426,7 +426,7 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
           global: this.toImmutableObjectKey(js.global),
           ignoreCase: this.toImmutableObjectKey(js.ignoreCase),
           multiline: this.toImmutableObjectKey(js.multiline),
-          __instance: 'JS.RegExp'
+          __instance: js.constructor
         });
 
       case Uncertainty:
@@ -436,14 +436,14 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
           return Immutable.Seq(js)
             .map((x: any) => this.toImmutableObjectKey(x))
             .toMap()
-            .set('__instance', 'CQL.Uncertainty');
+            .set('__instance', js.constructor);
         }
 
       default:
         return Immutable.Seq(js)
           .map((x: any) => this.toImmutableObjectKey(x))
           .toMap()
-          .set('__instance', js.constructor?.name);
+          .set('__instance', js.constructor);
     }
   };
 }
