@@ -9273,7 +9273,7 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
             });
         };
         this.toImmutableObjectKey = (js) => {
-            var _a, _b, _c, _d, _e;
+            var _a, _b, _c, _d;
             // This is necessary because of the oddities of CQL
             // It allows ignoring non-set values in tuples to be compared correctly with set as null values in tuples
             if (js === null || js === undefined) {
@@ -9283,7 +9283,7 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
             if (typeof js === 'function') {
                 return immutable_1.default.Map({
                     name: js.toString(),
-                    __instance: js.constructor.name
+                    __instance: 'JS.Function'
                 });
             }
             // Simple return non-objects
@@ -9300,37 +9300,37 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
                     return immutable_1.default.Map({
                         code: this.toImmutableObjectKey(js.code),
                         system: this.toImmutableObjectKey(js.system),
-                        __instance: js.constructor.name
+                        __instance: 'CQL.Code'
                     });
                 case Date:
                     return immutable_1.default.Map({
                         epochMs: js.getTime(),
-                        __instance: js.constructor.name
+                        __instance: 'JS.Date'
                     });
                 case datatypes_1.DateTime:
                     if (typeof js.timezoneOffset === 'number' && js.timezoneOffset !== 0) {
                         return immutable_1.default.Seq(js.convertToTimezoneOffset(0))
                             .map((x) => this.toImmutableObjectKey(x))
                             .toMap()
-                            .set('__instance', js.constructor.name);
+                            .set('__instance', 'CQL.DateTime');
                     }
                     else {
                         return immutable_1.default.Seq(js)
                             .map((x) => this.toImmutableObjectKey(x))
                             .toMap()
-                            .set('__instance', js.constructor.name);
+                            .set('__instance', 'CQL.DateTime');
                     }
                 case datatypes_1.Interval:
                     return immutable_1.default.Seq(js.toClosed())
                         .map((x) => this.toImmutableObjectKey(x))
                         .toMap()
-                        .set('__instance', js.constructor.name);
+                        .set('__instance', 'CQL.Interval');
                 case datatypes_1.Quantity:
                     if (!js.unit) {
                         return immutable_1.default.Map({
                             value: (_a = js.value) !== null && _a !== void 0 ? _a : null,
                             unit: null,
-                            __instance: js.constructor.name
+                            __instance: 'CQL.Quantity'
                         });
                     }
                     // Get the normalized base unit
@@ -9340,7 +9340,7 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
                         return immutable_1.default.Map({
                             value: (_b = js.value) !== null && _b !== void 0 ? _b : null,
                             unit: (_c = js.unit) !== null && _c !== void 0 ? _c : null,
-                            __instance: js.constructor.name
+                            __instance: 'CQL.Quantity'
                         });
                     }
                     else {
@@ -9351,14 +9351,14 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
                         return immutable_1.default.Map({
                             value: finalValue !== null && finalValue !== void 0 ? finalValue : null,
                             unit: baseUnitKeyCode !== null && baseUnitKeyCode !== void 0 ? baseUnitKeyCode : null,
-                            __instance: js.constructor.name
+                            __instance: 'CQL.Quantity'
                         });
                     }
                 case datatypes_1.Ratio:
                     return immutable_1.default.Map({
                         numerator: this.toImmutableObjectKey(js.numerator),
                         denominator: this.toImmutableObjectKey(js.denominator),
-                        __instance: js.constructor.name
+                        __instance: 'CQL.Ratio'
                     });
                 case RegExp:
                     return immutable_1.default.Map({
@@ -9366,7 +9366,7 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
                         global: this.toImmutableObjectKey(js.global),
                         ignoreCase: this.toImmutableObjectKey(js.ignoreCase),
                         multiline: this.toImmutableObjectKey(js.multiline),
-                        __instance: js.constructor.name
+                        __instance: 'JS.RegExp'
                     });
                 case datatypes_1.Uncertainty:
                     if (js.isPoint()) {
@@ -9376,13 +9376,13 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
                         return immutable_1.default.Seq(js)
                             .map((x) => this.toImmutableObjectKey(x))
                             .toMap()
-                            .set('__instance', (_d = js.constructor) === null || _d === void 0 ? void 0 : _d.name);
+                            .set('__instance', 'CQL.Uncertainty');
                     }
                 default:
                     return immutable_1.default.Seq(js)
                         .map((x) => this.toImmutableObjectKey(x))
                         .toMap()
-                        .set('__instance', (_e = js.constructor) === null || _e === void 0 ? void 0 : _e.name);
+                        .set('__instance', (_d = js.constructor) === null || _d === void 0 ? void 0 : _d.name);
             }
         };
     }
