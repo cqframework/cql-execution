@@ -9273,7 +9273,7 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
             });
         };
         this.toImmutableObjectKey = (js) => {
-            var _a, _b, _c;
+            var _a, _b, _c, _d, _e;
             // This is necessary because of the oddities of CQL
             // It allows ignoring non-set values in tuples to be compared correctly with set as null values in tuples
             if (js === null || js === undefined) {
@@ -9379,10 +9379,13 @@ class ImmutableMemoizer extends InMemoryCacheMemoizer {
                             .set('__instance', js.constructor);
                     }
                 default:
+                    // If the object is a model object (e.g. FHIRObject) with a _typeHierarchy function,
+                    // then use the typeHierarchy information to set the __instance property for the immutable object key.
+                    // Otherwise, use the constructor for the __instance property.
                     return immutable_1.default.Seq(js)
                         .map((x) => this.toImmutableObjectKey(x))
                         .toMap()
-                        .set('__instance', js.constructor);
+                        .set('__instance', (_e = this.toImmutableObjectKey((_d = js._typeHierarchy) === null || _d === void 0 ? void 0 : _d.call(js))) !== null && _e !== void 0 ? _e : js.constructor);
             }
         };
     }

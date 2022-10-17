@@ -440,10 +440,13 @@ export class ImmutableMemoizer<S, T> extends InMemoryCacheMemoizer<
         }
 
       default:
+        // If the object is a model object (e.g. FHIRObject) with a _typeHierarchy function,
+        // then use the typeHierarchy information to set the __instance property for the immutable object key.
+        // Otherwise, use the constructor for the __instance property.
         return Immutable.Seq(js)
           .map((x: any) => this.toImmutableObjectKey(x))
           .toMap()
-          .set('__instance', js.constructor);
+          .set('__instance', this.toImmutableObjectKey(js._typeHierarchy?.()) ?? js.constructor);
     }
   };
 }
