@@ -7868,9 +7868,9 @@ class Context {
     findRecords(profile, retrieveDetails) {
         return this.parent && this.parent.findRecords(profile, retrieveDetails);
     }
-    childContext(context_values = {}) {
+    childContext(context_values) {
         const ctx = new Context(this);
-        ctx.context_values = context_values;
+        ctx.context_values = context_values !== null && context_values !== void 0 ? context_values : {};
         return ctx;
     }
     getLibraryContext(library) {

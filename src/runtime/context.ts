@@ -81,9 +81,9 @@ export class Context {
     return this.parent && this.parent.findRecords(profile, retrieveDetails);
   }
 
-  childContext(context_values = {}) {
+  childContext(context_values?: any) {
     const ctx = new Context(this);
-    ctx.context_values = context_values;
+    ctx.context_values = context_values ?? {};
     return ctx;
   }
 

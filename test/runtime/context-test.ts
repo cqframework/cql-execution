@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import should from 'should';
 import { Context, Library } from '../../src/cql';
 const simpleELMWithVersion = require('./fixtures/SimpleLibraryWithVersion.json');
@@ -30,7 +29,6 @@ describe('Context', () => {
 
     // Tests solution for https://github.com/cqframework/cql-execution/issues/277
     it('should create a child context with empty values when null argument is passed in', () => {
-      // @ts-ignore
       const child = context.childContext(null);
       should(child.context_values).eql({});
     });
