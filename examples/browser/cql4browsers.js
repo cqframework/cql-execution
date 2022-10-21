@@ -8221,10 +8221,11 @@ class UnfilteredContext extends Context {
             return this.context_values[identifier];
         }
         //if not look to see if the library has a unfiltered expression of that identifier
-        if (this.library[identifier] && this.library[identifier].context === 'Unfiltered') {
+        if (this.library.expressions[identifier] &&
+            this.library.expressions[identifier].context === 'Unfiltered') {
             return this.library.expressions[identifier];
         }
-        //lastley attempt to gather all patient level results that have that identifier
+        //lastly attempt to gather all patient level results that have that identifier
         // should this compact null values before return ?
         return Object.values(this.results.patientResults).map((pr) => pr[identifier]);
     }
