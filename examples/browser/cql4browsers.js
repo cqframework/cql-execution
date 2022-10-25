@@ -7998,7 +7998,7 @@ class Context {
         for (const localId in libraryResults) {
             const localIdResult = libraryResults[localId];
             const existingResult = localIdResults[libraryId][localId];
-            // overwite this localid result if the existing result is "falsey". future work could track all results for each localid
+            // overwrite this localid result if the existing result is "falsey". future work could track all results for each localid
             if (existingResult === false ||
                 existingResult === null ||
                 existingResult === undefined ||
@@ -8210,7 +8210,7 @@ class UnfilteredContext extends Context {
         return this;
     }
     findRecords(_template) {
-        throw new exception_1.Exception('Retreives are not currently supported in Unfiltered Context');
+        throw new exception_1.Exception('Retrieves are not currently supported in Unfiltered Context');
     }
     getLibraryContext(_library) {
         throw new exception_1.Exception('Library expressions are not currently supported in Unfiltered Context');
