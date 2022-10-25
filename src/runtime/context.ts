@@ -7,12 +7,12 @@ import { PatientObject, RetrieveDetails, TerminologyProvider } from '../types';
 import { Library } from '../elm/library';
 
 export class Context {
-  // Public Construcor args
+  // Public Constructor args
   parent: any;
   executionDateTime?: dt.DateTime;
   messageListener?: MessageListener;
 
-  // Private Construcor args
+  // Private Constructor args
   private _codeService?: TerminologyProvider | null;
   private _parameters?: Parameter;
 
@@ -224,7 +224,7 @@ export class Context {
     for (const localId in libraryResults) {
       const localIdResult = libraryResults[localId];
       const existingResult = localIdResults[libraryId][localId];
-      // overwite this localid result if the existing result is "falsey". future work could track all results for each localid
+      // overwrite this localid result if the existing result is "falsey". future work could track all results for each localid
       if (
         existingResult === false ||
         existingResult === null ||
@@ -483,7 +483,7 @@ export class UnfilteredContext extends Context {
   }
 
   findRecords(_template: any) {
-    throw new Exception('Retreives are not currently supported in Unfiltered Context');
+    throw new Exception('Retrieves are not currently supported in Unfiltered Context');
   }
 
   getLibraryContext(_library: any) {
