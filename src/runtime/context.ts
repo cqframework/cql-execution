@@ -1,10 +1,10 @@
-import { Exception } from '../datatypes/exception';
-import { typeIsArray } from '../util/util';
 import * as dt from '../datatypes/datatypes';
-import { MessageListener, NullMessageListener } from './messageListeners';
-import { Parameter } from '../types/runtime.types';
-import { PatientObject, RetrieveDetails, TerminologyProvider } from '../types';
+import { Exception } from '../datatypes/exception';
 import { Library } from '../elm/library';
+import { PatientObject, RetrieveDetails, TerminologyProvider } from '../types';
+import { Parameter } from '../types/runtime.types';
+import { typeIsArray } from '../util/util';
+import { MessageListener, NullMessageListener } from './messageListeners';
 
 export class Context {
   // Public Constructor args
@@ -482,7 +482,7 @@ export class UnfilteredContext extends Context {
     return this;
   }
 
-  async findRecords(_template: any) {
+  findRecords(_template: any) {
     throw new Exception('Retrieves are not currently supported in Unfiltered Context');
   }
 

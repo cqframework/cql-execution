@@ -8251,7 +8251,7 @@ class UnfilteredContext extends Context {
     rootContext() {
         return this;
     }
-    async findRecords(_template) {
+    findRecords(_template) {
         throw new exception_1.Exception('Retrieves are not currently supported in Unfiltered Context');
     }
     getLibraryContext(_library) {
