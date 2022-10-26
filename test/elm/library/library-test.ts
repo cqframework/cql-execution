@@ -144,7 +144,7 @@ describe('Using CommonLib and CommonLib2', () => {
     should.exist(this.common2LocalIdObject[twoPlusOneLocalId]);
   });
 
-  it('should contian TwoTimesThree localId in the localIdMap', function () {
+  it('should contain TwoTimesThree localId in the localIdMap', function () {
     const twoTimesThreeLocalId = this.lib.includes.common2.expressions.TwoTimesThree.localId;
     should.exist(this.common2LocalIdObject[twoTimesThreeLocalId]);
   });
@@ -181,7 +181,7 @@ describe('Using CommonLib and CommonLib2 with namespace support', () => {
     should.exist(this.common2LocalIdObject[twoPlusOneLocalId]);
   });
 
-  it('should contian TwoTimesThree localId in the localIdMap with namespace support', function () {
+  it('should contain TwoTimesThree localId in the localIdMap with namespace support', function () {
     const twoTimesThreeLocalId = this.lib.includes.common2.expressions.TwoTimesThree.localId;
     should.exist(this.common2LocalIdObject[twoTimesThreeLocalId]);
   });
