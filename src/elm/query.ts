@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import { Context } from '../runtime/context';
-import * as Memoizer from '../util/memoizer';
+import { KeyValuePair, NormalizedKey, toKvpParams } from '../util/immutableUtil';
 import { allTrue, Direction, typeIsArray } from '../util/util';
 import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
@@ -173,12 +173,9 @@ export class SortClause {
   }
 }
 
-const toDistinctListMemoizer = new Memoizer.ImmutableMemoizer();
-const immutableToDistinctList = <S>(
-  list: Memoizer.ImmutableKeyValuePair<S>[]
-): Memoizer.ImmutableKeyValuePair<S>[] => {
-  const set = Immutable.Set<Memoizer.ImmutableObjectKey>().asMutable();
-  const distinct: Memoizer.ImmutableKeyValuePair<S>[] = [];
+const immutableToDistinctList = (list: KeyValuePair[]): KeyValuePair[] => {
+  const set = Immutable.Set<NormalizedKey>().asMutable();
+  const distinct: KeyValuePair[] = [];
 
   set.withMutations(y => {
     list.forEach(x => {
@@ -198,7 +195,7 @@ const immutableToDistinctList = <S>(
   return distinct;
 };
 export const toDistinctList = (list: unknown[]): unknown[] =>
-  toDistinctListMemoizer.memoize(immutableToDistinctList)(list);
+  toKvpParams(immutableToDistinctList)(list);
 
 class AggregateClause extends Expression {
   identifier: string;

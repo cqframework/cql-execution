@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 import { Context } from '../runtime/context';
 import { equals } from '../util/comparison';
-import * as Memoizer from '../util/memoizer';
+import { KeyValuePair, NormalizedKey, toKvpParams } from '../util/immutableUtil';
 import { typeIsArray } from '../util/util';
 import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
@@ -48,36 +48,18 @@ export function doUnion(a: any, b: any) {
 }
 
 // Delegated to by overloaded#Except
-const doExceptMemoizer = new Memoizer.ImmutableMemoizer();
-const immutableDoExcept = <S>(
-  a: Memoizer.ImmutableKeyValuePair<S>[],
-  b: Memoizer.ImmutableKeyValuePair<S>[]
-): Memoizer.ImmutableKeyValuePair<S>[] => {
+const kvpDoExcept = (a: KeyValuePair[], b: KeyValuePair[]): KeyValuePair[] => {
   const keys_b = Immutable.Set(b.map(x => x.key));
-
-  const distinct_a = immutableDoDistinct(a);
-  const a_except_b = distinct_a.filter(x => !keys_b.has(x.key));
-
-  return a_except_b;
+  return kvpDoDistinct(a).filter(x => !keys_b.has(x.key));
 };
-export const doExcept = (a: unknown[], b: unknown[]) =>
-  doExceptMemoizer.memoize(immutableDoExcept)(a, b);
+export const doExcept = (a: unknown[], b: unknown[]) => toKvpParams(kvpDoExcept)(a, b);
 
 // Delegated to by overloaded#Intersect
-const doIntersectMemoizer = new Memoizer.ImmutableMemoizer();
-const immutableDoIntersect = <S>(
-  a: Memoizer.ImmutableKeyValuePair<S>[],
-  b: Memoizer.ImmutableKeyValuePair<S>[]
-): Memoizer.ImmutableKeyValuePair<S>[] => {
+const kvpDoIntersect = (a: KeyValuePair[], b: KeyValuePair[]): KeyValuePair[] => {
   const keys_b = Immutable.Set(b.map(x => x.key));
-
-  const distinct_a = immutableDoDistinct(a);
-  const a_intersect_b = distinct_a.filter(z => keys_b.has(z.key));
-
-  return a_intersect_b;
+  return kvpDoDistinct(a).filter(x => keys_b.has(x.key));
 };
-export const doIntersect = (a: unknown[], b: unknown[]) =>
-  doIntersectMemoizer.memoize(immutableDoIntersect)(a, b);
+export const doIntersect = (a: unknown[], b: unknown[]) => toKvpParams(kvpDoIntersect)(a, b);
 
 // ELM-only, not a product of CQL
 export class Times extends UnimplementedExpression {}
@@ -201,12 +183,9 @@ export class Distinct extends Expression {
 }
 
 // Cacheable and optimized doDistinct
-const doDistinctMemoizer = new Memoizer.ImmutableMemoizer();
-const immutableDoDistinct = <S>(
-  list: Memoizer.ImmutableKeyValuePair<S>[]
-): Memoizer.ImmutableKeyValuePair<S>[] => {
-  const set = Immutable.Set<Memoizer.ImmutableObjectKey>().asMutable();
-  const distinct: Memoizer.ImmutableKeyValuePair<S>[] = [];
+const kvpDoDistinct = (list: KeyValuePair[]): KeyValuePair[] => {
+  const set = Immutable.Set<NormalizedKey>().asMutable();
+  const distinct: KeyValuePair[] = [];
 
   set.withMutations(y => {
     list.forEach(x => {
@@ -225,8 +204,7 @@ const immutableDoDistinct = <S>(
 
   return distinct;
 };
-export const doDistinct = (list: unknown[]): unknown[] =>
-  doDistinctMemoizer.memoize(immutableDoDistinct)(list);
+export const doDistinct = (list: unknown[]): unknown[] => toKvpParams(kvpDoDistinct)(list);
 
 // ELM-only, not a product of CQL
 export class Current extends UnimplementedExpression {}
