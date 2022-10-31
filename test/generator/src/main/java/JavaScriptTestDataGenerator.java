@@ -80,7 +80,6 @@ public class JavaScriptTestDataGenerator {
             final ModelInfo modelInfo = ModelInfoReaderFactory.getReader("application/xml").read(modelInfoXML);
             final ModelIdentifier modelId = new ModelIdentifier().withId(modelInfo.getName()).withVersion(modelInfo.getVersion());
             final ModelInfoProvider modelProvider = (ModelIdentifier modelIdentifier) -> modelInfo;
-            final ModelInfoLoader modelInfoLoader = new ModelInfoLoader();
             modelManager.getModelInfoLoader().registerModelInfoProvider(modelProvider);
         } catch (IOException e) {
             e.printStackTrace();
