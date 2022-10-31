@@ -4,14 +4,15 @@ import * as dt from '../datatypes/datatypes';
 import { MessageListener, NullMessageListener } from './messageListeners';
 import { Parameter } from '../types/runtime.types';
 import { PatientObject, RetrieveDetails, TerminologyProvider } from '../types';
+import { Library } from '../elm/library';
 
 export class Context {
-  // Public Construcor args
+  // Public Constructor args
   parent: any;
   executionDateTime?: dt.DateTime;
   messageListener?: MessageListener;
 
-  // Private Construcor args
+  // Private Constructor args
   private _codeService?: TerminologyProvider | null;
   private _parameters?: Parameter;
 
@@ -22,7 +23,7 @@ export class Context {
   evaluatedRecords: any[];
 
   constructor(
-    parent: Context,
+    parent: Context | Library,
     _codeService?: TerminologyProvider | null,
     _parameters?: Parameter,
     executionDateTime?: dt.DateTime,
@@ -80,9 +81,9 @@ export class Context {
     return this.parent && this.parent.findRecords(profile, retrieveDetails);
   }
 
-  childContext(context_values = {}) {
+  childContext(context_values?: any) {
     const ctx = new Context(this);
-    ctx.context_values = context_values;
+    ctx.context_values = context_values ?? {};
     return ctx;
   }
 
@@ -223,7 +224,7 @@ export class Context {
     for (const localId in libraryResults) {
       const localIdResult = libraryResults[localId];
       const existingResult = localIdResults[libraryId][localId];
-      // overwite this localid result if the existing result is "falsey". future work could track all results for each localid
+      // overwrite this localid result if the existing result is "falsey". future work could track all results for each localid
       if (
         existingResult === false ||
         existingResult === null ||
@@ -420,7 +421,7 @@ export class Context {
 
 export class PatientContext extends Context {
   constructor(
-    public library: any,
+    public library: Library,
     public patient?: PatientObject | null,
     codeService?: TerminologyProvider | null,
     parameters?: Parameter,
@@ -467,7 +468,7 @@ export class PatientContext extends Context {
 
 export class UnfilteredContext extends Context {
   constructor(
-    public library: any,
+    public library: Library,
     public results: any,
     codeService?: TerminologyProvider | null,
     parameters?: Parameter,
@@ -482,7 +483,7 @@ export class UnfilteredContext extends Context {
   }
 
   findRecords(_template: any) {
-    throw new Exception('Retreives are not currently supported in Unfiltered Context');
+    throw new Exception('Retrieves are not currently supported in Unfiltered Context');
   }
 
   getLibraryContext(_library: any) {
@@ -495,10 +496,13 @@ export class UnfilteredContext extends Context {
       return this.context_values[identifier];
     }
     //if not look to see if the library has a unfiltered expression of that identifier
-    if (this.library[identifier] && this.library[identifier].context === 'Unfiltered') {
+    if (
+      this.library.expressions[identifier] &&
+      this.library.expressions[identifier].context === 'Unfiltered'
+    ) {
       return this.library.expressions[identifier];
     }
-    //lastley attempt to gather all patient level results that have that identifier
+    //lastly attempt to gather all patient level results that have that identifier
     // should this compact null values before return ?
     return Object.values(this.results.patientResults).map((pr: any) => pr[identifier]);
   }

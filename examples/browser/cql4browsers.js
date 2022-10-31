@@ -7896,9 +7896,9 @@ class Context {
     findRecords(profile, retrieveDetails) {
         return this.parent && this.parent.findRecords(profile, retrieveDetails);
     }
-    childContext(context_values = {}) {
+    childContext(context_values) {
         const ctx = new Context(this);
-        ctx.context_values = context_values;
+        ctx.context_values = context_values !== null && context_values !== void 0 ? context_values : {};
         return ctx;
     }
     getLibraryContext(library) {
@@ -8026,7 +8026,7 @@ class Context {
         for (const localId in libraryResults) {
             const localIdResult = libraryResults[localId];
             const existingResult = localIdResults[libraryId][localId];
-            // overwite this localid result if the existing result is "falsey". future work could track all results for each localid
+            // overwrite this localid result if the existing result is "falsey". future work could track all results for each localid
             if (existingResult === false ||
                 existingResult === null ||
                 existingResult === undefined ||
@@ -8238,7 +8238,7 @@ class UnfilteredContext extends Context {
         return this;
     }
     findRecords(_template) {
-        throw new exception_1.Exception('Retreives are not currently supported in Unfiltered Context');
+        throw new exception_1.Exception('Retrieves are not currently supported in Unfiltered Context');
     }
     getLibraryContext(_library) {
         throw new exception_1.Exception('Library expressions are not currently supported in Unfiltered Context');
@@ -8249,10 +8249,11 @@ class UnfilteredContext extends Context {
             return this.context_values[identifier];
         }
         //if not look to see if the library has a unfiltered expression of that identifier
-        if (this.library[identifier] && this.library[identifier].context === 'Unfiltered') {
+        if (this.library.expressions[identifier] &&
+            this.library.expressions[identifier].context === 'Unfiltered') {
             return this.library.expressions[identifier];
         }
-        //lastley attempt to gather all patient level results that have that identifier
+        //lastly attempt to gather all patient level results that have that identifier
         // should this compact null values before return ?
         return Object.values(this.results.patientResults).map((pr) => pr[identifier]);
     }
