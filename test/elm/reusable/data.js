@@ -18,6 +18,7 @@ define Foo: 'Bar'
 module.exports['ExpressionDef'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -120,6 +121,7 @@ define Foo: Life
 module.exports['ExpressionRef'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -244,6 +246,7 @@ define testValue: "foo bar"(1,2)
 module.exports['FunctionDefinitions'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -438,6 +441,7 @@ define testValue2: process('World')
 module.exports['FunctionOverloadsWithSingleArgument'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -709,6 +713,7 @@ define testValue2: process(true, 'World')
 module.exports['FunctionOverloadsWithMultipleArguments'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1120,6 +1125,7 @@ define testValue3: process('World', false)
 module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1554,6 +1560,7 @@ define testValue2: process(First([Condition]))
 module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {

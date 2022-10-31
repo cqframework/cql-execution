@@ -22,6 +22,7 @@ define AmbulatoryEncountersIncludedInMP: [Encounter: "Ambulatory/ED Visit"] E wh
 module.exports['DateRangeOptimizedQuery'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -358,6 +359,7 @@ module.exports['DateRangeOptimizedQuery'] = {
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Ambulatory/ED Visit",
+                        "preserve" : true,
                         "type" : "ValueSetRef"
                      },
                      "dateRange" : {
@@ -455,6 +457,7 @@ module.exports['DateRangeOptimizedQuery'] = {
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Ambulatory/ED Visit",
+                        "preserve" : true,
                         "type" : "ValueSetRef"
                      },
                      "dateRange" : {
@@ -482,6 +485,7 @@ define queryWithThis: "FunctionWithThis"([Encounter] E) > 0
 module.exports['FunctionQuery'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -770,6 +774,7 @@ define MPIncludedAmbulatoryEncounters: [Encounter: "Ambulatory/ED Visit"] E wher
 module.exports['IncludesQuery'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1020,6 +1025,7 @@ module.exports['IncludesQuery'] = {
                      "type" : "Retrieve",
                      "codes" : {
                         "name" : "Ambulatory/ED Visit",
+                        "preserve" : true,
                         "type" : "ValueSetRef"
                      }
                   }
@@ -1063,6 +1069,7 @@ define msQuery: from [Encounter] E, [Condition] C return {E: E, C:C}
 module.exports['MultiSourceQuery'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1666,6 +1673,7 @@ without [Condition] C such that C.id = 'http://cqframework.org/3/2'
 module.exports['QueryRelationship'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2212,6 +2220,7 @@ return {E: E, a:a}
 module.exports['QueryLet'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2415,6 +2424,7 @@ define query:  [Encounter] E return {id: E.id, thing: E.status}
 module.exports['Tuple'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2615,6 +2625,7 @@ define query:  (List{null, 'One', null, 'Two', null}) I where I is not null
 module.exports['QueryFilterNulls'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2841,6 +2852,7 @@ define sortWithDescendingKeyword: ({8, 6, 7, 5, 3, 0, 9}) N return N sort descen
 module.exports['Sorting'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -5514,6 +5526,7 @@ define allTuples: ({Tuple{a: 1, b:2}, Tuple{a: 2, b: 3}, Tuple{a: 1, b: 2}}) T r
 module.exports['Distinct'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -7003,6 +7016,7 @@ define singleAliasReturnList: firstEncounter E return {'foo', 'bar', 'baz', 'bar
 module.exports['SingleObjectAlias'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -8260,7 +8274,7 @@ module.exports['SingleObjectAlias'] = {
                "s" : {
                   "r" : "111",
                   "s" : [ {
-                     "value" : [ "//define singleAliasWith: firstEncounter E with [Condition] C\n//                         such that C.id = 'http://cqframework.org/3/2'\n//define singleAliasWithNull: firstEncounter E with conditions C\n//                        such that C.id is null","define ","singleAliasReturnTuple",": " ]
+                     "value" : [ "//define singleAliasWith: firstEncounter E with [Condition] C\n//                         such that C.id = 'http://cqframework.org/3/2'\n//define singleAliasWithNull: firstEncounter E with conditions C\n//                        such that C.id is null\n","define ","singleAliasReturnTuple",": " ]
                   }, {
                      "r" : "110",
                      "s" : [ {
@@ -8490,6 +8504,7 @@ define distinctAggregation:
 module.exports['AggregateQuery'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
