@@ -2286,7 +2286,7 @@ function highestNumericUncertainty(x, y) {
     }
 }
 
-},{"../util/comparison":52,"../util/math":53,"./logic":10,"./quantity":11,"./uncertainty":13}],10:[function(require,module,exports){
+},{"../util/comparison":52,"../util/math":54,"./logic":10,"./quantity":11,"./uncertainty":13}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ThreeValuedLogic = void 0;
@@ -2538,7 +2538,7 @@ function doMultiplication(a, b) {
 }
 exports.doMultiplication = doMultiplication;
 
-},{"../util/math":53,"../util/units":55}],12:[function(require,module,exports){
+},{"../util/math":54,"../util/units":55}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Ratio = void 0;
@@ -3622,7 +3622,7 @@ class Predecessor extends expression_1.Expression {
 }
 exports.Predecessor = Predecessor;
 
-},{"../datatypes/quantity":11,"../datatypes/uncertainty":13,"../util/math":53,"./builder":16,"./expression":22}],16:[function(require,module,exports){
+},{"../datatypes/quantity":11,"../datatypes/uncertainty":13,"../util/math":54,"./builder":16,"./expression":22}],16:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -5285,7 +5285,7 @@ function truncateDecimal(decimal, decimalPlaces) {
     return parseFloat(decimal.toString().match(re)[0]);
 }
 
-},{"../datatypes/interval":9,"../datatypes/quantity":11,"../util/math":53,"../util/units":55,"./builder":16,"./expression":22}],27:[function(require,module,exports){
+},{"../datatypes/interval":9,"../datatypes/quantity":11,"../util/math":54,"../util/units":55,"./builder":16,"./expression":22}],27:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Library = void 0;
@@ -5393,25 +5393,6 @@ exports.Library = Library;
 
 },{"./expressions":23}],28:[function(require,module,exports){
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -5419,7 +5400,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Slice = exports.Last = exports.First = exports.Current = exports.doDistinct = exports.Distinct = exports.Flatten = exports.ForEach = exports.doProperIncludes = exports.doIncludes = exports.doContains = exports.IndexOf = exports.ToList = exports.SingletonFrom = exports.Filter = exports.Times = exports.doIntersect = exports.doExcept = exports.doUnion = exports.Exists = exports.List = void 0;
 const immutable_1 = __importDefault(require("immutable"));
 const comparison_1 = require("../util/comparison");
-const Memoizer = __importStar(require("../util/memoizer"));
+const immutableUtil_1 = require("../util/immutableUtil");
 const util_1 = require("../util/util");
 const builder_1 = require("./builder");
 const expression_1 = require("./expression");
@@ -5458,24 +5439,18 @@ function doUnion(a, b) {
 }
 exports.doUnion = doUnion;
 // Delegated to by overloaded#Except
-const doExceptMemoizer = new Memoizer.ImmutableMemoizer();
-const immutableDoExcept = (a, b) => {
+const kvpDoExcept = (a, b) => {
     const keys_b = immutable_1.default.Set(b.map(x => x.key));
-    const distinct_a = immutableDoDistinct(a);
-    const a_except_b = distinct_a.filter(x => !keys_b.has(x.key));
-    return a_except_b;
+    return kvpDoDistinct(a).filter(x => !keys_b.has(x.key));
 };
-const doExcept = (a, b) => doExceptMemoizer.memoize(immutableDoExcept)(a, b);
+const doExcept = (a, b) => (0, immutableUtil_1.toKvpParams)(kvpDoExcept)(a, b);
 exports.doExcept = doExcept;
 // Delegated to by overloaded#Intersect
-const doIntersectMemoizer = new Memoizer.ImmutableMemoizer();
-const immutableDoIntersect = (a, b) => {
+const kvpDoIntersect = (a, b) => {
     const keys_b = immutable_1.default.Set(b.map(x => x.key));
-    const distinct_a = immutableDoDistinct(a);
-    const a_intersect_b = distinct_a.filter(z => keys_b.has(z.key));
-    return a_intersect_b;
+    return kvpDoDistinct(a).filter(x => keys_b.has(x.key));
 };
-const doIntersect = (a, b) => doIntersectMemoizer.memoize(immutableDoIntersect)(a, b);
+const doIntersect = (a, b) => (0, immutableUtil_1.toKvpParams)(kvpDoIntersect)(a, b);
 exports.doIntersect = doIntersect;
 // ELM-only, not a product of CQL
 class Times extends expression_1.UnimplementedExpression {
@@ -5596,8 +5571,7 @@ class Distinct extends expression_1.Expression {
 }
 exports.Distinct = Distinct;
 // Cacheable and optimized doDistinct
-const doDistinctMemoizer = new Memoizer.ImmutableMemoizer();
-const immutableDoDistinct = (list) => {
+const kvpDoDistinct = (list) => {
     const set = immutable_1.default.Set().asMutable();
     const distinct = [];
     set.withMutations(y => {
@@ -5614,7 +5588,7 @@ const immutableDoDistinct = (list) => {
     });
     return distinct;
 };
-const doDistinct = (list) => doDistinctMemoizer.memoize(immutableDoDistinct)(list);
+const doDistinct = (list) => (0, immutableUtil_1.toKvpParams)(kvpDoDistinct)(list);
 exports.doDistinct = doDistinct;
 // ELM-only, not a product of CQL
 class Current extends expression_1.UnimplementedExpression {
@@ -5677,7 +5651,7 @@ class Slice extends expression_1.Expression {
 exports.Slice = Slice;
 // Length is completely handled by overloaded#Length
 
-},{"../util/comparison":52,"../util/memoizer":54,"../util/util":56,"./builder":16,"./expression":22,"immutable":71}],29:[function(require,module,exports){
+},{"../util/comparison":52,"../util/immutableUtil":53,"../util/util":56,"./builder":16,"./expression":22,"immutable":71}],29:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StringLiteral = exports.DecimalLiteral = exports.IntegerLiteral = exports.BooleanLiteral = exports.Literal = void 0;
@@ -6363,25 +6337,6 @@ exports.Quantity = Quantity;
 
 },{"../datatypes/datatypes":6,"./expression":22}],36:[function(require,module,exports){
 "use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -6389,7 +6344,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.QueryLetRef = exports.AliasRef = exports.Query = exports.toDistinctList = exports.SortClause = exports.ReturnClause = exports.ByColumn = exports.ByExpression = exports.ByDirection = exports.Sort = exports.Without = exports.With = exports.LetClause = exports.AliasedQuerySource = void 0;
 const immutable_1 = __importDefault(require("immutable"));
 const context_1 = require("../runtime/context");
-const Memoizer = __importStar(require("../util/memoizer"));
+const immutableUtil_1 = require("../util/immutableUtil");
 const util_1 = require("../util/util");
 const builder_1 = require("./builder");
 const expression_1 = require("./expression");
@@ -6539,7 +6494,6 @@ class SortClause {
     }
 }
 exports.SortClause = SortClause;
-const toDistinctListMemoizer = new Memoizer.ImmutableMemoizer();
 const immutableToDistinctList = (list) => {
     const set = immutable_1.default.Set().asMutable();
     const distinct = [];
@@ -6557,7 +6511,7 @@ const immutableToDistinctList = (list) => {
     });
     return distinct;
 };
-const toDistinctList = (list) => toDistinctListMemoizer.memoize(immutableToDistinctList)(list);
+const toDistinctList = (list) => (0, immutableUtil_1.toKvpParams)(immutableToDistinctList)(list);
 exports.toDistinctList = toDistinctList;
 class AggregateClause extends expression_1.Expression {
     constructor(json) {
@@ -6696,7 +6650,7 @@ class MultiSource {
     }
 }
 
-},{"../runtime/context":42,"../util/memoizer":54,"../util/util":56,"./builder":16,"./expression":22,"immutable":71}],37:[function(require,module,exports){
+},{"../runtime/context":42,"../util/immutableUtil":53,"../util/util":56,"./builder":16,"./expression":22,"immutable":71}],37:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -7869,7 +7823,7 @@ class TupleTypeSpecifier extends expression_1.UnimplementedExpression {
 }
 exports.TupleTypeSpecifier = TupleTypeSpecifier;
 
-},{"../datatypes/clinical":5,"../datatypes/datetime":7,"../datatypes/quantity":11,"../datatypes/ratio":12,"../datatypes/uncertainty":13,"../util/math":53,"../util/util":56,"./expression":22}],42:[function(require,module,exports){
+},{"../datatypes/clinical":5,"../datatypes/datetime":7,"../datatypes/quantity":11,"../datatypes/ratio":12,"../datatypes/uncertainty":13,"../util/math":54,"../util/util":56,"./expression":22}],42:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -8754,6 +8708,171 @@ exports.equals = equals;
 
 },{"../datatypes/datatypes":6}],53:[function(require,module,exports){
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.toNormalizedKey = exports.toKvpParams = void 0;
+const ucum = __importStar(require("@lhncbc/ucum-lhc"));
+const immutable_1 = __importDefault(require("immutable"));
+const datatypes_1 = require("../datatypes/datatypes");
+const math_1 = require("./math");
+const units_1 = require("./units");
+const ucumUtilInstance = ucum.UcumLhcUtils.getInstance();
+/**
+ * Utility method to convert an object to a key value pair.
+ */
+const toKvp = (x) => ({ key: (0, exports.toNormalizedKey)(x), value: x });
+/**
+ * Utility method to convert a function that operates on a list of objects
+ * to a function that operates on a list of corresponding key value pairs.
+ */
+const toKvpParams = (fn) => {
+    return (...lists) => fn(...lists.map(list => list.map(toKvp))).map(kvp => kvp.value);
+};
+exports.toKvpParams = toKvpParams;
+/**
+ * Utility method to generate a normalized key for an object.
+ */
+const toNormalizedKey = (js) => {
+    var _a, _b, _c, _d, _e;
+    // This is necessary because of the oddities of CQL
+    // It allows ignoring non-set values in tuples to be compared correctly with set as null values in tuples
+    if (js === null || js === undefined) {
+        return null;
+    }
+    // Handle the edge case of functions
+    if (typeof js === 'function') {
+        return immutable_1.default.Map({
+            name: js.toString(),
+            __instance: 'JS.Function'
+        });
+    }
+    // Simple return non-objects
+    if (typeof js !== 'object') {
+        return js;
+    }
+    // Handle objects - normalize as necessary to generate unique keys
+    switch (js.constructor) {
+        case Array:
+            return immutable_1.default.Seq(js)
+                .map((x) => (0, exports.toNormalizedKey)(x))
+                .toList();
+        case datatypes_1.Code:
+            return immutable_1.default.Map({
+                code: (0, exports.toNormalizedKey)(js.code),
+                system: (0, exports.toNormalizedKey)(js.system),
+                __instance: js.constructor
+            });
+        case Date:
+            return immutable_1.default.Map({
+                epochMs: js.getTime(),
+                __instance: js.constructor
+            });
+        case datatypes_1.DateTime:
+            if (typeof js.timezoneOffset === 'number' && js.timezoneOffset !== 0) {
+                return immutable_1.default.Seq(js.convertToTimezoneOffset(0))
+                    .map((x) => (0, exports.toNormalizedKey)(x))
+                    .toMap()
+                    .set('__instance', js.constructor);
+            }
+            else {
+                return immutable_1.default.Seq(js)
+                    .map((x) => (0, exports.toNormalizedKey)(x))
+                    .toMap()
+                    .set('__instance', js.constructor);
+            }
+        case datatypes_1.Interval:
+            return immutable_1.default.Seq(js.toClosed())
+                .map((x) => (0, exports.toNormalizedKey)(x))
+                .toMap()
+                .set('__instance', js.constructor);
+        case datatypes_1.Quantity:
+            if (!js.unit) {
+                return immutable_1.default.Map({
+                    value: (_a = js.value) !== null && _a !== void 0 ? _a : null,
+                    unit: null,
+                    __instance: js.constructor
+                });
+            }
+            // Get the normalized base unit
+            const baseUnitKey = ucumUtilInstance.commensurablesList(js.unit)[0];
+            if (!baseUnitKey) {
+                // No units found - normalization not possible and use provided values
+                return immutable_1.default.Map({
+                    value: (_b = js.value) !== null && _b !== void 0 ? _b : null,
+                    unit: (_c = js.unit) !== null && _c !== void 0 ? _c : null,
+                    __instance: js.constructor
+                });
+            }
+            else {
+                // Unit was found - convert to baseUnit and normalize
+                const baseUnitKeyCode = baseUnitKey[0].csCode_;
+                const conversionValue = (0, units_1.convertUnit)(js.value, js.unit, baseUnitKeyCode);
+                const finalValue = conversionValue ? (0, math_1.decimalAdjust)('round', conversionValue, -8) : null;
+                return immutable_1.default.Map({
+                    value: finalValue !== null && finalValue !== void 0 ? finalValue : null,
+                    unit: baseUnitKeyCode !== null && baseUnitKeyCode !== void 0 ? baseUnitKeyCode : null,
+                    __instance: js.constructor
+                });
+            }
+        case datatypes_1.Ratio:
+            return immutable_1.default.Map({
+                numerator: (0, exports.toNormalizedKey)(js.numerator),
+                denominator: (0, exports.toNormalizedKey)(js.denominator),
+                __instance: js.constructor
+            });
+        case RegExp:
+            return immutable_1.default.Map({
+                source: (0, exports.toNormalizedKey)(js.source),
+                global: (0, exports.toNormalizedKey)(js.global),
+                ignoreCase: (0, exports.toNormalizedKey)(js.ignoreCase),
+                multiline: (0, exports.toNormalizedKey)(js.multiline),
+                __instance: js.constructor
+            });
+        case datatypes_1.Uncertainty:
+            if (js.isPoint()) {
+                return (0, exports.toNormalizedKey)(js.low);
+            }
+            else {
+                return immutable_1.default.Seq(js)
+                    .map((x) => (0, exports.toNormalizedKey)(x))
+                    .toMap()
+                    .set('__instance', js.constructor);
+            }
+        default:
+            // If the object is a model object (e.g. FHIRObject) with a _typeHierarchy function,
+            // then use the typeHierarchy information for the __instance value.
+            // Otherwise, use the constructor for the __instance value.
+            return immutable_1.default.Seq(js)
+                .map((x) => (0, exports.toNormalizedKey)(x))
+                .toMap()
+                .set('__instance', (_e = (0, exports.toNormalizedKey)((_d = js._typeHierarchy) === null || _d === void 0 ? void 0 : _d.call(js))) !== null && _e !== void 0 ? _e : js.constructor);
+    }
+};
+exports.toNormalizedKey = toNormalizedKey;
+
+},{"../datatypes/datatypes":6,"./math":54,"./units":55,"@lhncbc/ucum-lhc":67,"immutable":71}],54:[function(require,module,exports){
+"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.decimalOrNull = exports.decimalAdjust = exports.minValueForType = exports.minValueForInstance = exports.maxValueForType = exports.maxValueForInstance = exports.predecessor = exports.successor = exports.OverFlowException = exports.limitDecimalPrecision = exports.isValidDecimal = exports.isValidInteger = exports.overflowsOrUnderflows = exports.MAX_TIME_VALUE = exports.MIN_TIME_VALUE = exports.MAX_DATE_VALUE = exports.MIN_DATE_VALUE = exports.MAX_DATETIME_VALUE = exports.MIN_DATETIME_VALUE = exports.MIN_FLOAT_PRECISION_VALUE = exports.MIN_FLOAT_VALUE = exports.MAX_FLOAT_VALUE = exports.MIN_INT_VALUE = exports.MAX_INT_VALUE = void 0;
 /* eslint-disable @typescript-eslint/no-loss-of-precision */
@@ -9127,272 +9246,7 @@ function decimalOrNull(value) {
 }
 exports.decimalOrNull = decimalOrNull;
 
-},{"../datatypes/datetime":7,"../datatypes/exception":8,"../datatypes/uncertainty":13}],54:[function(require,module,exports){
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ImmutableMemoizer = void 0;
-const ucum = __importStar(require("@lhncbc/ucum-lhc"));
-const immutable_1 = __importDefault(require("immutable"));
-const datatypes_1 = require("../datatypes/datatypes");
-const math_1 = require("./math");
-const units_1 = require("./units");
-const ucumUtilInstance = ucum.UcumLhcUtils.getInstance();
-/**
- * Let S, T, P, and Q be categories with the following diagram
- *
- * ```js
- *  CACHE
- *    ↑   ↘
- *  P[][] → Q[]
- *    ↑      ↓
- *  S[][] → T[]
- * ```
- *
- * This abstract class facilitates calculating S[][] → T[] via S[][] → P[][] → Q[] → T[] with the assumption that functors are chosen such that the diagram commutes.
- *
- * Moreover, this class optionally allows caching the calculation of P[][] → Q[] via the use of a unique CACHEKEY for P[][].
- */
-class Memoizer {
-    constructor(options) {
-        this.options = options;
-    }
-}
-/**
- * Let S, T, P, and Q be categories with the following diagram
- *
- * ```js
- *  CACHE
- *    ↑   ↘
- *  P[][] → Q[]
- *    ↑      ↓
- *  S[][] → T[]
- * ```
- *
- * This abstract class facilitates calculating S[][] → T[] via S[][] → P[][] → Q[] → T[] with the assumption that functors are chosen such that the diagram commutes,
- * and extends the base class by adding default implementations for:
- * 1. convertToKeyList
- * 2. convertToValueList
- * 3. addCacheToFunction
- * 4. memoize
- */
-class InMemoryCacheMemoizer extends Memoizer {
-    constructor(options) {
-        super(options);
-        this.addCacheToFunction = (fn) => {
-            return (...list) => {
-                // Check the cache
-                const cacheKey = this.getListCacheKey(...list);
-                const cacheValue = this.getListCacheValue(cacheKey);
-                if (cacheValue) {
-                    return cacheValue;
-                }
-                // Evaluate the function
-                const functionResult = fn(...list);
-                // Set the cache value
-                this.setListCacheValue(cacheKey, functionResult);
-                // Return result
-                return functionResult;
-            };
-        };
-        this.convertToKeyList = (...list) => {
-            return list.map(x => {
-                return x.map(y => {
-                    return {
-                        key: this.convertToObjectKey(y),
-                        value: y
-                    };
-                });
-            });
-        };
-        this.convertToValueList = (list) => list.map(x => x.value);
-        this.memoize = (fn) => {
-            if (this.options && this.options.useCache) {
-                return (...list) => this.convertToValueList(this.addCacheToFunction(fn)(...this.convertToKeyList(...list)));
-            }
-            return (...list) => this.convertToValueList(fn(...this.convertToKeyList(...list)));
-        };
-    }
-}
-/**
- * Let S, T, P, and Q be categories with the following diagram
- *
- * ```js
- *  CACHE
- *    ↑   ↘
- *  P[][] → Q[]
- *    ↑      ↓
- *  S[][] → T[]
- * ```
- *
- * This class facilitates calculating S[][] → T[] via S[][] → P[][] → Q[] → T[] with the assumption that functors are chosen such that the diagram commutes.
- * Care should be taken in Functor P[][] → Q[] such that the underlying functor P.value → Q.value = S → T
- *
- * Immutable JS is used for S → S_KEY (used by Functor S[][] → P[]) and P[][] → CACHEKEY.
- * Moreover, P.key and Q.key are Immutable.Collections.  See {@link https://immutable-js.com/docs/v4.1.0/Collection/}
- *
- * Caching is implemented via an Immutable.Map from Immutable JS.  See {@link https://immutable-js.com/docs/v4.1.0/Map/#Map()}
- */
-class ImmutableMemoizer extends InMemoryCacheMemoizer {
-    constructor(options) {
-        super(options);
-        this.cache = immutable_1.default.Map().asMutable();
-        this.getListCacheKey = (...list) => immutable_1.default.List(list.map(x => immutable_1.default.List(x.map(y => y.key))));
-        this.getListCacheValue = (key) => this.cache.get(key);
-        this.convertToObjectKey = (obj) => this.toImmutableObjectKey(obj);
-        this.setListCacheValue = (key, value) => {
-            this.cache.withMutations(map => {
-                if (this.options &&
-                    this.options.useCache &&
-                    this.options.cacheMax &&
-                    map.size == this.options.cacheMax) {
-                    map.delete(map.keySeq().first());
-                }
-                map.set(key, value);
-            });
-        };
-        this.toImmutableObjectKey = (js) => {
-            var _a, _b, _c, _d, _e;
-            // This is necessary because of the oddities of CQL
-            // It allows ignoring non-set values in tuples to be compared correctly with set as null values in tuples
-            if (js === null || js === undefined) {
-                return null;
-            }
-            // Handle the edge case of functions
-            if (typeof js === 'function') {
-                return immutable_1.default.Map({
-                    name: js.toString(),
-                    __instance: 'JS.Function'
-                });
-            }
-            // Simple return non-objects
-            if (typeof js !== 'object') {
-                return js;
-            }
-            // Handle objects - normalize as necessary to generate unique keys
-            switch (js.constructor) {
-                case Array:
-                    return immutable_1.default.Seq(js)
-                        .map((x) => this.toImmutableObjectKey(x))
-                        .toList();
-                case datatypes_1.Code:
-                    return immutable_1.default.Map({
-                        code: this.toImmutableObjectKey(js.code),
-                        system: this.toImmutableObjectKey(js.system),
-                        __instance: js.constructor
-                    });
-                case Date:
-                    return immutable_1.default.Map({
-                        epochMs: js.getTime(),
-                        __instance: js.constructor
-                    });
-                case datatypes_1.DateTime:
-                    if (typeof js.timezoneOffset === 'number' && js.timezoneOffset !== 0) {
-                        return immutable_1.default.Seq(js.convertToTimezoneOffset(0))
-                            .map((x) => this.toImmutableObjectKey(x))
-                            .toMap()
-                            .set('__instance', js.constructor);
-                    }
-                    else {
-                        return immutable_1.default.Seq(js)
-                            .map((x) => this.toImmutableObjectKey(x))
-                            .toMap()
-                            .set('__instance', js.constructor);
-                    }
-                case datatypes_1.Interval:
-                    return immutable_1.default.Seq(js.toClosed())
-                        .map((x) => this.toImmutableObjectKey(x))
-                        .toMap()
-                        .set('__instance', js.constructor);
-                case datatypes_1.Quantity:
-                    if (!js.unit) {
-                        return immutable_1.default.Map({
-                            value: (_a = js.value) !== null && _a !== void 0 ? _a : null,
-                            unit: null,
-                            __instance: js.constructor
-                        });
-                    }
-                    // Get the normalized base unit
-                    const baseUnitKey = ucumUtilInstance.commensurablesList(js.unit)[0];
-                    if (!baseUnitKey) {
-                        // No units found - normalization not possible and use provided values
-                        return immutable_1.default.Map({
-                            value: (_b = js.value) !== null && _b !== void 0 ? _b : null,
-                            unit: (_c = js.unit) !== null && _c !== void 0 ? _c : null,
-                            __instance: js.constructor
-                        });
-                    }
-                    else {
-                        // Unit was found - convert to baseUnit and normalize
-                        const baseUnitKeyCode = baseUnitKey[0].csCode_;
-                        const conversionValue = (0, units_1.convertUnit)(js.value, js.unit, baseUnitKeyCode);
-                        const finalValue = conversionValue ? (0, math_1.decimalAdjust)('round', conversionValue, -8) : null;
-                        return immutable_1.default.Map({
-                            value: finalValue !== null && finalValue !== void 0 ? finalValue : null,
-                            unit: baseUnitKeyCode !== null && baseUnitKeyCode !== void 0 ? baseUnitKeyCode : null,
-                            __instance: js.constructor
-                        });
-                    }
-                case datatypes_1.Ratio:
-                    return immutable_1.default.Map({
-                        numerator: this.toImmutableObjectKey(js.numerator),
-                        denominator: this.toImmutableObjectKey(js.denominator),
-                        __instance: js.constructor
-                    });
-                case RegExp:
-                    return immutable_1.default.Map({
-                        source: this.toImmutableObjectKey(js.source),
-                        global: this.toImmutableObjectKey(js.global),
-                        ignoreCase: this.toImmutableObjectKey(js.ignoreCase),
-                        multiline: this.toImmutableObjectKey(js.multiline),
-                        __instance: js.constructor
-                    });
-                case datatypes_1.Uncertainty:
-                    if (js.isPoint()) {
-                        return this.toImmutableObjectKey(js.low);
-                    }
-                    else {
-                        return immutable_1.default.Seq(js)
-                            .map((x) => this.toImmutableObjectKey(x))
-                            .toMap()
-                            .set('__instance', js.constructor);
-                    }
-                default:
-                    // If the object is a model object (e.g. FHIRObject) with a _typeHierarchy function,
-                    // then use the typeHierarchy information for the __instance value.
-                    // Otherwise, use the constructor for the __instance value.
-                    return immutable_1.default.Seq(js)
-                        .map((x) => this.toImmutableObjectKey(x))
-                        .toMap()
-                        .set('__instance', (_e = this.toImmutableObjectKey((_d = js._typeHierarchy) === null || _d === void 0 ? void 0 : _d.call(js))) !== null && _e !== void 0 ? _e : js.constructor);
-            }
-        };
-    }
-}
-exports.ImmutableMemoizer = ImmutableMemoizer;
-
-},{"../datatypes/datatypes":6,"./math":53,"./units":55,"@lhncbc/ucum-lhc":67,"immutable":71}],55:[function(require,module,exports){
+},{"../datatypes/datetime":7,"../datatypes/exception":8,"../datatypes/uncertainty":13}],55:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -9679,7 +9533,7 @@ function fixUnit(unit) {
     return fixCQLDateUnit(fixEmptyUnit(unit));
 }
 
-},{"./math":53,"@lhncbc/ucum-lhc":67}],56:[function(require,module,exports){
+},{"./math":54,"@lhncbc/ucum-lhc":67}],56:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getTimezoneSeparatorFromString = exports.normalizeMillisecondsField = exports.normalizeMillisecondsFieldInString = exports.jsDate = exports.anyTrue = exports.allTrue = exports.typeIsArray = exports.isNull = exports.numerical_sort = exports.removeNulls = void 0;

@@ -3,21 +3,15 @@ import should from 'should';
 import { Code, Concept, DateTime, Quantity, Ratio, ValueSet } from '../../src/cql';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 import { equals } from '../../src/util/comparison';
-import * as Memoizer from '../../src/util/memoizer';
+import { toNormalizedKey } from '../../src/util/immutableUtil';
 
 describe('Memoizer Tests', () => {
-  let immutableMemoizer: Memoizer.ImmutableMemoizer<unknown, unknown>;
-
-  beforeEach(() => {
-    immutableMemoizer = new Memoizer.ImmutableMemoizer();
-  });
-
   it('should normalize null and undefined properties', () => {
     const c1: { code: string; system: undefined } = { code: 'a', system: undefined };
     const c2: { code: string; system: null } = { code: 'a', system: null };
 
-    const ic1 = immutableMemoizer.toImmutableObjectKey(c1);
-    const ic2 = immutableMemoizer.toImmutableObjectKey(c2);
+    const ic1 = toNormalizedKey(c1);
+    const ic2 = toNormalizedKey(c2);
 
     equals(c1, c2).should.be.true();
     equals(c2, c1).should.be.true();
@@ -30,9 +24,9 @@ describe('Memoizer Tests', () => {
     const q2 = new Quantity(1000, 'm');
     const q3 = new Quantity(1001, 'm');
 
-    const iq1 = immutableMemoizer.toImmutableObjectKey(q1);
-    const iq2 = immutableMemoizer.toImmutableObjectKey(q2);
-    const iq3 = immutableMemoizer.toImmutableObjectKey(q3);
+    const iq1 = toNormalizedKey(q1);
+    const iq2 = toNormalizedKey(q2);
+    const iq3 = toNormalizedKey(q3);
 
     equals(q1, q2).should.be.true();
     equals(q1, q3).should.be.false();
@@ -47,8 +41,8 @@ describe('Memoizer Tests', () => {
     const r1 = new Ratio(new Quantity(1, 'km'), new Quantity(1, 'h'));
     const r2 = new Ratio(new Quantity(1000, 'm'), new Quantity(60, 'min'));
 
-    const ir1 = immutableMemoizer.toImmutableObjectKey(r1);
-    const ir2 = immutableMemoizer.toImmutableObjectKey(r2);
+    const ir1 = toNormalizedKey(r1);
+    const ir2 = toNormalizedKey(r2);
 
     // Classic
     equals(r1, r2).should.be.true();
@@ -69,8 +63,8 @@ describe('Memoizer Tests', () => {
     equals(d1, u1).should.be.true();
 
     // Immutable
-    const id1 = immutableMemoizer.toImmutableObjectKey(d1);
-    const iu1 = immutableMemoizer.toImmutableObjectKey(u1);
+    const id1 = toNormalizedKey(d1);
+    const iu1 = toNormalizedKey(u1);
 
     Immutable.is(id1, iu1).should.be.true();
 
@@ -93,17 +87,17 @@ describe('Memoizer Tests', () => {
       new DateTime(2000, 1, 1, 0, 0, 0, 0, 0)
     );
 
-    const id2 = immutableMemoizer.toImmutableObjectKey(d2);
-    const id3 = immutableMemoizer.toImmutableObjectKey(d3);
-    const iu2 = immutableMemoizer.toImmutableObjectKey(u2);
-    const iu3 = immutableMemoizer.toImmutableObjectKey(u3);
-    const iu4 = immutableMemoizer.toImmutableObjectKey(u4);
-    const iu5 = immutableMemoizer.toImmutableObjectKey(u5);
-    const iu6 = immutableMemoizer.toImmutableObjectKey(u6);
-    const iu7 = immutableMemoizer.toImmutableObjectKey(u7);
-    const iu8 = immutableMemoizer.toImmutableObjectKey(u8);
-    const iu9 = immutableMemoizer.toImmutableObjectKey(u9);
-    const iu10 = immutableMemoizer.toImmutableObjectKey(u10);
+    const id2 = toNormalizedKey(d2);
+    const id3 = toNormalizedKey(d3);
+    const iu2 = toNormalizedKey(u2);
+    const iu3 = toNormalizedKey(u3);
+    const iu4 = toNormalizedKey(u4);
+    const iu5 = toNormalizedKey(u5);
+    const iu6 = toNormalizedKey(u6);
+    const iu7 = toNormalizedKey(u7);
+    const iu8 = toNormalizedKey(u8);
+    const iu9 = toNormalizedKey(u9);
+    const iu10 = toNormalizedKey(u10);
 
     // Classic
     equals(d2, d3).should.be.false();
@@ -190,12 +184,12 @@ describe('Memoizer Tests', () => {
     const c5 = true;
     const c6 = false;
 
-    const ic1 = immutableMemoizer.toImmutableObjectKey(c1);
-    const ic2 = immutableMemoizer.toImmutableObjectKey(c2);
-    const ic3 = immutableMemoizer.toImmutableObjectKey(c3);
-    const ic4 = immutableMemoizer.toImmutableObjectKey(c4);
-    const ic5 = immutableMemoizer.toImmutableObjectKey(c5);
-    const ic6 = immutableMemoizer.toImmutableObjectKey(c6);
+    const ic1 = toNormalizedKey(c1);
+    const ic2 = toNormalizedKey(c2);
+    const ic3 = toNormalizedKey(c3);
+    const ic4 = toNormalizedKey(c4);
+    const ic5 = toNormalizedKey(c5);
+    const ic6 = toNormalizedKey(c6);
 
     // Classic
     equals(c1, c1).should.be.true();
@@ -290,10 +284,10 @@ describe('Memoizer Tests', () => {
     const c3 = new Code('a', 'c');
     const c4 = new ValueSet('a', undefined, [new Code('a', 'b')]);
 
-    const ic1 = immutableMemoizer.toImmutableObjectKey(c1);
-    const ic2 = immutableMemoizer.toImmutableObjectKey(c2);
-    const ic3 = immutableMemoizer.toImmutableObjectKey(c3);
-    const ic4 = immutableMemoizer.toImmutableObjectKey(c4);
+    const ic1 = toNormalizedKey(c1);
+    const ic2 = toNormalizedKey(c2);
+    const ic3 = toNormalizedKey(c3);
+    const ic4 = toNormalizedKey(c4);
 
     // Classic
     equals(c1, c2).should.be.true();
@@ -317,9 +311,9 @@ describe('Memoizer Tests', () => {
     const d2 = new Date(2000, 1, 1);
     const d3 = new Date(2000, 1, 1, 1);
 
-    const id1 = immutableMemoizer.toImmutableObjectKey(d1);
-    const id2 = immutableMemoizer.toImmutableObjectKey(d2);
-    const id3 = immutableMemoizer.toImmutableObjectKey(d3);
+    const id1 = toNormalizedKey(d1);
+    const id2 = toNormalizedKey(d2);
+    const id3 = toNormalizedKey(d3);
 
     // Classic
     equals(d1, d2).should.be.true();
@@ -339,9 +333,9 @@ describe('Memoizer Tests', () => {
     const r2 = /^\d*(\.\d{1,2})?$/g;
     const r3 = /^([0-9]{0,5}-)?[0-9]{10}$/g;
 
-    const ir1 = immutableMemoizer.toImmutableObjectKey(r1);
-    const ir2 = immutableMemoizer.toImmutableObjectKey(r2);
-    const ir3 = immutableMemoizer.toImmutableObjectKey(r3);
+    const ir1 = toNormalizedKey(r1);
+    const ir2 = toNormalizedKey(r2);
+    const ir3 = toNormalizedKey(r3);
 
     // Classic
     equals(r1, r2).should.be.true();
@@ -361,9 +355,9 @@ describe('Memoizer Tests', () => {
     const c2 = [1, null];
     const c3 = [1, 2];
 
-    const ic1 = immutableMemoizer.toImmutableObjectKey(c1);
-    const ic2 = immutableMemoizer.toImmutableObjectKey(c2);
-    const ic3 = immutableMemoizer.toImmutableObjectKey(c3);
+    const ic1 = toNormalizedKey(c1);
+    const ic2 = toNormalizedKey(c2);
+    const ic3 = toNormalizedKey(c3);
 
     // Classic behavior
     should(equals(c1, c2)).be.null();
@@ -387,9 +381,9 @@ describe('Memoizer Tests', () => {
     const f2 = () => true;
     const f3 = () => false;
 
-    const if1 = immutableMemoizer.toImmutableObjectKey(f1);
-    const if2 = immutableMemoizer.toImmutableObjectKey(f2);
-    const if3 = immutableMemoizer.toImmutableObjectKey(f3);
+    const if1 = toNormalizedKey(f1);
+    const if2 = toNormalizedKey(f2);
+    const if3 = toNormalizedKey(f3);
 
     // Classic
     equals(f1, f2).should.be.true();
@@ -415,11 +409,11 @@ describe('Memoizer Tests', () => {
       version: undefined
     };
 
-    const ic1 = immutableMemoizer.toImmutableObjectKey(c1);
-    const ic2 = immutableMemoizer.toImmutableObjectKey(c2);
-    const ic3 = immutableMemoizer.toImmutableObjectKey(c3);
-    const ic4 = immutableMemoizer.toImmutableObjectKey(c4);
-    const ic5 = immutableMemoizer.toImmutableObjectKey(c5);
+    const ic1 = toNormalizedKey(c1);
+    const ic2 = toNormalizedKey(c2);
+    const ic3 = toNormalizedKey(c3);
+    const ic4 = toNormalizedKey(c4);
+    const ic5 = toNormalizedKey(c5);
 
     // Classic
     equals(c1, c2).should.be.false();
