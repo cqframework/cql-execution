@@ -21,6 +21,7 @@ define Foo: 'Bar'
 module.exports['ValueSetDef'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -169,6 +170,7 @@ define Foo: "Acute Pharyngitis"
 module.exports['ValueSetRef'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -269,6 +271,7 @@ module.exports['ValueSetRef'] = {
             "expression" : {
                "localId" : "3",
                "name" : "Acute Pharyngitis",
+               "preserve" : true,
                "type" : "ValueSetRef"
             }
          } ]
@@ -310,6 +313,7 @@ define ListOfCodesNull: (null as List<Code>) in "Female"
 module.exports['InValueSet'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -472,7 +476,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "7",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -516,7 +520,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "11",
                   "name" : "SharedCodes",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -560,7 +564,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "15",
                   "name" : "SharedCodes",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -604,7 +608,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "19",
                   "name" : "ImproperSharedCodes",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -648,7 +652,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "23",
                   "name" : "Versioned Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -711,7 +715,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "28",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -793,7 +797,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "34",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -894,7 +898,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "41",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -938,7 +942,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "45",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -982,7 +986,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "49",
                   "name" : "Versioned Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -1045,7 +1049,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "54",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -1127,7 +1131,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "60",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -1228,7 +1232,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "67",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -1327,7 +1331,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "74",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -1470,7 +1474,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "84",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -1742,7 +1746,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "103",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -1785,7 +1789,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "107",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -1942,7 +1946,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "119",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          }, {
@@ -2018,7 +2022,7 @@ module.exports['InValueSet'] = {
                "valueset" : {
                   "localId" : "126",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          } ]
@@ -2037,6 +2041,7 @@ define IsFemale: Patient.gender in "Female"
 module.exports['Patient Property In ValueSet'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2170,7 +2175,7 @@ module.exports['Patient Property In ValueSet'] = {
                "valueset" : {
                   "localId" : "5",
                   "name" : "Female",
-                  "type" : "ValueSetRef"
+                  "preserve" : true
                }
             }
          } ]
@@ -2190,6 +2195,7 @@ define Foo: 'Bar'
 module.exports['CodeDef'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2339,6 +2345,7 @@ define Foo: "Tobacco smoking status code"
 module.exports['CodeRef'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2488,6 +2495,7 @@ define Foo: 'Bar'
 module.exports['ConceptDef'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2666,6 +2674,7 @@ define Foo: "Tobacco smoking status"
 module.exports['ConceptRef'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2846,6 +2855,7 @@ define Seconds: AgeInSeconds()
 module.exports['CalculateAge: Fully Specified Birth Date'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3158,6 +3168,7 @@ define Seconds: AgeInSeconds()
 module.exports['CalculateAge: Fully Specified Birth Date on Today'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3470,6 +3481,7 @@ define Seconds: AgeInSeconds()
 module.exports['CalculateAge: Date-Only Birth Date as DateTime'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3782,6 +3794,7 @@ define Seconds: AgeInSeconds()
 module.exports['CalculateAge: Date-Only Birth Date as DateTime on Today'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -4094,6 +4107,7 @@ define Seconds: AgeInSeconds()
 module.exports['CalculateAge: Date-Only Birth Date as Date'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -4406,6 +4420,7 @@ define Seconds: AgeInSeconds()
 module.exports['CalculateAge: Date-Only Birth Date as Date on Today'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -4718,6 +4733,7 @@ define CalculateAgeInYearsDateArg: CalculateAgeInYearsAt(@1994-12-01T23:59:00.00
 module.exports['CalculateAgeAt'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {

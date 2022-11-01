@@ -21,6 +21,7 @@ define oneOverZero: DoDivide(1, 0)
 module.exports['Message'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {

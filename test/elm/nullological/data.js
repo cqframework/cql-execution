@@ -18,6 +18,7 @@ define Nil: null
 module.exports['Nil'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -118,6 +119,7 @@ define NonNullVarIsNull: One is null
 module.exports['IsNull'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -371,6 +373,7 @@ define UnionAsList: Coalesce(ListA union ListWithNull)
 module.exports['Coalesce'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {

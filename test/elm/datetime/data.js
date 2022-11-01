@@ -25,6 +25,7 @@ define TimezoneOffset: DateTime(2012, 2, 15, 12, 10, 59, 456, -8.0)
 module.exports['DateTime'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -524,6 +525,7 @@ define Millisecond: Time(12, 10, 59, 456)
 module.exports['Time'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -756,6 +758,7 @@ define TodayVar: Today()
 module.exports['Today'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -855,6 +858,7 @@ define NowVar: Now()
 module.exports['Now'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -954,6 +958,7 @@ define TimeOfDayVar: TimeOfDay()
 module.exports['TimeOfDay'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1071,6 +1076,7 @@ define NullDate: year from (null as DateTime)
 module.exports['DateTimeComponentFrom'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1785,6 +1791,7 @@ define NullDate: date from (null as DateTime)
 module.exports['DateFrom'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2046,6 +2053,7 @@ define NullDate: time from null
 module.exports['TimeFrom'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2297,6 +2305,7 @@ define NullDate: timezoneoffset from (null as DateTime)
 module.exports['TimezoneOffsetFrom'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2713,6 +2722,7 @@ define NullBoth: (null as DateTime) same as null
 module.exports['SameAs'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -7076,6 +7086,7 @@ define NullBothAOO: (null as DateTime) after or on null
 module.exports['SameOrAfter'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -12387,7 +12398,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "693",
                   "s" : [ {
-                     "value" : [ "// On Or After:","define ","SameOOA",": " ]
+                     "value" : [ "// On Or After:\n","define ","SameOOA",": " ]
                   }, {
                      "r" : "692",
                      "s" : [ {
@@ -13109,7 +13120,7 @@ module.exports['SameOrAfter'] = {
                "s" : {
                   "r" : "783",
                   "s" : [ {
-                     "value" : [ "// After Or On:","define ","SameAOO",": " ]
+                     "value" : [ "// After Or On:\n","define ","SameAOO",": " ]
                   }, {
                      "r" : "782",
                      "s" : [ {
@@ -13885,6 +13896,7 @@ define NullBothBOO: (null as DateTime) before or on null
 module.exports['SameOrBefore'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -19196,7 +19208,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "693",
                   "s" : [ {
-                     "value" : [ "// On Or Before:","define ","SameOOB",": " ]
+                     "value" : [ "// On Or Before:\n","define ","SameOOB",": " ]
                   }, {
                      "r" : "692",
                      "s" : [ {
@@ -19918,7 +19930,7 @@ module.exports['SameOrBefore'] = {
                "s" : {
                   "r" : "783",
                   "s" : [ {
-                     "value" : [ "// Before Or On:","define ","SameBOO",": " ]
+                     "value" : [ "// Before Or On:\n","define ","SameBOO",": " ]
                   }, {
                      "r" : "782",
                      "s" : [ {
@@ -20677,6 +20689,7 @@ define NullBoth: (null as DateTime) after null
 module.exports['After'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -25557,6 +25570,7 @@ define NullBoth: (null as DateTime) before null
 module.exports['Before'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -30427,6 +30441,7 @@ define HoursBetween1and3CrossingFallDST: difference in hours between DateTime(20
 module.exports['DifferenceBetween'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -31832,6 +31847,7 @@ define BonnieTestCaseZulu: difference in months between DateTime(2012, 9, 13, 14
 module.exports['DifferenceBetween Comparisons'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -33448,6 +33464,7 @@ define HoursBetween1and3CrossingFallDST: hours between DateTime(2017, 11, 5, 1, 
 module.exports['DurationBetween'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -34848,6 +34865,7 @@ define MinusThreeMilliseconds: June15th2013 - 3 milliseconds
 module.exports['DateMath'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
