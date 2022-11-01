@@ -5435,7 +5435,8 @@ exports.Exists = Exists;
 // NotEqual is completely handled by overloaded#Equal
 // Delegated to by overloaded#Union
 function doUnion(a, b) {
-    return (0, exports.doDistinct)(a.concat(b));
+    const distinct = (0, exports.doDistinct)(a.concat(b));
+    return removeDuplicateNulls(distinct);
 }
 exports.doUnion = doUnion;
 // Delegated to by overloaded#Except
