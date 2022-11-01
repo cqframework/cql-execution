@@ -3,6 +3,11 @@ import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 import org.cqframework.cql.cql2elm.*;
 import org.cqframework.cql.elm.tracking.TrackBack;
+import org.hl7.cql.model.ModelIdentifier;
+import org.hl7.cql.model.ModelInfoProvider;
+import org.hl7.elm.r1.VersionedIdentifier;
+import org.hl7.elm_modelinfo.r1.ModelInfo;
+import org.hl7.elm_modelinfo.r1.serializing.ModelInfoReaderFactory;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -26,9 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.hl7.elm.r1.VersionedIdentifier;
-import org.hl7.elm_modelinfo.r1.ModelInfo;
 
 import javax.xml.bind.*;
 
@@ -74,10 +76,15 @@ public class JavaScriptTestDataGenerator {
     }
 
     public static void loadModelInfo(File modelInfoXML, ModelManager modelManager) {
-        final ModelInfo modelInfo = JAXB.unmarshal(modelInfoXML, ModelInfo.class);
-        final VersionedIdentifier modelId = new VersionedIdentifier().withId(modelInfo.getName()).withVersion(modelInfo.getVersion());
-        final ModelInfoProvider modelProvider = (VersionedIdentifier modelIdentifier) -> modelInfo;
-        modelManager.getModelInfoLoader().registerModelInfoProvider(modelProvider);
+        try {
+            final ModelInfo modelInfo = ModelInfoReaderFactory.getReader("application/xml").read(modelInfoXML);
+            final ModelIdentifier modelId = new ModelIdentifier().withId(modelInfo.getName()).withVersion(modelInfo.getVersion());
+            final ModelInfoProvider modelProvider = (ModelIdentifier modelIdentifier) -> modelInfo;
+            modelManager.getModelInfoLoader().registerModelInfoProvider(modelProvider);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
     }
 
     private static void writeSnippetsToJavaScriptFile(Map<String,StringBuilder> snippets, Path file) throws IOException {
@@ -106,12 +113,17 @@ public class JavaScriptTestDataGenerator {
                 JavaScriptTestDataGenerator.loadModelInfo(new File("../../src/simple-modelinfo.xml"), modelManager);
                 LibraryManager libraryManager = new LibraryManager(modelManager);
                 libraryManager.getLibrarySourceLoader().registerProvider(new DefaultLibrarySourceProvider(file.getParent()));
-                CqlTranslator.Options[] options = {CqlTranslator.Options.EnableDateRangeOptimization, CqlTranslator.Options.EnableAnnotations};
-                CqlTranslator cqlt = CqlTranslator.fromText(snippet, modelManager, libraryManager, options);
+                CqlTranslator cqlt = CqlTranslator.fromText(
+                    snippet,
+                    modelManager,
+                    libraryManager,
+                    CqlTranslatorOptions.Options.EnableDateRangeOptimization,
+                    CqlTranslatorOptions.Options.EnableAnnotations
+                );
                 if (! cqlt.getErrors().isEmpty()) {
                     pw.println("/*");
                     pw.println("Translation Error(s):");
-                    for (CqlTranslatorException e : cqlt.getErrors()) {
+                    for (CqlCompilerException e : cqlt.getErrors()) {
                         TrackBack tb = e.getLocator();
                         String lines = tb == null ? "[n/a]" : String.format("[%d:%d, %d:%d]",
                                 tb.getStartLine(), tb.getStartChar(), tb.getEndLine(), tb.getEndChar());
@@ -175,7 +187,7 @@ public class JavaScriptTestDataGenerator {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        
+
         OptionParser parser = new OptionParser();
         OptionSpec<File> input = parser.accepts("input").withRequiredArg().ofType(File.class).required();
         OptionSpec recursive = parser.accepts("recursive");
