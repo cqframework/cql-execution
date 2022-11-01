@@ -172,17 +172,17 @@ export class SortClause {
 }
 
 export const toDistinctList = (list: unknown[]): unknown[] => {
-  const list_kvp = list.map(toNormalizedKey);
+  const list_keys = list.map(toNormalizedKey);
   const set = Immutable.Set<NormalizedKey>().asMutable();
   const distinct: unknown[] = [];
 
   set.withMutations(y => {
-    list_kvp.forEach((x, i) => {
+    list_keys.forEach((key, i) => {
       // Check set size
       const setSize = y.count();
 
       // Attempt to insert
-      y.add(x);
+      y.add(key);
 
       // If inserted, then size will increase; push to distinct
       if (y.count() > setSize) {

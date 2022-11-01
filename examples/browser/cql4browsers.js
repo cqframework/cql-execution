@@ -5572,15 +5572,15 @@ class Distinct extends expression_1.Expression {
 }
 exports.Distinct = Distinct;
 const doDistinct = (list) => {
-    const list_kvp = list.map(immutableUtil_1.toNormalizedKey);
+    const list_keys = list.map(immutableUtil_1.toNormalizedKey);
     const set = immutable_1.default.Set().asMutable();
     const distinct = [];
     set.withMutations(y => {
-        list_kvp.forEach((x, i) => {
+        list_keys.forEach((key, i) => {
             // Check set size
             const setSize = y.count();
             // Attempt to insert
-            y.add(x);
+            y.add(key);
             // If inserted, then size will increase; push to distinct
             if (y.count() > setSize) {
                 distinct.push(list[i]);
@@ -6510,15 +6510,15 @@ class SortClause {
 }
 exports.SortClause = SortClause;
 const toDistinctList = (list) => {
-    const list_kvp = list.map(immutableUtil_1.toNormalizedKey);
+    const list_keys = list.map(immutableUtil_1.toNormalizedKey);
     const set = immutable_1.default.Set().asMutable();
     const distinct = [];
     set.withMutations(y => {
-        list_kvp.forEach((x, i) => {
+        list_keys.forEach((key, i) => {
             // Check set size
             const setSize = y.count();
             // Attempt to insert
-            y.add(x);
+            y.add(key);
             // If inserted, then size will increase; push to distinct
             if (y.count() > setSize) {
                 distinct.push(list[i]);
