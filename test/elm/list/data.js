@@ -22,6 +22,7 @@ define EmptyList: List<Integer>{}
 module.exports['List'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -329,6 +330,7 @@ define NullExists: exists (null)
 module.exports['Exists'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -766,6 +768,7 @@ define BothListsHaveNull: List<Integer>{(null as Integer)} = List<Integer>{(null
 module.exports['Equal'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2150,6 +2153,7 @@ define UnequalTupleList: List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z
 module.exports['NotEqual'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3188,12 +3192,13 @@ define nullUnionNull: (null as List<String>) union (null as List<String>)
 module.exports['Union'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "96",
+            "r" : "97",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3580,20 +3585,20 @@ module.exports['Union'] = {
                } ]
             }
          }, {
-            "localId" : "72",
+            "localId" : "73",
             "name" : "NestedToFifteen",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "72",
+                  "r" : "73",
                   "s" : [ {
                      "value" : [ "","define ","NestedToFifteen",": " ]
                   }, {
-                     "r" : "71",
+                     "r" : "72",
                      "s" : [ {
-                        "r" : "66",
+                        "r" : "67",
                         "s" : [ {
                            "r" : "61",
                            "s" : [ {
@@ -3634,9 +3639,9 @@ module.exports['Union'] = {
                      }, {
                         "value" : [ " union " ]
                      }, {
-                        "r" : "70",
+                        "r" : "71",
                         "s" : [ {
-                           "r" : "67",
+                           "r" : "68",
                            "value" : [ "{","13",", ","14",", ","15","}" ]
                         } ]
                      } ]
@@ -3644,10 +3649,10 @@ module.exports['Union'] = {
                }
             } ],
             "expression" : {
-               "localId" : "71",
+               "localId" : "72",
                "type" : "Union",
                "operand" : [ {
-                  "localId" : "66",
+                  "localId" : "67",
                   "type" : "Union",
                   "operand" : [ {
                      "localId" : "56",
@@ -3692,6 +3697,7 @@ module.exports['Union'] = {
                         } ]
                      } ]
                   }, {
+                     "localId" : "66",
                      "type" : "Union",
                      "operand" : [ {
                         "localId" : "60",
@@ -3734,20 +3740,20 @@ module.exports['Union'] = {
                      } ]
                   } ]
                }, {
-                  "localId" : "70",
+                  "localId" : "71",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "67",
+                     "localId" : "68",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "13",
                      "type" : "Literal"
                   }, {
-                     "localId" : "68",
+                     "localId" : "69",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "14",
                      "type" : "Literal"
                   }, {
-                     "localId" : "69",
+                     "localId" : "70",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "15",
                      "type" : "Literal"
@@ -3755,25 +3761,25 @@ module.exports['Union'] = {
                } ]
             }
          }, {
-            "localId" : "79",
+            "localId" : "80",
             "name" : "NullUnion",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "79",
+                  "r" : "80",
                   "s" : [ {
                      "value" : [ "","define ","NullUnion",": " ]
                   }, {
-                     "r" : "78",
+                     "r" : "79",
                      "s" : [ {
-                        "r" : "73",
+                        "r" : "74",
                         "value" : [ "null"," union " ]
                      }, {
-                        "r" : "77",
+                        "r" : "78",
                         "s" : [ {
-                           "r" : "74",
+                           "r" : "75",
                            "value" : [ "{","1",", ","2",", ","3","}" ]
                         } ]
                      } ]
@@ -3781,12 +3787,12 @@ module.exports['Union'] = {
                }
             } ],
             "expression" : {
-               "localId" : "78",
+               "localId" : "79",
                "type" : "Union",
                "operand" : [ {
                   "type" : "As",
                   "operand" : {
-                     "localId" : "73",
+                     "localId" : "74",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
@@ -3797,20 +3803,20 @@ module.exports['Union'] = {
                      }
                   }
                }, {
-                  "localId" : "77",
+                  "localId" : "78",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "74",
+                     "localId" : "75",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "75",
+                     "localId" : "76",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "76",
+                     "localId" : "77",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
@@ -3818,49 +3824,49 @@ module.exports['Union'] = {
                } ]
             }
          }, {
-            "localId" : "86",
+            "localId" : "87",
             "name" : "UnionNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "86",
+                  "r" : "87",
                   "s" : [ {
                      "value" : [ "","define ","UnionNull",": " ]
                   }, {
-                     "r" : "85",
+                     "r" : "86",
                      "s" : [ {
-                        "r" : "83",
+                        "r" : "84",
                         "s" : [ {
-                           "r" : "80",
+                           "r" : "81",
                            "value" : [ "{","1",", ","2",", ","3","}" ]
                         } ]
                      }, {
-                        "r" : "84",
+                        "r" : "85",
                         "value" : [ " union ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "85",
+               "localId" : "86",
                "type" : "Union",
                "operand" : [ {
-                  "localId" : "83",
+                  "localId" : "84",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "80",
+                     "localId" : "81",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "81",
+                     "localId" : "82",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "82",
+                     "localId" : "83",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
@@ -3868,7 +3874,7 @@ module.exports['Union'] = {
                }, {
                   "type" : "As",
                   "operand" : {
-                     "localId" : "84",
+                     "localId" : "85",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
@@ -3881,33 +3887,33 @@ module.exports['Union'] = {
                } ]
             }
          }, {
-            "localId" : "96",
+            "localId" : "97",
             "name" : "nullUnionNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "96",
+                  "r" : "97",
                   "s" : [ {
                      "value" : [ "","define ","nullUnionNull",": " ]
                   }, {
-                     "r" : "95",
+                     "r" : "96",
                      "s" : [ {
-                        "r" : "90",
+                        "r" : "91",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "90",
+                           "r" : "91",
                            "s" : [ {
-                              "r" : "87",
+                              "r" : "88",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "89",
+                              "r" : "90",
                               "s" : [ {
                                  "value" : [ "List<" ]
                               }, {
-                                 "r" : "88",
+                                 "r" : "89",
                                  "s" : [ {
                                     "value" : [ "String" ]
                                  } ]
@@ -3921,20 +3927,20 @@ module.exports['Union'] = {
                      }, {
                         "value" : [ " union " ]
                      }, {
-                        "r" : "94",
+                        "r" : "95",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "94",
+                           "r" : "95",
                            "s" : [ {
-                              "r" : "91",
+                              "r" : "92",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "93",
+                              "r" : "94",
                               "s" : [ {
                                  "value" : [ "List<" ]
                               }, {
-                                 "r" : "92",
+                                 "r" : "93",
                                  "s" : [ {
                                     "value" : [ "String" ]
                                  } ]
@@ -3950,38 +3956,38 @@ module.exports['Union'] = {
                }
             } ],
             "expression" : {
-               "localId" : "95",
+               "localId" : "96",
                "type" : "Union",
                "operand" : [ {
-                  "localId" : "90",
+                  "localId" : "91",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "87",
+                     "localId" : "88",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "89",
+                     "localId" : "90",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "88",
+                        "localId" : "89",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   }
                }, {
-                  "localId" : "94",
+                  "localId" : "95",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "91",
+                     "localId" : "92",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "93",
+                     "localId" : "94",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "92",
+                        "localId" : "93",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -4014,6 +4020,7 @@ define NullExcept: null except {1, 2, 3, 4, 5}
 module.exports['Except'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -5064,6 +5071,7 @@ define MultipleNullInListIntersect: {1, 2, 3, null} intersect {null, 3}
 module.exports['Intersect'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -6366,6 +6374,7 @@ define ListWrongCodeSystem: IndexOf({Code{code: 'F', system: '1.16.840.1.113883.
 module.exports['IndexOf'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -7763,6 +7772,7 @@ define NullIndexer: {'a', 'b', 'c', 'd'}[null]
 module.exports['Indexer'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -8267,6 +8277,7 @@ define NullNotIn: null in {1, 2, 3}
 module.exports['In'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -9045,6 +9056,7 @@ define NullNotIn: {1, 2, 3} contains null
 module.exports['Contains'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -9859,6 +9871,7 @@ define QuantityNotInList: { ToQuantity('100 \'m\''), ToQuantity('1.995 \'m\''), 
 module.exports['Includes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -11777,6 +11790,7 @@ define QuantityNotInList: ToQuantity('100 \'m\'') included in { ToQuantity('1 \'
 module.exports['IncludedIn'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -13678,6 +13692,7 @@ define NullIncludes: null properly includes {1, 2, 3, 4, 5}
 module.exports['ProperIncludes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -14885,6 +14900,7 @@ define NullIncluded: (null as List<Integer>) properly included in {1, 2, 3, 4, 5
 module.exports['ProperIncludedIn'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -16100,6 +16116,7 @@ define NullValue: flatten null
 module.exports['Flatten'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -16416,6 +16433,7 @@ define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
 module.exports['Distinct'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -17012,6 +17030,7 @@ define NullValue: First(null as List<Integer>)
 module.exports['First'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -17655,6 +17674,7 @@ define NullValue: Last(null as List<Integer>)
 module.exports['Last'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -18296,6 +18316,7 @@ define NullValue: Length(null as List<Integer>)
 module.exports['Length'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -18827,6 +18848,7 @@ define LengthOfNull: Length(null as Integer) // CQL-to-ELM will promote the null
 module.exports['ToList'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -18936,7 +18958,7 @@ module.exports['ToList'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "// CQL-to-ELM will promote the second 5 to a list via ToList","define ","FourInFive",": " ]
+                     "value" : [ "// CQL-to-ELM will promote the second 5 to a list via ToList\n","define ","FourInFive",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -18974,7 +18996,7 @@ module.exports['ToList'] = {
                "s" : {
                   "r" : "14",
                   "s" : [ {
-                     "value" : [ "// CQL-to-ELM will promote the 5 to a list via ToList","define ","LengthOfNull",": " ]
+                     "value" : [ "// CQL-to-ELM will promote the 5 to a list via ToList\n","define ","LengthOfNull",": " ]
                   }, {
                      "r" : "13",
                      "s" : [ {
@@ -19035,6 +19057,7 @@ define SkipIsNull: Skip(null, 2)
 module.exports['Skip'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -19370,6 +19393,7 @@ define TailIsNull: Tail(null)
 module.exports['Tail'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -19598,6 +19622,7 @@ define TakeIsNull: Take(null, 2)
 module.exports['Take'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {

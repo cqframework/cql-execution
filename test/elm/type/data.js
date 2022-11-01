@@ -21,6 +21,7 @@ define StringFiveIsString: '5' is String
 module.exports['IsSystemType'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -266,6 +267,7 @@ define ListOfDecimalsIsListOfIntegers: {1.5, 2.5, 3.5, 4.5, 5.5} is List<Integer
 module.exports['IsListType'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -503,6 +505,7 @@ define IntervalOfDecimalsIsIntervalOfIntegers: Interval[1.5, 5.5] is Interval<In
 module.exports['IsIntervalType'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -716,6 +719,7 @@ define TupleOfDecimalsIsTupleOfIntegers: Tuple{ a: 1.5, b: 2.5 } is Tuple{a Inte
 module.exports['IsTupleType'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1020,6 +1024,7 @@ define StringIsChoiceOfIntegersAndDecimals: 'Foo' is Choice<Integer, Decimal>
 module.exports['IsChoiceType'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1290,6 +1295,7 @@ define EncounterIsString: First([Encounter]) is System.String
 module.exports['IsCustomDataModelType'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1650,6 +1656,7 @@ define CastTupleAsInteger: cast Echo(Tuple{A: 5}) as Integer
 module.exports['AsSystemType'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1764,7 +1771,7 @@ module.exports['AsSystemType'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "// fool CQL-to-ELM into letting the casts compile","define ","FiveAsInteger",": " ]
+                     "value" : [ "// fool CQL-to-ELM into letting the casts compile\n","define ","FiveAsInteger",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -2631,6 +2638,7 @@ define CastTupleAsListOfIntegers: cast Echo(Tuple{A: 5}) as List<Integer>
 module.exports['AsListType'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2745,7 +2753,7 @@ module.exports['AsListType'] = {
                "s" : {
                   "r" : "15",
                   "s" : [ {
-                     "value" : [ "// fool CQL-to-ELM into letting the casts compile","define ","ListOfIntegersAsListOfIntegers",": " ]
+                     "value" : [ "// fool CQL-to-ELM into letting the casts compile\n","define ","ListOfIntegersAsListOfIntegers",": " ]
                   }, {
                      "r" : "14",
                      "s" : [ {
@@ -3636,6 +3644,7 @@ define CastTupleAsIntervalOfIntegers: cast Echo(Tuple{A: 5}) as Interval<Integer
 module.exports['AsIntervalType'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3750,7 +3759,7 @@ module.exports['AsIntervalType'] = {
                "s" : {
                   "r" : "12",
                   "s" : [ {
-                     "value" : [ "// fool CQL-to-ELM into letting the casts compile","define ","IntervalOfIntegersAsIntervalOfIntegers",": " ]
+                     "value" : [ "// fool CQL-to-ELM into letting the casts compile\n","define ","IntervalOfIntegersAsIntervalOfIntegers",": " ]
                   }, {
                      "r" : "11",
                      "s" : [ {
@@ -4625,6 +4634,7 @@ define CastIntervalAsTupleOfInteger: cast Echo(Interval[1, 5]) as Tuple{A Intege
 module.exports['AsTupleType'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -4739,7 +4749,7 @@ module.exports['AsTupleType'] = {
                "s" : {
                   "r" : "15",
                   "s" : [ {
-                     "value" : [ "// fool CQL-to-ELM into letting the casts compile","define ","TupleOfAIntegerBStringAsTupleOfAIntegerBString",": " ]
+                     "value" : [ "// fool CQL-to-ELM into letting the casts compile\n","define ","TupleOfAIntegerBStringAsTupleOfAIntegerBString",": " ]
                   }, {
                      "r" : "14",
                      "s" : [ {
@@ -5772,6 +5782,7 @@ define CastTupleAsChoiceOfIntegersAndStrings: cast Echo(Tuple{A: 1, B: '2'}) as 
 module.exports['AsChoiceType'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -5886,7 +5897,7 @@ module.exports['AsChoiceType'] = {
                "s" : {
                   "r" : "11",
                   "s" : [ {
-                     "value" : [ "// fool CQL-to-ELM into letting the casts compile","define ","IntegerAsChoiceOfIntegersAndStrings",": " ]
+                     "value" : [ "// fool CQL-to-ELM into letting the casts compile\n","define ","IntegerAsChoiceOfIntegersAndStrings",": " ]
                   }, {
                      "r" : "10",
                      "s" : [ {
@@ -6971,6 +6982,7 @@ define CastNamedTupleAsEncounter: Echo(Encounter {id: '1'}) as Simple.Encounter
 module.exports['AsCustomDataModelType'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -7085,7 +7097,7 @@ module.exports['AsCustomDataModelType'] = {
                "s" : {
                   "r" : "10",
                   "s" : [ {
-                     "value" : [ "// fool CQL-to-ELM into letting the casts compile","define ","EncounterAsEncounter",": " ]
+                     "value" : [ "// fool CQL-to-ELM into letting the casts compile\n","define ","EncounterAsEncounter",": " ]
                   }, {
                      "r" : "9",
                      "s" : [ {

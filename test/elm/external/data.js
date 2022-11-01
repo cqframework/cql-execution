@@ -34,6 +34,7 @@ define ConditionsByDate: [Condition] C where C.period during Interval[@2013-03-0
 module.exports['Retrieve'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -341,6 +342,7 @@ module.exports['Retrieve'] = {
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Ambulatory/ED Visit",
+                  "preserve" : true,
                   "type" : "ValueSetRef"
                }
             }
@@ -383,6 +385,7 @@ module.exports['Retrieve'] = {
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Ambulatory/ED Visit",
+                  "preserve" : true,
                   "type" : "ValueSetRef"
                }
             }
@@ -419,6 +422,7 @@ module.exports['Retrieve'] = {
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Ambulatory/ED Visit",
+                  "preserve" : true,
                   "type" : "ValueSetRef"
                }
             }
@@ -461,6 +465,7 @@ module.exports['Retrieve'] = {
                "type" : "Retrieve",
                "codes" : {
                   "name" : "Ambulatory/ED Visit",
+                  "preserve" : true,
                   "type" : "ValueSetRef"
                }
             }
@@ -724,6 +729,7 @@ valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.102.12.1011'
 module.exports['Included'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
