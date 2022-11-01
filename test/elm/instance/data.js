@@ -45,6 +45,7 @@ define val: QuantityA.value
 module.exports['Instance'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {

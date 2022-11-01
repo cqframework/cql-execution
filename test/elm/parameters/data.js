@@ -22,6 +22,7 @@ define foo: 'bar'
 module.exports['ParameterDef'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -378,6 +379,7 @@ define Foo: FooP
 module.exports['ParameterRef'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -508,6 +510,7 @@ define Foo2: FooDP
 module.exports['BooleanParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -681,6 +684,7 @@ define Foo2: FooDP
 module.exports['DecimalParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -854,6 +858,7 @@ define Foo2: FooDP
 module.exports['IntegerParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1027,6 +1032,7 @@ define Foo2: FooDP
 module.exports['StringParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1205,6 +1211,7 @@ define Foo2: FooDP
 module.exports['CodeParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1411,6 +1418,7 @@ define Foo2: FooDP
 module.exports['ConceptParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1624,6 +1632,7 @@ define Foo2: FooDP
 module.exports['DateTimeParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1825,6 +1834,7 @@ define Foo2: FooDP
 module.exports['DateParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2011,6 +2021,7 @@ define Foo2: FooDP
 module.exports['QuantityParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2188,6 +2199,7 @@ define Foo2: FooDP
 module.exports['TimeParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2374,6 +2386,7 @@ define Foo2: FooDP
 module.exports['ListParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2597,6 +2610,7 @@ define Foo2: FooDP
 module.exports['IntervalParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2798,6 +2812,7 @@ define Foo2: FooDP
 module.exports['TupleParameterTypes'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3048,6 +3063,7 @@ define Foo2: FooWithDefault
 module.exports['DefaultAndNoDefault'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3219,6 +3235,7 @@ define MeasurementPeriod: Interval[DateTime(2011, 1, 1), DateTime(2013, 1, 1)] o
 module.exports['MeasurementPeriodParameter'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {

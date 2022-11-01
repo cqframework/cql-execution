@@ -22,6 +22,7 @@ AgeInYearsAt(start of MeasurementPeriod) >= 2 and AgeInYearsAt(start of Measurem
 module.exports['In Age Demographic'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -328,6 +329,7 @@ define SupportLibDef:
 module.exports['CommonLib'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -863,6 +865,7 @@ define supportLibCode: common."directReferenceCode"
 module.exports['Using CommonLib'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1250,6 +1253,7 @@ define SortUsingFunction:
 module.exports['CommonLib2'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2003,6 +2007,7 @@ define ExprSortsOnFunc: common2.SortUsingFunction
 module.exports['Using CommonLib2'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2519,6 +2524,7 @@ define testCommon2Lib: common2.SortUsingFunction
 module.exports['Using CommonLib and CommonLib2'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
