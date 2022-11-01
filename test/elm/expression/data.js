@@ -18,6 +18,7 @@ define Foo: 'Bar'
 module.exports['Expression'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {

@@ -20,6 +20,7 @@ define Day: Date(2012, 2, 15)
 module.exports['Date'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -214,6 +215,7 @@ define NullDate: year from (null as Date)
 module.exports['DateComponentFrom'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -646,6 +648,7 @@ define NullBoth: (null as Date) same as null
 module.exports['SameAs'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1745,6 +1748,7 @@ define NullBoth: (null as Date) same or after null
 module.exports['SameOrAfter'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3441,6 +3445,7 @@ define NullBoth: (null as Date) same or before null
 module.exports['SameOrBefore'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -5134,6 +5139,7 @@ define NullBoth: (null as Date) after null
 module.exports['After'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -6587,6 +6593,7 @@ define NullBoth: (null as Date) before null
 module.exports['Before'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -8033,6 +8040,7 @@ define DaysBetweenUncertainty: difference in days between NewYear2014 and Januar
 module.exports['DifferenceBetween'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -8608,6 +8616,7 @@ define TwentyFiveDaysGreaterThanDaysBetween: 25 > difference in days between New
 module.exports['DifferenceBetween Comparisons'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -9852,6 +9861,7 @@ define DaysBetweenUncertainty: days between JanOne2015 and January2015
 module.exports['DurationBetween'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -10416,6 +10426,7 @@ define MinusTwentyDays: June15th2013 - 20 days
 module.exports['DateMath'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
