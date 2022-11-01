@@ -1,6 +1,7 @@
 {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "",
          "type" : "CqlToElmInfo"
       } ],
@@ -365,11 +366,11 @@
                            "type" : "Add",
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
-                              "value" : "",
+                              "value" : "1",
                               "type" : "Literal"
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
-                              "value" : "",
+                              "value" : "1",
                               "type" : "Literal"
                            } ]
                         }
@@ -377,7 +378,7 @@
                         "name" : "output",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
-                           "value" : "",
+                           "value" : "2",
                            "type" : "Literal"
                         }
                      } ]

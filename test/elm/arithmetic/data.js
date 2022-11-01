@@ -28,6 +28,7 @@ define AddNumberAndUncertainty: 10 + UncertaintyZeroToTwelve
 module.exports['Add'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -682,6 +683,7 @@ define SubtractUncertaintyFromNumber: 10 - UncertaintySixToEighteen
 module.exports['Subtract'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1197,6 +1199,7 @@ define MultiplyNumberAndUncertainty: 10 * UncertaintyTwoToFourteen
 module.exports['Multiply'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1728,6 +1731,7 @@ define DivideNumberByUncertainty: 36 / UncertaintySixToEighteen
 module.exports['Divide'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2317,6 +2321,7 @@ define NegativeOne: -1
 module.exports['Negate'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2424,6 +2429,7 @@ define Parenthetical: (1 + 5) * (10 - 15) / 3
 module.exports['MathPrecedence'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2687,6 +2693,7 @@ define Pow: 3 ^ 4
 module.exports['Power'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2802,6 +2809,7 @@ define MinWrongType: minimum Quantity
 module.exports['MinValue'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3027,6 +3035,7 @@ define MaxWrongType: maximum Quantity
 module.exports['MaxValue'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3249,6 +3258,7 @@ define Even: 9 div 3
 module.exports['TruncatedDivide'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3395,6 +3405,7 @@ define Mod: 3 mod 2
 module.exports['Modulo'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3507,6 +3518,7 @@ define Even: Ceiling(10)
 module.exports['Ceiling'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3647,6 +3659,7 @@ define Even: Floor(10)
 module.exports['Floor'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3787,6 +3800,7 @@ define Even: Truncate(10)
 module.exports['Truncate'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3928,6 +3942,7 @@ define Zero: Abs(0)
 module.exports['Abs'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -4108,6 +4123,7 @@ define Down_percent: Round(4.43,1)
 module.exports['Round'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -4316,6 +4332,7 @@ define ln: Ln(4)
 module.exports['Ln'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -4425,6 +4442,7 @@ define log: Log(10,10000)
 module.exports['Log'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -4552,6 +4570,7 @@ define max_date: successor of DateTime(9999,12,31,23,59,59,999)
 module.exports['Successor'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -5202,6 +5221,7 @@ define min_date: predecessor of DateTime(0001,01,01,0,0,0,0)
 module.exports['Predecessor'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -5873,6 +5893,7 @@ define SubtractUcum: (25 'km' - 5 'm') = 24995 'm'
 module.exports['Quantity'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -7059,6 +7080,7 @@ define ExpOverflow: Exp(maximum Decimal)
 module.exports['OutOfBounds'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {

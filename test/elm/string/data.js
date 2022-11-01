@@ -29,6 +29,7 @@ define AndHelloWorldVariables: Hello & World
 module.exports['Concat'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1340,6 +1341,7 @@ define CombineEmptyNull: Combine({}, ';')
 module.exports['Combine'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1868,6 +1870,7 @@ define SeparateUsingNull: Split('a,b,c', null)
 module.exports['Split'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2137,6 +2140,7 @@ define SplitOnMatchesAllNull: SplitOnMatches(null, null)
 module.exports['SplitOnMatches'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2491,6 +2495,7 @@ define NullString: Length(null as String)
 module.exports['Length'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2656,6 +2661,7 @@ define NullString: Upper(null)
 module.exports['Upper'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2875,6 +2881,7 @@ define NullString: Lower(null)
 module.exports['Lower'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3095,6 +3102,7 @@ define NullIndex: 'HelloWorld'[null]
 module.exports['Indexer'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3398,6 +3406,7 @@ define MatchesAllNull: Matches(null, null)
 module.exports['Matches'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3700,6 +3709,7 @@ define NullString: PositionOf('cde', null)
 module.exports['PositionOf'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3967,6 +3977,7 @@ define NullString: LastPositionOf('ABCDE', null)  // null
 module.exports['LastPositionOf'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -4087,7 +4098,7 @@ module.exports['LastPositionOf'] = {
                "s" : {
                   "r" : "9",
                   "s" : [ {
-                     "value" : [ "// 7","define ","NotFound",": " ]
+                     "value" : [ "// 7\n","define ","NotFound",": " ]
                   }, {
                      "r" : "8",
                      "s" : [ {
@@ -4136,7 +4147,7 @@ module.exports['LastPositionOf'] = {
                "s" : {
                   "r" : "13",
                   "s" : [ {
-                     "value" : [ "// -1","define ","NullPattern",": " ]
+                     "value" : [ "// -1\n","define ","NullPattern",": " ]
                   }, {
                      "r" : "12",
                      "s" : [ {
@@ -4181,7 +4192,7 @@ module.exports['LastPositionOf'] = {
                "s" : {
                   "r" : "17",
                   "s" : [ {
-                     "value" : [ "// null","define ","NullString",": " ]
+                     "value" : [ "// null\n","define ","NullString",": " ]
                   }, {
                      "r" : "16",
                      "s" : [ {
@@ -4239,6 +4250,7 @@ define NullStart: Substring('HelloWorld', null)
 module.exports['Substring'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -4753,6 +4765,7 @@ define NullAsStringStartsWith: StartsWith(null as String, 'Foo')
 module.exports['StartsWith'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -5240,6 +5253,7 @@ define NullAsStringEndsWith: EndsWith(null as String, 'Foo')
 module.exports['EndsWith'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -5749,6 +5763,7 @@ define ReplaceSubstitutionIsNull: ReplaceMatches('Foo', 'Bar', null)
 module.exports['ReplaceMatches'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {

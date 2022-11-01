@@ -21,6 +21,7 @@ define is_null: Count(null as List<Integer>)
 module.exports['Count'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -322,6 +323,7 @@ define IncompatibleUnitsNull: Sum({1 'mg/d', 0.002 '/d'})
 module.exports['Sum'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -1123,6 +1125,7 @@ define IncompatibleUnitsNull: Min({1 'mg/d', 0.002 '/d'})
 module.exports['Min'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -2560,6 +2563,7 @@ define MaxIsAlsoNull: Max(null as List<Decimal>)
 module.exports['Max'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -3947,6 +3951,7 @@ define IncompatibleUnitsNull: Avg({1 'mg/d', 0.002 '/d'})
 module.exports['Avg'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -4674,6 +4679,7 @@ define IncompatibleUnitsNull: Median({1 'mg/d', 0.002 '/d'})
 module.exports['Median'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -6045,6 +6051,7 @@ define IncompatibleUnitsNull: Mode({1 'mg/d', 0.002 '/d'})
 module.exports['Mode'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -6533,6 +6540,7 @@ define IncompatibleUnitsNull: Variance({1 'mg/d', 0.002 '/d'})
 module.exports['Variance'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -7023,6 +7031,7 @@ define IncompatibleUnitsNull: PopulationVariance({1 'mg/d', 0.002 '/d'})
 module.exports['PopulationVariance'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -7498,6 +7507,7 @@ define IncompatibleUnitsNull: StdDev({1 'mg/d', 0.002 '/d'})
 module.exports['StdDev'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -8080,6 +8090,7 @@ define IncompatibleUnitsNull: PopulationStdDev({1 'mg/d', 0.002 '/d'})
 module.exports['PopulationStdDev'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -8573,6 +8584,7 @@ define IncompatibleUnitsNull: Product({1 'mg/d', 0.002 '/d'})
 module.exports['Product'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -9431,6 +9443,7 @@ define also_null_geometric_mean: GeometricMean(null as List<Decimal>)
 module.exports['GeometricMean'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -9810,6 +9823,7 @@ define atfwn: AllTrue({true,true,null,null,true,false})
 module.exports['AllTrue'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
@@ -10142,6 +10156,7 @@ define atfwn: AnyTrue({false,false,null,null,false,false})
 module.exports['AnyTrue'] = {
    "library" : {
       "annotation" : [ {
+         "translatorVersion" : "2.3.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
          "type" : "CqlToElmInfo"
       }, {
