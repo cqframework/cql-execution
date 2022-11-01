@@ -1,7 +1,7 @@
 import Immutable from 'immutable';
 import { Context } from '../runtime/context';
 import { equals } from '../util/comparison';
-import { KeyValuePair, NormalizedKey, toKvpParams } from '../util/immutableUtil';
+import { NormalizedKey, toNormalizedKey } from '../util/immutableUtil';
 import { typeIsArray } from '../util/util';
 import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
@@ -48,18 +48,18 @@ export function doUnion(a: any, b: any) {
 }
 
 // Delegated to by overloaded#Except
-const kvpDoExcept = (a: KeyValuePair[], b: KeyValuePair[]): KeyValuePair[] => {
-  const keys_b = Immutable.Set(b.map(x => x.key));
-  return kvpDoDistinct(a).filter(x => !keys_b.has(x.key));
-};
-export const doExcept = (a: unknown[], b: unknown[]) => toKvpParams(kvpDoExcept)(a, b);
+export function doExcept(a: any, b: any) {
+  const distinct = doDistinct(a);
+  const setList = removeDuplicateNulls(distinct);
+  return setList.filter(item => !doContains(b, item, true));
+}
 
 // Delegated to by overloaded#Intersect
-const kvpDoIntersect = (a: KeyValuePair[], b: KeyValuePair[]): KeyValuePair[] => {
-  const keys_b = Immutable.Set(b.map(x => x.key));
-  return kvpDoDistinct(a).filter(x => keys_b.has(x.key));
-};
-export const doIntersect = (a: unknown[], b: unknown[]) => toKvpParams(kvpDoIntersect)(a, b);
+export function doIntersect(a: any, b: any) {
+  const distinct = doDistinct(a);
+  const setList = removeDuplicateNulls(distinct);
+  return setList.filter(item => doContains(b, item, true));
+}
 
 // ELM-only, not a product of CQL
 export class Times extends UnimplementedExpression {}
@@ -182,29 +182,43 @@ export class Distinct extends Expression {
   }
 }
 
-// Cacheable and optimized doDistinct
-const kvpDoDistinct = (list: KeyValuePair[]): KeyValuePair[] => {
+export const doDistinct = (list: unknown[]): unknown[] => {
+  const list_kvp = list.map(toNormalizedKey);
   const set = Immutable.Set<NormalizedKey>().asMutable();
-  const distinct: KeyValuePair[] = [];
+  const distinct: unknown[] = [];
 
   set.withMutations(y => {
-    list.forEach(x => {
+    list_kvp.forEach((x, i) => {
       // Check set size
       const setSize = y.count();
 
       // Attempt to insert
-      y.add(x.key);
+      y.add(x);
 
       // If inserted, then size will increase; push to distinct
       if (y.count() > setSize) {
-        distinct.push(x);
+        distinct.push(list[i]);
       }
     });
   });
 
   return distinct;
 };
-export const doDistinct = (list: unknown[]): unknown[] => toKvpParams(kvpDoDistinct)(list);
+
+function removeDuplicateNulls(list: any[]) {
+  // Remove duplicate null elements
+  let firstNullFound = false;
+  const setList = [];
+  for (const item of list) {
+    if (item !== null) {
+      setList.push(item);
+    } else if (item === null && !firstNullFound) {
+      setList.push(item);
+      firstNullFound = true;
+    }
+  }
+  return setList;
+}
 
 // ELM-only, not a product of CQL
 export class Current extends UnimplementedExpression {}

@@ -8,24 +8,7 @@ const ucumUtilInstance = ucum.UcumLhcUtils.getInstance();
 
 type Primitive = string | number | boolean | bigint | symbol | undefined | null;
 export type NormalizedKey = Primitive | Immutable.Collection<NormalizedKey, unknown>;
-export type KeyValuePair = { key: NormalizedKey; value: unknown };
 
-/**
- * Utility method to convert an object to a key value pair.
- */
-const toKvp = (x: any) => <KeyValuePair>{ key: toNormalizedKey(x), value: x };
-
-/**
- * Utility method to convert a function that operates on a list of objects
- * to a function that operates on a list of corresponding key value pairs.
- */
-export const toKvpParams = (fn: (...kvpLists: KeyValuePair[][]) => KeyValuePair[]) => {
-  return (...lists: unknown[][]) => fn(...lists.map(list => list.map(toKvp))).map(kvp => kvp.value);
-};
-
-/**
- * Utility method to generate a normalized key for an object.
- */
 export const toNormalizedKey = (js: any): NormalizedKey => {
   // This is necessary because of the oddities of CQL
   // It allows ignoring non-set values in tuples to be compared correctly with set as null values in tuples

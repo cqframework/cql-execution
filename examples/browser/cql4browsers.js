@@ -5439,18 +5439,18 @@ function doUnion(a, b) {
 }
 exports.doUnion = doUnion;
 // Delegated to by overloaded#Except
-const kvpDoExcept = (a, b) => {
-    const keys_b = immutable_1.default.Set(b.map(x => x.key));
-    return kvpDoDistinct(a).filter(x => !keys_b.has(x.key));
-};
-const doExcept = (a, b) => (0, immutableUtil_1.toKvpParams)(kvpDoExcept)(a, b);
+function doExcept(a, b) {
+    const distinct = (0, exports.doDistinct)(a);
+    const setList = removeDuplicateNulls(distinct);
+    return setList.filter(item => !doContains(b, item, true));
+}
 exports.doExcept = doExcept;
 // Delegated to by overloaded#Intersect
-const kvpDoIntersect = (a, b) => {
-    const keys_b = immutable_1.default.Set(b.map(x => x.key));
-    return kvpDoDistinct(a).filter(x => keys_b.has(x.key));
-};
-const doIntersect = (a, b) => (0, immutableUtil_1.toKvpParams)(kvpDoIntersect)(a, b);
+function doIntersect(a, b) {
+    const distinct = (0, exports.doDistinct)(a);
+    const setList = removeDuplicateNulls(distinct);
+    return setList.filter(item => doContains(b, item, true));
+}
 exports.doIntersect = doIntersect;
 // ELM-only, not a product of CQL
 class Times extends expression_1.UnimplementedExpression {
@@ -5570,26 +5570,40 @@ class Distinct extends expression_1.Expression {
     }
 }
 exports.Distinct = Distinct;
-// Cacheable and optimized doDistinct
-const kvpDoDistinct = (list) => {
+const doDistinct = (list) => {
+    const list_kvp = list.map(immutableUtil_1.toNormalizedKey);
     const set = immutable_1.default.Set().asMutable();
     const distinct = [];
     set.withMutations(y => {
-        list.forEach(x => {
+        list_kvp.forEach((x, i) => {
             // Check set size
             const setSize = y.count();
             // Attempt to insert
-            y.add(x.key);
+            y.add(x);
             // If inserted, then size will increase; push to distinct
             if (y.count() > setSize) {
-                distinct.push(x);
+                distinct.push(list[i]);
             }
         });
     });
     return distinct;
 };
-const doDistinct = (list) => (0, immutableUtil_1.toKvpParams)(kvpDoDistinct)(list);
 exports.doDistinct = doDistinct;
+function removeDuplicateNulls(list) {
+    // Remove duplicate null elements
+    let firstNullFound = false;
+    const setList = [];
+    for (const item of list) {
+        if (item !== null) {
+            setList.push(item);
+        }
+        else if (item === null && !firstNullFound) {
+            setList.push(item);
+            firstNullFound = true;
+        }
+    }
+    return setList;
+}
 // ELM-only, not a product of CQL
 class Current extends expression_1.UnimplementedExpression {
 }
@@ -6494,24 +6508,24 @@ class SortClause {
     }
 }
 exports.SortClause = SortClause;
-const immutableToDistinctList = (list) => {
+const toDistinctList = (list) => {
+    const list_kvp = list.map(immutableUtil_1.toNormalizedKey);
     const set = immutable_1.default.Set().asMutable();
     const distinct = [];
     set.withMutations(y => {
-        list.forEach(x => {
+        list_kvp.forEach((x, i) => {
             // Check set size
             const setSize = y.count();
             // Attempt to insert
-            y.add(x.key);
+            y.add(x);
             // If inserted, then size will increase; push to distinct
             if (y.count() > setSize) {
-                distinct.push(x);
+                distinct.push(list[i]);
             }
         });
     });
     return distinct;
 };
-const toDistinctList = (list) => (0, immutableUtil_1.toKvpParams)(immutableToDistinctList)(list);
 exports.toDistinctList = toDistinctList;
 class AggregateClause extends expression_1.Expression {
     constructor(json) {
@@ -8732,28 +8746,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toNormalizedKey = exports.toKvpParams = void 0;
+exports.toNormalizedKey = void 0;
 const ucum = __importStar(require("@lhncbc/ucum-lhc"));
 const immutable_1 = __importDefault(require("immutable"));
 const datatypes_1 = require("../datatypes/datatypes");
 const math_1 = require("./math");
 const units_1 = require("./units");
 const ucumUtilInstance = ucum.UcumLhcUtils.getInstance();
-/**
- * Utility method to convert an object to a key value pair.
- */
-const toKvp = (x) => ({ key: (0, exports.toNormalizedKey)(x), value: x });
-/**
- * Utility method to convert a function that operates on a list of objects
- * to a function that operates on a list of corresponding key value pairs.
- */
-const toKvpParams = (fn) => {
-    return (...lists) => fn(...lists.map(list => list.map(toKvp))).map(kvp => kvp.value);
-};
-exports.toKvpParams = toKvpParams;
-/**
- * Utility method to generate a normalized key for an object.
- */
 const toNormalizedKey = (js) => {
     var _a, _b, _c, _d, _e;
     // This is necessary because of the oddities of CQL

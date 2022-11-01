@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import { Context } from '../runtime/context';
-import { KeyValuePair, NormalizedKey, toKvpParams } from '../util/immutableUtil';
+import { NormalizedKey, toNormalizedKey } from '../util/immutableUtil';
 import { allTrue, Direction, typeIsArray } from '../util/util';
 import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
@@ -171,29 +171,28 @@ export class SortClause {
   }
 }
 
-const immutableToDistinctList = (list: KeyValuePair[]): KeyValuePair[] => {
+export const toDistinctList = (list: unknown[]): unknown[] => {
+  const list_kvp = list.map(toNormalizedKey);
   const set = Immutable.Set<NormalizedKey>().asMutable();
-  const distinct: KeyValuePair[] = [];
+  const distinct: unknown[] = [];
 
   set.withMutations(y => {
-    list.forEach(x => {
+    list_kvp.forEach((x, i) => {
       // Check set size
       const setSize = y.count();
 
       // Attempt to insert
-      y.add(x.key);
+      y.add(x);
 
       // If inserted, then size will increase; push to distinct
       if (y.count() > setSize) {
-        distinct.push(x);
+        distinct.push(list[i]);
       }
     });
   });
 
   return distinct;
 };
-export const toDistinctList = (list: unknown[]): unknown[] =>
-  toKvpParams(immutableToDistinctList)(list);
 
 class AggregateClause extends Expression {
   identifier: string;
