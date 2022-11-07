@@ -6,8 +6,8 @@ import { AnyTypeSpecifier } from './type-specifiers.interfaces';
  * Iterator for the patients provided to the execution engine
  */
 export interface DataProvider {
-  currentPatient(): any;
-  nextPatient(): any;
+  currentPatient(): PatientObject | undefined | Promise<PatientObject | undefined>;
+  nextPatient(): PatientObject | undefined | Promise<PatientObject | undefined>;
 }
 
 /*
@@ -40,5 +40,8 @@ export interface RetrieveDetails {
  * Patient data object that implements logic for searching for records based on the Patient
  */
 export interface PatientObject extends RecordObject {
-  findRecords(profile: string | null, retrieveDetails?: RetrieveDetails): RecordObject[];
+  findRecords(
+    profile: string | null,
+    retrieveDetails?: RetrieveDetails
+  ): RecordObject[] | Promise<RecordObject[]>;
 }
