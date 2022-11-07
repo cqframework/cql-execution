@@ -52,3 +52,13 @@ define function process(c Simple.Condition) :
 
 define testValue1: process(First([Encounter]))
 define testValue2: process(First([Condition]))
+
+// @Test: FluentFunctions
+define fluent function greet(name System.String) :
+  'Hello ' + name + '!'
+
+define fluent function add(a System.Integer, b System.Integer) :
+  a + b
+
+define testValue1: 'World'.greet()
+define testValue2: 1.add(2)

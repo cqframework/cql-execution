@@ -1868,3 +1868,326 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
    }
 }
 
+/* FluentFunctions
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define fluent function greet(name System.String) :
+  'Hello ' + name + '!'
+
+define fluent function add(a System.Integer, b System.Integer) :
+  a + b
+
+define testValue1: 'World'.greet()
+define testValue2: 1.add(2)
+*/
+
+module.exports['FluentFunctions'] = {
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "21",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "8",
+            "name" : "greet",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "fluent" : true,
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "8",
+                  "s" : [ {
+                     "value" : [ "","define fluent function ","greet","(","name"," " ]
+                  }, {
+                     "r" : "2",
+                     "s" : [ {
+                        "value" : [ "System",".","String" ]
+                     } ]
+                  }, {
+                     "value" : [ ") :\n  " ]
+                  }, {
+                     "r" : "7",
+                     "s" : [ {
+                        "r" : "7",
+                        "s" : [ {
+                           "r" : "5",
+                           "s" : [ {
+                              "r" : "3",
+                              "s" : [ {
+                                 "value" : [ "'Hello '" ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "4",
+                              "s" : [ {
+                                 "value" : [ "name" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "6",
+                           "s" : [ {
+                              "value" : [ "'!'" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "7",
+               "type" : "Concatenate",
+               "operand" : [ {
+                  "localId" : "5",
+                  "type" : "Concatenate",
+                  "operand" : [ {
+                     "localId" : "3",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Hello ",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "4",
+                     "name" : "name",
+                     "type" : "OperandRef"
+                  } ]
+               }, {
+                  "localId" : "6",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "!",
+                  "type" : "Literal"
+               } ]
+            },
+            "operand" : [ {
+               "name" : "name",
+               "operandTypeSpecifier" : {
+                  "localId" : "2",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "14",
+            "name" : "add",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "fluent" : true,
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "14",
+                  "s" : [ {
+                     "value" : [ "","define fluent function ","add","(","a"," " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "value" : [ "System",".","Integer" ]
+                     } ]
+                  }, {
+                     "value" : [ ", ","b"," " ]
+                  }, {
+                     "r" : "10",
+                     "s" : [ {
+                        "value" : [ "System",".","Integer" ]
+                     } ]
+                  }, {
+                     "value" : [ ") :\n  " ]
+                  }, {
+                     "r" : "13",
+                     "s" : [ {
+                        "r" : "13",
+                        "s" : [ {
+                           "r" : "11",
+                           "s" : [ {
+                              "value" : [ "a" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "12",
+                           "s" : [ {
+                              "value" : [ "b" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "13",
+               "type" : "Add",
+               "operand" : [ {
+                  "localId" : "11",
+                  "name" : "a",
+                  "type" : "OperandRef"
+               }, {
+                  "localId" : "12",
+                  "name" : "b",
+                  "type" : "OperandRef"
+               } ]
+            },
+            "operand" : [ {
+               "name" : "a",
+               "operandTypeSpecifier" : {
+                  "localId" : "9",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }, {
+               "name" : "b",
+               "operandTypeSpecifier" : {
+                  "localId" : "10",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "17",
+            "name" : "testValue1",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "","define ","testValue1",": " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "r" : "15",
+                        "s" : [ {
+                           "value" : [ "'World'" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "16",
+                        "s" : [ {
+                           "value" : [ "greet","()" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "16",
+               "name" : "greet",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "localId" : "15",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "World",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "21",
+            "name" : "testValue2",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "21",
+                  "s" : [ {
+                     "value" : [ "","define ","testValue2",": " ]
+                  }, {
+                     "r" : "20",
+                     "s" : [ {
+                        "r" : "18",
+                        "value" : [ "1","." ]
+                     }, {
+                        "r" : "20",
+                        "s" : [ {
+                           "r" : "19",
+                           "value" : [ "add","(","2",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "name" : "add",
+               "type" : "FunctionRef",
+               "operand" : [ {
+                  "localId" : "18",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "19",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
