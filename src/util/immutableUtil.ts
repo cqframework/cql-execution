@@ -9,6 +9,10 @@ const ucumUtilInstance = ucum.UcumLhcUtils.getInstance();
 type Primitive = string | number | boolean | bigint | symbol | undefined | null;
 export type NormalizedKey = Primitive | Immutable.Collection<NormalizedKey, unknown>;
 
+/**
+ * Provide a unique key for an object to be used for value equality
+ * A key is normalized such that representations for quantities, dates, intervals, etc. are comparable.
+ */
 export const toNormalizedKey = (js: any): NormalizedKey => {
   // This is necessary because of the oddities of CQL
   // It allows ignoring non-set values in tuples to be compared correctly with set as null values in tuples
