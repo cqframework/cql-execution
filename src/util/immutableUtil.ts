@@ -40,6 +40,8 @@ export const toNormalizedKey = (js: any): NormalizedKey => {
       return Immutable.Map({
         code: toNormalizedKey(js.code),
         system: toNormalizedKey(js.system),
+        version: toNormalizedKey(js.version),
+        display: toNormalizedKey(js.display),
         __instance: js.constructor
       });
 
