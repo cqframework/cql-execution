@@ -63,10 +63,10 @@ export function doIntersect(a: any, b: any) {
 }
 
 // ELM-only, not a product of CQL
-export class Times extends UnimplementedExpression { }
+export class Times extends UnimplementedExpression {}
 
 // ELM-only, not a product of CQL
-export class Filter extends UnimplementedExpression { }
+export class Filter extends UnimplementedExpression {}
 
 export class SingletonFrom extends Expression {
   constructor(json: any) {
@@ -152,7 +152,7 @@ export function doProperIncludes(list: any, sublist: any) {
 }
 
 // ELM-only, not a product of CQL
-export class ForEach extends UnimplementedExpression { }
+export class ForEach extends UnimplementedExpression {}
 
 export class Flatten extends Expression {
   constructor(json: any) {
@@ -222,7 +222,7 @@ function removeDuplicateNulls(list: any[]) {
 }
 
 // ELM-only, not a product of CQL
-export class Current extends UnimplementedExpression { }
+export class Current extends UnimplementedExpression {}
 
 export class First extends Expression {
   source: any;
