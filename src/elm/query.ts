@@ -4,8 +4,6 @@ import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
 import { toDistinctList } from './list';
 
-
-
 export class AliasedQuerySource {
   alias: any;
   expression: any;
@@ -62,7 +60,7 @@ export class Without extends With {
 }
 
 // ELM-only, not a product of CQL
-export class Sort extends UnimplementedExpression { }
+export class Sort extends UnimplementedExpression {}
 
 export class ByDirection extends Expression {
   direction: Direction;

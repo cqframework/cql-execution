@@ -5405,7 +5405,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Slice = exports.Last = exports.First = exports.Current = exports.doDistinct = exports.Distinct = exports.Flatten = exports.ForEach = exports.doProperIncludes = exports.doIncludes = exports.doContains = exports.IndexOf = exports.ToList = exports.SingletonFrom = exports.Filter = exports.Times = exports.doIntersect = exports.doExcept = exports.doUnion = exports.Exists = exports.List = void 0;
+exports.Slice = exports.Last = exports.First = exports.Current = exports.toDistinctList = exports.Distinct = exports.Flatten = exports.ForEach = exports.doProperIncludes = exports.doIncludes = exports.doContains = exports.IndexOf = exports.ToList = exports.SingletonFrom = exports.Filter = exports.Times = exports.doIntersect = exports.doExcept = exports.doUnion = exports.Exists = exports.List = void 0;
 const immutable_1 = __importDefault(require("immutable"));
 const comparison_1 = require("../util/comparison");
 const immutableUtil_1 = require("../util/immutableUtil");
@@ -5443,20 +5443,20 @@ exports.Exists = Exists;
 // NotEqual is completely handled by overloaded#Equal
 // Delegated to by overloaded#Union
 function doUnion(a, b) {
-    const distinct = (0, exports.doDistinct)(a.concat(b));
+    const distinct = (0, exports.toDistinctList)(a.concat(b));
     return removeDuplicateNulls(distinct);
 }
 exports.doUnion = doUnion;
 // Delegated to by overloaded#Except
 function doExcept(a, b) {
-    const distinct = (0, exports.doDistinct)(a);
+    const distinct = (0, exports.toDistinctList)(a);
     const setList = removeDuplicateNulls(distinct);
     return setList.filter(item => !doContains(b, item, true));
 }
 exports.doExcept = doExcept;
 // Delegated to by overloaded#Intersect
 function doIntersect(a, b) {
-    const distinct = (0, exports.doDistinct)(a);
+    const distinct = (0, exports.toDistinctList)(a);
     const setList = removeDuplicateNulls(distinct);
     return setList.filter(item => doContains(b, item, true));
 }
@@ -5575,11 +5575,11 @@ class Distinct extends expression_1.Expression {
         if (result == null) {
             return null;
         }
-        return (0, exports.doDistinct)(result);
+        return (0, exports.toDistinctList)(result);
     }
 }
 exports.Distinct = Distinct;
-const doDistinct = (list) => {
+const toDistinctList = (list) => {
     const list_keys = list.map(immutableUtil_1.toNormalizedKey);
     const set = immutable_1.default.Set().asMutable();
     const distinct = [];
@@ -5597,7 +5597,7 @@ const doDistinct = (list) => {
     });
     return distinct;
 };
-exports.doDistinct = doDistinct;
+exports.toDistinctList = toDistinctList;
 function removeDuplicateNulls(list) {
     // Remove duplicate null elements
     let firstNullFound = false;
@@ -6360,17 +6360,13 @@ exports.Quantity = Quantity;
 
 },{"../datatypes/datatypes":6,"./expression":22}],36:[function(require,module,exports){
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.QueryLetRef = exports.AliasRef = exports.Query = exports.toDistinctList = exports.SortClause = exports.ReturnClause = exports.ByColumn = exports.ByExpression = exports.ByDirection = exports.Sort = exports.Without = exports.With = exports.LetClause = exports.AliasedQuerySource = void 0;
-const immutable_1 = __importDefault(require("immutable"));
+exports.QueryLetRef = exports.AliasRef = exports.Query = exports.SortClause = exports.ReturnClause = exports.ByColumn = exports.ByExpression = exports.ByDirection = exports.Sort = exports.Without = exports.With = exports.LetClause = exports.AliasedQuerySource = void 0;
 const context_1 = require("../runtime/context");
-const immutableUtil_1 = require("../util/immutableUtil");
 const util_1 = require("../util/util");
 const builder_1 = require("./builder");
 const expression_1 = require("./expression");
+const list_1 = require("./list");
 class AliasedQuerySource {
     constructor(json) {
         this.alias = json.alias;
@@ -6519,25 +6515,6 @@ class SortClause {
     }
 }
 exports.SortClause = SortClause;
-const toDistinctList = (list) => {
-    const list_keys = list.map(immutableUtil_1.toNormalizedKey);
-    const set = immutable_1.default.Set().asMutable();
-    const distinct = [];
-    set.withMutations(y => {
-        list_keys.forEach((key, i) => {
-            // Check set size
-            const setSize = y.count();
-            // Attempt to insert
-            y.add(key);
-            // If inserted, then size will increase; push to distinct
-            if (y.count() > setSize) {
-                distinct.push(list[i]);
-            }
-        });
-    });
-    return distinct;
-};
-exports.toDistinctList = toDistinctList;
 class AggregateClause extends expression_1.Expression {
     constructor(json) {
         super(json);
@@ -6605,7 +6582,7 @@ class Query extends expression_1.Expression {
             }
         });
         if (this.isDistinct()) {
-            returnedValues = (0, exports.toDistinctList)(returnedValues);
+            returnedValues = (0, list_1.toDistinctList)(returnedValues);
         }
         if (this.aggregateClause != null) {
             returnedValues = await this.aggregateClause.aggregate(returnedValues, ctx);
@@ -6678,7 +6655,7 @@ class MultiSource {
     }
 }
 
-},{"../runtime/context":42,"../util/immutableUtil":53,"../util/util":56,"./builder":16,"./expression":22,"immutable":71}],37:[function(require,module,exports){
+},{"../runtime/context":42,"../util/util":56,"./builder":16,"./expression":22,"./list":28}],37:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -8774,6 +8751,10 @@ const datatypes_1 = require("../datatypes/datatypes");
 const math_1 = require("./math");
 const units_1 = require("./units");
 const ucumUtilInstance = ucum.UcumLhcUtils.getInstance();
+/**
+ * Provide a unique key for an object to be used for value equality
+ * A key is normalized such that representations for quantities, dates, intervals, etc. are comparable.
+ */
 const toNormalizedKey = (js) => {
     var _a, _b, _c, _d, _e;
     // This is necessary because of the oddities of CQL
@@ -8802,6 +8783,8 @@ const toNormalizedKey = (js) => {
             return immutable_1.default.Map({
                 code: (0, exports.toNormalizedKey)(js.code),
                 system: (0, exports.toNormalizedKey)(js.system),
+                version: (0, exports.toNormalizedKey)(js.version),
+                display: (0, exports.toNormalizedKey)(js.display),
                 __instance: js.constructor
             });
         case Date:
