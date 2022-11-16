@@ -44,29 +44,29 @@ export class Exists extends Expression {
 
 // Delegated to by overloaded#Union
 export function doUnion(a: any, b: any) {
-  const distinct = doDistinct(a.concat(b));
+  const distinct = toDistinctList(a.concat(b));
   return removeDuplicateNulls(distinct);
 }
 
 // Delegated to by overloaded#Except
 export function doExcept(a: any, b: any) {
-  const distinct = doDistinct(a);
+  const distinct = toDistinctList(a);
   const setList = removeDuplicateNulls(distinct);
   return setList.filter(item => !doContains(b, item, true));
 }
 
 // Delegated to by overloaded#Intersect
 export function doIntersect(a: any, b: any) {
-  const distinct = doDistinct(a);
+  const distinct = toDistinctList(a);
   const setList = removeDuplicateNulls(distinct);
   return setList.filter(item => doContains(b, item, true));
 }
 
 // ELM-only, not a product of CQL
-export class Times extends UnimplementedExpression {}
+export class Times extends UnimplementedExpression { }
 
 // ELM-only, not a product of CQL
-export class Filter extends UnimplementedExpression {}
+export class Filter extends UnimplementedExpression { }
 
 export class SingletonFrom extends Expression {
   constructor(json: any) {
@@ -152,7 +152,7 @@ export function doProperIncludes(list: any, sublist: any) {
 }
 
 // ELM-only, not a product of CQL
-export class ForEach extends UnimplementedExpression {}
+export class ForEach extends UnimplementedExpression { }
 
 export class Flatten extends Expression {
   constructor(json: any) {
@@ -179,11 +179,11 @@ export class Distinct extends Expression {
     if (result == null) {
       return null;
     }
-    return doDistinct(result);
+    return toDistinctList(result);
   }
 }
 
-export const doDistinct = (list: unknown[]): unknown[] => {
+export const toDistinctList = (list: unknown[]): unknown[] => {
   const list_keys = list.map(toNormalizedKey);
   const set = Immutable.Set<NormalizedKey>().asMutable();
   const distinct: unknown[] = [];
@@ -222,7 +222,7 @@ function removeDuplicateNulls(list: any[]) {
 }
 
 // ELM-only, not a product of CQL
-export class Current extends UnimplementedExpression {}
+export class Current extends UnimplementedExpression { }
 
 export class First extends Expression {
   source: Expression;
