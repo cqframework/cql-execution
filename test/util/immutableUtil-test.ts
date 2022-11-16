@@ -5,7 +5,7 @@ import { Uncertainty } from '../../src/datatypes/uncertainty';
 import { equals } from '../../src/util/comparison';
 import { toNormalizedKey } from '../../src/util/immutableUtil';
 
-describe('Memoizer Tests', () => {
+describe('ImmutableUtil Tests', () => {
   it('should normalize null and undefined properties', () => {
     const c1: { code: string; system: undefined } = { code: 'a', system: undefined };
     const c2: { code: string; system: null } = { code: 'a', system: null };
