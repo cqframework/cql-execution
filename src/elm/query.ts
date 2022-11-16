@@ -1,9 +1,10 @@
-import Immutable from 'immutable';
 import { Context } from '../runtime/context';
-import { NormalizedKey, toNormalizedKey } from '../util/immutableUtil';
 import { allTrue, Direction, typeIsArray } from '../util/util';
 import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
+import { toDistinctList } from './list';
+
+
 
 export class AliasedQuerySource {
   alias: any;
@@ -60,7 +61,7 @@ export class Without extends With {
 }
 
 // ELM-only, not a product of CQL
-export class Sort extends UnimplementedExpression {}
+export class Sort extends UnimplementedExpression { }
 
 export class ByDirection extends Expression {
   direction: Direction;
@@ -170,29 +171,6 @@ export class SortClause {
     }
   }
 }
-
-export const toDistinctList = (list: unknown[]): unknown[] => {
-  const list_keys = list.map(toNormalizedKey);
-  const set = Immutable.Set<NormalizedKey>().asMutable();
-  const distinct: unknown[] = [];
-
-  set.withMutations(y => {
-    list_keys.forEach((key, i) => {
-      // Check set size
-      const setSize = y.count();
-
-      // Attempt to insert
-      y.add(key);
-
-      // If inserted, then size will increase; push to distinct
-      if (y.count() > setSize) {
-        distinct.push(list[i]);
-      }
-    });
-  });
-
-  return distinct;
-};
 
 class AggregateClause extends Expression {
   identifier: string;
