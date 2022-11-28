@@ -99,3 +99,19 @@ describe('FunctionOverloadsWithArgumentsFromCustomDataModel', function () {
     e.should.equal('Condition http://cqframework.org/3/2');
   });
 });
+
+describe('FluentFunctions', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should be able to invoke a fluent function with no arguments', function () {
+    const e = this.testValue1.exec(this.ctx);
+    e.should.equal('Hello World!');
+  });
+
+  it('should be able to invoke a fluent function with one extra argument', function () {
+    const e = this.testValue2.exec(this.ctx);
+    e.should.equal(3);
+  });
+});
