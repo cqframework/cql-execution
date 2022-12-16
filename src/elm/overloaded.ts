@@ -62,7 +62,8 @@ export class Union extends Expression {
   }
 
   exec(ctx: Context) {
-    const [a, b] = this.execArgs(ctx);
+    // TODO: Remove hot fix once null-sourced queries are handled properly
+    const [a, b] = UNION_HOT_FIX(this.execArgs(ctx));
     if (a == null && b == null) {
       return this.listTypeArgs() ? [] : null;
     }
@@ -83,6 +84,16 @@ export class Union extends Expression {
       return arg.asTypeSpecifier != null && arg.asTypeSpecifier.type === 'ListTypeSpecifier';
     });
   }
+}
+
+// In some cases, arguments that should be lists are passed into the union as objects.
+// This hotfix checks each argument to ensure it is a valid type, and if not, it assumes
+// it should be wrapped in an array. This whole situation happens because the engine does
+// not properly handle list-based queries when the source is null. This fix prevents
+// the crash, but still may return unexpected results in these situations.
+// TODO: Remove this hot fix once null-sourced queries are handled properly.
+function UNION_HOT_FIX(args: [any, any]) {
+  return args.map(x => (x == null || typeIsArray(x) || x.isInterval ? x : [x]));
 }
 
 export class Except extends Expression {
