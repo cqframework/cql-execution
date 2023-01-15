@@ -42,7 +42,7 @@ describe('FunctionQuery', () => {
   });
 });
 
-describe.skip('IncludesQuery', function () {
+describe('IncludesQuery', function () {
   beforeEach(function () {
     setup(this, data, [p1], vsets);
   });
@@ -62,20 +62,54 @@ describe('MultiSourceQuery', () => {
   it('should find all Encounters performed and Conditions', function () {
     const e = this.msQuery.exec(this.ctx);
     e.should.have.length(6);
+    e[0].E.id.should.equal('http://cqframework.org/3/1');
+    e[0].C.id.should.equal('http://cqframework.org/3/4');
+    e[1].E.id.should.equal('http://cqframework.org/3/1');
+    e[1].C.id.should.equal('http://cqframework.org/3/2');
+    e[2].E.id.should.equal('http://cqframework.org/3/3');
+    e[2].C.id.should.equal('http://cqframework.org/3/4');
+    e[3].E.id.should.equal('http://cqframework.org/3/3');
+    e[3].C.id.should.equal('http://cqframework.org/3/2');
+    e[4].E.id.should.equal('http://cqframework.org/3/5');
+    e[4].C.id.should.equal('http://cqframework.org/3/4');
+    e[5].E.id.should.equal('http://cqframework.org/3/5');
+    e[5].C.id.should.equal('http://cqframework.org/3/2');
   });
 
-  it.skip('should find encounters performed during the MP and All conditions', function () {
+  it('should find encounters performed during the MP and All conditions', function () {
     const e = this.msQueryWhere.exec(this.ctx);
     e.should.have.length(2);
+    e[0].E.id.should.equal('http://cqframework.org/3/5');
+    e[0].C.id.should.equal('http://cqframework.org/3/4');
+    e[1].E.id.should.equal('http://cqframework.org/3/5');
+    e[1].C.id.should.equal('http://cqframework.org/3/2');
   });
 
-  it.skip('should be able to filter items in the where clause', function () {
+  it('should be able to filter items in the where clause', function () {
     const e = this.msQueryWhere2.exec(this.ctx);
     e.should.have.length(1);
+    e[0].E.id.should.equal('http://cqframework.org/3/5');
+    e[0].C.id.should.equal('http://cqframework.org/3/2');
+  });
+
+  //multiSourceWithArrays
+  it('should correctly handle individual results that are arrays', function () {
+    const e = this.multiSourceWithArrays.exec(this.ctx);
+    e.should.eql([
+      { A: 'a', X: ['x'] },
+      { A: 'a', X: ['y'] },
+      { A: 'a', X: ['z'] },
+      { A: 'b', X: ['x'] },
+      { A: 'b', X: ['y'] },
+      { A: 'b', X: ['z'] },
+      { A: 'c', X: ['x'] },
+      { A: 'c', X: ['y'] },
+      { A: 'c', X: ['z'] }
+    ]);
   });
 });
 
-describe.skip('QueryRelationship', function () {
+describe('QueryRelationship', function () {
   beforeEach(function () {
     setup(this, data, [p1]);
   });
@@ -372,5 +406,31 @@ describe('AggregateQuery', () => {
 
   it('should be able to aggregate with a Quantity as the starting value', function () {
     this.quantityStartingAggregation.exec(this.ctx).should.eql(new Quantity(15, 'ml'));
+  });
+});
+
+describe('NullSourceQuery', () => {
+  beforeEach(function () {
+    setup(this, data, [p1], vsets);
+  });
+
+  it('should return null when source is a null list', function () {
+    const result = this.nullListQuery.exec(this.ctx);
+    should(result).be.null();
+  });
+
+  it('should return null when source is a null object', function () {
+    const result = this.nullObjectQuery.exec(this.ctx);
+    should(result).be.null();
+  });
+
+  it('should return null when every source in a multi-source query null list', function () {
+    const result = this.allNullMultiSourceQuery.exec(this.ctx);
+    should(result).be.null();
+  });
+
+  it('should return empty list when one source is a list and the other is null', function () {
+    const result = this.someNullMultiSourceQuery.exec(this.ctx);
+    result.should.eql([]);
   });
 });
