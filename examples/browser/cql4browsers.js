@@ -6326,7 +6326,6 @@ exports.Quantity = Quantity;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.QueryLetRef = exports.AliasRef = exports.Query = exports.SortClause = exports.ReturnClause = exports.ByColumn = exports.ByExpression = exports.ByDirection = exports.Sort = exports.Without = exports.With = exports.LetClause = exports.AliasedQuerySource = void 0;
 const expression_1 = require("./expression");
-const context_1 = require("../runtime/context");
 const util_1 = require("../util/util");
 const comparison_1 = require("../util/comparison");
 const builder_1 = require("./builder");
@@ -6506,13 +6505,13 @@ class AggregateClause extends expression_1.Expression {
 class Query extends expression_1.Expression {
     constructor(json) {
         super(json);
-        this.sources = new MultiSource(json.source.map((s) => new AliasedQuerySource(s)));
+        this.sources = json.source.map((s) => new AliasedQuerySource(s));
+        this.aliases = json.source.map((s) => s.alias);
         this.letClauses = json.let != null ? json.let.map((d) => new LetClause(d)) : [];
         this.relationship = json.relationship != null ? (0, builder_1.build)(json.relationship) : [];
         this.where = (0, builder_1.build)(json.where);
         this.returnClause = json.return != null ? new ReturnClause(json.return) : null;
         this.aggregateClause = json.aggregate != null ? new AggregateClause(json.aggregate) : null;
-        this.aliases = this.sources.aliases();
         this.sortClause = json.sort != null ? new SortClause(json.sort) : null;
     }
     isDistinct() {
@@ -6525,8 +6524,33 @@ class Query extends expression_1.Expression {
         return true;
     }
     exec(ctx) {
+        let sourceResults = this.sources.map(s => s.expression.execute(ctx));
+        // If every source is null, the result is null
+        // See: https://jira.hl7.org/browse/FHIR-40225
+        if (sourceResults.every(r => r == null)) {
+            return null;
+        }
+        const isList = sourceResults.some(r => Array.isArray(r));
+        // For ease of processing, convert all the sources to lists and
+        // convert nulls to empty lists (we already handled the ALL null case)
+        sourceResults = sourceResults.map(r => {
+            if (r == null) {
+                return [];
+            }
+            else if (Array.isArray(r)) {
+                return r;
+            }
+            else {
+                return [r];
+            }
+        });
+        // Iterate over the cartesian product of the sources.
+        // See: https://cql.hl7.org/03-developersguide.html#multi-source-queries
+        const cartesian = cartesianProductOf(sourceResults);
         let returnedValues = [];
-        this.sources.forEach(ctx, (rctx) => {
+        cartesian.forEach((combo) => {
+            const rctx = ctx.childContext();
+            combo.forEach((r, i) => rctx.set(this.aliases[i], r));
             for (const def of this.letClauses) {
                 rctx.set(def.identifier, def.expression.execute(rctx));
             }
@@ -6559,7 +6583,7 @@ class Query extends expression_1.Expression {
         if (this.sortClause != null) {
             this.sortClause.sort(ctx, returnedValues);
         }
-        if (this.sources.returnsList() || this.aggregateClause != null) {
+        if (isList || this.aggregateClause != null) {
             return returnedValues;
         }
         else {
@@ -6584,45 +6608,21 @@ class QueryLetRef extends AliasRef {
     }
 }
 exports.QueryLetRef = QueryLetRef;
-// The following is not defined by ELM but is helpful for execution
-class MultiSource {
-    constructor(sources) {
-        this.sources = sources;
-        this.alias = this.sources[0].alias;
-        this.expression = this.sources[0].expression;
-        this.isList = true;
-        if (this.sources.length > 1) {
-            this.rest = new MultiSource(this.sources.slice(1));
-        }
-    }
-    aliases() {
-        let a = [this.alias];
-        if (this.rest) {
-            a = a.concat(this.rest.aliases());
-        }
-        return a;
-    }
-    returnsList() {
-        return this.isList || (this.rest && this.rest.returnsList());
-    }
-    forEach(ctx, func) {
-        let records = this.expression.execute(ctx);
-        this.isList = (0, util_1.typeIsArray)(records);
-        records = this.isList ? records : [records];
-        return records.map((rec) => {
-            const rctx = new context_1.Context(ctx);
-            rctx.set(this.alias, rec);
-            if (this.rest) {
-                return this.rest.forEach(rctx, func);
-            }
-            else {
-                return func(rctx);
-            }
+// cartesianProductOf function based on Chris West's function:
+// https://cwestblog.com/2011/05/02/cartesian-product-of-multiple-arrays/
+function cartesianProductOf(sources) {
+    return sources.reduce((a, b) => {
+        const ret = [];
+        a.forEach(a => {
+            b.forEach(b => {
+                ret.push(a.concat([b]));
+            });
         });
-    }
+        return ret;
+    }, [[]]);
 }
 
-},{"../runtime/context":42,"../util/comparison":52,"../util/util":55,"./builder":16,"./expression":22}],37:[function(require,module,exports){
+},{"../util/comparison":52,"../util/util":55,"./builder":16,"./expression":22}],37:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
