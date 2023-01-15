@@ -380,7 +380,7 @@ describe('Log', () => {
     setup(this, data);
   });
 
-  it('should be able to return the log of a number based on an arbitary base value', async function () {
+  it('should be able to return the log of a number based on an arbitrary base value', async function () {
     (await this.log.exec(this.ctx)).should.equal(0.25);
   });
 });

@@ -9616,8 +9616,9 @@ function getTimezoneSeparatorFromString(string) {
 }
 exports.getTimezoneSeparatorFromString = getTimezoneSeparatorFromString;
 async function asyncMergeSort(arr, compareFn) {
-    if (arr.length <= 1)
+    if (arr.length <= 1) {
         return arr;
+    }
     const midpoint = Math.floor(arr.length / 2);
     const left = await asyncMergeSort(arr.slice(0, midpoint), compareFn);
     const right = await asyncMergeSort(arr.slice(midpoint), compareFn);
