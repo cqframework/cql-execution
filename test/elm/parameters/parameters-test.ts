@@ -534,7 +534,7 @@ describe('MeasurementPeriodParameter', () => {
     (await this.measurementPeriod.exec(rctx)).should.equal(true);
   });
 
-  it('should execute expression with a passed in measurement period in a child context 2', function () {
+  it('should execute expression with a passed in measurement period in a child context 2', async function () {
     this.ctx = this.ctx.withParameters({
       'Measurement Period': new Interval(
         new DateTime(2012, 1, 1, 0, 0, 0, 0),

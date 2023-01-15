@@ -1,5 +1,5 @@
 import { Context } from '../runtime/context';
-import { allTrue, Direction, typeIsArray } from '../util/util';
+import { allTrue, asyncMergeSort, Direction, typeIsArray } from '../util/util';
 import { build } from './builder';
 import { Expression, UnimplementedExpression } from './expression';
 import { toDistinctList } from './list';

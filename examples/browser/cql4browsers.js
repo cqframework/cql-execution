@@ -7852,9 +7852,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UnfilteredContext = exports.PatientContext = exports.Context = void 0;
+const dt = __importStar(require("../datatypes/datatypes"));
 const exception_1 = require("../datatypes/exception");
 const util_1 = require("../util/util");
-const dt = __importStar(require("../datatypes/datatypes"));
 const messageListeners_1 = require("./messageListeners");
 class Context {
     constructor(parent, _codeService, _parameters, executionDateTime, messageListener) {
@@ -8243,7 +8243,7 @@ class UnfilteredContext extends Context {
     rootContext() {
         return this;
     }
-    findRecords(_template) {
+    async findRecords(_template) {
         throw new exception_1.Exception('Retrieves are not currently supported in Unfiltered Context');
     }
     getLibraryContext(_library) {

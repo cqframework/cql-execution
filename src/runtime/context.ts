@@ -482,7 +482,7 @@ export class UnfilteredContext extends Context {
     return this;
   }
 
-  findRecords(_template: any) {
+  async findRecords(_template: any): Promise<any> {
     throw new Exception('Retrieves are not currently supported in Unfiltered Context');
   }
 
