@@ -78,7 +78,9 @@ export function getTimezoneSeparatorFromString(string: string) {
 type SortCompareFn<T> = (a: T, b: T) => Promise<number>;
 
 export async function asyncMergeSort<T>(arr: T[], compareFn: SortCompareFn<T>): Promise<T[]> {
-  if (arr.length <= 1) return arr;
+  if (arr.length <= 1) {
+    return arr;
+  }
 
   const midpoint = Math.floor(arr.length / 2);
 

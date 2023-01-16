@@ -1,8 +1,8 @@
 import should from 'should';
-import data from './interval-data';
-import { Interval } from '../../src/datatypes/interval';
 import { DateTime } from '../../src/datatypes/datetime';
+import { Interval } from '../../src/datatypes/interval';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
+import data from './interval-data';
 
 const xy = (obj: any) => [obj.x, obj.y];
 
