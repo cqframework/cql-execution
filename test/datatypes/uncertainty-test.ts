@@ -1,8 +1,8 @@
 import should from 'should';
+import { Concept, ValueSet } from '../../src/datatypes/clinical';
+import { Code, Date, DateTime } from '../../src/datatypes/datatypes';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
-import { Code } from '../../src/datatypes/datatypes';
-import { Concept } from '../../src/datatypes/clinical';
-import { ValueSet } from '../../src/datatypes/clinical';
+import { equals } from '../../src/util/comparison';
 
 describe('Uncertainty', () => {
   it('should contruct uncertainties with correct properties', () => {
@@ -76,7 +76,7 @@ describe('Uncertainty', () => {
     fiveToOne.high.should.equal(5);
   });
 
-  it('should contruct uncertainties with correct properties', () => {
+  it('should contruct uncertainties with correct properties 2', () => {
     const oneToFive = new Uncertainty(1, 5);
     oneToFive.low.should.equal(1);
     oneToFive.high.should.equal(5);
@@ -158,6 +158,14 @@ describe('Uncertainty', () => {
     new Uncertainty(2, 2).equals(new Uncertainty(1, 1)).should.be.false();
     new Uncertainty(2, 3).equals(new Uncertainty(1, 1)).should.be.false();
     new Uncertainty(2, null).equals(new Uncertainty(1, 1)).should.be.false();
+
+    // date/datetime
+    new Uncertainty(new Date(2022, 1, 1))
+      .equals(new Uncertainty(new DateTime(2022, 1, 1)))
+      .should.be.false();
+    new Uncertainty(new DateTime(2022, 1, 1))
+      .equals(new Uncertainty(new Date(2022, 1, 1)))
+      .should.be.false();
   });
 
   it('should properly calculate "less than" inequality', () => {
@@ -423,5 +431,53 @@ describe('Uncertainty', () => {
     new Uncertainty(2, 2).greaterThanOrEquals(new Uncertainty(1, 1)).should.be.true();
     new Uncertainty(2, 3).greaterThanOrEquals(new Uncertainty(1, 1)).should.be.true();
     new Uncertainty(2, null).greaterThanOrEquals(new Uncertainty(1, 1)).should.be.true();
+  });
+
+  it('should maintain consistency with date/datetime equality', () => {
+    const d1 = new Date(2022, 1, 1);
+    const d2 = new DateTime(2022, 1, 1);
+    const u1 = new Uncertainty(new Date(2022, 1, 1));
+    const u2 = new Uncertainty(new DateTime(2022, 1, 1));
+
+    // Dates do not equal datetimes
+    d1.equals(d2).should.be.false();
+    d2.equals(d1).should.be.false();
+
+    // Dates do not equal uncertainties
+    d1.equals(u1).should.be.false();
+    u1.equals(d1).should.be.true();
+
+    // This inconsistency is resolved in the comparison equals method
+    equals(d1, u1).should.be.true();
+    equals(u1, d1).should.be.true();
+
+    d1.equals(u2).should.be.false();
+    u2.equals(d1).should.be.false();
+
+    // Datetimes do not equal uncertainties
+    d2.equals(u1).should.be.false();
+    u1.equals(d2).should.be.false();
+
+    d2.equals(u2).should.be.false();
+    u2.equals(d2).should.be.true();
+
+    // This inconsistency is resolved in the comparison equals method
+    equals(d2, u2).should.be.true();
+    equals(u2, d2).should.be.true();
+  });
+
+  it('point should distinguish similar but different types', () => {
+    // This is an unrealistic example, but is intended to catch the difference between
+    // typeof a !== typeof b and
+    // typeof a !== typeof b || a?.constructor !== b?.constructor
+    const baseDate = new Date(2022, 1, 1);
+    const u1 = new Uncertainty(new Date(2022, 1, 1), {
+      day: 1,
+      month: 1,
+      year: 2022,
+      isDate: baseDate.isDate,
+      isDateTime: baseDate.isDateTime
+    });
+    u1.isPoint().should.be.false();
   });
 });

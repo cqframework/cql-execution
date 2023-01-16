@@ -1,6 +1,6 @@
+import 'should';
 import { Patient } from '../src/cql-patient';
 import * as DT from '../src/datatypes/datatypes';
-import 'should';
 
 describe('Record', () => {
   let encRecord: any, cndRecord: any;
