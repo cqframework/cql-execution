@@ -1,11 +1,11 @@
 import should from 'should';
-import setup from '../../setup';
-import sinon from 'sinon';
 import 'should-sinon';
+import sinon from 'sinon';
+import { Code, Interval, Repository, RetrieveDetails, ValueSet } from '../../../src/cql';
+import setup from '../../setup';
 const data = require('./data');
 const vsets = require('./valuesets');
 const { p1 } = require('./patients');
-import { Code, Interval, Repository, RetrieveDetails, ValueSet } from '../../../src/cql';
 
 describe('Retrieve', () => {
   let findRecordsSpy: sinon.SinonSpy<any[], any>;

@@ -1,6 +1,5 @@
-import { NullMessageListener, ConsoleMessageListener } from '../../src/runtime/messageListeners';
-import { stdout, stderr, Inspector } from 'test-console';
-import { EOL } from 'os';
+import { Inspector, stderr, stdout } from 'test-console';
+import { ConsoleMessageListener, NullMessageListener } from '../../src/runtime/messageListeners';
 
 describe('ConsoleMessageListener', () => {
   let stdoutInspect: Inspector, stderrInspect: Inspector;
@@ -19,27 +18,29 @@ describe('ConsoleMessageListener', () => {
     const listener = new ConsoleMessageListener();
     listener.onMessage('My Source', 'test', 'Error', 'Hello World!');
     stdoutInspect.output.should.have.length(0);
-    stderrInspect.output.should.eql([`Error: [test] Hello World!${EOL}`]);
+
+    // stderr seems to always outputs line feed
+    stderrInspect.output.should.eql([`Error: [test] Hello World!\n`]);
   });
 
   it('should log a Warning to stdout', () => {
     const listener = new ConsoleMessageListener();
     listener.onMessage('My Source', 'test', 'Warning', 'Hello World!');
-    stdoutInspect.output.should.eql([`Warning: [test] Hello World!${EOL}`]);
+    stdoutInspect.output.should.eql([`Warning: [test] Hello World!\n`]);
     stderrInspect.output.should.have.length(0);
   });
 
   it('should log a Message to stdout', () => {
     const listener = new ConsoleMessageListener();
     listener.onMessage('My Source', 'test', 'Message', 'Hello World!');
-    stdoutInspect.output.should.eql([`Message: [test] Hello World!${EOL}`]);
+    stdoutInspect.output.should.eql([`Message: [test] Hello World!\n`]);
     stderrInspect.output.should.have.length(0);
   });
 
   it('should log a Trace to stdout w/no source output by default', () => {
     const listener = new ConsoleMessageListener();
     listener.onMessage('My Source', 'test', 'Trace', 'Hello World!');
-    stdoutInspect.output.should.eql([`Trace: [test] Hello World!${EOL}`]);
+    stdoutInspect.output.should.eql([`Trace: [test] Hello World!\n`]);
     stderrInspect.output.should.have.length(0);
   });
 
@@ -47,7 +48,7 @@ describe('ConsoleMessageListener', () => {
     const listener = new ConsoleMessageListener(true);
     listener.onMessage('My Source', 'test', 'Trace', 'Hello World!');
     stdoutInspect.output.should.eql([
-      `Trace: [test] Hello World!\n<<<<< SOURCE:\n"My Source"\n>>>>>${EOL}`
+      `Trace: [test] Hello World!\n<<<<< SOURCE:\n"My Source"\n>>>>>\n`
     ]);
     stderrInspect.output.should.have.length(0);
   });

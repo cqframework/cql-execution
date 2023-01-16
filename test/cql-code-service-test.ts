@@ -1,6 +1,6 @@
+import should from 'should';
 import { CodeService } from '../src/cql-code-service';
 import { Code, ValueSet } from '../src/datatypes/datatypes';
-import should from 'should';
 
 describe('CodeService', () => {
   let svc: CodeService, vsOne: ValueSet, vsTwo: ValueSet, vsThree: ValueSet;
