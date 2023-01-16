@@ -1,12 +1,12 @@
 import should from 'should';
 import {
   checkUnit,
-  convertUnit,
-  normalizeUnitsWhenPossible,
-  convertToCQLDateUnit,
   compareUnits,
+  convertToCQLDateUnit,
+  convertUnit,
   getProductOfUnits,
-  getQuotientOfUnits
+  getQuotientOfUnits,
+  normalizeUnitsWhenPossible
 } from '../../src/util/units';
 
 describe('checkUnit', () => {

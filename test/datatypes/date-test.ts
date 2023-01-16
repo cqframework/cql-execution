@@ -1,8 +1,8 @@
-import should from 'should';
 import * as luxon from 'luxon';
-import { jsDate } from '../../src/util/util';
+import should from 'should';
 import { Date, DateTime } from '../../src/datatypes/datetime';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
+import { jsDate } from '../../src/util/util';
 
 describe('Date', () => {
   it('should properly set all properties when constructed', () => {
