@@ -206,7 +206,7 @@ class AggregateClause extends Expression {
 }
 
 export class Query extends Expression {
-  sources: MultiSource;
+  sources: AliasedQuerySource[];
   letClauses: LetClause[];
   relationship: any[];
   where: any;
@@ -217,13 +217,13 @@ export class Query extends Expression {
 
   constructor(json: any) {
     super(json);
-    this.sources = new MultiSource(json.source.map((s: any) => new AliasedQuerySource(s)));
+    this.sources = json.source.map((s: any) => new AliasedQuerySource(s));
+    this.aliases = json.source.map((s: any) => s.alias);
     this.letClauses = json.let != null ? json.let.map((d: any) => new LetClause(d)) : [];
     this.relationship = json.relationship != null ? build(json.relationship) : [];
     this.where = build(json.where);
     this.returnClause = json.return != null ? new ReturnClause(json.return) : null;
     this.aggregateClause = json.aggregate != null ? new AggregateClause(json.aggregate) : null;
-    this.aliases = this.sources.aliases();
     this.sortClause = json.sort != null ? new SortClause(json.sort) : null;
   }
 
@@ -237,8 +237,33 @@ export class Query extends Expression {
   }
 
   exec(ctx: Context) {
+    let sourceResults = this.sources.map(s => s.expression.execute(ctx));
+    // If every source is null, the result is null
+    // See: https://jira.hl7.org/browse/FHIR-40225
+    if (sourceResults.every(r => r == null)) {
+      return null;
+    }
+    const isList = sourceResults.some(r => Array.isArray(r));
+    // For ease of processing, convert all the sources to lists and
+    // convert nulls to empty lists (we already handled the ALL null case)
+    sourceResults = sourceResults.map(r => {
+      if (r == null) {
+        return [];
+      } else if (Array.isArray(r)) {
+        return r;
+      } else {
+        return [r];
+      }
+    });
+
+    // Iterate over the cartesian product of the sources.
+    // See: https://cql.hl7.org/03-developersguide.html#multi-source-queries
+    const cartesian = cartesianProductOf(sourceResults);
     let returnedValues: any[] = [];
-    this.sources.forEach(ctx, (rctx: any) => {
+    cartesian.forEach((combo: any[]) => {
+      const rctx = ctx.childContext();
+      combo.forEach((r: any, i: number) => rctx.set(this.aliases[i], r));
+
       for (const def of this.letClauses) {
         rctx.set(def.identifier, def.expression.execute(rctx));
       }
@@ -273,7 +298,7 @@ export class Query extends Expression {
     if (this.sortClause != null) {
       this.sortClause.sort(ctx, returnedValues);
     }
-    if (this.sources.returnsList() || this.aggregateClause != null) {
+    if (isList || this.aggregateClause != null) {
       return returnedValues;
     } else {
       return returnedValues[0];
@@ -300,49 +325,19 @@ export class QueryLetRef extends AliasRef {
   }
 }
 
-// The following is not defined by ELM but is helpful for execution
-
-class MultiSource {
-  sources: any[];
-  alias: any;
-  expression: any;
-  isList: boolean;
-  rest?: MultiSource;
-
-  constructor(sources: any) {
-    this.sources = sources;
-    this.alias = this.sources[0].alias;
-    this.expression = this.sources[0].expression;
-    this.isList = true;
-    if (this.sources.length > 1) {
-      this.rest = new MultiSource(this.sources.slice(1));
-    }
-  }
-
-  aliases() {
-    let a = [this.alias];
-    if (this.rest) {
-      a = a.concat(this.rest.aliases());
-    }
-    return a;
-  }
-
-  returnsList(): boolean | undefined {
-    return this.isList || (this.rest && this.rest.returnsList());
-  }
-
-  forEach(ctx: Context, func: any) {
-    let records = this.expression.execute(ctx);
-    this.isList = typeIsArray(records);
-    records = this.isList ? records : [records];
-    return records.map((rec: any) => {
-      const rctx = new Context(ctx);
-      rctx.set(this.alias, rec);
-      if (this.rest) {
-        return this.rest.forEach(rctx, func);
-      } else {
-        return func(rctx);
-      }
-    });
-  }
+// cartesianProductOf function based on Chris West's function:
+// https://cwestblog.com/2011/05/02/cartesian-product-of-multiple-arrays/
+function cartesianProductOf(sources: any[]) {
+  return sources.reduce(
+    (a: any[], b: any[]) => {
+      const ret: any[] = [];
+      a.forEach(a => {
+        b.forEach(b => {
+          ret.push(a.concat([b]));
+        });
+      });
+      return ret;
+    },
+    [[]]
+  );
 }

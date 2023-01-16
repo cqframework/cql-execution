@@ -25,6 +25,9 @@ where  E.period  included in MeasurementPeriod and C.id = 'http://cqframework.or
 
 define msQuery: from [Encounter] E, [Condition] C return {E: E, C:C}
 
+define multiSourceWithArrays:
+  from (List{'a', 'b', 'c'}) A, (List{{'x'}, {'y'}, {'z'}}) X
+
 // @Test: QueryRelationship
 define withQuery:  [Encounter] E
 with [Condition] C such that C.id = 'http://cqframework.org/3/2'
@@ -144,3 +147,40 @@ define allAggregation:
 define distinctAggregation:
  ({1,2,3,4,5,1,2,3,4,5}) Num
   aggregate distinct Sum starting 0: Sum + Num
+
+// @Test: NullSourceQuery
+define NullListQuery:
+  (null as List<Condition>) X
+    return Tuple {
+      start: start of X.period,
+      end: end of X.period
+    }
+
+define NullObjectQuery:
+  (null as Condition) X
+    return Tuple {
+      start: start of X.period,
+      end: end of X.period
+    }
+
+define AllNullMultiSourceQuery:
+  from
+    (null as List<Condition>) X,
+    (null as List<Encounter>) Y
+    return Tuple {
+      cStart: start of X.period,
+      cEnd: end of X.period,
+      eStart: start of Y.period,
+      eEnd: end of Y.period
+    }
+
+define SomeNullMultiSourceQuery:
+  from
+    (null as List<Condition>) X,
+    [Encounter] Y
+    return Tuple {
+      cStart: start of X.period,
+      cEnd: end of X.period,
+      eStart: start of Y.period,
+      eEnd: end of Y.period
+    }

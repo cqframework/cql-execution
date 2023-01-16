@@ -1058,6 +1058,9 @@ define msQueryWhere2: from [Encounter] E, [Condition] C
 where  E.period  included in MeasurementPeriod and C.id = 'http://cqframework.org/3/2'
 
 define msQuery: from [Encounter] E, [Condition] C return {E: E, C:C}
+
+define multiSourceWithArrays:
+  from (List{'a', 'b', 'c'}) A, (List{{'x'}, {'y'}, {'z'}}) X
 */
 
 module.exports['MultiSourceQuery'] = {
@@ -1068,7 +1071,7 @@ module.exports['MultiSourceQuery'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "46",
+            "r" : "61",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1635,6 +1638,209 @@ module.exports['MultiSourceQuery'] = {
                         "value" : {
                            "localId" : "42",
                            "name" : "C",
+                           "type" : "AliasRef"
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "localId" : "61",
+            "name" : "multiSourceWithArrays",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "61",
+                  "s" : [ {
+                     "value" : [ "","define ","multiSourceWithArrays",":\n  " ]
+                  }, {
+                     "r" : "60",
+                     "s" : [ {
+                        "s" : [ {
+                           "value" : [ "from " ]
+                        }, {
+                           "r" : "51",
+                           "s" : [ {
+                              "r" : "50",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "50",
+                                 "s" : [ {
+                                    "value" : [ "List{" ]
+                                 }, {
+                                    "r" : "47",
+                                    "s" : [ {
+                                       "value" : [ "'a'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ", " ]
+                                 }, {
+                                    "r" : "48",
+                                    "s" : [ {
+                                       "value" : [ "'b'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ", " ]
+                                 }, {
+                                    "r" : "49",
+                                    "s" : [ {
+                                       "value" : [ "'c'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","A" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "59",
+                           "s" : [ {
+                              "r" : "58",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "58",
+                                 "s" : [ {
+                                    "value" : [ "List{" ]
+                                 }, {
+                                    "r" : "53",
+                                    "s" : [ {
+                                       "value" : [ "{" ]
+                                    }, {
+                                       "r" : "52",
+                                       "s" : [ {
+                                          "value" : [ "'x'" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "}" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ", " ]
+                                 }, {
+                                    "r" : "55",
+                                    "s" : [ {
+                                       "value" : [ "{" ]
+                                    }, {
+                                       "r" : "54",
+                                       "s" : [ {
+                                          "value" : [ "'y'" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "}" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ", " ]
+                                 }, {
+                                    "r" : "57",
+                                    "s" : [ {
+                                       "value" : [ "{" ]
+                                    }, {
+                                       "r" : "56",
+                                       "s" : [ {
+                                          "value" : [ "'z'" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "}" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","X" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "60",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "51",
+                  "alias" : "A",
+                  "expression" : {
+                     "localId" : "50",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "47",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "a",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "48",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "b",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "49",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "c",
+                        "type" : "Literal"
+                     } ]
+                  }
+               }, {
+                  "localId" : "59",
+                  "alias" : "X",
+                  "expression" : {
+                     "localId" : "58",
+                     "type" : "List",
+                     "element" : [ {
+                        "localId" : "53",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "52",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "x",
+                           "type" : "Literal"
+                        } ]
+                     }, {
+                        "localId" : "55",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "54",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "y",
+                           "type" : "Literal"
+                        } ]
+                     }, {
+                        "localId" : "57",
+                        "type" : "List",
+                        "element" : [ {
+                           "localId" : "56",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "z",
+                           "type" : "Literal"
+                        } ]
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "distinct" : true,
+                  "expression" : {
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "A",
+                        "value" : {
+                           "name" : "A",
+                           "type" : "AliasRef"
+                        }
+                     }, {
+                        "name" : "X",
+                        "value" : {
+                           "name" : "X",
                            "type" : "AliasRef"
                         }
                      } ]
@@ -9781,6 +9987,1025 @@ module.exports['AggregateQuery'] = {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
                      "type" : "Literal"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
+/* NullSourceQuery
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define NullListQuery:
+  (null as List<Condition>) X
+    return Tuple {
+      start: start of X.period,
+      end: end of X.period
+    }
+
+define NullObjectQuery:
+  (null as Condition) X
+    return Tuple {
+      start: start of X.period,
+      end: end of X.period
+    }
+
+define AllNullMultiSourceQuery:
+  from
+    (null as List<Condition>) X,
+    (null as List<Encounter>) Y
+    return Tuple {
+      cStart: start of X.period,
+      cEnd: end of X.period,
+      eStart: start of Y.period,
+      eEnd: end of Y.period
+    }
+
+define SomeNullMultiSourceQuery:
+  from
+    (null as List<Condition>) X,
+    [Encounter] Y
+    return Tuple {
+      cStart: start of X.period,
+      cEnd: end of X.period,
+      eStart: start of Y.period,
+      eEnd: end of Y.period
+    }
+*/
+
+module.exports['NullSourceQuery'] = {
+   "library" : {
+      "annotation" : [ {
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "79",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "16",
+            "name" : "NullListQuery",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "","define ","NullListQuery",":\n  " ]
+                  }, {
+                     "r" : "15",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "6",
+                           "s" : [ {
+                              "r" : "5",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "5",
+                                 "s" : [ {
+                                    "r" : "2",
+                                    "value" : [ "null"," as " ]
+                                 }, {
+                                    "r" : "4",
+                                    "s" : [ {
+                                       "value" : [ "List<" ]
+                                    }, {
+                                       "r" : "3",
+                                       "s" : [ {
+                                          "value" : [ "Condition" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ">" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","X" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n    " ]
+                     }, {
+                        "r" : "14",
+                        "s" : [ {
+                           "value" : [ "return " ]
+                        }, {
+                           "r" : "13",
+                           "s" : [ {
+                              "value" : [ "Tuple {\n      " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "start",": " ]
+                              }, {
+                                 "r" : "9",
+                                 "s" : [ {
+                                    "value" : [ "start of " ]
+                                 }, {
+                                    "r" : "8",
+                                    "s" : [ {
+                                       "r" : "7",
+                                       "s" : [ {
+                                          "value" : [ "X" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "8",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ",\n      " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "end",": " ]
+                              }, {
+                                 "r" : "12",
+                                 "s" : [ {
+                                    "value" : [ "end of " ]
+                                 }, {
+                                    "r" : "11",
+                                    "s" : [ {
+                                       "r" : "10",
+                                       "s" : [ {
+                                          "value" : [ "X" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "11",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n    }" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "15",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "6",
+                  "alias" : "X",
+                  "expression" : {
+                     "localId" : "5",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "2",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "4",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "3",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "14",
+                  "expression" : {
+                     "localId" : "13",
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "start",
+                        "value" : {
+                           "localId" : "9",
+                           "type" : "Start",
+                           "operand" : {
+                              "localId" : "8",
+                              "path" : "period",
+                              "scope" : "X",
+                              "type" : "Property"
+                           }
+                        }
+                     }, {
+                        "name" : "end",
+                        "value" : {
+                           "localId" : "12",
+                           "type" : "End",
+                           "operand" : {
+                              "localId" : "11",
+                              "path" : "period",
+                              "scope" : "X",
+                              "type" : "Property"
+                           }
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "localId" : "30",
+            "name" : "NullObjectQuery",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "30",
+                  "s" : [ {
+                     "value" : [ "","define ","NullObjectQuery",":\n  " ]
+                  }, {
+                     "r" : "29",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "20",
+                           "s" : [ {
+                              "r" : "19",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "19",
+                                 "s" : [ {
+                                    "r" : "17",
+                                    "value" : [ "null"," as " ]
+                                 }, {
+                                    "r" : "18",
+                                    "s" : [ {
+                                       "value" : [ "Condition" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","X" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n    " ]
+                     }, {
+                        "r" : "28",
+                        "s" : [ {
+                           "value" : [ "return " ]
+                        }, {
+                           "r" : "27",
+                           "s" : [ {
+                              "value" : [ "Tuple {\n      " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "start",": " ]
+                              }, {
+                                 "r" : "23",
+                                 "s" : [ {
+                                    "value" : [ "start of " ]
+                                 }, {
+                                    "r" : "22",
+                                    "s" : [ {
+                                       "r" : "21",
+                                       "s" : [ {
+                                          "value" : [ "X" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "22",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ",\n      " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "end",": " ]
+                              }, {
+                                 "r" : "26",
+                                 "s" : [ {
+                                    "value" : [ "end of " ]
+                                 }, {
+                                    "r" : "25",
+                                    "s" : [ {
+                                       "r" : "24",
+                                       "s" : [ {
+                                          "value" : [ "X" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "25",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n    }" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "29",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "20",
+                  "alias" : "X",
+                  "expression" : {
+                     "localId" : "19",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "17",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "18",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "28",
+                  "expression" : {
+                     "localId" : "27",
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "start",
+                        "value" : {
+                           "localId" : "23",
+                           "type" : "Start",
+                           "operand" : {
+                              "localId" : "22",
+                              "path" : "period",
+                              "scope" : "X",
+                              "type" : "Property"
+                           }
+                        }
+                     }, {
+                        "name" : "end",
+                        "value" : {
+                           "localId" : "26",
+                           "type" : "End",
+                           "operand" : {
+                              "localId" : "25",
+                              "path" : "period",
+                              "scope" : "X",
+                              "type" : "Property"
+                           }
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "localId" : "56",
+            "name" : "AllNullMultiSourceQuery",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "56",
+                  "s" : [ {
+                     "value" : [ "","define ","AllNullMultiSourceQuery",":\n  " ]
+                  }, {
+                     "r" : "55",
+                     "s" : [ {
+                        "s" : [ {
+                           "value" : [ "from\n    " ]
+                        }, {
+                           "r" : "35",
+                           "s" : [ {
+                              "r" : "34",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "34",
+                                 "s" : [ {
+                                    "r" : "31",
+                                    "value" : [ "null"," as " ]
+                                 }, {
+                                    "r" : "33",
+                                    "s" : [ {
+                                       "value" : [ "List<" ]
+                                    }, {
+                                       "r" : "32",
+                                       "s" : [ {
+                                          "value" : [ "Condition" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ">" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","X" ]
+                           } ]
+                        }, {
+                           "value" : [ ",\n    " ]
+                        }, {
+                           "r" : "40",
+                           "s" : [ {
+                              "r" : "39",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "39",
+                                 "s" : [ {
+                                    "r" : "36",
+                                    "value" : [ "null"," as " ]
+                                 }, {
+                                    "r" : "38",
+                                    "s" : [ {
+                                       "value" : [ "List<" ]
+                                    }, {
+                                       "r" : "37",
+                                       "s" : [ {
+                                          "value" : [ "Encounter" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ">" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","Y" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n    " ]
+                     }, {
+                        "r" : "54",
+                        "s" : [ {
+                           "value" : [ "return " ]
+                        }, {
+                           "r" : "53",
+                           "s" : [ {
+                              "value" : [ "Tuple {\n      " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "cStart",": " ]
+                              }, {
+                                 "r" : "43",
+                                 "s" : [ {
+                                    "value" : [ "start of " ]
+                                 }, {
+                                    "r" : "42",
+                                    "s" : [ {
+                                       "r" : "41",
+                                       "s" : [ {
+                                          "value" : [ "X" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "42",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ",\n      " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "cEnd",": " ]
+                              }, {
+                                 "r" : "46",
+                                 "s" : [ {
+                                    "value" : [ "end of " ]
+                                 }, {
+                                    "r" : "45",
+                                    "s" : [ {
+                                       "r" : "44",
+                                       "s" : [ {
+                                          "value" : [ "X" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "45",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ",\n      " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "eStart",": " ]
+                              }, {
+                                 "r" : "49",
+                                 "s" : [ {
+                                    "value" : [ "start of " ]
+                                 }, {
+                                    "r" : "48",
+                                    "s" : [ {
+                                       "r" : "47",
+                                       "s" : [ {
+                                          "value" : [ "Y" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "48",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ",\n      " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "eEnd",": " ]
+                              }, {
+                                 "r" : "52",
+                                 "s" : [ {
+                                    "value" : [ "end of " ]
+                                 }, {
+                                    "r" : "51",
+                                    "s" : [ {
+                                       "r" : "50",
+                                       "s" : [ {
+                                          "value" : [ "Y" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "51",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n    }" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "55",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "35",
+                  "alias" : "X",
+                  "expression" : {
+                     "localId" : "34",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "31",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "33",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "32",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               }, {
+                  "localId" : "40",
+                  "alias" : "Y",
+                  "expression" : {
+                     "localId" : "39",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "36",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "38",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "37",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "54",
+                  "expression" : {
+                     "localId" : "53",
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "cStart",
+                        "value" : {
+                           "localId" : "43",
+                           "type" : "Start",
+                           "operand" : {
+                              "localId" : "42",
+                              "path" : "period",
+                              "scope" : "X",
+                              "type" : "Property"
+                           }
+                        }
+                     }, {
+                        "name" : "cEnd",
+                        "value" : {
+                           "localId" : "46",
+                           "type" : "End",
+                           "operand" : {
+                              "localId" : "45",
+                              "path" : "period",
+                              "scope" : "X",
+                              "type" : "Property"
+                           }
+                        }
+                     }, {
+                        "name" : "eStart",
+                        "value" : {
+                           "localId" : "49",
+                           "type" : "Start",
+                           "operand" : {
+                              "localId" : "48",
+                              "path" : "period",
+                              "scope" : "Y",
+                              "type" : "Property"
+                           }
+                        }
+                     }, {
+                        "name" : "eEnd",
+                        "value" : {
+                           "localId" : "52",
+                           "type" : "End",
+                           "operand" : {
+                              "localId" : "51",
+                              "path" : "period",
+                              "scope" : "Y",
+                              "type" : "Property"
+                           }
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "localId" : "79",
+            "name" : "SomeNullMultiSourceQuery",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "79",
+                  "s" : [ {
+                     "value" : [ "","define ","SomeNullMultiSourceQuery",":\n  " ]
+                  }, {
+                     "r" : "78",
+                     "s" : [ {
+                        "s" : [ {
+                           "value" : [ "from\n    " ]
+                        }, {
+                           "r" : "61",
+                           "s" : [ {
+                              "r" : "60",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "60",
+                                 "s" : [ {
+                                    "r" : "57",
+                                    "value" : [ "null"," as " ]
+                                 }, {
+                                    "r" : "59",
+                                    "s" : [ {
+                                       "value" : [ "List<" ]
+                                    }, {
+                                       "r" : "58",
+                                       "s" : [ {
+                                          "value" : [ "Condition" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ">" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","X" ]
+                           } ]
+                        }, {
+                           "value" : [ ",\n    " ]
+                        }, {
+                           "r" : "63",
+                           "s" : [ {
+                              "r" : "62",
+                              "s" : [ {
+                                 "r" : "62",
+                                 "s" : [ {
+                                    "value" : [ "[","Encounter","]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","Y" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n    " ]
+                     }, {
+                        "r" : "77",
+                        "s" : [ {
+                           "value" : [ "return " ]
+                        }, {
+                           "r" : "76",
+                           "s" : [ {
+                              "value" : [ "Tuple {\n      " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "cStart",": " ]
+                              }, {
+                                 "r" : "66",
+                                 "s" : [ {
+                                    "value" : [ "start of " ]
+                                 }, {
+                                    "r" : "65",
+                                    "s" : [ {
+                                       "r" : "64",
+                                       "s" : [ {
+                                          "value" : [ "X" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "65",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ",\n      " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "cEnd",": " ]
+                              }, {
+                                 "r" : "69",
+                                 "s" : [ {
+                                    "value" : [ "end of " ]
+                                 }, {
+                                    "r" : "68",
+                                    "s" : [ {
+                                       "r" : "67",
+                                       "s" : [ {
+                                          "value" : [ "X" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "68",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ",\n      " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "eStart",": " ]
+                              }, {
+                                 "r" : "72",
+                                 "s" : [ {
+                                    "value" : [ "start of " ]
+                                 }, {
+                                    "r" : "71",
+                                    "s" : [ {
+                                       "r" : "70",
+                                       "s" : [ {
+                                          "value" : [ "Y" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "71",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ",\n      " ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "eEnd",": " ]
+                              }, {
+                                 "r" : "75",
+                                 "s" : [ {
+                                    "value" : [ "end of " ]
+                                 }, {
+                                    "r" : "74",
+                                    "s" : [ {
+                                       "r" : "73",
+                                       "s" : [ {
+                                          "value" : [ "Y" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "74",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n    }" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "78",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "61",
+                  "alias" : "X",
+                  "expression" : {
+                     "localId" : "60",
+                     "strict" : false,
+                     "type" : "As",
+                     "operand" : {
+                        "localId" : "57",
+                        "type" : "Null"
+                     },
+                     "asTypeSpecifier" : {
+                        "localId" : "59",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "58",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               }, {
+                  "localId" : "63",
+                  "alias" : "Y",
+                  "expression" : {
+                     "localId" : "62",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "Retrieve"
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "77",
+                  "expression" : {
+                     "localId" : "76",
+                     "type" : "Tuple",
+                     "element" : [ {
+                        "name" : "cStart",
+                        "value" : {
+                           "localId" : "66",
+                           "type" : "Start",
+                           "operand" : {
+                              "localId" : "65",
+                              "path" : "period",
+                              "scope" : "X",
+                              "type" : "Property"
+                           }
+                        }
+                     }, {
+                        "name" : "cEnd",
+                        "value" : {
+                           "localId" : "69",
+                           "type" : "End",
+                           "operand" : {
+                              "localId" : "68",
+                              "path" : "period",
+                              "scope" : "X",
+                              "type" : "Property"
+                           }
+                        }
+                     }, {
+                        "name" : "eStart",
+                        "value" : {
+                           "localId" : "72",
+                           "type" : "Start",
+                           "operand" : {
+                              "localId" : "71",
+                              "path" : "period",
+                              "scope" : "Y",
+                              "type" : "Property"
+                           }
+                        }
+                     }, {
+                        "name" : "eEnd",
+                        "value" : {
+                           "localId" : "75",
+                           "type" : "End",
+                           "operand" : {
+                              "localId" : "74",
+                              "path" : "period",
+                              "scope" : "Y",
+                              "type" : "Property"
+                           }
+                        }
+                     } ]
                   }
                }
             }
