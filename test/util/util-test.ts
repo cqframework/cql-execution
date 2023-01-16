@@ -28,13 +28,19 @@ describe('typeIsArray', () => {
 
 describe('asyncMergeSort', () => {
   const sortAsc = async (a: number | string, b: number | string) => {
-    if (a < b) return -1;
-    else if (a > b) return 1;
+    if (a < b) {
+      return -1;
+    } else if (a > b) {
+      return 1;
+    }
     return 0;
   };
   const sortDesc = async (a: number | string, b: number | string) => {
-    if (a < b) return 1;
-    else if (a > b) return -1;
+    if (a < b) {
+      return 1;
+    } else if (a > b) {
+      return -1;
+    }
     return 0;
   };
 

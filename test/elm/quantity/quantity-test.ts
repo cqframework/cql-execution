@@ -1,10 +1,10 @@
 import should from 'should';
 import {
-  Quantity,
   doAddition,
-  doSubtraction,
+  doDivision,
   doMultiplication,
-  doDivision
+  doSubtraction,
+  Quantity
 } from '../../../src/datatypes/quantity';
 
 describe('Quantity', () => {

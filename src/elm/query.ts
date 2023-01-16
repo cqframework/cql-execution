@@ -1,8 +1,8 @@
-import { Expression, UnimplementedExpression } from './expression';
 import { Context } from '../runtime/context';
-import { typeIsArray, allTrue, Direction, asyncMergeSort } from '../util/util';
-import { equals } from '../util/comparison';
+import { allTrue, asyncMergeSort, Direction, typeIsArray } from '../util/util';
 import { build } from './builder';
+import { Expression, UnimplementedExpression } from './expression';
+import { toDistinctList } from './list';
 
 export class AliasedQuerySource {
   alias: any;
@@ -171,16 +171,6 @@ export class SortClause {
     return values;
   }
 }
-
-const toDistinctList = function (xList: any[]) {
-  const yList: any[] = [];
-  xList.forEach(x => {
-    if (!yList.some(y => equals(x, y))) {
-      yList.push(x);
-    }
-  });
-  return yList;
-};
 
 class AggregateClause extends Expression {
   identifier: string;
