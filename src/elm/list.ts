@@ -1,8 +1,10 @@
-import { Expression, UnimplementedExpression } from './expression';
-import { build } from './builder';
-import { typeIsArray } from '../util/util';
-import { equals } from '../util/comparison';
+import Immutable from 'immutable';
 import { Context } from '../runtime/context';
+import { equals } from '../util/comparison';
+import { NormalizedKey, toNormalizedKey } from '../util/immutableUtil';
+import { typeIsArray } from '../util/util';
+import { build } from './builder';
+import { Expression, UnimplementedExpression } from './expression';
 
 export class List extends Expression {
   elements: Expression[];
@@ -42,20 +44,20 @@ export class Exists extends Expression {
 
 // Delegated to by overloaded#Union
 export function doUnion(a: any, b: any) {
-  const distinct = doDistinct(a.concat(b));
+  const distinct = toDistinctList(a.concat(b));
   return removeDuplicateNulls(distinct);
 }
 
 // Delegated to by overloaded#Except
 export function doExcept(a: any, b: any) {
-  const distinct = doDistinct(a);
+  const distinct = toDistinctList(a);
   const setList = removeDuplicateNulls(distinct);
   return setList.filter(item => !doContains(b, item, true));
 }
 
 // Delegated to by overloaded#Intersect
 export function doIntersect(a: any, b: any) {
-  const distinct = doDistinct(a);
+  const distinct = toDistinctList(a);
   const setList = removeDuplicateNulls(distinct);
   return setList.filter(item => doContains(b, item, true));
 }
@@ -177,20 +179,32 @@ export class Distinct extends Expression {
     if (result == null) {
       return null;
     }
-    return doDistinct(result);
+    return toDistinctList(result);
   }
 }
 
-function doDistinct(list: any[]) {
-  const distinct: any[] = [];
-  list.forEach(item => {
-    const isNew = distinct.every(seenItem => !equals(item, seenItem));
-    if (isNew) {
-      distinct.push(item);
-    }
+export const toDistinctList = (list: unknown[]): unknown[] => {
+  const list_keys = list.map(toNormalizedKey);
+  const set = Immutable.Set<NormalizedKey>().asMutable();
+  const distinct: unknown[] = [];
+
+  set.withMutations(y => {
+    list_keys.forEach((key, i) => {
+      // Check set size
+      const setSize = y.count();
+
+      // Attempt to insert
+      y.add(key);
+
+      // If inserted, then size will increase; push to distinct
+      if (y.count() > setSize) {
+        distinct.push(list[i]);
+      }
+    });
   });
-  return removeDuplicateNulls(distinct);
-}
+
+  return distinct;
+};
 
 function removeDuplicateNulls(list: any[]) {
   // Remove duplicate null elements

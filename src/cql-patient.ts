@@ -123,7 +123,9 @@ export class Patient extends Record implements PatientObject {
       /(\{https:\/\/github\.com\/cqframework\/cql-execution\/simple\})?(.*)/
     );
 
-    if (match == null) return [];
+    if (match == null) {
+      return [];
+    }
 
     const recordType = match[2];
     if (recordType === 'Patient') {
