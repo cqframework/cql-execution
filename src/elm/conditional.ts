@@ -2,6 +2,7 @@ import { Expression } from './expression';
 import { build } from './builder';
 import { equals } from '../util/comparison';
 import { Context } from '../runtime/context';
+import ELM from '../types/elm';
 
 // TODO: Spec lists "Conditional", but it's "If" in the XSD
 export class If extends Expression {
@@ -9,7 +10,7 @@ export class If extends Expression {
   th: any;
   els: any;
 
-  constructor(json: any) {
+  constructor(json: ELM.If) {
     super(json);
     this.condition = build(json.condition);
     this.th = build(json.then);
@@ -29,7 +30,7 @@ export class CaseItem {
   when: any;
   then: any;
 
-  constructor(json: any) {
+  constructor(json: ELM.CaseItem) {
     this.when = build(json.when);
     this.then = build(json.then);
   }
@@ -40,7 +41,7 @@ export class Case extends Expression {
   caseItems: CaseItem[];
   els: any;
 
-  constructor(json: any) {
+  constructor(json: ELM.Case) {
     super(json);
     this.comparand = build(json.comparand);
     this.caseItems = json.caseItem.map((ci: any) => new CaseItem(ci));

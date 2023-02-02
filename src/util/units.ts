@@ -107,7 +107,7 @@ export function normalizeUnitsWhenPossible(val1: any, unit1: any, val2: any, uni
   return [newVal1, resultConverter(newUnit1), val2, resultConverter(unit2)];
 }
 
-export function convertToCQLDateUnit(unit: any) {
+export function convertToCQLDateUnit(unit: any): string | undefined {
   let dateUnit;
   if (unit in CQL_TO_UCUM_DATE_UNITS) {
     // it's already a CQL unit, so return it as-is, removing trailing 's' if necessary (e.g., years -> year)
@@ -118,7 +118,7 @@ export function convertToCQLDateUnit(unit: any) {
   return dateUnit;
 }
 
-export function compareUnits(unit1: any, unit2: any) {
+export function compareUnits(unit1: any, unit2: any): null | number {
   try {
     const c = convertUnit(1, unit1, unit2);
     if (c && c > 1) {
