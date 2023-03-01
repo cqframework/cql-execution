@@ -1,5 +1,6 @@
-import { Context } from '../runtime/context';
+import { Context, PatientContext, UnfilteredContext } from '../runtime/context';
 import { typeIsArray } from '../util/util';
+import { AnnotatedError } from '../util/customErrors';
 
 import { build } from './builder';
 
@@ -23,13 +24,21 @@ export class Expression {
   }
 
   execute(ctx: Context) {
-    if (this.localId != null) {
-      // Store the localId and result on the root context of this library
-      const execValue = this.exec(ctx);
-      ctx.rootContext().setLocalIdWithResult(this.localId, execValue);
-      return execValue;
-    } else {
-      return this.exec(ctx);
+    try {
+      if (this.localId != null) {
+        // Store the localId and result on the root context of this library
+        const execValue = this.exec(ctx);
+        ctx.rootContext().setLocalIdWithResult(this.localId, execValue);
+        return execValue;
+      } else {
+        return this.exec(ctx);
+      }
+    } catch (e: any) {
+      if (e instanceof AnnotatedError) {
+        throw e;
+      }
+      const libraryIdentifier = this.getRecursiveLibraryIdentifier(ctx);
+      throw new AnnotatedError(e.message, this.constructor.name, libraryIdentifier, this.localId);
     }
   }
 
@@ -44,6 +53,15 @@ export class Expression {
       return this.arg.execute(ctx);
     } else {
       return null;
+    }
+  }
+
+  getRecursiveLibraryIdentifier(ctx: Context): string {
+    if (ctx instanceof PatientContext || ctx instanceof UnfilteredContext) {
+      const identifier = ctx.library.source.library.identifier;
+      return `${identifier.id}|${identifier.version}`;
+    } else {
+      return this.getRecursiveLibraryIdentifier(ctx.parent);
     }
   }
 }
