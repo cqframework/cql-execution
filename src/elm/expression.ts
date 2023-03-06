@@ -64,7 +64,7 @@ export class Expression {
   getRecursiveLibraryIdentifier(ctx: Context): string {
     if (ctx instanceof PatientContext || ctx instanceof UnfilteredContext) {
       const identifier = ctx.library.source.library.identifier;
-      return `${identifier.id}|${identifier.version}`;
+      return `${identifier.id}${identifier.version ? `|${identifier.version}` : ''}`;
     } else {
       return this.getRecursiveLibraryIdentifier(ctx.parent);
     }
