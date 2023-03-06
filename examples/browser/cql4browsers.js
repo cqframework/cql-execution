@@ -4385,6 +4385,11 @@ class Expression {
             return null;
         }
     }
+    /**
+     * Function used in error reporting during execution. Retrieves the source library from
+     * the context if it exists, or recursively traverses the context's parents until a source
+     * library identifier and version are found.
+     */
     getRecursiveLibraryIdentifier(ctx) {
         if (ctx instanceof context_1.PatientContext || ctx instanceof context_1.UnfilteredContext) {
             const identifier = ctx.library.source.library.identifier;
