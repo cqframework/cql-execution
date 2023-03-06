@@ -4393,7 +4393,7 @@ class Expression {
     getRecursiveLibraryIdentifier(ctx) {
         if (ctx instanceof context_1.PatientContext || ctx instanceof context_1.UnfilteredContext) {
             const identifier = ctx.library.source.library.identifier;
-            return `${identifier.id}|${identifier.version}`;
+            return `${identifier.id}${identifier.version ? `|${identifier.version}` : ''}`;
         }
         else {
             return this.getRecursiveLibraryIdentifier(ctx.parent);
