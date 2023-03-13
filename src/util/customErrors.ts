@@ -3,11 +3,23 @@
  * to simplify tracking down errors that occur during execution
  */
 export class AnnotatedError extends Error {
-  constructor(message: string, expressionName: string, libraryName: string, localId?: string) {
+  // TODO: need to explicitly specify cause in TypeScript versions < 4.7
+  // Remove this when TypeScript is upgraded, and add the cause directly to the `super` call
+  cause: Error;
+
+  constructor(
+    originalError: Error,
+    message: string,
+    expressionName: string,
+    libraryName: string,
+    localId?: string
+  ) {
     super(
       `Encountered unexpected error during execution.\n\n\tError Message:\t${message}\n\tCQL Library:\t${libraryName}\n\tExpression:\t${expressionName}${
         localId ? `\n\tELM Local ID:\t${localId}` : ``
       }\n`
     );
+
+    this.cause = originalError;
   }
 }

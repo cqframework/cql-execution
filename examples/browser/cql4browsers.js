@@ -4368,7 +4368,7 @@ class Expression {
                 throw e;
             }
             const libraryIdentifier = this.getRecursiveLibraryIdentifier(ctx);
-            throw new customErrors_1.AnnotatedError(e.message, this.constructor.name, libraryIdentifier, this.localId);
+            throw new customErrors_1.AnnotatedError(e, e.message, this.constructor.name, libraryIdentifier, this.localId);
         }
     }
     exec(_ctx) {
@@ -8713,8 +8713,9 @@ exports.AnnotatedError = void 0;
  * to simplify tracking down errors that occur during execution
  */
 class AnnotatedError extends Error {
-    constructor(message, expressionName, libraryName, localId) {
+    constructor(originalError, message, expressionName, libraryName, localId) {
         super(`Encountered unexpected error during execution.\n\n\tError Message:\t${message}\n\tCQL Library:\t${libraryName}\n\tExpression:\t${expressionName}${localId ? `\n\tELM Local ID:\t${localId}` : ``}\n`);
+        this.cause = originalError;
     }
 }
 exports.AnnotatedError = AnnotatedError;
