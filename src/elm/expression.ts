@@ -1,8 +1,8 @@
-import { Context, PatientContext, UnfilteredContext } from '../runtime/context';
+import { Context } from '../runtime/context';
 import { typeIsArray } from '../util/util';
 import { AnnotatedError } from '../util/customErrors';
-
 import { build } from './builder';
+import { Library } from './library';
 
 export class Expression {
   localId?: string;
@@ -68,8 +68,8 @@ export class Expression {
    * library identifier and version are found.
    */
   getRecursiveLibraryIdentifier(ctx: Context): string {
-    if (ctx instanceof PatientContext || ctx instanceof UnfilteredContext) {
-      const identifier = ctx.library.source.library.identifier;
+    if ((ctx as Context & { library?: Library }).library?.source?.library?.identifier) {
+      const identifier = (ctx as Context & { library: Library }).library.source.library.identifier;
       return `${identifier.id}${identifier.version ? `|${identifier.version}` : ''}`;
     } else {
       return ctx.parent ? this.getRecursiveLibraryIdentifier(ctx.parent) : '(unknown)';

@@ -4332,7 +4332,6 @@ exports.VersionedIdentifier = VersionedIdentifier;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UnimplementedExpression = exports.Expression = void 0;
-const context_1 = require("../runtime/context");
 const util_1 = require("../util/util");
 const customErrors_1 = require("../util/customErrors");
 const builder_1 = require("./builder");
@@ -4391,7 +4390,8 @@ class Expression {
      * library identifier and version are found.
      */
     getRecursiveLibraryIdentifier(ctx) {
-        if (ctx instanceof context_1.PatientContext || ctx instanceof context_1.UnfilteredContext) {
+        var _a, _b, _c;
+        if ((_c = (_b = (_a = ctx.library) === null || _a === void 0 ? void 0 : _a.source) === null || _b === void 0 ? void 0 : _b.library) === null || _c === void 0 ? void 0 : _c.identifier) {
             const identifier = ctx.library.source.library.identifier;
             return `${identifier.id}${identifier.version ? `|${identifier.version}` : ''}`;
         }
@@ -4412,7 +4412,7 @@ class UnimplementedExpression extends Expression {
 }
 exports.UnimplementedExpression = UnimplementedExpression;
 
-},{"../runtime/context":42,"../util/customErrors":53,"../util/util":56,"./builder":16}],23:[function(require,module,exports){
+},{"../util/customErrors":53,"../util/util":56,"./builder":16}],23:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
