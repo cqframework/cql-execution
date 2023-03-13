@@ -5,9 +5,9 @@
 export class AnnotatedError extends Error {
   constructor(message: string, expressionName: string, libraryName: string, localId?: string) {
     super(
-      `Expression ${expressionName} from CQL Library: ${libraryName} ${
-        localId ? `with ELM local id: ${localId}` : ``
-      } caused the following error during execution: ${message}`
+      `Encountered unexpected error during execution.\n\n\tError Message:\t${message}\n\tCQL Library:\t${libraryName}\n\tExpression:\t${expressionName}${
+        localId ? `\n\tELM Local ID:\t${localId}` : ``
+      }\n`
     );
   }
 }

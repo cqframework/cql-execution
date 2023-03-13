@@ -4396,7 +4396,7 @@ class Expression {
             return `${identifier.id}${identifier.version ? `|${identifier.version}` : ''}`;
         }
         else {
-            return this.getRecursiveLibraryIdentifier(ctx.parent);
+            return ctx.parent ? this.getRecursiveLibraryIdentifier(ctx.parent) : '(unknown)';
         }
     }
 }
@@ -8714,7 +8714,7 @@ exports.AnnotatedError = void 0;
  */
 class AnnotatedError extends Error {
     constructor(message, expressionName, libraryName, localId) {
-        super(`Expression ${expressionName} from CQL Library: ${libraryName} ${localId ? `with ELM local id: ${localId}` : ``} caused the following error during execution: ${message}`);
+        super(`Encountered unexpected error during execution.\n\n\tError Message:\t${message}\n\tCQL Library:\t${libraryName}\n\tExpression:\t${expressionName}${localId ? `\n\tELM Local ID:\t${localId}` : ``}\n`);
     }
 }
 exports.AnnotatedError = AnnotatedError;

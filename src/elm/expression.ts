@@ -66,7 +66,7 @@ export class Expression {
       const identifier = ctx.library.source.library.identifier;
       return `${identifier.id}${identifier.version ? `|${identifier.version}` : ''}`;
     } else {
-      return this.getRecursiveLibraryIdentifier(ctx.parent);
+      return ctx.parent ? this.getRecursiveLibraryIdentifier(ctx.parent) : '(unknown)';
     }
   }
 }
