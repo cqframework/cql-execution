@@ -20,13 +20,14 @@ describe('Expression', () => {
     setup(this, data);
   });
 
-  it('should throw annotated error with localId, libraryIdentifier, and class name on invalid elm in Patient context fully formatted during execution failure', function () {
+  it('should throw annotated error with localId, locator, libraryIdentifier, and class name on invalid elm in Patient context fully formatted during execution failure', function () {
     const testExpression = new FailingExpression({
-      localId: 'test'
+      localId: 'test',
+      locator: '7:19-19:96'
     });
 
     should(() => testExpression.execute(this.ctx)).throw(
-      'Encountered unexpected error during execution.\n\n\tError Message:\tExecution Failed!\n\tCQL Library:\tTestSnippet|1\n\tExpression:\tFailingExpression\n\tELM Local ID:\ttest\n'
+      'Encountered unexpected error during execution.\n\n\tError Message:\tExecution Failed!\n\tCQL Library:\tTestSnippet|1\n\tExpression:\tFailingExpression\n\tELM Local ID:\ttest\n\tCQL Locator:\t7:19-19:96\n'
     );
   });
 
@@ -47,18 +48,6 @@ describe('Expression', () => {
     }
   });
 
-  it('should throw annotated error with localId, libraryIdentifier, and class name on invalid elm in child context during execution failure', function () {
-    const expressionNoLocalId = new FailingExpression({});
-
-    try {
-      expressionNoLocalId.execute(this.ctx.childContext());
-      fail('test should have thrown an error before reaching this statement');
-    } catch (e: any) {
-      should(e).be.instanceOf(AnnotatedError);
-      should(e.message).not.containEql('ELM Local ID:');
-    }
-  });
-
   it('should report "(unknown)" library for annotated error when parent of context is null', function () {
     const testExpression = new FailingExpression({
       localId: 'test'
@@ -72,6 +61,30 @@ describe('Expression', () => {
     } catch (e: any) {
       should(e).be.instanceOf(AnnotatedError);
       should(e.message).containEql('CQL Library:\t(unknown)');
+    }
+  });
+
+  it('should omit localId for annotated error when undefined on expression', function () {
+    const expressionNoLocalId = new FailingExpression({});
+
+    try {
+      expressionNoLocalId.execute(this.ctx.childContext());
+      fail('test should have thrown an error before reaching this statement');
+    } catch (e: any) {
+      should(e).be.instanceOf(AnnotatedError);
+      should(e.message).not.containEql('ELM Local ID:');
+    }
+  });
+
+  it('should omit locator for annotated error when undefined on expression', function () {
+    const testExpression = new FailingExpression({});
+
+    try {
+      testExpression.execute(this.ctx);
+      fail('test should have thrown an error before reaching this statement');
+    } catch (e: any) {
+      should(e).be.instanceOf(AnnotatedError);
+      should(e.message).not.containEql('CQL Locator:');
     }
   });
 });

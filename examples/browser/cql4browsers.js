@@ -245,7 +245,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ValueSet = exports.Ratio = exports.Quantity = exports.Interval = exports.DateTime = exports.Date = exports.Concept = exports.CodeSystem = exports.Code = exports.CodeService = exports.PatientSource = exports.Patient = exports.NullMessageListener = exports.ConsoleMessageListener = exports.Results = exports.Executor = exports.UnfilteredContext = exports.PatientContext = exports.Context = exports.Expression = exports.Repository = exports.Library = void 0;
+exports.ValueSet = exports.Ratio = exports.Quantity = exports.Interval = exports.DateTime = exports.Date = exports.Concept = exports.CodeSystem = exports.Code = exports.CodeService = exports.PatientSource = exports.Patient = exports.NullMessageListener = exports.ConsoleMessageListener = exports.Results = exports.Executor = exports.UnfilteredContext = exports.PatientContext = exports.Context = exports.Expression = exports.Repository = exports.Library = exports.AnnotatedError = void 0;
 // Library-related classes
 const library_1 = require("./elm/library");
 Object.defineProperty(exports, "Library", { enumerable: true, get: function () { return library_1.Library; } });
@@ -283,9 +283,12 @@ Object.defineProperty(exports, "Interval", { enumerable: true, get: function () 
 Object.defineProperty(exports, "Quantity", { enumerable: true, get: function () { return datatypes_1.Quantity; } });
 Object.defineProperty(exports, "Ratio", { enumerable: true, get: function () { return datatypes_1.Ratio; } });
 Object.defineProperty(exports, "ValueSet", { enumerable: true, get: function () { return datatypes_1.ValueSet; } });
+const customErrors_1 = require("./util/customErrors");
+Object.defineProperty(exports, "AnnotatedError", { enumerable: true, get: function () { return customErrors_1.AnnotatedError; } });
 // Custom Types
 __exportStar(require("./types"), exports);
 exports.default = {
+    AnnotatedError: customErrors_1.AnnotatedError,
     Library: library_1.Library,
     Repository: repository_1.Repository,
     Expression: expression_1.Expression,
@@ -310,7 +313,7 @@ exports.default = {
     ValueSet: datatypes_1.ValueSet
 };
 
-},{"./cql-code-service":2,"./cql-patient":3,"./datatypes/datatypes":6,"./elm/expression":22,"./elm/library":27,"./runtime/context":42,"./runtime/executor":43,"./runtime/messageListeners":44,"./runtime/repository":45,"./runtime/results":46,"./types":49}],5:[function(require,module,exports){
+},{"./cql-code-service":2,"./cql-patient":3,"./datatypes/datatypes":6,"./elm/expression":22,"./elm/library":27,"./runtime/context":42,"./runtime/executor":43,"./runtime/messageListeners":44,"./runtime/repository":45,"./runtime/results":46,"./types":49,"./util/customErrors":53}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CodeSystem = exports.ValueSet = exports.Concept = exports.Code = void 0;
@@ -4349,6 +4352,9 @@ class Expression {
         if (json.localId != null) {
             this.localId = json.localId;
         }
+        if (json.locator != null) {
+            this.locator = json.locator;
+        }
     }
     execute(ctx) {
         try {
@@ -4367,7 +4373,7 @@ class Expression {
                 throw e;
             }
             const libraryIdentifier = this.getRecursiveLibraryIdentifier(ctx);
-            throw new customErrors_1.AnnotatedError(e, e.message, this.constructor.name, libraryIdentifier, this.localId);
+            throw new customErrors_1.AnnotatedError(e, e.message, this.constructor.name, libraryIdentifier, this.localId, this.locator);
         }
     }
     exec(_ctx) {
@@ -8713,8 +8719,12 @@ exports.AnnotatedError = void 0;
  * to simplify tracking down errors that occur during execution
  */
 class AnnotatedError extends Error {
-    constructor(originalError, message, expressionName, libraryName, localId) {
-        super(`Encountered unexpected error during execution.\n\n\tError Message:\t${message}\n\tCQL Library:\t${libraryName}\n\tExpression:\t${expressionName}${localId ? `\n\tELM Local ID:\t${localId}` : ``}\n`);
+    constructor(originalError, message, expressionName, libraryName, localId, locator) {
+        super(`Encountered unexpected error during execution.\n\n\tError Message:\t${message}\n\tCQL Library:\t${libraryName}\n\tExpression:\t${expressionName}${localId ? `\n\tELM Local ID:\t${localId}` : ''}${locator ? `\n\tCQL Locator:\t${locator}` : ''}\n`);
+        this.expressionName = expressionName;
+        this.libraryName = libraryName;
+        this.localId = localId;
+        this.locator = locator;
         this.cause = originalError;
     }
 }

@@ -28,10 +28,13 @@ import {
   ValueSet
 } from './datatypes/datatypes';
 
+import { AnnotatedError } from './util/customErrors';
+
 // Custom Types
 export * from './types';
 
 export {
+  AnnotatedError,
   Library,
   Repository,
   Expression,
@@ -57,6 +60,7 @@ export {
 };
 
 export default {
+  AnnotatedError,
   Library,
   Repository,
   Expression,

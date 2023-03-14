@@ -6,6 +6,7 @@ import { Library } from './library';
 
 export class Expression {
   localId?: string;
+  locator?: string;
   arg?: any;
   args?: any[];
 
@@ -18,8 +19,13 @@ export class Expression {
         this.arg = op;
       }
     }
+
     if (json.localId != null) {
       this.localId = json.localId;
+    }
+
+    if (json.locator != null) {
+      this.locator = json.locator;
     }
   }
 
@@ -43,7 +49,8 @@ export class Expression {
         e.message,
         this.constructor.name,
         libraryIdentifier,
-        this.localId
+        this.localId,
+        this.locator
       );
     }
   }
