@@ -31,6 +31,26 @@ describe('Expression', () => {
     );
   });
 
+  it('should include publicly accessible properties on annotated error when defined', function () {
+    const testExpression = new FailingExpression({
+      localId: 'test',
+      locator: '7:19-19:96'
+    });
+
+    try {
+      testExpression.execute(this.ctx.childContext());
+      fail('test should have thrown an error before reaching this statement');
+    } catch (e: any) {
+      should(e).be.instanceOf(AnnotatedError);
+
+      const err = e as AnnotatedError;
+      err.libraryName.should.equal('TestSnippet|1');
+      err.expressionName.should.equal('FailingExpression');
+      should(err.locator).equal('7:19-19:96');
+      should(err.localId).equal('test');
+    }
+  });
+
   it('should throw annotated error with localId, libraryIdentifier, and class name on invalid elm in child context during execution failure', function () {
     const testExpression = new FailingExpression({
       localId: 'test-nested'
