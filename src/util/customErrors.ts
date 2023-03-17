@@ -9,14 +9,15 @@ export class AnnotatedError extends Error {
 
   constructor(
     originalError: Error,
-    message: string,
     public expressionName: string,
     public libraryName: string,
     public localId?: string,
     public locator?: string
   ) {
     super(
-      `Encountered unexpected error during execution.\n\n\tError Message:\t${message}\n\tCQL Library:\t${libraryName}\n\tExpression:\t${expressionName}${
+      `Encountered unexpected error during execution.\n\n\tError Message:\t${
+        originalError.message
+      }\n\tCQL Library:\t${libraryName}\n\tExpression:\t${expressionName}${
         localId ? `\n\tELM Local ID:\t${localId}` : ''
       }${locator ? `\n\tCQL Locator:\t${locator}` : ''}\n`
     );

@@ -46,7 +46,6 @@ export class Expression {
       const libraryIdentifier = this.getRecursiveLibraryIdentifier(ctx);
       throw new AnnotatedError(
         e,
-        e.message,
         this.constructor.name,
         libraryIdentifier,
         this.localId,
