@@ -4397,8 +4397,8 @@ class Expression {
      */
     getRecursiveLibraryIdentifier(ctx) {
         var _a, _b, _c;
-        if ((_c = (_b = (_a = ctx.library) === null || _a === void 0 ? void 0 : _a.source) === null || _b === void 0 ? void 0 : _b.library) === null || _c === void 0 ? void 0 : _c.identifier) {
-            const identifier = ctx.library.source.library.identifier;
+        const identifier = (_c = (_b = (_a = ctx.library) === null || _a === void 0 ? void 0 : _a.source) === null || _b === void 0 ? void 0 : _b.library) === null || _c === void 0 ? void 0 : _c.identifier;
+        if (identifier) {
             return `${identifier.id}${identifier.version ? `|${identifier.version}` : ''}`;
         }
         else {

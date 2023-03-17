@@ -74,8 +74,9 @@ export class Expression {
    * library identifier and version are found.
    */
   getRecursiveLibraryIdentifier(ctx: Context): string {
-    if ((ctx as Context & { library?: Library }).library?.source?.library?.identifier) {
-      const identifier = (ctx as Context & { library: Library }).library.source.library.identifier;
+    const identifier = (ctx as Context & { library?: Library }).library?.source?.library
+      ?.identifier;
+    if (identifier) {
       return `${identifier.id}${identifier.version ? `|${identifier.version}` : ''}`;
     } else {
       return ctx.parent ? this.getRecursiveLibraryIdentifier(ctx.parent) : '(unknown)';
