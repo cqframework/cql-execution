@@ -8,7 +8,7 @@ const path = require('path');
 const fs = require('fs');
 const browserify = require('browserify');
 
-console.log('Browserifing cql4browsers...');
+console.log('Browserifying cql4browsers...');
 const c4bpath = path.join(__dirname, '..', 'examples', 'browser', 'cql4browsers.js');
 const outputJsFile = fs.createWriteStream(c4bpath);
 browserify(path.join(__dirname, '..', 'examples', 'browser', 'simple-browser-support.js'))
