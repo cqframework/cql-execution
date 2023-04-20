@@ -5175,17 +5175,17 @@ exports.Collapse = Collapse;
 function collapseIntervals(intervals, perWidth) {
     // Clone intervals so this function remains idempotent
     const intervalsClone = [];
+    // If the list is null, return null
+    if (intervals == null) {
+        return null;
+    }
     for (const interval of intervals) {
         // The spec says to ignore null intervals
         if (interval != null) {
             intervalsClone.push(interval.copy());
         }
     }
-    // If the list is null, return null
-    if (intervals == null) {
-        return null;
-    }
-    else if (intervalsClone.length <= 1) {
+    if (intervalsClone.length <= 1) {
         return intervalsClone;
     }
     else {
