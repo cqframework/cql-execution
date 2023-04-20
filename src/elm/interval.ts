@@ -650,12 +650,10 @@ export class Collapse extends Expression {
 function collapseIntervals(intervals: any, perWidth: any) {
   // Clone intervals so this function remains idempotent
   const intervalsClone = [];
-
   // If the list is null, return null
   if (intervals == null) {
     return null;
   }
-
   for (const interval of intervals) {
     // The spec says to ignore null intervals
     if (interval != null) {

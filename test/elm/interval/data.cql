@@ -1034,7 +1034,7 @@ define CollapseNullHighIntervalList: collapse NullHighIntervalList
 define ExpectedNullHighIntervalCollapse: { Interval[1, null] }
 define NullInCollapse: collapse { Interval[1,3], null }
 define ExpectedResultWithNull: { Interval[1,3] }
-// define NullCollapse: collapse null // Translation Error
+define NullCollapse: collapse null
 define NullPerCollapse: collapse { Interval[1,4], Interval[4,7] } per null
 define ExpectedResultNullPer: { Interval[1,7] }
 define DateTime5_NullInterval: Interval[DateTime(2012, 1, 5, 0, 0, 0, 0), null]
