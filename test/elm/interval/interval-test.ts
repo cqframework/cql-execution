@@ -2140,8 +2140,7 @@ describe('Collapse', () => {
     this.nullInCollapse.exec(this.ctx).should.eql(this.expectedResultWithNull.exec(this.ctx));
   });
 
-  it.skip('should return null if list is null', function () {
-    // TODO: Translation Error
+  it('should return null if list is null', function () {
     should.not.exist(this.nullCollapse.exec(this.ctx));
   });
 

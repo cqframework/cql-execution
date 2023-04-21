@@ -650,6 +650,10 @@ export class Collapse extends Expression {
 function collapseIntervals(intervals: any, perWidth: any) {
   // Clone intervals so this function remains idempotent
   const intervalsClone = [];
+  // If the list is null, return null
+  if (intervals == null) {
+    return null;
+  }
   for (const interval of intervals) {
     // The spec says to ignore null intervals
     if (interval != null) {
@@ -657,10 +661,7 @@ function collapseIntervals(intervals: any, perWidth: any) {
     }
   }
 
-  // If the list is null, return null
-  if (intervals == null) {
-    return null;
-  } else if (intervalsClone.length <= 1) {
+  if (intervalsClone.length <= 1) {
     return intervalsClone;
   } else {
     // If the per argument is null, the default unit interval for the point type
