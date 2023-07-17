@@ -109,7 +109,8 @@ export class ToDateTime extends Expression {
     if (arg == null) {
       return null;
     } else if (arg.isDate) {
-      return arg.getDateTime();
+      const timezoneOffset = ctx.getExecutionDateTime().timezoneOffset;
+      return arg.getDateTime(timezoneOffset);
     } else {
       return DateTime.parse(arg.toString());
     }
