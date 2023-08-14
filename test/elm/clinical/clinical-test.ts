@@ -3,7 +3,7 @@ import setup from '../../setup';
 const vsets = require('./valuesets');
 import * as DT from '../../../src/datatypes/datatypes';
 import { Uncertainty } from '../../../src/datatypes/uncertainty';
-const { p1, p2, p3, p4, p5 } = require('./patients');
+const { p1, p2, p3, p4, p5, p6, p7 } = require('./patients');
 import { PatientSource } from '../../../src/cql-patient';
 const data = require('./data');
 
@@ -499,5 +499,54 @@ describe('CalculateAgeAt', () => {
   it('should convert date to DateTime, give uncertainty (using CalculateAgeInYearsAt)', async function () {
     setup(this, data, [p3]);
     (await this.calculateAgeInYearsDateArg.exec(this.ctx)).should.eql(new Uncertainty(17, 18));
+  });
+
+  it('should convert date to DateTime, give 18 since the timeZoneOffset is 0', async function () {
+    setup(this, data, [p6]);
+    // Execute these tests as if it is 2024-01-01 at 00:00:00.0000 GMT
+    this.ctx.executionDateTime = new DT.DateTime(2024, 1, 1, 0, 0, 0, 0, 0);
+    // Change it to the Date class
+    this.ctx.patient.birthDate = new DT.Date(2005, 12, 31);
+
+    (await this.ageAtJanuary1DateTimeArg.exec(this.ctx)).should.equal(18);
+  });
+
+  it('should convert date to DateTime, give 18 since the timeZoneOffset on the parent is 0', async function () {
+    setup(this, data, [p6]);
+    this.ctx.executionDateTime = undefined;
+    // Execute these tests as if it is 2024-01-01 at 00:00:00.0000 GMT
+    this.ctx.parent.getExecutionDateTime = () => {
+      return new DT.DateTime(2024, 1, 1, 0, 0, 0, 0, 0);
+    };
+    // Change it to the Date class
+    this.ctx.patient.birthDate = new DT.Date(2005, 12, 31);
+
+    (await this.ageAtJanuary1DateTimeArg.exec(this.ctx)).should.equal(18);
+  });
+
+  it('should convert date to DateTime, but give an Uncertainty since the timeZoneOffset is not passed in and therefore equal to the timezone of the evaluation request timestamp', async function () {
+    setup(this, data, [p6]);
+    // Change it to the Date class
+    this.ctx.patient.birthDate = new DT.Date(2005, 12, 31);
+
+    (await this.ageAtJanuary1DateTimeArg.exec(this.ctx)).should.eql(new Uncertainty(17, 18));
+  });
+
+  it('should give 18 since the timeZoneOffset is 0 and both birthDate and asOf are DateTimes', async function () {
+    setup(this, data, [p7]);
+    // Execute these tests as if it is 2024-01-01 at 00:00:00.0000 GMT
+    this.ctx.executionDateTime = new DT.DateTime(2024, 1, 1, 0, 0, 0, 0, 0);
+
+    (await this.ageAtJanuary1DateTimeArg.exec(this.ctx)).should.equal(18);
+  });
+
+  it('should give 18 since the timeZoneOffset is 0 and both birthDate and asOf are Dates', async function () {
+    setup(this, data, [p6]);
+    // Execute these tests as if it is 2024-01-01 at 00:00:00.0000 GMT
+    this.ctx.executionDateTime = new DT.DateTime(2024, 1, 1, 0, 0, 0, 0, 0);
+    // Change it to the Date class
+    this.ctx.patient.birthDate = new DT.Date(2005, 12, 31);
+
+    (await this.ageAtJanuary1DateArg.exec(this.ctx)).should.equal(18);
   });
 });
