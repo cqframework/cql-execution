@@ -5659,7 +5659,7 @@ class First extends expression_1.Expression {
         this.source = (0, builder_1.build)(json.source);
     }
     async exec(ctx) {
-        const src = await this.source.exec(ctx);
+        const src = await this.source.execute(ctx);
         if (src != null && (0, util_1.typeIsArray)(src) && src.length > 0) {
             return src[0];
         }
@@ -5675,7 +5675,7 @@ class Last extends expression_1.Expression {
         this.source = (0, builder_1.build)(json.source);
     }
     async exec(ctx) {
-        const src = await this.source.exec(ctx);
+        const src = await this.source.execute(ctx);
         if (src != null && (0, util_1.typeIsArray)(src) && src.length > 0) {
             return src[src.length - 1];
         }
@@ -5693,10 +5693,10 @@ class Slice extends expression_1.Expression {
         this.endIndex = (0, builder_1.build)(json.endIndex);
     }
     async exec(ctx) {
-        const src = await this.source.exec(ctx);
+        const src = await this.source.execute(ctx);
         if (src != null && (0, util_1.typeIsArray)(src)) {
-            const startIndex = await this.startIndex.exec(ctx);
-            const endIndex = await this.endIndex.exec(ctx);
+            const startIndex = await this.startIndex.execute(ctx);
+            const endIndex = await this.endIndex.execute(ctx);
             const start = startIndex != null ? startIndex : 0;
             const end = endIndex != null ? endIndex : src.length;
             if (src.length === 0 || start < 0 || end < 0 || end < start) {
@@ -6559,7 +6559,7 @@ class AggregateClause extends expression_1.Expression {
         this.distinct = json.distinct != null ? json.distinct : true;
     }
     async aggregate(returnedValues, ctx) {
-        let aggregateValue = this.starting != null ? await this.starting.exec(ctx) : null;
+        let aggregateValue = this.starting != null ? await this.starting.execute(ctx) : null;
         for (const contextValues of returnedValues) {
             const childContext = ctx.childContext(contextValues);
             childContext.set(this.identifier, aggregateValue);
