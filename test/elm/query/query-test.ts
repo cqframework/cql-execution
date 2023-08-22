@@ -433,22 +433,27 @@ describe('AggregateQuery', () => {
       new Interval(new DateTime(1982, 3, 16, 15, 0), new DateTime(2013, 5, 23, 10, 0))
     ];
     (await this.expressionStartingAggregation.exec(this.ctx)).should.eql(ret);
+    should(this.ctx.localId_context[30]).not.be.undefined();
   });
 
   it('should be able to aggregate over distinct values', async function () {
     (await this.distinctAggregation.exec(this.ctx)).should.eql(15);
+    should(this.ctx.localId_context[124]).not.be.undefined();
   });
 
   it('should be able to aggregate over non-distinct values', async function () {
     (await this.allAggregation.exec(this.ctx)).should.eql(30);
+    should(this.ctx.localId_context[105]).not.be.undefined();
   });
 
   it('should be able to aggregate with a String as the starting value', async function () {
     (await this.literalStartingAggregation.exec(this.ctx)).should.eql('Start12345');
+    should(this.ctx.localId_context[71]).not.be.undefined();
   });
 
   it('should be able to aggregate with a Quantity as the starting value', async function () {
     (await this.quantityStartingAggregation.exec(this.ctx)).should.eql(new Quantity(15, 'ml'));
+    should(this.ctx.localId_context[86]).not.be.undefined();
   });
 });
 

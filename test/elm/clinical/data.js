@@ -279,6 +279,403 @@ module.exports['ValueSetRef'] = {
    }
 }
 
+/* AnyInValueSet
+library TestSnippet version '1'
+using Simple version '1.0.0'
+valueset "Major Depressive Disorder Active": '2.16.840.1.113883.3.526.3.1491'
+codesystem "SNOMED": 'http://snomed.info/sct'
+code "ChronicRecurrentDepression": '2618002' from "SNOMED" display 'Chronic recurrent major depressive disorder (disorder)'
+code "ModerateMajorDepression": '832007' from "SNOMED" display 'Moderate major depression (disorder)'
+concept "Depression Concept": { "ChronicRecurrentDepression", "ModerateMajorDepression" } display 'Depression Concept'
+context Patient
+define AnyInListOfConcepts: { "Depression Concept" } in "Major Depressive Disorder Active"
+define AnyInListOfCodes: { "ChronicRecurrentDepression", "ModerateMajorDepression" } in "Major Depressive Disorder Active"
+define AnyInListOfStrings: { '2618002', '12345' } in "Major Depressive Disorder Active"
+*/
+
+module.exports['AnyInValueSet'] = {
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "2.3.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "27",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "3",
+            "name" : "SNOMED",
+            "id" : "http://snomed.info/sct",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","codesystem ","\"SNOMED\"",": ","'http://snomed.info/sct'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "localId" : "2",
+            "name" : "Major Depressive Disorder Active",
+            "id" : "2.16.840.1.113883.3.526.3.1491",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Major Depressive Disorder Active\"",": ","'2.16.840.1.113883.3.526.3.1491'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "localId" : "5",
+            "name" : "ChronicRecurrentDepression",
+            "id" : "2618002",
+            "display" : "Chronic recurrent major depressive disorder (disorder)",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "","code ","\"ChronicRecurrentDepression\"",": ","'2618002'"," from " ]
+                  }, {
+                     "r" : "4",
+                     "s" : [ {
+                        "value" : [ "\"SNOMED\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Chronic recurrent major depressive disorder (disorder)'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : {
+               "localId" : "4",
+               "name" : "SNOMED"
+            }
+         }, {
+            "localId" : "7",
+            "name" : "ModerateMajorDepression",
+            "id" : "832007",
+            "display" : "Moderate major depression (disorder)",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "","code ","\"ModerateMajorDepression\"",": ","'832007'"," from " ]
+                  }, {
+                     "r" : "6",
+                     "s" : [ {
+                        "value" : [ "\"SNOMED\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Moderate major depression (disorder)'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : {
+               "localId" : "6",
+               "name" : "SNOMED"
+            }
+         } ]
+      },
+      "concepts" : {
+         "def" : [ {
+            "localId" : "10",
+            "name" : "Depression Concept",
+            "display" : "Depression Concept",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "","concept ","\"Depression Concept\"",": { " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "\"ChronicRecurrentDepression\"" ]
+                     } ]
+                  }, {
+                     "value" : [ ", " ]
+                  }, {
+                     "r" : "9",
+                     "s" : [ {
+                        "value" : [ "\"ModerateMajorDepression\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " } display ","'Depression Concept'" ]
+                  } ]
+               }
+            } ],
+            "code" : [ {
+               "localId" : "8",
+               "name" : "ChronicRecurrentDepression"
+            }, {
+               "localId" : "9",
+               "name" : "ModerateMajorDepression"
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "15",
+            "name" : "AnyInListOfConcepts",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "15",
+                  "s" : [ {
+                     "value" : [ "","define ","AnyInListOfConcepts",": " ]
+                  }, {
+                     "r" : "14",
+                     "s" : [ {
+                        "r" : "12",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "11",
+                           "s" : [ {
+                              "value" : [ "\"Depression Concept\"" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "13",
+                        "s" : [ {
+                           "value" : [ "\"Major Depressive Disorder Active\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "14",
+               "type" : "AnyInValueSet",
+               "codes" : {
+                  "localId" : "12",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "11",
+                     "name" : "Depression Concept",
+                     "type" : "ConceptRef"
+                  } ]
+               },
+               "valueset" : {
+                  "localId" : "13",
+                  "name" : "Major Depressive Disorder Active",
+                  "preserve" : true
+               }
+            }
+         }, {
+            "localId" : "21",
+            "name" : "AnyInListOfCodes",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "21",
+                  "s" : [ {
+                     "value" : [ "","define ","AnyInListOfCodes",": " ]
+                  }, {
+                     "r" : "20",
+                     "s" : [ {
+                        "r" : "18",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "16",
+                           "s" : [ {
+                              "value" : [ "\"ChronicRecurrentDepression\"" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "17",
+                           "s" : [ {
+                              "value" : [ "\"ModerateMajorDepression\"" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "19",
+                        "s" : [ {
+                           "value" : [ "\"Major Depressive Disorder Active\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "20",
+               "type" : "AnyInValueSet",
+               "codes" : {
+                  "localId" : "18",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "16",
+                     "name" : "ChronicRecurrentDepression",
+                     "type" : "CodeRef"
+                  }, {
+                     "localId" : "17",
+                     "name" : "ModerateMajorDepression",
+                     "type" : "CodeRef"
+                  } ]
+               },
+               "valueset" : {
+                  "localId" : "19",
+                  "name" : "Major Depressive Disorder Active",
+                  "preserve" : true
+               }
+            }
+         }, {
+            "localId" : "27",
+            "name" : "AnyInListOfStrings",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "27",
+                  "s" : [ {
+                     "value" : [ "","define ","AnyInListOfStrings",": " ]
+                  }, {
+                     "r" : "26",
+                     "s" : [ {
+                        "r" : "24",
+                        "s" : [ {
+                           "value" : [ "{ " ]
+                        }, {
+                           "r" : "22",
+                           "s" : [ {
+                              "value" : [ "'2618002'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "23",
+                           "s" : [ {
+                              "value" : [ "'12345'" ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "25",
+                        "s" : [ {
+                           "value" : [ "\"Major Depressive Disorder Active\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "26",
+               "type" : "AnyInValueSet",
+               "codes" : {
+                  "localId" : "24",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "22",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "2618002",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "23",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "12345",
+                     "type" : "Literal"
+                  } ]
+               },
+               "valueset" : {
+                  "localId" : "25",
+                  "name" : "Major Depressive Disorder Active",
+                  "preserve" : true
+               }
+            }
+         } ]
+      }
+   }
+}
+
 /* InValueSet
 library TestSnippet version '1'
 using Simple version '1.0.0'

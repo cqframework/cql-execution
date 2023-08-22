@@ -8,6 +8,16 @@ define Foo: 'Bar'
 valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.101.12.1001'
 define Foo: "Acute Pharyngitis"
 
+// @Test: AnyInValueSet
+valueset "Major Depressive Disorder Active": '2.16.840.1.113883.3.526.3.1491'
+codesystem "SNOMED": 'http://snomed.info/sct'
+code "ChronicRecurrentDepression": '2618002' from "SNOMED" display 'Chronic recurrent major depressive disorder (disorder)'
+code "ModerateMajorDepression": '832007' from "SNOMED" display 'Moderate major depression (disorder)'
+concept "Depression Concept": { "ChronicRecurrentDepression", "ModerateMajorDepression" } display 'Depression Concept'
+define AnyInListOfConcepts: { "Depression Concept" } in "Major Depressive Disorder Active"
+define AnyInListOfCodes: { "ChronicRecurrentDepression", "ModerateMajorDepression" } in "Major Depressive Disorder Active"
+define AnyInListOfStrings: { '2618002', '12345' } in "Major Depressive Disorder Active"
+
 // @Test: InValueSet
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
 valueset "Versioned Female": '2.16.840.1.113883.3.560.100.2' version '20121025'
@@ -34,7 +44,6 @@ define InListOfCodesExpressionRef: ListOfCodes in "Female"
 define InWrongListOfCodes: WrongListOfCodes in "Female"
 define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
 define ListOfCodesNull: (null as List<Code>) in "Female"
-
 
 // @Test: Patient Property In ValueSet
 valueset "Female": '2.16.840.1.113883.3.560.100.2'

@@ -3751,7 +3751,7 @@ class AnyInValueSet extends expression_1.Expression {
         if (valueset == null || !valueset.isValueSet) {
             throw new Error('ValueSet must be provided to InValueSet function');
         }
-        const codes = await this.codes.exec(ctx);
+        const codes = await this.codes.execute(ctx);
         return codes != null && codes.some((code) => valueset.hasMatch(code));
     }
 }
