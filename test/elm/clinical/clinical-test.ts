@@ -53,17 +53,17 @@ describe('AnyInValueSet', () => {
 
   it('should call execute on codes which is a list of concepts', async function () {
     (await this.anyInListOfConcepts.exec(this.ctx)).should.be.true();
-    should(this.ctx.localId_context[12]).not.be.undefined();
+    should(this.ctx.localId_context[this.anyInListOfConcepts.codes.localId]).not.be.undefined();
   });
 
   it('should call execute on codes which is a list of codes', async function () {
     (await this.anyInListOfCodes.exec(this.ctx)).should.be.true();
-    should(this.ctx.localId_context[18]).not.be.undefined();
+    should(this.ctx.localId_context[this.anyInListOfCodes.codes.localId]).not.be.undefined();
   });
 
   it('should call execute on codes which is a list of strings', async function () {
     (await this.anyInListOfStrings.exec(this.ctx)).should.be.true();
-    should(this.ctx.localId_context[24]).not.be.undefined();
+    should(this.ctx.localId_context[this.anyInListOfStrings.codes.localId]).not.be.undefined();
   });
 });
 
