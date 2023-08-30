@@ -3934,7 +3934,8 @@ exports.CalculateAgeAt = CalculateAgeAt;
  * @param precision - the precision as specified in the ELM (e.g., Year, Month, Week, etc.)
  * @param birthDate - the birth date to use for age calculations (may be Date or DateTime)
  * @param asOf - the date on which the age should be calculated (may be Date or DateTime)
- * @param timeZoneOffset - the passed in timeZoneOffset (if it exists)
+ * @param timeZoneOffset - the passed in timeZoneOffset (if it exists) to be used when
+ * converting birthDate from a Date to a DateTime
  * @returns the age as an integer or uncertainty in the requested precision units
  */
 function calculateAge(precision, birthDate, asOf, timeZoneOffset) {
