@@ -1199,12 +1199,12 @@ export class Date extends AbstractDate {
     return str;
   }
 
-  getDateTime() {
+  getDateTime(timeZoneOffset?: number | null) {
     // from the spec: the result will be a DateTime with the time components unspecified,
     // except for the timezone offset, which will be set to the timezone offset of the evaluation
-    // request timestamp. (this last part is achieved by just not passing in timezone offset)
+    // request timestamp. (this last part is achieved by passing in the timeZoneOffset from the context)
     if (this.year != null && this.month != null && this.day != null) {
-      return new DateTime(this.year, this.month, this.day, null, null, null, null);
+      return new DateTime(this.year, this.month, this.day, null, null, null, null, timeZoneOffset);
       // from spec: no component may be specified at a precision below an unspecified precision.
       // For example, hour may be null, but if it is, minute, second, and millisecond must all be null as well.
     } else {

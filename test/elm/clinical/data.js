@@ -4728,6 +4728,8 @@ define AgeInYearsDateTimeArg: AgeInYearsAt(DateTime(2012, 12, 1))
 define CalculateAgeInYearsDateTimeArg: CalculateAgeInYearsAt(@1994-12-01T23:59:00.000+00:00, DateTime(2012, 12, 1))
 define AgeInYearsDateArg: AgeInYearsAt(Date(2012, 12, 1))
 define CalculateAgeInYearsDateArg: CalculateAgeInYearsAt(@1994-12-01T23:59:00.000+00:00, Date(2012, 12, 1))
+define AgeAtJanuary1DateTimeArg: AgeInYearsAt(@2024-01-01T00:00:00.000+00:00)
+define AgeAtJanuary1DateArg: AgeInYearsAt(Date(2024, 1, 1))
 */
 
 module.exports['CalculateAgeAt'] = {
@@ -4739,7 +4741,7 @@ module.exports['CalculateAgeAt'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "41",
+            "r" : "50",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -5275,6 +5277,146 @@ module.exports['CalculateAgeAt'] = {
                         "value" : "1",
                         "type" : "Literal"
                      }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "44",
+            "name" : "AgeAtJanuary1DateTimeArg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "44",
+                  "s" : [ {
+                     "value" : [ "","define ","AgeAtJanuary1DateTimeArg",": " ]
+                  }, {
+                     "r" : "43",
+                     "s" : [ {
+                        "r" : "42",
+                        "value" : [ "AgeInYearsAt","(","@2024-01-01T00:00:00.000+00:00",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "43",
+               "precision" : "Year",
+               "type" : "CalculateAgeAt",
+               "operand" : [ {
+                  "path" : "birthDate",
+                  "type" : "Property",
+                  "source" : {
+                     "name" : "Patient",
+                     "type" : "ExpressionRef"
+                  }
+               }, {
+                  "localId" : "42",
+                  "type" : "DateTime",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2024",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "50",
+            "name" : "AgeAtJanuary1DateArg",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "50",
+                  "s" : [ {
+                     "value" : [ "","define ","AgeAtJanuary1DateArg",": " ]
+                  }, {
+                     "r" : "49",
+                     "s" : [ {
+                        "value" : [ "AgeInYearsAt","(" ]
+                     }, {
+                        "r" : "48",
+                        "s" : [ {
+                           "r" : "45",
+                           "value" : [ "Date","(","2024",", ","1",", ","1",")" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "49",
+               "precision" : "Year",
+               "type" : "CalculateAgeAt",
+               "operand" : [ {
+                  "type" : "ToDate",
+                  "operand" : {
+                     "path" : "birthDate",
+                     "type" : "Property",
+                     "source" : {
+                        "name" : "Patient",
+                        "type" : "ExpressionRef"
+                     }
+                  }
+               }, {
+                  "localId" : "48",
+                  "type" : "Date",
+                  "year" : {
+                     "localId" : "45",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2024",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "localId" : "46",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "localId" : "47",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
                   }
                } ]
             }

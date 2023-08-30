@@ -43,4 +43,22 @@ const p5 = {
   birthDate: '1980-10-01'
 };
 
-module.exports = { p1, p2, p3, p4, p5 };
+// Date-Only Birth Date on December 31
+const p6 = {
+  recordType: 'Patient',
+  id: '1',
+  name: 'John Smith',
+  gender: 'M',
+  birthDate: '2005-12-31'
+};
+
+// Fully Specified Birth Date on December 31
+const p7 = {
+  recordType: 'Patient',
+  id: '1',
+  name: 'John Smith',
+  gender: 'M',
+  birthDate: '2005-12-31T14:00:00.000Z'
+};
+
+module.exports = { p1, p2, p3, p4, p5, p6, p7 };

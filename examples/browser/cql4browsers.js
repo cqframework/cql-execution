@@ -1500,12 +1500,12 @@ class Date extends AbstractDate {
         }
         return str;
     }
-    getDateTime() {
+    getDateTime(timeZoneOffset) {
         // from the spec: the result will be a DateTime with the time components unspecified,
         // except for the timezone offset, which will be set to the timezone offset of the evaluation
-        // request timestamp. (this last part is achieved by just not passing in timezone offset)
+        // request timestamp. (this last part is achieved by passing in the timeZoneOffset from the context)
         if (this.year != null && this.month != null && this.day != null) {
-            return new DateTime(this.year, this.month, this.day, null, null, null, null);
+            return new DateTime(this.year, this.month, this.day, null, null, null, null, timeZoneOffset);
             // from spec: no component may be specified at a precision below an unspecified precision.
             // For example, hour may be null, but if it is, minute, second, and millisecond must all be null as well.
         }
@@ -3920,29 +3920,32 @@ class CalculateAgeAt extends expression_1.Expression {
     }
     async exec(ctx) {
         const [birthDate, asOf] = await this.execArgs(ctx);
-        return calculateAge(this.precision, birthDate, asOf);
+        const timeZoneOffset = ctx.getExecutionDateTime().timezoneOffset;
+        return calculateAge(this.precision, birthDate, asOf, timeZoneOffset);
     }
 }
 exports.CalculateAgeAt = CalculateAgeAt;
 /**
  * Calculates the age as of a certain date based on the passed in birth date. If the asOf date is
  * a Date, then birth date will be converted to a Date (if necessary) before calculation is
- * performed. If the asOf is a DateTime, then the birth date will be convertedto a DateTime (if
+ * performed. If the asOf is a DateTime, then the birth date will be converted to a DateTime (if
  * necessary) before calculation is performed. The result is an integer or uncertainty specifying
  * the age in the requested precision units.
  * @param precision - the precision as specified in the ELM (e.g., Year, Month, Week, etc.)
  * @param birthDate - the birth date to use for age calculations (may be Date or DateTime)
  * @param asOf - the date on which the age should be calculated (may be Date or DateTime)
+ * @param timeZoneOffset - the passed in timeZoneOffset (if it exists) to be used when
+ * converting birthDate from a Date to a DateTime
  * @returns the age as an integer or uncertainty in the requested precision units
  */
-function calculateAge(precision, birthDate, asOf) {
+function calculateAge(precision, birthDate, asOf, timeZoneOffset) {
     if (birthDate != null && asOf != null) {
         // Ensure we use like types (Date or DateTime) based on asOf type
         if (asOf.isDate && birthDate.isDateTime) {
             birthDate = birthDate.getDate();
         }
         else if (asOf.isDateTime && birthDate.isDate) {
-            birthDate = birthDate.getDateTime();
+            birthDate = birthDate.getDateTime(timeZoneOffset);
         }
         const result = birthDate.durationBetween(asOf, precision.toLowerCase());
         if (result === null || result === void 0 ? void 0 : result.isPoint()) {
@@ -7311,7 +7314,8 @@ class ToDateTime extends expression_1.Expression {
             return null;
         }
         else if (arg.isDate) {
-            return arg.getDateTime();
+            const timezoneOffset = ctx.getExecutionDateTime().timezoneOffset;
+            return arg.getDateTime(timezoneOffset);
         }
         else {
             return datetime_1.DateTime.parse(arg.toString());
