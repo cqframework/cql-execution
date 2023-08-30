@@ -191,7 +191,7 @@ class AggregateClause extends Expression {
     for (const contextValues of returnedValues) {
       const childContext = ctx.childContext(contextValues);
       childContext.set(this.identifier, aggregateValue);
-      aggregateValue = await this.expression.exec(childContext);
+      aggregateValue = await this.expression.execute(childContext);
     }
     return aggregateValue;
   }
