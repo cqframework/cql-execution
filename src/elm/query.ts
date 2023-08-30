@@ -187,11 +187,11 @@ class AggregateClause extends Expression {
   }
 
   async aggregate(returnedValues: any, ctx: Context) {
-    let aggregateValue = this.starting != null ? await this.starting.exec(ctx) : null;
+    let aggregateValue = this.starting != null ? await this.starting.execute(ctx) : null;
     for (const contextValues of returnedValues) {
       const childContext = ctx.childContext(contextValues);
       childContext.set(this.identifier, aggregateValue);
-      aggregateValue = await this.expression.exec(childContext);
+      aggregateValue = await this.expression.execute(childContext);
     }
     return aggregateValue;
   }

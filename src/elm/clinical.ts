@@ -62,7 +62,7 @@ export class AnyInValueSet extends Expression {
       throw new Error('ValueSet must be provided to InValueSet function');
     }
 
-    const codes = await this.codes.exec(ctx);
+    const codes = await this.codes.execute(ctx);
     return codes != null && codes.some((code: any) => valueset.hasMatch(code));
   }
 }

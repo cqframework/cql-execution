@@ -233,7 +233,7 @@ export class First extends Expression {
   }
 
   async exec(ctx: Context) {
-    const src = await this.source.exec(ctx);
+    const src = await this.source.execute(ctx);
     if (src != null && typeIsArray(src) && src.length > 0) {
       return src[0];
     } else {
@@ -251,7 +251,7 @@ export class Last extends Expression {
   }
 
   async exec(ctx: Context) {
-    const src = await this.source.exec(ctx);
+    const src = await this.source.execute(ctx);
     if (src != null && typeIsArray(src) && src.length > 0) {
       return src[src.length - 1];
     } else {
@@ -273,10 +273,10 @@ export class Slice extends Expression {
   }
 
   async exec(ctx: Context) {
-    const src = await this.source.exec(ctx);
+    const src = await this.source.execute(ctx);
     if (src != null && typeIsArray(src)) {
-      const startIndex = await this.startIndex.exec(ctx);
-      const endIndex = await this.endIndex.exec(ctx);
+      const startIndex = await this.startIndex.execute(ctx);
+      const endIndex = await this.endIndex.execute(ctx);
       const start = startIndex != null ? startIndex : 0;
       const end = endIndex != null ? endIndex : src.length;
       if (src.length === 0 || start < 0 || end < 0 || end < start) {
