@@ -53,7 +53,7 @@ Implementors should be aware of the following limitations and gaps in `cql-execu
   * External functions
 * While the source code of `cql-execution` is in TypeScript, full-fledged typing of the library is not yet implemented
   * Conversion from JavaScript to TypeScript was done in [this pull request](https://github.com/cqframework/cql-execution/pull/260),
-  with the intent on making incremental type improvements in subsequent pull requests.
+    with the intent on making incremental type improvements in subsequent pull requests.
 
 The above is a partial list covering the most significant limitations. For more details, see the
 [CQL_Execution_Features.xlsx](CQL_Execution_Features.xlsx) spreadsheet.
@@ -79,8 +79,8 @@ the ELM. For the easiest integration, we will generate a JSON file using cql-to-
    repository to a location of your choice
 3. `cd ${path_to_clinical_quality_language}/Src/java` (replacing
    `${path_to_clinical_quality_language}` with the path to the local clone)
-4. `./gradlew :cql-to-elm:installDist`
-5. `./cql-to-elm/build/install/cql-to-elm/bin/cql-to-elm --format=JSON --input ${path_to_cql} --output ${path_to_cql-execution}/customCQL`
+4. `./gradlew :cql-to-elm-cli:installDist`
+5. `./cql-to-elm-cli/build/install/cql-to-elm-cli/bin/cql-to-elm-cli --format=JSON --input ${path_to_cql} --output ${path_to_cql-execution}/customCQL`
 
 The above example puts the example CQL into a subfolder of the `cql-execution` project to make the
 relative paths to `cql-execution` libraries easier, but it doesn't _have_ to go there.  If you put
