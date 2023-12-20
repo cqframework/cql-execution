@@ -194,13 +194,13 @@ const psource = new cql.PatientSource([ {
 } ]);
 
 executor
-        .exec(psource)
-        .then(result => {
-          console.log(JSON.stringify(result, undefined, 2));
-        })
-        .catch(err => {
-          console.error(err);
-        });
+  .exec(psource)
+  .then(result => {
+    console.log(JSON.stringify(result, undefined, 2));
+  })
+  .catch(err => {
+    console.error(err);
+  });
 
 ```
 
@@ -251,62 +251,62 @@ define AllFalse: false and false
 */
 
 module.exports['And'] = {
-  "library" : {
-    "identifier" : { "id" : "TestSnippet", "version" : "1" },
-    "schemaIdentifier" : { "id" : "urn:hl7-org:elm", "version" : "r1" },
-    "usings" : {
-      "def" : [
-        { "localIdentifier" : "System", "uri" : "urn:hl7-org:elm-types:r1" },
-        { "localIdentifier" : "Simple", "uri" : "https://github.com/cqframework/cql-execution/simple", "version" : "1.0.0" }
-      ]
-    },
-    "statements" : {
-      "def" : [ {
-        "name" : "Patient",
-        "context" : "Patient",
-        "expression" : {
-          "type" : "SingletonFrom",
-          "operand" : {
-            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-            "type" : "Retrieve"
-          }
-        }
-      }, {
-        "name" : "AllTrue",
-        "context" : "Patient",
-        "accessLevel" : "Public",
-        "expression" : {
-          "type" : "And",
-          "operand" : [
-            { "valueType" : "{urn:hl7-org:elm-types:r1}Boolean", "value" : "true", "type" : "Literal" },
-            { "valueType" : "{urn:hl7-org:elm-types:r1}Boolean", "value" : "true", "type" : "Literal" }
-          ]
-        }
-      }, {
-        "name" : "SomeTrue",
-        "context" : "Patient",
-        "accessLevel" : "Public",
-        "expression" : {
-          "type" : "And",
-          "operand" : [
-            { "valueType" : "{urn:hl7-org:elm-types:r1}Boolean", "value" : "true", "type" : "Literal" },
-            { "valueType" : "{urn:hl7-org:elm-types:r1}Boolean", "value" : "false", "type" : "Literal" }
-          ]
-        }
-      }, {
-        "name" : "AllFalse",
-        "context" : "Patient",
-        "accessLevel" : "Public",
-        "expression" : {
-          "type" : "And",
-          "operand" : [
-            { "valueType" : "{urn:hl7-org:elm-types:r1}Boolean", "value" : "false", "type" : "Literal" },
-            { "valueType" : "{urn:hl7-org:elm-types:r1}Boolean", "value" : "false", "type" : "Literal" }
-          ]
-        }
-      }
+   "library" : {
+      "identifier" : { "id" : "TestSnippet", "version" : "1" },
+      "schemaIdentifier" : { "id" : "urn:hl7-org:elm", "version" : "r1" },
+      "usings" : {
+         "def" : [
+           { "localIdentifier" : "System", "uri" : "urn:hl7-org:elm-types:r1" },
+           { "localIdentifier" : "Simple", "uri" : "https://github.com/cqframework/cql-execution/simple", "version" : "1.0.0" }
+         ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "name" : "AllTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "And",
+               "operand" : [
+                  { "valueType" : "{urn:hl7-org:elm-types:r1}Boolean", "value" : "true", "type" : "Literal" },
+                  { "valueType" : "{urn:hl7-org:elm-types:r1}Boolean", "value" : "true", "type" : "Literal" }
+               ]
+            }
+         }, {
+            "name" : "SomeTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "And",
+               "operand" : [
+                  { "valueType" : "{urn:hl7-org:elm-types:r1}Boolean", "value" : "true", "type" : "Literal" },
+                  { "valueType" : "{urn:hl7-org:elm-types:r1}Boolean", "value" : "false", "type" : "Literal" }
+               ]
+            }
+         }, {
+            "name" : "AllFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "type" : "And",
+               "operand" : [
+                  { "valueType" : "{urn:hl7-org:elm-types:r1}Boolean", "value" : "false", "type" : "Literal" },
+                  { "valueType" : "{urn:hl7-org:elm-types:r1}Boolean", "value" : "false", "type" : "Literal" }
+               ]
+            }
+         }
       ]}
-  }
+   }
 }
 ```
 
