@@ -20,14 +20,16 @@ define StringFiveIsString: '5' is String
 
 module.exports['IsSystemType'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "17",
+            "r" : "227",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -43,17 +45,18 @@ module.exports['IsSystemType'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -61,7 +64,7 @@ module.exports['IsSystemType'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -69,38 +72,47 @@ module.exports['IsSystemType'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "5",
+            "localId" : "212",
             "name" : "FiveIsInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "5",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define ","FiveIsInteger",": " ]
                   }, {
-                     "r" : "4",
+                     "r" : "213",
                      "s" : [ {
-                        "r" : "2",
+                        "r" : "214",
                         "value" : [ "5"," is " ]
                      }, {
-                        "r" : "3",
+                        "r" : "215",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -109,38 +121,39 @@ module.exports['IsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "4",
+               "localId" : "213",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "2",
+                  "localId" : "214",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "5",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "3",
+                  "localId" : "215",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "9",
+            "localId" : "217",
             "name" : "FiveIsString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "9",
+                  "r" : "217",
                   "s" : [ {
                      "value" : [ "","define ","FiveIsString",": " ]
                   }, {
-                     "r" : "8",
+                     "r" : "218",
                      "s" : [ {
-                        "r" : "6",
+                        "r" : "219",
                         "value" : [ "5"," is " ]
                      }, {
-                        "r" : "7",
+                        "r" : "220",
                         "s" : [ {
                            "value" : [ "String" ]
                         } ]
@@ -149,42 +162,43 @@ module.exports['IsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "8",
+               "localId" : "218",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "6",
+                  "localId" : "219",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "5",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "7",
+                  "localId" : "220",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "13",
+            "localId" : "222",
             "name" : "StringFiveIsInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "13",
+                  "r" : "222",
                   "s" : [ {
                      "value" : [ "","define ","StringFiveIsInteger",": " ]
                   }, {
-                     "r" : "12",
+                     "r" : "223",
                      "s" : [ {
-                        "r" : "10",
+                        "r" : "224",
                         "s" : [ {
                            "value" : [ "'5'" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "11",
+                        "r" : "225",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -193,42 +207,43 @@ module.exports['IsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "12",
+               "localId" : "223",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "10",
+                  "localId" : "224",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "5",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "11",
+                  "localId" : "225",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "17",
+            "localId" : "227",
             "name" : "StringFiveIsString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "17",
+                  "r" : "227",
                   "s" : [ {
                      "value" : [ "","define ","StringFiveIsString",": " ]
                   }, {
-                     "r" : "16",
+                     "r" : "228",
                      "s" : [ {
-                        "r" : "14",
+                        "r" : "229",
                         "s" : [ {
                            "value" : [ "'5'" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "15",
+                        "r" : "230",
                         "s" : [ {
                            "value" : [ "String" ]
                         } ]
@@ -237,16 +252,17 @@ module.exports['IsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "16",
+               "localId" : "228",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "14",
+                  "localId" : "229",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "5",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "15",
+                  "localId" : "230",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
@@ -266,14 +282,16 @@ define ListOfDecimalsIsListOfIntegers: {1.5, 2.5, 3.5, 4.5, 5.5} is List<Integer
 
 module.exports['IsListType'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "21",
+            "r" : "223",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -289,17 +307,18 @@ module.exports['IsListType'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -307,7 +326,7 @@ module.exports['IsListType'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -315,47 +334,56 @@ module.exports['IsListType'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "11",
+            "localId" : "212",
             "name" : "ListOfIntegersIsListOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "11",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define ","ListOfIntegersIsListOfIntegers",": " ]
                   }, {
-                     "r" : "10",
+                     "r" : "213",
                      "s" : [ {
-                        "r" : "7",
+                        "r" : "214",
                         "s" : [ {
-                           "r" : "2",
+                           "r" : "215",
                            "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "9",
+                        "r" : "220",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "8",
+                           "r" : "221",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -367,75 +395,76 @@ module.exports['IsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "10",
+               "localId" : "213",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "7",
+                  "localId" : "214",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "2",
+                     "localId" : "215",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "3",
+                     "localId" : "216",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "4",
+                     "localId" : "217",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   }, {
-                     "localId" : "5",
+                     "localId" : "218",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "6",
+                     "localId" : "219",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "isTypeSpecifier" : {
-                  "localId" : "9",
+                  "localId" : "220",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "8",
+                     "localId" : "221",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "21",
+            "localId" : "223",
             "name" : "ListOfDecimalsIsListOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "21",
+                  "r" : "223",
                   "s" : [ {
                      "value" : [ "","define ","ListOfDecimalsIsListOfIntegers",": " ]
                   }, {
-                     "r" : "20",
+                     "r" : "224",
                      "s" : [ {
-                        "r" : "17",
+                        "r" : "225",
                         "s" : [ {
-                           "r" : "12",
+                           "r" : "226",
                            "value" : [ "{","1.5",", ","2.5",", ","3.5",", ","4.5",", ","5.5","}" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "19",
+                        "r" : "231",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "18",
+                           "r" : "232",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -447,43 +476,44 @@ module.exports['IsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "20",
+               "localId" : "224",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "17",
+                  "localId" : "225",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "12",
+                     "localId" : "226",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "1.5",
                      "type" : "Literal"
                   }, {
-                     "localId" : "13",
+                     "localId" : "227",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "2.5",
                      "type" : "Literal"
                   }, {
-                     "localId" : "14",
+                     "localId" : "228",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "3.5",
                      "type" : "Literal"
                   }, {
-                     "localId" : "15",
+                     "localId" : "229",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "4.5",
                      "type" : "Literal"
                   }, {
-                     "localId" : "16",
+                     "localId" : "230",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "5.5",
                      "type" : "Literal"
                   } ]
                },
                "isTypeSpecifier" : {
-                  "localId" : "19",
+                  "localId" : "231",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "18",
+                     "localId" : "232",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -504,14 +534,16 @@ define IntervalOfDecimalsIsIntervalOfIntegers: Interval[1.5, 5.5] is Interval<In
 
 module.exports['IsIntervalType'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "15",
+            "r" : "220",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -527,17 +559,18 @@ module.exports['IsIntervalType'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -545,7 +578,7 @@ module.exports['IsIntervalType'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -553,47 +586,56 @@ module.exports['IsIntervalType'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "8",
+            "localId" : "212",
             "name" : "IntervalOfIntegersIsIntervalOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "8",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define ","IntervalOfIntegersIsIntervalOfIntegers",": " ]
                   }, {
-                     "r" : "7",
+                     "r" : "213",
                      "s" : [ {
-                        "r" : "4",
+                        "r" : "216",
                         "s" : [ {
-                           "r" : "2",
+                           "r" : "214",
                            "value" : [ "Interval[","1",", ","5","]" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "6",
+                        "r" : "217",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "5",
+                           "r" : "218",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -605,63 +647,64 @@ module.exports['IsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "7",
+               "localId" : "213",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "4",
+                  "localId" : "216",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "2",
+                     "localId" : "214",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "high" : {
-                     "localId" : "3",
+                     "localId" : "215",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "6",
+                  "localId" : "217",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "5",
+                     "localId" : "218",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "15",
+            "localId" : "220",
             "name" : "IntervalOfDecimalsIsIntervalOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "15",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define ","IntervalOfDecimalsIsIntervalOfIntegers",": " ]
                   }, {
-                     "r" : "14",
+                     "r" : "221",
                      "s" : [ {
-                        "r" : "11",
+                        "r" : "224",
                         "s" : [ {
-                           "r" : "9",
+                           "r" : "222",
                            "value" : [ "Interval[","1.5",", ","5.5","]" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "13",
+                        "r" : "225",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "12",
+                           "r" : "226",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -673,31 +716,32 @@ module.exports['IsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "14",
+               "localId" : "221",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "11",
+                  "localId" : "224",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
                   "low" : {
-                     "localId" : "9",
+                     "localId" : "222",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "1.5",
                      "type" : "Literal"
                   },
                   "high" : {
-                     "localId" : "10",
+                     "localId" : "223",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "5.5",
                      "type" : "Literal"
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "13",
+                  "localId" : "225",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "12",
+                     "localId" : "226",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -718,14 +762,16 @@ define TupleOfDecimalsIsTupleOfIntegers: Tuple{ a: 1.5, b: 2.5 } is Tuple{a Inte
 
 module.exports['IsTupleType'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "21",
+            "r" : "223",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -741,17 +787,18 @@ module.exports['IsTupleType'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -759,7 +806,7 @@ module.exports['IsTupleType'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -767,47 +814,56 @@ module.exports['IsTupleType'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "11",
+            "localId" : "212",
             "name" : "TupleOfIntegersIsTupleOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "11",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define ","TupleOfIntegersIsTupleOfIntegers",": " ]
                   }, {
-                     "r" : "10",
+                     "r" : "213",
                      "s" : [ {
-                        "r" : "4",
+                        "r" : "214",
                         "s" : [ {
                            "value" : [ "Tuple{ " ]
                         }, {
                            "s" : [ {
-                              "r" : "2",
+                              "r" : "215",
                               "value" : [ "a",": ","1" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
                            "s" : [ {
-                              "r" : "3",
+                              "r" : "216",
                               "value" : [ "b",": ","2" ]
                            } ]
                         }, {
@@ -816,15 +872,15 @@ module.exports['IsTupleType'] = {
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "9",
+                        "r" : "217",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
-                           "r" : "6",
+                           "r" : "218",
                            "s" : [ {
                               "value" : [ "a"," " ]
                            }, {
-                              "r" : "5",
+                              "r" : "219",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -832,11 +888,11 @@ module.exports['IsTupleType'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "8",
+                           "r" : "220",
                            "s" : [ {
                               "value" : [ "b"," " ]
                            }, {
-                              "r" : "7",
+                              "r" : "221",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -849,15 +905,16 @@ module.exports['IsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "10",
+               "localId" : "213",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "4",
+                  "localId" : "214",
                   "type" : "Tuple",
                   "element" : [ {
                      "name" : "a",
                      "value" : {
-                        "localId" : "2",
+                        "localId" : "215",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
@@ -865,7 +922,7 @@ module.exports['IsTupleType'] = {
                   }, {
                      "name" : "b",
                      "value" : {
-                        "localId" : "3",
+                        "localId" : "216",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
@@ -873,21 +930,21 @@ module.exports['IsTupleType'] = {
                   } ]
                },
                "isTypeSpecifier" : {
-                  "localId" : "9",
+                  "localId" : "217",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "6",
+                     "localId" : "218",
                      "name" : "a",
                      "elementType" : {
-                        "localId" : "5",
+                        "localId" : "219",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "8",
+                     "localId" : "220",
                      "name" : "b",
                      "elementType" : {
-                        "localId" : "7",
+                        "localId" : "221",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -895,32 +952,32 @@ module.exports['IsTupleType'] = {
                }
             }
          }, {
-            "localId" : "21",
+            "localId" : "223",
             "name" : "TupleOfDecimalsIsTupleOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "21",
+                  "r" : "223",
                   "s" : [ {
                      "value" : [ "","define ","TupleOfDecimalsIsTupleOfIntegers",": " ]
                   }, {
-                     "r" : "20",
+                     "r" : "224",
                      "s" : [ {
-                        "r" : "14",
+                        "r" : "225",
                         "s" : [ {
                            "value" : [ "Tuple{ " ]
                         }, {
                            "s" : [ {
-                              "r" : "12",
+                              "r" : "226",
                               "value" : [ "a",": ","1.5" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
                            "s" : [ {
-                              "r" : "13",
+                              "r" : "227",
                               "value" : [ "b",": ","2.5" ]
                            } ]
                         }, {
@@ -929,15 +986,15 @@ module.exports['IsTupleType'] = {
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "19",
+                        "r" : "228",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
-                           "r" : "16",
+                           "r" : "229",
                            "s" : [ {
                               "value" : [ "a"," " ]
                            }, {
-                              "r" : "15",
+                              "r" : "230",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -945,11 +1002,11 @@ module.exports['IsTupleType'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "18",
+                           "r" : "231",
                            "s" : [ {
                               "value" : [ "b"," " ]
                            }, {
-                              "r" : "17",
+                              "r" : "232",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -962,15 +1019,16 @@ module.exports['IsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "20",
+               "localId" : "224",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "14",
+                  "localId" : "225",
                   "type" : "Tuple",
                   "element" : [ {
                      "name" : "a",
                      "value" : {
-                        "localId" : "12",
+                        "localId" : "226",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "value" : "1.5",
                         "type" : "Literal"
@@ -978,7 +1036,7 @@ module.exports['IsTupleType'] = {
                   }, {
                      "name" : "b",
                      "value" : {
-                        "localId" : "13",
+                        "localId" : "227",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "value" : "2.5",
                         "type" : "Literal"
@@ -986,21 +1044,21 @@ module.exports['IsTupleType'] = {
                   } ]
                },
                "isTypeSpecifier" : {
-                  "localId" : "19",
+                  "localId" : "228",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "16",
+                     "localId" : "229",
                      "name" : "a",
                      "elementType" : {
-                        "localId" : "15",
+                        "localId" : "230",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "18",
+                     "localId" : "231",
                      "name" : "b",
                      "elementType" : {
-                        "localId" : "17",
+                        "localId" : "232",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -1023,14 +1081,16 @@ define StringIsChoiceOfIntegersAndDecimals: 'Foo' is Choice<Integer, Decimal>
 
 module.exports['IsChoiceType'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "19",
+            "r" : "226",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1046,17 +1106,18 @@ module.exports['IsChoiceType'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -1064,7 +1125,7 @@ module.exports['IsChoiceType'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -1072,49 +1133,58 @@ module.exports['IsChoiceType'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "7",
+            "localId" : "212",
             "name" : "IntegerIsChoiceOfIntegersAndDecimals",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "7",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define ","IntegerIsChoiceOfIntegersAndDecimals",": " ]
                   }, {
-                     "r" : "6",
+                     "r" : "213",
                      "s" : [ {
-                        "r" : "2",
+                        "r" : "214",
                         "value" : [ "5"," is " ]
                      }, {
-                        "r" : "5",
+                        "r" : "217",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "3",
+                           "r" : "215",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "4",
+                           "r" : "216",
                            "s" : [ {
                               "value" : [ "Decimal" ]
                            } ]
@@ -1126,57 +1196,58 @@ module.exports['IsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "6",
+               "localId" : "213",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "2",
+                  "localId" : "214",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "5",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "5",
+                  "localId" : "217",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "3",
+                     "localId" : "215",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "4",
+                     "localId" : "216",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "13",
+            "localId" : "219",
             "name" : "DecimalIsChoiceOfIntegersAndDecimals",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "13",
+                  "r" : "219",
                   "s" : [ {
                      "value" : [ "","define ","DecimalIsChoiceOfIntegersAndDecimals",": " ]
                   }, {
-                     "r" : "12",
+                     "r" : "220",
                      "s" : [ {
-                        "r" : "8",
+                        "r" : "221",
                         "value" : [ "5.5"," is " ]
                      }, {
-                        "r" : "11",
+                        "r" : "224",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "9",
+                           "r" : "222",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "10",
+                           "r" : "223",
                            "s" : [ {
                               "value" : [ "Decimal" ]
                            } ]
@@ -1188,61 +1259,62 @@ module.exports['IsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "12",
+               "localId" : "220",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "8",
+                  "localId" : "221",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "value" : "5.5",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "11",
+                  "localId" : "224",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "9",
+                     "localId" : "222",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "10",
+                     "localId" : "223",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "19",
+            "localId" : "226",
             "name" : "StringIsChoiceOfIntegersAndDecimals",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "19",
+                  "r" : "226",
                   "s" : [ {
                      "value" : [ "","define ","StringIsChoiceOfIntegersAndDecimals",": " ]
                   }, {
-                     "r" : "18",
+                     "r" : "227",
                      "s" : [ {
-                        "r" : "14",
+                        "r" : "228",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "17",
+                        "r" : "231",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "15",
+                           "r" : "229",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "16",
+                           "r" : "230",
                            "s" : [ {
                               "value" : [ "Decimal" ]
                            } ]
@@ -1254,23 +1326,24 @@ module.exports['IsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "18",
+               "localId" : "227",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "14",
+                  "localId" : "228",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
                },
                "isTypeSpecifier" : {
-                  "localId" : "17",
+                  "localId" : "231",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "15",
+                     "localId" : "229",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "16",
+                     "localId" : "230",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   } ]
@@ -1294,14 +1367,16 @@ define EncounterIsString: First([Encounter]) is System.String
 
 module.exports['IsCustomDataModelType'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "26",
+            "r" : "244",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1317,17 +1392,18 @@ module.exports['IsCustomDataModelType'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -1335,7 +1411,7 @@ module.exports['IsCustomDataModelType'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -1343,39 +1419,48 @@ module.exports['IsCustomDataModelType'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "6",
+            "localId" : "212",
             "name" : "EncounterIsEncounter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "6",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define ","EncounterIsEncounter",": " ]
                   }, {
-                     "r" : "5",
+                     "r" : "213",
                      "s" : [ {
-                        "r" : "3",
+                        "r" : "217",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "2",
+                           "r" : "214",
                            "s" : [ {
                               "value" : [ "[","Encounter","]" ]
                            } ]
@@ -1385,7 +1470,7 @@ module.exports['IsCustomDataModelType'] = {
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "4",
+                        "r" : "218",
                         "s" : [ {
                            "value" : [ "Simple",".","Encounter" ]
                         } ]
@@ -1394,42 +1479,48 @@ module.exports['IsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "5",
+               "localId" : "213",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "3",
+                  "localId" : "217",
                   "type" : "First",
+                  "signature" : [ ],
                   "source" : {
-                     "localId" : "2",
+                     "localId" : "214",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                     "type" : "Retrieve"
+                     "type" : "Retrieve",
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "4",
+                  "localId" : "218",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "11",
+            "localId" : "220",
             "name" : "EncounterIsRecord",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "11",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define ","EncounterIsRecord",": " ]
                   }, {
-                     "r" : "10",
+                     "r" : "221",
                      "s" : [ {
-                        "r" : "8",
+                        "r" : "225",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "7",
+                           "r" : "222",
                            "s" : [ {
                               "value" : [ "[","Encounter","]" ]
                            } ]
@@ -1439,7 +1530,7 @@ module.exports['IsCustomDataModelType'] = {
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "9",
+                        "r" : "226",
                         "s" : [ {
                            "value" : [ "Simple",".","Record" ]
                         } ]
@@ -1448,42 +1539,48 @@ module.exports['IsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "10",
+               "localId" : "221",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "8",
+                  "localId" : "225",
                   "type" : "First",
+                  "signature" : [ ],
                   "source" : {
-                     "localId" : "7",
+                     "localId" : "222",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                     "type" : "Retrieve"
+                     "type" : "Retrieve",
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "9",
+                  "localId" : "226",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Record",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "16",
+            "localId" : "228",
             "name" : "EncounterIsAny",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "16",
+                  "r" : "228",
                   "s" : [ {
                      "value" : [ "","define ","EncounterIsAny",": " ]
                   }, {
-                     "r" : "15",
+                     "r" : "229",
                      "s" : [ {
-                        "r" : "13",
+                        "r" : "233",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "12",
+                           "r" : "230",
                            "s" : [ {
                               "value" : [ "[","Encounter","]" ]
                            } ]
@@ -1493,7 +1590,7 @@ module.exports['IsCustomDataModelType'] = {
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "14",
+                        "r" : "234",
                         "s" : [ {
                            "value" : [ "System",".","Any" ]
                         } ]
@@ -1502,42 +1599,48 @@ module.exports['IsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "15",
+               "localId" : "229",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "13",
+                  "localId" : "233",
                   "type" : "First",
+                  "signature" : [ ],
                   "source" : {
-                     "localId" : "12",
+                     "localId" : "230",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                     "type" : "Retrieve"
+                     "type" : "Retrieve",
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "14",
+                  "localId" : "234",
                   "name" : "{urn:hl7-org:elm-types:r1}Any",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "21",
+            "localId" : "236",
             "name" : "EncounterIsCondition",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "21",
+                  "r" : "236",
                   "s" : [ {
                      "value" : [ "","define ","EncounterIsCondition",": " ]
                   }, {
-                     "r" : "20",
+                     "r" : "237",
                      "s" : [ {
-                        "r" : "18",
+                        "r" : "241",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "17",
+                           "r" : "238",
                            "s" : [ {
                               "value" : [ "[","Encounter","]" ]
                            } ]
@@ -1547,7 +1650,7 @@ module.exports['IsCustomDataModelType'] = {
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "19",
+                        "r" : "242",
                         "s" : [ {
                            "value" : [ "Simple",".","Condition" ]
                         } ]
@@ -1556,42 +1659,48 @@ module.exports['IsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "20",
+               "localId" : "237",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "18",
+                  "localId" : "241",
                   "type" : "First",
+                  "signature" : [ ],
                   "source" : {
-                     "localId" : "17",
+                     "localId" : "238",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                     "type" : "Retrieve"
+                     "type" : "Retrieve",
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "19",
+                  "localId" : "242",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "26",
+            "localId" : "244",
             "name" : "EncounterIsString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "26",
+                  "r" : "244",
                   "s" : [ {
                      "value" : [ "","define ","EncounterIsString",": " ]
                   }, {
-                     "r" : "25",
+                     "r" : "245",
                      "s" : [ {
-                        "r" : "23",
+                        "r" : "249",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "22",
+                           "r" : "246",
                            "s" : [ {
                               "value" : [ "[","Encounter","]" ]
                            } ]
@@ -1601,7 +1710,7 @@ module.exports['IsCustomDataModelType'] = {
                      }, {
                         "value" : [ " is " ]
                      }, {
-                        "r" : "24",
+                        "r" : "250",
                         "s" : [ {
                            "value" : [ "System",".","String" ]
                         } ]
@@ -1610,19 +1719,25 @@ module.exports['IsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "25",
+               "localId" : "245",
                "type" : "Is",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "23",
+                  "localId" : "249",
                   "type" : "First",
+                  "signature" : [ ],
                   "source" : {
-                     "localId" : "22",
+                     "localId" : "246",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                     "type" : "Retrieve"
+                     "type" : "Retrieve",
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
                   }
                },
                "isTypeSpecifier" : {
-                  "localId" : "24",
+                  "localId" : "250",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
@@ -1655,14 +1770,16 @@ define CastTupleAsInteger: cast Echo(Tuple{A: 5}) as Integer
 
 module.exports['AsSystemType'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "82",
+            "r" : "301",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1678,17 +1795,18 @@ module.exports['AsSystemType'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -1696,7 +1814,7 @@ module.exports['AsSystemType'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -1704,22 +1822,31 @@ module.exports['AsSystemType'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "4",
+            "localId" : "211",
             "name" : "Echo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1727,20 +1854,13 @@ module.exports['AsSystemType'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "4",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define function ","Echo","(","Val"," " ]
+                     "value" : [ "","define function Echo(Val Any): " ]
                   }, {
-                     "r" : "2",
+                     "r" : "214",
                      "s" : [ {
-                        "value" : [ "Any" ]
-                     } ]
-                  }, {
-                     "value" : [ "): " ]
-                  }, {
-                     "r" : "3",
-                     "s" : [ {
-                        "r" : "3",
+                        "r" : "214",
                         "s" : [ {
                            "value" : [ "Val" ]
                         } ]
@@ -1749,41 +1869,42 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "3",
+               "localId" : "214",
                "name" : "Val",
                "type" : "OperandRef"
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "Val",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{urn:hl7-org:elm-types:r1}Any",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "9",
+            "localId" : "216",
             "name" : "FiveAsInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "9",
+                  "r" : "216",
                   "s" : [ {
                      "value" : [ "// fool CQL-to-ELM into letting the casts compile\n","define ","FiveAsInteger",": " ]
                   }, {
-                     "r" : "8",
+                     "r" : "217",
                      "s" : [ {
-                        "r" : "6",
+                        "r" : "219",
                         "s" : [ {
-                           "r" : "5",
+                           "r" : "218",
                            "value" : [ "Echo","(","5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "7",
+                        "r" : "220",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -1792,49 +1913,51 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "8",
+               "localId" : "217",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "6",
+                  "localId" : "219",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "5",
+                     "localId" : "218",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "7",
+                  "localId" : "220",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "14",
+            "localId" : "222",
             "name" : "FiveAsString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "14",
+                  "r" : "222",
                   "s" : [ {
                      "value" : [ "","define ","FiveAsString",": " ]
                   }, {
-                     "r" : "13",
+                     "r" : "223",
                      "s" : [ {
-                        "r" : "11",
+                        "r" : "225",
                         "s" : [ {
-                           "r" : "10",
+                           "r" : "224",
                            "value" : [ "Echo","(","5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "12",
+                        "r" : "226",
                         "s" : [ {
                            "value" : [ "String" ]
                         } ]
@@ -1843,45 +1966,47 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "13",
+               "localId" : "223",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "11",
+                  "localId" : "225",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "10",
+                     "localId" : "224",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "12",
+                  "localId" : "226",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "19",
+            "localId" : "228",
             "name" : "StringFiveAsInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "19",
+                  "r" : "228",
                   "s" : [ {
                      "value" : [ "","define ","StringFiveAsInteger",": " ]
                   }, {
-                     "r" : "18",
+                     "r" : "229",
                      "s" : [ {
-                        "r" : "16",
+                        "r" : "231",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "15",
+                           "r" : "230",
                            "s" : [ {
                               "value" : [ "'5'" ]
                            } ]
@@ -1891,7 +2016,7 @@ module.exports['AsSystemType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "17",
+                        "r" : "232",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -1900,45 +2025,47 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "18",
+               "localId" : "229",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "16",
+                  "localId" : "231",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "15",
+                     "localId" : "230",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "17",
+                  "localId" : "232",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "24",
+            "localId" : "234",
             "name" : "StringFiveAsString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "24",
+                  "r" : "234",
                   "s" : [ {
                      "value" : [ "","define ","StringFiveAsString",": " ]
                   }, {
-                     "r" : "23",
+                     "r" : "235",
                      "s" : [ {
-                        "r" : "21",
+                        "r" : "237",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "20",
+                           "r" : "236",
                            "s" : [ {
                               "value" : [ "'5'" ]
                            } ]
@@ -1948,7 +2075,7 @@ module.exports['AsSystemType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "22",
+                        "r" : "238",
                         "s" : [ {
                            "value" : [ "String" ]
                         } ]
@@ -1957,47 +2084,49 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "23",
+               "localId" : "235",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "21",
+                  "localId" : "237",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "20",
+                     "localId" : "236",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "22",
+                  "localId" : "238",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "30",
+            "localId" : "240",
             "name" : "ListAsInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "30",
+                  "r" : "240",
                   "s" : [ {
                      "value" : [ "","define ","ListAsInteger",": " ]
                   }, {
-                     "r" : "29",
+                     "r" : "241",
                      "s" : [ {
-                        "r" : "27",
+                        "r" : "244",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "26",
+                           "r" : "242",
                            "s" : [ {
-                              "r" : "25",
+                              "r" : "243",
                               "value" : [ "{","5","}" ]
                            } ]
                         }, {
@@ -2006,7 +2135,7 @@ module.exports['AsSystemType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "28",
+                        "r" : "245",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -2015,18 +2144,20 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "29",
+               "localId" : "241",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "27",
+                  "localId" : "244",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "26",
+                     "localId" : "242",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "25",
+                        "localId" : "243",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -2034,32 +2165,32 @@ module.exports['AsSystemType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "28",
+                  "localId" : "245",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "37",
+            "localId" : "247",
             "name" : "IntervalAsInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "37",
+                  "r" : "247",
                   "s" : [ {
                      "value" : [ "","define ","IntervalAsInteger",": " ]
                   }, {
-                     "r" : "36",
+                     "r" : "248",
                      "s" : [ {
-                        "r" : "34",
+                        "r" : "252",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "33",
+                           "r" : "251",
                            "s" : [ {
-                              "r" : "31",
+                              "r" : "249",
                               "value" : [ "Interval[","1",", ","5","]" ]
                            } ]
                         }, {
@@ -2068,7 +2199,7 @@ module.exports['AsSystemType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "35",
+                        "r" : "253",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -2077,26 +2208,28 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "36",
+               "localId" : "248",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "34",
+                  "localId" : "252",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "33",
+                     "localId" : "251",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "31",
+                        "localId" : "249",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "32",
+                        "localId" : "250",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -2104,35 +2237,35 @@ module.exports['AsSystemType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "35",
+                  "localId" : "253",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "43",
+            "localId" : "255",
             "name" : "TupleAsInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "43",
+                  "r" : "255",
                   "s" : [ {
                      "value" : [ "","define ","TupleAsInteger",": " ]
                   }, {
-                     "r" : "42",
+                     "r" : "256",
                      "s" : [ {
-                        "r" : "40",
+                        "r" : "259",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "39",
+                           "r" : "257",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
-                                 "r" : "38",
+                                 "r" : "258",
                                  "value" : [ "A",": ","5" ]
                               } ]
                            }, {
@@ -2144,7 +2277,7 @@ module.exports['AsSystemType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "41",
+                        "r" : "260",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -2153,20 +2286,22 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "42",
+               "localId" : "256",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "40",
+                  "localId" : "259",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "39",
+                     "localId" : "257",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "38",
+                           "localId" : "258",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
                            "type" : "Literal"
@@ -2175,36 +2310,36 @@ module.exports['AsSystemType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "41",
+                  "localId" : "260",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "48",
+            "localId" : "262",
             "name" : "CastFiveAsInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "48",
+                  "r" : "262",
                   "s" : [ {
                      "value" : [ "","define ","CastFiveAsInteger",": " ]
                   }, {
-                     "r" : "47",
+                     "r" : "263",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "45",
+                        "r" : "265",
                         "s" : [ {
-                           "r" : "44",
+                           "r" : "264",
                            "value" : [ "Echo","(","5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "46",
+                        "r" : "266",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -2213,51 +2348,53 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "47",
+               "localId" : "263",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "45",
+                  "localId" : "265",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "44",
+                     "localId" : "264",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "46",
+                  "localId" : "266",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "53",
+            "localId" : "268",
             "name" : "CastFiveAsString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "53",
+                  "r" : "268",
                   "s" : [ {
                      "value" : [ "","define ","CastFiveAsString",": " ]
                   }, {
-                     "r" : "52",
+                     "r" : "269",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "50",
+                        "r" : "271",
                         "s" : [ {
-                           "r" : "49",
+                           "r" : "270",
                            "value" : [ "Echo","(","5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "51",
+                        "r" : "272",
                         "s" : [ {
                            "value" : [ "String" ]
                         } ]
@@ -2266,47 +2403,49 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "52",
+               "localId" : "269",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "50",
+                  "localId" : "271",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "49",
+                     "localId" : "270",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "51",
+                  "localId" : "272",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "58",
+            "localId" : "274",
             "name" : "CastStringFiveAsInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "58",
+                  "r" : "274",
                   "s" : [ {
                      "value" : [ "","define ","CastStringFiveAsInteger",": " ]
                   }, {
-                     "r" : "57",
+                     "r" : "275",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "55",
+                        "r" : "277",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "54",
+                           "r" : "276",
                            "s" : [ {
                               "value" : [ "'5'" ]
                            } ]
@@ -2316,7 +2455,7 @@ module.exports['AsSystemType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "56",
+                        "r" : "278",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -2325,47 +2464,49 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "57",
+               "localId" : "275",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "55",
+                  "localId" : "277",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "54",
+                     "localId" : "276",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "56",
+                  "localId" : "278",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "63",
+            "localId" : "280",
             "name" : "CastStringFiveAsString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "63",
+                  "r" : "280",
                   "s" : [ {
                      "value" : [ "","define ","CastStringFiveAsString",": " ]
                   }, {
-                     "r" : "62",
+                     "r" : "281",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "60",
+                        "r" : "283",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "59",
+                           "r" : "282",
                            "s" : [ {
                               "value" : [ "'5'" ]
                            } ]
@@ -2375,7 +2516,7 @@ module.exports['AsSystemType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "61",
+                        "r" : "284",
                         "s" : [ {
                            "value" : [ "String" ]
                         } ]
@@ -2384,49 +2525,51 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "62",
+               "localId" : "281",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "60",
+                  "localId" : "283",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "59",
+                     "localId" : "282",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "61",
+                  "localId" : "284",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "69",
+            "localId" : "286",
             "name" : "CastListAsInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "69",
+                  "r" : "286",
                   "s" : [ {
                      "value" : [ "","define ","CastListAsInteger",": " ]
                   }, {
-                     "r" : "68",
+                     "r" : "287",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "66",
+                        "r" : "290",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "65",
+                           "r" : "288",
                            "s" : [ {
-                              "r" : "64",
+                              "r" : "289",
                               "value" : [ "{","5","}" ]
                            } ]
                         }, {
@@ -2435,7 +2578,7 @@ module.exports['AsSystemType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "67",
+                        "r" : "291",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -2444,18 +2587,20 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "68",
+               "localId" : "287",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "66",
+                  "localId" : "290",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "65",
+                     "localId" : "288",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "64",
+                        "localId" : "289",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -2463,34 +2608,34 @@ module.exports['AsSystemType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "67",
+                  "localId" : "291",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "76",
+            "localId" : "293",
             "name" : "CastIntervalAsInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "76",
+                  "r" : "293",
                   "s" : [ {
                      "value" : [ "","define ","CastIntervalAsInteger",": " ]
                   }, {
-                     "r" : "75",
+                     "r" : "294",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "73",
+                        "r" : "298",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "72",
+                           "r" : "297",
                            "s" : [ {
-                              "r" : "70",
+                              "r" : "295",
                               "value" : [ "Interval[","1",", ","5","]" ]
                            } ]
                         }, {
@@ -2499,7 +2644,7 @@ module.exports['AsSystemType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "74",
+                        "r" : "299",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -2508,26 +2653,28 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "75",
+               "localId" : "294",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "73",
+                  "localId" : "298",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "72",
+                     "localId" : "297",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "70",
+                        "localId" : "295",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "71",
+                        "localId" : "296",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -2535,37 +2682,37 @@ module.exports['AsSystemType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "74",
+                  "localId" : "299",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "82",
+            "localId" : "301",
             "name" : "CastTupleAsInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "82",
+                  "r" : "301",
                   "s" : [ {
                      "value" : [ "","define ","CastTupleAsInteger",": " ]
                   }, {
-                     "r" : "81",
+                     "r" : "302",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "79",
+                        "r" : "305",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "78",
+                           "r" : "303",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
-                                 "r" : "77",
+                                 "r" : "304",
                                  "value" : [ "A",": ","5" ]
                               } ]
                            }, {
@@ -2577,7 +2724,7 @@ module.exports['AsSystemType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "80",
+                        "r" : "306",
                         "s" : [ {
                            "value" : [ "Integer" ]
                         } ]
@@ -2586,20 +2733,22 @@ module.exports['AsSystemType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "81",
+               "localId" : "302",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "79",
+                  "localId" : "305",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "78",
+                     "localId" : "303",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "77",
+                           "localId" : "304",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
                            "type" : "Literal"
@@ -2608,7 +2757,7 @@ module.exports['AsSystemType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "80",
+                  "localId" : "306",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
@@ -2637,14 +2786,16 @@ define CastTupleAsListOfIntegers: cast Echo(Tuple{A: 5}) as List<Integer>
 
 module.exports['AsListType'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "88",
+            "r" : "302",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -2660,17 +2811,18 @@ module.exports['AsListType'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -2678,7 +2830,7 @@ module.exports['AsListType'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -2686,22 +2838,31 @@ module.exports['AsListType'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "4",
+            "localId" : "211",
             "name" : "Echo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2709,20 +2870,13 @@ module.exports['AsListType'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "4",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define function ","Echo","(","Val"," " ]
+                     "value" : [ "","define function Echo(Val Any): " ]
                   }, {
-                     "r" : "2",
+                     "r" : "214",
                      "s" : [ {
-                        "value" : [ "Any" ]
-                     } ]
-                  }, {
-                     "value" : [ "): " ]
-                  }, {
-                     "r" : "3",
-                     "s" : [ {
-                        "r" : "3",
+                        "r" : "214",
                         "s" : [ {
                            "value" : [ "Val" ]
                         } ]
@@ -2731,39 +2885,40 @@ module.exports['AsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "3",
+               "localId" : "214",
                "name" : "Val",
                "type" : "OperandRef"
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "Val",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{urn:hl7-org:elm-types:r1}Any",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "15",
+            "localId" : "216",
             "name" : "ListOfIntegersAsListOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "15",
+                  "r" : "216",
                   "s" : [ {
                      "value" : [ "// fool CQL-to-ELM into letting the casts compile\n","define ","ListOfIntegersAsListOfIntegers",": " ]
                   }, {
-                     "r" : "14",
+                     "r" : "217",
                      "s" : [ {
-                        "r" : "11",
+                        "r" : "224",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "10",
+                           "r" : "218",
                            "s" : [ {
-                              "r" : "5",
+                              "r" : "219",
                               "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
                            } ]
                         }, {
@@ -2772,11 +2927,11 @@ module.exports['AsListType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "13",
+                        "r" : "225",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "12",
+                           "r" : "226",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -2788,38 +2943,40 @@ module.exports['AsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "14",
+               "localId" : "217",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "11",
+                  "localId" : "224",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "10",
+                     "localId" : "218",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "5",
+                        "localId" : "219",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
-                        "localId" : "6",
+                        "localId" : "220",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "7",
+                        "localId" : "221",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "8",
+                        "localId" : "222",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "9",
+                        "localId" : "223",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -2827,59 +2984,59 @@ module.exports['AsListType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "13",
+                  "localId" : "225",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "12",
+                     "localId" : "226",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "25",
+            "localId" : "228",
             "name" : "ListOfStringsAsListOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "25",
+                  "r" : "228",
                   "s" : [ {
                      "value" : [ "","define ","ListOfStringsAsListOfIntegers",": " ]
                   }, {
-                     "r" : "24",
+                     "r" : "229",
                      "s" : [ {
-                        "r" : "21",
+                        "r" : "235",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "20",
+                           "r" : "230",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
-                              "r" : "16",
+                              "r" : "231",
                               "s" : [ {
                                  "value" : [ "'a'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "17",
+                              "r" : "232",
                               "s" : [ {
                                  "value" : [ "'b'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "18",
+                              "r" : "233",
                               "s" : [ {
                                  "value" : [ "'c'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "19",
+                              "r" : "234",
                               "s" : [ {
                                  "value" : [ "'d'" ]
                               } ]
@@ -2892,11 +3049,11 @@ module.exports['AsListType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "23",
+                        "r" : "236",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "22",
+                           "r" : "237",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -2908,33 +3065,35 @@ module.exports['AsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "24",
+               "localId" : "229",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "21",
+                  "localId" : "235",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "20",
+                     "localId" : "230",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "16",
+                        "localId" : "231",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "a",
                         "type" : "Literal"
                      }, {
-                        "localId" : "17",
+                        "localId" : "232",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "b",
                         "type" : "Literal"
                      }, {
-                        "localId" : "18",
+                        "localId" : "233",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "c",
                         "type" : "Literal"
                      }, {
-                        "localId" : "19",
+                        "localId" : "234",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "d",
                         "type" : "Literal"
@@ -2942,42 +3101,42 @@ module.exports['AsListType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "23",
+                  "localId" : "236",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "22",
+                     "localId" : "237",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "31",
+            "localId" : "239",
             "name" : "IntegerAsListOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "31",
+                  "r" : "239",
                   "s" : [ {
                      "value" : [ "","define ","IntegerAsListOfIntegers",": " ]
                   }, {
-                     "r" : "30",
+                     "r" : "240",
                      "s" : [ {
-                        "r" : "27",
+                        "r" : "242",
                         "s" : [ {
-                           "r" : "26",
+                           "r" : "241",
                            "value" : [ "Echo","(","5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "29",
+                        "r" : "243",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "28",
+                           "r" : "244",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -2989,51 +3148,53 @@ module.exports['AsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "30",
+               "localId" : "240",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "27",
+                  "localId" : "242",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "26",
+                     "localId" : "241",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "29",
+                  "localId" : "243",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "28",
+                     "localId" : "244",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "39",
+            "localId" : "246",
             "name" : "IntervalAsListOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "39",
+                  "r" : "246",
                   "s" : [ {
                      "value" : [ "","define ","IntervalAsListOfIntegers",": " ]
                   }, {
-                     "r" : "38",
+                     "r" : "247",
                      "s" : [ {
-                        "r" : "35",
+                        "r" : "251",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "34",
+                           "r" : "250",
                            "s" : [ {
-                              "r" : "32",
+                              "r" : "248",
                               "value" : [ "Interval[","1",", ","5","]" ]
                            } ]
                         }, {
@@ -3042,11 +3203,11 @@ module.exports['AsListType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "37",
+                        "r" : "252",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "36",
+                           "r" : "253",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -3058,26 +3219,28 @@ module.exports['AsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "38",
+               "localId" : "247",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "35",
+                  "localId" : "251",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "34",
+                     "localId" : "250",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "32",
+                        "localId" : "248",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "33",
+                        "localId" : "249",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -3085,39 +3248,39 @@ module.exports['AsListType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "37",
+                  "localId" : "252",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "36",
+                     "localId" : "253",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "46",
+            "localId" : "255",
             "name" : "TupleAsListOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "46",
+                  "r" : "255",
                   "s" : [ {
                      "value" : [ "","define ","TupleAsListOfIntegers",": " ]
                   }, {
-                     "r" : "45",
+                     "r" : "256",
                      "s" : [ {
-                        "r" : "42",
+                        "r" : "259",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "41",
+                           "r" : "257",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
-                                 "r" : "40",
+                                 "r" : "258",
                                  "value" : [ "A",": ","5" ]
                               } ]
                            }, {
@@ -3129,11 +3292,11 @@ module.exports['AsListType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "44",
+                        "r" : "260",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "43",
+                           "r" : "261",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -3145,20 +3308,22 @@ module.exports['AsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "45",
+               "localId" : "256",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "42",
+                  "localId" : "259",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "41",
+                     "localId" : "257",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "40",
+                           "localId" : "258",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
                            "type" : "Literal"
@@ -3167,38 +3332,38 @@ module.exports['AsListType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "44",
+                  "localId" : "260",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "43",
+                     "localId" : "261",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "57",
+            "localId" : "263",
             "name" : "CastListOfIntegersAsListOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "57",
+                  "r" : "263",
                   "s" : [ {
                      "value" : [ "","define ","CastListOfIntegersAsListOfIntegers",": " ]
                   }, {
-                     "r" : "56",
+                     "r" : "264",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "53",
+                        "r" : "271",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "52",
+                           "r" : "265",
                            "s" : [ {
-                              "r" : "47",
+                              "r" : "266",
                               "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
                            } ]
                         }, {
@@ -3207,11 +3372,11 @@ module.exports['AsListType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "55",
+                        "r" : "272",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "54",
+                           "r" : "273",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -3223,38 +3388,40 @@ module.exports['AsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "56",
+               "localId" : "264",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "53",
+                  "localId" : "271",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "52",
+                     "localId" : "265",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "47",
+                        "localId" : "266",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
-                        "localId" : "48",
+                        "localId" : "267",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "49",
+                        "localId" : "268",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "50",
+                        "localId" : "269",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "51",
+                        "localId" : "270",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -3262,61 +3429,61 @@ module.exports['AsListType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "55",
+                  "localId" : "272",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "54",
+                     "localId" : "273",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "67",
+            "localId" : "275",
             "name" : "CastListOfStringsAsListOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "67",
+                  "r" : "275",
                   "s" : [ {
                      "value" : [ "","define ","CastListOfStringsAsListOfIntegers",": " ]
                   }, {
-                     "r" : "66",
+                     "r" : "276",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "63",
+                        "r" : "282",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "62",
+                           "r" : "277",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
-                              "r" : "58",
+                              "r" : "278",
                               "s" : [ {
                                  "value" : [ "'a'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "59",
+                              "r" : "279",
                               "s" : [ {
                                  "value" : [ "'b'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "60",
+                              "r" : "280",
                               "s" : [ {
                                  "value" : [ "'c'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "61",
+                              "r" : "281",
                               "s" : [ {
                                  "value" : [ "'d'" ]
                               } ]
@@ -3329,11 +3496,11 @@ module.exports['AsListType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "65",
+                        "r" : "283",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "64",
+                           "r" : "284",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -3345,33 +3512,35 @@ module.exports['AsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "66",
+               "localId" : "276",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "63",
+                  "localId" : "282",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "62",
+                     "localId" : "277",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "58",
+                        "localId" : "278",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "a",
                         "type" : "Literal"
                      }, {
-                        "localId" : "59",
+                        "localId" : "279",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "b",
                         "type" : "Literal"
                      }, {
-                        "localId" : "60",
+                        "localId" : "280",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "c",
                         "type" : "Literal"
                      }, {
-                        "localId" : "61",
+                        "localId" : "281",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "d",
                         "type" : "Literal"
@@ -3379,44 +3548,44 @@ module.exports['AsListType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "65",
+                  "localId" : "283",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "64",
+                     "localId" : "284",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "73",
+            "localId" : "286",
             "name" : "CastIntegerAsListOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "73",
+                  "r" : "286",
                   "s" : [ {
                      "value" : [ "","define ","CastIntegerAsListOfIntegers",": " ]
                   }, {
-                     "r" : "72",
+                     "r" : "287",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "69",
+                        "r" : "289",
                         "s" : [ {
-                           "r" : "68",
+                           "r" : "288",
                            "value" : [ "Echo","(","5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "71",
+                        "r" : "290",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "70",
+                           "r" : "291",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -3428,53 +3597,55 @@ module.exports['AsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "72",
+               "localId" : "287",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "69",
+                  "localId" : "289",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "68",
+                     "localId" : "288",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "71",
+                  "localId" : "290",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "70",
+                     "localId" : "291",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "81",
+            "localId" : "293",
             "name" : "CastIntervalAsListOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "81",
+                  "r" : "293",
                   "s" : [ {
                      "value" : [ "","define ","CastIntervalAsListOfIntegers",": " ]
                   }, {
-                     "r" : "80",
+                     "r" : "294",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "77",
+                        "r" : "298",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "76",
+                           "r" : "297",
                            "s" : [ {
-                              "r" : "74",
+                              "r" : "295",
                               "value" : [ "Interval[","1",", ","5","]" ]
                            } ]
                         }, {
@@ -3483,11 +3654,11 @@ module.exports['AsListType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "79",
+                        "r" : "299",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "78",
+                           "r" : "300",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -3499,26 +3670,28 @@ module.exports['AsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "80",
+               "localId" : "294",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "77",
+                  "localId" : "298",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "76",
+                     "localId" : "297",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "74",
+                        "localId" : "295",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "75",
+                        "localId" : "296",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -3526,41 +3699,41 @@ module.exports['AsListType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "79",
+                  "localId" : "299",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "78",
+                     "localId" : "300",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "88",
+            "localId" : "302",
             "name" : "CastTupleAsListOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "88",
+                  "r" : "302",
                   "s" : [ {
                      "value" : [ "","define ","CastTupleAsListOfIntegers",": " ]
                   }, {
-                     "r" : "87",
+                     "r" : "303",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "84",
+                        "r" : "306",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "83",
+                           "r" : "304",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
-                                 "r" : "82",
+                                 "r" : "305",
                                  "value" : [ "A",": ","5" ]
                               } ]
                            }, {
@@ -3572,11 +3745,11 @@ module.exports['AsListType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "86",
+                        "r" : "307",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "85",
+                           "r" : "308",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -3588,20 +3761,22 @@ module.exports['AsListType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "87",
+               "localId" : "303",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "84",
+                  "localId" : "306",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "83",
+                     "localId" : "304",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "82",
+                           "localId" : "305",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
                            "type" : "Literal"
@@ -3610,10 +3785,10 @@ module.exports['AsListType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "86",
+                  "localId" : "307",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "85",
+                     "localId" : "308",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -3643,14 +3818,16 @@ define CastTupleAsIntervalOfIntegers: cast Echo(Tuple{A: 5}) as Interval<Integer
 
 module.exports['AsIntervalType'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "84",
+            "r" : "314",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3666,17 +3843,18 @@ module.exports['AsIntervalType'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -3684,7 +3862,7 @@ module.exports['AsIntervalType'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -3692,22 +3870,31 @@ module.exports['AsIntervalType'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "4",
+            "localId" : "211",
             "name" : "Echo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3715,20 +3902,13 @@ module.exports['AsIntervalType'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "4",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define function ","Echo","(","Val"," " ]
+                     "value" : [ "","define function Echo(Val Any): " ]
                   }, {
-                     "r" : "2",
+                     "r" : "214",
                      "s" : [ {
-                        "value" : [ "Any" ]
-                     } ]
-                  }, {
-                     "value" : [ "): " ]
-                  }, {
-                     "r" : "3",
-                     "s" : [ {
-                        "r" : "3",
+                        "r" : "214",
                         "s" : [ {
                            "value" : [ "Val" ]
                         } ]
@@ -3737,39 +3917,40 @@ module.exports['AsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "3",
+               "localId" : "214",
                "name" : "Val",
                "type" : "OperandRef"
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "Val",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{urn:hl7-org:elm-types:r1}Any",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "12",
+            "localId" : "216",
             "name" : "IntervalOfIntegersAsIntervalOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "12",
+                  "r" : "216",
                   "s" : [ {
                      "value" : [ "// fool CQL-to-ELM into letting the casts compile\n","define ","IntervalOfIntegersAsIntervalOfIntegers",": " ]
                   }, {
-                     "r" : "11",
+                     "r" : "217",
                      "s" : [ {
-                        "r" : "8",
+                        "r" : "221",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "7",
+                           "r" : "220",
                            "s" : [ {
-                              "r" : "5",
+                              "r" : "218",
                               "value" : [ "Interval[","1",", ","5","]" ]
                            } ]
                         }, {
@@ -3778,11 +3959,11 @@ module.exports['AsIntervalType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "10",
+                        "r" : "222",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "9",
+                           "r" : "223",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -3794,26 +3975,28 @@ module.exports['AsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "11",
+               "localId" : "217",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "8",
+                  "localId" : "221",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "7",
+                     "localId" : "220",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "5",
+                        "localId" : "218",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "6",
+                        "localId" : "219",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -3821,36 +4004,36 @@ module.exports['AsIntervalType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "10",
+                  "localId" : "222",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "9",
+                     "localId" : "223",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "20",
+            "localId" : "225",
             "name" : "IntervalOfDatesAsIntervalOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "20",
+                  "r" : "225",
                   "s" : [ {
                      "value" : [ "","define ","IntervalOfDatesAsIntervalOfIntegers",": " ]
                   }, {
-                     "r" : "19",
+                     "r" : "226",
                      "s" : [ {
-                        "r" : "16",
+                        "r" : "238",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "15",
+                           "r" : "237",
                            "s" : [ {
-                              "r" : "13",
+                              "r" : "231",
                               "value" : [ "Interval[","@2000-01-01",", ","@2000-12-31","]" ]
                            } ]
                         }, {
@@ -3859,11 +4042,11 @@ module.exports['AsIntervalType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "18",
+                        "r" : "239",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "17",
+                           "r" : "240",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -3875,51 +4058,61 @@ module.exports['AsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "19",
+               "localId" : "226",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "16",
+                  "localId" : "238",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "15",
+                     "localId" : "237",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "13",
+                        "localId" : "231",
                         "type" : "Date",
+                        "signature" : [ ],
                         "year" : {
+                           "localId" : "228",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2000",
                            "type" : "Literal"
                         },
                         "month" : {
+                           "localId" : "229",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         },
                         "day" : {
+                           "localId" : "230",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }
                      },
                      "high" : {
-                        "localId" : "14",
+                        "localId" : "236",
                         "type" : "Date",
+                        "signature" : [ ],
                         "year" : {
+                           "localId" : "233",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2000",
                            "type" : "Literal"
                         },
                         "month" : {
+                           "localId" : "234",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "12",
                            "type" : "Literal"
                         },
                         "day" : {
+                           "localId" : "235",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "31",
                            "type" : "Literal"
@@ -3928,42 +4121,42 @@ module.exports['AsIntervalType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "18",
+                  "localId" : "239",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "17",
+                     "localId" : "240",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "26",
+            "localId" : "242",
             "name" : "IntegerAsIntervalOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "26",
+                  "r" : "242",
                   "s" : [ {
                      "value" : [ "","define ","IntegerAsIntervalOfIntegers",": " ]
                   }, {
-                     "r" : "25",
+                     "r" : "243",
                      "s" : [ {
-                        "r" : "22",
+                        "r" : "245",
                         "s" : [ {
-                           "r" : "21",
+                           "r" : "244",
                            "value" : [ "Echo","(","5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "24",
+                        "r" : "246",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "23",
+                           "r" : "247",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -3975,51 +4168,53 @@ module.exports['AsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "25",
+               "localId" : "243",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "22",
+                  "localId" : "245",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "21",
+                     "localId" : "244",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "24",
+                  "localId" : "246",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "23",
+                     "localId" : "247",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "37",
+            "localId" : "249",
             "name" : "ListAsIntervalOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "37",
+                  "r" : "249",
                   "s" : [ {
                      "value" : [ "","define ","ListAsIntervalOfIntegers",": " ]
                   }, {
-                     "r" : "36",
+                     "r" : "250",
                      "s" : [ {
-                        "r" : "33",
+                        "r" : "257",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "32",
+                           "r" : "251",
                            "s" : [ {
-                              "r" : "27",
+                              "r" : "252",
                               "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
                            } ]
                         }, {
@@ -4028,11 +4223,11 @@ module.exports['AsIntervalType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "35",
+                        "r" : "258",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "34",
+                           "r" : "259",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -4044,38 +4239,40 @@ module.exports['AsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "36",
+               "localId" : "250",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "33",
+                  "localId" : "257",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "32",
+                     "localId" : "251",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "27",
+                        "localId" : "252",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
-                        "localId" : "28",
+                        "localId" : "253",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "29",
+                        "localId" : "254",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "30",
+                        "localId" : "255",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "31",
+                        "localId" : "256",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -4083,39 +4280,39 @@ module.exports['AsIntervalType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "35",
+                  "localId" : "258",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "34",
+                     "localId" : "259",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "44",
+            "localId" : "261",
             "name" : "TupleAsIntervalOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "44",
+                  "r" : "261",
                   "s" : [ {
                      "value" : [ "","define ","TupleAsIntervalOfIntegers",": " ]
                   }, {
-                     "r" : "43",
+                     "r" : "262",
                      "s" : [ {
-                        "r" : "40",
+                        "r" : "265",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "39",
+                           "r" : "263",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
-                                 "r" : "38",
+                                 "r" : "264",
                                  "value" : [ "A",": ","5" ]
                               } ]
                            }, {
@@ -4127,11 +4324,11 @@ module.exports['AsIntervalType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "42",
+                        "r" : "266",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "41",
+                           "r" : "267",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -4143,20 +4340,22 @@ module.exports['AsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "43",
+               "localId" : "262",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "40",
+                  "localId" : "265",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "39",
+                     "localId" : "263",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "38",
+                           "localId" : "264",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
                            "type" : "Literal"
@@ -4165,38 +4364,38 @@ module.exports['AsIntervalType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "42",
+                  "localId" : "266",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "41",
+                     "localId" : "267",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "52",
+            "localId" : "269",
             "name" : "CastIntervalOfIntegersAsIntervalOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "52",
+                  "r" : "269",
                   "s" : [ {
                      "value" : [ "","define ","CastIntervalOfIntegersAsIntervalOfIntegers",": " ]
                   }, {
-                     "r" : "51",
+                     "r" : "270",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "48",
+                        "r" : "274",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "47",
+                           "r" : "273",
                            "s" : [ {
-                              "r" : "45",
+                              "r" : "271",
                               "value" : [ "Interval[","1",", ","5","]" ]
                            } ]
                         }, {
@@ -4205,11 +4404,11 @@ module.exports['AsIntervalType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "50",
+                        "r" : "275",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "49",
+                           "r" : "276",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -4221,26 +4420,28 @@ module.exports['AsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "51",
+               "localId" : "270",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "48",
+                  "localId" : "274",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "47",
+                     "localId" : "273",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "45",
+                        "localId" : "271",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "46",
+                        "localId" : "272",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -4248,38 +4449,38 @@ module.exports['AsIntervalType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "50",
+                  "localId" : "275",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "49",
+                     "localId" : "276",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "60",
+            "localId" : "278",
             "name" : "CastIntervalOfDatesAsIntervalOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "60",
+                  "r" : "278",
                   "s" : [ {
                      "value" : [ "","define ","CastIntervalOfDatesAsIntervalOfIntegers",": " ]
                   }, {
-                     "r" : "59",
+                     "r" : "279",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "56",
+                        "r" : "291",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "55",
+                           "r" : "290",
                            "s" : [ {
-                              "r" : "53",
+                              "r" : "284",
                               "value" : [ "Interval[","@2000-01-01",", ","@2000-12-31","]" ]
                            } ]
                         }, {
@@ -4288,11 +4489,11 @@ module.exports['AsIntervalType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "58",
+                        "r" : "292",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "57",
+                           "r" : "293",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -4304,51 +4505,61 @@ module.exports['AsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "59",
+               "localId" : "279",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "56",
+                  "localId" : "291",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "55",
+                     "localId" : "290",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "53",
+                        "localId" : "284",
                         "type" : "Date",
+                        "signature" : [ ],
                         "year" : {
+                           "localId" : "281",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2000",
                            "type" : "Literal"
                         },
                         "month" : {
+                           "localId" : "282",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         },
                         "day" : {
+                           "localId" : "283",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }
                      },
                      "high" : {
-                        "localId" : "54",
+                        "localId" : "289",
                         "type" : "Date",
+                        "signature" : [ ],
                         "year" : {
+                           "localId" : "286",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2000",
                            "type" : "Literal"
                         },
                         "month" : {
+                           "localId" : "287",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "12",
                            "type" : "Literal"
                         },
                         "day" : {
+                           "localId" : "288",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "31",
                            "type" : "Literal"
@@ -4357,44 +4568,44 @@ module.exports['AsIntervalType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "58",
+                  "localId" : "292",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "57",
+                     "localId" : "293",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "66",
+            "localId" : "295",
             "name" : "CastIntegerAsIntervalOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "66",
+                  "r" : "295",
                   "s" : [ {
                      "value" : [ "","define ","CastIntegerAsIntervalOfIntegers",": " ]
                   }, {
-                     "r" : "65",
+                     "r" : "296",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "62",
+                        "r" : "298",
                         "s" : [ {
-                           "r" : "61",
+                           "r" : "297",
                            "value" : [ "Echo","(","5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "64",
+                        "r" : "299",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "63",
+                           "r" : "300",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -4406,53 +4617,55 @@ module.exports['AsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "65",
+               "localId" : "296",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "62",
+                  "localId" : "298",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "61",
+                     "localId" : "297",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "64",
+                  "localId" : "299",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "63",
+                     "localId" : "300",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "77",
+            "localId" : "302",
             "name" : "CastListAsIntervalOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "77",
+                  "r" : "302",
                   "s" : [ {
                      "value" : [ "","define ","CastListAsIntervalOfIntegers",": " ]
                   }, {
-                     "r" : "76",
+                     "r" : "303",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "73",
+                        "r" : "310",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "72",
+                           "r" : "304",
                            "s" : [ {
-                              "r" : "67",
+                              "r" : "305",
                               "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
                            } ]
                         }, {
@@ -4461,11 +4674,11 @@ module.exports['AsIntervalType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "75",
+                        "r" : "311",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "74",
+                           "r" : "312",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -4477,38 +4690,40 @@ module.exports['AsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "76",
+               "localId" : "303",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "73",
+                  "localId" : "310",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "72",
+                     "localId" : "304",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "67",
+                        "localId" : "305",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
-                        "localId" : "68",
+                        "localId" : "306",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "69",
+                        "localId" : "307",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "70",
+                        "localId" : "308",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "71",
+                        "localId" : "309",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -4516,41 +4731,41 @@ module.exports['AsIntervalType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "75",
+                  "localId" : "311",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "74",
+                     "localId" : "312",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             }
          }, {
-            "localId" : "84",
+            "localId" : "314",
             "name" : "CastTupleAsIntervalOfIntegers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "84",
+                  "r" : "314",
                   "s" : [ {
                      "value" : [ "","define ","CastTupleAsIntervalOfIntegers",": " ]
                   }, {
-                     "r" : "83",
+                     "r" : "315",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "80",
+                        "r" : "318",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "79",
+                           "r" : "316",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
-                                 "r" : "78",
+                                 "r" : "317",
                                  "value" : [ "A",": ","5" ]
                               } ]
                            }, {
@@ -4562,11 +4777,11 @@ module.exports['AsIntervalType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "82",
+                        "r" : "319",
                         "s" : [ {
                            "value" : [ "Interval<" ]
                         }, {
-                           "r" : "81",
+                           "r" : "320",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -4578,20 +4793,22 @@ module.exports['AsIntervalType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "83",
+               "localId" : "315",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "80",
+                  "localId" : "318",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "79",
+                     "localId" : "316",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "78",
+                           "localId" : "317",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
                            "type" : "Literal"
@@ -4600,10 +4817,10 @@ module.exports['AsIntervalType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "82",
+                  "localId" : "319",
                   "type" : "IntervalTypeSpecifier",
                   "pointType" : {
-                     "localId" : "81",
+                     "localId" : "320",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -4633,14 +4850,16 @@ define CastIntervalAsTupleOfInteger: cast Echo(Interval[1, 5]) as Tuple{A Intege
 
 module.exports['AsTupleType'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "96",
+            "r" : "308",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -4656,17 +4875,18 @@ module.exports['AsTupleType'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -4674,7 +4894,7 @@ module.exports['AsTupleType'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -4682,22 +4902,31 @@ module.exports['AsTupleType'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "4",
+            "localId" : "211",
             "name" : "Echo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -4705,20 +4934,13 @@ module.exports['AsTupleType'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "4",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define function ","Echo","(","Val"," " ]
+                     "value" : [ "","define function Echo(Val Any): " ]
                   }, {
-                     "r" : "2",
+                     "r" : "214",
                      "s" : [ {
-                        "value" : [ "Any" ]
-                     } ]
-                  }, {
-                     "value" : [ "): " ]
-                  }, {
-                     "r" : "3",
-                     "s" : [ {
-                        "r" : "3",
+                        "r" : "214",
                         "s" : [ {
                            "value" : [ "Val" ]
                         } ]
@@ -4727,42 +4949,43 @@ module.exports['AsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "3",
+               "localId" : "214",
                "name" : "Val",
                "type" : "OperandRef"
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "Val",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{urn:hl7-org:elm-types:r1}Any",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "15",
+            "localId" : "216",
             "name" : "TupleOfAIntegerBStringAsTupleOfAIntegerBString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "15",
+                  "r" : "216",
                   "s" : [ {
                      "value" : [ "// fool CQL-to-ELM into letting the casts compile\n","define ","TupleOfAIntegerBStringAsTupleOfAIntegerBString",": " ]
                   }, {
-                     "r" : "14",
+                     "r" : "217",
                      "s" : [ {
-                        "r" : "8",
+                        "r" : "221",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "7",
+                           "r" : "218",
                            "s" : [ {
                               "value" : [ "Tuple{ " ]
                            }, {
                               "s" : [ {
-                                 "r" : "5",
+                                 "r" : "219",
                                  "value" : [ "A",": ","1" ]
                               } ]
                            }, {
@@ -4771,7 +4994,7 @@ module.exports['AsTupleType'] = {
                               "s" : [ {
                                  "value" : [ "B",": " ]
                               }, {
-                                 "r" : "6",
+                                 "r" : "220",
                                  "s" : [ {
                                     "value" : [ "'2'" ]
                                  } ]
@@ -4785,15 +5008,15 @@ module.exports['AsTupleType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "13",
+                        "r" : "222",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
-                           "r" : "10",
+                           "r" : "223",
                            "s" : [ {
                               "value" : [ "A"," " ]
                            }, {
-                              "r" : "9",
+                              "r" : "224",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -4801,11 +5024,11 @@ module.exports['AsTupleType'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "12",
+                           "r" : "225",
                            "s" : [ {
                               "value" : [ "B"," " ]
                            }, {
-                              "r" : "11",
+                              "r" : "226",
                               "s" : [ {
                                  "value" : [ "String" ]
                               } ]
@@ -4818,20 +5041,22 @@ module.exports['AsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "14",
+               "localId" : "217",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "8",
+                  "localId" : "221",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "7",
+                     "localId" : "218",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "5",
+                           "localId" : "219",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
@@ -4839,7 +5064,7 @@ module.exports['AsTupleType'] = {
                      }, {
                         "name" : "B",
                         "value" : {
-                           "localId" : "6",
+                           "localId" : "220",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "2",
                            "type" : "Literal"
@@ -4848,21 +5073,21 @@ module.exports['AsTupleType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "13",
+                  "localId" : "222",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "10",
+                     "localId" : "223",
                      "name" : "A",
                      "elementType" : {
-                        "localId" : "9",
+                        "localId" : "224",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "12",
+                     "localId" : "225",
                      "name" : "B",
                      "elementType" : {
-                        "localId" : "11",
+                        "localId" : "226",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -4870,31 +5095,31 @@ module.exports['AsTupleType'] = {
                }
             }
          }, {
-            "localId" : "26",
+            "localId" : "228",
             "name" : "TupleOfAStringBIntegerAsTupleOfAIntegerBString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "26",
+                  "r" : "228",
                   "s" : [ {
                      "value" : [ "","define ","TupleOfAStringBIntegerAsTupleOfAIntegerBString",": " ]
                   }, {
-                     "r" : "25",
+                     "r" : "229",
                      "s" : [ {
-                        "r" : "19",
+                        "r" : "233",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "18",
+                           "r" : "230",
                            "s" : [ {
                               "value" : [ "Tuple{ " ]
                            }, {
                               "s" : [ {
                                  "value" : [ "A",": " ]
                               }, {
-                                 "r" : "16",
+                                 "r" : "231",
                                  "s" : [ {
                                     "value" : [ "'1'" ]
                                  } ]
@@ -4903,7 +5128,7 @@ module.exports['AsTupleType'] = {
                               "value" : [ ", " ]
                            }, {
                               "s" : [ {
-                                 "r" : "17",
+                                 "r" : "232",
                                  "value" : [ "B",": ","2" ]
                               } ]
                            }, {
@@ -4915,15 +5140,15 @@ module.exports['AsTupleType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "24",
+                        "r" : "234",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
-                           "r" : "21",
+                           "r" : "235",
                            "s" : [ {
                               "value" : [ "A"," " ]
                            }, {
-                              "r" : "20",
+                              "r" : "236",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -4931,11 +5156,11 @@ module.exports['AsTupleType'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "23",
+                           "r" : "237",
                            "s" : [ {
                               "value" : [ "B"," " ]
                            }, {
-                              "r" : "22",
+                              "r" : "238",
                               "s" : [ {
                                  "value" : [ "String" ]
                               } ]
@@ -4948,20 +5173,22 @@ module.exports['AsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "25",
+               "localId" : "229",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "19",
+                  "localId" : "233",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "18",
+                     "localId" : "230",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "16",
+                           "localId" : "231",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "1",
                            "type" : "Literal"
@@ -4969,7 +5196,7 @@ module.exports['AsTupleType'] = {
                      }, {
                         "name" : "B",
                         "value" : {
-                           "localId" : "17",
+                           "localId" : "232",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
@@ -4978,21 +5205,21 @@ module.exports['AsTupleType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "24",
+                  "localId" : "234",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "21",
+                     "localId" : "235",
                      "name" : "A",
                      "elementType" : {
-                        "localId" : "20",
+                        "localId" : "236",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "23",
+                     "localId" : "237",
                      "name" : "B",
                      "elementType" : {
-                        "localId" : "22",
+                        "localId" : "238",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -5000,36 +5227,36 @@ module.exports['AsTupleType'] = {
                }
             }
          }, {
-            "localId" : "33",
+            "localId" : "240",
             "name" : "IntegerAsTupleOfInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "33",
+                  "r" : "240",
                   "s" : [ {
                      "value" : [ "","define ","IntegerAsTupleOfInteger",": " ]
                   }, {
-                     "r" : "32",
+                     "r" : "241",
                      "s" : [ {
-                        "r" : "28",
+                        "r" : "243",
                         "s" : [ {
-                           "r" : "27",
+                           "r" : "242",
                            "value" : [ "Echo","(","5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "31",
+                        "r" : "244",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
-                           "r" : "30",
+                           "r" : "245",
                            "s" : [ {
                               "value" : [ "A"," " ]
                            }, {
-                              "r" : "29",
+                              "r" : "246",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -5042,28 +5269,30 @@ module.exports['AsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "32",
+               "localId" : "241",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "28",
+                  "localId" : "243",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "27",
+                     "localId" : "242",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "31",
+                  "localId" : "244",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "30",
+                     "localId" : "245",
                      "name" : "A",
                      "elementType" : {
-                        "localId" : "29",
+                        "localId" : "246",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -5071,26 +5300,26 @@ module.exports['AsTupleType'] = {
                }
             }
          }, {
-            "localId" : "41",
+            "localId" : "248",
             "name" : "ListAsTupleOfInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "41",
+                  "r" : "248",
                   "s" : [ {
                      "value" : [ "","define ","ListAsTupleOfInteger",": " ]
                   }, {
-                     "r" : "40",
+                     "r" : "249",
                      "s" : [ {
-                        "r" : "36",
+                        "r" : "252",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "35",
+                           "r" : "250",
                            "s" : [ {
-                              "r" : "34",
+                              "r" : "251",
                               "value" : [ "{","5","}" ]
                            } ]
                         }, {
@@ -5099,15 +5328,15 @@ module.exports['AsTupleType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "39",
+                        "r" : "253",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
-                           "r" : "38",
+                           "r" : "254",
                            "s" : [ {
                               "value" : [ "A"," " ]
                            }, {
-                              "r" : "37",
+                              "r" : "255",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -5120,18 +5349,20 @@ module.exports['AsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "40",
+               "localId" : "249",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "36",
+                  "localId" : "252",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "35",
+                     "localId" : "250",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "34",
+                        "localId" : "251",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -5139,13 +5370,13 @@ module.exports['AsTupleType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "39",
+                  "localId" : "253",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "38",
+                     "localId" : "254",
                      "name" : "A",
                      "elementType" : {
-                        "localId" : "37",
+                        "localId" : "255",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -5153,26 +5384,26 @@ module.exports['AsTupleType'] = {
                }
             }
          }, {
-            "localId" : "50",
+            "localId" : "257",
             "name" : "IntervalAsTupleOfInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "50",
+                  "r" : "257",
                   "s" : [ {
                      "value" : [ "","define ","IntervalAsTupleOfInteger",": " ]
                   }, {
-                     "r" : "49",
+                     "r" : "258",
                      "s" : [ {
-                        "r" : "45",
+                        "r" : "262",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "44",
+                           "r" : "261",
                            "s" : [ {
-                              "r" : "42",
+                              "r" : "259",
                               "value" : [ "Interval[","1",", ","5","]" ]
                            } ]
                         }, {
@@ -5181,15 +5412,15 @@ module.exports['AsTupleType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "48",
+                        "r" : "263",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
-                           "r" : "47",
+                           "r" : "264",
                            "s" : [ {
                               "value" : [ "A"," " ]
                            }, {
-                              "r" : "46",
+                              "r" : "265",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -5202,26 +5433,28 @@ module.exports['AsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "49",
+               "localId" : "258",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "45",
+                  "localId" : "262",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "44",
+                     "localId" : "261",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "42",
+                        "localId" : "259",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "43",
+                        "localId" : "260",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -5229,13 +5462,13 @@ module.exports['AsTupleType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "48",
+                  "localId" : "263",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "47",
+                     "localId" : "264",
                      "name" : "A",
                      "elementType" : {
-                        "localId" : "46",
+                        "localId" : "265",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -5243,31 +5476,31 @@ module.exports['AsTupleType'] = {
                }
             }
          }, {
-            "localId" : "61",
+            "localId" : "267",
             "name" : "CastTupleOfAIntegerBStringAsTupleOfAIntegerBString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "61",
+                  "r" : "267",
                   "s" : [ {
                      "value" : [ "","define ","CastTupleOfAIntegerBStringAsTupleOfAIntegerBString",": " ]
                   }, {
-                     "r" : "60",
+                     "r" : "268",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "54",
+                        "r" : "272",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "53",
+                           "r" : "269",
                            "s" : [ {
                               "value" : [ "Tuple{ " ]
                            }, {
                               "s" : [ {
-                                 "r" : "51",
+                                 "r" : "270",
                                  "value" : [ "A",": ","1" ]
                               } ]
                            }, {
@@ -5276,7 +5509,7 @@ module.exports['AsTupleType'] = {
                               "s" : [ {
                                  "value" : [ "B",": " ]
                               }, {
-                                 "r" : "52",
+                                 "r" : "271",
                                  "s" : [ {
                                     "value" : [ "'2'" ]
                                  } ]
@@ -5290,15 +5523,15 @@ module.exports['AsTupleType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "59",
+                        "r" : "273",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
-                           "r" : "56",
+                           "r" : "274",
                            "s" : [ {
                               "value" : [ "A"," " ]
                            }, {
-                              "r" : "55",
+                              "r" : "275",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -5306,11 +5539,11 @@ module.exports['AsTupleType'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "58",
+                           "r" : "276",
                            "s" : [ {
                               "value" : [ "B"," " ]
                            }, {
-                              "r" : "57",
+                              "r" : "277",
                               "s" : [ {
                                  "value" : [ "String" ]
                               } ]
@@ -5323,20 +5556,22 @@ module.exports['AsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "60",
+               "localId" : "268",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "54",
+                  "localId" : "272",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "53",
+                     "localId" : "269",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "51",
+                           "localId" : "270",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
@@ -5344,7 +5579,7 @@ module.exports['AsTupleType'] = {
                      }, {
                         "name" : "B",
                         "value" : {
-                           "localId" : "52",
+                           "localId" : "271",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "2",
                            "type" : "Literal"
@@ -5353,21 +5588,21 @@ module.exports['AsTupleType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "59",
+                  "localId" : "273",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "56",
+                     "localId" : "274",
                      "name" : "A",
                      "elementType" : {
-                        "localId" : "55",
+                        "localId" : "275",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "58",
+                     "localId" : "276",
                      "name" : "B",
                      "elementType" : {
-                        "localId" : "57",
+                        "localId" : "277",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -5375,33 +5610,33 @@ module.exports['AsTupleType'] = {
                }
             }
          }, {
-            "localId" : "72",
+            "localId" : "279",
             "name" : "CastTupleOfAStringBIntegerAsTupleOfAIntegerBString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "72",
+                  "r" : "279",
                   "s" : [ {
                      "value" : [ "","define ","CastTupleOfAStringBIntegerAsTupleOfAIntegerBString",": " ]
                   }, {
-                     "r" : "71",
+                     "r" : "280",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "65",
+                        "r" : "284",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "64",
+                           "r" : "281",
                            "s" : [ {
                               "value" : [ "Tuple{ " ]
                            }, {
                               "s" : [ {
                                  "value" : [ "A",": " ]
                               }, {
-                                 "r" : "62",
+                                 "r" : "282",
                                  "s" : [ {
                                     "value" : [ "'1'" ]
                                  } ]
@@ -5410,7 +5645,7 @@ module.exports['AsTupleType'] = {
                               "value" : [ ", " ]
                            }, {
                               "s" : [ {
-                                 "r" : "63",
+                                 "r" : "283",
                                  "value" : [ "B",": ","2" ]
                               } ]
                            }, {
@@ -5422,15 +5657,15 @@ module.exports['AsTupleType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "70",
+                        "r" : "285",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
-                           "r" : "67",
+                           "r" : "286",
                            "s" : [ {
                               "value" : [ "A"," " ]
                            }, {
-                              "r" : "66",
+                              "r" : "287",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -5438,11 +5673,11 @@ module.exports['AsTupleType'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "69",
+                           "r" : "288",
                            "s" : [ {
                               "value" : [ "B"," " ]
                            }, {
-                              "r" : "68",
+                              "r" : "289",
                               "s" : [ {
                                  "value" : [ "String" ]
                               } ]
@@ -5455,20 +5690,22 @@ module.exports['AsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "71",
+               "localId" : "280",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "65",
+                  "localId" : "284",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "64",
+                     "localId" : "281",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "62",
+                           "localId" : "282",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "1",
                            "type" : "Literal"
@@ -5476,7 +5713,7 @@ module.exports['AsTupleType'] = {
                      }, {
                         "name" : "B",
                         "value" : {
-                           "localId" : "63",
+                           "localId" : "283",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
@@ -5485,21 +5722,21 @@ module.exports['AsTupleType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "70",
+                  "localId" : "285",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "67",
+                     "localId" : "286",
                      "name" : "A",
                      "elementType" : {
-                        "localId" : "66",
+                        "localId" : "287",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "69",
+                     "localId" : "288",
                      "name" : "B",
                      "elementType" : {
-                        "localId" : "68",
+                        "localId" : "289",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -5507,38 +5744,38 @@ module.exports['AsTupleType'] = {
                }
             }
          }, {
-            "localId" : "79",
+            "localId" : "291",
             "name" : "CastIntegerAsTupleOfInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "79",
+                  "r" : "291",
                   "s" : [ {
                      "value" : [ "","define ","CastIntegerAsTupleOfInteger",": " ]
                   }, {
-                     "r" : "78",
+                     "r" : "292",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "74",
+                        "r" : "294",
                         "s" : [ {
-                           "r" : "73",
+                           "r" : "293",
                            "value" : [ "Echo","(","5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "77",
+                        "r" : "295",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
-                           "r" : "76",
+                           "r" : "296",
                            "s" : [ {
                               "value" : [ "A"," " ]
                            }, {
-                              "r" : "75",
+                              "r" : "297",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -5551,28 +5788,30 @@ module.exports['AsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "78",
+               "localId" : "292",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "74",
+                  "localId" : "294",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "73",
+                     "localId" : "293",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "77",
+                  "localId" : "295",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "76",
+                     "localId" : "296",
                      "name" : "A",
                      "elementType" : {
-                        "localId" : "75",
+                        "localId" : "297",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -5580,28 +5819,28 @@ module.exports['AsTupleType'] = {
                }
             }
          }, {
-            "localId" : "87",
+            "localId" : "299",
             "name" : "CastListAsTupleOfInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "87",
+                  "r" : "299",
                   "s" : [ {
                      "value" : [ "","define ","CastListAsTupleOfInteger",": " ]
                   }, {
-                     "r" : "86",
+                     "r" : "300",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "82",
+                        "r" : "303",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "81",
+                           "r" : "301",
                            "s" : [ {
-                              "r" : "80",
+                              "r" : "302",
                               "value" : [ "{","5","}" ]
                            } ]
                         }, {
@@ -5610,15 +5849,15 @@ module.exports['AsTupleType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "85",
+                        "r" : "304",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
-                           "r" : "84",
+                           "r" : "305",
                            "s" : [ {
                               "value" : [ "A"," " ]
                            }, {
-                              "r" : "83",
+                              "r" : "306",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -5631,18 +5870,20 @@ module.exports['AsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "86",
+               "localId" : "300",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "82",
+                  "localId" : "303",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "81",
+                     "localId" : "301",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "80",
+                        "localId" : "302",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -5650,13 +5891,13 @@ module.exports['AsTupleType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "85",
+                  "localId" : "304",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "84",
+                     "localId" : "305",
                      "name" : "A",
                      "elementType" : {
-                        "localId" : "83",
+                        "localId" : "306",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -5664,28 +5905,28 @@ module.exports['AsTupleType'] = {
                }
             }
          }, {
-            "localId" : "96",
+            "localId" : "308",
             "name" : "CastIntervalAsTupleOfInteger",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "96",
+                  "r" : "308",
                   "s" : [ {
                      "value" : [ "","define ","CastIntervalAsTupleOfInteger",": " ]
                   }, {
-                     "r" : "95",
+                     "r" : "309",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "91",
+                        "r" : "313",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "90",
+                           "r" : "312",
                            "s" : [ {
-                              "r" : "88",
+                              "r" : "310",
                               "value" : [ "Interval[","1",", ","5","]" ]
                            } ]
                         }, {
@@ -5694,15 +5935,15 @@ module.exports['AsTupleType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "94",
+                        "r" : "314",
                         "s" : [ {
                            "value" : [ "Tuple{" ]
                         }, {
-                           "r" : "93",
+                           "r" : "315",
                            "s" : [ {
                               "value" : [ "A"," " ]
                            }, {
-                              "r" : "92",
+                              "r" : "316",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -5715,26 +5956,28 @@ module.exports['AsTupleType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "95",
+               "localId" : "309",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "91",
+                  "localId" : "313",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "90",
+                     "localId" : "312",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "88",
+                        "localId" : "310",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "89",
+                        "localId" : "311",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -5742,13 +5985,13 @@ module.exports['AsTupleType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "94",
+                  "localId" : "314",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "93",
+                     "localId" : "315",
                      "name" : "A",
                      "elementType" : {
-                        "localId" : "92",
+                        "localId" : "316",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -5781,14 +6024,16 @@ define CastTupleAsChoiceOfIntegersAndStrings: cast Echo(Tuple{A: 1, B: '2'}) as 
 
 module.exports['AsChoiceType'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "100",
+            "r" : "314",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -5804,17 +6049,18 @@ module.exports['AsChoiceType'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -5822,7 +6068,7 @@ module.exports['AsChoiceType'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -5830,22 +6076,31 @@ module.exports['AsChoiceType'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "4",
+            "localId" : "211",
             "name" : "Echo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -5853,20 +6108,13 @@ module.exports['AsChoiceType'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "4",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define function ","Echo","(","Val"," " ]
+                     "value" : [ "","define function Echo(Val Any): " ]
                   }, {
-                     "r" : "2",
+                     "r" : "214",
                      "s" : [ {
-                        "value" : [ "Any" ]
-                     } ]
-                  }, {
-                     "value" : [ "): " ]
-                  }, {
-                     "r" : "3",
-                     "s" : [ {
-                        "r" : "3",
+                        "r" : "214",
                         "s" : [ {
                            "value" : [ "Val" ]
                         } ]
@@ -5875,52 +6123,53 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "3",
+               "localId" : "214",
                "name" : "Val",
                "type" : "OperandRef"
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "Val",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{urn:hl7-org:elm-types:r1}Any",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "11",
+            "localId" : "216",
             "name" : "IntegerAsChoiceOfIntegersAndStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "11",
+                  "r" : "216",
                   "s" : [ {
                      "value" : [ "// fool CQL-to-ELM into letting the casts compile\n","define ","IntegerAsChoiceOfIntegersAndStrings",": " ]
                   }, {
-                     "r" : "10",
+                     "r" : "217",
                      "s" : [ {
-                        "r" : "6",
+                        "r" : "219",
                         "s" : [ {
-                           "r" : "5",
+                           "r" : "218",
                            "value" : [ "Echo","(","5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "9",
+                        "r" : "222",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "7",
+                           "r" : "220",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "8",
+                           "r" : "221",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -5932,53 +6181,55 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "10",
+               "localId" : "217",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "6",
+                  "localId" : "219",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "5",
+                     "localId" : "218",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "9",
+                  "localId" : "222",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "7",
+                     "localId" : "220",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "8",
+                     "localId" : "221",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "18",
+            "localId" : "224",
             "name" : "StringAsChoiceOfIntegersAndStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "18",
+                  "r" : "224",
                   "s" : [ {
                      "value" : [ "","define ","StringAsChoiceOfIntegersAndStrings",": " ]
                   }, {
-                     "r" : "17",
+                     "r" : "225",
                      "s" : [ {
-                        "r" : "13",
+                        "r" : "227",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "12",
+                           "r" : "226",
                            "s" : [ {
                               "value" : [ "'Foo'" ]
                            } ]
@@ -5988,18 +6239,18 @@ module.exports['AsChoiceType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "16",
+                        "r" : "230",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "14",
+                           "r" : "228",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "15",
+                           "r" : "229",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6011,68 +6262,70 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "17",
+               "localId" : "225",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "13",
+                  "localId" : "227",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "12",
+                     "localId" : "226",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Foo",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "16",
+                  "localId" : "230",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "14",
+                     "localId" : "228",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "15",
+                     "localId" : "229",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "25",
+            "localId" : "232",
             "name" : "DecimalAsChoiceOfIntegersAndStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "25",
+                  "r" : "232",
                   "s" : [ {
                      "value" : [ "","define ","DecimalAsChoiceOfIntegersAndStrings",": " ]
                   }, {
-                     "r" : "24",
+                     "r" : "233",
                      "s" : [ {
-                        "r" : "20",
+                        "r" : "235",
                         "s" : [ {
-                           "r" : "19",
+                           "r" : "234",
                            "value" : [ "Echo","(","5.5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "23",
+                        "r" : "238",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "21",
+                           "r" : "236",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "22",
+                           "r" : "237",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6084,58 +6337,60 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "24",
+               "localId" : "233",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "20",
+                  "localId" : "235",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "19",
+                     "localId" : "234",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "5.5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "23",
+                  "localId" : "238",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "21",
+                     "localId" : "236",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "22",
+                     "localId" : "237",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "34",
+            "localId" : "240",
             "name" : "ListAsChoiceOfIntegersAndStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "34",
+                  "r" : "240",
                   "s" : [ {
                      "value" : [ "","define ","ListAsChoiceOfIntegersAndStrings",": " ]
                   }, {
-                     "r" : "33",
+                     "r" : "241",
                      "s" : [ {
-                        "r" : "29",
+                        "r" : "245",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "28",
+                           "r" : "242",
                            "s" : [ {
-                              "r" : "26",
+                              "r" : "243",
                               "value" : [ "{","5",", " ]
                            }, {
-                              "r" : "27",
+                              "r" : "244",
                               "s" : [ {
                                  "value" : [ "'a'" ]
                               } ]
@@ -6148,18 +6403,18 @@ module.exports['AsChoiceType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "32",
+                        "r" : "248",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "30",
+                           "r" : "246",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "31",
+                           "r" : "247",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6171,23 +6426,25 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "33",
+               "localId" : "241",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "29",
+                  "localId" : "245",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "28",
+                     "localId" : "242",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "26",
+                        "localId" : "243",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "27",
+                        "localId" : "244",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "a",
                         "type" : "Literal"
@@ -6195,40 +6452,40 @@ module.exports['AsChoiceType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "32",
+                  "localId" : "248",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "30",
+                     "localId" : "246",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "31",
+                     "localId" : "247",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "43",
+            "localId" : "250",
             "name" : "IntervalAsChoiceOfIntegersAndStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "43",
+                  "r" : "250",
                   "s" : [ {
                      "value" : [ "","define ","IntervalAsChoiceOfIntegersAndStrings",": " ]
                   }, {
-                     "r" : "42",
+                     "r" : "251",
                      "s" : [ {
-                        "r" : "38",
+                        "r" : "255",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "37",
+                           "r" : "254",
                            "s" : [ {
-                              "r" : "35",
+                              "r" : "252",
                               "value" : [ "Interval[","1",", ","5","]" ]
                            } ]
                         }, {
@@ -6237,18 +6494,18 @@ module.exports['AsChoiceType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "41",
+                        "r" : "258",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "39",
+                           "r" : "256",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "40",
+                           "r" : "257",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6260,26 +6517,28 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "42",
+               "localId" : "251",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "38",
+                  "localId" : "255",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "37",
+                     "localId" : "254",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "35",
+                        "localId" : "252",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "36",
+                        "localId" : "253",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -6287,43 +6546,43 @@ module.exports['AsChoiceType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "41",
+                  "localId" : "258",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "39",
+                     "localId" : "256",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "40",
+                     "localId" : "257",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "52",
+            "localId" : "260",
             "name" : "TupleAsChoiceOfIntegersAndStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "52",
+                  "r" : "260",
                   "s" : [ {
                      "value" : [ "","define ","TupleAsChoiceOfIntegersAndStrings",": " ]
                   }, {
-                     "r" : "51",
+                     "r" : "261",
                      "s" : [ {
-                        "r" : "47",
+                        "r" : "265",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "46",
+                           "r" : "262",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
-                                 "r" : "44",
+                                 "r" : "263",
                                  "value" : [ "A",": ","1" ]
                               } ]
                            }, {
@@ -6332,7 +6591,7 @@ module.exports['AsChoiceType'] = {
                               "s" : [ {
                                  "value" : [ "B",": " ]
                               }, {
-                                 "r" : "45",
+                                 "r" : "264",
                                  "s" : [ {
                                     "value" : [ "'2'" ]
                                  } ]
@@ -6346,18 +6605,18 @@ module.exports['AsChoiceType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "50",
+                        "r" : "268",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "48",
+                           "r" : "266",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "49",
+                           "r" : "267",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6369,20 +6628,22 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "51",
+               "localId" : "261",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "47",
+                  "localId" : "265",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "46",
+                     "localId" : "262",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "44",
+                           "localId" : "263",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
@@ -6390,7 +6651,7 @@ module.exports['AsChoiceType'] = {
                      }, {
                         "name" : "B",
                         "value" : {
-                           "localId" : "45",
+                           "localId" : "264",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "2",
                            "type" : "Literal"
@@ -6399,55 +6660,55 @@ module.exports['AsChoiceType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "50",
+                  "localId" : "268",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "48",
+                     "localId" : "266",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "49",
+                     "localId" : "267",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "59",
+            "localId" : "270",
             "name" : "CastIntegerAsChoiceOfIntegersAndStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "59",
+                  "r" : "270",
                   "s" : [ {
                      "value" : [ "","define ","CastIntegerAsChoiceOfIntegersAndStrings",": " ]
                   }, {
-                     "r" : "58",
+                     "r" : "271",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "54",
+                        "r" : "273",
                         "s" : [ {
-                           "r" : "53",
+                           "r" : "272",
                            "value" : [ "Echo","(","5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "57",
+                        "r" : "276",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "55",
+                           "r" : "274",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "56",
+                           "r" : "275",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6459,55 +6720,57 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "58",
+               "localId" : "271",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "54",
+                  "localId" : "273",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "53",
+                     "localId" : "272",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "57",
+                  "localId" : "276",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "55",
+                     "localId" : "274",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "56",
+                     "localId" : "275",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "66",
+            "localId" : "278",
             "name" : "CastStringAsChoiceOfIntegersAndStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "66",
+                  "r" : "278",
                   "s" : [ {
                      "value" : [ "","define ","CastStringAsChoiceOfIntegersAndStrings",": " ]
                   }, {
-                     "r" : "65",
+                     "r" : "279",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "61",
+                        "r" : "281",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "60",
+                           "r" : "280",
                            "s" : [ {
                               "value" : [ "'Foo'" ]
                            } ]
@@ -6517,18 +6780,18 @@ module.exports['AsChoiceType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "64",
+                        "r" : "284",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "62",
+                           "r" : "282",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "63",
+                           "r" : "283",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6540,70 +6803,72 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "65",
+               "localId" : "279",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "61",
+                  "localId" : "281",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "60",
+                     "localId" : "280",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Foo",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "64",
+                  "localId" : "284",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "62",
+                     "localId" : "282",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "63",
+                     "localId" : "283",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "73",
+            "localId" : "286",
             "name" : "CastDecimalAsChoiceOfIntegersAndStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "73",
+                  "r" : "286",
                   "s" : [ {
                      "value" : [ "","define ","CastDecimalAsChoiceOfIntegersAndStrings",": " ]
                   }, {
-                     "r" : "72",
+                     "r" : "287",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "68",
+                        "r" : "289",
                         "s" : [ {
-                           "r" : "67",
+                           "r" : "288",
                            "value" : [ "Echo","(","5.5",")" ]
                         } ]
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "71",
+                        "r" : "292",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "69",
+                           "r" : "290",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "70",
+                           "r" : "291",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6615,60 +6880,62 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "72",
+               "localId" : "287",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "68",
+                  "localId" : "289",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "67",
+                     "localId" : "288",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "5.5",
                      "type" : "Literal"
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "71",
+                  "localId" : "292",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "69",
+                     "localId" : "290",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "70",
+                     "localId" : "291",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "82",
+            "localId" : "294",
             "name" : "CastListAsChoiceOfIntegersAndStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "82",
+                  "r" : "294",
                   "s" : [ {
                      "value" : [ "","define ","CastListAsChoiceOfIntegersAndStrings",": " ]
                   }, {
-                     "r" : "81",
+                     "r" : "295",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "77",
+                        "r" : "299",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "76",
+                           "r" : "296",
                            "s" : [ {
-                              "r" : "74",
+                              "r" : "297",
                               "value" : [ "{","5",", " ]
                            }, {
-                              "r" : "75",
+                              "r" : "298",
                               "s" : [ {
                                  "value" : [ "'a'" ]
                               } ]
@@ -6681,18 +6948,18 @@ module.exports['AsChoiceType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "80",
+                        "r" : "302",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "78",
+                           "r" : "300",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "79",
+                           "r" : "301",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6704,23 +6971,25 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "81",
+               "localId" : "295",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "77",
+                  "localId" : "299",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "76",
+                     "localId" : "296",
                      "type" : "List",
                      "element" : [ {
-                        "localId" : "74",
+                        "localId" : "297",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "75",
+                        "localId" : "298",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "a",
                         "type" : "Literal"
@@ -6728,42 +6997,42 @@ module.exports['AsChoiceType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "80",
+                  "localId" : "302",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "78",
+                     "localId" : "300",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "79",
+                     "localId" : "301",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "91",
+            "localId" : "304",
             "name" : "CastIntervalAsChoiceOfIntegersAndStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "91",
+                  "r" : "304",
                   "s" : [ {
                      "value" : [ "","define ","CastIntervalAsChoiceOfIntegersAndStrings",": " ]
                   }, {
-                     "r" : "90",
+                     "r" : "305",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "86",
+                        "r" : "309",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "85",
+                           "r" : "308",
                            "s" : [ {
-                              "r" : "83",
+                              "r" : "306",
                               "value" : [ "Interval[","1",", ","5","]" ]
                            } ]
                         }, {
@@ -6772,18 +7041,18 @@ module.exports['AsChoiceType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "89",
+                        "r" : "312",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "87",
+                           "r" : "310",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "88",
+                           "r" : "311",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6795,26 +7064,28 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "90",
+               "localId" : "305",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "86",
+                  "localId" : "309",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "85",
+                     "localId" : "308",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "83",
+                        "localId" : "306",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "84",
+                        "localId" : "307",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -6822,45 +7093,45 @@ module.exports['AsChoiceType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "89",
+                  "localId" : "312",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "87",
+                     "localId" : "310",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "88",
+                     "localId" : "311",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   } ]
                }
             }
          }, {
-            "localId" : "100",
+            "localId" : "314",
             "name" : "CastTupleAsChoiceOfIntegersAndStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "100",
+                  "r" : "314",
                   "s" : [ {
                      "value" : [ "","define ","CastTupleAsChoiceOfIntegersAndStrings",": " ]
                   }, {
-                     "r" : "99",
+                     "r" : "315",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "95",
+                        "r" : "319",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "94",
+                           "r" : "316",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
-                                 "r" : "92",
+                                 "r" : "317",
                                  "value" : [ "A",": ","1" ]
                               } ]
                            }, {
@@ -6869,7 +7140,7 @@ module.exports['AsChoiceType'] = {
                               "s" : [ {
                                  "value" : [ "B",": " ]
                               }, {
-                                 "r" : "93",
+                                 "r" : "318",
                                  "s" : [ {
                                     "value" : [ "'2'" ]
                                  } ]
@@ -6883,18 +7154,18 @@ module.exports['AsChoiceType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "98",
+                        "r" : "322",
                         "s" : [ {
                            "value" : [ "Choice<" ]
                         }, {
-                           "r" : "96",
+                           "r" : "320",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "97",
+                           "r" : "321",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6906,20 +7177,22 @@ module.exports['AsChoiceType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "99",
+               "localId" : "315",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "95",
+                  "localId" : "319",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "94",
+                     "localId" : "316",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "92",
+                           "localId" : "317",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
@@ -6927,7 +7200,7 @@ module.exports['AsChoiceType'] = {
                      }, {
                         "name" : "B",
                         "value" : {
-                           "localId" : "93",
+                           "localId" : "318",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "2",
                            "type" : "Literal"
@@ -6936,14 +7209,14 @@ module.exports['AsChoiceType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "98",
+                  "localId" : "322",
                   "type" : "ChoiceTypeSpecifier",
                   "choice" : [ {
-                     "localId" : "96",
+                     "localId" : "320",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "97",
+                     "localId" : "321",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   } ]
@@ -6981,14 +7254,16 @@ define CastNamedTupleAsEncounter: Echo(Encounter {id: '1'}) as Simple.Encounter
 
 module.exports['AsCustomDataModelType'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "112",
+            "r" : "356",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -7004,17 +7279,18 @@ module.exports['AsCustomDataModelType'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -7022,7 +7298,7 @@ module.exports['AsCustomDataModelType'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -7030,22 +7306,31 @@ module.exports['AsCustomDataModelType'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "4",
+            "localId" : "211",
             "name" : "Echo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -7053,20 +7338,13 @@ module.exports['AsCustomDataModelType'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "4",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define function ","Echo","(","Val"," " ]
+                     "value" : [ "","define function Echo(Val Any): " ]
                   }, {
-                     "r" : "2",
+                     "r" : "214",
                      "s" : [ {
-                        "value" : [ "Any" ]
-                     } ]
-                  }, {
-                     "value" : [ "): " ]
-                  }, {
-                     "r" : "3",
-                     "s" : [ {
-                        "r" : "3",
+                        "r" : "214",
                         "s" : [ {
                            "value" : [ "Val" ]
                         } ]
@@ -7075,41 +7353,42 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "3",
+               "localId" : "214",
                "name" : "Val",
                "type" : "OperandRef"
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "Val",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{urn:hl7-org:elm-types:r1}Any",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "10",
+            "localId" : "216",
             "name" : "EncounterAsEncounter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "10",
+                  "r" : "216",
                   "s" : [ {
                      "value" : [ "// fool CQL-to-ELM into letting the casts compile\n","define ","EncounterAsEncounter",": " ]
                   }, {
-                     "r" : "9",
+                     "r" : "217",
                      "s" : [ {
-                        "r" : "7",
+                        "r" : "222",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "6",
+                           "r" : "221",
                            "s" : [ {
                               "value" : [ "First","(" ]
                            }, {
-                              "r" : "5",
+                              "r" : "218",
                               "s" : [ {
                                  "value" : [ "[","Encounter","]" ]
                               } ]
@@ -7122,7 +7401,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "8",
+                        "r" : "223",
                         "s" : [ {
                            "value" : [ "Simple",".","Encounter" ]
                         } ]
@@ -7131,52 +7410,59 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "9",
+               "localId" : "217",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "7",
+                  "localId" : "222",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "6",
+                     "localId" : "221",
                      "type" : "First",
+                     "signature" : [ ],
                      "source" : {
-                        "localId" : "5",
+                        "localId" : "218",
                         "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                        "type" : "Retrieve"
+                        "type" : "Retrieve",
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      }
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "8",
+                  "localId" : "223",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "16",
+            "localId" : "225",
             "name" : "EncounterAsRecord",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "16",
+                  "r" : "225",
                   "s" : [ {
                      "value" : [ "","define ","EncounterAsRecord",": " ]
                   }, {
-                     "r" : "15",
+                     "r" : "226",
                      "s" : [ {
-                        "r" : "13",
+                        "r" : "231",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "12",
+                           "r" : "230",
                            "s" : [ {
                               "value" : [ "First","(" ]
                            }, {
-                              "r" : "11",
+                              "r" : "227",
                               "s" : [ {
                                  "value" : [ "[","Encounter","]" ]
                               } ]
@@ -7189,7 +7475,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "14",
+                        "r" : "232",
                         "s" : [ {
                            "value" : [ "Simple",".","Record" ]
                         } ]
@@ -7198,52 +7484,59 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "15",
+               "localId" : "226",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "13",
+                  "localId" : "231",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "12",
+                     "localId" : "230",
                      "type" : "First",
+                     "signature" : [ ],
                      "source" : {
-                        "localId" : "11",
+                        "localId" : "227",
                         "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                        "type" : "Retrieve"
+                        "type" : "Retrieve",
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      }
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "14",
+                  "localId" : "232",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Record",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "22",
+            "localId" : "234",
             "name" : "EncounterAsAny",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "22",
+                  "r" : "234",
                   "s" : [ {
                      "value" : [ "","define ","EncounterAsAny",": " ]
                   }, {
-                     "r" : "21",
+                     "r" : "235",
                      "s" : [ {
-                        "r" : "19",
+                        "r" : "240",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "18",
+                           "r" : "239",
                            "s" : [ {
                               "value" : [ "First","(" ]
                            }, {
-                              "r" : "17",
+                              "r" : "236",
                               "s" : [ {
                                  "value" : [ "[","Encounter","]" ]
                               } ]
@@ -7256,7 +7549,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "20",
+                        "r" : "241",
                         "s" : [ {
                            "value" : [ "System",".","Any" ]
                         } ]
@@ -7265,52 +7558,59 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "21",
+               "localId" : "235",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "19",
+                  "localId" : "240",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "18",
+                     "localId" : "239",
                      "type" : "First",
+                     "signature" : [ ],
                      "source" : {
-                        "localId" : "17",
+                        "localId" : "236",
                         "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                        "type" : "Retrieve"
+                        "type" : "Retrieve",
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      }
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "20",
+                  "localId" : "241",
                   "name" : "{urn:hl7-org:elm-types:r1}Any",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "28",
+            "localId" : "243",
             "name" : "EncounterAsCondition",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "28",
+                  "r" : "243",
                   "s" : [ {
                      "value" : [ "","define ","EncounterAsCondition",": " ]
                   }, {
-                     "r" : "27",
+                     "r" : "244",
                      "s" : [ {
-                        "r" : "25",
+                        "r" : "249",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "24",
+                           "r" : "248",
                            "s" : [ {
                               "value" : [ "First","(" ]
                            }, {
-                              "r" : "23",
+                              "r" : "245",
                               "s" : [ {
                                  "value" : [ "[","Encounter","]" ]
                               } ]
@@ -7323,7 +7623,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "26",
+                        "r" : "250",
                         "s" : [ {
                            "value" : [ "Simple",".","Condition" ]
                         } ]
@@ -7332,52 +7632,59 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "27",
+               "localId" : "244",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "25",
+                  "localId" : "249",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "24",
+                     "localId" : "248",
                      "type" : "First",
+                     "signature" : [ ],
                      "source" : {
-                        "localId" : "23",
+                        "localId" : "245",
                         "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                        "type" : "Retrieve"
+                        "type" : "Retrieve",
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      }
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "26",
+                  "localId" : "250",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "34",
+            "localId" : "252",
             "name" : "EncounterAsString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "34",
+                  "r" : "252",
                   "s" : [ {
                      "value" : [ "","define ","EncounterAsString",": " ]
                   }, {
-                     "r" : "33",
+                     "r" : "253",
                      "s" : [ {
-                        "r" : "31",
+                        "r" : "258",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "30",
+                           "r" : "257",
                            "s" : [ {
                               "value" : [ "First","(" ]
                            }, {
-                              "r" : "29",
+                              "r" : "254",
                               "s" : [ {
                                  "value" : [ "[","Encounter","]" ]
                               } ]
@@ -7390,7 +7697,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "32",
+                        "r" : "259",
                         "s" : [ {
                            "value" : [ "System",".","String" ]
                         } ]
@@ -7399,48 +7706,55 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "33",
+               "localId" : "253",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "31",
+                  "localId" : "258",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "30",
+                     "localId" : "257",
                      "type" : "First",
+                     "signature" : [ ],
                      "source" : {
-                        "localId" : "29",
+                        "localId" : "254",
                         "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                        "type" : "Retrieve"
+                        "type" : "Retrieve",
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      }
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "32",
+                  "localId" : "259",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "39",
+            "localId" : "261",
             "name" : "ListAsEncounter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "39",
+                  "r" : "261",
                   "s" : [ {
                      "value" : [ "","define ","ListAsEncounter",": " ]
                   }, {
-                     "r" : "38",
+                     "r" : "262",
                      "s" : [ {
-                        "r" : "36",
+                        "r" : "264",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "35",
+                           "r" : "263",
                            "s" : [ {
                               "value" : [ "[","Encounter","]" ]
                            } ]
@@ -7450,7 +7764,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "37",
+                        "r" : "265",
                         "s" : [ {
                            "value" : [ "Simple",".","Encounter" ]
                         } ]
@@ -7459,46 +7773,52 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "38",
+               "localId" : "262",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "36",
+                  "localId" : "264",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "35",
+                     "localId" : "263",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                     "type" : "Retrieve"
+                     "type" : "Retrieve",
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "37",
+                  "localId" : "265",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "46",
+            "localId" : "267",
             "name" : "IntervalAsEncounter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "46",
+                  "r" : "267",
                   "s" : [ {
                      "value" : [ "","define ","IntervalAsEncounter",": " ]
                   }, {
-                     "r" : "45",
+                     "r" : "268",
                      "s" : [ {
-                        "r" : "43",
+                        "r" : "272",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "42",
+                           "r" : "271",
                            "s" : [ {
-                              "r" : "40",
+                              "r" : "269",
                               "value" : [ "Interval[","1",", ","5","]" ]
                            } ]
                         }, {
@@ -7507,7 +7827,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "44",
+                        "r" : "273",
                         "s" : [ {
                            "value" : [ "Simple",".","Encounter" ]
                         } ]
@@ -7516,26 +7836,28 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "45",
+               "localId" : "268",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "43",
+                  "localId" : "272",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "42",
+                     "localId" : "271",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "40",
+                        "localId" : "269",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "41",
+                        "localId" : "270",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -7543,37 +7865,37 @@ module.exports['AsCustomDataModelType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "44",
+                  "localId" : "273",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "52",
+            "localId" : "275",
             "name" : "TupleAsEncounter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "52",
+                  "r" : "275",
                   "s" : [ {
                      "value" : [ "","define ","TupleAsEncounter",": " ]
                   }, {
-                     "r" : "51",
+                     "r" : "276",
                      "s" : [ {
-                        "r" : "49",
+                        "r" : "279",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "48",
+                           "r" : "277",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "id",": " ]
                               }, {
-                                 "r" : "47",
+                                 "r" : "278",
                                  "s" : [ {
                                     "value" : [ "'1'" ]
                                  } ]
@@ -7587,7 +7909,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "50",
+                        "r" : "280",
                         "s" : [ {
                            "value" : [ "Simple",".","Encounter" ]
                         } ]
@@ -7596,20 +7918,22 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "51",
+               "localId" : "276",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "49",
+                  "localId" : "279",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "48",
+                     "localId" : "277",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "id",
                         "value" : {
-                           "localId" : "47",
+                           "localId" : "278",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "1",
                            "type" : "Literal"
@@ -7618,37 +7942,37 @@ module.exports['AsCustomDataModelType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "50",
+                  "localId" : "280",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "58",
+            "localId" : "282",
             "name" : "NamedTupleAsEncounter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "58",
+                  "r" : "282",
                   "s" : [ {
                      "value" : [ "","define ","NamedTupleAsEncounter",": " ]
                   }, {
-                     "r" : "57",
+                     "r" : "283",
                      "s" : [ {
-                        "r" : "55",
+                        "r" : "287",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "54",
+                           "r" : "284",
                            "s" : [ {
                               "value" : [ "Encounter"," {" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "id",": " ]
                               }, {
-                                 "r" : "53",
+                                 "r" : "286",
                                  "s" : [ {
                                     "value" : [ "'1'" ]
                                  } ]
@@ -7662,7 +7986,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "56",
+                        "r" : "288",
                         "s" : [ {
                            "value" : [ "Simple",".","Encounter" ]
                         } ]
@@ -7671,21 +7995,23 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "57",
+               "localId" : "283",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "55",
+                  "localId" : "287",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "54",
+                     "localId" : "284",
                      "classType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Instance",
                      "element" : [ {
                         "name" : "id",
                         "value" : {
-                           "localId" : "53",
+                           "localId" : "286",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "1",
                            "type" : "Literal"
@@ -7694,36 +8020,36 @@ module.exports['AsCustomDataModelType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "56",
+                  "localId" : "288",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "64",
+            "localId" : "290",
             "name" : "CastEncounterAsEncounter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "64",
+                  "r" : "290",
                   "s" : [ {
                      "value" : [ "","define ","CastEncounterAsEncounter",": " ]
                   }, {
-                     "r" : "63",
+                     "r" : "291",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "61",
+                        "r" : "296",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "60",
+                           "r" : "295",
                            "s" : [ {
                               "value" : [ "First","(" ]
                            }, {
-                              "r" : "59",
+                              "r" : "292",
                               "s" : [ {
                                  "value" : [ "[","Encounter","]" ]
                               } ]
@@ -7736,7 +8062,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "62",
+                        "r" : "297",
                         "s" : [ {
                            "value" : [ "Simple",".","Encounter" ]
                         } ]
@@ -7745,54 +8071,61 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "63",
+               "localId" : "291",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "61",
+                  "localId" : "296",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "60",
+                     "localId" : "295",
                      "type" : "First",
+                     "signature" : [ ],
                      "source" : {
-                        "localId" : "59",
+                        "localId" : "292",
                         "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                        "type" : "Retrieve"
+                        "type" : "Retrieve",
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      }
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "62",
+                  "localId" : "297",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "70",
+            "localId" : "299",
             "name" : "CastEncounterAsRecord",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "70",
+                  "r" : "299",
                   "s" : [ {
                      "value" : [ "","define ","CastEncounterAsRecord",": " ]
                   }, {
-                     "r" : "69",
+                     "r" : "300",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "67",
+                        "r" : "305",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "66",
+                           "r" : "304",
                            "s" : [ {
                               "value" : [ "First","(" ]
                            }, {
-                              "r" : "65",
+                              "r" : "301",
                               "s" : [ {
                                  "value" : [ "[","Encounter","]" ]
                               } ]
@@ -7805,7 +8138,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "68",
+                        "r" : "306",
                         "s" : [ {
                            "value" : [ "Simple",".","Record" ]
                         } ]
@@ -7814,54 +8147,61 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "69",
+               "localId" : "300",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "67",
+                  "localId" : "305",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "66",
+                     "localId" : "304",
                      "type" : "First",
+                     "signature" : [ ],
                      "source" : {
-                        "localId" : "65",
+                        "localId" : "301",
                         "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                        "type" : "Retrieve"
+                        "type" : "Retrieve",
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      }
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "68",
+                  "localId" : "306",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Record",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "76",
+            "localId" : "308",
             "name" : "CastEncounterAsAny",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "76",
+                  "r" : "308",
                   "s" : [ {
                      "value" : [ "","define ","CastEncounterAsAny",": " ]
                   }, {
-                     "r" : "75",
+                     "r" : "309",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "73",
+                        "r" : "314",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "72",
+                           "r" : "313",
                            "s" : [ {
                               "value" : [ "First","(" ]
                            }, {
-                              "r" : "71",
+                              "r" : "310",
                               "s" : [ {
                                  "value" : [ "[","Encounter","]" ]
                               } ]
@@ -7874,7 +8214,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "74",
+                        "r" : "315",
                         "s" : [ {
                            "value" : [ "System",".","Any" ]
                         } ]
@@ -7883,54 +8223,61 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "75",
+               "localId" : "309",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "73",
+                  "localId" : "314",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "72",
+                     "localId" : "313",
                      "type" : "First",
+                     "signature" : [ ],
                      "source" : {
-                        "localId" : "71",
+                        "localId" : "310",
                         "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                        "type" : "Retrieve"
+                        "type" : "Retrieve",
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      }
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "74",
+                  "localId" : "315",
                   "name" : "{urn:hl7-org:elm-types:r1}Any",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "82",
+            "localId" : "317",
             "name" : "CastEncounterAsCondition",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "82",
+                  "r" : "317",
                   "s" : [ {
                      "value" : [ "","define ","CastEncounterAsCondition",": " ]
                   }, {
-                     "r" : "81",
+                     "r" : "318",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "79",
+                        "r" : "323",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "78",
+                           "r" : "322",
                            "s" : [ {
                               "value" : [ "First","(" ]
                            }, {
-                              "r" : "77",
+                              "r" : "319",
                               "s" : [ {
                                  "value" : [ "[","Encounter","]" ]
                               } ]
@@ -7943,7 +8290,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "80",
+                        "r" : "324",
                         "s" : [ {
                            "value" : [ "Simple",".","Condition" ]
                         } ]
@@ -7952,54 +8299,61 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "81",
+               "localId" : "318",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "79",
+                  "localId" : "323",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "78",
+                     "localId" : "322",
                      "type" : "First",
+                     "signature" : [ ],
                      "source" : {
-                        "localId" : "77",
+                        "localId" : "319",
                         "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                        "type" : "Retrieve"
+                        "type" : "Retrieve",
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      }
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "80",
+                  "localId" : "324",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "88",
+            "localId" : "326",
             "name" : "CastEncounterAsString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "88",
+                  "r" : "326",
                   "s" : [ {
                      "value" : [ "","define ","CastEncounterAsString",": " ]
                   }, {
-                     "r" : "87",
+                     "r" : "327",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "85",
+                        "r" : "332",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "84",
+                           "r" : "331",
                            "s" : [ {
                               "value" : [ "First","(" ]
                            }, {
-                              "r" : "83",
+                              "r" : "328",
                               "s" : [ {
                                  "value" : [ "[","Encounter","]" ]
                               } ]
@@ -8012,7 +8366,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "86",
+                        "r" : "333",
                         "s" : [ {
                            "value" : [ "System",".","String" ]
                         } ]
@@ -8021,50 +8375,57 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "87",
+               "localId" : "327",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "85",
+                  "localId" : "332",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "84",
+                     "localId" : "331",
                      "type" : "First",
+                     "signature" : [ ],
                      "source" : {
-                        "localId" : "83",
+                        "localId" : "328",
                         "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                        "type" : "Retrieve"
+                        "type" : "Retrieve",
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
                      }
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "86",
+                  "localId" : "333",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "93",
+            "localId" : "335",
             "name" : "CastListAsEncounter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "93",
+                  "r" : "335",
                   "s" : [ {
                      "value" : [ "","define ","CastListAsEncounter",": " ]
                   }, {
-                     "r" : "92",
+                     "r" : "336",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "90",
+                        "r" : "338",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "89",
+                           "r" : "337",
                            "s" : [ {
                               "value" : [ "[","Encounter","]" ]
                            } ]
@@ -8074,7 +8435,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "91",
+                        "r" : "339",
                         "s" : [ {
                            "value" : [ "Simple",".","Encounter" ]
                         } ]
@@ -8083,48 +8444,54 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "92",
+               "localId" : "336",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "90",
+                  "localId" : "338",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "89",
+                     "localId" : "337",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                     "type" : "Retrieve"
+                     "type" : "Retrieve",
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "91",
+                  "localId" : "339",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "100",
+            "localId" : "341",
             "name" : "CastIntervalAsEncounter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "100",
+                  "r" : "341",
                   "s" : [ {
                      "value" : [ "","define ","CastIntervalAsEncounter",": " ]
                   }, {
-                     "r" : "99",
+                     "r" : "342",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "97",
+                        "r" : "346",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "96",
+                           "r" : "345",
                            "s" : [ {
-                              "r" : "94",
+                              "r" : "343",
                               "value" : [ "Interval[","1",", ","5","]" ]
                            } ]
                         }, {
@@ -8133,7 +8500,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "98",
+                        "r" : "347",
                         "s" : [ {
                            "value" : [ "Simple",".","Encounter" ]
                         } ]
@@ -8142,26 +8509,28 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "99",
+               "localId" : "342",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "97",
+                  "localId" : "346",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "96",
+                     "localId" : "345",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "low" : {
-                        "localId" : "94",
+                        "localId" : "343",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "95",
+                        "localId" : "344",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -8169,39 +8538,39 @@ module.exports['AsCustomDataModelType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "98",
+                  "localId" : "347",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "106",
+            "localId" : "349",
             "name" : "CastTupleAsEncounter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "106",
+                  "r" : "349",
                   "s" : [ {
                      "value" : [ "","define ","CastTupleAsEncounter",": " ]
                   }, {
-                     "r" : "105",
+                     "r" : "350",
                      "s" : [ {
                         "value" : [ "cast " ]
                      }, {
-                        "r" : "103",
+                        "r" : "353",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "102",
+                           "r" : "351",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "id",": " ]
                               }, {
-                                 "r" : "101",
+                                 "r" : "352",
                                  "s" : [ {
                                     "value" : [ "'1'" ]
                                  } ]
@@ -8215,7 +8584,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "104",
+                        "r" : "354",
                         "s" : [ {
                            "value" : [ "Simple",".","Encounter" ]
                         } ]
@@ -8224,20 +8593,22 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "105",
+               "localId" : "350",
                "strict" : true,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "103",
+                  "localId" : "353",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "102",
+                     "localId" : "351",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "id",
                         "value" : {
-                           "localId" : "101",
+                           "localId" : "352",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "1",
                            "type" : "Literal"
@@ -8246,37 +8617,37 @@ module.exports['AsCustomDataModelType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "104",
+                  "localId" : "354",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "112",
+            "localId" : "356",
             "name" : "CastNamedTupleAsEncounter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "112",
+                  "r" : "356",
                   "s" : [ {
                      "value" : [ "","define ","CastNamedTupleAsEncounter",": " ]
                   }, {
-                     "r" : "111",
+                     "r" : "357",
                      "s" : [ {
-                        "r" : "109",
+                        "r" : "361",
                         "s" : [ {
                            "value" : [ "Echo","(" ]
                         }, {
-                           "r" : "108",
+                           "r" : "358",
                            "s" : [ {
                               "value" : [ "Encounter"," {" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "id",": " ]
                               }, {
-                                 "r" : "107",
+                                 "r" : "360",
                                  "s" : [ {
                                     "value" : [ "'1'" ]
                                  } ]
@@ -8290,7 +8661,7 @@ module.exports['AsCustomDataModelType'] = {
                      }, {
                         "value" : [ " as " ]
                      }, {
-                        "r" : "110",
+                        "r" : "362",
                         "s" : [ {
                            "value" : [ "Simple",".","Encounter" ]
                         } ]
@@ -8299,21 +8670,23 @@ module.exports['AsCustomDataModelType'] = {
                }
             } ],
             "expression" : {
-               "localId" : "111",
+               "localId" : "357",
                "strict" : false,
                "type" : "As",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "109",
+                  "localId" : "361",
                   "name" : "Echo",
                   "type" : "FunctionRef",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "108",
+                     "localId" : "358",
                      "classType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Instance",
                      "element" : [ {
                         "name" : "id",
                         "value" : {
-                           "localId" : "107",
+                           "localId" : "360",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "1",
                            "type" : "Literal"
@@ -8322,7 +8695,7 @@ module.exports['AsCustomDataModelType'] = {
                   } ]
                },
                "asTypeSpecifier" : {
-                  "localId" : "110",
+                  "localId" : "362",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }

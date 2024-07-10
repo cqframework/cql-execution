@@ -17,14 +17,16 @@ define Nil: null
 
 module.exports['Nil'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "3",
+            "r" : "212",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -40,17 +42,18 @@ module.exports['Nil'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -58,7 +61,7 @@ module.exports['Nil'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -66,37 +69,46 @@ module.exports['Nil'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "3",
+            "localId" : "212",
             "name" : "Nil",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "3",
+                  "r" : "212",
                   "s" : [ {
-                     "r" : "2",
+                     "r" : "213",
                      "value" : [ "","define ","Nil",": ","null" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "2",
+               "localId" : "213",
                "type" : "Null"
             }
          } ]
@@ -118,14 +130,16 @@ define NonNullVarIsNull: One is null
 
 module.exports['IsNull'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "17",
+            "r" : "230",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -141,17 +155,18 @@ module.exports['IsNull'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -159,7 +174,7 @@ module.exports['IsNull'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -167,103 +182,113 @@ module.exports['IsNull'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "3",
+            "localId" : "212",
             "name" : "Nil",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "3",
+                  "r" : "212",
                   "s" : [ {
-                     "r" : "2",
+                     "r" : "213",
                      "value" : [ "","define ","Nil",": ","null" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "2",
+               "localId" : "213",
                "type" : "Null"
             }
          }, {
-            "localId" : "5",
+            "localId" : "215",
             "name" : "One",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "5",
+                  "r" : "215",
                   "s" : [ {
-                     "r" : "4",
+                     "r" : "216",
                      "value" : [ "","define ","One",": ","1" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "4",
+               "localId" : "216",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "1",
                "type" : "Literal"
             }
          }, {
-            "localId" : "8",
+            "localId" : "218",
             "name" : "NullIsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "8",
+                  "r" : "218",
                   "s" : [ {
                      "value" : [ "","define ","NullIsNull",": " ]
                   }, {
-                     "r" : "7",
+                     "r" : "220",
                      "s" : [ {
-                        "r" : "6",
+                        "r" : "219",
                         "value" : [ "null"," is null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "7",
+               "localId" : "220",
                "type" : "IsNull",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "6",
+                  "localId" : "219",
                   "type" : "Null"
                }
             }
          }, {
-            "localId" : "11",
+            "localId" : "222",
             "name" : "NullVarIsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "11",
+                  "r" : "222",
                   "s" : [ {
                      "value" : [ "","define ","NullVarIsNull",": " ]
                   }, {
-                     "r" : "10",
+                     "r" : "224",
                      "s" : [ {
-                        "r" : "9",
+                        "r" : "223",
                         "s" : [ {
                            "value" : [ "Nil" ]
                         } ]
@@ -274,29 +299,30 @@ module.exports['IsNull'] = {
                }
             } ],
             "expression" : {
-               "localId" : "10",
+               "localId" : "224",
                "type" : "IsNull",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "9",
+                  "localId" : "223",
                   "name" : "Nil",
                   "type" : "ExpressionRef"
                }
             }
          }, {
-            "localId" : "14",
+            "localId" : "226",
             "name" : "StringIsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "14",
+                  "r" : "226",
                   "s" : [ {
                      "value" : [ "","define ","StringIsNull",": " ]
                   }, {
-                     "r" : "13",
+                     "r" : "228",
                      "s" : [ {
-                        "r" : "12",
+                        "r" : "227",
                         "s" : [ {
                            "value" : [ "''" ]
                         } ]
@@ -307,30 +333,31 @@ module.exports['IsNull'] = {
                }
             } ],
             "expression" : {
-               "localId" : "13",
+               "localId" : "228",
                "type" : "IsNull",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "12",
+                  "localId" : "227",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "17",
+            "localId" : "230",
             "name" : "NonNullVarIsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "17",
+                  "r" : "230",
                   "s" : [ {
                      "value" : [ "","define ","NonNullVarIsNull",": " ]
                   }, {
-                     "r" : "16",
+                     "r" : "232",
                      "s" : [ {
-                        "r" : "15",
+                        "r" : "231",
                         "s" : [ {
                            "value" : [ "One" ]
                         } ]
@@ -341,10 +368,11 @@ module.exports['IsNull'] = {
                }
             } ],
             "expression" : {
-               "localId" : "16",
+               "localId" : "232",
                "type" : "IsNull",
+               "signature" : [ ],
                "operand" : {
-                  "localId" : "15",
+                  "localId" : "231",
                   "name" : "One",
                   "type" : "ExpressionRef"
                }
@@ -372,14 +400,16 @@ define UnionAsList: Coalesce(ListA union ListWithNull)
 
 module.exports['Coalesce'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "57",
+            "r" : "298",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -395,17 +425,18 @@ module.exports['Coalesce'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -413,7 +444,7 @@ module.exports['Coalesce'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -421,46 +452,55 @@ module.exports['Coalesce'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "8",
+            "localId" : "212",
             "name" : "NullNullHelloNullWorld",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "8",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define ","NullNullHelloNullWorld",": " ]
                   }, {
-                     "r" : "7",
+                     "r" : "220",
                      "s" : [ {
-                        "r" : "2",
+                        "r" : "213",
                         "value" : [ "Coalesce","(","null",", ","null",", " ]
                      }, {
-                        "r" : "4",
+                        "r" : "215",
                         "s" : [ {
                            "value" : [ "'Hello'" ]
                         } ]
                      }, {
-                        "r" : "5",
+                        "r" : "216",
                         "value" : [ ", ","null",", " ]
                      }, {
-                        "r" : "6",
+                        "r" : "217",
                         "s" : [ {
                            "value" : [ "'World'" ]
                         } ]
@@ -471,54 +511,55 @@ module.exports['Coalesce'] = {
                }
             } ],
             "expression" : {
-               "localId" : "7",
+               "localId" : "220",
                "type" : "Coalesce",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "2",
+                  "localId" : "213",
                   "type" : "Null"
                }, {
-                  "localId" : "3",
+                  "localId" : "214",
                   "type" : "Null"
                }, {
-                  "localId" : "4",
+                  "localId" : "215",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Hello",
                   "type" : "Literal"
                }, {
-                  "localId" : "5",
+                  "localId" : "216",
                   "type" : "Null"
                }, {
-                  "localId" : "6",
+                  "localId" : "217",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "World",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "14",
+            "localId" : "222",
             "name" : "FooNullNullBar",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "14",
+                  "r" : "222",
                   "s" : [ {
                      "value" : [ "","define ","FooNullNullBar",": " ]
                   }, {
-                     "r" : "13",
+                     "r" : "231",
                      "s" : [ {
                         "value" : [ "Coalesce","(" ]
                      }, {
-                        "r" : "9",
+                        "r" : "223",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
                      }, {
-                        "r" : "10",
+                        "r" : "224",
                         "value" : [ ", ","null",", ","null",", " ]
                      }, {
-                        "r" : "12",
+                        "r" : "226",
                         "s" : [ {
                            "value" : [ "'Bar'" ]
                         } ]
@@ -529,98 +570,104 @@ module.exports['Coalesce'] = {
                }
             } ],
             "expression" : {
-               "localId" : "13",
+               "localId" : "231",
                "type" : "Coalesce",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "9",
+                  "localId" : "223",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
                }, {
+                  "localId" : "232",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
+                  "signature" : [ ],
                   "operand" : {
-                     "localId" : "10",
+                     "localId" : "224",
                      "type" : "Null"
                   }
                }, {
+                  "localId" : "233",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
+                  "signature" : [ ],
                   "operand" : {
-                     "localId" : "11",
+                     "localId" : "225",
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "12",
+                  "localId" : "226",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Bar",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "19",
+            "localId" : "235",
             "name" : "AllNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "19",
+                  "r" : "235",
                   "s" : [ {
                      "value" : [ "","define ","AllNull",": " ]
                   }, {
-                     "r" : "18",
+                     "r" : "241",
                      "s" : [ {
-                        "r" : "15",
+                        "r" : "236",
                         "value" : [ "Coalesce","(","null",", ","null",", ","null",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "18",
+               "localId" : "241",
                "type" : "Coalesce",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "15",
+                  "localId" : "236",
                   "type" : "Null"
                }, {
-                  "localId" : "16",
+                  "localId" : "237",
                   "type" : "Null"
                }, {
-                  "localId" : "17",
+                  "localId" : "238",
                   "type" : "Null"
                } ]
             }
          }, {
-            "localId" : "27",
+            "localId" : "243",
             "name" : "ListArgStartsWithNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "27",
+                  "r" : "243",
                   "s" : [ {
                      "value" : [ "","define ","ListArgStartsWithNull",": " ]
                   }, {
-                     "r" : "26",
+                     "r" : "255",
                      "s" : [ {
                         "value" : [ "Coalesce","(" ]
                      }, {
-                        "r" : "25",
+                        "r" : "244",
                         "s" : [ {
-                           "r" : "20",
+                           "r" : "245",
                            "value" : [ "List{","null",", ","null",", " ]
                         }, {
-                           "r" : "22",
+                           "r" : "247",
                            "s" : [ {
                               "value" : [ "'One'" ]
                            } ]
                         }, {
-                           "r" : "23",
+                           "r" : "248",
                            "value" : [ ", ","null",", " ]
                         }, {
-                           "r" : "24",
+                           "r" : "249",
                            "s" : [ {
                               "value" : [ "'Two'" ]
                            } ]
@@ -634,39 +681,46 @@ module.exports['Coalesce'] = {
                }
             } ],
             "expression" : {
-               "localId" : "26",
+               "localId" : "255",
                "type" : "Coalesce",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "25",
+                  "localId" : "244",
                   "type" : "List",
                   "element" : [ {
+                     "localId" : "250",
                      "asType" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "As",
+                     "signature" : [ ],
                      "operand" : {
-                        "localId" : "20",
+                        "localId" : "245",
                         "type" : "Null"
                      }
                   }, {
+                     "localId" : "251",
                      "asType" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "As",
+                     "signature" : [ ],
                      "operand" : {
-                        "localId" : "21",
+                        "localId" : "246",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "22",
+                     "localId" : "247",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "One",
                      "type" : "Literal"
                   }, {
+                     "localId" : "252",
                      "asType" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "As",
+                     "signature" : [ ],
                      "operand" : {
-                        "localId" : "23",
+                        "localId" : "248",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "24",
+                     "localId" : "249",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Two",
                      "type" : "Literal"
@@ -674,24 +728,24 @@ module.exports['Coalesce'] = {
                } ]
             }
          }, {
-            "localId" : "34",
+            "localId" : "257",
             "name" : "ListArgAllNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "34",
+                  "r" : "257",
                   "s" : [ {
                      "value" : [ "","define ","ListArgAllNull",": " ]
                   }, {
-                     "r" : "33",
+                     "r" : "265",
                      "s" : [ {
                         "value" : [ "Coalesce","(" ]
                      }, {
-                        "r" : "32",
+                        "r" : "258",
                         "s" : [ {
-                           "r" : "28",
+                           "r" : "259",
                            "value" : [ "List{","null",", ","null",", ","null",", ","null","}" ]
                         } ]
                      }, {
@@ -701,52 +755,53 @@ module.exports['Coalesce'] = {
                }
             } ],
             "expression" : {
-               "localId" : "33",
+               "localId" : "265",
                "type" : "Coalesce",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "32",
+                  "localId" : "258",
                   "type" : "List",
                   "element" : [ {
-                     "localId" : "28",
+                     "localId" : "259",
                      "type" : "Null"
                   }, {
-                     "localId" : "29",
+                     "localId" : "260",
                      "type" : "Null"
                   }, {
-                     "localId" : "30",
+                     "localId" : "261",
                      "type" : "Null"
                   }, {
-                     "localId" : "31",
+                     "localId" : "262",
                      "type" : "Null"
                   } ]
                } ]
             }
          }, {
-            "localId" : "41",
+            "localId" : "267",
             "name" : "ListWithNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "41",
+                  "r" : "267",
                   "s" : [ {
                      "value" : [ "","define ","ListWithNull",": " ]
                   }, {
-                     "r" : "40",
+                     "r" : "268",
                      "s" : [ {
-                        "r" : "35",
+                        "r" : "269",
                         "value" : [ "List{","null",", ","null",", " ]
                      }, {
-                        "r" : "37",
+                        "r" : "271",
                         "s" : [ {
                            "value" : [ "'One'" ]
                         } ]
                      }, {
-                        "r" : "38",
+                        "r" : "272",
                         "value" : [ ", ","null",", " ]
                      }, {
-                        "r" : "39",
+                        "r" : "273",
                         "s" : [ {
                            "value" : [ "'Two'" ]
                         } ]
@@ -757,58 +812,64 @@ module.exports['Coalesce'] = {
                }
             } ],
             "expression" : {
-               "localId" : "40",
+               "localId" : "268",
                "type" : "List",
                "element" : [ {
+                  "localId" : "274",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
+                  "signature" : [ ],
                   "operand" : {
-                     "localId" : "35",
+                     "localId" : "269",
                      "type" : "Null"
                   }
                }, {
+                  "localId" : "275",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
+                  "signature" : [ ],
                   "operand" : {
-                     "localId" : "36",
+                     "localId" : "270",
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "37",
+                  "localId" : "271",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "One",
                   "type" : "Literal"
                }, {
+                  "localId" : "276",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
+                  "signature" : [ ],
                   "operand" : {
-                     "localId" : "38",
+                     "localId" : "272",
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "39",
+                  "localId" : "273",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Two",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "44",
+            "localId" : "278",
             "name" : "ListExpressionRef",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "44",
+                  "r" : "278",
                   "s" : [ {
                      "value" : [ "","define ","ListExpressionRef",": " ]
                   }, {
-                     "r" : "43",
+                     "r" : "282",
                      "s" : [ {
                         "value" : [ "Coalesce","(" ]
                      }, {
-                        "r" : "42",
+                        "r" : "279",
                         "s" : [ {
                            "value" : [ "ListWithNull" ]
                         } ]
@@ -819,31 +880,32 @@ module.exports['Coalesce'] = {
                }
             } ],
             "expression" : {
-               "localId" : "43",
+               "localId" : "282",
                "type" : "Coalesce",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "42",
+                  "localId" : "279",
                   "name" : "ListWithNull",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "47",
+            "localId" : "284",
             "name" : "RetrieveAsList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "47",
+                  "r" : "284",
                   "s" : [ {
                      "value" : [ "","define ","RetrieveAsList",": " ]
                   }, {
-                     "r" : "46",
+                     "r" : "288",
                      "s" : [ {
                         "value" : [ "Coalesce","(" ]
                      }, {
-                        "r" : "45",
+                        "r" : "285",
                         "s" : [ {
                            "value" : [ "[","Encounter","]" ]
                         } ]
@@ -854,84 +916,93 @@ module.exports['Coalesce'] = {
                }
             } ],
             "expression" : {
-               "localId" : "46",
+               "localId" : "288",
                "type" : "Coalesce",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "45",
+                  "localId" : "285",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                } ]
             }
          }, {
-            "localId" : "52",
+            "localId" : "290",
             "name" : "ListA",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "52",
+                  "r" : "290",
                   "s" : [ {
                      "value" : [ "","define ","ListA",": " ]
                   }, {
-                     "r" : "51",
+                     "r" : "291",
                      "s" : [ {
-                        "r" : "48",
+                        "r" : "292",
                         "value" : [ "List{","null",", ","null",", ","3","}" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "51",
+               "localId" : "291",
                "type" : "List",
                "element" : [ {
+                  "localId" : "295",
                   "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "As",
+                  "signature" : [ ],
                   "operand" : {
-                     "localId" : "48",
+                     "localId" : "292",
                      "type" : "Null"
                   }
                }, {
+                  "localId" : "296",
                   "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "As",
+                  "signature" : [ ],
                   "operand" : {
-                     "localId" : "49",
+                     "localId" : "293",
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "50",
+                  "localId" : "294",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "3",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "57",
+            "localId" : "298",
             "name" : "UnionAsList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "57",
+                  "r" : "298",
                   "s" : [ {
                      "value" : [ "","define ","UnionAsList",": " ]
                   }, {
-                     "r" : "56",
+                     "r" : "314",
                      "s" : [ {
                         "value" : [ "Coalesce","(" ]
                      }, {
-                        "r" : "55",
+                        "r" : "311",
                         "s" : [ {
-                           "r" : "53",
+                           "r" : "299",
                            "s" : [ {
                               "value" : [ "ListA" ]
                            } ]
                         }, {
                            "value" : [ " union " ]
                         }, {
-                           "r" : "54",
+                           "r" : "300",
                            "s" : [ {
                               "value" : [ "ListWithNull" ]
                            } ]
@@ -943,46 +1014,62 @@ module.exports['Coalesce'] = {
                }
             } ],
             "expression" : {
-               "localId" : "56",
+               "localId" : "314",
                "type" : "Coalesce",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "55",
+                  "localId" : "311",
                   "type" : "Union",
+                  "signature" : [ ],
                   "operand" : [ {
+                     "localId" : "301",
                      "type" : "As",
+                     "signature" : [ ],
                      "operand" : {
-                        "localId" : "53",
+                        "localId" : "299",
                         "name" : "ListA",
                         "type" : "ExpressionRef"
                      },
                      "asTypeSpecifier" : {
+                        "localId" : "302",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
+                           "localId" : "303",
                            "type" : "ChoiceTypeSpecifier",
+                           "type" : [ ],
                            "choice" : [ {
+                              "localId" : "304",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }, {
+                              "localId" : "305",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            } ]
                         }
                      }
                   }, {
+                     "localId" : "306",
                      "type" : "As",
+                     "signature" : [ ],
                      "operand" : {
-                        "localId" : "54",
+                        "localId" : "300",
                         "name" : "ListWithNull",
                         "type" : "ExpressionRef"
                      },
                      "asTypeSpecifier" : {
+                        "localId" : "307",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
+                           "localId" : "308",
                            "type" : "ChoiceTypeSpecifier",
+                           "type" : [ ],
                            "choice" : [ {
+                              "localId" : "309",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }, {
+                              "localId" : "310",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            } ]

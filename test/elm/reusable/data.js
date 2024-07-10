@@ -17,14 +17,16 @@ define Foo: 'Bar'
 
 module.exports['ExpressionDef'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "3",
+            "r" : "212",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -40,17 +42,18 @@ module.exports['ExpressionDef'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -58,7 +61,7 @@ module.exports['ExpressionDef'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -66,33 +69,42 @@ module.exports['ExpressionDef'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "3",
+            "localId" : "212",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "3",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define ","Foo",": " ]
                   }, {
-                     "r" : "2",
+                     "r" : "213",
                      "s" : [ {
                         "value" : [ "'Bar'" ]
                      } ]
@@ -100,7 +112,7 @@ module.exports['ExpressionDef'] = {
                }
             } ],
             "expression" : {
-               "localId" : "2",
+               "localId" : "213",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "Bar",
                "type" : "Literal"
@@ -120,14 +132,16 @@ define Foo: Life
 
 module.exports['ExpressionRef'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "5",
+            "r" : "215",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -143,17 +157,18 @@ module.exports['ExpressionRef'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -161,7 +176,7 @@ module.exports['ExpressionRef'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -169,54 +184,63 @@ module.exports['ExpressionRef'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "3",
+            "localId" : "212",
             "name" : "Life",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "3",
+                  "r" : "212",
                   "s" : [ {
-                     "r" : "2",
+                     "r" : "213",
                      "value" : [ "","define ","Life",": ","42" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "2",
+               "localId" : "213",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "42",
                "type" : "Literal"
             }
          }, {
-            "localId" : "5",
+            "localId" : "215",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "5",
+                  "r" : "215",
                   "s" : [ {
                      "value" : [ "","define ","Foo",": " ]
                   }, {
-                     "r" : "4",
+                     "r" : "216",
                      "s" : [ {
                         "value" : [ "Life" ]
                      } ]
@@ -224,7 +248,7 @@ module.exports['ExpressionRef'] = {
                }
             } ],
             "expression" : {
-               "localId" : "4",
+               "localId" : "216",
                "name" : "Life",
                "type" : "ExpressionRef"
             }
@@ -245,14 +269,16 @@ define testValue: "foo bar"(1,2)
 
 module.exports['FunctionDefinitions'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "11",
+            "r" : "220",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -268,17 +294,18 @@ module.exports['FunctionDefinitions'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -286,7 +313,7 @@ module.exports['FunctionDefinitions'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -294,22 +321,31 @@ module.exports['FunctionDefinitions'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "7",
+            "localId" : "211",
             "name" : "foo bar",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -317,36 +353,22 @@ module.exports['FunctionDefinitions'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "7",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define function ","\"foo bar\"","(","a"," " ]
+                     "value" : [ "","define function \"foo bar\"(a Integer, b Integer) :\n  " ]
                   }, {
-                     "r" : "2",
+                     "r" : "216",
                      "s" : [ {
-                        "value" : [ "Integer" ]
-                     } ]
-                  }, {
-                     "value" : [ ", ","b"," " ]
-                  }, {
-                     "r" : "3",
-                     "s" : [ {
-                        "value" : [ "Integer" ]
-                     } ]
-                  }, {
-                     "value" : [ ") :\n  " ]
-                  }, {
-                     "r" : "6",
-                     "s" : [ {
-                        "r" : "6",
+                        "r" : "216",
                         "s" : [ {
-                           "r" : "4",
+                           "r" : "217",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "5",
+                           "r" : "218",
                            "s" : [ {
                               "value" : [ "b" ]
                            } ]
@@ -356,64 +378,68 @@ module.exports['FunctionDefinitions'] = {
                }
             } ],
             "expression" : {
-               "localId" : "6",
+               "localId" : "216",
                "type" : "Add",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "4",
+                  "localId" : "217",
                   "name" : "a",
                   "type" : "OperandRef"
                }, {
-                  "localId" : "5",
+                  "localId" : "218",
                   "name" : "b",
                   "type" : "OperandRef"
                } ]
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }, {
+               "localId" : "215",
                "name" : "b",
                "operandTypeSpecifier" : {
-                  "localId" : "3",
+                  "localId" : "214",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "11",
+            "localId" : "220",
             "name" : "testValue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "11",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define ","testValue",": " ]
                   }, {
-                     "r" : "10",
+                     "r" : "223",
                      "s" : [ {
-                        "r" : "8",
+                        "r" : "221",
                         "value" : [ "\"foo bar\"","(","1",",","2",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "10",
+               "localId" : "223",
                "name" : "foo bar",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "8",
+                  "localId" : "221",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                }, {
-                  "localId" : "9",
+                  "localId" : "222",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
                   "type" : "Literal"
@@ -440,14 +466,26 @@ define testValue2: process('World')
 
 module.exports['FunctionOverloadsWithSingleArgument'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
+      }, {
+         "message" : "The function TestSnippet.process has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "message" : "The function TestSnippet.process has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "17",
+            "r" : "229",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -463,17 +501,18 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -481,7 +520,7 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -489,22 +528,31 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "6",
+            "localId" : "211",
             "name" : "process",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -512,27 +560,20 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "6",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define function ","process","(","a"," " ]
+                     "value" : [ "","define function process(a System.Integer) :\n  " ]
                   }, {
-                     "r" : "2",
+                     "r" : "214",
                      "s" : [ {
-                        "value" : [ "System",".","Integer" ]
-                     } ]
-                  }, {
-                     "value" : [ ") :\n  " ]
-                  }, {
-                     "r" : "5",
-                     "s" : [ {
-                        "r" : "5",
+                        "r" : "214",
                         "s" : [ {
-                           "r" : "3",
+                           "r" : "215",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
                         }, {
-                           "r" : "4",
+                           "r" : "216",
                            "value" : [ " + ","1" ]
                         } ]
                      } ]
@@ -540,29 +581,31 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                }
             } ],
             "expression" : {
-               "localId" : "5",
+               "localId" : "214",
                "type" : "Add",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "3",
+                  "localId" : "215",
                   "name" : "a",
                   "type" : "OperandRef"
                }, {
-                  "localId" : "4",
+                  "localId" : "216",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                } ]
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "11",
+            "localId" : "217",
             "name" : "process",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -570,29 +613,22 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "11",
+                  "r" : "217",
                   "s" : [ {
-                     "value" : [ "","define function ","process","(","a"," " ]
+                     "value" : [ "","define function process(a System.String) :\n  " ]
                   }, {
-                     "r" : "7",
+                     "r" : "223",
                      "s" : [ {
-                        "value" : [ "System",".","String" ]
-                     } ]
-                  }, {
-                     "value" : [ ") :\n  " ]
-                  }, {
-                     "r" : "10",
-                     "s" : [ {
-                        "r" : "10",
+                        "r" : "223",
                         "s" : [ {
-                           "r" : "8",
+                           "r" : "221",
                            "s" : [ {
                               "value" : [ "'Hello '" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "9",
+                           "r" : "222",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
@@ -602,75 +638,78 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                }
             } ],
             "expression" : {
-               "localId" : "10",
+               "localId" : "223",
                "type" : "Concatenate",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "8",
+                  "localId" : "221",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Hello ",
                   "type" : "Literal"
                }, {
-                  "localId" : "9",
+                  "localId" : "222",
                   "name" : "a",
                   "type" : "OperandRef"
                } ]
             },
             "operand" : [ {
+               "localId" : "219",
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "7",
+                  "localId" : "218",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "14",
+            "localId" : "225",
             "name" : "testValue1",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "14",
+                  "r" : "225",
                   "s" : [ {
                      "value" : [ "","define ","testValue1",": " ]
                   }, {
-                     "r" : "13",
+                     "r" : "227",
                      "s" : [ {
-                        "r" : "12",
+                        "r" : "226",
                         "value" : [ "process","(","1",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "13",
+               "localId" : "227",
                "name" : "process",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "12",
+                  "localId" : "226",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "17",
+            "localId" : "229",
             "name" : "testValue2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "17",
+                  "r" : "229",
                   "s" : [ {
                      "value" : [ "","define ","testValue2",": " ]
                   }, {
-                     "r" : "16",
+                     "r" : "231",
                      "s" : [ {
                         "value" : [ "process","(" ]
                      }, {
-                        "r" : "15",
+                        "r" : "230",
                         "s" : [ {
                            "value" : [ "'World'" ]
                         } ]
@@ -681,11 +720,12 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                }
             } ],
             "expression" : {
-               "localId" : "16",
+               "localId" : "231",
                "name" : "process",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "15",
+                  "localId" : "230",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "World",
                   "type" : "Literal"
@@ -712,14 +752,26 @@ define testValue2: process(true, 'World')
 
 module.exports['FunctionOverloadsWithMultipleArguments'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
+      }, {
+         "message" : "The function TestSnippet.process has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "message" : "The function TestSnippet.process has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "31",
+            "r" : "245",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -735,17 +787,18 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -753,7 +806,7 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -761,22 +814,31 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "12",
+            "localId" : "211",
             "name" : "process",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -784,58 +846,44 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "12",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define function ","process","(","inverse"," " ]
+                     "value" : [ "","define function process(inverse System.Boolean, a System.Integer) :\n  " ]
                   }, {
-                     "r" : "2",
+                     "r" : "216",
                      "s" : [ {
-                        "value" : [ "System",".","Boolean" ]
-                     } ]
-                  }, {
-                     "value" : [ ", ","a"," " ]
-                  }, {
-                     "r" : "3",
-                     "s" : [ {
-                        "value" : [ "System",".","Integer" ]
-                     } ]
-                  }, {
-                     "value" : [ ") :\n  " ]
-                  }, {
-                     "r" : "11",
-                     "s" : [ {
-                        "r" : "11",
+                        "r" : "216",
                         "s" : [ {
                            "value" : [ "if " ]
                         }, {
-                           "r" : "4",
+                           "r" : "217",
                            "s" : [ {
                               "value" : [ "inverse" ]
                            } ]
                         }, {
                            "value" : [ " then " ]
                         }, {
-                           "r" : "7",
+                           "r" : "218",
                            "s" : [ {
-                              "r" : "5",
+                              "r" : "219",
                               "s" : [ {
                                  "value" : [ "a" ]
                               } ]
                            }, {
-                              "r" : "6",
+                              "r" : "220",
                               "value" : [ " - ","1" ]
                            } ]
                         }, {
                            "value" : [ " else " ]
                         }, {
-                           "r" : "10",
+                           "r" : "221",
                            "s" : [ {
-                              "r" : "8",
+                              "r" : "222",
                               "s" : [ {
                                  "value" : [ "a" ]
                               } ]
                            }, {
-                              "r" : "9",
+                              "r" : "223",
                               "value" : [ " + ","1" ]
                            } ]
                         } ]
@@ -844,36 +892,38 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                }
             } ],
             "expression" : {
-               "localId" : "11",
+               "localId" : "216",
                "type" : "If",
                "condition" : {
-                  "localId" : "4",
+                  "localId" : "217",
                   "name" : "inverse",
                   "type" : "OperandRef"
                },
                "then" : {
-                  "localId" : "7",
+                  "localId" : "218",
                   "type" : "Subtract",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "5",
+                     "localId" : "219",
                      "name" : "a",
                      "type" : "OperandRef"
                   }, {
-                     "localId" : "6",
+                     "localId" : "220",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   } ]
                },
                "else" : {
-                  "localId" : "10",
+                  "localId" : "221",
                   "type" : "Add",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "8",
+                     "localId" : "222",
                      "name" : "a",
                      "type" : "OperandRef"
                   }, {
-                     "localId" : "9",
+                     "localId" : "223",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
@@ -881,22 +931,24 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                }
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "inverse",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }
             }, {
+               "localId" : "215",
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "3",
+                  "localId" : "214",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "23",
+            "localId" : "224",
             "name" : "process",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -904,47 +956,33 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "23",
+                  "r" : "224",
                   "s" : [ {
-                     "value" : [ "","define function ","process","(","inverse"," " ]
+                     "value" : [ "","define function process(inverse System.Boolean, a System.String) :\n  " ]
                   }, {
-                     "r" : "13",
+                     "r" : "229",
                      "s" : [ {
-                        "value" : [ "System",".","Boolean" ]
-                     } ]
-                  }, {
-                     "value" : [ ", ","a"," " ]
-                  }, {
-                     "r" : "14",
-                     "s" : [ {
-                        "value" : [ "System",".","String" ]
-                     } ]
-                  }, {
-                     "value" : [ ") :\n  " ]
-                  }, {
-                     "r" : "22",
-                     "s" : [ {
-                        "r" : "22",
+                        "r" : "229",
                         "s" : [ {
                            "value" : [ "if " ]
                         }, {
-                           "r" : "15",
+                           "r" : "230",
                            "s" : [ {
                               "value" : [ "inverse" ]
                            } ]
                         }, {
                            "value" : [ " then " ]
                         }, {
-                           "r" : "18",
+                           "r" : "234",
                            "s" : [ {
-                              "r" : "16",
+                              "r" : "232",
                               "s" : [ {
                                  "value" : [ "'Goodbye '" ]
                               } ]
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "17",
+                              "r" : "233",
                               "s" : [ {
                                  "value" : [ "a" ]
                               } ]
@@ -952,16 +990,16 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                         }, {
                            "value" : [ " else " ]
                         }, {
-                           "r" : "21",
+                           "r" : "238",
                            "s" : [ {
-                              "r" : "19",
+                              "r" : "236",
                               "s" : [ {
                                  "value" : [ "'Hello '" ]
                               } ]
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "20",
+                              "r" : "237",
                               "s" : [ {
                                  "value" : [ "a" ]
                               } ]
@@ -972,111 +1010,116 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                }
             } ],
             "expression" : {
-               "localId" : "22",
+               "localId" : "229",
                "type" : "If",
                "condition" : {
-                  "localId" : "15",
+                  "localId" : "230",
                   "name" : "inverse",
                   "type" : "OperandRef"
                },
                "then" : {
-                  "localId" : "18",
+                  "localId" : "234",
                   "type" : "Concatenate",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "16",
+                     "localId" : "232",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Goodbye ",
                      "type" : "Literal"
                   }, {
-                     "localId" : "17",
+                     "localId" : "233",
                      "name" : "a",
                      "type" : "OperandRef"
                   } ]
                },
                "else" : {
-                  "localId" : "21",
+                  "localId" : "238",
                   "type" : "Concatenate",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "19",
+                     "localId" : "236",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Hello ",
                      "type" : "Literal"
                   }, {
-                     "localId" : "20",
+                     "localId" : "237",
                      "name" : "a",
                      "type" : "OperandRef"
                   } ]
                }
             },
             "operand" : [ {
+               "localId" : "226",
                "name" : "inverse",
                "operandTypeSpecifier" : {
-                  "localId" : "13",
+                  "localId" : "225",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }
             }, {
+               "localId" : "228",
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "14",
+                  "localId" : "227",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "27",
+            "localId" : "240",
             "name" : "testValue1",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "27",
+                  "r" : "240",
                   "s" : [ {
                      "value" : [ "","define ","testValue1",": " ]
                   }, {
-                     "r" : "26",
+                     "r" : "243",
                      "s" : [ {
-                        "r" : "24",
+                        "r" : "241",
                         "value" : [ "process","(","true",", ","1",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "26",
+               "localId" : "243",
                "name" : "process",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "24",
+                  "localId" : "241",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                }, {
-                  "localId" : "25",
+                  "localId" : "242",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "31",
+            "localId" : "245",
             "name" : "testValue2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "31",
+                  "r" : "245",
                   "s" : [ {
                      "value" : [ "","define ","testValue2",": " ]
                   }, {
-                     "r" : "30",
+                     "r" : "248",
                      "s" : [ {
-                        "r" : "28",
+                        "r" : "246",
                         "value" : [ "process","(","true",", " ]
                      }, {
-                        "r" : "29",
+                        "r" : "247",
                         "s" : [ {
                            "value" : [ "'World'" ]
                         } ]
@@ -1087,16 +1130,17 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                }
             } ],
             "expression" : {
-               "localId" : "30",
+               "localId" : "248",
                "name" : "process",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "28",
+                  "localId" : "246",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                }, {
-                  "localId" : "29",
+                  "localId" : "247",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "World",
                   "type" : "Literal"
@@ -1124,14 +1168,16 @@ define testValue3: process('World', false)
 
 module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "32",
+            "r" : "249",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1147,17 +1193,18 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -1165,7 +1212,7 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -1173,22 +1220,31 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "6",
+            "localId" : "211",
             "name" : "process",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1196,29 +1252,22 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "6",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define function ","process","(","a"," " ]
+                     "value" : [ "","define function process(a System.String) :\n  " ]
                   }, {
-                     "r" : "2",
+                     "r" : "217",
                      "s" : [ {
-                        "value" : [ "System",".","String" ]
-                     } ]
-                  }, {
-                     "value" : [ ") :\n  " ]
-                  }, {
-                     "r" : "5",
-                     "s" : [ {
-                        "r" : "5",
+                        "r" : "217",
                         "s" : [ {
-                           "r" : "3",
+                           "r" : "215",
                            "s" : [ {
                               "value" : [ "'Hello '" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "4",
+                           "r" : "216",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
@@ -1228,29 +1277,31 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                }
             } ],
             "expression" : {
-               "localId" : "5",
+               "localId" : "217",
                "type" : "Concatenate",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "3",
+                  "localId" : "215",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Hello ",
                   "type" : "Literal"
                }, {
-                  "localId" : "4",
+                  "localId" : "216",
                   "name" : "a",
                   "type" : "OperandRef"
                } ]
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "21",
+            "localId" : "218",
             "name" : "process",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1258,49 +1309,35 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "21",
+                  "r" : "218",
                   "s" : [ {
-                     "value" : [ "","define function ","process","(","a"," " ]
+                     "value" : [ "","define function process(a System.String, isSpanish System.Boolean) :\n  " ]
                   }, {
-                     "r" : "7",
+                     "r" : "223",
                      "s" : [ {
-                        "value" : [ "System",".","String" ]
-                     } ]
-                  }, {
-                     "value" : [ ", ","isSpanish"," " ]
-                  }, {
-                     "r" : "8",
-                     "s" : [ {
-                        "value" : [ "System",".","Boolean" ]
-                     } ]
-                  }, {
-                     "value" : [ ") :\n  " ]
-                  }, {
-                     "r" : "20",
-                     "s" : [ {
-                        "r" : "20",
+                        "r" : "223",
                         "s" : [ {
                            "value" : [ "if " ]
                         }, {
-                           "r" : "9",
+                           "r" : "224",
                            "s" : [ {
                               "value" : [ "isSpanish" ]
                            } ]
                         }, {
                            "value" : [ " then " ]
                         }, {
-                           "r" : "14",
+                           "r" : "231",
                            "s" : [ {
-                              "r" : "12",
+                              "r" : "229",
                               "s" : [ {
-                                 "r" : "10",
+                                 "r" : "227",
                                  "s" : [ {
                                     "value" : [ "'Hola '" ]
                                  } ]
                               }, {
                                  "value" : [ " + " ]
                               }, {
-                                 "r" : "11",
+                                 "r" : "228",
                                  "s" : [ {
                                     "value" : [ "a" ]
                                  } ]
@@ -1308,7 +1345,7 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "13",
+                              "r" : "230",
                               "s" : [ {
                                  "value" : [ "' from Spain'" ]
                               } ]
@@ -1316,18 +1353,18 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                         }, {
                            "value" : [ " else " ]
                         }, {
-                           "r" : "19",
+                           "r" : "238",
                            "s" : [ {
-                              "r" : "17",
+                              "r" : "236",
                               "s" : [ {
-                                 "r" : "15",
+                                 "r" : "234",
                                  "s" : [ {
                                     "value" : [ "'Hello '" ]
                                  } ]
                               }, {
                                  "value" : [ " + " ]
                               }, {
-                                 "r" : "16",
+                                 "r" : "235",
                                  "s" : [ {
                                     "value" : [ "a" ]
                                  } ]
@@ -1335,7 +1372,7 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "18",
+                              "r" : "237",
                               "s" : [ {
                                  "value" : [ "' from England'" ]
                               } ]
@@ -1346,54 +1383,58 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                }
             } ],
             "expression" : {
-               "localId" : "20",
+               "localId" : "223",
                "type" : "If",
                "condition" : {
-                  "localId" : "9",
+                  "localId" : "224",
                   "name" : "isSpanish",
                   "type" : "OperandRef"
                },
                "then" : {
-                  "localId" : "14",
+                  "localId" : "231",
                   "type" : "Concatenate",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "12",
+                     "localId" : "229",
                      "type" : "Concatenate",
+                     "signature" : [ ],
                      "operand" : [ {
-                        "localId" : "10",
+                        "localId" : "227",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "Hola ",
                         "type" : "Literal"
                      }, {
-                        "localId" : "11",
+                        "localId" : "228",
                         "name" : "a",
                         "type" : "OperandRef"
                      } ]
                   }, {
-                     "localId" : "13",
+                     "localId" : "230",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : " from Spain",
                      "type" : "Literal"
                   } ]
                },
                "else" : {
-                  "localId" : "19",
+                  "localId" : "238",
                   "type" : "Concatenate",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "17",
+                     "localId" : "236",
                      "type" : "Concatenate",
+                     "signature" : [ ],
                      "operand" : [ {
-                        "localId" : "15",
+                        "localId" : "234",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "Hello ",
                         "type" : "Literal"
                      }, {
-                        "localId" : "16",
+                        "localId" : "235",
                         "name" : "a",
                         "type" : "OperandRef"
                      } ]
                   }, {
-                     "localId" : "18",
+                     "localId" : "237",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : " from England",
                      "type" : "Literal"
@@ -1401,37 +1442,39 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                }
             },
             "operand" : [ {
+               "localId" : "220",
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "7",
+                  "localId" : "219",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             }, {
+               "localId" : "222",
                "name" : "isSpanish",
                "operandTypeSpecifier" : {
-                  "localId" : "8",
+                  "localId" : "221",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "24",
+            "localId" : "240",
             "name" : "testValue1",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "24",
+                  "r" : "240",
                   "s" : [ {
                      "value" : [ "","define ","testValue1",": " ]
                   }, {
-                     "r" : "23",
+                     "r" : "242",
                      "s" : [ {
                         "value" : [ "process","(" ]
                      }, {
-                        "r" : "22",
+                        "r" : "241",
                         "s" : [ {
                            "value" : [ "'World'" ]
                         } ]
@@ -1442,97 +1485,100 @@ module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
                }
             } ],
             "expression" : {
-               "localId" : "23",
+               "localId" : "242",
                "name" : "process",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "22",
+                  "localId" : "241",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "World",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "28",
+            "localId" : "244",
             "name" : "testValue2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "28",
+                  "r" : "244",
                   "s" : [ {
                      "value" : [ "","define ","testValue2",": " ]
                   }, {
-                     "r" : "27",
+                     "r" : "247",
                      "s" : [ {
                         "value" : [ "process","(" ]
                      }, {
-                        "r" : "25",
+                        "r" : "245",
                         "s" : [ {
                            "value" : [ "'World'" ]
                         } ]
                      }, {
-                        "r" : "26",
+                        "r" : "246",
                         "value" : [ ", ","true",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "27",
+               "localId" : "247",
                "name" : "process",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "25",
+                  "localId" : "245",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "World",
                   "type" : "Literal"
                }, {
-                  "localId" : "26",
+                  "localId" : "246",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "32",
+            "localId" : "249",
             "name" : "testValue3",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "32",
+                  "r" : "249",
                   "s" : [ {
                      "value" : [ "","define ","testValue3",": " ]
                   }, {
-                     "r" : "31",
+                     "r" : "252",
                      "s" : [ {
                         "value" : [ "process","(" ]
                      }, {
-                        "r" : "29",
+                        "r" : "250",
                         "s" : [ {
                            "value" : [ "'World'" ]
                         } ]
                      }, {
-                        "r" : "30",
+                        "r" : "251",
                         "value" : [ ", ","false",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "31",
+               "localId" : "252",
                "name" : "process",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "29",
+                  "localId" : "250",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "World",
                   "type" : "Literal"
                }, {
-                  "localId" : "30",
+                  "localId" : "251",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
                   "type" : "Literal"
@@ -1559,14 +1605,26 @@ define testValue2: process(First([Condition]))
 
 module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
+      }, {
+         "message" : "The function TestSnippet.process has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "message" : "The function TestSnippet.process has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "21",
+            "r" : "235",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1582,17 +1640,18 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -1600,7 +1659,7 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -1608,22 +1667,31 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "7",
+            "localId" : "211",
             "name" : "process",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1631,38 +1699,31 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "7",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define function ","process","(","e"," " ]
+                     "value" : [ "","define function process(e Simple.Encounter) :\n  " ]
                   }, {
-                     "r" : "2",
+                     "r" : "218",
                      "s" : [ {
-                        "value" : [ "Simple",".","Encounter" ]
-                     } ]
-                  }, {
-                     "value" : [ ") :\n  " ]
-                  }, {
-                     "r" : "6",
-                     "s" : [ {
-                        "r" : "6",
+                        "r" : "218",
                         "s" : [ {
-                           "r" : "3",
+                           "r" : "215",
                            "s" : [ {
                               "value" : [ "'Encounter '" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "5",
+                           "r" : "217",
                            "s" : [ {
-                              "r" : "4",
+                              "r" : "216",
                               "s" : [ {
                                  "value" : [ "e" ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "5",
+                              "r" : "217",
                               "s" : [ {
                                  "value" : [ "id" ]
                               } ]
@@ -1673,34 +1734,36 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                }
             } ],
             "expression" : {
-               "localId" : "6",
+               "localId" : "218",
                "type" : "Concatenate",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "3",
+                  "localId" : "215",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Encounter ",
                   "type" : "Literal"
                }, {
-                  "localId" : "5",
+                  "localId" : "217",
                   "path" : "id",
                   "type" : "Property",
                   "source" : {
-                     "localId" : "4",
+                     "localId" : "216",
                      "name" : "e",
                      "type" : "OperandRef"
                   }
                } ]
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "e",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "13",
+            "localId" : "219",
             "name" : "process",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1708,38 +1771,31 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "13",
+                  "r" : "219",
                   "s" : [ {
-                     "value" : [ "","define function ","process","(","c"," " ]
+                     "value" : [ "","define function process(c Simple.Condition) :\n  " ]
                   }, {
-                     "r" : "8",
+                     "r" : "226",
                      "s" : [ {
-                        "value" : [ "Simple",".","Condition" ]
-                     } ]
-                  }, {
-                     "value" : [ ") :\n  " ]
-                  }, {
-                     "r" : "12",
-                     "s" : [ {
-                        "r" : "12",
+                        "r" : "226",
                         "s" : [ {
-                           "r" : "9",
+                           "r" : "223",
                            "s" : [ {
                               "value" : [ "'Condition '" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "11",
+                           "r" : "225",
                            "s" : [ {
-                              "r" : "10",
+                              "r" : "224",
                               "s" : [ {
                                  "value" : [ "c" ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "11",
+                              "r" : "225",
                               "s" : [ {
                                  "value" : [ "id" ]
                               } ]
@@ -1750,53 +1806,55 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                }
             } ],
             "expression" : {
-               "localId" : "12",
+               "localId" : "226",
                "type" : "Concatenate",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "9",
+                  "localId" : "223",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Condition ",
                   "type" : "Literal"
                }, {
-                  "localId" : "11",
+                  "localId" : "225",
                   "path" : "id",
                   "type" : "Property",
                   "source" : {
-                     "localId" : "10",
+                     "localId" : "224",
                      "name" : "c",
                      "type" : "OperandRef"
                   }
                } ]
             },
             "operand" : [ {
+               "localId" : "221",
                "name" : "c",
                "operandTypeSpecifier" : {
-                  "localId" : "8",
+                  "localId" : "220",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "17",
+            "localId" : "228",
             "name" : "testValue1",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "17",
+                  "r" : "228",
                   "s" : [ {
                      "value" : [ "","define ","testValue1",": " ]
                   }, {
-                     "r" : "16",
+                     "r" : "233",
                      "s" : [ {
                         "value" : [ "process","(" ]
                      }, {
-                        "r" : "15",
+                        "r" : "232",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "14",
+                           "r" : "229",
                            "s" : [ {
                               "value" : [ "[","Encounter","]" ]
                            } ]
@@ -1810,40 +1868,46 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                }
             } ],
             "expression" : {
-               "localId" : "16",
+               "localId" : "233",
                "name" : "process",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "15",
+                  "localId" : "232",
                   "type" : "First",
+                  "signature" : [ ],
                   "source" : {
-                     "localId" : "14",
+                     "localId" : "229",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                     "type" : "Retrieve"
+                     "type" : "Retrieve",
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
                   }
                } ]
             }
          }, {
-            "localId" : "21",
+            "localId" : "235",
             "name" : "testValue2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "21",
+                  "r" : "235",
                   "s" : [ {
                      "value" : [ "","define ","testValue2",": " ]
                   }, {
-                     "r" : "20",
+                     "r" : "240",
                      "s" : [ {
                         "value" : [ "process","(" ]
                      }, {
-                        "r" : "19",
+                        "r" : "239",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "18",
+                           "r" : "236",
                            "s" : [ {
                               "value" : [ "[","Condition","]" ]
                            } ]
@@ -1857,16 +1921,22 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                }
             } ],
             "expression" : {
-               "localId" : "20",
+               "localId" : "240",
                "name" : "process",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "19",
+                  "localId" : "239",
                   "type" : "First",
+                  "signature" : [ ],
                   "source" : {
-                     "localId" : "18",
+                     "localId" : "236",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
-                     "type" : "Retrieve"
+                     "type" : "Retrieve",
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
                   }
                } ]
             }
@@ -1891,14 +1961,16 @@ define testValue2: 1.add(2)
 
 module.exports['FluentFunctions'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "21",
+            "r" : "234",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1914,17 +1986,18 @@ module.exports['FluentFunctions'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -1932,7 +2005,7 @@ module.exports['FluentFunctions'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -1940,22 +2013,31 @@ module.exports['FluentFunctions'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "8",
+            "localId" : "211",
             "name" : "greet",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1964,31 +2046,24 @@ module.exports['FluentFunctions'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "8",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define fluent function ","greet","(","name"," " ]
+                     "value" : [ "","define fluent function greet(name System.String) :\n  " ]
                   }, {
-                     "r" : "2",
+                     "r" : "220",
                      "s" : [ {
-                        "value" : [ "System",".","String" ]
-                     } ]
-                  }, {
-                     "value" : [ ") :\n  " ]
-                  }, {
-                     "r" : "7",
-                     "s" : [ {
-                        "r" : "7",
+                        "r" : "220",
                         "s" : [ {
-                           "r" : "5",
+                           "r" : "218",
                            "s" : [ {
-                              "r" : "3",
+                              "r" : "216",
                               "s" : [ {
                                  "value" : [ "'Hello '" ]
                               } ]
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "4",
+                              "r" : "217",
                               "s" : [ {
                                  "value" : [ "name" ]
                               } ]
@@ -1996,7 +2071,7 @@ module.exports['FluentFunctions'] = {
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "6",
+                           "r" : "219",
                            "s" : [ {
                               "value" : [ "'!'" ]
                            } ]
@@ -2006,38 +2081,41 @@ module.exports['FluentFunctions'] = {
                }
             } ],
             "expression" : {
-               "localId" : "7",
+               "localId" : "220",
                "type" : "Concatenate",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "5",
+                  "localId" : "218",
                   "type" : "Concatenate",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "3",
+                     "localId" : "216",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Hello ",
                      "type" : "Literal"
                   }, {
-                     "localId" : "4",
+                     "localId" : "217",
                      "name" : "name",
                      "type" : "OperandRef"
                   } ]
                }, {
-                  "localId" : "6",
+                  "localId" : "219",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "!",
                   "type" : "Literal"
                } ]
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "name",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "14",
+            "localId" : "221",
             "name" : "add",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2046,36 +2124,22 @@ module.exports['FluentFunctions'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "14",
+                  "r" : "221",
                   "s" : [ {
-                     "value" : [ "","define fluent function ","add","(","a"," " ]
+                     "value" : [ "","define fluent function add(a System.Integer, b System.Integer) :\n  " ]
                   }, {
-                     "r" : "9",
+                     "r" : "226",
                      "s" : [ {
-                        "value" : [ "System",".","Integer" ]
-                     } ]
-                  }, {
-                     "value" : [ ", ","b"," " ]
-                  }, {
-                     "r" : "10",
-                     "s" : [ {
-                        "value" : [ "System",".","Integer" ]
-                     } ]
-                  }, {
-                     "value" : [ ") :\n  " ]
-                  }, {
-                     "r" : "13",
-                     "s" : [ {
-                        "r" : "13",
+                        "r" : "226",
                         "s" : [ {
-                           "r" : "11",
+                           "r" : "227",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "12",
+                           "r" : "228",
                            "s" : [ {
                               "value" : [ "b" ]
                            } ]
@@ -2085,55 +2149,58 @@ module.exports['FluentFunctions'] = {
                }
             } ],
             "expression" : {
-               "localId" : "13",
+               "localId" : "226",
                "type" : "Add",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "11",
+                  "localId" : "227",
                   "name" : "a",
                   "type" : "OperandRef"
                }, {
-                  "localId" : "12",
+                  "localId" : "228",
                   "name" : "b",
                   "type" : "OperandRef"
                } ]
             },
             "operand" : [ {
+               "localId" : "223",
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "9",
+                  "localId" : "222",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }, {
+               "localId" : "225",
                "name" : "b",
                "operandTypeSpecifier" : {
-                  "localId" : "10",
+                  "localId" : "224",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "17",
+            "localId" : "230",
             "name" : "testValue1",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "17",
+                  "r" : "230",
                   "s" : [ {
                      "value" : [ "","define ","testValue1",": " ]
                   }, {
-                     "r" : "16",
+                     "r" : "232",
                      "s" : [ {
-                        "r" : "15",
+                        "r" : "231",
                         "s" : [ {
                            "value" : [ "'World'" ]
                         } ]
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "16",
+                        "r" : "232",
                         "s" : [ {
                            "value" : [ "greet","()" ]
                         } ]
@@ -2142,36 +2209,37 @@ module.exports['FluentFunctions'] = {
                }
             } ],
             "expression" : {
-               "localId" : "16",
+               "localId" : "232",
                "name" : "greet",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "15",
+                  "localId" : "231",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "World",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "21",
+            "localId" : "234",
             "name" : "testValue2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "21",
+                  "r" : "234",
                   "s" : [ {
                      "value" : [ "","define ","testValue2",": " ]
                   }, {
-                     "r" : "20",
+                     "r" : "237",
                      "s" : [ {
-                        "r" : "18",
+                        "r" : "235",
                         "value" : [ "1","." ]
                      }, {
-                        "r" : "20",
+                        "r" : "237",
                         "s" : [ {
-                           "r" : "19",
+                           "r" : "236",
                            "value" : [ "add","(","2",")" ]
                         } ]
                      } ]
@@ -2179,16 +2247,17 @@ module.exports['FluentFunctions'] = {
                }
             } ],
             "expression" : {
-               "localId" : "20",
+               "localId" : "237",
                "name" : "add",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "18",
+                  "localId" : "235",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                }, {
-                  "localId" : "19",
+                  "localId" : "236",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
                   "type" : "Literal"

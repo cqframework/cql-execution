@@ -23,14 +23,16 @@ define TimeX: @T12:10:59.456
 
 module.exports['Literal'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "15",
+            "r" : "238",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -46,17 +48,18 @@ module.exports['Literal'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -64,7 +67,7 @@ module.exports['Literal'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -72,117 +75,126 @@ module.exports['Literal'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "3",
+            "localId" : "212",
             "name" : "BoolTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "3",
+                  "r" : "212",
                   "s" : [ {
-                     "r" : "2",
+                     "r" : "213",
                      "value" : [ "","define ","BoolTrue",": ","true" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "2",
+               "localId" : "213",
                "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                "value" : "true",
                "type" : "Literal"
             }
          }, {
-            "localId" : "5",
+            "localId" : "215",
             "name" : "BoolFalse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "5",
+                  "r" : "215",
                   "s" : [ {
-                     "r" : "4",
+                     "r" : "216",
                      "value" : [ "","define ","BoolFalse",": ","false" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "4",
+               "localId" : "216",
                "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                "value" : "false",
                "type" : "Literal"
             }
          }, {
-            "localId" : "7",
+            "localId" : "218",
             "name" : "IntOne",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "7",
+                  "r" : "218",
                   "s" : [ {
-                     "r" : "6",
+                     "r" : "219",
                      "value" : [ "","define ","IntOne",": ","1" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "6",
+               "localId" : "219",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "1",
                "type" : "Literal"
             }
          }, {
-            "localId" : "9",
+            "localId" : "221",
             "name" : "DecimalTenth",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "9",
+                  "r" : "221",
                   "s" : [ {
-                     "r" : "8",
+                     "r" : "222",
                      "value" : [ "","define ","DecimalTenth",": ","0.1" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "8",
+               "localId" : "222",
                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                "value" : "0.1",
                "type" : "Literal"
             }
          }, {
-            "localId" : "11",
+            "localId" : "224",
             "name" : "StringTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "11",
+                  "r" : "224",
                   "s" : [ {
                      "value" : [ "","define ","StringTrue",": " ]
                   }, {
-                     "r" : "10",
+                     "r" : "225",
                      "s" : [ {
                         "value" : [ "'true'" ]
                      } ]
@@ -190,104 +202,118 @@ module.exports['Literal'] = {
                }
             } ],
             "expression" : {
-               "localId" : "10",
+               "localId" : "225",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "true",
                "type" : "Literal"
             }
          }, {
-            "localId" : "13",
+            "localId" : "227",
             "name" : "DateTimeX",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "13",
+                  "r" : "227",
                   "s" : [ {
-                     "r" : "12",
+                     "r" : "228",
                      "value" : [ "","define ","DateTimeX",": ","@2012-02-15T12:10:59.456Z" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "12",
+               "localId" : "228",
                "type" : "DateTime",
+               "signature" : [ ],
                "year" : {
+                  "localId" : "229",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2012",
                   "type" : "Literal"
                },
                "month" : {
+                  "localId" : "230",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
                   "type" : "Literal"
                },
                "day" : {
+                  "localId" : "231",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "15",
                   "type" : "Literal"
                },
                "hour" : {
+                  "localId" : "232",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "12",
                   "type" : "Literal"
                },
                "minute" : {
+                  "localId" : "233",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "10",
                   "type" : "Literal"
                },
                "second" : {
+                  "localId" : "234",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "59",
                   "type" : "Literal"
                },
                "millisecond" : {
+                  "localId" : "235",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "456",
                   "type" : "Literal"
                },
                "timezoneOffset" : {
+                  "localId" : "236",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "value" : "0.0",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "15",
+            "localId" : "238",
             "name" : "TimeX",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "15",
+                  "r" : "238",
                   "s" : [ {
-                     "r" : "14",
+                     "r" : "239",
                      "value" : [ "","define ","TimeX",": ","@T12:10:59.456" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "14",
+               "localId" : "239",
                "type" : "Time",
+               "signature" : [ ],
                "hour" : {
+                  "localId" : "240",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "12",
                   "type" : "Literal"
                },
                "minute" : {
+                  "localId" : "241",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "10",
                   "type" : "Literal"
                },
                "second" : {
+                  "localId" : "242",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "59",
                   "type" : "Literal"
                },
                "millisecond" : {
+                  "localId" : "243",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "456",
                   "type" : "Literal"
@@ -315,14 +341,16 @@ define Unicode: '\u0048'
 
 module.exports['Escape'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "19",
+            "r" : "236",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -338,17 +366,18 @@ module.exports['Escape'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -356,7 +385,7 @@ module.exports['Escape'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -364,33 +393,42 @@ module.exports['Escape'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "3",
+            "localId" : "212",
             "name" : "SingleQuote",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "3",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define ","SingleQuote",": " ]
                   }, {
-                     "r" : "2",
+                     "r" : "213",
                      "s" : [ {
                         "value" : [ "'\\''" ]
                      } ]
@@ -398,24 +436,24 @@ module.exports['Escape'] = {
                }
             } ],
             "expression" : {
-               "localId" : "2",
+               "localId" : "213",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "'",
                "type" : "Literal"
             }
          }, {
-            "localId" : "5",
+            "localId" : "215",
             "name" : "DoubleQuote",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "5",
+                  "r" : "215",
                   "s" : [ {
                      "value" : [ "","define ","DoubleQuote",": " ]
                   }, {
-                     "r" : "4",
+                     "r" : "216",
                      "s" : [ {
                         "value" : [ "'\\\"'" ]
                      } ]
@@ -423,24 +461,24 @@ module.exports['Escape'] = {
                }
             } ],
             "expression" : {
-               "localId" : "4",
+               "localId" : "216",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "\"",
                "type" : "Literal"
             }
          }, {
-            "localId" : "7",
+            "localId" : "218",
             "name" : "Backtick",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "7",
+                  "r" : "218",
                   "s" : [ {
                      "value" : [ "","define ","Backtick",": " ]
                   }, {
-                     "r" : "6",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "'\\`'" ]
                      } ]
@@ -448,24 +486,24 @@ module.exports['Escape'] = {
                }
             } ],
             "expression" : {
-               "localId" : "6",
+               "localId" : "219",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "`",
                "type" : "Literal"
             }
          }, {
-            "localId" : "9",
+            "localId" : "221",
             "name" : "CarriageReturn",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "9",
+                  "r" : "221",
                   "s" : [ {
                      "value" : [ "","define ","CarriageReturn",": " ]
                   }, {
-                     "r" : "8",
+                     "r" : "222",
                      "s" : [ {
                         "value" : [ "'\\r'" ]
                      } ]
@@ -473,24 +511,24 @@ module.exports['Escape'] = {
                }
             } ],
             "expression" : {
-               "localId" : "8",
+               "localId" : "222",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "\r",
                "type" : "Literal"
             }
          }, {
-            "localId" : "11",
+            "localId" : "224",
             "name" : "LineFeed",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "11",
+                  "r" : "224",
                   "s" : [ {
                      "value" : [ "","define ","LineFeed",": " ]
                   }, {
-                     "r" : "10",
+                     "r" : "225",
                      "s" : [ {
                         "value" : [ "'\\n'" ]
                      } ]
@@ -498,24 +536,24 @@ module.exports['Escape'] = {
                }
             } ],
             "expression" : {
-               "localId" : "10",
+               "localId" : "225",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "\n",
                "type" : "Literal"
             }
          }, {
-            "localId" : "13",
+            "localId" : "227",
             "name" : "Tab",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "13",
+                  "r" : "227",
                   "s" : [ {
                      "value" : [ "","define ","Tab",": " ]
                   }, {
-                     "r" : "12",
+                     "r" : "228",
                      "s" : [ {
                         "value" : [ "'\\t'" ]
                      } ]
@@ -523,24 +561,24 @@ module.exports['Escape'] = {
                }
             } ],
             "expression" : {
-               "localId" : "12",
+               "localId" : "228",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "\t",
                "type" : "Literal"
             }
          }, {
-            "localId" : "15",
+            "localId" : "230",
             "name" : "FormFeed",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "15",
+                  "r" : "230",
                   "s" : [ {
                      "value" : [ "","define ","FormFeed",": " ]
                   }, {
-                     "r" : "14",
+                     "r" : "231",
                      "s" : [ {
                         "value" : [ "'\\f'" ]
                      } ]
@@ -548,24 +586,24 @@ module.exports['Escape'] = {
                }
             } ],
             "expression" : {
-               "localId" : "14",
+               "localId" : "231",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "\f",
                "type" : "Literal"
             }
          }, {
-            "localId" : "17",
+            "localId" : "233",
             "name" : "Backslash",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "17",
+                  "r" : "233",
                   "s" : [ {
                      "value" : [ "","define ","Backslash",": " ]
                   }, {
-                     "r" : "16",
+                     "r" : "234",
                      "s" : [ {
                         "value" : [ "'\\\\'" ]
                      } ]
@@ -573,24 +611,24 @@ module.exports['Escape'] = {
                }
             } ],
             "expression" : {
-               "localId" : "16",
+               "localId" : "234",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "\\",
                "type" : "Literal"
             }
          }, {
-            "localId" : "19",
+            "localId" : "236",
             "name" : "Unicode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "19",
+                  "r" : "236",
                   "s" : [ {
                      "value" : [ "","define ","Unicode",": " ]
                   }, {
-                     "r" : "18",
+                     "r" : "237",
                      "s" : [ {
                         "value" : [ "'\\u0048'" ]
                      } ]
@@ -598,7 +636,7 @@ module.exports['Escape'] = {
                }
             } ],
             "expression" : {
-               "localId" : "18",
+               "localId" : "237",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "H",
                "type" : "Literal"
