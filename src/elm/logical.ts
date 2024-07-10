@@ -12,6 +12,17 @@ export class And extends Expression {
   }
 }
 
+export class Implies extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const [left, right] = await this.execArgs(ctx);
+    return ThreeValuedLogic.implies(left, right);
+  }
+}
+
 export class Or extends Expression {
   constructor(json: any) {
     super(json);

@@ -2334,6 +2334,17 @@ class ThreeValuedLogic {
             return null;
         }
     }
+    static implies(left, right) {
+        if (left === true) {
+            return right;
+        }
+        else if (left === false) {
+            return true;
+        }
+        else {
+            return right === true ? true : null;
+        }
+    }
 }
 exports.ThreeValuedLogic = ThreeValuedLogic;
 
@@ -5805,7 +5816,7 @@ exports.StringLiteral = StringLiteral;
 },{"./expression":22}],30:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IsFalse = exports.IsTrue = exports.Xor = exports.Not = exports.Or = exports.And = void 0;
+exports.IsFalse = exports.IsTrue = exports.Xor = exports.Not = exports.Or = exports.Implies = exports.And = void 0;
 const expression_1 = require("./expression");
 const datatypes_1 = require("../datatypes/datatypes");
 class And extends expression_1.Expression {
@@ -5817,6 +5828,16 @@ class And extends expression_1.Expression {
     }
 }
 exports.And = And;
+class Implies extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    async exec(ctx) {
+        const [left, right] = await this.execArgs(ctx);
+        return datatypes_1.ThreeValuedLogic.implies(left, right);
+    }
+}
+exports.Implies = Implies;
 class Or extends expression_1.Expression {
     constructor(json) {
         super(json);
