@@ -391,10 +391,28 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Boolean).",
+                           "type" : "Implies",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -406,10 +424,28 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Boolean).",
+                           "type" : "Implies",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -421,11 +457,31 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Any).",
-                           "type" : "Literal",
+                           "type" : "Implies",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Null",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null",
                            "annotation" : [ ]
                         }
                      } ]
@@ -436,10 +492,28 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Boolean).",
+                           "type" : "Implies",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -451,10 +525,28 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Boolean).",
+                           "type" : "Implies",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -466,10 +558,32 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Any).",
+                           "type" : "Implies",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Null",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -481,10 +595,32 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Boolean).",
+                           "type" : "Implies",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Null",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "true",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -496,11 +632,31 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Boolean).",
-                           "type" : "Literal",
+                           "type" : "Implies",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Null",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "value" : "false",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null",
                            "annotation" : [ ]
                         }
                      } ]
@@ -511,11 +667,35 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Any).",
-                           "type" : "Literal",
+                           "type" : "Implies",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Null",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Null",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null",
                            "annotation" : [ ]
                         }
                      } ]
