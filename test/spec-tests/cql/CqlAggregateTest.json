@@ -1,8 +1,9 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
@@ -16,88 +17,117 @@
       "usings" : {
          "def" : [ {
             "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
          }, {
             "localIdentifier" : "QUICK",
             "uri" : "http://hl7.org/fhir/us/qicore",
-            "version" : "3.3.0"
+            "version" : "3.3.0",
+            "annotation" : [ ]
          } ]
       },
       "contexts" : {
          "def" : [ {
-            "name" : "Patient"
+            "name" : "Patient",
+            "annotation" : [ ]
          } ]
       },
       "statements" : {
          "def" : [ {
             "name" : "Patient",
             "context" : "Patient",
+            "annotation" : [ ],
             "expression" : {
                "type" : "SingletonFrom",
+               "annotation" : [ ],
+               "signature" : [ ],
                "operand" : {
                   "dataType" : "{http://hl7.org/fhir/us/qicore}Patient",
                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "annotation" : [ ],
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
             "name" : "AggregateTests",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "FactorialOfFive",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Query",
+                           "annotation" : [ ],
                            "source" : [ {
                               "alias" : "Num",
+                              "annotation" : [ ],
                               "expression" : {
                                  "type" : "List",
+                                 "annotation" : [ ],
                                  "element" : [ {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "1",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "2",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "3",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "4",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "5",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  } ]
                               }
                            } ],
+                           "let" : [ ],
                            "relationship" : [ ],
                            "aggregate" : {
                               "identifier" : "Result",
+                              "annotation" : [ ],
                               "expression" : {
                                  "type" : "Multiply",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "name" : "Result",
-                                    "type" : "QueryLetRef"
+                                    "type" : "QueryLetRef",
+                                    "annotation" : [ ]
                                  }, {
                                     "name" : "Num",
-                                    "type" : "AliasRef"
+                                    "type" : "AliasRef",
+                                    "annotation" : [ ]
                                  } ]
                               },
                               "starting" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "1",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            }
                         }
@@ -106,7 +136,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "120",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -114,12 +145,14 @@
                   "name" : "RolledOutIntervals",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Translation Error: Could not resolve identifier MedicationRequestIntervals in the current library.",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }

@@ -1,8 +1,9 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
@@ -16,53 +17,73 @@
       "usings" : {
          "def" : [ {
             "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
          }, {
             "localIdentifier" : "QUICK",
             "uri" : "http://hl7.org/fhir/us/qicore",
-            "version" : "3.3.0"
+            "version" : "3.3.0",
+            "annotation" : [ ]
          } ]
       },
       "contexts" : {
          "def" : [ {
-            "name" : "Patient"
+            "name" : "Patient",
+            "annotation" : [ ]
          } ]
       },
       "statements" : {
          "def" : [ {
             "name" : "Patient",
             "context" : "Patient",
+            "annotation" : [ ],
             "expression" : {
                "type" : "SingletonFrom",
+               "annotation" : [ ],
+               "signature" : [ ],
                "operand" : {
                   "dataType" : "{http://hl7.org/fhir/us/qicore}Patient",
                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "annotation" : [ ],
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
             "name" : "Coalesce",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "CoalesceANull",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Coalesce",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "a",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "asType" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
-                                 "type" : "Null"
+                                 "type" : "Null",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
@@ -71,7 +92,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "a",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -79,20 +101,27 @@
                   "name" : "CoalesceNullA",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Coalesce",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "asType" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
-                                 "type" : "Null"
+                                 "type" : "Null",
+                                 "annotation" : [ ]
                               }
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "a",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      }, {
@@ -100,7 +129,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "a",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -108,18 +138,24 @@
                   "name" : "CoalesceEmptyList",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Coalesce",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
-                              "type" : "List"
+                              "type" : "List",
+                              "annotation" : [ ],
+                              "element" : [ ]
                            } ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Null"
+                           "type" : "Null",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -127,27 +163,38 @@
                   "name" : "CoalesceListFirstA",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Coalesce",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "List",
+                              "annotation" : [ ],
                               "element" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "a",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "asType" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
-                                    "type" : "Null"
+                                    "type" : "Null",
+                                    "annotation" : [ ]
                                  }
                               }, {
                                  "asType" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
-                                    "type" : "Null"
+                                    "type" : "Null",
+                                    "annotation" : [ ]
                                  }
                               } ]
                            } ]
@@ -157,7 +204,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "a",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -165,28 +213,39 @@
                   "name" : "CoalesceListLastA",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Coalesce",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "List",
+                              "annotation" : [ ],
                               "element" : [ {
                                  "asType" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
-                                    "type" : "Null"
+                                    "type" : "Null",
+                                    "annotation" : [ ]
                                  }
                               }, {
                                  "asType" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
-                                    "type" : "Null"
+                                    "type" : "Null",
+                                    "annotation" : [ ]
                                  }
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "a",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            } ]
                         }
@@ -195,7 +254,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "a",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -203,39 +263,54 @@
                   "name" : "CoalesceFirstList",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Coalesce",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "List",
+                              "annotation" : [ ],
                               "element" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "a",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            }, {
                               "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
-                                 "type" : "Null"
+                                 "type" : "Null",
+                                 "annotation" : [ ]
                               },
                               "asTypeSpecifier" : {
                                  "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
                                  "elementType" : {
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }
                               }
                            }, {
                               "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
-                                 "type" : "Null"
+                                 "type" : "Null",
+                                 "annotation" : [ ]
                               },
                               "asTypeSpecifier" : {
                                  "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
                                  "elementType" : {
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }
                               }
                            } ]
@@ -244,10 +319,12 @@
                         "name" : "output",
                         "value" : {
                            "type" : "List",
+                           "annotation" : [ ],
                            "element" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "a",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -256,40 +333,55 @@
                   "name" : "CoalesceLastList",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Coalesce",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
-                                 "type" : "Null"
+                                 "type" : "Null",
+                                 "annotation" : [ ]
                               },
                               "asTypeSpecifier" : {
                                  "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
                                  "elementType" : {
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }
                               }
                            }, {
                               "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
-                                 "type" : "Null"
+                                 "type" : "Null",
+                                 "annotation" : [ ]
                               },
                               "asTypeSpecifier" : {
                                  "type" : "ListTypeSpecifier",
+                                 "annotation" : [ ],
                                  "elementType" : {
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
-                                    "type" : "NamedTypeSpecifier"
+                                    "type" : "NamedTypeSpecifier",
+                                    "annotation" : [ ]
                                  }
                               }
                            }, {
                               "type" : "List",
+                              "annotation" : [ ],
                               "element" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "a",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            } ]
                         }
@@ -297,10 +389,12 @@
                         "name" : "output",
                         "value" : {
                            "type" : "List",
+                           "annotation" : [ ],
                            "element" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "a",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -309,30 +403,40 @@
                   "name" : "DateTimeCoalesce",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Coalesce",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
-                              "type" : "Null"
+                              "type" : "Null",
+                              "annotation" : [ ]
                            }, {
-                              "type" : "Null"
+                              "type" : "Null",
+                              "annotation" : [ ]
                            }, {
                               "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "year" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "2012",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               },
                               "month" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "5",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               },
                               "day" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "18",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
@@ -340,20 +444,25 @@
                         "name" : "output",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2012",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "5",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "18",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -362,40 +471,55 @@
                   "name" : "DateTimeListCoalesce",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Coalesce",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "List",
+                              "annotation" : [ ],
                               "element" : [ {
                                  "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
-                                    "type" : "Null"
+                                    "type" : "Null",
+                                    "annotation" : [ ]
                                  }
                               }, {
                                  "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
-                                    "type" : "Null"
+                                    "type" : "Null",
+                                    "annotation" : [ ]
                                  }
                               }, {
                                  "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "year" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "2012",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  },
                                  "month" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "5",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  },
                                  "day" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "18",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }
                               } ]
                            } ]
@@ -404,20 +528,25 @@
                         "name" : "output",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2012",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "5",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "18",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -426,35 +555,46 @@
                   "name" : "TimeCoalesce",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Coalesce",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
-                              "type" : "Null"
+                              "type" : "Null",
+                              "annotation" : [ ]
                            }, {
-                              "type" : "Null"
+                              "type" : "Null",
+                              "annotation" : [ ]
                            }, {
                               "type" : "Time",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "hour" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "5",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               },
                               "minute" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "15",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               },
                               "second" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "33",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               },
                               "millisecond" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "556",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
@@ -462,25 +602,31 @@
                         "name" : "output",
                         "value" : {
                            "type" : "Time",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "5",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "15",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "33",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "556",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -489,45 +635,61 @@
                   "name" : "TimeListCoalesce",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Coalesce",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "List",
+                              "annotation" : [ ],
                               "element" : [ {
                                  "asType" : "{urn:hl7-org:elm-types:r1}Time",
                                  "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
-                                    "type" : "Null"
+                                    "type" : "Null",
+                                    "annotation" : [ ]
                                  }
                               }, {
                                  "asType" : "{urn:hl7-org:elm-types:r1}Time",
                                  "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
-                                    "type" : "Null"
+                                    "type" : "Null",
+                                    "annotation" : [ ]
                                  }
                               }, {
                                  "type" : "Time",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "hour" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "5",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  },
                                  "minute" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "15",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  },
                                  "second" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "33",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  },
                                  "millisecond" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "556",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }
                               } ]
                            } ]
@@ -536,25 +698,31 @@
                         "name" : "output",
                         "value" : {
                            "type" : "Time",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "5",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "15",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "33",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "556",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -565,18 +733,24 @@
             "name" : "IsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "IsNullTrue",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "IsNull",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
-                              "type" : "Null"
+                              "type" : "Null",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -584,7 +758,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -592,14 +767,18 @@
                   "name" : "IsNullFalseEmptyString",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "IsNull",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -607,7 +786,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "false",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -615,14 +795,18 @@
                   "name" : "IsNullAlsoFalseAbcString",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "IsNull",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "abc",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -630,7 +814,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "false",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -638,14 +823,18 @@
                   "name" : "IsNullAlsoFalseNumber1",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "IsNull",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -653,7 +842,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "false",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -661,14 +851,18 @@
                   "name" : "IsNullAlsoFalseNumberZero",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "IsNull",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -676,7 +870,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "false",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -686,20 +881,26 @@
             "name" : "IsFalse",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "IsFalseFalse",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "IsFalse",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "value" : "false",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -707,7 +908,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -715,14 +917,18 @@
                   "name" : "IsFalseTrue",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "IsFalse",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "value" : "true",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -730,7 +936,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "false",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -738,15 +945,21 @@
                   "name" : "IsFalseNull",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "IsFalse",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
-                                 "type" : "Null"
+                                 "type" : "Null",
+                                 "annotation" : [ ]
                               }
                            }
                         }
@@ -755,7 +968,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "false",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -765,20 +979,26 @@
             "name" : "IsTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "IsTrueTrue",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "IsTrue",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "value" : "true",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -786,7 +1006,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -794,14 +1015,18 @@
                   "name" : "IsTrueFalse",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "IsTrue",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "value" : "false",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -809,7 +1034,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "false",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -817,15 +1043,21 @@
                   "name" : "IsTrueNull",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "IsTrue",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
-                                 "type" : "Null"
+                                 "type" : "Null",
+                                 "annotation" : [ ]
                               }
                            }
                         }
@@ -834,7 +1066,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "false",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }

@@ -32,6 +32,6 @@ task watchTestData (dependsOn: 'classes', type: JavaExec) {
 
 task generateSpecTestData(dependsOn: 'classes', type: JavaExec) {
   classpath = sourceSets.main.runtimeClasspath
-  main = 'org.cqframework.cql.cql2elm.cli.CqlTranslator'
+  main = 'org.cqframework.cql.cql2elm.cli.Main'
   args '--input', "${projectDir}/../spec-tests/cql", '--format', 'JSON'
 }

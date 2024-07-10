@@ -1,8 +1,9 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
@@ -16,68 +17,89 @@
       "usings" : {
          "def" : [ {
             "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
          }, {
             "localIdentifier" : "QUICK",
             "uri" : "http://hl7.org/fhir/us/qicore",
-            "version" : "3.3.0"
+            "version" : "3.3.0",
+            "annotation" : [ ]
          } ]
       },
       "contexts" : {
          "def" : [ {
-            "name" : "Patient"
+            "name" : "Patient",
+            "annotation" : [ ]
          } ]
       },
       "statements" : {
          "def" : [ {
             "name" : "Patient",
             "context" : "Patient",
+            "annotation" : [ ],
             "expression" : {
                "type" : "SingletonFrom",
+               "annotation" : [ ],
+               "signature" : [ ],
                "operand" : {
                   "dataType" : "{http://hl7.org/fhir/us/qicore}Patient",
                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "annotation" : [ ],
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
             "name" : "Group1",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "TestMessageInfo",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Message",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "source" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "condition" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "value" : "true",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "code" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "100",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "severity" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "Message",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "message" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "Test Message",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -85,7 +107,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -93,34 +116,42 @@
                   "name" : "TestMessageWarn",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Message",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "source" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "condition" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "value" : "true",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "code" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "200",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "severity" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "Warning",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "message" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "You have been warned!",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -128,7 +159,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -136,63 +168,78 @@
                   "name" : "TestMessageTrace",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Message",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "source" : {
                               "type" : "List",
+                              "annotation" : [ ],
                               "element" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "3",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "4",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "5",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            },
                            "condition" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "value" : "true",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "code" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "300",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "severity" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "Trace",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "message" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "This is a trace",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "List",
+                           "annotation" : [ ],
                            "element" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "3",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "4",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "5",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -201,41 +248,52 @@
                   "name" : "TestMessageError",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Message",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "source" : {
                               "type" : "Add",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "3",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "1",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            },
                            "condition" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "value" : "true",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "code" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "400",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "severity" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "Error",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "message" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "This is an error!",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -243,7 +301,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }

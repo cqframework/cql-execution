@@ -1,8 +1,9 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
@@ -16,67 +17,91 @@
       "usings" : {
          "def" : [ {
             "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
          }, {
             "localIdentifier" : "QUICK",
             "uri" : "http://hl7.org/fhir/us/qicore",
-            "version" : "3.3.0"
+            "version" : "3.3.0",
+            "annotation" : [ ]
          } ]
       },
       "contexts" : {
          "def" : [ {
-            "name" : "Patient"
+            "name" : "Patient",
+            "annotation" : [ ]
          } ]
       },
       "statements" : {
          "def" : [ {
             "name" : "Patient",
             "context" : "Patient",
+            "annotation" : [ ],
             "expression" : {
                "type" : "SingletonFrom",
+               "annotation" : [ ],
+               "signature" : [ ],
                "operand" : {
                   "dataType" : "{http://hl7.org/fhir/us/qicore}Patient",
                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "annotation" : [ ],
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
             "name" : "Null",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "Null",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "type" : "Null"
+                           "type" : "Null",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Less",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "Date",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "year" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "2000",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            }, {
                               "type" : "Date",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "year" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "2000",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               },
                               "month" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "1",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
@@ -88,31 +113,39 @@
             "name" : "Boolean",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "BooleanFalse",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "false",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Equivalent",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -121,25 +154,31 @@
                   "name" : "BooleanTrue",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Equivalent",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -150,31 +189,39 @@
             "name" : "Integer",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "IntegerZero",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "0",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "42",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "42",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -183,25 +230,31 @@
                   "name" : "IntegerPosZero",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "0",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "42",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "42",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -210,28 +263,36 @@
                   "name" : "IntegerNegZero",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "42",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "42",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -240,25 +301,31 @@
                   "name" : "IntegerOne",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "42",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "41",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -267,25 +334,31 @@
                   "name" : "IntegerPosOne",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "42",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "41",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -294,28 +367,36 @@
                   "name" : "IntegerNegOne",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "42",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "43",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -324,25 +405,31 @@
                   "name" : "IntegerTwo",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "42",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "40",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -351,25 +438,31 @@
                   "name" : "IntegerPosTwo",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "42",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "40",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -378,28 +471,36 @@
                   "name" : "IntegerNegTwo",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "42",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "44",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -408,25 +509,31 @@
                   "name" : "Integer10Pow9",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1000000000",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Power",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "9",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -435,25 +542,31 @@
                   "name" : "IntegerPos10Pow9",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1000000000",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Power",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "9",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -462,30 +575,40 @@
                   "name" : "IntegerNeg10Pow9",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1000000000",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "type" : "Power",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "10",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "9",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            }
                         }
@@ -495,45 +618,60 @@
                   "name" : "Integer2Pow31ToZero1IntegerMaxValue",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2147483647",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Add",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "Subtract",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "type" : "Power",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "2",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "30",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  } ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "1",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            }, {
                               "type" : "Power",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "2",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "30",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            } ]
                         }
@@ -543,45 +681,60 @@
                   "name" : "IntegerPos2Pow31ToZero1IntegerMaxValue",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2147483647",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Add",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "Subtract",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "type" : "Power",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "2",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "30",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  } ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "1",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            }, {
                               "type" : "Power",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "2",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "30",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            } ]
                         }
@@ -591,51 +744,70 @@
                   "name" : "IntegerNeg2Pow31ToZero1",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2147483647",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "Add",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "type" : "Negate",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
                                     "type" : "Power",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
                                     "operand" : [ {
                                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                        "value" : "2",
-                                       "type" : "Literal"
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
                                     }, {
                                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                        "value" : "30",
-                                       "type" : "Literal"
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
                                     } ]
                                  }
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "1",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            }, {
                               "type" : "Power",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "2",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "30",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            } ]
                         }
@@ -645,19 +817,22 @@
                   "name" : "Integer2Pow31",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2147483648",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "invalid",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -665,19 +840,22 @@
                   "name" : "IntegerPos2Pow31",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2147483648",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "invalid",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -685,44 +863,60 @@
                   "name" : "IntegerNeg2Pow31IntegerMinValue",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2147483648",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "Negate",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
                                  "type" : "Power",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "2",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "30",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  } ]
                               }
                            }, {
                               "type" : "Power",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "2",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "30",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            } ]
                         }
@@ -732,19 +926,22 @@
                   "name" : "Integer2Pow31ToInf1",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2147483649",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "invalid",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -752,19 +949,22 @@
                   "name" : "IntegerPos2Pow31ToInf1",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2147483649",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "invalid",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -772,14 +972,18 @@
                   "name" : "IntegerNeg2Pow31ToInf1",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2147483649",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -787,7 +991,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -797,31 +1002,39 @@
             "name" : "Decimal",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "DecimalZero",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.0",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -830,25 +1043,31 @@
                   "name" : "DecimalPosZero",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.0",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -857,28 +1076,36 @@
                   "name" : "DecimalNegZero",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "0.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -887,25 +1114,31 @@
                   "name" : "DecimalOne",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "1.0",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "41.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -914,25 +1147,31 @@
                   "name" : "DecimalPosOne",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "1.0",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "41.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -941,28 +1180,36 @@
                   "name" : "DecimalNegOne",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "1.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "43.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -971,25 +1218,31 @@
                   "name" : "DecimalTwo",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "2.0",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "40.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -998,25 +1251,31 @@
                   "name" : "DecimalPosTwo",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "2.0",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "40.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -1025,28 +1284,36 @@
                   "name" : "DecimalNegTwo",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "2.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "44.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -1055,25 +1322,31 @@
                   "name" : "Decimal10Pow9",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "1000000000.0",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Power",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "10.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "9.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -1082,25 +1355,31 @@
                   "name" : "DecimalPos10Pow9",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "1000000000.0",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Power",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "10.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "9.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -1109,30 +1388,40 @@
                   "name" : "DecimalNeg10Pow9",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "1000000000.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "type" : "Power",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                  "value" : "10.0",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                  "value" : "9.0",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            }
                         }
@@ -1142,48 +1431,65 @@
                   "name" : "Decimal2Pow31ToZero1",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "2147483647.0",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Add",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "Subtract",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "type" : "Power",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                     "value" : "2.0",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                     "value" : "30.0",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  } ]
                               }, {
                                  "type" : "ToDecimal",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "1",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }
                               } ]
                            }, {
                               "type" : "Power",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                  "value" : "2.0",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                  "value" : "30.0",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            } ]
                         }
@@ -1193,48 +1499,65 @@
                   "name" : "DecimalPos2Pow31ToZero1",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "2147483647.0",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Add",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "Subtract",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "type" : "Power",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                     "value" : "2.0",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                     "value" : "30.0",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  } ]
                               }, {
                                  "type" : "ToDecimal",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "1",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }
                               } ]
                            }, {
                               "type" : "Power",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                  "value" : "2.0",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                  "value" : "30.0",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            } ]
                         }
@@ -1244,51 +1567,70 @@
                   "name" : "DecimalNeg2Pow31ToZero1",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "2147483647.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "Add",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "type" : "Negate",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
                                     "type" : "Power",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
                                     "operand" : [ {
                                        "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                        "value" : "2.0",
-                                       "type" : "Literal"
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
                                     }, {
                                        "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                        "value" : "30.0",
-                                       "type" : "Literal"
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
                                     } ]
                                  }
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                  "value" : "1.0",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            }, {
                               "type" : "Power",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                  "value" : "2.0",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                  "value" : "30.0",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            } ]
                         }
@@ -1298,12 +1640,14 @@
                   "name" : "Decimal2Pow31",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Overflows because it thinks it is an integer",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1311,12 +1655,14 @@
                   "name" : "DecimalPos2Pow31",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Overflows because it thinks it is an integer",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1324,44 +1670,60 @@
                   "name" : "DecimalNeg2Pow31",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "2147483648.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "Negate",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
                                  "type" : "Power",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                     "value" : "2.0",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                     "value" : "30.0",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  } ]
                               }
                            }, {
                               "type" : "Power",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                  "value" : "2.0",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                  "value" : "30.0",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               } ]
                            } ]
                         }
@@ -1371,12 +1733,14 @@
                   "name" : "Decimal2Pow31ToInf1",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Overflows because it thinks it is an integer",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1384,12 +1748,14 @@
                   "name" : "DecimalPos2Pow31ToInf1",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Overflows because it thinks it is an integer",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1397,12 +1763,14 @@
                   "name" : "DecimalNeg2Pow31ToInf1",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Underflows because it thinks it is an integer",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1410,25 +1778,31 @@
                   "name" : "DecimalZeroStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.00000000",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -1437,25 +1811,31 @@
                   "name" : "DecimalPosZeroStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.00000000",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -1464,28 +1844,36 @@
                   "name" : "DecimalNegZeroStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "0.00000000",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "42.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -1494,27 +1882,35 @@
                   "name" : "DecimalOneStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.00000001",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Power",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "type" : "Negate",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "8",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
@@ -1524,27 +1920,35 @@
                   "name" : "DecimalPosOneStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.00000001",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Power",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "type" : "Negate",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "8",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
@@ -1554,32 +1958,44 @@
                   "name" : "DecimalNegOneStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "0.00000001",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "type" : "Power",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "10",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "type" : "Negate",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "8",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }
                               } ]
                            }
@@ -1590,35 +2006,48 @@
                   "name" : "DecimalTwoStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.00000002",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Multiply",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "2.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "type" : "ToDecimal",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
                                  "type" : "Power",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "10",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "type" : "Negate",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
                                     "operand" : {
                                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                        "value" : "8",
-                                       "type" : "Literal"
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
                                     }
                                  } ]
                               }
@@ -1630,35 +2059,48 @@
                   "name" : "DecimalPosTwoStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.00000002",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Multiply",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "2.0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "type" : "ToDecimal",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
                                  "type" : "Power",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "10",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "type" : "Negate",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
                                     "operand" : {
                                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                        "value" : "8",
-                                       "type" : "Literal"
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
                                     }
                                  } ]
                               }
@@ -1670,41 +2112,58 @@
                   "name" : "DecimalNegTwoStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "0.00000002",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Multiply",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "Negate",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                                  "value" : "2.0",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            }, {
                               "type" : "ToDecimal",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
                                  "type" : "Power",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : [ {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "10",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }, {
                                     "type" : "Negate",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
                                     "operand" : {
                                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                        "value" : "8",
-                                       "type" : "Literal"
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
                                     }
                                  } ]
                               }
@@ -1716,27 +2175,35 @@
                   "name" : "DecimalTenStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.0000001",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Power",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "type" : "Negate",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "7",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
@@ -1746,27 +2213,35 @@
                   "name" : "DecimalPosTenStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.0000001",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Power",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "type" : "Negate",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "7",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
@@ -1776,32 +2251,44 @@
                   "name" : "DecimalNegTenStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "0.0000001",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "type" : "Power",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "operand" : [ {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "10",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }, {
                                  "type" : "Negate",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
                                  "operand" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "7",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }
                               } ]
                            }
@@ -1812,19 +2299,22 @@
                   "name" : "DecimalTenthStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.000000001",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "invalid",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1832,19 +2322,22 @@
                   "name" : "DecimalPosTenthStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "0.000000001",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "invalid",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1852,14 +2345,18 @@
                   "name" : "DecimalNegTenthStep",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "0.000000001",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -1867,7 +2364,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1875,12 +2373,14 @@
                   "name" : "Decimal10Pow28ToZeroOneStepDecimalMaxValue",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Wrong answer (null vs big number)",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1888,12 +2388,14 @@
                   "name" : "DecimalPos10Pow28ToZeroOneStepDecimalMaxValue",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Wrong answer (null vs big number)",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1901,12 +2403,14 @@
                   "name" : "DecimalNeg10Pow28ToZeroOneStepDecimalMinValue",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Wrong answer (null vs big number)",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1914,19 +2418,22 @@
                   "name" : "Decimal10Pow28",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "10000000000000000000000000000.00000000",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "invalid",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1934,19 +2441,22 @@
                   "name" : "DecimalPos10Pow28",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "value" : "10000000000000000000000000000.00000000",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "invalid",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1954,14 +2464,18 @@
                   "name" : "DecimalNeg10Pow28",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                               "value" : "10000000000000000000000000000.00000000",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -1969,7 +2483,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
