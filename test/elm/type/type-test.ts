@@ -67,11 +67,13 @@ describe('IsChoiceType', () => {
     setup(this, data);
   });
 
+  // If this test breaks, check the generated JSON for a repeated type element from translator.
   it('should correctly accept matching types', async function () {
     (await this.integerIsChoiceOfIntegersAndDecimals.exec(this.ctx)).should.be.true();
     (await this.decimalIsChoiceOfIntegersAndDecimals.exec(this.ctx)).should.be.true();
   });
 
+  // If this test breaks, check the generated JSON for a repeated type element from translator.
   it('should correctly reject non-matching types', async function () {
     (await this.stringIsChoiceOfIntegersAndDecimals.exec(this.ctx)).should.be.false();
   });
@@ -288,6 +290,7 @@ describe('AsChoiceType', () => {
     (await this.castStringAsChoiceOfIntegersAndStrings.exec(this.ctx)).should.eql('Foo');
   });
 
+  // If this test breaks, check the generated JSON for a repeated type element from translator.
   it('should return null on non-matching types for non-strict cast', async function () {
     should(await this.decimalAsChoiceOfIntegersAndStrings.exec(this.ctx)).be.null();
     should(await this.listAsChoiceOfIntegersAndStrings.exec(this.ctx)).be.null();
@@ -295,6 +298,7 @@ describe('AsChoiceType', () => {
     should(await this.tupleAsChoiceOfIntegersAndStrings.exec(this.ctx)).be.null();
   });
 
+  // If this test breaks, check the generated JSON for a repeated type element from translator.
   it('should throw on non-matching types for strict cast', async function () {
     await this.castDecimalAsChoiceOfIntegersAndStrings
       .exec(this.ctx)
