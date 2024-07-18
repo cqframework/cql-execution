@@ -6,6 +6,7 @@ const { p1 } = require('./patients');
 import { Interval } from '../../../src/datatypes/interval';
 import { DateTime } from '../../../src/datatypes/datetime';
 import { Quantity } from '../../../src/datatypes/quantity';
+import { getLocalIdByPath } from '../../testHelpers';
 
 describe('DateRangeOptimizedQuery', () => {
   beforeEach(function () {
@@ -433,27 +434,67 @@ describe('AggregateQuery', () => {
       new Interval(new DateTime(1982, 3, 16, 15, 0), new DateTime(2013, 5, 23, 10, 0))
     ];
     (await this.expressionStartingAggregation.exec(this.ctx)).should.eql(ret);
-    should(this.ctx.localId_context[245]).not.be.undefined();
+    const asLocalId = getLocalIdByPath(
+      data,
+      'AggregateQuery',
+      'expressionStartingAggregation',
+      'aggregate',
+      'starting'
+    );
+    should(asLocalId).not.be.null();
+    should(this.ctx.localId_context[asLocalId]).not.be.undefined();
   });
 
   it('should be able to aggregate over distinct values', async function () {
     (await this.distinctAggregation.exec(this.ctx)).should.eql(15);
-    should(this.ctx.localId_context[367]).not.be.undefined();
+    const literalLocalId = getLocalIdByPath(
+      data,
+      'AggregateQuery',
+      'distinctAggregation',
+      'aggregate',
+      'starting'
+    );
+    should(literalLocalId).not.be.null();
+    should(this.ctx.localId_context[literalLocalId]).not.be.undefined();
   });
 
   it('should be able to aggregate over non-distinct values', async function () {
     (await this.allAggregation.exec(this.ctx)).should.eql(30);
-    should(this.ctx.localId_context[345]).not.be.undefined();
+    const literalLocalId = getLocalIdByPath(
+      data,
+      'AggregateQuery',
+      'allAggregation',
+      'aggregate',
+      'starting'
+    );
+    should(literalLocalId).not.be.null();
+    should(this.ctx.localId_context[literalLocalId]).not.be.undefined();
   });
 
   it('should be able to aggregate with a String as the starting value', async function () {
     (await this.literalStartingAggregation.exec(this.ctx)).should.eql('Start12345');
-    should(this.ctx.localId_context[302]).not.be.undefined();
+    const literalLocalId = getLocalIdByPath(
+      data,
+      'AggregateQuery',
+      'literalStartingAggregation',
+      'aggregate',
+      'starting'
+    );
+    should(literalLocalId).not.be.null();
+    should(this.ctx.localId_context[literalLocalId]).not.be.undefined();
   });
 
   it('should be able to aggregate with a Quantity as the starting value', async function () {
     (await this.quantityStartingAggregation.exec(this.ctx)).should.eql(new Quantity(15, 'ml'));
-    should(this.ctx.localId_context[323]).not.be.undefined();
+    const quantityLocalId = getLocalIdByPath(
+      data,
+      'AggregateQuery',
+      'quantityStartingAggregation',
+      'aggregate',
+      'starting'
+    );
+    should(quantityLocalId).not.be.null();
+    should(this.ctx.localId_context[quantityLocalId]).not.be.undefined();
   });
 });
 
