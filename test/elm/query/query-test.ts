@@ -441,7 +441,6 @@ describe('AggregateQuery', () => {
       'aggregate',
       'starting'
     );
-    should(asLocalId).not.be.null();
     should(this.ctx.localId_context[asLocalId]).not.be.undefined();
   });
 
@@ -454,7 +453,6 @@ describe('AggregateQuery', () => {
       'aggregate',
       'starting'
     );
-    should(literalLocalId).not.be.null();
     should(this.ctx.localId_context[literalLocalId]).not.be.undefined();
   });
 
@@ -467,7 +465,6 @@ describe('AggregateQuery', () => {
       'aggregate',
       'starting'
     );
-    should(literalLocalId).not.be.null();
     should(this.ctx.localId_context[literalLocalId]).not.be.undefined();
   });
 
@@ -480,7 +477,6 @@ describe('AggregateQuery', () => {
       'aggregate',
       'starting'
     );
-    should(literalLocalId).not.be.null();
     should(this.ctx.localId_context[literalLocalId]).not.be.undefined();
   });
 
@@ -493,7 +489,6 @@ describe('AggregateQuery', () => {
       'aggregate',
       'starting'
     );
-    should(quantityLocalId).not.be.null();
     should(this.ctx.localId_context[quantityLocalId]).not.be.undefined();
   });
 });

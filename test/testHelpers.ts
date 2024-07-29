@@ -7,7 +7,7 @@ export function getLocalIdByPath(
   testName: string,
   statementName: string,
   ...path: string[]
-): string | null {
+): string {
   const statementExpression = data[testName].library.statements.def.find(
     (d: any) => d.name === statementName
   ).expression;
@@ -15,7 +15,7 @@ export function getLocalIdByPath(
   if (expression?.localId) {
     return expression.localId;
   } else {
-    return null;
+    throw new Error(`No localId found in ${statementName} at ${path.join('.')}`);
   }
 }
 
