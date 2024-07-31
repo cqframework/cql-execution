@@ -18,14 +18,16 @@ define emptyTup: {:}
 
 module.exports['Tuple'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "7",
+            "r" : "217",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -41,17 +43,18 @@ module.exports['Tuple'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -59,7 +62,7 @@ module.exports['Tuple'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -67,45 +70,54 @@ module.exports['Tuple'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "5",
+            "localId" : "212",
             "name" : "tup",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "5",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define ","tup",": " ]
                   }, {
-                     "r" : "4",
+                     "r" : "213",
                      "s" : [ {
                         "value" : [ "{" ]
                      }, {
                         "s" : [ {
-                           "r" : "2",
+                           "r" : "214",
                            "value" : [ "a",": ","1" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
                         "s" : [ {
-                           "r" : "3",
+                           "r" : "215",
                            "value" : [ "b",": ","2" ]
                         } ]
                      }, {
@@ -115,12 +127,12 @@ module.exports['Tuple'] = {
                }
             } ],
             "expression" : {
-               "localId" : "4",
+               "localId" : "213",
                "type" : "Tuple",
                "element" : [ {
                   "name" : "a",
                   "value" : {
-                     "localId" : "2",
+                     "localId" : "214",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
@@ -128,7 +140,7 @@ module.exports['Tuple'] = {
                }, {
                   "name" : "b",
                   "value" : {
-                     "localId" : "3",
+                     "localId" : "215",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
@@ -136,23 +148,24 @@ module.exports['Tuple'] = {
                } ]
             }
          }, {
-            "localId" : "7",
+            "localId" : "217",
             "name" : "emptyTup",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "7",
+                  "r" : "217",
                   "s" : [ {
-                     "r" : "6",
+                     "r" : "218",
                      "value" : [ "","define ","emptyTup",": ","{:}" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "6",
-               "type" : "Tuple"
+               "localId" : "218",
+               "type" : "Tuple",
+               "element" : [ ]
             }
          } ]
       }

@@ -36,4 +36,14 @@ export class ThreeValuedLogic {
       return null;
     }
   }
+
+  static implies(left: boolean | null, right: boolean | null) {
+    if (left === true) {
+      return right;
+    } else if (left === false) {
+      return true;
+    } else {
+      return right === true ? true : null;
+    }
+  }
 }

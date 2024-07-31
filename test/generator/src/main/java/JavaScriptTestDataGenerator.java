@@ -32,8 +32,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.xml.bind.*;
-
 import static java.nio.file.FileVisitResult.CONTINUE;
 
 
@@ -111,15 +109,11 @@ public class JavaScriptTestDataGenerator {
             try {
                 ModelManager modelManager = new ModelManager();
                 JavaScriptTestDataGenerator.loadModelInfo(new File("../../src/simple-modelinfo.xml"), modelManager);
-                LibraryManager libraryManager = new LibraryManager(modelManager);
+                LibraryManager libraryManager = new LibraryManager(modelManager,
+                    new CqlCompilerOptions(CqlCompilerOptions.Options.EnableDateRangeOptimization,
+                    CqlCompilerOptions.Options.EnableAnnotations));
                 libraryManager.getLibrarySourceLoader().registerProvider(new DefaultLibrarySourceProvider(file.getParent()));
-                CqlTranslator cqlt = CqlTranslator.fromText(
-                    snippet,
-                    modelManager,
-                    libraryManager,
-                    CqlTranslatorOptions.Options.EnableDateRangeOptimization,
-                    CqlTranslatorOptions.Options.EnableAnnotations
-                );
+                CqlTranslator cqlt = CqlTranslator.fromText(snippet, libraryManager);
                 if (! cqlt.getErrors().isEmpty()) {
                     pw.println("/*");
                     pw.println("Translation Error(s):");

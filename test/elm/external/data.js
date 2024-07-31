@@ -33,14 +33,16 @@ define ConditionsByDate: [Condition] C where C.period during Interval[@2013-03-0
 
 module.exports['Retrieve'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "37",
+            "r" : "274",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -56,17 +58,18 @@ module.exports['Retrieve'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -74,7 +77,7 @@ module.exports['Retrieve'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -82,14 +85,14 @@ module.exports['Retrieve'] = {
       },
       "includes" : {
          "def" : [ {
-            "localId" : "2",
+            "localId" : "207",
             "localIdentifier" : "included",
             "path" : "Included",
             "version" : "1",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "2",
+                  "r" : "207",
                   "s" : [ {
                      "value" : [ "","include " ]
                   }, {
@@ -105,14 +108,14 @@ module.exports['Retrieve'] = {
       },
       "codeSystems" : {
          "def" : [ {
-            "localId" : "3",
+            "localId" : "208",
             "name" : "SNOMED",
             "id" : "2.16.840.1.113883.6.96",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "3",
+                  "r" : "208",
                   "s" : [ {
                      "value" : [ "","codesystem ","\"SNOMED\"",": ","'2.16.840.1.113883.6.96'" ]
                   } ]
@@ -122,38 +125,40 @@ module.exports['Retrieve'] = {
       },
       "valueSets" : {
          "def" : [ {
-            "localId" : "4",
+            "localId" : "209",
             "name" : "Ambulatory/ED Visit",
             "id" : "2.16.840.1.113883.3.464.1003.101.12.1061",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "4",
+                  "r" : "209",
                   "s" : [ {
                      "value" : [ "","valueset ","\"Ambulatory/ED Visit\"",": ","'2.16.840.1.113883.3.464.1003.101.12.1061'" ]
                   } ]
                }
-            } ]
+            } ],
+            "codeSystem" : [ ]
          }, {
-            "localId" : "5",
+            "localId" : "210",
             "name" : "Annual Wellness Visit",
             "id" : "2.16.840.1.113883.3.526.3.1240",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "5",
+                  "r" : "210",
                   "s" : [ {
                      "value" : [ "","valueset ","\"Annual Wellness Visit\"",": ","'2.16.840.1.113883.3.526.3.1240'" ]
                   } ]
                }
-            } ]
+            } ],
+            "codeSystem" : [ ]
          } ]
       },
       "codes" : {
          "def" : [ {
-            "localId" : "7",
+            "localId" : "211",
             "name" : "Viral pharyngitis code",
             "id" : "1532007",
             "display" : "Viral pharyngitis (disorder)",
@@ -161,11 +166,11 @@ module.exports['Retrieve'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "7",
+                  "r" : "211",
                   "s" : [ {
                      "value" : [ "","code ","\"Viral pharyngitis code\"",": ","'1532007'"," from " ]
                   }, {
-                     "r" : "6",
+                     "r" : "212",
                      "s" : [ {
                         "value" : [ "\"SNOMED\"" ]
                      } ]
@@ -175,25 +180,25 @@ module.exports['Retrieve'] = {
                }
             } ],
             "codeSystem" : {
-               "localId" : "6",
+               "localId" : "212",
                "name" : "SNOMED"
             }
          } ]
       },
       "concepts" : {
          "def" : [ {
-            "localId" : "9",
+            "localId" : "213",
             "name" : "Viral pharyngitis",
             "display" : "Viral pharyngitis (disorder)",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "9",
+                  "r" : "213",
                   "s" : [ {
                      "value" : [ "","concept ","\"Viral pharyngitis\"",": { " ]
                   }, {
-                     "r" : "8",
+                     "r" : "214",
                      "s" : [ {
                         "value" : [ "\"Viral pharyngitis code\"" ]
                      } ]
@@ -203,40 +208,49 @@ module.exports['Retrieve'] = {
                }
             } ],
             "code" : [ {
-               "localId" : "8",
+               "localId" : "214",
                "name" : "Viral pharyngitis code"
             } ]
          } ]
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "218",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "216",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "217",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "215",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "11",
+            "localId" : "220",
             "name" : "Conditions",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "11",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define ","Conditions",": " ]
                   }, {
-                     "r" : "10",
+                     "r" : "221",
                      "s" : [ {
                         "value" : [ "[","Condition","]" ]
                      } ]
@@ -244,23 +258,27 @@ module.exports['Retrieve'] = {
                }
             } ],
             "expression" : {
-               "localId" : "10",
+               "localId" : "221",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
-               "type" : "Retrieve"
+               "type" : "Retrieve",
+               "include" : [ ],
+               "codeFilter" : [ ],
+               "dateFilter" : [ ],
+               "otherFilter" : [ ]
             }
          }, {
-            "localId" : "13",
+            "localId" : "223",
             "name" : "Encounters",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "13",
+                  "r" : "223",
                   "s" : [ {
                      "value" : [ "","define ","Encounters",": " ]
                   }, {
-                     "r" : "12",
+                     "r" : "224",
                      "s" : [ {
                         "value" : [ "[","Encounter","]" ]
                      } ]
@@ -268,23 +286,27 @@ module.exports['Retrieve'] = {
                }
             } ],
             "expression" : {
-               "localId" : "12",
+               "localId" : "224",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-               "type" : "Retrieve"
+               "type" : "Retrieve",
+               "include" : [ ],
+               "codeFilter" : [ ],
+               "dateFilter" : [ ],
+               "otherFilter" : [ ]
             }
          }, {
-            "localId" : "15",
+            "localId" : "226",
             "name" : "PharyngitisConditions",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "15",
+                  "r" : "226",
                   "s" : [ {
                      "value" : [ "","define ","PharyngitisConditions",": " ]
                   }, {
-                     "r" : "14",
+                     "r" : "230",
                      "s" : [ {
                         "value" : [ "[","Condition",": " ]
                      }, {
@@ -298,30 +320,35 @@ module.exports['Retrieve'] = {
                }
             } ],
             "expression" : {
-               "localId" : "14",
+               "localId" : "230",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "codeProperty" : "code",
                "codeComparator" : "in",
                "type" : "Retrieve",
                "codes" : {
+                  "localId" : "229",
                   "name" : "Acute Pharyngitis",
                   "libraryName" : "included",
                   "type" : "ValueSetRef"
-               }
+               },
+               "include" : [ ],
+               "codeFilter" : [ ],
+               "dateFilter" : [ ],
+               "otherFilter" : [ ]
             }
          }, {
-            "localId" : "17",
+            "localId" : "233",
             "name" : "AmbulatoryEncounters",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "17",
+                  "r" : "233",
                   "s" : [ {
                      "value" : [ "","define ","AmbulatoryEncounters",": " ]
                   }, {
-                     "r" : "16",
+                     "r" : "236",
                      "s" : [ {
                         "value" : [ "[","Encounter",": " ]
                      }, {
@@ -335,30 +362,35 @@ module.exports['Retrieve'] = {
                }
             } ],
             "expression" : {
-               "localId" : "16",
+               "localId" : "236",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                "codeProperty" : "code",
                "codeComparator" : "in",
                "type" : "Retrieve",
                "codes" : {
+                  "localId" : "235",
                   "name" : "Ambulatory/ED Visit",
                   "preserve" : true,
                   "type" : "ValueSetRef"
-               }
+               },
+               "include" : [ ],
+               "codeFilter" : [ ],
+               "dateFilter" : [ ],
+               "otherFilter" : [ ]
             }
          }, {
-            "localId" : "19",
+            "localId" : "239",
             "name" : "EncountersByCode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "19",
+                  "r" : "239",
                   "s" : [ {
                      "value" : [ "","define ","EncountersByCode",": " ]
                   }, {
-                     "r" : "18",
+                     "r" : "242",
                      "s" : [ {
                         "value" : [ "[","Encounter",": " ]
                      }, {
@@ -378,30 +410,35 @@ module.exports['Retrieve'] = {
                }
             } ],
             "expression" : {
-               "localId" : "18",
+               "localId" : "242",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                "codeProperty" : "code",
                "codeComparator" : "in",
                "type" : "Retrieve",
                "codes" : {
+                  "localId" : "241",
                   "name" : "Ambulatory/ED Visit",
                   "preserve" : true,
                   "type" : "ValueSetRef"
-               }
+               },
+               "include" : [ ],
+               "codeFilter" : [ ],
+               "dateFilter" : [ ],
+               "otherFilter" : [ ]
             }
          }, {
-            "localId" : "21",
+            "localId" : "245",
             "name" : "WrongValueSet",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "21",
+                  "r" : "245",
                   "s" : [ {
                      "value" : [ "","define ","WrongValueSet",": " ]
                   }, {
-                     "r" : "20",
+                     "r" : "248",
                      "s" : [ {
                         "value" : [ "[","Condition",": " ]
                      }, {
@@ -415,30 +452,35 @@ module.exports['Retrieve'] = {
                }
             } ],
             "expression" : {
-               "localId" : "20",
+               "localId" : "248",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "codeProperty" : "code",
                "codeComparator" : "in",
                "type" : "Retrieve",
                "codes" : {
+                  "localId" : "247",
                   "name" : "Ambulatory/ED Visit",
                   "preserve" : true,
                   "type" : "ValueSetRef"
-               }
+               },
+               "include" : [ ],
+               "codeFilter" : [ ],
+               "dateFilter" : [ ],
+               "otherFilter" : [ ]
             }
          }, {
-            "localId" : "23",
+            "localId" : "251",
             "name" : "WrongCodeProperty",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "23",
+                  "r" : "251",
                   "s" : [ {
                      "value" : [ "","define ","WrongCodeProperty",": " ]
                   }, {
-                     "r" : "22",
+                     "r" : "254",
                      "s" : [ {
                         "value" : [ "[","Encounter",": " ]
                      }, {
@@ -458,30 +500,35 @@ module.exports['Retrieve'] = {
                }
             } ],
             "expression" : {
-               "localId" : "22",
+               "localId" : "254",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                "codeProperty" : "status",
                "codeComparator" : "in",
                "type" : "Retrieve",
                "codes" : {
+                  "localId" : "253",
                   "name" : "Ambulatory/ED Visit",
                   "preserve" : true,
                   "type" : "ValueSetRef"
-               }
+               },
+               "include" : [ ],
+               "codeFilter" : [ ],
+               "dateFilter" : [ ],
+               "otherFilter" : [ ]
             }
          }, {
-            "localId" : "25",
+            "localId" : "257",
             "name" : "ConditionsByCode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "25",
+                  "r" : "257",
                   "s" : [ {
                      "value" : [ "","define ","ConditionsByCode",": " ]
                   }, {
-                     "r" : "24",
+                     "r" : "260",
                      "s" : [ {
                         "value" : [ "[","Condition",": " ]
                      }, {
@@ -495,32 +542,39 @@ module.exports['Retrieve'] = {
                }
             } ],
             "expression" : {
-               "localId" : "24",
+               "localId" : "260",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "codeProperty" : "code",
                "codeComparator" : "~",
                "type" : "Retrieve",
                "codes" : {
+                  "localId" : "262",
                   "type" : "ToList",
+                  "signature" : [ ],
                   "operand" : {
+                     "localId" : "259",
                      "name" : "Viral pharyngitis code",
                      "type" : "CodeRef"
                   }
-               }
+               },
+               "include" : [ ],
+               "codeFilter" : [ ],
+               "dateFilter" : [ ],
+               "otherFilter" : [ ]
             }
          }, {
-            "localId" : "27",
+            "localId" : "264",
             "name" : "ConditionsByConcept",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "27",
+                  "r" : "264",
                   "s" : [ {
                      "value" : [ "","define ","ConditionsByConcept",": " ]
                   }, {
-                     "r" : "26",
+                     "r" : "267",
                      "s" : [ {
                         "value" : [ "[","Condition",": " ]
                      }, {
@@ -534,40 +588,46 @@ module.exports['Retrieve'] = {
                }
             } ],
             "expression" : {
-               "localId" : "26",
+               "localId" : "267",
                "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "codeProperty" : "code",
                "codeComparator" : "~",
                "type" : "Retrieve",
                "codes" : {
+                  "localId" : "272",
                   "path" : "codes",
                   "type" : "Property",
                   "source" : {
+                     "localId" : "266",
                      "name" : "Viral pharyngitis",
                      "type" : "ConceptRef"
                   }
-               }
+               },
+               "include" : [ ],
+               "codeFilter" : [ ],
+               "dateFilter" : [ ],
+               "otherFilter" : [ ]
             }
          }, {
-            "localId" : "37",
+            "localId" : "274",
             "name" : "ConditionsByDate",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "37",
+                  "r" : "274",
                   "s" : [ {
                      "value" : [ "","define ","ConditionsByDate",": " ]
                   }, {
-                     "r" : "36",
+                     "r" : "299",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "29",
+                           "r" : "275",
                            "s" : [ {
-                              "r" : "28",
+                              "r" : "276",
                               "s" : [ {
-                                 "r" : "28",
+                                 "r" : "276",
                                  "s" : [ {
                                     "value" : [ "[","Condition","]" ]
                                  } ]
@@ -579,33 +639,33 @@ module.exports['Retrieve'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "35",
+                        "r" : "296",
                         "s" : [ {
                            "value" : [ "where " ]
                         }, {
-                           "r" : "35",
+                           "r" : "296",
                            "s" : [ {
-                              "r" : "31",
+                              "r" : "278",
                               "s" : [ {
-                                 "r" : "30",
+                                 "r" : "277",
                                  "s" : [ {
                                     "value" : [ "C" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "31",
+                                 "r" : "278",
                                  "s" : [ {
                                     "value" : [ "period" ]
                                  } ]
                               } ]
                            }, {
-                              "r" : "35",
+                              "r" : "296",
                               "value" : [ " ","during"," " ]
                            }, {
-                              "r" : "34",
+                              "r" : "295",
                               "s" : [ {
-                                 "r" : "32",
+                                 "r" : "279",
                                  "value" : [ "Interval[","@2013-03-01T00:00:00.0",", ","@2013-03-31T00:00:00.0",")" ]
                               } ]
                            } ]
@@ -615,102 +675,123 @@ module.exports['Retrieve'] = {
                }
             } ],
             "expression" : {
-               "localId" : "36",
+               "localId" : "299",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "29",
+                  "localId" : "275",
                   "alias" : "C",
                   "expression" : {
-                     "localId" : "28",
+                     "localId" : "276",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "dateProperty" : "period",
                      "type" : "Retrieve",
                      "dateRange" : {
-                        "localId" : "34",
+                        "localId" : "295",
                         "lowClosed" : true,
                         "highClosed" : false,
                         "type" : "Interval",
                         "low" : {
-                           "localId" : "32",
+                           "localId" : "279",
                            "type" : "DateTime",
+                           "signature" : [ ],
                            "year" : {
+                              "localId" : "280",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2013",
                               "type" : "Literal"
                            },
                            "month" : {
+                              "localId" : "281",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "3",
                               "type" : "Literal"
                            },
                            "day" : {
+                              "localId" : "282",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
                               "type" : "Literal"
                            },
                            "hour" : {
+                              "localId" : "283",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
                               "type" : "Literal"
                            },
                            "minute" : {
+                              "localId" : "284",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
                               "type" : "Literal"
                            },
                            "second" : {
+                              "localId" : "285",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
                               "type" : "Literal"
                            },
                            "millisecond" : {
+                              "localId" : "286",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
                               "type" : "Literal"
                            }
                         },
                         "high" : {
-                           "localId" : "33",
+                           "localId" : "287",
                            "type" : "DateTime",
+                           "signature" : [ ],
                            "year" : {
+                              "localId" : "288",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2013",
                               "type" : "Literal"
                            },
                            "month" : {
+                              "localId" : "289",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "3",
                               "type" : "Literal"
                            },
                            "day" : {
+                              "localId" : "290",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "31",
                               "type" : "Literal"
                            },
                            "hour" : {
+                              "localId" : "291",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
                               "type" : "Literal"
                            },
                            "minute" : {
+                              "localId" : "292",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
                               "type" : "Literal"
                            },
                            "second" : {
+                              "localId" : "293",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
                               "type" : "Literal"
                            },
                            "millisecond" : {
+                              "localId" : "294",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
                               "type" : "Literal"
                            }
                         }
-                     }
+                     },
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
                   }
                } ],
+               "let" : [ ],
                "relationship" : [ ]
             }
          } ]
@@ -728,14 +809,16 @@ valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.102.12.1011'
 
 module.exports['Included'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "3",
+            "r" : "208",
             "s" : [ {
                "value" : [ "","library Included version '1'" ]
             } ]
@@ -751,17 +834,18 @@ module.exports['Included'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -769,7 +853,7 @@ module.exports['Included'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -777,14 +861,14 @@ module.exports['Included'] = {
       },
       "codeSystems" : {
          "def" : [ {
-            "localId" : "2",
+            "localId" : "207",
             "name" : "SNOMED",
             "id" : "2.16.840.1.113883.6.96",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "2",
+                  "r" : "207",
                   "s" : [ {
                      "value" : [ "","codesystem ","\"SNOMED\"",": ","'2.16.840.1.113883.6.96'" ]
                   } ]
@@ -794,19 +878,20 @@ module.exports['Included'] = {
       },
       "valueSets" : {
          "def" : [ {
-            "localId" : "3",
+            "localId" : "208",
             "name" : "Acute Pharyngitis",
             "id" : "2.16.840.1.113883.3.464.1003.102.12.1011",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "3",
+                  "r" : "208",
                   "s" : [ {
                      "value" : [ "","valueset ","\"Acute Pharyngitis\"",": ","'2.16.840.1.113883.3.464.1003.102.12.1011'" ]
                   } ]
                }
-            } ]
+            } ],
+            "codeSystem" : [ ]
          } ]
       }
    }

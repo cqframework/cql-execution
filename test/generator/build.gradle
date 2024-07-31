@@ -10,10 +10,10 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'info.cqframework', name: 'cql-to-elm-cli', version: '2.3.0'
-    implementation group: 'info.cqframework', name: 'cql-to-elm', version: '2.3.0'
-    implementation group: 'info.cqframework', name: 'model-jaxb', version: '2.3.0'
-    implementation group: 'info.cqframework', name: 'elm-jaxb', version: '2.3.0'
+    implementation group: 'info.cqframework', name: 'cql-to-elm-cli', version: '3.12.0'
+    implementation group: 'info.cqframework', name: 'cql-to-elm', version: '3.12.0'
+    implementation group: 'info.cqframework', name: 'model-jaxb', version: '3.12.0'
+    implementation group: 'info.cqframework', name: 'elm-jaxb', version: '3.12.0'
     implementation group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '4.7'
     runtimeOnly group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy', version: '2.7.7'
 }
@@ -32,6 +32,6 @@ task watchTestData (dependsOn: 'classes', type: JavaExec) {
 
 task generateSpecTestData(dependsOn: 'classes', type: JavaExec) {
   classpath = sourceSets.main.runtimeClasspath
-  main = 'org.cqframework.cql.cql2elm.cli.CqlTranslator'
+  main = 'org.cqframework.cql.cql2elm.cli.Main'
   args '--input', "${projectDir}/../spec-tests/cql", '--format', 'JSON'
 }

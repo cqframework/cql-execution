@@ -1,5 +1,6 @@
 import should from 'should';
 import setup from '../../setup';
+import { getLocalIdByPath } from '../../testHelpers';
 const data = require('./data');
 
 describe('List', () => {
@@ -671,37 +672,44 @@ describe('First', () => {
 
   it('should get first of a list of numbers and the localId should exist on the root context', async function () {
     (await this.numbers.exec(this.ctx)).should.equal(1);
-    should(this.ctx.localId_context[6]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'First', 'Numbers', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should get first of a list of letters and the localId should exist on the root context', async function () {
     (await this.letters.exec(this.ctx)).should.equal('a');
-    should(this.ctx.localId_context[12]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'First', 'Letters', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should get first of a list of lists and the localId should exist on the root context', async function () {
     (await this.lists.exec(this.ctx)).should.eql(['a', 'b', 'c']);
-    should(this.ctx.localId_context[23]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'First', 'Lists', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should get first of a list of tuples and the localId should exist on the root context', async function () {
     (await this.tuples.exec(this.ctx)).should.eql({ a: 1, b: 2, c: 3 });
-    should(this.ctx.localId_context[34]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'First', 'Tuples', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should get first of a list of unordered numbers and the localId should exist on the root context', async function () {
     (await this.unordered.exec(this.ctx)).should.equal(3);
-    should(this.ctx.localId_context[41]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'First', 'Unordered', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should return null for an empty list and the localId should exist on the root context', async function () {
     should(await this.empty.exec(this.ctx)).be.null();
-    should(this.ctx.localId_context[45]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'First', 'Empty', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should return null for a null list and the localId should exist on the root context', async function () {
     should(await this.nullValue.exec(this.ctx)).be.null();
-    should(this.ctx.localId_context[51]).not.be.undefined();
+    const asLocalId = getLocalIdByPath(data, 'First', 'NullValue', 'source');
+    should(this.ctx.localId_context[asLocalId]).not.be.undefined();
   });
 });
 
@@ -712,37 +720,44 @@ describe('Last', () => {
 
   it('should get last of a list of numbers and the localId should exist on the root context', async function () {
     (await this.numbers.exec(this.ctx)).should.equal(4);
-    should(this.ctx.localId_context[6]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Last', 'Numbers', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should get last of a list of letters and the localId should exist on the root context', async function () {
     (await this.letters.exec(this.ctx)).should.equal('c');
-    should(this.ctx.localId_context[12]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Last', 'Letters', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should get last of a list of lists and the localId should exist on the root context', async function () {
     (await this.lists.exec(this.ctx)).should.eql(['d', 'e', 'f']);
-    should(this.ctx.localId_context[23]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Last', 'Lists', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should get last of a list of tuples and the localId should exist on the root context', async function () {
     (await this.tuples.exec(this.ctx)).should.eql({ a: 24, b: 25, c: 26 });
-    should(this.ctx.localId_context[34]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Last', 'Tuples', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should get last of a list of unordered numbers and the localId should exist on the root context', async function () {
     (await this.unordered.exec(this.ctx)).should.equal(2);
-    should(this.ctx.localId_context[41]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Last', 'Unordered', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should return null for an empty list and the localId should exist on the root context', async function () {
     should(await this.empty.exec(this.ctx)).be.null();
-    should(this.ctx.localId_context[45]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Last', 'Empty', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should return null for a null list and the localId should exist on the root context', async function () {
     should(await this.nullValue.exec(this.ctx)).be.null();
-    should(this.ctx.localId_context[51]).not.be.undefined();
+    const asLocalId = getLocalIdByPath(data, 'Last', 'NullValue', 'source');
+    should(this.ctx.localId_context[asLocalId]).not.be.undefined();
   });
 });
 
@@ -797,19 +812,24 @@ describe('Skip', () => {
 
   it('should skip two elements and the localId of the source and the startIndex should exist on the root context', async function () {
     (await this.skip2.exec(this.ctx)).should.eql([3, 4, 5]);
-    should(this.ctx.localId_context[7]).not.be.undefined();
-    should(this.ctx.localId_context[8]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Skip', 'Skip2', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
+    const literalLocalId = getLocalIdByPath(data, 'Skip', 'Skip2', 'startIndex');
+    should(this.ctx.localId_context[literalLocalId]).not.be.undefined();
   });
 
   it('should not skip when using null and the localId of the source should exist on the root context', async function () {
     (await this.skipNull.exec(this.ctx)).should.eql([1, 3, 5]);
-    should(this.ctx.localId_context[14]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Skip', 'SkipNull', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should return empty list when using negative number and the localId of the source and the startIndex should exist on the root context', async function () {
     (await this.skipEmpty.exec(this.ctx)).should.eql([]);
-    should(this.ctx.localId_context[21]).not.be.undefined();
-    should(this.ctx.localId_context[23]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Skip', 'SkipEmpty', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
+    const negateLocalId = getLocalIdByPath(data, 'Skip', 'SkipEmpty', 'startIndex');
+    should(this.ctx.localId_context[negateLocalId]).not.be.undefined();
   });
 
   it('should return null when given null', async function () {
@@ -824,12 +844,14 @@ describe('Tail', () => {
 
   it('should get tail of list and the localId of the source should exist on the root context', async function () {
     (await this.tail234.exec(this.ctx)).should.eql([2, 3, 4]);
-    should(this.ctx.localId_context[6]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Tail', 'Tail234', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should return empty list when given empty list and the localId of the source should exist on the root context', async function () {
     (await this.tailEmpty.exec(this.ctx)).should.eql([]);
-    should(this.ctx.localId_context[9]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Tail', 'TailEmpty', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should return null when given null', async function () {
@@ -844,17 +866,20 @@ describe('Take', () => {
 
   it('should take two elements and the localId of the source should exist on the root context', async function () {
     (await this.take2.exec(this.ctx)).should.eql([1, 2]);
-    should(this.ctx.localId_context[6]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Take', 'Take2', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should return full list when asked for too many elements and the localId of the source should exist on the root context', async function () {
     (await this.takeTooMany.exec(this.ctx)).should.eql([1, 2]);
-    should(this.ctx.localId_context[12]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Take', 'TakeTooMany', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should return empty list when using null and the localId of the source should exist on the root context', async function () {
     (await this.takeEmpty.exec(this.ctx)).should.eql([]);
-    should(this.ctx.localId_context[20]).not.be.undefined();
+    const listLocalId = getLocalIdByPath(data, 'Take', 'TakeEmpty', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
   it('should return null when given null', async function () {

@@ -20,14 +20,16 @@ define oneOverZero: DoDivide(1, 0)
 
 module.exports['Message'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "22",
+            "r" : "238",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -43,17 +45,18 @@ module.exports['Message'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -61,7 +64,7 @@ module.exports['Message'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -69,22 +72,31 @@ module.exports['Message'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "210",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "208",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "209",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "207",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "14",
+            "localId" : "211",
             "name" : "DoDivide",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -92,40 +104,26 @@ module.exports['Message'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "14",
+                  "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define function ","DoDivide","(","num"," " ]
+                     "value" : [ "","define function DoDivide(num Integer, den Integer):\n  " ]
                   }, {
-                     "r" : "2",
+                     "r" : "231",
                      "s" : [ {
-                        "value" : [ "Integer" ]
-                     } ]
-                  }, {
-                     "value" : [ ", ","den"," " ]
-                  }, {
-                     "r" : "3",
-                     "s" : [ {
-                        "value" : [ "Integer" ]
-                     } ]
-                  }, {
-                     "value" : [ "):\n  " ]
-                  }, {
-                     "r" : "13",
-                     "s" : [ {
-                        "r" : "13",
+                        "r" : "231",
                         "s" : [ {
                            "value" : [ "Message","(" ]
                         }, {
-                           "r" : "6",
+                           "r" : "216",
                            "s" : [ {
-                              "r" : "4",
+                              "r" : "217",
                               "s" : [ {
                                  "value" : [ "num" ]
                               } ]
                            }, {
                               "value" : [ " / " ]
                            }, {
-                              "r" : "5",
+                              "r" : "218",
                               "s" : [ {
                                  "value" : [ "den" ]
                               } ]
@@ -133,34 +131,34 @@ module.exports['Message'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "9",
+                           "r" : "223",
                            "s" : [ {
-                              "r" : "7",
+                              "r" : "224",
                               "s" : [ {
                                  "value" : [ "den" ]
                               } ]
                            }, {
-                              "r" : "8",
+                              "r" : "225",
                               "value" : [ " ","="," ","0" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "10",
+                           "r" : "226",
                            "s" : [ {
                               "value" : [ "'DivideByZero'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "11",
+                           "r" : "227",
                            "s" : [ {
                               "value" : [ "'Error'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "12",
+                           "r" : "228",
                            "s" : [ {
                               "value" : [ "'Cannot divide by zero'" ]
                            } ]
@@ -172,142 +170,153 @@ module.exports['Message'] = {
                }
             } ],
             "expression" : {
-               "localId" : "13",
+               "localId" : "231",
                "type" : "Message",
+               "signature" : [ ],
                "source" : {
-                  "localId" : "6",
+                  "localId" : "216",
                   "type" : "Divide",
+                  "signature" : [ ],
                   "operand" : [ {
+                     "localId" : "220",
                      "type" : "ToDecimal",
+                     "signature" : [ ],
                      "operand" : {
-                        "localId" : "4",
+                        "localId" : "217",
                         "name" : "num",
                         "type" : "OperandRef"
                      }
                   }, {
+                     "localId" : "222",
                      "type" : "ToDecimal",
+                     "signature" : [ ],
                      "operand" : {
-                        "localId" : "5",
+                        "localId" : "218",
                         "name" : "den",
                         "type" : "OperandRef"
                      }
                   } ]
                },
                "condition" : {
-                  "localId" : "9",
+                  "localId" : "223",
                   "type" : "Equal",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "7",
+                     "localId" : "224",
                      "name" : "den",
                      "type" : "OperandRef"
                   }, {
-                     "localId" : "8",
+                     "localId" : "225",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
                      "type" : "Literal"
                   } ]
                },
                "code" : {
-                  "localId" : "10",
+                  "localId" : "226",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "DivideByZero",
                   "type" : "Literal"
                },
                "severity" : {
-                  "localId" : "11",
+                  "localId" : "227",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Error",
                   "type" : "Literal"
                },
                "message" : {
-                  "localId" : "12",
+                  "localId" : "228",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Cannot divide by zero",
                   "type" : "Literal"
                }
             },
             "operand" : [ {
+               "localId" : "213",
                "name" : "num",
                "operandTypeSpecifier" : {
-                  "localId" : "2",
+                  "localId" : "212",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }, {
+               "localId" : "215",
                "name" : "den",
                "operandTypeSpecifier" : {
-                  "localId" : "3",
+                  "localId" : "214",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "18",
+            "localId" : "233",
             "name" : "oneOverTwo",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "18",
+                  "r" : "233",
                   "s" : [ {
                      "value" : [ "","define ","oneOverTwo",": " ]
                   }, {
-                     "r" : "17",
+                     "r" : "236",
                      "s" : [ {
-                        "r" : "15",
+                        "r" : "234",
                         "value" : [ "DoDivide","(","1",", ","2",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "17",
+               "localId" : "236",
                "name" : "DoDivide",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "15",
+                  "localId" : "234",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                }, {
-                  "localId" : "16",
+                  "localId" : "235",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "22",
+            "localId" : "238",
             "name" : "oneOverZero",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "22",
+                  "r" : "238",
                   "s" : [ {
                      "value" : [ "","define ","oneOverZero",": " ]
                   }, {
-                     "r" : "21",
+                     "r" : "241",
                      "s" : [ {
-                        "r" : "19",
+                        "r" : "239",
                         "value" : [ "DoDivide","(","1",", ","0",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "21",
+               "localId" : "241",
                "name" : "DoDivide",
                "type" : "FunctionRef",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "19",
+                  "localId" : "239",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                }, {
-                  "localId" : "20",
+                  "localId" : "240",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
                   "type" : "Literal"

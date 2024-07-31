@@ -43,59 +43,41 @@ define "And": Tuple{
 
 define "Implies": Tuple{
   "TrueImpliesTrue": Tuple{
-    skipped: 'Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Boolean).'
-    /*
     expression: true implies true,
     output: true
-    */  },
+  },
   "TrueImpliesFalse": Tuple{
-    skipped: 'Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Boolean).'
-    /*
     expression: true implies false,
     output: false
-    */  },
+  },
   "TrueImpliesNull": Tuple{
-    skipped: 'Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Any).'
-    /*
     expression: true implies null,
     output: null
-    */  },
+  },
   "FalseImpliesTrue": Tuple{
-    skipped: 'Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Boolean).'
-    /*
     expression: false implies true,
     output: true
-    */  },
+  },
   "FalseImpliesFalse": Tuple{
-    skipped: 'Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Boolean).'
-    /*
     expression: false implies false,
     output: true
-    */  },
+  },
   "FalseImpliesNull": Tuple{
-    skipped: 'Translation Error: Could not resolve call to operator Implies with signature (System.Boolean,System.Any).'
-    /*
     expression: false implies null,
     output: true
-    */  },
+  },
   "NullImpliesTrue": Tuple{
-    skipped: 'Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Boolean).'
-    /*
     expression: null implies true,
     output: true
-    */  },
+  },
   "NullImpliesFalse": Tuple{
-    skipped: 'Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Boolean).'
-    /*
     expression: null implies false,
     output: null
-    */  },
+  },
   "NullImpliesNull": Tuple{
-    skipped: 'Translation Error: Could not resolve call to operator Implies with signature (System.Any,System.Any).'
-    /*
     expression: null implies null,
     output: null
-    */  }
+  }
 }
 
 define "Not": Tuple{

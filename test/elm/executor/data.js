@@ -33,14 +33,16 @@ define AgeSumRef : AgeSum
 
 module.exports['Age'] = {
    "library" : {
+      "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "39",
+            "r" : "273",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -56,17 +58,18 @@ module.exports['Age'] = {
       },
       "usings" : {
          "def" : [ {
+            "localId" : "1",
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
+            "localId" : "206",
             "localIdentifier" : "Simple",
             "uri" : "https://github.com/cqframework/cql-execution/simple",
             "version" : "1.0.0",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "1",
+                  "r" : "206",
                   "s" : [ {
                      "value" : [ "","using " ]
                   }, {
@@ -74,7 +77,7 @@ module.exports['Age'] = {
                         "value" : [ "Simple" ]
                      } ]
                   }, {
-                     "value" : [ " version ","'1.0.0'" ]
+                     "value" : [ " version '1.0.0'" ]
                   } ]
                }
             } ]
@@ -82,31 +85,31 @@ module.exports['Age'] = {
       },
       "parameters" : {
          "def" : [ {
-            "localId" : "11",
+            "localId" : "207",
             "name" : "MeasurementPeriod",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "11",
+                  "r" : "207",
                   "s" : [ {
                      "value" : [ "","parameter ","MeasurementPeriod"," default " ]
                   }, {
-                     "r" : "10",
+                     "r" : "220",
                      "s" : [ {
                         "value" : [ "Interval[" ]
                      }, {
-                        "r" : "5",
+                        "r" : "213",
                         "s" : [ {
-                           "r" : "2",
+                           "r" : "208",
                            "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "9",
+                        "r" : "219",
                         "s" : [ {
-                           "r" : "6",
+                           "r" : "214",
                            "value" : [ "DateTime","(","2014",", ","1",", ","1",")" ]
                         } ]
                      }, {
@@ -116,49 +119,51 @@ module.exports['Age'] = {
                }
             } ],
             "default" : {
-               "localId" : "10",
+               "localId" : "220",
                "lowClosed" : true,
                "highClosed" : false,
                "type" : "Interval",
                "low" : {
-                  "localId" : "5",
+                  "localId" : "213",
                   "type" : "DateTime",
+                  "signature" : [ ],
                   "year" : {
-                     "localId" : "2",
+                     "localId" : "208",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2013",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "3",
+                     "localId" : "209",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "4",
+                     "localId" : "210",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }
                },
                "high" : {
-                  "localId" : "9",
+                  "localId" : "219",
                   "type" : "DateTime",
+                  "signature" : [ ],
                   "year" : {
-                     "localId" : "6",
+                     "localId" : "214",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2014",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "7",
+                     "localId" : "215",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "8",
+                     "localId" : "216",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
@@ -169,43 +174,53 @@ module.exports['Age'] = {
       },
       "contexts" : {
          "def" : [ {
+            "localId" : "224",
             "name" : "Patient"
          }, {
+            "localId" : "255",
             "name" : "Unfiltered"
          } ]
       },
       "statements" : {
          "def" : [ {
+            "localId" : "222",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
+               "localId" : "223",
                "type" : "SingletonFrom",
+               "signature" : [ ],
                "operand" : {
+                  "localId" : "221",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
-            "localId" : "15",
+            "localId" : "226",
             "name" : "Age",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "15",
+                  "r" : "226",
                   "s" : [ {
                      "value" : [ "","define ","Age",":\n  " ]
                   }, {
-                     "r" : "14",
+                     "r" : "233",
                      "s" : [ {
                         "value" : [ "AgeInYearsAt","(" ]
                      }, {
-                        "r" : "13",
+                        "r" : "227",
                         "s" : [ {
                            "value" : [ "start of " ]
                         }, {
-                           "r" : "12",
+                           "r" : "228",
                            "s" : [ {
                               "value" : [ "MeasurementPeriod" ]
                            } ]
@@ -217,51 +232,55 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "14",
+               "localId" : "233",
                "precision" : "Year",
                "type" : "CalculateAgeAt",
+               "signature" : [ ],
                "operand" : [ {
+                  "localId" : "232",
                   "path" : "birthDate",
                   "type" : "Property",
                   "source" : {
+                     "localId" : "231",
                      "name" : "Patient",
                      "type" : "ExpressionRef"
                   }
                }, {
-                  "localId" : "13",
+                  "localId" : "227",
                   "type" : "Start",
+                  "signature" : [ ],
                   "operand" : {
-                     "localId" : "12",
+                     "localId" : "228",
                      "name" : "MeasurementPeriod",
                      "type" : "ParameterRef"
                   }
                } ]
             }
          }, {
-            "localId" : "27",
+            "localId" : "235",
             "name" : "InDemographic",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "27",
+                  "r" : "235",
                   "s" : [ {
                      "value" : [ "","define ","InDemographic",":\n  " ]
                   }, {
-                     "r" : "26",
+                     "r" : "236",
                      "s" : [ {
-                        "r" : "20",
+                        "r" : "237",
                         "s" : [ {
-                           "r" : "18",
+                           "r" : "244",
                            "s" : [ {
                               "value" : [ "AgeInYearsAt","(" ]
                            }, {
-                              "r" : "17",
+                              "r" : "238",
                               "s" : [ {
                                  "value" : [ "start of " ]
                               }, {
-                                 "r" : "16",
+                                 "r" : "239",
                                  "s" : [ {
                                     "value" : [ "MeasurementPeriod" ]
                                  } ]
@@ -270,23 +289,23 @@ module.exports['Age'] = {
                               "value" : [ ")" ]
                            } ]
                         }, {
-                           "r" : "19",
+                           "r" : "245",
                            "value" : [ " ",">="," ","2" ]
                         } ]
                      }, {
                         "value" : [ " and " ]
                      }, {
-                        "r" : "25",
+                        "r" : "246",
                         "s" : [ {
-                           "r" : "23",
+                           "r" : "253",
                            "s" : [ {
                               "value" : [ "AgeInYearsAt","(" ]
                            }, {
-                              "r" : "22",
+                              "r" : "247",
                               "s" : [ {
                                  "value" : [ "start of " ]
                               }, {
-                                 "r" : "21",
+                                 "r" : "248",
                                  "s" : [ {
                                     "value" : [ "MeasurementPeriod" ]
                                  } ]
@@ -295,7 +314,7 @@ module.exports['Age'] = {
                               "value" : [ ")" ]
                            } ]
                         }, {
-                           "r" : "24",
+                           "r" : "254",
                            "value" : [ " ","<"," ","18" ]
                         } ]
                      } ]
@@ -303,62 +322,73 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "26",
+               "localId" : "236",
                "type" : "And",
+               "signature" : [ ],
                "operand" : [ {
-                  "localId" : "20",
+                  "localId" : "237",
                   "type" : "GreaterOrEqual",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "18",
+                     "localId" : "244",
                      "precision" : "Year",
                      "type" : "CalculateAgeAt",
+                     "signature" : [ ],
                      "operand" : [ {
+                        "localId" : "243",
                         "path" : "birthDate",
                         "type" : "Property",
                         "source" : {
+                           "localId" : "242",
                            "name" : "Patient",
                            "type" : "ExpressionRef"
                         }
                      }, {
-                        "localId" : "17",
+                        "localId" : "238",
                         "type" : "Start",
+                        "signature" : [ ],
                         "operand" : {
-                           "localId" : "16",
+                           "localId" : "239",
                            "name" : "MeasurementPeriod",
                            "type" : "ParameterRef"
                         }
                      } ]
                   }, {
-                     "localId" : "19",
+                     "localId" : "245",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "25",
+                  "localId" : "246",
                   "type" : "Less",
+                  "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "23",
+                     "localId" : "253",
                      "precision" : "Year",
                      "type" : "CalculateAgeAt",
+                     "signature" : [ ],
                      "operand" : [ {
+                        "localId" : "252",
                         "path" : "birthDate",
                         "type" : "Property",
                         "source" : {
+                           "localId" : "251",
                            "name" : "Patient",
                            "type" : "ExpressionRef"
                         }
                      }, {
-                        "localId" : "22",
+                        "localId" : "247",
                         "type" : "Start",
+                        "signature" : [ ],
                         "operand" : {
-                           "localId" : "21",
+                           "localId" : "248",
                            "name" : "MeasurementPeriod",
                            "type" : "ParameterRef"
                         }
                      } ]
                   }, {
-                     "localId" : "24",
+                     "localId" : "254",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "18",
                      "type" : "Literal"
@@ -366,22 +396,22 @@ module.exports['Age'] = {
                } ]
             }
          }, {
-            "localId" : "30",
+            "localId" : "257",
             "name" : "AgeSum",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "30",
+                  "r" : "257",
                   "s" : [ {
                      "value" : [ "","define ","AgeSum",": " ]
                   }, {
-                     "r" : "29",
+                     "r" : "261",
                      "s" : [ {
                         "value" : [ "Sum","(" ]
                      }, {
-                        "r" : "28",
+                        "r" : "258",
                         "s" : [ {
                            "value" : [ "Age" ]
                         } ]
@@ -392,36 +422,37 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "29",
+               "localId" : "261",
                "type" : "Sum",
+               "signature" : [ ],
                "source" : {
-                  "localId" : "28",
+                  "localId" : "258",
                   "name" : "Age",
                   "type" : "ExpressionRef"
                }
             }
          }, {
-            "localId" : "37",
+            "localId" : "263",
             "name" : "DEMO",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "37",
+                  "r" : "263",
                   "s" : [ {
                      "value" : [ "","define ","DEMO",": " ]
                   }, {
-                     "r" : "36",
+                     "r" : "271",
                      "s" : [ {
                         "value" : [ "Count","(" ]
                      }, {
-                        "r" : "35",
+                        "r" : "268",
                         "s" : [ {
                            "s" : [ {
-                              "r" : "32",
+                              "r" : "264",
                               "s" : [ {
-                                 "r" : "31",
+                                 "r" : "265",
                                  "s" : [ {
                                     "s" : [ {
                                        "value" : [ "InDemographic" ]
@@ -434,13 +465,13 @@ module.exports['Age'] = {
                         }, {
                            "value" : [ " " ]
                         }, {
-                           "r" : "34",
+                           "r" : "267",
                            "s" : [ {
                               "value" : [ "where " ]
                            }, {
-                              "r" : "34",
+                              "r" : "267",
                               "s" : [ {
-                                 "r" : "33",
+                                 "r" : "266",
                                  "s" : [ {
                                     "value" : [ "w" ]
                                  } ]
@@ -456,26 +487,29 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "36",
+               "localId" : "271",
                "type" : "Count",
+               "signature" : [ ],
                "source" : {
-                  "localId" : "35",
+                  "localId" : "268",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "32",
+                     "localId" : "264",
                      "alias" : "w",
                      "expression" : {
-                        "localId" : "31",
+                        "localId" : "265",
                         "name" : "InDemographic",
                         "type" : "ExpressionRef"
                      }
                   } ],
+                  "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "34",
+                     "localId" : "267",
                      "type" : "IsTrue",
+                     "signature" : [ ],
                      "operand" : {
-                        "localId" : "33",
+                        "localId" : "266",
                         "name" : "w",
                         "type" : "AliasRef"
                      }
@@ -483,18 +517,18 @@ module.exports['Age'] = {
                }
             }
          }, {
-            "localId" : "39",
+            "localId" : "273",
             "name" : "AgeSumRef",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "39",
+                  "r" : "273",
                   "s" : [ {
                      "value" : [ "","define ","AgeSumRef"," : " ]
                   }, {
-                     "r" : "38",
+                     "r" : "274",
                      "s" : [ {
                         "value" : [ "AgeSum" ]
                      } ]
@@ -502,7 +536,7 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "38",
+               "localId" : "274",
                "name" : "AgeSum",
                "type" : "ExpressionRef"
             }

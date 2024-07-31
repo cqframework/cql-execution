@@ -1,8 +1,9 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.3.0",
+         "translatorVersion" : "3.12.0",
          "translatorOptions" : "",
+         "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
       } ],
       "identifier" : {
@@ -16,53 +17,69 @@
       "usings" : {
          "def" : [ {
             "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
          }, {
             "localIdentifier" : "QUICK",
             "uri" : "http://hl7.org/fhir/us/qicore",
-            "version" : "3.3.0"
+            "version" : "3.3.0",
+            "annotation" : [ ]
          } ]
       },
       "contexts" : {
          "def" : [ {
-            "name" : "Patient"
+            "name" : "Patient",
+            "annotation" : [ ]
          } ]
       },
       "statements" : {
          "def" : [ {
             "name" : "Patient",
             "context" : "Patient",
+            "annotation" : [ ],
             "expression" : {
                "type" : "SingletonFrom",
+               "annotation" : [ ],
+               "signature" : [ ],
                "operand" : {
                   "dataType" : "{http://hl7.org/fhir/us/qicore}Patient",
                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
-                  "type" : "Retrieve"
+                  "type" : "Retrieve",
+                  "annotation" : [ ],
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
                }
             }
          }, {
             "name" : "Any",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "AnyQuantity",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "value" : 5.0,
                            "unit" : "g",
-                           "type" : "Quantity"
+                           "type" : "Quantity",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "value" : 5.0,
                            "unit" : "g",
-                           "type" : "Quantity"
+                           "type" : "Quantity",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -70,44 +87,55 @@
                   "name" : "AnyDateTime",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2012",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "4",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "4",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2012",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "4",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "4",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -116,54 +144,67 @@
                   "name" : "AnyTime",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Time",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "9",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Time",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "9",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -172,21 +213,25 @@
                   "name" : "AnyInterval",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "lowClosed" : true,
                            "highClosed" : true,
                            "type" : "Interval",
+                           "annotation" : [ ],
                            "low" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "high" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "7",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -195,15 +240,18 @@
                            "lowClosed" : true,
                            "highClosed" : true,
                            "type" : "Interval",
+                           "annotation" : [ ],
                            "low" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "high" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "7",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -212,40 +260,49 @@
                   "name" : "AnyList",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "List",
+                           "annotation" : [ ],
                            "element" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "3",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "List",
+                           "annotation" : [ ],
                            "element" : [ {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }, {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "3",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            } ]
                         }
                      } ]
@@ -254,23 +311,27 @@
                   "name" : "AnyTuple",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Tuple",
+                           "annotation" : [ ],
                            "element" : [ {
                               "name" : "id",
                               "value" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "5",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            }, {
                               "name" : "name",
                               "value" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "Chris",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
@@ -278,19 +339,22 @@
                         "name" : "output",
                         "value" : {
                            "type" : "Tuple",
+                           "annotation" : [ ],
                            "element" : [ {
                               "name" : "id",
                               "value" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "5",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            }, {
                               "name" : "name",
                               "value" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "Chris",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
@@ -300,26 +364,31 @@
                   "name" : "AnyString",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "path" : "name",
                            "type" : "Property",
+                           "annotation" : [ ],
                            "source" : {
                               "type" : "Tuple",
+                              "annotation" : [ ],
                               "element" : [ {
                                  "name" : "id",
                                  "value" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "5",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }
                               }, {
                                  "name" : "name",
                                  "value" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                     "value" : "Chris",
-                                    "type" : "Literal"
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }
                               } ]
                            }
@@ -329,7 +398,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Chris",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -339,18 +409,22 @@
             "name" : "DateTime",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "DateTimeNull",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Should DateTime(null) really evaluate to null?",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -358,44 +432,54 @@
                   "name" : "DateTimeUpperBoundExcept",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10000",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "12",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "31",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "23",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "59",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "59",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "999",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -403,7 +487,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -411,44 +496,54 @@
                   "name" : "DateTimeLowerBoundExcept",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0000",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -456,7 +551,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -464,84 +560,103 @@
                   "name" : "DateTimeProper",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2016",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "7",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "7",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "6",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "25",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "33",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "910",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2016",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "7",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "7",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "6",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "25",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "33",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "910",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -550,44 +665,55 @@
                   "name" : "DateTimeIncomplete",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2015",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2015",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -596,39 +722,51 @@
                   "name" : "DateTimeUncertain",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "precision" : "Day",
                            "type" : "DurationBetween",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "operand" : [ {
                               "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "year" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "2015",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               },
                               "month" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "2",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               },
                               "day" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "10",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            }, {
                               "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
                               "year" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "2015",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               },
                               "month" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "3",
-                                 "type" : "Literal"
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
                               }
                            } ]
                         }
@@ -638,15 +776,18 @@
                            "lowClosed" : true,
                            "highClosed" : true,
                            "type" : "Interval",
+                           "annotation" : [ ],
                            "low" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "18",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "high" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "49",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -655,84 +796,103 @@
                   "name" : "DateTimeMin",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0001",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -741,84 +901,103 @@
                   "name" : "DateTimeMax",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "9999",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "12",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "31",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "23",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "59",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "59",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "999",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "9999",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "month" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "12",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "day" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "31",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "23",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "59",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "59",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "999",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -829,25 +1008,30 @@
             "name" : "Quantity",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "QuantityTest",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "value" : 150.2,
                            "unit" : "[lb_av]",
-                           "type" : "Quantity"
+                           "type" : "Quantity",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "value" : 150.2,
                            "unit" : "[lb_av]",
-                           "type" : "Quantity"
+                           "type" : "Quantity",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -855,19 +1039,22 @@
                   "name" : "QuantityTest2",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "value" : 2.5589,
                            "unit" : "{eskimo kisses}",
-                           "type" : "Quantity"
+                           "type" : "Quantity",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "value" : 2.5589,
                            "unit" : "{eskimo kisses}",
-                           "type" : "Quantity"
+                           "type" : "Quantity",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -875,19 +1062,22 @@
                   "name" : "QuantityFractionalTooBig",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "value" : 5.999999999,
                            "unit" : "g",
-                           "type" : "Quantity"
+                           "type" : "Quantity",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "value" : 5.999999999,
                            "unit" : "g",
-                           "type" : "Quantity"
+                           "type" : "Quantity",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -897,25 +1087,30 @@
             "name" : "String",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "StringTestEscapeQuotes",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "'I start with a single quote and end with a double quote\"",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "'I start with a single quote and end with a double quote\"",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -923,19 +1118,22 @@
                   "name" : "StringUnicodeTest",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Hi",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Hi",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -945,18 +1143,22 @@
             "name" : "Time",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ ],
             "expression" : {
                "type" : "Tuple",
+               "annotation" : [ ],
                "element" : [ {
                   "name" : "TimeUpperBoundHours",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Translation Error: Invalid time input (T24:59:59.999). Use ISO 8601 time representation (hh:mm:ss.fff).",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -964,12 +1166,14 @@
                   "name" : "TimeUpperBoundMinutes",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Translation Error: Invalid time input (T23:60:59.999). Use ISO 8601 time representation (hh:mm:ss.fff).",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -977,12 +1181,14 @@
                   "name" : "TimeUpperBoundSeconds",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Translation Error: Invalid time input (T23:59:60.999). Use ISO 8601 time representation (hh:mm:ss.fff).",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -990,29 +1196,36 @@
                   "name" : "TimeUpperBoundMillis",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Time",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "23",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "59",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "59",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10000",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
@@ -1020,7 +1233,8 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
-                           "type" : "Literal"
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1028,54 +1242,67 @@
                   "name" : "TimeProper",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Time",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "25",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "12",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "863",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Time",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "25",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "12",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "863",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -1084,54 +1311,67 @@
                   "name" : "TimeAllMax",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Time",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "23",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "59",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "59",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "999",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Time",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "23",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "59",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "59",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "999",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
@@ -1140,54 +1380,67 @@
                   "name" : "TimeAllMin",
                   "value" : {
                      "type" : "Tuple",
+                     "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
                            "type" : "Time",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      }, {
                         "name" : "output",
                         "value" : {
                            "type" : "Time",
+                           "annotation" : [ ],
+                           "signature" : [ ],
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "minute" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "second" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            },
                            "millisecond" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "0",
-                              "type" : "Literal"
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
