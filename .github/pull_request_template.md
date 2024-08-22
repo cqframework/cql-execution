@@ -2,7 +2,7 @@ Pull requests into cql-execution require the following.
 Submitter and reviewer should ✔ when done.
 For items that are not-applicable, mark "N/A" and ✔.
 
-[CDS Connect](https://cds.ahrq.gov/cdsconnect) and [Bonnie](https://github.com/projecttacoma/bonnie) are the main users of this repository.
+[CDS Connect](https://cds.ahrq.gov/cdsconnect) and [MADiE](https://www.emeasuretool.cms.gov/madie) are the main users of this repository.
 It is strongly recommended to include a person from each of those projects as a reviewer.
 
 **Submitter:**
