@@ -73,7 +73,7 @@ export class FunctionRef extends Expression {
       // cache hit
       return this.functionDefs;
     }
-    let functionDefs, child_ctx;
+    let functionDefs;
     if (this.library) {
       const lib = ctx.get(this.library);
       functionDefs = lib ? lib.getFunction(this.name) : undefined;
