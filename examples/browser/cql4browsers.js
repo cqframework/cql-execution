@@ -6861,6 +6861,8 @@ class FunctionRef extends expression_1.Expression {
         if (fDefs.length === 0) {
             throw new Error('no function with matching signature could be found');
         }
+        // Moved context creation below the functionDef checks because it's not needed if 
+        // there are no matching function defs
         let child_ctx;
         if (this.library) {
             const libCtx = ctx.getLibraryContext(this.library);
