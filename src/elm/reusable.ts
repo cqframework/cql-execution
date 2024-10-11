@@ -68,6 +68,36 @@ export class FunctionRef extends Expression {
     this.functionDefs = null;
   }
 
+  async exec(ctx: Context) {
+    const args = await this.execArgs(ctx);
+    // Filter out functions w/ wrong number of arguments.
+    const fDefs = this.getFunctionDefs(ctx, args);
+    // If there is still > 1 matching function, calculate a score based on quality of matches
+    if (fDefs.length > 1) {
+      // TODO
+    }
+
+    if (fDefs.length === 0) {
+      throw new Error('no function with matching signature could be found');
+    }
+    // Moved context creation below the functionDef checks because it's not needed if
+    // there are no matching function defs
+    let child_ctx;
+    if (this.library) {
+      const libCtx = ctx.getLibraryContext(this.library);
+      child_ctx = libCtx ? libCtx.childContext() : undefined;
+    } else {
+      child_ctx = ctx.childContext();
+    }
+    // By this point, we should have only one function, but until implementation is completed,
+    // use the last one (no matter how many still remain)
+    const functionDef = fDefs[fDefs.length - 1];
+    for (let i = 0; i < functionDef.parameters.length; i++) {
+      child_ctx.set(functionDef.parameters[i].name, args[i]);
+    }
+    return functionDef.expression.execute(child_ctx);
+  }
+
   getFunctionDefs(ctx: Context, args: any) {
     if (this.functionDefs != null) {
       // cache hit
@@ -104,36 +134,6 @@ export class FunctionRef extends Expression {
     }
     this.functionDefs = functionDefs;
     return functionDefs;
-  }
-
-  async exec(ctx: Context) {
-    const args = await this.execArgs(ctx);
-    // Filter out functions w/ wrong number of arguments.
-    const fDefs = this.getFunctionDefs(ctx, args);
-    // If there is still > 1 matching function, calculate a score based on quality of matches
-    if (fDefs.length > 1) {
-      // TODO
-    }
-
-    if (fDefs.length === 0) {
-      throw new Error('no function with matching signature could be found');
-    }
-    // Moved context creation below the functionDef checks because it's not needed if
-    // there are no matching function defs
-    let child_ctx;
-    if (this.library) {
-      const libCtx = ctx.getLibraryContext(this.library);
-      child_ctx = libCtx ? libCtx.childContext() : undefined;
-    } else {
-      child_ctx = ctx.childContext();
-    }
-    // By this point, we should have only one function, but until implementation is completed,
-    // use the last one (no matter how many still remain)
-    const functionDef = fDefs[fDefs.length - 1];
-    for (let i = 0; i < functionDef.parameters.length; i++) {
-      child_ctx.set(functionDef.parameters[i].name, args[i]);
-    }
-    return functionDef.expression.execute(child_ctx);
   }
 }
 
