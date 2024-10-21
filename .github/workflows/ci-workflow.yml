@@ -53,6 +53,10 @@ jobs:
       - run: date +"%Y-%m-%d %T"
       - run: npm install
       - run: ./bin/check_for_nonassertive_tests.sh
-      - run: npx nyc --reporter=lcov npm test && npx codecov
+      - run: npx nyc --reporter=lcov npm test
         env:
           CI: true
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
