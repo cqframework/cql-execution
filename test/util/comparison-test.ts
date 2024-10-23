@@ -68,6 +68,15 @@ describe('equals', () => {
     ).should.be.true();
     equals({ a: [1, 2, 3], b: [4, 5, 6] }, { a: [1, 2, 3], b: [4, 5, 6] }).should.be.true();
     equals({ a: [1, 2, 3], b: [4, 5, 6] }, { a: [3, 2, 1], b: [6, 5, 4] }).should.be.false();
+    equals({ a: 1, b: null, c: 'sea' }, { a: 1, b: null, c: 'sea' }).should.be.true();
+    equals({ a: 1, b: null, c: 'sea' }, { a: 1, b: null, c: 'see' }).should.be.false();
+    equals({ a: 1, b: null, c: 'sea' }, { a: 2, b: null, c: 'sea' }).should.be.false();
+    equals({ a: 1, b: null, c: 'sea' }, { a: 1, b: 'bee', c: 'see' }).should.be.false();
+    equals({ a: 1, b: 'bee', c: 'sea' }, { a: 1, b: null, c: 'see' }).should.be.false();
+    equals({ a: 2, b: null, c: 'sea' }, { a: 1, b: 'bee', c: 'sea' }).should.be.false();
+    equals({ a: 2, b: 'bee', c: 'sea' }, { a: 1, b: null, c: 'sea' }).should.be.false();
+    should(equals({ a: 1, b: null, c: 'sea' }, { a: 1, b: 'bee', c: 'sea' })).be.null();
+    should(equals({ a: 1, b: 'bee', c: 'sea' }, { a: 1, b: null, c: 'sea' })).be.null();
   });
 
   it('should detect equality/inequality for classes', () => {

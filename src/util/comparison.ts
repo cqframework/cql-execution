@@ -165,6 +165,7 @@ function deepCompareKeysAndValues(a: any, b: any, comparisonFunction: any) {
       const comparisonResult = comparisonFunction(a[key], b[key]);
       if (comparisonResult === null) {
         shouldReturnNull = true;
+        return true;
       }
       return comparisonResult;
     });
@@ -172,7 +173,7 @@ function deepCompareKeysAndValues(a: any, b: any, comparisonFunction: any) {
     finalComparisonResult = false;
   }
 
-  if (shouldReturnNull) {
+  if (finalComparisonResult && shouldReturnNull) {
     return null;
   }
   return finalComparisonResult;
