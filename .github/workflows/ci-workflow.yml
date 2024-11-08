@@ -7,8 +7,8 @@ jobs:
     name: Check npm audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
       - run: npm audit
@@ -18,8 +18,8 @@ jobs:
     name: Check cql4browsers
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
       - run: ./bin/validate_cql4browsers.sh
@@ -29,8 +29,8 @@ jobs:
     name: Check lint and prettier
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
       - run: npm install
@@ -42,8 +42,8 @@ jobs:
     name: Test on node 18 and ubuntu-latest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18.x'
       - name: Set timezone to America/New_York
