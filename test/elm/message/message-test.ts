@@ -51,7 +51,9 @@ describe('Retrieve', () => {
   it('should log a message when the condition is true', async function () {
     await this.oneOverZero.exec(this.ctx);
     messageCollector.messages.length.should.equal(1);
-    messageCollector.messages[0].should.equal('Error: [DivideByZero] Cannot divide by zero in included (null)');
+    messageCollector.messages[0].should.equal(
+      'Error: [DivideByZero] Cannot divide by zero in included (null)'
+    );
   });
 });
 
