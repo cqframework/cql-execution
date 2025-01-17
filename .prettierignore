@@ -12,3 +12,4 @@ test/elm/external/Retrieve.js
 test/elm/library/Common.js
 test/elm/library/Common2.js
 test/elm/library/data-with-namespace.js
+test/elm/message/Included.js

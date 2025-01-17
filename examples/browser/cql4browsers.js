@@ -8275,13 +8275,13 @@ class PatientContext extends Context {
     }
     getLibraryContext(library) {
         if (this.library_context[library] == null) {
-            this.library_context[library] = new PatientContext(this.get(library), this.patient, this.codeService, this.parameters, this.executionDateTime);
+            this.library_context[library] = new PatientContext(this.get(library), this.patient, this.codeService, this.parameters, this.executionDateTime, this.messageListener);
         }
         return this.library_context[library];
     }
     getLocalIdContext(localId) {
         if (this.localId_context[localId] == null) {
-            this.localId_context[localId] = new PatientContext(this.get(localId), this.patient, this.codeService, this.parameters, this.executionDateTime);
+            this.localId_context[localId] = new PatientContext(this.get(localId), this.patient, this.codeService, this.parameters, this.executionDateTime, this.messageListener);
         }
         return this.localId_context[localId];
     }
