@@ -442,7 +442,8 @@ export class PatientContext extends Context {
         this.patient,
         this.codeService,
         this.parameters,
-        this.executionDateTime
+        this.executionDateTime,
+        this.messageListener
       );
     }
     return this.library_context[library];
@@ -455,7 +456,8 @@ export class PatientContext extends Context {
         this.patient,
         this.codeService,
         this.parameters,
-        this.executionDateTime
+        this.executionDateTime,
+        this.messageListener
       );
     }
     return this.localId_context[localId];
