@@ -13,7 +13,7 @@ import { ConsoleMessageListener, NullMessageListener } from './runtime/messageLi
 import { Patient, PatientSource } from './cql-patient';
 
 // TerminologyService-related classes
-import { CodeService } from './cql-code-service';
+import { CodeService, AdvancedCodeService } from './cql-code-service';
 
 // DataType classes
 import {
@@ -48,6 +48,7 @@ export {
   Patient,
   PatientSource,
   CodeService,
+  AdvancedCodeService,
   Code,
   CodeSystem,
   Concept,

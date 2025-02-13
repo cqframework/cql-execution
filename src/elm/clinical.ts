@@ -1,7 +1,7 @@
-import { Expression } from './expression';
+import {Expression} from './expression';
 import * as dt from '../datatypes/datatypes';
-import { Context } from '../runtime/context';
-import { build } from './builder';
+import {Context} from '../runtime/context';
+import {build} from './builder';
 
 export class ValueSetDef extends Expression {
   name: string;
@@ -14,6 +14,7 @@ export class ValueSetDef extends Expression {
     this.id = json.id;
     this.version = json.version;
   }
+
   //todo: code systems and versions
 
   async exec(ctx: Context) {
@@ -99,6 +100,33 @@ export class InValueSet extends Expression {
   }
 }
 
+
+export class ExpandValueSet extends Expression {
+  valueset: ValueSetRef;
+
+  constructor(json: any) {
+    super(json);
+    this.valueset = new ValueSetRef(json.operand);
+
+  }
+
+
+  async exec(ctx: Context) {
+
+    const valueset = await this.valueset.execute(ctx);
+    if (valueset == null || !valueset.isValueSet) {
+      throw new Error('ValueSet must be provided to ExpandValueSet function');
+    }
+
+    try {
+      const codes = (await ctx.codeService.expandValueSet(valueset.oid, valueset.version));
+      return codes;
+    } catch (typeError) {
+      throw new Error( typeError + '\t NOTE: An AdvancedTerminologyProvider (such as AdvancedCodeService) is needed to use expandValueSet function');
+    }
+  }
+}
+
 export class CodeSystemDef extends Expression {
   name: string;
   id: string;
@@ -115,6 +143,8 @@ export class CodeSystemDef extends Expression {
     return new dt.CodeSystem(this.id, this.version);
   }
 }
+
+
 
 export class CodeDef extends Expression {
   name: string;
@@ -272,6 +302,7 @@ export class CalculateAge extends Expression {
 
 export class CalculateAgeAt extends Expression {
   precision: string;
+
   constructor(json: any) {
     super(json);
     this.precision = json.precision;

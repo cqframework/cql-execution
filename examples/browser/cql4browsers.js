@@ -40,7 +40,7 @@ window.executeSimpleELM = async function (
 },{"../../lib/cql":4}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CodeService = void 0;
+exports.AdvancedCodeService = exports.CodeService = void 0;
 const datatypes_1 = require("./datatypes/datatypes");
 class CodeService {
     constructor(valueSetsJson = {}) {
@@ -79,6 +79,66 @@ class CodeService {
     }
 }
 exports.CodeService = CodeService;
+class AdvancedCodeService {
+    constructor(valueSetsJson = {}) {
+        this.valueSets = {};
+        for (const oid in valueSetsJson) {
+            this.valueSets[oid] = {};
+            for (const version in valueSetsJson[oid]) {
+                const codes = valueSetsJson[oid][version].map((code) => new datatypes_1.Code(code.code, code.system, code.version));
+                this.valueSets[oid][version] = new datatypes_1.ValueSet(oid, version, codes);
+            }
+        }
+    }
+    findValueSetsByOid(oid) {
+        return this.valueSets[oid] ? Object.values(this.valueSets[oid]) : [];
+    }
+    findValueSet(oid, version) {
+        if (version != null) {
+            return this.valueSets[oid] != null ? this.valueSets[oid][version] : null;
+        }
+        else {
+            const results = this.findValueSetsByOid(oid);
+            if (results.length === 0) {
+                return null;
+            }
+            else {
+                return results.reduce((a, b) => {
+                    if (a.version > b.version) {
+                        return a;
+                    }
+                    else {
+                        return b;
+                    }
+                });
+            }
+        }
+    }
+    expandValueSet(valueSet) {
+        const results = [];
+        valueSet.codes.forEach(code => {
+            if (!results.find(result => {
+                result === code;
+            })) {
+                results.push(code);
+            }
+        });
+        return results;
+    }
+    inValueSet(code, valueSet) {
+        throw new Error('This function is not implemented.');
+    }
+    expandCodeSystem(codeSystem) {
+        throw new Error('This function is not implemented.');
+    }
+    inCodeSystem(code, codeSystem) {
+        throw new Error('This function is not implemented.');
+    }
+    subsumes(subsuming, subsumed) {
+        throw new Error('This function is not implemented.');
+    }
+}
+exports.AdvancedCodeService = AdvancedCodeService;
 
 },{"./datatypes/datatypes":6}],3:[function(require,module,exports){
 "use strict";
@@ -3714,7 +3774,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CalculateAgeAt = exports.CalculateAge = exports.Concept = exports.ConceptRef = exports.ConceptDef = exports.Code = exports.CodeRef = exports.CodeDef = exports.CodeSystemDef = exports.InValueSet = exports.AnyInValueSet = exports.ValueSetRef = exports.ValueSetDef = void 0;
+exports.CalculateAgeAt = exports.CalculateAge = exports.Concept = exports.ConceptRef = exports.ConceptDef = exports.Code = exports.CodeRef = exports.CodeDef = exports.CodeSystemDef = exports.ExpandValueSet = exports.InValueSet = exports.AnyInValueSet = exports.ValueSetRef = exports.ValueSetDef = void 0;
 const expression_1 = require("./expression");
 const dt = __importStar(require("../datatypes/datatypes"));
 const builder_1 = require("./builder");
@@ -3795,6 +3855,20 @@ class InValueSet extends expression_1.Expression {
     }
 }
 exports.InValueSet = InValueSet;
+class ExpandValueSet extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.valueset = new ValueSetRef(json.operand);
+    }
+    async exec(ctx) {
+        const valueset = await this.valueset.execute(ctx);
+        if (valueset == null || !valueset.isValueSet) {
+            throw new Error('ValueSet must be provided to ExpandValueSet function');
+        }
+        console.log(ctx);
+    }
+}
+exports.ExpandValueSet = ExpandValueSet;
 class CodeSystemDef extends expression_1.Expression {
     constructor(json) {
         super(json);
@@ -4492,6 +4566,7 @@ __exportStar(require("./string"), exports);
 __exportStar(require("./structured"), exports);
 __exportStar(require("./type"), exports);
 __exportStar(require("./overloaded"), exports);
+// TODO Add advanced valueset operations here
 // Re-exporting interval functions as overrides to avoid ambiguity
 // https://stackoverflow.com/questions/41293108/how-to-do-re-export-with-overrides
 // TODO: we should improve this by perhaps renaming and reworking these functions
