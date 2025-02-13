@@ -1,4 +1,4 @@
-import {Code, Concept, ValueSet} from '../../src/datatypes/clinical';
+import { Code, Concept, ValueSet } from '../../src/datatypes/clinical';
 
 describe('Code', () => {
   let code: Code, code_no_version: Code, code_no_codesystem: Code;
@@ -177,16 +177,14 @@ describe('ValueSet', () => {
       new Code('GHI', '5.4.3.4.5', '3')
     ];
 
-
     received.length.should.be.equal(expected.length);
 
     for (let i = 0; i < received.length; i++) {
-      (expected[i].hasMatch(received[i])).should.be.true();
+      expected[i].hasMatch(received[i]).should.be.true();
     }
   });
 
   it('should  expand the valueset without duplicates', () => {
-
     const duplicatedValueSet = new ValueSet('1.2.3.4.5', '1', [
       new Code('ABC', '5.4.3.2.1', '1'),
       new Code('DEF', '5.4.3.2.1', '2'),
@@ -200,12 +198,10 @@ describe('ValueSet', () => {
       new Code('GHI', '5.4.3.4.5', '3')
     ];
 
-
     received.length.should.be.equal(expected.length);
 
     for (let i = 0; i < received.length; i++) {
-      (expected[i].hasMatch(received[i])).should.be.true();
+      expected[i].hasMatch(received[i]).should.be.true();
     }
   });
-
 });

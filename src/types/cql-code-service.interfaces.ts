@@ -1,4 +1,4 @@
-import { ValueSet} from '../datatypes/datatypes';
+import { ValueSet } from '../datatypes/datatypes';
 
 /*
  * Lookup of all codes used based on their ValueSet
@@ -29,8 +29,6 @@ export interface ValueSetObject {
 export interface TerminologyProvider {
   findValueSetsByOid: (oid: string) => ValueSet[] | Promise<ValueSet[]>;
   findValueSet: (oid: string, version?: string) => ValueSet | Promise<ValueSet> | null;
-
-
 }
 //
 // /**
@@ -46,4 +44,3 @@ export interface TerminologyProvider {
 //   // subsumes: (subsuming: Code | Concept, subsumed: Code | Concept) => boolean | Promise<boolean>;
 //
 // }
-

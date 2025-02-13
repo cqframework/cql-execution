@@ -1,4 +1,4 @@
-import {typeIsArray} from '../util/util';
+import { typeIsArray } from '../util/util';
 
 export class Code {
   constructor(
@@ -6,8 +6,7 @@ export class Code {
     public system?: string,
     public version?: string,
     public display?: string
-  ) {
-  }
+  ) {}
 
   get isCode() {
     return true;
@@ -85,7 +84,6 @@ export class ValueSet {
     }
   }
 
-
   /**
    * Expands the current set of codes by returning a list of unique `Code` objects.
    * This method filters out duplicate codes from the `codes` array, ensuring each
@@ -97,7 +95,12 @@ export class ValueSet {
     const expanded: Code[] = [];
     this.codes.forEach(code => {
       const foundUniqueCode = expanded.find(uniqueCode => {
-        return uniqueCode.code === code.code && uniqueCode.system == code.system && uniqueCode.version == code.version && uniqueCode.display == code.display;
+        return (
+          uniqueCode.code === code.code &&
+          uniqueCode.system == code.system &&
+          uniqueCode.version == code.version &&
+          uniqueCode.display == code.display
+        );
       });
       if (!foundUniqueCode) {
         expanded.push(code);
@@ -105,11 +108,8 @@ export class ValueSet {
     });
 
     return expanded;
-
-
   }
 }
-
 
 function toCodeList(c: any): any {
   if (c == null) {
@@ -148,6 +148,5 @@ function codesMatch(code1: Code, code2: Code) {
 }
 
 export class CodeSystem {
-  constructor(public id: string, public version?: string) {
-  }
+  constructor(public id: string, public version?: string) {}
 }

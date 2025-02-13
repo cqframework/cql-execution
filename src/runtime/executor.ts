@@ -1,9 +1,9 @@
-import {MessageListener, NullMessageListener} from './messageListeners';
-import {Results} from './results';
-import {UnfilteredContext, PatientContext} from './context';
-import {DateTime} from '../datatypes/datetime';
-import {Parameter} from '../types/runtime.types';
-import { DataProvider, TerminologyProvider} from '../types';
+import { MessageListener, NullMessageListener } from './messageListeners';
+import { Results } from './results';
+import { UnfilteredContext, PatientContext } from './context';
+import { DateTime } from '../datatypes/datetime';
+import { Parameter } from '../types/runtime.types';
+import { DataProvider, TerminologyProvider } from '../types';
 
 export class Executor {
   constructor(
@@ -11,8 +11,7 @@ export class Executor {
     public codeService?: TerminologyProvider,
     public parameters?: Parameter,
     public messageListener: MessageListener = new NullMessageListener()
-  ) {
-  }
+  ) {}
 
   withLibrary(lib: any) {
     this.library = lib;
@@ -24,7 +23,7 @@ export class Executor {
     return this;
   }
 
-  withCodeService(cs: TerminologyProvider ) {
+  withCodeService(cs: TerminologyProvider) {
     this.codeService = cs;
     return this;
   }
@@ -50,7 +49,7 @@ export class Executor {
           executionDateTime,
           this.messageListener
         );
-        r.recordPatientResults(patient_ctx, {[expression]: expr.execute(patient_ctx)});
+        r.recordPatientResults(patient_ctx, { [expression]: expr.execute(patient_ctx) });
         currentPatient = await patientSource.nextPatient();
       }
     }

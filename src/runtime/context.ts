@@ -1,10 +1,10 @@
 import * as dt from '../datatypes/datatypes';
-import {Exception} from '../datatypes/exception';
-import {Library} from '../elm/library';
-import {PatientObject, RetrieveDetails, TerminologyProvider} from '../types';
-import {Parameter} from '../types/runtime.types';
-import {typeIsArray} from '../util/util';
-import {MessageListener, NullMessageListener} from './messageListeners';
+import { Exception } from '../datatypes/exception';
+import { Library } from '../elm/library';
+import { PatientObject, RetrieveDetails, TerminologyProvider } from '../types';
+import { Parameter } from '../types/runtime.types';
+import { typeIsArray } from '../util/util';
+import { MessageListener, NullMessageListener } from './messageListeners';
 
 export class Context {
   // Public Constructor args
@@ -24,7 +24,7 @@ export class Context {
 
   constructor(
     parent: Context | Library,
-    _codeService?: TerminologyProvider ,
+    _codeService?: TerminologyProvider,
     _parameters?: Parameter,
     executionDateTime?: dt.DateTime,
     messageListener?: MessageListener
@@ -55,7 +55,7 @@ export class Context {
     return this._codeService || (this.parent && this.parent.codeService);
   }
 
-  set codeService(cs: TerminologyProvider ) {
+  set codeService(cs: TerminologyProvider) {
     this._codeService = cs;
   }
 
@@ -64,7 +64,7 @@ export class Context {
     return this;
   }
 
-  withCodeService(cs: TerminologyProvider ) {
+  withCodeService(cs: TerminologyProvider) {
     this.codeService = cs;
     return this;
   }

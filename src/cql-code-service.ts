@@ -1,5 +1,5 @@
-import {Code, ValueSet} from './datatypes/datatypes';
-import { TerminologyProvider, ValueSetDictionary, ValueSetObject} from './types';
+import { Code, ValueSet } from './datatypes/datatypes';
+import { TerminologyProvider, ValueSetDictionary, ValueSetObject } from './types';
 
 class CodeService implements TerminologyProvider {
   valueSets: ValueSetObject;
@@ -39,10 +39,7 @@ class CodeService implements TerminologyProvider {
       }
     }
   }
-
-
 }
-
 
 // class AdvancedCodeService implements AdvancedTerminologyProvider {
 //   valueSets: ValueSetObject;
@@ -143,5 +140,4 @@ class CodeService implements TerminologyProvider {
 //   }
 // }
 
-
-export {CodeService};
+export { CodeService };

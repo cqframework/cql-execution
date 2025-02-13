@@ -1,7 +1,7 @@
-import {Expression} from './expression';
+import { Expression } from './expression';
 import * as dt from '../datatypes/datatypes';
-import {Context} from '../runtime/context';
-import {build} from './builder';
+import { Context } from '../runtime/context';
+import { build } from './builder';
 
 export class ValueSetDef extends Expression {
   name: string;
@@ -97,11 +97,8 @@ export class InValueSet extends Expression {
     }
     // If there is a code and valueset return whether or not the valueset has the code
     return valueset.hasMatch(code);
-
-
   }
 }
-
 
 export class ExpandValueSet extends Expression {
   valueset: ValueSetRef;
@@ -109,12 +106,9 @@ export class ExpandValueSet extends Expression {
   constructor(json: any) {
     super(json);
     this.valueset = new ValueSetRef(json.operand);
-
   }
 
-
   async exec(ctx: Context) {
-
     const valueset = await this.valueset.execute(ctx);
     if (valueset == null || !valueset.isValueSet) {
       throw new Error('ValueSet must be provided to ExpandValueSet function');
@@ -140,7 +134,6 @@ export class CodeSystemDef extends Expression {
     return new dt.CodeSystem(this.id, this.version);
   }
 }
-
 
 export class CodeDef extends Expression {
   name: string;
