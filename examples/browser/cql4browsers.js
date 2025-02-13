@@ -40,7 +40,7 @@ window.executeSimpleELM = async function (
 },{"../../lib/cql":4}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AdvancedCodeService = exports.CodeService = void 0;
+exports.CodeService = void 0;
 const datatypes_1 = require("./datatypes/datatypes");
 class CodeService {
     constructor(valueSetsJson = {}) {
@@ -79,66 +79,6 @@ class CodeService {
     }
 }
 exports.CodeService = CodeService;
-class AdvancedCodeService {
-    constructor(valueSetsJson = {}) {
-        this.valueSets = {};
-        for (const oid in valueSetsJson) {
-            this.valueSets[oid] = {};
-            for (const version in valueSetsJson[oid]) {
-                const codes = valueSetsJson[oid][version].map((code) => new datatypes_1.Code(code.code, code.system, code.version));
-                this.valueSets[oid][version] = new datatypes_1.ValueSet(oid, version, codes);
-            }
-        }
-    }
-    findValueSetsByOid(oid) {
-        return this.valueSets[oid] ? Object.values(this.valueSets[oid]) : [];
-    }
-    findValueSet(oid, version) {
-        if (version != null) {
-            return this.valueSets[oid] != null ? this.valueSets[oid][version] : null;
-        }
-        else {
-            const results = this.findValueSetsByOid(oid);
-            if (results.length === 0) {
-                return null;
-            }
-            else {
-                return results.reduce((a, b) => {
-                    if (a.version > b.version) {
-                        return a;
-                    }
-                    else {
-                        return b;
-                    }
-                });
-            }
-        }
-    }
-    expandValueSet(valueSet) {
-        const results = [];
-        valueSet.codes.forEach(code => {
-            if (!results.find(result => {
-                result === code;
-            })) {
-                results.push(code);
-            }
-        });
-        return results;
-    }
-    inValueSet(code, valueSet) {
-        throw new Error('This function is not implemented.');
-    }
-    expandCodeSystem(codeSystem) {
-        throw new Error('This function is not implemented.');
-    }
-    inCodeSystem(code, codeSystem) {
-        throw new Error('This function is not implemented.');
-    }
-    subsumes(subsuming, subsumed) {
-        throw new Error('This function is not implemented.');
-    }
-}
-exports.AdvancedCodeService = AdvancedCodeService;
 
 },{"./datatypes/datatypes":6}],3:[function(require,module,exports){
 "use strict";
@@ -424,6 +364,19 @@ class ValueSet {
     get isValueSet() {
         return true;
     }
+    /**
+     * Determines if the provided code matches any code in the current set.
+     * If the input is a single string, it checks for a direct match with the
+     * codes in the set, ensuring all code systems are consistent. Throws an
+     * error if multiple code systems exist and a match is found, indicating
+     * ambiguity. For other inputs, it checks for any matching codes using
+     * the `codesInList` function. Used for the `code in valueset` operation.
+     *
+     * @param code - The code to be checked for a match, which can be a string
+     *               or an object containing codes.
+     * @returns {boolean} True if a match is found, otherwise false.
+     * @throws {Error} If a match is found with multiple code systems present.
+     */
     hasMatch(code) {
         const codesList = toCodeList(code);
         // InValueSet String Overload
@@ -447,6 +400,17 @@ class ValueSet {
         else {
             return codesInList(codesList, this.codes);
         }
+    }
+    /**
+     * Expands the current set of codes by returning a list of unique `Code` objects.
+     * This method filters out duplicate codes from the `codes` array, ensuring each
+     * code appears only once in the returned list. Use for the ExpandValueset operator
+     *
+     * @returns {Code[]} An array of unique `Code` objects.
+     */
+    expand() {
+        const results = this.codes.map(code => code).filter((val, index, arr) => arr.indexOf(val) == index);
+        return results;
     }
 }
 exports.ValueSet = ValueSet;
@@ -3865,7 +3829,7 @@ class ExpandValueSet extends expression_1.Expression {
         if (valueset == null || !valueset.isValueSet) {
             throw new Error('ValueSet must be provided to ExpandValueSet function');
         }
-        console.log(ctx);
+        return valueset.expand();
     }
 }
 exports.ExpandValueSet = ExpandValueSet;
@@ -8574,6 +8538,20 @@ exports.Results = Results;
 },{}],47:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+//
+// /**
+//  * Interface extending TerminologyProvider to include advanced terminology operations such as expanding valuesets and codesystems
+//  */
+//
+// export interface AdvancedTerminologyProvider extends TerminologyProvider {
+//   inValueSet: (code: Code | Code[], oid: string, version?: string) => boolean | Promise<boolean>;
+//   anyInValueSet: (code: Code | Code[], oid: string, version?: string) => boolean | Promise<boolean>;
+//   expandValueSet: ( oid: string, version?: string) => Code[] | Promise<Code[]>;
+//   inCodeSystem: (code: Code | Code[], codeSystem: CodeSystem) => boolean | Promise<boolean>;
+//   // expandCodeSystem: (codeSystem: CodeSystem) => Code[] | Promise<Code[]>;
+//   // subsumes: (subsuming: Code | Concept, subsumed: Code | Concept) => boolean | Promise<boolean>;
+//
+// }
 
 },{}],48:[function(require,module,exports){
 "use strict";

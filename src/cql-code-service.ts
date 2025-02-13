@@ -1,4 +1,4 @@
-import {Code, CodeSystem, ValueSet, Concept} from './datatypes/datatypes';
+import {Code, ValueSet} from './datatypes/datatypes';
 import { TerminologyProvider, ValueSetDictionary, ValueSetObject} from './types';
 
 class CodeService implements TerminologyProvider {
