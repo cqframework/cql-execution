@@ -412,7 +412,10 @@ class ValueSet {
         const expanded = [];
         this.codes.forEach(code => {
             const foundUniqueCode = expanded.find(uniqueCode => {
-                return uniqueCode.code === code.code && uniqueCode.system == code.system && uniqueCode.version == code.version && uniqueCode.display == code.display;
+                return (uniqueCode.code === code.code &&
+                    uniqueCode.system == code.system &&
+                    uniqueCode.version == code.version &&
+                    uniqueCode.display == code.display);
             });
             if (!foundUniqueCode) {
                 expanded.push(code);
