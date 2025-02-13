@@ -1,4 +1,4 @@
-import { typeIsArray } from '../util/util';
+import {typeIsArray} from '../util/util';
 
 export class Code {
   constructor(
@@ -6,7 +6,8 @@ export class Code {
     public system?: string,
     public version?: string,
     public display?: string
-  ) {}
+  ) {
+  }
 
   get isCode() {
     return true;
@@ -45,6 +46,19 @@ export class ValueSet {
     return true;
   }
 
+  /**
+   * Determines if the provided code matches any code in the current set.
+   * If the input is a single string, it checks for a direct match with the
+   * codes in the set, ensuring all code systems are consistent. Throws an
+   * error if multiple code systems exist and a match is found, indicating
+   * ambiguity. For other inputs, it checks for any matching codes using
+   * the `codesInList` function. Used for the `code in valueset` operation.
+   *
+   * @param code - The code to be checked for a match, which can be a string
+   *               or an object containing codes.
+   * @returns {boolean} True if a match is found, otherwise false.
+   * @throws {Error} If a match is found with multiple code systems present.
+   */
   hasMatch(code: any) {
     const codesList = toCodeList(code);
     // InValueSet String Overload
@@ -70,8 +84,22 @@ export class ValueSet {
       return codesInList(codesList, this.codes);
     }
   }
-}
 
+
+  /**
+   * Expands the current set of codes by returning a list of unique `Code` objects.
+   * This method filters out duplicate codes from the `codes` array, ensuring each
+   * code appears only once in the returned list. Use for the ExpandValueset operator
+   *
+   * @returns {Code[]} An array of unique `Code` objects.
+   */
+  expand() {
+    const results: Code[] = this.codes.map(code => code).filter((val, index, arr) =>
+      arr.indexOf(val) == index);
+    return results;
+
+  }
+}
 
 
 function toCodeList(c: any): any {
@@ -111,5 +139,6 @@ function codesMatch(code1: Code, code2: Code) {
 }
 
 export class CodeSystem {
-  constructor(public id: string, public version?: string) {}
+  constructor(public id: string, public version?: string) {
+  }
 }

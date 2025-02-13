@@ -97,6 +97,8 @@ export class InValueSet extends Expression {
     }
     // If there is a code and valueset return whether or not the valueset has the code
     return valueset.hasMatch(code);
+
+
   }
 }
 
@@ -118,12 +120,7 @@ export class ExpandValueSet extends Expression {
       throw new Error('ValueSet must be provided to ExpandValueSet function');
     }
 
-    try {
-      const codes = (await ctx.codeService.expandValueSet(valueset.oid, valueset.version));
-      return codes;
-    } catch (typeError) {
-      throw new Error( typeError + '\t NOTE: An AdvancedTerminologyProvider (such as AdvancedCodeService) is needed to use expandValueSet function');
-    }
+    return valueset.expand();
   }
 }
 
@@ -143,7 +140,6 @@ export class CodeSystemDef extends Expression {
     return new dt.CodeSystem(this.id, this.version);
   }
 }
-
 
 
 export class CodeDef extends Expression {

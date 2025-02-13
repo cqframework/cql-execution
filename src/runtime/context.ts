@@ -1,7 +1,7 @@
 import * as dt from '../datatypes/datatypes';
 import {Exception} from '../datatypes/exception';
 import {Library} from '../elm/library';
-import {AdvancedTerminologyProvider, PatientObject, RetrieveDetails, TerminologyProvider} from '../types';
+import {PatientObject, RetrieveDetails, TerminologyProvider} from '../types';
 import {Parameter} from '../types/runtime.types';
 import {typeIsArray} from '../util/util';
 import {MessageListener, NullMessageListener} from './messageListeners';
@@ -13,7 +13,7 @@ export class Context {
   messageListener?: MessageListener;
 
   // Private Constructor args
-  private _codeService?: TerminologyProvider | AdvancedTerminologyProvider ;
+  private _codeService?: TerminologyProvider;
   private _parameters?: Parameter;
 
   // Auto-initialized properties
@@ -24,7 +24,7 @@ export class Context {
 
   constructor(
     parent: Context | Library,
-    _codeService?: TerminologyProvider | AdvancedTerminologyProvider ,
+    _codeService?: TerminologyProvider ,
     _parameters?: Parameter,
     executionDateTime?: dt.DateTime,
     messageListener?: MessageListener
@@ -51,11 +51,11 @@ export class Context {
     this._parameters = params;
   }
 
-  get codeService(): AdvancedTerminologyProvider {
+  get codeService(): TerminologyProvider {
     return this._codeService || (this.parent && this.parent.codeService);
   }
 
-  set codeService(cs: TerminologyProvider | AdvancedTerminologyProvider) {
+  set codeService(cs: TerminologyProvider ) {
     this._codeService = cs;
   }
 
@@ -64,7 +64,7 @@ export class Context {
     return this;
   }
 
-  withCodeService(cs: TerminologyProvider | AdvancedTerminologyProvider ) {
+  withCodeService(cs: TerminologyProvider ) {
     this.codeService = cs;
     return this;
   }
@@ -423,7 +423,7 @@ export class PatientContext extends Context {
   constructor(
     public library: Library,
     public patient?: PatientObject | null,
-    codeService?: TerminologyProvider | AdvancedTerminologyProvider,
+    codeService?: TerminologyProvider,
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
     messageListener: MessageListener = new NullMessageListener()
@@ -472,7 +472,7 @@ export class UnfilteredContext extends Context {
   constructor(
     public library: Library,
     public results: any,
-    codeService?: TerminologyProvider | AdvancedTerminologyProvider,
+    codeService?: TerminologyProvider,
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
     messageListener: MessageListener = new NullMessageListener()
