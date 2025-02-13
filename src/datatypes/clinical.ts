@@ -94,9 +94,18 @@ export class ValueSet {
    * @returns {Code[]} An array of unique `Code` objects.
    */
   expand() {
-    const results: Code[] = this.codes.map(code => code).filter((val, index, arr) =>
-      arr.indexOf(val) == index);
-    return results;
+    const expanded: Code[] = [];
+    this.codes.forEach(code => {
+      const foundUniqueCode = expanded.find(uniqueCode => {
+        return uniqueCode.code === code.code && uniqueCode.system == code.system && uniqueCode.version == code.version && uniqueCode.display == code.display;
+      });
+      if (!foundUniqueCode) {
+        expanded.push(code);
+      }
+    });
+
+    return expanded;
+
 
   }
 }
