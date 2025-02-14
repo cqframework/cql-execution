@@ -412,6 +412,9 @@ class ValueSet {
         const expanded = [];
         this.codes.forEach(code => {
             const foundUniqueCode = expanded.find(uniqueCode => {
+                if (uniqueCode == null || code == null) {
+                    return true;
+                }
                 return (uniqueCode.code === code.code &&
                     uniqueCode.system == code.system &&
                     uniqueCode.version == code.version &&
@@ -8549,20 +8552,6 @@ exports.Results = Results;
 },{}],47:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//
-// /**
-//  * Interface extending TerminologyProvider to include advanced terminology operations such as expanding valuesets and codesystems
-//  */
-//
-// export interface AdvancedTerminologyProvider extends TerminologyProvider {
-//   inValueSet: (code: Code | Code[], oid: string, version?: string) => boolean | Promise<boolean>;
-//   anyInValueSet: (code: Code | Code[], oid: string, version?: string) => boolean | Promise<boolean>;
-//   expandValueSet: ( oid: string, version?: string) => Code[] | Promise<Code[]>;
-//   inCodeSystem: (code: Code | Code[], codeSystem: CodeSystem) => boolean | Promise<boolean>;
-//   // expandCodeSystem: (codeSystem: CodeSystem) => Code[] | Promise<Code[]>;
-//   // subsumes: (subsuming: Code | Concept, subsumed: Code | Concept) => boolean | Promise<boolean>;
-//
-// }
 
 },{}],48:[function(require,module,exports){
 "use strict";

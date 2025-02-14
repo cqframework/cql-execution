@@ -204,4 +204,25 @@ describe('ValueSet', () => {
       expected[i].hasMatch(received[i]).should.be.true();
     }
   });
+
+  it('should  expand the valueset without undefined', () => {
+    const duplicatedValueSet = new ValueSet('1.2.3.4.5', '1', [
+      new Code('ABC', '5.4.3.2.1', '1'),
+      new Code('DEF', '5.4.3.2.1', '2'),
+      new Code('GHI', '5.4.3.4.5', '3'),
+      null
+    ]);
+    const received: Code[] = duplicatedValueSet.expand();
+    const expected: Code[] = [
+      new Code('ABC', '5.4.3.2.1', '1'),
+      new Code('DEF', '5.4.3.2.1', '2'),
+      new Code('GHI', '5.4.3.4.5', '3')
+    ];
+
+    received.length.should.be.equal(expected.length);
+
+    for (let i = 0; i < received.length; i++) {
+      expected[i].hasMatch(received[i]).should.be.true();
+    }
+  });
 });

@@ -95,6 +95,9 @@ export class ValueSet {
     const expanded: Code[] = [];
     this.codes.forEach(code => {
       const foundUniqueCode = expanded.find(uniqueCode => {
+        if (uniqueCode == null || code == null) {
+          return true;
+        }
         return (
           uniqueCode.code === code.code &&
           uniqueCode.system == code.system &&
