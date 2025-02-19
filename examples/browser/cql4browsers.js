@@ -6811,21 +6811,50 @@ class FunctionRef extends expression_1.Expression {
         super(json);
         this.name = json.name;
         this.library = json.libraryName;
+        this.functionDefs = null;
     }
     async exec(ctx) {
-        let functionDefs, child_ctx;
+        const args = await this.execArgs(ctx);
+        // Filter out functions w/ wrong number of arguments.
+        const fDefs = this.getFunctionDefs(ctx, args);
+        // If there is still > 1 matching function, calculate a score based on quality of matches
+        if (fDefs.length > 1) {
+            // TODO
+        }
+        if (fDefs.length === 0) {
+            throw new Error('no function with matching signature could be found');
+        }
+        // Moved context creation below the functionDef checks because it's not needed if
+        // there are no matching function defs
+        let child_ctx;
         if (this.library) {
-            const lib = ctx.get(this.library);
-            functionDefs = lib ? lib.getFunction(this.name) : undefined;
             const libCtx = ctx.getLibraryContext(this.library);
             child_ctx = libCtx ? libCtx.childContext() : undefined;
         }
         else {
-            functionDefs = ctx.get(this.name);
             child_ctx = ctx.childContext();
         }
-        const args = await this.execArgs(ctx);
-        // Filter out functions w/ wrong number of arguments.
+        // By this point, we should have only one function, but until implementation is completed,
+        // use the last one (no matter how many still remain)
+        const functionDef = fDefs[fDefs.length - 1];
+        for (let i = 0; i < functionDef.parameters.length; i++) {
+            child_ctx.set(functionDef.parameters[i].name, args[i]);
+        }
+        return functionDef.expression.execute(child_ctx);
+    }
+    getFunctionDefs(ctx, args) {
+        if (this.functionDefs != null) {
+            // cache hit
+            return this.functionDefs;
+        }
+        let functionDefs;
+        if (this.library) {
+            const lib = ctx.get(this.library);
+            functionDefs = lib ? lib.getFunction(this.name) : undefined;
+        }
+        else {
+            functionDefs = ctx.get(this.name);
+        }
         functionDefs = functionDefs.filter((f) => f.parameters.length === args.length);
         // If there is still > 1 matching function, filter by argument types
         if (functionDefs.length > 1) {
@@ -6847,20 +6876,8 @@ class FunctionRef extends expression_1.Expression {
                 return match;
             });
         }
-        // If there is still > 1 matching function, calculate a score based on quality of matches
-        if (functionDefs.length > 1) {
-            // TODO
-        }
-        if (functionDefs.length === 0) {
-            throw new Error('no function with matching signature could be found');
-        }
-        // By this point, we should have only one function, but until implementation is completed,
-        // use the last one (no matter how many still remain)
-        const functionDef = functionDefs[functionDefs.length - 1];
-        for (let i = 0; i < functionDef.parameters.length; i++) {
-            child_ctx.set(functionDef.parameters[i].name, args[i]);
-        }
-        return functionDef.expression.execute(child_ctx);
+        this.functionDefs = functionDefs;
+        return functionDefs;
     }
 }
 exports.FunctionRef = FunctionRef;
