@@ -4544,7 +4544,6 @@ __exportStar(require("./string"), exports);
 __exportStar(require("./structured"), exports);
 __exportStar(require("./type"), exports);
 __exportStar(require("./overloaded"), exports);
-// TODO Add advanced valueset operations here
 // Re-exporting interval functions as overrides to avoid ambiguity
 // https://stackoverflow.com/questions/41293108/how-to-do-re-export-with-overrides
 // TODO: we should improve this by perhaps renaming and reworking these functions

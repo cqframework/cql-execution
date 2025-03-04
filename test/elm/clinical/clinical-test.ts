@@ -7,7 +7,7 @@ import { Uncertainty } from '../../../src/datatypes/uncertainty';
 
 const { p1, p2, p3, p4, p5, p6, p7 } = require('./patients');
 import { PatientSource } from '../../../src/cql-patient';
-import { Code } from '../../../lib/datatypes/clinical';
+import { Code } from '../../../src/datatypes/clinical';
 
 const data = require('./data');
 
@@ -169,12 +169,7 @@ describe('ExpandValueset', () => {
   it('expand valueset', async function () {
     const received: any = await this.expandFemale.exec(this.ctx);
     const expected: Code[] = [new Code('F', '2.16.840.1.113883.18.2', 'HL7V2.5', undefined)];
-    (received.length == expected.length).should.true();
-    (received[0] != null).should.true();
-    (received[0].code === expected[0].code).should.true();
-    (received[0].system === expected[0].system).should.true();
-    (received[0].version === expected[0].version).should.true();
-    (received[0].display === expected[0].display).should.true();
+    received.should.eql(expected);
   });
 
   it('expand null', async function () {
@@ -191,15 +186,7 @@ describe('ExpandValueset', () => {
       new Code('270427003', '2.16.840.1.113883.6.96', '2013-09', undefined),
       new Code('406547006', '2.16.840.1.113883.6.96', '2013-09', undefined)
     ];
-    (received.length == expected.length).should.true();
-
-    for (let i = 0; i < received.length; i++) {
-      (received[i] != null).should.true();
-      (received[i].code === expected[i].code).should.true();
-      (received[i].system === expected[i].system).should.true();
-      (received[i].version === expected[i].version).should.true();
-      (received[i].display === expected[i].display).should.true();
-    }
+    received.should.eql(expected);
   });
 });
 
