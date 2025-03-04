@@ -49,7 +49,7 @@ export class Executor {
           executionDateTime,
           this.messageListener
         );
-        r.recordPatientResults(patient_ctx, { [expression]: expr.execute(patient_ctx) });
+        r.recordPatientResults(patient_ctx, { [expression]: await expr.execute(patient_ctx) });
         currentPatient = await patientSource.nextPatient();
       }
     }
