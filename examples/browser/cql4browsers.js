@@ -8361,7 +8361,7 @@ class Executor {
             let currentPatient = await patientSource.currentPatient();
             while (currentPatient) {
                 const patient_ctx = new context_1.PatientContext(this.library, currentPatient, this.codeService, this.parameters, executionDateTime, this.messageListener);
-                r.recordPatientResults(patient_ctx, { [expression]: expr.execute(patient_ctx) });
+                r.recordPatientResults(patient_ctx, { [expression]: await expr.execute(patient_ctx) });
                 currentPatient = await patientSource.nextPatient();
             }
         }
