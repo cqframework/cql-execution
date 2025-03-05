@@ -2510,6 +2510,298 @@ module.exports['InValueSet'] = {
    }
 }
 
+/* ExpandValueset
+library TestSnippet version '1'
+using Simple version '1.0.0'
+valueset "Female": '2.16.840.1.113883.3.560.100.2'
+valueset "Known": '2.16.840.1.113883.3.464.1003.101.12.1061'
+context Patient
+
+define ExpandFemale: ExpandValueSet("Female")
+define ExpandKnown: ExpandValueSet("Known")
+define ExpandNull: ExpandValueSet(null)
+define InvokeExpandWithUnion: "Female" union  "Known"
+*/
+
+module.exports['ExpandValueset'] = {
+   "library" : {
+      "localId" : "0",
+      "annotation" : [ {
+         "translatorVersion" : "3.12.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "234",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localId" : "1",
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "206",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "206",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version '1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "localId" : "207",
+            "name" : "Female",
+            "id" : "2.16.840.1.113883.3.560.100.2",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "207",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Female\"",": ","'2.16.840.1.113883.3.560.100.2'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : [ ]
+         }, {
+            "localId" : "208",
+            "name" : "Known",
+            "id" : "2.16.840.1.113883.3.464.1003.101.12.1061",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "208",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Known\"",": ","'2.16.840.1.113883.3.464.1003.101.12.1061'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : [ ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "localId" : "212",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "localId" : "210",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "localId" : "211",
+               "type" : "SingletonFrom",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "209",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         }, {
+            "localId" : "214",
+            "name" : "ExpandFemale",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "214",
+                  "s" : [ {
+                     "value" : [ "","define ","ExpandFemale",": " ]
+                  }, {
+                     "r" : "218",
+                     "s" : [ {
+                        "value" : [ "ExpandValueSet","(" ]
+                     }, {
+                        "r" : "215",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "218",
+               "type" : "ExpandValueSet",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "215",
+                  "name" : "Female",
+                  "preserve" : true,
+                  "type" : "ValueSetRef"
+               }
+            }
+         }, {
+            "localId" : "220",
+            "name" : "ExpandKnown",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "220",
+                  "s" : [ {
+                     "value" : [ "","define ","ExpandKnown",": " ]
+                  }, {
+                     "r" : "224",
+                     "s" : [ {
+                        "value" : [ "ExpandValueSet","(" ]
+                     }, {
+                        "r" : "221",
+                        "s" : [ {
+                           "value" : [ "\"Known\"" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "224",
+               "type" : "ExpandValueSet",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "221",
+                  "name" : "Known",
+                  "preserve" : true,
+                  "type" : "ValueSetRef"
+               }
+            }
+         }, {
+            "localId" : "226",
+            "name" : "ExpandNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "226",
+                  "s" : [ {
+                     "value" : [ "","define ","ExpandNull",": " ]
+                  }, {
+                     "r" : "231",
+                     "s" : [ {
+                        "r" : "227",
+                        "value" : [ "ExpandValueSet","(","null",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "231",
+               "type" : "ExpandValueSet",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "232",
+                  "asType" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "As",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "227",
+                     "type" : "Null"
+                  }
+               }
+            }
+         }, {
+            "localId" : "234",
+            "name" : "InvokeExpandWithUnion",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "234",
+                  "s" : [ {
+                     "value" : [ "","define ","InvokeExpandWithUnion",": " ]
+                  }, {
+                     "r" : "237",
+                     "s" : [ {
+                        "r" : "235",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     }, {
+                        "value" : [ " union  " ]
+                     }, {
+                        "r" : "236",
+                        "s" : [ {
+                           "value" : [ "\"Known\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "237",
+               "type" : "Union",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "239",
+                  "type" : "ExpandValueSet",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "235",
+                     "name" : "Female",
+                     "preserve" : true,
+                     "type" : "ValueSetRef"
+                  }
+               }, {
+                  "localId" : "241",
+                  "type" : "ExpandValueSet",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "236",
+                     "name" : "Known",
+                     "preserve" : true,
+                     "type" : "ValueSetRef"
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
 /* Patient Property In ValueSet
 library TestSnippet version '1'
 using Simple version '1.0.0'
