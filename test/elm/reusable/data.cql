@@ -62,3 +62,15 @@ define fluent function add(a System.Integer, b System.Integer) :
 
 define testValue1: 'World'.greet()
 define testValue2: 1.add(2)
+
+// @Test: FluentFunctionsOverloadCallingSelf
+define fluent function add(nums List<System.Integer>, num System.Integer) :
+  nums n
+    return n.add(num)
+
+define fluent function add(a System.Integer, b System.Integer) :
+  a + b
+
+define testValue1: ({1, 2, 3, 4}).add(1)
+define testValue2: ({51, 27, 12, 2}).add(2)
+define testValue3: 1.add(2)
