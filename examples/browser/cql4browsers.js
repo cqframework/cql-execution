@@ -3841,7 +3841,7 @@ class ExpandValueSet extends expression_1.Expression {
     async exec(ctx) {
         const valueset = await this.valueset.execute(ctx);
         if (valueset == null || !valueset.isValueSet) {
-            throw new Error('ValueSet must be provided to ExpandValueSet function');
+            return null;
         }
         return valueset.expand();
     }

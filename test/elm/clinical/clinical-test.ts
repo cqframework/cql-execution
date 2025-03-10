@@ -173,9 +173,7 @@ describe('ExpandValueset', () => {
   });
 
   it('expand null', async function () {
-    this.expandNull
-      .exec(this.ctx)
-      .should.be.rejectedWith('ValueSet must be provided to ExpandValueSet function');
+    should(await this.expandNull.exec(this.ctx)).be.null();
   });
 
   it('invoke expandValueSet with union', async function () {
