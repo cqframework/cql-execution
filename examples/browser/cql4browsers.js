@@ -4490,10 +4490,15 @@ class Expression {
     }
     async execArgs(ctx) {
         if (this.args != null) {
-            return Promise.all(this.args.map(async (arg) => arg.execute(ctx)));
+            const retVals = [];
+            for (let index = 0; index < this.args.length; index++) {
+                const arg = this.args[index];
+                retVals.push(await arg.execute(ctx));
+            }
+            return retVals;
         }
         else if (this.arg != null) {
-            return this.arg.execute(ctx);
+            return await this.arg.execute(ctx);
         }
         else {
             return null;
