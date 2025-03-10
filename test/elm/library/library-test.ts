@@ -213,3 +213,41 @@ describe('Using CommonLib and CommonLib2 with namespace support', () => {
     should.exist(this.common2LocalIdObject[sortUsingFunctionLocalId]);
   });
 });
+
+describe('CommonLib3', () => {
+  beforeEach(function () {
+    setup(this, data, [p1, p2], {}, {}, new Repository(data));
+  });
+  it('should be able to execute an expensive expression', async function () {
+    const startTime = Date.now();    
+    this.results = await this.executor
+      .withLibrary(this.lib)
+      .exec_patient_context(this.patientSource);
+    const endTime = Date.now();
+    const executionTime = endTime - startTime;
+    executionTime.should.be.lessThan(250);
+    this.results.patientResults['1'].ExpensiveStatementRef.length.should.equal(1);
+  });  
+});
+
+describe('Using CommonLib3', () => {
+  beforeEach(function () {
+    setup(this, data, [p1, p2], {}, {}, new Repository(data));
+  });
+
+  it('should execute expression from included library at similar cost', async function () {
+    const startTime = Date.now();    
+    this.results = await this.executor
+      .withLibrary(this.lib)
+      .exec_patient_context(this.patientSource);
+    const endTime = Date.now();
+    const executionTime = endTime - startTime;
+    executionTime.should.be.lessThan(1000);
+    this.results.patientResults['1'].ExpensiveStatementRef.length.should.equal(1);
+  });
+
+  it('should execute expression directly from included library at similar cost', async function () {
+    (await this.expensiveStatementRef.exec(this.ctx)).length.should.equal(1);
+  });
+
+});
