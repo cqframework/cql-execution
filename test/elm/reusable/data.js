@@ -2268,3 +2268,496 @@ module.exports['FluentFunctions'] = {
    }
 }
 
+/* FluentFunctionsOverloadCallingSelf
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define fluent function add(nums List<System.Integer>, num System.Integer) :
+  nums n
+    return n.add(num)
+
+define fluent function add(a System.Integer, b System.Integer) :
+  a + b
+
+define testValue1: ({1, 2, 3, 4}).add(1)
+define testValue2: ({51, 27, 12, 2}).add(2)
+define testValue3: 1.add(2)
+*/
+
+module.exports['FluentFunctionsOverloadCallingSelf'] = {
+   "library" : {
+      "localId" : "0",
+      "annotation" : [ {
+         "translatorVersion" : "3.12.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+         "signatureLevel" : "None",
+         "type" : "CqlToElmInfo"
+      }, {
+         "message" : "The function TestSnippet.add has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "message" : "The function TestSnippet.add has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "message" : "The function TestSnippet.add has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "message" : "The function TestSnippet.add has multiple overloads and due to the SignatureLevel setting (None), the overload signature is not being included in the output. This may result in ambiguous function resolution at runtime, consider setting the SignatureLevel to Overloads or All to ensure that the output includes sufficient information to support correct overload selection at runtime.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "254",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localId" : "1",
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "206",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "206",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version '1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "localId" : "210",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "localId" : "208",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "localId" : "209",
+               "type" : "SingletonFrom",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "207",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         }, {
+            "localId" : "211",
+            "name" : "add",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "fluent" : true,
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "211",
+                  "s" : [ {
+                     "value" : [ "","define fluent function add(nums List<System.Integer>, num System.Integer) :\n  " ]
+                  }, {
+                     "r" : "231",
+                     "s" : [ {
+                        "r" : "231",
+                        "s" : [ {
+                           "s" : [ {
+                              "r" : "217",
+                              "s" : [ {
+                                 "r" : "218",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "value" : [ "nums" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","n" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n    " ]
+                        }, {
+                           "r" : "219",
+                           "s" : [ {
+                              "value" : [ "return " ]
+                           }, {
+                              "r" : "227",
+                              "s" : [ {
+                                 "r" : "220",
+                                 "s" : [ {
+                                    "value" : [ "n" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "227",
+                                 "s" : [ {
+                                    "value" : [ "add","(" ]
+                                 }, {
+                                    "r" : "221",
+                                    "s" : [ {
+                                       "value" : [ "num" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ")" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "231",
+               "type" : "Query",
+               "source" : [ {
+                  "localId" : "217",
+                  "alias" : "n",
+                  "expression" : {
+                     "localId" : "218",
+                     "name" : "nums",
+                     "type" : "OperandRef"
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "219",
+                  "expression" : {
+                     "localId" : "227",
+                     "name" : "add",
+                     "type" : "FunctionRef",
+                     "signature" : [ ],
+                     "operand" : [ {
+                        "localId" : "220",
+                        "name" : "n",
+                        "type" : "AliasRef"
+                     }, {
+                        "localId" : "221",
+                        "name" : "num",
+                        "type" : "OperandRef"
+                     } ]
+                  }
+               }
+            },
+            "operand" : [ {
+               "localId" : "214",
+               "name" : "nums",
+               "operandTypeSpecifier" : {
+                  "localId" : "212",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "213",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }, {
+               "localId" : "216",
+               "name" : "num",
+               "operandTypeSpecifier" : {
+                  "localId" : "215",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "222",
+            "name" : "add",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "fluent" : true,
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "222",
+                  "s" : [ {
+                     "value" : [ "","define fluent function add(a System.Integer, b System.Integer) :\n  " ]
+                  }, {
+                     "r" : "232",
+                     "s" : [ {
+                        "r" : "232",
+                        "s" : [ {
+                           "r" : "233",
+                           "s" : [ {
+                              "value" : [ "a" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "234",
+                           "s" : [ {
+                              "value" : [ "b" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "232",
+               "type" : "Add",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "233",
+                  "name" : "a",
+                  "type" : "OperandRef"
+               }, {
+                  "localId" : "234",
+                  "name" : "b",
+                  "type" : "OperandRef"
+               } ]
+            },
+            "operand" : [ {
+               "localId" : "224",
+               "name" : "a",
+               "operandTypeSpecifier" : {
+                  "localId" : "223",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }, {
+               "localId" : "226",
+               "name" : "b",
+               "operandTypeSpecifier" : {
+                  "localId" : "225",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "236",
+            "name" : "testValue1",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "236",
+                  "s" : [ {
+                     "value" : [ "","define ","testValue1",": " ]
+                  }, {
+                     "r" : "243",
+                     "s" : [ {
+                        "r" : "237",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "237",
+                           "s" : [ {
+                              "r" : "238",
+                              "value" : [ "{","1",", ","2",", ","3",", ","4","}" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "243",
+                        "s" : [ {
+                           "r" : "242",
+                           "value" : [ "add","(","1",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "243",
+               "name" : "add",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "237",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "238",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "239",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "240",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "241",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  } ]
+               }, {
+                  "localId" : "242",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "245",
+            "name" : "testValue2",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "245",
+                  "s" : [ {
+                     "value" : [ "","define ","testValue2",": " ]
+                  }, {
+                     "r" : "252",
+                     "s" : [ {
+                        "r" : "246",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "246",
+                           "s" : [ {
+                              "r" : "247",
+                              "value" : [ "{","51",", ","27",", ","12",", ","2","}" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "252",
+                        "s" : [ {
+                           "r" : "251",
+                           "value" : [ "add","(","2",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "252",
+               "name" : "add",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "246",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "247",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "51",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "248",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "27",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "249",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "12",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "250",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  } ]
+               }, {
+                  "localId" : "251",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "254",
+            "name" : "testValue3",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "254",
+                  "s" : [ {
+                     "value" : [ "","define ","testValue3",": " ]
+                  }, {
+                     "r" : "257",
+                     "s" : [ {
+                        "r" : "255",
+                        "value" : [ "1","." ]
+                     }, {
+                        "r" : "257",
+                        "s" : [ {
+                           "r" : "256",
+                           "value" : [ "add","(","2",")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "257",
+               "name" : "add",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "255",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "256",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

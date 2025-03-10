@@ -116,3 +116,21 @@ describe('FluentFunctions', () => {
     e.should.equal(3);
   });
 });
+
+describe('FluentFunctionsOverloadCallingSelf', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should be able to invoke a fluent which calls another fluent function overload of the same name', async function () {
+    const e1 = await this.testValue1.exec(this.ctx);
+    e1.should.equal([2, 3, 4, 5]);
+    const e2 = await this.testValue2.exec(this.ctx);
+    e2.should.equal([53, 29, 14, 4]);
+  });
+
+  it('should be able to invoke a fluent that is overloaded', async function () {
+    const e = await this.testValue3.exec(this.ctx);
+    e.should.equal(3);
+  });
+});
