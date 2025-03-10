@@ -219,7 +219,7 @@ describe('CommonLib3', () => {
     setup(this, data, [p1, p2], {}, {}, new Repository(data));
   });
   it('should be able to execute an expensive expression', async function () {
-    const startTime = Date.now();    
+    const startTime = Date.now();
     this.results = await this.executor
       .withLibrary(this.lib)
       .exec_patient_context(this.patientSource);
@@ -227,7 +227,7 @@ describe('CommonLib3', () => {
     const executionTime = endTime - startTime;
     executionTime.should.be.lessThan(250);
     this.results.patientResults['1'].ExpensiveStatementRef.length.should.equal(1);
-  });  
+  });
 });
 
 describe('Using CommonLib3', () => {
@@ -236,7 +236,7 @@ describe('Using CommonLib3', () => {
   });
 
   it('should execute expression from included library at similar cost', async function () {
-    const startTime = Date.now();    
+    const startTime = Date.now();
     this.results = await this.executor
       .withLibrary(this.lib)
       .exec_patient_context(this.patientSource);
@@ -249,5 +249,4 @@ describe('Using CommonLib3', () => {
   it('should execute expression directly from included library at similar cost', async function () {
     (await this.expensiveStatementRef.exec(this.ctx)).length.should.equal(1);
   });
-
 });
