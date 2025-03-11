@@ -3,6 +3,7 @@ import setup from '../../setup';
 const data = require('./data');
 const { p1 } = require('./patients');
 import { Repository } from '../../../src/cql';
+import sinon from 'sinon';
 
 describe('ExpressionDef', () => {
   beforeEach(function () {
@@ -199,5 +200,16 @@ describe('FluentFunctionsOverloadCallingSelfFromOtherLibrary', () => {
     results.patientResults['3'].matchTestCallSelfTrue.should.be.true();
     results.patientResults['3'].matchTestsCallSelfFalse.should.be.false();
     results.patientResults['3'].matchTestsCallSelfTrue.should.be.true();
+  });
+});
+
+describe('CommonLib3', () => {
+  beforeEach(function () {
+    setup(this, data, [p1], {}, {}, new Repository(data));
+  });
+  it('should be able to execute an expensive expression', async function () {
+    let spy = sinon.spy(this.expensiveStatement, 'exec');
+    await this.expensiveStatementRef.exec(this.ctx);
+    spy.should.have.been.calledOnce();
   });
 });

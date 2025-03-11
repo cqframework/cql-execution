@@ -7335,3 +7335,638 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
    }
 }
 
+/* CommonLib3
+library Common3
+using Simple version '1.0.0'
+context Patient
+
+define function ExpensiveFunction():
+  First(expand Interval[1, 100000])
+
+define ExpensiveStatement:
+  ExpensiveFunction()
+
+define ExpensiveStatementRef:
+  ExpensiveStatement union 
+  ExpensiveStatement union 
+  ExpensiveStatement union 
+  ExpensiveStatement union 
+  ExpensiveStatement
+*/
+
+module.exports['CommonLib3'] = {
+   "library" : {
+      "localId" : "0",
+      "annotation" : [ {
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "235",
+            "s" : [ {
+               "value" : [ "","library Common3" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "Common3"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localId" : "1",
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "206",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "206",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version '1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "localId" : "210",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "localId" : "208",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "localId" : "209",
+               "type" : "SingletonFrom",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "207",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         }, {
+            "localId" : "211",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "ExpensiveFunction",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "211",
+                  "s" : [ {
+                     "value" : [ "","define function ExpensiveFunction():\n  " ]
+                  }, {
+                     "r" : "228",
+                     "s" : [ {
+                        "r" : "228",
+                        "s" : [ {
+                           "value" : [ "First","(" ]
+                        }, {
+                           "r" : "218",
+                           "s" : [ {
+                              "value" : [ "expand " ]
+                           }, {
+                              "r" : "214",
+                              "s" : [ {
+                                 "r" : "212",
+                                 "value" : [ "Interval[","1",", ","100000","]" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "228",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "type" : "First",
+               "signature" : [ {
+                  "localId" : "229",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "230",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
+               "source" : {
+                  "localId" : "218",
+                  "type" : "Expand",
+                  "resultTypeSpecifier" : {
+                     "localId" : "222",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "223",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "signature" : [ {
+                     "localId" : "219",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "220",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "221",
+                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
+                  "operand" : [ {
+                     "localId" : "214",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "localId" : "215",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "216",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "localId" : "212",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "high" : {
+                        "localId" : "213",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "100000",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "217",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "type" : "Null"
+                  } ]
+               }
+            },
+            "operand" : [ ]
+         }, {
+            "localId" : "232",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "ExpensiveStatement",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "232",
+                  "s" : [ {
+                     "value" : [ "","define ","ExpensiveStatement",":\n  " ]
+                  }, {
+                     "r" : "233",
+                     "s" : [ {
+                        "value" : [ "ExpensiveFunction","()" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "233",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "name" : "ExpensiveFunction",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ ]
+            }
+         }, {
+            "localId" : "235",
+            "name" : "ExpensiveStatementRef",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "235",
+                  "s" : [ {
+                     "value" : [ "","define ","ExpensiveStatementRef",":\n  " ]
+                  }, {
+                     "r" : "271",
+                     "s" : [ {
+                        "r" : "263",
+                        "s" : [ {
+                           "r" : "248",
+                           "s" : [ {
+                              "r" : "238",
+                              "s" : [ {
+                                 "r" : "236",
+                                 "s" : [ {
+                                    "value" : [ "ExpensiveStatement" ]
+                                 } ]
+                              }, {
+                                 "value" : [ " union \n  " ]
+                              }, {
+                                 "r" : "237",
+                                 "s" : [ {
+                                    "value" : [ "ExpensiveStatement" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " union \n  " ]
+                           }, {
+                              "r" : "247",
+                              "s" : [ {
+                                 "value" : [ "ExpensiveStatement" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " union \n  " ]
+                        }, {
+                           "r" : "256",
+                           "s" : [ {
+                              "value" : [ "ExpensiveStatement" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " union \n  " ]
+                     }, {
+                        "r" : "270",
+                        "s" : [ {
+                           "value" : [ "ExpensiveStatement" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "279",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "280",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "271",
+               "type" : "Union",
+               "resultTypeSpecifier" : {
+                  "localId" : "277",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "278",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "273",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "274",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "275",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "276",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
+               "operand" : [ {
+                  "localId" : "263",
+                  "type" : "Union",
+                  "resultTypeSpecifier" : {
+                     "localId" : "268",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "269",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "signature" : [ {
+                     "localId" : "264",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "265",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "266",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "267",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : [ {
+                     "localId" : "238",
+                     "type" : "Union",
+                     "resultTypeSpecifier" : {
+                        "localId" : "245",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "246",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "signature" : [ {
+                        "localId" : "241",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "242",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "243",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "244",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
+                     "operand" : [ {
+                        "localId" : "239",
+                        "type" : "ToList",
+                        "signature" : [ ],
+                        "operand" : {
+                           "localId" : "236",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "name" : "ExpensiveStatement",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "localId" : "240",
+                        "type" : "ToList",
+                        "signature" : [ ],
+                        "operand" : {
+                           "localId" : "237",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "name" : "ExpensiveStatement",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }, {
+                     "localId" : "257",
+                     "type" : "Union",
+                     "signature" : [ {
+                        "localId" : "259",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "260",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "261",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "262",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
+                     "operand" : [ {
+                        "localId" : "249",
+                        "type" : "ToList",
+                        "signature" : [ ],
+                        "operand" : {
+                           "localId" : "247",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "name" : "ExpensiveStatement",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "localId" : "258",
+                        "type" : "ToList",
+                        "signature" : [ ],
+                        "operand" : {
+                           "localId" : "256",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "name" : "ExpensiveStatement",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  } ]
+               }, {
+                  "localId" : "272",
+                  "type" : "ToList",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "270",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "name" : "ExpensiveStatement",
+                     "type" : "ExpressionRef"
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+/* Using CommonLib3
+library TestSnippet version '1'
+using Simple version '1.0.0'
+include Common3 called common3
+context Patient
+
+define ExpensiveStatementRef: common3.ExpensiveStatementRef
+*/
+
+module.exports['Using CommonLib3'] = {
+   "library" : {
+      "localId" : "0",
+      "annotation" : [ {
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "213",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localId" : "1",
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "206",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "206",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version '1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localId" : "207",
+            "localIdentifier" : "common3",
+            "path" : "Common3",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "207",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Common3" ]
+                     } ]
+                  }, {
+                     "value" : [ " called ","common3" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "localId" : "211",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "localId" : "209",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "localId" : "210",
+               "type" : "SingletonFrom",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "208",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         }, {
+            "localId" : "213",
+            "name" : "ExpensiveStatementRef",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "213",
+                  "s" : [ {
+                     "value" : [ "","define ","ExpensiveStatementRef",": " ]
+                  }, {
+                     "r" : "215",
+                     "s" : [ {
+                        "r" : "214",
+                        "s" : [ {
+                           "value" : [ "common3" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "215",
+                        "s" : [ {
+                           "value" : [ "ExpensiveStatementRef" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "220",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "221",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "215",
+               "name" : "ExpensiveStatementRef",
+               "libraryName" : "common3",
+               "type" : "ExpressionRef",
+               "resultTypeSpecifier" : {
+                  "localId" : "218",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "219",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
