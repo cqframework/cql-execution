@@ -4498,7 +4498,7 @@ class Expression {
             return retVals;
         }
         else if (this.arg != null) {
-            return await this.arg.execute(ctx);
+            return this.arg.execute(ctx);
         }
         else {
             return null;
