@@ -111,27 +111,3 @@ context Patient
 define testCommonLib: common.SupportLibDef
 define testCommon2Lib: common2.SortUsingFunction
 
-// @Test: CommonLib3
-library Common3
-using Simple version '1.0.0'
-context Patient
-
-define function ExpensiveFunction():
-  First(expand Interval[1, 100000])
-
-define ExpensiveStatement:
-  ExpensiveFunction()
-
-define ExpensiveStatementRef:
-  ExpensiveStatement union 
-  ExpensiveStatement union 
-  ExpensiveStatement union 
-  ExpensiveStatement union 
-  ExpensiveStatement
-
-// @Test: Using CommonLib3
-using Simple version '1.0.0'
-include Common3 called common3
-context Patient
-
-define ExpensiveStatementRef: common3.ExpensiveStatementRef
