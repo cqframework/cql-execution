@@ -208,7 +208,7 @@ describe('CommonLib3', () => {
     setup(this, data, [p1], {}, {}, new Repository(data));
   });
   it('should be able to execute an expensive expression', async function () {
-    let spy = sinon.spy(this.expensiveStatement, 'exec');
+    const spy = sinon.spy(this.expensiveStatement, 'exec');
     await this.expensiveStatementRef.exec(this.ctx);
     spy.should.have.been.calledOnce();
   });
