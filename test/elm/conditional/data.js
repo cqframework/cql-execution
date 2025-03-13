@@ -20,9 +20,9 @@ module.exports['If'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -71,6 +71,7 @@ module.exports['If'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "var",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -89,6 +90,7 @@ module.exports['If'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "NamedTypeSpecifier"
             }
@@ -121,6 +123,7 @@ module.exports['If'] = {
             }
          }, {
             "localId" : "214",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "exp",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -159,20 +162,24 @@ module.exports['If'] = {
             } ],
             "expression" : {
                "localId" : "215",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "If",
                "condition" : {
                   "localId" : "216",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "var",
                   "type" : "ParameterRef"
                },
                "then" : {
                   "localId" : "217",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "true return",
                   "type" : "Literal"
                },
                "else" : {
                   "localId" : "218",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "false return",
                   "type" : "Literal"
@@ -211,9 +218,9 @@ module.exports['Case'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -262,6 +269,7 @@ module.exports['Case'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "var",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -280,11 +288,13 @@ module.exports['Case'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "209",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "X",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -303,11 +313,13 @@ module.exports['Case'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "210",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "211",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Y",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -326,6 +338,7 @@ module.exports['Case'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "212",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "NamedTypeSpecifier"
             }
@@ -358,6 +371,7 @@ module.exports['Case'] = {
             }
          }, {
             "localId" : "218",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "selected",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -417,9 +431,11 @@ module.exports['Case'] = {
             } ],
             "expression" : {
                "localId" : "219",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Case",
                "comparand" : {
                   "localId" : "220",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "var",
                   "type" : "ParameterRef"
                },
@@ -427,12 +443,14 @@ module.exports['Case'] = {
                   "localId" : "221",
                   "when" : {
                      "localId" : "222",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "then" : {
                      "localId" : "223",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "one",
                      "type" : "Literal"
@@ -441,12 +459,14 @@ module.exports['Case'] = {
                   "localId" : "224",
                   "when" : {
                      "localId" : "225",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   },
                   "then" : {
                      "localId" : "226",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "two",
                      "type" : "Literal"
@@ -454,6 +474,7 @@ module.exports['Case'] = {
                } ],
                "else" : {
                   "localId" : "227",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "?",
                   "type" : "Literal"
@@ -461,6 +482,7 @@ module.exports['Case'] = {
             }
          }, {
             "localId" : "229",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "standard",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -496,7 +518,7 @@ module.exports['Case'] = {
                         }, {
                            "value" : [ " then " ]
                         }, {
-                           "r" : "235",
+                           "r" : "237",
                            "s" : [ {
                               "value" : [ "'X > Y'" ]
                            } ]
@@ -504,20 +526,20 @@ module.exports['Case'] = {
                      }, {
                         "value" : [ "\n    " ]
                      }, {
-                        "r" : "236",
+                        "r" : "238",
                         "s" : [ {
                            "value" : [ "when " ]
                         }, {
-                           "r" : "237",
+                           "r" : "239",
                            "s" : [ {
-                              "r" : "238",
+                              "r" : "240",
                               "s" : [ {
                                  "value" : [ "X" ]
                               } ]
                            }, {
                               "value" : [ " ","<"," " ]
                            }, {
-                              "r" : "239",
+                              "r" : "241",
                               "s" : [ {
                                  "value" : [ "Y" ]
                               } ]
@@ -525,7 +547,7 @@ module.exports['Case'] = {
                         }, {
                            "value" : [ " then " ]
                         }, {
-                           "r" : "240",
+                           "r" : "244",
                            "s" : [ {
                               "value" : [ "'X < Y'" ]
                            } ]
@@ -533,7 +555,7 @@ module.exports['Case'] = {
                      }, {
                         "value" : [ "\n    else " ]
                      }, {
-                        "r" : "241",
+                        "r" : "245",
                         "s" : [ {
                            "value" : [ "'X == Y'" ]
                         } ]
@@ -545,54 +567,80 @@ module.exports['Case'] = {
             } ],
             "expression" : {
                "localId" : "230",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Case",
                "caseItem" : [ {
                   "localId" : "231",
                   "when" : {
                      "localId" : "232",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Greater",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "235",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "236",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "localId" : "233",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "X",
                         "type" : "ParameterRef"
                      }, {
                         "localId" : "234",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "Y",
                         "type" : "ParameterRef"
                      } ]
                   },
                   "then" : {
-                     "localId" : "235",
+                     "localId" : "237",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "X > Y",
                      "type" : "Literal"
                   }
                }, {
-                  "localId" : "236",
+                  "localId" : "238",
                   "when" : {
-                     "localId" : "237",
+                     "localId" : "239",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Less",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "242",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "243",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "238",
+                        "localId" : "240",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "X",
                         "type" : "ParameterRef"
                      }, {
-                        "localId" : "239",
+                        "localId" : "241",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "Y",
                         "type" : "ParameterRef"
                      } ]
                   },
                   "then" : {
-                     "localId" : "240",
+                     "localId" : "244",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "X < Y",
                      "type" : "Literal"
                   }
                } ],
                "else" : {
-                  "localId" : "241",
+                  "localId" : "245",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "X == Y",
                   "type" : "Literal"

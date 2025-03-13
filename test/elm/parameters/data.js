@@ -23,14 +23,14 @@ module.exports['ParameterDef'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "236",
+            "r" : "279",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -74,6 +74,7 @@ module.exports['ParameterDef'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "MeasureYear",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -88,12 +89,14 @@ module.exports['ParameterDef'] = {
             } ],
             "default" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "2012",
                "type" : "Literal"
             }
          }, {
             "localId" : "209",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "IntParameter",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -112,6 +115,7 @@ module.exports['ParameterDef'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "210",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "NamedTypeSpecifier"
             }
@@ -140,35 +144,54 @@ module.exports['ParameterDef'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "216",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "217",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "parameterTypeSpecifier" : {
                "localId" : "212",
                "type" : "ListTypeSpecifier",
+               "resultTypeSpecifier" : {
+                  "localId" : "214",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "215",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "elementType" : {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "214",
+            "localId" : "218",
             "name" : "TupleParameter",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "214",
+                  "r" : "218",
                   "s" : [ {
                      "value" : [ "","parameter ","TupleParameter"," " ]
                   }, {
-                     "r" : "215",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "Tuple{" ]
                      }, {
-                        "r" : "216",
+                        "r" : "220",
                         "s" : [ {
                            "value" : [ "a"," " ]
                         }, {
-                           "r" : "217",
+                           "r" : "221",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -176,11 +199,11 @@ module.exports['ParameterDef'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "218",
+                        "r" : "222",
                         "s" : [ {
                            "value" : [ "b"," " ]
                         }, {
-                           "r" : "219",
+                           "r" : "223",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -188,11 +211,11 @@ module.exports['ParameterDef'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "220",
+                        "r" : "224",
                         "s" : [ {
                            "value" : [ "c"," " ]
                         }, {
-                           "r" : "221",
+                           "r" : "225",
                            "s" : [ {
                               "value" : [ "Boolean" ]
                            } ]
@@ -200,15 +223,15 @@ module.exports['ParameterDef'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "222",
+                        "r" : "226",
                         "s" : [ {
                            "value" : [ "d"," " ]
                         }, {
-                           "r" : "223",
+                           "r" : "227",
                            "s" : [ {
                               "value" : [ "List<" ]
                            }, {
-                              "r" : "224",
+                              "r" : "228",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -219,19 +242,19 @@ module.exports['ParameterDef'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "225",
+                        "r" : "231",
                         "s" : [ {
                            "value" : [ "e"," " ]
                         }, {
-                           "r" : "226",
+                           "r" : "232",
                            "s" : [ {
                               "value" : [ "Tuple{ " ]
                            }, {
-                              "r" : "227",
+                              "r" : "233",
                               "s" : [ {
                                  "value" : [ "f"," " ]
                               }, {
-                                 "r" : "228",
+                                 "r" : "234",
                                  "s" : [ {
                                     "value" : [ "String" ]
                                  } ]
@@ -239,11 +262,11 @@ module.exports['ParameterDef'] = {
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "229",
+                              "r" : "235",
                               "s" : [ {
                                  "value" : [ "g"," " ]
                               }, {
-                                 "r" : "230",
+                                 "r" : "236",
                                  "s" : [ {
                                     "value" : [ "Boolean" ]
                                  } ]
@@ -258,64 +281,230 @@ module.exports['ParameterDef'] = {
                   } ]
                }
             } ],
-            "parameterTypeSpecifier" : {
-               "localId" : "215",
+            "resultTypeSpecifier" : {
+               "localId" : "258",
                "type" : "TupleTypeSpecifier",
                "element" : [ {
-                  "localId" : "216",
+                  "localId" : "259",
                   "name" : "a",
                   "elementType" : {
-                     "localId" : "217",
+                     "localId" : "260",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "218",
+                  "localId" : "261",
                   "name" : "b",
                   "elementType" : {
-                     "localId" : "219",
+                     "localId" : "262",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "220",
+                  "localId" : "263",
                   "name" : "c",
                   "elementType" : {
-                     "localId" : "221",
+                     "localId" : "264",
                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "222",
+                  "localId" : "265",
                   "name" : "d",
                   "elementType" : {
-                     "localId" : "223",
+                     "localId" : "266",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "224",
+                        "localId" : "267",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   }
                }, {
-                  "localId" : "225",
+                  "localId" : "268",
                   "name" : "e",
                   "elementType" : {
-                     "localId" : "226",
+                     "localId" : "269",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "227",
+                        "localId" : "270",
                         "name" : "f",
                         "elementType" : {
-                           "localId" : "228",
+                           "localId" : "271",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      }, {
-                        "localId" : "229",
+                        "localId" : "272",
                         "name" : "g",
                         "elementType" : {
+                           "localId" : "273",
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               } ]
+            },
+            "parameterTypeSpecifier" : {
+               "localId" : "219",
+               "type" : "TupleTypeSpecifier",
+               "resultTypeSpecifier" : {
+                  "localId" : "242",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "243",
+                     "name" : "a",
+                     "elementType" : {
+                        "localId" : "244",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "245",
+                     "name" : "b",
+                     "elementType" : {
+                        "localId" : "246",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "247",
+                     "name" : "c",
+                     "elementType" : {
+                        "localId" : "248",
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "249",
+                     "name" : "d",
+                     "elementType" : {
+                        "localId" : "250",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "251",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "localId" : "252",
+                     "name" : "e",
+                     "elementType" : {
+                        "localId" : "253",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "254",
+                           "name" : "f",
+                           "elementType" : {
+                              "localId" : "255",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "256",
+                           "name" : "g",
+                           "elementType" : {
+                              "localId" : "257",
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  } ]
+               },
+               "element" : [ {
+                  "localId" : "220",
+                  "name" : "a",
+                  "elementType" : {
+                     "localId" : "221",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "222",
+                  "name" : "b",
+                  "elementType" : {
+                     "localId" : "223",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "224",
+                  "name" : "c",
+                  "elementType" : {
+                     "localId" : "225",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "226",
+                  "name" : "d",
+                  "elementType" : {
+                     "localId" : "227",
+                     "type" : "ListTypeSpecifier",
+                     "resultTypeSpecifier" : {
+                        "localId" : "229",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
                            "localId" : "230",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "elementType" : {
+                        "localId" : "228",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }, {
+                  "localId" : "231",
+                  "name" : "e",
+                  "elementType" : {
+                     "localId" : "232",
+                     "type" : "TupleTypeSpecifier",
+                     "resultTypeSpecifier" : {
+                        "localId" : "237",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "238",
+                           "name" : "f",
+                           "elementType" : {
+                              "localId" : "239",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "240",
+                           "name" : "g",
+                           "elementType" : {
+                              "localId" : "241",
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
+                     "element" : [ {
+                        "localId" : "233",
+                        "name" : "f",
+                        "elementType" : {
+                           "localId" : "234",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "235",
+                        "name" : "g",
+                        "elementType" : {
+                           "localId" : "236",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -327,21 +516,21 @@ module.exports['ParameterDef'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "234",
+            "localId" : "277",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "232",
+            "localId" : "275",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "233",
+               "localId" : "276",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "231",
+                  "localId" : "274",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -351,18 +540,19 @@ module.exports['ParameterDef'] = {
                }
             }
          }, {
-            "localId" : "236",
+            "localId" : "279",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "foo",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "236",
+                  "r" : "279",
                   "s" : [ {
                      "value" : [ "","define ","foo",": " ]
                   }, {
-                     "r" : "237",
+                     "r" : "280",
                      "s" : [ {
                         "value" : [ "'bar'" ]
                      } ]
@@ -370,7 +560,8 @@ module.exports['ParameterDef'] = {
                }
             } ],
             "expression" : {
-               "localId" : "237",
+               "localId" : "280",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "bar",
                "type" : "Literal"
@@ -392,9 +583,9 @@ module.exports['ParameterRef'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -443,6 +634,7 @@ module.exports['ParameterRef'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "FooP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -461,6 +653,7 @@ module.exports['ParameterRef'] = {
             } ],
             "default" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "Bar",
                "type" : "Literal"
@@ -494,6 +687,7 @@ module.exports['ParameterRef'] = {
             }
          }, {
             "localId" : "214",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -513,6 +707,7 @@ module.exports['ParameterRef'] = {
             } ],
             "expression" : {
                "localId" : "215",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "name" : "FooP",
                "type" : "ParameterRef"
             }
@@ -535,9 +730,9 @@ module.exports['BooleanParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -586,6 +781,7 @@ module.exports['BooleanParameterTypes'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FooP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -604,11 +800,13 @@ module.exports['BooleanParameterTypes'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "209",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -623,6 +821,7 @@ module.exports['BooleanParameterTypes'] = {
             } ],
             "default" : {
                "localId" : "210",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                "value" : "true",
                "type" : "Literal"
@@ -656,6 +855,7 @@ module.exports['BooleanParameterTypes'] = {
             }
          }, {
             "localId" : "216",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -675,11 +875,13 @@ module.exports['BooleanParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "217",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "FooP",
                "type" : "ParameterRef"
             }
          }, {
             "localId" : "219",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -699,6 +901,7 @@ module.exports['BooleanParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "220",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "FooDP",
                "type" : "ParameterRef"
             }
@@ -721,9 +924,9 @@ module.exports['DecimalParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -772,6 +975,7 @@ module.exports['DecimalParameterTypes'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "FooP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -790,11 +994,13 @@ module.exports['DecimalParameterTypes'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "209",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -809,6 +1015,7 @@ module.exports['DecimalParameterTypes'] = {
             } ],
             "default" : {
                "localId" : "210",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                "value" : "1.5",
                "type" : "Literal"
@@ -842,6 +1049,7 @@ module.exports['DecimalParameterTypes'] = {
             }
          }, {
             "localId" : "216",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -861,11 +1069,13 @@ module.exports['DecimalParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "217",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "name" : "FooP",
                "type" : "ParameterRef"
             }
          }, {
             "localId" : "219",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -885,6 +1095,7 @@ module.exports['DecimalParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "220",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "name" : "FooDP",
                "type" : "ParameterRef"
             }
@@ -907,9 +1118,9 @@ module.exports['IntegerParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -958,6 +1169,7 @@ module.exports['IntegerParameterTypes'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "FooP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -976,11 +1188,13 @@ module.exports['IntegerParameterTypes'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "209",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -995,6 +1209,7 @@ module.exports['IntegerParameterTypes'] = {
             } ],
             "default" : {
                "localId" : "210",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "2",
                "type" : "Literal"
@@ -1028,6 +1243,7 @@ module.exports['IntegerParameterTypes'] = {
             }
          }, {
             "localId" : "216",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1047,11 +1263,13 @@ module.exports['IntegerParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "217",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "FooP",
                "type" : "ParameterRef"
             }
          }, {
             "localId" : "219",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1071,6 +1289,7 @@ module.exports['IntegerParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "220",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "FooDP",
                "type" : "ParameterRef"
             }
@@ -1093,9 +1312,9 @@ module.exports['StringParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -1144,6 +1363,7 @@ module.exports['StringParameterTypes'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "FooP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1162,11 +1382,13 @@ module.exports['StringParameterTypes'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "name" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "209",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1185,6 +1407,7 @@ module.exports['StringParameterTypes'] = {
             } ],
             "default" : {
                "localId" : "210",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "Hello",
                "type" : "Literal"
@@ -1218,6 +1441,7 @@ module.exports['StringParameterTypes'] = {
             }
          }, {
             "localId" : "216",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1237,11 +1461,13 @@ module.exports['StringParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "217",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "name" : "FooP",
                "type" : "ParameterRef"
             }
          }, {
             "localId" : "219",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1261,6 +1487,7 @@ module.exports['StringParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "220",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "name" : "FooDP",
                "type" : "ParameterRef"
             }
@@ -1284,9 +1511,9 @@ module.exports['CodeParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -1335,6 +1562,7 @@ module.exports['CodeParameterTypes'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "208",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "FooP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1353,11 +1581,13 @@ module.exports['CodeParameterTypes'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "209",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "{urn:hl7-org:elm-types:r1}Code",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "210",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1383,11 +1613,13 @@ module.exports['CodeParameterTypes'] = {
             } ],
             "default" : {
                "localId" : "211",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "code" : "FooTest",
                "display" : "Foo Test",
                "type" : "Code",
                "system" : {
                   "localId" : "212",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                   "name" : "FOOTESTCS"
                }
             }
@@ -1396,6 +1628,7 @@ module.exports['CodeParameterTypes'] = {
       "codeSystems" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "FOOTESTCS",
             "id" : "http://footest.org",
             "accessLevel" : "Public",
@@ -1437,6 +1670,7 @@ module.exports['CodeParameterTypes'] = {
             }
          }, {
             "localId" : "218",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1456,11 +1690,13 @@ module.exports['CodeParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "219",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "FooP",
                "type" : "ParameterRef"
             }
          }, {
             "localId" : "221",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1480,6 +1716,7 @@ module.exports['CodeParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "222",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "FooDP",
                "type" : "ParameterRef"
             }
@@ -1503,9 +1740,9 @@ module.exports['ConceptParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -1554,6 +1791,7 @@ module.exports['ConceptParameterTypes'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "208",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
             "name" : "FooP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1572,11 +1810,13 @@ module.exports['ConceptParameterTypes'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "209",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                "name" : "{urn:hl7-org:elm-types:r1}Concept",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "210",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1607,13 +1847,16 @@ module.exports['ConceptParameterTypes'] = {
             } ],
             "default" : {
                "localId" : "211",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                "display" : "Foo Test",
                "type" : "Concept",
                "code" : [ {
                   "localId" : "212",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                   "code" : "FooTest",
                   "system" : {
                      "localId" : "213",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                      "name" : "FOOTESTCS"
                   }
                } ]
@@ -1623,6 +1866,7 @@ module.exports['ConceptParameterTypes'] = {
       "codeSystems" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "FOOTESTCS",
             "id" : "http://footest.org",
             "accessLevel" : "Public",
@@ -1664,6 +1908,7 @@ module.exports['ConceptParameterTypes'] = {
             }
          }, {
             "localId" : "219",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1683,11 +1928,13 @@ module.exports['ConceptParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "220",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                "name" : "FooP",
                "type" : "ParameterRef"
             }
          }, {
             "localId" : "222",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1707,6 +1954,7 @@ module.exports['ConceptParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "223",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                "name" : "FooDP",
                "type" : "ParameterRef"
             }
@@ -1729,9 +1977,9 @@ module.exports['DateTimeParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -1780,6 +2028,7 @@ module.exports['DateTimeParameterTypes'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "FooP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1798,11 +2047,13 @@ module.exports['DateTimeParameterTypes'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "209",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1817,6 +2068,7 @@ module.exports['DateTimeParameterTypes'] = {
             } ],
             "default" : {
                "localId" : "210",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "DateTime",
                "signature" : [ ],
                "year" : {
@@ -1885,6 +2137,7 @@ module.exports['DateTimeParameterTypes'] = {
             }
          }, {
             "localId" : "222",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1904,11 +2157,13 @@ module.exports['DateTimeParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "223",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "name" : "FooP",
                "type" : "ParameterRef"
             }
          }, {
             "localId" : "225",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1928,6 +2183,7 @@ module.exports['DateTimeParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "226",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "name" : "FooDP",
                "type" : "ParameterRef"
             }
@@ -1950,9 +2206,9 @@ module.exports['DateParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -2001,6 +2257,7 @@ module.exports['DateParameterTypes'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "name" : "FooP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2019,11 +2276,13 @@ module.exports['DateParameterTypes'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                "name" : "{urn:hl7-org:elm-types:r1}Date",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "209",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2038,6 +2297,7 @@ module.exports['DateParameterTypes'] = {
             } ],
             "default" : {
                "localId" : "214",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                "type" : "Date",
                "signature" : [ ],
                "year" : {
@@ -2088,6 +2348,7 @@ module.exports['DateParameterTypes'] = {
             }
          }, {
             "localId" : "220",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2107,11 +2368,13 @@ module.exports['DateParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "221",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                "name" : "FooP",
                "type" : "ParameterRef"
             }
          }, {
             "localId" : "223",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2131,6 +2394,7 @@ module.exports['DateParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "224",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                "name" : "FooDP",
                "type" : "ParameterRef"
             }
@@ -2153,9 +2417,9 @@ module.exports['QuantityParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -2204,6 +2468,7 @@ module.exports['QuantityParameterTypes'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "FooP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2222,11 +2487,13 @@ module.exports['QuantityParameterTypes'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "209",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2245,6 +2512,7 @@ module.exports['QuantityParameterTypes'] = {
             } ],
             "default" : {
                "localId" : "210",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "value" : 10,
                "unit" : "dL",
                "type" : "Quantity"
@@ -2278,6 +2546,7 @@ module.exports['QuantityParameterTypes'] = {
             }
          }, {
             "localId" : "216",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2297,11 +2566,13 @@ module.exports['QuantityParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "217",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "name" : "FooP",
                "type" : "ParameterRef"
             }
          }, {
             "localId" : "219",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2321,6 +2592,7 @@ module.exports['QuantityParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "220",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "name" : "FooDP",
                "type" : "ParameterRef"
             }
@@ -2343,9 +2615,9 @@ module.exports['TimeParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -2394,6 +2666,7 @@ module.exports['TimeParameterTypes'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "name" : "FooP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2412,11 +2685,13 @@ module.exports['TimeParameterTypes'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
                "name" : "{urn:hl7-org:elm-types:r1}Time",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "209",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -2431,6 +2706,7 @@ module.exports['TimeParameterTypes'] = {
             } ],
             "default" : {
                "localId" : "210",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
                "type" : "Time",
                "signature" : [ ],
                "hour" : {
@@ -2481,6 +2757,7 @@ module.exports['TimeParameterTypes'] = {
             }
          }, {
             "localId" : "219",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2500,11 +2777,13 @@ module.exports['TimeParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "220",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
                "name" : "FooP",
                "type" : "ParameterRef"
             }
          }, {
             "localId" : "222",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2524,6 +2803,7 @@ module.exports['TimeParameterTypes'] = {
             } ],
             "expression" : {
                "localId" : "223",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
                "name" : "FooDP",
                "type" : "ParameterRef"
             }
@@ -2546,14 +2826,14 @@ module.exports['ListParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "223",
+            "r" : "235",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -2620,45 +2900,64 @@ module.exports['ListParameterTypes'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "212",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "213",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "parameterTypeSpecifier" : {
                "localId" : "208",
                "type" : "ListTypeSpecifier",
+               "resultTypeSpecifier" : {
+                  "localId" : "210",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "211",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "elementType" : {
                   "localId" : "209",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "210",
+            "localId" : "214",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "210",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","parameter ","FooDP"," default " ]
                   }, {
-                     "r" : "211",
+                     "r" : "215",
                      "s" : [ {
                         "value" : [ "{ " ]
                      }, {
-                        "r" : "212",
+                        "r" : "216",
                         "s" : [ {
                            "value" : [ "'a'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "213",
+                        "r" : "217",
                         "s" : [ {
                            "value" : [ "'b'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "214",
+                        "r" : "218",
                         "s" : [ {
                            "value" : [ "'c'" ]
                         } ]
@@ -2668,21 +2967,42 @@ module.exports['ListParameterTypes'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "221",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "222",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "default" : {
-               "localId" : "211",
+               "localId" : "215",
                "type" : "List",
+               "resultTypeSpecifier" : {
+                  "localId" : "219",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "220",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "element" : [ {
-                  "localId" : "212",
+                  "localId" : "216",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "a",
                   "type" : "Literal"
                }, {
-                  "localId" : "213",
+                  "localId" : "217",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "b",
                   "type" : "Literal"
                }, {
-                  "localId" : "214",
+                  "localId" : "218",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "c",
                   "type" : "Literal"
@@ -2692,21 +3012,21 @@ module.exports['ListParameterTypes'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "218",
+            "localId" : "226",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "216",
+            "localId" : "224",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "217",
+               "localId" : "225",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "215",
+                  "localId" : "223",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -2716,52 +3036,88 @@ module.exports['ListParameterTypes'] = {
                }
             }
          }, {
-            "localId" : "220",
+            "localId" : "228",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "220",
+                  "r" : "228",
                   "s" : [ {
                      "value" : [ "","define ","Foo",": " ]
                   }, {
-                     "r" : "221",
+                     "r" : "229",
                      "s" : [ {
                         "value" : [ "FooP" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "232",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "233",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "221",
+               "localId" : "229",
                "name" : "FooP",
-               "type" : "ParameterRef"
+               "type" : "ParameterRef",
+               "resultTypeSpecifier" : {
+                  "localId" : "230",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "231",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
             }
          }, {
-            "localId" : "223",
+            "localId" : "235",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "223",
+                  "r" : "235",
                   "s" : [ {
                      "value" : [ "","define ","Foo2",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "236",
                      "s" : [ {
                         "value" : [ "FooDP" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "239",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "240",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "224",
+               "localId" : "236",
                "name" : "FooDP",
-               "type" : "ParameterRef"
+               "type" : "ParameterRef",
+               "resultTypeSpecifier" : {
+                  "localId" : "237",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "238",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
             }
          } ]
       }
@@ -2782,14 +3138,14 @@ module.exports['IntervalParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "222",
+            "r" : "234",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -2856,47 +3212,86 @@ module.exports['IntervalParameterTypes'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "212",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "213",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "parameterTypeSpecifier" : {
                "localId" : "208",
                "type" : "IntervalTypeSpecifier",
+               "resultTypeSpecifier" : {
+                  "localId" : "210",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "211",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "pointType" : {
                   "localId" : "209",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }
          }, {
-            "localId" : "210",
+            "localId" : "214",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "210",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","parameter ","FooDP"," default " ]
                   }, {
-                     "r" : "213",
+                     "r" : "217",
                      "s" : [ {
-                        "r" : "211",
+                        "r" : "215",
                         "value" : [ "Interval[","2",",","6","]" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "220",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "221",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "default" : {
-               "localId" : "213",
+               "localId" : "217",
                "lowClosed" : true,
                "highClosed" : true,
                "type" : "Interval",
+               "resultTypeSpecifier" : {
+                  "localId" : "218",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "219",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "low" : {
-                  "localId" : "211",
+                  "localId" : "215",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
                   "type" : "Literal"
                },
                "high" : {
-                  "localId" : "212",
+                  "localId" : "216",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "6",
                   "type" : "Literal"
@@ -2906,21 +3301,21 @@ module.exports['IntervalParameterTypes'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "217",
+            "localId" : "225",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "215",
+            "localId" : "223",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "216",
+               "localId" : "224",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "214",
+                  "localId" : "222",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -2930,52 +3325,88 @@ module.exports['IntervalParameterTypes'] = {
                }
             }
          }, {
-            "localId" : "219",
+            "localId" : "227",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "227",
                   "s" : [ {
                      "value" : [ "","define ","Foo",": " ]
                   }, {
-                     "r" : "220",
+                     "r" : "228",
                      "s" : [ {
                         "value" : [ "FooP" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "231",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "232",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "220",
+               "localId" : "228",
                "name" : "FooP",
-               "type" : "ParameterRef"
+               "type" : "ParameterRef",
+               "resultTypeSpecifier" : {
+                  "localId" : "229",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "230",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
             }
          }, {
-            "localId" : "222",
+            "localId" : "234",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "222",
+                  "r" : "234",
                   "s" : [ {
                      "value" : [ "","define ","Foo2",": " ]
                   }, {
-                     "r" : "223",
+                     "r" : "235",
                      "s" : [ {
                         "value" : [ "FooDP" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "238",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "239",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "223",
+               "localId" : "235",
                "name" : "FooDP",
-               "type" : "ParameterRef"
+               "type" : "ParameterRef",
+               "resultTypeSpecifier" : {
+                  "localId" : "236",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "237",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
             }
          } ]
       }
@@ -2996,14 +3427,14 @@ module.exports['TupleParameterTypes'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "225",
+            "r" : "255",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3087,14 +3518,57 @@ module.exports['TupleParameterTypes'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "218",
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "localId" : "219",
+                  "name" : "Hello",
+                  "elementType" : {
+                     "localId" : "220",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "221",
+                  "name" : "MeaningOfLife",
+                  "elementType" : {
+                     "localId" : "222",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
             "parameterTypeSpecifier" : {
                "localId" : "208",
                "type" : "TupleTypeSpecifier",
+               "resultTypeSpecifier" : {
+                  "localId" : "213",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "214",
+                     "name" : "Hello",
+                     "elementType" : {
+                        "localId" : "215",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "216",
+                     "name" : "MeaningOfLife",
+                     "elementType" : {
+                        "localId" : "217",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               },
                "element" : [ {
                   "localId" : "209",
                   "name" : "Hello",
                   "elementType" : {
                      "localId" : "210",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -3103,30 +3577,31 @@ module.exports['TupleParameterTypes'] = {
                   "name" : "MeaningOfLife",
                   "elementType" : {
                      "localId" : "212",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ]
             }
          }, {
-            "localId" : "213",
+            "localId" : "223",
             "name" : "FooDP",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "213",
+                  "r" : "223",
                   "s" : [ {
                      "value" : [ "","parameter ","FooDP"," default " ]
                   }, {
-                     "r" : "214",
+                     "r" : "224",
                      "s" : [ {
                         "value" : [ "Tuple { " ]
                      }, {
                         "s" : [ {
                            "value" : [ "Hello",": " ]
                         }, {
-                           "r" : "215",
+                           "r" : "225",
                            "s" : [ {
                               "value" : [ "'Universe'" ]
                            } ]
@@ -3135,7 +3610,7 @@ module.exports['TupleParameterTypes'] = {
                         "value" : [ ", " ]
                      }, {
                         "s" : [ {
-                           "r" : "216",
+                           "r" : "226",
                            "value" : [ "MeaningOfLife",": ","24" ]
                         } ]
                      }, {
@@ -3144,13 +3619,56 @@ module.exports['TupleParameterTypes'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "232",
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "localId" : "233",
+                  "name" : "Hello",
+                  "elementType" : {
+                     "localId" : "234",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "235",
+                  "name" : "MeaningOfLife",
+                  "elementType" : {
+                     "localId" : "236",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
             "default" : {
-               "localId" : "214",
+               "localId" : "224",
                "type" : "Tuple",
+               "resultTypeSpecifier" : {
+                  "localId" : "227",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "228",
+                     "name" : "Hello",
+                     "elementType" : {
+                        "localId" : "229",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "230",
+                     "name" : "MeaningOfLife",
+                     "elementType" : {
+                        "localId" : "231",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               },
                "element" : [ {
                   "name" : "Hello",
                   "value" : {
-                     "localId" : "215",
+                     "localId" : "225",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Universe",
                      "type" : "Literal"
@@ -3158,7 +3676,8 @@ module.exports['TupleParameterTypes'] = {
                }, {
                   "name" : "MeaningOfLife",
                   "value" : {
-                     "localId" : "216",
+                     "localId" : "226",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "24",
                      "type" : "Literal"
@@ -3169,21 +3688,21 @@ module.exports['TupleParameterTypes'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "220",
+            "localId" : "240",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "218",
+            "localId" : "238",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "219",
+               "localId" : "239",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "217",
+                  "localId" : "237",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -3193,52 +3712,136 @@ module.exports['TupleParameterTypes'] = {
                }
             }
          }, {
-            "localId" : "222",
+            "localId" : "242",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "222",
+                  "r" : "242",
                   "s" : [ {
                      "value" : [ "","define ","Foo",": " ]
                   }, {
-                     "r" : "223",
+                     "r" : "243",
                      "s" : [ {
                         "value" : [ "FooP" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "249",
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "localId" : "250",
+                  "name" : "Hello",
+                  "elementType" : {
+                     "localId" : "251",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "252",
+                  "name" : "MeaningOfLife",
+                  "elementType" : {
+                     "localId" : "253",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
             "expression" : {
-               "localId" : "223",
+               "localId" : "243",
                "name" : "FooP",
-               "type" : "ParameterRef"
+               "type" : "ParameterRef",
+               "resultTypeSpecifier" : {
+                  "localId" : "244",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "245",
+                     "name" : "Hello",
+                     "elementType" : {
+                        "localId" : "246",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "247",
+                     "name" : "MeaningOfLife",
+                     "elementType" : {
+                        "localId" : "248",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
             }
          }, {
-            "localId" : "225",
+            "localId" : "255",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "225",
+                  "r" : "255",
                   "s" : [ {
                      "value" : [ "","define ","Foo2",": " ]
                   }, {
-                     "r" : "226",
+                     "r" : "256",
                      "s" : [ {
                         "value" : [ "FooDP" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "262",
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "localId" : "263",
+                  "name" : "Hello",
+                  "elementType" : {
+                     "localId" : "264",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "265",
+                  "name" : "MeaningOfLife",
+                  "elementType" : {
+                     "localId" : "266",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
             "expression" : {
-               "localId" : "226",
+               "localId" : "256",
                "name" : "FooDP",
-               "type" : "ParameterRef"
+               "type" : "ParameterRef",
+               "resultTypeSpecifier" : {
+                  "localId" : "257",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "258",
+                     "name" : "Hello",
+                     "elementType" : {
+                        "localId" : "259",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "260",
+                     "name" : "MeaningOfLife",
+                     "elementType" : {
+                        "localId" : "261",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
             }
          } ]
       }
@@ -3259,9 +3862,9 @@ module.exports['DefaultAndNoDefault'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -3310,6 +3913,7 @@ module.exports['DefaultAndNoDefault'] = {
       "parameters" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "FooWithNoDefault",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -3328,11 +3932,13 @@ module.exports['DefaultAndNoDefault'] = {
             } ],
             "parameterTypeSpecifier" : {
                "localId" : "208",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "NamedTypeSpecifier"
             }
          }, {
             "localId" : "209",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "FooWithDefault",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -3347,6 +3953,7 @@ module.exports['DefaultAndNoDefault'] = {
             } ],
             "default" : {
                "localId" : "210",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "5",
                "type" : "Literal"
@@ -3380,6 +3987,7 @@ module.exports['DefaultAndNoDefault'] = {
             }
          }, {
             "localId" : "216",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Foo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3399,11 +4007,13 @@ module.exports['DefaultAndNoDefault'] = {
             } ],
             "expression" : {
                "localId" : "217",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "FooWithNoDefault",
                "type" : "ParameterRef"
             }
          }, {
             "localId" : "219",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Foo2",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3423,6 +4033,7 @@ module.exports['DefaultAndNoDefault'] = {
             } ],
             "expression" : {
                "localId" : "220",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "FooWithDefault",
                "type" : "ParameterRef"
             }
@@ -3443,14 +4054,14 @@ module.exports['MeasurementPeriodParameter'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "215",
+            "r" : "219",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3517,11 +4128,30 @@ module.exports['MeasurementPeriodParameter'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "212",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "213",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "parameterTypeSpecifier" : {
                "localId" : "208",
                "type" : "IntervalTypeSpecifier",
+               "resultTypeSpecifier" : {
+                  "localId" : "210",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "211",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "pointType" : {
                   "localId" : "209",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "NamedTypeSpecifier"
                }
@@ -3530,21 +4160,21 @@ module.exports['MeasurementPeriodParameter'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "213",
+            "localId" : "217",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "211",
+            "localId" : "215",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "212",
+               "localId" : "216",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "210",
+                  "localId" : "214",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -3554,44 +4184,45 @@ module.exports['MeasurementPeriodParameter'] = {
                }
             }
          }, {
-            "localId" : "215",
+            "localId" : "219",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "MeasurementPeriod",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "215",
+                  "r" : "219",
                   "s" : [ {
                      "value" : [ "","define ","MeasurementPeriod",": " ]
                   }, {
-                     "r" : "230",
+                     "r" : "250",
                      "s" : [ {
-                        "r" : "228",
+                        "r" : "244",
                         "s" : [ {
                            "value" : [ "Interval[" ]
                         }, {
-                           "r" : "221",
+                           "r" : "228",
                            "s" : [ {
-                              "r" : "216",
+                              "r" : "220",
                               "value" : [ "DateTime","(","2011",", ","1",", ","1",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "227",
+                           "r" : "240",
                            "s" : [ {
-                              "r" : "222",
+                              "r" : "232",
                               "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
                            } ]
                         }, {
                            "value" : [ "]" ]
                         } ]
                      }, {
-                        "r" : "230",
+                        "r" : "250",
                         "value" : [ " ","overlaps"," " ]
                      }, {
-                        "r" : "229",
+                        "r" : "247",
                         "s" : [ {
                            "value" : [ "\"Measurement Period\"" ]
                         } ]
@@ -3600,64 +4231,131 @@ module.exports['MeasurementPeriodParameter'] = {
                }
             } ],
             "expression" : {
-               "localId" : "230",
+               "localId" : "250",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Overlaps",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "251",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "252",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "253",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "254",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : [ {
-                  "localId" : "228",
+                  "localId" : "244",
                   "lowClosed" : true,
                   "highClosed" : true,
                   "type" : "Interval",
+                  "resultTypeSpecifier" : {
+                     "localId" : "245",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "246",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "low" : {
-                     "localId" : "221",
+                     "localId" : "228",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "DateTime",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "229",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "230",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "231",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "year" : {
-                        "localId" : "216",
+                        "localId" : "220",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2011",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "217",
+                        "localId" : "221",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "218",
+                        "localId" : "222",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   },
                   "high" : {
-                     "localId" : "227",
+                     "localId" : "240",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "DateTime",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "241",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "242",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "243",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "year" : {
-                        "localId" : "222",
+                        "localId" : "232",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2013",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "223",
+                        "localId" : "233",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "224",
+                        "localId" : "234",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }
                }, {
-                  "localId" : "229",
+                  "localId" : "247",
                   "name" : "Measurement Period",
-                  "type" : "ParameterRef"
+                  "type" : "ParameterRef",
+                  "resultTypeSpecifier" : {
+                     "localId" : "248",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "249",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
                } ]
             }
          } ]
