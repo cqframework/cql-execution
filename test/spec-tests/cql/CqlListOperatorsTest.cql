@@ -786,45 +786,65 @@ define "ProperlyIncludes": Tuple{
 
 define "ProperlyIncludedIn": Tuple{
   "ProperIncludedInEmptyAndEmpty": Tuple{
+    skipped: 'Translates ProperIncludedIn as ProperIn'
+    /*
     expression: {} properly included in {},
     output: false
-  },
+    */  },
   "ProperIncludedInListNullAndListNull": Tuple{
+    skipped: 'Translates ProperIncludedIn as ProperIn'
+    /*
     expression: {null} properly included in {null},
     output: false
-  },
+    */  },
   "ProperIncludedInEmptyAnd123": Tuple{
+    skipped: 'Translates ProperIncludedIn as ProperIn'
+    /*
     expression: {} properly included in {1, 2, 3},
     output: true
-  },
+    */  },
   "ProperIncludedIn2And123": Tuple{
+    skipped: 'Translates ProperIncludedIn as ProperIn'
+    /*
     expression: {2} properly included in {1, 2, 3},
     output: true
-  },
+    */  },
   "ProperIncludedIn4And123": Tuple{
+    skipped: 'Translates ProperIncludedIn as ProperIn'
+    /*
     expression: {4} properly included in {1, 2, 3},
     output: false
-  },
+    */  },
   "ProperIncludedInDateTimeTrue": Tuple{
+    skipped: 'Translates ProperIncludedIn as ProperIn'
+    /*
     expression: {DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)},
     output: true
-  },
+    */  },
   "ProperIncludedInDateTimeFalse": Tuple{
+    skipped: 'Translates ProperIncludedIn as ProperIn'
+    /*
     expression: {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)} properly included in {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10)},
     output: false
-  },
+    */  },
   "ProperIncludedInTimeTrue": Tuple{
+    skipped: 'Translates ProperIncludedIn as ProperIn'
+    /*
     expression: { @T15:59:59.999, @T20:59:59.999 } properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 },
     output: true
-  },
+    */  },
   "ProperIncludedInTimeFalse": Tuple{
+    skipped: 'Translates ProperIncludedIn as ProperIn'
+    /*
     expression: { @T15:59:59.999, @T20:59:59.999, @T14:59:22.999 } properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 },
     output: false
-  },
+    */  },
   "ProperlyIncludedInNulRight": Tuple{
+    skipped: 'Translates ProperIncludedIn as ProperIn'
+    /*
     expression: {'s', 'u', 'n'} properly included in null,
     output: null
-  }
+    */  }
 }
 
 define "SingletonFrom": Tuple{

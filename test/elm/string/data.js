@@ -27,1496 +27,2604 @@ define AndHelloWorldVariables: Hello & World
 */
 
 module.exports['Concat'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "message" : "You used a string literal: [Hello] here that matches an identifier in scope: [Hello]. Did you mean to use the identifier instead?",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "message" : "You used a string literal: [World] here that matches an identifier in scope: [World]. Did you mean to use the identifier instead?",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "message" : "You used a string literal: [Hello] here that matches an identifier in scope: [Hello]. Did you mean to use the identifier instead?",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "message" : "You used a string literal: [World] here that matches an identifier in scope: [World]. Did you mean to use the identifier instead?",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "message" : "You used a string literal: [Hello] here that matches an identifier in scope: [Hello]. Did you mean to use the identifier instead?",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "479",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "HelloWorld",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","HelloWorld",": " ]
-                  }, {
-                     "r" : "216",
-                     "s" : [ {
-                        "r" : "214",
-                        "s" : [ {
-                           "value" : [ "'Hello'" ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "215",
-                        "s" : [ {
-                           "value" : [ "'World'" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "216",
-               "type" : "Concatenate",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "214",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Hello",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "215",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "World",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "218",
-            "name" : "Sentence",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "218",
-                  "s" : [ {
-                     "value" : [ "","define ","Sentence",": " ]
-                  }, {
-                     "r" : "267",
-                     "s" : [ {
-                        "r" : "265",
-                        "s" : [ {
-                           "r" : "263",
-                           "s" : [ {
-                              "r" : "261",
-                              "s" : [ {
-                                 "r" : "259",
-                                 "s" : [ {
-                                    "r" : "257",
-                                    "s" : [ {
-                                       "r" : "255",
-                                       "s" : [ {
-                                          "r" : "253",
-                                          "s" : [ {
-                                             "r" : "251",
-                                             "s" : [ {
-                                                "r" : "249",
-                                                "s" : [ {
-                                                   "r" : "247",
-                                                   "s" : [ {
-                                                      "r" : "245",
-                                                      "s" : [ {
-                                                         "r" : "243",
-                                                         "s" : [ {
-                                                            "r" : "241",
-                                                            "s" : [ {
-                                                               "r" : "239",
-                                                               "s" : [ {
-                                                                  "r" : "237",
-                                                                  "s" : [ {
-                                                                     "r" : "235",
-                                                                     "s" : [ {
-                                                                        "value" : [ "'The'" ]
-                                                                     } ]
-                                                                  }, {
-                                                                     "value" : [ " + " ]
-                                                                  }, {
-                                                                     "r" : "236",
-                                                                     "s" : [ {
-                                                                        "value" : [ "' '" ]
-                                                                     } ]
-                                                                  } ]
-                                                               }, {
-                                                                  "value" : [ " + " ]
-                                                               }, {
-                                                                  "r" : "238",
-                                                                  "s" : [ {
-                                                                     "value" : [ "'quick'" ]
-                                                                  } ]
-                                                               } ]
-                                                            }, {
-                                                               "value" : [ " + " ]
-                                                            }, {
-                                                               "r" : "240",
-                                                               "s" : [ {
-                                                                  "value" : [ "' '" ]
-                                                               } ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ " + " ]
-                                                         }, {
-                                                            "r" : "242",
-                                                            "s" : [ {
-                                                               "value" : [ "'brown'" ]
-                                                            } ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ " + " ]
-                                                      }, {
-                                                         "r" : "244",
-                                                         "s" : [ {
-                                                            "value" : [ "' '" ]
-                                                         } ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ " + " ]
-                                                   }, {
-                                                      "r" : "246",
-                                                      "s" : [ {
-                                                         "value" : [ "'fox'" ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ " + " ]
-                                                }, {
-                                                   "r" : "248",
-                                                   "s" : [ {
-                                                      "value" : [ "' '" ]
-                                                   } ]
-                                                } ]
-                                             }, {
-                                                "value" : [ " + " ]
-                                             }, {
-                                                "r" : "250",
-                                                "s" : [ {
-                                                   "value" : [ "'jumps'" ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ " + " ]
-                                          }, {
-                                             "r" : "252",
-                                             "s" : [ {
-                                                "value" : [ "' '" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "\n                  + " ]
-                                       }, {
-                                          "r" : "254",
-                                          "s" : [ {
-                                             "value" : [ "'over'" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " + " ]
-                                    }, {
-                                       "r" : "256",
-                                       "s" : [ {
-                                          "value" : [ "' '" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " + " ]
-                                 }, {
-                                    "r" : "258",
-                                    "s" : [ {
-                                       "value" : [ "'the'" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " + " ]
-                              }, {
-                                 "r" : "260",
-                                 "s" : [ {
-                                    "value" : [ "' '" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " + " ]
-                           }, {
-                              "r" : "262",
-                              "s" : [ {
-                                 "value" : [ "'lazy'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ " + " ]
-                        }, {
-                           "r" : "264",
-                           "s" : [ {
-                              "value" : [ "' '" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "266",
-                        "s" : [ {
-                           "value" : [ "'dog.'" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "267",
-               "type" : "Concatenate",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "265",
-                  "type" : "Concatenate",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "263",
-                     "type" : "Concatenate",
-                     "signature" : [ ],
-                     "operand" : [ {
-                        "localId" : "261",
-                        "type" : "Concatenate",
-                        "signature" : [ ],
-                        "operand" : [ {
-                           "localId" : "259",
-                           "type" : "Concatenate",
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "localId" : "257",
-                              "type" : "Concatenate",
-                              "signature" : [ ],
-                              "operand" : [ {
-                                 "localId" : "255",
-                                 "type" : "Concatenate",
-                                 "signature" : [ ],
-                                 "operand" : [ {
-                                    "localId" : "253",
-                                    "type" : "Concatenate",
-                                    "signature" : [ ],
-                                    "operand" : [ {
-                                       "localId" : "251",
-                                       "type" : "Concatenate",
-                                       "signature" : [ ],
-                                       "operand" : [ {
-                                          "localId" : "249",
-                                          "type" : "Concatenate",
-                                          "signature" : [ ],
-                                          "operand" : [ {
-                                             "localId" : "247",
-                                             "type" : "Concatenate",
-                                             "signature" : [ ],
-                                             "operand" : [ {
-                                                "localId" : "245",
-                                                "type" : "Concatenate",
-                                                "signature" : [ ],
-                                                "operand" : [ {
-                                                   "localId" : "243",
-                                                   "type" : "Concatenate",
-                                                   "signature" : [ ],
-                                                   "operand" : [ {
-                                                      "localId" : "241",
-                                                      "type" : "Concatenate",
-                                                      "signature" : [ ],
-                                                      "operand" : [ {
-                                                         "localId" : "239",
-                                                         "type" : "Concatenate",
-                                                         "signature" : [ ],
-                                                         "operand" : [ {
-                                                            "localId" : "237",
-                                                            "type" : "Concatenate",
-                                                            "signature" : [ ],
-                                                            "operand" : [ {
-                                                               "localId" : "235",
-                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                               "value" : "The",
-                                                               "type" : "Literal"
-                                                            }, {
-                                                               "localId" : "236",
-                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                               "value" : " ",
-                                                               "type" : "Literal"
-                                                            } ]
-                                                         }, {
-                                                            "localId" : "238",
-                                                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                            "value" : "quick",
-                                                            "type" : "Literal"
-                                                         } ]
-                                                      }, {
-                                                         "localId" : "240",
-                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                         "value" : " ",
-                                                         "type" : "Literal"
-                                                      } ]
-                                                   }, {
-                                                      "localId" : "242",
-                                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                      "value" : "brown",
-                                                      "type" : "Literal"
-                                                   } ]
-                                                }, {
-                                                   "localId" : "244",
-                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                   "value" : " ",
-                                                   "type" : "Literal"
-                                                } ]
-                                             }, {
-                                                "localId" : "246",
-                                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                "value" : "fox",
-                                                "type" : "Literal"
-                                             } ]
-                                          }, {
-                                             "localId" : "248",
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                             "value" : " ",
-                                             "type" : "Literal"
-                                          } ]
-                                       }, {
-                                          "localId" : "250",
-                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                          "value" : "jumps",
-                                          "type" : "Literal"
-                                       } ]
-                                    }, {
-                                       "localId" : "252",
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                       "value" : " ",
-                                       "type" : "Literal"
-                                    } ]
-                                 }, {
-                                    "localId" : "254",
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "over",
-                                    "type" : "Literal"
-                                 } ]
-                              }, {
-                                 "localId" : "256",
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : " ",
-                                 "type" : "Literal"
-                              } ]
-                           }, {
-                              "localId" : "258",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "the",
-                              "type" : "Literal"
-                           } ]
-                        }, {
-                           "localId" : "260",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : " ",
-                           "type" : "Literal"
-                        } ]
-                     }, {
-                        "localId" : "262",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "lazy",
-                        "type" : "Literal"
-                     } ]
-                  }, {
-                     "localId" : "264",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : " ",
-                     "type" : "Literal"
-                  } ]
-               }, {
-                  "localId" : "266",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "dog.",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "269",
-            "name" : "ConcatNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "269",
-                  "s" : [ {
-                     "value" : [ "","define ","ConcatNull",": " ]
-                  }, {
-                     "r" : "274",
-                     "s" : [ {
-                        "r" : "271",
-                        "s" : [ {
-                           "value" : [ "'Hello'" ]
-                        } ]
-                     }, {
-                        "r" : "272",
-                        "value" : [ " + ","null" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "274",
-               "type" : "Concatenate",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "271",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Hello",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "273",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "272",
-                     "type" : "Null"
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "276",
-            "name" : "Hello",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "276",
-                  "s" : [ {
-                     "value" : [ "","define ","Hello",": " ]
-                  }, {
-                     "r" : "277",
-                     "s" : [ {
-                        "value" : [ "'Hello'" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "277",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "Hello",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "279",
-            "name" : "World",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "279",
-                  "s" : [ {
-                     "value" : [ "","define ","World",": " ]
-                  }, {
-                     "r" : "280",
-                     "s" : [ {
-                        "value" : [ "'World'" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "280",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "World",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "282",
-            "name" : "HelloWorldVariables",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "282",
-                  "s" : [ {
-                     "value" : [ "","define ","HelloWorldVariables",": " ]
-                  }, {
-                     "r" : "286",
-                     "s" : [ {
-                        "r" : "284",
-                        "s" : [ {
-                           "value" : [ "Hello" ]
-                        } ]
-                     }, {
-                        "value" : [ " + " ]
-                     }, {
-                        "r" : "285",
-                        "s" : [ {
-                           "value" : [ "World" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "286",
-               "type" : "Concatenate",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "284",
-                  "name" : "Hello",
-                  "type" : "ExpressionRef"
-               }, {
-                  "localId" : "285",
-                  "name" : "World",
-                  "type" : "ExpressionRef"
-               } ]
-            }
-         }, {
-            "localId" : "288",
-            "name" : "AndHelloWorld",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "288",
-                  "s" : [ {
-                     "value" : [ "","define ","AndHelloWorld",": " ]
-                  }, {
-                     "r" : "289",
-                     "s" : [ {
-                        "r" : "290",
-                        "s" : [ {
-                           "value" : [ "'Hello'" ]
-                        } ]
-                     }, {
-                        "value" : [ " & " ]
-                     }, {
-                        "r" : "291",
-                        "s" : [ {
-                           "value" : [ "'World'" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "289",
-               "type" : "Concatenate",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "295",
-                  "type" : "Coalesce",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "290",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "Hello",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "292",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "",
-                     "type" : "Literal"
-                  } ]
-               }, {
-                  "localId" : "299",
-                  "type" : "Coalesce",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "291",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "World",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "296",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "",
-                     "type" : "Literal"
-                  } ]
-               } ]
-            }
-         }, {
-            "localId" : "301",
-            "name" : "AndSentence",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "301",
-                  "s" : [ {
-                     "value" : [ "","define ","AndSentence",": " ]
-                  }, {
-                     "r" : "302",
-                     "s" : [ {
-                        "r" : "303",
-                        "s" : [ {
-                           "r" : "304",
-                           "s" : [ {
-                              "r" : "305",
-                              "s" : [ {
-                                 "r" : "306",
-                                 "s" : [ {
-                                    "r" : "307",
-                                    "s" : [ {
-                                       "r" : "308",
-                                       "s" : [ {
-                                          "r" : "309",
-                                          "s" : [ {
-                                             "r" : "310",
-                                             "s" : [ {
-                                                "r" : "311",
-                                                "s" : [ {
-                                                   "r" : "312",
-                                                   "s" : [ {
-                                                      "r" : "313",
-                                                      "s" : [ {
-                                                         "r" : "314",
-                                                         "s" : [ {
-                                                            "r" : "315",
-                                                            "s" : [ {
-                                                               "r" : "316",
-                                                               "s" : [ {
-                                                                  "r" : "317",
-                                                                  "s" : [ {
-                                                                     "r" : "318",
-                                                                     "s" : [ {
-                                                                        "value" : [ "'The'" ]
-                                                                     } ]
-                                                                  }, {
-                                                                     "value" : [ " & " ]
-                                                                  }, {
-                                                                     "r" : "319",
-                                                                     "s" : [ {
-                                                                        "value" : [ "' '" ]
-                                                                     } ]
-                                                                  } ]
-                                                               }, {
-                                                                  "value" : [ " & " ]
-                                                               }, {
-                                                                  "r" : "328",
-                                                                  "s" : [ {
-                                                                     "value" : [ "'quick'" ]
-                                                                  } ]
-                                                               } ]
-                                                            }, {
-                                                               "value" : [ " & " ]
-                                                            }, {
-                                                               "r" : "337",
-                                                               "s" : [ {
-                                                                  "value" : [ "' '" ]
-                                                               } ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ " & " ]
-                                                         }, {
-                                                            "r" : "346",
-                                                            "s" : [ {
-                                                               "value" : [ "'brown'" ]
-                                                            } ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ " & " ]
-                                                      }, {
-                                                         "r" : "355",
-                                                         "s" : [ {
-                                                            "value" : [ "' '" ]
-                                                         } ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ " & " ]
-                                                   }, {
-                                                      "r" : "364",
-                                                      "s" : [ {
-                                                         "value" : [ "'fox'" ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ " & " ]
-                                                }, {
-                                                   "r" : "373",
-                                                   "s" : [ {
-                                                      "value" : [ "' '" ]
-                                                   } ]
-                                                } ]
-                                             }, {
-                                                "value" : [ " & " ]
-                                             }, {
-                                                "r" : "382",
-                                                "s" : [ {
-                                                   "value" : [ "'jumps'" ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ " & " ]
-                                          }, {
-                                             "r" : "391",
-                                             "s" : [ {
-                                                "value" : [ "' '" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "\n                  & " ]
-                                       }, {
-                                          "r" : "400",
-                                          "s" : [ {
-                                             "value" : [ "'over'" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " & " ]
-                                    }, {
-                                       "r" : "409",
-                                       "s" : [ {
-                                          "value" : [ "' '" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " & " ]
-                                 }, {
-                                    "r" : "418",
-                                    "s" : [ {
-                                       "value" : [ "'the'" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " & " ]
-                              }, {
-                                 "r" : "427",
-                                 "s" : [ {
-                                    "value" : [ "' '" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " & " ]
-                           }, {
-                              "r" : "436",
-                              "s" : [ {
-                                 "value" : [ "'lazy'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ " & " ]
-                        }, {
-                           "r" : "445",
-                           "s" : [ {
-                              "value" : [ "' '" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " & " ]
-                     }, {
-                        "r" : "454",
-                        "s" : [ {
-                           "value" : [ "'dog.'" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "302",
-               "type" : "Concatenate",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "458",
-                  "type" : "Coalesce",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "303",
-                     "type" : "Concatenate",
-                     "signature" : [ ],
-                     "operand" : [ {
-                        "localId" : "449",
-                        "type" : "Coalesce",
-                        "signature" : [ ],
-                        "operand" : [ {
-                           "localId" : "304",
-                           "type" : "Concatenate",
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "localId" : "440",
-                              "type" : "Coalesce",
-                              "signature" : [ ],
-                              "operand" : [ {
-                                 "localId" : "305",
-                                 "type" : "Concatenate",
-                                 "signature" : [ ],
-                                 "operand" : [ {
-                                    "localId" : "431",
-                                    "type" : "Coalesce",
-                                    "signature" : [ ],
-                                    "operand" : [ {
-                                       "localId" : "306",
-                                       "type" : "Concatenate",
-                                       "signature" : [ ],
-                                       "operand" : [ {
-                                          "localId" : "422",
-                                          "type" : "Coalesce",
-                                          "signature" : [ ],
-                                          "operand" : [ {
-                                             "localId" : "307",
-                                             "type" : "Concatenate",
-                                             "signature" : [ ],
-                                             "operand" : [ {
-                                                "localId" : "413",
-                                                "type" : "Coalesce",
-                                                "signature" : [ ],
-                                                "operand" : [ {
-                                                   "localId" : "308",
-                                                   "type" : "Concatenate",
-                                                   "signature" : [ ],
-                                                   "operand" : [ {
-                                                      "localId" : "404",
-                                                      "type" : "Coalesce",
-                                                      "signature" : [ ],
-                                                      "operand" : [ {
-                                                         "localId" : "309",
-                                                         "type" : "Concatenate",
-                                                         "signature" : [ ],
-                                                         "operand" : [ {
-                                                            "localId" : "395",
-                                                            "type" : "Coalesce",
-                                                            "signature" : [ ],
-                                                            "operand" : [ {
-                                                               "localId" : "310",
-                                                               "type" : "Concatenate",
-                                                               "signature" : [ ],
-                                                               "operand" : [ {
-                                                                  "localId" : "386",
-                                                                  "type" : "Coalesce",
-                                                                  "signature" : [ ],
-                                                                  "operand" : [ {
-                                                                     "localId" : "311",
-                                                                     "type" : "Concatenate",
-                                                                     "signature" : [ ],
-                                                                     "operand" : [ {
-                                                                        "localId" : "377",
-                                                                        "type" : "Coalesce",
-                                                                        "signature" : [ ],
-                                                                        "operand" : [ {
-                                                                           "localId" : "312",
-                                                                           "type" : "Concatenate",
-                                                                           "signature" : [ ],
-                                                                           "operand" : [ {
-                                                                              "localId" : "368",
-                                                                              "type" : "Coalesce",
-                                                                              "signature" : [ ],
-                                                                              "operand" : [ {
-                                                                                 "localId" : "313",
-                                                                                 "type" : "Concatenate",
-                                                                                 "signature" : [ ],
-                                                                                 "operand" : [ {
-                                                                                    "localId" : "359",
-                                                                                    "type" : "Coalesce",
-                                                                                    "signature" : [ ],
-                                                                                    "operand" : [ {
-                                                                                       "localId" : "314",
-                                                                                       "type" : "Concatenate",
-                                                                                       "signature" : [ ],
-                                                                                       "operand" : [ {
-                                                                                          "localId" : "350",
-                                                                                          "type" : "Coalesce",
-                                                                                          "signature" : [ ],
-                                                                                          "operand" : [ {
-                                                                                             "localId" : "315",
-                                                                                             "type" : "Concatenate",
-                                                                                             "signature" : [ ],
-                                                                                             "operand" : [ {
-                                                                                                "localId" : "341",
-                                                                                                "type" : "Coalesce",
-                                                                                                "signature" : [ ],
-                                                                                                "operand" : [ {
-                                                                                                   "localId" : "316",
-                                                                                                   "type" : "Concatenate",
-                                                                                                   "signature" : [ ],
-                                                                                                   "operand" : [ {
-                                                                                                      "localId" : "332",
-                                                                                                      "type" : "Coalesce",
-                                                                                                      "signature" : [ ],
-                                                                                                      "operand" : [ {
-                                                                                                         "localId" : "317",
-                                                                                                         "type" : "Concatenate",
-                                                                                                         "signature" : [ ],
-                                                                                                         "operand" : [ {
-                                                                                                            "localId" : "323",
-                                                                                                            "type" : "Coalesce",
-                                                                                                            "signature" : [ ],
-                                                                                                            "operand" : [ {
-                                                                                                               "localId" : "318",
-                                                                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                                               "value" : "The",
-                                                                                                               "type" : "Literal"
-                                                                                                            }, {
-                                                                                                               "localId" : "320",
-                                                                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                                               "value" : "",
-                                                                                                               "type" : "Literal"
-                                                                                                            } ]
-                                                                                                         }, {
-                                                                                                            "localId" : "327",
-                                                                                                            "type" : "Coalesce",
-                                                                                                            "signature" : [ ],
-                                                                                                            "operand" : [ {
-                                                                                                               "localId" : "319",
-                                                                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                                               "value" : " ",
-                                                                                                               "type" : "Literal"
-                                                                                                            }, {
-                                                                                                               "localId" : "324",
-                                                                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                                               "value" : "",
-                                                                                                               "type" : "Literal"
-                                                                                                            } ]
-                                                                                                         } ]
-                                                                                                      }, {
-                                                                                                         "localId" : "329",
-                                                                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                                         "value" : "",
-                                                                                                         "type" : "Literal"
-                                                                                                      } ]
-                                                                                                   }, {
-                                                                                                      "localId" : "336",
-                                                                                                      "type" : "Coalesce",
-                                                                                                      "signature" : [ ],
-                                                                                                      "operand" : [ {
-                                                                                                         "localId" : "328",
-                                                                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                                         "value" : "quick",
-                                                                                                         "type" : "Literal"
-                                                                                                      }, {
-                                                                                                         "localId" : "333",
-                                                                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                                         "value" : "",
-                                                                                                         "type" : "Literal"
-                                                                                                      } ]
-                                                                                                   } ]
-                                                                                                }, {
-                                                                                                   "localId" : "338",
-                                                                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                                   "value" : "",
-                                                                                                   "type" : "Literal"
-                                                                                                } ]
-                                                                                             }, {
-                                                                                                "localId" : "345",
-                                                                                                "type" : "Coalesce",
-                                                                                                "signature" : [ ],
-                                                                                                "operand" : [ {
-                                                                                                   "localId" : "337",
-                                                                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                                   "value" : " ",
-                                                                                                   "type" : "Literal"
-                                                                                                }, {
-                                                                                                   "localId" : "342",
-                                                                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                                   "value" : "",
-                                                                                                   "type" : "Literal"
-                                                                                                } ]
-                                                                                             } ]
-                                                                                          }, {
-                                                                                             "localId" : "347",
-                                                                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                             "value" : "",
-                                                                                             "type" : "Literal"
-                                                                                          } ]
-                                                                                       }, {
-                                                                                          "localId" : "354",
-                                                                                          "type" : "Coalesce",
-                                                                                          "signature" : [ ],
-                                                                                          "operand" : [ {
-                                                                                             "localId" : "346",
-                                                                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                             "value" : "brown",
-                                                                                             "type" : "Literal"
-                                                                                          }, {
-                                                                                             "localId" : "351",
-                                                                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                             "value" : "",
-                                                                                             "type" : "Literal"
-                                                                                          } ]
-                                                                                       } ]
-                                                                                    }, {
-                                                                                       "localId" : "356",
-                                                                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                       "value" : "",
-                                                                                       "type" : "Literal"
-                                                                                    } ]
-                                                                                 }, {
-                                                                                    "localId" : "363",
-                                                                                    "type" : "Coalesce",
-                                                                                    "signature" : [ ],
-                                                                                    "operand" : [ {
-                                                                                       "localId" : "355",
-                                                                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                       "value" : " ",
-                                                                                       "type" : "Literal"
-                                                                                    }, {
-                                                                                       "localId" : "360",
-                                                                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                       "value" : "",
-                                                                                       "type" : "Literal"
-                                                                                    } ]
-                                                                                 } ]
-                                                                              }, {
-                                                                                 "localId" : "365",
-                                                                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                 "value" : "",
-                                                                                 "type" : "Literal"
-                                                                              } ]
-                                                                           }, {
-                                                                              "localId" : "372",
-                                                                              "type" : "Coalesce",
-                                                                              "signature" : [ ],
-                                                                              "operand" : [ {
-                                                                                 "localId" : "364",
-                                                                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                 "value" : "fox",
-                                                                                 "type" : "Literal"
-                                                                              }, {
-                                                                                 "localId" : "369",
-                                                                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                                 "value" : "",
-                                                                                 "type" : "Literal"
-                                                                              } ]
-                                                                           } ]
-                                                                        }, {
-                                                                           "localId" : "374",
-                                                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                           "value" : "",
-                                                                           "type" : "Literal"
-                                                                        } ]
-                                                                     }, {
-                                                                        "localId" : "381",
-                                                                        "type" : "Coalesce",
-                                                                        "signature" : [ ],
-                                                                        "operand" : [ {
-                                                                           "localId" : "373",
-                                                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                           "value" : " ",
-                                                                           "type" : "Literal"
-                                                                        }, {
-                                                                           "localId" : "378",
-                                                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                           "value" : "",
-                                                                           "type" : "Literal"
-                                                                        } ]
-                                                                     } ]
-                                                                  }, {
-                                                                     "localId" : "383",
-                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                     "value" : "",
-                                                                     "type" : "Literal"
-                                                                  } ]
-                                                               }, {
-                                                                  "localId" : "390",
-                                                                  "type" : "Coalesce",
-                                                                  "signature" : [ ],
-                                                                  "operand" : [ {
-                                                                     "localId" : "382",
-                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                     "value" : "jumps",
-                                                                     "type" : "Literal"
-                                                                  }, {
-                                                                     "localId" : "387",
-                                                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                                     "value" : "",
-                                                                     "type" : "Literal"
-                                                                  } ]
-                                                               } ]
-                                                            }, {
-                                                               "localId" : "392",
-                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                               "value" : "",
-                                                               "type" : "Literal"
-                                                            } ]
-                                                         }, {
-                                                            "localId" : "399",
-                                                            "type" : "Coalesce",
-                                                            "signature" : [ ],
-                                                            "operand" : [ {
-                                                               "localId" : "391",
-                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                               "value" : " ",
-                                                               "type" : "Literal"
-                                                            }, {
-                                                               "localId" : "396",
-                                                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                               "value" : "",
-                                                               "type" : "Literal"
-                                                            } ]
-                                                         } ]
-                                                      }, {
-                                                         "localId" : "401",
-                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                         "value" : "",
-                                                         "type" : "Literal"
-                                                      } ]
-                                                   }, {
-                                                      "localId" : "408",
-                                                      "type" : "Coalesce",
-                                                      "signature" : [ ],
-                                                      "operand" : [ {
-                                                         "localId" : "400",
-                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                         "value" : "over",
-                                                         "type" : "Literal"
-                                                      }, {
-                                                         "localId" : "405",
-                                                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                         "value" : "",
-                                                         "type" : "Literal"
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "localId" : "410",
-                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                   "value" : "",
-                                                   "type" : "Literal"
-                                                } ]
-                                             }, {
-                                                "localId" : "417",
-                                                "type" : "Coalesce",
-                                                "signature" : [ ],
-                                                "operand" : [ {
-                                                   "localId" : "409",
-                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                   "value" : " ",
-                                                   "type" : "Literal"
-                                                }, {
-                                                   "localId" : "414",
-                                                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                                   "value" : "",
-                                                   "type" : "Literal"
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "localId" : "419",
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                             "value" : "",
-                                             "type" : "Literal"
-                                          } ]
-                                       }, {
-                                          "localId" : "426",
-                                          "type" : "Coalesce",
-                                          "signature" : [ ],
-                                          "operand" : [ {
-                                             "localId" : "418",
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                             "value" : "the",
-                                             "type" : "Literal"
-                                          }, {
-                                             "localId" : "423",
-                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                             "value" : "",
-                                             "type" : "Literal"
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "localId" : "428",
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                       "value" : "",
-                                       "type" : "Literal"
-                                    } ]
-                                 }, {
-                                    "localId" : "435",
-                                    "type" : "Coalesce",
-                                    "signature" : [ ],
-                                    "operand" : [ {
-                                       "localId" : "427",
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                       "value" : " ",
-                                       "type" : "Literal"
-                                    }, {
-                                       "localId" : "432",
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                       "value" : "",
-                                       "type" : "Literal"
-                                    } ]
-                                 } ]
-                              }, {
-                                 "localId" : "437",
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "",
-                                 "type" : "Literal"
-                              } ]
-                           }, {
-                              "localId" : "444",
-                              "type" : "Coalesce",
-                              "signature" : [ ],
-                              "operand" : [ {
-                                 "localId" : "436",
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "lazy",
-                                 "type" : "Literal"
-                              }, {
-                                 "localId" : "441",
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "",
-                                 "type" : "Literal"
-                              } ]
-                           } ]
-                        }, {
-                           "localId" : "446",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "",
-                           "type" : "Literal"
-                        } ]
-                     }, {
-                        "localId" : "453",
-                        "type" : "Coalesce",
-                        "signature" : [ ],
-                        "operand" : [ {
-                           "localId" : "445",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : " ",
-                           "type" : "Literal"
-                        }, {
-                           "localId" : "450",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "",
-                           "type" : "Literal"
-                        } ]
-                     } ]
-                  }, {
-                     "localId" : "455",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "",
-                     "type" : "Literal"
-                  } ]
-               }, {
-                  "localId" : "462",
-                  "type" : "Coalesce",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "454",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "dog.",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "459",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "",
-                     "type" : "Literal"
-                  } ]
-               } ]
-            }
-         }, {
-            "localId" : "464",
-            "name" : "AndConcatNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "464",
-                  "s" : [ {
-                     "value" : [ "","define ","AndConcatNull",": " ]
-                  }, {
-                     "r" : "465",
-                     "s" : [ {
-                        "r" : "466",
-                        "s" : [ {
-                           "value" : [ "'Hello'" ]
-                        } ]
-                     }, {
-                        "r" : "467",
-                        "value" : [ " & ","null" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "465",
-               "type" : "Concatenate",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "471",
-                  "type" : "Coalesce",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "466",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "Hello",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "468",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "",
-                     "type" : "Literal"
-                  } ]
-               }, {
-                  "localId" : "476",
-                  "type" : "Coalesce",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "477",
-                     "asType" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "467",
-                        "type" : "Null"
-                     }
-                  }, {
-                     "localId" : "472",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "",
-                     "type" : "Literal"
-                  } ]
-               } ]
-            }
-         }, {
-            "localId" : "479",
-            "name" : "AndHelloWorldVariables",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "479",
-                  "s" : [ {
-                     "value" : [ "","define ","AndHelloWorldVariables",": " ]
-                  }, {
-                     "r" : "480",
-                     "s" : [ {
-                        "r" : "481",
-                        "s" : [ {
-                           "value" : [ "Hello" ]
-                        } ]
-                     }, {
-                        "value" : [ " & " ]
-                     }, {
-                        "r" : "482",
-                        "s" : [ {
-                           "value" : [ "World" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "480",
-               "type" : "Concatenate",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "486",
-                  "type" : "Coalesce",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "481",
-                     "name" : "Hello",
-                     "type" : "ExpressionRef"
-                  }, {
-                     "localId" : "483",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "",
-                     "type" : "Literal"
-                  } ]
-               }, {
-                  "localId" : "490",
-                  "type" : "Coalesce",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "482",
-                     "name" : "World",
-                     "type" : "ExpressionRef"
-                  }, {
-                     "localId" : "487",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "",
-                     "type" : "Literal"
-                  } ]
-               } ]
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "CqlToElmError",
+      "message" : "You used a string literal: [Hello] here that matches an identifier in scope: [Hello]. Did you mean to use the identifier instead?",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "CqlToElmError",
+      "message" : "You used a string literal: [World] here that matches an identifier in scope: [World]. Did you mean to use the identifier instead?",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "CqlToElmError",
+      "message" : "You used a string literal: [Hello] here that matches an identifier in scope: [Hello]. Did you mean to use the identifier instead?",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "CqlToElmError",
+      "message" : "You used a string literal: [World] here that matches an identifier in scope: [World]. Did you mean to use the identifier instead?",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "CqlToElmError",
+      "message" : "You used a string literal: [Hello] here that matches an identifier in scope: [Hello]. Did you mean to use the identifier instead?",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "479"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "HelloWorld", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Hello'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "214"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ " + " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'World'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "215"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "216"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "Concatenate",
+          "localId" : "216",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "214",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Hello"
+          }, {
+            "type" : "Literal",
+            "localId" : "215",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "World"
+          } ]
+        },
+        "name" : "HelloWorld",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "Sentence", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ {
+                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                              "value" : {
+                                "s" : [ {
+                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                  "value" : {
+                                    "s" : [ {
+                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                      "value" : {
+                                        "s" : [ {
+                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                          "value" : {
+                                            "s" : [ {
+                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                              "value" : {
+                                                "s" : [ {
+                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                  "value" : {
+                                                    "s" : [ {
+                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                      "value" : {
+                                                        "s" : [ {
+                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                          "value" : {
+                                                            "s" : [ {
+                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                              "value" : {
+                                                                "s" : [ {
+                                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                  "value" : {
+                                                                    "s" : [ {
+                                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                      "value" : {
+                                                                        "s" : [ {
+                                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                          "value" : {
+                                                                            "s" : [ {
+                                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                              "value" : {
+                                                                                "s" : [ {
+                                                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                                  "value" : {
+                                                                                    "s" : [ "'The'" ]
+                                                                                  },
+                                                                                  "globalScope" : true
+                                                                                } ],
+                                                                                "r" : "235"
+                                                                              },
+                                                                              "globalScope" : true
+                                                                            }, {
+                                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                              "value" : {
+                                                                                "s" : [ " + " ]
+                                                                              },
+                                                                              "globalScope" : true
+                                                                            }, {
+                                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                              "value" : {
+                                                                                "s" : [ {
+                                                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                                  "value" : {
+                                                                                    "s" : [ "' '" ]
+                                                                                  },
+                                                                                  "globalScope" : true
+                                                                                } ],
+                                                                                "r" : "236"
+                                                                              },
+                                                                              "globalScope" : true
+                                                                            } ],
+                                                                            "r" : "237"
+                                                                          },
+                                                                          "globalScope" : true
+                                                                        }, {
+                                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                          "value" : {
+                                                                            "s" : [ " + " ]
+                                                                          },
+                                                                          "globalScope" : true
+                                                                        }, {
+                                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                          "value" : {
+                                                                            "s" : [ {
+                                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                              "value" : {
+                                                                                "s" : [ "'quick'" ]
+                                                                              },
+                                                                              "globalScope" : true
+                                                                            } ],
+                                                                            "r" : "238"
+                                                                          },
+                                                                          "globalScope" : true
+                                                                        } ],
+                                                                        "r" : "239"
+                                                                      },
+                                                                      "globalScope" : true
+                                                                    }, {
+                                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                      "value" : {
+                                                                        "s" : [ " + " ]
+                                                                      },
+                                                                      "globalScope" : true
+                                                                    }, {
+                                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                      "value" : {
+                                                                        "s" : [ {
+                                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                          "value" : {
+                                                                            "s" : [ "' '" ]
+                                                                          },
+                                                                          "globalScope" : true
+                                                                        } ],
+                                                                        "r" : "240"
+                                                                      },
+                                                                      "globalScope" : true
+                                                                    } ],
+                                                                    "r" : "241"
+                                                                  },
+                                                                  "globalScope" : true
+                                                                }, {
+                                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                  "value" : {
+                                                                    "s" : [ " + " ]
+                                                                  },
+                                                                  "globalScope" : true
+                                                                }, {
+                                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                  "value" : {
+                                                                    "s" : [ {
+                                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                      "value" : {
+                                                                        "s" : [ "'brown'" ]
+                                                                      },
+                                                                      "globalScope" : true
+                                                                    } ],
+                                                                    "r" : "242"
+                                                                  },
+                                                                  "globalScope" : true
+                                                                } ],
+                                                                "r" : "243"
+                                                              },
+                                                              "globalScope" : true
+                                                            }, {
+                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                              "value" : {
+                                                                "s" : [ " + " ]
+                                                              },
+                                                              "globalScope" : true
+                                                            }, {
+                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                              "value" : {
+                                                                "s" : [ {
+                                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                  "value" : {
+                                                                    "s" : [ "' '" ]
+                                                                  },
+                                                                  "globalScope" : true
+                                                                } ],
+                                                                "r" : "244"
+                                                              },
+                                                              "globalScope" : true
+                                                            } ],
+                                                            "r" : "245"
+                                                          },
+                                                          "globalScope" : true
+                                                        }, {
+                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                          "value" : {
+                                                            "s" : [ " + " ]
+                                                          },
+                                                          "globalScope" : true
+                                                        }, {
+                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                          "value" : {
+                                                            "s" : [ {
+                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                              "value" : {
+                                                                "s" : [ "'fox'" ]
+                                                              },
+                                                              "globalScope" : true
+                                                            } ],
+                                                            "r" : "246"
+                                                          },
+                                                          "globalScope" : true
+                                                        } ],
+                                                        "r" : "247"
+                                                      },
+                                                      "globalScope" : true
+                                                    }, {
+                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                      "value" : {
+                                                        "s" : [ " + " ]
+                                                      },
+                                                      "globalScope" : true
+                                                    }, {
+                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                      "value" : {
+                                                        "s" : [ {
+                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                          "value" : {
+                                                            "s" : [ "' '" ]
+                                                          },
+                                                          "globalScope" : true
+                                                        } ],
+                                                        "r" : "248"
+                                                      },
+                                                      "globalScope" : true
+                                                    } ],
+                                                    "r" : "249"
+                                                  },
+                                                  "globalScope" : true
+                                                }, {
+                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                  "value" : {
+                                                    "s" : [ " + " ]
+                                                  },
+                                                  "globalScope" : true
+                                                }, {
+                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                  "value" : {
+                                                    "s" : [ {
+                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                      "value" : {
+                                                        "s" : [ "'jumps'" ]
+                                                      },
+                                                      "globalScope" : true
+                                                    } ],
+                                                    "r" : "250"
+                                                  },
+                                                  "globalScope" : true
+                                                } ],
+                                                "r" : "251"
+                                              },
+                                              "globalScope" : true
+                                            }, {
+                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                              "value" : {
+                                                "s" : [ " + " ]
+                                              },
+                                              "globalScope" : true
+                                            }, {
+                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                              "value" : {
+                                                "s" : [ {
+                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                  "value" : {
+                                                    "s" : [ "' '" ]
+                                                  },
+                                                  "globalScope" : true
+                                                } ],
+                                                "r" : "252"
+                                              },
+                                              "globalScope" : true
+                                            } ],
+                                            "r" : "253"
+                                          },
+                                          "globalScope" : true
+                                        }, {
+                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                          "value" : {
+                                            "s" : [ "\n                  + " ]
+                                          },
+                                          "globalScope" : true
+                                        }, {
+                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                          "value" : {
+                                            "s" : [ {
+                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                              "value" : {
+                                                "s" : [ "'over'" ]
+                                              },
+                                              "globalScope" : true
+                                            } ],
+                                            "r" : "254"
+                                          },
+                                          "globalScope" : true
+                                        } ],
+                                        "r" : "255"
+                                      },
+                                      "globalScope" : true
+                                    }, {
+                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                      "value" : {
+                                        "s" : [ " + " ]
+                                      },
+                                      "globalScope" : true
+                                    }, {
+                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                      "value" : {
+                                        "s" : [ {
+                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                          "value" : {
+                                            "s" : [ "' '" ]
+                                          },
+                                          "globalScope" : true
+                                        } ],
+                                        "r" : "256"
+                                      },
+                                      "globalScope" : true
+                                    } ],
+                                    "r" : "257"
+                                  },
+                                  "globalScope" : true
+                                }, {
+                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                  "value" : {
+                                    "s" : [ " + " ]
+                                  },
+                                  "globalScope" : true
+                                }, {
+                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                  "value" : {
+                                    "s" : [ {
+                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                      "value" : {
+                                        "s" : [ "'the'" ]
+                                      },
+                                      "globalScope" : true
+                                    } ],
+                                    "r" : "258"
+                                  },
+                                  "globalScope" : true
+                                } ],
+                                "r" : "259"
+                              },
+                              "globalScope" : true
+                            }, {
+                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                              "value" : {
+                                "s" : [ " + " ]
+                              },
+                              "globalScope" : true
+                            }, {
+                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                              "value" : {
+                                "s" : [ {
+                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                  "value" : {
+                                    "s" : [ "' '" ]
+                                  },
+                                  "globalScope" : true
+                                } ],
+                                "r" : "260"
+                              },
+                              "globalScope" : true
+                            } ],
+                            "r" : "261"
+                          },
+                          "globalScope" : true
+                        }, {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ " + " ]
+                          },
+                          "globalScope" : true
+                        }, {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ {
+                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                              "value" : {
+                                "s" : [ "'lazy'" ]
+                              },
+                              "globalScope" : true
+                            } ],
+                            "r" : "262"
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "263"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ " + " ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "' '" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "264"
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "265"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ " + " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'dog.'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "266"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "267"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "218"
+          }
+        } ],
+        "localId" : "218",
+        "expression" : {
+          "type" : "Concatenate",
+          "localId" : "267",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Concatenate",
+            "localId" : "265",
+            "signature" : [ ],
+            "operand" : [ {
+              "type" : "Concatenate",
+              "localId" : "263",
+              "signature" : [ ],
+              "operand" : [ {
+                "type" : "Concatenate",
+                "localId" : "261",
+                "signature" : [ ],
+                "operand" : [ {
+                  "type" : "Concatenate",
+                  "localId" : "259",
+                  "signature" : [ ],
+                  "operand" : [ {
+                    "type" : "Concatenate",
+                    "localId" : "257",
+                    "signature" : [ ],
+                    "operand" : [ {
+                      "type" : "Concatenate",
+                      "localId" : "255",
+                      "signature" : [ ],
+                      "operand" : [ {
+                        "type" : "Concatenate",
+                        "localId" : "253",
+                        "signature" : [ ],
+                        "operand" : [ {
+                          "type" : "Concatenate",
+                          "localId" : "251",
+                          "signature" : [ ],
+                          "operand" : [ {
+                            "type" : "Concatenate",
+                            "localId" : "249",
+                            "signature" : [ ],
+                            "operand" : [ {
+                              "type" : "Concatenate",
+                              "localId" : "247",
+                              "signature" : [ ],
+                              "operand" : [ {
+                                "type" : "Concatenate",
+                                "localId" : "245",
+                                "signature" : [ ],
+                                "operand" : [ {
+                                  "type" : "Concatenate",
+                                  "localId" : "243",
+                                  "signature" : [ ],
+                                  "operand" : [ {
+                                    "type" : "Concatenate",
+                                    "localId" : "241",
+                                    "signature" : [ ],
+                                    "operand" : [ {
+                                      "type" : "Concatenate",
+                                      "localId" : "239",
+                                      "signature" : [ ],
+                                      "operand" : [ {
+                                        "type" : "Concatenate",
+                                        "localId" : "237",
+                                        "signature" : [ ],
+                                        "operand" : [ {
+                                          "type" : "Literal",
+                                          "localId" : "235",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                          "value" : "The"
+                                        }, {
+                                          "type" : "Literal",
+                                          "localId" : "236",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                          "value" : " "
+                                        } ]
+                                      }, {
+                                        "type" : "Literal",
+                                        "localId" : "238",
+                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                        "value" : "quick"
+                                      } ]
+                                    }, {
+                                      "type" : "Literal",
+                                      "localId" : "240",
+                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                      "value" : " "
+                                    } ]
+                                  }, {
+                                    "type" : "Literal",
+                                    "localId" : "242",
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : "brown"
+                                  } ]
+                                }, {
+                                  "type" : "Literal",
+                                  "localId" : "244",
+                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                  "value" : " "
+                                } ]
+                              }, {
+                                "type" : "Literal",
+                                "localId" : "246",
+                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                "value" : "fox"
+                              } ]
+                            }, {
+                              "type" : "Literal",
+                              "localId" : "248",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : " "
+                            } ]
+                          }, {
+                            "type" : "Literal",
+                            "localId" : "250",
+                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                            "value" : "jumps"
+                          } ]
+                        }, {
+                          "type" : "Literal",
+                          "localId" : "252",
+                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                          "value" : " "
+                        } ]
+                      }, {
+                        "type" : "Literal",
+                        "localId" : "254",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "over"
+                      } ]
+                    }, {
+                      "type" : "Literal",
+                      "localId" : "256",
+                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                      "value" : " "
+                    } ]
+                  }, {
+                    "type" : "Literal",
+                    "localId" : "258",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                    "value" : "the"
+                  } ]
+                }, {
+                  "type" : "Literal",
+                  "localId" : "260",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : " "
+                } ]
+              }, {
+                "type" : "Literal",
+                "localId" : "262",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "lazy"
+              } ]
+            }, {
+              "type" : "Literal",
+              "localId" : "264",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : " "
+            } ]
+          }, {
+            "type" : "Literal",
+            "localId" : "266",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "dog."
+          } ]
+        },
+        "name" : "Sentence",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ConcatNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Hello'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "271"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ " + ", "null" ],
+                    "r" : "272"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "274"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "269"
+          }
+        } ],
+        "localId" : "269",
+        "expression" : {
+          "type" : "Concatenate",
+          "localId" : "274",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "271",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Hello"
+          }, {
+            "type" : "As",
+            "localId" : "273",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "272"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ]
+        },
+        "name" : "ConcatNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "Hello", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "'Hello'" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "277"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "276"
+          }
+        } ],
+        "localId" : "276",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "277",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "Hello"
+        },
+        "name" : "Hello",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "World", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "'World'" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "280"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "279"
+          }
+        } ],
+        "localId" : "279",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "280",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "World"
+        },
+        "name" : "World",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "HelloWorldVariables", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "Hello" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "284"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ " + " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "World" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "285"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "286"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "282"
+          }
+        } ],
+        "localId" : "282",
+        "expression" : {
+          "type" : "Concatenate",
+          "localId" : "286",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "ExpressionRef",
+            "localId" : "284",
+            "name" : "Hello"
+          }, {
+            "type" : "ExpressionRef",
+            "localId" : "285",
+            "name" : "World"
+          } ]
+        },
+        "name" : "HelloWorldVariables",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "AndHelloWorld", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Hello'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "290"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ " & " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'World'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "291"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "289"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "288"
+          }
+        } ],
+        "localId" : "288",
+        "expression" : {
+          "type" : "Concatenate",
+          "localId" : "289",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Coalesce",
+            "localId" : "295",
+            "signature" : [ ],
+            "operand" : [ {
+              "type" : "Literal",
+              "localId" : "290",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Hello"
+            }, {
+              "type" : "Literal",
+              "localId" : "292",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ""
+            } ]
+          }, {
+            "type" : "Coalesce",
+            "localId" : "299",
+            "signature" : [ ],
+            "operand" : [ {
+              "type" : "Literal",
+              "localId" : "291",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "World"
+            }, {
+              "type" : "Literal",
+              "localId" : "296",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ""
+            } ]
+          } ]
+        },
+        "name" : "AndHelloWorld",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "AndSentence", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ {
+                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                              "value" : {
+                                "s" : [ {
+                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                  "value" : {
+                                    "s" : [ {
+                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                      "value" : {
+                                        "s" : [ {
+                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                          "value" : {
+                                            "s" : [ {
+                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                              "value" : {
+                                                "s" : [ {
+                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                  "value" : {
+                                                    "s" : [ {
+                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                      "value" : {
+                                                        "s" : [ {
+                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                          "value" : {
+                                                            "s" : [ {
+                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                              "value" : {
+                                                                "s" : [ {
+                                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                  "value" : {
+                                                                    "s" : [ {
+                                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                      "value" : {
+                                                                        "s" : [ {
+                                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                          "value" : {
+                                                                            "s" : [ {
+                                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                              "value" : {
+                                                                                "s" : [ {
+                                                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                                  "value" : {
+                                                                                    "s" : [ "'The'" ]
+                                                                                  },
+                                                                                  "globalScope" : true
+                                                                                } ],
+                                                                                "r" : "318"
+                                                                              },
+                                                                              "globalScope" : true
+                                                                            }, {
+                                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                              "value" : {
+                                                                                "s" : [ " & " ]
+                                                                              },
+                                                                              "globalScope" : true
+                                                                            }, {
+                                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                              "value" : {
+                                                                                "s" : [ {
+                                                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                                  "value" : {
+                                                                                    "s" : [ "' '" ]
+                                                                                  },
+                                                                                  "globalScope" : true
+                                                                                } ],
+                                                                                "r" : "319"
+                                                                              },
+                                                                              "globalScope" : true
+                                                                            } ],
+                                                                            "r" : "317"
+                                                                          },
+                                                                          "globalScope" : true
+                                                                        }, {
+                                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                          "value" : {
+                                                                            "s" : [ " & " ]
+                                                                          },
+                                                                          "globalScope" : true
+                                                                        }, {
+                                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                          "value" : {
+                                                                            "s" : [ {
+                                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                              "value" : {
+                                                                                "s" : [ "'quick'" ]
+                                                                              },
+                                                                              "globalScope" : true
+                                                                            } ],
+                                                                            "r" : "328"
+                                                                          },
+                                                                          "globalScope" : true
+                                                                        } ],
+                                                                        "r" : "316"
+                                                                      },
+                                                                      "globalScope" : true
+                                                                    }, {
+                                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                      "value" : {
+                                                                        "s" : [ " & " ]
+                                                                      },
+                                                                      "globalScope" : true
+                                                                    }, {
+                                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                      "value" : {
+                                                                        "s" : [ {
+                                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                          "value" : {
+                                                                            "s" : [ "' '" ]
+                                                                          },
+                                                                          "globalScope" : true
+                                                                        } ],
+                                                                        "r" : "337"
+                                                                      },
+                                                                      "globalScope" : true
+                                                                    } ],
+                                                                    "r" : "315"
+                                                                  },
+                                                                  "globalScope" : true
+                                                                }, {
+                                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                  "value" : {
+                                                                    "s" : [ " & " ]
+                                                                  },
+                                                                  "globalScope" : true
+                                                                }, {
+                                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                  "value" : {
+                                                                    "s" : [ {
+                                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                      "value" : {
+                                                                        "s" : [ "'brown'" ]
+                                                                      },
+                                                                      "globalScope" : true
+                                                                    } ],
+                                                                    "r" : "346"
+                                                                  },
+                                                                  "globalScope" : true
+                                                                } ],
+                                                                "r" : "314"
+                                                              },
+                                                              "globalScope" : true
+                                                            }, {
+                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                              "value" : {
+                                                                "s" : [ " & " ]
+                                                              },
+                                                              "globalScope" : true
+                                                            }, {
+                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                              "value" : {
+                                                                "s" : [ {
+                                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                                  "value" : {
+                                                                    "s" : [ "' '" ]
+                                                                  },
+                                                                  "globalScope" : true
+                                                                } ],
+                                                                "r" : "355"
+                                                              },
+                                                              "globalScope" : true
+                                                            } ],
+                                                            "r" : "313"
+                                                          },
+                                                          "globalScope" : true
+                                                        }, {
+                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                          "value" : {
+                                                            "s" : [ " & " ]
+                                                          },
+                                                          "globalScope" : true
+                                                        }, {
+                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                          "value" : {
+                                                            "s" : [ {
+                                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                              "value" : {
+                                                                "s" : [ "'fox'" ]
+                                                              },
+                                                              "globalScope" : true
+                                                            } ],
+                                                            "r" : "364"
+                                                          },
+                                                          "globalScope" : true
+                                                        } ],
+                                                        "r" : "312"
+                                                      },
+                                                      "globalScope" : true
+                                                    }, {
+                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                      "value" : {
+                                                        "s" : [ " & " ]
+                                                      },
+                                                      "globalScope" : true
+                                                    }, {
+                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                      "value" : {
+                                                        "s" : [ {
+                                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                          "value" : {
+                                                            "s" : [ "' '" ]
+                                                          },
+                                                          "globalScope" : true
+                                                        } ],
+                                                        "r" : "373"
+                                                      },
+                                                      "globalScope" : true
+                                                    } ],
+                                                    "r" : "311"
+                                                  },
+                                                  "globalScope" : true
+                                                }, {
+                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                  "value" : {
+                                                    "s" : [ " & " ]
+                                                  },
+                                                  "globalScope" : true
+                                                }, {
+                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                  "value" : {
+                                                    "s" : [ {
+                                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                      "value" : {
+                                                        "s" : [ "'jumps'" ]
+                                                      },
+                                                      "globalScope" : true
+                                                    } ],
+                                                    "r" : "382"
+                                                  },
+                                                  "globalScope" : true
+                                                } ],
+                                                "r" : "310"
+                                              },
+                                              "globalScope" : true
+                                            }, {
+                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                              "value" : {
+                                                "s" : [ " & " ]
+                                              },
+                                              "globalScope" : true
+                                            }, {
+                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                              "value" : {
+                                                "s" : [ {
+                                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                                  "value" : {
+                                                    "s" : [ "' '" ]
+                                                  },
+                                                  "globalScope" : true
+                                                } ],
+                                                "r" : "391"
+                                              },
+                                              "globalScope" : true
+                                            } ],
+                                            "r" : "309"
+                                          },
+                                          "globalScope" : true
+                                        }, {
+                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                          "value" : {
+                                            "s" : [ "\n                  & " ]
+                                          },
+                                          "globalScope" : true
+                                        }, {
+                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                          "value" : {
+                                            "s" : [ {
+                                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                              "value" : {
+                                                "s" : [ "'over'" ]
+                                              },
+                                              "globalScope" : true
+                                            } ],
+                                            "r" : "400"
+                                          },
+                                          "globalScope" : true
+                                        } ],
+                                        "r" : "308"
+                                      },
+                                      "globalScope" : true
+                                    }, {
+                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                      "value" : {
+                                        "s" : [ " & " ]
+                                      },
+                                      "globalScope" : true
+                                    }, {
+                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                      "value" : {
+                                        "s" : [ {
+                                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                          "value" : {
+                                            "s" : [ "' '" ]
+                                          },
+                                          "globalScope" : true
+                                        } ],
+                                        "r" : "409"
+                                      },
+                                      "globalScope" : true
+                                    } ],
+                                    "r" : "307"
+                                  },
+                                  "globalScope" : true
+                                }, {
+                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                  "value" : {
+                                    "s" : [ " & " ]
+                                  },
+                                  "globalScope" : true
+                                }, {
+                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                  "value" : {
+                                    "s" : [ {
+                                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                      "value" : {
+                                        "s" : [ "'the'" ]
+                                      },
+                                      "globalScope" : true
+                                    } ],
+                                    "r" : "418"
+                                  },
+                                  "globalScope" : true
+                                } ],
+                                "r" : "306"
+                              },
+                              "globalScope" : true
+                            }, {
+                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                              "value" : {
+                                "s" : [ " & " ]
+                              },
+                              "globalScope" : true
+                            }, {
+                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                              "value" : {
+                                "s" : [ {
+                                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                                  "value" : {
+                                    "s" : [ "' '" ]
+                                  },
+                                  "globalScope" : true
+                                } ],
+                                "r" : "427"
+                              },
+                              "globalScope" : true
+                            } ],
+                            "r" : "305"
+                          },
+                          "globalScope" : true
+                        }, {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ " & " ]
+                          },
+                          "globalScope" : true
+                        }, {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ {
+                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                              "value" : {
+                                "s" : [ "'lazy'" ]
+                              },
+                              "globalScope" : true
+                            } ],
+                            "r" : "436"
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "304"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ " & " ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "' '" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "445"
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "303"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ " & " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'dog.'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "454"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "302"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "301"
+          }
+        } ],
+        "localId" : "301",
+        "expression" : {
+          "type" : "Concatenate",
+          "localId" : "302",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Coalesce",
+            "localId" : "458",
+            "signature" : [ ],
+            "operand" : [ {
+              "type" : "Concatenate",
+              "localId" : "303",
+              "signature" : [ ],
+              "operand" : [ {
+                "type" : "Coalesce",
+                "localId" : "449",
+                "signature" : [ ],
+                "operand" : [ {
+                  "type" : "Concatenate",
+                  "localId" : "304",
+                  "signature" : [ ],
+                  "operand" : [ {
+                    "type" : "Coalesce",
+                    "localId" : "440",
+                    "signature" : [ ],
+                    "operand" : [ {
+                      "type" : "Concatenate",
+                      "localId" : "305",
+                      "signature" : [ ],
+                      "operand" : [ {
+                        "type" : "Coalesce",
+                        "localId" : "431",
+                        "signature" : [ ],
+                        "operand" : [ {
+                          "type" : "Concatenate",
+                          "localId" : "306",
+                          "signature" : [ ],
+                          "operand" : [ {
+                            "type" : "Coalesce",
+                            "localId" : "422",
+                            "signature" : [ ],
+                            "operand" : [ {
+                              "type" : "Concatenate",
+                              "localId" : "307",
+                              "signature" : [ ],
+                              "operand" : [ {
+                                "type" : "Coalesce",
+                                "localId" : "413",
+                                "signature" : [ ],
+                                "operand" : [ {
+                                  "type" : "Concatenate",
+                                  "localId" : "308",
+                                  "signature" : [ ],
+                                  "operand" : [ {
+                                    "type" : "Coalesce",
+                                    "localId" : "404",
+                                    "signature" : [ ],
+                                    "operand" : [ {
+                                      "type" : "Concatenate",
+                                      "localId" : "309",
+                                      "signature" : [ ],
+                                      "operand" : [ {
+                                        "type" : "Coalesce",
+                                        "localId" : "395",
+                                        "signature" : [ ],
+                                        "operand" : [ {
+                                          "type" : "Concatenate",
+                                          "localId" : "310",
+                                          "signature" : [ ],
+                                          "operand" : [ {
+                                            "type" : "Coalesce",
+                                            "localId" : "386",
+                                            "signature" : [ ],
+                                            "operand" : [ {
+                                              "type" : "Concatenate",
+                                              "localId" : "311",
+                                              "signature" : [ ],
+                                              "operand" : [ {
+                                                "type" : "Coalesce",
+                                                "localId" : "377",
+                                                "signature" : [ ],
+                                                "operand" : [ {
+                                                  "type" : "Concatenate",
+                                                  "localId" : "312",
+                                                  "signature" : [ ],
+                                                  "operand" : [ {
+                                                    "type" : "Coalesce",
+                                                    "localId" : "368",
+                                                    "signature" : [ ],
+                                                    "operand" : [ {
+                                                      "type" : "Concatenate",
+                                                      "localId" : "313",
+                                                      "signature" : [ ],
+                                                      "operand" : [ {
+                                                        "type" : "Coalesce",
+                                                        "localId" : "359",
+                                                        "signature" : [ ],
+                                                        "operand" : [ {
+                                                          "type" : "Concatenate",
+                                                          "localId" : "314",
+                                                          "signature" : [ ],
+                                                          "operand" : [ {
+                                                            "type" : "Coalesce",
+                                                            "localId" : "350",
+                                                            "signature" : [ ],
+                                                            "operand" : [ {
+                                                              "type" : "Concatenate",
+                                                              "localId" : "315",
+                                                              "signature" : [ ],
+                                                              "operand" : [ {
+                                                                "type" : "Coalesce",
+                                                                "localId" : "341",
+                                                                "signature" : [ ],
+                                                                "operand" : [ {
+                                                                  "type" : "Concatenate",
+                                                                  "localId" : "316",
+                                                                  "signature" : [ ],
+                                                                  "operand" : [ {
+                                                                    "type" : "Coalesce",
+                                                                    "localId" : "332",
+                                                                    "signature" : [ ],
+                                                                    "operand" : [ {
+                                                                      "type" : "Concatenate",
+                                                                      "localId" : "317",
+                                                                      "signature" : [ ],
+                                                                      "operand" : [ {
+                                                                        "type" : "Coalesce",
+                                                                        "localId" : "323",
+                                                                        "signature" : [ ],
+                                                                        "operand" : [ {
+                                                                          "type" : "Literal",
+                                                                          "localId" : "318",
+                                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                          "value" : "The"
+                                                                        }, {
+                                                                          "type" : "Literal",
+                                                                          "localId" : "320",
+                                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                          "value" : ""
+                                                                        } ]
+                                                                      }, {
+                                                                        "type" : "Coalesce",
+                                                                        "localId" : "327",
+                                                                        "signature" : [ ],
+                                                                        "operand" : [ {
+                                                                          "type" : "Literal",
+                                                                          "localId" : "319",
+                                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                          "value" : " "
+                                                                        }, {
+                                                                          "type" : "Literal",
+                                                                          "localId" : "324",
+                                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                          "value" : ""
+                                                                        } ]
+                                                                      } ]
+                                                                    }, {
+                                                                      "type" : "Literal",
+                                                                      "localId" : "329",
+                                                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                      "value" : ""
+                                                                    } ]
+                                                                  }, {
+                                                                    "type" : "Coalesce",
+                                                                    "localId" : "336",
+                                                                    "signature" : [ ],
+                                                                    "operand" : [ {
+                                                                      "type" : "Literal",
+                                                                      "localId" : "328",
+                                                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                      "value" : "quick"
+                                                                    }, {
+                                                                      "type" : "Literal",
+                                                                      "localId" : "333",
+                                                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                      "value" : ""
+                                                                    } ]
+                                                                  } ]
+                                                                }, {
+                                                                  "type" : "Literal",
+                                                                  "localId" : "338",
+                                                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                  "value" : ""
+                                                                } ]
+                                                              }, {
+                                                                "type" : "Coalesce",
+                                                                "localId" : "345",
+                                                                "signature" : [ ],
+                                                                "operand" : [ {
+                                                                  "type" : "Literal",
+                                                                  "localId" : "337",
+                                                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                  "value" : " "
+                                                                }, {
+                                                                  "type" : "Literal",
+                                                                  "localId" : "342",
+                                                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                                  "value" : ""
+                                                                } ]
+                                                              } ]
+                                                            }, {
+                                                              "type" : "Literal",
+                                                              "localId" : "347",
+                                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                              "value" : ""
+                                                            } ]
+                                                          }, {
+                                                            "type" : "Coalesce",
+                                                            "localId" : "354",
+                                                            "signature" : [ ],
+                                                            "operand" : [ {
+                                                              "type" : "Literal",
+                                                              "localId" : "346",
+                                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                              "value" : "brown"
+                                                            }, {
+                                                              "type" : "Literal",
+                                                              "localId" : "351",
+                                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                              "value" : ""
+                                                            } ]
+                                                          } ]
+                                                        }, {
+                                                          "type" : "Literal",
+                                                          "localId" : "356",
+                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                          "value" : ""
+                                                        } ]
+                                                      }, {
+                                                        "type" : "Coalesce",
+                                                        "localId" : "363",
+                                                        "signature" : [ ],
+                                                        "operand" : [ {
+                                                          "type" : "Literal",
+                                                          "localId" : "355",
+                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                          "value" : " "
+                                                        }, {
+                                                          "type" : "Literal",
+                                                          "localId" : "360",
+                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                          "value" : ""
+                                                        } ]
+                                                      } ]
+                                                    }, {
+                                                      "type" : "Literal",
+                                                      "localId" : "365",
+                                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                      "value" : ""
+                                                    } ]
+                                                  }, {
+                                                    "type" : "Coalesce",
+                                                    "localId" : "372",
+                                                    "signature" : [ ],
+                                                    "operand" : [ {
+                                                      "type" : "Literal",
+                                                      "localId" : "364",
+                                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                      "value" : "fox"
+                                                    }, {
+                                                      "type" : "Literal",
+                                                      "localId" : "369",
+                                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                      "value" : ""
+                                                    } ]
+                                                  } ]
+                                                }, {
+                                                  "type" : "Literal",
+                                                  "localId" : "374",
+                                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                  "value" : ""
+                                                } ]
+                                              }, {
+                                                "type" : "Coalesce",
+                                                "localId" : "381",
+                                                "signature" : [ ],
+                                                "operand" : [ {
+                                                  "type" : "Literal",
+                                                  "localId" : "373",
+                                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                  "value" : " "
+                                                }, {
+                                                  "type" : "Literal",
+                                                  "localId" : "378",
+                                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                                  "value" : ""
+                                                } ]
+                                              } ]
+                                            }, {
+                                              "type" : "Literal",
+                                              "localId" : "383",
+                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                              "value" : ""
+                                            } ]
+                                          }, {
+                                            "type" : "Coalesce",
+                                            "localId" : "390",
+                                            "signature" : [ ],
+                                            "operand" : [ {
+                                              "type" : "Literal",
+                                              "localId" : "382",
+                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                              "value" : "jumps"
+                                            }, {
+                                              "type" : "Literal",
+                                              "localId" : "387",
+                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                              "value" : ""
+                                            } ]
+                                          } ]
+                                        }, {
+                                          "type" : "Literal",
+                                          "localId" : "392",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                          "value" : ""
+                                        } ]
+                                      }, {
+                                        "type" : "Coalesce",
+                                        "localId" : "399",
+                                        "signature" : [ ],
+                                        "operand" : [ {
+                                          "type" : "Literal",
+                                          "localId" : "391",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                          "value" : " "
+                                        }, {
+                                          "type" : "Literal",
+                                          "localId" : "396",
+                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                          "value" : ""
+                                        } ]
+                                      } ]
+                                    }, {
+                                      "type" : "Literal",
+                                      "localId" : "401",
+                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                      "value" : ""
+                                    } ]
+                                  }, {
+                                    "type" : "Coalesce",
+                                    "localId" : "408",
+                                    "signature" : [ ],
+                                    "operand" : [ {
+                                      "type" : "Literal",
+                                      "localId" : "400",
+                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                      "value" : "over"
+                                    }, {
+                                      "type" : "Literal",
+                                      "localId" : "405",
+                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                      "value" : ""
+                                    } ]
+                                  } ]
+                                }, {
+                                  "type" : "Literal",
+                                  "localId" : "410",
+                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                  "value" : ""
+                                } ]
+                              }, {
+                                "type" : "Coalesce",
+                                "localId" : "417",
+                                "signature" : [ ],
+                                "operand" : [ {
+                                  "type" : "Literal",
+                                  "localId" : "409",
+                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                  "value" : " "
+                                }, {
+                                  "type" : "Literal",
+                                  "localId" : "414",
+                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                  "value" : ""
+                                } ]
+                              } ]
+                            }, {
+                              "type" : "Literal",
+                              "localId" : "419",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : ""
+                            } ]
+                          }, {
+                            "type" : "Coalesce",
+                            "localId" : "426",
+                            "signature" : [ ],
+                            "operand" : [ {
+                              "type" : "Literal",
+                              "localId" : "418",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "the"
+                            }, {
+                              "type" : "Literal",
+                              "localId" : "423",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : ""
+                            } ]
+                          } ]
+                        }, {
+                          "type" : "Literal",
+                          "localId" : "428",
+                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                          "value" : ""
+                        } ]
+                      }, {
+                        "type" : "Coalesce",
+                        "localId" : "435",
+                        "signature" : [ ],
+                        "operand" : [ {
+                          "type" : "Literal",
+                          "localId" : "427",
+                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                          "value" : " "
+                        }, {
+                          "type" : "Literal",
+                          "localId" : "432",
+                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                          "value" : ""
+                        } ]
+                      } ]
+                    }, {
+                      "type" : "Literal",
+                      "localId" : "437",
+                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                      "value" : ""
+                    } ]
+                  }, {
+                    "type" : "Coalesce",
+                    "localId" : "444",
+                    "signature" : [ ],
+                    "operand" : [ {
+                      "type" : "Literal",
+                      "localId" : "436",
+                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                      "value" : "lazy"
+                    }, {
+                      "type" : "Literal",
+                      "localId" : "441",
+                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                      "value" : ""
+                    } ]
+                  } ]
+                }, {
+                  "type" : "Literal",
+                  "localId" : "446",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : ""
+                } ]
+              }, {
+                "type" : "Coalesce",
+                "localId" : "453",
+                "signature" : [ ],
+                "operand" : [ {
+                  "type" : "Literal",
+                  "localId" : "445",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : " "
+                }, {
+                  "type" : "Literal",
+                  "localId" : "450",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : ""
+                } ]
+              } ]
+            }, {
+              "type" : "Literal",
+              "localId" : "455",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ""
+            } ]
+          }, {
+            "type" : "Coalesce",
+            "localId" : "462",
+            "signature" : [ ],
+            "operand" : [ {
+              "type" : "Literal",
+              "localId" : "454",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "dog."
+            }, {
+              "type" : "Literal",
+              "localId" : "459",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ""
+            } ]
+          } ]
+        },
+        "name" : "AndSentence",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "AndConcatNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Hello'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "466"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ " & ", "null" ],
+                    "r" : "467"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "465"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "464"
+          }
+        } ],
+        "localId" : "464",
+        "expression" : {
+          "type" : "Concatenate",
+          "localId" : "465",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Coalesce",
+            "localId" : "471",
+            "signature" : [ ],
+            "operand" : [ {
+              "type" : "Literal",
+              "localId" : "466",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Hello"
+            }, {
+              "type" : "Literal",
+              "localId" : "468",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ""
+            } ]
+          }, {
+            "type" : "Coalesce",
+            "localId" : "476",
+            "signature" : [ ],
+            "operand" : [ {
+              "type" : "As",
+              "localId" : "477",
+              "signature" : [ ],
+              "operand" : {
+                "type" : "Null",
+                "localId" : "467"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            }, {
+              "type" : "Literal",
+              "localId" : "472",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ""
+            } ]
+          } ]
+        },
+        "name" : "AndConcatNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "AndHelloWorldVariables", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "Hello" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "481"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ " & " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "World" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "482"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "480"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "479"
+          }
+        } ],
+        "localId" : "479",
+        "expression" : {
+          "type" : "Concatenate",
+          "localId" : "480",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Coalesce",
+            "localId" : "486",
+            "signature" : [ ],
+            "operand" : [ {
+              "type" : "ExpressionRef",
+              "localId" : "481",
+              "name" : "Hello"
+            }, {
+              "type" : "Literal",
+              "localId" : "483",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ""
+            } ]
+          }, {
+            "type" : "Coalesce",
+            "localId" : "490",
+            "signature" : [ ],
+            "operand" : [ {
+              "type" : "ExpressionRef",
+              "localId" : "482",
+              "name" : "World"
+            }, {
+              "type" : "Literal",
+              "localId" : "487",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ""
+            } ]
+          } ]
+        },
+        "name" : "AndHelloWorldVariables",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* Combine
@@ -1532,563 +2640,1069 @@ define CombineEmptyNull: Combine({}, ';')
 */
 
 module.exports['Combine'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "276",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "NoSeparator",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","NoSeparator",": " ]
-                  }, {
-                     "r" : "220",
-                     "s" : [ {
-                        "value" : [ "Combine","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "{ " ]
-                        }, {
-                           "r" : "214",
-                           "s" : [ {
-                              "value" : [ "'abc'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "215",
-                           "s" : [ {
-                              "value" : [ "'def'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "216",
-                           "s" : [ {
-                              "value" : [ "'ghi'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "217",
-                           "s" : [ {
-                              "value" : [ "'jkl'" ]
-                           } ]
-                        }, {
-                           "value" : [ " }" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "220",
-               "type" : "Combine",
-               "signature" : [ ],
-               "source" : {
-                  "localId" : "213",
-                  "type" : "List",
-                  "element" : [ {
-                     "localId" : "214",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "abc",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "215",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "def",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "216",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "ghi",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "217",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "jkl",
-                     "type" : "Literal"
-                  } ]
-               }
-            }
-         }, {
-            "localId" : "222",
-            "name" : "Separator",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "222",
-                  "s" : [ {
-                     "value" : [ "","define ","Separator",": " ]
-                  }, {
-                     "r" : "231",
-                     "s" : [ {
-                        "value" : [ "Combine","(" ]
-                     }, {
-                        "r" : "223",
-                        "s" : [ {
-                           "value" : [ "{ " ]
-                        }, {
-                           "r" : "224",
-                           "s" : [ {
-                              "value" : [ "'abc'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "225",
-                           "s" : [ {
-                              "value" : [ "'def'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "226",
-                           "s" : [ {
-                              "value" : [ "'ghi'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "227",
-                           "s" : [ {
-                              "value" : [ "'jkl'" ]
-                           } ]
-                        }, {
-                           "value" : [ " }" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "228",
-                        "s" : [ {
-                           "value" : [ "';'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "231",
-               "type" : "Combine",
-               "signature" : [ ],
-               "source" : {
-                  "localId" : "223",
-                  "type" : "List",
-                  "element" : [ {
-                     "localId" : "224",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "abc",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "225",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "def",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "226",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "ghi",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "227",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "jkl",
-                     "type" : "Literal"
-                  } ]
-               },
-               "separator" : {
-                  "localId" : "228",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : ";",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "233",
-            "name" : "CombineNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "233",
-                  "s" : [ {
-                     "value" : [ "","define ","CombineNull",": " ]
-                  }, {
-                     "r" : "241",
-                     "s" : [ {
-                        "r" : "234",
-                        "value" : [ "Combine","(","null",", " ]
-                     }, {
-                        "r" : "235",
-                        "s" : [ {
-                           "value" : [ "';'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "241",
-               "type" : "Combine",
-               "signature" : [ ],
-               "source" : {
-                  "localId" : "242",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "234",
-                     "type" : "Null"
-                  },
-                  "asTypeSpecifier" : {
-                     "localId" : "243",
-                     "type" : "ListTypeSpecifier",
-                     "elementType" : {
-                        "localId" : "244",
-                        "name" : "{urn:hl7-org:elm-types:r1}String",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  }
-               },
-               "separator" : {
-                  "localId" : "235",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : ";",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "246",
-            "name" : "CombineNullItem",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "246",
-                  "s" : [ {
-                     "value" : [ "","define ","CombineNullItem",": " ]
-                  }, {
-                     "r" : "256",
-                     "s" : [ {
-                        "value" : [ "Combine","(" ]
-                     }, {
-                        "r" : "247",
-                        "s" : [ {
-                           "value" : [ "{ " ]
-                        }, {
-                           "r" : "248",
-                           "s" : [ {
-                              "value" : [ "'abc'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "249",
-                           "s" : [ {
-                              "value" : [ "'def'" ]
-                           } ]
-                        }, {
-                           "r" : "250",
-                           "value" : [ ", ","null",", " ]
-                        }, {
-                           "r" : "251",
-                           "s" : [ {
-                              "value" : [ "'jkl'" ]
-                           } ]
-                        }, {
-                           "value" : [ " }" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "253",
-                        "s" : [ {
-                           "value" : [ "';'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "256",
-               "type" : "Combine",
-               "signature" : [ ],
-               "source" : {
-                  "localId" : "247",
-                  "type" : "List",
-                  "element" : [ {
-                     "localId" : "248",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "abc",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "249",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "def",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "252",
-                     "asType" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "250",
-                        "type" : "Null"
-                     }
-                  }, {
-                     "localId" : "251",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "jkl",
-                     "type" : "Literal"
-                  } ]
-               },
-               "separator" : {
-                  "localId" : "253",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : ";",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "258",
-            "name" : "CombineOneNullItem",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "258",
-                  "s" : [ {
-                     "value" : [ "","define ","CombineOneNullItem",": " ]
-                  }, {
-                     "r" : "269",
-                     "s" : [ {
-                        "value" : [ "Combine","(" ]
-                     }, {
-                        "r" : "259",
-                        "s" : [ {
-                           "r" : "260",
-                           "value" : [ "{","null","}" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "261",
-                        "s" : [ {
-                           "value" : [ "';'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "269",
-               "type" : "Combine",
-               "signature" : [ ],
-               "source" : {
-                  "localId" : "270",
-                  "type" : "Query",
-                  "source" : [ {
-                     "localId" : "271",
-                     "alias" : "X",
-                     "expression" : {
-                        "localId" : "259",
-                        "type" : "List",
-                        "element" : [ {
-                           "localId" : "260",
-                           "type" : "Null"
-                        } ]
-                     }
-                  } ],
-                  "let" : [ ],
-                  "relationship" : [ ],
-                  "return" : {
-                     "localId" : "272",
-                     "distinct" : false,
-                     "expression" : {
-                        "localId" : "274",
-                        "asType" : "{urn:hl7-org:elm-types:r1}String",
-                        "type" : "As",
-                        "signature" : [ ],
-                        "operand" : {
-                           "localId" : "273",
-                           "name" : "X",
-                           "type" : "AliasRef"
-                        }
-                     }
-                  }
-               },
-               "separator" : {
-                  "localId" : "261",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : ";",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "276",
-            "name" : "CombineEmptyNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "276",
-                  "s" : [ {
-                     "value" : [ "","define ","CombineEmptyNull",": " ]
-                  }, {
-                     "r" : "286",
-                     "s" : [ {
-                        "r" : "277",
-                        "value" : [ "Combine","(","{}",", " ]
-                     }, {
-                        "r" : "278",
-                        "s" : [ {
-                           "value" : [ "';'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "286",
-               "type" : "Combine",
-               "signature" : [ ],
-               "source" : {
-                  "localId" : "287",
-                  "type" : "Query",
-                  "source" : [ {
-                     "localId" : "288",
-                     "alias" : "X",
-                     "expression" : {
-                        "localId" : "277",
-                        "type" : "List",
-                        "element" : [ ]
-                     }
-                  } ],
-                  "let" : [ ],
-                  "relationship" : [ ],
-                  "return" : {
-                     "localId" : "289",
-                     "distinct" : false,
-                     "expression" : {
-                        "localId" : "291",
-                        "asType" : "{urn:hl7-org:elm-types:r1}String",
-                        "type" : "As",
-                        "signature" : [ ],
-                        "operand" : {
-                           "localId" : "290",
-                           "name" : "X",
-                           "type" : "AliasRef"
-                        }
-                     }
-                  }
-               },
-               "separator" : {
-                  "localId" : "278",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : ";",
-                  "type" : "Literal"
-               }
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "276"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NoSeparator", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Combine", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "{ " ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "'abc'" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "214"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ ", " ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "'def'" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "215"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ ", " ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "'ghi'" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "216"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ ", " ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "'jkl'" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "217"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ " }" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "220"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "Combine",
+          "localId" : "220",
+          "signature" : [ ],
+          "source" : {
+            "type" : "List",
+            "localId" : "213",
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "214",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "abc"
+            }, {
+              "type" : "Literal",
+              "localId" : "215",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "def"
+            }, {
+              "type" : "Literal",
+              "localId" : "216",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ghi"
+            }, {
+              "type" : "Literal",
+              "localId" : "217",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "jkl"
+            } ]
+          }
+        },
+        "name" : "NoSeparator",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "Separator", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Combine", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "{ " ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "'abc'" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "224"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ ", " ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "'def'" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "225"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ ", " ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "'ghi'" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "226"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ ", " ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "'jkl'" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "227"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ " }" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "223"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "';'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "228"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "231"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "222"
+          }
+        } ],
+        "localId" : "222",
+        "expression" : {
+          "type" : "Combine",
+          "localId" : "231",
+          "signature" : [ ],
+          "source" : {
+            "type" : "List",
+            "localId" : "223",
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "224",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "abc"
+            }, {
+              "type" : "Literal",
+              "localId" : "225",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "def"
+            }, {
+              "type" : "Literal",
+              "localId" : "226",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ghi"
+            }, {
+              "type" : "Literal",
+              "localId" : "227",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "jkl"
+            } ]
+          },
+          "separator" : {
+            "type" : "Literal",
+            "localId" : "228",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ";"
+          }
+        },
+        "name" : "Separator",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "CombineNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Combine", "(", "null", ", " ],
+                    "r" : "234"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "';'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "235"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "241"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "233"
+          }
+        } ],
+        "localId" : "233",
+        "expression" : {
+          "type" : "Combine",
+          "localId" : "241",
+          "signature" : [ ],
+          "source" : {
+            "type" : "As",
+            "localId" : "242",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "234"
+            },
+            "asTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "243",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "244",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            }
+          },
+          "separator" : {
+            "type" : "Literal",
+            "localId" : "235",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ";"
+          }
+        },
+        "name" : "CombineNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "CombineNullItem", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Combine", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "{ " ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "'abc'" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "248"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ ", " ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "'def'" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "249"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ ", ", "null", ", " ],
+                        "r" : "250"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "'jkl'" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "251"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ " }" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "247"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "';'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "253"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "256"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "246"
+          }
+        } ],
+        "localId" : "246",
+        "expression" : {
+          "type" : "Combine",
+          "localId" : "256",
+          "signature" : [ ],
+          "source" : {
+            "type" : "List",
+            "localId" : "247",
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "248",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "abc"
+            }, {
+              "type" : "Literal",
+              "localId" : "249",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "def"
+            }, {
+              "type" : "As",
+              "localId" : "252",
+              "signature" : [ ],
+              "operand" : {
+                "type" : "Null",
+                "localId" : "250"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            }, {
+              "type" : "Literal",
+              "localId" : "251",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "jkl"
+            } ]
+          },
+          "separator" : {
+            "type" : "Literal",
+            "localId" : "253",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ";"
+          }
+        },
+        "name" : "CombineNullItem",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "CombineOneNullItem", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Combine", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "{", "null", "}" ],
+                        "r" : "260"
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "259"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "';'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "261"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "269"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "258"
+          }
+        } ],
+        "localId" : "258",
+        "expression" : {
+          "type" : "Combine",
+          "localId" : "269",
+          "signature" : [ ],
+          "source" : {
+            "type" : "Query",
+            "localId" : "270",
+            "source" : [ {
+              "type" : "AliasedQuerySource",
+              "localId" : "271",
+              "expression" : {
+                "type" : "List",
+                "localId" : "259",
+                "element" : [ {
+                  "type" : "Null",
+                  "localId" : "260"
+                } ]
+              },
+              "alias" : "X"
+            } ],
+            "let" : [ ],
+            "relationship" : [ ],
+            "return" : {
+              "localId" : "272",
+              "expression" : {
+                "type" : "As",
+                "localId" : "274",
+                "signature" : [ ],
+                "operand" : {
+                  "type" : "AliasRef",
+                  "localId" : "273",
+                  "name" : "X"
+                },
+                "asType" : "{urn:hl7-org:elm-types:r1}String"
+              },
+              "distinct" : false
+            }
+          },
+          "separator" : {
+            "type" : "Literal",
+            "localId" : "261",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ";"
+          }
+        },
+        "name" : "CombineOneNullItem",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "CombineEmptyNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Combine", "(", "{}", ", " ],
+                    "r" : "277"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "';'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "278"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "286"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "276"
+          }
+        } ],
+        "localId" : "276",
+        "expression" : {
+          "type" : "Combine",
+          "localId" : "286",
+          "signature" : [ ],
+          "source" : {
+            "type" : "Query",
+            "localId" : "287",
+            "source" : [ {
+              "type" : "AliasedQuerySource",
+              "localId" : "288",
+              "expression" : {
+                "type" : "List",
+                "localId" : "277",
+                "element" : [ ]
+              },
+              "alias" : "X"
+            } ],
+            "let" : [ ],
+            "relationship" : [ ],
+            "return" : {
+              "localId" : "289",
+              "expression" : {
+                "type" : "As",
+                "localId" : "291",
+                "signature" : [ ],
+                "operand" : {
+                  "type" : "AliasRef",
+                  "localId" : "290",
+                  "name" : "X"
+                },
+                "asType" : "{urn:hl7-org:elm-types:r1}String"
+              },
+              "distinct" : false
+            }
+          },
+          "separator" : {
+            "type" : "Literal",
+            "localId" : "278",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ";"
+          }
+        },
+        "name" : "CombineEmptyNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* Split
@@ -2102,281 +3716,495 @@ define SeparateUsingNull: Split('a,b,c', null)
 */
 
 module.exports['Split'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "235",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "CommaSeparated",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","CommaSeparated",": " ]
-                  }, {
-                     "r" : "217",
-                     "s" : [ {
-                        "value" : [ "Split","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "'a,b,c,,1,2,3'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "214",
-                        "s" : [ {
-                           "value" : [ "','" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "217",
-               "type" : "Split",
-               "signature" : [ ],
-               "stringToSplit" : {
-                  "localId" : "213",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "a,b,c,,1,2,3",
-                  "type" : "Literal"
-               },
-               "separator" : {
-                  "localId" : "214",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : ",",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "219",
-            "name" : "SeparatorNotUsed",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "219",
-                  "s" : [ {
-                     "value" : [ "","define ","SeparatorNotUsed",": " ]
-                  }, {
-                     "r" : "224",
-                     "s" : [ {
-                        "value" : [ "Split","(" ]
-                     }, {
-                        "r" : "220",
-                        "s" : [ {
-                           "value" : [ "'a,b,c,,1,2,3'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "221",
-                        "s" : [ {
-                           "value" : [ "';'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "224",
-               "type" : "Split",
-               "signature" : [ ],
-               "stringToSplit" : {
-                  "localId" : "220",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "a,b,c,,1,2,3",
-                  "type" : "Literal"
-               },
-               "separator" : {
-                  "localId" : "221",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : ";",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "226",
-            "name" : "SeparateNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "226",
-                  "s" : [ {
-                     "value" : [ "","define ","SeparateNull",": " ]
-                  }, {
-                     "r" : "232",
-                     "s" : [ {
-                        "r" : "227",
-                        "value" : [ "Split","(","null",", " ]
-                     }, {
-                        "r" : "228",
-                        "s" : [ {
-                           "value" : [ "','" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "232",
-               "type" : "Split",
-               "signature" : [ ],
-               "stringToSplit" : {
-                  "localId" : "233",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "227",
-                     "type" : "Null"
-                  }
-               },
-               "separator" : {
-                  "localId" : "228",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : ",",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "235",
-            "name" : "SeparateUsingNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "235",
-                  "s" : [ {
-                     "value" : [ "","define ","SeparateUsingNull",": " ]
-                  }, {
-                     "r" : "241",
-                     "s" : [ {
-                        "value" : [ "Split","(" ]
-                     }, {
-                        "r" : "236",
-                        "s" : [ {
-                           "value" : [ "'a,b,c'" ]
-                        } ]
-                     }, {
-                        "r" : "237",
-                        "value" : [ ", ","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "241",
-               "type" : "Split",
-               "signature" : [ ],
-               "stringToSplit" : {
-                  "localId" : "236",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "a,b,c",
-                  "type" : "Literal"
-               },
-               "separator" : {
-                  "localId" : "242",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "237",
-                     "type" : "Null"
-                  }
-               }
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "235"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "CommaSeparated", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Split", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'a,b,c,,1,2,3'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "','" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "214"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "217"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "Split",
+          "localId" : "217",
+          "signature" : [ ],
+          "stringToSplit" : {
+            "type" : "Literal",
+            "localId" : "213",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a,b,c,,1,2,3"
+          },
+          "separator" : {
+            "type" : "Literal",
+            "localId" : "214",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ","
+          }
+        },
+        "name" : "CommaSeparated",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "SeparatorNotUsed", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Split", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'a,b,c,,1,2,3'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "220"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "';'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "221"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "224"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "219"
+          }
+        } ],
+        "localId" : "219",
+        "expression" : {
+          "type" : "Split",
+          "localId" : "224",
+          "signature" : [ ],
+          "stringToSplit" : {
+            "type" : "Literal",
+            "localId" : "220",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a,b,c,,1,2,3"
+          },
+          "separator" : {
+            "type" : "Literal",
+            "localId" : "221",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ";"
+          }
+        },
+        "name" : "SeparatorNotUsed",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "SeparateNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Split", "(", "null", ", " ],
+                    "r" : "227"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "','" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "228"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "232"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "226"
+          }
+        } ],
+        "localId" : "226",
+        "expression" : {
+          "type" : "Split",
+          "localId" : "232",
+          "signature" : [ ],
+          "stringToSplit" : {
+            "type" : "As",
+            "localId" : "233",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "227"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          },
+          "separator" : {
+            "type" : "Literal",
+            "localId" : "228",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ","
+          }
+        },
+        "name" : "SeparateNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "SeparateUsingNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Split", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'a,b,c'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "236"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "null", ")" ],
+                    "r" : "237"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "241"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "235"
+          }
+        } ],
+        "localId" : "235",
+        "expression" : {
+          "type" : "Split",
+          "localId" : "241",
+          "signature" : [ ],
+          "stringToSplit" : {
+            "type" : "Literal",
+            "localId" : "236",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a,b,c"
+          },
+          "separator" : {
+            "type" : "As",
+            "localId" : "242",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "237"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }
+        },
+        "name" : "SeparateUsingNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* SplitOnMatches
@@ -2392,376 +4220,664 @@ define SplitOnMatchesAllNull: SplitOnMatches(null, null)
 */
 
 module.exports['SplitOnMatches'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "251",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "SplitOnMatchesListReturn",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","SplitOnMatchesListReturn",": " ]
-                  }, {
-                     "r" : "217",
-                     "s" : [ {
-                        "value" : [ "SplitOnMatches","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "'foo 1,2three bar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "214",
-                        "s" : [ {
-                           "value" : [ "'\\\\d,\\\\d\\\\w+'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "217",
-               "type" : "SplitOnMatches",
-               "signature" : [ ],
-               "stringToSplit" : {
-                  "localId" : "213",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "foo 1,2three bar",
-                  "type" : "Literal"
-               },
-               "separatorPattern" : {
-                  "localId" : "214",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "\\d,\\d\\w+",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "219",
-            "name" : "SplitOnMatchesOriginalString",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "219",
-                  "s" : [ {
-                     "value" : [ "","define ","SplitOnMatchesOriginalString",": " ]
-                  }, {
-                     "r" : "224",
-                     "s" : [ {
-                        "value" : [ "SplitOnMatches","(" ]
-                     }, {
-                        "r" : "220",
-                        "s" : [ {
-                           "value" : [ "'1,2three'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "221",
-                        "s" : [ {
-                           "value" : [ "'\\\\w,\\\\w+'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "224",
-               "type" : "SplitOnMatches",
-               "signature" : [ ],
-               "stringToSplit" : {
-                  "localId" : "220",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "1,2three",
-                  "type" : "Literal"
-               },
-               "separatorPattern" : {
-                  "localId" : "221",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "\\w,\\w+",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "226",
-            "name" : "SplitOnMatchesNoMatch",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "226",
-                  "s" : [ {
-                     "value" : [ "","define ","SplitOnMatchesNoMatch",": " ]
-                  }, {
-                     "r" : "231",
-                     "s" : [ {
-                        "value" : [ "SplitOnMatches","(" ]
-                     }, {
-                        "r" : "227",
-                        "s" : [ {
-                           "value" : [ "'foobar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "228",
-                        "s" : [ {
-                           "value" : [ "'\\\\d'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "231",
-               "type" : "SplitOnMatches",
-               "signature" : [ ],
-               "stringToSplit" : {
-                  "localId" : "227",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "foobar",
-                  "type" : "Literal"
-               },
-               "separatorPattern" : {
-                  "localId" : "228",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "\\d",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "233",
-            "name" : "SplitOnMatchesIsNullFirst",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "233",
-                  "s" : [ {
-                     "value" : [ "","define ","SplitOnMatchesIsNullFirst",": " ]
-                  }, {
-                     "r" : "239",
-                     "s" : [ {
-                        "r" : "234",
-                        "value" : [ "SplitOnMatches","(","null",", " ]
-                     }, {
-                        "r" : "235",
-                        "s" : [ {
-                           "value" : [ "'\\\\w+'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "239",
-               "type" : "SplitOnMatches",
-               "signature" : [ ],
-               "stringToSplit" : {
-                  "localId" : "240",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "234",
-                     "type" : "Null"
-                  }
-               },
-               "separatorPattern" : {
-                  "localId" : "235",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "\\w+",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "242",
-            "name" : "SplitOnMatchesIsNullSecond",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "242",
-                  "s" : [ {
-                     "value" : [ "","define ","SplitOnMatchesIsNullSecond",": " ]
-                  }, {
-                     "r" : "248",
-                     "s" : [ {
-                        "value" : [ "SplitOnMatches","(" ]
-                     }, {
-                        "r" : "243",
-                        "s" : [ {
-                           "value" : [ "'12three'" ]
-                        } ]
-                     }, {
-                        "r" : "244",
-                        "value" : [ ", ","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "248",
-               "type" : "SplitOnMatches",
-               "signature" : [ ],
-               "stringToSplit" : {
-                  "localId" : "243",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "12three",
-                  "type" : "Literal"
-               },
-               "separatorPattern" : {
-                  "localId" : "249",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "244",
-                     "type" : "Null"
-                  }
-               }
-            }
-         }, {
-            "localId" : "251",
-            "name" : "SplitOnMatchesAllNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "251",
-                  "s" : [ {
-                     "value" : [ "","define ","SplitOnMatchesAllNull",": " ]
-                  }, {
-                     "r" : "258",
-                     "s" : [ {
-                        "r" : "252",
-                        "value" : [ "SplitOnMatches","(","null",", ","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "258",
-               "type" : "SplitOnMatches",
-               "signature" : [ ],
-               "stringToSplit" : {
-                  "localId" : "259",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "252",
-                     "type" : "Null"
-                  }
-               },
-               "separatorPattern" : {
-                  "localId" : "260",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "253",
-                     "type" : "Null"
-                  }
-               }
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "251"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "SplitOnMatchesListReturn", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "SplitOnMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'foo 1,2three bar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'\\\\d,\\\\d\\\\w+'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "214"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "217"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "SplitOnMatches",
+          "localId" : "217",
+          "signature" : [ ],
+          "stringToSplit" : {
+            "type" : "Literal",
+            "localId" : "213",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "foo 1,2three bar"
+          },
+          "separatorPattern" : {
+            "type" : "Literal",
+            "localId" : "214",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\d,\\d\\w+"
+          }
+        },
+        "name" : "SplitOnMatchesListReturn",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "SplitOnMatchesOriginalString", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "SplitOnMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'1,2three'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "220"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'\\\\w,\\\\w+'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "221"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "224"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "219"
+          }
+        } ],
+        "localId" : "219",
+        "expression" : {
+          "type" : "SplitOnMatches",
+          "localId" : "224",
+          "signature" : [ ],
+          "stringToSplit" : {
+            "type" : "Literal",
+            "localId" : "220",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "1,2three"
+          },
+          "separatorPattern" : {
+            "type" : "Literal",
+            "localId" : "221",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\w,\\w+"
+          }
+        },
+        "name" : "SplitOnMatchesOriginalString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "SplitOnMatchesNoMatch", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "SplitOnMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'foobar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "227"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'\\\\d'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "228"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "231"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "226"
+          }
+        } ],
+        "localId" : "226",
+        "expression" : {
+          "type" : "SplitOnMatches",
+          "localId" : "231",
+          "signature" : [ ],
+          "stringToSplit" : {
+            "type" : "Literal",
+            "localId" : "227",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "foobar"
+          },
+          "separatorPattern" : {
+            "type" : "Literal",
+            "localId" : "228",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\d"
+          }
+        },
+        "name" : "SplitOnMatchesNoMatch",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "SplitOnMatchesIsNullFirst", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "SplitOnMatches", "(", "null", ", " ],
+                    "r" : "234"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'\\\\w+'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "235"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "239"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "233"
+          }
+        } ],
+        "localId" : "233",
+        "expression" : {
+          "type" : "SplitOnMatches",
+          "localId" : "239",
+          "signature" : [ ],
+          "stringToSplit" : {
+            "type" : "As",
+            "localId" : "240",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "234"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          },
+          "separatorPattern" : {
+            "type" : "Literal",
+            "localId" : "235",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\w+"
+          }
+        },
+        "name" : "SplitOnMatchesIsNullFirst",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "SplitOnMatchesIsNullSecond", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "SplitOnMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'12three'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "243"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "null", ")" ],
+                    "r" : "244"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "248"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "242"
+          }
+        } ],
+        "localId" : "242",
+        "expression" : {
+          "type" : "SplitOnMatches",
+          "localId" : "248",
+          "signature" : [ ],
+          "stringToSplit" : {
+            "type" : "Literal",
+            "localId" : "243",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "12three"
+          },
+          "separatorPattern" : {
+            "type" : "As",
+            "localId" : "249",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "244"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }
+        },
+        "name" : "SplitOnMatchesIsNullSecond",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "SplitOnMatchesAllNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "SplitOnMatches", "(", "null", ", ", "null", ")" ],
+                    "r" : "252"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "258"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "251"
+          }
+        } ],
+        "localId" : "251",
+        "expression" : {
+          "type" : "SplitOnMatches",
+          "localId" : "258",
+          "signature" : [ ],
+          "stringToSplit" : {
+            "type" : "As",
+            "localId" : "259",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "252"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          },
+          "separatorPattern" : {
+            "type" : "As",
+            "localId" : "260",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "253"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }
+        },
+        "name" : "SplitOnMatchesAllNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* Length
@@ -2773,174 +4889,290 @@ define NullString: Length(null as String)
 */
 
 module.exports['Length'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "218",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "ElevenLetters",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","ElevenLetters",": " ]
-                  }, {
-                     "r" : "216",
-                     "s" : [ {
-                        "value" : [ "Length","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "'Hello World'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "216",
-               "type" : "Length",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "213",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Hello World",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "218",
-            "name" : "NullString",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "218",
-                  "s" : [ {
-                     "value" : [ "","define ","NullString",": " ]
-                  }, {
-                     "r" : "224",
-                     "s" : [ {
-                        "value" : [ "Length","(" ]
-                     }, {
-                        "r" : "219",
-                        "s" : [ {
-                           "r" : "220",
-                           "value" : [ "null"," as " ]
-                        }, {
-                           "r" : "221",
-                           "s" : [ {
-                              "value" : [ "String" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "224",
-               "type" : "Length",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "219",
-                  "strict" : false,
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "220",
-                     "type" : "Null"
-                  },
-                  "asTypeSpecifier" : {
-                     "localId" : "221",
-                     "name" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               }
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "218"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ElevenLetters", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Length", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Hello World'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "216"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "Length",
+          "localId" : "216",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "213",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Hello World"
+          }
+        },
+        "name" : "ElevenLetters",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullString", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Length", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "null", " as " ],
+                        "r" : "220"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "String" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "221"
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "219"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "224"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "218"
+          }
+        } ],
+        "localId" : "218",
+        "expression" : {
+          "type" : "Length",
+          "localId" : "224",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "As",
+            "localId" : "219",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "220"
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "221",
+              "name" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "strict" : false
+          }
+        },
+        "name" : "NullString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* Upper
@@ -2954,231 +5186,391 @@ define NullString: Upper(null)
 */
 
 module.exports['Upper'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "230",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "LowerC",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","LowerC",": " ]
-                  }, {
-                     "r" : "216",
-                     "s" : [ {
-                        "value" : [ "Upper","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "'abcdefg123'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "216",
-               "type" : "Upper",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "213",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "abcdefg123",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "218",
-            "name" : "UpperC",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "218",
-                  "s" : [ {
-                     "value" : [ "","define ","UpperC",": " ]
-                  }, {
-                     "r" : "222",
-                     "s" : [ {
-                        "value" : [ "Upper","(" ]
-                     }, {
-                        "r" : "219",
-                        "s" : [ {
-                           "value" : [ "'ABCDEFG123'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "222",
-               "type" : "Upper",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "219",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "ABCDEFG123",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "224",
-            "name" : "CamelC",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "224",
-                  "s" : [ {
-                     "value" : [ "","define ","CamelC",": " ]
-                  }, {
-                     "r" : "228",
-                     "s" : [ {
-                        "value" : [ "Upper","(" ]
-                     }, {
-                        "r" : "225",
-                        "s" : [ {
-                           "value" : [ "'aBcDeFg123'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "228",
-               "type" : "Upper",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "225",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "aBcDeFg123",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "230",
-            "name" : "NullString",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "230",
-                  "s" : [ {
-                     "value" : [ "","define ","NullString",": " ]
-                  }, {
-                     "r" : "235",
-                     "s" : [ {
-                        "r" : "231",
-                        "value" : [ "Upper","(","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "235",
-               "type" : "Upper",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "236",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "231",
-                     "type" : "Null"
-                  }
-               }
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "230"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "LowerC", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Upper", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'abcdefg123'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "216"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "Upper",
+          "localId" : "216",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "213",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "abcdefg123"
+          }
+        },
+        "name" : "LowerC",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "UpperC", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Upper", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'ABCDEFG123'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "219"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "222"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "218"
+          }
+        } ],
+        "localId" : "218",
+        "expression" : {
+          "type" : "Upper",
+          "localId" : "222",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "219",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "ABCDEFG123"
+          }
+        },
+        "name" : "UpperC",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "CamelC", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Upper", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'aBcDeFg123'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "225"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "228"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "224"
+          }
+        } ],
+        "localId" : "224",
+        "expression" : {
+          "type" : "Upper",
+          "localId" : "228",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "225",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "aBcDeFg123"
+          }
+        },
+        "name" : "CamelC",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullString", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Upper", "(", "null", ")" ],
+                    "r" : "231"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "235"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "230"
+          }
+        } ],
+        "localId" : "230",
+        "expression" : {
+          "type" : "Upper",
+          "localId" : "235",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "As",
+            "localId" : "236",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "231"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }
+        },
+        "name" : "NullString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* Lower
@@ -3192,231 +5584,391 @@ define NullString: Lower(null)
 */
 
 module.exports['Lower'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "230",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "LowerC",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","LowerC",": " ]
-                  }, {
-                     "r" : "216",
-                     "s" : [ {
-                        "value" : [ "Lower","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "'abcdefg123'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "216",
-               "type" : "Lower",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "213",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "abcdefg123",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "218",
-            "name" : "UpperC",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "218",
-                  "s" : [ {
-                     "value" : [ "","define ","UpperC",": " ]
-                  }, {
-                     "r" : "222",
-                     "s" : [ {
-                        "value" : [ "Lower","(" ]
-                     }, {
-                        "r" : "219",
-                        "s" : [ {
-                           "value" : [ "'ABCDEFG123'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "222",
-               "type" : "Lower",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "219",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "ABCDEFG123",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "224",
-            "name" : "CamelC",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "224",
-                  "s" : [ {
-                     "value" : [ "","define ","CamelC",": " ]
-                  }, {
-                     "r" : "228",
-                     "s" : [ {
-                        "value" : [ "Lower","(" ]
-                     }, {
-                        "r" : "225",
-                        "s" : [ {
-                           "value" : [ "'aBcDeFg123'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "228",
-               "type" : "Lower",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "225",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "aBcDeFg123",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "230",
-            "name" : "NullString",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "230",
-                  "s" : [ {
-                     "value" : [ "","define ","NullString",": " ]
-                  }, {
-                     "r" : "235",
-                     "s" : [ {
-                        "r" : "231",
-                        "value" : [ "Lower","(","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "235",
-               "type" : "Lower",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "236",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "231",
-                     "type" : "Null"
-                  }
-               }
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "230"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "LowerC", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Lower", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'abcdefg123'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "216"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "Lower",
+          "localId" : "216",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "213",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "abcdefg123"
+          }
+        },
+        "name" : "LowerC",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "UpperC", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Lower", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'ABCDEFG123'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "219"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "222"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "218"
+          }
+        } ],
+        "localId" : "218",
+        "expression" : {
+          "type" : "Lower",
+          "localId" : "222",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "219",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "ABCDEFG123"
+          }
+        },
+        "name" : "UpperC",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "CamelC", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Lower", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'aBcDeFg123'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "225"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "228"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "224"
+          }
+        } ],
+        "localId" : "224",
+        "expression" : {
+          "type" : "Lower",
+          "localId" : "228",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "225",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "aBcDeFg123"
+          }
+        },
+        "name" : "CamelC",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullString", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Lower", "(", "null", ")" ],
+                    "r" : "231"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "235"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "230"
+          }
+        } ],
+        "localId" : "230",
+        "expression" : {
+          "type" : "Lower",
+          "localId" : "235",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "As",
+            "localId" : "236",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "231"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }
+        },
+        "name" : "NullString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* Indexer
@@ -3431,316 +5983,531 @@ define NullIndex: 'HelloWorld'[null]
 */
 
 module.exports['Indexer'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "234",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "HelloWorldSix",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","HelloWorldSix",": " ]
-                  }, {
-                     "r" : "213",
-                     "s" : [ {
-                        "r" : "214",
-                        "s" : [ {
-                           "value" : [ "'HelloWorld'" ]
-                        } ]
-                     }, {
-                        "r" : "215",
-                        "value" : [ "[","6","]" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "213",
-               "type" : "Indexer",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "214",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "HelloWorld",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "215",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "6",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "217",
-            "name" : "HelloWorldZero",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "217",
-                  "s" : [ {
-                     "value" : [ "","define ","HelloWorldZero",": " ]
-                  }, {
-                     "r" : "218",
-                     "s" : [ {
-                        "r" : "219",
-                        "s" : [ {
-                           "value" : [ "'HelloWorld'" ]
-                        } ]
-                     }, {
-                        "r" : "220",
-                        "value" : [ "[","0","]" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "218",
-               "type" : "Indexer",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "219",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "HelloWorld",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "220",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "0",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "222",
-            "name" : "HelloWorldTwenty",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "222",
-                  "s" : [ {
-                     "value" : [ "","define ","HelloWorldTwenty",": " ]
-                  }, {
-                     "r" : "223",
-                     "s" : [ {
-                        "r" : "224",
-                        "s" : [ {
-                           "value" : [ "'HelloWorld'" ]
-                        } ]
-                     }, {
-                        "r" : "225",
-                        "value" : [ "[","20","]" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "223",
-               "type" : "Indexer",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "224",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "HelloWorld",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "225",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "20",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "227",
-            "name" : "NullString",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "227",
-                  "s" : [ {
-                     "value" : [ "","define ","NullString",": " ]
-                  }, {
-                     "r" : "228",
-                     "s" : [ {
-                        "r" : "229",
-                        "s" : [ {
-                           "value" : [ "(" ]
-                        }, {
-                           "r" : "229",
-                           "s" : [ {
-                              "r" : "230",
-                              "value" : [ "null"," as " ]
-                           }, {
-                              "r" : "231",
-                              "s" : [ {
-                                 "value" : [ "String" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ")" ]
-                        } ]
-                     }, {
-                        "r" : "232",
-                        "value" : [ "[","4","]" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "228",
-               "type" : "Indexer",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "229",
-                  "strict" : false,
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "230",
-                     "type" : "Null"
-                  },
-                  "asTypeSpecifier" : {
-                     "localId" : "231",
-                     "name" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               }, {
-                  "localId" : "232",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "4",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "234",
-            "name" : "NullIndex",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "234",
-                  "s" : [ {
-                     "value" : [ "","define ","NullIndex",": " ]
-                  }, {
-                     "r" : "235",
-                     "s" : [ {
-                        "r" : "236",
-                        "s" : [ {
-                           "value" : [ "'HelloWorld'" ]
-                        } ]
-                     }, {
-                        "r" : "237",
-                        "value" : [ "[","null","]" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "235",
-               "type" : "Indexer",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "236",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "HelloWorld",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "238",
-                  "asType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "237",
-                     "type" : "Null"
-                  }
-               } ]
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "234"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "HelloWorldSix", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'HelloWorld'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "214"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "[", "6", "]" ],
+                    "r" : "215"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "213"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "Indexer",
+          "localId" : "213",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "214",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "HelloWorld"
+          }, {
+            "type" : "Literal",
+            "localId" : "215",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "6"
+          } ]
+        },
+        "name" : "HelloWorldSix",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "HelloWorldZero", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'HelloWorld'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "219"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "[", "0", "]" ],
+                    "r" : "220"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "218"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "217"
+          }
+        } ],
+        "localId" : "217",
+        "expression" : {
+          "type" : "Indexer",
+          "localId" : "218",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "219",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "HelloWorld"
+          }, {
+            "type" : "Literal",
+            "localId" : "220",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          } ]
+        },
+        "name" : "HelloWorldZero",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "HelloWorldTwenty", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'HelloWorld'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "224"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "[", "20", "]" ],
+                    "r" : "225"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "223"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "222"
+          }
+        } ],
+        "localId" : "222",
+        "expression" : {
+          "type" : "Indexer",
+          "localId" : "223",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "224",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "HelloWorld"
+          }, {
+            "type" : "Literal",
+            "localId" : "225",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "20"
+          } ]
+        },
+        "name" : "HelloWorldTwenty",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullString", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "(" ]
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "null", " as " ],
+                            "r" : "230"
+                          },
+                          "globalScope" : true
+                        }, {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ {
+                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                              "value" : {
+                                "s" : [ "String" ]
+                              },
+                              "globalScope" : true
+                            } ],
+                            "r" : "231"
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "229"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ ")" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "229"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "[", "4", "]" ],
+                    "r" : "232"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "228"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "227"
+          }
+        } ],
+        "localId" : "227",
+        "expression" : {
+          "type" : "Indexer",
+          "localId" : "228",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "229",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "230"
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "231",
+              "name" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "strict" : false
+          }, {
+            "type" : "Literal",
+            "localId" : "232",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4"
+          } ]
+        },
+        "name" : "NullString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullIndex", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'HelloWorld'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "236"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "[", "null", "]" ],
+                    "r" : "237"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "235"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "234"
+          }
+        } ],
+        "localId" : "234",
+        "expression" : {
+          "type" : "Indexer",
+          "localId" : "235",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "236",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "HelloWorld"
+          }, {
+            "type" : "As",
+            "localId" : "238",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "237"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ]
+        },
+        "name" : "NullIndex",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* Matches
@@ -3755,321 +6522,554 @@ define MatchesAllNull: Matches(null, null)
 */
 
 module.exports['Matches'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "244",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "MatchesTrue",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","MatchesTrue",": " ]
-                  }, {
-                     "r" : "217",
-                     "s" : [ {
-                        "value" : [ "Matches","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "'1,2three'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "214",
-                        "s" : [ {
-                           "value" : [ "'\\\\d,\\\\d\\\\w+'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "217",
-               "type" : "Matches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "213",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "1,2three",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "214",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "\\d,\\d\\w+",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "219",
-            "name" : "MatchesFalse",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "219",
-                  "s" : [ {
-                     "value" : [ "","define ","MatchesFalse",": " ]
-                  }, {
-                     "r" : "224",
-                     "s" : [ {
-                        "value" : [ "Matches","(" ]
-                     }, {
-                        "r" : "220",
-                        "s" : [ {
-                           "value" : [ "'three'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "221",
-                        "s" : [ {
-                           "value" : [ "'\\\\d'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "224",
-               "type" : "Matches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "220",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "three",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "221",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "\\d",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "226",
-            "name" : "MatchesIsNullFirst",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "226",
-                  "s" : [ {
-                     "value" : [ "","define ","MatchesIsNullFirst",": " ]
-                  }, {
-                     "r" : "232",
-                     "s" : [ {
-                        "r" : "227",
-                        "value" : [ "Matches","(","null",", " ]
-                     }, {
-                        "r" : "228",
-                        "s" : [ {
-                           "value" : [ "'\\\\w+'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "232",
-               "type" : "Matches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "233",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "227",
-                     "type" : "Null"
-                  }
-               }, {
-                  "localId" : "228",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "\\w+",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "235",
-            "name" : "MatchesIsNullSecond",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "235",
-                  "s" : [ {
-                     "value" : [ "","define ","MatchesIsNullSecond",": " ]
-                  }, {
-                     "r" : "241",
-                     "s" : [ {
-                        "value" : [ "Matches","(" ]
-                     }, {
-                        "r" : "236",
-                        "s" : [ {
-                           "value" : [ "'12three'" ]
-                        } ]
-                     }, {
-                        "r" : "237",
-                        "value" : [ ", ","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "241",
-               "type" : "Matches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "236",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "12three",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "242",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "237",
-                     "type" : "Null"
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "244",
-            "name" : "MatchesAllNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "244",
-                  "s" : [ {
-                     "value" : [ "","define ","MatchesAllNull",": " ]
-                  }, {
-                     "r" : "251",
-                     "s" : [ {
-                        "r" : "245",
-                        "value" : [ "Matches","(","null",", ","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "251",
-               "type" : "Matches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "252",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "245",
-                     "type" : "Null"
-                  }
-               }, {
-                  "localId" : "253",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "246",
-                     "type" : "Null"
-                  }
-               } ]
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "244"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "MatchesTrue", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Matches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'1,2three'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'\\\\d,\\\\d\\\\w+'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "214"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "217"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "Matches",
+          "localId" : "217",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "213",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "1,2three"
+          }, {
+            "type" : "Literal",
+            "localId" : "214",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\d,\\d\\w+"
+          } ]
+        },
+        "name" : "MatchesTrue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "MatchesFalse", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Matches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'three'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "220"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'\\\\d'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "221"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "224"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "219"
+          }
+        } ],
+        "localId" : "219",
+        "expression" : {
+          "type" : "Matches",
+          "localId" : "224",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "220",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "three"
+          }, {
+            "type" : "Literal",
+            "localId" : "221",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\d"
+          } ]
+        },
+        "name" : "MatchesFalse",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "MatchesIsNullFirst", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Matches", "(", "null", ", " ],
+                    "r" : "227"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'\\\\w+'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "228"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "232"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "226"
+          }
+        } ],
+        "localId" : "226",
+        "expression" : {
+          "type" : "Matches",
+          "localId" : "232",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "233",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "227"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "localId" : "228",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\w+"
+          } ]
+        },
+        "name" : "MatchesIsNullFirst",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "MatchesIsNullSecond", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Matches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'12three'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "236"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "null", ")" ],
+                    "r" : "237"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "241"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "235"
+          }
+        } ],
+        "localId" : "235",
+        "expression" : {
+          "type" : "Matches",
+          "localId" : "241",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "236",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "12three"
+          }, {
+            "type" : "As",
+            "localId" : "242",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "237"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ]
+        },
+        "name" : "MatchesIsNullSecond",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "MatchesAllNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Matches", "(", "null", ", ", "null", ")" ],
+                    "r" : "245"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "251"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "244"
+          }
+        } ],
+        "localId" : "244",
+        "expression" : {
+          "type" : "Matches",
+          "localId" : "251",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "252",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "245"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "localId" : "253",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "246"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ]
+        },
+        "name" : "MatchesAllNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* PositionOf
@@ -4083,281 +7083,495 @@ define NullString: PositionOf('cde', null)
 */
 
 module.exports['PositionOf'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "235",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "Found",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","Found",": " ]
-                  }, {
-                     "r" : "217",
-                     "s" : [ {
-                        "value" : [ "PositionOf","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "'cde'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "214",
-                        "s" : [ {
-                           "value" : [ "'abcdefg'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "217",
-               "type" : "PositionOf",
-               "signature" : [ ],
-               "pattern" : {
-                  "localId" : "213",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "cde",
-                  "type" : "Literal"
-               },
-               "string" : {
-                  "localId" : "214",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "abcdefg",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "219",
-            "name" : "NotFound",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "219",
-                  "s" : [ {
-                     "value" : [ "","define ","NotFound",": " ]
-                  }, {
-                     "r" : "224",
-                     "s" : [ {
-                        "value" : [ "PositionOf","(" ]
-                     }, {
-                        "r" : "220",
-                        "s" : [ {
-                           "value" : [ "'fgh'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "221",
-                        "s" : [ {
-                           "value" : [ "'abcdefg'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "224",
-               "type" : "PositionOf",
-               "signature" : [ ],
-               "pattern" : {
-                  "localId" : "220",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "fgh",
-                  "type" : "Literal"
-               },
-               "string" : {
-                  "localId" : "221",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "abcdefg",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "226",
-            "name" : "NullPattern",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "226",
-                  "s" : [ {
-                     "value" : [ "","define ","NullPattern",": " ]
-                  }, {
-                     "r" : "232",
-                     "s" : [ {
-                        "r" : "227",
-                        "value" : [ "PositionOf","(","null",", " ]
-                     }, {
-                        "r" : "228",
-                        "s" : [ {
-                           "value" : [ "'abcdefg'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "232",
-               "type" : "PositionOf",
-               "signature" : [ ],
-               "pattern" : {
-                  "localId" : "233",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "227",
-                     "type" : "Null"
-                  }
-               },
-               "string" : {
-                  "localId" : "228",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "abcdefg",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "235",
-            "name" : "NullString",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "235",
-                  "s" : [ {
-                     "value" : [ "","define ","NullString",": " ]
-                  }, {
-                     "r" : "241",
-                     "s" : [ {
-                        "value" : [ "PositionOf","(" ]
-                     }, {
-                        "r" : "236",
-                        "s" : [ {
-                           "value" : [ "'cde'" ]
-                        } ]
-                     }, {
-                        "r" : "237",
-                        "value" : [ ", ","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "241",
-               "type" : "PositionOf",
-               "signature" : [ ],
-               "pattern" : {
-                  "localId" : "236",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "cde",
-                  "type" : "Literal"
-               },
-               "string" : {
-                  "localId" : "242",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "237",
-                     "type" : "Null"
-                  }
-               }
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "235"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "Found", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "PositionOf", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'cde'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'abcdefg'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "214"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "217"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "PositionOf",
+          "localId" : "217",
+          "signature" : [ ],
+          "pattern" : {
+            "type" : "Literal",
+            "localId" : "213",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "cde"
+          },
+          "string" : {
+            "type" : "Literal",
+            "localId" : "214",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "abcdefg"
+          }
+        },
+        "name" : "Found",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NotFound", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "PositionOf", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'fgh'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "220"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'abcdefg'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "221"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "224"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "219"
+          }
+        } ],
+        "localId" : "219",
+        "expression" : {
+          "type" : "PositionOf",
+          "localId" : "224",
+          "signature" : [ ],
+          "pattern" : {
+            "type" : "Literal",
+            "localId" : "220",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "fgh"
+          },
+          "string" : {
+            "type" : "Literal",
+            "localId" : "221",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "abcdefg"
+          }
+        },
+        "name" : "NotFound",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullPattern", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "PositionOf", "(", "null", ", " ],
+                    "r" : "227"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'abcdefg'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "228"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "232"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "226"
+          }
+        } ],
+        "localId" : "226",
+        "expression" : {
+          "type" : "PositionOf",
+          "localId" : "232",
+          "signature" : [ ],
+          "pattern" : {
+            "type" : "As",
+            "localId" : "233",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "227"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          },
+          "string" : {
+            "type" : "Literal",
+            "localId" : "228",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "abcdefg"
+          }
+        },
+        "name" : "NullPattern",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullString", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "PositionOf", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'cde'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "236"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "null", ")" ],
+                    "r" : "237"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "241"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "235"
+          }
+        } ],
+        "localId" : "235",
+        "expression" : {
+          "type" : "PositionOf",
+          "localId" : "241",
+          "signature" : [ ],
+          "pattern" : {
+            "type" : "Literal",
+            "localId" : "236",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "cde"
+          },
+          "string" : {
+            "type" : "As",
+            "localId" : "242",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "237"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }
+        },
+        "name" : "NullString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* LastPositionOf
@@ -4371,281 +7585,495 @@ define NullString: LastPositionOf('ABCDE', null)  // null
 */
 
 module.exports['LastPositionOf'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "235",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "Found",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","Found",": " ]
-                  }, {
-                     "r" : "217",
-                     "s" : [ {
-                        "value" : [ "LastPositionOf","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "'B'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "214",
-                        "s" : [ {
-                           "value" : [ "'ABCDEDCBA'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "217",
-               "type" : "LastPositionOf",
-               "signature" : [ ],
-               "pattern" : {
-                  "localId" : "213",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "B",
-                  "type" : "Literal"
-               },
-               "string" : {
-                  "localId" : "214",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "ABCDEDCBA",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "219",
-            "name" : "NotFound",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "219",
-                  "s" : [ {
-                     "value" : [ "// 7\n","define ","NotFound",": " ]
-                  }, {
-                     "r" : "224",
-                     "s" : [ {
-                        "value" : [ "LastPositionOf","(" ]
-                     }, {
-                        "r" : "220",
-                        "s" : [ {
-                           "value" : [ "'XYZ'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "221",
-                        "s" : [ {
-                           "value" : [ "'ABCDE'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "224",
-               "type" : "LastPositionOf",
-               "signature" : [ ],
-               "pattern" : {
-                  "localId" : "220",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "XYZ",
-                  "type" : "Literal"
-               },
-               "string" : {
-                  "localId" : "221",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "ABCDE",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "226",
-            "name" : "NullPattern",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "226",
-                  "s" : [ {
-                     "value" : [ "// -1\n","define ","NullPattern",": " ]
-                  }, {
-                     "r" : "232",
-                     "s" : [ {
-                        "r" : "227",
-                        "value" : [ "LastPositionOf","(","null",", " ]
-                     }, {
-                        "r" : "228",
-                        "s" : [ {
-                           "value" : [ "'ABCDE'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "232",
-               "type" : "LastPositionOf",
-               "signature" : [ ],
-               "pattern" : {
-                  "localId" : "233",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "227",
-                     "type" : "Null"
-                  }
-               },
-               "string" : {
-                  "localId" : "228",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "ABCDE",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "235",
-            "name" : "NullString",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "235",
-                  "s" : [ {
-                     "value" : [ "// null\n","define ","NullString",": " ]
-                  }, {
-                     "r" : "241",
-                     "s" : [ {
-                        "value" : [ "LastPositionOf","(" ]
-                     }, {
-                        "r" : "236",
-                        "s" : [ {
-                           "value" : [ "'ABCDE'" ]
-                        } ]
-                     }, {
-                        "r" : "237",
-                        "value" : [ ", ","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "241",
-               "type" : "LastPositionOf",
-               "signature" : [ ],
-               "pattern" : {
-                  "localId" : "236",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "ABCDE",
-                  "type" : "Literal"
-               },
-               "string" : {
-                  "localId" : "242",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "237",
-                     "type" : "Null"
-                  }
-               }
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "235"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "Found", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "LastPositionOf", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'B'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'ABCDEDCBA'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "214"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "217"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "LastPositionOf",
+          "localId" : "217",
+          "signature" : [ ],
+          "pattern" : {
+            "type" : "Literal",
+            "localId" : "213",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "B"
+          },
+          "string" : {
+            "type" : "Literal",
+            "localId" : "214",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "ABCDEDCBA"
+          }
+        },
+        "name" : "Found",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "// 7\n", "define ", "NotFound", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "LastPositionOf", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'XYZ'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "220"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'ABCDE'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "221"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "224"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "219"
+          }
+        } ],
+        "localId" : "219",
+        "expression" : {
+          "type" : "LastPositionOf",
+          "localId" : "224",
+          "signature" : [ ],
+          "pattern" : {
+            "type" : "Literal",
+            "localId" : "220",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "XYZ"
+          },
+          "string" : {
+            "type" : "Literal",
+            "localId" : "221",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "ABCDE"
+          }
+        },
+        "name" : "NotFound",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "// -1\n", "define ", "NullPattern", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "LastPositionOf", "(", "null", ", " ],
+                    "r" : "227"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'ABCDE'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "228"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "232"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "226"
+          }
+        } ],
+        "localId" : "226",
+        "expression" : {
+          "type" : "LastPositionOf",
+          "localId" : "232",
+          "signature" : [ ],
+          "pattern" : {
+            "type" : "As",
+            "localId" : "233",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "227"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          },
+          "string" : {
+            "type" : "Literal",
+            "localId" : "228",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "ABCDE"
+          }
+        },
+        "name" : "NullPattern",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "// null\n", "define ", "NullString", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "LastPositionOf", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'ABCDE'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "236"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "null", ")" ],
+                    "r" : "237"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "241"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "235"
+          }
+        } ],
+        "localId" : "235",
+        "expression" : {
+          "type" : "LastPositionOf",
+          "localId" : "241",
+          "signature" : [ ],
+          "pattern" : {
+            "type" : "Literal",
+            "localId" : "236",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "ABCDE"
+          },
+          "string" : {
+            "type" : "As",
+            "localId" : "242",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "237"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }
+        },
+        "name" : "NullString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* Substring
@@ -4664,531 +8092,912 @@ define NullStart: Substring('HelloWorld', null)
 */
 
 module.exports['Substring'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "276",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "World",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","World",": " ]
-                  }, {
-                     "r" : "217",
-                     "s" : [ {
-                        "value" : [ "Substring","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "'HelloWorld'" ]
-                        } ]
-                     }, {
-                        "r" : "214",
-                        "value" : [ ", ","5",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "217",
-               "type" : "Substring",
-               "signature" : [ ],
-               "stringToSub" : {
-                  "localId" : "213",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "HelloWorld",
-                  "type" : "Literal"
-               },
-               "startIndex" : {
-                  "localId" : "214",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "5",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "219",
-            "name" : "Or",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "219",
-                  "s" : [ {
-                     "value" : [ "","define ","Or",": " ]
-                  }, {
-                     "r" : "225",
-                     "s" : [ {
-                        "value" : [ "Substring","(" ]
-                     }, {
-                        "r" : "220",
-                        "s" : [ {
-                           "value" : [ "'HelloWorld'" ]
-                        } ]
-                     }, {
-                        "r" : "221",
-                        "value" : [ ", ","7",", ","2",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "225",
-               "type" : "Substring",
-               "signature" : [ ],
-               "stringToSub" : {
-                  "localId" : "220",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "HelloWorld",
-                  "type" : "Literal"
-               },
-               "startIndex" : {
-                  "localId" : "221",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "7",
-                  "type" : "Literal"
-               },
-               "length" : {
-                  "localId" : "222",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "2",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "227",
-            "name" : "ZeroLength",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "227",
-                  "s" : [ {
-                     "value" : [ "","define ","ZeroLength",": " ]
-                  }, {
-                     "r" : "233",
-                     "s" : [ {
-                        "value" : [ "Substring","(" ]
-                     }, {
-                        "r" : "228",
-                        "s" : [ {
-                           "value" : [ "'HelloWorld'" ]
-                        } ]
-                     }, {
-                        "r" : "229",
-                        "value" : [ ", ","7",", ","0",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "233",
-               "type" : "Substring",
-               "signature" : [ ],
-               "stringToSub" : {
-                  "localId" : "228",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "HelloWorld",
-                  "type" : "Literal"
-               },
-               "startIndex" : {
-                  "localId" : "229",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "7",
-                  "type" : "Literal"
-               },
-               "length" : {
-                  "localId" : "230",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "0",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "235",
-            "name" : "StartTooLow",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "235",
-                  "s" : [ {
-                     "value" : [ "","define ","StartTooLow",": " ]
-                  }, {
-                     "r" : "241",
-                     "s" : [ {
-                        "value" : [ "Substring","(" ]
-                     }, {
-                        "r" : "236",
-                        "s" : [ {
-                           "value" : [ "'HelloWorld'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "237",
-                        "s" : [ {
-                           "r" : "238",
-                           "value" : [ "-","1" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "241",
-               "type" : "Substring",
-               "signature" : [ ],
-               "stringToSub" : {
-                  "localId" : "236",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "HelloWorld",
-                  "type" : "Literal"
-               },
-               "startIndex" : {
-                  "localId" : "237",
-                  "type" : "Negate",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "238",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
-                  }
-               }
-            }
-         }, {
-            "localId" : "243",
-            "name" : "StartZero",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "243",
-                  "s" : [ {
-                     "value" : [ "","define ","StartZero",": " ]
-                  }, {
-                     "r" : "248",
-                     "s" : [ {
-                        "value" : [ "Substring","(" ]
-                     }, {
-                        "r" : "244",
-                        "s" : [ {
-                           "value" : [ "'HelloWorld'" ]
-                        } ]
-                     }, {
-                        "r" : "245",
-                        "value" : [ ", ","0",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "248",
-               "type" : "Substring",
-               "signature" : [ ],
-               "stringToSub" : {
-                  "localId" : "244",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "HelloWorld",
-                  "type" : "Literal"
-               },
-               "startIndex" : {
-                  "localId" : "245",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "0",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "250",
-            "name" : "TooMuchLength",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "250",
-                  "s" : [ {
-                     "value" : [ "","define ","TooMuchLength",": " ]
-                  }, {
-                     "r" : "256",
-                     "s" : [ {
-                        "value" : [ "Substring","(" ]
-                     }, {
-                        "r" : "251",
-                        "s" : [ {
-                           "value" : [ "'HelloWorld'" ]
-                        } ]
-                     }, {
-                        "r" : "252",
-                        "value" : [ ", ","7",", ","25",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "256",
-               "type" : "Substring",
-               "signature" : [ ],
-               "stringToSub" : {
-                  "localId" : "251",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "HelloWorld",
-                  "type" : "Literal"
-               },
-               "startIndex" : {
-                  "localId" : "252",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "7",
-                  "type" : "Literal"
-               },
-               "length" : {
-                  "localId" : "253",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "25",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "258",
-            "name" : "NegativeLength",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "258",
-                  "s" : [ {
-                     "value" : [ "","define ","NegativeLength",": " ]
-                  }, {
-                     "r" : "265",
-                     "s" : [ {
-                        "value" : [ "Substring","(" ]
-                     }, {
-                        "r" : "259",
-                        "s" : [ {
-                           "value" : [ "'HelloWorld'" ]
-                        } ]
-                     }, {
-                        "r" : "260",
-                        "value" : [ ", ","7",", " ]
-                     }, {
-                        "r" : "261",
-                        "s" : [ {
-                           "r" : "262",
-                           "value" : [ "-","1" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "265",
-               "type" : "Substring",
-               "signature" : [ ],
-               "stringToSub" : {
-                  "localId" : "259",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "HelloWorld",
-                  "type" : "Literal"
-               },
-               "startIndex" : {
-                  "localId" : "260",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "7",
-                  "type" : "Literal"
-               },
-               "length" : {
-                  "localId" : "261",
-                  "type" : "Negate",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "262",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
-                  }
-               }
-            }
-         }, {
-            "localId" : "267",
-            "name" : "NullString",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "267",
-                  "s" : [ {
-                     "value" : [ "","define ","NullString",": " ]
-                  }, {
-                     "r" : "273",
-                     "s" : [ {
-                        "r" : "268",
-                        "value" : [ "Substring","(","null",", ","5",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "273",
-               "type" : "Substring",
-               "signature" : [ ],
-               "stringToSub" : {
-                  "localId" : "274",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "268",
-                     "type" : "Null"
-                  }
-               },
-               "startIndex" : {
-                  "localId" : "269",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "5",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "276",
-            "name" : "NullStart",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "276",
-                  "s" : [ {
-                     "value" : [ "","define ","NullStart",": " ]
-                  }, {
-                     "r" : "282",
-                     "s" : [ {
-                        "value" : [ "Substring","(" ]
-                     }, {
-                        "r" : "277",
-                        "s" : [ {
-                           "value" : [ "'HelloWorld'" ]
-                        } ]
-                     }, {
-                        "r" : "278",
-                        "value" : [ ", ","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "282",
-               "type" : "Substring",
-               "signature" : [ ],
-               "stringToSub" : {
-                  "localId" : "277",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "HelloWorld",
-                  "type" : "Literal"
-               },
-               "startIndex" : {
-                  "localId" : "283",
-                  "asType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "278",
-                     "type" : "Null"
-                  }
-               }
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "276"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "World", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Substring", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'HelloWorld'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "5", ")" ],
+                    "r" : "214"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "217"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "Substring",
+          "localId" : "217",
+          "signature" : [ ],
+          "stringToSub" : {
+            "type" : "Literal",
+            "localId" : "213",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "HelloWorld"
+          },
+          "startIndex" : {
+            "type" : "Literal",
+            "localId" : "214",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "5"
+          }
+        },
+        "name" : "World",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "Or", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Substring", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'HelloWorld'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "220"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "7", ", ", "2", ")" ],
+                    "r" : "221"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "225"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "219"
+          }
+        } ],
+        "localId" : "219",
+        "expression" : {
+          "type" : "Substring",
+          "localId" : "225",
+          "signature" : [ ],
+          "stringToSub" : {
+            "type" : "Literal",
+            "localId" : "220",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "HelloWorld"
+          },
+          "startIndex" : {
+            "type" : "Literal",
+            "localId" : "221",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "7"
+          },
+          "length" : {
+            "type" : "Literal",
+            "localId" : "222",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2"
+          }
+        },
+        "name" : "Or",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ZeroLength", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Substring", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'HelloWorld'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "228"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "7", ", ", "0", ")" ],
+                    "r" : "229"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "233"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "227"
+          }
+        } ],
+        "localId" : "227",
+        "expression" : {
+          "type" : "Substring",
+          "localId" : "233",
+          "signature" : [ ],
+          "stringToSub" : {
+            "type" : "Literal",
+            "localId" : "228",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "HelloWorld"
+          },
+          "startIndex" : {
+            "type" : "Literal",
+            "localId" : "229",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "7"
+          },
+          "length" : {
+            "type" : "Literal",
+            "localId" : "230",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          }
+        },
+        "name" : "ZeroLength",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "StartTooLow", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Substring", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'HelloWorld'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "236"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "-", "1" ],
+                        "r" : "238"
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "237"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "241"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "235"
+          }
+        } ],
+        "localId" : "235",
+        "expression" : {
+          "type" : "Substring",
+          "localId" : "241",
+          "signature" : [ ],
+          "stringToSub" : {
+            "type" : "Literal",
+            "localId" : "236",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "HelloWorld"
+          },
+          "startIndex" : {
+            "type" : "Negate",
+            "localId" : "237",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "238",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            }
+          }
+        },
+        "name" : "StartTooLow",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "StartZero", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Substring", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'HelloWorld'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "244"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "0", ")" ],
+                    "r" : "245"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "248"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "243"
+          }
+        } ],
+        "localId" : "243",
+        "expression" : {
+          "type" : "Substring",
+          "localId" : "248",
+          "signature" : [ ],
+          "stringToSub" : {
+            "type" : "Literal",
+            "localId" : "244",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "HelloWorld"
+          },
+          "startIndex" : {
+            "type" : "Literal",
+            "localId" : "245",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          }
+        },
+        "name" : "StartZero",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "TooMuchLength", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Substring", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'HelloWorld'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "251"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "7", ", ", "25", ")" ],
+                    "r" : "252"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "256"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "250"
+          }
+        } ],
+        "localId" : "250",
+        "expression" : {
+          "type" : "Substring",
+          "localId" : "256",
+          "signature" : [ ],
+          "stringToSub" : {
+            "type" : "Literal",
+            "localId" : "251",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "HelloWorld"
+          },
+          "startIndex" : {
+            "type" : "Literal",
+            "localId" : "252",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "7"
+          },
+          "length" : {
+            "type" : "Literal",
+            "localId" : "253",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "25"
+          }
+        },
+        "name" : "TooMuchLength",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NegativeLength", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Substring", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'HelloWorld'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "259"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "7", ", " ],
+                    "r" : "260"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "-", "1" ],
+                        "r" : "262"
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "261"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "265"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "258"
+          }
+        } ],
+        "localId" : "258",
+        "expression" : {
+          "type" : "Substring",
+          "localId" : "265",
+          "signature" : [ ],
+          "stringToSub" : {
+            "type" : "Literal",
+            "localId" : "259",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "HelloWorld"
+          },
+          "startIndex" : {
+            "type" : "Literal",
+            "localId" : "260",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "7"
+          },
+          "length" : {
+            "type" : "Negate",
+            "localId" : "261",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "262",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            }
+          }
+        },
+        "name" : "NegativeLength",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullString", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Substring", "(", "null", ", ", "5", ")" ],
+                    "r" : "268"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "273"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "267"
+          }
+        } ],
+        "localId" : "267",
+        "expression" : {
+          "type" : "Substring",
+          "localId" : "273",
+          "signature" : [ ],
+          "stringToSub" : {
+            "type" : "As",
+            "localId" : "274",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "268"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          },
+          "startIndex" : {
+            "type" : "Literal",
+            "localId" : "269",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "5"
+          }
+        },
+        "name" : "NullString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullStart", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Substring", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'HelloWorld'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "277"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "null", ")" ],
+                    "r" : "278"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "282"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "276"
+          }
+        } ],
+        "localId" : "276",
+        "expression" : {
+          "type" : "Substring",
+          "localId" : "282",
+          "signature" : [ ],
+          "stringToSub" : {
+            "type" : "Literal",
+            "localId" : "277",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "HelloWorld"
+          },
+          "startIndex" : {
+            "type" : "As",
+            "localId" : "283",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "278"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+          }
+        },
+        "name" : "NullStart",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* StartsWith
@@ -5206,503 +9015,961 @@ define NullAsStringStartsWith: StartsWith(null as String, 'Foo')
 */
 
 module.exports['StartsWith'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "267",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "FooBarStartsWithFoo",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","FooBarStartsWithFoo",": " ]
-                  }, {
-                     "r" : "217",
-                     "s" : [ {
-                        "value" : [ "StartsWith","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "'FooBar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "214",
-                        "s" : [ {
-                           "value" : [ "'Foo'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "217",
-               "type" : "StartsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "213",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "214",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "219",
-            "name" : "FooBarStartsWithBar",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "219",
-                  "s" : [ {
-                     "value" : [ "","define ","FooBarStartsWithBar",": " ]
-                  }, {
-                     "r" : "224",
-                     "s" : [ {
-                        "value" : [ "StartsWith","(" ]
-                     }, {
-                        "r" : "220",
-                        "s" : [ {
-                           "value" : [ "'FooBar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "221",
-                        "s" : [ {
-                           "value" : [ "'Bar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "224",
-               "type" : "StartsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "220",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "221",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Bar",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "226",
-            "name" : "FooBarStartsWithBlank",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "226",
-                  "s" : [ {
-                     "value" : [ "","define ","FooBarStartsWithBlank",": " ]
-                  }, {
-                     "r" : "231",
-                     "s" : [ {
-                        "value" : [ "StartsWith","(" ]
-                     }, {
-                        "r" : "227",
-                        "s" : [ {
-                           "value" : [ "'FooBar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "228",
-                        "s" : [ {
-                           "value" : [ "''" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "231",
-               "type" : "StartsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "227",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "228",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "233",
-            "name" : "BlankStartsWithFoo",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "233",
-                  "s" : [ {
-                     "value" : [ "","define ","BlankStartsWithFoo",": " ]
-                  }, {
-                     "r" : "238",
-                     "s" : [ {
-                        "value" : [ "StartsWith","(" ]
-                     }, {
-                        "r" : "234",
-                        "s" : [ {
-                           "value" : [ "''" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "235",
-                        "s" : [ {
-                           "value" : [ "'Foo'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "238",
-               "type" : "StartsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "234",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "235",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "240",
-            "name" : "StartsWithNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "240",
-                  "s" : [ {
-                     "value" : [ "","define ","StartsWithNull",": " ]
-                  }, {
-                     "r" : "246",
-                     "s" : [ {
-                        "value" : [ "StartsWith","(" ]
-                     }, {
-                        "r" : "241",
-                        "s" : [ {
-                           "value" : [ "'FooBar'" ]
-                        } ]
-                     }, {
-                        "r" : "242",
-                        "value" : [ ", ","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "246",
-               "type" : "StartsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "241",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "247",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "242",
-                     "type" : "Null"
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "249",
-            "name" : "StartsWithNullAsString",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "249",
-                  "s" : [ {
-                     "value" : [ "","define ","StartsWithNullAsString",": " ]
-                  }, {
-                     "r" : "256",
-                     "s" : [ {
-                        "value" : [ "StartsWith","(" ]
-                     }, {
-                        "r" : "250",
-                        "s" : [ {
-                           "value" : [ "'FooBar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "251",
-                        "s" : [ {
-                           "r" : "252",
-                           "value" : [ "null"," as " ]
-                        }, {
-                           "r" : "253",
-                           "s" : [ {
-                              "value" : [ "String" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "256",
-               "type" : "StartsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "250",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "251",
-                  "strict" : false,
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "252",
-                     "type" : "Null"
-                  },
-                  "asTypeSpecifier" : {
-                     "localId" : "253",
-                     "name" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "258",
-            "name" : "NullStartsWith",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "258",
-                  "s" : [ {
-                     "value" : [ "","define ","NullStartsWith",": " ]
-                  }, {
-                     "r" : "264",
-                     "s" : [ {
-                        "r" : "259",
-                        "value" : [ "StartsWith","(","null",", " ]
-                     }, {
-                        "r" : "260",
-                        "s" : [ {
-                           "value" : [ "'Foo'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "264",
-               "type" : "StartsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "265",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "259",
-                     "type" : "Null"
-                  }
-               }, {
-                  "localId" : "260",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "267",
-            "name" : "NullAsStringStartsWith",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "267",
-                  "s" : [ {
-                     "value" : [ "","define ","NullAsStringStartsWith",": " ]
-                  }, {
-                     "r" : "274",
-                     "s" : [ {
-                        "value" : [ "StartsWith","(" ]
-                     }, {
-                        "r" : "268",
-                        "s" : [ {
-                           "r" : "269",
-                           "value" : [ "null"," as " ]
-                        }, {
-                           "r" : "270",
-                           "s" : [ {
-                              "value" : [ "String" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "271",
-                        "s" : [ {
-                           "value" : [ "'Foo'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "274",
-               "type" : "StartsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "268",
-                  "strict" : false,
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "269",
-                     "type" : "Null"
-                  },
-                  "asTypeSpecifier" : {
-                     "localId" : "270",
-                     "name" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               }, {
-                  "localId" : "271",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
-                  "type" : "Literal"
-               } ]
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "267"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "FooBarStartsWithFoo", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "StartsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "214"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "217"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "StartsWith",
+          "localId" : "217",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "213",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBar"
+          }, {
+            "type" : "Literal",
+            "localId" : "214",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo"
+          } ]
+        },
+        "name" : "FooBarStartsWithFoo",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "FooBarStartsWithBar", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "StartsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "220"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Bar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "221"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "224"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "219"
+          }
+        } ],
+        "localId" : "219",
+        "expression" : {
+          "type" : "StartsWith",
+          "localId" : "224",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "220",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBar"
+          }, {
+            "type" : "Literal",
+            "localId" : "221",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Bar"
+          } ]
+        },
+        "name" : "FooBarStartsWithBar",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "FooBarStartsWithBlank", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "StartsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "227"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "''" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "228"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "231"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "226"
+          }
+        } ],
+        "localId" : "226",
+        "expression" : {
+          "type" : "StartsWith",
+          "localId" : "231",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "227",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBar"
+          }, {
+            "type" : "Literal",
+            "localId" : "228",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ""
+          } ]
+        },
+        "name" : "FooBarStartsWithBlank",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "BlankStartsWithFoo", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "StartsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "''" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "234"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "235"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "238"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "233"
+          }
+        } ],
+        "localId" : "233",
+        "expression" : {
+          "type" : "StartsWith",
+          "localId" : "238",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "234",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ""
+          }, {
+            "type" : "Literal",
+            "localId" : "235",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo"
+          } ]
+        },
+        "name" : "BlankStartsWithFoo",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "StartsWithNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "StartsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "241"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "null", ")" ],
+                    "r" : "242"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "246"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "240"
+          }
+        } ],
+        "localId" : "240",
+        "expression" : {
+          "type" : "StartsWith",
+          "localId" : "246",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "241",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBar"
+          }, {
+            "type" : "As",
+            "localId" : "247",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "242"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ]
+        },
+        "name" : "StartsWithNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "StartsWithNullAsString", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "StartsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "250"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "null", " as " ],
+                        "r" : "252"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "String" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "253"
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "251"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "256"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "249"
+          }
+        } ],
+        "localId" : "249",
+        "expression" : {
+          "type" : "StartsWith",
+          "localId" : "256",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "250",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBar"
+          }, {
+            "type" : "As",
+            "localId" : "251",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "252"
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "253",
+              "name" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "strict" : false
+          } ]
+        },
+        "name" : "StartsWithNullAsString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullStartsWith", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "StartsWith", "(", "null", ", " ],
+                    "r" : "259"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "260"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "264"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "258"
+          }
+        } ],
+        "localId" : "258",
+        "expression" : {
+          "type" : "StartsWith",
+          "localId" : "264",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "265",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "259"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "localId" : "260",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo"
+          } ]
+        },
+        "name" : "NullStartsWith",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullAsStringStartsWith", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "StartsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "null", " as " ],
+                        "r" : "269"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "String" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "270"
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "268"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "271"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "274"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "267"
+          }
+        } ],
+        "localId" : "267",
+        "expression" : {
+          "type" : "StartsWith",
+          "localId" : "274",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "268",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "269"
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "270",
+              "name" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "strict" : false
+          }, {
+            "type" : "Literal",
+            "localId" : "271",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo"
+          } ]
+        },
+        "name" : "NullAsStringStartsWith",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* EndsWith
@@ -5720,520 +9987,1008 @@ define NullAsStringEndsWith: EndsWith(null as String, 'Foo')
 */
 
 module.exports['EndsWith'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "267",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "FooBarEndsWithBar",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","FooBarEndsWithBar",": " ]
-                  }, {
-                     "r" : "217",
-                     "s" : [ {
-                        "value" : [ "EndsWith","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "'FooBar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "214",
-                        "s" : [ {
-                           "value" : [ "'Bar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "217",
-               "type" : "EndsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "213",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "214",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Bar",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "219",
-            "name" : "FooBarEndsWithFoo",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "219",
-                  "s" : [ {
-                     "value" : [ "","define ","FooBarEndsWithFoo",": " ]
-                  }, {
-                     "r" : "224",
-                     "s" : [ {
-                        "value" : [ "EndsWith","(" ]
-                     }, {
-                        "r" : "220",
-                        "s" : [ {
-                           "value" : [ "'FooBar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "221",
-                        "s" : [ {
-                           "value" : [ "'Foo'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "224",
-               "type" : "EndsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "220",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "221",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "226",
-            "name" : "FooBarEndsWithBlank",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "226",
-                  "s" : [ {
-                     "value" : [ "","define ","FooBarEndsWithBlank",": " ]
-                  }, {
-                     "r" : "231",
-                     "s" : [ {
-                        "value" : [ "EndsWith","(" ]
-                     }, {
-                        "r" : "227",
-                        "s" : [ {
-                           "value" : [ "'FooBar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "228",
-                        "s" : [ {
-                           "value" : [ "''" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "231",
-               "type" : "EndsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "227",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "228",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "233",
-            "name" : "BlankEndsWithFoo",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "233",
-                  "s" : [ {
-                     "value" : [ "","define ","BlankEndsWithFoo",": " ]
-                  }, {
-                     "r" : "238",
-                     "s" : [ {
-                        "value" : [ "EndsWith","(" ]
-                     }, {
-                        "r" : "234",
-                        "s" : [ {
-                           "value" : [ "''" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "235",
-                        "s" : [ {
-                           "value" : [ "'Foo'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "238",
-               "type" : "EndsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "234",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "235",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "240",
-            "name" : "EndsWithNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "240",
-                  "s" : [ {
-                     "value" : [ "","define ","EndsWithNull",": " ]
-                  }, {
-                     "r" : "246",
-                     "s" : [ {
-                        "value" : [ "EndsWith","(" ]
-                     }, {
-                        "r" : "241",
-                        "s" : [ {
-                           "value" : [ "'FooBar'" ]
-                        } ]
-                     }, {
-                        "r" : "242",
-                        "value" : [ ", ","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "246",
-               "type" : "EndsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "241",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "247",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "242",
-                     "type" : "Null"
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "249",
-            "name" : "EndsWithNullAsString",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "249",
-                  "s" : [ {
-                     "value" : [ "","define ","EndsWithNullAsString",": " ]
-                  }, {
-                     "r" : "256",
-                     "s" : [ {
-                        "value" : [ "EndsWith","(" ]
-                     }, {
-                        "r" : "250",
-                        "s" : [ {
-                           "value" : [ "'FooBar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "251",
-                        "s" : [ {
-                           "r" : "252",
-                           "value" : [ "null"," as " ]
-                        }, {
-                           "r" : "253",
-                           "s" : [ {
-                              "value" : [ "String" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "256",
-               "type" : "EndsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "250",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "251",
-                  "strict" : false,
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "252",
-                     "type" : "Null"
-                  },
-                  "asTypeSpecifier" : {
-                     "localId" : "253",
-                     "name" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "258",
-            "name" : "NullEndsWith",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "258",
-                  "s" : [ {
-                     "value" : [ "","define ","NullEndsWith",": " ]
-                  }, {
-                     "r" : "265",
-                     "s" : [ {
-                        "value" : [ "EndsWith","(" ]
-                     }, {
-                        "r" : "259",
-                        "s" : [ {
-                           "r" : "260",
-                           "value" : [ "null"," as " ]
-                        }, {
-                           "r" : "261",
-                           "s" : [ {
-                              "value" : [ "String" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "262",
-                        "s" : [ {
-                           "value" : [ "'Foo'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "265",
-               "type" : "EndsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "259",
-                  "strict" : false,
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "260",
-                     "type" : "Null"
-                  },
-                  "asTypeSpecifier" : {
-                     "localId" : "261",
-                     "name" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               }, {
-                  "localId" : "262",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "267",
-            "name" : "NullAsStringEndsWith",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "267",
-                  "s" : [ {
-                     "value" : [ "","define ","NullAsStringEndsWith",": " ]
-                  }, {
-                     "r" : "274",
-                     "s" : [ {
-                        "value" : [ "EndsWith","(" ]
-                     }, {
-                        "r" : "268",
-                        "s" : [ {
-                           "r" : "269",
-                           "value" : [ "null"," as " ]
-                        }, {
-                           "r" : "270",
-                           "s" : [ {
-                              "value" : [ "String" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "271",
-                        "s" : [ {
-                           "value" : [ "'Foo'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "274",
-               "type" : "EndsWith",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "268",
-                  "strict" : false,
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "269",
-                     "type" : "Null"
-                  },
-                  "asTypeSpecifier" : {
-                     "localId" : "270",
-                     "name" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               }, {
-                  "localId" : "271",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
-                  "type" : "Literal"
-               } ]
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "267"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "FooBarEndsWithBar", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "EndsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Bar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "214"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "217"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "EndsWith",
+          "localId" : "217",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "213",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBar"
+          }, {
+            "type" : "Literal",
+            "localId" : "214",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Bar"
+          } ]
+        },
+        "name" : "FooBarEndsWithBar",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "FooBarEndsWithFoo", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "EndsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "220"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "221"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "224"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "219"
+          }
+        } ],
+        "localId" : "219",
+        "expression" : {
+          "type" : "EndsWith",
+          "localId" : "224",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "220",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBar"
+          }, {
+            "type" : "Literal",
+            "localId" : "221",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo"
+          } ]
+        },
+        "name" : "FooBarEndsWithFoo",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "FooBarEndsWithBlank", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "EndsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "227"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "''" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "228"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "231"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "226"
+          }
+        } ],
+        "localId" : "226",
+        "expression" : {
+          "type" : "EndsWith",
+          "localId" : "231",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "227",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBar"
+          }, {
+            "type" : "Literal",
+            "localId" : "228",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ""
+          } ]
+        },
+        "name" : "FooBarEndsWithBlank",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "BlankEndsWithFoo", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "EndsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "''" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "234"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "235"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "238"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "233"
+          }
+        } ],
+        "localId" : "233",
+        "expression" : {
+          "type" : "EndsWith",
+          "localId" : "238",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "234",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ""
+          }, {
+            "type" : "Literal",
+            "localId" : "235",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo"
+          } ]
+        },
+        "name" : "BlankEndsWithFoo",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "EndsWithNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "EndsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "241"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "null", ")" ],
+                    "r" : "242"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "246"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "240"
+          }
+        } ],
+        "localId" : "240",
+        "expression" : {
+          "type" : "EndsWith",
+          "localId" : "246",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "241",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBar"
+          }, {
+            "type" : "As",
+            "localId" : "247",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "242"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ]
+        },
+        "name" : "EndsWithNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "EndsWithNullAsString", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "EndsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "250"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "null", " as " ],
+                        "r" : "252"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "String" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "253"
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "251"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "256"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "249"
+          }
+        } ],
+        "localId" : "249",
+        "expression" : {
+          "type" : "EndsWith",
+          "localId" : "256",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "250",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBar"
+          }, {
+            "type" : "As",
+            "localId" : "251",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "252"
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "253",
+              "name" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "strict" : false
+          } ]
+        },
+        "name" : "EndsWithNullAsString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullEndsWith", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "EndsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "null", " as " ],
+                        "r" : "260"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "String" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "261"
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "259"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "262"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "265"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "258"
+          }
+        } ],
+        "localId" : "258",
+        "expression" : {
+          "type" : "EndsWith",
+          "localId" : "265",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "259",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "260"
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "261",
+              "name" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "strict" : false
+          }, {
+            "type" : "Literal",
+            "localId" : "262",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo"
+          } ]
+        },
+        "name" : "NullEndsWith",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "NullAsStringEndsWith", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "EndsWith", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "null", " as " ],
+                        "r" : "269"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "String" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "270"
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "268"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "271"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "274"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "267"
+          }
+        } ],
+        "localId" : "267",
+        "expression" : {
+          "type" : "EndsWith",
+          "localId" : "274",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "268",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "269"
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "270",
+              "name" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "strict" : false
+          }, {
+            "type" : "Literal",
+            "localId" : "271",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo"
+          } ]
+        },
+        "name" : "NullAsStringEndsWith",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* ReplaceMatches
@@ -6255,810 +11010,1662 @@ define ReplaceSubstitutionIsNull: ReplaceMatches('Foo', 'Bar', null)
 */
 
 module.exports['ReplaceMatches'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "304",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "ReplaceOne",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","ReplaceOne",": " ]
-                  }, {
-                     "r" : "218",
-                     "s" : [ {
-                        "value" : [ "ReplaceMatches","(" ]
-                     }, {
-                        "r" : "213",
-                        "s" : [ {
-                           "value" : [ "'FooBar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "214",
-                        "s" : [ {
-                           "value" : [ "'Bar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "215",
-                        "s" : [ {
-                           "value" : [ "'Baz'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "218",
-               "type" : "ReplaceMatches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "213",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "214",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Bar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "215",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Baz",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "220",
-            "name" : "ReplaceMany",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "220",
-                  "s" : [ {
-                     "value" : [ "","define ","ReplaceMany",": " ]
-                  }, {
-                     "r" : "226",
-                     "s" : [ {
-                        "value" : [ "ReplaceMatches","(" ]
-                     }, {
-                        "r" : "221",
-                        "s" : [ {
-                           "value" : [ "'FooBarFooBarFooBar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "222",
-                        "s" : [ {
-                           "value" : [ "'Bar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "223",
-                        "s" : [ {
-                           "value" : [ "'Baz'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "226",
-               "type" : "ReplaceMatches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "221",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBarFooBarFooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "222",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Bar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "223",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Baz",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "228",
-            "name" : "ReplaceCapital",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "228",
-                  "s" : [ {
-                     "value" : [ "","define ","ReplaceCapital",": " ]
-                  }, {
-                     "r" : "234",
-                     "s" : [ {
-                        "value" : [ "ReplaceMatches","(" ]
-                     }, {
-                        "r" : "229",
-                        "s" : [ {
-                           "value" : [ "'Tattle'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "230",
-                        "s" : [ {
-                           "value" : [ "'T'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "231",
-                        "s" : [ {
-                           "value" : [ "'R'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "234",
-               "type" : "ReplaceMatches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "229",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Tattle",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "230",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "T",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "231",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "R",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "236",
-            "name" : "ReplaceDiacritical",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "236",
-                  "s" : [ {
-                     "value" : [ "","define ","ReplaceDiacritical",": " ]
-                  }, {
-                     "r" : "242",
-                     "s" : [ {
-                        "value" : [ "ReplaceMatches","(" ]
-                     }, {
-                        "r" : "237",
-                        "s" : [ {
-                           "value" : [ "'Cafè'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "238",
-                        "s" : [ {
-                           "value" : [ "'è'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "239",
-                        "s" : [ {
-                           "value" : [ "'é'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "242",
-               "type" : "ReplaceMatches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "237",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Cafè",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "238",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "è",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "239",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "é",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "244",
-            "name" : "ReplaceUnicode",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "244",
-                  "s" : [ {
-                     "value" : [ "","define ","ReplaceUnicode",": " ]
-                  }, {
-                     "r" : "250",
-                     "s" : [ {
-                        "value" : [ "ReplaceMatches","(" ]
-                     }, {
-                        "r" : "245",
-                        "s" : [ {
-                           "value" : [ "'Turn that frown \uD83D\uDE41 upside down! \uD83D\uDE03'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "246",
-                        "s" : [ {
-                           "value" : [ "'\uD83D\uDE41'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "247",
-                        "s" : [ {
-                           "value" : [ "'\uD83D\uDE03'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "250",
-               "type" : "ReplaceMatches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "245",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Turn that frown \uD83D\uDE41 upside down! \uD83D\uDE03",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "246",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "\uD83D\uDE41",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "247",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "\uD83D\uDE03",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "252",
-            "name" : "ReplaceSpace",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "252",
-                  "s" : [ {
-                     "value" : [ "","define ","ReplaceSpace",": " ]
-                  }, {
-                     "r" : "258",
-                     "s" : [ {
-                        "value" : [ "ReplaceMatches","(" ]
-                     }, {
-                        "r" : "253",
-                        "s" : [ {
-                           "value" : [ "'(123) 456 7890'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "254",
-                        "s" : [ {
-                           "value" : [ "'\\\\s'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "255",
-                        "s" : [ {
-                           "value" : [ "'-'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "258",
-               "type" : "ReplaceMatches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "253",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "(123) 456 7890",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "254",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "\\s",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "255",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "-",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "260",
-            "name" : "ReplaceEmpty",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "260",
-                  "s" : [ {
-                     "value" : [ "","define ","ReplaceEmpty",": " ]
-                  }, {
-                     "r" : "266",
-                     "s" : [ {
-                        "value" : [ "ReplaceMatches","(" ]
-                     }, {
-                        "r" : "261",
-                        "s" : [ {
-                           "value" : [ "'FooBar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "262",
-                        "s" : [ {
-                           "value" : [ "''" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "263",
-                        "s" : [ {
-                           "value" : [ "'.'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "266",
-               "type" : "ReplaceMatches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "261",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "FooBar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "262",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "263",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : ".",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "268",
-            "name" : "ReplaceMatchGroups",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "268",
-                  "s" : [ {
-                     "value" : [ "","define ","ReplaceMatchGroups",": " ]
-                  }, {
-                     "r" : "274",
-                     "s" : [ {
-                        "value" : [ "ReplaceMatches","(" ]
-                     }, {
-                        "r" : "269",
-                        "s" : [ {
-                           "value" : [ "'Foo[123]'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "270",
-                        "s" : [ {
-                           "value" : [ "'Foo\\\\[(\\\\d+)]'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "271",
-                        "s" : [ {
-                           "value" : [ "'Bar[$1]'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "274",
-               "type" : "ReplaceMatches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "269",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo[123]",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "270",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo\\[(\\d+)]",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "271",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Bar[$1]",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "276",
-            "name" : "ReplaceNone",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "276",
-                  "s" : [ {
-                     "value" : [ "","define ","ReplaceNone",": " ]
-                  }, {
-                     "r" : "282",
-                     "s" : [ {
-                        "value" : [ "ReplaceMatches","(" ]
-                     }, {
-                        "r" : "277",
-                        "s" : [ {
-                           "value" : [ "'Foo'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "278",
-                        "s" : [ {
-                           "value" : [ "'Bar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "279",
-                        "s" : [ {
-                           "value" : [ "'Baz'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "282",
-               "type" : "ReplaceMatches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "277",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "278",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Bar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "279",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Baz",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "284",
-            "name" : "ReplaceArgumentIsNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "284",
-                  "s" : [ {
-                     "value" : [ "","define ","ReplaceArgumentIsNull",": " ]
-                  }, {
-                     "r" : "291",
-                     "s" : [ {
-                        "r" : "285",
-                        "value" : [ "ReplaceMatches","(","null",", " ]
-                     }, {
-                        "r" : "286",
-                        "s" : [ {
-                           "value" : [ "'Bar'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "287",
-                        "s" : [ {
-                           "value" : [ "'Baz'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "291",
-               "type" : "ReplaceMatches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "292",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "285",
-                     "type" : "Null"
-                  }
-               }, {
-                  "localId" : "286",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Bar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "287",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Baz",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "294",
-            "name" : "ReplacePatternIsNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "294",
-                  "s" : [ {
-                     "value" : [ "","define ","ReplacePatternIsNull",": " ]
-                  }, {
-                     "r" : "301",
-                     "s" : [ {
-                        "value" : [ "ReplaceMatches","(" ]
-                     }, {
-                        "r" : "295",
-                        "s" : [ {
-                           "value" : [ "'Foo'" ]
-                        } ]
-                     }, {
-                        "r" : "296",
-                        "value" : [ ", ","null",", " ]
-                     }, {
-                        "r" : "297",
-                        "s" : [ {
-                           "value" : [ "'Baz'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "301",
-               "type" : "ReplaceMatches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "295",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "302",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "296",
-                     "type" : "Null"
-                  }
-               }, {
-                  "localId" : "297",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Baz",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "304",
-            "name" : "ReplaceSubstitutionIsNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "304",
-                  "s" : [ {
-                     "value" : [ "","define ","ReplaceSubstitutionIsNull",": " ]
-                  }, {
-                     "r" : "311",
-                     "s" : [ {
-                        "value" : [ "ReplaceMatches","(" ]
-                     }, {
-                        "r" : "305",
-                        "s" : [ {
-                           "value" : [ "'Foo'" ]
-                        } ]
-                     }, {
-                        "value" : [ ", " ]
-                     }, {
-                        "r" : "306",
-                        "s" : [ {
-                           "value" : [ "'Bar'" ]
-                        } ]
-                     }, {
-                        "r" : "307",
-                        "value" : [ ", ","null",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "311",
-               "type" : "ReplaceMatches",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "305",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Foo",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "306",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Bar",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "312",
-                  "asType" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "307",
-                     "type" : "Null"
-                  }
-               } ]
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "304"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ReplaceOne", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "ReplaceMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "213"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Bar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "214"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Baz'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "215"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "218"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "ReplaceMatches",
+          "localId" : "218",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "213",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBar"
+          }, {
+            "type" : "Literal",
+            "localId" : "214",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Bar"
+          }, {
+            "type" : "Literal",
+            "localId" : "215",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Baz"
+          } ]
+        },
+        "name" : "ReplaceOne",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ReplaceMany", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "ReplaceMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBarFooBarFooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "221"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Bar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "222"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Baz'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "223"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "226"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "220"
+          }
+        } ],
+        "localId" : "220",
+        "expression" : {
+          "type" : "ReplaceMatches",
+          "localId" : "226",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "221",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBarFooBarFooBar"
+          }, {
+            "type" : "Literal",
+            "localId" : "222",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Bar"
+          }, {
+            "type" : "Literal",
+            "localId" : "223",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Baz"
+          } ]
+        },
+        "name" : "ReplaceMany",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ReplaceCapital", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "ReplaceMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Tattle'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "229"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'T'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "230"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'R'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "231"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "234"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "228"
+          }
+        } ],
+        "localId" : "228",
+        "expression" : {
+          "type" : "ReplaceMatches",
+          "localId" : "234",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "229",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Tattle"
+          }, {
+            "type" : "Literal",
+            "localId" : "230",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "T"
+          }, {
+            "type" : "Literal",
+            "localId" : "231",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "R"
+          } ]
+        },
+        "name" : "ReplaceCapital",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ReplaceDiacritical", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "ReplaceMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Cafè'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "237"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'è'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "238"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'é'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "239"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "242"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "236"
+          }
+        } ],
+        "localId" : "236",
+        "expression" : {
+          "type" : "ReplaceMatches",
+          "localId" : "242",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "237",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Cafè"
+          }, {
+            "type" : "Literal",
+            "localId" : "238",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "è"
+          }, {
+            "type" : "Literal",
+            "localId" : "239",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "é"
+          } ]
+        },
+        "name" : "ReplaceDiacritical",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ReplaceUnicode", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "ReplaceMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Turn that frown 🙁 upside down! 😃'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "245"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'🙁'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "246"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'😃'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "247"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "250"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "244"
+          }
+        } ],
+        "localId" : "244",
+        "expression" : {
+          "type" : "ReplaceMatches",
+          "localId" : "250",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "245",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Turn that frown 🙁 upside down! 😃"
+          }, {
+            "type" : "Literal",
+            "localId" : "246",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "🙁"
+          }, {
+            "type" : "Literal",
+            "localId" : "247",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "😃"
+          } ]
+        },
+        "name" : "ReplaceUnicode",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ReplaceSpace", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "ReplaceMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'(123) 456 7890'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "253"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'\\\\s'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "254"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'-'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "255"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "258"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "252"
+          }
+        } ],
+        "localId" : "252",
+        "expression" : {
+          "type" : "ReplaceMatches",
+          "localId" : "258",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "253",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "(123) 456 7890"
+          }, {
+            "type" : "Literal",
+            "localId" : "254",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "\\s"
+          }, {
+            "type" : "Literal",
+            "localId" : "255",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "-"
+          } ]
+        },
+        "name" : "ReplaceSpace",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ReplaceEmpty", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "ReplaceMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'FooBar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "261"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "''" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "262"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'.'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "263"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "266"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "260"
+          }
+        } ],
+        "localId" : "260",
+        "expression" : {
+          "type" : "ReplaceMatches",
+          "localId" : "266",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "261",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "FooBar"
+          }, {
+            "type" : "Literal",
+            "localId" : "262",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ""
+          }, {
+            "type" : "Literal",
+            "localId" : "263",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "."
+          } ]
+        },
+        "name" : "ReplaceEmpty",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ReplaceMatchGroups", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "ReplaceMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo[123]'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "269"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo\\\\[(\\\\d+)]'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "270"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Bar[$1]'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "271"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "274"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "268"
+          }
+        } ],
+        "localId" : "268",
+        "expression" : {
+          "type" : "ReplaceMatches",
+          "localId" : "274",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "269",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo[123]"
+          }, {
+            "type" : "Literal",
+            "localId" : "270",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo\\[(\\d+)]"
+          }, {
+            "type" : "Literal",
+            "localId" : "271",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Bar[$1]"
+          } ]
+        },
+        "name" : "ReplaceMatchGroups",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ReplaceNone", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "ReplaceMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "277"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Bar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "278"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Baz'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "279"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "282"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "276"
+          }
+        } ],
+        "localId" : "276",
+        "expression" : {
+          "type" : "ReplaceMatches",
+          "localId" : "282",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "277",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo"
+          }, {
+            "type" : "Literal",
+            "localId" : "278",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Bar"
+          }, {
+            "type" : "Literal",
+            "localId" : "279",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Baz"
+          } ]
+        },
+        "name" : "ReplaceNone",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ReplaceArgumentIsNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "ReplaceMatches", "(", "null", ", " ],
+                    "r" : "285"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Bar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "286"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Baz'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "287"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "291"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "284"
+          }
+        } ],
+        "localId" : "284",
+        "expression" : {
+          "type" : "ReplaceMatches",
+          "localId" : "291",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "292",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "285"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "localId" : "286",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Bar"
+          }, {
+            "type" : "Literal",
+            "localId" : "287",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Baz"
+          } ]
+        },
+        "name" : "ReplaceArgumentIsNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ReplacePatternIsNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "ReplaceMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "295"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "null", ", " ],
+                    "r" : "296"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Baz'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "297"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ")" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "301"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "294"
+          }
+        } ],
+        "localId" : "294",
+        "expression" : {
+          "type" : "ReplaceMatches",
+          "localId" : "301",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "295",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo"
+          }, {
+            "type" : "As",
+            "localId" : "302",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "296"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "localId" : "297",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Baz"
+          } ]
+        },
+        "name" : "ReplacePatternIsNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "ReplaceSubstitutionIsNull", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "ReplaceMatches", "(" ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Foo'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "305"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", " ]
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "'Bar'" ]
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "306"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ ", ", "null", ")" ],
+                    "r" : "307"
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "311"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "304"
+          }
+        } ],
+        "localId" : "304",
+        "expression" : {
+          "type" : "ReplaceMatches",
+          "localId" : "311",
+          "signature" : [ ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "305",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Foo"
+          }, {
+            "type" : "Literal",
+            "localId" : "306",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Bar"
+          }, {
+            "type" : "As",
+            "localId" : "312",
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "307"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ]
+        },
+        "name" : "ReplaceSubstitutionIsNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 

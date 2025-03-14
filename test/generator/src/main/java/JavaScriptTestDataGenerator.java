@@ -1,11 +1,13 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
+import kotlinx.io.Source;
 import org.cqframework.cql.cql2elm.*;
-import org.cqframework.cql.elm.tracking.TrackBack;
+import org.cqframework.cql.cql2elm.tracking.TrackBack;
 import org.hl7.cql.model.ModelIdentifier;
 import org.hl7.cql.model.ModelInfoProvider;
-import org.hl7.elm.r1.VersionedIdentifier;
 import org.hl7.elm_modelinfo.r1.ModelInfo;
 import org.hl7.elm_modelinfo.r1.serializing.ModelInfoReaderFactory;
 
@@ -19,7 +21,6 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
-import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
@@ -33,7 +34,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
-
+import static kotlinx.io.CoreKt.buffered;
+import static kotlinx.io.JvmCoreKt.asSource;
 
 
 public class JavaScriptTestDataGenerator {
@@ -75,8 +77,9 @@ public class JavaScriptTestDataGenerator {
 
     public static void loadModelInfo(File modelInfoXML, ModelManager modelManager) {
         try {
-            final ModelInfo modelInfo = ModelInfoReaderFactory.getReader("application/xml").read(modelInfoXML);
-            final ModelIdentifier modelId = new ModelIdentifier().withId(modelInfo.getName()).withVersion(modelInfo.getVersion());
+            final Source source = buffered(asSource(new FileInputStream(modelInfoXML)));
+            final ModelInfo modelInfo = ModelInfoReaderFactory.INSTANCE.getReader("application/xml").read(source);
+            final ModelIdentifier modelId = new ModelIdentifier(modelInfo.getName(), null, modelInfo.getVersion());
             final ModelInfoProvider modelProvider = (ModelIdentifier modelIdentifier) -> modelInfo;
             modelManager.getModelInfoLoader().registerModelInfoProvider(modelProvider);
         } catch (IOException e) {
@@ -126,7 +129,7 @@ public class JavaScriptTestDataGenerator {
                     }
                     pw.println("*/");
                 }
-                pw.println("module.exports['" + name + "'] = " + cqlt.toJson());
+                pw.println("module.exports['" + name + "'] = " + prettyPrint(cqlt.toJson()));
             } catch (Exception e) {
                 pw.println("/*");
                 pw.println("Translation Exception: " + e.getMessage());
@@ -138,6 +141,12 @@ public class JavaScriptTestDataGenerator {
         }
         pw.close();
         System.out.println("Generated " + file.toAbsolutePath().normalize());
+    }
+
+    private static String prettyPrint(String jsonString) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Object jsonObject = objectMapper.readValue(jsonString, Object.class);
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonObject);
     }
 
     private static void updateSnippet(StringBuilder snippet) {

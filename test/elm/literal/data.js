@@ -22,306 +22,397 @@ define TimeX: @T12:10:59.456
 */
 
 module.exports['Literal'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "238",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "BoolTrue",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "r" : "213",
-                     "value" : [ "","define ","BoolTrue",": ","true" ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "213",
-               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-               "value" : "true",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "215",
-            "name" : "BoolFalse",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "215",
-                  "s" : [ {
-                     "r" : "216",
-                     "value" : [ "","define ","BoolFalse",": ","false" ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "216",
-               "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-               "value" : "false",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "218",
-            "name" : "IntOne",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "218",
-                  "s" : [ {
-                     "r" : "219",
-                     "value" : [ "","define ","IntOne",": ","1" ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "219",
-               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-               "value" : "1",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "221",
-            "name" : "DecimalTenth",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "221",
-                  "s" : [ {
-                     "r" : "222",
-                     "value" : [ "","define ","DecimalTenth",": ","0.1" ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "222",
-               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-               "value" : "0.1",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "224",
-            "name" : "StringTrue",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "224",
-                  "s" : [ {
-                     "value" : [ "","define ","StringTrue",": " ]
-                  }, {
-                     "r" : "225",
-                     "s" : [ {
-                        "value" : [ "'true'" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "225",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "true",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "227",
-            "name" : "DateTimeX",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "227",
-                  "s" : [ {
-                     "r" : "228",
-                     "value" : [ "","define ","DateTimeX",": ","@2012-02-15T12:10:59.456Z" ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "228",
-               "type" : "DateTime",
-               "signature" : [ ],
-               "year" : {
-                  "localId" : "229",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "2012",
-                  "type" : "Literal"
-               },
-               "month" : {
-                  "localId" : "230",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "2",
-                  "type" : "Literal"
-               },
-               "day" : {
-                  "localId" : "231",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "15",
-                  "type" : "Literal"
-               },
-               "hour" : {
-                  "localId" : "232",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "12",
-                  "type" : "Literal"
-               },
-               "minute" : {
-                  "localId" : "233",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "10",
-                  "type" : "Literal"
-               },
-               "second" : {
-                  "localId" : "234",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "59",
-                  "type" : "Literal"
-               },
-               "millisecond" : {
-                  "localId" : "235",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "456",
-                  "type" : "Literal"
-               },
-               "timezoneOffset" : {
-                  "localId" : "236",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                  "value" : "0.0",
-                  "type" : "Literal"
-               }
-            }
-         }, {
-            "localId" : "238",
-            "name" : "TimeX",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "238",
-                  "s" : [ {
-                     "r" : "239",
-                     "value" : [ "","define ","TimeX",": ","@T12:10:59.456" ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "239",
-               "type" : "Time",
-               "signature" : [ ],
-               "hour" : {
-                  "localId" : "240",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "12",
-                  "type" : "Literal"
-               },
-               "minute" : {
-                  "localId" : "241",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "10",
-                  "type" : "Literal"
-               },
-               "second" : {
-                  "localId" : "242",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "59",
-                  "type" : "Literal"
-               },
-               "millisecond" : {
-                  "localId" : "243",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "456",
-                  "type" : "Literal"
-               }
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "238"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "BoolTrue", ": ", "true" ],
+                "r" : "213"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "213",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "true"
+        },
+        "name" : "BoolTrue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "BoolFalse", ": ", "false" ],
+                "r" : "216"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "215"
+          }
+        } ],
+        "localId" : "215",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "216",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "false"
+        },
+        "name" : "BoolFalse",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "IntOne", ": ", "1" ],
+                "r" : "219"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "218"
+          }
+        } ],
+        "localId" : "218",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "219",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+          "value" : "1"
+        },
+        "name" : "IntOne",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "DecimalTenth", ": ", "0.1" ],
+                "r" : "222"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "221"
+          }
+        } ],
+        "localId" : "221",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "222",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "value" : "0.1"
+        },
+        "name" : "DecimalTenth",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "StringTrue", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "'true'" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "225"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "224"
+          }
+        } ],
+        "localId" : "224",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "225",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "true"
+        },
+        "name" : "StringTrue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "DateTimeX", ": ", "@2012-02-15T12:10:59.456Z" ],
+                "r" : "228"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "227"
+          }
+        } ],
+        "localId" : "227",
+        "expression" : {
+          "type" : "DateTime",
+          "localId" : "228",
+          "signature" : [ ],
+          "year" : {
+            "type" : "Literal",
+            "localId" : "229",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2012"
+          },
+          "month" : {
+            "type" : "Literal",
+            "localId" : "230",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2"
+          },
+          "day" : {
+            "type" : "Literal",
+            "localId" : "231",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "15"
+          },
+          "hour" : {
+            "type" : "Literal",
+            "localId" : "232",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "12"
+          },
+          "minute" : {
+            "type" : "Literal",
+            "localId" : "233",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "10"
+          },
+          "second" : {
+            "type" : "Literal",
+            "localId" : "234",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "59"
+          },
+          "millisecond" : {
+            "type" : "Literal",
+            "localId" : "235",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "456"
+          },
+          "timezoneOffset" : {
+            "type" : "Literal",
+            "localId" : "236",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.0"
+          }
+        },
+        "name" : "DateTimeX",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "TimeX", ": ", "@T12:10:59.456" ],
+                "r" : "239"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "238"
+          }
+        } ],
+        "localId" : "238",
+        "expression" : {
+          "type" : "Time",
+          "localId" : "239",
+          "signature" : [ ],
+          "hour" : {
+            "type" : "Literal",
+            "localId" : "240",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "12"
+          },
+          "minute" : {
+            "type" : "Literal",
+            "localId" : "241",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "10"
+          },
+          "second" : {
+            "type" : "Literal",
+            "localId" : "242",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "59"
+          },
+          "millisecond" : {
+            "type" : "Literal",
+            "localId" : "243",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "456"
+          }
+        },
+        "name" : "TimeX",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
 /* Escape
@@ -340,309 +431,510 @@ define Unicode: '\u0048'
 */
 
 module.exports['Escape'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "236",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "212",
-            "name" : "SingleQuote",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "212",
-                  "s" : [ {
-                     "value" : [ "","define ","SingleQuote",": " ]
-                  }, {
-                     "r" : "213",
-                     "s" : [ {
-                        "value" : [ "'\\''" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "213",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "'",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "215",
-            "name" : "DoubleQuote",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "215",
-                  "s" : [ {
-                     "value" : [ "","define ","DoubleQuote",": " ]
-                  }, {
-                     "r" : "216",
-                     "s" : [ {
-                        "value" : [ "'\\\"'" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "216",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "\"",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "218",
-            "name" : "Backtick",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "218",
-                  "s" : [ {
-                     "value" : [ "","define ","Backtick",": " ]
-                  }, {
-                     "r" : "219",
-                     "s" : [ {
-                        "value" : [ "'\\`'" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "219",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "`",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "221",
-            "name" : "CarriageReturn",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "221",
-                  "s" : [ {
-                     "value" : [ "","define ","CarriageReturn",": " ]
-                  }, {
-                     "r" : "222",
-                     "s" : [ {
-                        "value" : [ "'\\r'" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "222",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "\r",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "224",
-            "name" : "LineFeed",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "224",
-                  "s" : [ {
-                     "value" : [ "","define ","LineFeed",": " ]
-                  }, {
-                     "r" : "225",
-                     "s" : [ {
-                        "value" : [ "'\\n'" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "225",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "\n",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "227",
-            "name" : "Tab",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "227",
-                  "s" : [ {
-                     "value" : [ "","define ","Tab",": " ]
-                  }, {
-                     "r" : "228",
-                     "s" : [ {
-                        "value" : [ "'\\t'" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "228",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "\t",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "230",
-            "name" : "FormFeed",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "230",
-                  "s" : [ {
-                     "value" : [ "","define ","FormFeed",": " ]
-                  }, {
-                     "r" : "231",
-                     "s" : [ {
-                        "value" : [ "'\\f'" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "231",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "\f",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "233",
-            "name" : "Backslash",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "233",
-                  "s" : [ {
-                     "value" : [ "","define ","Backslash",": " ]
-                  }, {
-                     "r" : "234",
-                     "s" : [ {
-                        "value" : [ "'\\\\'" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "234",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "\\",
-               "type" : "Literal"
-            }
-         }, {
-            "localId" : "236",
-            "name" : "Unicode",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "236",
-                  "s" : [ {
-                     "value" : [ "","define ","Unicode",": " ]
-                  }, {
-                     "r" : "237",
-                     "s" : [ {
-                        "value" : [ "'\\u0048'" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "237",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "H",
-               "type" : "Literal"
-            }
-         } ]
+  "library" : {
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
+      "signatureLevel" : "None"
+    }, {
+      "type" : "Annotation",
+      "s" : {
+        "s" : [ {
+          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+          "value" : {
+            "s" : [ "", "library TestSnippet version '1'" ]
+          },
+          "globalScope" : true
+        } ],
+        "r" : "236"
       }
-   }
+    } ],
+    "localId" : "0",
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "using " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "Simple" ]
+                  },
+                  "globalScope" : true
+                } ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ " version '1.0.0'" ]
+              },
+              "globalScope" : true
+            } ],
+            "r" : "206"
+          }
+        } ],
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0"
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "210",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "localId" : "208",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "209",
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "207",
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ],
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient"
+          }
+        },
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "SingleQuote", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "'\\''" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "213"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "212"
+          }
+        } ],
+        "localId" : "212",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "213",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "'"
+        },
+        "name" : "SingleQuote",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "DoubleQuote", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "'\\\"'" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "216"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "215"
+          }
+        } ],
+        "localId" : "215",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "216",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "\""
+        },
+        "name" : "DoubleQuote",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "Backtick", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "'\\`'" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "219"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "218"
+          }
+        } ],
+        "localId" : "218",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "219",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "`"
+        },
+        "name" : "Backtick",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "CarriageReturn", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "'\\r'" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "222"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "221"
+          }
+        } ],
+        "localId" : "221",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "222",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "\r"
+        },
+        "name" : "CarriageReturn",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "LineFeed", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "'\\n'" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "225"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "224"
+          }
+        } ],
+        "localId" : "224",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "225",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "\n"
+        },
+        "name" : "LineFeed",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "Tab", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "'\\t'" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "228"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "227"
+          }
+        } ],
+        "localId" : "227",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "228",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "\t"
+        },
+        "name" : "Tab",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "FormFeed", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "'\\f'" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "231"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "230"
+          }
+        } ],
+        "localId" : "230",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "231",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "\f"
+        },
+        "name" : "FormFeed",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "Backslash", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "'\\\\'" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "234"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "233"
+          }
+        } ],
+        "localId" : "233",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "234",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "\\"
+        },
+        "name" : "Backslash",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "s" : {
+            "s" : [ {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ "", "define ", "Unicode", ": " ]
+              },
+              "globalScope" : true
+            }, {
+              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+              "value" : {
+                "s" : [ {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ "'\\u0048'" ]
+                  },
+                  "globalScope" : true
+                } ],
+                "r" : "237"
+              },
+              "globalScope" : true
+            } ],
+            "r" : "236"
+          }
+        } ],
+        "localId" : "236",
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "237",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "H"
+        },
+        "name" : "Unicode",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    }
+  }
 }
 
