@@ -2516,19 +2516,38 @@ module.exports['FluentFunctions'] = {
 }
 
 /* FluentFunctionsOverloadCallingSelf
-library TestSnippet version '1'
+library FluentFunctionsOverloadCallingSelf version '1'
 using Simple version '1.0.0'
 context Patient
-define fluent function add(nums List<System.Integer>, num System.Integer) :
-  nums n
-    return n.add(num)
 
-define fluent function add(a System.Integer, b System.Integer) :
-  a + b
+define fluent function targetMatches(option Tuple { option System.String }, target Tuple { id System.String }):
+  target.id = option.option
 
-define testValue1: ({1, 2, 3, 4}).add(1)
-define testValue2: ({51, 27, 12, 2}).add(2)
-define testValue3: 1.add(2)
+define fluent function targetMatches(option Tuple { option System.String }, targetId System.String):
+  targetId = option.option
+
+define fluent function targetMatches(options List<Tuple { option System.String }>, target Tuple { id System.String }):
+  exists (options O where O.targetMatches(target))
+
+define fluent function targetMatches(options List<Tuple { option System.String }>, targetId System.String):
+  exists (options O where O.targetMatches(targetId))
+
+define testOptionsList:
+  {
+    {
+      option: 'test123'
+    },
+    {
+      option: 'test341'
+    }
+  }
+
+define matchTestFalse: "testOptionsList".targetMatches({id: 'test789'})
+define matchTestTrue: "testOptionsList".targetMatches({id: 'test123'})
+define matchTestsFalse: exists (({ {id: 'test789'}, {id: 'test719'} }) T
+  where "testOptionsList".targetMatches(T))
+define matchTestsTrue: exists (({ {id: 'test341'}, {id: 'test719'} }) T
+  where "testOptionsList".targetMatches(T))
 */
 
 module.exports['FluentFunctionsOverloadCallingSelf'] = {
@@ -2542,14 +2561,14 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "300",
+            "r" : "485",
             "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
+               "value" : [ "","library FluentFunctionsOverloadCallingSelf version '1'" ]
             } ]
          }
       } ],
       "identifier" : {
-         "id" : "TestSnippet",
+         "id" : "FluentFunctionsOverloadCallingSelf",
          "version" : "1"
       },
       "schemaIdentifier" : {
@@ -2610,7 +2629,8 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             }
          }, {
             "localId" : "211",
-            "name" : "add",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "targetMatches",
             "context" : "Patient",
             "accessLevel" : "Public",
             "fluent" : true,
@@ -2620,52 +2640,41 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                "s" : {
                   "r" : "211",
                   "s" : [ {
-                     "value" : [ "","define fluent function add(nums List<System.Integer>, num System.Integer) :\n  " ]
+                     "value" : [ "","define fluent function targetMatches(option Tuple { option System.String }, target Tuple { id System.String }):\n  " ]
                   }, {
-                     "r" : "243",
+                     "r" : "226",
                      "s" : [ {
-                        "r" : "243",
+                        "r" : "226",
                         "s" : [ {
+                           "r" : "231",
                            "s" : [ {
-                              "r" : "219",
+                              "r" : "227",
                               "s" : [ {
-                                 "r" : "220",
-                                 "s" : [ {
-                                    "s" : [ {
-                                       "value" : [ "nums" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " ","n" ]
+                                 "value" : [ "target" ]
+                              } ]
+                           }, {
+                              "value" : [ "." ]
+                           }, {
+                              "r" : "231",
+                              "s" : [ {
+                                 "value" : [ "id" ]
                               } ]
                            } ]
                         }, {
-                           "value" : [ "\n    " ]
+                           "value" : [ " ","="," " ]
                         }, {
-                           "r" : "225",
+                           "r" : "236",
                            "s" : [ {
-                              "value" : [ "return " ]
-                           }, {
-                              "r" : "233",
+                              "r" : "232",
                               "s" : [ {
-                                 "r" : "226",
-                                 "s" : [ {
-                                    "value" : [ "n" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "233",
-                                 "s" : [ {
-                                    "value" : [ "add","(" ]
-                                 }, {
-                                    "r" : "227",
-                                    "s" : [ {
-                                       "value" : [ "num" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
+                                 "value" : [ "option" ]
+                              } ]
+                           }, {
+                              "value" : [ "." ]
+                           }, {
+                              "r" : "236",
+                              "s" : [ {
+                                 "value" : [ "option" ]
                               } ]
                            } ]
                         } ]
@@ -2673,131 +2682,132 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   } ]
                }
             } ],
-            "resultTypeSpecifier" : {
-               "localId" : "248",
-               "type" : "ListTypeSpecifier",
-               "elementType" : {
-                  "localId" : "249",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
-               }
-            },
             "expression" : {
-               "localId" : "243",
-               "type" : "Query",
-               "resultTypeSpecifier" : {
-                  "localId" : "246",
-                  "type" : "ListTypeSpecifier",
-                  "elementType" : {
-                     "localId" : "247",
-                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               },
-               "source" : [ {
-                  "localId" : "219",
-                  "alias" : "n",
-                  "resultTypeSpecifier" : {
-                     "localId" : "223",
-                     "type" : "ListTypeSpecifier",
-                     "elementType" : {
-                        "localId" : "224",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  },
-                  "expression" : {
-                     "localId" : "220",
-                     "name" : "nums",
+               "localId" : "226",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Equal",
+               "signature" : [ {
+                  "localId" : "237",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "238",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "231",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "path" : "id",
+                  "type" : "Property",
+                  "source" : {
+                     "localId" : "227",
+                     "name" : "target",
                      "type" : "OperandRef",
                      "resultTypeSpecifier" : {
-                        "localId" : "221",
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "localId" : "222",
-                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "type" : "NamedTypeSpecifier"
-                        }
+                        "localId" : "228",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "229",
+                           "name" : "id",
+                           "elementType" : {
+                              "localId" : "230",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
                      }
                   }
-               } ],
-               "let" : [ ],
-               "relationship" : [ ],
-               "return" : {
-                  "localId" : "225",
-                  "resultTypeSpecifier" : {
-                     "localId" : "241",
-                     "type" : "ListTypeSpecifier",
-                     "elementType" : {
-                        "localId" : "242",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "236",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "path" : "option",
+                  "type" : "Property",
+                  "source" : {
+                     "localId" : "232",
+                     "name" : "option",
+                     "type" : "OperandRef",
+                     "resultTypeSpecifier" : {
+                        "localId" : "233",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "234",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "235",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
                      }
-                  },
-                  "expression" : {
-                     "localId" : "233",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "name" : "add",
-                     "type" : "FunctionRef",
-                     "signature" : [ {
-                        "localId" : "234",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "localId" : "235",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "localId" : "226",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "name" : "n",
-                        "type" : "AliasRef"
-                     }, {
-                        "localId" : "227",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "name" : "num",
-                        "type" : "OperandRef"
-                     } ]
                   }
-               }
+               } ]
             },
             "operand" : [ {
-               "localId" : "216",
-               "name" : "nums",
+               "localId" : "218",
+               "name" : "option",
                "operandTypeSpecifier" : {
                   "localId" : "212",
-                  "type" : "ListTypeSpecifier",
+                  "type" : "TupleTypeSpecifier",
                   "resultTypeSpecifier" : {
-                     "localId" : "214",
-                     "type" : "ListTypeSpecifier",
+                     "localId" : "215",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "216",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "217",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
+                  "element" : [ {
+                     "localId" : "213",
+                     "name" : "option",
                      "elementType" : {
-                        "localId" : "215",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "localId" : "214",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
-                  },
-                  "elementType" : {
-                     "localId" : "213",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "NamedTypeSpecifier"
-                  }
+                  } ]
                }
             }, {
-               "localId" : "218",
-               "name" : "num",
+               "localId" : "225",
+               "name" : "target",
                "operandTypeSpecifier" : {
-                  "localId" : "217",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
+                  "localId" : "219",
+                  "type" : "TupleTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "localId" : "222",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "223",
+                        "name" : "id",
+                        "elementType" : {
+                           "localId" : "224",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
+                  "element" : [ {
+                     "localId" : "220",
+                     "name" : "id",
+                     "elementType" : {
+                        "localId" : "221",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
                }
             } ]
          }, {
-            "localId" : "228",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-            "name" : "add",
+            "localId" : "239",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "targetMatches",
             "context" : "Patient",
             "accessLevel" : "Public",
             "fluent" : true,
@@ -2805,24 +2815,34 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "228",
+                  "r" : "239",
                   "s" : [ {
-                     "value" : [ "","define fluent function add(a System.Integer, b System.Integer) :\n  " ]
+                     "value" : [ "","define fluent function targetMatches(option Tuple { option System.String }, targetId System.String):\n  " ]
                   }, {
-                     "r" : "250",
+                     "r" : "249",
                      "s" : [ {
-                        "r" : "250",
+                        "r" : "249",
                         "s" : [ {
-                           "r" : "251",
+                           "r" : "250",
                            "s" : [ {
-                              "value" : [ "a" ]
+                              "value" : [ "targetId" ]
                            } ]
                         }, {
-                           "value" : [ " + " ]
+                           "value" : [ " ","="," " ]
                         }, {
-                           "r" : "252",
+                           "r" : "255",
                            "s" : [ {
-                              "value" : [ "b" ]
+                              "r" : "251",
+                              "s" : [ {
+                                 "value" : [ "option" ]
+                              } ]
+                           }, {
+                              "value" : [ "." ]
+                           }, {
+                              "r" : "255",
+                              "s" : [ {
+                                 "value" : [ "option" ]
+                              } ]
                            } ]
                         } ]
                      } ]
@@ -2830,339 +2850,2934 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "250",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-               "type" : "Add",
+               "localId" : "249",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Equal",
                "signature" : [ {
-                  "localId" : "253",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "localId" : "256",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "254",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "localId" : "257",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "251",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "name" : "a",
+                  "localId" : "250",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "name" : "targetId",
                   "type" : "OperandRef"
                }, {
-                  "localId" : "252",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "name" : "b",
-                  "type" : "OperandRef"
+                  "localId" : "255",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "path" : "option",
+                  "type" : "Property",
+                  "source" : {
+                     "localId" : "251",
+                     "name" : "option",
+                     "type" : "OperandRef",
+                     "resultTypeSpecifier" : {
+                        "localId" : "252",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "253",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "254",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  }
                } ]
             },
             "operand" : [ {
-               "localId" : "230",
-               "name" : "a",
+               "localId" : "246",
+               "name" : "option",
                "operandTypeSpecifier" : {
-                  "localId" : "229",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
+                  "localId" : "240",
+                  "type" : "TupleTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "localId" : "243",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "244",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "245",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
+                  "element" : [ {
+                     "localId" : "241",
+                     "name" : "option",
+                     "elementType" : {
+                        "localId" : "242",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
                }
             }, {
-               "localId" : "232",
-               "name" : "b",
+               "localId" : "248",
+               "name" : "targetId",
                "operandTypeSpecifier" : {
-                  "localId" : "231",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "localId" : "247",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "256",
-            "name" : "testValue1",
+            "localId" : "258",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "targetMatches",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "fluent" : true,
+            "type" : "FunctionDef",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "256",
+                  "r" : "258",
                   "s" : [ {
-                     "value" : [ "","define ","testValue1",": " ]
+                     "value" : [ "","define fluent function targetMatches(options List<Tuple { option System.String }>, target Tuple { id System.String }):\n  " ]
                   }, {
-                     "r" : "267",
+                     "r" : "278",
                      "s" : [ {
-                        "r" : "257",
+                        "r" : "278",
                         "s" : [ {
-                           "value" : [ "(" ]
+                           "value" : [ "exists " ]
                         }, {
-                           "r" : "257",
+                           "r" : "319",
                            "s" : [ {
-                              "r" : "258",
-                              "value" : [ "{","1",", ","2",", ","3",", ","4","}" ]
+                              "value" : [ "(" ]
+                           }, {
+                              "r" : "319",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "r" : "279",
+                                    "s" : [ {
+                                       "r" : "280",
+                                       "s" : [ {
+                                          "s" : [ {
+                                             "value" : [ "options" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","O" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " " ]
+                              }, {
+                                 "r" : "312",
+                                 "s" : [ {
+                                    "value" : [ "where " ]
+                                 }, {
+                                    "r" : "312",
+                                    "s" : [ {
+                                       "r" : "289",
+                                       "s" : [ {
+                                          "value" : [ "O" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "312",
+                                       "s" : [ {
+                                          "value" : [ "targetMatches","(" ]
+                                       }, {
+                                          "r" : "293",
+                                          "s" : [ {
+                                             "value" : [ "target" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ ")" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
                            } ]
-                        }, {
-                           "value" : [ ")" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "267",
-                        "s" : [ {
-                           "r" : "266",
-                           "value" : [ "add","(","1",")" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
+            "expression" : {
+               "localId" : "278",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Exists",
+               "signature" : [ {
+                  "localId" : "328",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "329",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "330",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "331",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               } ],
+               "operand" : {
+                  "localId" : "319",
+                  "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "localId" : "324",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "325",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "326",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "327",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "source" : [ {
+                     "localId" : "279",
+                     "alias" : "O",
+                     "resultTypeSpecifier" : {
+                        "localId" : "285",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "286",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "287",
+                              "name" : "option",
+                              "elementType" : {
+                                 "localId" : "288",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     },
+                     "expression" : {
+                        "localId" : "280",
+                        "name" : "options",
+                        "type" : "OperandRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "281",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "282",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "283",
+                                 "name" : "option",
+                                 "elementType" : {
+                                    "localId" : "284",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           }
+                        }
+                     }
+                  } ],
+                  "let" : [ ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "312",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "name" : "targetMatches",
+                     "type" : "FunctionRef",
+                     "signature" : [ {
+                        "localId" : "313",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "314",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "315",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }, {
+                        "localId" : "316",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "317",
+                           "name" : "id",
+                           "elementType" : {
+                              "localId" : "318",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     } ],
+                     "operand" : [ {
+                        "localId" : "289",
+                        "name" : "O",
+                        "type" : "AliasRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "290",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "291",
+                              "name" : "option",
+                              "elementType" : {
+                                 "localId" : "292",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "localId" : "293",
+                        "name" : "target",
+                        "type" : "OperandRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "294",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "295",
+                              "name" : "id",
+                              "elementType" : {
+                                 "localId" : "296",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     } ]
+                  }
+               }
+            },
+            "operand" : [ {
+               "localId" : "270",
+               "name" : "options",
+               "operandTypeSpecifier" : {
+                  "localId" : "259",
+                  "type" : "ListTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "localId" : "266",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "267",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "268",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "269",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "elementType" : {
+                     "localId" : "260",
+                     "type" : "TupleTypeSpecifier",
+                     "resultTypeSpecifier" : {
+                        "localId" : "263",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "264",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "265",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
+                     "element" : [ {
+                        "localId" : "261",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "262",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               }
+            }, {
+               "localId" : "277",
+               "name" : "target",
+               "operandTypeSpecifier" : {
+                  "localId" : "271",
+                  "type" : "TupleTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "localId" : "274",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "275",
+                        "name" : "id",
+                        "elementType" : {
+                           "localId" : "276",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
+                  "element" : [ {
+                     "localId" : "272",
+                     "name" : "id",
+                     "elementType" : {
+                        "localId" : "273",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "297",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "targetMatches",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "fluent" : true,
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "297",
+                  "s" : [ {
+                     "value" : [ "","define fluent function targetMatches(options List<Tuple { option System.String }>, targetId System.String):\n  " ]
+                  }, {
+                     "r" : "332",
+                     "s" : [ {
+                        "r" : "332",
+                        "s" : [ {
+                           "value" : [ "exists " ]
+                        }, {
+                           "r" : "353",
+                           "s" : [ {
+                              "value" : [ "(" ]
+                           }, {
+                              "r" : "353",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "r" : "333",
+                                    "s" : [ {
+                                       "r" : "334",
+                                       "s" : [ {
+                                          "s" : [ {
+                                             "value" : [ "options" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","O" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " " ]
+                              }, {
+                                 "r" : "348",
+                                 "s" : [ {
+                                    "value" : [ "where " ]
+                                 }, {
+                                    "r" : "348",
+                                    "s" : [ {
+                                       "r" : "343",
+                                       "s" : [ {
+                                          "value" : [ "O" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "348",
+                                       "s" : [ {
+                                          "value" : [ "targetMatches","(" ]
+                                       }, {
+                                          "r" : "347",
+                                          "s" : [ {
+                                             "value" : [ "targetId" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ ")" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ ")" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "332",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Exists",
+               "signature" : [ {
+                  "localId" : "362",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "363",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "364",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "365",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               } ],
+               "operand" : {
+                  "localId" : "353",
+                  "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "localId" : "358",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "359",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "360",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "361",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "source" : [ {
+                     "localId" : "333",
+                     "alias" : "O",
+                     "resultTypeSpecifier" : {
+                        "localId" : "339",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "340",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "341",
+                              "name" : "option",
+                              "elementType" : {
+                                 "localId" : "342",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     },
+                     "expression" : {
+                        "localId" : "334",
+                        "name" : "options",
+                        "type" : "OperandRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "335",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "336",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "337",
+                                 "name" : "option",
+                                 "elementType" : {
+                                    "localId" : "338",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           }
+                        }
+                     }
+                  } ],
+                  "let" : [ ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "348",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "name" : "targetMatches",
+                     "type" : "FunctionRef",
+                     "signature" : [ {
+                        "localId" : "349",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "350",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "351",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }, {
+                        "localId" : "352",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "localId" : "343",
+                        "name" : "O",
+                        "type" : "AliasRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "344",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "345",
+                              "name" : "option",
+                              "elementType" : {
+                                 "localId" : "346",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "localId" : "347",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "name" : "targetId",
+                        "type" : "OperandRef"
+                     } ]
+                  }
+               }
+            },
+            "operand" : [ {
+               "localId" : "309",
+               "name" : "options",
+               "operandTypeSpecifier" : {
+                  "localId" : "298",
+                  "type" : "ListTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "localId" : "305",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "306",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "307",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "308",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "elementType" : {
+                     "localId" : "299",
+                     "type" : "TupleTypeSpecifier",
+                     "resultTypeSpecifier" : {
+                        "localId" : "302",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "303",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "304",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
+                     "element" : [ {
+                        "localId" : "300",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "301",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               }
+            }, {
+               "localId" : "311",
+               "name" : "targetId",
+               "operandTypeSpecifier" : {
+                  "localId" : "310",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "367",
+            "name" : "testOptionsList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "367",
+                  "s" : [ {
+                     "value" : [ "","define ","testOptionsList",":\n  " ]
+                  }, {
+                     "r" : "368",
+                     "s" : [ {
+                        "value" : [ "{\n    " ]
+                     }, {
+                        "r" : "369",
+                        "s" : [ {
+                           "value" : [ "{\n      " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "option",": " ]
+                           }, {
+                              "r" : "370",
+                              "s" : [ {
+                                 "value" : [ "'test123'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n    }" ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n    " ]
+                     }, {
+                        "r" : "374",
+                        "s" : [ {
+                           "value" : [ "{\n      " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "option",": " ]
+                           }, {
+                              "r" : "375",
+                              "s" : [ {
+                                 "value" : [ "'test341'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n    }" ]
+                        } ]
+                     }, {
+                        "value" : [ "\n  }" ]
+                     } ]
+                  } ]
+               }
+            } ],
             "resultTypeSpecifier" : {
-               "localId" : "275",
+               "localId" : "383",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "276",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
+                  "localId" : "384",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "385",
+                     "name" : "option",
+                     "elementType" : {
+                        "localId" : "386",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
                }
             },
             "expression" : {
-               "localId" : "267",
-               "name" : "add",
-               "type" : "FunctionRef",
+               "localId" : "368",
+               "type" : "List",
                "resultTypeSpecifier" : {
-                  "localId" : "273",
+                  "localId" : "379",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "274",
-                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "NamedTypeSpecifier"
+                     "localId" : "380",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "381",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "382",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
                   }
                },
+               "element" : [ {
+                  "localId" : "369",
+                  "type" : "Tuple",
+                  "resultTypeSpecifier" : {
+                     "localId" : "371",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "372",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "373",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
+                  "element" : [ {
+                     "name" : "option",
+                     "value" : {
+                        "localId" : "370",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "test123",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "localId" : "374",
+                  "type" : "Tuple",
+                  "resultTypeSpecifier" : {
+                     "localId" : "376",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "377",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "378",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
+                  "element" : [ {
+                     "name" : "option",
+                     "value" : {
+                        "localId" : "375",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "test341",
+                        "type" : "Literal"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "388",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "matchTestFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "388",
+                  "s" : [ {
+                     "value" : [ "","define ","matchTestFalse",": " ]
+                  }, {
+                     "r" : "399",
+                     "s" : [ {
+                        "r" : "389",
+                        "s" : [ {
+                           "value" : [ "\"testOptionsList\"" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "399",
+                        "s" : [ {
+                           "value" : [ "targetMatches","(" ]
+                        }, {
+                           "r" : "394",
+                           "s" : [ {
+                              "value" : [ "{" ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "id",": " ]
+                              }, {
+                                 "r" : "395",
+                                 "s" : [ {
+                                    "value" : [ "'test789'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "399",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "name" : "targetMatches",
+               "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "268",
+                  "localId" : "400",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "269",
-                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "NamedTypeSpecifier"
+                     "localId" : "401",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "402",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "403",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               }, {
+                  "localId" : "404",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "405",
+                     "name" : "id",
+                     "elementType" : {
+                        "localId" : "406",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               } ],
+               "operand" : [ {
+                  "localId" : "389",
+                  "name" : "testOptionsList",
+                  "type" : "ExpressionRef",
+                  "resultTypeSpecifier" : {
+                     "localId" : "390",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "391",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "392",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "393",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  }
+               }, {
+                  "localId" : "394",
+                  "type" : "Tuple",
+                  "resultTypeSpecifier" : {
+                     "localId" : "396",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "397",
+                        "name" : "id",
+                        "elementType" : {
+                           "localId" : "398",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
+                  "element" : [ {
+                     "name" : "id",
+                     "value" : {
+                        "localId" : "395",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "test789",
+                        "type" : "Literal"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "408",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "matchTestTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "408",
+                  "s" : [ {
+                     "value" : [ "","define ","matchTestTrue",": " ]
+                  }, {
+                     "r" : "419",
+                     "s" : [ {
+                        "r" : "409",
+                        "s" : [ {
+                           "value" : [ "\"testOptionsList\"" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "419",
+                        "s" : [ {
+                           "value" : [ "targetMatches","(" ]
+                        }, {
+                           "r" : "414",
+                           "s" : [ {
+                              "value" : [ "{" ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "id",": " ]
+                              }, {
+                                 "r" : "415",
+                                 "s" : [ {
+                                    "value" : [ "'test123'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "419",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "name" : "targetMatches",
+               "type" : "FunctionRef",
+               "signature" : [ {
+                  "localId" : "420",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "421",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "422",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "423",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               }, {
+                  "localId" : "424",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "425",
+                     "name" : "id",
+                     "elementType" : {
+                        "localId" : "426",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               } ],
+               "operand" : [ {
+                  "localId" : "409",
+                  "name" : "testOptionsList",
+                  "type" : "ExpressionRef",
+                  "resultTypeSpecifier" : {
+                     "localId" : "410",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "411",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "412",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "413",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  }
+               }, {
+                  "localId" : "414",
+                  "type" : "Tuple",
+                  "resultTypeSpecifier" : {
+                     "localId" : "416",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "417",
+                        "name" : "id",
+                        "elementType" : {
+                           "localId" : "418",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
+                  "element" : [ {
+                     "name" : "id",
+                     "value" : {
+                        "localId" : "415",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "test123",
+                        "type" : "Literal"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "428",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "matchTestsFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "428",
+                  "s" : [ {
+                     "value" : [ "","define ","matchTestsFalse",": " ]
+                  }, {
+                     "r" : "429",
+                     "s" : [ {
+                        "value" : [ "exists " ]
+                     }, {
+                        "r" : "471",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "471",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "430",
+                                 "s" : [ {
+                                    "r" : "431",
+                                    "s" : [ {
+                                       "value" : [ "(" ]
+                                    }, {
+                                       "r" : "431",
+                                       "s" : [ {
+                                          "value" : [ "{ " ]
+                                       }, {
+                                          "r" : "432",
+                                          "s" : [ {
+                                             "value" : [ "{" ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "id",": " ]
+                                             }, {
+                                                "r" : "433",
+                                                "s" : [ {
+                                                   "value" : [ "'test789'" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "}" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ ", " ]
+                                       }, {
+                                          "r" : "437",
+                                          "s" : [ {
+                                             "value" : [ "{" ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "id",": " ]
+                                             }, {
+                                                "r" : "438",
+                                                "s" : [ {
+                                                   "value" : [ "'test719'" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "}" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " }" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ")" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","T" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n  " ]
+                           }, {
+                              "r" : "463",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "463",
+                                 "s" : [ {
+                                    "r" : "454",
+                                    "s" : [ {
+                                       "value" : [ "\"testOptionsList\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "463",
+                                    "s" : [ {
+                                       "value" : [ "targetMatches","(" ]
+                                    }, {
+                                       "r" : "459",
+                                       "s" : [ {
+                                          "value" : [ "T" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ")" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "429",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Exists",
+               "signature" : [ {
+                  "localId" : "480",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "481",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "482",
+                        "name" : "id",
+                        "elementType" : {
+                           "localId" : "483",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               } ],
+               "operand" : {
+                  "localId" : "471",
+                  "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "localId" : "476",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "477",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "478",
+                           "name" : "id",
+                           "elementType" : {
+                              "localId" : "479",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "source" : [ {
+                     "localId" : "430",
+                     "alias" : "T",
+                     "resultTypeSpecifier" : {
+                        "localId" : "450",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "451",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "452",
+                              "name" : "id",
+                              "elementType" : {
+                                 "localId" : "453",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     },
+                     "expression" : {
+                        "localId" : "431",
+                        "type" : "List",
+                        "resultTypeSpecifier" : {
+                           "localId" : "446",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "447",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "448",
+                                 "name" : "id",
+                                 "elementType" : {
+                                    "localId" : "449",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           }
+                        },
+                        "element" : [ {
+                           "localId" : "432",
+                           "type" : "Tuple",
+                           "resultTypeSpecifier" : {
+                              "localId" : "434",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "435",
+                                 "name" : "id",
+                                 "elementType" : {
+                                    "localId" : "436",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           },
+                           "element" : [ {
+                              "name" : "id",
+                              "value" : {
+                                 "localId" : "433",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "test789",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        }, {
+                           "localId" : "437",
+                           "type" : "Tuple",
+                           "resultTypeSpecifier" : {
+                              "localId" : "439",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "440",
+                                 "name" : "id",
+                                 "elementType" : {
+                                    "localId" : "441",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           },
+                           "element" : [ {
+                              "name" : "id",
+                              "value" : {
+                                 "localId" : "438",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "test719",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        } ]
+                     }
+                  } ],
+                  "let" : [ ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "463",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "name" : "targetMatches",
+                     "type" : "FunctionRef",
+                     "signature" : [ {
+                        "localId" : "464",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "465",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "466",
+                              "name" : "option",
+                              "elementType" : {
+                                 "localId" : "467",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "localId" : "468",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "469",
+                           "name" : "id",
+                           "elementType" : {
+                              "localId" : "470",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     } ],
+                     "operand" : [ {
+                        "localId" : "454",
+                        "name" : "testOptionsList",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "455",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "456",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "457",
+                                 "name" : "option",
+                                 "elementType" : {
+                                    "localId" : "458",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           }
+                        }
+                     }, {
+                        "localId" : "459",
+                        "name" : "T",
+                        "type" : "AliasRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "460",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "461",
+                              "name" : "id",
+                              "elementType" : {
+                                 "localId" : "462",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "localId" : "485",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "matchTestsTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "485",
+                  "s" : [ {
+                     "value" : [ "","define ","matchTestsTrue",": " ]
+                  }, {
+                     "r" : "486",
+                     "s" : [ {
+                        "value" : [ "exists " ]
+                     }, {
+                        "r" : "528",
+                        "s" : [ {
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "528",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "487",
+                                 "s" : [ {
+                                    "r" : "488",
+                                    "s" : [ {
+                                       "value" : [ "(" ]
+                                    }, {
+                                       "r" : "488",
+                                       "s" : [ {
+                                          "value" : [ "{ " ]
+                                       }, {
+                                          "r" : "489",
+                                          "s" : [ {
+                                             "value" : [ "{" ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "id",": " ]
+                                             }, {
+                                                "r" : "490",
+                                                "s" : [ {
+                                                   "value" : [ "'test341'" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "}" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ ", " ]
+                                       }, {
+                                          "r" : "494",
+                                          "s" : [ {
+                                             "value" : [ "{" ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "id",": " ]
+                                             }, {
+                                                "r" : "495",
+                                                "s" : [ {
+                                                   "value" : [ "'test719'" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "}" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " }" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ")" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","T" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n  " ]
+                           }, {
+                              "r" : "520",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "520",
+                                 "s" : [ {
+                                    "r" : "511",
+                                    "s" : [ {
+                                       "value" : [ "\"testOptionsList\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "520",
+                                    "s" : [ {
+                                       "value" : [ "targetMatches","(" ]
+                                    }, {
+                                       "r" : "516",
+                                       "s" : [ {
+                                          "value" : [ "T" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ")" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "486",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Exists",
+               "signature" : [ {
+                  "localId" : "537",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "538",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "539",
+                        "name" : "id",
+                        "elementType" : {
+                           "localId" : "540",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               } ],
+               "operand" : {
+                  "localId" : "528",
+                  "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "localId" : "533",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "534",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "535",
+                           "name" : "id",
+                           "elementType" : {
+                              "localId" : "536",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "source" : [ {
+                     "localId" : "487",
+                     "alias" : "T",
+                     "resultTypeSpecifier" : {
+                        "localId" : "507",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "508",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "509",
+                              "name" : "id",
+                              "elementType" : {
+                                 "localId" : "510",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     },
+                     "expression" : {
+                        "localId" : "488",
+                        "type" : "List",
+                        "resultTypeSpecifier" : {
+                           "localId" : "503",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "504",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "505",
+                                 "name" : "id",
+                                 "elementType" : {
+                                    "localId" : "506",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           }
+                        },
+                        "element" : [ {
+                           "localId" : "489",
+                           "type" : "Tuple",
+                           "resultTypeSpecifier" : {
+                              "localId" : "491",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "492",
+                                 "name" : "id",
+                                 "elementType" : {
+                                    "localId" : "493",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           },
+                           "element" : [ {
+                              "name" : "id",
+                              "value" : {
+                                 "localId" : "490",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "test341",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        }, {
+                           "localId" : "494",
+                           "type" : "Tuple",
+                           "resultTypeSpecifier" : {
+                              "localId" : "496",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "497",
+                                 "name" : "id",
+                                 "elementType" : {
+                                    "localId" : "498",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           },
+                           "element" : [ {
+                              "name" : "id",
+                              "value" : {
+                                 "localId" : "495",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "test719",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        } ]
+                     }
+                  } ],
+                  "let" : [ ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "520",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "name" : "targetMatches",
+                     "type" : "FunctionRef",
+                     "signature" : [ {
+                        "localId" : "521",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "522",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "523",
+                              "name" : "option",
+                              "elementType" : {
+                                 "localId" : "524",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "localId" : "525",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "526",
+                           "name" : "id",
+                           "elementType" : {
+                              "localId" : "527",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     } ],
+                     "operand" : [ {
+                        "localId" : "511",
+                        "name" : "testOptionsList",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "512",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "513",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "514",
+                                 "name" : "option",
+                                 "elementType" : {
+                                    "localId" : "515",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           }
+                        }
+                     }, {
+                        "localId" : "516",
+                        "name" : "T",
+                        "type" : "AliasRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "517",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "518",
+                              "name" : "id",
+                              "elementType" : {
+                                 "localId" : "519",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     } ]
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
+/* FluentFunctionsOverloadCallingSelfFromOtherLibrary
+library TestSnippet version '1'
+using Simple version '1.0.0'
+include FluentFunctionsOverloadCallingSelf version '1' called FluentFunctionsOverloadCallingSelf
+context Patient
+
+define testOptionsList:
+  {
+    {
+      option: 'test123'
+    },
+    {
+      option: 'test341'
+    }
+  }
+define matchTestFalse: "testOptionsList".targetMatches({id: 'test789'})
+define matchTestTrue: "testOptionsList".targetMatches({id: 'test123'})
+define matchTestsFalse: exists (({ {id: 'test789'}, {id: 'test719'} }) T
+  where "testOptionsList".targetMatches(T))
+define matchTestsTrue: exists (({ {id: 'test341'}, {id: 'test719'} }) T
+  where "testOptionsList".targetMatches(T))
+*/
+
+module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
+   "library" : {
+      "localId" : "0",
+      "annotation" : [ {
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "331",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localId" : "1",
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "206",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "206",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version '1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localId" : "207",
+            "localIdentifier" : "FluentFunctionsOverloadCallingSelf",
+            "path" : "FluentFunctionsOverloadCallingSelf",
+            "version" : "1",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "207",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "FluentFunctionsOverloadCallingSelf" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1'"," called ","FluentFunctionsOverloadCallingSelf" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "localId" : "211",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "localId" : "209",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "localId" : "210",
+               "type" : "SingletonFrom",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "208",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         }, {
+            "localId" : "213",
+            "name" : "testOptionsList",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "213",
+                  "s" : [ {
+                     "value" : [ "","define ","testOptionsList",":\n  " ]
+                  }, {
+                     "r" : "214",
+                     "s" : [ {
+                        "value" : [ "{\n    " ]
+                     }, {
+                        "r" : "215",
+                        "s" : [ {
+                           "value" : [ "{\n      " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "option",": " ]
+                           }, {
+                              "r" : "216",
+                              "s" : [ {
+                                 "value" : [ "'test123'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n    }" ]
+                        } ]
+                     }, {
+                        "value" : [ ",\n    " ]
+                     }, {
+                        "r" : "220",
+                        "s" : [ {
+                           "value" : [ "{\n      " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "option",": " ]
+                           }, {
+                              "r" : "221",
+                              "s" : [ {
+                                 "value" : [ "'test341'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n    }" ]
+                        } ]
+                     }, {
+                        "value" : [ "\n  }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "229",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "230",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "231",
+                     "name" : "option",
+                     "elementType" : {
+                        "localId" : "232",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
+            "expression" : {
+               "localId" : "214",
+               "type" : "List",
+               "resultTypeSpecifier" : {
+                  "localId" : "225",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "226",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "227",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "228",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
+               "element" : [ {
+                  "localId" : "215",
+                  "type" : "Tuple",
+                  "resultTypeSpecifier" : {
+                     "localId" : "217",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "218",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "219",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
+                  "element" : [ {
+                     "name" : "option",
+                     "value" : {
+                        "localId" : "216",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "test123",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "localId" : "220",
+                  "type" : "Tuple",
+                  "resultTypeSpecifier" : {
+                     "localId" : "222",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "223",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "224",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
+                  "element" : [ {
+                     "name" : "option",
+                     "value" : {
+                        "localId" : "221",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "test341",
+                        "type" : "Literal"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "234",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "matchTestFalse",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "234",
+                  "s" : [ {
+                     "value" : [ "","define ","matchTestFalse",": " ]
+                  }, {
+                     "r" : "245",
+                     "s" : [ {
+                        "r" : "235",
+                        "s" : [ {
+                           "value" : [ "\"testOptionsList\"" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "245",
+                        "s" : [ {
+                           "value" : [ "targetMatches","(" ]
+                        }, {
+                           "r" : "240",
+                           "s" : [ {
+                              "value" : [ "{" ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "id",": " ]
+                              }, {
+                                 "r" : "241",
+                                 "s" : [ {
+                                    "value" : [ "'test789'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "245",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "name" : "targetMatches",
+               "libraryName" : "FluentFunctionsOverloadCallingSelf",
+               "type" : "FunctionRef",
+               "signature" : [ {
+                  "localId" : "246",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "247",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "248",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "249",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               }, {
+                  "localId" : "250",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "251",
+                     "name" : "id",
+                     "elementType" : {
+                        "localId" : "252",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               } ],
+               "operand" : [ {
+                  "localId" : "235",
+                  "name" : "testOptionsList",
+                  "type" : "ExpressionRef",
+                  "resultTypeSpecifier" : {
+                     "localId" : "236",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "237",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "238",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "239",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  }
+               }, {
+                  "localId" : "240",
+                  "type" : "Tuple",
+                  "resultTypeSpecifier" : {
+                     "localId" : "242",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "243",
+                        "name" : "id",
+                        "elementType" : {
+                           "localId" : "244",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
+                  "element" : [ {
+                     "name" : "id",
+                     "value" : {
+                        "localId" : "241",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "test789",
+                        "type" : "Literal"
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "localId" : "254",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "matchTestTrue",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "254",
+                  "s" : [ {
+                     "value" : [ "","define ","matchTestTrue",": " ]
+                  }, {
+                     "r" : "265",
+                     "s" : [ {
+                        "r" : "255",
+                        "s" : [ {
+                           "value" : [ "\"testOptionsList\"" ]
+                        } ]
+                     }, {
+                        "value" : [ "." ]
+                     }, {
+                        "r" : "265",
+                        "s" : [ {
+                           "value" : [ "targetMatches","(" ]
+                        }, {
+                           "r" : "260",
+                           "s" : [ {
+                              "value" : [ "{" ]
+                           }, {
+                              "s" : [ {
+                                 "value" : [ "id",": " ]
+                              }, {
+                                 "r" : "261",
+                                 "s" : [ {
+                                    "value" : [ "'test123'" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "}" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "265",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "name" : "targetMatches",
+               "libraryName" : "FluentFunctionsOverloadCallingSelf",
+               "type" : "FunctionRef",
+               "signature" : [ {
+                  "localId" : "266",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "267",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "268",
+                        "name" : "option",
+                        "elementType" : {
+                           "localId" : "269",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
                   }
                }, {
                   "localId" : "270",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
-               } ],
-               "operand" : [ {
-                  "localId" : "257",
-                  "type" : "List",
-                  "resultTypeSpecifier" : {
-                     "localId" : "264",
-                     "type" : "ListTypeSpecifier",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "271",
+                     "name" : "id",
                      "elementType" : {
-                        "localId" : "265",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "localId" : "272",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
+                  } ]
+               } ],
+               "operand" : [ {
+                  "localId" : "255",
+                  "name" : "testOptionsList",
+                  "type" : "ExpressionRef",
+                  "resultTypeSpecifier" : {
+                     "localId" : "256",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "257",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "258",
+                           "name" : "option",
+                           "elementType" : {
+                              "localId" : "259",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  }
+               }, {
+                  "localId" : "260",
+                  "type" : "Tuple",
+                  "resultTypeSpecifier" : {
+                     "localId" : "262",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "263",
+                        "name" : "id",
+                        "elementType" : {
+                           "localId" : "264",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
                   },
                   "element" : [ {
-                     "localId" : "258",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "259",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "260",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "261",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "4",
-                     "type" : "Literal"
+                     "name" : "id",
+                     "value" : {
+                        "localId" : "261",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "test123",
+                        "type" : "Literal"
+                     }
                   } ]
-               }, {
-                  "localId" : "266",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "1",
-                  "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "278",
-            "name" : "testValue2",
+            "localId" : "274",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "matchTestsFalse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "278",
+                  "r" : "274",
                   "s" : [ {
-                     "value" : [ "","define ","testValue2",": " ]
+                     "value" : [ "","define ","matchTestsFalse",": " ]
                   }, {
-                     "r" : "289",
+                     "r" : "275",
                      "s" : [ {
-                        "r" : "279",
+                        "value" : [ "exists " ]
+                     }, {
+                        "r" : "317",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "279",
+                           "r" : "317",
                            "s" : [ {
-                              "r" : "280",
-                              "value" : [ "{","51",", ","27",", ","12",", ","2","}" ]
+                              "s" : [ {
+                                 "r" : "276",
+                                 "s" : [ {
+                                    "r" : "277",
+                                    "s" : [ {
+                                       "value" : [ "(" ]
+                                    }, {
+                                       "r" : "277",
+                                       "s" : [ {
+                                          "value" : [ "{ " ]
+                                       }, {
+                                          "r" : "278",
+                                          "s" : [ {
+                                             "value" : [ "{" ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "id",": " ]
+                                             }, {
+                                                "r" : "279",
+                                                "s" : [ {
+                                                   "value" : [ "'test789'" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "}" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ ", " ]
+                                       }, {
+                                          "r" : "283",
+                                          "s" : [ {
+                                             "value" : [ "{" ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "id",": " ]
+                                             }, {
+                                                "r" : "284",
+                                                "s" : [ {
+                                                   "value" : [ "'test719'" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "}" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " }" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ")" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","T" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n  " ]
+                           }, {
+                              "r" : "309",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "309",
+                                 "s" : [ {
+                                    "r" : "300",
+                                    "s" : [ {
+                                       "value" : [ "\"testOptionsList\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "309",
+                                    "s" : [ {
+                                       "value" : [ "targetMatches","(" ]
+                                    }, {
+                                       "r" : "305",
+                                       "s" : [ {
+                                          "value" : [ "T" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ")" ]
+                                    } ]
+                                 } ]
+                              } ]
                            } ]
                         }, {
                            "value" : [ ")" ]
                         } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "289",
-                        "s" : [ {
-                           "r" : "288",
-                           "value" : [ "add","(","2",")" ]
-                        } ]
                      } ]
                   } ]
                }
             } ],
-            "resultTypeSpecifier" : {
-               "localId" : "297",
-               "type" : "ListTypeSpecifier",
-               "elementType" : {
-                  "localId" : "298",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
-               }
-            },
             "expression" : {
-               "localId" : "289",
-               "name" : "add",
-               "type" : "FunctionRef",
-               "resultTypeSpecifier" : {
-                  "localId" : "295",
-                  "type" : "ListTypeSpecifier",
-                  "elementType" : {
-                     "localId" : "296",
-                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               },
+               "localId" : "275",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Exists",
                "signature" : [ {
-                  "localId" : "290",
+                  "localId" : "326",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "291",
-                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "NamedTypeSpecifier"
+                     "localId" : "327",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "328",
+                        "name" : "id",
+                        "elementType" : {
+                           "localId" : "329",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
                   }
-               }, {
-                  "localId" : "292",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
                } ],
-               "operand" : [ {
-                  "localId" : "279",
-                  "type" : "List",
+               "operand" : {
+                  "localId" : "317",
+                  "type" : "Query",
                   "resultTypeSpecifier" : {
-                     "localId" : "286",
+                     "localId" : "322",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "287",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
+                        "localId" : "323",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "324",
+                           "name" : "id",
+                           "elementType" : {
+                              "localId" : "325",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
                      }
                   },
-                  "element" : [ {
-                     "localId" : "280",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "51",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "281",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "27",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "282",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "12",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "283",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2",
-                     "type" : "Literal"
-                  } ]
-               }, {
-                  "localId" : "288",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "2",
-                  "type" : "Literal"
-               } ]
+                  "source" : [ {
+                     "localId" : "276",
+                     "alias" : "T",
+                     "resultTypeSpecifier" : {
+                        "localId" : "296",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "297",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "298",
+                              "name" : "id",
+                              "elementType" : {
+                                 "localId" : "299",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     },
+                     "expression" : {
+                        "localId" : "277",
+                        "type" : "List",
+                        "resultTypeSpecifier" : {
+                           "localId" : "292",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "293",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "294",
+                                 "name" : "id",
+                                 "elementType" : {
+                                    "localId" : "295",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           }
+                        },
+                        "element" : [ {
+                           "localId" : "278",
+                           "type" : "Tuple",
+                           "resultTypeSpecifier" : {
+                              "localId" : "280",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "281",
+                                 "name" : "id",
+                                 "elementType" : {
+                                    "localId" : "282",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           },
+                           "element" : [ {
+                              "name" : "id",
+                              "value" : {
+                                 "localId" : "279",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "test789",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        }, {
+                           "localId" : "283",
+                           "type" : "Tuple",
+                           "resultTypeSpecifier" : {
+                              "localId" : "285",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "286",
+                                 "name" : "id",
+                                 "elementType" : {
+                                    "localId" : "287",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           },
+                           "element" : [ {
+                              "name" : "id",
+                              "value" : {
+                                 "localId" : "284",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "test719",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        } ]
+                     }
+                  } ],
+                  "let" : [ ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "309",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "name" : "targetMatches",
+                     "libraryName" : "FluentFunctionsOverloadCallingSelf",
+                     "type" : "FunctionRef",
+                     "signature" : [ {
+                        "localId" : "310",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "311",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "312",
+                              "name" : "option",
+                              "elementType" : {
+                                 "localId" : "313",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "localId" : "314",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "315",
+                           "name" : "id",
+                           "elementType" : {
+                              "localId" : "316",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     } ],
+                     "operand" : [ {
+                        "localId" : "300",
+                        "name" : "testOptionsList",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "301",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "302",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "303",
+                                 "name" : "option",
+                                 "elementType" : {
+                                    "localId" : "304",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           }
+                        }
+                     }, {
+                        "localId" : "305",
+                        "name" : "T",
+                        "type" : "AliasRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "306",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "307",
+                              "name" : "id",
+                              "elementType" : {
+                                 "localId" : "308",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     } ]
+                  }
+               }
             }
          }, {
-            "localId" : "300",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-            "name" : "testValue3",
+            "localId" : "331",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "matchTestsTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "300",
+                  "r" : "331",
                   "s" : [ {
-                     "value" : [ "","define ","testValue3",": " ]
+                     "value" : [ "","define ","matchTestsTrue",": " ]
                   }, {
-                     "r" : "303",
+                     "r" : "332",
                      "s" : [ {
-                        "r" : "301",
-                        "value" : [ "1","." ]
+                        "value" : [ "exists " ]
                      }, {
-                        "r" : "303",
+                        "r" : "374",
                         "s" : [ {
-                           "r" : "302",
-                           "value" : [ "add","(","2",")" ]
+                           "value" : [ "(" ]
+                        }, {
+                           "r" : "374",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "333",
+                                 "s" : [ {
+                                    "r" : "334",
+                                    "s" : [ {
+                                       "value" : [ "(" ]
+                                    }, {
+                                       "r" : "334",
+                                       "s" : [ {
+                                          "value" : [ "{ " ]
+                                       }, {
+                                          "r" : "335",
+                                          "s" : [ {
+                                             "value" : [ "{" ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "id",": " ]
+                                             }, {
+                                                "r" : "336",
+                                                "s" : [ {
+                                                   "value" : [ "'test341'" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "}" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ ", " ]
+                                       }, {
+                                          "r" : "340",
+                                          "s" : [ {
+                                             "value" : [ "{" ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "id",": " ]
+                                             }, {
+                                                "r" : "341",
+                                                "s" : [ {
+                                                   "value" : [ "'test719'" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "}" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " }" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ")" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","T" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n  " ]
+                           }, {
+                              "r" : "366",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "366",
+                                 "s" : [ {
+                                    "r" : "357",
+                                    "s" : [ {
+                                       "value" : [ "\"testOptionsList\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "366",
+                                    "s" : [ {
+                                       "value" : [ "targetMatches","(" ]
+                                    }, {
+                                       "r" : "362",
+                                       "s" : [ {
+                                          "value" : [ "T" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ")" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
                         } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "303",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-               "name" : "add",
-               "type" : "FunctionRef",
+               "localId" : "332",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Exists",
                "signature" : [ {
-                  "localId" : "304",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
-               }, {
-                  "localId" : "305",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
+                  "localId" : "383",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "384",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "385",
+                        "name" : "id",
+                        "elementType" : {
+                           "localId" : "386",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
                } ],
-               "operand" : [ {
-                  "localId" : "301",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "1",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "302",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "2",
-                  "type" : "Literal"
-               } ]
+               "operand" : {
+                  "localId" : "374",
+                  "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "localId" : "379",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "380",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "381",
+                           "name" : "id",
+                           "elementType" : {
+                              "localId" : "382",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "source" : [ {
+                     "localId" : "333",
+                     "alias" : "T",
+                     "resultTypeSpecifier" : {
+                        "localId" : "353",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "354",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "355",
+                              "name" : "id",
+                              "elementType" : {
+                                 "localId" : "356",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     },
+                     "expression" : {
+                        "localId" : "334",
+                        "type" : "List",
+                        "resultTypeSpecifier" : {
+                           "localId" : "349",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "350",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "351",
+                                 "name" : "id",
+                                 "elementType" : {
+                                    "localId" : "352",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           }
+                        },
+                        "element" : [ {
+                           "localId" : "335",
+                           "type" : "Tuple",
+                           "resultTypeSpecifier" : {
+                              "localId" : "337",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "338",
+                                 "name" : "id",
+                                 "elementType" : {
+                                    "localId" : "339",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           },
+                           "element" : [ {
+                              "name" : "id",
+                              "value" : {
+                                 "localId" : "336",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "test341",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        }, {
+                           "localId" : "340",
+                           "type" : "Tuple",
+                           "resultTypeSpecifier" : {
+                              "localId" : "342",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "343",
+                                 "name" : "id",
+                                 "elementType" : {
+                                    "localId" : "344",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           },
+                           "element" : [ {
+                              "name" : "id",
+                              "value" : {
+                                 "localId" : "341",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "test719",
+                                 "type" : "Literal"
+                              }
+                           } ]
+                        } ]
+                     }
+                  } ],
+                  "let" : [ ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "localId" : "366",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "name" : "targetMatches",
+                     "libraryName" : "FluentFunctionsOverloadCallingSelf",
+                     "type" : "FunctionRef",
+                     "signature" : [ {
+                        "localId" : "367",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "368",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "369",
+                              "name" : "option",
+                              "elementType" : {
+                                 "localId" : "370",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     }, {
+                        "localId" : "371",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "372",
+                           "name" : "id",
+                           "elementType" : {
+                              "localId" : "373",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     } ],
+                     "operand" : [ {
+                        "localId" : "357",
+                        "name" : "testOptionsList",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "358",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "359",
+                              "type" : "TupleTypeSpecifier",
+                              "element" : [ {
+                                 "localId" : "360",
+                                 "name" : "option",
+                                 "elementType" : {
+                                    "localId" : "361",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              } ]
+                           }
+                        }
+                     }, {
+                        "localId" : "362",
+                        "name" : "T",
+                        "type" : "AliasRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "363",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "364",
+                              "name" : "id",
+                              "elementType" : {
+                                 "localId" : "365",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     } ]
+                  }
+               }
             }
          } ]
       }
