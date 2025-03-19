@@ -8752,6 +8752,7 @@ function deepCompareKeysAndValues(a, b, comparisonFunction) {
             const comparisonResult = comparisonFunction(a[key], b[key]);
             if (comparisonResult === null) {
                 shouldReturnNull = true;
+                return true;
             }
             return comparisonResult;
         });
@@ -8759,7 +8760,7 @@ function deepCompareKeysAndValues(a, b, comparisonFunction) {
     else {
         finalComparisonResult = false;
     }
-    if (shouldReturnNull) {
+    if (finalComparisonResult && shouldReturnNull) {
         return null;
     }
     return finalComparisonResult;
