@@ -64,13 +64,53 @@ define testValue1: 'World'.greet()
 define testValue2: 1.add(2)
 
 // @Test: FluentFunctionsOverloadCallingSelf
-define fluent function add(nums List<System.Integer>, num System.Integer) :
-  nums n
-    return n.add(num)
+library FluentFunctionsOverloadCallingSelf version '1'
 
-define fluent function add(a System.Integer, b System.Integer) :
-  a + b
+define fluent function targetMatches(option Tuple { option System.String }, target Tuple { id System.String }):
+  target.id = option.option
 
-define testValue1: ({1, 2, 3, 4}).add(1)
-define testValue2: ({51, 27, 12, 2}).add(2)
-define testValue3: 1.add(2)
+define fluent function targetMatches(option Tuple { option System.String }, targetId System.String):
+  targetId = option.option
+
+define fluent function targetMatches(options List<Tuple { option System.String }>, target Tuple { id System.String }):
+  exists (options O where O.targetMatches(target))
+
+define fluent function targetMatches(options List<Tuple { option System.String }>, targetId System.String):
+  exists (options O where O.targetMatches(targetId))
+
+define testOptionsList:
+  {
+    {
+      option: 'test123'
+    },
+    {
+      option: 'test341'
+    }
+  }
+
+define matchTestFalse: "testOptionsList".targetMatches({id: 'test789'})
+define matchTestTrue: "testOptionsList".targetMatches({id: 'test123'})
+define matchTestsFalse: exists (({ {id: 'test789'}, {id: 'test719'} }) T
+  where "testOptionsList".targetMatches(T))
+define matchTestsTrue: exists (({ {id: 'test341'}, {id: 'test719'} }) T
+  where "testOptionsList".targetMatches(T))
+
+
+// @Test: FluentFunctionsOverloadCallingSelfFromOtherLibrary
+include FluentFunctionsOverloadCallingSelf version '1' called FluentFunctionsOverloadCallingSelf
+
+define testOptionsList:
+  {
+    {
+      option: 'test123'
+    },
+    {
+      option: 'test341'
+    }
+  }
+define matchTestFalse: "testOptionsList".targetMatches({id: 'test789'})
+define matchTestTrue: "testOptionsList".targetMatches({id: 'test123'})
+define matchTestsFalse: exists (({ {id: 'test789'}, {id: 'test719'} }) T
+  where "testOptionsList".targetMatches(T))
+define matchTestsTrue: exists (({ {id: 'test341'}, {id: 'test719'} }) T
+  where "testOptionsList".targetMatches(T))

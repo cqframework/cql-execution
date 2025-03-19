@@ -123,14 +123,32 @@ describe('FluentFunctionsOverloadCallingSelf', () => {
   });
 
   it('should be able to invoke a fluent which calls another fluent function overload of the same name', async function () {
-    const e1 = await this.testValue1.exec(this.ctx);
-    e1.should.eql([2, 3, 4, 5]);
-    const e2 = await this.testValue2.exec(this.ctx);
-    e2.should.eql([53, 29, 14, 4]);
+    const e1 = await this.matchTestFalse.exec(this.ctx);
+    e1.should.be.false();
+    const e2 = await this.matchTestTrue.exec(this.ctx);
+    e2.should.be.true();
+
+    const e3 = await this.matchTestsFalse.exec(this.ctx);
+    e3.should.be.false();
+    const e4 = await this.matchTestsTrue.exec(this.ctx);
+    e4.should.be.true();
+  });
+});
+
+describe('FluentFunctionsOverloadCallingSelfFromOtherLibrary', () => {
+  beforeEach(function () {
+    setup(this, data);
   });
 
-  it('should be able to invoke a fluent that is overloaded', async function () {
-    const e = await this.testValue3.exec(this.ctx);
-    e.should.equal(3);
+  it('should be able to invoke a fluent which calls another fluent function overload of the same name', async function () {
+    const e1 = await this.matchTestFalse.exec(this.ctx);
+    e1.should.be.false();
+    const e2 = await this.matchTestTrue.exec(this.ctx);
+    e2.should.be.true();
+
+    const e3 = await this.matchTestsFalse.exec(this.ctx);
+    e3.should.be.false();
+    const e4 = await this.matchTestsTrue.exec(this.ctx);
+    e4.should.be.true();
   });
 });
