@@ -2,6 +2,8 @@ import should from 'should';
 import setup from '../../setup';
 const data = require('./data');
 const { p1 } = require('./patients');
+import { Repository } from '../../../src/cql';
+import sinon from 'sinon';
 
 describe('ExpressionDef', () => {
   beforeEach(function () {
@@ -114,5 +116,16 @@ describe('FluentFunctions', () => {
   it('should be able to invoke a fluent function with one extra argument', async function () {
     const e = await this.testValue2.exec(this.ctx);
     e.should.equal(3);
+  });
+});
+
+describe('CommonLib3', () => {
+  beforeEach(function () {
+    setup(this, data, [p1], {}, {}, new Repository(data));
+  });
+  it('should be able to execute an expensive expression', async function () {
+    const spy = sinon.spy(this.expensiveStatement, 'exec');
+    await this.expensiveStatementRef.exec(this.ctx);
+    spy.should.have.been.calledOnce();
   });
 });
