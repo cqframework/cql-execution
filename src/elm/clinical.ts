@@ -110,8 +110,10 @@ export class ExpandValueSet extends Expression {
 
   async exec(ctx: Context) {
     const valueset = await this.valueset.execute(ctx);
-    if (valueset == null || !valueset.isValueSet) {
+    if (valueset == null) {
       return null;
+    } else if (!valueset.isValueSet) {
+      throw new Error('ExpandValueSet function invoked on object that is not a ValueSet');
     }
 
     return valueset.expand();
