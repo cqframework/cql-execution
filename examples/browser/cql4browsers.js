@@ -3840,8 +3840,11 @@ class ExpandValueSet extends expression_1.Expression {
     }
     async exec(ctx) {
         const valueset = await this.valueset.execute(ctx);
-        if (valueset == null || !valueset.isValueSet) {
+        if (valueset == null) {
             return null;
+        }
+        else if (!valueset.isValueSet) {
+            throw new Error('ExpandValueSet function invoked on object that is not a ValueSet');
         }
         return valueset.expand();
     }
