@@ -45,6 +45,17 @@ define InWrongListOfCodes: WrongListOfCodes in "Female"
 define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
 define ListOfCodesNull: (null as List<Code>) in "Female"
 
+
+// @Test: ExpandValueset
+valueset "Female": '2.16.840.1.113883.3.560.100.2'
+valueset "Known": '2.16.840.1.113883.3.464.1003.101.12.1061'
+
+define ExpandFemale: ExpandValueSet("Female")
+define ExpandKnown: ExpandValueSet("Known")
+define ExpandNull: ExpandValueSet(null)
+define InvokeExpandWithUnion: "Female" union  "Known"
+
+
 // @Test: Patient Property In ValueSet
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
 define IsFemale: Patient.gender in "Female"

@@ -14,6 +14,7 @@ export class ValueSetDef extends Expression {
     this.id = json.id;
     this.version = json.version;
   }
+
   //todo: code systems and versions
 
   async exec(ctx: Context) {
@@ -96,6 +97,26 @@ export class InValueSet extends Expression {
     }
     // If there is a code and valueset return whether or not the valueset has the code
     return valueset.hasMatch(code);
+  }
+}
+
+export class ExpandValueSet extends Expression {
+  valueset: ValueSetRef;
+
+  constructor(json: any) {
+    super(json);
+    this.valueset = new ValueSetRef(json.operand);
+  }
+
+  async exec(ctx: Context) {
+    const valueset = await this.valueset.execute(ctx);
+    if (valueset == null) {
+      return null;
+    } else if (!valueset.isValueSet) {
+      throw new Error('ExpandValueSet function invoked on object that is not a ValueSet');
+    }
+
+    return valueset.expand();
   }
 }
 
@@ -272,6 +293,7 @@ export class CalculateAge extends Expression {
 
 export class CalculateAgeAt extends Expression {
   precision: string;
+
   constructor(json: any) {
     super(json);
     this.precision = json.precision;
