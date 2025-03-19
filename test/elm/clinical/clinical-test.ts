@@ -1,10 +1,14 @@
 import should from 'should';
 import setup from '../../setup';
+
 const vsets = require('./valuesets');
 import * as DT from '../../../src/datatypes/datatypes';
 import { Uncertainty } from '../../../src/datatypes/uncertainty';
+
 const { p1, p2, p3, p4, p5, p6, p7 } = require('./patients');
 import { PatientSource } from '../../../src/cql-patient';
+import { Code } from '../../../src/datatypes/clinical';
+
 const data = require('./data');
 
 describe('ValueSetDef', () => {
@@ -154,6 +158,33 @@ describe('InValueSet', () => {
 
   it('should return false for null list of codes', async function () {
     (await this.listOfCodesNull.exec(this.ctx)).should.be.false();
+  });
+});
+
+describe('ExpandValueset', () => {
+  beforeEach(function () {
+    setup(this, data, [], vsets);
+  });
+
+  it('expand valueset', async function () {
+    const received: any = await this.expandFemale.exec(this.ctx);
+    const expected: Code[] = [new Code('F', '2.16.840.1.113883.18.2', 'HL7V2.5', undefined)];
+    received.should.eql(expected);
+  });
+
+  it('expand null', async function () {
+    should(await this.expandNull.exec(this.ctx)).be.null();
+  });
+
+  it('invoke expandValueSet with union', async function () {
+    const received: any = await this.invokeExpandWithUnion.exec(this.ctx);
+    const expected: Code[] = [
+      new Code('F', '2.16.840.1.113883.18.2', 'HL7V2.5', undefined),
+      new Code('185349003', '2.16.840.1.113883.6.96', '2013-09', undefined),
+      new Code('270427003', '2.16.840.1.113883.6.96', '2013-09', undefined),
+      new Code('406547006', '2.16.840.1.113883.6.96', '2013-09', undefined)
+    ];
+    received.should.eql(expected);
   });
 });
 

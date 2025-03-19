@@ -364,6 +364,19 @@ class ValueSet {
     get isValueSet() {
         return true;
     }
+    /**
+     * Determines if the provided code matches any code in the current set.
+     * If the input is a single string, it checks for a direct match with the
+     * codes in the set, ensuring all code systems are consistent. Throws an
+     * error if multiple code systems exist and a match is found, indicating
+     * ambiguity. For other inputs, it checks for any matching codes using
+     * the `codesInList` function. Used for the `code in valueset` operation.
+     *
+     * @param code - The code to be checked for a match, which can be a string
+     *               or an object containing codes.
+     * @returns {boolean} True if a match is found, otherwise false.
+     * @throws {Error} If a match is found with multiple code systems present.
+     */
     hasMatch(code) {
         const codesList = toCodeList(code);
         // InValueSet String Overload
@@ -387,6 +400,31 @@ class ValueSet {
         else {
             return codesInList(codesList, this.codes);
         }
+    }
+    /**
+     * Expands the current set of codes by returning a list of unique `Code` objects.
+     * This method filters out duplicate codes from the `codes` array, ensuring each
+     * code appears only once in the returned list. Use for the ExpandValueset operator
+     *
+     * @returns {Code[]} An array of unique `Code` objects.
+     */
+    expand() {
+        const expanded = [];
+        this.codes.forEach(code => {
+            const foundUniqueCode = expanded.find(uniqueCode => {
+                if (uniqueCode == null || code == null) {
+                    return true;
+                }
+                return (uniqueCode.code === code.code &&
+                    uniqueCode.system == code.system &&
+                    uniqueCode.version == code.version &&
+                    uniqueCode.display == code.display);
+            });
+            if (!foundUniqueCode) {
+                expanded.push(code);
+            }
+        });
+        return expanded;
     }
 }
 exports.ValueSet = ValueSet;
@@ -3714,7 +3752,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CalculateAgeAt = exports.CalculateAge = exports.Concept = exports.ConceptRef = exports.ConceptDef = exports.Code = exports.CodeRef = exports.CodeDef = exports.CodeSystemDef = exports.InValueSet = exports.AnyInValueSet = exports.ValueSetRef = exports.ValueSetDef = void 0;
+exports.CalculateAgeAt = exports.CalculateAge = exports.Concept = exports.ConceptRef = exports.ConceptDef = exports.Code = exports.CodeRef = exports.CodeDef = exports.CodeSystemDef = exports.ExpandValueSet = exports.InValueSet = exports.AnyInValueSet = exports.ValueSetRef = exports.ValueSetDef = void 0;
 const expression_1 = require("./expression");
 const dt = __importStar(require("../datatypes/datatypes"));
 const builder_1 = require("./builder");
@@ -3795,6 +3833,23 @@ class InValueSet extends expression_1.Expression {
     }
 }
 exports.InValueSet = InValueSet;
+class ExpandValueSet extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.valueset = new ValueSetRef(json.operand);
+    }
+    async exec(ctx) {
+        const valueset = await this.valueset.execute(ctx);
+        if (valueset == null) {
+            return null;
+        }
+        else if (!valueset.isValueSet) {
+            throw new Error('ExpandValueSet function invoked on object that is not a ValueSet');
+        }
+        return valueset.expand();
+    }
+}
+exports.ExpandValueSet = ExpandValueSet;
 class CodeSystemDef extends expression_1.Expression {
     constructor(json) {
         super(json);

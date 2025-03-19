@@ -13,7 +13,7 @@ export class Context {
   messageListener?: MessageListener;
 
   // Private Constructor args
-  private _codeService?: TerminologyProvider | null;
+  private _codeService?: TerminologyProvider;
   private _parameters?: Parameter;
 
   // Auto-initialized properties
@@ -24,7 +24,7 @@ export class Context {
 
   constructor(
     parent: Context | Library,
-    _codeService?: TerminologyProvider | null,
+    _codeService?: TerminologyProvider,
     _parameters?: Parameter,
     executionDateTime?: dt.DateTime,
     messageListener?: MessageListener
@@ -55,7 +55,7 @@ export class Context {
     return this._codeService || (this.parent && this.parent.codeService);
   }
 
-  set codeService(cs) {
+  set codeService(cs: TerminologyProvider) {
     this._codeService = cs;
   }
 
@@ -423,7 +423,7 @@ export class PatientContext extends Context {
   constructor(
     public library: Library,
     public patient?: PatientObject | null,
-    codeService?: TerminologyProvider | null,
+    codeService?: TerminologyProvider,
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
     messageListener: MessageListener = new NullMessageListener()
@@ -472,7 +472,7 @@ export class UnfilteredContext extends Context {
   constructor(
     public library: Library,
     public results: any,
-    codeService?: TerminologyProvider | null,
+    codeService?: TerminologyProvider,
     parameters?: Parameter,
     executionDateTime: dt.DateTime = dt.DateTime.fromJSDate(new Date()),
     messageListener: MessageListener = new NullMessageListener()
