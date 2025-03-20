@@ -19660,7 +19660,7 @@ define DayIncluded: {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 
 define DayNotIncluded: {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 3, 4)} includes DateTime(2014, 3, 3)
 define IntegerIncluded: {1, 2, 3, 4, 5} includes 3
 define IntegerNotIncluded: {1, 2, 3, 4, 5} includes 33
-define QuantityInList: { ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'') 
+define QuantityInList: { ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'')
 define QuantityNotInList: { ToQuantity('100 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'')
 */
 
@@ -29141,7 +29141,7 @@ define IsSame: {1, 2, 3, 4, 5} properly included in {1, 2, 3, 4, 5}
 define IsNotIncluded: {4, 5, 6} properly included in {1, 2, 3, 4, 5}
 define TuplesIncluded: {Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define TuplesNotIncluded: {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}} properly included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
-define NullIncludes: {1, 2, 3, 4, 5} properly included in null
+define NullIncludes: {1, 2, 3, 4, 5} properly included in null as List<Integer>
 define NullIncluded: (null as List<Integer>) properly included in {1, 2, 3, 4, 5}
 */
 
@@ -29221,6 +29221,17 @@ module.exports['ProperIncludedIn'] = {
       "type" : "CqlToElmError",
       "libraryId" : "TestSnippet",
       "libraryVersion" : "1",
+      "startLine" : 10,
+      "startChar" : 22,
+      "endLine" : 10,
+      "endChar" : 36,
+      "message" : "List-valued expression was demoted to a singleton.",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "CqlToElmError",
+      "libraryId" : "TestSnippet",
+      "libraryVersion" : "1",
       "startLine" : 11,
       "startChar" : 23,
       "endLine" : 11,
@@ -29240,7 +29251,7 @@ module.exports['ProperIncludedIn'] = {
           },
           "globalScope" : true
         } ],
-        "r" : "336"
+        "r" : "333"
       }
     } ],
     "localId" : "0",
@@ -31180,12 +31191,72 @@ module.exports['ProperIncludedIn'] = {
                   "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
                   "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
                   "value" : {
-                    "s" : [ " ", "properly included in", " ", "null" ],
-                    "r" : "330"
+                    "s" : [ " ", "properly included in", " " ],
+                    "r" : "329"
+                  },
+                  "globalScope" : true
+                }, {
+                  "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                  "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                  "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                  "value" : {
+                    "s" : [ {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ "null", " as " ],
+                        "r" : "326"
+                      },
+                      "globalScope" : true
+                    }, {
+                      "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                      "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                      "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                      "value" : {
+                        "s" : [ {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ "List<" ]
+                          },
+                          "globalScope" : true
+                        }, {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ {
+                              "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                              "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                              "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                              "value" : {
+                                "s" : [ "Integer" ]
+                              },
+                              "globalScope" : true
+                            } ],
+                            "r" : "328"
+                          },
+                          "globalScope" : true
+                        }, {
+                          "name" : "{urn:hl7-org:cql-annotations:r1}s",
+                          "declaredType" : "org.hl7.cql_annotations.r1.Narrative",
+                          "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
+                          "value" : {
+                            "s" : [ ">" ]
+                          },
+                          "globalScope" : true
+                        } ],
+                        "r" : "327"
+                      },
+                      "globalScope" : true
+                    } ],
+                    "r" : "325"
                   },
                   "globalScope" : true
                 } ],
-                "r" : "330"
+                "r" : "329"
               },
               "globalScope" : true
             } ],
@@ -31194,8 +31265,8 @@ module.exports['ProperIncludedIn'] = {
         } ],
         "localId" : "318",
         "expression" : {
-          "type" : "ProperIn",
-          "localId" : "330",
+          "type" : "ProperIncludedIn",
+          "localId" : "329",
           "signature" : [ ],
           "operand" : [ {
             "type" : "List",
@@ -31228,25 +31299,22 @@ module.exports['ProperIncludedIn'] = {
             } ]
           }, {
             "type" : "As",
-            "localId" : "331",
+            "localId" : "325",
             "signature" : [ ],
             "operand" : {
               "type" : "Null",
-              "localId" : "325"
+              "localId" : "326"
             },
             "asTypeSpecifier" : {
-              "type" : "IntervalTypeSpecifier",
-              "localId" : "332",
-              "pointType" : {
-                "type" : "ListTypeSpecifier",
-                "localId" : "333",
-                "elementType" : {
-                  "type" : "NamedTypeSpecifier",
-                  "localId" : "334",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer"
-                }
+              "type" : "ListTypeSpecifier",
+              "localId" : "327",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "328",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
               }
-            }
+            },
+            "strict" : false
           } ]
         },
         "name" : "NullIncludes",
@@ -31294,7 +31362,7 @@ module.exports['ProperIncludedIn'] = {
                           "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
                           "value" : {
                             "s" : [ "null", " as " ],
-                            "r" : "338"
+                            "r" : "335"
                           },
                           "globalScope" : true
                         }, {
@@ -31324,7 +31392,7 @@ module.exports['ProperIncludedIn'] = {
                                   },
                                   "globalScope" : true
                                 } ],
-                                "r" : "340"
+                                "r" : "337"
                               },
                               "globalScope" : true
                             }, {
@@ -31336,11 +31404,11 @@ module.exports['ProperIncludedIn'] = {
                               },
                               "globalScope" : true
                             } ],
-                            "r" : "339"
+                            "r" : "336"
                           },
                           "globalScope" : true
                         } ],
-                        "r" : "337"
+                        "r" : "334"
                       },
                       "globalScope" : true
                     }, {
@@ -31352,7 +31420,7 @@ module.exports['ProperIncludedIn'] = {
                       },
                       "globalScope" : true
                     } ],
-                    "r" : "337"
+                    "r" : "334"
                   },
                   "globalScope" : true
                 }, {
@@ -31361,7 +31429,7 @@ module.exports['ProperIncludedIn'] = {
                   "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
                   "value" : {
                     "s" : [ " ", "properly included in", " " ],
-                    "r" : "347"
+                    "r" : "344"
                   },
                   "globalScope" : true
                 }, {
@@ -31375,70 +31443,70 @@ module.exports['ProperIncludedIn'] = {
                       "scope" : "javax.xml.bind.JAXBElement$GlobalScope",
                       "value" : {
                         "s" : [ "{", "1", ", ", "2", ", ", "3", ", ", "4", ", ", "5", "}" ],
-                        "r" : "342"
+                        "r" : "339"
                       },
                       "globalScope" : true
                     } ],
-                    "r" : "341"
+                    "r" : "338"
                   },
                   "globalScope" : true
                 } ],
-                "r" : "347"
+                "r" : "344"
               },
               "globalScope" : true
             } ],
-            "r" : "336"
+            "r" : "333"
           }
         } ],
-        "localId" : "336",
+        "localId" : "333",
         "expression" : {
           "type" : "ProperIncludedIn",
-          "localId" : "347",
+          "localId" : "344",
           "signature" : [ ],
           "operand" : [ {
             "type" : "As",
-            "localId" : "337",
+            "localId" : "334",
             "signature" : [ ],
             "operand" : {
               "type" : "Null",
-              "localId" : "338"
+              "localId" : "335"
             },
             "asTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "339",
+              "localId" : "336",
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "340",
+                "localId" : "337",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer"
               }
             },
             "strict" : false
           }, {
             "type" : "List",
-            "localId" : "341",
+            "localId" : "338",
             "element" : [ {
               "type" : "Literal",
-              "localId" : "342",
+              "localId" : "339",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "1"
             }, {
               "type" : "Literal",
-              "localId" : "343",
+              "localId" : "340",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "2"
             }, {
               "type" : "Literal",
-              "localId" : "344",
+              "localId" : "341",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "3"
             }, {
               "type" : "Literal",
-              "localId" : "345",
+              "localId" : "342",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "4"
             }, {
               "type" : "Literal",
-              "localId" : "346",
+              "localId" : "343",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "5"
             } ]

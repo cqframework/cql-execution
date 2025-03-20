@@ -123,7 +123,7 @@ define DayIncluded: {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 
 define DayNotIncluded: {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 3, 4)} includes DateTime(2014, 3, 3)
 define IntegerIncluded: {1, 2, 3, 4, 5} includes 3
 define IntegerNotIncluded: {1, 2, 3, 4, 5} includes 33
-define QuantityInList: { ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'') 
+define QuantityInList: { ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'')
 define QuantityNotInList: { ToQuantity('100 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'')
 
 // @Test: IncludedIn
@@ -159,7 +159,7 @@ define IsSame: {1, 2, 3, 4, 5} properly included in {1, 2, 3, 4, 5}
 define IsNotIncluded: {4, 5, 6} properly included in {1, 2, 3, 4, 5}
 define TuplesIncluded: {Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define TuplesNotIncluded: {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}} properly included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
-define NullIncludes: {1, 2, 3, 4, 5} properly included in null
+define NullIncludes: {1, 2, 3, 4, 5} properly included in null as List<Integer>
 define NullIncluded: (null as List<Integer>) properly included in {1, 2, 3, 4, 5}
 
 // @Test: Flatten
