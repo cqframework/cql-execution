@@ -1,5 +1,5 @@
 import should from 'should';
-import { Concept, ValueSet } from '../../src/datatypes/clinical';
+import { CodeSystem, Concept, ValueSet } from '../../src/datatypes/clinical';
 import { Code, Date, DateTime } from '../../src/datatypes/datatypes';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 import { equals } from '../../src/util/comparison';
@@ -50,11 +50,7 @@ describe('Uncertainty', () => {
     should(conceptHigh.low).be.null();
     should(conceptHigh.high).be.null();
 
-    const valueSet = new ValueSet('1.2.3.4.5', '1', [
-      new Code('ABC', '5.4.3.2.1', '1'),
-      new Code('DEF', '5.4.3.2.1', '2'),
-      new Code('GHI', '5.4.3.4.5', '3')
-    ]);
+    const valueSet = new ValueSet('1.2.3.4.5', '1', 'name', [new CodeSystem('systemId')]);
     const valueSetLow = new Uncertainty(valueSet, 1);
     should(valueSetLow.low).be.null();
     should(valueSetLow.high).be.null();

@@ -2,28 +2,58 @@ import { Expression } from './expression';
 import * as dt from '../datatypes/datatypes';
 import { Context } from '../runtime/context';
 import { build } from './builder';
+import { resolveValueSet } from '../util/util';
 
 export class ValueSetDef extends Expression {
   name: string;
   id: string;
   version?: string;
+  codesystems?: CodeSystemRef[];
 
   constructor(json: any) {
     super(json);
     this.name = json.name;
     this.id = json.id;
     this.version = json.version;
+    this.codesystems = json.codesystems; // TODO: fix this as needed. See what the elm json passes through to populate this. Will be a CodeSystemRef (name, libraryname)
   }
 
   //todo: code systems and versions
 
   async exec(ctx: Context) {
-    const valueset =
-      (await ctx.codeService.findValueSet(this.id, this.version)) ||
-      new dt.ValueSet(this.id, this.version);
-    ctx.rootContext().set(this.name, valueset);
+    // TODO: use the context to resolve the CodeSystemRef to a CodeSystem
+    // valueset is loaded as part of initial library load ... check if in library vs list??? if not, add
+    if (!ctx) {
+      throw Error('no context');
+    } // dumb placeholder
+    const valueset = new dt.ValueSet(this.id, this.version, this.name, this.codesystems);
+    // ctx.rootContext().set(this.name, valueset); Note (2025): this seems to be unneccesary, remove completely in future if not needed
     return valueset;
   }
+
+  // Recommendations:
+  // Resolve when we need it -> if not resolved, throw error
+
+  // TODO: ?? other places that a valueset could be created in patient data (in the middle of execution)
+  //  ^ talk to Chris Moesel about valueset that's defined on the fly
+  // ... resources could have contained valuesets -> that would be a FHIR valueset (we wouldn't have any automatic conversion of that)
+  // probably not a problem we need to solve at this juncture
+  // this could influence how we define the terminology or data provider interfaces, but that's a future issue
+
+  // Update: initially store ValueSet to context... then, when we need the expansion, call the code service to expand and (also?) store the expansion to the context
+  // This rootContext call is kind of hinky ... why are we doing this since the getValueSet function pulls from the root library vs list?
+  // Recommendations:
+  // Cache both valueset references and valueset resolutions? (could also be responsibility of the terminology provider? implementation class can choose how to cache or not cache)
+  // For simplicity, push expanded caching to terminology provider
+
+  // async exec(ctx: Context) {
+  //   const valuesetExpanded = await ctx.codeService.findValueSet(this.id, this.version);
+  //   if(!valuesetExpanded){
+  //     throw Error('TODO: Make this better');
+  //   }
+  //   ctx.rootContext().set(this.name, valuesetExpanded);
+  //   return new dt.ValueSet(this.id, this.version);
+  // }
 }
 
 export class ValueSetRef extends Expression {
@@ -37,7 +67,6 @@ export class ValueSetRef extends Expression {
   }
 
   async exec(ctx: Context) {
-    // TODO: This calls the code service every time-- should be optimized
     let valueset = ctx.getValueSet(this.name, this.libraryName);
     if (valueset instanceof Expression) {
       valueset = await valueset.execute(ctx);
@@ -64,11 +93,12 @@ export class AnyInValueSet extends Expression {
     if (codes == null) {
       return false;
     }
-    const valueset = await this.valueset.execute(ctx);
+    const valueset: dt.ValueSet = await this.valueset.execute(ctx);
     if (valueset == null || !valueset.isValueSet) {
       throw new Error('ValueSet must be provided to AnyInValueSet expression');
     }
-    return codes.some((code: any) => valueset.hasMatch(code));
+    const vsExpansion = await resolveValueSet(valueset, ctx);
+    return codes.some((code: any) => vsExpansion.hasMatch(code));
   }
 }
 
@@ -90,12 +120,13 @@ export class InValueSet extends Expression {
     if (code == null) {
       return false;
     }
-    const valueset = await this.valueset.execute(ctx);
+    const valueset: dt.ValueSet = await this.valueset.execute(ctx);
     if (valueset == null || !valueset.isValueSet) {
       throw new Error('ValueSet must be provided to InValueSet expression');
     }
     // If there is a code and valueset return whether or not the valueset has the code
-    return valueset.hasMatch(code);
+    const vsExpansion = await resolveValueSet(valueset, ctx);
+    return vsExpansion.hasMatch(code);
   }
 }
 
@@ -108,14 +139,14 @@ export class ExpandValueSet extends Expression {
   }
 
   async exec(ctx: Context) {
-    const valueset = await this.valueset.execute(ctx);
+    const valueset: dt.ValueSet = await this.valueset.execute(ctx);
     if (valueset == null) {
       return null;
     } else if (!valueset.isValueSet) {
       throw new Error('ExpandValueSet function invoked on object that is not a ValueSet');
     }
-
-    return valueset.expand();
+    const vsExpansion = await resolveValueSet(valueset, ctx);
+    return vsExpansion.expand();
   }
 }
 

@@ -2,12 +2,13 @@
 import { Expression } from './expression';
 import { ThreeValuedLogic } from '../datatypes/logic';
 import { DateTime } from '../datatypes/datetime';
-import { typeIsArray } from '../util/util';
+import { resolveValueSet, typeIsArray } from '../util/util';
 import { equals, equivalent } from '../util/comparison';
 import * as DT from './datetime';
 import * as LIST from './list';
 import * as IVL from './interval';
 import { Context } from '../runtime/context';
+import { ValueSet } from '../datatypes/clinical';
 
 export class Equal extends Expression {
   constructor(json: any) {
@@ -30,12 +31,24 @@ export class Equivalent extends Expression {
   }
 
   async exec(ctx: Context) {
-    const [a, b] = await this.execArgs(ctx);
+    let [a, b] = await this.execArgs(ctx);
     if (a == null && b == null) {
       return true;
     } else if (a == null || b == null) {
       return false;
     } else {
+      // comparison of valueset id/version -> only check expanded equivalence if these don't match
+      if (a.isValueSet && b.isValueSet) {
+        if (a.id === b.id && a.version === b.version) {
+          return true;
+        }
+      }
+      if (a.isValueSet) {
+        a = await resolveValueSet(a as ValueSet, ctx);
+      }
+      if (b.isValueSet) {
+        b = await resolveValueSet(b as ValueSet, ctx);
+      }
       return equivalent(a, b);
     }
   }

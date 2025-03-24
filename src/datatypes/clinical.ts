@@ -35,14 +35,34 @@ export class Concept {
     return codesInList(toCodeList(code), this.codes);
   }
 }
+export abstract class Vocabulary {
+  constructor(public id: string, public version?: string, public name?: string) {}
+}
 
-export class ValueSet {
-  constructor(public oid: string, public version?: string, public codes: any[] = []) {
-    this.codes ||= [];
+export class CodeSystem extends Vocabulary {
+  constructor(public id: string, public version?: string, public name?: string) {
+    super(id, version, name);
+  }
+}
+
+export class ValueSet extends Vocabulary {
+  constructor(
+    public id: string,
+    public version?: string,
+    public name?: string,
+    public codesystems?: CodeSystem[]
+  ) {
+    super(id, version, name);
   }
 
   get isValueSet() {
     return true;
+  }
+}
+
+export class ValueSetExpansion {
+  constructor(public oid: string, public version?: string, public codes: any[] = []) {
+    this.codes ||= [];
   }
 
   /**
@@ -148,8 +168,4 @@ function codesInList(cl1: any, cl2: any) {
 
 function codesMatch(code1: Code, code2: Code) {
   return code1.code === code2.code && code1.system === code2.system;
-}
-
-export class CodeSystem {
-  constructor(public id: string, public version?: string, public name?: string) {}
 }

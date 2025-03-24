@@ -1,4 +1,10 @@
-import { Code, CodeSystem, Concept, ValueSet } from '../../src/datatypes/clinical';
+import {
+  Code,
+  CodeSystem,
+  Concept,
+  ValueSet,
+  ValueSetExpansion
+} from '../../src/datatypes/clinical';
 import should from 'should';
 
 describe('Code', () => {
@@ -122,7 +128,22 @@ describe('Concept', () => {
 describe('ValueSet', () => {
   let valueSet: ValueSet;
   beforeEach(() => {
-    valueSet = new ValueSet('1.2.3.4.5', '1', [
+    valueSet = new ValueSet('1.2.3.4.5', '1', 'name', [new CodeSystem('systemId')]);
+  });
+
+  it('should properly represent the id, version, name, codesystems', () => {
+    valueSet.id.should.equal('1.2.3.4.5');
+    valueSet.version.should.equal('1');
+    valueSet.name.should.equal('name');
+    valueSet.codesystems.length.should.equal(1);
+    valueSet.codesystems[0].should.eql(new CodeSystem('systemId'));
+  });
+});
+
+describe('ValueSetExpansion', () => {
+  let valueSet: ValueSetExpansion;
+  beforeEach(() => {
+    valueSet = new ValueSetExpansion('1.2.3.4.5', '1', [
       new Code('ABC', '5.4.3.2.1', '1'),
       new Code('DEF', '5.4.3.2.1', '2'),
       new Code('GHI', '5.4.3.4.5', '3')
@@ -186,13 +207,13 @@ describe('ValueSet', () => {
   });
 
   it('should  expand the valueset without duplicates', () => {
-    const duplicatedValueSet = new ValueSet('1.2.3.4.5', '1', [
+    const duplicatedValueSetExpansion = new ValueSetExpansion('1.2.3.4.5', '1', [
       new Code('ABC', '5.4.3.2.1', '1'),
       new Code('DEF', '5.4.3.2.1', '2'),
       new Code('GHI', '5.4.3.4.5', '3'),
       new Code('GHI', '5.4.3.4.5', '3')
     ]);
-    const received: Code[] = duplicatedValueSet.expand();
+    const received: Code[] = duplicatedValueSetExpansion.expand();
     const expected: Code[] = [
       new Code('ABC', '5.4.3.2.1', '1'),
       new Code('DEF', '5.4.3.2.1', '2'),
@@ -207,13 +228,13 @@ describe('ValueSet', () => {
   });
 
   it('should  expand the valueset without undefined', () => {
-    const duplicatedValueSet = new ValueSet('1.2.3.4.5', '1', [
+    const duplicatedValueSetExpansion = new ValueSetExpansion('1.2.3.4.5', '1', [
       new Code('ABC', '5.4.3.2.1', '1'),
       new Code('DEF', '5.4.3.2.1', '2'),
       new Code('GHI', '5.4.3.4.5', '3'),
       null
     ]);
-    const received: Code[] = duplicatedValueSet.expand();
+    const received: Code[] = duplicatedValueSetExpansion.expand();
     const expected: Code[] = [
       new Code('ABC', '5.4.3.2.1', '1'),
       new Code('DEF', '5.4.3.2.1', '2'),

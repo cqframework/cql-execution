@@ -16,22 +16,22 @@ describe('ValueSetDef', () => {
     setup(this, data, [], vsets);
   });
 
-  it('should return a resolved value set when the codeService knows about it', async function () {
+  it('should return a valueset reference', async function () {
     const vs = await this.known.exec(this.ctx);
-    vs.oid.should.equal('2.16.840.1.113883.3.464.1003.101.12.1061');
+    vs.id.should.equal('2.16.840.1.113883.3.464.1003.101.12.1061');
     vs.version.should.equal('20140501');
-    vs.codes.length.should.equal(3);
+    // vs.codes.length.should.equal(3);
   });
 
   it('should execute one-arg to ValueSet with ID', async function () {
     const vs = await this['unknown One Arg'].exec(this.ctx);
-    vs.oid.should.equal('1.2.3.4.5.6.7.8.9');
+    vs.id.should.equal('1.2.3.4.5.6.7.8.9');
     should.not.exist(vs.version);
   });
 
   it('should execute two-arg to ValueSet with ID and version', async function () {
     const vs = await this['unknown Two Arg'].exec(this.ctx);
-    vs.oid.should.equal('1.2.3.4.5.6.7.8.9');
+    vs.id.should.equal('1.2.3.4.5.6.7.8.9');
     vs.version.should.equal('1');
   });
 });
@@ -46,7 +46,7 @@ describe('ValueSetRef', () => {
   });
 
   it('should execute to the defined value set', async function () {
-    (await this.foo.exec(this.ctx)).oid.should.equal('2.16.840.1.113883.3.464.1003.101.12.1001');
+    (await this.foo.exec(this.ctx)).id.should.equal('2.16.840.1.113883.3.464.1003.101.12.1001');
   });
 });
 
