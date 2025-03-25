@@ -2912,14 +2912,14 @@ module.exports['ExpandValueset'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "234",
+            "r" : "252",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -2963,6 +2963,7 @@ module.exports['ExpandValueset'] = {
       "valueSets" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Female",
             "id" : "2.16.840.1.113883.3.560.100.2",
             "accessLevel" : "Public",
@@ -2978,6 +2979,7 @@ module.exports['ExpandValueset'] = {
             "codeSystem" : [ ]
          }, {
             "localId" : "208",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Known",
             "id" : "2.16.840.1.113883.3.464.1003.101.12.1061",
             "accessLevel" : "Public",
@@ -3030,7 +3032,7 @@ module.exports['ExpandValueset'] = {
                   "s" : [ {
                      "value" : [ "","define ","ExpandFemale",": " ]
                   }, {
-                     "r" : "218",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "ExpandValueSet","(" ]
                      }, {
@@ -3044,34 +3046,57 @@ module.exports['ExpandValueset'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "223",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "224",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "218",
+               "localId" : "219",
                "type" : "ExpandValueSet",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "221",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "222",
+                     "name" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "220",
+                  "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
                   "localId" : "215",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true,
                   "type" : "ValueSetRef"
                }
             }
          }, {
-            "localId" : "220",
+            "localId" : "226",
             "name" : "ExpandKnown",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "220",
+                  "r" : "226",
                   "s" : [ {
                      "value" : [ "","define ","ExpandKnown",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "231",
                      "s" : [ {
                         "value" : [ "ExpandValueSet","(" ]
                      }, {
-                        "r" : "221",
+                        "r" : "227",
                         "s" : [ {
                            "value" : [ "\"Known\"" ]
                         } ]
@@ -3081,74 +3106,120 @@ module.exports['ExpandValueset'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "235",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "236",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "224",
+               "localId" : "231",
                "type" : "ExpandValueSet",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "233",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "234",
+                     "name" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "232",
+                  "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
-                  "localId" : "221",
+                  "localId" : "227",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Known",
                   "preserve" : true,
                   "type" : "ValueSetRef"
                }
             }
          }, {
-            "localId" : "226",
+            "localId" : "238",
             "name" : "ExpandNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "238",
                   "s" : [ {
                      "value" : [ "","define ","ExpandNull",": " ]
                   }, {
-                     "r" : "231",
+                     "r" : "244",
                      "s" : [ {
-                        "r" : "227",
+                        "r" : "239",
                         "value" : [ "ExpandValueSet","(","null",")" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "249",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "250",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "231",
+               "localId" : "244",
                "type" : "ExpandValueSet",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "247",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "248",
+                     "name" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "246",
+                  "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
-                  "localId" : "232",
+                  "localId" : "245",
                   "asType" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "227",
+                     "localId" : "239",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }
             }
          }, {
-            "localId" : "234",
+            "localId" : "252",
             "name" : "InvokeExpandWithUnion",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "234",
+                  "r" : "252",
                   "s" : [ {
                      "value" : [ "","define ","InvokeExpandWithUnion",": " ]
                   }, {
-                     "r" : "237",
+                     "r" : "255",
                      "s" : [ {
-                        "r" : "235",
+                        "r" : "253",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
                      }, {
                         "value" : [ " union  " ]
                      }, {
-                        "r" : "236",
+                        "r" : "254",
                         "s" : [ {
                            "value" : [ "\"Known\"" ]
                         } ]
@@ -3156,26 +3227,70 @@ module.exports['ExpandValueset'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "268",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "269",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "237",
+               "localId" : "255",
                "type" : "Union",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "266",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "267",
+                     "name" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "262",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "263",
+                     "name" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "264",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "265",
+                     "name" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "operand" : [ {
-                  "localId" : "239",
+                  "localId" : "257",
                   "type" : "ExpandValueSet",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "258",
+                     "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
-                     "localId" : "235",
+                     "localId" : "253",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Female",
                      "preserve" : true,
                      "type" : "ValueSetRef"
                   }
                }, {
-                  "localId" : "241",
+                  "localId" : "260",
                   "type" : "ExpandValueSet",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "261",
+                     "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
-                     "localId" : "236",
+                     "localId" : "254",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Known",
                      "preserve" : true,
                      "type" : "ValueSetRef"

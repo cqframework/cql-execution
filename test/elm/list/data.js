@@ -23114,7 +23114,7 @@ define IsSame: {1, 2, 3, 4, 5} properly included in {1, 2, 3, 4, 5}
 define IsNotIncluded: {4, 5, 6} properly included in {1, 2, 3, 4, 5}
 define TuplesIncluded: {Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define TuplesNotIncluded: {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}} properly included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
-define NullIncludes: {1, 2, 3, 4, 5} properly included in null
+define NullIncludes: {1, 2, 3, 4, 5} properly included in null as List<Integer>
 define NullIncluded: (null as List<Integer>) properly included in {1, 2, 3, 4, 5}
 */
 
@@ -23195,6 +23195,17 @@ module.exports['ProperIncludedIn'] = {
       }, {
          "libraryId" : "TestSnippet",
          "libraryVersion" : "1",
+         "startLine" : 10,
+         "startChar" : 22,
+         "endLine" : 10,
+         "endChar" : 36,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "TestSnippet",
+         "libraryVersion" : "1",
          "startLine" : 11,
          "startChar" : 23,
          "endLine" : 11,
@@ -23206,7 +23217,7 @@ module.exports['ProperIncludedIn'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "531",
+            "r" : "532",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -24785,7 +24796,7 @@ module.exports['ProperIncludedIn'] = {
                   "s" : [ {
                      "value" : [ "","define ","NullIncludes",": " ]
                   }, {
-                     "r" : "520",
+                     "r" : "519",
                      "s" : [ {
                         "r" : "503",
                         "s" : [ {
@@ -24793,35 +24804,49 @@ module.exports['ProperIncludedIn'] = {
                            "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
                         } ]
                      }, {
-                        "r" : "520",
-                        "value" : [ " ","properly included in"," ","null" ]
+                        "r" : "519",
+                        "value" : [ " ","properly included in"," " ]
+                     }, {
+                        "r" : "511",
+                        "s" : [ {
+                           "r" : "512",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "513",
+                           "s" : [ {
+                              "value" : [ "List<" ]
+                           }, {
+                              "r" : "514",
+                              "s" : [ {
+                                 "value" : [ "Integer" ]
+                              } ]
+                           }, {
+                              "value" : [ ">" ]
+                           } ]
+                        } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "520",
+               "localId" : "519",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "ProperIncludedIn",
                "signature" : [ {
-                  "localId" : "525",
+                  "localId" : "520",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "526",
+                     "localId" : "521",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "527",
-                  "type" : "IntervalTypeSpecifier",
-                  "pointType" : {
-                     "localId" : "528",
-                     "type" : "ListTypeSpecifier",
-                     "elementType" : {
-                        "localId" : "529",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }
+                  "localId" : "522",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "523",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
                   }
                } ],
                "operand" : [ {
@@ -24868,31 +24893,47 @@ module.exports['ProperIncludedIn'] = {
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "521",
+                  "localId" : "511",
+                  "strict" : false,
                   "type" : "As",
+                  "resultTypeSpecifier" : {
+                     "localId" : "517",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "518",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "511",
+                     "localId" : "512",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "522",
-                     "type" : "IntervalTypeSpecifier",
-                     "pointType" : {
-                        "localId" : "523",
+                     "localId" : "513",
+                     "type" : "ListTypeSpecifier",
+                     "resultTypeSpecifier" : {
+                        "localId" : "515",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "524",
+                           "localId" : "516",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         }
+                     },
+                     "elementType" : {
+                        "localId" : "514",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
                      }
                   }
                } ]
             }
          }, {
-            "localId" : "531",
+            "localId" : "532",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullIncluded",
             "context" : "Patient",
@@ -24900,26 +24941,26 @@ module.exports['ProperIncludedIn'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "531",
+                  "r" : "532",
                   "s" : [ {
                      "value" : [ "","define ","NullIncluded",": " ]
                   }, {
-                     "r" : "550",
+                     "r" : "551",
                      "s" : [ {
-                        "r" : "532",
+                        "r" : "533",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "532",
+                           "r" : "533",
                            "s" : [ {
-                              "r" : "533",
+                              "r" : "534",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "534",
+                              "r" : "535",
                               "s" : [ {
                                  "value" : [ "List<" ]
                               }, {
-                                 "r" : "535",
+                                 "r" : "536",
                                  "s" : [ {
                                     "value" : [ "Integer" ]
                                  } ]
@@ -24931,12 +24972,12 @@ module.exports['ProperIncludedIn'] = {
                            "value" : [ ")" ]
                         } ]
                      }, {
-                        "r" : "550",
+                        "r" : "551",
                         "value" : [ " ","properly included in"," " ]
                      }, {
-                        "r" : "542",
+                        "r" : "543",
                         "s" : [ {
-                           "r" : "543",
+                           "r" : "544",
                            "value" : [ "{","1",", ","2",", ","3",", ","4",", ","5","}" ]
                         } ]
                      } ]
@@ -24944,102 +24985,102 @@ module.exports['ProperIncludedIn'] = {
                }
             } ],
             "expression" : {
-               "localId" : "550",
+               "localId" : "551",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "ProperIncludedIn",
                "signature" : [ {
-                  "localId" : "551",
+                  "localId" : "552",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "552",
+                     "localId" : "553",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "553",
+                  "localId" : "554",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "554",
+                     "localId" : "555",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "operand" : [ {
-                  "localId" : "532",
+                  "localId" : "533",
                   "strict" : false,
                   "type" : "As",
                   "resultTypeSpecifier" : {
-                     "localId" : "540",
+                     "localId" : "541",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "541",
+                        "localId" : "542",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "533",
+                     "localId" : "534",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "534",
+                     "localId" : "535",
                      "type" : "ListTypeSpecifier",
                      "resultTypeSpecifier" : {
-                        "localId" : "536",
+                        "localId" : "537",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "537",
+                           "localId" : "538",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "elementType" : {
-                        "localId" : "535",
+                        "localId" : "536",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   }
                }, {
-                  "localId" : "542",
+                  "localId" : "543",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "548",
+                     "localId" : "549",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "549",
+                        "localId" : "550",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "543",
+                     "localId" : "544",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "544",
+                     "localId" : "545",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "545",
+                     "localId" : "546",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   }, {
-                     "localId" : "546",
+                     "localId" : "547",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "547",
+                     "localId" : "548",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",

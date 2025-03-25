@@ -111,8 +111,12 @@ public class JavaScriptTestDataGenerator {
                 ModelManager modelManager = new ModelManager();
                 JavaScriptTestDataGenerator.loadModelInfo(new File("../../src/simple-modelinfo.xml"), modelManager);
                 LibraryManager libraryManager = new LibraryManager(modelManager,
+                        // Set up the compiler options to roughly match what MADiE uses.
+                        // Source seems to be here:
+                        // https://github.com/MeasureAuthoringTool/madie-fhir-elm-translator/blob/develop/src/main/java/gov/cms/mat/cql_elm_translation/service/CqlTooling.java#L92
                         new CqlCompilerOptions(CqlCompilerOptions.Options.EnableDateRangeOptimization,
                                 CqlCompilerOptions.Options.EnableAnnotations,
+                                // // These are enabled by MADiE but need to be off for many tests
                                 // CqlCompilerOptions.Options.DisableListDemotion,
                                 // CqlCompilerOptions.Options.DisableListPromotion,
                                 CqlCompilerOptions.Options.EnableResultTypes));
