@@ -141,14 +141,14 @@ describe('FluentFunctionsOverloadCallingSelf', () => {
     results.patientResults['3'].matchTestsTrue.should.be.true();
   });
 
-  it('should be able to invoke a fluent which calls another fluent function overload of the same name', async function () {
+  it('should be able to invoke a fluent function which calls another fluent function overload of the same name', async function () {
     await this.matchTestCallSelfFalse.exec(this.ctx).should.be.finally.false();
     await this.matchTestCallSelfTrue.exec(this.ctx).should.be.finally.true();
     await this.matchTestsCallSelfFalse.exec(this.ctx).should.be.finally.false();
     await this.matchTestsCallSelfTrue.exec(this.ctx).should.be.finally.true();
   });
 
-  it('should be able to invoke a fluent which calls another fluent function overload of the same name with patient context', async function () {
+  it('should be able to invoke a fluent function which calls another fluent function overload of the same name with patient context', async function () {
     const results = await this.executor
       .withLibrary(this.lib)
       .exec_patient_context(this.patientSource);
@@ -183,14 +183,14 @@ describe('FluentFunctionsOverloadCallingSelfFromOtherLibrary', () => {
     results.patientResults['3'].matchTestsTrue.should.be.true();
   });
 
-  it('should be able to invoke a fluent which calls another fluent function overload of the same name without patient context', async function () {
+  it('should be able to invoke a fluent function which calls another fluent function overload of the same name without patient context', async function () {
     await this.matchTestCallSelfFalse.exec(this.ctx).should.be.finally.false();
     await this.matchTestCallSelfTrue.exec(this.ctx).should.be.finally.true();
     await this.matchTestsCallSelfFalse.exec(this.ctx).should.be.finally.false();
     await this.matchTestsCallSelfTrue.exec(this.ctx).should.be.finally.true();
   });
 
-  it('should be able to invoke a fluent which calls another fluent function overload of the same name with patient context', async function () {
+  it('should be able to invoke a fluent function which calls another fluent function overload of the same name with patient context', async function () {
     const results = await this.executor
       .withLibrary(this.lib)
       .exec_patient_context(this.patientSource);
