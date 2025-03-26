@@ -6876,7 +6876,7 @@ class FunctionRef extends expression_1.Expression {
             child_ctx = libCtx ? libCtx.childContext() : undefined;
         }
         else {
-            functionDefs = ctx.get(this.name);
+            functionDefs = ctx.getFunction(this.name);
             child_ctx = ctx.childContext();
         }
         const args = await this.execArgs(ctx);
@@ -8081,6 +8081,9 @@ class Context {
     }
     getConcept(name) {
         return this.parent && this.parent.getConcept(name);
+    }
+    getFunction(name) {
+        return this.parent && this.parent.getFunction(name);
     }
     get(identifier) {
         // Check for undefined because if its null, we actually *do* want to return null (rather than

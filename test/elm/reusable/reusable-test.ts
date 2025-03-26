@@ -2,6 +2,7 @@ import should from 'should';
 import setup from '../../setup';
 const data = require('./data');
 const { p1 } = require('./patients');
+import { Repository } from '../../../src/cql';
 
 describe('ExpressionDef', () => {
   beforeEach(function () {
@@ -114,5 +115,89 @@ describe('FluentFunctions', () => {
   it('should be able to invoke a fluent function with one extra argument', async function () {
     const e = await this.testValue2.exec(this.ctx);
     e.should.equal(3);
+  });
+});
+
+describe('FluentFunctionsOverloadCallingSelf', () => {
+  beforeEach(function () {
+    setup(this, data, [p1], {}, {}, new Repository(data));
+  });
+
+  it('should be able to invoke an overloaded fluent function', async function () {
+    await this.matchTestFalse.exec(this.ctx).should.be.finally.false();
+    await this.matchTestTrue.exec(this.ctx).should.be.finally.true();
+    await this.matchTestsFalse.exec(this.ctx).should.be.finally.false();
+    await this.matchTestsTrue.exec(this.ctx).should.be.finally.true();
+  });
+
+  it('should be able to invoke an overloaded fluent function with patient context', async function () {
+    const results = await this.executor
+      .withLibrary(this.lib)
+      .exec_patient_context(this.patientSource);
+
+    results.patientResults['3'].matchTestFalse.should.be.false();
+    results.patientResults['3'].matchTestTrue.should.be.true();
+    results.patientResults['3'].matchTestsFalse.should.be.false();
+    results.patientResults['3'].matchTestsTrue.should.be.true();
+  });
+
+  it('should be able to invoke a fluent function which calls another fluent function overload of the same name', async function () {
+    await this.matchTestCallSelfFalse.exec(this.ctx).should.be.finally.false();
+    await this.matchTestCallSelfTrue.exec(this.ctx).should.be.finally.true();
+    await this.matchTestsCallSelfFalse.exec(this.ctx).should.be.finally.false();
+    await this.matchTestsCallSelfTrue.exec(this.ctx).should.be.finally.true();
+  });
+
+  it('should be able to invoke a fluent function which calls another fluent function overload of the same name with patient context', async function () {
+    const results = await this.executor
+      .withLibrary(this.lib)
+      .exec_patient_context(this.patientSource);
+
+    results.patientResults['3'].matchTestCallSelfFalse.should.be.false();
+    results.patientResults['3'].matchTestCallSelfTrue.should.be.true();
+    results.patientResults['3'].matchTestsCallSelfFalse.should.be.false();
+    results.patientResults['3'].matchTestsCallSelfTrue.should.be.true();
+  });
+});
+
+describe('FluentFunctionsOverloadCallingSelfFromOtherLibrary', () => {
+  beforeEach(function () {
+    setup(this, data, [p1], {}, {}, new Repository(data));
+  });
+
+  it('should be able to invoke an overloaded fluent function without patient context', async function () {
+    await this.matchTestFalse.exec(this.ctx).should.be.finally.false();
+    await this.matchTestTrue.exec(this.ctx).should.be.finally.true();
+    await this.matchTestsFalse.exec(this.ctx).should.be.finally.false();
+    await this.matchTestsTrue.exec(this.ctx).should.be.finally.true();
+  });
+
+  it('should be able to invoke an overloaded fluent function with patient context', async function () {
+    const results = await this.executor
+      .withLibrary(this.lib)
+      .exec_patient_context(this.patientSource);
+
+    results.patientResults['3'].matchTestFalse.should.be.false();
+    results.patientResults['3'].matchTestTrue.should.be.true();
+    results.patientResults['3'].matchTestsFalse.should.be.false();
+    results.patientResults['3'].matchTestsTrue.should.be.true();
+  });
+
+  it('should be able to invoke a fluent function which calls another fluent function overload of the same name without patient context', async function () {
+    await this.matchTestCallSelfFalse.exec(this.ctx).should.be.finally.false();
+    await this.matchTestCallSelfTrue.exec(this.ctx).should.be.finally.true();
+    await this.matchTestsCallSelfFalse.exec(this.ctx).should.be.finally.false();
+    await this.matchTestsCallSelfTrue.exec(this.ctx).should.be.finally.true();
+  });
+
+  it('should be able to invoke a fluent function which calls another fluent function overload of the same name with patient context', async function () {
+    const results = await this.executor
+      .withLibrary(this.lib)
+      .exec_patient_context(this.patientSource);
+
+    results.patientResults['3'].matchTestCallSelfFalse.should.be.false();
+    results.patientResults['3'].matchTestCallSelfTrue.should.be.true();
+    results.patientResults['3'].matchTestsCallSelfFalse.should.be.false();
+    results.patientResults['3'].matchTestsCallSelfTrue.should.be.true();
   });
 });

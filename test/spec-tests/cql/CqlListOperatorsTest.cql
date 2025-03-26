@@ -822,7 +822,7 @@ define "ProperlyIncludedIn": Tuple{
     output: false
   },
   "ProperlyIncludedInNulRight": Tuple{
-    expression: {'s', 'u', 'n'} properly included in null,
+    expression: {'s', 'u', 'n'} properly included in null as List<String>,
     output: null
   }
 }

@@ -1,10 +1,54 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
+         "translatorVersion" : "3.22.0",
          "translatorOptions" : "",
          "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 353,
+         "startChar" : 17,
+         "endLine" : 353,
+         "endChar" : 18,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 363,
+         "startChar" : 36,
+         "endLine" : 363,
+         "endChar" : 37,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 367,
+         "startChar" : 36,
+         "endLine" : 367,
+         "endChar" : 38,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 371,
+         "startChar" : 36,
+         "endLine" : 371,
+         "endChar" : 38,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
@@ -85,6 +129,83 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
+         "startLine" : 754,
+         "startChar" : 45,
+         "endLine" : 754,
+         "endChar" : 46,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 758,
+         "startChar" : 45,
+         "endLine" : 758,
+         "endChar" : 47,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 762,
+         "startChar" : 45,
+         "endLine" : 762,
+         "endChar" : 47,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 766,
+         "startChar" : 106,
+         "endLine" : 766,
+         "endChar" : 152,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 770,
+         "startChar" : 106,
+         "endLine" : 770,
+         "endChar" : 175,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 774,
+         "startChar" : 86,
+         "endLine" : 774,
+         "endChar" : 119,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 778,
+         "startChar" : 86,
+         "endLine" : 778,
+         "endChar" : 135,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
          "startLine" : 797,
          "startChar" : 17,
          "endLine" : 797,
@@ -155,6 +276,17 @@
          "startChar" : 17,
          "endLine" : 821,
          "endChar" : 66,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 825,
+         "startChar" : 17,
+         "endLine" : 825,
+         "endChar" : 31,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -4815,9 +4947,9 @@
                                  "annotation" : [ ]
                               },
                               "asTypeSpecifier" : {
-                                 "type" : "ListTypeSpecifier",
+                                 "type" : "IntervalTypeSpecifier",
                                  "annotation" : [ ],
-                                 "elementType" : {
+                                 "pointType" : {
                                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "type" : "NamedTypeSpecifier",
                                     "annotation" : [ ]
@@ -5514,9 +5646,34 @@
                                  "annotation" : [ ]
                               } ]
                            }, {
-                              "type" : "List",
+                              "type" : "Query",
                               "annotation" : [ ],
-                              "element" : [ ]
+                              "source" : [ {
+                                 "alias" : "X",
+                                 "annotation" : [ ],
+                                 "expression" : {
+                                    "type" : "List",
+                                    "annotation" : [ ],
+                                    "element" : [ ]
+                                 }
+                              } ],
+                              "let" : [ ],
+                              "relationship" : [ ],
+                              "return" : {
+                                 "distinct" : false,
+                                 "annotation" : [ ],
+                                 "expression" : {
+                                    "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "type" : "As",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
+                                    "operand" : {
+                                       "name" : "X",
+                                       "type" : "AliasRef",
+                                       "annotation" : [ ]
+                                    }
+                                 }
+                              }
                            } ]
                         }
                      }, {
@@ -6170,7 +6327,7 @@
                                  "type" : "ListTypeSpecifier",
                                  "annotation" : [ ],
                                  "elementType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Any",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "type" : "NamedTypeSpecifier",
                                     "annotation" : [ ]
                                  }
@@ -6202,7 +6359,7 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "type" : "Includes",
+                           "type" : "Contains",
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : [ {
@@ -6225,21 +6382,13 @@
                                  "annotation" : [ ]
                               } ]
                            }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "As",
                               "annotation" : [ ],
                               "signature" : [ ],
                               "operand" : {
                                  "type" : "Null",
                                  "annotation" : [ ]
-                              },
-                              "asTypeSpecifier" : {
-                                 "type" : "ListTypeSpecifier",
-                                 "annotation" : [ ],
-                                 "elementType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}String",
-                                    "type" : "NamedTypeSpecifier",
-                                    "annotation" : [ ]
-                                 }
                               }
                            } ]
                         }
@@ -7018,7 +7167,7 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "type" : "IncludedIn",
+                           "type" : "In",
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : [ {
@@ -7049,12 +7198,16 @@
                                  "annotation" : [ ]
                               },
                               "asTypeSpecifier" : {
-                                 "type" : "ListTypeSpecifier",
+                                 "type" : "IntervalTypeSpecifier",
                                  "annotation" : [ ],
-                                 "elementType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}String",
-                                    "type" : "NamedTypeSpecifier",
-                                    "annotation" : [ ]
+                                 "pointType" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier",
+                                       "annotation" : [ ]
+                                    }
                                  }
                               }
                            } ]
@@ -7657,8 +7810,14 @@
                               } ]
                            },
                            "element" : {
-                              "type" : "Null",
-                              "annotation" : [ ]
+                              "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Null",
+                                 "annotation" : [ ]
+                              }
                            }
                         }
                      }, {
@@ -12355,9 +12514,34 @@
                                  "annotation" : [ ]
                               } ]
                            }, {
-                              "type" : "List",
+                              "type" : "Query",
                               "annotation" : [ ],
-                              "element" : [ ]
+                              "source" : [ {
+                                 "alias" : "X",
+                                 "annotation" : [ ],
+                                 "expression" : {
+                                    "type" : "List",
+                                    "annotation" : [ ],
+                                    "element" : [ ]
+                                 }
+                              } ],
+                              "let" : [ ],
+                              "relationship" : [ ],
+                              "return" : {
+                                 "distinct" : false,
+                                 "annotation" : [ ],
+                                 "expression" : {
+                                    "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "type" : "As",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
+                                    "operand" : {
+                                       "name" : "X",
+                                       "type" : "AliasRef",
+                                       "annotation" : [ ]
+                                    }
+                                 }
+                              }
                            } ]
                         }
                      }, {
@@ -13169,7 +13353,7 @@
                                  "type" : "ListTypeSpecifier",
                                  "annotation" : [ ],
                                  "elementType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Any",
+                                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "type" : "NamedTypeSpecifier",
                                     "annotation" : [ ]
                                  }
@@ -14124,6 +14308,7 @@
                                  "annotation" : [ ]
                               } ]
                            }, {
+                              "strict" : false,
                               "type" : "As",
                               "annotation" : [ ],
                               "signature" : [ ],
@@ -15629,9 +15814,34 @@
                                  "annotation" : [ ]
                               } ]
                            }, {
-                              "type" : "List",
+                              "type" : "Query",
                               "annotation" : [ ],
-                              "element" : [ ]
+                              "source" : [ {
+                                 "alias" : "X",
+                                 "annotation" : [ ],
+                                 "expression" : {
+                                    "type" : "List",
+                                    "annotation" : [ ],
+                                    "element" : [ ]
+                                 }
+                              } ],
+                              "let" : [ ],
+                              "relationship" : [ ],
+                              "return" : {
+                                 "distinct" : false,
+                                 "annotation" : [ ],
+                                 "expression" : {
+                                    "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "type" : "As",
+                                    "annotation" : [ ],
+                                    "signature" : [ ],
+                                    "operand" : {
+                                       "name" : "X",
+                                       "type" : "AliasRef",
+                                       "annotation" : [ ]
+                                    }
+                                 }
+                              }
                            } ]
                         }
                      }, {
