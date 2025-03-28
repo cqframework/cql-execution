@@ -825,7 +825,7 @@ export class DateTime extends AbstractDate {
       aDateTime.millisecond = 0;
     }
     if (other.millisecond == null) {
-      const bDateTime = other.copy();
+      bDateTime = other.copy();
       bDateTime.millisecond = 0;
     }
     const a = aDateTime.toLuxonUncertainty();
