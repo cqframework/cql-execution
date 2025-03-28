@@ -47,20 +47,22 @@ export class ValueSetRef extends Expression {
 }
 
 export class AnyInValueSet extends Expression {
-  codes: any;
-  valueset: ValueSetRef;
+  codes: Expression;
+  valueset: Expression;
 
   constructor(json: any) {
     super(json);
-    this.codes = build(json.codes);
-    this.valueset = new ValueSetRef(json.valueset);
+    this.codes = build(json.codes) as Expression;
+    this.valueset = json.valueset
+      ? new ValueSetRef(json.valueset)
+      : (build(json.valuesetExpression) as Expression);
   }
 
   async exec(ctx: Context) {
     const valueset = await this.valueset.execute(ctx);
     // If the value set reference cannot be resolved, a run-time error is thrown.
     if (valueset == null || !valueset.isValueSet) {
-      throw new Error('ValueSet must be provided to InValueSet function');
+      throw new Error('ValueSet must be provided to AnyInValueSet expression');
     }
 
     const codes = await this.codes.execute(ctx);
@@ -69,13 +71,15 @@ export class AnyInValueSet extends Expression {
 }
 
 export class InValueSet extends Expression {
-  code: any;
-  valueset: ValueSetRef;
+  code: Expression;
+  valueset: Expression;
 
   constructor(json: any) {
     super(json);
-    this.code = build(json.code);
-    this.valueset = new ValueSetRef(json.valueset);
+    this.code = build(json.code) as Expression;
+    this.valueset = json.valueset
+      ? new ValueSetRef(json.valueset)
+      : (build(json.valuesetExpression) as Expression);
   }
 
   async exec(ctx: Context) {
@@ -84,7 +88,7 @@ export class InValueSet extends Expression {
       return false;
     }
     if (this.valueset == null) {
-      throw new Error('ValueSet must be provided to InValueSet function');
+      throw new Error('ValueSet must be provided to InValueSet expression');
     }
     const code = await this.code.execute(ctx);
     // spec indicates to return false if code is null, throw error if value set cannot be resolved
@@ -93,7 +97,7 @@ export class InValueSet extends Expression {
     }
     const valueset = await this.valueset.execute(ctx);
     if (valueset == null || !valueset.isValueSet) {
-      throw new Error('ValueSet must be provided to InValueSet function');
+      throw new Error('ValueSet must be provided to InValueSet expression');
     }
     // If there is a code and valueset return whether or not the valueset has the code
     return valueset.hasMatch(code);
@@ -101,11 +105,11 @@ export class InValueSet extends Expression {
 }
 
 export class ExpandValueSet extends Expression {
-  valueset: ValueSetRef;
+  valueset: Expression;
 
   constructor(json: any) {
     super(json);
-    this.valueset = new ValueSetRef(json.operand);
+    this.valueset = build(json.operand) as Expression;
   }
 
   async exec(ctx: Context) {

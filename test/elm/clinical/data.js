@@ -319,6 +319,7 @@ module.exports['ValueSetRef'] = {
 library TestSnippet version '1'
 using Simple version '1.0.0'
 valueset "Major Depressive Disorder Active": '2.16.840.1.113883.3.526.3.1491'
+valueset "Male": '2.16.840.1.113883.3.560.100.1'
 codesystem "SNOMED": 'http://snomed.info/sct'
 code "ChronicRecurrentDepression": '2618002' from "SNOMED" display 'Chronic recurrent major depressive disorder (disorder)'
 code "ModerateMajorDepression": '832007' from "SNOMED" display 'Moderate major depression (disorder)'
@@ -327,6 +328,10 @@ context Patient
 define AnyInListOfConcepts: { "Depression Concept" } in "Major Depressive Disorder Active"
 define AnyInListOfCodes: { "ChronicRecurrentDepression", "ModerateMajorDepression" } in "Major Depressive Disorder Active"
 define AnyInListOfStrings: { '2618002', '12345' } in "Major Depressive Disorder Active"
+define function ListInVS(vs ValueSet): { '2618002', '12345' } in vs
+define ListInPassedVS: ListInVS("Major Depressive Disorder Active")
+define ListInWrongVS: ListInVS("Male")
+define ListInNullVS: ListInVS(null as ValueSet)
 */
 
 module.exports['AnyInValueSet'] = {
@@ -391,7 +396,7 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "208",
+                  "r" : "209",
                   "s" : [ {
                      "value" : [ "","codesystem ","\"SNOMED\"",": ","'http://snomed.info/sct'" ]
                   } ]
@@ -416,6 +421,21 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "codeSystem" : [ ]
+         }, {
+            "localId" : "208",
+            "name" : "Male",
+            "id" : "2.16.840.1.113883.3.560.100.1",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "208",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Male\"",": ","'2.16.840.1.113883.3.560.100.1'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : [ ]
          } ]
       },
       "codes" : {
@@ -429,11 +449,11 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "209",
+                  "r" : "210",
                   "s" : [ {
                      "value" : [ "","code ","\"ChronicRecurrentDepression\"",": ","'2618002'"," from " ]
                   }, {
-                     "r" : "210",
+                     "r" : "211",
                      "s" : [ {
                         "value" : [ "\"SNOMED\"" ]
                      } ]
@@ -457,11 +477,11 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "211",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","code ","\"ModerateMajorDepression\"",": ","'832007'"," from " ]
                   }, {
-                     "r" : "212",
+                     "r" : "213",
                      "s" : [ {
                         "value" : [ "\"SNOMED\"" ]
                      } ]
@@ -487,18 +507,18 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "213",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","concept ","\"Depression Concept\"",": { " ]
                   }, {
-                     "r" : "214",
+                     "r" : "215",
                      "s" : [ {
                         "value" : [ "\"ChronicRecurrentDepression\"" ]
                      } ]
                   }, {
                      "value" : [ ", " ]
                   }, {
-                     "r" : "215",
+                     "r" : "216",
                      "s" : [ {
                         "value" : [ "\"ModerateMajorDepression\"" ]
                      } ]
@@ -520,21 +540,21 @@ module.exports['AnyInValueSet'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "219",
+            "localId" : "220",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "217",
+            "localId" : "218",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "218",
+               "localId" : "219",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "216",
+                  "localId" : "217",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -552,17 +572,17 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "221",
+                  "r" : "222",
                   "s" : [ {
                      "value" : [ "","define ","AnyInListOfConcepts",": " ]
                   }, {
                      "r" : "227",
                      "s" : [ {
-                        "r" : "222",
+                        "r" : "223",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "223",
+                           "r" : "224",
                            "s" : [ {
                               "value" : [ "\"Depression Concept\"" ]
                            } ]
@@ -594,7 +614,7 @@ module.exports['AnyInValueSet'] = {
                   }
                } ],
                "codes" : {
-                  "localId" : "222",
+                  "localId" : "223",
                   "type" : "List",
                   "resultTypeSpecifier" : {
                      "localId" : "224",
@@ -797,6 +817,216 @@ module.exports['AnyInValueSet'] = {
                   "preserve" : true
                }
             }
+         }, {
+            "localId" : "241",
+            "name" : "ListInVS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "241",
+                  "s" : [ {
+                     "value" : [ "","define function ListInVS(vs ValueSet): " ]
+                  }, {
+                     "r" : "248",
+                     "s" : [ {
+                        "r" : "248",
+                        "s" : [ {
+                           "r" : "244",
+                           "s" : [ {
+                              "value" : [ "{ " ]
+                           }, {
+                              "r" : "245",
+                              "s" : [ {
+                                 "value" : [ "'2618002'" ]
+                              } ]
+                           }, {
+                              "value" : [ ", " ]
+                           }, {
+                              "r" : "246",
+                              "s" : [ {
+                                 "value" : [ "'12345'" ]
+                              } ]
+                           }, {
+                              "value" : [ " }" ]
+                           } ]
+                        }, {
+                           "value" : [ " in " ]
+                        }, {
+                           "r" : "247",
+                           "s" : [ {
+                              "value" : [ "vs" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "248",
+               "type" : "AnyInValueSet",
+               "signature" : [ ],
+               "codes" : {
+                  "localId" : "244",
+                  "type" : "List",
+                  "element" : [ {
+                     "localId" : "245",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "2618002",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "246",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "12345",
+                     "type" : "Literal"
+                  } ]
+               },
+               "valuesetExpression" : {
+                  "localId" : "247",
+                  "name" : "vs",
+                  "type" : "OperandRef"
+               }
+            },
+            "operand" : [ {
+               "localId" : "243",
+               "name" : "vs",
+               "operandTypeSpecifier" : {
+                  "localId" : "242",
+                  "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "250",
+            "name" : "ListInPassedVS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "250",
+                  "s" : [ {
+                     "value" : [ "","define ","ListInPassedVS",": " ]
+                  }, {
+                     "r" : "252",
+                     "s" : [ {
+                        "value" : [ "ListInVS","(" ]
+                     }, {
+                        "r" : "251",
+                        "s" : [ {
+                           "value" : [ "\"Major Depressive Disorder Active\"" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "252",
+               "name" : "ListInVS",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "251",
+                  "name" : "Major Depressive Disorder Active",
+                  "preserve" : true,
+                  "type" : "ValueSetRef"
+               } ]
+            }
+         }, {
+            "localId" : "254",
+            "name" : "ListInWrongVS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "254",
+                  "s" : [ {
+                     "value" : [ "","define ","ListInWrongVS",": " ]
+                  }, {
+                     "r" : "256",
+                     "s" : [ {
+                        "value" : [ "ListInVS","(" ]
+                     }, {
+                        "r" : "255",
+                        "s" : [ {
+                           "value" : [ "\"Male\"" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "256",
+               "name" : "ListInVS",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "255",
+                  "name" : "Male",
+                  "preserve" : true,
+                  "type" : "ValueSetRef"
+               } ]
+            }
+         }, {
+            "localId" : "258",
+            "name" : "ListInNullVS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "258",
+                  "s" : [ {
+                     "value" : [ "","define ","ListInNullVS",": " ]
+                  }, {
+                     "r" : "262",
+                     "s" : [ {
+                        "value" : [ "ListInVS","(" ]
+                     }, {
+                        "r" : "259",
+                        "s" : [ {
+                           "r" : "260",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "261",
+                           "s" : [ {
+                              "value" : [ "ValueSet" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "262",
+               "name" : "ListInVS",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "259",
+                  "strict" : false,
+                  "type" : "As",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "260",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "261",
+                     "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            }
          } ]
       }
    }
@@ -806,6 +1036,7 @@ module.exports['AnyInValueSet'] = {
 library TestSnippet version '1'
 using Simple version '1.0.0'
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
+valueset "Male": '2.16.840.1.113883.3.560.100.1'
 valueset "Versioned Female": '2.16.840.1.113883.3.560.100.2' version '20121025'
 valueset "SharedCodes": '2.16.840.1.113883.3.000.000.0'
 valueset "ImproperSharedCodes": '2.16.840.1.113883.3.000.000.1'
@@ -831,6 +1062,10 @@ define InListOfCodesExpressionRef: ListOfCodes in "Female"
 define InWrongListOfCodes: WrongListOfCodes in "Female"
 define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
 define ListOfCodesNull: (null as List<Code>) in "Female"
+define function FInVS(vs ValueSet): 'F' in vs
+define FInPassedVS: FInVS("Female")
+define FInWrongVS: FInVS("Male")
+define FInNullVS: FInVS(null as ValueSet)
 */
 
 module.exports['InValueSet'] = {
@@ -912,7 +1147,7 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "208",
+                  "r" : "209",
                   "s" : [ {
                      "value" : [ "","valueset ","\"Versioned Female\"",": ","'2.16.840.1.113883.3.560.100.2'"," version ","'20121025'" ]
                   } ]
@@ -928,7 +1163,7 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "209",
+                  "r" : "210",
                   "s" : [ {
                      "value" : [ "","valueset ","\"SharedCodes\"",": ","'2.16.840.1.113883.3.000.000.0'" ]
                   } ]
@@ -944,7 +1179,7 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "210",
+                  "r" : "211",
                   "s" : [ {
                      "value" : [ "","valueset ","\"ImproperSharedCodes\"",": ","'2.16.840.1.113883.3.000.000.1'" ]
                   } ]
@@ -955,21 +1190,21 @@ module.exports['InValueSet'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "214",
+            "localId" : "215",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "212",
+            "localId" : "213",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "213",
+               "localId" : "214",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "211",
+                  "localId" : "212",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -987,20 +1222,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "216",
+                  "r" : "217",
                   "s" : [ {
                      "value" : [ "","define ","String",": " ]
                   }, {
-                     "r" : "219",
+                     "r" : "220",
                      "s" : [ {
-                        "r" : "217",
+                        "r" : "218",
                         "s" : [ {
                            "value" : [ "'F'" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "218",
+                        "r" : "219",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -2890,6 +3125,193 @@ module.exports['InValueSet'] = {
                   "preserve" : true
                }
             }
+         }, {
+            "localId" : "376",
+            "name" : "FInVS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "376",
+                  "s" : [ {
+                     "value" : [ "","define function FInVS(vs ValueSet): " ]
+                  }, {
+                     "r" : "381",
+                     "s" : [ {
+                        "r" : "381",
+                        "s" : [ {
+                           "r" : "379",
+                           "s" : [ {
+                              "value" : [ "'F'" ]
+                           } ]
+                        }, {
+                           "value" : [ " in " ]
+                        }, {
+                           "r" : "380",
+                           "s" : [ {
+                              "value" : [ "vs" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "381",
+               "type" : "InValueSet",
+               "signature" : [ ],
+               "code" : {
+                  "localId" : "379",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "F",
+                  "type" : "Literal"
+               },
+               "valuesetExpression" : {
+                  "localId" : "380",
+                  "name" : "vs",
+                  "type" : "OperandRef"
+               }
+            },
+            "operand" : [ {
+               "localId" : "378",
+               "name" : "vs",
+               "operandTypeSpecifier" : {
+                  "localId" : "377",
+                  "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "383",
+            "name" : "FInPassedVS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "383",
+                  "s" : [ {
+                     "value" : [ "","define ","FInPassedVS",": " ]
+                  }, {
+                     "r" : "385",
+                     "s" : [ {
+                        "value" : [ "FInVS","(" ]
+                     }, {
+                        "r" : "384",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "385",
+               "name" : "FInVS",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "384",
+                  "name" : "Female",
+                  "preserve" : true,
+                  "type" : "ValueSetRef"
+               } ]
+            }
+         }, {
+            "localId" : "387",
+            "name" : "FInWrongVS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "387",
+                  "s" : [ {
+                     "value" : [ "","define ","FInWrongVS",": " ]
+                  }, {
+                     "r" : "389",
+                     "s" : [ {
+                        "value" : [ "FInVS","(" ]
+                     }, {
+                        "r" : "388",
+                        "s" : [ {
+                           "value" : [ "\"Male\"" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "389",
+               "name" : "FInVS",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "388",
+                  "name" : "Male",
+                  "preserve" : true,
+                  "type" : "ValueSetRef"
+               } ]
+            }
+         }, {
+            "localId" : "391",
+            "name" : "FInNullVS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "391",
+                  "s" : [ {
+                     "value" : [ "","define ","FInNullVS",": " ]
+                  }, {
+                     "r" : "395",
+                     "s" : [ {
+                        "value" : [ "FInVS","(" ]
+                     }, {
+                        "r" : "392",
+                        "s" : [ {
+                           "r" : "393",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "394",
+                           "s" : [ {
+                              "value" : [ "ValueSet" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "395",
+               "name" : "FInVS",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "392",
+                  "strict" : false,
+                  "type" : "As",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "393",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "394",
+                     "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            }
          } ]
       }
    }
@@ -2906,6 +3328,11 @@ define ExpandFemale: ExpandValueSet("Female")
 define ExpandKnown: ExpandValueSet("Known")
 define ExpandNull: ExpandValueSet(null)
 define InvokeExpandWithUnion: "Female" union  "Known"
+define function ExpandVSHelper(vs ValueSet): ExpandValueSet(vs)
+define ExpandPassedVS: ExpandVSHelper("Female")
+define ExpandNullVS: ExpandVSHelper(null as ValueSet)
+define function UnionVSs(vs1 ValueSet, vs2 ValueSet): vs1 union vs2
+define ExpandPassedWithUnion: UnionVSs("Female", "Known")
 */
 
 module.exports['ExpandValueset'] = {
@@ -3295,6 +3722,270 @@ module.exports['ExpandValueset'] = {
                      "preserve" : true,
                      "type" : "ValueSetRef"
                   }
+               } ]
+            }
+         }, {
+            "localId" : "242",
+            "name" : "ExpandVSHelper",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "242",
+                  "s" : [ {
+                     "value" : [ "","define function ExpandVSHelper(vs ValueSet): " ]
+                  }, {
+                     "r" : "248",
+                     "s" : [ {
+                        "r" : "248",
+                        "s" : [ {
+                           "value" : [ "ExpandValueSet","(" ]
+                        }, {
+                           "r" : "245",
+                           "s" : [ {
+                              "value" : [ "vs" ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "248",
+               "type" : "ExpandValueSet",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "245",
+                  "name" : "vs",
+                  "type" : "OperandRef"
+               }
+            },
+            "operand" : [ {
+               "localId" : "244",
+               "name" : "vs",
+               "operandTypeSpecifier" : {
+                  "localId" : "243",
+                  "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "250",
+            "name" : "ExpandPassedVS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "250",
+                  "s" : [ {
+                     "value" : [ "","define ","ExpandPassedVS",": " ]
+                  }, {
+                     "r" : "252",
+                     "s" : [ {
+                        "value" : [ "ExpandVSHelper","(" ]
+                     }, {
+                        "r" : "251",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "252",
+               "name" : "ExpandVSHelper",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "251",
+                  "name" : "Female",
+                  "preserve" : true,
+                  "type" : "ValueSetRef"
+               } ]
+            }
+         }, {
+            "localId" : "254",
+            "name" : "ExpandNullVS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "254",
+                  "s" : [ {
+                     "value" : [ "","define ","ExpandNullVS",": " ]
+                  }, {
+                     "r" : "258",
+                     "s" : [ {
+                        "value" : [ "ExpandVSHelper","(" ]
+                     }, {
+                        "r" : "255",
+                        "s" : [ {
+                           "r" : "256",
+                           "value" : [ "null"," as " ]
+                        }, {
+                           "r" : "257",
+                           "s" : [ {
+                              "value" : [ "ValueSet" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "258",
+               "name" : "ExpandVSHelper",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "255",
+                  "strict" : false,
+                  "type" : "As",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "256",
+                     "type" : "Null"
+                  },
+                  "asTypeSpecifier" : {
+                     "localId" : "257",
+                     "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "259",
+            "name" : "UnionVSs",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "259",
+                  "s" : [ {
+                     "value" : [ "","define function UnionVSs(vs1 ValueSet, vs2 ValueSet): " ]
+                  }, {
+                     "r" : "266",
+                     "s" : [ {
+                        "r" : "266",
+                        "s" : [ {
+                           "r" : "264",
+                           "s" : [ {
+                              "value" : [ "vs1" ]
+                           } ]
+                        }, {
+                           "value" : [ " union " ]
+                        }, {
+                           "r" : "265",
+                           "s" : [ {
+                              "value" : [ "vs2" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "266",
+               "type" : "Union",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "268",
+                  "type" : "ExpandValueSet",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "264",
+                     "name" : "vs1",
+                     "type" : "OperandRef"
+                  }
+               }, {
+                  "localId" : "270",
+                  "type" : "ExpandValueSet",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "265",
+                     "name" : "vs2",
+                     "type" : "OperandRef"
+                  }
+               } ]
+            },
+            "operand" : [ {
+               "localId" : "261",
+               "name" : "vs1",
+               "operandTypeSpecifier" : {
+                  "localId" : "260",
+                  "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }, {
+               "localId" : "263",
+               "name" : "vs2",
+               "operandTypeSpecifier" : {
+                  "localId" : "262",
+                  "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "272",
+            "name" : "ExpandPassedWithUnion",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "272",
+                  "s" : [ {
+                     "value" : [ "","define ","ExpandPassedWithUnion",": " ]
+                  }, {
+                     "r" : "275",
+                     "s" : [ {
+                        "value" : [ "UnionVSs","(" ]
+                     }, {
+                        "r" : "273",
+                        "s" : [ {
+                           "value" : [ "\"Female\"" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "274",
+                        "s" : [ {
+                           "value" : [ "\"Known\"" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "275",
+               "name" : "UnionVSs",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "273",
+                  "name" : "Female",
+                  "preserve" : true,
+                  "type" : "ValueSetRef"
+               }, {
+                  "localId" : "274",
+                  "name" : "Known",
+                  "preserve" : true,
+                  "type" : "ValueSetRef"
                } ]
             }
          } ]
