@@ -35,14 +35,14 @@ module.exports['Age'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "273",
+            "r" : "330",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -95,11 +95,11 @@ module.exports['Age'] = {
                   "s" : [ {
                      "value" : [ "","parameter ","MeasurementPeriod"," default " ]
                   }, {
-                     "r" : "220",
+                     "r" : "232",
                      "s" : [ {
                         "value" : [ "Interval[" ]
                      }, {
-                        "r" : "213",
+                        "r" : "216",
                         "s" : [ {
                            "r" : "208",
                            "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
@@ -107,9 +107,9 @@ module.exports['Age'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "219",
+                        "r" : "228",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "220",
                            "value" : [ "DateTime","(","2014",", ","1",", ","1",")" ]
                         } ]
                      }, {
@@ -118,52 +118,102 @@ module.exports['Age'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "235",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "236",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "default" : {
-               "localId" : "220",
+               "localId" : "232",
                "lowClosed" : true,
                "highClosed" : false,
                "type" : "Interval",
+               "resultTypeSpecifier" : {
+                  "localId" : "233",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "234",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "low" : {
-                  "localId" : "213",
+                  "localId" : "216",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "217",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "218",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "219",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "year" : {
                      "localId" : "208",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2013",
                      "type" : "Literal"
                   },
                   "month" : {
                      "localId" : "209",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "day" : {
                      "localId" : "210",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }
                },
                "high" : {
-                  "localId" : "219",
+                  "localId" : "228",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "229",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "230",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "231",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "year" : {
-                     "localId" : "214",
+                     "localId" : "220",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2014",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "215",
+                     "localId" : "221",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "216",
+                     "localId" : "222",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
@@ -174,24 +224,24 @@ module.exports['Age'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "224",
+            "localId" : "240",
             "name" : "Patient"
          }, {
-            "localId" : "255",
+            "localId" : "295",
             "name" : "Unfiltered"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "222",
+            "localId" : "238",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "223",
+               "localId" : "239",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "221",
+                  "localId" : "237",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -201,26 +251,27 @@ module.exports['Age'] = {
                }
             }
          }, {
-            "localId" : "226",
+            "localId" : "242",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Age",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "242",
                   "s" : [ {
                      "value" : [ "","define ","Age",":\n  " ]
                   }, {
-                     "r" : "233",
+                     "r" : "253",
                      "s" : [ {
                         "value" : [ "AgeInYearsAt","(" ]
                      }, {
-                        "r" : "227",
+                        "r" : "243",
                         "s" : [ {
                            "value" : [ "start of " ]
                         }, {
-                           "r" : "228",
+                           "r" : "244",
                            "s" : [ {
                               "value" : [ "MeasurementPeriod" ]
                            } ]
@@ -232,55 +283,83 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "233",
+               "localId" : "253",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "precision" : "Year",
                "type" : "CalculateAgeAt",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "254",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "255",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "232",
+                  "localId" : "252",
                   "path" : "birthDate",
                   "type" : "Property",
                   "source" : {
-                     "localId" : "231",
+                     "localId" : "251",
                      "name" : "Patient",
                      "type" : "ExpressionRef"
                   }
                }, {
-                  "localId" : "227",
+                  "localId" : "243",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "Start",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "247",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "248",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
                   "operand" : {
-                     "localId" : "228",
+                     "localId" : "244",
                      "name" : "MeasurementPeriod",
-                     "type" : "ParameterRef"
+                     "type" : "ParameterRef",
+                     "resultTypeSpecifier" : {
+                        "localId" : "245",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "246",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
                   }
                } ]
             }
          }, {
-            "localId" : "235",
+            "localId" : "257",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "InDemographic",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "235",
+                  "r" : "257",
                   "s" : [ {
                      "value" : [ "","define ","InDemographic",":\n  " ]
                   }, {
-                     "r" : "236",
+                     "r" : "258",
                      "s" : [ {
-                        "r" : "237",
+                        "r" : "259",
                         "s" : [ {
-                           "r" : "244",
+                           "r" : "270",
                            "s" : [ {
                               "value" : [ "AgeInYearsAt","(" ]
                            }, {
-                              "r" : "238",
+                              "r" : "260",
                               "s" : [ {
                                  "value" : [ "start of " ]
                               }, {
-                                 "r" : "239",
+                                 "r" : "261",
                                  "s" : [ {
                                     "value" : [ "MeasurementPeriod" ]
                                  } ]
@@ -289,23 +368,23 @@ module.exports['Age'] = {
                               "value" : [ ")" ]
                            } ]
                         }, {
-                           "r" : "245",
+                           "r" : "273",
                            "value" : [ " ",">="," ","2" ]
                         } ]
                      }, {
                         "value" : [ " and " ]
                      }, {
-                        "r" : "246",
+                        "r" : "276",
                         "s" : [ {
-                           "r" : "253",
+                           "r" : "287",
                            "s" : [ {
                               "value" : [ "AgeInYearsAt","(" ]
                            }, {
-                              "r" : "247",
+                              "r" : "277",
                               "s" : [ {
                                  "value" : [ "start of " ]
                               }, {
-                                 "r" : "248",
+                                 "r" : "278",
                                  "s" : [ {
                                     "value" : [ "MeasurementPeriod" ]
                                  } ]
@@ -314,7 +393,7 @@ module.exports['Age'] = {
                               "value" : [ ")" ]
                            } ]
                         }, {
-                           "r" : "254",
+                           "r" : "290",
                            "value" : [ " ","<"," ","18" ]
                         } ]
                      } ]
@@ -322,73 +401,156 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "236",
+               "localId" : "258",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "293",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "294",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "237",
+                  "localId" : "259",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "GreaterOrEqual",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "274",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "275",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
-                     "localId" : "244",
+                     "localId" : "270",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "precision" : "Year",
                      "type" : "CalculateAgeAt",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "271",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "272",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "243",
+                        "localId" : "269",
                         "path" : "birthDate",
                         "type" : "Property",
                         "source" : {
-                           "localId" : "242",
+                           "localId" : "268",
                            "name" : "Patient",
                            "type" : "ExpressionRef"
                         }
                      }, {
-                        "localId" : "238",
+                        "localId" : "260",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
-                        "signature" : [ ],
+                        "signature" : [ {
+                           "localId" : "264",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "265",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
-                           "localId" : "239",
+                           "localId" : "261",
                            "name" : "MeasurementPeriod",
-                           "type" : "ParameterRef"
+                           "type" : "ParameterRef",
+                           "resultTypeSpecifier" : {
+                              "localId" : "262",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "263",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }
                         }
                      } ]
                   }, {
-                     "localId" : "245",
+                     "localId" : "273",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "246",
+                  "localId" : "276",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Less",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "291",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "292",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
-                     "localId" : "253",
+                     "localId" : "287",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "precision" : "Year",
                      "type" : "CalculateAgeAt",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "288",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "289",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "252",
+                        "localId" : "286",
                         "path" : "birthDate",
                         "type" : "Property",
                         "source" : {
-                           "localId" : "251",
+                           "localId" : "285",
                            "name" : "Patient",
                            "type" : "ExpressionRef"
                         }
                      }, {
-                        "localId" : "247",
+                        "localId" : "277",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
-                        "signature" : [ ],
+                        "signature" : [ {
+                           "localId" : "281",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "282",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
                         "operand" : {
-                           "localId" : "248",
+                           "localId" : "278",
                            "name" : "MeasurementPeriod",
-                           "type" : "ParameterRef"
+                           "type" : "ParameterRef",
+                           "resultTypeSpecifier" : {
+                              "localId" : "279",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "280",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }
                         }
                      } ]
                   }, {
-                     "localId" : "254",
+                     "localId" : "290",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "18",
                      "type" : "Literal"
@@ -396,22 +558,23 @@ module.exports['Age'] = {
                } ]
             }
          }, {
-            "localId" : "257",
+            "localId" : "297",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "AgeSum",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "257",
+                  "r" : "297",
                   "s" : [ {
                      "value" : [ "","define ","AgeSum",": " ]
                   }, {
-                     "r" : "261",
+                     "r" : "305",
                      "s" : [ {
                         "value" : [ "Sum","(" ]
                      }, {
-                        "r" : "258",
+                        "r" : "298",
                         "s" : [ {
                            "value" : [ "Age" ]
                         } ]
@@ -422,37 +585,56 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "261",
+               "localId" : "305",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Sum",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "306",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "307",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "source" : {
-                  "localId" : "258",
+                  "localId" : "298",
                   "name" : "Age",
-                  "type" : "ExpressionRef"
+                  "type" : "ExpressionRef",
+                  "resultTypeSpecifier" : {
+                     "localId" : "299",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "300",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
                }
             }
          }, {
-            "localId" : "263",
+            "localId" : "309",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "DEMO",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "263",
+                  "r" : "309",
                   "s" : [ {
                      "value" : [ "","define ","DEMO",": " ]
                   }, {
-                     "r" : "271",
+                     "r" : "326",
                      "s" : [ {
                         "value" : [ "Count","(" ]
                      }, {
-                        "r" : "268",
+                        "r" : "319",
                         "s" : [ {
                            "s" : [ {
-                              "r" : "264",
+                              "r" : "310",
                               "s" : [ {
-                                 "r" : "265",
+                                 "r" : "311",
                                  "s" : [ {
                                     "s" : [ {
                                        "value" : [ "InDemographic" ]
@@ -465,13 +647,13 @@ module.exports['Age'] = {
                         }, {
                            "value" : [ " " ]
                         }, {
-                           "r" : "267",
+                           "r" : "317",
                            "s" : [ {
                               "value" : [ "where " ]
                            }, {
-                              "r" : "267",
+                              "r" : "317",
                               "s" : [ {
-                                 "r" : "266",
+                                 "r" : "316",
                                  "s" : [ {
                                     "value" : [ "w" ]
                                  } ]
@@ -487,29 +669,71 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "271",
+               "localId" : "326",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Count",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "327",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "328",
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "source" : {
-                  "localId" : "268",
+                  "localId" : "319",
                   "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "localId" : "320",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "321",
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "source" : [ {
-                     "localId" : "264",
+                     "localId" : "310",
                      "alias" : "w",
+                     "resultTypeSpecifier" : {
+                        "localId" : "314",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "315",
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "expression" : {
-                        "localId" : "265",
+                        "localId" : "311",
                         "name" : "InDemographic",
-                        "type" : "ExpressionRef"
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "312",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "313",
+                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
                      }
                   } ],
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "267",
+                     "localId" : "317",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IsTrue",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "318",
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : {
-                        "localId" : "266",
+                        "localId" : "316",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "w",
                         "type" : "AliasRef"
                      }
@@ -517,18 +741,19 @@ module.exports['Age'] = {
                }
             }
          }, {
-            "localId" : "273",
+            "localId" : "330",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "AgeSumRef",
             "context" : "Unfiltered",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "273",
+                  "r" : "330",
                   "s" : [ {
                      "value" : [ "","define ","AgeSumRef"," : " ]
                   }, {
-                     "r" : "274",
+                     "r" : "331",
                      "s" : [ {
                         "value" : [ "AgeSum" ]
                      } ]
@@ -536,7 +761,8 @@ module.exports['Age'] = {
                }
             } ],
             "expression" : {
-               "localId" : "274",
+               "localId" : "331",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "AgeSum",
                "type" : "ExpressionRef"
             }
