@@ -77,6 +77,10 @@ describe('equals', () => {
     equals({ a: 2, b: 'bee', c: 'sea' }, { a: 1, b: null, c: 'sea' }).should.be.false();
     should(equals({ a: 1, b: null, c: 'sea' }, { a: 1, b: 'bee', c: 'sea' })).be.null();
     should(equals({ a: 1, b: 'bee', c: 'sea' }, { a: 1, b: null, c: 'sea' })).be.null();
+    should(equals({ a: 1, b: 'bee', c: 'sea' }, { a: 1, b: 'bee', c: null })).be.null();
+    should(equals({ a: 1, b: 'bee', c: null }, { a: 1, b: 'bee', c: 'sea' })).be.null();
+    should(equals({ a: null, b: 'bee', c: 'sea' }, { a: 1, b: 'bee', c: 'sea' })).be.null();
+    should(equals({ a: 1, b: 'bee', c: 'sea' }, { a: null, b: 'bee', c: 'sea' })).be.null();
   });
 
   it('should detect equality/inequality for classes', () => {
