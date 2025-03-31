@@ -151,10 +151,3 @@ define ExpensiveStatementRef:
   ExpensiveStatement union 
   ExpensiveStatement union 
   ExpensiveStatement
-
-// @Test: Using CommonLib3
-using Simple version '1.0.0'
-include Common3 called common3
-context Patient
-
-define ExpensiveStatementRef: common3.ExpensiveStatementRef
