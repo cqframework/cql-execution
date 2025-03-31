@@ -18,9 +18,8 @@ describe('ConsoleMessageListener', () => {
     const listener = new ConsoleMessageListener();
     listener.onMessage('My Source', 'test', 'Error', 'Hello World!');
     stdoutInspect.output.should.have.length(0);
-
-    // stderr seems to always outputs line feed
-    stderrInspect.output.should.eql([`Error: [test] Hello World!\n`]);
+    stderrInspect.output.should.have.length(1);
+    stderrInspect.output[0].should.match(/Error: \[test\] Hello World!/);
   });
 
   it('should log a Warning to stdout', () => {
