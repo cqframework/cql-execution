@@ -46,14 +46,14 @@ module.exports['Instance'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "247",
+            "r" : "250",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -97,6 +97,7 @@ module.exports['Instance'] = {
       "codeSystems" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "SNOMED",
             "id" : "2.16.840.1.113883.6.96",
             "accessLevel" : "Public",
@@ -111,6 +112,7 @@ module.exports['Instance'] = {
             } ]
          }, {
             "localId" : "208",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "SIMPLE",
             "id" : "1.2.3.4.5",
             "accessLevel" : "Public",
@@ -128,6 +130,7 @@ module.exports['Instance'] = {
       "codes" : {
          "def" : [ {
             "localId" : "209",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Viral pharyngitis code",
             "id" : "1532007",
             "display" : "Viral pharyngitis (disorder)",
@@ -150,10 +153,12 @@ module.exports['Instance'] = {
             } ],
             "codeSystem" : {
                "localId" : "210",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "SNOMED"
             }
          }, {
             "localId" : "211",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Active code",
             "id" : "active",
             "display" : "Active",
@@ -176,6 +181,7 @@ module.exports['Instance'] = {
             } ],
             "codeSystem" : {
                "localId" : "212",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "SNOMED"
             }
          } ]
@@ -207,6 +213,7 @@ module.exports['Instance'] = {
             }
          }, {
             "localId" : "218",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "QuantityA",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -244,12 +251,14 @@ module.exports['Instance'] = {
             } ],
             "expression" : {
                "localId" : "219",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Instance",
                "element" : [ {
                   "name" : "unit",
                   "value" : {
                      "localId" : "221",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "a",
                      "type" : "Literal"
@@ -259,9 +268,14 @@ module.exports['Instance'] = {
                   "value" : {
                      "localId" : "224",
                      "type" : "ToDecimal",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "225",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : {
                         "localId" : "222",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
@@ -270,25 +284,26 @@ module.exports['Instance'] = {
                } ]
             }
          }, {
-            "localId" : "226",
+            "localId" : "227",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "CodeA",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "227",
                   "s" : [ {
                      "value" : [ "","define ","CodeA",": " ]
                   }, {
-                     "r" : "227",
+                     "r" : "228",
                      "s" : [ {
                         "value" : [ "Code"," {\n  " ]
                      }, {
                         "s" : [ {
                            "value" : [ "system",": " ]
                         }, {
-                           "r" : "229",
+                           "r" : "230",
                            "s" : [ {
                               "value" : [ "'http://loinc.org'" ]
                            } ]
@@ -299,7 +314,7 @@ module.exports['Instance'] = {
                         "s" : [ {
                            "value" : [ "code",": " ]
                         }, {
-                           "r" : "230",
+                           "r" : "231",
                            "s" : [ {
                               "value" : [ "'12345'" ]
                            } ]
@@ -310,7 +325,7 @@ module.exports['Instance'] = {
                         "s" : [ {
                            "value" : [ "version",": " ]
                         }, {
-                           "r" : "231",
+                           "r" : "232",
                            "s" : [ {
                               "value" : [ "'1'" ]
                            } ]
@@ -321,7 +336,7 @@ module.exports['Instance'] = {
                         "s" : [ {
                            "value" : [ "display",": " ]
                         }, {
-                           "r" : "232",
+                           "r" : "233",
                            "s" : [ {
                               "value" : [ "'Test Code'" ]
                            } ]
@@ -333,13 +348,15 @@ module.exports['Instance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "227",
+               "localId" : "228",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "classType" : "{urn:hl7-org:elm-types:r1}Code",
                "type" : "Instance",
                "element" : [ {
                   "name" : "system",
                   "value" : {
-                     "localId" : "229",
+                     "localId" : "230",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "http://loinc.org",
                      "type" : "Literal"
@@ -347,7 +364,8 @@ module.exports['Instance'] = {
                }, {
                   "name" : "code",
                   "value" : {
-                     "localId" : "230",
+                     "localId" : "231",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "12345",
                      "type" : "Literal"
@@ -355,7 +373,8 @@ module.exports['Instance'] = {
                }, {
                   "name" : "version",
                   "value" : {
-                     "localId" : "231",
+                     "localId" : "232",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "1",
                      "type" : "Literal"
@@ -363,7 +382,8 @@ module.exports['Instance'] = {
                }, {
                   "name" : "display",
                   "value" : {
-                     "localId" : "232",
+                     "localId" : "233",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Test Code",
                      "type" : "Literal"
@@ -371,29 +391,30 @@ module.exports['Instance'] = {
                } ]
             }
          }, {
-            "localId" : "234",
+            "localId" : "235",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
             "name" : "ConceptA",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "234",
+                  "r" : "235",
                   "s" : [ {
                      "value" : [ "","define ","ConceptA",": " ]
                   }, {
-                     "r" : "235",
+                     "r" : "236",
                      "s" : [ {
                         "value" : [ "Concept"," {\n  " ]
                      }, {
                         "s" : [ {
                            "value" : [ "codes",": " ]
                         }, {
-                           "r" : "237",
+                           "r" : "238",
                            "s" : [ {
                               "value" : [ "{ " ]
                            }, {
-                              "r" : "238",
+                              "r" : "239",
                               "s" : [ {
                                  "value" : [ "CodeA" ]
                               } ]
@@ -407,7 +428,7 @@ module.exports['Instance'] = {
                         "s" : [ {
                            "value" : [ "display",": " ]
                         }, {
-                           "r" : "239",
+                           "r" : "242",
                            "s" : [ {
                               "value" : [ "'Test Concept'" ]
                            } ]
@@ -419,16 +440,27 @@ module.exports['Instance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "235",
+               "localId" : "236",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                "classType" : "{urn:hl7-org:elm-types:r1}Concept",
                "type" : "Instance",
                "element" : [ {
                   "name" : "codes",
                   "value" : {
-                     "localId" : "237",
+                     "localId" : "238",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "240",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "241",
+                           "name" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "238",
+                        "localId" : "239",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                         "name" : "CodeA",
                         "type" : "ExpressionRef"
                      } ]
@@ -436,7 +468,8 @@ module.exports['Instance'] = {
                }, {
                   "name" : "display",
                   "value" : {
-                     "localId" : "239",
+                     "localId" : "242",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Test Concept",
                      "type" : "Literal"
@@ -444,25 +477,26 @@ module.exports['Instance'] = {
                } ]
             }
          }, {
-            "localId" : "241",
+            "localId" : "244",
+            "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
             "name" : "Pharyngitis",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "241",
+                  "r" : "244",
                   "s" : [ {
                      "value" : [ "","define ","Pharyngitis"," : " ]
                   }, {
-                     "r" : "242",
+                     "r" : "245",
                      "s" : [ {
                         "value" : [ "Condition"," {\n  " ]
                      }, {
                         "s" : [ {
                            "value" : [ "code",": " ]
                         }, {
-                           "r" : "244",
+                           "r" : "247",
                            "s" : [ {
                               "value" : [ "\"Viral pharyngitis code\"" ]
                            } ]
@@ -473,7 +507,7 @@ module.exports['Instance'] = {
                         "s" : [ {
                            "value" : [ "status",": " ]
                         }, {
-                           "r" : "245",
+                           "r" : "248",
                            "s" : [ {
                               "value" : [ "\"Active code\"" ]
                            } ]
@@ -485,47 +519,51 @@ module.exports['Instance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "242",
+               "localId" : "245",
+               "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "classType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "type" : "Instance",
                "element" : [ {
                   "name" : "code",
                   "value" : {
-                     "localId" : "244",
+                     "localId" : "247",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                      "name" : "Viral pharyngitis code",
                      "type" : "CodeRef"
                   }
                }, {
                   "name" : "status",
                   "value" : {
-                     "localId" : "245",
+                     "localId" : "248",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                      "name" : "Active code",
                      "type" : "CodeRef"
                   }
                } ]
             }
          }, {
-            "localId" : "247",
+            "localId" : "250",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "val",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "247",
+                  "r" : "250",
                   "s" : [ {
                      "value" : [ "","define ","val",": " ]
                   }, {
-                     "r" : "249",
+                     "r" : "252",
                      "s" : [ {
-                        "r" : "248",
+                        "r" : "251",
                         "s" : [ {
                            "value" : [ "QuantityA" ]
                         } ]
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "249",
+                        "r" : "252",
                         "s" : [ {
                            "value" : [ "value" ]
                         } ]
@@ -534,11 +572,13 @@ module.exports['Instance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "249",
+               "localId" : "252",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "path" : "value",
                "type" : "Property",
                "source" : {
-                  "localId" : "248",
+                  "localId" : "251",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                   "name" : "QuantityA",
                   "type" : "ExpressionRef"
                }

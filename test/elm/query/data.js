@@ -23,14 +23,14 @@ module.exports['DateRangeOptimizedQuery'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "252",
+            "r" : "319",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -83,11 +83,11 @@ module.exports['DateRangeOptimizedQuery'] = {
                   "s" : [ {
                      "value" : [ "","parameter ","MeasurementPeriod"," default " ]
                   }, {
-                     "r" : "221",
+                     "r" : "233",
                      "s" : [ {
                         "value" : [ "Interval[" ]
                      }, {
-                        "r" : "214",
+                        "r" : "217",
                         "s" : [ {
                            "r" : "209",
                            "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
@@ -95,9 +95,9 @@ module.exports['DateRangeOptimizedQuery'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "220",
+                        "r" : "229",
                         "s" : [ {
-                           "r" : "215",
+                           "r" : "221",
                            "value" : [ "DateTime","(","2014",", ","1",", ","1",")" ]
                         } ]
                      }, {
@@ -106,52 +106,102 @@ module.exports['DateRangeOptimizedQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "236",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "237",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "default" : {
-               "localId" : "221",
+               "localId" : "233",
                "lowClosed" : true,
                "highClosed" : false,
                "type" : "Interval",
+               "resultTypeSpecifier" : {
+                  "localId" : "234",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "235",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "low" : {
-                  "localId" : "214",
+                  "localId" : "217",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "218",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "219",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "220",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "year" : {
                      "localId" : "209",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2013",
                      "type" : "Literal"
                   },
                   "month" : {
                      "localId" : "210",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "day" : {
                      "localId" : "211",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }
                },
                "high" : {
-                  "localId" : "220",
+                  "localId" : "229",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "230",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "231",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "232",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "year" : {
-                     "localId" : "215",
+                     "localId" : "221",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2014",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "216",
+                     "localId" : "222",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "217",
+                     "localId" : "223",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
@@ -163,6 +213,7 @@ module.exports['DateRangeOptimizedQuery'] = {
       "valueSets" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Ambulatory/ED Visit",
             "id" : "2.16.840.1.113883.3.464.1003.101.12.1061",
             "accessLevel" : "Public",
@@ -180,21 +231,21 @@ module.exports['DateRangeOptimizedQuery'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "225",
+            "localId" : "241",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "223",
+            "localId" : "239",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "224",
+               "localId" : "240",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "222",
+                  "localId" : "238",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -204,227 +255,27 @@ module.exports['DateRangeOptimizedQuery'] = {
                }
             }
          }, {
-            "localId" : "227",
+            "localId" : "243",
             "name" : "EncountersDuringMP",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "227",
+                  "r" : "243",
                   "s" : [ {
                      "value" : [ "","define ","EncountersDuringMP",": " ]
                   }, {
-                     "r" : "236",
+                     "r" : "273",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "228",
-                           "s" : [ {
-                              "r" : "229",
-                              "s" : [ {
-                                 "r" : "229",
-                                 "s" : [ {
-                                    "value" : [ "[","Encounter","]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","E" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " " ]
-                     }, {
-                        "r" : "233",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "233",
-                           "s" : [ {
-                              "r" : "231",
-                              "s" : [ {
-                                 "r" : "230",
-                                 "s" : [ {
-                                    "value" : [ "E" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "231",
-                                 "s" : [ {
-                                    "value" : [ "period" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "r" : "233",
-                              "value" : [ " ","during"," " ]
-                           }, {
-                              "r" : "232",
-                              "s" : [ {
-                                 "value" : [ "MeasurementPeriod" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "236",
-               "type" : "Query",
-               "source" : [ {
-                  "localId" : "228",
-                  "alias" : "E",
-                  "expression" : {
-                     "localId" : "229",
-                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                     "dateProperty" : "period",
-                     "type" : "Retrieve",
-                     "dateRange" : {
-                        "localId" : "232",
-                        "name" : "MeasurementPeriod",
-                        "type" : "ParameterRef"
-                     },
-                     "include" : [ ],
-                     "codeFilter" : [ ],
-                     "dateFilter" : [ ],
-                     "otherFilter" : [ ]
-                  }
-               } ],
-               "let" : [ ],
-               "relationship" : [ ]
-            }
-         }, {
-            "localId" : "238",
-            "name" : "AmbulatoryEncountersDuringMP",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "238",
-                  "s" : [ {
-                     "value" : [ "","define ","AmbulatoryEncountersDuringMP",": " ]
-                  }, {
-                     "r" : "250",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "239",
-                           "s" : [ {
-                              "r" : "242",
-                              "s" : [ {
-                                 "r" : "242",
-                                 "s" : [ {
-                                    "value" : [ "[","Encounter",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Ambulatory/ED Visit\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","E" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " " ]
-                     }, {
-                        "r" : "247",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "247",
+                           "r" : "244",
                            "s" : [ {
                               "r" : "245",
                               "s" : [ {
-                                 "r" : "244",
-                                 "s" : [ {
-                                    "value" : [ "E" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
                                  "r" : "245",
                                  "s" : [ {
-                                    "value" : [ "period" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "r" : "247",
-                              "value" : [ " ","during"," " ]
-                           }, {
-                              "r" : "246",
-                              "s" : [ {
-                                 "value" : [ "MeasurementPeriod" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "250",
-               "type" : "Query",
-               "source" : [ {
-                  "localId" : "239",
-                  "alias" : "E",
-                  "expression" : {
-                     "localId" : "242",
-                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                     "codeProperty" : "code",
-                     "codeComparator" : "in",
-                     "dateProperty" : "period",
-                     "type" : "Retrieve",
-                     "codes" : {
-                        "localId" : "241",
-                        "name" : "Ambulatory/ED Visit",
-                        "preserve" : true,
-                        "type" : "ValueSetRef"
-                     },
-                     "dateRange" : {
-                        "localId" : "246",
-                        "name" : "MeasurementPeriod",
-                        "type" : "ParameterRef"
-                     },
-                     "include" : [ ],
-                     "codeFilter" : [ ],
-                     "dateFilter" : [ ],
-                     "otherFilter" : [ ]
-                  }
-               } ],
-               "let" : [ ],
-               "relationship" : [ ]
-            }
-         }, {
-            "localId" : "252",
-            "name" : "AmbulatoryEncountersIncludedInMP",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "252",
-                  "s" : [ {
-                     "value" : [ "","define ","AmbulatoryEncountersIncludedInMP",": " ]
-                  }, {
-                     "r" : "264",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "253",
-                           "s" : [ {
-                              "r" : "256",
-                              "s" : [ {
-                                 "r" : "256",
-                                 "s" : [ {
-                                    "value" : [ "[","Encounter",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Ambulatory/ED Visit\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
+                                    "value" : [ "[","Encounter","]" ]
                                  } ]
                               } ]
                            }, {
@@ -440,25 +291,25 @@ module.exports['DateRangeOptimizedQuery'] = {
                         }, {
                            "r" : "261",
                            "s" : [ {
-                              "r" : "259",
+                              "r" : "253",
                               "s" : [ {
-                                 "r" : "258",
+                                 "r" : "252",
                                  "s" : [ {
                                     "value" : [ "E" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "259",
+                                 "r" : "253",
                                  "s" : [ {
                                     "value" : [ "period" ]
                                  } ]
                               } ]
                            }, {
                               "r" : "261",
-                              "value" : [ " ","included in"," " ]
+                              "value" : [ " ","during"," " ]
                            }, {
-                              "r" : "260",
+                              "r" : "258",
                               "s" : [ {
                                  "value" : [ "MeasurementPeriod" ]
                               } ]
@@ -468,29 +319,366 @@ module.exports['DateRangeOptimizedQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "276",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "277",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "264",
+               "localId" : "273",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "274",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "275",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "253",
+                  "localId" : "244",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "250",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "251",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "256",
+                     "localId" : "245",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "dateProperty" : "period",
+                     "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "248",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "249",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "dateRange" : {
+                        "localId" : "258",
+                        "name" : "MeasurementPeriod",
+                        "type" : "ParameterRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "259",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "260",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     },
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ ]
+            }
+         }, {
+            "localId" : "279",
+            "name" : "AmbulatoryEncountersDuringMP",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "279",
+                  "s" : [ {
+                     "value" : [ "","define ","AmbulatoryEncountersDuringMP",": " ]
+                  }, {
+                     "r" : "313",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "280",
+                           "s" : [ {
+                              "r" : "283",
+                              "s" : [ {
+                                 "r" : "283",
+                                 "s" : [ {
+                                    "value" : [ "[","Encounter",": " ]
+                                 }, {
+                                    "s" : [ {
+                                       "value" : [ "\"Ambulatory/ED Visit\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","E" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " " ]
+                     }, {
+                        "r" : "301",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "301",
+                           "s" : [ {
+                              "r" : "293",
+                              "s" : [ {
+                                 "r" : "292",
+                                 "s" : [ {
+                                    "value" : [ "E" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "293",
+                                 "s" : [ {
+                                    "value" : [ "period" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "r" : "301",
+                              "value" : [ " ","during"," " ]
+                           }, {
+                              "r" : "298",
+                              "s" : [ {
+                                 "value" : [ "MeasurementPeriod" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "316",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "317",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "313",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "314",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "315",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "280",
+                  "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "290",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "291",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "283",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "codeProperty" : "code",
                      "codeComparator" : "in",
                      "dateProperty" : "period",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "288",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "289",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "codes" : {
-                        "localId" : "255",
+                        "localId" : "282",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "name" : "Ambulatory/ED Visit",
                         "preserve" : true,
                         "type" : "ValueSetRef"
                      },
                      "dateRange" : {
-                        "localId" : "260",
+                        "localId" : "298",
                         "name" : "MeasurementPeriod",
-                        "type" : "ParameterRef"
+                        "type" : "ParameterRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "299",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "300",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     },
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ ]
+            }
+         }, {
+            "localId" : "319",
+            "name" : "AmbulatoryEncountersIncludedInMP",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "319",
+                  "s" : [ {
+                     "value" : [ "","define ","AmbulatoryEncountersIncludedInMP",": " ]
+                  }, {
+                     "r" : "353",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "320",
+                           "s" : [ {
+                              "r" : "323",
+                              "s" : [ {
+                                 "r" : "323",
+                                 "s" : [ {
+                                    "value" : [ "[","Encounter",": " ]
+                                 }, {
+                                    "s" : [ {
+                                       "value" : [ "\"Ambulatory/ED Visit\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","E" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " " ]
+                     }, {
+                        "r" : "341",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "341",
+                           "s" : [ {
+                              "r" : "333",
+                              "s" : [ {
+                                 "r" : "332",
+                                 "s" : [ {
+                                    "value" : [ "E" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "333",
+                                 "s" : [ {
+                                    "value" : [ "period" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "r" : "341",
+                              "value" : [ " ","included in"," " ]
+                           }, {
+                              "r" : "338",
+                              "s" : [ {
+                                 "value" : [ "MeasurementPeriod" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "356",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "357",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "353",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "354",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "355",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "320",
+                  "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "330",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "331",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "323",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "codeProperty" : "code",
+                     "codeComparator" : "in",
+                     "dateProperty" : "period",
+                     "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "328",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "329",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "codes" : {
+                        "localId" : "322",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                        "name" : "Ambulatory/ED Visit",
+                        "preserve" : true,
+                        "type" : "ValueSetRef"
+                     },
+                     "dateRange" : {
+                        "localId" : "338",
+                        "name" : "MeasurementPeriod",
+                        "type" : "ParameterRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "339",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "340",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
                      },
                      "include" : [ ],
                      "codeFilter" : [ ],
@@ -518,14 +706,14 @@ module.exports['FunctionQuery'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "233",
+            "r" : "255",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -593,6 +781,7 @@ module.exports['FunctionQuery'] = {
             }
          }, {
             "localId" : "211",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "FunctionWithThis",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -604,18 +793,18 @@ module.exports['FunctionQuery'] = {
                   "s" : [ {
                      "value" : [ "","define function \"FunctionWithThis\"(Encounter List<\"Encounter\">): " ]
                   }, {
-                     "r" : "231",
+                     "r" : "250",
                      "s" : [ {
-                        "r" : "231",
+                        "r" : "250",
                         "s" : [ {
                            "value" : [ "Count","(" ]
                         }, {
-                           "r" : "228",
+                           "r" : "241",
                            "s" : [ {
                               "s" : [ {
-                                 "r" : "215",
+                                 "r" : "217",
                                  "s" : [ {
-                                    "r" : "224",
+                                    "r" : "226",
                                     "s" : [ {
                                        "s" : [ {
                                           "value" : [ "Encounter",".","period" ]
@@ -628,11 +817,11 @@ module.exports['FunctionQuery'] = {
                            }, {
                               "value" : [ " " ]
                            }, {
-                              "r" : "226",
+                              "r" : "234",
                               "s" : [ {
                                  "value" : [ "return " ]
                               }, {
-                                 "r" : "227",
+                                 "r" : "235",
                                  "s" : [ {
                                     "value" : [ "EncounterPeriod" ]
                                  } ]
@@ -646,23 +835,75 @@ module.exports['FunctionQuery'] = {
                }
             } ],
             "expression" : {
-               "localId" : "231",
+               "localId" : "250",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Count",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "251",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "252",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "253",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               } ],
                "source" : {
-                  "localId" : "228",
+                  "localId" : "241",
                   "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "localId" : "242",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "243",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "244",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  },
                   "source" : [ {
-                     "localId" : "215",
+                     "localId" : "217",
                      "alias" : "EncounterPeriod",
+                     "resultTypeSpecifier" : {
+                        "localId" : "231",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "232",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "233",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     },
                      "expression" : {
-                        "localId" : "224",
+                        "localId" : "226",
                         "type" : "Query",
+                        "resultTypeSpecifier" : {
+                           "localId" : "228",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "229",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "230",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }
+                        },
                         "source" : [ {
-                           "localId" : "223",
+                           "localId" : "225",
                            "alias" : "$this",
                            "expression" : {
-                              "localId" : "216",
+                              "localId" : "218",
                               "name" : "Encounter",
                               "type" : "OperandRef"
                            }
@@ -670,19 +911,19 @@ module.exports['FunctionQuery'] = {
                         "let" : [ ],
                         "relationship" : [ ],
                         "where" : {
-                           "localId" : "220",
+                           "localId" : "222",
                            "type" : "Not",
                            "signature" : [ ],
                            "operand" : {
-                              "localId" : "219",
+                              "localId" : "221",
                               "type" : "IsNull",
                               "signature" : [ ],
                               "operand" : {
-                                 "localId" : "218",
+                                 "localId" : "220",
                                  "path" : "period",
                                  "type" : "Property",
                                  "source" : {
-                                    "localId" : "217",
+                                    "localId" : "219",
                                     "name" : "$this",
                                     "type" : "AliasRef"
                                  }
@@ -690,14 +931,14 @@ module.exports['FunctionQuery'] = {
                            }
                         },
                         "return" : {
-                           "localId" : "225",
+                           "localId" : "227",
                            "distinct" : false,
                            "expression" : {
-                              "localId" : "222",
+                              "localId" : "224",
                               "path" : "period",
                               "type" : "Property",
                               "source" : {
-                                 "localId" : "221",
+                                 "localId" : "223",
                                  "name" : "$this",
                                  "type" : "AliasRef"
                               }
@@ -708,54 +949,87 @@ module.exports['FunctionQuery'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "226",
+                     "localId" : "234",
+                     "resultTypeSpecifier" : {
+                        "localId" : "238",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "239",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "240",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     },
                      "expression" : {
-                        "localId" : "227",
+                        "localId" : "235",
                         "name" : "EncounterPeriod",
-                        "type" : "AliasRef"
+                        "type" : "AliasRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "236",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "237",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
                      }
                   }
                }
             },
             "operand" : [ {
-               "localId" : "214",
+               "localId" : "216",
                "name" : "Encounter",
                "operandTypeSpecifier" : {
                   "localId" : "212",
                   "type" : "ListTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "localId" : "214",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "215",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "elementType" : {
                      "localId" : "213",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "NamedTypeSpecifier"
                   }
                }
             } ]
          }, {
-            "localId" : "233",
+            "localId" : "255",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "queryWithThis",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "233",
+                  "r" : "255",
                   "s" : [ {
                      "value" : [ "","define ","queryWithThis",": " ]
                   }, {
-                     "r" : "234",
+                     "r" : "256",
                      "s" : [ {
-                        "r" : "238",
+                        "r" : "268",
                         "s" : [ {
                            "value" : [ "\"FunctionWithThis\"","(" ]
                         }, {
-                           "r" : "237",
+                           "r" : "265",
                            "s" : [ {
                               "s" : [ {
-                                 "r" : "235",
+                                 "r" : "257",
                                  "s" : [ {
-                                    "r" : "236",
+                                    "r" : "258",
                                     "s" : [ {
-                                       "r" : "236",
+                                       "r" : "258",
                                        "s" : [ {
                                           "value" : [ "[","Encounter","]" ]
                                        } ]
@@ -769,31 +1043,76 @@ module.exports['FunctionQuery'] = {
                            "value" : [ ")" ]
                         } ]
                      }, {
-                        "r" : "239",
+                        "r" : "271",
                         "value" : [ " ",">"," ","0" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "234",
+               "localId" : "256",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Greater",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "272",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "273",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "238",
+                  "localId" : "268",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "FunctionWithThis",
                   "type" : "FunctionRef",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "269",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "270",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
                   "operand" : [ {
-                     "localId" : "237",
+                     "localId" : "265",
                      "type" : "Query",
+                     "resultTypeSpecifier" : {
+                        "localId" : "266",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "267",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "source" : [ {
-                        "localId" : "235",
+                        "localId" : "257",
                         "alias" : "E",
+                        "resultTypeSpecifier" : {
+                           "localId" : "263",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "264",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "expression" : {
-                           "localId" : "236",
+                           "localId" : "258",
                            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "type" : "Retrieve",
+                           "resultTypeSpecifier" : {
+                              "localId" : "261",
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "localId" : "262",
+                                 "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
                            "include" : [ ],
                            "codeFilter" : [ ],
                            "dateFilter" : [ ],
@@ -804,7 +1123,8 @@ module.exports['FunctionQuery'] = {
                      "relationship" : [ ]
                   } ]
                }, {
-                  "localId" : "239",
+                  "localId" : "271",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
                   "type" : "Literal"
@@ -828,14 +1148,14 @@ module.exports['IncludesQuery'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "227",
+            "r" : "243",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -888,11 +1208,11 @@ module.exports['IncludesQuery'] = {
                   "s" : [ {
                      "value" : [ "","parameter ","MeasurementPeriod"," default " ]
                   }, {
-                     "r" : "221",
+                     "r" : "233",
                      "s" : [ {
                         "value" : [ "Interval[" ]
                      }, {
-                        "r" : "214",
+                        "r" : "217",
                         "s" : [ {
                            "r" : "209",
                            "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
@@ -900,9 +1220,9 @@ module.exports['IncludesQuery'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "220",
+                        "r" : "229",
                         "s" : [ {
-                           "r" : "215",
+                           "r" : "221",
                            "value" : [ "DateTime","(","2014",", ","1",", ","1",")" ]
                         } ]
                      }, {
@@ -911,52 +1231,102 @@ module.exports['IncludesQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "236",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "237",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "default" : {
-               "localId" : "221",
+               "localId" : "233",
                "lowClosed" : true,
                "highClosed" : false,
                "type" : "Interval",
+               "resultTypeSpecifier" : {
+                  "localId" : "234",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "235",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "low" : {
-                  "localId" : "214",
+                  "localId" : "217",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "218",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "219",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "220",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "year" : {
                      "localId" : "209",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2013",
                      "type" : "Literal"
                   },
                   "month" : {
                      "localId" : "210",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "day" : {
                      "localId" : "211",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }
                },
                "high" : {
-                  "localId" : "220",
+                  "localId" : "229",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "230",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "231",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "232",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "year" : {
-                     "localId" : "215",
+                     "localId" : "221",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2014",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "216",
+                     "localId" : "222",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "217",
+                     "localId" : "223",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
@@ -968,6 +1338,7 @@ module.exports['IncludesQuery'] = {
       "valueSets" : {
          "def" : [ {
             "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Ambulatory/ED Visit",
             "id" : "2.16.840.1.113883.3.464.1003.101.12.1061",
             "accessLevel" : "Public",
@@ -985,21 +1356,21 @@ module.exports['IncludesQuery'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "225",
+            "localId" : "241",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "223",
+            "localId" : "239",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "224",
+               "localId" : "240",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "222",
+                  "localId" : "238",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -1009,25 +1380,25 @@ module.exports['IncludesQuery'] = {
                }
             }
          }, {
-            "localId" : "227",
+            "localId" : "243",
             "name" : "MPIncludedAmbulatoryEncounters",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "227",
+                  "r" : "243",
                   "s" : [ {
                      "value" : [ "","define ","MPIncludedAmbulatoryEncounters",": " ]
                   }, {
-                     "r" : "239",
+                     "r" : "277",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "228",
+                           "r" : "244",
                            "s" : [ {
-                              "r" : "231",
+                              "r" : "247",
                               "s" : [ {
-                                 "r" : "231",
+                                 "r" : "247",
                                  "s" : [ {
                                     "value" : [ "[","Encounter",": " ]
                                  }, {
@@ -1045,30 +1416,30 @@ module.exports['IncludesQuery'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "236",
+                        "r" : "265",
                         "s" : [ {
                            "value" : [ "where " ]
                         }, {
-                           "r" : "236",
+                           "r" : "265",
                            "s" : [ {
-                              "r" : "233",
+                              "r" : "256",
                               "s" : [ {
                                  "value" : [ "MeasurementPeriod" ]
                               } ]
                            }, {
-                              "r" : "236",
+                              "r" : "265",
                               "value" : [ " ","includes"," " ]
                            }, {
-                              "r" : "235",
+                              "r" : "260",
                               "s" : [ {
-                                 "r" : "234",
+                                 "r" : "259",
                                  "s" : [ {
                                     "value" : [ "E" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "235",
+                                 "r" : "260",
                                  "s" : [ {
                                     "value" : [ "period" ]
                                  } ]
@@ -1079,20 +1450,57 @@ module.exports['IncludesQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "280",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "281",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "239",
+               "localId" : "277",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "278",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "279",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "228",
+                  "localId" : "244",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "254",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "255",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "231",
+                     "localId" : "247",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "codeProperty" : "code",
                      "codeComparator" : "in",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "252",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "253",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "codes" : {
-                        "localId" : "230",
+                        "localId" : "246",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "name" : "Ambulatory/ED Visit",
                         "preserve" : true,
                         "type" : "ValueSetRef"
@@ -1106,18 +1514,53 @@ module.exports['IncludesQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "236",
+                  "localId" : "265",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Includes",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "233",
-                     "name" : "MeasurementPeriod",
-                     "type" : "ParameterRef"
+                  "signature" : [ {
+                     "localId" : "266",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "267",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
                   }, {
-                     "localId" : "235",
+                     "localId" : "268",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "269",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : [ {
+                     "localId" : "256",
+                     "name" : "MeasurementPeriod",
+                     "type" : "ParameterRef",
+                     "resultTypeSpecifier" : {
+                        "localId" : "257",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "258",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "localId" : "260",
                      "path" : "period",
                      "scope" : "E",
-                     "type" : "Property"
+                     "type" : "Property",
+                     "resultTypeSpecifier" : {
+                        "localId" : "263",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "264",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
                   } ]
                }
             }
@@ -1148,14 +1591,14 @@ module.exports['MultiSourceQuery'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "277",
+            "r" : "410",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1208,11 +1651,11 @@ module.exports['MultiSourceQuery'] = {
                   "s" : [ {
                      "value" : [ "","parameter ","MeasurementPeriod"," default " ]
                   }, {
-                     "r" : "220",
+                     "r" : "232",
                      "s" : [ {
                         "value" : [ "Interval[" ]
                      }, {
-                        "r" : "213",
+                        "r" : "216",
                         "s" : [ {
                            "r" : "208",
                            "value" : [ "DateTime","(","2013",", ","1",", ","1",")" ]
@@ -1220,9 +1663,9 @@ module.exports['MultiSourceQuery'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "219",
+                        "r" : "228",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "220",
                            "value" : [ "DateTime","(","2014",", ","1",", ","1",")" ]
                         } ]
                      }, {
@@ -1231,52 +1674,102 @@ module.exports['MultiSourceQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "235",
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "localId" : "236",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "default" : {
-               "localId" : "220",
+               "localId" : "232",
                "lowClosed" : true,
                "highClosed" : false,
                "type" : "Interval",
+               "resultTypeSpecifier" : {
+                  "localId" : "233",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "234",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "low" : {
-                  "localId" : "213",
+                  "localId" : "216",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "217",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "218",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "219",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "year" : {
                      "localId" : "208",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2013",
                      "type" : "Literal"
                   },
                   "month" : {
                      "localId" : "209",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "day" : {
                      "localId" : "210",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }
                },
                "high" : {
-                  "localId" : "219",
+                  "localId" : "228",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "229",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "230",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "231",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "year" : {
-                     "localId" : "214",
+                     "localId" : "220",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2014",
                      "type" : "Literal"
                   },
                   "month" : {
-                     "localId" : "215",
+                     "localId" : "221",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   },
                   "day" : {
-                     "localId" : "216",
+                     "localId" : "222",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
@@ -1287,21 +1780,21 @@ module.exports['MultiSourceQuery'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "224",
+            "localId" : "240",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "222",
+            "localId" : "238",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "223",
+               "localId" : "239",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "221",
+                  "localId" : "237",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -1311,27 +1804,27 @@ module.exports['MultiSourceQuery'] = {
                }
             }
          }, {
-            "localId" : "226",
+            "localId" : "242",
             "name" : "msQueryWhere",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "242",
                   "s" : [ {
                      "value" : [ "","define ","msQueryWhere",": " ]
                   }, {
-                     "r" : "241",
+                     "r" : "284",
                      "s" : [ {
                         "s" : [ {
                            "value" : [ "from " ]
                         }, {
-                           "r" : "227",
+                           "r" : "243",
                            "s" : [ {
-                              "r" : "228",
+                              "r" : "244",
                               "s" : [ {
-                                 "r" : "228",
+                                 "r" : "244",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -1342,11 +1835,11 @@ module.exports['MultiSourceQuery'] = {
                         }, {
                            "value" : [ ",\n" ]
                         }, {
-                           "r" : "229",
+                           "r" : "251",
                            "s" : [ {
-                              "r" : "230",
+                              "r" : "252",
                               "s" : [ {
-                                 "r" : "230",
+                                 "r" : "252",
                                  "s" : [ {
                                     "value" : [ "[","Condition","]" ]
                                  } ]
@@ -1358,31 +1851,31 @@ module.exports['MultiSourceQuery'] = {
                      }, {
                         "value" : [ "\n" ]
                      }, {
-                        "r" : "234",
+                        "r" : "268",
                         "s" : [ {
                            "value" : [ "where " ]
                         }, {
-                           "r" : "234",
+                           "r" : "268",
                            "s" : [ {
-                              "r" : "232",
+                              "r" : "260",
                               "s" : [ {
-                                 "r" : "231",
+                                 "r" : "259",
                                  "s" : [ {
                                     "value" : [ "E" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "232",
+                                 "r" : "260",
                                  "s" : [ {
                                     "value" : [ "period" ]
                                  } ]
                               } ]
                            }, {
-                              "r" : "234",
+                              "r" : "268",
                               "value" : [ " ","included in"," " ]
                            }, {
-                              "r" : "233",
+                              "r" : "265",
                               "s" : [ {
                                  "value" : [ "MeasurementPeriod" ]
                               } ]
@@ -1392,21 +1885,98 @@ module.exports['MultiSourceQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "291",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "292",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "293",
+                     "name" : "E",
+                     "elementType" : {
+                        "localId" : "294",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "295",
+                     "name" : "C",
+                     "elementType" : {
+                        "localId" : "296",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "241",
+               "localId" : "284",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "285",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "286",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "287",
+                        "name" : "E",
+                        "elementType" : {
+                           "localId" : "288",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "289",
+                        "name" : "C",
+                        "elementType" : {
+                           "localId" : "290",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
                "source" : [ {
-                  "localId" : "227",
+                  "localId" : "243",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "249",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "250",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "228",
+                     "localId" : "244",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "dateProperty" : "period",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "247",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "248",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "dateRange" : {
-                        "localId" : "233",
+                        "localId" : "265",
                         "name" : "MeasurementPeriod",
-                        "type" : "ParameterRef"
+                        "type" : "ParameterRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "266",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "267",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
                      },
                      "include" : [ ],
                      "codeFilter" : [ ],
@@ -1414,12 +1984,30 @@ module.exports['MultiSourceQuery'] = {
                      "otherFilter" : [ ]
                   }
                }, {
-                  "localId" : "229",
+                  "localId" : "251",
                   "alias" : "C",
+                  "resultTypeSpecifier" : {
+                     "localId" : "257",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "258",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "230",
+                     "localId" : "252",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "255",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "256",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -1429,22 +2017,22 @@ module.exports['MultiSourceQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "237",
+                  "localId" : "280",
                   "distinct" : true,
                   "expression" : {
-                     "localId" : "238",
+                     "localId" : "281",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "E",
                         "value" : {
-                           "localId" : "239",
+                           "localId" : "282",
                            "name" : "E",
                            "type" : "AliasRef"
                         }
                      }, {
                         "name" : "C",
                         "value" : {
-                           "localId" : "240",
+                           "localId" : "283",
                            "name" : "C",
                            "type" : "AliasRef"
                         }
@@ -1453,27 +2041,27 @@ module.exports['MultiSourceQuery'] = {
                }
             }
          }, {
-            "localId" : "243",
+            "localId" : "298",
             "name" : "msQueryWhere2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "243",
+                  "r" : "298",
                   "s" : [ {
                      "value" : [ "","define ","msQueryWhere2",": " ]
                   }, {
-                     "r" : "264",
+                     "r" : "350",
                      "s" : [ {
                         "s" : [ {
                            "value" : [ "from " ]
                         }, {
-                           "r" : "244",
+                           "r" : "299",
                            "s" : [ {
-                              "r" : "245",
+                              "r" : "300",
                               "s" : [ {
-                                 "r" : "245",
+                                 "r" : "300",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -1484,11 +2072,11 @@ module.exports['MultiSourceQuery'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "246",
+                           "r" : "307",
                            "s" : [ {
-                              "r" : "247",
+                              "r" : "308",
                               "s" : [ {
-                                 "r" : "247",
+                                 "r" : "308",
                                  "s" : [ {
                                     "value" : [ "[","Condition","]" ]
                                  } ]
@@ -1500,33 +2088,33 @@ module.exports['MultiSourceQuery'] = {
                      }, {
                         "value" : [ "\n" ]
                      }, {
-                        "r" : "248",
+                        "r" : "315",
                         "s" : [ {
                            "value" : [ "where  " ]
                         }, {
-                           "r" : "248",
+                           "r" : "315",
                            "s" : [ {
-                              "r" : "252",
+                              "r" : "325",
                               "s" : [ {
-                                 "r" : "250",
+                                 "r" : "317",
                                  "s" : [ {
-                                    "r" : "249",
+                                    "r" : "316",
                                     "s" : [ {
                                        "value" : [ "E" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "250",
+                                    "r" : "317",
                                     "s" : [ {
                                        "value" : [ "period" ]
                                     } ]
                                  } ]
                               }, {
-                                 "r" : "252",
+                                 "r" : "325",
                                  "value" : [ "  ","included in"," " ]
                               }, {
-                                 "r" : "251",
+                                 "r" : "322",
                                  "s" : [ {
                                     "value" : [ "MeasurementPeriod" ]
                                  } ]
@@ -1534,18 +2122,18 @@ module.exports['MultiSourceQuery'] = {
                            }, {
                               "value" : [ " and " ]
                            }, {
-                              "r" : "255",
+                              "r" : "337",
                               "s" : [ {
-                                 "r" : "257",
+                                 "r" : "339",
                                  "s" : [ {
-                                    "r" : "256",
+                                    "r" : "338",
                                     "s" : [ {
                                        "value" : [ "C" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "257",
+                                    "r" : "339",
                                     "s" : [ {
                                        "value" : [ "id" ]
                                     } ]
@@ -1553,7 +2141,7 @@ module.exports['MultiSourceQuery'] = {
                               }, {
                                  "value" : [ " ","="," " ]
                               }, {
-                                 "r" : "258",
+                                 "r" : "340",
                                  "s" : [ {
                                     "value" : [ "'http://cqframework.org/3/2'" ]
                                  } ]
@@ -1564,21 +2152,98 @@ module.exports['MultiSourceQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "357",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "358",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "359",
+                     "name" : "E",
+                     "elementType" : {
+                        "localId" : "360",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "361",
+                     "name" : "C",
+                     "elementType" : {
+                        "localId" : "362",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "264",
+               "localId" : "350",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "351",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "352",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "353",
+                        "name" : "E",
+                        "elementType" : {
+                           "localId" : "354",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "355",
+                        "name" : "C",
+                        "elementType" : {
+                           "localId" : "356",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
                "source" : [ {
-                  "localId" : "244",
+                  "localId" : "299",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "305",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "306",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "245",
+                     "localId" : "300",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "dateProperty" : "period",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "303",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "304",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "dateRange" : {
-                        "localId" : "251",
+                        "localId" : "322",
                         "name" : "MeasurementPeriod",
-                        "type" : "ParameterRef"
+                        "type" : "ParameterRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "323",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "324",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
                      },
                      "include" : [ ],
                      "codeFilter" : [ ],
@@ -1586,12 +2251,30 @@ module.exports['MultiSourceQuery'] = {
                      "otherFilter" : [ ]
                   }
                }, {
-                  "localId" : "246",
+                  "localId" : "307",
                   "alias" : "C",
+                  "resultTypeSpecifier" : {
+                     "localId" : "313",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "314",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "247",
+                     "localId" : "308",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "311",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "312",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -1601,38 +2284,49 @@ module.exports['MultiSourceQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "255",
+                  "localId" : "337",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Equal",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "341",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "342",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
-                     "localId" : "257",
+                     "localId" : "339",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "path" : "id",
                      "scope" : "C",
                      "type" : "Property"
                   }, {
-                     "localId" : "258",
+                     "localId" : "340",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "http://cqframework.org/3/2",
                      "type" : "Literal"
                   } ]
                },
                "return" : {
-                  "localId" : "260",
+                  "localId" : "346",
                   "distinct" : true,
                   "expression" : {
-                     "localId" : "261",
+                     "localId" : "347",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "E",
                         "value" : {
-                           "localId" : "262",
+                           "localId" : "348",
                            "name" : "E",
                            "type" : "AliasRef"
                         }
                      }, {
                         "name" : "C",
                         "value" : {
-                           "localId" : "263",
+                           "localId" : "349",
                            "name" : "C",
                            "type" : "AliasRef"
                         }
@@ -1641,27 +2335,27 @@ module.exports['MultiSourceQuery'] = {
                }
             }
          }, {
-            "localId" : "266",
+            "localId" : "364",
             "name" : "msQuery",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "266",
+                  "r" : "364",
                   "s" : [ {
                      "value" : [ "","define ","msQuery",": " ]
                   }, {
-                     "r" : "275",
+                     "r" : "396",
                      "s" : [ {
                         "s" : [ {
                            "value" : [ "from " ]
                         }, {
-                           "r" : "267",
+                           "r" : "365",
                            "s" : [ {
-                              "r" : "268",
+                              "r" : "366",
                               "s" : [ {
-                                 "r" : "268",
+                                 "r" : "366",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -1672,11 +2366,11 @@ module.exports['MultiSourceQuery'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "269",
+                           "r" : "373",
                            "s" : [ {
-                              "r" : "270",
+                              "r" : "374",
                               "s" : [ {
-                                 "r" : "270",
+                                 "r" : "374",
                                  "s" : [ {
                                     "value" : [ "[","Condition","]" ]
                                  } ]
@@ -1688,18 +2382,18 @@ module.exports['MultiSourceQuery'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "271",
+                        "r" : "381",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "272",
+                           "r" : "382",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "E",": " ]
                               }, {
-                                 "r" : "273",
+                                 "r" : "383",
                                  "s" : [ {
                                     "value" : [ "E" ]
                                  } ]
@@ -1710,7 +2404,7 @@ module.exports['MultiSourceQuery'] = {
                               "s" : [ {
                                  "value" : [ "C",":" ]
                               }, {
-                                 "r" : "274",
+                                 "r" : "384",
                                  "s" : [ {
                                     "value" : [ "C" ]
                                  } ]
@@ -1723,28 +2417,114 @@ module.exports['MultiSourceQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "403",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "404",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "405",
+                     "name" : "E",
+                     "elementType" : {
+                        "localId" : "406",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "407",
+                     "name" : "C",
+                     "elementType" : {
+                        "localId" : "408",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "275",
+               "localId" : "396",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "397",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "398",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "399",
+                        "name" : "E",
+                        "elementType" : {
+                           "localId" : "400",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "401",
+                        "name" : "C",
+                        "elementType" : {
+                           "localId" : "402",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
                "source" : [ {
-                  "localId" : "267",
+                  "localId" : "365",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "371",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "372",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "268",
+                     "localId" : "366",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "369",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "370",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
                      "otherFilter" : [ ]
                   }
                }, {
-                  "localId" : "269",
+                  "localId" : "373",
                   "alias" : "C",
+                  "resultTypeSpecifier" : {
+                     "localId" : "379",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "380",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "270",
+                     "localId" : "374",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "377",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "378",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -1754,21 +2534,69 @@ module.exports['MultiSourceQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "271",
+                  "localId" : "381",
+                  "resultTypeSpecifier" : {
+                     "localId" : "390",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "391",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "392",
+                           "name" : "E",
+                           "elementType" : {
+                              "localId" : "393",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "394",
+                           "name" : "C",
+                           "elementType" : {
+                              "localId" : "395",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "272",
+                     "localId" : "382",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "385",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "386",
+                           "name" : "E",
+                           "elementType" : {
+                              "localId" : "387",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "388",
+                           "name" : "C",
+                           "elementType" : {
+                              "localId" : "389",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "E",
                         "value" : {
-                           "localId" : "273",
+                           "localId" : "383",
+                           "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "name" : "E",
                            "type" : "AliasRef"
                         }
                      }, {
                         "name" : "C",
                         "value" : {
-                           "localId" : "274",
+                           "localId" : "384",
+                           "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                            "name" : "C",
                            "type" : "AliasRef"
                         }
@@ -1777,47 +2605,47 @@ module.exports['MultiSourceQuery'] = {
                }
             }
          }, {
-            "localId" : "277",
+            "localId" : "410",
             "name" : "multiSourceWithArrays",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "277",
+                  "r" : "410",
                   "s" : [ {
                      "value" : [ "","define ","multiSourceWithArrays",":\n  " ]
                   }, {
-                     "r" : "295",
+                     "r" : "449",
                      "s" : [ {
                         "s" : [ {
                            "value" : [ "from " ]
                         }, {
-                           "r" : "278",
+                           "r" : "411",
                            "s" : [ {
-                              "r" : "279",
+                              "r" : "412",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "279",
+                                 "r" : "412",
                                  "s" : [ {
                                     "value" : [ "List{" ]
                                  }, {
-                                    "r" : "280",
+                                    "r" : "413",
                                     "s" : [ {
                                        "value" : [ "'a'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "281",
+                                    "r" : "414",
                                     "s" : [ {
                                        "value" : [ "'b'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "282",
+                                    "r" : "415",
                                     "s" : [ {
                                        "value" : [ "'c'" ]
                                     } ]
@@ -1833,21 +2661,21 @@ module.exports['MultiSourceQuery'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "283",
+                           "r" : "422",
                            "s" : [ {
-                              "r" : "284",
+                              "r" : "423",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "284",
+                                 "r" : "423",
                                  "s" : [ {
                                     "value" : [ "List{" ]
                                  }, {
-                                    "r" : "285",
+                                    "r" : "424",
                                     "s" : [ {
                                        "value" : [ "{" ]
                                     }, {
-                                       "r" : "286",
+                                       "r" : "425",
                                        "s" : [ {
                                           "value" : [ "'x'" ]
                                        } ]
@@ -1857,11 +2685,11 @@ module.exports['MultiSourceQuery'] = {
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "287",
+                                    "r" : "428",
                                     "s" : [ {
                                        "value" : [ "{" ]
                                     }, {
-                                       "r" : "288",
+                                       "r" : "429",
                                        "s" : [ {
                                           "value" : [ "'y'" ]
                                        } ]
@@ -1871,11 +2699,11 @@ module.exports['MultiSourceQuery'] = {
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "289",
+                                    "r" : "432",
                                     "s" : [ {
                                        "value" : [ "{" ]
                                     }, {
-                                       "r" : "290",
+                                       "r" : "433",
                                        "s" : [ {
                                           "value" : [ "'z'" ]
                                        } ]
@@ -1896,61 +2724,196 @@ module.exports['MultiSourceQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "457",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "458",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "459",
+                     "name" : "A",
+                     "elementType" : {
+                        "localId" : "460",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "461",
+                     "name" : "X",
+                     "elementType" : {
+                        "localId" : "462",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "463",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "295",
+               "localId" : "449",
                "type" : "Query",
-               "source" : [ {
-                  "localId" : "278",
-                  "alias" : "A",
-                  "expression" : {
-                     "localId" : "279",
-                     "type" : "List",
+               "resultTypeSpecifier" : {
+                  "localId" : "450",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "451",
+                     "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "280",
+                        "localId" : "452",
+                        "name" : "A",
+                        "elementType" : {
+                           "localId" : "453",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "454",
+                        "name" : "X",
+                        "elementType" : {
+                           "localId" : "455",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "456",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     } ]
+                  }
+               },
+               "source" : [ {
+                  "localId" : "411",
+                  "alias" : "A",
+                  "resultTypeSpecifier" : {
+                     "localId" : "420",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "421",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "412",
+                     "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "418",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "419",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "element" : [ {
+                        "localId" : "413",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "a",
                         "type" : "Literal"
                      }, {
-                        "localId" : "281",
+                        "localId" : "414",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "b",
                         "type" : "Literal"
                      }, {
-                        "localId" : "282",
+                        "localId" : "415",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "c",
                         "type" : "Literal"
                      } ]
                   }
                }, {
-                  "localId" : "283",
+                  "localId" : "422",
                   "alias" : "X",
+                  "resultTypeSpecifier" : {
+                     "localId" : "442",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "443",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "444",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  },
                   "expression" : {
-                     "localId" : "284",
+                     "localId" : "423",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "439",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "440",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "441",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "285",
+                        "localId" : "424",
                         "type" : "List",
+                        "resultTypeSpecifier" : {
+                           "localId" : "426",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "427",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "element" : [ {
-                           "localId" : "286",
+                           "localId" : "425",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "x",
                            "type" : "Literal"
                         } ]
                      }, {
-                        "localId" : "287",
+                        "localId" : "428",
                         "type" : "List",
+                        "resultTypeSpecifier" : {
+                           "localId" : "430",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "431",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "element" : [ {
-                           "localId" : "288",
+                           "localId" : "429",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "y",
                            "type" : "Literal"
                         } ]
                      }, {
-                        "localId" : "289",
+                        "localId" : "432",
                         "type" : "List",
+                        "resultTypeSpecifier" : {
+                           "localId" : "434",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "435",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "element" : [ {
-                           "localId" : "290",
+                           "localId" : "433",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "z",
                            "type" : "Literal"
@@ -1961,22 +2924,22 @@ module.exports['MultiSourceQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "291",
+                  "localId" : "445",
                   "distinct" : true,
                   "expression" : {
-                     "localId" : "292",
+                     "localId" : "446",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "A",
                         "value" : {
-                           "localId" : "293",
+                           "localId" : "447",
                            "name" : "A",
                            "type" : "AliasRef"
                         }
                      }, {
                         "name" : "X",
                         "value" : {
-                           "localId" : "294",
+                           "localId" : "448",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -2010,14 +2973,14 @@ module.exports['QueryRelationship'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "248",
+            "r" : "308",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -2095,7 +3058,7 @@ module.exports['QueryRelationship'] = {
                   "s" : [ {
                      "value" : [ "","define ","withQuery",":  " ]
                   }, {
-                     "r" : "222",
+                     "r" : "238",
                      "s" : [ {
                         "s" : [ {
                            "r" : "213",
@@ -2114,142 +3077,15 @@ module.exports['QueryRelationship'] = {
                      }, {
                         "value" : [ "\n" ]
                      }, {
-                        "r" : "221",
+                        "r" : "235",
                         "s" : [ {
                            "value" : [ "with " ]
                         }, {
-                           "r" : "215",
+                           "r" : "221",
                            "s" : [ {
-                              "r" : "216",
+                              "r" : "222",
                               "s" : [ {
-                                 "r" : "216",
-                                 "s" : [ {
-                                    "value" : [ "[","Condition","]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","C" ]
-                           } ]
-                        }, {
-                           "value" : [ " such that " ]
-                        }, {
-                           "r" : "217",
-                           "s" : [ {
-                              "r" : "219",
-                              "s" : [ {
-                                 "r" : "218",
-                                 "s" : [ {
-                                    "value" : [ "C" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "219",
-                                 "s" : [ {
-                                    "value" : [ "id" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","="," " ]
-                           }, {
-                              "r" : "220",
-                              "s" : [ {
-                                 "value" : [ "'http://cqframework.org/3/2'" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "222",
-               "type" : "Query",
-               "source" : [ {
-                  "localId" : "213",
-                  "alias" : "E",
-                  "expression" : {
-                     "localId" : "214",
-                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
-                     "type" : "Retrieve",
-                     "include" : [ ],
-                     "codeFilter" : [ ],
-                     "dateFilter" : [ ],
-                     "otherFilter" : [ ]
-                  }
-               } ],
-               "let" : [ ],
-               "relationship" : [ {
-                  "localId" : "221",
-                  "alias" : "C",
-                  "type" : "With",
-                  "expression" : {
-                     "localId" : "216",
-                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
-                     "type" : "Retrieve",
-                     "include" : [ ],
-                     "codeFilter" : [ ],
-                     "dateFilter" : [ ],
-                     "otherFilter" : [ ]
-                  },
-                  "suchThat" : {
-                     "localId" : "217",
-                     "type" : "Equal",
-                     "signature" : [ ],
-                     "operand" : [ {
-                        "localId" : "219",
-                        "path" : "id",
-                        "scope" : "C",
-                        "type" : "Property"
-                     }, {
-                        "localId" : "220",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "http://cqframework.org/3/2",
-                        "type" : "Literal"
-                     } ]
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "224",
-            "name" : "withQuery2",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "224",
-                  "s" : [ {
-                     "value" : [ "","define ","withQuery2",":  " ]
-                  }, {
-                     "r" : "234",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "225",
-                           "s" : [ {
-                              "r" : "226",
-                              "s" : [ {
-                                 "r" : "226",
-                                 "s" : [ {
-                                    "value" : [ "[","Encounter","]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","E" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n" ]
-                     }, {
-                        "r" : "233",
-                        "s" : [ {
-                           "value" : [ "with " ]
-                        }, {
-                           "r" : "227",
-                           "s" : [ {
-                              "r" : "228",
-                              "s" : [ {
-                                 "r" : "228",
+                                 "r" : "222",
                                  "s" : [ {
                                     "value" : [ "[","Condition","]" ]
                                  } ]
@@ -2281,7 +3117,7 @@ module.exports['QueryRelationship'] = {
                            }, {
                               "r" : "232",
                               "s" : [ {
-                                 "value" : [ "'http://cqframework.org/3'" ]
+                                 "value" : [ "'http://cqframework.org/3/2'" ]
                               } ]
                            } ]
                         } ]
@@ -2289,16 +3125,52 @@ module.exports['QueryRelationship'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "241",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "242",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "234",
+               "localId" : "238",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "239",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "240",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "225",
+                  "localId" : "213",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "219",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "220",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "226",
+                     "localId" : "214",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "217",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "218",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -2307,13 +3179,31 @@ module.exports['QueryRelationship'] = {
                } ],
                "let" : [ ],
                "relationship" : [ {
-                  "localId" : "233",
+                  "localId" : "235",
                   "alias" : "C",
                   "type" : "With",
+                  "resultTypeSpecifier" : {
+                     "localId" : "236",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "237",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "228",
+                     "localId" : "222",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "225",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "226",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -2321,42 +3211,53 @@ module.exports['QueryRelationship'] = {
                   },
                   "suchThat" : {
                      "localId" : "229",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "233",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "234",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
                         "localId" : "231",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "id",
                         "scope" : "C",
                         "type" : "Property"
                      }, {
                         "localId" : "232",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "http://cqframework.org/3",
+                        "value" : "http://cqframework.org/3/2",
                         "type" : "Literal"
                      } ]
                   }
                } ]
             }
          }, {
-            "localId" : "236",
-            "name" : "withOutQuery",
+            "localId" : "244",
+            "name" : "withQuery2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "236",
+                  "r" : "244",
                   "s" : [ {
-                     "value" : [ "","define ","withOutQuery",":  " ]
+                     "value" : [ "","define ","withQuery2",":  " ]
                   }, {
-                     "r" : "246",
+                     "r" : "270",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "237",
+                           "r" : "245",
                            "s" : [ {
-                              "r" : "238",
+                              "r" : "246",
                               "s" : [ {
-                                 "r" : "238",
+                                 "r" : "246",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -2368,15 +3269,15 @@ module.exports['QueryRelationship'] = {
                      }, {
                         "value" : [ "\n" ]
                      }, {
-                        "r" : "245",
+                        "r" : "267",
                         "s" : [ {
-                           "value" : [ "without " ]
+                           "value" : [ "with " ]
                         }, {
-                           "r" : "239",
+                           "r" : "253",
                            "s" : [ {
-                              "r" : "240",
+                              "r" : "254",
                               "s" : [ {
-                                 "r" : "240",
+                                 "r" : "254",
                                  "s" : [ {
                                     "value" : [ "[","Condition","]" ]
                                  } ]
@@ -2387,18 +3288,18 @@ module.exports['QueryRelationship'] = {
                         }, {
                            "value" : [ " such that " ]
                         }, {
-                           "r" : "241",
+                           "r" : "261",
                            "s" : [ {
-                              "r" : "243",
+                              "r" : "263",
                               "s" : [ {
-                                 "r" : "242",
+                                 "r" : "262",
                                  "s" : [ {
                                     "value" : [ "C" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "243",
+                                 "r" : "263",
                                  "s" : [ {
                                     "value" : [ "id" ]
                                  } ]
@@ -2406,7 +3307,199 @@ module.exports['QueryRelationship'] = {
                            }, {
                               "value" : [ " ","="," " ]
                            }, {
-                              "r" : "244",
+                              "r" : "264",
+                              "s" : [ {
+                                 "value" : [ "'http://cqframework.org/3'" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "273",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "274",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "270",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "271",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "272",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "245",
+                  "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "251",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "252",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "246",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "249",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "250",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ {
+                  "localId" : "267",
+                  "alias" : "C",
+                  "type" : "With",
+                  "resultTypeSpecifier" : {
+                     "localId" : "268",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "269",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "254",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                     "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "257",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "258",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
+                  },
+                  "suchThat" : {
+                     "localId" : "261",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Equal",
+                     "signature" : [ {
+                        "localId" : "265",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "266",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "localId" : "263",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "path" : "id",
+                        "scope" : "C",
+                        "type" : "Property"
+                     }, {
+                        "localId" : "264",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "http://cqframework.org/3",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "276",
+            "name" : "withOutQuery",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "276",
+                  "s" : [ {
+                     "value" : [ "","define ","withOutQuery",":  " ]
+                  }, {
+                     "r" : "302",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "277",
+                           "s" : [ {
+                              "r" : "278",
+                              "s" : [ {
+                                 "r" : "278",
+                                 "s" : [ {
+                                    "value" : [ "[","Encounter","]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","E" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n" ]
+                     }, {
+                        "r" : "299",
+                        "s" : [ {
+                           "value" : [ "without " ]
+                        }, {
+                           "r" : "285",
+                           "s" : [ {
+                              "r" : "286",
+                              "s" : [ {
+                                 "r" : "286",
+                                 "s" : [ {
+                                    "value" : [ "[","Condition","]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","C" ]
+                           } ]
+                        }, {
+                           "value" : [ " such that " ]
+                        }, {
+                           "r" : "293",
+                           "s" : [ {
+                              "r" : "295",
+                              "s" : [ {
+                                 "r" : "294",
+                                 "s" : [ {
+                                    "value" : [ "C" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "295",
+                                 "s" : [ {
+                                    "value" : [ "id" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","="," " ]
+                           }, {
+                              "r" : "296",
                               "s" : [ {
                                  "value" : [ "'http://cqframework.org/3/'" ]
                               } ]
@@ -2416,16 +3509,52 @@ module.exports['QueryRelationship'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "305",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "306",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "246",
+               "localId" : "302",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "303",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "304",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "237",
+                  "localId" : "277",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "283",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "284",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "238",
+                     "localId" : "278",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "281",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "282",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -2434,29 +3563,58 @@ module.exports['QueryRelationship'] = {
                } ],
                "let" : [ ],
                "relationship" : [ {
-                  "localId" : "245",
+                  "localId" : "299",
                   "alias" : "C",
                   "type" : "Without",
+                  "resultTypeSpecifier" : {
+                     "localId" : "300",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "301",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "240",
+                     "localId" : "286",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "289",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "290",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
                      "otherFilter" : [ ]
                   },
                   "suchThat" : {
-                     "localId" : "241",
+                     "localId" : "293",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "297",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "298",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "243",
+                        "localId" : "295",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "id",
                         "scope" : "C",
                         "type" : "Property"
                      }, {
-                        "localId" : "244",
+                        "localId" : "296",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "http://cqframework.org/3/",
                         "type" : "Literal"
@@ -2465,25 +3623,25 @@ module.exports['QueryRelationship'] = {
                } ]
             }
          }, {
-            "localId" : "248",
+            "localId" : "308",
             "name" : "withOutQuery2",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "248",
+                  "r" : "308",
                   "s" : [ {
                      "value" : [ "","define ","withOutQuery2",":  " ]
                   }, {
-                     "r" : "258",
+                     "r" : "334",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "249",
+                           "r" : "309",
                            "s" : [ {
-                              "r" : "250",
+                              "r" : "310",
                               "s" : [ {
-                                 "r" : "250",
+                                 "r" : "310",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -2495,15 +3653,15 @@ module.exports['QueryRelationship'] = {
                      }, {
                         "value" : [ "\n" ]
                      }, {
-                        "r" : "257",
+                        "r" : "331",
                         "s" : [ {
                            "value" : [ "without " ]
                         }, {
-                           "r" : "251",
+                           "r" : "317",
                            "s" : [ {
-                              "r" : "252",
+                              "r" : "318",
                               "s" : [ {
-                                 "r" : "252",
+                                 "r" : "318",
                                  "s" : [ {
                                     "value" : [ "[","Condition","]" ]
                                  } ]
@@ -2514,18 +3672,18 @@ module.exports['QueryRelationship'] = {
                         }, {
                            "value" : [ " such that " ]
                         }, {
-                           "r" : "253",
+                           "r" : "325",
                            "s" : [ {
-                              "r" : "255",
+                              "r" : "327",
                               "s" : [ {
-                                 "r" : "254",
+                                 "r" : "326",
                                  "s" : [ {
                                     "value" : [ "C" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "255",
+                                 "r" : "327",
                                  "s" : [ {
                                     "value" : [ "id" ]
                                  } ]
@@ -2533,7 +3691,7 @@ module.exports['QueryRelationship'] = {
                            }, {
                               "value" : [ " ","="," " ]
                            }, {
-                              "r" : "256",
+                              "r" : "328",
                               "s" : [ {
                                  "value" : [ "'http://cqframework.org/3/2'" ]
                               } ]
@@ -2543,16 +3701,52 @@ module.exports['QueryRelationship'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "337",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "338",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "258",
+               "localId" : "334",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "335",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "336",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "249",
+                  "localId" : "309",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "315",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "316",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "250",
+                     "localId" : "310",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "313",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "314",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -2561,29 +3755,58 @@ module.exports['QueryRelationship'] = {
                } ],
                "let" : [ ],
                "relationship" : [ {
-                  "localId" : "257",
+                  "localId" : "331",
                   "alias" : "C",
                   "type" : "Without",
+                  "resultTypeSpecifier" : {
+                     "localId" : "332",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "333",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "252",
+                     "localId" : "318",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "321",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "322",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
                      "otherFilter" : [ ]
                   },
                   "suchThat" : {
-                     "localId" : "253",
+                     "localId" : "325",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "329",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "330",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "255",
+                        "localId" : "327",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "id",
                         "scope" : "C",
                         "type" : "Property"
                      }, {
-                        "localId" : "256",
+                        "localId" : "328",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "http://cqframework.org/3/2",
                         "type" : "Literal"
@@ -2609,9 +3832,9 @@ module.exports['QueryLet'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -2694,7 +3917,7 @@ module.exports['QueryLet'] = {
                   "s" : [ {
                      "value" : [ "","define ","query",":  " ]
                   }, {
-                     "r" : "221",
+                     "r" : "238",
                      "s" : [ {
                         "s" : [ {
                            "r" : "213",
@@ -2716,11 +3939,11 @@ module.exports['QueryLet'] = {
                         "s" : [ {
                            "value" : [ "let " ]
                         }, {
-                           "r" : "215",
+                           "r" : "221",
                            "s" : [ {
                               "value" : [ "a",": " ]
                            }, {
-                              "r" : "216",
+                              "r" : "222",
                               "s" : [ {
                                  "value" : [ "E" ]
                               } ]
@@ -2729,18 +3952,18 @@ module.exports['QueryLet'] = {
                      }, {
                         "value" : [ "\n" ]
                      }, {
-                        "r" : "217",
+                        "r" : "223",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "218",
+                           "r" : "224",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "E",": " ]
                               }, {
-                                 "r" : "219",
+                                 "r" : "225",
                                  "s" : [ {
                                     "value" : [ "E" ]
                                  } ]
@@ -2751,7 +3974,7 @@ module.exports['QueryLet'] = {
                               "s" : [ {
                                  "value" : [ "a",":" ]
                               }, {
-                                 "r" : "220",
+                                 "r" : "226",
                                  "s" : [ {
                                     "value" : [ "a" ]
                                  } ]
@@ -2764,16 +3987,84 @@ module.exports['QueryLet'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "245",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "246",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "247",
+                     "name" : "E",
+                     "elementType" : {
+                        "localId" : "248",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "249",
+                     "name" : "a",
+                     "elementType" : {
+                        "localId" : "250",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "221",
+               "localId" : "238",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "239",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "240",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "241",
+                        "name" : "E",
+                        "elementType" : {
+                           "localId" : "242",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "243",
+                        "name" : "a",
+                        "elementType" : {
+                           "localId" : "244",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
                "source" : [ {
                   "localId" : "213",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "219",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "220",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
                      "localId" : "214",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "217",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "218",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -2781,31 +4072,81 @@ module.exports['QueryLet'] = {
                   }
                } ],
                "let" : [ {
-                  "localId" : "215",
+                  "localId" : "221",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "identifier" : "a",
                   "expression" : {
-                     "localId" : "216",
+                     "localId" : "222",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "name" : "E",
                      "type" : "AliasRef"
                   }
                } ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "217",
+                  "localId" : "223",
+                  "resultTypeSpecifier" : {
+                     "localId" : "232",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "233",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "234",
+                           "name" : "E",
+                           "elementType" : {
+                              "localId" : "235",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "236",
+                           "name" : "a",
+                           "elementType" : {
+                              "localId" : "237",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "218",
+                     "localId" : "224",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "227",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "228",
+                           "name" : "E",
+                           "elementType" : {
+                              "localId" : "229",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "230",
+                           "name" : "a",
+                           "elementType" : {
+                              "localId" : "231",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "E",
                         "value" : {
-                           "localId" : "219",
+                           "localId" : "225",
+                           "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "name" : "E",
                            "type" : "AliasRef"
                         }
                      }, {
                         "name" : "a",
                         "value" : {
-                           "localId" : "220",
+                           "localId" : "226",
+                           "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "name" : "a",
                            "type" : "QueryLetRef"
                         }
@@ -2829,9 +4170,9 @@ module.exports['Tuple'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -2914,7 +4255,7 @@ module.exports['Tuple'] = {
                   "s" : [ {
                      "value" : [ "","define ","query",":  " ]
                   }, {
-                     "r" : "221",
+                     "r" : "238",
                      "s" : [ {
                         "s" : [ {
                            "r" : "213",
@@ -2933,27 +4274,27 @@ module.exports['Tuple'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "215",
+                        "r" : "221",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "216",
+                           "r" : "222",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "id",": " ]
                               }, {
-                                 "r" : "218",
+                                 "r" : "224",
                                  "s" : [ {
-                                    "r" : "217",
+                                    "r" : "223",
                                     "s" : [ {
                                        "value" : [ "E" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "218",
+                                    "r" : "224",
                                     "s" : [ {
                                        "value" : [ "id" ]
                                     } ]
@@ -2965,16 +4306,16 @@ module.exports['Tuple'] = {
                               "s" : [ {
                                  "value" : [ "thing",": " ]
                               }, {
-                                 "r" : "220",
+                                 "r" : "226",
                                  "s" : [ {
-                                    "r" : "219",
+                                    "r" : "225",
                                     "s" : [ {
                                        "value" : [ "E" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "220",
+                                    "r" : "226",
                                     "s" : [ {
                                        "value" : [ "status" ]
                                     } ]
@@ -2988,16 +4329,84 @@ module.exports['Tuple'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "245",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "246",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "247",
+                     "name" : "id",
+                     "elementType" : {
+                        "localId" : "248",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "249",
+                     "name" : "thing",
+                     "elementType" : {
+                        "localId" : "250",
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "221",
+               "localId" : "238",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "239",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "240",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "241",
+                        "name" : "id",
+                        "elementType" : {
+                           "localId" : "242",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "243",
+                        "name" : "thing",
+                        "elementType" : {
+                           "localId" : "244",
+                           "name" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
                "source" : [ {
                   "localId" : "213",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "219",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "220",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
                      "localId" : "214",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "217",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "218",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -3007,14 +4416,61 @@ module.exports['Tuple'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "215",
+                  "localId" : "221",
+                  "resultTypeSpecifier" : {
+                     "localId" : "232",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "233",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "234",
+                           "name" : "id",
+                           "elementType" : {
+                              "localId" : "235",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "236",
+                           "name" : "thing",
+                           "elementType" : {
+                              "localId" : "237",
+                              "name" : "{urn:hl7-org:elm-types:r1}Code",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "216",
+                     "localId" : "222",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "227",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "228",
+                           "name" : "id",
+                           "elementType" : {
+                              "localId" : "229",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "230",
+                           "name" : "thing",
+                           "elementType" : {
+                              "localId" : "231",
+                              "name" : "{urn:hl7-org:elm-types:r1}Code",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "id",
                         "value" : {
-                           "localId" : "218",
+                           "localId" : "224",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "path" : "id",
                            "scope" : "E",
                            "type" : "Property"
@@ -3022,7 +4478,8 @@ module.exports['Tuple'] = {
                      }, {
                         "name" : "thing",
                         "value" : {
-                           "localId" : "220",
+                           "localId" : "226",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                            "path" : "status",
                            "scope" : "E",
                            "type" : "Property"
@@ -3047,9 +4504,9 @@ module.exports['QueryFilterNulls'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -3132,7 +4589,7 @@ module.exports['QueryFilterNulls'] = {
                   "s" : [ {
                      "value" : [ "","define ","query",":  " ]
                   }, {
-                     "r" : "226",
+                     "r" : "234",
                      "s" : [ {
                         "s" : [ {
                            "r" : "213",
@@ -3172,13 +4629,13 @@ module.exports['QueryFilterNulls'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "225",
+                        "r" : "232",
                         "s" : [ {
                            "value" : [ "where " ]
                         }, {
-                           "r" : "225",
+                           "r" : "232",
                            "s" : [ {
-                              "r" : "223",
+                              "r" : "229",
                               "s" : [ {
                                  "value" : [ "I" ]
                               } ]
@@ -3190,15 +4647,51 @@ module.exports['QueryFilterNulls'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "237",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "238",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "226",
+               "localId" : "234",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "235",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "236",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
                   "localId" : "213",
                   "alias" : "I",
+                  "resultTypeSpecifier" : {
+                     "localId" : "227",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "228",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
                      "localId" : "214",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "225",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "226",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
                         "localId" : "220",
                         "asType" : "{urn:hl7-org:elm-types:r1}String",
@@ -3206,10 +4699,12 @@ module.exports['QueryFilterNulls'] = {
                         "signature" : [ ],
                         "operand" : {
                            "localId" : "215",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                            "type" : "Null"
                         }
                      }, {
                         "localId" : "216",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "One",
                         "type" : "Literal"
@@ -3220,10 +4715,12 @@ module.exports['QueryFilterNulls'] = {
                         "signature" : [ ],
                         "operand" : {
                            "localId" : "217",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                            "type" : "Null"
                         }
                      }, {
                         "localId" : "218",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "Two",
                         "type" : "Literal"
@@ -3234,6 +4731,7 @@ module.exports['QueryFilterNulls'] = {
                         "signature" : [ ],
                         "operand" : {
                            "localId" : "219",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                            "type" : "Null"
                         }
                      } ]
@@ -3242,15 +4740,26 @@ module.exports['QueryFilterNulls'] = {
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "225",
+                  "localId" : "232",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Not",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "233",
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
-                     "localId" : "224",
+                     "localId" : "230",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IsNull",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "231",
+                        "name" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : {
-                        "localId" : "223",
+                        "localId" : "229",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "I",
                         "type" : "AliasRef"
                      }
@@ -3296,14 +4805,14 @@ module.exports['Sorting'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "560",
+            "r" : "903",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3381,7 +4890,7 @@ module.exports['Sorting'] = {
                   "s" : [ {
                      "value" : [ "","define ","QuantityListAsc",": " ]
                   }, {
-                     "r" : "230",
+                     "r" : "244",
                      "s" : [ {
                         "s" : [ {
                            "r" : "213",
@@ -3394,7 +4903,7 @@ module.exports['Sorting'] = {
                                  "s" : [ {
                                     "value" : [ "{ " ]
                                  }, {
-                                    "r" : "218",
+                                    "r" : "219",
                                     "s" : [ {
                                        "value" : [ "ToQuantity","(" ]
                                     }, {
@@ -3408,11 +4917,11 @@ module.exports['Sorting'] = {
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "222",
+                                    "r" : "225",
                                     "s" : [ {
                                        "value" : [ "ToQuantity","(" ]
                                     }, {
-                                       "r" : "219",
+                                       "r" : "221",
                                        "s" : [ {
                                           "value" : [ "'2 \\'m\\''" ]
                                        } ]
@@ -3432,47 +4941,95 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "223",
+                        "r" : "233",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "224",
+                           "r" : "234",
                            "s" : [ {
                               "value" : [ "S" ]
                            } ]
                         } ]
                      }, {
-                        "r" : "225",
+                        "r" : "237",
                         "value" : [ " ","sort asc" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "247",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "248",
+                  "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "230",
+               "localId" : "244",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "245",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "246",
+                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
                   "localId" : "213",
                   "alias" : "S",
+                  "resultTypeSpecifier" : {
+                     "localId" : "231",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "232",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
                      "localId" : "214",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "229",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "230",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "218",
+                        "localId" : "219",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "ToQuantity",
-                        "signature" : [ ],
+                        "signature" : [ {
+                           "localId" : "220",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
                            "localId" : "215",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "10 'm'",
                            "type" : "Literal"
                         }
                      }, {
-                        "localId" : "222",
+                        "localId" : "225",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "ToQuantity",
-                        "signature" : [ ],
+                        "signature" : [ {
+                           "localId" : "226",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
-                           "localId" : "219",
+                           "localId" : "221",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "2 'm'",
                            "type" : "Literal"
@@ -3483,52 +5040,62 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "223",
+                  "localId" : "233",
+                  "resultTypeSpecifier" : {
+                     "localId" : "235",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "236",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "224",
+                     "localId" : "234",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "name" : "S",
                      "type" : "AliasRef"
                   }
                },
                "sort" : {
-                  "localId" : "225",
+                  "localId" : "237",
                   "by" : [ {
-                     "localId" : "226",
+                     "localId" : "238",
                      "direction" : "asc",
                      "type" : "ByDirection"
                   } ]
                }
             }
          }, {
-            "localId" : "232",
+            "localId" : "250",
             "name" : "QuantityListSort",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "232",
+                  "r" : "250",
                   "s" : [ {
                      "value" : [ "","define ","QuantityListSort",": " ]
                   }, {
-                     "r" : "252",
+                     "r" : "289",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "233",
+                           "r" : "251",
                            "s" : [ {
-                              "r" : "234",
+                              "r" : "252",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "234",
+                                 "r" : "252",
                                  "s" : [ {
                                     "value" : [ "{ " ]
                                  }, {
-                                    "r" : "238",
+                                    "r" : "257",
                                     "s" : [ {
                                        "value" : [ "ToQuantity","(" ]
                                     }, {
-                                       "r" : "235",
+                                       "r" : "253",
                                        "s" : [ {
                                           "value" : [ "'10 \\'m\\''" ]
                                        } ]
@@ -3538,11 +5105,11 @@ module.exports['Sorting'] = {
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "242",
+                                    "r" : "263",
                                     "s" : [ {
                                        "value" : [ "ToQuantity","(" ]
                                     }, {
-                                       "r" : "239",
+                                       "r" : "259",
                                        "s" : [ {
                                           "value" : [ "'2 \\'m\\''" ]
                                        } ]
@@ -3562,18 +5129,18 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "243",
+                        "r" : "271",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "244",
+                           "r" : "272",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "N",": " ]
                               }, {
-                                 "r" : "245",
+                                 "r" : "273",
                                  "s" : [ {
                                     "value" : [ "N" ]
                                  } ]
@@ -3585,17 +5152,17 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "248",
+                        "r" : "283",
                         "s" : [ {
                            "value" : [ "sort by " ]
                         }, {
-                           "r" : "247",
+                           "r" : "282",
                            "s" : [ {
-                              "r" : "246",
+                              "r" : "281",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "246",
+                                 "r" : "281",
                                  "s" : [ {
                                     "value" : [ "N" ]
                                  } ]
@@ -3608,31 +5175,95 @@ module.exports['Sorting'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "294",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "295",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "296",
+                     "name" : "N",
+                     "elementType" : {
+                        "localId" : "297",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "252",
+               "localId" : "289",
                "type" : "Query",
-               "source" : [ {
-                  "localId" : "233",
-                  "alias" : "N",
-                  "expression" : {
-                     "localId" : "234",
-                     "type" : "List",
+               "resultTypeSpecifier" : {
+                  "localId" : "290",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "291",
+                     "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "238",
+                        "localId" : "292",
+                        "name" : "N",
+                        "elementType" : {
+                           "localId" : "293",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
+               "source" : [ {
+                  "localId" : "251",
+                  "alias" : "N",
+                  "resultTypeSpecifier" : {
+                     "localId" : "269",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "270",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "252",
+                     "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "267",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "268",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "element" : [ {
+                        "localId" : "257",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "ToQuantity",
-                        "signature" : [ ],
+                        "signature" : [ {
+                           "localId" : "258",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
-                           "localId" : "235",
+                           "localId" : "253",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "10 'm'",
                            "type" : "Literal"
                         }
                      }, {
-                        "localId" : "242",
+                        "localId" : "263",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "ToQuantity",
-                        "signature" : [ ],
+                        "signature" : [ {
+                           "localId" : "264",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
-                           "localId" : "239",
+                           "localId" : "259",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "2 'm'",
                            "type" : "Literal"
@@ -3643,14 +5274,45 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "243",
+                  "localId" : "271",
+                  "resultTypeSpecifier" : {
+                     "localId" : "277",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "278",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "279",
+                           "name" : "N",
+                           "elementType" : {
+                              "localId" : "280",
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "244",
+                     "localId" : "272",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "274",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "275",
+                           "name" : "N",
+                           "elementType" : {
+                              "localId" : "276",
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "N",
                         "value" : {
-                           "localId" : "245",
+                           "localId" : "273",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "name" : "N",
                            "type" : "AliasRef"
                         }
@@ -3658,9 +5320,10 @@ module.exports['Sorting'] = {
                   }
                },
                "sort" : {
-                  "localId" : "248",
+                  "localId" : "283",
                   "by" : [ {
-                     "localId" : "247",
+                     "localId" : "282",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "direction" : "asc",
                      "path" : "N",
                      "type" : "ByColumn"
@@ -3668,25 +5331,25 @@ module.exports['Sorting'] = {
                }
             }
          }, {
-            "localId" : "254",
+            "localId" : "299",
             "name" : "TupleAsc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "254",
+                  "r" : "299",
                   "s" : [ {
                      "value" : [ "","define ","TupleAsc",": " ]
                   }, {
-                     "r" : "263",
+                     "r" : "316",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "255",
+                           "r" : "300",
                            "s" : [ {
-                              "r" : "256",
+                              "r" : "301",
                               "s" : [ {
-                                 "r" : "256",
+                                 "r" : "301",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -3698,13 +5361,13 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "259",
+                        "r" : "310",
                         "s" : [ {
                            "value" : [ "sort by " ]
                         }, {
-                           "r" : "258",
+                           "r" : "309",
                            "s" : [ {
-                              "r" : "257",
+                              "r" : "308",
                               "s" : [ {
                                  "value" : [ "id" ]
                               } ]
@@ -3714,16 +5377,52 @@ module.exports['Sorting'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "319",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "320",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "263",
+               "localId" : "316",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "317",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "318",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "255",
+                  "localId" : "300",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "306",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "307",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "256",
+                     "localId" : "301",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "304",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "305",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -3733,9 +5432,10 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "sort" : {
-                  "localId" : "259",
+                  "localId" : "310",
                   "by" : [ {
-                     "localId" : "258",
+                     "localId" : "309",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "direction" : "asc",
                      "path" : "id",
                      "type" : "ByColumn"
@@ -3743,25 +5443,25 @@ module.exports['Sorting'] = {
                }
             }
          }, {
-            "localId" : "265",
+            "localId" : "322",
             "name" : "TupleReturnAsc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "265",
+                  "r" : "322",
                   "s" : [ {
                      "value" : [ "","define ","TupleReturnAsc",": " ]
                   }, {
-                     "r" : "276",
+                     "r" : "343",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "266",
+                           "r" : "323",
                            "s" : [ {
-                              "r" : "267",
+                              "r" : "324",
                               "s" : [ {
-                                 "r" : "267",
+                                 "r" : "324",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -3773,11 +5473,11 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "268",
+                        "r" : "331",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "269",
+                           "r" : "332",
                            "s" : [ {
                               "value" : [ "E" ]
                            } ]
@@ -3785,13 +5485,13 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "272",
+                        "r" : "337",
                         "s" : [ {
                            "value" : [ "sort by " ]
                         }, {
-                           "r" : "271",
+                           "r" : "336",
                            "s" : [ {
-                              "r" : "270",
+                              "r" : "335",
                               "s" : [ {
                                  "value" : [ "id" ]
                               } ]
@@ -3801,16 +5501,52 @@ module.exports['Sorting'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "346",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "347",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "276",
+               "localId" : "343",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "344",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "345",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "266",
+                  "localId" : "323",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "329",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "330",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "267",
+                     "localId" : "324",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "327",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "328",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -3820,17 +5556,28 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "268",
+                  "localId" : "331",
+                  "resultTypeSpecifier" : {
+                     "localId" : "333",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "334",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "269",
+                     "localId" : "332",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "name" : "E",
                      "type" : "AliasRef"
                   }
                },
                "sort" : {
-                  "localId" : "272",
+                  "localId" : "337",
                   "by" : [ {
-                     "localId" : "271",
+                     "localId" : "336",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "direction" : "asc",
                      "path" : "id",
                      "type" : "ByColumn"
@@ -3838,25 +5585,25 @@ module.exports['Sorting'] = {
                }
             }
          }, {
-            "localId" : "278",
+            "localId" : "349",
             "name" : "TupleReturnTupleAsc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "278",
+                  "r" : "349",
                   "s" : [ {
                      "value" : [ "","define ","TupleReturnTupleAsc",": " ]
                   }, {
-                     "r" : "291",
+                     "r" : "377",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "279",
+                           "r" : "350",
                            "s" : [ {
-                              "r" : "280",
+                              "r" : "351",
                               "s" : [ {
-                                 "r" : "280",
+                                 "r" : "351",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -3868,18 +5615,18 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "281",
+                        "r" : "358",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "282",
+                           "r" : "359",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "E"," : " ]
                               }, {
-                                 "r" : "283",
+                                 "r" : "360",
                                  "s" : [ {
                                     "value" : [ "E" ]
                                  } ]
@@ -3891,22 +5638,22 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "287",
+                        "r" : "371",
                         "s" : [ {
                            "value" : [ "sort by " ]
                         }, {
-                           "r" : "286",
+                           "r" : "370",
                            "s" : [ {
-                              "r" : "285",
+                              "r" : "369",
                               "s" : [ {
-                                 "r" : "284",
+                                 "r" : "368",
                                  "s" : [ {
                                     "value" : [ "E" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "285",
+                                 "r" : "369",
                                  "s" : [ {
                                     "value" : [ "id" ]
                                  } ]
@@ -3917,16 +5664,68 @@ module.exports['Sorting'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "382",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "383",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "384",
+                     "name" : "E",
+                     "elementType" : {
+                        "localId" : "385",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "291",
+               "localId" : "377",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "378",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "379",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "380",
+                        "name" : "E",
+                        "elementType" : {
+                           "localId" : "381",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
                "source" : [ {
-                  "localId" : "279",
+                  "localId" : "350",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "356",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "357",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "280",
+                     "localId" : "351",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "354",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "355",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -3936,14 +5735,45 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "281",
+                  "localId" : "358",
+                  "resultTypeSpecifier" : {
+                     "localId" : "364",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "365",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "366",
+                           "name" : "E",
+                           "elementType" : {
+                              "localId" : "367",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "282",
+                     "localId" : "359",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "361",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "362",
+                           "name" : "E",
+                           "elementType" : {
+                              "localId" : "363",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "E",
                         "value" : {
-                           "localId" : "283",
+                           "localId" : "360",
+                           "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "name" : "E",
                            "type" : "AliasRef"
                         }
@@ -3951,17 +5781,20 @@ module.exports['Sorting'] = {
                   }
                },
                "sort" : {
-                  "localId" : "287",
+                  "localId" : "371",
                   "by" : [ {
-                     "localId" : "286",
+                     "localId" : "370",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "direction" : "asc",
                      "type" : "ByExpression",
                      "expression" : {
-                        "localId" : "285",
+                        "localId" : "369",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "id",
                         "type" : "Property",
                         "source" : {
-                           "localId" : "284",
+                           "localId" : "368",
+                           "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "name" : "E",
                            "type" : "IdentifierRef"
                         }
@@ -3970,25 +5803,25 @@ module.exports['Sorting'] = {
                }
             }
          }, {
-            "localId" : "293",
+            "localId" : "387",
             "name" : "TupleDesc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "293",
+                  "r" : "387",
                   "s" : [ {
                      "value" : [ "","define ","TupleDesc",": " ]
                   }, {
-                     "r" : "302",
+                     "r" : "404",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "294",
+                           "r" : "388",
                            "s" : [ {
-                              "r" : "295",
+                              "r" : "389",
                               "s" : [ {
-                                 "r" : "295",
+                                 "r" : "389",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -4000,13 +5833,13 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "298",
+                        "r" : "398",
                         "s" : [ {
                            "value" : [ "sort by " ]
                         }, {
-                           "r" : "297",
+                           "r" : "397",
                            "s" : [ {
-                              "r" : "296",
+                              "r" : "396",
                               "s" : [ {
                                  "value" : [ "id" ]
                               } ]
@@ -4018,16 +5851,52 @@ module.exports['Sorting'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "407",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "408",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "302",
+               "localId" : "404",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "405",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "406",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "294",
+                  "localId" : "388",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "394",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "395",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "295",
+                     "localId" : "389",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "392",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "393",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -4037,9 +5906,10 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "sort" : {
-                  "localId" : "298",
+                  "localId" : "398",
                   "by" : [ {
-                     "localId" : "297",
+                     "localId" : "397",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "direction" : "desc",
                      "path" : "id",
                      "type" : "ByColumn"
@@ -4047,25 +5917,25 @@ module.exports['Sorting'] = {
                }
             }
          }, {
-            "localId" : "304",
+            "localId" : "410",
             "name" : "TupleReturnDesc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "304",
+                  "r" : "410",
                   "s" : [ {
                      "value" : [ "","define ","TupleReturnDesc",": " ]
                   }, {
-                     "r" : "315",
+                     "r" : "431",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "305",
+                           "r" : "411",
                            "s" : [ {
-                              "r" : "306",
+                              "r" : "412",
                               "s" : [ {
-                                 "r" : "306",
+                                 "r" : "412",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -4077,11 +5947,11 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "307",
+                        "r" : "419",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "308",
+                           "r" : "420",
                            "s" : [ {
                               "value" : [ "E" ]
                            } ]
@@ -4089,13 +5959,13 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "311",
+                        "r" : "425",
                         "s" : [ {
                            "value" : [ "sort by " ]
                         }, {
-                           "r" : "310",
+                           "r" : "424",
                            "s" : [ {
-                              "r" : "309",
+                              "r" : "423",
                               "s" : [ {
                                  "value" : [ "id" ]
                               } ]
@@ -4107,16 +5977,52 @@ module.exports['Sorting'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "434",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "435",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "315",
+               "localId" : "431",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "432",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "433",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "305",
+                  "localId" : "411",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "417",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "418",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "306",
+                     "localId" : "412",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "415",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "416",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -4126,17 +6032,28 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "307",
+                  "localId" : "419",
+                  "resultTypeSpecifier" : {
+                     "localId" : "421",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "422",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "308",
+                     "localId" : "420",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "name" : "E",
                      "type" : "AliasRef"
                   }
                },
                "sort" : {
-                  "localId" : "311",
+                  "localId" : "425",
                   "by" : [ {
-                     "localId" : "310",
+                     "localId" : "424",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "direction" : "desc",
                      "path" : "id",
                      "type" : "ByColumn"
@@ -4144,25 +6061,25 @@ module.exports['Sorting'] = {
                }
             }
          }, {
-            "localId" : "317",
+            "localId" : "437",
             "name" : "TupleReturnTupleDesc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "317",
+                  "r" : "437",
                   "s" : [ {
                      "value" : [ "","define ","TupleReturnTupleDesc",":  " ]
                   }, {
-                     "r" : "330",
+                     "r" : "465",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "318",
+                           "r" : "438",
                            "s" : [ {
-                              "r" : "319",
+                              "r" : "439",
                               "s" : [ {
-                                 "r" : "319",
+                                 "r" : "439",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -4174,18 +6091,18 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "320",
+                        "r" : "446",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "321",
+                           "r" : "447",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "E"," : " ]
                               }, {
-                                 "r" : "322",
+                                 "r" : "448",
                                  "s" : [ {
                                     "value" : [ "E" ]
                                  } ]
@@ -4197,22 +6114,22 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "326",
+                        "r" : "459",
                         "s" : [ {
                            "value" : [ "sort by " ]
                         }, {
-                           "r" : "325",
+                           "r" : "458",
                            "s" : [ {
-                              "r" : "324",
+                              "r" : "457",
                               "s" : [ {
-                                 "r" : "323",
+                                 "r" : "456",
                                  "s" : [ {
                                     "value" : [ "E" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "324",
+                                 "r" : "457",
                                  "s" : [ {
                                     "value" : [ "id" ]
                                  } ]
@@ -4225,16 +6142,68 @@ module.exports['Sorting'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "470",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "471",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "472",
+                     "name" : "E",
+                     "elementType" : {
+                        "localId" : "473",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "330",
+               "localId" : "465",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "466",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "467",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "468",
+                        "name" : "E",
+                        "elementType" : {
+                           "localId" : "469",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
                "source" : [ {
-                  "localId" : "318",
+                  "localId" : "438",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "444",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "445",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "319",
+                     "localId" : "439",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "442",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "443",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -4244,14 +6213,45 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "320",
+                  "localId" : "446",
+                  "resultTypeSpecifier" : {
+                     "localId" : "452",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "453",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "454",
+                           "name" : "E",
+                           "elementType" : {
+                              "localId" : "455",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "321",
+                     "localId" : "447",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "449",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "450",
+                           "name" : "E",
+                           "elementType" : {
+                              "localId" : "451",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "E",
                         "value" : {
-                           "localId" : "322",
+                           "localId" : "448",
+                           "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "name" : "E",
                            "type" : "AliasRef"
                         }
@@ -4259,17 +6259,20 @@ module.exports['Sorting'] = {
                   }
                },
                "sort" : {
-                  "localId" : "326",
+                  "localId" : "459",
                   "by" : [ {
-                     "localId" : "325",
+                     "localId" : "458",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "direction" : "desc",
                      "type" : "ByExpression",
                      "expression" : {
-                        "localId" : "324",
+                        "localId" : "457",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "id",
                         "type" : "Property",
                         "source" : {
-                           "localId" : "323",
+                           "localId" : "456",
+                           "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "name" : "E",
                            "type" : "IdentifierRef"
                         }
@@ -4278,25 +6281,25 @@ module.exports['Sorting'] = {
                }
             }
          }, {
-            "localId" : "332",
+            "localId" : "475",
             "name" : "ConditionDates",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "332",
+                  "r" : "475",
                   "s" : [ {
                      "value" : [ "","define ","ConditionDates",": " ]
                   }, {
-                     "r" : "339",
+                     "r" : "494",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "333",
+                           "r" : "476",
                            "s" : [ {
-                              "r" : "334",
+                              "r" : "477",
                               "s" : [ {
-                                 "r" : "334",
+                                 "r" : "477",
                                  "s" : [ {
                                     "value" : [ "[","Condition","]" ]
                                  } ]
@@ -4308,22 +6311,22 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "335",
+                        "r" : "484",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "338",
+                           "r" : "491",
                            "s" : [ {
-                              "r" : "337",
+                              "r" : "486",
                               "s" : [ {
-                                 "r" : "336",
+                                 "r" : "485",
                                  "s" : [ {
                                     "value" : [ "C" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "337",
+                                 "r" : "486",
                                  "s" : [ {
                                     "value" : [ "period" ]
                                  } ]
@@ -4331,7 +6334,7 @@ module.exports['Sorting'] = {
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "338",
+                              "r" : "491",
                               "s" : [ {
                                  "value" : [ "low" ]
                               } ]
@@ -4341,16 +6344,52 @@ module.exports['Sorting'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "497",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "498",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "339",
+               "localId" : "494",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "495",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "496",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "333",
+                  "localId" : "476",
                   "alias" : "C",
+                  "resultTypeSpecifier" : {
+                     "localId" : "482",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "483",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "334",
+                     "localId" : "477",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "480",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "481",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -4360,37 +6399,57 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "335",
+                  "localId" : "484",
+                  "resultTypeSpecifier" : {
+                     "localId" : "492",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "493",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "338",
+                     "localId" : "491",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "path" : "low",
                      "type" : "Property",
                      "source" : {
-                        "localId" : "337",
+                        "localId" : "486",
                         "path" : "period",
                         "scope" : "C",
-                        "type" : "Property"
+                        "type" : "Property",
+                        "resultTypeSpecifier" : {
+                           "localId" : "489",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "490",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
                      }
                   }
                }
             }
          }, {
-            "localId" : "341",
+            "localId" : "500",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "lastDateUnsorted",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "341",
+                  "r" : "500",
                   "s" : [ {
                      "value" : [ "","define ","lastDateUnsorted",": " ]
                   }, {
-                     "r" : "345",
+                     "r" : "508",
                      "s" : [ {
                         "value" : [ "Last","(" ]
                      }, {
-                        "r" : "342",
+                        "r" : "501",
                         "s" : [ {
                            "value" : [ "\"ConditionDates\"" ]
                         } ]
@@ -4401,37 +6460,56 @@ module.exports['Sorting'] = {
                }
             } ],
             "expression" : {
-               "localId" : "345",
+               "localId" : "508",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "Last",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "509",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "510",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "source" : {
-                  "localId" : "342",
+                  "localId" : "501",
                   "name" : "ConditionDates",
-                  "type" : "ExpressionRef"
+                  "type" : "ExpressionRef",
+                  "resultTypeSpecifier" : {
+                     "localId" : "502",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "503",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
                }
             }
          }, {
-            "localId" : "347",
+            "localId" : "512",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "lastDateByThis",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "347",
+                  "r" : "512",
                   "s" : [ {
                      "value" : [ "","define ","lastDateByThis",": " ]
                   }, {
-                     "r" : "359",
+                     "r" : "534",
                      "s" : [ {
                         "value" : [ "Last","(" ]
                      }, {
-                        "r" : "356",
+                        "r" : "527",
                         "s" : [ {
                            "s" : [ {
-                              "r" : "348",
+                              "r" : "513",
                               "s" : [ {
-                                 "r" : "349",
+                                 "r" : "514",
                                  "s" : [ {
                                     "s" : [ {
                                        "value" : [ "\"ConditionDates\"" ]
@@ -4444,13 +6522,13 @@ module.exports['Sorting'] = {
                         }, {
                            "value" : [ " " ]
                         }, {
-                           "r" : "352",
+                           "r" : "521",
                            "s" : [ {
                               "value" : [ "sort by " ]
                            }, {
-                              "r" : "351",
+                              "r" : "520",
                               "s" : [ {
-                                 "r" : "350",
+                                 "r" : "519",
                                  "value" : [ "$this" ]
                               } ]
                            } ]
@@ -4462,27 +6540,64 @@ module.exports['Sorting'] = {
                }
             } ],
             "expression" : {
-               "localId" : "359",
+               "localId" : "534",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "Last",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "535",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "536",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "source" : {
-                  "localId" : "356",
+                  "localId" : "527",
                   "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "localId" : "528",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "529",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "source" : [ {
-                     "localId" : "348",
+                     "localId" : "513",
                      "alias" : "CD",
+                     "resultTypeSpecifier" : {
+                        "localId" : "517",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "518",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "expression" : {
-                        "localId" : "349",
+                        "localId" : "514",
                         "name" : "ConditionDates",
-                        "type" : "ExpressionRef"
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "515",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "516",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
                      }
                   } ],
                   "let" : [ ],
                   "relationship" : [ ],
                   "sort" : {
-                     "localId" : "352",
+                     "localId" : "521",
                      "by" : [ {
-                        "localId" : "351",
+                        "localId" : "520",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "direction" : "asc",
                         "path" : "$this",
                         "type" : "ByColumn"
@@ -4491,29 +6606,29 @@ module.exports['Sorting'] = {
                }
             }
          }, {
-            "localId" : "361",
+            "localId" : "538",
             "name" : "numberAsc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "361",
+                  "r" : "538",
                   "s" : [ {
                      "value" : [ "","define ","numberAsc",": " ]
                   }, {
-                     "r" : "376",
+                     "r" : "561",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "362",
+                           "r" : "539",
                            "s" : [ {
-                              "r" : "363",
+                              "r" : "540",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "363",
+                                 "r" : "540",
                                  "s" : [ {
-                                    "r" : "364",
+                                    "r" : "541",
                                     "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
                                  } ]
                               }, {
@@ -4524,53 +6639,96 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
-                        "r" : "371",
+                        "r" : "554",
                         "value" : [ " ","sort asc" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "564",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "565",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "376",
+               "localId" : "561",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "562",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "563",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "362",
+                  "localId" : "539",
                   "alias" : "N",
+                  "resultTypeSpecifier" : {
+                     "localId" : "552",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "553",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "363",
+                     "localId" : "540",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "550",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "551",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "364",
+                        "localId" : "541",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "8",
                         "type" : "Literal"
                      }, {
-                        "localId" : "365",
+                        "localId" : "542",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "6",
                         "type" : "Literal"
                      }, {
-                        "localId" : "366",
+                        "localId" : "543",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "7",
                         "type" : "Literal"
                      }, {
-                        "localId" : "367",
+                        "localId" : "544",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "368",
+                        "localId" : "545",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "369",
+                        "localId" : "546",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }, {
-                        "localId" : "370",
+                        "localId" : "547",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
@@ -4580,38 +6738,38 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "sort" : {
-                  "localId" : "371",
+                  "localId" : "554",
                   "by" : [ {
-                     "localId" : "372",
+                     "localId" : "555",
                      "direction" : "asc",
                      "type" : "ByDirection"
                   } ]
                }
             }
          }, {
-            "localId" : "378",
+            "localId" : "567",
             "name" : "numberReturnAsc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "378",
+                  "r" : "567",
                   "s" : [ {
                      "value" : [ "","define ","numberReturnAsc",": " ]
                   }, {
-                     "r" : "395",
+                     "r" : "594",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "379",
+                           "r" : "568",
                            "s" : [ {
-                              "r" : "380",
+                              "r" : "569",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "380",
+                                 "r" : "569",
                                  "s" : [ {
-                                    "r" : "381",
+                                    "r" : "570",
                                     "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
                                  } ]
                               }, {
@@ -4624,63 +6782,106 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "388",
+                        "r" : "583",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "389",
+                           "r" : "584",
                            "s" : [ {
                               "value" : [ "N" ]
                            } ]
                         } ]
                      }, {
-                        "r" : "390",
+                        "r" : "587",
                         "value" : [ " ","sort asc" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "597",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "598",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "395",
+               "localId" : "594",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "595",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "596",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "379",
+                  "localId" : "568",
                   "alias" : "N",
+                  "resultTypeSpecifier" : {
+                     "localId" : "581",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "582",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "380",
+                     "localId" : "569",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "579",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "580",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "381",
+                        "localId" : "570",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "8",
                         "type" : "Literal"
                      }, {
-                        "localId" : "382",
+                        "localId" : "571",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "6",
                         "type" : "Literal"
                      }, {
-                        "localId" : "383",
+                        "localId" : "572",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "7",
                         "type" : "Literal"
                      }, {
-                        "localId" : "384",
+                        "localId" : "573",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "385",
+                        "localId" : "574",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "386",
+                        "localId" : "575",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }, {
-                        "localId" : "387",
+                        "localId" : "576",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
@@ -4690,46 +6891,56 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "388",
+                  "localId" : "583",
+                  "resultTypeSpecifier" : {
+                     "localId" : "585",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "586",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "389",
+                     "localId" : "584",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "name" : "N",
                      "type" : "AliasRef"
                   }
                },
                "sort" : {
-                  "localId" : "390",
+                  "localId" : "587",
                   "by" : [ {
-                     "localId" : "391",
+                     "localId" : "588",
                      "direction" : "asc",
                      "type" : "ByDirection"
                   } ]
                }
             }
          }, {
-            "localId" : "397",
+            "localId" : "600",
             "name" : "numberDesc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "397",
+                  "r" : "600",
                   "s" : [ {
                      "value" : [ "","define ","numberDesc",": " ]
                   }, {
-                     "r" : "412",
+                     "r" : "623",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "398",
+                           "r" : "601",
                            "s" : [ {
-                              "r" : "399",
+                              "r" : "602",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "399",
+                                 "r" : "602",
                                  "s" : [ {
-                                    "r" : "400",
+                                    "r" : "603",
                                     "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
                                  } ]
                               }, {
@@ -4740,53 +6951,96 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
-                        "r" : "407",
+                        "r" : "616",
                         "value" : [ " ","sort desc" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "626",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "627",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "412",
+               "localId" : "623",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "624",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "625",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "398",
+                  "localId" : "601",
                   "alias" : "N",
+                  "resultTypeSpecifier" : {
+                     "localId" : "614",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "615",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "399",
+                     "localId" : "602",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "612",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "613",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "400",
+                        "localId" : "603",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "8",
                         "type" : "Literal"
                      }, {
-                        "localId" : "401",
+                        "localId" : "604",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "6",
                         "type" : "Literal"
                      }, {
-                        "localId" : "402",
+                        "localId" : "605",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "7",
                         "type" : "Literal"
                      }, {
-                        "localId" : "403",
+                        "localId" : "606",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "404",
+                        "localId" : "607",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "405",
+                        "localId" : "608",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }, {
-                        "localId" : "406",
+                        "localId" : "609",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
@@ -4796,38 +7050,38 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "sort" : {
-                  "localId" : "407",
+                  "localId" : "616",
                   "by" : [ {
-                     "localId" : "408",
+                     "localId" : "617",
                      "direction" : "desc",
                      "type" : "ByDirection"
                   } ]
                }
             }
          }, {
-            "localId" : "414",
+            "localId" : "629",
             "name" : "numberReturnDesc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "414",
+                  "r" : "629",
                   "s" : [ {
                      "value" : [ "","define ","numberReturnDesc",": " ]
                   }, {
-                     "r" : "431",
+                     "r" : "656",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "415",
+                           "r" : "630",
                            "s" : [ {
-                              "r" : "416",
+                              "r" : "631",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "416",
+                                 "r" : "631",
                                  "s" : [ {
-                                    "r" : "417",
+                                    "r" : "632",
                                     "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
                                  } ]
                               }, {
@@ -4840,63 +7094,106 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "424",
+                        "r" : "645",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "425",
+                           "r" : "646",
                            "s" : [ {
                               "value" : [ "N" ]
                            } ]
                         } ]
                      }, {
-                        "r" : "426",
+                        "r" : "649",
                         "value" : [ " ","sort desc" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "659",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "660",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "431",
+               "localId" : "656",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "657",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "658",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "415",
+                  "localId" : "630",
                   "alias" : "N",
+                  "resultTypeSpecifier" : {
+                     "localId" : "643",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "644",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "416",
+                     "localId" : "631",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "641",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "642",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "417",
+                        "localId" : "632",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "8",
                         "type" : "Literal"
                      }, {
-                        "localId" : "418",
+                        "localId" : "633",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "6",
                         "type" : "Literal"
                      }, {
-                        "localId" : "419",
+                        "localId" : "634",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "7",
                         "type" : "Literal"
                      }, {
-                        "localId" : "420",
+                        "localId" : "635",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "421",
+                        "localId" : "636",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "422",
+                        "localId" : "637",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }, {
-                        "localId" : "423",
+                        "localId" : "638",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
@@ -4906,76 +7203,86 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "424",
+                  "localId" : "645",
+                  "resultTypeSpecifier" : {
+                     "localId" : "647",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "648",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "425",
+                     "localId" : "646",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "name" : "N",
                      "type" : "AliasRef"
                   }
                },
                "sort" : {
-                  "localId" : "426",
+                  "localId" : "649",
                   "by" : [ {
-                     "localId" : "427",
+                     "localId" : "650",
                      "direction" : "desc",
                      "type" : "ByDirection"
                   } ]
                }
             }
          }, {
-            "localId" : "433",
+            "localId" : "662",
             "name" : "stringAsc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "433",
+                  "r" : "662",
                   "s" : [ {
                      "value" : [ "","define ","stringAsc",": " ]
                   }, {
-                     "r" : "446",
+                     "r" : "683",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "434",
+                           "r" : "663",
                            "s" : [ {
-                              "r" : "435",
+                              "r" : "664",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "435",
+                                 "r" : "664",
                                  "s" : [ {
                                     "value" : [ "{" ]
                                  }, {
-                                    "r" : "436",
+                                    "r" : "665",
                                     "s" : [ {
                                        "value" : [ "'jenny'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "437",
+                                    "r" : "666",
                                     "s" : [ {
                                        "value" : [ "'dont'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "438",
+                                    "r" : "667",
                                     "s" : [ {
                                        "value" : [ "'change'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "439",
+                                    "r" : "668",
                                     "s" : [ {
                                        "value" : [ "'your'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "440",
+                                    "r" : "669",
                                     "s" : [ {
                                        "value" : [ "'number'" ]
                                     } ]
@@ -4990,43 +7297,84 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
-                        "r" : "441",
+                        "r" : "676",
                         "value" : [ " ","sort asc" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "686",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "687",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "446",
+               "localId" : "683",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "684",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "685",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "434",
+                  "localId" : "663",
                   "alias" : "S",
+                  "resultTypeSpecifier" : {
+                     "localId" : "674",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "675",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "435",
+                     "localId" : "664",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "672",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "673",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "436",
+                        "localId" : "665",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "jenny",
                         "type" : "Literal"
                      }, {
-                        "localId" : "437",
+                        "localId" : "666",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "dont",
                         "type" : "Literal"
                      }, {
-                        "localId" : "438",
+                        "localId" : "667",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "change",
                         "type" : "Literal"
                      }, {
-                        "localId" : "439",
+                        "localId" : "668",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "your",
                         "type" : "Literal"
                      }, {
-                        "localId" : "440",
+                        "localId" : "669",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "number",
                         "type" : "Literal"
@@ -5036,68 +7384,68 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "sort" : {
-                  "localId" : "441",
+                  "localId" : "676",
                   "by" : [ {
-                     "localId" : "442",
+                     "localId" : "677",
                      "direction" : "asc",
                      "type" : "ByDirection"
                   } ]
                }
             }
          }, {
-            "localId" : "448",
+            "localId" : "689",
             "name" : "stringReturnAsc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "448",
+                  "r" : "689",
                   "s" : [ {
                      "value" : [ "","define ","stringReturnAsc",": " ]
                   }, {
-                     "r" : "463",
+                     "r" : "714",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "449",
+                           "r" : "690",
                            "s" : [ {
-                              "r" : "450",
+                              "r" : "691",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "450",
+                                 "r" : "691",
                                  "s" : [ {
                                     "value" : [ "{" ]
                                  }, {
-                                    "r" : "451",
+                                    "r" : "692",
                                     "s" : [ {
                                        "value" : [ "'jenny'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "452",
+                                    "r" : "693",
                                     "s" : [ {
                                        "value" : [ "'dont'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "453",
+                                    "r" : "694",
                                     "s" : [ {
                                        "value" : [ "'change'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "454",
+                                    "r" : "695",
                                     "s" : [ {
                                        "value" : [ "'your'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "455",
+                                    "r" : "696",
                                     "s" : [ {
                                        "value" : [ "'number'" ]
                                     } ]
@@ -5114,53 +7462,94 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "456",
+                        "r" : "703",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "457",
+                           "r" : "704",
                            "s" : [ {
                               "value" : [ "S" ]
                            } ]
                         } ]
                      }, {
-                        "r" : "458",
+                        "r" : "707",
                         "value" : [ " ","sort asc" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "717",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "718",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "463",
+               "localId" : "714",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "715",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "716",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "449",
+                  "localId" : "690",
                   "alias" : "S",
+                  "resultTypeSpecifier" : {
+                     "localId" : "701",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "702",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "450",
+                     "localId" : "691",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "699",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "700",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "451",
+                        "localId" : "692",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "jenny",
                         "type" : "Literal"
                      }, {
-                        "localId" : "452",
+                        "localId" : "693",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "dont",
                         "type" : "Literal"
                      }, {
-                        "localId" : "453",
+                        "localId" : "694",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "change",
                         "type" : "Literal"
                      }, {
-                        "localId" : "454",
+                        "localId" : "695",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "your",
                         "type" : "Literal"
                      }, {
-                        "localId" : "455",
+                        "localId" : "696",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "number",
                         "type" : "Literal"
@@ -5170,76 +7559,86 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "456",
+                  "localId" : "703",
+                  "resultTypeSpecifier" : {
+                     "localId" : "705",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "706",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "457",
+                     "localId" : "704",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "S",
                      "type" : "AliasRef"
                   }
                },
                "sort" : {
-                  "localId" : "458",
+                  "localId" : "707",
                   "by" : [ {
-                     "localId" : "459",
+                     "localId" : "708",
                      "direction" : "asc",
                      "type" : "ByDirection"
                   } ]
                }
             }
          }, {
-            "localId" : "465",
+            "localId" : "720",
             "name" : "stringDesc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "465",
+                  "r" : "720",
                   "s" : [ {
                      "value" : [ "","define ","stringDesc",": " ]
                   }, {
-                     "r" : "478",
+                     "r" : "741",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "466",
+                           "r" : "721",
                            "s" : [ {
-                              "r" : "467",
+                              "r" : "722",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "467",
+                                 "r" : "722",
                                  "s" : [ {
                                     "value" : [ "{" ]
                                  }, {
-                                    "r" : "468",
+                                    "r" : "723",
                                     "s" : [ {
                                        "value" : [ "'jenny'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "469",
+                                    "r" : "724",
                                     "s" : [ {
                                        "value" : [ "'dont'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "470",
+                                    "r" : "725",
                                     "s" : [ {
                                        "value" : [ "'change'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "471",
+                                    "r" : "726",
                                     "s" : [ {
                                        "value" : [ "'your'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "472",
+                                    "r" : "727",
                                     "s" : [ {
                                        "value" : [ "'number'" ]
                                     } ]
@@ -5254,43 +7653,84 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
-                        "r" : "473",
+                        "r" : "734",
                         "value" : [ " ","sort desc" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "744",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "745",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "478",
+               "localId" : "741",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "742",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "743",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "466",
+                  "localId" : "721",
                   "alias" : "S",
+                  "resultTypeSpecifier" : {
+                     "localId" : "732",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "733",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "467",
+                     "localId" : "722",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "730",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "731",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "468",
+                        "localId" : "723",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "jenny",
                         "type" : "Literal"
                      }, {
-                        "localId" : "469",
+                        "localId" : "724",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "dont",
                         "type" : "Literal"
                      }, {
-                        "localId" : "470",
+                        "localId" : "725",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "change",
                         "type" : "Literal"
                      }, {
-                        "localId" : "471",
+                        "localId" : "726",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "your",
                         "type" : "Literal"
                      }, {
-                        "localId" : "472",
+                        "localId" : "727",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "number",
                         "type" : "Literal"
@@ -5300,68 +7740,68 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "sort" : {
-                  "localId" : "473",
+                  "localId" : "734",
                   "by" : [ {
-                     "localId" : "474",
+                     "localId" : "735",
                      "direction" : "desc",
                      "type" : "ByDirection"
                   } ]
                }
             }
          }, {
-            "localId" : "480",
+            "localId" : "747",
             "name" : "stringReturnDesc",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "480",
+                  "r" : "747",
                   "s" : [ {
                      "value" : [ "","define ","stringReturnDesc",": " ]
                   }, {
-                     "r" : "495",
+                     "r" : "772",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "481",
+                           "r" : "748",
                            "s" : [ {
-                              "r" : "482",
+                              "r" : "749",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "482",
+                                 "r" : "749",
                                  "s" : [ {
                                     "value" : [ "{" ]
                                  }, {
-                                    "r" : "483",
+                                    "r" : "750",
                                     "s" : [ {
                                        "value" : [ "'jenny'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "484",
+                                    "r" : "751",
                                     "s" : [ {
                                        "value" : [ "'dont'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "485",
+                                    "r" : "752",
                                     "s" : [ {
                                        "value" : [ "'change'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "486",
+                                    "r" : "753",
                                     "s" : [ {
                                        "value" : [ "'your'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "487",
+                                    "r" : "754",
                                     "s" : [ {
                                        "value" : [ "'number'" ]
                                     } ]
@@ -5378,53 +7818,94 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "488",
+                        "r" : "761",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "489",
+                           "r" : "762",
                            "s" : [ {
                               "value" : [ "S" ]
                            } ]
                         } ]
                      }, {
-                        "r" : "490",
+                        "r" : "765",
                         "value" : [ " ","sort desc" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "775",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "776",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "495",
+               "localId" : "772",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "773",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "774",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "481",
+                  "localId" : "748",
                   "alias" : "S",
+                  "resultTypeSpecifier" : {
+                     "localId" : "759",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "760",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "482",
+                     "localId" : "749",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "757",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "758",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "483",
+                        "localId" : "750",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "jenny",
                         "type" : "Literal"
                      }, {
-                        "localId" : "484",
+                        "localId" : "751",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "dont",
                         "type" : "Literal"
                      }, {
-                        "localId" : "485",
+                        "localId" : "752",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "change",
                         "type" : "Literal"
                      }, {
-                        "localId" : "486",
+                        "localId" : "753",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "your",
                         "type" : "Literal"
                      }, {
-                        "localId" : "487",
+                        "localId" : "754",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "number",
                         "type" : "Literal"
@@ -5434,67 +7915,79 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "488",
+                  "localId" : "761",
+                  "resultTypeSpecifier" : {
+                     "localId" : "763",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "764",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "489",
+                     "localId" : "762",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "S",
                      "type" : "AliasRef"
                   }
                },
                "sort" : {
-                  "localId" : "490",
+                  "localId" : "765",
                   "by" : [ {
-                     "localId" : "491",
+                     "localId" : "766",
                      "direction" : "desc",
                      "type" : "ByDirection"
                   } ]
                }
             }
          }, {
-            "localId" : "497",
+            "localId" : "778",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "five",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "497",
+                  "r" : "778",
                   "s" : [ {
-                     "r" : "498",
+                     "r" : "779",
                      "value" : [ "","define ","five",": ","5" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "498",
+               "localId" : "779",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "5",
                "type" : "Literal"
             }
          }, {
-            "localId" : "500",
+            "localId" : "781",
             "name" : "sortByExpression",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "500",
+                  "r" : "781",
                   "s" : [ {
                      "value" : [ "","define ","sortByExpression",": " ]
                   }, {
-                     "r" : "521",
+                     "r" : "819",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "501",
+                           "r" : "782",
                            "s" : [ {
-                              "r" : "502",
+                              "r" : "783",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "502",
+                                 "r" : "783",
                                  "s" : [ {
-                                    "r" : "503",
+                                    "r" : "784",
                                     "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
                                  } ]
                               }, {
@@ -5507,18 +8000,18 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "510",
+                        "r" : "797",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "511",
+                           "r" : "798",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "N",": " ]
                               }, {
-                                 "r" : "512",
+                                 "r" : "799",
                                  "s" : [ {
                                     "value" : [ "N" ]
                                  } ]
@@ -5530,26 +8023,26 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "517",
+                        "r" : "813",
                         "s" : [ {
                            "value" : [ "sort by " ]
                         }, {
-                           "r" : "516",
+                           "r" : "812",
                            "s" : [ {
-                              "r" : "513",
+                              "r" : "807",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "513",
+                                 "r" : "807",
                                  "s" : [ {
-                                    "r" : "514",
+                                    "r" : "808",
                                     "s" : [ {
                                        "value" : [ "five" ]
                                     } ]
                                  }, {
                                     "value" : [ " + " ]
                                  }, {
-                                    "r" : "515",
+                                    "r" : "809",
                                     "s" : [ {
                                        "value" : [ "N" ]
                                     } ]
@@ -5563,47 +8056,106 @@ module.exports['Sorting'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "824",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "825",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "826",
+                     "name" : "N",
+                     "elementType" : {
+                        "localId" : "827",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "521",
+               "localId" : "819",
                "type" : "Query",
-               "source" : [ {
-                  "localId" : "501",
-                  "alias" : "N",
-                  "expression" : {
-                     "localId" : "502",
-                     "type" : "List",
+               "resultTypeSpecifier" : {
+                  "localId" : "820",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "821",
+                     "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "503",
+                        "localId" : "822",
+                        "name" : "N",
+                        "elementType" : {
+                           "localId" : "823",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
+               "source" : [ {
+                  "localId" : "782",
+                  "alias" : "N",
+                  "resultTypeSpecifier" : {
+                     "localId" : "795",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "796",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "783",
+                     "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "793",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "794",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "element" : [ {
+                        "localId" : "784",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "8",
                         "type" : "Literal"
                      }, {
-                        "localId" : "504",
+                        "localId" : "785",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "6",
                         "type" : "Literal"
                      }, {
-                        "localId" : "505",
+                        "localId" : "786",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "7",
                         "type" : "Literal"
                      }, {
-                        "localId" : "506",
+                        "localId" : "787",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "507",
+                        "localId" : "788",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "508",
+                        "localId" : "789",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }, {
-                        "localId" : "509",
+                        "localId" : "790",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
@@ -5613,14 +8165,45 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "510",
+                  "localId" : "797",
+                  "resultTypeSpecifier" : {
+                     "localId" : "803",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "804",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "805",
+                           "name" : "N",
+                           "elementType" : {
+                              "localId" : "806",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "511",
+                     "localId" : "798",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "800",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "801",
+                           "name" : "N",
+                           "elementType" : {
+                              "localId" : "802",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "N",
                         "value" : {
-                           "localId" : "512",
+                           "localId" : "799",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "N",
                            "type" : "AliasRef"
                         }
@@ -5628,21 +8211,33 @@ module.exports['Sorting'] = {
                   }
                },
                "sort" : {
-                  "localId" : "517",
+                  "localId" : "813",
                   "by" : [ {
-                     "localId" : "516",
+                     "localId" : "812",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "direction" : "asc",
                      "type" : "ByExpression",
                      "expression" : {
-                        "localId" : "513",
+                        "localId" : "807",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "Add",
-                        "signature" : [ ],
+                        "signature" : [ {
+                           "localId" : "810",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "811",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
-                           "localId" : "514",
+                           "localId" : "808",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "five",
                            "type" : "ExpressionRef"
                         }, {
-                           "localId" : "515",
+                           "localId" : "809",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "N",
                            "type" : "IdentifierRef"
                         } ]
@@ -5651,29 +8246,29 @@ module.exports['Sorting'] = {
                }
             }
          }, {
-            "localId" : "523",
+            "localId" : "829",
             "name" : "sortByExpressionWithNullResults",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "523",
+                  "r" : "829",
                   "s" : [ {
                      "value" : [ "","define ","sortByExpressionWithNullResults",": " ]
                   }, {
-                     "r" : "541",
+                     "r" : "864",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "524",
+                           "r" : "830",
                            "s" : [ {
-                              "r" : "525",
+                              "r" : "831",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "525",
+                                 "r" : "831",
                                  "s" : [ {
-                                    "r" : "526",
+                                    "r" : "832",
                                     "value" : [ "{","8",", ","null",", ","7","}" ]
                                  } ]
                               }, {
@@ -5686,18 +8281,18 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "530",
+                        "r" : "842",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "531",
+                           "r" : "843",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "N",": " ]
                               }, {
-                                 "r" : "532",
+                                 "r" : "844",
                                  "s" : [ {
                                     "value" : [ "N" ]
                                  } ]
@@ -5709,26 +8304,26 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "537",
+                        "r" : "858",
                         "s" : [ {
                            "value" : [ "sort by " ]
                         }, {
-                           "r" : "536",
+                           "r" : "857",
                            "s" : [ {
-                              "r" : "533",
+                              "r" : "852",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "533",
+                                 "r" : "852",
                                  "s" : [ {
-                                    "r" : "534",
+                                    "r" : "853",
                                     "s" : [ {
                                        "value" : [ "five" ]
                                     } ]
                                  }, {
                                     "value" : [ " + " ]
                                  }, {
-                                    "r" : "535",
+                                    "r" : "854",
                                     "s" : [ {
                                        "value" : [ "N" ]
                                     } ]
@@ -5742,31 +8337,86 @@ module.exports['Sorting'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "869",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "870",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "871",
+                     "name" : "N",
+                     "elementType" : {
+                        "localId" : "872",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "541",
+               "localId" : "864",
                "type" : "Query",
-               "source" : [ {
-                  "localId" : "524",
-                  "alias" : "N",
-                  "expression" : {
-                     "localId" : "525",
-                     "type" : "List",
+               "resultTypeSpecifier" : {
+                  "localId" : "865",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "866",
+                     "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "526",
+                        "localId" : "867",
+                        "name" : "N",
+                        "elementType" : {
+                           "localId" : "868",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
+               "source" : [ {
+                  "localId" : "830",
+                  "alias" : "N",
+                  "resultTypeSpecifier" : {
+                     "localId" : "840",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "841",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "831",
+                     "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "838",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "839",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "element" : [ {
+                        "localId" : "832",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "8",
                         "type" : "Literal"
                      }, {
-                        "localId" : "529",
+                        "localId" : "835",
                         "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "As",
                         "signature" : [ ],
                         "operand" : {
-                           "localId" : "527",
+                           "localId" : "833",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                            "type" : "Null"
                         }
                      }, {
-                        "localId" : "528",
+                        "localId" : "834",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "7",
                         "type" : "Literal"
@@ -5776,14 +8426,45 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "530",
+                  "localId" : "842",
+                  "resultTypeSpecifier" : {
+                     "localId" : "848",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "849",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "850",
+                           "name" : "N",
+                           "elementType" : {
+                              "localId" : "851",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "531",
+                     "localId" : "843",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "845",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "846",
+                           "name" : "N",
+                           "elementType" : {
+                              "localId" : "847",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "N",
                         "value" : {
-                           "localId" : "532",
+                           "localId" : "844",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "N",
                            "type" : "AliasRef"
                         }
@@ -5791,21 +8472,33 @@ module.exports['Sorting'] = {
                   }
                },
                "sort" : {
-                  "localId" : "537",
+                  "localId" : "858",
                   "by" : [ {
-                     "localId" : "536",
+                     "localId" : "857",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "direction" : "asc",
                      "type" : "ByExpression",
                      "expression" : {
-                        "localId" : "533",
+                        "localId" : "852",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "Add",
-                        "signature" : [ ],
+                        "signature" : [ {
+                           "localId" : "855",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "856",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
-                           "localId" : "534",
+                           "localId" : "853",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "five",
                            "type" : "ExpressionRef"
                         }, {
-                           "localId" : "535",
+                           "localId" : "854",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "N",
                            "type" : "IdentifierRef"
                         } ]
@@ -5814,29 +8507,29 @@ module.exports['Sorting'] = {
                }
             }
          }, {
-            "localId" : "543",
+            "localId" : "874",
             "name" : "sortWithAscendingKeyword",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "543",
+                  "r" : "874",
                   "s" : [ {
                      "value" : [ "","define ","sortWithAscendingKeyword",": " ]
                   }, {
-                     "r" : "558",
+                     "r" : "897",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "544",
+                           "r" : "875",
                            "s" : [ {
-                              "r" : "545",
+                              "r" : "876",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "545",
+                                 "r" : "876",
                                  "s" : [ {
-                                    "r" : "546",
+                                    "r" : "877",
                                     "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
                                  } ]
                               }, {
@@ -5847,53 +8540,96 @@ module.exports['Sorting'] = {
                            } ]
                         } ]
                      }, {
-                        "r" : "553",
+                        "r" : "890",
                         "value" : [ " ","sort ascending" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "900",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "901",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "558",
+               "localId" : "897",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "898",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "899",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "544",
+                  "localId" : "875",
                   "alias" : "N",
+                  "resultTypeSpecifier" : {
+                     "localId" : "888",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "889",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "545",
+                     "localId" : "876",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "886",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "887",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "546",
+                        "localId" : "877",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "8",
                         "type" : "Literal"
                      }, {
-                        "localId" : "547",
+                        "localId" : "878",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "6",
                         "type" : "Literal"
                      }, {
-                        "localId" : "548",
+                        "localId" : "879",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "7",
                         "type" : "Literal"
                      }, {
-                        "localId" : "549",
+                        "localId" : "880",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "550",
+                        "localId" : "881",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "551",
+                        "localId" : "882",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }, {
-                        "localId" : "552",
+                        "localId" : "883",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
@@ -5903,38 +8639,38 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "sort" : {
-                  "localId" : "553",
+                  "localId" : "890",
                   "by" : [ {
-                     "localId" : "554",
+                     "localId" : "891",
                      "direction" : "ascending",
                      "type" : "ByDirection"
                   } ]
                }
             }
          }, {
-            "localId" : "560",
+            "localId" : "903",
             "name" : "sortWithDescendingKeyword",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "560",
+                  "r" : "903",
                   "s" : [ {
                      "value" : [ "","define ","sortWithDescendingKeyword",": " ]
                   }, {
-                     "r" : "577",
+                     "r" : "930",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "561",
+                           "r" : "904",
                            "s" : [ {
-                              "r" : "562",
+                              "r" : "905",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "562",
+                                 "r" : "905",
                                  "s" : [ {
-                                    "r" : "563",
+                                    "r" : "906",
                                     "value" : [ "{","8",", ","6",", ","7",", ","5",", ","3",", ","0",", ","9","}" ]
                                  } ]
                               }, {
@@ -5947,63 +8683,106 @@ module.exports['Sorting'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "570",
+                        "r" : "919",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "571",
+                           "r" : "920",
                            "s" : [ {
                               "value" : [ "N" ]
                            } ]
                         } ]
                      }, {
-                        "r" : "572",
+                        "r" : "923",
                         "value" : [ " ","sort descending" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "933",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "934",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "577",
+               "localId" : "930",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "931",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "932",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "561",
+                  "localId" : "904",
                   "alias" : "N",
+                  "resultTypeSpecifier" : {
+                     "localId" : "917",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "918",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "562",
+                     "localId" : "905",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "915",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "916",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "563",
+                        "localId" : "906",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "8",
                         "type" : "Literal"
                      }, {
-                        "localId" : "564",
+                        "localId" : "907",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "6",
                         "type" : "Literal"
                      }, {
-                        "localId" : "565",
+                        "localId" : "908",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "7",
                         "type" : "Literal"
                      }, {
-                        "localId" : "566",
+                        "localId" : "909",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "567",
+                        "localId" : "910",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "568",
+                        "localId" : "911",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
                         "type" : "Literal"
                      }, {
-                        "localId" : "569",
+                        "localId" : "912",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
@@ -6013,17 +8792,27 @@ module.exports['Sorting'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "570",
+                  "localId" : "919",
+                  "resultTypeSpecifier" : {
+                     "localId" : "921",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "922",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "571",
+                     "localId" : "920",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "name" : "N",
                      "type" : "AliasRef"
                   }
                },
                "sort" : {
-                  "localId" : "572",
+                  "localId" : "923",
                   "by" : [ {
-                     "localId" : "573",
+                     "localId" : "924",
                      "direction" : "descending",
                      "type" : "ByDirection"
                   } ]
@@ -6053,14 +8842,14 @@ module.exports['Distinct'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "346",
+            "r" : "530",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -6138,7 +8927,7 @@ module.exports['Distinct'] = {
                   "s" : [ {
                      "value" : [ "","define ","defaultNumbers",": " ]
                   }, {
-                     "r" : "233",
+                     "r" : "241",
                      "s" : [ {
                         "s" : [ {
                            "r" : "213",
@@ -6162,11 +8951,11 @@ module.exports['Distinct'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "231",
+                        "r" : "237",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "232",
+                           "r" : "238",
                            "s" : [ {
                               "value" : [ "N" ]
                            } ]
@@ -6175,92 +8964,144 @@ module.exports['Distinct'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "244",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "245",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "233",
+               "localId" : "241",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "242",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "243",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
                   "localId" : "213",
                   "alias" : "N",
+                  "resultTypeSpecifier" : {
+                     "localId" : "235",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "236",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
                      "localId" : "214",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "233",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "234",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
                         "localId" : "215",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
                         "localId" : "216",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
                         "localId" : "217",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
                         "localId" : "218",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
                         "localId" : "219",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
                         "localId" : "220",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
                         "localId" : "221",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
                         "localId" : "222",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
                         "localId" : "223",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
                         "localId" : "224",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
                         "localId" : "225",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
                         "localId" : "226",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
                         "localId" : "227",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
                         "localId" : "228",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
                         "localId" : "229",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
                         "localId" : "230",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
@@ -6270,217 +9111,73 @@ module.exports['Distinct'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "231",
+                  "localId" : "237",
+                  "resultTypeSpecifier" : {
+                     "localId" : "239",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "240",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "232",
+                     "localId" : "238",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "name" : "N",
                      "type" : "AliasRef"
                   }
                }
             }
          }, {
-            "localId" : "235",
+            "localId" : "247",
             "name" : "defaultStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "235",
+                  "r" : "247",
                   "s" : [ {
                      "value" : [ "","define ","defaultStrings",": " ]
                   }, {
-                     "r" : "244",
+                     "r" : "264",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "236",
+                           "r" : "248",
                            "s" : [ {
-                              "r" : "237",
+                              "r" : "249",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "237",
+                                 "r" : "249",
                                  "s" : [ {
                                     "value" : [ "{" ]
                                  }, {
-                                    "r" : "238",
+                                    "r" : "250",
                                     "s" : [ {
                                        "value" : [ "'foo'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "239",
+                                    "r" : "251",
                                     "s" : [ {
                                        "value" : [ "'bar'" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "240",
-                                    "s" : [ {
-                                       "value" : [ "'baz'" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "241",
-                                    "s" : [ {
-                                       "value" : [ "'bar'" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "}" ]
-                                 } ]
-                              }, {
-                                 "value" : [ ")" ]
-                              } ]
-                           }, {
-                              "value" : [ " ","S" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " " ]
-                     }, {
-                        "r" : "242",
-                        "s" : [ {
-                           "value" : [ "return " ]
-                        }, {
-                           "r" : "243",
-                           "s" : [ {
-                              "value" : [ "S" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "244",
-               "type" : "Query",
-               "source" : [ {
-                  "localId" : "236",
-                  "alias" : "S",
-                  "expression" : {
-                     "localId" : "237",
-                     "type" : "List",
-                     "element" : [ {
-                        "localId" : "238",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "foo",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "239",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "bar",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "240",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "baz",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "241",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "bar",
-                        "type" : "Literal"
-                     } ]
-                  }
-               } ],
-               "let" : [ ],
-               "relationship" : [ ],
-               "return" : {
-                  "localId" : "242",
-                  "expression" : {
-                     "localId" : "243",
-                     "name" : "S",
-                     "type" : "AliasRef"
-                  }
-               }
-            }
-         }, {
-            "localId" : "246",
-            "name" : "defaultTuples",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "246",
-                  "s" : [ {
-                     "value" : [ "","define ","defaultTuples",": " ]
-                  }, {
-                     "r" : "260",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "247",
-                           "s" : [ {
-                              "r" : "248",
-                              "s" : [ {
-                                 "value" : [ "(" ]
-                              }, {
-                                 "r" : "248",
-                                 "s" : [ {
-                                    "value" : [ "{" ]
-                                 }, {
-                                    "r" : "249",
-                                    "s" : [ {
-                                       "value" : [ "Tuple{" ]
-                                    }, {
-                                       "s" : [ {
-                                          "r" : "250",
-                                          "value" : [ "a",": ","1" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "s" : [ {
-                                          "r" : "251",
-                                          "value" : [ "b",":","2" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "}" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
                                     "r" : "252",
                                     "s" : [ {
-                                       "value" : [ "Tuple{" ]
-                                    }, {
-                                       "s" : [ {
-                                          "r" : "253",
-                                          "value" : [ "a",": ","2" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "s" : [ {
-                                          "r" : "254",
-                                          "value" : [ "b",": ","3" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "}" ]
+                                       "value" : [ "'baz'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "255",
+                                    "r" : "253",
                                     "s" : [ {
-                                       "value" : [ "Tuple{" ]
-                                    }, {
-                                       "s" : [ {
-                                          "r" : "256",
-                                          "value" : [ "a",": ","1" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "s" : [ {
-                                          "r" : "257",
-                                          "value" : [ "b",": ","2" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "}" ]
+                                       "value" : [ "'bar'" ]
                                     } ]
                                  }, {
                                     "value" : [ "}" ]
@@ -6489,245 +9186,93 @@ module.exports['Distinct'] = {
                                  "value" : [ ")" ]
                               } ]
                            }, {
-                              "value" : [ " ","T" ]
+                              "value" : [ " ","S" ]
                            } ]
                         } ]
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "258",
+                        "r" : "260",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "259",
+                           "r" : "261",
                            "s" : [ {
-                              "value" : [ "T" ]
+                              "value" : [ "S" ]
                            } ]
                         } ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "267",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "268",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "260",
+               "localId" : "264",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "265",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "266",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "247",
-                  "alias" : "T",
+                  "localId" : "248",
+                  "alias" : "S",
+                  "resultTypeSpecifier" : {
+                     "localId" : "258",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "259",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "248",
+                     "localId" : "249",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "256",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "257",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "249",
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "a",
-                           "value" : {
-                              "localId" : "250",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1",
-                              "type" : "Literal"
-                           }
-                        }, {
-                           "name" : "b",
-                           "value" : {
-                              "localId" : "251",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2",
-                              "type" : "Literal"
-                           }
-                        } ]
+                        "localId" : "250",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "foo",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "251",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "bar",
+                        "type" : "Literal"
                      }, {
                         "localId" : "252",
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "a",
-                           "value" : {
-                              "localId" : "253",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2",
-                              "type" : "Literal"
-                           }
-                        }, {
-                           "name" : "b",
-                           "value" : {
-                              "localId" : "254",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "3",
-                              "type" : "Literal"
-                           }
-                        } ]
-                     }, {
-                        "localId" : "255",
-                        "type" : "Tuple",
-                        "element" : [ {
-                           "name" : "a",
-                           "value" : {
-                              "localId" : "256",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1",
-                              "type" : "Literal"
-                           }
-                        }, {
-                           "name" : "b",
-                           "value" : {
-                              "localId" : "257",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2",
-                              "type" : "Literal"
-                           }
-                        } ]
-                     } ]
-                  }
-               } ],
-               "let" : [ ],
-               "relationship" : [ ],
-               "return" : {
-                  "localId" : "258",
-                  "expression" : {
-                     "localId" : "259",
-                     "name" : "T",
-                     "type" : "AliasRef"
-                  }
-               }
-            }
-         }, {
-            "localId" : "262",
-            "name" : "distinctNumbers",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "262",
-                  "s" : [ {
-                     "value" : [ "","define ","distinctNumbers",": " ]
-                  }, {
-                     "r" : "283",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "263",
-                           "s" : [ {
-                              "r" : "264",
-                              "s" : [ {
-                                 "value" : [ "(" ]
-                              }, {
-                                 "r" : "264",
-                                 "s" : [ {
-                                    "r" : "265",
-                                    "value" : [ "{","1",", ","2",", ","2",", ","3",", ","3",", ","3",", ","4",", ","4",", ","4",", ","4",", ","3",", ","3",", ","3",", ","2",", ","2",", ","1","}" ]
-                                 } ]
-                              }, {
-                                 "value" : [ ")" ]
-                              } ]
-                           }, {
-                              "value" : [ " ","N" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " " ]
-                     }, {
-                        "r" : "281",
-                        "s" : [ {
-                           "value" : [ "return distinct " ]
-                        }, {
-                           "r" : "282",
-                           "s" : [ {
-                              "value" : [ "N" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "283",
-               "type" : "Query",
-               "source" : [ {
-                  "localId" : "263",
-                  "alias" : "N",
-                  "expression" : {
-                     "localId" : "264",
-                     "type" : "List",
-                     "element" : [ {
-                        "localId" : "265",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "baz",
                         "type" : "Literal"
                      }, {
-                        "localId" : "266",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "267",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "268",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "269",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "270",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "271",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "4",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "272",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "4",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "273",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "4",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "274",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "4",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "275",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "276",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "277",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "278",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "279",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "280",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
+                        "localId" : "253",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "bar",
                         "type" : "Literal"
                      } ]
                   }
@@ -6735,215 +9280,104 @@ module.exports['Distinct'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "281",
-                  "distinct" : true,
+                  "localId" : "260",
+                  "resultTypeSpecifier" : {
+                     "localId" : "262",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "263",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "282",
-                     "name" : "N",
+                     "localId" : "261",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "name" : "S",
                      "type" : "AliasRef"
                   }
                }
             }
          }, {
-            "localId" : "285",
-            "name" : "distinctStrings",
+            "localId" : "270",
+            "name" : "defaultTuples",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "285",
+                  "r" : "270",
                   "s" : [ {
-                     "value" : [ "","define ","distinctStrings",": " ]
+                     "value" : [ "","define ","defaultTuples",": " ]
                   }, {
-                     "r" : "294",
+                     "r" : "328",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "286",
+                           "r" : "271",
                            "s" : [ {
-                              "r" : "287",
+                              "r" : "272",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "287",
+                                 "r" : "272",
                                  "s" : [ {
                                     "value" : [ "{" ]
                                  }, {
-                                    "r" : "288",
+                                    "r" : "273",
                                     "s" : [ {
-                                       "value" : [ "'foo'" ]
+                                       "value" : [ "Tuple{" ]
+                                    }, {
+                                       "s" : [ {
+                                          "r" : "274",
+                                          "value" : [ "a",": ","1" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ", " ]
+                                    }, {
+                                       "s" : [ {
+                                          "r" : "275",
+                                          "value" : [ "b",":","2" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "}" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ", " ]
+                                 }, {
+                                    "r" : "281",
+                                    "s" : [ {
+                                       "value" : [ "Tuple{" ]
+                                    }, {
+                                       "s" : [ {
+                                          "r" : "282",
+                                          "value" : [ "a",": ","2" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ", " ]
+                                    }, {
+                                       "s" : [ {
+                                          "r" : "283",
+                                          "value" : [ "b",": ","3" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "}" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
                                     "r" : "289",
                                     "s" : [ {
-                                       "value" : [ "'bar'" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "290",
-                                    "s" : [ {
-                                       "value" : [ "'baz'" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "291",
-                                    "s" : [ {
-                                       "value" : [ "'bar'" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "}" ]
-                                 } ]
-                              }, {
-                                 "value" : [ ")" ]
-                              } ]
-                           }, {
-                              "value" : [ " ","S" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ " " ]
-                     }, {
-                        "r" : "292",
-                        "s" : [ {
-                           "value" : [ "return distinct " ]
-                        }, {
-                           "r" : "293",
-                           "s" : [ {
-                              "value" : [ "S" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "294",
-               "type" : "Query",
-               "source" : [ {
-                  "localId" : "286",
-                  "alias" : "S",
-                  "expression" : {
-                     "localId" : "287",
-                     "type" : "List",
-                     "element" : [ {
-                        "localId" : "288",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "foo",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "289",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "bar",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "290",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "baz",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "291",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "bar",
-                        "type" : "Literal"
-                     } ]
-                  }
-               } ],
-               "let" : [ ],
-               "relationship" : [ ],
-               "return" : {
-                  "localId" : "292",
-                  "distinct" : true,
-                  "expression" : {
-                     "localId" : "293",
-                     "name" : "S",
-                     "type" : "AliasRef"
-                  }
-               }
-            }
-         }, {
-            "localId" : "296",
-            "name" : "distinctTuples",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "296",
-                  "s" : [ {
-                     "value" : [ "","define ","distinctTuples",": " ]
-                  }, {
-                     "r" : "310",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "297",
-                           "s" : [ {
-                              "r" : "298",
-                              "s" : [ {
-                                 "value" : [ "(" ]
-                              }, {
-                                 "r" : "298",
-                                 "s" : [ {
-                                    "value" : [ "{" ]
-                                 }, {
-                                    "r" : "299",
-                                    "s" : [ {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
-                                          "r" : "300",
+                                          "r" : "290",
                                           "value" : [ "a",": ","1" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
-                                          "r" : "301",
-                                          "value" : [ "b",":","2" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "}" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "302",
-                                    "s" : [ {
-                                       "value" : [ "Tuple{" ]
-                                    }, {
-                                       "s" : [ {
-                                          "r" : "303",
-                                          "value" : [ "a",": ","2" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "s" : [ {
-                                          "r" : "304",
-                                          "value" : [ "b",": ","3" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "}" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "305",
-                                    "s" : [ {
-                                       "value" : [ "Tuple{" ]
-                                    }, {
-                                       "s" : [ {
-                                          "r" : "306",
-                                          "value" : [ "a",": ","1" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "s" : [ {
-                                          "r" : "307",
+                                          "r" : "291",
                                           "value" : [ "b",": ","2" ]
                                        } ]
                                     }, {
@@ -6962,11 +9396,11 @@ module.exports['Distinct'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "308",
+                        "r" : "315",
                         "s" : [ {
-                           "value" : [ "return distinct " ]
+                           "value" : [ "return " ]
                         }, {
-                           "r" : "309",
+                           "r" : "316",
                            "s" : [ {
                               "value" : [ "T" ]
                            } ]
@@ -6975,22 +9409,144 @@ module.exports['Distinct'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "335",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "336",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "337",
+                     "name" : "a",
+                     "elementType" : {
+                        "localId" : "338",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "339",
+                     "name" : "b",
+                     "elementType" : {
+                        "localId" : "340",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "310",
+               "localId" : "328",
                "type" : "Query",
-               "source" : [ {
-                  "localId" : "297",
-                  "alias" : "T",
-                  "expression" : {
-                     "localId" : "298",
-                     "type" : "List",
+               "resultTypeSpecifier" : {
+                  "localId" : "329",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "330",
+                     "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "299",
+                        "localId" : "331",
+                        "name" : "a",
+                        "elementType" : {
+                           "localId" : "332",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "333",
+                        "name" : "b",
+                        "elementType" : {
+                           "localId" : "334",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
+               "source" : [ {
+                  "localId" : "271",
+                  "alias" : "T",
+                  "resultTypeSpecifier" : {
+                     "localId" : "309",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "310",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "311",
+                           "name" : "a",
+                           "elementType" : {
+                              "localId" : "312",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "313",
+                           "name" : "b",
+                           "elementType" : {
+                              "localId" : "314",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "272",
+                     "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "303",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "304",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "305",
+                              "name" : "a",
+                              "elementType" : {
+                                 "localId" : "306",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "307",
+                              "name" : "b",
+                              "elementType" : {
+                                 "localId" : "308",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     },
+                     "element" : [ {
+                        "localId" : "273",
                         "type" : "Tuple",
+                        "resultTypeSpecifier" : {
+                           "localId" : "276",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "277",
+                              "name" : "a",
+                              "elementType" : {
+                                 "localId" : "278",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "279",
+                              "name" : "b",
+                              "elementType" : {
+                                 "localId" : "280",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        },
                         "element" : [ {
                            "name" : "a",
                            "value" : {
-                              "localId" : "300",
+                              "localId" : "274",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
                               "type" : "Literal"
@@ -6998,19 +9554,42 @@ module.exports['Distinct'] = {
                         }, {
                            "name" : "b",
                            "value" : {
-                              "localId" : "301",
+                              "localId" : "275",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
                               "type" : "Literal"
                            }
                         } ]
                      }, {
-                        "localId" : "302",
+                        "localId" : "281",
                         "type" : "Tuple",
+                        "resultTypeSpecifier" : {
+                           "localId" : "284",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "285",
+                              "name" : "a",
+                              "elementType" : {
+                                 "localId" : "286",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "287",
+                              "name" : "b",
+                              "elementType" : {
+                                 "localId" : "288",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        },
                         "element" : [ {
                            "name" : "a",
                            "value" : {
-                              "localId" : "303",
+                              "localId" : "282",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
                               "type" : "Literal"
@@ -7018,19 +9597,42 @@ module.exports['Distinct'] = {
                         }, {
                            "name" : "b",
                            "value" : {
-                              "localId" : "304",
+                              "localId" : "283",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "3",
                               "type" : "Literal"
                            }
                         } ]
                      }, {
-                        "localId" : "305",
+                        "localId" : "289",
                         "type" : "Tuple",
+                        "resultTypeSpecifier" : {
+                           "localId" : "292",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "293",
+                              "name" : "a",
+                              "elementType" : {
+                                 "localId" : "294",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "295",
+                              "name" : "b",
+                              "elementType" : {
+                                 "localId" : "296",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        },
                         "element" : [ {
                            "name" : "a",
                            "value" : {
-                              "localId" : "306",
+                              "localId" : "290",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
                               "type" : "Literal"
@@ -7038,7 +9640,8 @@ module.exports['Distinct'] = {
                         }, {
                            "name" : "b",
                            "value" : {
-                              "localId" : "307",
+                              "localId" : "291",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
                               "type" : "Literal"
@@ -7050,39 +9653,84 @@ module.exports['Distinct'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "308",
-                  "distinct" : true,
+                  "localId" : "315",
+                  "resultTypeSpecifier" : {
+                     "localId" : "322",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "323",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "324",
+                           "name" : "a",
+                           "elementType" : {
+                              "localId" : "325",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "326",
+                           "name" : "b",
+                           "elementType" : {
+                              "localId" : "327",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "309",
+                     "localId" : "316",
                      "name" : "T",
-                     "type" : "AliasRef"
+                     "type" : "AliasRef",
+                     "resultTypeSpecifier" : {
+                        "localId" : "317",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "318",
+                           "name" : "a",
+                           "elementType" : {
+                              "localId" : "319",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "320",
+                           "name" : "b",
+                           "elementType" : {
+                              "localId" : "321",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
                   }
                }
             }
          }, {
-            "localId" : "312",
-            "name" : "allNumbers",
+            "localId" : "342",
+            "name" : "distinctNumbers",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "312",
+                  "r" : "342",
                   "s" : [ {
-                     "value" : [ "","define ","allNumbers",": " ]
+                     "value" : [ "","define ","distinctNumbers",": " ]
                   }, {
-                     "r" : "333",
+                     "r" : "371",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "313",
+                           "r" : "343",
                            "s" : [ {
-                              "r" : "314",
+                              "r" : "344",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "314",
+                                 "r" : "344",
                                  "s" : [ {
-                                    "r" : "315",
+                                    "r" : "345",
                                     "value" : [ "{","1",", ","2",", ","2",", ","3",", ","3",", ","3",", ","4",", ","4",", ","4",", ","4",", ","3",", ","3",", ","3",", ","2",", ","2",", ","1","}" ]
                                  } ]
                               }, {
@@ -7095,11 +9743,11 @@ module.exports['Distinct'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "331",
+                        "r" : "367",
                         "s" : [ {
-                           "value" : [ "return all " ]
+                           "value" : [ "return distinct " ]
                         }, {
-                           "r" : "332",
+                           "r" : "368",
                            "s" : [ {
                               "value" : [ "N" ]
                            } ]
@@ -7108,92 +9756,144 @@ module.exports['Distinct'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "374",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "375",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "333",
+               "localId" : "371",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "372",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "373",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "313",
+                  "localId" : "343",
                   "alias" : "N",
+                  "resultTypeSpecifier" : {
+                     "localId" : "365",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "366",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "314",
+                     "localId" : "344",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "363",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "364",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "315",
+                        "localId" : "345",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
-                        "localId" : "316",
+                        "localId" : "346",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "317",
+                        "localId" : "347",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "318",
+                        "localId" : "348",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "319",
+                        "localId" : "349",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "320",
+                        "localId" : "350",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "321",
+                        "localId" : "351",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "322",
+                        "localId" : "352",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "323",
+                        "localId" : "353",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "324",
+                        "localId" : "354",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "325",
+                        "localId" : "355",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "326",
+                        "localId" : "356",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "327",
+                        "localId" : "357",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "328",
+                        "localId" : "358",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "329",
+                        "localId" : "359",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "330",
+                        "localId" : "360",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
@@ -7203,62 +9903,72 @@ module.exports['Distinct'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "331",
-                  "distinct" : false,
+                  "localId" : "367",
+                  "distinct" : true,
+                  "resultTypeSpecifier" : {
+                     "localId" : "369",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "370",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "332",
+                     "localId" : "368",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "name" : "N",
                      "type" : "AliasRef"
                   }
                }
             }
          }, {
-            "localId" : "335",
-            "name" : "allStrings",
+            "localId" : "377",
+            "name" : "distinctStrings",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "335",
+                  "r" : "377",
                   "s" : [ {
-                     "value" : [ "","define ","allStrings",": " ]
+                     "value" : [ "","define ","distinctStrings",": " ]
                   }, {
-                     "r" : "344",
+                     "r" : "394",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "336",
+                           "r" : "378",
                            "s" : [ {
-                              "r" : "337",
+                              "r" : "379",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "337",
+                                 "r" : "379",
                                  "s" : [ {
                                     "value" : [ "{" ]
                                  }, {
-                                    "r" : "338",
+                                    "r" : "380",
                                     "s" : [ {
                                        "value" : [ "'foo'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "339",
+                                    "r" : "381",
                                     "s" : [ {
                                        "value" : [ "'bar'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "340",
+                                    "r" : "382",
                                     "s" : [ {
                                        "value" : [ "'baz'" ]
                                     } ]
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "341",
+                                    "r" : "383",
                                     "s" : [ {
                                        "value" : [ "'bar'" ]
                                     } ]
@@ -7275,11 +9985,11 @@ module.exports['Distinct'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "342",
+                        "r" : "390",
                         "s" : [ {
-                           "value" : [ "return all " ]
+                           "value" : [ "return distinct " ]
                         }, {
-                           "r" : "343",
+                           "r" : "391",
                            "s" : [ {
                               "value" : [ "S" ]
                            } ]
@@ -7288,32 +9998,72 @@ module.exports['Distinct'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "397",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "398",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "344",
+               "localId" : "394",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "395",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "396",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "336",
+                  "localId" : "378",
                   "alias" : "S",
+                  "resultTypeSpecifier" : {
+                     "localId" : "388",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "389",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "337",
+                     "localId" : "379",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "386",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "387",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "338",
+                        "localId" : "380",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "foo",
                         "type" : "Literal"
                      }, {
-                        "localId" : "339",
+                        "localId" : "381",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "bar",
                         "type" : "Literal"
                      }, {
-                        "localId" : "340",
+                        "localId" : "382",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "baz",
                         "type" : "Literal"
                      }, {
-                        "localId" : "341",
+                        "localId" : "383",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "bar",
                         "type" : "Literal"
@@ -7323,53 +10073,63 @@ module.exports['Distinct'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "342",
-                  "distinct" : false,
+                  "localId" : "390",
+                  "distinct" : true,
+                  "resultTypeSpecifier" : {
+                     "localId" : "392",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "393",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "343",
+                     "localId" : "391",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "S",
                      "type" : "AliasRef"
                   }
                }
             }
          }, {
-            "localId" : "346",
-            "name" : "allTuples",
+            "localId" : "400",
+            "name" : "distinctTuples",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "346",
+                  "r" : "400",
                   "s" : [ {
-                     "value" : [ "","define ","allTuples",": " ]
+                     "value" : [ "","define ","distinctTuples",": " ]
                   }, {
-                     "r" : "360",
+                     "r" : "458",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "347",
+                           "r" : "401",
                            "s" : [ {
-                              "r" : "348",
+                              "r" : "402",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "348",
+                                 "r" : "402",
                                  "s" : [ {
                                     "value" : [ "{" ]
                                  }, {
-                                    "r" : "349",
+                                    "r" : "403",
                                     "s" : [ {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
-                                          "r" : "350",
+                                          "r" : "404",
                                           "value" : [ "a",": ","1" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
-                                          "r" : "351",
+                                          "r" : "405",
                                           "value" : [ "b",":","2" ]
                                        } ]
                                     }, {
@@ -7378,19 +10138,19 @@ module.exports['Distinct'] = {
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "352",
+                                    "r" : "411",
                                     "s" : [ {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
-                                          "r" : "353",
+                                          "r" : "412",
                                           "value" : [ "a",": ","2" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
-                                          "r" : "354",
+                                          "r" : "413",
                                           "value" : [ "b",": ","3" ]
                                        } ]
                                     }, {
@@ -7399,19 +10159,19 @@ module.exports['Distinct'] = {
                                  }, {
                                     "value" : [ ", " ]
                                  }, {
-                                    "r" : "355",
+                                    "r" : "419",
                                     "s" : [ {
                                        "value" : [ "Tuple{" ]
                                     }, {
                                        "s" : [ {
-                                          "r" : "356",
+                                          "r" : "420",
                                           "value" : [ "a",": ","1" ]
                                        } ]
                                     }, {
                                        "value" : [ ", " ]
                                     }, {
                                        "s" : [ {
-                                          "r" : "357",
+                                          "r" : "421",
                                           "value" : [ "b",": ","2" ]
                                        } ]
                                     }, {
@@ -7430,11 +10190,11 @@ module.exports['Distinct'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "358",
+                        "r" : "445",
                         "s" : [ {
-                           "value" : [ "return all " ]
+                           "value" : [ "return distinct " ]
                         }, {
-                           "r" : "359",
+                           "r" : "446",
                            "s" : [ {
                               "value" : [ "T" ]
                            } ]
@@ -7443,22 +10203,144 @@ module.exports['Distinct'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "465",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "466",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "467",
+                     "name" : "a",
+                     "elementType" : {
+                        "localId" : "468",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "469",
+                     "name" : "b",
+                     "elementType" : {
+                        "localId" : "470",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "360",
+               "localId" : "458",
                "type" : "Query",
-               "source" : [ {
-                  "localId" : "347",
-                  "alias" : "T",
-                  "expression" : {
-                     "localId" : "348",
-                     "type" : "List",
+               "resultTypeSpecifier" : {
+                  "localId" : "459",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "460",
+                     "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "349",
+                        "localId" : "461",
+                        "name" : "a",
+                        "elementType" : {
+                           "localId" : "462",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "463",
+                        "name" : "b",
+                        "elementType" : {
+                           "localId" : "464",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
+               "source" : [ {
+                  "localId" : "401",
+                  "alias" : "T",
+                  "resultTypeSpecifier" : {
+                     "localId" : "439",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "440",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "441",
+                           "name" : "a",
+                           "elementType" : {
+                              "localId" : "442",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "443",
+                           "name" : "b",
+                           "elementType" : {
+                              "localId" : "444",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "402",
+                     "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "433",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "434",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "435",
+                              "name" : "a",
+                              "elementType" : {
+                                 "localId" : "436",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "437",
+                              "name" : "b",
+                              "elementType" : {
+                                 "localId" : "438",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     },
+                     "element" : [ {
+                        "localId" : "403",
                         "type" : "Tuple",
+                        "resultTypeSpecifier" : {
+                           "localId" : "406",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "407",
+                              "name" : "a",
+                              "elementType" : {
+                                 "localId" : "408",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "409",
+                              "name" : "b",
+                              "elementType" : {
+                                 "localId" : "410",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        },
                         "element" : [ {
                            "name" : "a",
                            "value" : {
-                              "localId" : "350",
+                              "localId" : "404",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
                               "type" : "Literal"
@@ -7466,19 +10348,42 @@ module.exports['Distinct'] = {
                         }, {
                            "name" : "b",
                            "value" : {
-                              "localId" : "351",
+                              "localId" : "405",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
                               "type" : "Literal"
                            }
                         } ]
                      }, {
-                        "localId" : "352",
+                        "localId" : "411",
                         "type" : "Tuple",
+                        "resultTypeSpecifier" : {
+                           "localId" : "414",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "415",
+                              "name" : "a",
+                              "elementType" : {
+                                 "localId" : "416",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "417",
+                              "name" : "b",
+                              "elementType" : {
+                                 "localId" : "418",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        },
                         "element" : [ {
                            "name" : "a",
                            "value" : {
-                              "localId" : "353",
+                              "localId" : "412",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
                               "type" : "Literal"
@@ -7486,19 +10391,42 @@ module.exports['Distinct'] = {
                         }, {
                            "name" : "b",
                            "value" : {
-                              "localId" : "354",
+                              "localId" : "413",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "3",
                               "type" : "Literal"
                            }
                         } ]
                      }, {
-                        "localId" : "355",
+                        "localId" : "419",
                         "type" : "Tuple",
+                        "resultTypeSpecifier" : {
+                           "localId" : "422",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "423",
+                              "name" : "a",
+                              "elementType" : {
+                                 "localId" : "424",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "425",
+                              "name" : "b",
+                              "elementType" : {
+                                 "localId" : "426",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        },
                         "element" : [ {
                            "name" : "a",
                            "value" : {
-                              "localId" : "356",
+                              "localId" : "420",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
                               "type" : "Literal"
@@ -7506,7 +10434,8 @@ module.exports['Distinct'] = {
                         }, {
                            "name" : "b",
                            "value" : {
-                              "localId" : "357",
+                              "localId" : "421",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2",
                               "type" : "Literal"
@@ -7518,12 +10447,853 @@ module.exports['Distinct'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "358",
-                  "distinct" : false,
+                  "localId" : "445",
+                  "distinct" : true,
+                  "resultTypeSpecifier" : {
+                     "localId" : "452",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "453",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "454",
+                           "name" : "a",
+                           "elementType" : {
+                              "localId" : "455",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "456",
+                           "name" : "b",
+                           "elementType" : {
+                              "localId" : "457",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "359",
+                     "localId" : "446",
                      "name" : "T",
+                     "type" : "AliasRef",
+                     "resultTypeSpecifier" : {
+                        "localId" : "447",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "448",
+                           "name" : "a",
+                           "elementType" : {
+                              "localId" : "449",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "450",
+                           "name" : "b",
+                           "elementType" : {
+                              "localId" : "451",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  }
+               }
+            }
+         }, {
+            "localId" : "472",
+            "name" : "allNumbers",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "472",
+                  "s" : [ {
+                     "value" : [ "","define ","allNumbers",": " ]
+                  }, {
+                     "r" : "501",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "473",
+                           "s" : [ {
+                              "r" : "474",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "474",
+                                 "s" : [ {
+                                    "r" : "475",
+                                    "value" : [ "{","1",", ","2",", ","2",", ","3",", ","3",", ","3",", ","4",", ","4",", ","4",", ","4",", ","3",", ","3",", ","3",", ","2",", ","2",", ","1","}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","N" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " " ]
+                     }, {
+                        "r" : "497",
+                        "s" : [ {
+                           "value" : [ "return all " ]
+                        }, {
+                           "r" : "498",
+                           "s" : [ {
+                              "value" : [ "N" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "504",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "505",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "501",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "502",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "503",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "473",
+                  "alias" : "N",
+                  "resultTypeSpecifier" : {
+                     "localId" : "495",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "496",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "474",
+                     "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "493",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "494",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "element" : [ {
+                        "localId" : "475",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "476",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "477",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "478",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "479",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "480",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "481",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "482",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "483",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "484",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "4",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "485",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "486",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "487",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "488",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "489",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "490",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "497",
+                  "distinct" : false,
+                  "resultTypeSpecifier" : {
+                     "localId" : "499",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "500",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "498",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "name" : "N",
                      "type" : "AliasRef"
+                  }
+               }
+            }
+         }, {
+            "localId" : "507",
+            "name" : "allStrings",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "507",
+                  "s" : [ {
+                     "value" : [ "","define ","allStrings",": " ]
+                  }, {
+                     "r" : "524",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "508",
+                           "s" : [ {
+                              "r" : "509",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "509",
+                                 "s" : [ {
+                                    "value" : [ "{" ]
+                                 }, {
+                                    "r" : "510",
+                                    "s" : [ {
+                                       "value" : [ "'foo'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ", " ]
+                                 }, {
+                                    "r" : "511",
+                                    "s" : [ {
+                                       "value" : [ "'bar'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ", " ]
+                                 }, {
+                                    "r" : "512",
+                                    "s" : [ {
+                                       "value" : [ "'baz'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ", " ]
+                                 }, {
+                                    "r" : "513",
+                                    "s" : [ {
+                                       "value" : [ "'bar'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","S" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " " ]
+                     }, {
+                        "r" : "520",
+                        "s" : [ {
+                           "value" : [ "return all " ]
+                        }, {
+                           "r" : "521",
+                           "s" : [ {
+                              "value" : [ "S" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "527",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "528",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "524",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "525",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "526",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "508",
+                  "alias" : "S",
+                  "resultTypeSpecifier" : {
+                     "localId" : "518",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "519",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "509",
+                     "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "516",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "517",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "element" : [ {
+                        "localId" : "510",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "foo",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "511",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "bar",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "512",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "baz",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "513",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "bar",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "520",
+                  "distinct" : false,
+                  "resultTypeSpecifier" : {
+                     "localId" : "522",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "523",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "521",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "name" : "S",
+                     "type" : "AliasRef"
+                  }
+               }
+            }
+         }, {
+            "localId" : "530",
+            "name" : "allTuples",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "530",
+                  "s" : [ {
+                     "value" : [ "","define ","allTuples",": " ]
+                  }, {
+                     "r" : "588",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "531",
+                           "s" : [ {
+                              "r" : "532",
+                              "s" : [ {
+                                 "value" : [ "(" ]
+                              }, {
+                                 "r" : "532",
+                                 "s" : [ {
+                                    "value" : [ "{" ]
+                                 }, {
+                                    "r" : "533",
+                                    "s" : [ {
+                                       "value" : [ "Tuple{" ]
+                                    }, {
+                                       "s" : [ {
+                                          "r" : "534",
+                                          "value" : [ "a",": ","1" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ", " ]
+                                    }, {
+                                       "s" : [ {
+                                          "r" : "535",
+                                          "value" : [ "b",":","2" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "}" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ", " ]
+                                 }, {
+                                    "r" : "541",
+                                    "s" : [ {
+                                       "value" : [ "Tuple{" ]
+                                    }, {
+                                       "s" : [ {
+                                          "r" : "542",
+                                          "value" : [ "a",": ","2" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ", " ]
+                                    }, {
+                                       "s" : [ {
+                                          "r" : "543",
+                                          "value" : [ "b",": ","3" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "}" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ", " ]
+                                 }, {
+                                    "r" : "549",
+                                    "s" : [ {
+                                       "value" : [ "Tuple{" ]
+                                    }, {
+                                       "s" : [ {
+                                          "r" : "550",
+                                          "value" : [ "a",": ","1" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ", " ]
+                                    }, {
+                                       "s" : [ {
+                                          "r" : "551",
+                                          "value" : [ "b",": ","2" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "}" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "}" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "value" : [ " ","T" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " " ]
+                     }, {
+                        "r" : "575",
+                        "s" : [ {
+                           "value" : [ "return all " ]
+                        }, {
+                           "r" : "576",
+                           "s" : [ {
+                              "value" : [ "T" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "595",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "596",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "597",
+                     "name" : "a",
+                     "elementType" : {
+                        "localId" : "598",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "599",
+                     "name" : "b",
+                     "elementType" : {
+                        "localId" : "600",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
+            "expression" : {
+               "localId" : "588",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "589",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "590",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "591",
+                        "name" : "a",
+                        "elementType" : {
+                           "localId" : "592",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "593",
+                        "name" : "b",
+                        "elementType" : {
+                           "localId" : "594",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
+               "source" : [ {
+                  "localId" : "531",
+                  "alias" : "T",
+                  "resultTypeSpecifier" : {
+                     "localId" : "569",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "570",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "571",
+                           "name" : "a",
+                           "elementType" : {
+                              "localId" : "572",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "573",
+                           "name" : "b",
+                           "elementType" : {
+                              "localId" : "574",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "532",
+                     "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "563",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "564",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "565",
+                              "name" : "a",
+                              "elementType" : {
+                                 "localId" : "566",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "567",
+                              "name" : "b",
+                              "elementType" : {
+                                 "localId" : "568",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     },
+                     "element" : [ {
+                        "localId" : "533",
+                        "type" : "Tuple",
+                        "resultTypeSpecifier" : {
+                           "localId" : "536",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "537",
+                              "name" : "a",
+                              "elementType" : {
+                                 "localId" : "538",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "539",
+                              "name" : "b",
+                              "elementType" : {
+                                 "localId" : "540",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        },
+                        "element" : [ {
+                           "name" : "a",
+                           "value" : {
+                              "localId" : "534",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "1",
+                              "type" : "Literal"
+                           }
+                        }, {
+                           "name" : "b",
+                           "value" : {
+                              "localId" : "535",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2",
+                              "type" : "Literal"
+                           }
+                        } ]
+                     }, {
+                        "localId" : "541",
+                        "type" : "Tuple",
+                        "resultTypeSpecifier" : {
+                           "localId" : "544",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "545",
+                              "name" : "a",
+                              "elementType" : {
+                                 "localId" : "546",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "547",
+                              "name" : "b",
+                              "elementType" : {
+                                 "localId" : "548",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        },
+                        "element" : [ {
+                           "name" : "a",
+                           "value" : {
+                              "localId" : "542",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2",
+                              "type" : "Literal"
+                           }
+                        }, {
+                           "name" : "b",
+                           "value" : {
+                              "localId" : "543",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "3",
+                              "type" : "Literal"
+                           }
+                        } ]
+                     }, {
+                        "localId" : "549",
+                        "type" : "Tuple",
+                        "resultTypeSpecifier" : {
+                           "localId" : "552",
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "localId" : "553",
+                              "name" : "a",
+                              "elementType" : {
+                                 "localId" : "554",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "555",
+                              "name" : "b",
+                              "elementType" : {
+                                 "localId" : "556",
+                                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        },
+                        "element" : [ {
+                           "name" : "a",
+                           "value" : {
+                              "localId" : "550",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "1",
+                              "type" : "Literal"
+                           }
+                        }, {
+                           "name" : "b",
+                           "value" : {
+                              "localId" : "551",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2",
+                              "type" : "Literal"
+                           }
+                        } ]
+                     } ]
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ ],
+               "return" : {
+                  "localId" : "575",
+                  "distinct" : false,
+                  "resultTypeSpecifier" : {
+                     "localId" : "582",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "583",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "584",
+                           "name" : "a",
+                           "elementType" : {
+                              "localId" : "585",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "586",
+                           "name" : "b",
+                           "elementType" : {
+                              "localId" : "587",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "576",
+                     "name" : "T",
+                     "type" : "AliasRef",
+                     "resultTypeSpecifier" : {
+                        "localId" : "577",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "578",
+                           "name" : "a",
+                           "elementType" : {
+                              "localId" : "579",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "580",
+                           "name" : "b",
+                           "elementType" : {
+                              "localId" : "581",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
                   }
                }
             }
@@ -7564,14 +11334,14 @@ module.exports['SingleObjectAlias'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "352",
+            "r" : "495",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -7649,7 +11419,7 @@ module.exports['SingleObjectAlias'] = {
                   "s" : [ {
                      "value" : [ "","define ","encounters",": " ]
                   }, {
-                     "r" : "215",
+                     "r" : "221",
                      "s" : [ {
                         "s" : [ {
                            "r" : "213",
@@ -7669,16 +11439,52 @@ module.exports['SingleObjectAlias'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "224",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "225",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "215",
+               "localId" : "221",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "222",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "223",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
                   "localId" : "213",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "219",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "220",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
                      "localId" : "214",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "217",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "218",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -7689,25 +11495,25 @@ module.exports['SingleObjectAlias'] = {
                "relationship" : [ ]
             }
          }, {
-            "localId" : "217",
+            "localId" : "227",
             "name" : "conditions",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "217",
+                  "r" : "227",
                   "s" : [ {
                      "value" : [ "","define ","conditions",": " ]
                   }, {
-                     "r" : "220",
+                     "r" : "236",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "218",
+                           "r" : "228",
                            "s" : [ {
-                              "r" : "219",
+                              "r" : "229",
                               "s" : [ {
-                                 "r" : "219",
+                                 "r" : "229",
                                  "s" : [ {
                                     "value" : [ "[","Condition","]" ]
                                  } ]
@@ -7720,16 +11526,52 @@ module.exports['SingleObjectAlias'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "239",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "240",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "220",
+               "localId" : "236",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "237",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "238",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "218",
+                  "localId" : "228",
                   "alias" : "C",
+                  "resultTypeSpecifier" : {
+                     "localId" : "234",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "235",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "219",
+                     "localId" : "229",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "232",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "233",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -7740,29 +11582,30 @@ module.exports['SingleObjectAlias'] = {
                "relationship" : [ ]
             }
          }, {
-            "localId" : "222",
+            "localId" : "242",
+            "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
             "name" : "firstEncounter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "222",
+                  "r" : "242",
                   "s" : [ {
                      "value" : [ "","define ","firstEncounter",": " ]
                   }, {
-                     "r" : "228",
+                     "r" : "258",
                      "s" : [ {
                         "value" : [ "First","(" ]
                      }, {
-                        "r" : "225",
+                        "r" : "251",
                         "s" : [ {
                            "s" : [ {
-                              "r" : "223",
+                              "r" : "243",
                               "s" : [ {
-                                 "r" : "224",
+                                 "r" : "244",
                                  "s" : [ {
-                                    "r" : "224",
+                                    "r" : "244",
                                     "s" : [ {
                                        "value" : [ "[","Encounter","]" ]
                                     } ]
@@ -7779,19 +11622,55 @@ module.exports['SingleObjectAlias'] = {
                }
             } ],
             "expression" : {
-               "localId" : "228",
+               "localId" : "258",
+               "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                "type" : "First",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "259",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "260",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "source" : {
-                  "localId" : "225",
+                  "localId" : "251",
                   "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "localId" : "252",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "253",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "source" : [ {
-                     "localId" : "223",
+                     "localId" : "243",
                      "alias" : "E",
+                     "resultTypeSpecifier" : {
+                        "localId" : "249",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "250",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "expression" : {
-                        "localId" : "224",
+                        "localId" : "244",
                         "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                         "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "localId" : "247",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "248",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "include" : [ ],
                         "codeFilter" : [ ],
                         "dateFilter" : [ ],
@@ -7803,29 +11682,30 @@ module.exports['SingleObjectAlias'] = {
                }
             }
          }, {
-            "localId" : "230",
+            "localId" : "262",
+            "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
             "name" : "firstCondition",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "230",
+                  "r" : "262",
                   "s" : [ {
                      "value" : [ "","define ","firstCondition",": " ]
                   }, {
-                     "r" : "240",
+                     "r" : "284",
                      "s" : [ {
                         "value" : [ "First","(" ]
                      }, {
-                        "r" : "237",
+                        "r" : "277",
                         "s" : [ {
                            "s" : [ {
-                              "r" : "231",
+                              "r" : "263",
                               "s" : [ {
-                                 "r" : "232",
+                                 "r" : "264",
                                  "s" : [ {
-                                    "r" : "232",
+                                    "r" : "264",
                                     "s" : [ {
                                        "value" : [ "[","Condition","]" ]
                                     } ]
@@ -7837,22 +11717,22 @@ module.exports['SingleObjectAlias'] = {
                         }, {
                            "value" : [ " " ]
                         }, {
-                           "r" : "233",
+                           "r" : "271",
                            "s" : [ {
                               "value" : [ "where " ]
                            }, {
-                              "r" : "233",
+                              "r" : "271",
                               "s" : [ {
-                                 "r" : "235",
+                                 "r" : "273",
                                  "s" : [ {
-                                    "r" : "234",
+                                    "r" : "272",
                                     "s" : [ {
                                        "value" : [ "C" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "235",
+                                    "r" : "273",
                                     "s" : [ {
                                        "value" : [ "id" ]
                                     } ]
@@ -7860,7 +11740,7 @@ module.exports['SingleObjectAlias'] = {
                               }, {
                                  "value" : [ " ","="," " ]
                               }, {
-                                 "r" : "236",
+                                 "r" : "274",
                                  "s" : [ {
                                     "value" : [ "'http://cqframework.org/3/2'" ]
                                  } ]
@@ -7874,19 +11754,55 @@ module.exports['SingleObjectAlias'] = {
                }
             } ],
             "expression" : {
-               "localId" : "240",
+               "localId" : "284",
+               "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                "type" : "First",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "285",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "286",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "source" : {
-                  "localId" : "237",
+                  "localId" : "277",
                   "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "localId" : "278",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "279",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "source" : [ {
-                     "localId" : "231",
+                     "localId" : "263",
                      "alias" : "C",
+                     "resultTypeSpecifier" : {
+                        "localId" : "269",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "270",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "expression" : {
-                        "localId" : "232",
+                        "localId" : "264",
                         "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                         "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "localId" : "267",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "268",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "include" : [ ],
                         "codeFilter" : [ ],
                         "dateFilter" : [ ],
@@ -7896,16 +11812,27 @@ module.exports['SingleObjectAlias'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "233",
+                     "localId" : "271",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "275",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "276",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "235",
+                        "localId" : "273",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "id",
                         "scope" : "C",
                         "type" : "Property"
                      }, {
-                        "localId" : "236",
+                        "localId" : "274",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "http://cqframework.org/3/2",
                         "type" : "Literal"
@@ -7914,23 +11841,24 @@ module.exports['SingleObjectAlias'] = {
                }
             }
          }, {
-            "localId" : "242",
+            "localId" : "288",
+            "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
             "name" : "singleAlias",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "242",
+                  "r" : "288",
                   "s" : [ {
                      "value" : [ "","define ","singleAlias",": " ]
                   }, {
-                     "r" : "245",
+                     "r" : "291",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "243",
+                           "r" : "289",
                            "s" : [ {
-                              "r" : "244",
+                              "r" : "290",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstEncounter" ]
@@ -7945,13 +11873,16 @@ module.exports['SingleObjectAlias'] = {
                }
             } ],
             "expression" : {
-               "localId" : "245",
+               "localId" : "291",
+               "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "243",
+                  "localId" : "289",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "alias" : "E",
                   "expression" : {
-                     "localId" : "244",
+                     "localId" : "290",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "name" : "firstEncounter",
                      "type" : "ExpressionRef"
                   }
@@ -7960,23 +11891,24 @@ module.exports['SingleObjectAlias'] = {
                "relationship" : [ ]
             }
          }, {
-            "localId" : "247",
+            "localId" : "293",
+            "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
             "name" : "singleAliasWhere",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "247",
+                  "r" : "293",
                   "s" : [ {
                      "value" : [ "","define ","singleAliasWhere",": " ]
                   }, {
-                     "r" : "253",
+                     "r" : "301",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "248",
+                           "r" : "294",
                            "s" : [ {
-                              "r" : "249",
+                              "r" : "295",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstEncounter" ]
@@ -7989,13 +11921,13 @@ module.exports['SingleObjectAlias'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "252",
+                        "r" : "299",
                         "s" : [ {
                            "value" : [ "where " ]
                         }, {
-                           "r" : "252",
+                           "r" : "299",
                            "s" : [ {
-                              "r" : "250",
+                              "r" : "296",
                               "s" : [ {
                                  "value" : [ "E" ]
                               } ]
@@ -8008,13 +11940,16 @@ module.exports['SingleObjectAlias'] = {
                }
             } ],
             "expression" : {
-               "localId" : "253",
+               "localId" : "301",
+               "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "248",
+                  "localId" : "294",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "alias" : "E",
                   "expression" : {
-                     "localId" : "249",
+                     "localId" : "295",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "name" : "firstEncounter",
                      "type" : "ExpressionRef"
                   }
@@ -8022,15 +11957,26 @@ module.exports['SingleObjectAlias'] = {
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "252",
+                  "localId" : "299",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Not",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "300",
+                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
-                     "localId" : "251",
+                     "localId" : "297",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IsNull",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "298",
+                        "name" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : {
-                        "localId" : "250",
+                        "localId" : "296",
+                        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                         "name" : "E",
                         "type" : "AliasRef"
                      }
@@ -8038,23 +11984,24 @@ module.exports['SingleObjectAlias'] = {
                }
             }
          }, {
-            "localId" : "255",
+            "localId" : "303",
+            "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
             "name" : "singleAliasWhereToNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "255",
+                  "r" : "303",
                   "s" : [ {
                      "value" : [ "","define ","singleAliasWhereToNull",": " ]
                   }, {
-                     "r" : "261",
+                     "r" : "314",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "256",
+                           "r" : "304",
                            "s" : [ {
-                              "r" : "257",
+                              "r" : "305",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstEncounter" ]
@@ -8067,22 +12014,22 @@ module.exports['SingleObjectAlias'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "260",
+                        "r" : "312",
                         "s" : [ {
                            "value" : [ "where " ]
                         }, {
-                           "r" : "260",
+                           "r" : "312",
                            "s" : [ {
-                              "r" : "259",
+                              "r" : "307",
                               "s" : [ {
-                                 "r" : "258",
+                                 "r" : "306",
                                  "s" : [ {
                                     "value" : [ "E" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "259",
+                                 "r" : "307",
                                  "s" : [ {
                                     "value" : [ "period" ]
                                  } ]
@@ -8096,13 +12043,16 @@ module.exports['SingleObjectAlias'] = {
                }
             } ],
             "expression" : {
-               "localId" : "261",
+               "localId" : "314",
+               "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "256",
+                  "localId" : "304",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "alias" : "E",
                   "expression" : {
-                     "localId" : "257",
+                     "localId" : "305",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "name" : "firstEncounter",
                      "type" : "ExpressionRef"
                   }
@@ -8110,37 +12060,51 @@ module.exports['SingleObjectAlias'] = {
                "let" : [ ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "260",
+                  "localId" : "312",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "IsNull",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "313",
+                     "name" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
-                     "localId" : "259",
+                     "localId" : "307",
                      "path" : "period",
                      "scope" : "E",
-                     "type" : "Property"
+                     "type" : "Property",
+                     "resultTypeSpecifier" : {
+                        "localId" : "310",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "311",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
                   }
                }
             }
          }, {
-            "localId" : "263",
+            "localId" : "316",
             "name" : "singleAliases",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "263",
+                  "r" : "316",
                   "s" : [ {
                      "value" : [ "","define ","singleAliases",": " ]
                   }, {
-                     "r" : "272",
+                     "r" : "325",
                      "s" : [ {
                         "s" : [ {
                            "value" : [ "from " ]
                         }, {
-                           "r" : "264",
+                           "r" : "317",
                            "s" : [ {
-                              "r" : "265",
+                              "r" : "318",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstEncounter" ]
@@ -8152,9 +12116,9 @@ module.exports['SingleObjectAlias'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "266",
+                           "r" : "319",
                            "s" : [ {
-                              "r" : "267",
+                              "r" : "320",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstCondition" ]
@@ -8168,22 +12132,68 @@ module.exports['SingleObjectAlias'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "331",
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "localId" : "332",
+                  "name" : "E",
+                  "elementType" : {
+                     "localId" : "333",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "334",
+                  "name" : "C",
+                  "elementType" : {
+                     "localId" : "335",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
             "expression" : {
-               "localId" : "272",
+               "localId" : "325",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "326",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "327",
+                     "name" : "E",
+                     "elementType" : {
+                        "localId" : "328",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "329",
+                     "name" : "C",
+                     "elementType" : {
+                        "localId" : "330",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               },
                "source" : [ {
-                  "localId" : "264",
+                  "localId" : "317",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "alias" : "E",
                   "expression" : {
-                     "localId" : "265",
+                     "localId" : "318",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "name" : "firstEncounter",
                      "type" : "ExpressionRef"
                   }
                }, {
-                  "localId" : "266",
+                  "localId" : "319",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "alias" : "C",
                   "expression" : {
-                     "localId" : "267",
+                     "localId" : "320",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "name" : "firstCondition",
                      "type" : "ExpressionRef"
                   }
@@ -8191,22 +12201,22 @@ module.exports['SingleObjectAlias'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "268",
+                  "localId" : "321",
                   "distinct" : true,
                   "expression" : {
-                     "localId" : "269",
+                     "localId" : "322",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "E",
                         "value" : {
-                           "localId" : "270",
+                           "localId" : "323",
                            "name" : "E",
                            "type" : "AliasRef"
                         }
                      }, {
                         "name" : "C",
                         "value" : {
-                           "localId" : "271",
+                           "localId" : "324",
                            "name" : "C",
                            "type" : "AliasRef"
                         }
@@ -8215,25 +12225,25 @@ module.exports['SingleObjectAlias'] = {
                }
             }
          }, {
-            "localId" : "274",
+            "localId" : "337",
             "name" : "singleAliasesAndList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "274",
+                  "r" : "337",
                   "s" : [ {
                      "value" : [ "","define ","singleAliasesAndList",": " ]
                   }, {
-                     "r" : "286",
+                     "r" : "353",
                      "s" : [ {
                         "s" : [ {
                            "value" : [ "from " ]
                         }, {
-                           "r" : "275",
+                           "r" : "338",
                            "s" : [ {
-                              "r" : "276",
+                              "r" : "339",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstEncounter" ]
@@ -8245,9 +12255,9 @@ module.exports['SingleObjectAlias'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "277",
+                           "r" : "340",
                            "s" : [ {
-                              "r" : "278",
+                              "r" : "341",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstCondition" ]
@@ -8259,9 +12269,9 @@ module.exports['SingleObjectAlias'] = {
                         }, {
                            "value" : [ " , " ]
                         }, {
-                           "r" : "279",
+                           "r" : "342",
                            "s" : [ {
-                              "r" : "280",
+                              "r" : "343",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "conditions" ]
@@ -8275,60 +12285,148 @@ module.exports['SingleObjectAlias'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "362",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "363",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "364",
+                     "name" : "E",
+                     "elementType" : {
+                        "localId" : "365",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "366",
+                     "name" : "C",
+                     "elementType" : {
+                        "localId" : "367",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "368",
+                     "name" : "Con",
+                     "elementType" : {
+                        "localId" : "369",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "286",
+               "localId" : "353",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "354",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "355",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "356",
+                        "name" : "E",
+                        "elementType" : {
+                           "localId" : "357",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "358",
+                        "name" : "C",
+                        "elementType" : {
+                           "localId" : "359",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "360",
+                        "name" : "Con",
+                        "elementType" : {
+                           "localId" : "361",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
                "source" : [ {
-                  "localId" : "275",
+                  "localId" : "338",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "alias" : "E",
                   "expression" : {
-                     "localId" : "276",
+                     "localId" : "339",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "name" : "firstEncounter",
                      "type" : "ExpressionRef"
                   }
                }, {
-                  "localId" : "277",
+                  "localId" : "340",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "alias" : "C",
                   "expression" : {
-                     "localId" : "278",
+                     "localId" : "341",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "name" : "firstCondition",
                      "type" : "ExpressionRef"
                   }
                }, {
-                  "localId" : "279",
+                  "localId" : "342",
                   "alias" : "Con",
+                  "resultTypeSpecifier" : {
+                     "localId" : "346",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "347",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "280",
+                     "localId" : "343",
                      "name" : "conditions",
-                     "type" : "ExpressionRef"
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "localId" : "344",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "345",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
                   }
                } ],
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "281",
+                  "localId" : "348",
                   "distinct" : true,
                   "expression" : {
-                     "localId" : "282",
+                     "localId" : "349",
                      "type" : "Tuple",
                      "element" : [ {
                         "name" : "E",
                         "value" : {
-                           "localId" : "283",
+                           "localId" : "350",
                            "name" : "E",
                            "type" : "AliasRef"
                         }
                      }, {
                         "name" : "C",
                         "value" : {
-                           "localId" : "284",
+                           "localId" : "351",
                            "name" : "C",
                            "type" : "AliasRef"
                         }
                      }, {
                         "name" : "Con",
                         "value" : {
-                           "localId" : "285",
+                           "localId" : "352",
                            "name" : "Con",
                            "type" : "AliasRef"
                         }
@@ -8337,25 +12435,25 @@ module.exports['SingleObjectAlias'] = {
                }
             }
          }, {
-            "localId" : "288",
+            "localId" : "371",
             "name" : "singleAliasWith",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "288",
+                  "r" : "371",
                   "s" : [ {
                      "value" : [ "","define ","singleAliasWith",":  " ]
                   }, {
-                     "r" : "298",
+                     "r" : "389",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "289",
+                           "r" : "372",
                            "s" : [ {
-                              "r" : "290",
+                              "r" : "373",
                               "s" : [ {
-                                 "r" : "290",
+                                 "r" : "373",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -8367,13 +12465,13 @@ module.exports['SingleObjectAlias'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "297",
+                        "r" : "388",
                         "s" : [ {
                            "value" : [ "with " ]
                         }, {
-                           "r" : "291",
+                           "r" : "380",
                            "s" : [ {
-                              "r" : "292",
+                              "r" : "381",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstCondition" ]
@@ -8385,18 +12483,18 @@ module.exports['SingleObjectAlias'] = {
                         }, {
                            "value" : [ " such that " ]
                         }, {
-                           "r" : "293",
+                           "r" : "382",
                            "s" : [ {
-                              "r" : "295",
+                              "r" : "384",
                               "s" : [ {
-                                 "r" : "294",
+                                 "r" : "383",
                                  "s" : [ {
                                     "value" : [ "C" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "295",
+                                 "r" : "384",
                                  "s" : [ {
                                     "value" : [ "id" ]
                                  } ]
@@ -8404,7 +12502,7 @@ module.exports['SingleObjectAlias'] = {
                            }, {
                               "value" : [ " ","="," " ]
                            }, {
-                              "r" : "296",
+                              "r" : "385",
                               "s" : [ {
                                  "value" : [ "'http://cqframework.org/3/2'" ]
                               } ]
@@ -8414,16 +12512,52 @@ module.exports['SingleObjectAlias'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "392",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "393",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "298",
+               "localId" : "389",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "390",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "391",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "289",
+                  "localId" : "372",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "378",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "379",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "290",
+                     "localId" : "373",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "376",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "377",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -8432,25 +12566,38 @@ module.exports['SingleObjectAlias'] = {
                } ],
                "let" : [ ],
                "relationship" : [ {
-                  "localId" : "297",
+                  "localId" : "388",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "alias" : "C",
                   "type" : "With",
                   "expression" : {
-                     "localId" : "292",
+                     "localId" : "381",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "name" : "firstCondition",
                      "type" : "ExpressionRef"
                   },
                   "suchThat" : {
-                     "localId" : "293",
+                     "localId" : "382",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "386",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "387",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "295",
+                        "localId" : "384",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "id",
                         "scope" : "C",
                         "type" : "Property"
                      }, {
-                        "localId" : "296",
+                        "localId" : "385",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "http://cqframework.org/3/2",
                         "type" : "Literal"
@@ -8459,25 +12606,25 @@ module.exports['SingleObjectAlias'] = {
                } ]
             }
          }, {
-            "localId" : "300",
+            "localId" : "395",
             "name" : "singleAliasWithOut",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "300",
+                  "r" : "395",
                   "s" : [ {
                      "value" : [ "","define ","singleAliasWithOut",":  " ]
                   }, {
-                     "r" : "310",
+                     "r" : "413",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "301",
+                           "r" : "396",
                            "s" : [ {
-                              "r" : "302",
+                              "r" : "397",
                               "s" : [ {
-                                 "r" : "302",
+                                 "r" : "397",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -8489,13 +12636,13 @@ module.exports['SingleObjectAlias'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "309",
+                        "r" : "412",
                         "s" : [ {
                            "value" : [ "without " ]
                         }, {
-                           "r" : "303",
+                           "r" : "404",
                            "s" : [ {
-                              "r" : "304",
+                              "r" : "405",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstCondition" ]
@@ -8507,18 +12654,18 @@ module.exports['SingleObjectAlias'] = {
                         }, {
                            "value" : [ " such that " ]
                         }, {
-                           "r" : "305",
+                           "r" : "406",
                            "s" : [ {
-                              "r" : "307",
+                              "r" : "408",
                               "s" : [ {
-                                 "r" : "306",
+                                 "r" : "407",
                                  "s" : [ {
                                     "value" : [ "C" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "307",
+                                 "r" : "408",
                                  "s" : [ {
                                     "value" : [ "id" ]
                                  } ]
@@ -8526,7 +12673,7 @@ module.exports['SingleObjectAlias'] = {
                            }, {
                               "value" : [ " ","="," " ]
                            }, {
-                              "r" : "308",
+                              "r" : "409",
                               "s" : [ {
                                  "value" : [ "'http://cqframework.org/3'" ]
                               } ]
@@ -8536,16 +12683,52 @@ module.exports['SingleObjectAlias'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "416",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "417",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "310",
+               "localId" : "413",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "414",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "415",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "301",
+                  "localId" : "396",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "402",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "403",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "302",
+                     "localId" : "397",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "400",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "401",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -8554,25 +12737,38 @@ module.exports['SingleObjectAlias'] = {
                } ],
                "let" : [ ],
                "relationship" : [ {
-                  "localId" : "309",
+                  "localId" : "412",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "alias" : "C",
                   "type" : "Without",
                   "expression" : {
-                     "localId" : "304",
+                     "localId" : "405",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "name" : "firstCondition",
                      "type" : "ExpressionRef"
                   },
                   "suchThat" : {
-                     "localId" : "305",
+                     "localId" : "406",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "410",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "411",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "307",
+                        "localId" : "408",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "id",
                         "scope" : "C",
                         "type" : "Property"
                      }, {
-                        "localId" : "308",
+                        "localId" : "409",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "http://cqframework.org/3",
                         "type" : "Literal"
@@ -8581,25 +12777,25 @@ module.exports['SingleObjectAlias'] = {
                } ]
             }
          }, {
-            "localId" : "312",
+            "localId" : "419",
             "name" : "singleAliasWithEmpty",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "312",
+                  "r" : "419",
                   "s" : [ {
                      "value" : [ "","define ","singleAliasWithEmpty",":  " ]
                   }, {
-                     "r" : "322",
+                     "r" : "437",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "313",
+                           "r" : "420",
                            "s" : [ {
-                              "r" : "314",
+                              "r" : "421",
                               "s" : [ {
-                                 "r" : "314",
+                                 "r" : "421",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -8611,13 +12807,13 @@ module.exports['SingleObjectAlias'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "321",
+                        "r" : "436",
                         "s" : [ {
                            "value" : [ "with " ]
                         }, {
-                           "r" : "315",
+                           "r" : "428",
                            "s" : [ {
-                              "r" : "316",
+                              "r" : "429",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstCondition" ]
@@ -8629,18 +12825,18 @@ module.exports['SingleObjectAlias'] = {
                         }, {
                            "value" : [ " such that " ]
                         }, {
-                           "r" : "317",
+                           "r" : "430",
                            "s" : [ {
-                              "r" : "319",
+                              "r" : "432",
                               "s" : [ {
-                                 "r" : "318",
+                                 "r" : "431",
                                  "s" : [ {
                                     "value" : [ "C" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "319",
+                                 "r" : "432",
                                  "s" : [ {
                                     "value" : [ "id" ]
                                  } ]
@@ -8648,7 +12844,7 @@ module.exports['SingleObjectAlias'] = {
                            }, {
                               "value" : [ " ","="," " ]
                            }, {
-                              "r" : "320",
+                              "r" : "433",
                               "s" : [ {
                                  "value" : [ "'http://cqframework.org/3'" ]
                               } ]
@@ -8658,16 +12854,52 @@ module.exports['SingleObjectAlias'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "440",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "441",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "322",
+               "localId" : "437",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "438",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "439",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "313",
+                  "localId" : "420",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "426",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "427",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "314",
+                     "localId" : "421",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "424",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "425",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -8676,25 +12908,38 @@ module.exports['SingleObjectAlias'] = {
                } ],
                "let" : [ ],
                "relationship" : [ {
-                  "localId" : "321",
+                  "localId" : "436",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "alias" : "C",
                   "type" : "With",
                   "expression" : {
-                     "localId" : "316",
+                     "localId" : "429",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "name" : "firstCondition",
                      "type" : "ExpressionRef"
                   },
                   "suchThat" : {
-                     "localId" : "317",
+                     "localId" : "430",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "434",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "435",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "319",
+                        "localId" : "432",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "id",
                         "scope" : "C",
                         "type" : "Property"
                      }, {
-                        "localId" : "320",
+                        "localId" : "433",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "http://cqframework.org/3",
                         "type" : "Literal"
@@ -8703,25 +12948,25 @@ module.exports['SingleObjectAlias'] = {
                } ]
             }
          }, {
-            "localId" : "324",
+            "localId" : "443",
             "name" : "singleAliasWithOutEmpty",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "324",
+                  "r" : "443",
                   "s" : [ {
                      "value" : [ "","define ","singleAliasWithOutEmpty",":  " ]
                   }, {
-                     "r" : "334",
+                     "r" : "461",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "325",
+                           "r" : "444",
                            "s" : [ {
-                              "r" : "326",
+                              "r" : "445",
                               "s" : [ {
-                                 "r" : "326",
+                                 "r" : "445",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -8733,13 +12978,13 @@ module.exports['SingleObjectAlias'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "333",
+                        "r" : "460",
                         "s" : [ {
                            "value" : [ "without " ]
                         }, {
-                           "r" : "327",
+                           "r" : "452",
                            "s" : [ {
-                              "r" : "328",
+                              "r" : "453",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstCondition" ]
@@ -8751,18 +12996,18 @@ module.exports['SingleObjectAlias'] = {
                         }, {
                            "value" : [ " such that " ]
                         }, {
-                           "r" : "329",
+                           "r" : "454",
                            "s" : [ {
-                              "r" : "331",
+                              "r" : "456",
                               "s" : [ {
-                                 "r" : "330",
+                                 "r" : "455",
                                  "s" : [ {
                                     "value" : [ "C" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "331",
+                                 "r" : "456",
                                  "s" : [ {
                                     "value" : [ "id" ]
                                  } ]
@@ -8770,7 +13015,7 @@ module.exports['SingleObjectAlias'] = {
                            }, {
                               "value" : [ " ","="," " ]
                            }, {
-                              "r" : "332",
+                              "r" : "457",
                               "s" : [ {
                                  "value" : [ "'http://cqframework.org/3/2'" ]
                               } ]
@@ -8780,16 +13025,52 @@ module.exports['SingleObjectAlias'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "464",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "465",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "334",
+               "localId" : "461",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "462",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "463",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "325",
+                  "localId" : "444",
                   "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "450",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "451",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "326",
+                     "localId" : "445",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "448",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "449",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -8798,25 +13079,38 @@ module.exports['SingleObjectAlias'] = {
                } ],
                "let" : [ ],
                "relationship" : [ {
-                  "localId" : "333",
+                  "localId" : "460",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "alias" : "C",
                   "type" : "Without",
                   "expression" : {
-                     "localId" : "328",
+                     "localId" : "453",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "name" : "firstCondition",
                      "type" : "ExpressionRef"
                   },
                   "suchThat" : {
-                     "localId" : "329",
+                     "localId" : "454",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "458",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "459",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "331",
+                        "localId" : "456",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "id",
                         "scope" : "C",
                         "type" : "Property"
                      }, {
-                        "localId" : "332",
+                        "localId" : "457",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "http://cqframework.org/3/2",
                         "type" : "Literal"
@@ -8825,42 +13119,45 @@ module.exports['SingleObjectAlias'] = {
                } ]
             }
          }, {
-            "localId" : "336",
+            "localId" : "467",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
             "name" : "asNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "336",
+                  "r" : "467",
                   "s" : [ {
-                     "r" : "337",
+                     "r" : "468",
                      "value" : [ "","define ","asNull",": ","null" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "337",
+               "localId" : "468",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                "type" : "Null"
             }
          }, {
-            "localId" : "339",
+            "localId" : "470",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
             "name" : "nullQuery",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "339",
+                  "r" : "470",
                   "s" : [ {
                      "value" : [ "","define ","nullQuery",": " ]
                   }, {
-                     "r" : "342",
+                     "r" : "473",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "340",
+                           "r" : "471",
                            "s" : [ {
-                              "r" : "341",
+                              "r" : "472",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "asNull" ]
@@ -8875,13 +13172,16 @@ module.exports['SingleObjectAlias'] = {
                }
             } ],
             "expression" : {
-               "localId" : "342",
+               "localId" : "473",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "340",
+                  "localId" : "471",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                   "alias" : "N",
                   "expression" : {
-                     "localId" : "341",
+                     "localId" : "472",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "name" : "asNull",
                      "type" : "ExpressionRef"
                   }
@@ -8890,23 +13190,23 @@ module.exports['SingleObjectAlias'] = {
                "relationship" : [ ]
             }
          }, {
-            "localId" : "344",
+            "localId" : "475",
             "name" : "singleAliasReturnTuple",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "344",
+                  "r" : "475",
                   "s" : [ {
                      "value" : [ "//define singleAliasWith: firstEncounter E with [Condition] C\n//                         such that C.id = 'http://cqframework.org/3/2'\n//define singleAliasWithNull: firstEncounter E with conditions C\n//                        such that C.id is null\n","define ","singleAliasReturnTuple",": " ]
                   }, {
-                     "r" : "350",
+                     "r" : "487",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "345",
+                           "r" : "476",
                            "s" : [ {
-                              "r" : "346",
+                              "r" : "477",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstEncounter" ]
@@ -8919,16 +13219,16 @@ module.exports['SingleObjectAlias'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "347",
+                        "r" : "478",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "348",
+                           "r" : "479",
                            "s" : [ {
                               "value" : [ "Tuple{" ]
                            }, {
                               "s" : [ {
-                                 "r" : "349",
+                                 "r" : "480",
                                  "value" : [ "a",":","1" ]
                               } ]
                            }, {
@@ -8939,14 +13239,42 @@ module.exports['SingleObjectAlias'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "491",
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "localId" : "492",
+                  "name" : "a",
+                  "elementType" : {
+                     "localId" : "493",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
             "expression" : {
-               "localId" : "350",
+               "localId" : "487",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "488",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "489",
+                     "name" : "a",
+                     "elementType" : {
+                        "localId" : "490",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               },
                "source" : [ {
-                  "localId" : "345",
+                  "localId" : "476",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "alias" : "E",
                   "expression" : {
-                     "localId" : "346",
+                     "localId" : "477",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "name" : "firstEncounter",
                      "type" : "ExpressionRef"
                   }
@@ -8954,14 +13282,41 @@ module.exports['SingleObjectAlias'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "347",
+                  "localId" : "478",
+                  "resultTypeSpecifier" : {
+                     "localId" : "484",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "485",
+                        "name" : "a",
+                        "elementType" : {
+                           "localId" : "486",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
                   "expression" : {
-                     "localId" : "348",
+                     "localId" : "479",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "481",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "482",
+                           "name" : "a",
+                           "elementType" : {
+                              "localId" : "483",
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "a",
                         "value" : {
-                           "localId" : "349",
+                           "localId" : "480",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
@@ -8971,23 +13326,23 @@ module.exports['SingleObjectAlias'] = {
                }
             }
          }, {
-            "localId" : "352",
+            "localId" : "495",
             "name" : "singleAliasReturnList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "352",
+                  "r" : "495",
                   "s" : [ {
                      "value" : [ "","define ","singleAliasReturnList",": " ]
                   }, {
-                     "r" : "361",
+                     "r" : "508",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "353",
+                           "r" : "496",
                            "s" : [ {
-                              "r" : "354",
+                              "r" : "497",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "firstEncounter" ]
@@ -9000,36 +13355,36 @@ module.exports['SingleObjectAlias'] = {
                      }, {
                         "value" : [ " " ]
                      }, {
-                        "r" : "355",
+                        "r" : "498",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "356",
+                           "r" : "499",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
-                              "r" : "357",
+                              "r" : "500",
                               "s" : [ {
                                  "value" : [ "'foo'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "358",
+                              "r" : "501",
                               "s" : [ {
                                  "value" : [ "'bar'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "359",
+                              "r" : "502",
                               "s" : [ {
                                  "value" : [ "'baz'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "360",
+                              "r" : "503",
                               "s" : [ {
                                  "value" : [ "'bar'" ]
                               } ]
@@ -9041,14 +13396,34 @@ module.exports['SingleObjectAlias'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "511",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "512",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "361",
+               "localId" : "508",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "509",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "510",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
                "source" : [ {
-                  "localId" : "353",
+                  "localId" : "496",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "alias" : "E",
                   "expression" : {
-                     "localId" : "354",
+                     "localId" : "497",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "name" : "firstEncounter",
                      "type" : "ExpressionRef"
                   }
@@ -9056,27 +13431,49 @@ module.exports['SingleObjectAlias'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "355",
+                  "localId" : "498",
+                  "resultTypeSpecifier" : {
+                     "localId" : "506",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "507",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "356",
+                     "localId" : "499",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "504",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "505",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "357",
+                        "localId" : "500",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "foo",
                         "type" : "Literal"
                      }, {
-                        "localId" : "358",
+                        "localId" : "501",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "bar",
                         "type" : "Literal"
                      }, {
-                        "localId" : "359",
+                        "localId" : "502",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "baz",
                         "type" : "Literal"
                      }, {
-                        "localId" : "360",
+                        "localId" : "503",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "bar",
                         "type" : "Literal"
@@ -9132,14 +13529,14 @@ module.exports['AggregateQuery'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "353",
+            "r" : "497",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -9207,6 +13604,7 @@ module.exports['AggregateQuery'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "noStartingAggregation",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -9217,7 +13615,7 @@ module.exports['AggregateQuery'] = {
                   "s" : [ {
                      "value" : [ "","define ","noStartingAggregation",":\n " ]
                   }, {
-                     "r" : "231",
+                     "r" : "243",
                      "s" : [ {
                         "s" : [ {
                            "r" : "213",
@@ -9241,28 +13639,28 @@ module.exports['AggregateQuery'] = {
                      }, {
                         "value" : [ "\n    " ]
                      }, {
-                        "r" : "220",
+                        "r" : "226",
                         "s" : [ {
                            "value" : [ "aggregate ","T"," : " ]
                         }, {
-                           "r" : "223",
+                           "r" : "229",
                            "s" : [ {
-                              "r" : "228",
+                              "r" : "236",
                               "s" : [ {
                                  "value" : [ "Coalesce","(" ]
                               }, {
-                                 "r" : "224",
+                                 "r" : "230",
                                  "s" : [ {
                                     "value" : [ "T" ]
                                  } ]
                               }, {
-                                 "r" : "225",
+                                 "r" : "231",
                                  "value" : [ ", ","1",")" ]
                               } ]
                            }, {
                               "value" : [ " * " ]
                            }, {
-                              "r" : "229",
+                              "r" : "239",
                               "s" : [ {
                                  "value" : [ "R" ]
                               } ]
@@ -9273,36 +13671,60 @@ module.exports['AggregateQuery'] = {
                }
             } ],
             "expression" : {
-               "localId" : "231",
+               "localId" : "243",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Query",
                "source" : [ {
                   "localId" : "213",
                   "alias" : "R",
+                  "resultTypeSpecifier" : {
+                     "localId" : "224",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "225",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
                      "localId" : "214",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "222",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "223",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
                         "localId" : "215",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
                         "localId" : "216",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
                         "localId" : "217",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
                         "localId" : "218",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
                         "localId" : "219",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -9312,64 +13734,87 @@ module.exports['AggregateQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "aggregate" : {
-                  "localId" : "220",
+                  "localId" : "226",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "identifier" : "T",
                   "expression" : {
-                     "localId" : "223",
+                     "localId" : "229",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "Multiply",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "241",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "242",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "230",
+                        "localId" : "240",
                         "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "As",
                         "signature" : [ ],
                         "operand" : {
-                           "localId" : "228",
+                           "localId" : "236",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                            "type" : "Coalesce",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "237",
+                              "name" : "{urn:hl7-org:elm-types:r1}Any",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "localId" : "238",
+                              "name" : "{urn:hl7-org:elm-types:r1}Any",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
-                              "localId" : "224",
+                              "localId" : "230",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                               "name" : "T",
                               "type" : "QueryLetRef"
                            }, {
-                              "localId" : "225",
+                              "localId" : "231",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "1",
                               "type" : "Literal"
                            } ]
                         }
                      }, {
-                        "localId" : "229",
+                        "localId" : "239",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "R",
                         "type" : "AliasRef"
                      } ]
                   },
                   "starting" : {
-                     "localId" : "221",
+                     "localId" : "227",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }
             }
          }, {
-            "localId" : "233",
+            "localId" : "245",
             "name" : "encounterPeriods",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "233",
+                  "r" : "245",
                   "s" : [ {
                      "value" : [ "","define ","encounterPeriods",":\n  " ]
                   }, {
-                     "r" : "239",
+                     "r" : "264",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "234",
+                           "r" : "246",
                            "s" : [ {
-                              "r" : "235",
+                              "r" : "247",
                               "s" : [ {
-                                 "r" : "235",
+                                 "r" : "247",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -9381,20 +13826,20 @@ module.exports['AggregateQuery'] = {
                      }, {
                         "value" : [ "\n    " ]
                      }, {
-                        "r" : "236",
+                        "r" : "254",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "238",
+                           "r" : "256",
                            "s" : [ {
-                              "r" : "237",
+                              "r" : "255",
                               "s" : [ {
                                  "value" : [ "e" ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "238",
+                              "r" : "256",
                               "s" : [ {
                                  "value" : [ "period" ]
                               } ]
@@ -9404,16 +13849,60 @@ module.exports['AggregateQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "268",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "269",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "270",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            },
             "expression" : {
-               "localId" : "239",
+               "localId" : "264",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "265",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "266",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "267",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               },
                "source" : [ {
-                  "localId" : "234",
+                  "localId" : "246",
                   "alias" : "e",
+                  "resultTypeSpecifier" : {
+                     "localId" : "252",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "253",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "235",
+                     "localId" : "247",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "250",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "251",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -9423,33 +13912,55 @@ module.exports['AggregateQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "236",
+                  "localId" : "254",
+                  "resultTypeSpecifier" : {
+                     "localId" : "261",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "262",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "263",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  },
                   "expression" : {
-                     "localId" : "238",
+                     "localId" : "256",
                      "path" : "period",
                      "scope" : "e",
-                     "type" : "Property"
+                     "type" : "Property",
+                     "resultTypeSpecifier" : {
+                        "localId" : "259",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "260",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
                   }
                }
             }
          }, {
-            "localId" : "241",
+            "localId" : "272",
             "name" : "expressionStartingAggregation",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "241",
+                  "r" : "272",
                   "s" : [ {
                      "value" : [ "","define ","expressionStartingAggregation",":\n  " ]
                   }, {
-                     "r" : "286",
+                     "r" : "398",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "242",
+                           "r" : "273",
                            "s" : [ {
-                              "r" : "243",
+                              "r" : "274",
                               "s" : [ {
                                  "s" : [ {
                                     "value" : [ "encounterPeriods" ]
@@ -9462,28 +13973,28 @@ module.exports['AggregateQuery'] = {
                      }, {
                         "value" : [ "\n    " ]
                      }, {
-                        "r" : "244",
+                        "r" : "281",
                         "s" : [ {
                            "value" : [ "aggregate ","R"," " ]
                         }, {
-                           "r" : "245",
+                           "r" : "282",
                            "s" : [ {
                               "value" : [ "starting (" ]
                            }, {
-                              "r" : "245",
+                              "r" : "282",
                               "s" : [ {
-                                 "r" : "246",
+                                 "r" : "283",
                                  "value" : [ "List{}"," as " ]
                               }, {
-                                 "r" : "247",
+                                 "r" : "286",
                                  "s" : [ {
                                     "value" : [ "List<" ]
                                  }, {
-                                    "r" : "248",
+                                    "r" : "287",
                                     "s" : [ {
                                        "value" : [ "Interval<" ]
                                     }, {
-                                       "r" : "249",
+                                       "r" : "288",
                                        "s" : [ {
                                           "value" : [ "DateTime" ]
                                        } ]
@@ -9500,29 +14011,29 @@ module.exports['AggregateQuery'] = {
                         }, {
                            "value" : [ ": " ]
                         }, {
-                           "r" : "285",
+                           "r" : "385",
                            "s" : [ {
-                              "r" : "255",
+                              "r" : "305",
                               "s" : [ {
                                  "value" : [ "R" ]
                               } ]
                            }, {
                               "value" : [ " union " ]
                            }, {
-                              "r" : "256",
+                              "r" : "309",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "256",
+                                 "r" : "309",
                                  "s" : [ {
                                     "value" : [ "{\n      " ]
                                  }, {
-                                    "r" : "284",
+                                    "r" : "376",
                                     "s" : [ {
                                        "s" : [ {
-                                          "r" : "257",
+                                          "r" : "310",
                                           "s" : [ {
-                                             "r" : "258",
+                                             "r" : "311",
                                              "s" : [ {
                                                 "s" : [ {
                                                    "value" : [ "M" ]
@@ -9538,29 +14049,29 @@ module.exports['AggregateQuery'] = {
                                        "s" : [ {
                                           "value" : [ "let " ]
                                        }, {
-                                          "r" : "259",
+                                          "r" : "316",
                                           "s" : [ {
                                              "value" : [ "S",": " ]
                                           }, {
-                                             "r" : "276",
+                                             "r" : "358",
                                              "s" : [ {
                                                 "value" : [ "Max","(" ]
                                              }, {
-                                                "r" : "260",
+                                                "r" : "317",
                                                 "s" : [ {
                                                    "value" : [ "{ " ]
                                                 }, {
-                                                   "r" : "261",
+                                                   "r" : "318",
                                                    "s" : [ {
-                                                      "r" : "262",
+                                                      "r" : "319",
                                                       "s" : [ {
                                                          "value" : [ "end of " ]
                                                       }, {
-                                                         "r" : "266",
+                                                         "r" : "329",
                                                          "s" : [ {
                                                             "value" : [ "Last","(" ]
                                                          }, {
-                                                            "r" : "263",
+                                                            "r" : "320",
                                                             "s" : [ {
                                                                "value" : [ "R" ]
                                                             } ]
@@ -9571,7 +14082,7 @@ module.exports['AggregateQuery'] = {
                                                    }, {
                                                       "value" : [ "+" ]
                                                    }, {
-                                                      "r" : "267",
+                                                      "r" : "337",
                                                       "s" : [ {
                                                          "value" : [ "1 ","day" ]
                                                       } ]
@@ -9579,9 +14090,9 @@ module.exports['AggregateQuery'] = {
                                                 }, {
                                                    "value" : [ ", " ]
                                                 }, {
-                                                   "r" : "273",
+                                                   "r" : "348",
                                                    "s" : [ {
-                                                      "r" : "268",
+                                                      "r" : "340",
                                                       "value" : [ "DateTime","(","1970",",","01",",","01",")" ]
                                                    } ]
                                                 }, {
@@ -9594,15 +14105,15 @@ module.exports['AggregateQuery'] = {
                                        }, {
                                           "value" : [ ",\n          " ]
                                        }, {
-                                          "r" : "277",
+                                          "r" : "361",
                                           "s" : [ {
                                              "value" : [ "E",": " ]
                                           }, {
-                                             "r" : "278",
+                                             "r" : "362",
                                              "s" : [ {
                                                 "value" : [ "start of " ]
                                              }, {
-                                                "r" : "279",
+                                                "r" : "363",
                                                 "s" : [ {
                                                    "value" : [ "X" ]
                                                 } ]
@@ -9612,22 +14123,22 @@ module.exports['AggregateQuery'] = {
                                     }, {
                                        "value" : [ "\n        " ]
                                     }, {
-                                       "r" : "280",
+                                       "r" : "368",
                                        "s" : [ {
                                           "value" : [ "return " ]
                                        }, {
-                                          "r" : "283",
+                                          "r" : "371",
                                           "s" : [ {
                                              "value" : [ "Interval[" ]
                                           }, {
-                                             "r" : "281",
+                                             "r" : "369",
                                              "s" : [ {
                                                 "value" : [ "S" ]
                                              } ]
                                           }, {
                                              "value" : [ ", " ]
                                           }, {
-                                             "r" : "282",
+                                             "r" : "370",
                                              "s" : [ {
                                                 "value" : [ "E" ]
                                              } ]
@@ -9648,98 +14159,341 @@ module.exports['AggregateQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "402",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "403",
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "localId" : "404",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            },
             "expression" : {
-               "localId" : "286",
+               "localId" : "398",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "399",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "400",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "401",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               },
                "source" : [ {
-                  "localId" : "242",
+                  "localId" : "273",
                   "alias" : "M",
+                  "resultTypeSpecifier" : {
+                     "localId" : "278",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "279",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "280",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  },
                   "expression" : {
-                     "localId" : "243",
+                     "localId" : "274",
                      "name" : "encounterPeriods",
-                     "type" : "ExpressionRef"
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "localId" : "275",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "276",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "277",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }
                   }
                } ],
                "let" : [ ],
                "relationship" : [ ],
                "aggregate" : {
-                  "localId" : "244",
+                  "localId" : "281",
                   "identifier" : "R",
+                  "resultTypeSpecifier" : {
+                     "localId" : "395",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "396",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "397",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  },
                   "expression" : {
-                     "localId" : "285",
+                     "localId" : "385",
                      "type" : "Union",
-                     "signature" : [ ],
-                     "operand" : [ {
-                        "localId" : "255",
-                        "name" : "R",
-                        "type" : "QueryLetRef"
+                     "resultTypeSpecifier" : {
+                        "localId" : "392",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "393",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "394",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     },
+                     "signature" : [ {
+                        "localId" : "386",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "387",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "388",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
                      }, {
-                        "localId" : "256",
+                        "localId" : "389",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "390",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "391",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     } ],
+                     "operand" : [ {
+                        "localId" : "305",
+                        "name" : "R",
+                        "type" : "QueryLetRef",
+                        "resultTypeSpecifier" : {
+                           "localId" : "306",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "307",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "308",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }
+                        }
+                     }, {
+                        "localId" : "309",
                         "type" : "List",
+                        "resultTypeSpecifier" : {
+                           "localId" : "382",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "383",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "384",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }
+                        },
                         "element" : [ {
-                           "localId" : "284",
+                           "localId" : "376",
                            "type" : "Query",
+                           "resultTypeSpecifier" : {
+                              "localId" : "377",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "378",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
                            "source" : [ {
-                              "localId" : "257",
+                              "localId" : "310",
                               "alias" : "X",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "314",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "315",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
                               "expression" : {
-                                 "localId" : "258",
+                                 "localId" : "311",
                                  "name" : "M",
-                                 "type" : "AliasRef"
+                                 "type" : "AliasRef",
+                                 "resultTypeSpecifier" : {
+                                    "localId" : "312",
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "localId" : "313",
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
                               }
                            } ],
                            "let" : [ {
-                              "localId" : "259",
+                              "localId" : "316",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "identifier" : "S",
                               "expression" : {
-                                 "localId" : "276",
+                                 "localId" : "358",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Max",
-                                 "signature" : [ ],
+                                 "signature" : [ {
+                                    "localId" : "359",
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "localId" : "360",
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "source" : {
-                                    "localId" : "260",
+                                    "localId" : "317",
                                     "type" : "List",
+                                    "resultTypeSpecifier" : {
+                                       "localId" : "352",
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "localId" : "353",
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    },
                                     "element" : [ {
-                                       "localId" : "261",
+                                       "localId" : "318",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "Add",
-                                       "signature" : [ ],
+                                       "signature" : [ {
+                                          "localId" : "338",
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "localId" : "339",
+                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
-                                          "localId" : "262",
+                                          "localId" : "319",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                           "type" : "End",
-                                          "signature" : [ ],
+                                          "signature" : [ {
+                                             "localId" : "335",
+                                             "type" : "IntervalTypeSpecifier",
+                                             "pointType" : {
+                                                "localId" : "336",
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ],
                                           "operand" : {
-                                             "localId" : "266",
+                                             "localId" : "329",
                                              "type" : "Last",
-                                             "signature" : [ ],
+                                             "resultTypeSpecifier" : {
+                                                "localId" : "333",
+                                                "type" : "IntervalTypeSpecifier",
+                                                "pointType" : {
+                                                   "localId" : "334",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }
+                                             },
+                                             "signature" : [ {
+                                                "localId" : "330",
+                                                "type" : "ListTypeSpecifier",
+                                                "elementType" : {
+                                                   "localId" : "331",
+                                                   "type" : "IntervalTypeSpecifier",
+                                                   "pointType" : {
+                                                      "localId" : "332",
+                                                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                }
+                                             } ],
                                              "source" : {
-                                                "localId" : "263",
+                                                "localId" : "320",
                                                 "name" : "R",
-                                                "type" : "QueryLetRef"
+                                                "type" : "QueryLetRef",
+                                                "resultTypeSpecifier" : {
+                                                   "localId" : "321",
+                                                   "type" : "ListTypeSpecifier",
+                                                   "elementType" : {
+                                                      "localId" : "322",
+                                                      "type" : "IntervalTypeSpecifier",
+                                                      "pointType" : {
+                                                         "localId" : "323",
+                                                         "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }
+                                                   }
+                                                }
                                              }
                                           }
                                        }, {
-                                          "localId" : "267",
+                                          "localId" : "337",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                           "value" : 1,
                                           "unit" : "day",
                                           "type" : "Quantity"
                                        } ]
                                     }, {
-                                       "localId" : "273",
+                                       "localId" : "348",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "DateTime",
-                                       "signature" : [ ],
+                                       "signature" : [ {
+                                          "localId" : "349",
+                                          "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "localId" : "350",
+                                          "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "localId" : "351",
+                                          "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "year" : {
-                                          "localId" : "268",
+                                          "localId" : "340",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                           "value" : "1970",
                                           "type" : "Literal"
                                        },
                                        "month" : {
-                                          "localId" : "269",
+                                          "localId" : "341",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                           "value" : "01",
                                           "type" : "Literal"
                                        },
                                        "day" : {
-                                          "localId" : "270",
+                                          "localId" : "342",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                           "value" : "01",
                                           "type" : "Literal"
@@ -9748,34 +14502,73 @@ module.exports['AggregateQuery'] = {
                                  }
                               }
                            }, {
-                              "localId" : "277",
+                              "localId" : "361",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "identifier" : "E",
                               "expression" : {
-                                 "localId" : "278",
+                                 "localId" : "362",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Start",
-                                 "signature" : [ ],
+                                 "signature" : [ {
+                                    "localId" : "366",
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "localId" : "367",
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
                                  "operand" : {
-                                    "localId" : "279",
+                                    "localId" : "363",
                                     "name" : "X",
-                                    "type" : "AliasRef"
+                                    "type" : "AliasRef",
+                                    "resultTypeSpecifier" : {
+                                       "localId" : "364",
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "localId" : "365",
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    }
                                  }
                               }
                            } ],
                            "relationship" : [ ],
                            "return" : {
-                              "localId" : "280",
+                              "localId" : "368",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "374",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "375",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
                               "expression" : {
-                                 "localId" : "283",
+                                 "localId" : "371",
                                  "lowClosed" : true,
                                  "highClosed" : true,
                                  "type" : "Interval",
+                                 "resultTypeSpecifier" : {
+                                    "localId" : "372",
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "localId" : "373",
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
                                  "low" : {
-                                    "localId" : "281",
+                                    "localId" : "369",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "name" : "S",
                                     "type" : "QueryLetRef"
                                  },
                                  "high" : {
-                                    "localId" : "282",
+                                    "localId" : "370",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "name" : "E",
                                     "type" : "QueryLetRef"
                                  }
@@ -9785,23 +14578,68 @@ module.exports['AggregateQuery'] = {
                      } ]
                   },
                   "starting" : {
-                     "localId" : "245",
+                     "localId" : "282",
                      "strict" : false,
                      "type" : "As",
+                     "resultTypeSpecifier" : {
+                        "localId" : "297",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "298",
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "localId" : "299",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     },
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "246",
+                        "localId" : "283",
                         "type" : "List",
+                        "resultTypeSpecifier" : {
+                           "localId" : "284",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "285",
+                              "name" : "{urn:hl7-org:elm-types:r1}Any",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "element" : [ ]
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "247",
+                        "localId" : "286",
                         "type" : "ListTypeSpecifier",
+                        "resultTypeSpecifier" : {
+                           "localId" : "291",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "292",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "293",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }
+                        },
                         "elementType" : {
-                           "localId" : "248",
+                           "localId" : "287",
                            "type" : "IntervalTypeSpecifier",
+                           "resultTypeSpecifier" : {
+                              "localId" : "289",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "290",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
                            "pointType" : {
-                              "localId" : "249",
+                              "localId" : "288",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -9811,29 +14649,30 @@ module.exports['AggregateQuery'] = {
                }
             }
          }, {
-            "localId" : "288",
+            "localId" : "406",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "literalStartingAggregation",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "288",
+                  "r" : "406",
                   "s" : [ {
                      "value" : [ "","define ","literalStartingAggregation",":\n  " ]
                   }, {
-                     "r" : "312",
+                     "r" : "440",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "289",
+                           "r" : "407",
                            "s" : [ {
-                              "r" : "290",
+                              "r" : "408",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "290",
+                                 "r" : "408",
                                  "s" : [ {
-                                    "r" : "291",
+                                    "r" : "409",
                                     "value" : [ "{","1",",","2",",","3",",","4",",","5",",","1",",","2",",","3",",","4",",","5","}" ]
                                  } ]
                               }, {
@@ -9846,15 +14685,15 @@ module.exports['AggregateQuery'] = {
                      }, {
                         "value" : [ "\n    " ]
                      }, {
-                        "r" : "301",
+                        "r" : "425",
                         "s" : [ {
                            "value" : [ "aggregate distinct ","str"," " ]
                         }, {
-                           "r" : "302",
+                           "r" : "426",
                            "s" : [ {
                               "value" : [ "starting " ]
                            }, {
-                              "r" : "302",
+                              "r" : "426",
                               "s" : [ {
                                  "value" : [ "'Start'" ]
                               } ]
@@ -9862,20 +14701,20 @@ module.exports['AggregateQuery'] = {
                         }, {
                            "value" : [ " : " ]
                         }, {
-                           "r" : "311",
+                           "r" : "439",
                            "s" : [ {
-                              "r" : "306",
+                              "r" : "430",
                               "s" : [ {
                                  "value" : [ "str" ]
                               } ]
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "310",
+                              "r" : "435",
                               "s" : [ {
                                  "value" : [ "ToString","(" ]
                               }, {
-                                 "r" : "307",
+                                 "r" : "431",
                                  "s" : [ {
                                     "value" : [ "Num" ]
                                  } ]
@@ -9889,61 +14728,90 @@ module.exports['AggregateQuery'] = {
                }
             } ],
             "expression" : {
-               "localId" : "312",
+               "localId" : "440",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "289",
+                  "localId" : "407",
                   "alias" : "Num",
+                  "resultTypeSpecifier" : {
+                     "localId" : "423",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "424",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "290",
+                     "localId" : "408",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "421",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "422",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "291",
+                        "localId" : "409",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
-                        "localId" : "292",
+                        "localId" : "410",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "293",
+                        "localId" : "411",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "294",
+                        "localId" : "412",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "295",
+                        "localId" : "413",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "296",
+                        "localId" : "414",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
-                        "localId" : "297",
+                        "localId" : "415",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "298",
+                        "localId" : "416",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "299",
+                        "localId" : "417",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "300",
+                        "localId" : "418",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -9953,30 +14821,40 @@ module.exports['AggregateQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "aggregate" : {
-                  "localId" : "301",
+                  "localId" : "425",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "identifier" : "str",
                   "distinct" : true,
                   "expression" : {
-                     "localId" : "311",
+                     "localId" : "439",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "Concatenate",
                      "signature" : [ ],
                      "operand" : [ {
-                        "localId" : "306",
+                        "localId" : "430",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "str",
                         "type" : "QueryLetRef"
                      }, {
-                        "localId" : "310",
+                        "localId" : "435",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "ToString",
-                        "signature" : [ ],
+                        "signature" : [ {
+                           "localId" : "436",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : {
-                           "localId" : "307",
+                           "localId" : "431",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "Num",
                            "type" : "AliasRef"
                         }
                      } ]
                   },
                   "starting" : {
-                     "localId" : "302",
+                     "localId" : "426",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Start",
                      "type" : "Literal"
@@ -9984,59 +14862,60 @@ module.exports['AggregateQuery'] = {
                }
             }
          }, {
-            "localId" : "314",
+            "localId" : "442",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "quantityStartingAggregation",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "314",
+                  "r" : "442",
                   "s" : [ {
                      "value" : [ "","define ","quantityStartingAggregation",":\n " ]
                   }, {
-                     "r" : "329",
+                     "r" : "465",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "315",
+                           "r" : "443",
                            "s" : [ {
-                              "r" : "316",
+                              "r" : "444",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "316",
+                                 "r" : "444",
                                  "s" : [ {
                                     "value" : [ "{" ]
                                  }, {
-                                    "r" : "317",
+                                    "r" : "445",
                                     "s" : [ {
                                        "value" : [ "1 ","'ml'" ]
                                     } ]
                                  }, {
                                     "value" : [ "," ]
                                  }, {
-                                    "r" : "318",
+                                    "r" : "446",
                                     "s" : [ {
                                        "value" : [ "2 ","'ml'" ]
                                     } ]
                                  }, {
                                     "value" : [ "," ]
                                  }, {
-                                    "r" : "319",
+                                    "r" : "447",
                                     "s" : [ {
                                        "value" : [ "3 ","'ml'" ]
                                     } ]
                                  }, {
                                     "value" : [ "," ]
                                  }, {
-                                    "r" : "320",
+                                    "r" : "448",
                                     "s" : [ {
                                        "value" : [ "4 ","'ml'" ]
                                     } ]
                                  }, {
                                     "value" : [ "," ]
                                  }, {
-                                    "r" : "321",
+                                    "r" : "449",
                                     "s" : [ {
                                        "value" : [ "5 ","'ml'" ]
                                     } ]
@@ -10053,15 +14932,15 @@ module.exports['AggregateQuery'] = {
                      }, {
                         "value" : [ "\n  " ]
                      }, {
-                        "r" : "322",
+                        "r" : "456",
                         "s" : [ {
                            "value" : [ "aggregate distinct ","Sum"," " ]
                         }, {
-                           "r" : "323",
+                           "r" : "457",
                            "s" : [ {
                               "value" : [ "starting " ]
                            }, {
-                              "r" : "323",
+                              "r" : "457",
                               "s" : [ {
                                  "value" : [ "0 ","'ml'" ]
                               } ]
@@ -10069,16 +14948,16 @@ module.exports['AggregateQuery'] = {
                         }, {
                            "value" : [ ": " ]
                         }, {
-                           "r" : "326",
+                           "r" : "460",
                            "s" : [ {
-                              "r" : "327",
+                              "r" : "461",
                               "s" : [ {
                                  "value" : [ "Sum" ]
                               } ]
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "328",
+                              "r" : "462",
                               "s" : [ {
                                  "value" : [ "Num" ]
                               } ]
@@ -10089,36 +14968,60 @@ module.exports['AggregateQuery'] = {
                }
             } ],
             "expression" : {
-               "localId" : "329",
+               "localId" : "465",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "315",
+                  "localId" : "443",
                   "alias" : "Num",
+                  "resultTypeSpecifier" : {
+                     "localId" : "454",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "455",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "316",
+                     "localId" : "444",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "452",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "453",
+                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "317",
+                        "localId" : "445",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "value" : 1,
                         "unit" : "ml",
                         "type" : "Quantity"
                      }, {
-                        "localId" : "318",
+                        "localId" : "446",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "value" : 2,
                         "unit" : "ml",
                         "type" : "Quantity"
                      }, {
-                        "localId" : "319",
+                        "localId" : "447",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "value" : 3,
                         "unit" : "ml",
                         "type" : "Quantity"
                      }, {
-                        "localId" : "320",
+                        "localId" : "448",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "value" : 4,
                         "unit" : "ml",
                         "type" : "Quantity"
                      }, {
-                        "localId" : "321",
+                        "localId" : "449",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "value" : 5,
                         "unit" : "ml",
                         "type" : "Quantity"
@@ -10128,25 +15031,38 @@ module.exports['AggregateQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "aggregate" : {
-                  "localId" : "322",
+                  "localId" : "456",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                   "identifier" : "Sum",
                   "distinct" : true,
                   "expression" : {
-                     "localId" : "326",
+                     "localId" : "460",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "Add",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "463",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "464",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "327",
+                        "localId" : "461",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "Sum",
                         "type" : "QueryLetRef"
                      }, {
-                        "localId" : "328",
+                        "localId" : "462",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "Num",
                         "type" : "AliasRef"
                      } ]
                   },
                   "starting" : {
-                     "localId" : "323",
+                     "localId" : "457",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0,
                      "unit" : "ml",
                      "type" : "Quantity"
@@ -10154,29 +15070,30 @@ module.exports['AggregateQuery'] = {
                }
             }
          }, {
-            "localId" : "331",
+            "localId" : "467",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "allAggregation",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "331",
+                  "r" : "467",
                   "s" : [ {
                      "value" : [ "","define ","allAggregation",":\n " ]
                   }, {
-                     "r" : "351",
+                     "r" : "495",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "332",
+                           "r" : "468",
                            "s" : [ {
-                              "r" : "333",
+                              "r" : "469",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "333",
+                                 "r" : "469",
                                  "s" : [ {
-                                    "r" : "334",
+                                    "r" : "470",
                                     "value" : [ "{","1",",","2",",","3",",","4",",","5",",","1",",","2",",","3",",","4",",","5","}" ]
                                  } ]
                               }, {
@@ -10189,28 +15106,28 @@ module.exports['AggregateQuery'] = {
                      }, {
                         "value" : [ "\n  " ]
                      }, {
-                        "r" : "344",
+                        "r" : "486",
                         "s" : [ {
                            "value" : [ "aggregate all ","Sum"," " ]
                         }, {
-                           "r" : "345",
+                           "r" : "487",
                            "s" : [ {
-                              "r" : "345",
+                              "r" : "487",
                               "value" : [ "starting ","0" ]
                            } ]
                         }, {
                            "value" : [ ": " ]
                         }, {
-                           "r" : "348",
+                           "r" : "490",
                            "s" : [ {
-                              "r" : "349",
+                              "r" : "491",
                               "s" : [ {
                                  "value" : [ "Sum" ]
                               } ]
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "350",
+                              "r" : "492",
                               "s" : [ {
                                  "value" : [ "Num" ]
                               } ]
@@ -10221,61 +15138,90 @@ module.exports['AggregateQuery'] = {
                }
             } ],
             "expression" : {
-               "localId" : "351",
+               "localId" : "495",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "332",
+                  "localId" : "468",
                   "alias" : "Num",
+                  "resultTypeSpecifier" : {
+                     "localId" : "484",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "485",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "333",
+                     "localId" : "469",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "482",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "483",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "334",
+                        "localId" : "470",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
-                        "localId" : "335",
+                        "localId" : "471",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "336",
+                        "localId" : "472",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "337",
+                        "localId" : "473",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "338",
+                        "localId" : "474",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "339",
+                        "localId" : "475",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
-                        "localId" : "340",
+                        "localId" : "476",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "341",
+                        "localId" : "477",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "342",
+                        "localId" : "478",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "343",
+                        "localId" : "479",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -10285,25 +15231,38 @@ module.exports['AggregateQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "aggregate" : {
-                  "localId" : "344",
+                  "localId" : "486",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "identifier" : "Sum",
                   "distinct" : false,
                   "expression" : {
-                     "localId" : "348",
+                     "localId" : "490",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "Add",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "493",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "494",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "349",
+                        "localId" : "491",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "Sum",
                         "type" : "QueryLetRef"
                      }, {
-                        "localId" : "350",
+                        "localId" : "492",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "Num",
                         "type" : "AliasRef"
                      } ]
                   },
                   "starting" : {
-                     "localId" : "345",
+                     "localId" : "487",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
                      "type" : "Literal"
@@ -10311,29 +15270,30 @@ module.exports['AggregateQuery'] = {
                }
             }
          }, {
-            "localId" : "353",
+            "localId" : "497",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "distinctAggregation",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "353",
+                  "r" : "497",
                   "s" : [ {
                      "value" : [ "","define ","distinctAggregation",":\n " ]
                   }, {
-                     "r" : "373",
+                     "r" : "525",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "354",
+                           "r" : "498",
                            "s" : [ {
-                              "r" : "355",
+                              "r" : "499",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "355",
+                                 "r" : "499",
                                  "s" : [ {
-                                    "r" : "356",
+                                    "r" : "500",
                                     "value" : [ "{","1",",","2",",","3",",","4",",","5",",","1",",","2",",","3",",","4",",","5","}" ]
                                  } ]
                               }, {
@@ -10346,28 +15306,28 @@ module.exports['AggregateQuery'] = {
                      }, {
                         "value" : [ "\n  " ]
                      }, {
-                        "r" : "366",
+                        "r" : "516",
                         "s" : [ {
                            "value" : [ "aggregate distinct ","Sum"," " ]
                         }, {
-                           "r" : "367",
+                           "r" : "517",
                            "s" : [ {
-                              "r" : "367",
+                              "r" : "517",
                               "value" : [ "starting ","0" ]
                            } ]
                         }, {
                            "value" : [ ": " ]
                         }, {
-                           "r" : "370",
+                           "r" : "520",
                            "s" : [ {
-                              "r" : "371",
+                              "r" : "521",
                               "s" : [ {
                                  "value" : [ "Sum" ]
                               } ]
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "372",
+                              "r" : "522",
                               "s" : [ {
                                  "value" : [ "Num" ]
                               } ]
@@ -10378,61 +15338,90 @@ module.exports['AggregateQuery'] = {
                }
             } ],
             "expression" : {
-               "localId" : "373",
+               "localId" : "525",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "354",
+                  "localId" : "498",
                   "alias" : "Num",
+                  "resultTypeSpecifier" : {
+                     "localId" : "514",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "515",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "355",
+                     "localId" : "499",
                      "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "localId" : "512",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "513",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "element" : [ {
-                        "localId" : "356",
+                        "localId" : "500",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
-                        "localId" : "357",
+                        "localId" : "501",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "358",
+                        "localId" : "502",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "359",
+                        "localId" : "503",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "360",
+                        "localId" : "504",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }, {
-                        "localId" : "361",
+                        "localId" : "505",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }, {
-                        "localId" : "362",
+                        "localId" : "506",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }, {
-                        "localId" : "363",
+                        "localId" : "507",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }, {
-                        "localId" : "364",
+                        "localId" : "508",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "4",
                         "type" : "Literal"
                      }, {
-                        "localId" : "365",
+                        "localId" : "509",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
@@ -10442,25 +15431,38 @@ module.exports['AggregateQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "aggregate" : {
-                  "localId" : "366",
+                  "localId" : "516",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "identifier" : "Sum",
                   "distinct" : true,
                   "expression" : {
-                     "localId" : "370",
+                     "localId" : "520",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "Add",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "523",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "524",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "371",
+                        "localId" : "521",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "Sum",
                         "type" : "QueryLetRef"
                      }, {
-                        "localId" : "372",
+                        "localId" : "522",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "Num",
                         "type" : "AliasRef"
                      } ]
                   },
                   "starting" : {
-                     "localId" : "367",
+                     "localId" : "517",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
                      "type" : "Literal"
@@ -10517,14 +15519,14 @@ module.exports['NullSourceQuery'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "270",
+            "r" : "424",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -10602,7 +15604,7 @@ module.exports['NullSourceQuery'] = {
                   "s" : [ {
                      "value" : [ "","define ","NullListQuery",":\n  " ]
                   }, {
-                     "r" : "226",
+                     "r" : "257",
                      "s" : [ {
                         "s" : [ {
                            "r" : "213",
@@ -10638,31 +15640,31 @@ module.exports['NullSourceQuery'] = {
                      }, {
                         "value" : [ "\n    " ]
                      }, {
-                        "r" : "218",
+                        "r" : "226",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "219",
+                           "r" : "227",
                            "s" : [ {
                               "value" : [ "Tuple {\n      " ]
                            }, {
                               "s" : [ {
                                  "value" : [ "start",": " ]
                               }, {
-                                 "r" : "220",
+                                 "r" : "228",
                                  "s" : [ {
                                     "value" : [ "start of " ]
                                  }, {
-                                    "r" : "222",
+                                    "r" : "230",
                                     "s" : [ {
-                                       "r" : "221",
+                                       "r" : "229",
                                        "s" : [ {
                                           "value" : [ "X" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "222",
+                                       "r" : "230",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -10675,20 +15677,20 @@ module.exports['NullSourceQuery'] = {
                               "s" : [ {
                                  "value" : [ "end",": " ]
                               }, {
-                                 "r" : "223",
+                                 "r" : "237",
                                  "s" : [ {
                                     "value" : [ "end of " ]
                                  }, {
-                                    "r" : "225",
+                                    "r" : "239",
                                     "s" : [ {
-                                       "r" : "224",
+                                       "r" : "238",
                                        "s" : [ {
                                           "value" : [ "X" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "225",
+                                       "r" : "239",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -10703,26 +15705,105 @@ module.exports['NullSourceQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "264",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "265",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "266",
+                     "name" : "start",
+                     "elementType" : {
+                        "localId" : "267",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "268",
+                     "name" : "end",
+                     "elementType" : {
+                        "localId" : "269",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "226",
+               "localId" : "257",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "258",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "259",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "260",
+                        "name" : "start",
+                        "elementType" : {
+                           "localId" : "261",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "262",
+                        "name" : "end",
+                        "elementType" : {
+                           "localId" : "263",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
                "source" : [ {
                   "localId" : "213",
                   "alias" : "X",
+                  "resultTypeSpecifier" : {
+                     "localId" : "224",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "225",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
                      "localId" : "214",
                      "strict" : false,
                      "type" : "As",
+                     "resultTypeSpecifier" : {
+                        "localId" : "222",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "223",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "signature" : [ ],
                      "operand" : {
                         "localId" : "215",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
                         "localId" : "216",
                         "type" : "ListTypeSpecifier",
+                        "resultTypeSpecifier" : {
+                           "localId" : "218",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "219",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "elementType" : {
                            "localId" : "217",
+                           "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                            "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -10732,34 +15813,116 @@ module.exports['NullSourceQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "218",
+                  "localId" : "226",
+                  "resultTypeSpecifier" : {
+                     "localId" : "251",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "252",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "253",
+                           "name" : "start",
+                           "elementType" : {
+                              "localId" : "254",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "255",
+                           "name" : "end",
+                           "elementType" : {
+                              "localId" : "256",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "219",
+                     "localId" : "227",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "246",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "247",
+                           "name" : "start",
+                           "elementType" : {
+                              "localId" : "248",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "249",
+                           "name" : "end",
+                           "elementType" : {
+                              "localId" : "250",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "start",
                         "value" : {
-                           "localId" : "220",
+                           "localId" : "228",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "235",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "236",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
-                              "localId" : "222",
+                              "localId" : "230",
                               "path" : "period",
                               "scope" : "X",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "233",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "234",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
                            }
                         }
                      }, {
                         "name" : "end",
                         "value" : {
-                           "localId" : "223",
+                           "localId" : "237",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "244",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "245",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
-                              "localId" : "225",
+                              "localId" : "239",
                               "path" : "period",
                               "scope" : "X",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "242",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "243",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
                            }
                         }
                      } ]
@@ -10767,32 +15930,32 @@ module.exports['NullSourceQuery'] = {
                }
             }
          }, {
-            "localId" : "228",
+            "localId" : "271",
             "name" : "NullObjectQuery",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "228",
+                  "r" : "271",
                   "s" : [ {
                      "value" : [ "","define ","NullObjectQuery",":\n  " ]
                   }, {
-                     "r" : "241",
+                     "r" : "306",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "229",
+                           "r" : "272",
                            "s" : [ {
-                              "r" : "230",
+                              "r" : "273",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "230",
+                                 "r" : "273",
                                  "s" : [ {
-                                    "r" : "231",
+                                    "r" : "274",
                                     "value" : [ "null"," as " ]
                                  }, {
-                                    "r" : "232",
+                                    "r" : "275",
                                     "s" : [ {
                                        "value" : [ "Condition" ]
                                     } ]
@@ -10807,31 +15970,31 @@ module.exports['NullSourceQuery'] = {
                      }, {
                         "value" : [ "\n    " ]
                      }, {
-                        "r" : "233",
+                        "r" : "276",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "234",
+                           "r" : "277",
                            "s" : [ {
                               "value" : [ "Tuple {\n      " ]
                            }, {
                               "s" : [ {
                                  "value" : [ "start",": " ]
                               }, {
-                                 "r" : "235",
+                                 "r" : "278",
                                  "s" : [ {
                                     "value" : [ "start of " ]
                                  }, {
-                                    "r" : "237",
+                                    "r" : "280",
                                     "s" : [ {
-                                       "r" : "236",
+                                       "r" : "279",
                                        "s" : [ {
                                           "value" : [ "X" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "237",
+                                       "r" : "280",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -10844,20 +16007,20 @@ module.exports['NullSourceQuery'] = {
                               "s" : [ {
                                  "value" : [ "end",": " ]
                               }, {
-                                 "r" : "238",
+                                 "r" : "287",
                                  "s" : [ {
                                     "value" : [ "end of " ]
                                  }, {
-                                    "r" : "240",
+                                    "r" : "289",
                                     "s" : [ {
-                                       "r" : "239",
+                                       "r" : "288",
                                        "s" : [ {
                                           "value" : [ "X" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "240",
+                                       "r" : "289",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -10872,23 +16035,69 @@ module.exports['NullSourceQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "312",
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "localId" : "313",
+                  "name" : "start",
+                  "elementType" : {
+                     "localId" : "314",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "315",
+                  "name" : "end",
+                  "elementType" : {
+                     "localId" : "316",
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
             "expression" : {
-               "localId" : "241",
+               "localId" : "306",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "307",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "308",
+                     "name" : "start",
+                     "elementType" : {
+                        "localId" : "309",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "310",
+                     "name" : "end",
+                     "elementType" : {
+                        "localId" : "311",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               },
                "source" : [ {
-                  "localId" : "229",
+                  "localId" : "272",
+                  "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "alias" : "X",
                   "expression" : {
-                     "localId" : "230",
+                     "localId" : "273",
+                     "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "strict" : false,
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "231",
+                        "localId" : "274",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "232",
+                        "localId" : "275",
+                        "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                         "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -10897,34 +16106,112 @@ module.exports['NullSourceQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "233",
+                  "localId" : "276",
+                  "resultTypeSpecifier" : {
+                     "localId" : "301",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "302",
+                        "name" : "start",
+                        "elementType" : {
+                           "localId" : "303",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "304",
+                        "name" : "end",
+                        "elementType" : {
+                           "localId" : "305",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  },
                   "expression" : {
-                     "localId" : "234",
+                     "localId" : "277",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "296",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "297",
+                           "name" : "start",
+                           "elementType" : {
+                              "localId" : "298",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "299",
+                           "name" : "end",
+                           "elementType" : {
+                              "localId" : "300",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "start",
                         "value" : {
-                           "localId" : "235",
+                           "localId" : "278",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "285",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "286",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
-                              "localId" : "237",
+                              "localId" : "280",
                               "path" : "period",
                               "scope" : "X",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "283",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "284",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
                            }
                         }
                      }, {
                         "name" : "end",
                         "value" : {
-                           "localId" : "238",
+                           "localId" : "287",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "294",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "295",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
-                              "localId" : "240",
+                              "localId" : "289",
                               "path" : "period",
                               "scope" : "X",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "292",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "293",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
                            }
                         }
                      } ]
@@ -10932,38 +16219,38 @@ module.exports['NullSourceQuery'] = {
                }
             }
          }, {
-            "localId" : "243",
+            "localId" : "318",
             "name" : "AllNullMultiSourceQuery",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "243",
+                  "r" : "318",
                   "s" : [ {
                      "value" : [ "","define ","AllNullMultiSourceQuery",":\n  " ]
                   }, {
-                     "r" : "268",
+                     "r" : "402",
                      "s" : [ {
                         "s" : [ {
                            "value" : [ "from\n    " ]
                         }, {
-                           "r" : "244",
+                           "r" : "319",
                            "s" : [ {
-                              "r" : "245",
+                              "r" : "320",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "245",
+                                 "r" : "320",
                                  "s" : [ {
-                                    "r" : "246",
+                                    "r" : "321",
                                     "value" : [ "null"," as " ]
                                  }, {
-                                    "r" : "247",
+                                    "r" : "322",
                                     "s" : [ {
                                        "value" : [ "List<" ]
                                     }, {
-                                       "r" : "248",
+                                       "r" : "323",
                                        "s" : [ {
                                           "value" : [ "Condition" ]
                                        } ]
@@ -10980,22 +16267,22 @@ module.exports['NullSourceQuery'] = {
                         }, {
                            "value" : [ ",\n    " ]
                         }, {
-                           "r" : "249",
+                           "r" : "332",
                            "s" : [ {
-                              "r" : "250",
+                              "r" : "333",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "250",
+                                 "r" : "333",
                                  "s" : [ {
-                                    "r" : "251",
+                                    "r" : "334",
                                     "value" : [ "null"," as " ]
                                  }, {
-                                    "r" : "252",
+                                    "r" : "335",
                                     "s" : [ {
                                        "value" : [ "List<" ]
                                     }, {
-                                       "r" : "253",
+                                       "r" : "336",
                                        "s" : [ {
                                           "value" : [ "Encounter" ]
                                        } ]
@@ -11013,31 +16300,31 @@ module.exports['NullSourceQuery'] = {
                      }, {
                         "value" : [ "\n    " ]
                      }, {
-                        "r" : "254",
+                        "r" : "345",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "255",
+                           "r" : "346",
                            "s" : [ {
                               "value" : [ "Tuple {\n      " ]
                            }, {
                               "s" : [ {
                                  "value" : [ "cStart",": " ]
                               }, {
-                                 "r" : "256",
+                                 "r" : "347",
                                  "s" : [ {
                                     "value" : [ "start of " ]
                                  }, {
-                                    "r" : "258",
+                                    "r" : "349",
                                     "s" : [ {
-                                       "r" : "257",
+                                       "r" : "348",
                                        "s" : [ {
                                           "value" : [ "X" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "258",
+                                       "r" : "349",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -11050,20 +16337,20 @@ module.exports['NullSourceQuery'] = {
                               "s" : [ {
                                  "value" : [ "cEnd",": " ]
                               }, {
-                                 "r" : "259",
+                                 "r" : "356",
                                  "s" : [ {
                                     "value" : [ "end of " ]
                                  }, {
-                                    "r" : "261",
+                                    "r" : "358",
                                     "s" : [ {
-                                       "r" : "260",
+                                       "r" : "357",
                                        "s" : [ {
                                           "value" : [ "X" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "261",
+                                       "r" : "358",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -11076,20 +16363,20 @@ module.exports['NullSourceQuery'] = {
                               "s" : [ {
                                  "value" : [ "eStart",": " ]
                               }, {
-                                 "r" : "262",
+                                 "r" : "365",
                                  "s" : [ {
                                     "value" : [ "start of " ]
                                  }, {
-                                    "r" : "264",
+                                    "r" : "367",
                                     "s" : [ {
-                                       "r" : "263",
+                                       "r" : "366",
                                        "s" : [ {
                                           "value" : [ "Y" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "264",
+                                       "r" : "367",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -11102,20 +16389,20 @@ module.exports['NullSourceQuery'] = {
                               "s" : [ {
                                  "value" : [ "eEnd",": " ]
                               }, {
-                                 "r" : "265",
+                                 "r" : "374",
                                  "s" : [ {
                                     "value" : [ "end of " ]
                                  }, {
-                                    "r" : "267",
+                                    "r" : "376",
                                     "s" : [ {
-                                       "r" : "266",
+                                       "r" : "375",
                                        "s" : [ {
                                           "value" : [ "Y" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "267",
+                                       "r" : "376",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -11130,48 +16417,188 @@ module.exports['NullSourceQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "413",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "414",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "415",
+                     "name" : "cStart",
+                     "elementType" : {
+                        "localId" : "416",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "417",
+                     "name" : "cEnd",
+                     "elementType" : {
+                        "localId" : "418",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "419",
+                     "name" : "eStart",
+                     "elementType" : {
+                        "localId" : "420",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "421",
+                     "name" : "eEnd",
+                     "elementType" : {
+                        "localId" : "422",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "268",
+               "localId" : "402",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "403",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "404",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "405",
+                        "name" : "cStart",
+                        "elementType" : {
+                           "localId" : "406",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "407",
+                        "name" : "cEnd",
+                        "elementType" : {
+                           "localId" : "408",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "409",
+                        "name" : "eStart",
+                        "elementType" : {
+                           "localId" : "410",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "411",
+                        "name" : "eEnd",
+                        "elementType" : {
+                           "localId" : "412",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
                "source" : [ {
-                  "localId" : "244",
+                  "localId" : "319",
                   "alias" : "X",
+                  "resultTypeSpecifier" : {
+                     "localId" : "330",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "331",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "245",
+                     "localId" : "320",
                      "strict" : false,
                      "type" : "As",
+                     "resultTypeSpecifier" : {
+                        "localId" : "328",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "329",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "246",
+                        "localId" : "321",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "247",
+                        "localId" : "322",
                         "type" : "ListTypeSpecifier",
+                        "resultTypeSpecifier" : {
+                           "localId" : "324",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "325",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "elementType" : {
-                           "localId" : "248",
+                           "localId" : "323",
+                           "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                            "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                            "type" : "NamedTypeSpecifier"
                         }
                      }
                   }
                }, {
-                  "localId" : "249",
+                  "localId" : "332",
                   "alias" : "Y",
+                  "resultTypeSpecifier" : {
+                     "localId" : "343",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "344",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "250",
+                     "localId" : "333",
                      "strict" : false,
                      "type" : "As",
+                     "resultTypeSpecifier" : {
+                        "localId" : "341",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "342",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "251",
+                        "localId" : "334",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "252",
+                        "localId" : "335",
                         "type" : "ListTypeSpecifier",
+                        "resultTypeSpecifier" : {
+                           "localId" : "337",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "338",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "elementType" : {
-                           "localId" : "253",
+                           "localId" : "336",
+                           "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -11181,60 +16608,210 @@ module.exports['NullSourceQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "254",
+                  "localId" : "345",
+                  "resultTypeSpecifier" : {
+                     "localId" : "392",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "393",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "394",
+                           "name" : "cStart",
+                           "elementType" : {
+                              "localId" : "395",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "396",
+                           "name" : "cEnd",
+                           "elementType" : {
+                              "localId" : "397",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "398",
+                           "name" : "eStart",
+                           "elementType" : {
+                              "localId" : "399",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "400",
+                           "name" : "eEnd",
+                           "elementType" : {
+                              "localId" : "401",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "255",
+                     "localId" : "346",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "383",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "384",
+                           "name" : "cStart",
+                           "elementType" : {
+                              "localId" : "385",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "386",
+                           "name" : "cEnd",
+                           "elementType" : {
+                              "localId" : "387",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "388",
+                           "name" : "eStart",
+                           "elementType" : {
+                              "localId" : "389",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "390",
+                           "name" : "eEnd",
+                           "elementType" : {
+                              "localId" : "391",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "cStart",
                         "value" : {
-                           "localId" : "256",
+                           "localId" : "347",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "354",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "355",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
-                              "localId" : "258",
+                              "localId" : "349",
                               "path" : "period",
                               "scope" : "X",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "352",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "353",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
                            }
                         }
                      }, {
                         "name" : "cEnd",
                         "value" : {
-                           "localId" : "259",
+                           "localId" : "356",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "363",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "364",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
-                              "localId" : "261",
+                              "localId" : "358",
                               "path" : "period",
                               "scope" : "X",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "361",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "362",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
                            }
                         }
                      }, {
                         "name" : "eStart",
                         "value" : {
-                           "localId" : "262",
+                           "localId" : "365",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "372",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "373",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
-                              "localId" : "264",
+                              "localId" : "367",
                               "path" : "period",
                               "scope" : "Y",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "370",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "371",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
                            }
                         }
                      }, {
                         "name" : "eEnd",
                         "value" : {
-                           "localId" : "265",
+                           "localId" : "374",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "381",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "382",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
-                              "localId" : "267",
+                              "localId" : "376",
                               "path" : "period",
                               "scope" : "Y",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "379",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "380",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
                            }
                         }
                      } ]
@@ -11242,38 +16819,38 @@ module.exports['NullSourceQuery'] = {
                }
             }
          }, {
-            "localId" : "270",
+            "localId" : "424",
             "name" : "SomeNullMultiSourceQuery",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "270",
+                  "r" : "424",
                   "s" : [ {
                      "value" : [ "","define ","SomeNullMultiSourceQuery",":\n  " ]
                   }, {
-                     "r" : "292",
+                     "r" : "503",
                      "s" : [ {
                         "s" : [ {
                            "value" : [ "from\n    " ]
                         }, {
-                           "r" : "271",
+                           "r" : "425",
                            "s" : [ {
-                              "r" : "272",
+                              "r" : "426",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "272",
+                                 "r" : "426",
                                  "s" : [ {
-                                    "r" : "273",
+                                    "r" : "427",
                                     "value" : [ "null"," as " ]
                                  }, {
-                                    "r" : "274",
+                                    "r" : "428",
                                     "s" : [ {
                                        "value" : [ "List<" ]
                                     }, {
-                                       "r" : "275",
+                                       "r" : "429",
                                        "s" : [ {
                                           "value" : [ "Condition" ]
                                        } ]
@@ -11290,11 +16867,11 @@ module.exports['NullSourceQuery'] = {
                         }, {
                            "value" : [ ",\n    " ]
                         }, {
-                           "r" : "276",
+                           "r" : "438",
                            "s" : [ {
-                              "r" : "277",
+                              "r" : "439",
                               "s" : [ {
-                                 "r" : "277",
+                                 "r" : "439",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -11306,31 +16883,31 @@ module.exports['NullSourceQuery'] = {
                      }, {
                         "value" : [ "\n    " ]
                      }, {
-                        "r" : "278",
+                        "r" : "446",
                         "s" : [ {
                            "value" : [ "return " ]
                         }, {
-                           "r" : "279",
+                           "r" : "447",
                            "s" : [ {
                               "value" : [ "Tuple {\n      " ]
                            }, {
                               "s" : [ {
                                  "value" : [ "cStart",": " ]
                               }, {
-                                 "r" : "280",
+                                 "r" : "448",
                                  "s" : [ {
                                     "value" : [ "start of " ]
                                  }, {
-                                    "r" : "282",
+                                    "r" : "450",
                                     "s" : [ {
-                                       "r" : "281",
+                                       "r" : "449",
                                        "s" : [ {
                                           "value" : [ "X" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "282",
+                                       "r" : "450",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -11343,20 +16920,20 @@ module.exports['NullSourceQuery'] = {
                               "s" : [ {
                                  "value" : [ "cEnd",": " ]
                               }, {
-                                 "r" : "283",
+                                 "r" : "457",
                                  "s" : [ {
                                     "value" : [ "end of " ]
                                  }, {
-                                    "r" : "285",
+                                    "r" : "459",
                                     "s" : [ {
-                                       "r" : "284",
+                                       "r" : "458",
                                        "s" : [ {
                                           "value" : [ "X" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "285",
+                                       "r" : "459",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -11369,20 +16946,20 @@ module.exports['NullSourceQuery'] = {
                               "s" : [ {
                                  "value" : [ "eStart",": " ]
                               }, {
-                                 "r" : "286",
+                                 "r" : "466",
                                  "s" : [ {
                                     "value" : [ "start of " ]
                                  }, {
-                                    "r" : "288",
+                                    "r" : "468",
                                     "s" : [ {
-                                       "r" : "287",
+                                       "r" : "467",
                                        "s" : [ {
                                           "value" : [ "Y" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "288",
+                                       "r" : "468",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -11395,20 +16972,20 @@ module.exports['NullSourceQuery'] = {
                               "s" : [ {
                                  "value" : [ "eEnd",": " ]
                               }, {
-                                 "r" : "289",
+                                 "r" : "475",
                                  "s" : [ {
                                     "value" : [ "end of " ]
                                  }, {
-                                    "r" : "291",
+                                    "r" : "477",
                                     "s" : [ {
-                                       "r" : "290",
+                                       "r" : "476",
                                        "s" : [ {
                                           "value" : [ "Y" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "291",
+                                       "r" : "477",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -11423,38 +17000,167 @@ module.exports['NullSourceQuery'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "514",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "515",
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "localId" : "516",
+                     "name" : "cStart",
+                     "elementType" : {
+                        "localId" : "517",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "518",
+                     "name" : "cEnd",
+                     "elementType" : {
+                        "localId" : "519",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "520",
+                     "name" : "eStart",
+                     "elementType" : {
+                        "localId" : "521",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "522",
+                     "name" : "eEnd",
+                     "elementType" : {
+                        "localId" : "523",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            },
             "expression" : {
-               "localId" : "292",
+               "localId" : "503",
                "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "504",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "505",
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "localId" : "506",
+                        "name" : "cStart",
+                        "elementType" : {
+                           "localId" : "507",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "508",
+                        "name" : "cEnd",
+                        "elementType" : {
+                           "localId" : "509",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "510",
+                        "name" : "eStart",
+                        "elementType" : {
+                           "localId" : "511",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "512",
+                        "name" : "eEnd",
+                        "elementType" : {
+                           "localId" : "513",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ]
+                  }
+               },
                "source" : [ {
-                  "localId" : "271",
+                  "localId" : "425",
                   "alias" : "X",
+                  "resultTypeSpecifier" : {
+                     "localId" : "436",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "437",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "272",
+                     "localId" : "426",
                      "strict" : false,
                      "type" : "As",
+                     "resultTypeSpecifier" : {
+                        "localId" : "434",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "435",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "273",
+                        "localId" : "427",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "274",
+                        "localId" : "428",
                         "type" : "ListTypeSpecifier",
+                        "resultTypeSpecifier" : {
+                           "localId" : "430",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "431",
+                              "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "elementType" : {
-                           "localId" : "275",
+                           "localId" : "429",
+                           "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                            "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                            "type" : "NamedTypeSpecifier"
                         }
                      }
                   }
                }, {
-                  "localId" : "276",
+                  "localId" : "438",
                   "alias" : "Y",
+                  "resultTypeSpecifier" : {
+                     "localId" : "444",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "445",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "expression" : {
-                     "localId" : "277",
+                     "localId" : "439",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "442",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "443",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
                      "include" : [ ],
                      "codeFilter" : [ ],
                      "dateFilter" : [ ],
@@ -11464,60 +17170,210 @@ module.exports['NullSourceQuery'] = {
                "let" : [ ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "278",
+                  "localId" : "446",
+                  "resultTypeSpecifier" : {
+                     "localId" : "493",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "494",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "495",
+                           "name" : "cStart",
+                           "elementType" : {
+                              "localId" : "496",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "497",
+                           "name" : "cEnd",
+                           "elementType" : {
+                              "localId" : "498",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "499",
+                           "name" : "eStart",
+                           "elementType" : {
+                              "localId" : "500",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "501",
+                           "name" : "eEnd",
+                           "elementType" : {
+                              "localId" : "502",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
                   "expression" : {
-                     "localId" : "279",
+                     "localId" : "447",
                      "type" : "Tuple",
+                     "resultTypeSpecifier" : {
+                        "localId" : "484",
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "localId" : "485",
+                           "name" : "cStart",
+                           "elementType" : {
+                              "localId" : "486",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "487",
+                           "name" : "cEnd",
+                           "elementType" : {
+                              "localId" : "488",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "489",
+                           "name" : "eStart",
+                           "elementType" : {
+                              "localId" : "490",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "localId" : "491",
+                           "name" : "eEnd",
+                           "elementType" : {
+                              "localId" : "492",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
                      "element" : [ {
                         "name" : "cStart",
                         "value" : {
-                           "localId" : "280",
+                           "localId" : "448",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "455",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "456",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
-                              "localId" : "282",
+                              "localId" : "450",
                               "path" : "period",
                               "scope" : "X",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "453",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "454",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
                            }
                         }
                      }, {
                         "name" : "cEnd",
                         "value" : {
-                           "localId" : "283",
+                           "localId" : "457",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "464",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "465",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
-                              "localId" : "285",
+                              "localId" : "459",
                               "path" : "period",
                               "scope" : "X",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "462",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "463",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
                            }
                         }
                      }, {
                         "name" : "eStart",
                         "value" : {
-                           "localId" : "286",
+                           "localId" : "466",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "473",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "474",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
-                              "localId" : "288",
+                              "localId" : "468",
                               "path" : "period",
                               "scope" : "Y",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "471",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "472",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
                            }
                         }
                      }, {
                         "name" : "eEnd",
                         "value" : {
-                           "localId" : "289",
+                           "localId" : "475",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "482",
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "localId" : "483",
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ],
                            "operand" : {
-                              "localId" : "291",
+                              "localId" : "477",
                               "path" : "period",
                               "scope" : "Y",
-                              "type" : "Property"
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "localId" : "480",
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "localId" : "481",
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
                            }
                         }
                      } ]

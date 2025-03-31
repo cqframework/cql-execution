@@ -30,9 +30,9 @@ module.exports['Concat'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "message" : "You used a string literal: [Hello] here that matches an identifier in scope: [Hello]. Did you mean to use the identifier instead?",
@@ -62,7 +62,7 @@ module.exports['Concat'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "479",
+            "r" : "697",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -130,6 +130,7 @@ module.exports['Concat'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "HelloWorld",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -140,7 +141,7 @@ module.exports['Concat'] = {
                   "s" : [ {
                      "value" : [ "","define ","HelloWorld",": " ]
                   }, {
-                     "r" : "216",
+                     "r" : "218",
                      "s" : [ {
                         "r" : "214",
                         "s" : [ {
@@ -158,73 +159,77 @@ module.exports['Concat'] = {
                }
             } ],
             "expression" : {
-               "localId" : "216",
+               "localId" : "218",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Concatenate",
                "signature" : [ ],
                "operand" : [ {
                   "localId" : "214",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Hello",
                   "type" : "Literal"
                }, {
                   "localId" : "215",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "World",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "218",
+            "localId" : "220",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Sentence",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "218",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define ","Sentence",": " ]
                   }, {
-                     "r" : "267",
+                     "r" : "301",
                      "s" : [ {
-                        "r" : "265",
+                        "r" : "297",
                         "s" : [ {
-                           "r" : "263",
+                           "r" : "293",
                            "s" : [ {
-                              "r" : "261",
+                              "r" : "289",
                               "s" : [ {
-                                 "r" : "259",
+                                 "r" : "285",
                                  "s" : [ {
-                                    "r" : "257",
+                                    "r" : "281",
                                     "s" : [ {
-                                       "r" : "255",
+                                       "r" : "277",
                                        "s" : [ {
-                                          "r" : "253",
+                                          "r" : "273",
                                           "s" : [ {
-                                             "r" : "251",
+                                             "r" : "269",
                                              "s" : [ {
-                                                "r" : "249",
+                                                "r" : "265",
                                                 "s" : [ {
-                                                   "r" : "247",
+                                                   "r" : "261",
                                                    "s" : [ {
-                                                      "r" : "245",
+                                                      "r" : "257",
                                                       "s" : [ {
-                                                         "r" : "243",
+                                                         "r" : "253",
                                                          "s" : [ {
-                                                            "r" : "241",
+                                                            "r" : "249",
                                                             "s" : [ {
-                                                               "r" : "239",
+                                                               "r" : "245",
                                                                "s" : [ {
-                                                                  "r" : "237",
+                                                                  "r" : "241",
                                                                   "s" : [ {
-                                                                     "r" : "235",
+                                                                     "r" : "237",
                                                                      "s" : [ {
                                                                         "value" : [ "'The'" ]
                                                                      } ]
                                                                   }, {
                                                                      "value" : [ " + " ]
                                                                   }, {
-                                                                     "r" : "236",
+                                                                     "r" : "238",
                                                                      "s" : [ {
                                                                         "value" : [ "' '" ]
                                                                      } ]
@@ -232,7 +237,7 @@ module.exports['Concat'] = {
                                                                }, {
                                                                   "value" : [ " + " ]
                                                                }, {
-                                                                  "r" : "238",
+                                                                  "r" : "242",
                                                                   "s" : [ {
                                                                      "value" : [ "'quick'" ]
                                                                   } ]
@@ -240,7 +245,7 @@ module.exports['Concat'] = {
                                                             }, {
                                                                "value" : [ " + " ]
                                                             }, {
-                                                               "r" : "240",
+                                                               "r" : "246",
                                                                "s" : [ {
                                                                   "value" : [ "' '" ]
                                                                } ]
@@ -248,7 +253,7 @@ module.exports['Concat'] = {
                                                          }, {
                                                             "value" : [ " + " ]
                                                          }, {
-                                                            "r" : "242",
+                                                            "r" : "250",
                                                             "s" : [ {
                                                                "value" : [ "'brown'" ]
                                                             } ]
@@ -256,7 +261,7 @@ module.exports['Concat'] = {
                                                       }, {
                                                          "value" : [ " + " ]
                                                       }, {
-                                                         "r" : "244",
+                                                         "r" : "254",
                                                          "s" : [ {
                                                             "value" : [ "' '" ]
                                                          } ]
@@ -264,7 +269,7 @@ module.exports['Concat'] = {
                                                    }, {
                                                       "value" : [ " + " ]
                                                    }, {
-                                                      "r" : "246",
+                                                      "r" : "258",
                                                       "s" : [ {
                                                          "value" : [ "'fox'" ]
                                                       } ]
@@ -272,7 +277,7 @@ module.exports['Concat'] = {
                                                 }, {
                                                    "value" : [ " + " ]
                                                 }, {
-                                                   "r" : "248",
+                                                   "r" : "262",
                                                    "s" : [ {
                                                       "value" : [ "' '" ]
                                                    } ]
@@ -280,7 +285,7 @@ module.exports['Concat'] = {
                                              }, {
                                                 "value" : [ " + " ]
                                              }, {
-                                                "r" : "250",
+                                                "r" : "266",
                                                 "s" : [ {
                                                    "value" : [ "'jumps'" ]
                                                 } ]
@@ -288,7 +293,7 @@ module.exports['Concat'] = {
                                           }, {
                                              "value" : [ " + " ]
                                           }, {
-                                             "r" : "252",
+                                             "r" : "270",
                                              "s" : [ {
                                                 "value" : [ "' '" ]
                                              } ]
@@ -296,7 +301,7 @@ module.exports['Concat'] = {
                                        }, {
                                           "value" : [ "\n                  + " ]
                                        }, {
-                                          "r" : "254",
+                                          "r" : "274",
                                           "s" : [ {
                                              "value" : [ "'over'" ]
                                           } ]
@@ -304,7 +309,7 @@ module.exports['Concat'] = {
                                     }, {
                                        "value" : [ " + " ]
                                     }, {
-                                       "r" : "256",
+                                       "r" : "278",
                                        "s" : [ {
                                           "value" : [ "' '" ]
                                        } ]
@@ -312,7 +317,7 @@ module.exports['Concat'] = {
                                  }, {
                                     "value" : [ " + " ]
                                  }, {
-                                    "r" : "258",
+                                    "r" : "282",
                                     "s" : [ {
                                        "value" : [ "'the'" ]
                                     } ]
@@ -320,7 +325,7 @@ module.exports['Concat'] = {
                               }, {
                                  "value" : [ " + " ]
                               }, {
-                                 "r" : "260",
+                                 "r" : "286",
                                  "s" : [ {
                                     "value" : [ "' '" ]
                                  } ]
@@ -328,7 +333,7 @@ module.exports['Concat'] = {
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "262",
+                              "r" : "290",
                               "s" : [ {
                                  "value" : [ "'lazy'" ]
                               } ]
@@ -336,7 +341,7 @@ module.exports['Concat'] = {
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "264",
+                           "r" : "294",
                            "s" : [ {
                               "value" : [ "' '" ]
                            } ]
@@ -344,7 +349,7 @@ module.exports['Concat'] = {
                      }, {
                         "value" : [ " + " ]
                      }, {
-                        "r" : "266",
+                        "r" : "298",
                         "s" : [ {
                            "value" : [ "'dog.'" ]
                         } ]
@@ -353,229 +358,267 @@ module.exports['Concat'] = {
                }
             } ],
             "expression" : {
-               "localId" : "267",
+               "localId" : "301",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Concatenate",
                "signature" : [ ],
                "operand" : [ {
-                  "localId" : "265",
+                  "localId" : "297",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "Concatenate",
                   "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "263",
+                     "localId" : "293",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "Concatenate",
                      "signature" : [ ],
                      "operand" : [ {
-                        "localId" : "261",
+                        "localId" : "289",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "Concatenate",
                         "signature" : [ ],
                         "operand" : [ {
-                           "localId" : "259",
+                           "localId" : "285",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "Concatenate",
                            "signature" : [ ],
                            "operand" : [ {
-                              "localId" : "257",
+                              "localId" : "281",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "Concatenate",
                               "signature" : [ ],
                               "operand" : [ {
-                                 "localId" : "255",
+                                 "localId" : "277",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "Concatenate",
                                  "signature" : [ ],
                                  "operand" : [ {
-                                    "localId" : "253",
+                                    "localId" : "273",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "Concatenate",
                                     "signature" : [ ],
                                     "operand" : [ {
-                                       "localId" : "251",
+                                       "localId" : "269",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "type" : "Concatenate",
                                        "signature" : [ ],
                                        "operand" : [ {
-                                          "localId" : "249",
+                                          "localId" : "265",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                           "type" : "Concatenate",
                                           "signature" : [ ],
                                           "operand" : [ {
-                                             "localId" : "247",
+                                             "localId" : "261",
+                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                              "type" : "Concatenate",
                                              "signature" : [ ],
                                              "operand" : [ {
-                                                "localId" : "245",
+                                                "localId" : "257",
+                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                 "type" : "Concatenate",
                                                 "signature" : [ ],
                                                 "operand" : [ {
-                                                   "localId" : "243",
+                                                   "localId" : "253",
+                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                    "type" : "Concatenate",
                                                    "signature" : [ ],
                                                    "operand" : [ {
-                                                      "localId" : "241",
+                                                      "localId" : "249",
+                                                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                       "type" : "Concatenate",
                                                       "signature" : [ ],
                                                       "operand" : [ {
-                                                         "localId" : "239",
+                                                         "localId" : "245",
+                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                          "type" : "Concatenate",
                                                          "signature" : [ ],
                                                          "operand" : [ {
-                                                            "localId" : "237",
+                                                            "localId" : "241",
+                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                             "type" : "Concatenate",
                                                             "signature" : [ ],
                                                             "operand" : [ {
-                                                               "localId" : "235",
+                                                               "localId" : "237",
+                                                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                "value" : "The",
                                                                "type" : "Literal"
                                                             }, {
-                                                               "localId" : "236",
+                                                               "localId" : "238",
+                                                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                "value" : " ",
                                                                "type" : "Literal"
                                                             } ]
                                                          }, {
-                                                            "localId" : "238",
+                                                            "localId" : "242",
+                                                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                             "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                             "value" : "quick",
                                                             "type" : "Literal"
                                                          } ]
                                                       }, {
-                                                         "localId" : "240",
+                                                         "localId" : "246",
+                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                          "value" : " ",
                                                          "type" : "Literal"
                                                       } ]
                                                    }, {
-                                                      "localId" : "242",
+                                                      "localId" : "250",
+                                                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                       "value" : "brown",
                                                       "type" : "Literal"
                                                    } ]
                                                 }, {
-                                                   "localId" : "244",
+                                                   "localId" : "254",
+                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                    "value" : " ",
                                                    "type" : "Literal"
                                                 } ]
                                              }, {
-                                                "localId" : "246",
+                                                "localId" : "258",
+                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                 "value" : "fox",
                                                 "type" : "Literal"
                                              } ]
                                           }, {
-                                             "localId" : "248",
+                                             "localId" : "262",
+                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                              "value" : " ",
                                              "type" : "Literal"
                                           } ]
                                        }, {
-                                          "localId" : "250",
+                                          "localId" : "266",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                           "value" : "jumps",
                                           "type" : "Literal"
                                        } ]
                                     }, {
-                                       "localId" : "252",
+                                       "localId" : "270",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                        "value" : " ",
                                        "type" : "Literal"
                                     } ]
                                  }, {
-                                    "localId" : "254",
+                                    "localId" : "274",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                     "value" : "over",
                                     "type" : "Literal"
                                  } ]
                               }, {
-                                 "localId" : "256",
+                                 "localId" : "278",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : " ",
                                  "type" : "Literal"
                               } ]
                            }, {
-                              "localId" : "258",
+                              "localId" : "282",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "the",
                               "type" : "Literal"
                            } ]
                         }, {
-                           "localId" : "260",
+                           "localId" : "286",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : " ",
                            "type" : "Literal"
                         } ]
                      }, {
-                        "localId" : "262",
+                        "localId" : "290",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "lazy",
                         "type" : "Literal"
                      } ]
                   }, {
-                     "localId" : "264",
+                     "localId" : "294",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : " ",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "266",
+                  "localId" : "298",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "dog.",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "269",
+            "localId" : "303",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ConcatNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "269",
+                  "r" : "303",
                   "s" : [ {
                      "value" : [ "","define ","ConcatNull",": " ]
                   }, {
-                     "r" : "274",
+                     "r" : "310",
                      "s" : [ {
-                        "r" : "271",
+                        "r" : "305",
                         "s" : [ {
                            "value" : [ "'Hello'" ]
                         } ]
                      }, {
-                        "r" : "272",
+                        "r" : "306",
                         "value" : [ " + ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "274",
+               "localId" : "310",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Concatenate",
                "signature" : [ ],
                "operand" : [ {
-                  "localId" : "271",
+                  "localId" : "305",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Hello",
                   "type" : "Literal"
                }, {
-                  "localId" : "273",
+                  "localId" : "307",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "272",
+                     "localId" : "306",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                } ]
             }
          }, {
-            "localId" : "276",
+            "localId" : "312",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Hello",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "276",
+                  "r" : "312",
                   "s" : [ {
                      "value" : [ "","define ","Hello",": " ]
                   }, {
-                     "r" : "277",
+                     "r" : "313",
                      "s" : [ {
                         "value" : [ "'Hello'" ]
                      } ]
@@ -583,24 +626,26 @@ module.exports['Concat'] = {
                }
             } ],
             "expression" : {
-               "localId" : "277",
+               "localId" : "313",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "Hello",
                "type" : "Literal"
             }
          }, {
-            "localId" : "279",
+            "localId" : "315",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "World",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "279",
+                  "r" : "315",
                   "s" : [ {
                      "value" : [ "","define ","World",": " ]
                   }, {
-                     "r" : "280",
+                     "r" : "316",
                      "s" : [ {
                         "value" : [ "'World'" ]
                      } ]
@@ -608,33 +653,35 @@ module.exports['Concat'] = {
                }
             } ],
             "expression" : {
-               "localId" : "280",
+               "localId" : "316",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "World",
                "type" : "Literal"
             }
          }, {
-            "localId" : "282",
+            "localId" : "318",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "HelloWorldVariables",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "282",
+                  "r" : "318",
                   "s" : [ {
                      "value" : [ "","define ","HelloWorldVariables",": " ]
                   }, {
-                     "r" : "286",
+                     "r" : "324",
                      "s" : [ {
-                        "r" : "284",
+                        "r" : "320",
                         "s" : [ {
                            "value" : [ "Hello" ]
                         } ]
                      }, {
                         "value" : [ " + " ]
                      }, {
-                        "r" : "285",
+                        "r" : "321",
                         "s" : [ {
                            "value" : [ "World" ]
                         } ]
@@ -643,41 +690,45 @@ module.exports['Concat'] = {
                }
             } ],
             "expression" : {
-               "localId" : "286",
+               "localId" : "324",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Concatenate",
                "signature" : [ ],
                "operand" : [ {
-                  "localId" : "284",
+                  "localId" : "320",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "Hello",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "285",
+                  "localId" : "321",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "World",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "localId" : "288",
+            "localId" : "326",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "AndHelloWorld",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "288",
+                  "r" : "326",
                   "s" : [ {
                      "value" : [ "","define ","AndHelloWorld",": " ]
                   }, {
-                     "r" : "289",
+                     "r" : "327",
                      "s" : [ {
-                        "r" : "290",
+                        "r" : "328",
                         "s" : [ {
                            "value" : [ "'Hello'" ]
                         } ]
                      }, {
                         "value" : [ " & " ]
                      }, {
-                        "r" : "291",
+                        "r" : "329",
                         "s" : [ {
                            "value" : [ "'World'" ]
                         } ]
@@ -686,35 +737,62 @@ module.exports['Concat'] = {
                }
             } ],
             "expression" : {
-               "localId" : "289",
+               "localId" : "327",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Concatenate",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "346",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "347",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "295",
+                  "localId" : "335",
                   "type" : "Coalesce",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "336",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "337",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
-                     "localId" : "290",
+                     "localId" : "328",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Hello",
                      "type" : "Literal"
                   }, {
-                     "localId" : "292",
+                     "localId" : "330",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "299",
+                  "localId" : "343",
                   "type" : "Coalesce",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "344",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "345",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
-                     "localId" : "291",
+                     "localId" : "329",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "World",
                      "type" : "Literal"
                   }, {
-                     "localId" : "296",
+                     "localId" : "338",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "",
                      "type" : "Literal"
@@ -722,57 +800,58 @@ module.exports['Concat'] = {
                } ]
             }
          }, {
-            "localId" : "301",
+            "localId" : "349",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "AndSentence",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "301",
+                  "r" : "349",
                   "s" : [ {
                      "value" : [ "","define ","AndSentence",": " ]
                   }, {
-                     "r" : "302",
+                     "r" : "350",
                      "s" : [ {
-                        "r" : "303",
+                        "r" : "351",
                         "s" : [ {
-                           "r" : "304",
+                           "r" : "352",
                            "s" : [ {
-                              "r" : "305",
+                              "r" : "353",
                               "s" : [ {
-                                 "r" : "306",
+                                 "r" : "354",
                                  "s" : [ {
-                                    "r" : "307",
+                                    "r" : "355",
                                     "s" : [ {
-                                       "r" : "308",
+                                       "r" : "356",
                                        "s" : [ {
-                                          "r" : "309",
+                                          "r" : "357",
                                           "s" : [ {
-                                             "r" : "310",
+                                             "r" : "358",
                                              "s" : [ {
-                                                "r" : "311",
+                                                "r" : "359",
                                                 "s" : [ {
-                                                   "r" : "312",
+                                                   "r" : "360",
                                                    "s" : [ {
-                                                      "r" : "313",
+                                                      "r" : "361",
                                                       "s" : [ {
-                                                         "r" : "314",
+                                                         "r" : "362",
                                                          "s" : [ {
-                                                            "r" : "315",
+                                                            "r" : "363",
                                                             "s" : [ {
-                                                               "r" : "316",
+                                                               "r" : "364",
                                                                "s" : [ {
-                                                                  "r" : "317",
+                                                                  "r" : "365",
                                                                   "s" : [ {
-                                                                     "r" : "318",
+                                                                     "r" : "366",
                                                                      "s" : [ {
                                                                         "value" : [ "'The'" ]
                                                                      } ]
                                                                   }, {
                                                                      "value" : [ " & " ]
                                                                   }, {
-                                                                     "r" : "319",
+                                                                     "r" : "367",
                                                                      "s" : [ {
                                                                         "value" : [ "' '" ]
                                                                      } ]
@@ -780,7 +859,7 @@ module.exports['Concat'] = {
                                                                }, {
                                                                   "value" : [ " & " ]
                                                                }, {
-                                                                  "r" : "328",
+                                                                  "r" : "386",
                                                                   "s" : [ {
                                                                      "value" : [ "'quick'" ]
                                                                   } ]
@@ -788,7 +867,7 @@ module.exports['Concat'] = {
                                                             }, {
                                                                "value" : [ " & " ]
                                                             }, {
-                                                               "r" : "337",
+                                                               "r" : "405",
                                                                "s" : [ {
                                                                   "value" : [ "' '" ]
                                                                } ]
@@ -796,7 +875,7 @@ module.exports['Concat'] = {
                                                          }, {
                                                             "value" : [ " & " ]
                                                          }, {
-                                                            "r" : "346",
+                                                            "r" : "424",
                                                             "s" : [ {
                                                                "value" : [ "'brown'" ]
                                                             } ]
@@ -804,7 +883,7 @@ module.exports['Concat'] = {
                                                       }, {
                                                          "value" : [ " & " ]
                                                       }, {
-                                                         "r" : "355",
+                                                         "r" : "443",
                                                          "s" : [ {
                                                             "value" : [ "' '" ]
                                                          } ]
@@ -812,7 +891,7 @@ module.exports['Concat'] = {
                                                    }, {
                                                       "value" : [ " & " ]
                                                    }, {
-                                                      "r" : "364",
+                                                      "r" : "462",
                                                       "s" : [ {
                                                          "value" : [ "'fox'" ]
                                                       } ]
@@ -820,7 +899,7 @@ module.exports['Concat'] = {
                                                 }, {
                                                    "value" : [ " & " ]
                                                 }, {
-                                                   "r" : "373",
+                                                   "r" : "481",
                                                    "s" : [ {
                                                       "value" : [ "' '" ]
                                                    } ]
@@ -828,7 +907,7 @@ module.exports['Concat'] = {
                                              }, {
                                                 "value" : [ " & " ]
                                              }, {
-                                                "r" : "382",
+                                                "r" : "500",
                                                 "s" : [ {
                                                    "value" : [ "'jumps'" ]
                                                 } ]
@@ -836,7 +915,7 @@ module.exports['Concat'] = {
                                           }, {
                                              "value" : [ " & " ]
                                           }, {
-                                             "r" : "391",
+                                             "r" : "519",
                                              "s" : [ {
                                                 "value" : [ "' '" ]
                                              } ]
@@ -844,7 +923,7 @@ module.exports['Concat'] = {
                                        }, {
                                           "value" : [ "\n                  & " ]
                                        }, {
-                                          "r" : "400",
+                                          "r" : "538",
                                           "s" : [ {
                                              "value" : [ "'over'" ]
                                           } ]
@@ -852,7 +931,7 @@ module.exports['Concat'] = {
                                     }, {
                                        "value" : [ " & " ]
                                     }, {
-                                       "r" : "409",
+                                       "r" : "557",
                                        "s" : [ {
                                           "value" : [ "' '" ]
                                        } ]
@@ -860,7 +939,7 @@ module.exports['Concat'] = {
                                  }, {
                                     "value" : [ " & " ]
                                  }, {
-                                    "r" : "418",
+                                    "r" : "576",
                                     "s" : [ {
                                        "value" : [ "'the'" ]
                                     } ]
@@ -868,7 +947,7 @@ module.exports['Concat'] = {
                               }, {
                                  "value" : [ " & " ]
                               }, {
-                                 "r" : "427",
+                                 "r" : "595",
                                  "s" : [ {
                                     "value" : [ "' '" ]
                                  } ]
@@ -876,7 +955,7 @@ module.exports['Concat'] = {
                            }, {
                               "value" : [ " & " ]
                            }, {
-                              "r" : "436",
+                              "r" : "614",
                               "s" : [ {
                                  "value" : [ "'lazy'" ]
                               } ]
@@ -884,7 +963,7 @@ module.exports['Concat'] = {
                         }, {
                            "value" : [ " & " ]
                         }, {
-                           "r" : "445",
+                           "r" : "633",
                            "s" : [ {
                               "value" : [ "' '" ]
                            } ]
@@ -892,7 +971,7 @@ module.exports['Concat'] = {
                      }, {
                         "value" : [ " & " ]
                      }, {
-                        "r" : "454",
+                        "r" : "652",
                         "s" : [ {
                            "value" : [ "'dog.'" ]
                         } ]
@@ -901,485 +980,902 @@ module.exports['Concat'] = {
                }
             } ],
             "expression" : {
-               "localId" : "302",
+               "localId" : "350",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Concatenate",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "669",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "670",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "458",
+                  "localId" : "658",
                   "type" : "Coalesce",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "659",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "660",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
-                     "localId" : "303",
+                     "localId" : "351",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "Concatenate",
-                     "signature" : [ ],
+                     "signature" : [ {
+                        "localId" : "650",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "651",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
                      "operand" : [ {
-                        "localId" : "449",
+                        "localId" : "639",
                         "type" : "Coalesce",
-                        "signature" : [ ],
+                        "signature" : [ {
+                           "localId" : "640",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "641",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
-                           "localId" : "304",
+                           "localId" : "352",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "Concatenate",
-                           "signature" : [ ],
+                           "signature" : [ {
+                              "localId" : "631",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "localId" : "632",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
-                              "localId" : "440",
+                              "localId" : "620",
                               "type" : "Coalesce",
-                              "signature" : [ ],
+                              "signature" : [ {
+                                 "localId" : "621",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "localId" : "622",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
-                                 "localId" : "305",
+                                 "localId" : "353",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "Concatenate",
-                                 "signature" : [ ],
+                                 "signature" : [ {
+                                    "localId" : "612",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "localId" : "613",
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
                                  "operand" : [ {
-                                    "localId" : "431",
+                                    "localId" : "601",
                                     "type" : "Coalesce",
-                                    "signature" : [ ],
+                                    "signature" : [ {
+                                       "localId" : "602",
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "localId" : "603",
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
-                                       "localId" : "306",
+                                       "localId" : "354",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "type" : "Concatenate",
-                                       "signature" : [ ],
+                                       "signature" : [ {
+                                          "localId" : "593",
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "localId" : "594",
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
                                        "operand" : [ {
-                                          "localId" : "422",
+                                          "localId" : "582",
                                           "type" : "Coalesce",
-                                          "signature" : [ ],
+                                          "signature" : [ {
+                                             "localId" : "583",
+                                             "name" : "{urn:hl7-org:elm-types:r1}String",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "localId" : "584",
+                                             "name" : "{urn:hl7-org:elm-types:r1}String",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
-                                             "localId" : "307",
+                                             "localId" : "355",
+                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                              "type" : "Concatenate",
-                                             "signature" : [ ],
+                                             "signature" : [ {
+                                                "localId" : "574",
+                                                "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                "type" : "NamedTypeSpecifier"
+                                             }, {
+                                                "localId" : "575",
+                                                "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
                                              "operand" : [ {
-                                                "localId" : "413",
+                                                "localId" : "563",
                                                 "type" : "Coalesce",
-                                                "signature" : [ ],
+                                                "signature" : [ {
+                                                   "localId" : "564",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "localId" : "565",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : [ {
-                                                   "localId" : "308",
+                                                   "localId" : "356",
+                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                    "type" : "Concatenate",
-                                                   "signature" : [ ],
+                                                   "signature" : [ {
+                                                      "localId" : "555",
+                                                      "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }, {
+                                                      "localId" : "556",
+                                                      "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   } ],
                                                    "operand" : [ {
-                                                      "localId" : "404",
+                                                      "localId" : "544",
                                                       "type" : "Coalesce",
-                                                      "signature" : [ ],
+                                                      "signature" : [ {
+                                                         "localId" : "545",
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "localId" : "546",
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
-                                                         "localId" : "309",
+                                                         "localId" : "357",
+                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                          "type" : "Concatenate",
-                                                         "signature" : [ ],
+                                                         "signature" : [ {
+                                                            "localId" : "536",
+                                                            "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         }, {
+                                                            "localId" : "537",
+                                                            "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                            "type" : "NamedTypeSpecifier"
+                                                         } ],
                                                          "operand" : [ {
-                                                            "localId" : "395",
+                                                            "localId" : "525",
                                                             "type" : "Coalesce",
-                                                            "signature" : [ ],
+                                                            "signature" : [ {
+                                                               "localId" : "526",
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "localId" : "527",
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
-                                                               "localId" : "310",
+                                                               "localId" : "358",
+                                                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                "type" : "Concatenate",
-                                                               "signature" : [ ],
+                                                               "signature" : [ {
+                                                                  "localId" : "517",
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               }, {
+                                                                  "localId" : "518",
+                                                                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                  "type" : "NamedTypeSpecifier"
+                                                               } ],
                                                                "operand" : [ {
-                                                                  "localId" : "386",
+                                                                  "localId" : "506",
                                                                   "type" : "Coalesce",
-                                                                  "signature" : [ ],
+                                                                  "signature" : [ {
+                                                                     "localId" : "507",
+                                                                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  }, {
+                                                                     "localId" : "508",
+                                                                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  } ],
                                                                   "operand" : [ {
-                                                                     "localId" : "311",
+                                                                     "localId" : "359",
+                                                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                      "type" : "Concatenate",
-                                                                     "signature" : [ ],
+                                                                     "signature" : [ {
+                                                                        "localId" : "498",
+                                                                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                        "type" : "NamedTypeSpecifier"
+                                                                     }, {
+                                                                        "localId" : "499",
+                                                                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                        "type" : "NamedTypeSpecifier"
+                                                                     } ],
                                                                      "operand" : [ {
-                                                                        "localId" : "377",
+                                                                        "localId" : "487",
                                                                         "type" : "Coalesce",
-                                                                        "signature" : [ ],
+                                                                        "signature" : [ {
+                                                                           "localId" : "488",
+                                                                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                           "type" : "NamedTypeSpecifier"
+                                                                        }, {
+                                                                           "localId" : "489",
+                                                                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                           "type" : "NamedTypeSpecifier"
+                                                                        } ],
                                                                         "operand" : [ {
-                                                                           "localId" : "312",
+                                                                           "localId" : "360",
+                                                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                            "type" : "Concatenate",
-                                                                           "signature" : [ ],
+                                                                           "signature" : [ {
+                                                                              "localId" : "479",
+                                                                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                              "type" : "NamedTypeSpecifier"
+                                                                           }, {
+                                                                              "localId" : "480",
+                                                                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                              "type" : "NamedTypeSpecifier"
+                                                                           } ],
                                                                            "operand" : [ {
-                                                                              "localId" : "368",
+                                                                              "localId" : "468",
                                                                               "type" : "Coalesce",
-                                                                              "signature" : [ ],
+                                                                              "signature" : [ {
+                                                                                 "localId" : "469",
+                                                                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                 "type" : "NamedTypeSpecifier"
+                                                                              }, {
+                                                                                 "localId" : "470",
+                                                                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                 "type" : "NamedTypeSpecifier"
+                                                                              } ],
                                                                               "operand" : [ {
-                                                                                 "localId" : "313",
+                                                                                 "localId" : "361",
+                                                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                                  "type" : "Concatenate",
-                                                                                 "signature" : [ ],
+                                                                                 "signature" : [ {
+                                                                                    "localId" : "460",
+                                                                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                    "type" : "NamedTypeSpecifier"
+                                                                                 }, {
+                                                                                    "localId" : "461",
+                                                                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                    "type" : "NamedTypeSpecifier"
+                                                                                 } ],
                                                                                  "operand" : [ {
-                                                                                    "localId" : "359",
+                                                                                    "localId" : "449",
                                                                                     "type" : "Coalesce",
-                                                                                    "signature" : [ ],
+                                                                                    "signature" : [ {
+                                                                                       "localId" : "450",
+                                                                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                       "type" : "NamedTypeSpecifier"
+                                                                                    }, {
+                                                                                       "localId" : "451",
+                                                                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                       "type" : "NamedTypeSpecifier"
+                                                                                    } ],
                                                                                     "operand" : [ {
-                                                                                       "localId" : "314",
+                                                                                       "localId" : "362",
+                                                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                                        "type" : "Concatenate",
-                                                                                       "signature" : [ ],
+                                                                                       "signature" : [ {
+                                                                                          "localId" : "441",
+                                                                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                          "type" : "NamedTypeSpecifier"
+                                                                                       }, {
+                                                                                          "localId" : "442",
+                                                                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                          "type" : "NamedTypeSpecifier"
+                                                                                       } ],
                                                                                        "operand" : [ {
-                                                                                          "localId" : "350",
+                                                                                          "localId" : "430",
                                                                                           "type" : "Coalesce",
-                                                                                          "signature" : [ ],
+                                                                                          "signature" : [ {
+                                                                                             "localId" : "431",
+                                                                                             "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                             "type" : "NamedTypeSpecifier"
+                                                                                          }, {
+                                                                                             "localId" : "432",
+                                                                                             "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                             "type" : "NamedTypeSpecifier"
+                                                                                          } ],
                                                                                           "operand" : [ {
-                                                                                             "localId" : "315",
+                                                                                             "localId" : "363",
+                                                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                                              "type" : "Concatenate",
-                                                                                             "signature" : [ ],
+                                                                                             "signature" : [ {
+                                                                                                "localId" : "422",
+                                                                                                "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                "type" : "NamedTypeSpecifier"
+                                                                                             }, {
+                                                                                                "localId" : "423",
+                                                                                                "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                "type" : "NamedTypeSpecifier"
+                                                                                             } ],
                                                                                              "operand" : [ {
-                                                                                                "localId" : "341",
+                                                                                                "localId" : "411",
                                                                                                 "type" : "Coalesce",
-                                                                                                "signature" : [ ],
+                                                                                                "signature" : [ {
+                                                                                                   "localId" : "412",
+                                                                                                   "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                   "type" : "NamedTypeSpecifier"
+                                                                                                }, {
+                                                                                                   "localId" : "413",
+                                                                                                   "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                   "type" : "NamedTypeSpecifier"
+                                                                                                } ],
                                                                                                 "operand" : [ {
-                                                                                                   "localId" : "316",
+                                                                                                   "localId" : "364",
+                                                                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                    "type" : "Concatenate",
-                                                                                                   "signature" : [ ],
+                                                                                                   "signature" : [ {
+                                                                                                      "localId" : "403",
+                                                                                                      "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                      "type" : "NamedTypeSpecifier"
+                                                                                                   }, {
+                                                                                                      "localId" : "404",
+                                                                                                      "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                      "type" : "NamedTypeSpecifier"
+                                                                                                   } ],
                                                                                                    "operand" : [ {
-                                                                                                      "localId" : "332",
+                                                                                                      "localId" : "392",
                                                                                                       "type" : "Coalesce",
-                                                                                                      "signature" : [ ],
+                                                                                                      "signature" : [ {
+                                                                                                         "localId" : "393",
+                                                                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                         "type" : "NamedTypeSpecifier"
+                                                                                                      }, {
+                                                                                                         "localId" : "394",
+                                                                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                         "type" : "NamedTypeSpecifier"
+                                                                                                      } ],
                                                                                                       "operand" : [ {
-                                                                                                         "localId" : "317",
+                                                                                                         "localId" : "365",
+                                                                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                          "type" : "Concatenate",
-                                                                                                         "signature" : [ ],
+                                                                                                         "signature" : [ {
+                                                                                                            "localId" : "384",
+                                                                                                            "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                            "type" : "NamedTypeSpecifier"
+                                                                                                         }, {
+                                                                                                            "localId" : "385",
+                                                                                                            "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                            "type" : "NamedTypeSpecifier"
+                                                                                                         } ],
                                                                                                          "operand" : [ {
-                                                                                                            "localId" : "323",
+                                                                                                            "localId" : "373",
                                                                                                             "type" : "Coalesce",
-                                                                                                            "signature" : [ ],
+                                                                                                            "signature" : [ {
+                                                                                                               "localId" : "374",
+                                                                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                               "type" : "NamedTypeSpecifier"
+                                                                                                            }, {
+                                                                                                               "localId" : "375",
+                                                                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                               "type" : "NamedTypeSpecifier"
+                                                                                                            } ],
                                                                                                             "operand" : [ {
-                                                                                                               "localId" : "318",
+                                                                                                               "localId" : "366",
+                                                                                                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                                "value" : "The",
                                                                                                                "type" : "Literal"
                                                                                                             }, {
-                                                                                                               "localId" : "320",
+                                                                                                               "localId" : "368",
                                                                                                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                                "value" : "",
                                                                                                                "type" : "Literal"
                                                                                                             } ]
                                                                                                          }, {
-                                                                                                            "localId" : "327",
+                                                                                                            "localId" : "381",
                                                                                                             "type" : "Coalesce",
-                                                                                                            "signature" : [ ],
+                                                                                                            "signature" : [ {
+                                                                                                               "localId" : "382",
+                                                                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                               "type" : "NamedTypeSpecifier"
+                                                                                                            }, {
+                                                                                                               "localId" : "383",
+                                                                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                               "type" : "NamedTypeSpecifier"
+                                                                                                            } ],
                                                                                                             "operand" : [ {
-                                                                                                               "localId" : "319",
+                                                                                                               "localId" : "367",
+                                                                                                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                                "value" : " ",
                                                                                                                "type" : "Literal"
                                                                                                             }, {
-                                                                                                               "localId" : "324",
+                                                                                                               "localId" : "376",
                                                                                                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                                "value" : "",
                                                                                                                "type" : "Literal"
                                                                                                             } ]
                                                                                                          } ]
                                                                                                       }, {
-                                                                                                         "localId" : "329",
+                                                                                                         "localId" : "387",
                                                                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                          "value" : "",
                                                                                                          "type" : "Literal"
                                                                                                       } ]
                                                                                                    }, {
-                                                                                                      "localId" : "336",
+                                                                                                      "localId" : "400",
                                                                                                       "type" : "Coalesce",
-                                                                                                      "signature" : [ ],
+                                                                                                      "signature" : [ {
+                                                                                                         "localId" : "401",
+                                                                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                         "type" : "NamedTypeSpecifier"
+                                                                                                      }, {
+                                                                                                         "localId" : "402",
+                                                                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                         "type" : "NamedTypeSpecifier"
+                                                                                                      } ],
                                                                                                       "operand" : [ {
-                                                                                                         "localId" : "328",
+                                                                                                         "localId" : "386",
+                                                                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                          "value" : "quick",
                                                                                                          "type" : "Literal"
                                                                                                       }, {
-                                                                                                         "localId" : "333",
+                                                                                                         "localId" : "395",
                                                                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                          "value" : "",
                                                                                                          "type" : "Literal"
                                                                                                       } ]
                                                                                                    } ]
                                                                                                 }, {
-                                                                                                   "localId" : "338",
+                                                                                                   "localId" : "406",
                                                                                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                    "value" : "",
                                                                                                    "type" : "Literal"
                                                                                                 } ]
                                                                                              }, {
-                                                                                                "localId" : "345",
+                                                                                                "localId" : "419",
                                                                                                 "type" : "Coalesce",
-                                                                                                "signature" : [ ],
+                                                                                                "signature" : [ {
+                                                                                                   "localId" : "420",
+                                                                                                   "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                   "type" : "NamedTypeSpecifier"
+                                                                                                }, {
+                                                                                                   "localId" : "421",
+                                                                                                   "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                                   "type" : "NamedTypeSpecifier"
+                                                                                                } ],
                                                                                                 "operand" : [ {
-                                                                                                   "localId" : "337",
+                                                                                                   "localId" : "405",
+                                                                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                    "value" : " ",
                                                                                                    "type" : "Literal"
                                                                                                 }, {
-                                                                                                   "localId" : "342",
+                                                                                                   "localId" : "414",
                                                                                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                                    "value" : "",
                                                                                                    "type" : "Literal"
                                                                                                 } ]
                                                                                              } ]
                                                                                           }, {
-                                                                                             "localId" : "347",
+                                                                                             "localId" : "425",
                                                                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                              "value" : "",
                                                                                              "type" : "Literal"
                                                                                           } ]
                                                                                        }, {
-                                                                                          "localId" : "354",
+                                                                                          "localId" : "438",
                                                                                           "type" : "Coalesce",
-                                                                                          "signature" : [ ],
+                                                                                          "signature" : [ {
+                                                                                             "localId" : "439",
+                                                                                             "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                             "type" : "NamedTypeSpecifier"
+                                                                                          }, {
+                                                                                             "localId" : "440",
+                                                                                             "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                             "type" : "NamedTypeSpecifier"
+                                                                                          } ],
                                                                                           "operand" : [ {
-                                                                                             "localId" : "346",
+                                                                                             "localId" : "424",
+                                                                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                              "value" : "brown",
                                                                                              "type" : "Literal"
                                                                                           }, {
-                                                                                             "localId" : "351",
+                                                                                             "localId" : "433",
                                                                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                              "value" : "",
                                                                                              "type" : "Literal"
                                                                                           } ]
                                                                                        } ]
                                                                                     }, {
-                                                                                       "localId" : "356",
+                                                                                       "localId" : "444",
                                                                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                        "value" : "",
                                                                                        "type" : "Literal"
                                                                                     } ]
                                                                                  }, {
-                                                                                    "localId" : "363",
+                                                                                    "localId" : "457",
                                                                                     "type" : "Coalesce",
-                                                                                    "signature" : [ ],
+                                                                                    "signature" : [ {
+                                                                                       "localId" : "458",
+                                                                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                       "type" : "NamedTypeSpecifier"
+                                                                                    }, {
+                                                                                       "localId" : "459",
+                                                                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                       "type" : "NamedTypeSpecifier"
+                                                                                    } ],
                                                                                     "operand" : [ {
-                                                                                       "localId" : "355",
+                                                                                       "localId" : "443",
+                                                                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                        "value" : " ",
                                                                                        "type" : "Literal"
                                                                                     }, {
-                                                                                       "localId" : "360",
+                                                                                       "localId" : "452",
                                                                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                        "value" : "",
                                                                                        "type" : "Literal"
                                                                                     } ]
                                                                                  } ]
                                                                               }, {
-                                                                                 "localId" : "365",
+                                                                                 "localId" : "463",
                                                                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                  "value" : "",
                                                                                  "type" : "Literal"
                                                                               } ]
                                                                            }, {
-                                                                              "localId" : "372",
+                                                                              "localId" : "476",
                                                                               "type" : "Coalesce",
-                                                                              "signature" : [ ],
+                                                                              "signature" : [ {
+                                                                                 "localId" : "477",
+                                                                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                 "type" : "NamedTypeSpecifier"
+                                                                              }, {
+                                                                                 "localId" : "478",
+                                                                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                                 "type" : "NamedTypeSpecifier"
+                                                                              } ],
                                                                               "operand" : [ {
-                                                                                 "localId" : "364",
+                                                                                 "localId" : "462",
+                                                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                  "value" : "fox",
                                                                                  "type" : "Literal"
                                                                               }, {
-                                                                                 "localId" : "369",
+                                                                                 "localId" : "471",
                                                                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                                  "value" : "",
                                                                                  "type" : "Literal"
                                                                               } ]
                                                                            } ]
                                                                         }, {
-                                                                           "localId" : "374",
+                                                                           "localId" : "482",
                                                                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                            "value" : "",
                                                                            "type" : "Literal"
                                                                         } ]
                                                                      }, {
-                                                                        "localId" : "381",
+                                                                        "localId" : "495",
                                                                         "type" : "Coalesce",
-                                                                        "signature" : [ ],
+                                                                        "signature" : [ {
+                                                                           "localId" : "496",
+                                                                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                           "type" : "NamedTypeSpecifier"
+                                                                        }, {
+                                                                           "localId" : "497",
+                                                                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                           "type" : "NamedTypeSpecifier"
+                                                                        } ],
                                                                         "operand" : [ {
-                                                                           "localId" : "373",
+                                                                           "localId" : "481",
+                                                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                            "value" : " ",
                                                                            "type" : "Literal"
                                                                         }, {
-                                                                           "localId" : "378",
+                                                                           "localId" : "490",
                                                                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                            "value" : "",
                                                                            "type" : "Literal"
                                                                         } ]
                                                                      } ]
                                                                   }, {
-                                                                     "localId" : "383",
+                                                                     "localId" : "501",
                                                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                      "value" : "",
                                                                      "type" : "Literal"
                                                                   } ]
                                                                }, {
-                                                                  "localId" : "390",
+                                                                  "localId" : "514",
                                                                   "type" : "Coalesce",
-                                                                  "signature" : [ ],
+                                                                  "signature" : [ {
+                                                                     "localId" : "515",
+                                                                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  }, {
+                                                                     "localId" : "516",
+                                                                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                                     "type" : "NamedTypeSpecifier"
+                                                                  } ],
                                                                   "operand" : [ {
-                                                                     "localId" : "382",
+                                                                     "localId" : "500",
+                                                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                      "value" : "jumps",
                                                                      "type" : "Literal"
                                                                   }, {
-                                                                     "localId" : "387",
+                                                                     "localId" : "509",
                                                                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                      "value" : "",
                                                                      "type" : "Literal"
                                                                   } ]
                                                                } ]
                                                             }, {
-                                                               "localId" : "392",
+                                                               "localId" : "520",
                                                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                "value" : "",
                                                                "type" : "Literal"
                                                             } ]
                                                          }, {
-                                                            "localId" : "399",
+                                                            "localId" : "533",
                                                             "type" : "Coalesce",
-                                                            "signature" : [ ],
+                                                            "signature" : [ {
+                                                               "localId" : "534",
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            }, {
+                                                               "localId" : "535",
+                                                               "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                               "type" : "NamedTypeSpecifier"
+                                                            } ],
                                                             "operand" : [ {
-                                                               "localId" : "391",
+                                                               "localId" : "519",
+                                                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                "value" : " ",
                                                                "type" : "Literal"
                                                             }, {
-                                                               "localId" : "396",
+                                                               "localId" : "528",
                                                                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                                "value" : "",
                                                                "type" : "Literal"
                                                             } ]
                                                          } ]
                                                       }, {
-                                                         "localId" : "401",
+                                                         "localId" : "539",
                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                          "value" : "",
                                                          "type" : "Literal"
                                                       } ]
                                                    }, {
-                                                      "localId" : "408",
+                                                      "localId" : "552",
                                                       "type" : "Coalesce",
-                                                      "signature" : [ ],
+                                                      "signature" : [ {
+                                                         "localId" : "553",
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      }, {
+                                                         "localId" : "554",
+                                                         "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                         "type" : "NamedTypeSpecifier"
+                                                      } ],
                                                       "operand" : [ {
-                                                         "localId" : "400",
+                                                         "localId" : "538",
+                                                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                          "value" : "over",
                                                          "type" : "Literal"
                                                       }, {
-                                                         "localId" : "405",
+                                                         "localId" : "547",
                                                          "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                          "value" : "",
                                                          "type" : "Literal"
                                                       } ]
                                                    } ]
                                                 }, {
-                                                   "localId" : "410",
+                                                   "localId" : "558",
                                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                    "value" : "",
                                                    "type" : "Literal"
                                                 } ]
                                              }, {
-                                                "localId" : "417",
+                                                "localId" : "571",
                                                 "type" : "Coalesce",
-                                                "signature" : [ ],
+                                                "signature" : [ {
+                                                   "localId" : "572",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }, {
+                                                   "localId" : "573",
+                                                   "name" : "{urn:hl7-org:elm-types:r1}String",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
                                                 "operand" : [ {
-                                                   "localId" : "409",
+                                                   "localId" : "557",
+                                                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                    "value" : " ",
                                                    "type" : "Literal"
                                                 }, {
-                                                   "localId" : "414",
+                                                   "localId" : "566",
                                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                                    "value" : "",
                                                    "type" : "Literal"
                                                 } ]
                                              } ]
                                           }, {
-                                             "localId" : "419",
+                                             "localId" : "577",
                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                              "value" : "",
                                              "type" : "Literal"
                                           } ]
                                        }, {
-                                          "localId" : "426",
+                                          "localId" : "590",
                                           "type" : "Coalesce",
-                                          "signature" : [ ],
+                                          "signature" : [ {
+                                             "localId" : "591",
+                                             "name" : "{urn:hl7-org:elm-types:r1}String",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "localId" : "592",
+                                             "name" : "{urn:hl7-org:elm-types:r1}String",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
                                           "operand" : [ {
-                                             "localId" : "418",
+                                             "localId" : "576",
+                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                              "value" : "the",
                                              "type" : "Literal"
                                           }, {
-                                             "localId" : "423",
+                                             "localId" : "585",
                                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                              "value" : "",
                                              "type" : "Literal"
                                           } ]
                                        } ]
                                     }, {
-                                       "localId" : "428",
+                                       "localId" : "596",
                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                        "value" : "",
                                        "type" : "Literal"
                                     } ]
                                  }, {
-                                    "localId" : "435",
+                                    "localId" : "609",
                                     "type" : "Coalesce",
-                                    "signature" : [ ],
+                                    "signature" : [ {
+                                       "localId" : "610",
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "localId" : "611",
+                                       "name" : "{urn:hl7-org:elm-types:r1}String",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
                                     "operand" : [ {
-                                       "localId" : "427",
+                                       "localId" : "595",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                        "value" : " ",
                                        "type" : "Literal"
                                     }, {
-                                       "localId" : "432",
+                                       "localId" : "604",
                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                        "value" : "",
                                        "type" : "Literal"
                                     } ]
                                  } ]
                               }, {
-                                 "localId" : "437",
+                                 "localId" : "615",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "",
                                  "type" : "Literal"
                               } ]
                            }, {
-                              "localId" : "444",
+                              "localId" : "628",
                               "type" : "Coalesce",
-                              "signature" : [ ],
+                              "signature" : [ {
+                                 "localId" : "629",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "localId" : "630",
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
                               "operand" : [ {
-                                 "localId" : "436",
+                                 "localId" : "614",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "lazy",
                                  "type" : "Literal"
                               }, {
-                                 "localId" : "441",
+                                 "localId" : "623",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "",
                                  "type" : "Literal"
                               } ]
                            } ]
                         }, {
-                           "localId" : "446",
+                           "localId" : "634",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "",
                            "type" : "Literal"
                         } ]
                      }, {
-                        "localId" : "453",
+                        "localId" : "647",
                         "type" : "Coalesce",
-                        "signature" : [ ],
+                        "signature" : [ {
+                           "localId" : "648",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "649",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
                         "operand" : [ {
-                           "localId" : "445",
+                           "localId" : "633",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : " ",
                            "type" : "Literal"
                         }, {
-                           "localId" : "450",
+                           "localId" : "642",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "",
                            "type" : "Literal"
                         } ]
                      } ]
                   }, {
-                     "localId" : "455",
+                     "localId" : "653",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "462",
+                  "localId" : "666",
                   "type" : "Coalesce",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "667",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "668",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
-                     "localId" : "454",
+                     "localId" : "652",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "dog.",
                      "type" : "Literal"
                   }, {
-                     "localId" : "459",
+                     "localId" : "661",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "",
                      "type" : "Literal"
@@ -1387,64 +1883,92 @@ module.exports['Concat'] = {
                } ]
             }
          }, {
-            "localId" : "464",
+            "localId" : "672",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "AndConcatNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "464",
+                  "r" : "672",
                   "s" : [ {
                      "value" : [ "","define ","AndConcatNull",": " ]
                   }, {
-                     "r" : "465",
+                     "r" : "673",
                      "s" : [ {
-                        "r" : "466",
+                        "r" : "674",
                         "s" : [ {
                            "value" : [ "'Hello'" ]
                         } ]
                      }, {
-                        "r" : "467",
+                        "r" : "675",
                         "value" : [ " & ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "465",
+               "localId" : "673",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Concatenate",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "694",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "695",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "471",
+                  "localId" : "681",
                   "type" : "Coalesce",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "682",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "683",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
-                     "localId" : "466",
+                     "localId" : "674",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Hello",
                      "type" : "Literal"
                   }, {
-                     "localId" : "468",
+                     "localId" : "676",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "476",
+                  "localId" : "690",
                   "type" : "Coalesce",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "692",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "693",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
-                     "localId" : "477",
+                     "localId" : "691",
                      "asType" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "467",
+                        "localId" : "675",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "472",
+                     "localId" : "684",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "",
                      "type" : "Literal"
@@ -1452,27 +1976,28 @@ module.exports['Concat'] = {
                } ]
             }
          }, {
-            "localId" : "479",
+            "localId" : "697",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "AndHelloWorldVariables",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "479",
+                  "r" : "697",
                   "s" : [ {
                      "value" : [ "","define ","AndHelloWorldVariables",": " ]
                   }, {
-                     "r" : "480",
+                     "r" : "698",
                      "s" : [ {
-                        "r" : "481",
+                        "r" : "699",
                         "s" : [ {
                            "value" : [ "Hello" ]
                         } ]
                      }, {
                         "value" : [ " & " ]
                      }, {
-                        "r" : "482",
+                        "r" : "700",
                         "s" : [ {
                            "value" : [ "World" ]
                         } ]
@@ -1481,33 +2006,60 @@ module.exports['Concat'] = {
                }
             } ],
             "expression" : {
-               "localId" : "480",
+               "localId" : "698",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Concatenate",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "717",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "718",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "486",
+                  "localId" : "706",
                   "type" : "Coalesce",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "707",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "708",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
-                     "localId" : "481",
+                     "localId" : "699",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "Hello",
                      "type" : "ExpressionRef"
                   }, {
-                     "localId" : "483",
+                     "localId" : "701",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "",
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "490",
+                  "localId" : "714",
                   "type" : "Coalesce",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "715",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "716",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : [ {
-                     "localId" : "482",
+                     "localId" : "700",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "World",
                      "type" : "ExpressionRef"
                   }, {
-                     "localId" : "487",
+                     "localId" : "709",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "",
                      "type" : "Literal"
@@ -1535,14 +2087,14 @@ module.exports['Combine'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "276",
+            "r" : "312",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1610,6 +2162,7 @@ module.exports['Combine'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "NoSeparator",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1620,7 +2173,7 @@ module.exports['Combine'] = {
                   "s" : [ {
                      "value" : [ "","define ","NoSeparator",": " ]
                   }, {
-                     "r" : "220",
+                     "r" : "224",
                      "s" : [ {
                         "value" : [ "Combine","(" ]
                      }, {
@@ -1663,29 +2216,51 @@ module.exports['Combine'] = {
                }
             } ],
             "expression" : {
-               "localId" : "220",
+               "localId" : "224",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Combine",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "225",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "226",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
                "source" : {
                   "localId" : "213",
                   "type" : "List",
+                  "resultTypeSpecifier" : {
+                     "localId" : "218",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "219",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "element" : [ {
                      "localId" : "214",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "abc",
                      "type" : "Literal"
                   }, {
                      "localId" : "215",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "def",
                      "type" : "Literal"
                   }, {
                      "localId" : "216",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "ghi",
                      "type" : "Literal"
                   }, {
                      "localId" : "217",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "jkl",
                      "type" : "Literal"
@@ -1693,47 +2268,48 @@ module.exports['Combine'] = {
                }
             }
          }, {
-            "localId" : "222",
+            "localId" : "228",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Separator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "222",
+                  "r" : "228",
                   "s" : [ {
                      "value" : [ "","define ","Separator",": " ]
                   }, {
-                     "r" : "231",
+                     "r" : "242",
                      "s" : [ {
                         "value" : [ "Combine","(" ]
                      }, {
-                        "r" : "223",
+                        "r" : "229",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "224",
+                           "r" : "230",
                            "s" : [ {
                               "value" : [ "'abc'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "225",
+                           "r" : "231",
                            "s" : [ {
                               "value" : [ "'def'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "226",
+                           "r" : "232",
                            "s" : [ {
                               "value" : [ "'ghi'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "227",
+                           "r" : "233",
                            "s" : [ {
                               "value" : [ "'jkl'" ]
                            } ]
@@ -1743,7 +2319,7 @@ module.exports['Combine'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "228",
+                        "r" : "236",
                         "s" : [ {
                            "value" : [ "';'" ]
                         } ]
@@ -1754,59 +2330,87 @@ module.exports['Combine'] = {
                }
             } ],
             "expression" : {
-               "localId" : "231",
+               "localId" : "242",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Combine",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "243",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "244",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "245",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "source" : {
-                  "localId" : "223",
+                  "localId" : "229",
                   "type" : "List",
+                  "resultTypeSpecifier" : {
+                     "localId" : "234",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "235",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "element" : [ {
-                     "localId" : "224",
+                     "localId" : "230",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "abc",
                      "type" : "Literal"
                   }, {
-                     "localId" : "225",
+                     "localId" : "231",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "def",
                      "type" : "Literal"
                   }, {
-                     "localId" : "226",
+                     "localId" : "232",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "ghi",
                      "type" : "Literal"
                   }, {
-                     "localId" : "227",
+                     "localId" : "233",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "jkl",
                      "type" : "Literal"
                   } ]
                },
                "separator" : {
-                  "localId" : "228",
+                  "localId" : "236",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : ";",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "233",
+            "localId" : "247",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "CombineNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "233",
+                  "r" : "247",
                   "s" : [ {
                      "value" : [ "","define ","CombineNull",": " ]
                   }, {
-                     "r" : "241",
+                     "r" : "258",
                      "s" : [ {
-                        "r" : "234",
+                        "r" : "248",
                         "value" : [ "Combine","(","null",", " ]
                      }, {
-                        "r" : "235",
+                        "r" : "249",
                         "s" : [ {
                            "value" : [ "';'" ]
                         } ]
@@ -1817,70 +2421,86 @@ module.exports['Combine'] = {
                }
             } ],
             "expression" : {
-               "localId" : "241",
+               "localId" : "258",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Combine",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "262",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "263",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "264",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "source" : {
-                  "localId" : "242",
+                  "localId" : "259",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "234",
+                     "localId" : "248",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "243",
+                     "localId" : "260",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "244",
+                        "localId" : "261",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   }
                },
                "separator" : {
-                  "localId" : "235",
+                  "localId" : "249",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : ";",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "246",
+            "localId" : "266",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "CombineNullItem",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "246",
+                  "r" : "266",
                   "s" : [ {
                      "value" : [ "","define ","CombineNullItem",": " ]
                   }, {
-                     "r" : "256",
+                     "r" : "281",
                      "s" : [ {
                         "value" : [ "Combine","(" ]
                      }, {
-                        "r" : "247",
+                        "r" : "267",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "248",
+                           "r" : "268",
                            "s" : [ {
                               "value" : [ "'abc'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "249",
+                           "r" : "269",
                            "s" : [ {
                               "value" : [ "'def'" ]
                            } ]
                         }, {
-                           "r" : "250",
+                           "r" : "270",
                            "value" : [ ", ","null",", " ]
                         }, {
-                           "r" : "251",
+                           "r" : "271",
                            "s" : [ {
                               "value" : [ "'jkl'" ]
                            } ]
@@ -1890,7 +2510,7 @@ module.exports['Combine'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "253",
+                        "r" : "275",
                         "s" : [ {
                            "value" : [ "';'" ]
                         } ]
@@ -1901,70 +2521,98 @@ module.exports['Combine'] = {
                }
             } ],
             "expression" : {
-               "localId" : "256",
+               "localId" : "281",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Combine",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "282",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "283",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "284",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "source" : {
-                  "localId" : "247",
+                  "localId" : "267",
                   "type" : "List",
+                  "resultTypeSpecifier" : {
+                     "localId" : "273",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "274",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
                   "element" : [ {
-                     "localId" : "248",
+                     "localId" : "268",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "abc",
                      "type" : "Literal"
                   }, {
-                     "localId" : "249",
+                     "localId" : "269",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "def",
                      "type" : "Literal"
                   }, {
-                     "localId" : "252",
+                     "localId" : "272",
                      "asType" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "250",
+                        "localId" : "270",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "251",
+                     "localId" : "271",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "jkl",
                      "type" : "Literal"
                   } ]
                },
                "separator" : {
-                  "localId" : "253",
+                  "localId" : "275",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : ";",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "258",
+            "localId" : "286",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "CombineOneNullItem",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "258",
+                  "r" : "286",
                   "s" : [ {
                      "value" : [ "","define ","CombineOneNullItem",": " ]
                   }, {
-                     "r" : "269",
+                     "r" : "302",
                      "s" : [ {
                         "value" : [ "Combine","(" ]
                      }, {
-                        "r" : "259",
+                        "r" : "287",
                         "s" : [ {
-                           "r" : "260",
+                           "r" : "288",
                            "value" : [ "{","null","}" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "261",
+                        "r" : "291",
                         "s" : [ {
                            "value" : [ "';'" ]
                         } ]
@@ -1975,20 +2623,43 @@ module.exports['Combine'] = {
                }
             } ],
             "expression" : {
-               "localId" : "269",
+               "localId" : "302",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Combine",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "308",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "309",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "310",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "source" : {
-                  "localId" : "270",
+                  "localId" : "303",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "271",
+                     "localId" : "304",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "259",
+                        "localId" : "287",
                         "type" : "List",
+                        "resultTypeSpecifier" : {
+                           "localId" : "289",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "290",
+                              "name" : "{urn:hl7-org:elm-types:r1}Any",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "element" : [ {
-                           "localId" : "260",
+                           "localId" : "288",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                            "type" : "Null"
                         } ]
                      }
@@ -1996,15 +2667,15 @@ module.exports['Combine'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "272",
+                     "localId" : "305",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "274",
+                        "localId" : "307",
                         "asType" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "As",
                         "signature" : [ ],
                         "operand" : {
-                           "localId" : "273",
+                           "localId" : "306",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -2012,30 +2683,32 @@ module.exports['Combine'] = {
                   }
                },
                "separator" : {
-                  "localId" : "261",
+                  "localId" : "291",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : ";",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "276",
+            "localId" : "312",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "CombineEmptyNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "276",
+                  "r" : "312",
                   "s" : [ {
                      "value" : [ "","define ","CombineEmptyNull",": " ]
                   }, {
-                     "r" : "286",
+                     "r" : "327",
                      "s" : [ {
-                        "r" : "277",
+                        "r" : "313",
                         "value" : [ "Combine","(","{}",", " ]
                      }, {
-                        "r" : "278",
+                        "r" : "316",
                         "s" : [ {
                            "value" : [ "';'" ]
                         } ]
@@ -2046,33 +2719,55 @@ module.exports['Combine'] = {
                }
             } ],
             "expression" : {
-               "localId" : "286",
+               "localId" : "327",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Combine",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "333",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "334",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "335",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "source" : {
-                  "localId" : "287",
+                  "localId" : "328",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "288",
+                     "localId" : "329",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "277",
+                        "localId" : "313",
                         "type" : "List",
+                        "resultTypeSpecifier" : {
+                           "localId" : "314",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "315",
+                              "name" : "{urn:hl7-org:elm-types:r1}Any",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
                         "element" : [ ]
                      }
                   } ],
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "289",
+                     "localId" : "330",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "291",
+                        "localId" : "332",
                         "asType" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "As",
                         "signature" : [ ],
                         "operand" : {
-                           "localId" : "290",
+                           "localId" : "331",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -2080,7 +2775,8 @@ module.exports['Combine'] = {
                   }
                },
                "separator" : {
-                  "localId" : "278",
+                  "localId" : "316",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : ";",
                   "type" : "Literal"
@@ -2105,14 +2801,14 @@ module.exports['Split'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "235",
+            "r" : "259",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -2190,7 +2886,7 @@ module.exports['Split'] = {
                   "s" : [ {
                      "value" : [ "","define ","CommaSeparated",": " ]
                   }, {
-                     "r" : "217",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "Split","(" ]
                      }, {
@@ -2211,47 +2907,75 @@ module.exports['Split'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "224",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "225",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "217",
+               "localId" : "219",
                "type" : "Split",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "222",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "223",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "220",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "221",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSplit" : {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "a,b,c,,1,2,3",
                   "type" : "Literal"
                },
                "separator" : {
                   "localId" : "214",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : ",",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "219",
+            "localId" : "227",
             "name" : "SeparatorNotUsed",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "227",
                   "s" : [ {
                      "value" : [ "","define ","SeparatorNotUsed",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "234",
                      "s" : [ {
                         "value" : [ "Split","(" ]
                      }, {
-                        "r" : "220",
+                        "r" : "228",
                         "s" : [ {
                            "value" : [ "'a,b,c,,1,2,3'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "221",
+                        "r" : "229",
                         "s" : [ {
                            "value" : [ "';'" ]
                         } ]
@@ -2261,41 +2985,69 @@ module.exports['Split'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "239",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "240",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "224",
+               "localId" : "234",
                "type" : "Split",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "237",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "238",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "235",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "236",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSplit" : {
-                  "localId" : "220",
+                  "localId" : "228",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "a,b,c,,1,2,3",
                   "type" : "Literal"
                },
                "separator" : {
-                  "localId" : "221",
+                  "localId" : "229",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : ";",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "226",
+            "localId" : "242",
             "name" : "SeparateNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "242",
                   "s" : [ {
                      "value" : [ "","define ","SeparateNull",": " ]
                   }, {
-                     "r" : "232",
+                     "r" : "250",
                      "s" : [ {
-                        "r" : "227",
+                        "r" : "243",
                         "value" : [ "Split","(","null",", " ]
                      }, {
-                        "r" : "228",
+                        "r" : "244",
                         "s" : [ {
                            "value" : [ "','" ]
                         } ]
@@ -2305,71 +3057,127 @@ module.exports['Split'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "256",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "257",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "232",
+               "localId" : "250",
                "type" : "Split",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "254",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "255",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "252",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "253",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSplit" : {
-                  "localId" : "233",
+                  "localId" : "251",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "227",
+                     "localId" : "243",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                },
                "separator" : {
-                  "localId" : "228",
+                  "localId" : "244",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : ",",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "235",
+            "localId" : "259",
             "name" : "SeparateUsingNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "235",
+                  "r" : "259",
                   "s" : [ {
                      "value" : [ "","define ","SeparateUsingNull",": " ]
                   }, {
-                     "r" : "241",
+                     "r" : "267",
                      "s" : [ {
                         "value" : [ "Split","(" ]
                      }, {
-                        "r" : "236",
+                        "r" : "260",
                         "s" : [ {
                            "value" : [ "'a,b,c'" ]
                         } ]
                      }, {
-                        "r" : "237",
+                        "r" : "261",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "273",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "274",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "241",
+               "localId" : "267",
                "type" : "Split",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "271",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "272",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "269",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "270",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSplit" : {
-                  "localId" : "236",
+                  "localId" : "260",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "a,b,c",
                   "type" : "Literal"
                },
                "separator" : {
-                  "localId" : "242",
+                  "localId" : "268",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "237",
+                     "localId" : "261",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }
@@ -2395,14 +3203,14 @@ module.exports['SplitOnMatches'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "251",
+            "r" : "291",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -2480,7 +3288,7 @@ module.exports['SplitOnMatches'] = {
                   "s" : [ {
                      "value" : [ "","define ","SplitOnMatchesListReturn",": " ]
                   }, {
-                     "r" : "217",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "SplitOnMatches","(" ]
                      }, {
@@ -2501,47 +3309,75 @@ module.exports['SplitOnMatches'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "224",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "225",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "217",
+               "localId" : "219",
                "type" : "SplitOnMatches",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "222",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "223",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "220",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "221",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSplit" : {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "foo 1,2three bar",
                   "type" : "Literal"
                },
                "separatorPattern" : {
                   "localId" : "214",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "\\d,\\d\\w+",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "219",
+            "localId" : "227",
             "name" : "SplitOnMatchesOriginalString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "227",
                   "s" : [ {
                      "value" : [ "","define ","SplitOnMatchesOriginalString",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "234",
                      "s" : [ {
                         "value" : [ "SplitOnMatches","(" ]
                      }, {
-                        "r" : "220",
+                        "r" : "228",
                         "s" : [ {
                            "value" : [ "'1,2three'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "221",
+                        "r" : "229",
                         "s" : [ {
                            "value" : [ "'\\\\w,\\\\w+'" ]
                         } ]
@@ -2551,47 +3387,75 @@ module.exports['SplitOnMatches'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "239",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "240",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "224",
+               "localId" : "234",
                "type" : "SplitOnMatches",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "237",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "238",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "235",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "236",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSplit" : {
-                  "localId" : "220",
+                  "localId" : "228",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "1,2three",
                   "type" : "Literal"
                },
                "separatorPattern" : {
-                  "localId" : "221",
+                  "localId" : "229",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "\\w,\\w+",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "226",
+            "localId" : "242",
             "name" : "SplitOnMatchesNoMatch",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "242",
                   "s" : [ {
                      "value" : [ "","define ","SplitOnMatchesNoMatch",": " ]
                   }, {
-                     "r" : "231",
+                     "r" : "249",
                      "s" : [ {
                         "value" : [ "SplitOnMatches","(" ]
                      }, {
-                        "r" : "227",
+                        "r" : "243",
                         "s" : [ {
                            "value" : [ "'foobar'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "228",
+                        "r" : "244",
                         "s" : [ {
                            "value" : [ "'\\\\d'" ]
                         } ]
@@ -2601,41 +3465,69 @@ module.exports['SplitOnMatches'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "254",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "255",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "231",
+               "localId" : "249",
                "type" : "SplitOnMatches",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "252",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "253",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "250",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "251",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSplit" : {
-                  "localId" : "227",
+                  "localId" : "243",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "foobar",
                   "type" : "Literal"
                },
                "separatorPattern" : {
-                  "localId" : "228",
+                  "localId" : "244",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "\\d",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "233",
+            "localId" : "257",
             "name" : "SplitOnMatchesIsNullFirst",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "233",
+                  "r" : "257",
                   "s" : [ {
                      "value" : [ "","define ","SplitOnMatchesIsNullFirst",": " ]
                   }, {
-                     "r" : "239",
+                     "r" : "265",
                      "s" : [ {
-                        "r" : "234",
+                        "r" : "258",
                         "value" : [ "SplitOnMatches","(","null",", " ]
                      }, {
-                        "r" : "235",
+                        "r" : "259",
                         "s" : [ {
                            "value" : [ "'\\\\w+'" ]
                         } ]
@@ -2645,116 +3537,200 @@ module.exports['SplitOnMatches'] = {
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "271",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "272",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "239",
+               "localId" : "265",
                "type" : "SplitOnMatches",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "269",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "270",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "267",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "268",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSplit" : {
-                  "localId" : "240",
+                  "localId" : "266",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "234",
+                     "localId" : "258",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                },
                "separatorPattern" : {
-                  "localId" : "235",
+                  "localId" : "259",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "\\w+",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "242",
+            "localId" : "274",
             "name" : "SplitOnMatchesIsNullSecond",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "242",
+                  "r" : "274",
                   "s" : [ {
                      "value" : [ "","define ","SplitOnMatchesIsNullSecond",": " ]
                   }, {
-                     "r" : "248",
+                     "r" : "282",
                      "s" : [ {
                         "value" : [ "SplitOnMatches","(" ]
                      }, {
-                        "r" : "243",
+                        "r" : "275",
                         "s" : [ {
                            "value" : [ "'12three'" ]
                         } ]
                      }, {
-                        "r" : "244",
+                        "r" : "276",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "288",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "289",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "248",
+               "localId" : "282",
                "type" : "SplitOnMatches",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "286",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "287",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "284",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "285",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSplit" : {
-                  "localId" : "243",
+                  "localId" : "275",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "12three",
                   "type" : "Literal"
                },
                "separatorPattern" : {
-                  "localId" : "249",
+                  "localId" : "283",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "244",
+                     "localId" : "276",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }
             }
          }, {
-            "localId" : "251",
+            "localId" : "291",
             "name" : "SplitOnMatchesAllNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "251",
+                  "r" : "291",
                   "s" : [ {
                      "value" : [ "","define ","SplitOnMatchesAllNull",": " ]
                   }, {
-                     "r" : "258",
+                     "r" : "300",
                      "s" : [ {
-                        "r" : "252",
+                        "r" : "292",
                         "value" : [ "SplitOnMatches","(","null",", ","null",")" ]
                      } ]
                   } ]
                }
             } ],
+            "resultTypeSpecifier" : {
+               "localId" : "307",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "308",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
             "expression" : {
-               "localId" : "258",
+               "localId" : "300",
                "type" : "SplitOnMatches",
-               "signature" : [ ],
+               "resultTypeSpecifier" : {
+                  "localId" : "305",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "306",
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "303",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "304",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSplit" : {
-                  "localId" : "259",
+                  "localId" : "301",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "252",
+                     "localId" : "292",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                },
                "separatorPattern" : {
-                  "localId" : "260",
+                  "localId" : "302",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "253",
+                     "localId" : "293",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }
@@ -2776,14 +3752,14 @@ module.exports['Length'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "218",
+            "r" : "220",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -2851,6 +3827,7 @@ module.exports['Length'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "ElevenLetters",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2861,7 +3838,7 @@ module.exports['Length'] = {
                   "s" : [ {
                      "value" : [ "","define ","ElevenLetters",": " ]
                   }, {
-                     "r" : "216",
+                     "r" : "217",
                      "s" : [ {
                         "value" : [ "Length","(" ]
                      }, {
@@ -2876,38 +3853,45 @@ module.exports['Length'] = {
                }
             } ],
             "expression" : {
-               "localId" : "216",
+               "localId" : "217",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Length",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "218",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Hello World",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "218",
+            "localId" : "220",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "NullString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "218",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define ","NullString",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "227",
                      "s" : [ {
                         "value" : [ "Length","(" ]
                      }, {
-                        "r" : "219",
+                        "r" : "221",
                         "s" : [ {
-                           "r" : "220",
+                           "r" : "222",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "221",
+                           "r" : "223",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -2919,20 +3903,28 @@ module.exports['Length'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "227",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Length",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "228",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
-                  "localId" : "219",
+                  "localId" : "221",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "220",
+                     "localId" : "222",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "221",
+                     "localId" : "223",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -2957,14 +3949,14 @@ module.exports['Upper'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "230",
+            "r" : "236",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3032,6 +4024,7 @@ module.exports['Upper'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "LowerC",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3042,7 +4035,7 @@ module.exports['Upper'] = {
                   "s" : [ {
                      "value" : [ "","define ","LowerC",": " ]
                   }, {
-                     "r" : "216",
+                     "r" : "217",
                      "s" : [ {
                         "value" : [ "Upper","(" ]
                      }, {
@@ -3057,33 +4050,40 @@ module.exports['Upper'] = {
                }
             } ],
             "expression" : {
-               "localId" : "216",
+               "localId" : "217",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Upper",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "218",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "abcdefg123",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "218",
+            "localId" : "220",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "UpperC",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "218",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define ","UpperC",": " ]
                   }, {
-                     "r" : "222",
+                     "r" : "225",
                      "s" : [ {
                         "value" : [ "Upper","(" ]
                      }, {
-                        "r" : "219",
+                        "r" : "221",
                         "s" : [ {
                            "value" : [ "'ABCDEFG123'" ]
                         } ]
@@ -3094,33 +4094,40 @@ module.exports['Upper'] = {
                }
             } ],
             "expression" : {
-               "localId" : "222",
+               "localId" : "225",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Upper",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "226",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
-                  "localId" : "219",
+                  "localId" : "221",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "ABCDEFG123",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "224",
+            "localId" : "228",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "CamelC",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "224",
+                  "r" : "228",
                   "s" : [ {
                      "value" : [ "","define ","CamelC",": " ]
                   }, {
-                     "r" : "228",
+                     "r" : "233",
                      "s" : [ {
                         "value" : [ "Upper","(" ]
                      }, {
-                        "r" : "225",
+                        "r" : "229",
                         "s" : [ {
                            "value" : [ "'aBcDeFg123'" ]
                         } ]
@@ -3131,47 +4138,60 @@ module.exports['Upper'] = {
                }
             } ],
             "expression" : {
-               "localId" : "228",
+               "localId" : "233",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Upper",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "234",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
-                  "localId" : "225",
+                  "localId" : "229",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "aBcDeFg123",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "230",
+            "localId" : "236",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "NullString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "230",
+                  "r" : "236",
                   "s" : [ {
                      "value" : [ "","define ","NullString",": " ]
                   }, {
-                     "r" : "235",
+                     "r" : "242",
                      "s" : [ {
-                        "r" : "231",
+                        "r" : "237",
                         "value" : [ "Upper","(","null",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "235",
+               "localId" : "242",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Upper",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "244",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
-                  "localId" : "236",
+                  "localId" : "243",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "231",
+                     "localId" : "237",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }
@@ -3195,14 +4215,14 @@ module.exports['Lower'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "230",
+            "r" : "236",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3270,6 +4290,7 @@ module.exports['Lower'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "LowerC",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3280,7 +4301,7 @@ module.exports['Lower'] = {
                   "s" : [ {
                      "value" : [ "","define ","LowerC",": " ]
                   }, {
-                     "r" : "216",
+                     "r" : "217",
                      "s" : [ {
                         "value" : [ "Lower","(" ]
                      }, {
@@ -3295,33 +4316,40 @@ module.exports['Lower'] = {
                }
             } ],
             "expression" : {
-               "localId" : "216",
+               "localId" : "217",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Lower",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "218",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "abcdefg123",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "218",
+            "localId" : "220",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "UpperC",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "218",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define ","UpperC",": " ]
                   }, {
-                     "r" : "222",
+                     "r" : "225",
                      "s" : [ {
                         "value" : [ "Lower","(" ]
                      }, {
-                        "r" : "219",
+                        "r" : "221",
                         "s" : [ {
                            "value" : [ "'ABCDEFG123'" ]
                         } ]
@@ -3332,33 +4360,40 @@ module.exports['Lower'] = {
                }
             } ],
             "expression" : {
-               "localId" : "222",
+               "localId" : "225",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Lower",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "226",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
-                  "localId" : "219",
+                  "localId" : "221",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "ABCDEFG123",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "224",
+            "localId" : "228",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "CamelC",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "224",
+                  "r" : "228",
                   "s" : [ {
                      "value" : [ "","define ","CamelC",": " ]
                   }, {
-                     "r" : "228",
+                     "r" : "233",
                      "s" : [ {
                         "value" : [ "Lower","(" ]
                      }, {
-                        "r" : "225",
+                        "r" : "229",
                         "s" : [ {
                            "value" : [ "'aBcDeFg123'" ]
                         } ]
@@ -3369,47 +4404,60 @@ module.exports['Lower'] = {
                }
             } ],
             "expression" : {
-               "localId" : "228",
+               "localId" : "233",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Lower",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "234",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
-                  "localId" : "225",
+                  "localId" : "229",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "aBcDeFg123",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "230",
+            "localId" : "236",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "NullString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "230",
+                  "r" : "236",
                   "s" : [ {
                      "value" : [ "","define ","NullString",": " ]
                   }, {
-                     "r" : "235",
+                     "r" : "242",
                      "s" : [ {
-                        "r" : "231",
+                        "r" : "237",
                         "value" : [ "Lower","(","null",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "235",
+               "localId" : "242",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Lower",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "244",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : {
-                  "localId" : "236",
+                  "localId" : "243",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "231",
+                     "localId" : "237",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }
@@ -3434,14 +4482,14 @@ module.exports['Indexer'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "234",
+            "r" : "242",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3509,6 +4557,7 @@ module.exports['Indexer'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "HelloWorldSix",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3534,126 +4583,162 @@ module.exports['Indexer'] = {
             } ],
             "expression" : {
                "localId" : "213",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Indexer",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "216",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "217",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
                   "localId" : "214",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "HelloWorld",
                   "type" : "Literal"
                }, {
                   "localId" : "215",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "6",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "217",
+            "localId" : "219",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "HelloWorldZero",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "217",
+                  "r" : "219",
                   "s" : [ {
                      "value" : [ "","define ","HelloWorldZero",": " ]
                   }, {
-                     "r" : "218",
+                     "r" : "220",
                      "s" : [ {
-                        "r" : "219",
+                        "r" : "221",
                         "s" : [ {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
-                        "r" : "220",
+                        "r" : "222",
                         "value" : [ "[","0","]" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "218",
+               "localId" : "220",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Indexer",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "223",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "224",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "219",
+                  "localId" : "221",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "HelloWorld",
                   "type" : "Literal"
                }, {
-                  "localId" : "220",
+                  "localId" : "222",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "222",
+            "localId" : "226",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "HelloWorldTwenty",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "222",
+                  "r" : "226",
                   "s" : [ {
                      "value" : [ "","define ","HelloWorldTwenty",": " ]
                   }, {
-                     "r" : "223",
+                     "r" : "227",
                      "s" : [ {
-                        "r" : "224",
+                        "r" : "228",
                         "s" : [ {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
-                        "r" : "225",
+                        "r" : "229",
                         "value" : [ "[","20","]" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "223",
+               "localId" : "227",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Indexer",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "230",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "231",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "224",
+                  "localId" : "228",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "HelloWorld",
                   "type" : "Literal"
                }, {
-                  "localId" : "225",
+                  "localId" : "229",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "20",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "227",
+            "localId" : "233",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "NullString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "227",
+                  "r" : "233",
                   "s" : [ {
                      "value" : [ "","define ","NullString",": " ]
                   }, {
-                     "r" : "228",
+                     "r" : "234",
                      "s" : [ {
-                        "r" : "229",
+                        "r" : "235",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "229",
+                           "r" : "235",
                            "s" : [ {
-                              "r" : "230",
+                              "r" : "236",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "231",
+                              "r" : "237",
                               "s" : [ {
                                  "value" : [ "String" ]
                               } ]
@@ -3662,78 +4747,103 @@ module.exports['Indexer'] = {
                            "value" : [ ")" ]
                         } ]
                      }, {
-                        "r" : "232",
+                        "r" : "238",
                         "value" : [ "[","4","]" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "228",
+               "localId" : "234",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Indexer",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "239",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "240",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "229",
+                  "localId" : "235",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "230",
+                     "localId" : "236",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "231",
+                     "localId" : "237",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "232",
+                  "localId" : "238",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "4",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "234",
+            "localId" : "242",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "NullIndex",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "234",
+                  "r" : "242",
                   "s" : [ {
                      "value" : [ "","define ","NullIndex",": " ]
                   }, {
-                     "r" : "235",
+                     "r" : "243",
                      "s" : [ {
-                        "r" : "236",
+                        "r" : "244",
                         "s" : [ {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
-                        "r" : "237",
+                        "r" : "245",
                         "value" : [ "[","null","]" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "235",
+               "localId" : "243",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Indexer",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "247",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "248",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "236",
+                  "localId" : "244",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "HelloWorld",
                   "type" : "Literal"
                }, {
-                  "localId" : "238",
+                  "localId" : "246",
                   "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "237",
+                     "localId" : "245",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                } ]
@@ -3758,14 +4868,14 @@ module.exports['Matches'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "244",
+            "r" : "260",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3833,6 +4943,7 @@ module.exports['Matches'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "MatchesTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3843,7 +4954,7 @@ module.exports['Matches'] = {
                   "s" : [ {
                      "value" : [ "","define ","MatchesTrue",": " ]
                   }, {
-                     "r" : "217",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "Matches","(" ]
                      }, {
@@ -3865,45 +4976,57 @@ module.exports['Matches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "217",
+               "localId" : "219",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Matches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "220",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "221",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "1,2three",
                   "type" : "Literal"
                }, {
                   "localId" : "214",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "\\d,\\d\\w+",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "219",
+            "localId" : "223",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "MatchesFalse",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "223",
                   "s" : [ {
                      "value" : [ "","define ","MatchesFalse",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "230",
                      "s" : [ {
                         "value" : [ "Matches","(" ]
                      }, {
-                        "r" : "220",
+                        "r" : "224",
                         "s" : [ {
                            "value" : [ "'three'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "221",
+                        "r" : "225",
                         "s" : [ {
                            "value" : [ "'\\\\d'" ]
                         } ]
@@ -3914,39 +5037,51 @@ module.exports['Matches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "230",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Matches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "231",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "232",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "220",
+                  "localId" : "224",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "three",
                   "type" : "Literal"
                }, {
-                  "localId" : "221",
+                  "localId" : "225",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "\\d",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "226",
+            "localId" : "234",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "MatchesIsNullFirst",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "234",
                   "s" : [ {
                      "value" : [ "","define ","MatchesIsNullFirst",": " ]
                   }, {
-                     "r" : "232",
+                     "r" : "242",
                      "s" : [ {
-                        "r" : "227",
+                        "r" : "235",
                         "value" : [ "Matches","(","null",", " ]
                      }, {
-                        "r" : "228",
+                        "r" : "236",
                         "s" : [ {
                            "value" : [ "'\\\\w+'" ]
                         } ]
@@ -3957,112 +5092,147 @@ module.exports['Matches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "232",
+               "localId" : "242",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Matches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "244",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "245",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "233",
+                  "localId" : "243",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "227",
+                     "localId" : "235",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "228",
+                  "localId" : "236",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "\\w+",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "235",
+            "localId" : "247",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "MatchesIsNullSecond",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "235",
+                  "r" : "247",
                   "s" : [ {
                      "value" : [ "","define ","MatchesIsNullSecond",": " ]
                   }, {
-                     "r" : "241",
+                     "r" : "255",
                      "s" : [ {
                         "value" : [ "Matches","(" ]
                      }, {
-                        "r" : "236",
+                        "r" : "248",
                         "s" : [ {
                            "value" : [ "'12three'" ]
                         } ]
                      }, {
-                        "r" : "237",
+                        "r" : "249",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "241",
+               "localId" : "255",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Matches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "257",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "258",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "236",
+                  "localId" : "248",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "12three",
                   "type" : "Literal"
                }, {
-                  "localId" : "242",
+                  "localId" : "256",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "237",
+                     "localId" : "249",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                } ]
             }
          }, {
-            "localId" : "244",
+            "localId" : "260",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "MatchesAllNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "244",
+                  "r" : "260",
                   "s" : [ {
                      "value" : [ "","define ","MatchesAllNull",": " ]
                   }, {
-                     "r" : "251",
+                     "r" : "269",
                      "s" : [ {
-                        "r" : "245",
+                        "r" : "261",
                         "value" : [ "Matches","(","null",", ","null",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "251",
+               "localId" : "269",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Matches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "272",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "273",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "252",
+                  "localId" : "270",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "245",
+                     "localId" : "261",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "253",
+                  "localId" : "271",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "246",
+                     "localId" : "262",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                } ]
@@ -4086,14 +5256,14 @@ module.exports['PositionOf'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "235",
+            "r" : "247",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -4161,6 +5331,7 @@ module.exports['PositionOf'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Found",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -4171,7 +5342,7 @@ module.exports['PositionOf'] = {
                   "s" : [ {
                      "value" : [ "","define ","Found",": " ]
                   }, {
-                     "r" : "217",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "PositionOf","(" ]
                      }, {
@@ -4193,46 +5364,58 @@ module.exports['PositionOf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "217",
+               "localId" : "219",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "PositionOf",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "220",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "221",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "pattern" : {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "cde",
                   "type" : "Literal"
                },
                "string" : {
                   "localId" : "214",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "abcdefg",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "219",
+            "localId" : "223",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "NotFound",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "223",
                   "s" : [ {
                      "value" : [ "","define ","NotFound",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "230",
                      "s" : [ {
                         "value" : [ "PositionOf","(" ]
                      }, {
-                        "r" : "220",
+                        "r" : "224",
                         "s" : [ {
                            "value" : [ "'fgh'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "221",
+                        "r" : "225",
                         "s" : [ {
                            "value" : [ "'abcdefg'" ]
                         } ]
@@ -4243,40 +5426,52 @@ module.exports['PositionOf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "230",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "PositionOf",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "231",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "232",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "pattern" : {
-                  "localId" : "220",
+                  "localId" : "224",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "fgh",
                   "type" : "Literal"
                },
                "string" : {
-                  "localId" : "221",
+                  "localId" : "225",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "abcdefg",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "226",
+            "localId" : "234",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "NullPattern",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "234",
                   "s" : [ {
                      "value" : [ "","define ","NullPattern",": " ]
                   }, {
-                     "r" : "232",
+                     "r" : "242",
                      "s" : [ {
-                        "r" : "227",
+                        "r" : "235",
                         "value" : [ "PositionOf","(","null",", " ]
                      }, {
-                        "r" : "228",
+                        "r" : "236",
                         "s" : [ {
                            "value" : [ "'abcdefg'" ]
                         } ]
@@ -4287,70 +5482,93 @@ module.exports['PositionOf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "232",
+               "localId" : "242",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "PositionOf",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "244",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "245",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "pattern" : {
-                  "localId" : "233",
+                  "localId" : "243",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "227",
+                     "localId" : "235",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                },
                "string" : {
-                  "localId" : "228",
+                  "localId" : "236",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "abcdefg",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "235",
+            "localId" : "247",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "NullString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "235",
+                  "r" : "247",
                   "s" : [ {
                      "value" : [ "","define ","NullString",": " ]
                   }, {
-                     "r" : "241",
+                     "r" : "255",
                      "s" : [ {
                         "value" : [ "PositionOf","(" ]
                      }, {
-                        "r" : "236",
+                        "r" : "248",
                         "s" : [ {
                            "value" : [ "'cde'" ]
                         } ]
                      }, {
-                        "r" : "237",
+                        "r" : "249",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "241",
+               "localId" : "255",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "PositionOf",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "257",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "258",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "pattern" : {
-                  "localId" : "236",
+                  "localId" : "248",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "cde",
                   "type" : "Literal"
                },
                "string" : {
-                  "localId" : "242",
+                  "localId" : "256",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "237",
+                     "localId" : "249",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }
@@ -4374,14 +5592,14 @@ module.exports['LastPositionOf'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "235",
+            "r" : "247",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -4449,6 +5667,7 @@ module.exports['LastPositionOf'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Found",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -4459,7 +5678,7 @@ module.exports['LastPositionOf'] = {
                   "s" : [ {
                      "value" : [ "","define ","Found",": " ]
                   }, {
-                     "r" : "217",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "LastPositionOf","(" ]
                      }, {
@@ -4481,46 +5700,58 @@ module.exports['LastPositionOf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "217",
+               "localId" : "219",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "LastPositionOf",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "220",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "221",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "pattern" : {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "B",
                   "type" : "Literal"
                },
                "string" : {
                   "localId" : "214",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "ABCDEDCBA",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "219",
+            "localId" : "223",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "NotFound",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "223",
                   "s" : [ {
                      "value" : [ "// 7\n","define ","NotFound",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "230",
                      "s" : [ {
                         "value" : [ "LastPositionOf","(" ]
                      }, {
-                        "r" : "220",
+                        "r" : "224",
                         "s" : [ {
                            "value" : [ "'XYZ'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "221",
+                        "r" : "225",
                         "s" : [ {
                            "value" : [ "'ABCDE'" ]
                         } ]
@@ -4531,40 +5762,52 @@ module.exports['LastPositionOf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "230",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "LastPositionOf",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "231",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "232",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "pattern" : {
-                  "localId" : "220",
+                  "localId" : "224",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "XYZ",
                   "type" : "Literal"
                },
                "string" : {
-                  "localId" : "221",
+                  "localId" : "225",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "ABCDE",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "226",
+            "localId" : "234",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "NullPattern",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "234",
                   "s" : [ {
                      "value" : [ "// -1\n","define ","NullPattern",": " ]
                   }, {
-                     "r" : "232",
+                     "r" : "242",
                      "s" : [ {
-                        "r" : "227",
+                        "r" : "235",
                         "value" : [ "LastPositionOf","(","null",", " ]
                      }, {
-                        "r" : "228",
+                        "r" : "236",
                         "s" : [ {
                            "value" : [ "'ABCDE'" ]
                         } ]
@@ -4575,70 +5818,93 @@ module.exports['LastPositionOf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "232",
+               "localId" : "242",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "LastPositionOf",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "244",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "245",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "pattern" : {
-                  "localId" : "233",
+                  "localId" : "243",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "227",
+                     "localId" : "235",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                },
                "string" : {
-                  "localId" : "228",
+                  "localId" : "236",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "ABCDE",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "235",
+            "localId" : "247",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "NullString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "235",
+                  "r" : "247",
                   "s" : [ {
                      "value" : [ "// null\n","define ","NullString",": " ]
                   }, {
-                     "r" : "241",
+                     "r" : "255",
                      "s" : [ {
                         "value" : [ "LastPositionOf","(" ]
                      }, {
-                        "r" : "236",
+                        "r" : "248",
                         "s" : [ {
                            "value" : [ "'ABCDE'" ]
                         } ]
                      }, {
-                        "r" : "237",
+                        "r" : "249",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "241",
+               "localId" : "255",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "LastPositionOf",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "257",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "258",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "pattern" : {
-                  "localId" : "236",
+                  "localId" : "248",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "ABCDE",
                   "type" : "Literal"
                },
                "string" : {
-                  "localId" : "242",
+                  "localId" : "256",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "237",
+                     "localId" : "249",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }
@@ -4667,14 +5933,14 @@ module.exports['Substring'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "276",
+            "r" : "318",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -4742,6 +6008,7 @@ module.exports['Substring'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "World",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -4752,7 +6019,7 @@ module.exports['Substring'] = {
                   "s" : [ {
                      "value" : [ "","define ","World",": " ]
                   }, {
-                     "r" : "217",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "Substring","(" ]
                      }, {
@@ -4768,148 +6035,194 @@ module.exports['Substring'] = {
                }
             } ],
             "expression" : {
-               "localId" : "217",
+               "localId" : "219",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Substring",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "220",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "221",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSub" : {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "HelloWorld",
                   "type" : "Literal"
                },
                "startIndex" : {
                   "localId" : "214",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "5",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "219",
+            "localId" : "223",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Or",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "223",
                   "s" : [ {
                      "value" : [ "","define ","Or",": " ]
                   }, {
-                     "r" : "225",
+                     "r" : "232",
                      "s" : [ {
                         "value" : [ "Substring","(" ]
                      }, {
-                        "r" : "220",
+                        "r" : "224",
                         "s" : [ {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
-                        "r" : "221",
+                        "r" : "225",
                         "value" : [ ", ","7",", ","2",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "225",
+               "localId" : "232",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Substring",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "233",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "234",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "235",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSub" : {
-                  "localId" : "220",
+                  "localId" : "224",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "HelloWorld",
                   "type" : "Literal"
                },
                "startIndex" : {
-                  "localId" : "221",
+                  "localId" : "225",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "7",
                   "type" : "Literal"
                },
                "length" : {
-                  "localId" : "222",
+                  "localId" : "226",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "227",
+            "localId" : "237",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ZeroLength",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "227",
+                  "r" : "237",
                   "s" : [ {
                      "value" : [ "","define ","ZeroLength",": " ]
                   }, {
-                     "r" : "233",
+                     "r" : "246",
                      "s" : [ {
                         "value" : [ "Substring","(" ]
                      }, {
-                        "r" : "228",
+                        "r" : "238",
                         "s" : [ {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
-                        "r" : "229",
+                        "r" : "239",
                         "value" : [ ", ","7",", ","0",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "233",
+               "localId" : "246",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Substring",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "247",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "248",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "249",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSub" : {
-                  "localId" : "228",
+                  "localId" : "238",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "HelloWorld",
                   "type" : "Literal"
                },
                "startIndex" : {
-                  "localId" : "229",
+                  "localId" : "239",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "7",
                   "type" : "Literal"
                },
                "length" : {
-                  "localId" : "230",
+                  "localId" : "240",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "235",
+            "localId" : "251",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "StartTooLow",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "235",
+                  "r" : "251",
                   "s" : [ {
                      "value" : [ "","define ","StartTooLow",": " ]
                   }, {
-                     "r" : "241",
+                     "r" : "260",
                      "s" : [ {
                         "value" : [ "Substring","(" ]
                      }, {
-                        "r" : "236",
+                        "r" : "252",
                         "s" : [ {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "237",
+                        "r" : "253",
                         "s" : [ {
-                           "r" : "238",
+                           "r" : "254",
                            "value" : [ "-","1" ]
                         } ]
                      }, {
@@ -4919,21 +6232,37 @@ module.exports['Substring'] = {
                }
             } ],
             "expression" : {
-               "localId" : "241",
+               "localId" : "260",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Substring",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "261",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "262",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSub" : {
-                  "localId" : "236",
+                  "localId" : "252",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "HelloWorld",
                   "type" : "Literal"
                },
                "startIndex" : {
-                  "localId" : "237",
+                  "localId" : "253",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "Negate",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "255",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
-                     "localId" : "238",
+                     "localId" : "254",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
@@ -4941,126 +6270,156 @@ module.exports['Substring'] = {
                }
             }
          }, {
-            "localId" : "243",
+            "localId" : "264",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "StartZero",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "243",
+                  "r" : "264",
                   "s" : [ {
                      "value" : [ "","define ","StartZero",": " ]
                   }, {
-                     "r" : "248",
+                     "r" : "271",
                      "s" : [ {
                         "value" : [ "Substring","(" ]
                      }, {
-                        "r" : "244",
+                        "r" : "265",
                         "s" : [ {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
-                        "r" : "245",
+                        "r" : "266",
                         "value" : [ ", ","0",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "248",
+               "localId" : "271",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Substring",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "272",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "273",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSub" : {
-                  "localId" : "244",
+                  "localId" : "265",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "HelloWorld",
                   "type" : "Literal"
                },
                "startIndex" : {
-                  "localId" : "245",
+                  "localId" : "266",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "250",
+            "localId" : "275",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "TooMuchLength",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "250",
+                  "r" : "275",
                   "s" : [ {
                      "value" : [ "","define ","TooMuchLength",": " ]
                   }, {
-                     "r" : "256",
+                     "r" : "284",
                      "s" : [ {
                         "value" : [ "Substring","(" ]
                      }, {
-                        "r" : "251",
+                        "r" : "276",
                         "s" : [ {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
-                        "r" : "252",
+                        "r" : "277",
                         "value" : [ ", ","7",", ","25",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "256",
+               "localId" : "284",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Substring",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "285",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "286",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "287",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSub" : {
-                  "localId" : "251",
+                  "localId" : "276",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "HelloWorld",
                   "type" : "Literal"
                },
                "startIndex" : {
-                  "localId" : "252",
+                  "localId" : "277",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "7",
                   "type" : "Literal"
                },
                "length" : {
-                  "localId" : "253",
+                  "localId" : "278",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "25",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "258",
+            "localId" : "289",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "NegativeLength",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "258",
+                  "r" : "289",
                   "s" : [ {
                      "value" : [ "","define ","NegativeLength",": " ]
                   }, {
-                     "r" : "265",
+                     "r" : "300",
                      "s" : [ {
                         "value" : [ "Substring","(" ]
                      }, {
-                        "r" : "259",
+                        "r" : "290",
                         "s" : [ {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
-                        "r" : "260",
+                        "r" : "291",
                         "value" : [ ", ","7",", " ]
                      }, {
-                        "r" : "261",
+                        "r" : "292",
                         "s" : [ {
-                           "r" : "262",
+                           "r" : "293",
                            "value" : [ "-","1" ]
                         } ]
                      }, {
@@ -5070,27 +6429,48 @@ module.exports['Substring'] = {
                }
             } ],
             "expression" : {
-               "localId" : "265",
+               "localId" : "300",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Substring",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "301",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "302",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "303",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSub" : {
-                  "localId" : "259",
+                  "localId" : "290",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "HelloWorld",
                   "type" : "Literal"
                },
                "startIndex" : {
-                  "localId" : "260",
+                  "localId" : "291",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "7",
                   "type" : "Literal"
                },
                "length" : {
-                  "localId" : "261",
+                  "localId" : "292",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "Negate",
-                  "signature" : [ ],
+                  "signature" : [ {
+                     "localId" : "294",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
                   "operand" : {
-                     "localId" : "262",
+                     "localId" : "293",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
@@ -5098,90 +6478,114 @@ module.exports['Substring'] = {
                }
             }
          }, {
-            "localId" : "267",
+            "localId" : "305",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "NullString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "267",
+                  "r" : "305",
                   "s" : [ {
                      "value" : [ "","define ","NullString",": " ]
                   }, {
-                     "r" : "273",
+                     "r" : "313",
                      "s" : [ {
-                        "r" : "268",
+                        "r" : "306",
                         "value" : [ "Substring","(","null",", ","5",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "273",
+               "localId" : "313",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Substring",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "315",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "316",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSub" : {
-                  "localId" : "274",
+                  "localId" : "314",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "268",
+                     "localId" : "306",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                },
                "startIndex" : {
-                  "localId" : "269",
+                  "localId" : "307",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "5",
                   "type" : "Literal"
                }
             }
          }, {
-            "localId" : "276",
+            "localId" : "318",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "NullStart",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "276",
+                  "r" : "318",
                   "s" : [ {
                      "value" : [ "","define ","NullStart",": " ]
                   }, {
-                     "r" : "282",
+                     "r" : "326",
                      "s" : [ {
                         "value" : [ "Substring","(" ]
                      }, {
-                        "r" : "277",
+                        "r" : "319",
                         "s" : [ {
                            "value" : [ "'HelloWorld'" ]
                         } ]
                      }, {
-                        "r" : "278",
+                        "r" : "320",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "282",
+               "localId" : "326",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Substring",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "328",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "329",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "stringToSub" : {
-                  "localId" : "277",
+                  "localId" : "319",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "HelloWorld",
                   "type" : "Literal"
                },
                "startIndex" : {
-                  "localId" : "283",
+                  "localId" : "327",
                   "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "278",
+                     "localId" : "320",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }
@@ -5209,14 +6613,14 @@ module.exports['StartsWith'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "267",
+            "r" : "295",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -5284,6 +6688,7 @@ module.exports['StartsWith'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FooBarStartsWithFoo",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -5294,7 +6699,7 @@ module.exports['StartsWith'] = {
                   "s" : [ {
                      "value" : [ "","define ","FooBarStartsWithFoo",": " ]
                   }, {
-                     "r" : "217",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "StartsWith","(" ]
                      }, {
@@ -5316,45 +6721,57 @@ module.exports['StartsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "217",
+               "localId" : "219",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "StartsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "220",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "221",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
                   "localId" : "214",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "219",
+            "localId" : "223",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FooBarStartsWithBar",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "223",
                   "s" : [ {
                      "value" : [ "","define ","FooBarStartsWithBar",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "230",
                      "s" : [ {
                         "value" : [ "StartsWith","(" ]
                      }, {
-                        "r" : "220",
+                        "r" : "224",
                         "s" : [ {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "221",
+                        "r" : "225",
                         "s" : [ {
                            "value" : [ "'Bar'" ]
                         } ]
@@ -5365,45 +6782,57 @@ module.exports['StartsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "230",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "StartsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "231",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "232",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "220",
+                  "localId" : "224",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
-                  "localId" : "221",
+                  "localId" : "225",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Bar",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "226",
+            "localId" : "234",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FooBarStartsWithBlank",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "234",
                   "s" : [ {
                      "value" : [ "","define ","FooBarStartsWithBlank",": " ]
                   }, {
-                     "r" : "231",
+                     "r" : "241",
                      "s" : [ {
                         "value" : [ "StartsWith","(" ]
                      }, {
-                        "r" : "227",
+                        "r" : "235",
                         "s" : [ {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "228",
+                        "r" : "236",
                         "s" : [ {
                            "value" : [ "''" ]
                         } ]
@@ -5414,45 +6843,57 @@ module.exports['StartsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "231",
+               "localId" : "241",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "StartsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "242",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "243",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "227",
+                  "localId" : "235",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
-                  "localId" : "228",
+                  "localId" : "236",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "233",
+            "localId" : "245",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "BlankStartsWithFoo",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "233",
+                  "r" : "245",
                   "s" : [ {
                      "value" : [ "","define ","BlankStartsWithFoo",": " ]
                   }, {
-                     "r" : "238",
+                     "r" : "252",
                      "s" : [ {
                         "value" : [ "StartsWith","(" ]
                      }, {
-                        "r" : "234",
+                        "r" : "246",
                         "s" : [ {
                            "value" : [ "''" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "235",
+                        "r" : "247",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
@@ -5463,97 +6904,121 @@ module.exports['StartsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "238",
+               "localId" : "252",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "StartsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "253",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "254",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "234",
+                  "localId" : "246",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "",
                   "type" : "Literal"
                }, {
-                  "localId" : "235",
+                  "localId" : "247",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "240",
+            "localId" : "256",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "StartsWithNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "240",
+                  "r" : "256",
                   "s" : [ {
                      "value" : [ "","define ","StartsWithNull",": " ]
                   }, {
-                     "r" : "246",
+                     "r" : "264",
                      "s" : [ {
                         "value" : [ "StartsWith","(" ]
                      }, {
-                        "r" : "241",
+                        "r" : "257",
                         "s" : [ {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
-                        "r" : "242",
+                        "r" : "258",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "246",
+               "localId" : "264",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "StartsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "266",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "267",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "241",
+                  "localId" : "257",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
-                  "localId" : "247",
+                  "localId" : "265",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "242",
+                     "localId" : "258",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                } ]
             }
          }, {
-            "localId" : "249",
+            "localId" : "269",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "StartsWithNullAsString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "249",
+                  "r" : "269",
                   "s" : [ {
                      "value" : [ "","define ","StartsWithNullAsString",": " ]
                   }, {
-                     "r" : "256",
+                     "r" : "278",
                      "s" : [ {
                         "value" : [ "StartsWith","(" ]
                      }, {
-                        "r" : "250",
+                        "r" : "270",
                         "s" : [ {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "251",
+                        "r" : "271",
                         "s" : [ {
-                           "r" : "252",
+                           "r" : "272",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "253",
+                           "r" : "273",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -5565,48 +7030,62 @@ module.exports['StartsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "256",
+               "localId" : "278",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "StartsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "279",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "280",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "250",
+                  "localId" : "270",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
-                  "localId" : "251",
+                  "localId" : "271",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "252",
+                     "localId" : "272",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "253",
+                     "localId" : "273",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                } ]
             }
          }, {
-            "localId" : "258",
+            "localId" : "282",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullStartsWith",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "258",
+                  "r" : "282",
                   "s" : [ {
                      "value" : [ "","define ","NullStartsWith",": " ]
                   }, {
-                     "r" : "264",
+                     "r" : "290",
                      "s" : [ {
-                        "r" : "259",
+                        "r" : "283",
                         "value" : [ "StartsWith","(","null",", " ]
                      }, {
-                        "r" : "260",
+                        "r" : "284",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
@@ -5617,47 +7096,59 @@ module.exports['StartsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "264",
+               "localId" : "290",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "StartsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "292",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "293",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "265",
+                  "localId" : "291",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "259",
+                     "localId" : "283",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "260",
+                  "localId" : "284",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "267",
+            "localId" : "295",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullAsStringStartsWith",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "267",
+                  "r" : "295",
                   "s" : [ {
                      "value" : [ "","define ","NullAsStringStartsWith",": " ]
                   }, {
-                     "r" : "274",
+                     "r" : "304",
                      "s" : [ {
                         "value" : [ "StartsWith","(" ]
                      }, {
-                        "r" : "268",
+                        "r" : "296",
                         "s" : [ {
-                           "r" : "269",
+                           "r" : "297",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "270",
+                           "r" : "298",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -5665,7 +7156,7 @@ module.exports['StartsWith'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "271",
+                        "r" : "299",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
@@ -5676,25 +7167,38 @@ module.exports['StartsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "274",
+               "localId" : "304",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "StartsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "305",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "306",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "268",
+                  "localId" : "296",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "269",
+                     "localId" : "297",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "270",
+                     "localId" : "298",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "271",
+                  "localId" : "299",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
@@ -5723,14 +7227,14 @@ module.exports['EndsWith'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "267",
+            "r" : "295",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -5798,6 +7302,7 @@ module.exports['EndsWith'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FooBarEndsWithBar",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -5808,7 +7313,7 @@ module.exports['EndsWith'] = {
                   "s" : [ {
                      "value" : [ "","define ","FooBarEndsWithBar",": " ]
                   }, {
-                     "r" : "217",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "EndsWith","(" ]
                      }, {
@@ -5830,45 +7335,57 @@ module.exports['EndsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "217",
+               "localId" : "219",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "EndsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "220",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "221",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
                   "localId" : "214",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Bar",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "219",
+            "localId" : "223",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FooBarEndsWithFoo",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "223",
                   "s" : [ {
                      "value" : [ "","define ","FooBarEndsWithFoo",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "230",
                      "s" : [ {
                         "value" : [ "EndsWith","(" ]
                      }, {
-                        "r" : "220",
+                        "r" : "224",
                         "s" : [ {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "221",
+                        "r" : "225",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
@@ -5879,45 +7396,57 @@ module.exports['EndsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "230",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "EndsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "231",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "232",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "220",
+                  "localId" : "224",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
-                  "localId" : "221",
+                  "localId" : "225",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "226",
+            "localId" : "234",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FooBarEndsWithBlank",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "234",
                   "s" : [ {
                      "value" : [ "","define ","FooBarEndsWithBlank",": " ]
                   }, {
-                     "r" : "231",
+                     "r" : "241",
                      "s" : [ {
                         "value" : [ "EndsWith","(" ]
                      }, {
-                        "r" : "227",
+                        "r" : "235",
                         "s" : [ {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "228",
+                        "r" : "236",
                         "s" : [ {
                            "value" : [ "''" ]
                         } ]
@@ -5928,45 +7457,57 @@ module.exports['EndsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "231",
+               "localId" : "241",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "EndsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "242",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "243",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "227",
+                  "localId" : "235",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
-                  "localId" : "228",
+                  "localId" : "236",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "233",
+            "localId" : "245",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "BlankEndsWithFoo",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "233",
+                  "r" : "245",
                   "s" : [ {
                      "value" : [ "","define ","BlankEndsWithFoo",": " ]
                   }, {
-                     "r" : "238",
+                     "r" : "252",
                      "s" : [ {
                         "value" : [ "EndsWith","(" ]
                      }, {
-                        "r" : "234",
+                        "r" : "246",
                         "s" : [ {
                            "value" : [ "''" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "235",
+                        "r" : "247",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
@@ -5977,97 +7518,121 @@ module.exports['EndsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "238",
+               "localId" : "252",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "EndsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "253",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "254",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "234",
+                  "localId" : "246",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "",
                   "type" : "Literal"
                }, {
-                  "localId" : "235",
+                  "localId" : "247",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "240",
+            "localId" : "256",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "EndsWithNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "240",
+                  "r" : "256",
                   "s" : [ {
                      "value" : [ "","define ","EndsWithNull",": " ]
                   }, {
-                     "r" : "246",
+                     "r" : "264",
                      "s" : [ {
                         "value" : [ "EndsWith","(" ]
                      }, {
-                        "r" : "241",
+                        "r" : "257",
                         "s" : [ {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
-                        "r" : "242",
+                        "r" : "258",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "246",
+               "localId" : "264",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "EndsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "266",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "267",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "241",
+                  "localId" : "257",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
-                  "localId" : "247",
+                  "localId" : "265",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "242",
+                     "localId" : "258",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                } ]
             }
          }, {
-            "localId" : "249",
+            "localId" : "269",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "EndsWithNullAsString",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "249",
+                  "r" : "269",
                   "s" : [ {
                      "value" : [ "","define ","EndsWithNullAsString",": " ]
                   }, {
-                     "r" : "256",
+                     "r" : "278",
                      "s" : [ {
                         "value" : [ "EndsWith","(" ]
                      }, {
-                        "r" : "250",
+                        "r" : "270",
                         "s" : [ {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "251",
+                        "r" : "271",
                         "s" : [ {
-                           "r" : "252",
+                           "r" : "272",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "253",
+                           "r" : "273",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6079,52 +7644,66 @@ module.exports['EndsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "256",
+               "localId" : "278",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "EndsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "279",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "280",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "250",
+                  "localId" : "270",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
-                  "localId" : "251",
+                  "localId" : "271",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "252",
+                     "localId" : "272",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "253",
+                     "localId" : "273",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                } ]
             }
          }, {
-            "localId" : "258",
+            "localId" : "282",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullEndsWith",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "258",
+                  "r" : "282",
                   "s" : [ {
                      "value" : [ "","define ","NullEndsWith",": " ]
                   }, {
-                     "r" : "265",
+                     "r" : "291",
                      "s" : [ {
                         "value" : [ "EndsWith","(" ]
                      }, {
-                        "r" : "259",
+                        "r" : "283",
                         "s" : [ {
-                           "r" : "260",
+                           "r" : "284",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "261",
+                           "r" : "285",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6132,7 +7711,7 @@ module.exports['EndsWith'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "262",
+                        "r" : "286",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
@@ -6143,52 +7722,66 @@ module.exports['EndsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "265",
+               "localId" : "291",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "EndsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "292",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "293",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "259",
+                  "localId" : "283",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "260",
+                     "localId" : "284",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "261",
+                     "localId" : "285",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "262",
+                  "localId" : "286",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "267",
+            "localId" : "295",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullAsStringEndsWith",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "267",
+                  "r" : "295",
                   "s" : [ {
                      "value" : [ "","define ","NullAsStringEndsWith",": " ]
                   }, {
-                     "r" : "274",
+                     "r" : "304",
                      "s" : [ {
                         "value" : [ "EndsWith","(" ]
                      }, {
-                        "r" : "268",
+                        "r" : "296",
                         "s" : [ {
-                           "r" : "269",
+                           "r" : "297",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "270",
+                           "r" : "298",
                            "s" : [ {
                               "value" : [ "String" ]
                            } ]
@@ -6196,7 +7789,7 @@ module.exports['EndsWith'] = {
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "271",
+                        "r" : "299",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
@@ -6207,25 +7800,38 @@ module.exports['EndsWith'] = {
                }
             } ],
             "expression" : {
-               "localId" : "274",
+               "localId" : "304",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "EndsWith",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "305",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "306",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "268",
+                  "localId" : "296",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "269",
+                     "localId" : "297",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "270",
+                     "localId" : "298",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "271",
+                  "localId" : "299",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
@@ -6258,14 +7864,14 @@ module.exports['ReplaceMatches'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "304",
+            "r" : "370",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -6333,6 +7939,7 @@ module.exports['ReplaceMatches'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ReplaceOne",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -6343,7 +7950,7 @@ module.exports['ReplaceMatches'] = {
                   "s" : [ {
                      "value" : [ "","define ","ReplaceOne",": " ]
                   }, {
-                     "r" : "218",
+                     "r" : "221",
                      "s" : [ {
                         "value" : [ "ReplaceMatches","(" ]
                      }, {
@@ -6372,57 +7979,74 @@ module.exports['ReplaceMatches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "218",
+               "localId" : "221",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "ReplaceMatches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "222",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "223",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "224",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
                   "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
                   "localId" : "214",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Bar",
                   "type" : "Literal"
                }, {
                   "localId" : "215",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Baz",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "220",
+            "localId" : "226",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ReplaceMany",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "220",
+                  "r" : "226",
                   "s" : [ {
                      "value" : [ "","define ","ReplaceMany",": " ]
                   }, {
-                     "r" : "226",
+                     "r" : "235",
                      "s" : [ {
                         "value" : [ "ReplaceMatches","(" ]
                      }, {
-                        "r" : "221",
+                        "r" : "227",
                         "s" : [ {
                            "value" : [ "'FooBarFooBarFooBar'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "222",
+                        "r" : "228",
                         "s" : [ {
                            "value" : [ "'Bar'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "223",
+                        "r" : "229",
                         "s" : [ {
                            "value" : [ "'Baz'" ]
                         } ]
@@ -6433,57 +8057,74 @@ module.exports['ReplaceMatches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "226",
+               "localId" : "235",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "ReplaceMatches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "236",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "237",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "238",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "221",
+                  "localId" : "227",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBarFooBarFooBar",
                   "type" : "Literal"
                }, {
-                  "localId" : "222",
+                  "localId" : "228",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Bar",
                   "type" : "Literal"
                }, {
-                  "localId" : "223",
+                  "localId" : "229",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Baz",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "228",
+            "localId" : "240",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ReplaceCapital",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "228",
+                  "r" : "240",
                   "s" : [ {
                      "value" : [ "","define ","ReplaceCapital",": " ]
                   }, {
-                     "r" : "234",
+                     "r" : "249",
                      "s" : [ {
                         "value" : [ "ReplaceMatches","(" ]
                      }, {
-                        "r" : "229",
+                        "r" : "241",
                         "s" : [ {
                            "value" : [ "'Tattle'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "230",
+                        "r" : "242",
                         "s" : [ {
                            "value" : [ "'T'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "231",
+                        "r" : "243",
                         "s" : [ {
                            "value" : [ "'R'" ]
                         } ]
@@ -6494,57 +8135,74 @@ module.exports['ReplaceMatches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "234",
+               "localId" : "249",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "ReplaceMatches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "250",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "251",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "252",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "229",
+                  "localId" : "241",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Tattle",
                   "type" : "Literal"
                }, {
-                  "localId" : "230",
+                  "localId" : "242",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "T",
                   "type" : "Literal"
                }, {
-                  "localId" : "231",
+                  "localId" : "243",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "R",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "236",
+            "localId" : "254",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ReplaceDiacritical",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "236",
+                  "r" : "254",
                   "s" : [ {
                      "value" : [ "","define ","ReplaceDiacritical",": " ]
                   }, {
-                     "r" : "242",
+                     "r" : "263",
                      "s" : [ {
                         "value" : [ "ReplaceMatches","(" ]
                      }, {
-                        "r" : "237",
+                        "r" : "255",
                         "s" : [ {
                            "value" : [ "'Cafè'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "238",
+                        "r" : "256",
                         "s" : [ {
                            "value" : [ "'è'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "239",
+                        "r" : "257",
                         "s" : [ {
                            "value" : [ "'é'" ]
                         } ]
@@ -6555,57 +8213,74 @@ module.exports['ReplaceMatches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "242",
+               "localId" : "263",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "ReplaceMatches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "264",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "265",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "266",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "237",
+                  "localId" : "255",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Cafè",
                   "type" : "Literal"
                }, {
-                  "localId" : "238",
+                  "localId" : "256",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "è",
                   "type" : "Literal"
                }, {
-                  "localId" : "239",
+                  "localId" : "257",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "é",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "244",
+            "localId" : "268",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ReplaceUnicode",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "244",
+                  "r" : "268",
                   "s" : [ {
                      "value" : [ "","define ","ReplaceUnicode",": " ]
                   }, {
-                     "r" : "250",
+                     "r" : "277",
                      "s" : [ {
                         "value" : [ "ReplaceMatches","(" ]
                      }, {
-                        "r" : "245",
+                        "r" : "269",
                         "s" : [ {
                            "value" : [ "'Turn that frown \uD83D\uDE41 upside down! \uD83D\uDE03'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "246",
+                        "r" : "270",
                         "s" : [ {
                            "value" : [ "'\uD83D\uDE41'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "247",
+                        "r" : "271",
                         "s" : [ {
                            "value" : [ "'\uD83D\uDE03'" ]
                         } ]
@@ -6616,57 +8291,74 @@ module.exports['ReplaceMatches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "250",
+               "localId" : "277",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "ReplaceMatches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "278",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "279",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "280",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "245",
+                  "localId" : "269",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Turn that frown \uD83D\uDE41 upside down! \uD83D\uDE03",
                   "type" : "Literal"
                }, {
-                  "localId" : "246",
+                  "localId" : "270",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "\uD83D\uDE41",
                   "type" : "Literal"
                }, {
-                  "localId" : "247",
+                  "localId" : "271",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "\uD83D\uDE03",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "252",
+            "localId" : "282",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ReplaceSpace",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "252",
+                  "r" : "282",
                   "s" : [ {
                      "value" : [ "","define ","ReplaceSpace",": " ]
                   }, {
-                     "r" : "258",
+                     "r" : "291",
                      "s" : [ {
                         "value" : [ "ReplaceMatches","(" ]
                      }, {
-                        "r" : "253",
+                        "r" : "283",
                         "s" : [ {
                            "value" : [ "'(123) 456 7890'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "254",
+                        "r" : "284",
                         "s" : [ {
                            "value" : [ "'\\\\s'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "255",
+                        "r" : "285",
                         "s" : [ {
                            "value" : [ "'-'" ]
                         } ]
@@ -6677,57 +8369,74 @@ module.exports['ReplaceMatches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "258",
+               "localId" : "291",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "ReplaceMatches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "292",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "293",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "294",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "253",
+                  "localId" : "283",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "(123) 456 7890",
                   "type" : "Literal"
                }, {
-                  "localId" : "254",
+                  "localId" : "284",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "\\s",
                   "type" : "Literal"
                }, {
-                  "localId" : "255",
+                  "localId" : "285",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "-",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "260",
+            "localId" : "296",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ReplaceEmpty",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "260",
+                  "r" : "296",
                   "s" : [ {
                      "value" : [ "","define ","ReplaceEmpty",": " ]
                   }, {
-                     "r" : "266",
+                     "r" : "305",
                      "s" : [ {
                         "value" : [ "ReplaceMatches","(" ]
                      }, {
-                        "r" : "261",
+                        "r" : "297",
                         "s" : [ {
                            "value" : [ "'FooBar'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "262",
+                        "r" : "298",
                         "s" : [ {
                            "value" : [ "''" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "263",
+                        "r" : "299",
                         "s" : [ {
                            "value" : [ "'.'" ]
                         } ]
@@ -6738,57 +8447,74 @@ module.exports['ReplaceMatches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "266",
+               "localId" : "305",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "ReplaceMatches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "306",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "307",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "308",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "261",
+                  "localId" : "297",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "FooBar",
                   "type" : "Literal"
                }, {
-                  "localId" : "262",
+                  "localId" : "298",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "",
                   "type" : "Literal"
                }, {
-                  "localId" : "263",
+                  "localId" : "299",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : ".",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "268",
+            "localId" : "310",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ReplaceMatchGroups",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "268",
+                  "r" : "310",
                   "s" : [ {
                      "value" : [ "","define ","ReplaceMatchGroups",": " ]
                   }, {
-                     "r" : "274",
+                     "r" : "319",
                      "s" : [ {
                         "value" : [ "ReplaceMatches","(" ]
                      }, {
-                        "r" : "269",
+                        "r" : "311",
                         "s" : [ {
                            "value" : [ "'Foo[123]'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "270",
+                        "r" : "312",
                         "s" : [ {
                            "value" : [ "'Foo\\\\[(\\\\d+)]'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "271",
+                        "r" : "313",
                         "s" : [ {
                            "value" : [ "'Bar[$1]'" ]
                         } ]
@@ -6799,57 +8525,74 @@ module.exports['ReplaceMatches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "274",
+               "localId" : "319",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "ReplaceMatches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "320",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "321",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "322",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "269",
+                  "localId" : "311",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo[123]",
                   "type" : "Literal"
                }, {
-                  "localId" : "270",
+                  "localId" : "312",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo\\[(\\d+)]",
                   "type" : "Literal"
                }, {
-                  "localId" : "271",
+                  "localId" : "313",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Bar[$1]",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "276",
+            "localId" : "324",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ReplaceNone",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "276",
+                  "r" : "324",
                   "s" : [ {
                      "value" : [ "","define ","ReplaceNone",": " ]
                   }, {
-                     "r" : "282",
+                     "r" : "333",
                      "s" : [ {
                         "value" : [ "ReplaceMatches","(" ]
                      }, {
-                        "r" : "277",
+                        "r" : "325",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "278",
+                        "r" : "326",
                         "s" : [ {
                            "value" : [ "'Bar'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "279",
+                        "r" : "327",
                         "s" : [ {
                            "value" : [ "'Baz'" ]
                         } ]
@@ -6860,51 +8603,68 @@ module.exports['ReplaceMatches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "282",
+               "localId" : "333",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "ReplaceMatches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "334",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "335",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "336",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "277",
+                  "localId" : "325",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
                }, {
-                  "localId" : "278",
+                  "localId" : "326",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Bar",
                   "type" : "Literal"
                }, {
-                  "localId" : "279",
+                  "localId" : "327",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Baz",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "284",
+            "localId" : "338",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ReplaceArgumentIsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "284",
+                  "r" : "338",
                   "s" : [ {
                      "value" : [ "","define ","ReplaceArgumentIsNull",": " ]
                   }, {
-                     "r" : "291",
+                     "r" : "348",
                      "s" : [ {
-                        "r" : "285",
+                        "r" : "339",
                         "value" : [ "ReplaceMatches","(","null",", " ]
                      }, {
-                        "r" : "286",
+                        "r" : "340",
                         "s" : [ {
                            "value" : [ "'Bar'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "287",
+                        "r" : "341",
                         "s" : [ {
                            "value" : [ "'Baz'" ]
                         } ]
@@ -6915,55 +8675,72 @@ module.exports['ReplaceMatches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "291",
+               "localId" : "348",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "ReplaceMatches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "350",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "351",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "352",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "292",
+                  "localId" : "349",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "285",
+                     "localId" : "339",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "286",
+                  "localId" : "340",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Bar",
                   "type" : "Literal"
                }, {
-                  "localId" : "287",
+                  "localId" : "341",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Baz",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "294",
+            "localId" : "354",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ReplacePatternIsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "294",
+                  "r" : "354",
                   "s" : [ {
                      "value" : [ "","define ","ReplacePatternIsNull",": " ]
                   }, {
-                     "r" : "301",
+                     "r" : "364",
                      "s" : [ {
                         "value" : [ "ReplaceMatches","(" ]
                      }, {
-                        "r" : "295",
+                        "r" : "355",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
                      }, {
-                        "r" : "296",
+                        "r" : "356",
                         "value" : [ ", ","null",", " ]
                      }, {
-                        "r" : "297",
+                        "r" : "357",
                         "s" : [ {
                            "value" : [ "'Baz'" ]
                         } ]
@@ -6974,85 +8751,118 @@ module.exports['ReplaceMatches'] = {
                }
             } ],
             "expression" : {
-               "localId" : "301",
+               "localId" : "364",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "ReplaceMatches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "366",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "367",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "368",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "295",
+                  "localId" : "355",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
                }, {
-                  "localId" : "302",
+                  "localId" : "365",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "296",
+                     "localId" : "356",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "297",
+                  "localId" : "357",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Baz",
                   "type" : "Literal"
                } ]
             }
          }, {
-            "localId" : "304",
+            "localId" : "370",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "ReplaceSubstitutionIsNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "304",
+                  "r" : "370",
                   "s" : [ {
                      "value" : [ "","define ","ReplaceSubstitutionIsNull",": " ]
                   }, {
-                     "r" : "311",
+                     "r" : "380",
                      "s" : [ {
                         "value" : [ "ReplaceMatches","(" ]
                      }, {
-                        "r" : "305",
+                        "r" : "371",
                         "s" : [ {
                            "value" : [ "'Foo'" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "306",
+                        "r" : "372",
                         "s" : [ {
                            "value" : [ "'Bar'" ]
                         } ]
                      }, {
-                        "r" : "307",
+                        "r" : "373",
                         "value" : [ ", ","null",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "311",
+               "localId" : "380",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "ReplaceMatches",
-               "signature" : [ ],
+               "signature" : [ {
+                  "localId" : "382",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "383",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "384",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
                "operand" : [ {
-                  "localId" : "305",
+                  "localId" : "371",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Foo",
                   "type" : "Literal"
                }, {
-                  "localId" : "306",
+                  "localId" : "372",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Bar",
                   "type" : "Literal"
                }, {
-                  "localId" : "312",
+                  "localId" : "381",
                   "asType" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "307",
+                     "localId" : "373",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                } ]

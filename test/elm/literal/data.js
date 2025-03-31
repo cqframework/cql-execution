@@ -25,9 +25,9 @@ module.exports['Literal'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -100,6 +100,7 @@ module.exports['Literal'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "BoolTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -115,12 +116,14 @@ module.exports['Literal'] = {
             } ],
             "expression" : {
                "localId" : "213",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                "value" : "true",
                "type" : "Literal"
             }
          }, {
             "localId" : "215",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "BoolFalse",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -136,12 +139,14 @@ module.exports['Literal'] = {
             } ],
             "expression" : {
                "localId" : "216",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                "value" : "false",
                "type" : "Literal"
             }
          }, {
             "localId" : "218",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "IntOne",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -157,12 +162,14 @@ module.exports['Literal'] = {
             } ],
             "expression" : {
                "localId" : "219",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "1",
                "type" : "Literal"
             }
          }, {
             "localId" : "221",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "DecimalTenth",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -178,12 +185,14 @@ module.exports['Literal'] = {
             } ],
             "expression" : {
                "localId" : "222",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                "value" : "0.1",
                "type" : "Literal"
             }
          }, {
             "localId" : "224",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "StringTrue",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -203,12 +212,14 @@ module.exports['Literal'] = {
             } ],
             "expression" : {
                "localId" : "225",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "true",
                "type" : "Literal"
             }
          }, {
             "localId" : "227",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "DateTimeX",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -224,6 +235,7 @@ module.exports['Literal'] = {
             } ],
             "expression" : {
                "localId" : "228",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "DateTime",
                "signature" : [ ],
                "year" : {
@@ -277,6 +289,7 @@ module.exports['Literal'] = {
             }
          }, {
             "localId" : "238",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "name" : "TimeX",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -292,6 +305,7 @@ module.exports['Literal'] = {
             } ],
             "expression" : {
                "localId" : "239",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
                "type" : "Time",
                "signature" : [ ],
                "hour" : {
@@ -343,9 +357,9 @@ module.exports['Escape'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.12.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations",
-         "signatureLevel" : "None",
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
@@ -418,6 +432,7 @@ module.exports['Escape'] = {
             }
          }, {
             "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "SingleQuote",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -437,12 +452,14 @@ module.exports['Escape'] = {
             } ],
             "expression" : {
                "localId" : "213",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "'",
                "type" : "Literal"
             }
          }, {
             "localId" : "215",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "DoubleQuote",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -462,12 +479,14 @@ module.exports['Escape'] = {
             } ],
             "expression" : {
                "localId" : "216",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "\"",
                "type" : "Literal"
             }
          }, {
             "localId" : "218",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Backtick",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -487,12 +506,14 @@ module.exports['Escape'] = {
             } ],
             "expression" : {
                "localId" : "219",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "`",
                "type" : "Literal"
             }
          }, {
             "localId" : "221",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "CarriageReturn",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -512,12 +533,14 @@ module.exports['Escape'] = {
             } ],
             "expression" : {
                "localId" : "222",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "\r",
                "type" : "Literal"
             }
          }, {
             "localId" : "224",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "LineFeed",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -537,12 +560,14 @@ module.exports['Escape'] = {
             } ],
             "expression" : {
                "localId" : "225",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "\n",
                "type" : "Literal"
             }
          }, {
             "localId" : "227",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Tab",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -562,12 +587,14 @@ module.exports['Escape'] = {
             } ],
             "expression" : {
                "localId" : "228",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "\t",
                "type" : "Literal"
             }
          }, {
             "localId" : "230",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "FormFeed",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -587,12 +614,14 @@ module.exports['Escape'] = {
             } ],
             "expression" : {
                "localId" : "231",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "\f",
                "type" : "Literal"
             }
          }, {
             "localId" : "233",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Backslash",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -612,12 +641,14 @@ module.exports['Escape'] = {
             } ],
             "expression" : {
                "localId" : "234",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "\\",
                "type" : "Literal"
             }
          }, {
             "localId" : "236",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Unicode",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -637,6 +668,7 @@ module.exports['Escape'] = {
             } ],
             "expression" : {
                "localId" : "237",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "H",
                "type" : "Literal"

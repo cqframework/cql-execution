@@ -74,7 +74,7 @@ export class FunctionRef extends Expression {
       const libCtx = ctx.getLibraryContext(this.library);
       child_ctx = libCtx ? libCtx.childContext() : undefined;
     } else {
-      functionDefs = ctx.get(this.name);
+      functionDefs = ctx.getFunction(this.name);
       child_ctx = ctx.childContext();
     }
     const args = await this.execArgs(ctx);
