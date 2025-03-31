@@ -36,6 +36,12 @@ describe('Equal', () => {
 
   it('should identify uncertian tuples with same fields but one has a null field', async function () {
     should(await this.uncertTuplesWithNullFieldOnOne.exec(this.ctx)).be.null();
+    should(await this.uncertTuplesWithNullFieldOnFirstOne.exec(this.ctx)).be.null();
+  });
+
+  it('should identify unequal tuples with different values but one has a null field', async function () {
+    should(await this.uneqTuplesWithNullFieldOnOne.exec(this.ctx)).be.false();
+    should(await this.uneqTuplesWithNullFieldOnFirstOne.exec(this.ctx)).be.false();
   });
 
   it('should identify equal/unequal DateTimes in same timezone', async function () {
