@@ -3797,13 +3797,16 @@ class AnyInValueSet extends expression_1.Expression {
             : (0, builder_1.build)(json.valuesetExpression);
     }
     async exec(ctx) {
+        const codes = await this.codes.execute(ctx);
+        // spec indicates to return false if code is null, throw error if value set cannot be resolved
+        if (codes == null) {
+            return false;
+        }
         const valueset = await this.valueset.execute(ctx);
-        // If the value set reference cannot be resolved, a run-time error is thrown.
         if (valueset == null || !valueset.isValueSet) {
             throw new Error('ValueSet must be provided to AnyInValueSet expression');
         }
-        const codes = await this.codes.execute(ctx);
-        return codes != null && codes.some((code) => valueset.hasMatch(code));
+        return codes.some((code) => valueset.hasMatch(code));
     }
 }
 exports.AnyInValueSet = AnyInValueSet;
@@ -3816,13 +3819,6 @@ class InValueSet extends expression_1.Expression {
             : (0, builder_1.build)(json.valuesetExpression);
     }
     async exec(ctx) {
-        // If the code argument is null, the result is false
-        if (this.code == null) {
-            return false;
-        }
-        if (this.valueset == null) {
-            throw new Error('ValueSet must be provided to InValueSet expression');
-        }
         const code = await this.code.execute(ctx);
         // spec indicates to return false if code is null, throw error if value set cannot be resolved
         if (code == null) {

@@ -20,6 +20,13 @@ define AnyInListOfCodes: { "ChronicRecurrentDepression", "ModerateMajorDepressio
 define AnyInListOfStrings: { '2618002', '12345' } in "Major Depressive Disorder Active"
 define AnyInNullList: null as List<Code> in "Major Depressive Disorder Active"
 define AnyInNullListNullVs: null as List<Code> in null as ValueSet
+define AnyInListOfCodesWithNull: { Code { code: 'M' }, (null as Code), "ChronicRecurrentDepression" } in "Major Depressive Disorder Active"
+// expression data
+define ListOfCodes: { Code { code: 'M' } , "ChronicRecurrentDepression" }
+define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.840.1.113883.18.2' } }
+define AnyInListOfCodesExpressionRef: ListOfCodes in "Major Depressive Disorder Active"
+define AnyInWrongListOfCodes: WrongListOfCodes in "Major Depressive Disorder Active"
+// function data
 define function ListInVS(vs ValueSet): { '2618002', '12345' } in vs
 define ListInPassedVS: ListInVS("Major Depressive Disorder Active")
 define ListInWrongVS: ListInVS("Male")
@@ -45,13 +52,6 @@ define WrongShortCode: Code { code: 'M' } in "Female"
 define WrongMediumCode: Code { code: 'F', system: '3.16.840.1.113883.18.2' } in "Female"
 define LongCodeDifferentVersion: Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.6' } in "Female"
 define NullCode: Code { code: null, system: '2.16.840.1.113883.18.2', version: 'HL7V2.6' } in "Female"
-define InListOfCodes: { Code { code: 'M' } , Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5' } } in "Female"
-define ListOfCodes: { Code { code: 'M' } , Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5' } }
-define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.840.1.113883.18.2' } }
-define InListOfCodesExpressionRef: ListOfCodes in "Female"
-define InWrongListOfCodes: WrongListOfCodes in "Female"
-define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
-define ListOfCodesNull: (null as List<Code>) in "Female"
 define function FInVS(vs ValueSet): 'F' in vs
 define FInPassedVS: FInVS("Female")
 define FInWrongVS: FInVS("Male")

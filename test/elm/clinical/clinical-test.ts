@@ -70,6 +70,27 @@ describe('AnyInValueSet', () => {
     should(this.ctx.localId_context[this.anyInListOfStrings.codes.localId]).not.be.undefined();
   });
 
+  it('should return false for null code list in valueset', async function () {
+    (await this.anyInNullList.exec(this.ctx)).should.be.false();
+  });
+
+  it('should return false for null code list in null valueset', async function () {
+    // code null returning false is prioritized over valueset resolution
+    (await this.anyInNullListNullVs.exec(this.ctx)).should.be.false();
+  });
+
+  it('should ignore null codes in list', async function () {
+    (await this.anyInListOfCodesWithNull.exec(this.ctx)).should.be.true();
+  });
+
+  it('should return true if code in list is equivalent using ExpressionRef', async function () {
+    (await this.anyInListOfCodesExpressionRef.exec(this.ctx)).should.be.true();
+  });
+
+  it('should return false if no code in list is equivalent', async function () {
+    (await this.anyInWrongListOfCodes.exec(this.ctx)).should.be.false();
+  });
+
   it('should return true for correct valueset passed to list comparison function', async function () {
     (await this.listInPassedVS.exec(this.ctx)).should.be.true();
   });
@@ -154,26 +175,6 @@ describe('InValueSet', () => {
     (await this.nullCode.exec(this.ctx)).should.be.false();
   });
 
-  it('should return true if code in list is equivalent', async function () {
-    (await this.inListOfCodes.exec(this.ctx)).should.be.true();
-  });
-
-  it('should return true if code in list is equivalent using ExpressionRef', async function () {
-    (await this.inListOfCodesExpressionRef.exec(this.ctx)).should.be.true();
-  });
-
-  it('should return false if no code in list is equivalent', async function () {
-    (await this.inWrongListOfCodes.exec(this.ctx)).should.be.false();
-  });
-
-  it('should ignore null codes in list', async function () {
-    (await this.listOfCodesWithNull.exec(this.ctx)).should.be.true();
-  });
-
-  it('should return false for null list of codes', async function () {
-    (await this.listOfCodesNull.exec(this.ctx)).should.be.false();
-  });
-
   it('should return true for correct valueset passed to function', async function () {
     (await this.fInPassedVS.exec(this.ctx)).should.be.true();
   });
@@ -185,7 +186,7 @@ describe('InValueSet', () => {
   it('should return error for null cast valueset passed to function', async function () {
     return this.fInNullVS
       .exec(this.ctx)
-      .should.be.rejectedWith('ValueSet must be provided to InValueSet expression');
+      .should.be.rejectedWith(/ValueSet must be provided to InValueSet expression/);
   });
 });
 
@@ -221,10 +222,8 @@ describe('ExpandValueset', () => {
     received.should.eql(expected);
   });
 
-  it('should return error for null cast valueset passed to function', async function () {
-    this.expandNullVS
-      .exec(this.ctx)
-      .should.be.rejectedWith('ExpandValueSet function invoked on object that is not a ValueSet');
+  it('should return null for null cast valueset passed to function', async function () {
+    should(await this.expandNullVS.exec(this.ctx)).be.null();
   });
 
   it('invoke expandValueSet with union via function', async function () {
