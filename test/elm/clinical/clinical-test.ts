@@ -79,9 +79,9 @@ describe('AnyInValueSet', () => {
   });
 
   it('should return error for null cast valueset passed to list comparison function', async function () {
-    this.listInNullVS
+    return this.listInNullVS
       .exec(this.ctx)
-      .should.be.rejectedWith('ValueSet must be provided to AnyInValueSet expression');
+      .should.be.rejectedWith(/ValueSet must be provided to AnyInValueSet expression/);
   });
 });
 
@@ -183,7 +183,7 @@ describe('InValueSet', () => {
   });
 
   it('should return error for null cast valueset passed to function', async function () {
-    this.fInNullVS
+    return this.fInNullVS
       .exec(this.ctx)
       .should.be.rejectedWith('ValueSet must be provided to InValueSet expression');
   });

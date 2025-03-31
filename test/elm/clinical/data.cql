@@ -18,6 +18,8 @@ concept "Depression Concept": { "ChronicRecurrentDepression", "ModerateMajorDepr
 define AnyInListOfConcepts: { "Depression Concept" } in "Major Depressive Disorder Active"
 define AnyInListOfCodes: { "ChronicRecurrentDepression", "ModerateMajorDepression" } in "Major Depressive Disorder Active"
 define AnyInListOfStrings: { '2618002', '12345' } in "Major Depressive Disorder Active"
+define AnyInNullList: null as List<Code> in "Major Depressive Disorder Active"
+define AnyInNullListNullVs: null as List<Code> in null as ValueSet
 define function ListInVS(vs ValueSet): { '2618002', '12345' } in vs
 define ListInPassedVS: ListInVS("Major Depressive Disorder Active")
 define ListInWrongVS: ListInVS("Male")
