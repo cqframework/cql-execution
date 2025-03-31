@@ -70,6 +70,10 @@ describe('equals', () => {
     equals({ a: [1, 2, 3], b: [4, 5, 6] }, { a: [3, 2, 1], b: [6, 5, 4] }).should.be.false();
     equals({ a: 1, b: null, c: 'sea' }, { a: 1, b: null, c: 'sea' }).should.be.true();
     equals({ a: 1, b: null, c: 'sea' }, { a: 1, b: null, c: 'see' }).should.be.false();
+    equals({ a: 1, b: 'bee', c: null }, { a: 1, b: 'bee', c: null }).should.be.true();
+    equals({ a: 1, b: 'bee', c: null }, { a: 1, b: 'bea', c: null }).should.be.false();
+    equals({ a: null, b: 'bee', c: 'sea' }, { a: null, b: 'bee', c: 'sea' }).should.be.true();
+    equals({ a: null, b: 'bee', c: 'sea' }, { a: null, b: 'bee', c: 'see' }).should.be.false();
     equals({ a: 1, b: null, c: 'sea' }, { a: 2, b: null, c: 'sea' }).should.be.false();
     equals({ a: 1, b: null, c: 'sea' }, { a: 1, b: 'bee', c: 'see' }).should.be.false();
     equals({ a: 1, b: 'bee', c: 'sea' }, { a: 1, b: null, c: 'see' }).should.be.false();
