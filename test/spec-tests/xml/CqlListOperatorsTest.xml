@@ -765,7 +765,7 @@
 			<output>false</output>
 		</test>
 		<test name="ProperlyIncludedInNulRight">
-			<expression>{'s', 'u', 'n'} properly included in null</expression>
+			<expression>{'s', 'u', 'n'} properly included in null as List&lt;String&gt;</expression>
 			<output>null</output>
 		</test>
 	</group>

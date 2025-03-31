@@ -155,6 +155,10 @@ export class Context {
     return this.parent && this.parent.getConcept(name);
   }
 
+  getFunction(name: string) {
+    return this.parent && this.parent.getFunction(name);
+  }
+
   get(identifier: string): any {
     // Check for undefined because if its null, we actually *do* want to return null (rather than
     // looking at parent), but if it's really undefined, *then* look at the parent
