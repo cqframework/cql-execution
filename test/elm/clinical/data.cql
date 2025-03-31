@@ -52,6 +52,8 @@ define WrongShortCode: Code { code: 'M' } in "Female"
 define WrongMediumCode: Code { code: 'F', system: '3.16.840.1.113883.18.2' } in "Female"
 define LongCodeDifferentVersion: Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.6' } in "Female"
 define NullCode: Code { code: null, system: '2.16.840.1.113883.18.2', version: 'HL7V2.6' } in "Female"
+define NullCastAsCode: null as Code in "Female"
+define NullCastAsCodeWithNullVS: null as Code in null as ValueSet
 define function FInVS(vs ValueSet): 'F' in vs
 define FInPassedVS: FInVS("Female")
 define FInWrongVS: FInVS("Male")

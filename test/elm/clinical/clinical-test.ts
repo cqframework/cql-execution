@@ -175,6 +175,14 @@ describe('InValueSet', () => {
     (await this.nullCode.exec(this.ctx)).should.be.false();
   });
 
+  it('should return false if the passed in code is null', async function () {
+    (await this.nullCastAsCode.exec(this.ctx)).should.be.false();
+  });
+
+  it('should return false if the passed in code is null and the valueset is null', async function () {
+    (await this.nullCastAsCodeWithNullVS.exec(this.ctx)).should.be.false();
+  });
+
   it('should return true for correct valueset passed to function', async function () {
     (await this.fInPassedVS.exec(this.ctx)).should.be.true();
   });
