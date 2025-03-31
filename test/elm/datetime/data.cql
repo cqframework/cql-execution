@@ -340,8 +340,8 @@ define HoursBetween1and3CrossingSpringDST: hours between DateTime(2017, 3, 12, 1
 define HoursBetween1and3CrossingFallDST: hours between DateTime(2017, 11, 5, 1, 0, 0, 0, -4.0) and DateTime(2017, 11, 5, 3, 0, 0, 0, -5.0)
 define DurationInDaysWith0MS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38, 0), DateTime(2026, 11, 13, 13, 41, 38, 0)]
 define DurationInDaysNoMS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38), DateTime(2026, 11, 13, 13, 41, 38)]
-define DurationInDaysSameMS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38, 59), DateTime(2026, 11, 13, 13, 41, 59)]
-define DurationInDaysDiffMS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38, 59), DateTime(2026, 11, 13, 13, 41, 58)]
+define DurationInDaysSameMS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38, 59), DateTime(2026, 11, 13, 13, 41, 38, 59)]
+define DurationInDaysDiffMS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38, 59), DateTime(2026, 11, 13, 13, 41, 38, 58)]
 
 // @Test: DateMath
 define June15th2013: DateTime(2013, 6, 15, 0, 0, 0, 0)

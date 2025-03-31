@@ -1078,7 +1078,7 @@ describe('DurationBetween', () => {
   });
 
   it('should not return an uncertainty when the DateTimes have different nonzero ms', async function () {
-    (await this.durationInDaysDiffMS.exec(this.ctx)).should.equal(1);
+    (await this.durationInDaysDiffMS.exec(this.ctx)).should.equal(0);
   });
 });
 
