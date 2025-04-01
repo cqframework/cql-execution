@@ -342,6 +342,7 @@ define DurationInDaysWith0MS: duration in days of Interval[DateTime(2026, 11, 12
 define DurationInDaysNoMS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38), DateTime(2026, 11, 13, 13, 41, 38)]
 define DurationInDaysSameMS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38, 59), DateTime(2026, 11, 13, 13, 41, 38, 59)]
 define DurationInDaysDiffMS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38, 59), DateTime(2026, 11, 13, 13, 41, 38, 58)]
+define DurationInMSNoMS: duration in milliseconds of Interval[DateTime(2026, 11, 12, 13, 41, 38), DateTime(2026, 11, 12, 13, 41, 38)]
 
 // @Test: DateMath
 define June15th2013: DateTime(2013, 6, 15, 0, 0, 0, 0)
