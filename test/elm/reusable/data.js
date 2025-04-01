@@ -130,6 +130,19 @@ using Simple version '1.0.0'
 context Patient
 define Life: 42
 define Foo: Life
+
+define function ExpensiveFunction():
+  First(expand Interval[1, 100000])
+
+define ExpensiveStatement:
+  ExpensiveFunction()
+
+define ExpensiveStatementRef:
+  ExpensiveStatement union 
+  ExpensiveStatement union 
+  ExpensiveStatement union 
+  ExpensiveStatement union 
+  ExpensiveStatement
 */
 
 module.exports['ExpressionRef'] = {
@@ -143,7 +156,7 @@ module.exports['ExpressionRef'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "215",
+            "r" : "241",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -257,6 +270,375 @@ module.exports['ExpressionRef'] = {
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "Life",
                "type" : "ExpressionRef"
+            }
+         }, {
+            "localId" : "217",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "ExpensiveFunction",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "217",
+                  "s" : [ {
+                     "value" : [ "","define function ExpensiveFunction():\n  " ]
+                  }, {
+                     "r" : "234",
+                     "s" : [ {
+                        "r" : "234",
+                        "s" : [ {
+                           "value" : [ "First","(" ]
+                        }, {
+                           "r" : "224",
+                           "s" : [ {
+                              "value" : [ "expand " ]
+                           }, {
+                              "r" : "220",
+                              "s" : [ {
+                                 "r" : "218",
+                                 "value" : [ "Interval[","1",", ","100000","]" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ")" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "234",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "type" : "First",
+               "signature" : [ {
+                  "localId" : "235",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "236",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
+               "source" : {
+                  "localId" : "224",
+                  "type" : "Expand",
+                  "resultTypeSpecifier" : {
+                     "localId" : "228",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "229",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "signature" : [ {
+                     "localId" : "225",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "226",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "227",
+                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
+                  "operand" : [ {
+                     "localId" : "220",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "localId" : "221",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "222",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "localId" : "218",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "1",
+                        "type" : "Literal"
+                     },
+                     "high" : {
+                        "localId" : "219",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "100000",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "223",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "type" : "Null"
+                  } ]
+               }
+            },
+            "operand" : [ ]
+         }, {
+            "localId" : "238",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "ExpensiveStatement",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "238",
+                  "s" : [ {
+                     "value" : [ "","define ","ExpensiveStatement",":\n  " ]
+                  }, {
+                     "r" : "239",
+                     "s" : [ {
+                        "value" : [ "ExpensiveFunction","()" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "239",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "name" : "ExpensiveFunction",
+               "type" : "FunctionRef",
+               "signature" : [ ],
+               "operand" : [ ]
+            }
+         }, {
+            "localId" : "241",
+            "name" : "ExpensiveStatementRef",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "241",
+                  "s" : [ {
+                     "value" : [ "","define ","ExpensiveStatementRef",":\n  " ]
+                  }, {
+                     "r" : "277",
+                     "s" : [ {
+                        "r" : "269",
+                        "s" : [ {
+                           "r" : "254",
+                           "s" : [ {
+                              "r" : "244",
+                              "s" : [ {
+                                 "r" : "242",
+                                 "s" : [ {
+                                    "value" : [ "ExpensiveStatement" ]
+                                 } ]
+                              }, {
+                                 "value" : [ " union \n  " ]
+                              }, {
+                                 "r" : "243",
+                                 "s" : [ {
+                                    "value" : [ "ExpensiveStatement" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " union \n  " ]
+                           }, {
+                              "r" : "253",
+                              "s" : [ {
+                                 "value" : [ "ExpensiveStatement" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " union \n  " ]
+                        }, {
+                           "r" : "262",
+                           "s" : [ {
+                              "value" : [ "ExpensiveStatement" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ " union \n  " ]
+                     }, {
+                        "r" : "276",
+                        "s" : [ {
+                           "value" : [ "ExpensiveStatement" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "285",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "286",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "277",
+               "type" : "Union",
+               "resultTypeSpecifier" : {
+                  "localId" : "283",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "284",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "279",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "280",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "localId" : "281",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "282",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
+               "operand" : [ {
+                  "localId" : "269",
+                  "type" : "Union",
+                  "resultTypeSpecifier" : {
+                     "localId" : "274",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "275",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "signature" : [ {
+                     "localId" : "270",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "271",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "localId" : "272",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "273",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : [ {
+                     "localId" : "244",
+                     "type" : "Union",
+                     "resultTypeSpecifier" : {
+                        "localId" : "251",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "252",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "signature" : [ {
+                        "localId" : "247",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "248",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "249",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "250",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
+                     "operand" : [ {
+                        "localId" : "245",
+                        "type" : "ToList",
+                        "signature" : [ ],
+                        "operand" : {
+                           "localId" : "242",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "name" : "ExpensiveStatement",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "localId" : "246",
+                        "type" : "ToList",
+                        "signature" : [ ],
+                        "operand" : {
+                           "localId" : "243",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "name" : "ExpensiveStatement",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  }, {
+                     "localId" : "263",
+                     "type" : "Union",
+                     "signature" : [ {
+                        "localId" : "265",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "266",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "localId" : "267",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "268",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     } ],
+                     "operand" : [ {
+                        "localId" : "255",
+                        "type" : "ToList",
+                        "signature" : [ ],
+                        "operand" : {
+                           "localId" : "253",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "name" : "ExpensiveStatement",
+                           "type" : "ExpressionRef"
+                        }
+                     }, {
+                        "localId" : "264",
+                        "type" : "ToList",
+                        "signature" : [ ],
+                        "operand" : {
+                           "localId" : "262",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "name" : "ExpensiveStatement",
+                           "type" : "ExpressionRef"
+                        }
+                     } ]
+                  } ]
+               }, {
+                  "localId" : "278",
+                  "type" : "ToList",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "276",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "name" : "ExpensiveStatement",
+                     "type" : "ExpressionRef"
+                  }
+               } ]
             }
          } ]
       }

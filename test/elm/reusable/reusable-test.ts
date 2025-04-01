@@ -3,6 +3,7 @@ import setup from '../../setup';
 const data = require('./data');
 const { p1 } = require('./patients');
 import { Repository } from '../../../src/cql';
+import sinon from 'sinon';
 
 describe('ExpressionDef', () => {
   beforeEach(function () {
@@ -34,6 +35,12 @@ describe('ExpressionRef', () => {
 
   it('should execute to expression value', async function () {
     (await this.foo.exec(this.ctx)).should.equal(42);
+  });
+
+  it('should execute an expensive ExpressionDef once when referenced more than once', async function () {
+    const spy = sinon.spy(this.expensiveStatement, 'exec');
+    await this.expensiveStatementRef.exec(this.ctx);
+    spy.should.have.been.calledOnce();
   });
 });
 
