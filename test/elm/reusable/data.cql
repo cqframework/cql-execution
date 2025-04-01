@@ -6,6 +6,19 @@ define Foo: 'Bar'
 define Life: 42
 define Foo: Life
 
+define function ExpensiveFunction():
+  First(expand Interval[1, 100000])
+
+define ExpensiveStatement:
+  ExpensiveFunction()
+
+define ExpensiveStatementRef:
+  ExpensiveStatement union 
+  ExpensiveStatement union 
+  ExpensiveStatement union 
+  ExpensiveStatement union 
+  ExpensiveStatement
+
 // @Test: FunctionDefinitions
 define function "foo bar"(a Integer, b Integer) :
   a + b
@@ -139,15 +152,3 @@ library Common3
 using Simple version '1.0.0'
 context Patient
 
-define function ExpensiveFunction():
-  First(expand Interval[1, 100000])
-
-define ExpensiveStatement:
-  ExpensiveFunction()
-
-define ExpensiveStatementRef:
-  ExpensiveStatement union 
-  ExpensiveStatement union 
-  ExpensiveStatement union 
-  ExpensiveStatement union 
-  ExpensiveStatement

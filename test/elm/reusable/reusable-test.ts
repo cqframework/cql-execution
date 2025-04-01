@@ -36,6 +36,12 @@ describe('ExpressionRef', () => {
   it('should execute to expression value', async function () {
     (await this.foo.exec(this.ctx)).should.equal(42);
   });
+
+  it('should execute an expensive ExpressionDef once when referenced more than once', async function () {
+    const spy = sinon.spy(this.expensiveStatement, 'exec');
+    await this.expensiveStatementRef.exec(this.ctx);
+    spy.should.have.been.calledOnce();
+  });
 });
 
 describe('FunctionDefinitions', () => {
@@ -200,16 +206,5 @@ describe('FluentFunctionsOverloadCallingSelfFromOtherLibrary', () => {
     results.patientResults['3'].matchTestCallSelfTrue.should.be.true();
     results.patientResults['3'].matchTestsCallSelfFalse.should.be.false();
     results.patientResults['3'].matchTestsCallSelfTrue.should.be.true();
-  });
-});
-
-describe('CommonLib3', () => {
-  beforeEach(function () {
-    setup(this, data, [p1], {}, {}, new Repository(data));
-  });
-  it('should be able to execute an expensive expression', async function () {
-    const spy = sinon.spy(this.expensiveStatement, 'exec');
-    await this.expensiveStatementRef.exec(this.ctx);
-    spy.should.have.been.calledOnce();
   });
 });
