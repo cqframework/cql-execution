@@ -146,9 +146,3 @@ define matchTestsCallSelfFalse: exists (({ {id: 'test789'}, {id: 'test719'} }) T
   where "testOptionsList".targetMatches(T))
 define matchTestsCallSelfTrue: exists (({ {id: 'test341'}, {id: 'test719'} }) T
   where "testOptionsList".targetMatches(T))
-
-// @Test: CommonLib3
-library Common3
-using Simple version '1.0.0'
-context Patient
-
