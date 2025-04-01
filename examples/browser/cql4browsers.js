@@ -1185,11 +1185,15 @@ class DateTime extends AbstractDate {
         /* eslint-disable @typescript-eslint/no-this-alias */
         let aDateTime = this;
         let bDateTime = other;
-        if (this.second !== null && this.millisecond == null && unitField !== 'millisecond') {
+        if (this.second !== null &&
+            this.millisecond == null &&
+            unitField !== DateTime.Unit.MILLISECOND) {
             aDateTime = this.copy();
             aDateTime.millisecond = 0;
         }
-        if (other.second != null && other.millisecond == null && unitField !== 'millisecond') {
+        if (other.second != null &&
+            other.millisecond == null &&
+            unitField !== DateTime.Unit.MILLISECOND) {
             bDateTime = other.copy();
             bDateTime.millisecond = 0;
         }
