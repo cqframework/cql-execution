@@ -69,6 +69,41 @@ describe('AnyInValueSet', () => {
     (await this.anyInListOfStrings.exec(this.ctx)).should.be.true();
     should(this.ctx.localId_context[this.anyInListOfStrings.codes.localId]).not.be.undefined();
   });
+
+  it('should return false for null code list in valueset', async function () {
+    (await this.anyInNullList.exec(this.ctx)).should.be.false();
+  });
+
+  it('should return false for null code list in null valueset', async function () {
+    // code null returning false is prioritized over valueset resolution
+    (await this.anyInNullListNullVs.exec(this.ctx)).should.be.false();
+  });
+
+  it('should ignore null codes in list', async function () {
+    (await this.anyInListOfCodesWithNull.exec(this.ctx)).should.be.true();
+  });
+
+  it('should return true if code in list is equivalent using ExpressionRef', async function () {
+    (await this.anyInListOfCodesExpressionRef.exec(this.ctx)).should.be.true();
+  });
+
+  it('should return false if no code in list is equivalent', async function () {
+    (await this.anyInWrongListOfCodes.exec(this.ctx)).should.be.false();
+  });
+
+  it('should return true for correct valueset passed to list comparison function', async function () {
+    (await this.listInPassedVS.exec(this.ctx)).should.be.true();
+  });
+
+  it('should return false for incorrect valueset passed to list comparison function', async function () {
+    (await this.listInWrongVS.exec(this.ctx)).should.be.false();
+  });
+
+  it('should return error for null cast valueset passed to list comparison function', async function () {
+    return this.listInNullVS
+      .exec(this.ctx)
+      .should.be.rejectedWith(/ValueSet must be provided to AnyInValueSet expression/);
+  });
 });
 
 describe('InValueSet', () => {
@@ -140,24 +175,26 @@ describe('InValueSet', () => {
     (await this.nullCode.exec(this.ctx)).should.be.false();
   });
 
-  it('should return true if code in list is equivalent', async function () {
-    (await this.inListOfCodes.exec(this.ctx)).should.be.true();
+  it('should return false if the passed in code is null', async function () {
+    (await this.nullCastAsCode.exec(this.ctx)).should.be.false();
   });
 
-  it('should return true if code in list is equivalent using ExpressionRef', async function () {
-    (await this.inListOfCodesExpressionRef.exec(this.ctx)).should.be.true();
+  it('should return false if the passed in code is null and the valueset is null', async function () {
+    (await this.nullCastAsCodeWithNullVS.exec(this.ctx)).should.be.false();
   });
 
-  it('should return false if no code in list is equivalent', async function () {
-    (await this.inWrongListOfCodes.exec(this.ctx)).should.be.false();
+  it('should return true for correct valueset passed to function', async function () {
+    (await this.fInPassedVS.exec(this.ctx)).should.be.true();
   });
 
-  it('should ignore null codes in list', async function () {
-    (await this.listOfCodesWithNull.exec(this.ctx)).should.be.true();
+  it('should return false for incorrect valueset passed to function', async function () {
+    (await this.fInWrongVS.exec(this.ctx)).should.be.false();
   });
 
-  it('should return false for null list of codes', async function () {
-    (await this.listOfCodesNull.exec(this.ctx)).should.be.false();
+  it('should return error for null cast valueset passed to function', async function () {
+    return this.fInNullVS
+      .exec(this.ctx)
+      .should.be.rejectedWith(/ValueSet must be provided to InValueSet expression/);
   });
 });
 
@@ -178,6 +215,27 @@ describe('ExpandValueset', () => {
 
   it('invoke expandValueSet with union', async function () {
     const received: any = await this.invokeExpandWithUnion.exec(this.ctx);
+    const expected: Code[] = [
+      new Code('F', '2.16.840.1.113883.18.2', 'HL7V2.5', undefined),
+      new Code('185349003', '2.16.840.1.113883.6.96', '2013-09', undefined),
+      new Code('270427003', '2.16.840.1.113883.6.96', '2013-09', undefined),
+      new Code('406547006', '2.16.840.1.113883.6.96', '2013-09', undefined)
+    ];
+    received.should.eql(expected);
+  });
+
+  it('expand valueset through function call', async function () {
+    const received: any = await this.expandPassedVS.exec(this.ctx);
+    const expected: Code[] = [new Code('F', '2.16.840.1.113883.18.2', 'HL7V2.5', undefined)];
+    received.should.eql(expected);
+  });
+
+  it('should return null for null cast valueset passed to function', async function () {
+    should(await this.expandNullVS.exec(this.ctx)).be.null();
+  });
+
+  it('invoke expandValueSet with union via function', async function () {
+    const received: any = await this.expandPassedWithUnion.exec(this.ctx);
     const expected: Code[] = [
       new Code('F', '2.16.840.1.113883.18.2', 'HL7V2.5', undefined),
       new Code('185349003', '2.16.840.1.113883.6.96', '2013-09', undefined),

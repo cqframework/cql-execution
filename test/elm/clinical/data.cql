@@ -10,6 +10,7 @@ define Foo: "Acute Pharyngitis"
 
 // @Test: AnyInValueSet
 valueset "Major Depressive Disorder Active": '2.16.840.1.113883.3.526.3.1491'
+valueset "Male": '2.16.840.1.113883.3.560.100.1'
 codesystem "SNOMED": 'http://snomed.info/sct'
 code "ChronicRecurrentDepression": '2618002' from "SNOMED" display 'Chronic recurrent major depressive disorder (disorder)'
 code "ModerateMajorDepression": '832007' from "SNOMED" display 'Moderate major depression (disorder)'
@@ -17,9 +18,23 @@ concept "Depression Concept": { "ChronicRecurrentDepression", "ModerateMajorDepr
 define AnyInListOfConcepts: { "Depression Concept" } in "Major Depressive Disorder Active"
 define AnyInListOfCodes: { "ChronicRecurrentDepression", "ModerateMajorDepression" } in "Major Depressive Disorder Active"
 define AnyInListOfStrings: { '2618002', '12345' } in "Major Depressive Disorder Active"
+define AnyInNullList: null as List<Code> in "Major Depressive Disorder Active"
+define AnyInNullListNullVs: null as List<Code> in null as ValueSet
+define AnyInListOfCodesWithNull: { Code { code: 'M' }, (null as Code), "ChronicRecurrentDepression" } in "Major Depressive Disorder Active"
+// expression data
+define ListOfCodes: { Code { code: 'M' } , "ChronicRecurrentDepression" }
+define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.840.1.113883.18.2' } }
+define AnyInListOfCodesExpressionRef: ListOfCodes in "Major Depressive Disorder Active"
+define AnyInWrongListOfCodes: WrongListOfCodes in "Major Depressive Disorder Active"
+// function data
+define function ListInVS(vs ValueSet): { '2618002', '12345' } in vs
+define ListInPassedVS: ListInVS("Major Depressive Disorder Active")
+define ListInWrongVS: ListInVS("Male")
+define ListInNullVS: ListInVS(null as ValueSet)
 
 // @Test: InValueSet
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
+valueset "Male": '2.16.840.1.113883.3.560.100.1'
 valueset "Versioned Female": '2.16.840.1.113883.3.560.100.2' version '20121025'
 valueset "SharedCodes": '2.16.840.1.113883.3.000.000.0'
 valueset "ImproperSharedCodes": '2.16.840.1.113883.3.000.000.1'
@@ -37,13 +52,12 @@ define WrongShortCode: Code { code: 'M' } in "Female"
 define WrongMediumCode: Code { code: 'F', system: '3.16.840.1.113883.18.2' } in "Female"
 define LongCodeDifferentVersion: Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.6' } in "Female"
 define NullCode: Code { code: null, system: '2.16.840.1.113883.18.2', version: 'HL7V2.6' } in "Female"
-define InListOfCodes: { Code { code: 'M' } , Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5' } } in "Female"
-define ListOfCodes: { Code { code: 'M' } , Code { code: 'F', system: '2.16.840.1.113883.18.2', version: 'HL7V2.5' } }
-define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.840.1.113883.18.2' } }
-define InListOfCodesExpressionRef: ListOfCodes in "Female"
-define InWrongListOfCodes: WrongListOfCodes in "Female"
-define ListOfCodesWithNull: { Code { code: 'M' }, (null as Code), Code { code: 'F', system: '2.16.840.1.113883.18.2' } } in "Female"
-define ListOfCodesNull: (null as List<Code>) in "Female"
+define NullCastAsCode: null as Code in "Female"
+define NullCastAsCodeWithNullVS: null as Code in null as ValueSet
+define function FInVS(vs ValueSet): 'F' in vs
+define FInPassedVS: FInVS("Female")
+define FInWrongVS: FInVS("Male")
+define FInNullVS: FInVS(null as ValueSet)
 
 
 // @Test: ExpandValueset
@@ -54,6 +68,11 @@ define ExpandFemale: ExpandValueSet("Female")
 define ExpandKnown: ExpandValueSet("Known")
 define ExpandNull: ExpandValueSet(null)
 define InvokeExpandWithUnion: "Female" union  "Known"
+define function ExpandVSHelper(vs ValueSet): ExpandValueSet(vs)
+define ExpandPassedVS: ExpandVSHelper("Female")
+define ExpandNullVS: ExpandVSHelper(null as ValueSet)
+define function UnionVSs(vs1 ValueSet, vs2 ValueSet): vs1 union vs2
+define ExpandPassedWithUnion: UnionVSs("Female", "Known")
 
 
 // @Test: Patient Property In ValueSet
