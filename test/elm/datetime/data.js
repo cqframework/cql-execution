@@ -52146,6 +52146,11 @@ define MillisecondsBetweenUncertainty: milliseconds between JanOne2015 and Janua
 define MillisecondsBetweenReversedUncertainty: milliseconds between January2015 and JanOne2015
 define HoursBetween1and3CrossingSpringDST: hours between DateTime(2017, 3, 12, 1, 0, 0, 0, -5.0) and DateTime(2017, 3, 12, 3, 0, 0, 0, -4.0)
 define HoursBetween1and3CrossingFallDST: hours between DateTime(2017, 11, 5, 1, 0, 0, 0, -4.0) and DateTime(2017, 11, 5, 3, 0, 0, 0, -5.0)
+define DurationInDaysWith0MS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38, 0), DateTime(2026, 11, 13, 13, 41, 38, 0)]
+define DurationInDaysNoMS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38), DateTime(2026, 11, 13, 13, 41, 38)]
+define DurationInDaysSameMS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38, 59), DateTime(2026, 11, 13, 13, 41, 38, 59)]
+define DurationInDaysDiffMS: duration in days of Interval[DateTime(2026, 11, 12, 13, 41, 38, 59), DateTime(2026, 11, 13, 13, 41, 38, 58)]
+define DurationInMSNoMS: duration in milliseconds of Interval[DateTime(2026, 11, 12, 13, 41, 38), DateTime(2026, 11, 12, 13, 41, 38)]
 */
 
 module.exports['DurationBetween'] = {
@@ -52159,7 +52164,7 @@ module.exports['DurationBetween'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "464",
+            "r" : "769",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -54066,6 +54071,2133 @@ module.exports['DurationBetween'] = {
                         "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "value" : "5.0",
                         "type" : "Literal"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "527",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "DurationInDaysWith0MS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "527",
+                  "s" : [ {
+                     "value" : [ "","define ","DurationInDaysWith0MS",": " ]
+                  }, {
+                     "r" : "585",
+                     "s" : [ {
+                        "value" : [ "duration in days of " ]
+                     }, {
+                        "r" : "576",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "544",
+                           "s" : [ {
+                              "r" : "528",
+                              "value" : [ "DateTime","(","2026",", ","11",", ","12",", ","13",", ","41",", ","38",", ","0",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "568",
+                           "s" : [ {
+                              "r" : "552",
+                              "value" : [ "DateTime","(","2026",", ","11",", ","13",", ","13",", ","41",", ","38",", ","0",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "585",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "precision" : "Day",
+               "type" : "DurationBetween",
+               "signature" : [ {
+                  "localId" : "586",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "587",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "579",
+                  "type" : "Start",
+                  "signature" : [ {
+                     "localId" : "580",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "581",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : {
+                     "localId" : "576",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "localId" : "577",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "578",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "localId" : "544",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "545",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "546",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "547",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "548",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "549",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "550",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "551",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "528",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "529",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "530",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "531",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "532",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "533",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        },
+                        "millisecond" : {
+                           "localId" : "534",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "568",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "569",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "570",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "571",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "572",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "573",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "574",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "575",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "552",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "553",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "554",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "555",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "556",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "557",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        },
+                        "millisecond" : {
+                           "localId" : "558",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal"
+                        }
+                     }
+                  }
+               }, {
+                  "localId" : "582",
+                  "type" : "End",
+                  "signature" : [ {
+                     "localId" : "583",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "584",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : {
+                     "localId" : "576",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "localId" : "577",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "578",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "localId" : "544",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "545",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "546",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "547",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "548",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "549",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "550",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "551",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "528",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "529",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "530",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "531",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "532",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "533",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        },
+                        "millisecond" : {
+                           "localId" : "534",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "568",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "569",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "570",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "571",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "572",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "573",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "574",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "575",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "552",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "553",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "554",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "555",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "556",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "557",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        },
+                        "millisecond" : {
+                           "localId" : "558",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal"
+                        }
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "589",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "DurationInDaysNoMS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "589",
+                  "s" : [ {
+                     "value" : [ "","define ","DurationInDaysNoMS",": " ]
+                  }, {
+                     "r" : "641",
+                     "s" : [ {
+                        "value" : [ "duration in days of " ]
+                     }, {
+                        "r" : "632",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "604",
+                           "s" : [ {
+                              "r" : "590",
+                              "value" : [ "DateTime","(","2026",", ","11",", ","12",", ","13",", ","41",", ","38",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "625",
+                           "s" : [ {
+                              "r" : "611",
+                              "value" : [ "DateTime","(","2026",", ","11",", ","13",", ","13",", ","41",", ","38",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "641",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "precision" : "Day",
+               "type" : "DurationBetween",
+               "signature" : [ {
+                  "localId" : "642",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "643",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "635",
+                  "type" : "Start",
+                  "signature" : [ {
+                     "localId" : "636",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "637",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : {
+                     "localId" : "632",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "localId" : "633",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "634",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "localId" : "604",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "605",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "606",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "607",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "608",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "609",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "610",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "590",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "591",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "592",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "593",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "594",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "595",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "625",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "626",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "627",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "628",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "629",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "630",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "631",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "611",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "612",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "613",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "614",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "615",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "616",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        }
+                     }
+                  }
+               }, {
+                  "localId" : "638",
+                  "type" : "End",
+                  "signature" : [ {
+                     "localId" : "639",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "640",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : {
+                     "localId" : "632",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "localId" : "633",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "634",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "localId" : "604",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "605",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "606",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "607",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "608",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "609",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "610",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "590",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "591",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "592",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "593",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "594",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "595",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "625",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "626",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "627",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "628",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "629",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "630",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "631",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "611",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "612",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "613",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "614",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "615",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "616",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        }
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "645",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "DurationInDaysSameMS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "645",
+                  "s" : [ {
+                     "value" : [ "","define ","DurationInDaysSameMS",": " ]
+                  }, {
+                     "r" : "703",
+                     "s" : [ {
+                        "value" : [ "duration in days of " ]
+                     }, {
+                        "r" : "694",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "662",
+                           "s" : [ {
+                              "r" : "646",
+                              "value" : [ "DateTime","(","2026",", ","11",", ","12",", ","13",", ","41",", ","38",", ","59",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "686",
+                           "s" : [ {
+                              "r" : "670",
+                              "value" : [ "DateTime","(","2026",", ","11",", ","13",", ","13",", ","41",", ","38",", ","59",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "703",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "precision" : "Day",
+               "type" : "DurationBetween",
+               "signature" : [ {
+                  "localId" : "704",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "705",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "697",
+                  "type" : "Start",
+                  "signature" : [ {
+                     "localId" : "698",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "699",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : {
+                     "localId" : "694",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "localId" : "695",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "696",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "localId" : "662",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "663",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "664",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "665",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "666",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "667",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "668",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "669",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "646",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "647",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "648",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "649",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "650",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "651",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        },
+                        "millisecond" : {
+                           "localId" : "652",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "59",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "686",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "687",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "688",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "689",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "690",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "691",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "692",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "693",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "670",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "671",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "672",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "673",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "674",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "675",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        },
+                        "millisecond" : {
+                           "localId" : "676",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "59",
+                           "type" : "Literal"
+                        }
+                     }
+                  }
+               }, {
+                  "localId" : "700",
+                  "type" : "End",
+                  "signature" : [ {
+                     "localId" : "701",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "702",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : {
+                     "localId" : "694",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "localId" : "695",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "696",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "localId" : "662",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "663",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "664",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "665",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "666",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "667",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "668",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "669",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "646",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "647",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "648",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "649",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "650",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "651",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        },
+                        "millisecond" : {
+                           "localId" : "652",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "59",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "686",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "687",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "688",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "689",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "690",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "691",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "692",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "693",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "670",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "671",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "672",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "673",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "674",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "675",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        },
+                        "millisecond" : {
+                           "localId" : "676",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "59",
+                           "type" : "Literal"
+                        }
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "707",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "DurationInDaysDiffMS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "707",
+                  "s" : [ {
+                     "value" : [ "","define ","DurationInDaysDiffMS",": " ]
+                  }, {
+                     "r" : "765",
+                     "s" : [ {
+                        "value" : [ "duration in days of " ]
+                     }, {
+                        "r" : "756",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "724",
+                           "s" : [ {
+                              "r" : "708",
+                              "value" : [ "DateTime","(","2026",", ","11",", ","12",", ","13",", ","41",", ","38",", ","59",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "748",
+                           "s" : [ {
+                              "r" : "732",
+                              "value" : [ "DateTime","(","2026",", ","11",", ","13",", ","13",", ","41",", ","38",", ","58",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "765",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "precision" : "Day",
+               "type" : "DurationBetween",
+               "signature" : [ {
+                  "localId" : "766",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "767",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "759",
+                  "type" : "Start",
+                  "signature" : [ {
+                     "localId" : "760",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "761",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : {
+                     "localId" : "756",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "localId" : "757",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "758",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "localId" : "724",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "725",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "726",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "727",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "728",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "729",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "730",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "731",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "708",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "709",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "710",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "711",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "712",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "713",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        },
+                        "millisecond" : {
+                           "localId" : "714",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "59",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "748",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "749",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "750",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "751",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "752",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "753",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "754",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "755",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "732",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "733",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "734",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "735",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "736",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "737",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        },
+                        "millisecond" : {
+                           "localId" : "738",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "58",
+                           "type" : "Literal"
+                        }
+                     }
+                  }
+               }, {
+                  "localId" : "762",
+                  "type" : "End",
+                  "signature" : [ {
+                     "localId" : "763",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "764",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : {
+                     "localId" : "756",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "localId" : "757",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "758",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "localId" : "724",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "725",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "726",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "727",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "728",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "729",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "730",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "731",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "708",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "709",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "710",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "711",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "712",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "713",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        },
+                        "millisecond" : {
+                           "localId" : "714",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "59",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "748",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "749",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "750",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "751",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "752",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "753",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "754",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "755",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "732",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "733",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "734",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "735",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "736",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "737",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        },
+                        "millisecond" : {
+                           "localId" : "738",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "58",
+                           "type" : "Literal"
+                        }
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "769",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "DurationInMSNoMS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "769",
+                  "s" : [ {
+                     "value" : [ "","define ","DurationInMSNoMS",": " ]
+                  }, {
+                     "r" : "821",
+                     "s" : [ {
+                        "value" : [ "duration in milliseconds of " ]
+                     }, {
+                        "r" : "812",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "784",
+                           "s" : [ {
+                              "r" : "770",
+                              "value" : [ "DateTime","(","2026",", ","11",", ","12",", ","13",", ","41",", ","38",")" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "805",
+                           "s" : [ {
+                              "r" : "791",
+                              "value" : [ "DateTime","(","2026",", ","11",", ","12",", ","13",", ","41",", ","38",")" ]
+                           } ]
+                        }, {
+                           "value" : [ "]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "821",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "precision" : "Millisecond",
+               "type" : "DurationBetween",
+               "signature" : [ {
+                  "localId" : "822",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "823",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "815",
+                  "type" : "Start",
+                  "signature" : [ {
+                     "localId" : "816",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "817",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : {
+                     "localId" : "812",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "localId" : "813",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "814",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "localId" : "784",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "785",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "786",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "787",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "788",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "789",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "790",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "770",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "771",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "772",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "773",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "774",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "775",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "805",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "806",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "807",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "808",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "809",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "810",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "811",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "791",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "792",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "793",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "794",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "795",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "796",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        }
+                     }
+                  }
+               }, {
+                  "localId" : "818",
+                  "type" : "End",
+                  "signature" : [ {
+                     "localId" : "819",
+                     "type" : "IntervalTypeSpecifier",
+                     "pointType" : {
+                        "localId" : "820",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ],
+                  "operand" : {
+                     "localId" : "812",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "localId" : "813",
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "localId" : "814",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "localId" : "784",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "785",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "786",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "787",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "788",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "789",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "790",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "770",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "771",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "772",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "773",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "774",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "775",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        }
+                     },
+                     "high" : {
+                        "localId" : "805",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "DateTime",
+                        "signature" : [ {
+                           "localId" : "806",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "807",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "808",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "809",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "810",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "811",
+                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "year" : {
+                           "localId" : "791",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2026",
+                           "type" : "Literal"
+                        },
+                        "month" : {
+                           "localId" : "792",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "11",
+                           "type" : "Literal"
+                        },
+                        "day" : {
+                           "localId" : "793",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "12",
+                           "type" : "Literal"
+                        },
+                        "hour" : {
+                           "localId" : "794",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "13",
+                           "type" : "Literal"
+                        },
+                        "minute" : {
+                           "localId" : "795",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "41",
+                           "type" : "Literal"
+                        },
+                        "second" : {
+                           "localId" : "796",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "38",
+                           "type" : "Literal"
+                        }
                      }
                   }
                } ]

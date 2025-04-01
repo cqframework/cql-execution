@@ -1178,8 +1178,27 @@ class DateTime extends AbstractDate {
         if (other == null || !other.isDateTime) {
             return null;
         }
-        const a = this.toLuxonUncertainty();
-        const b = other.toLuxonUncertainty();
+        // According to the CQL specification, just like date and time comparison calculations,
+        // consider seconds and milliseconds as a single combined precision with decimal semantics
+        // this means that if milliseconds are not specified, then we treat it as though their
+        // millisecond value is "0" so that no Uncertainty will be produced
+        /* eslint-disable @typescript-eslint/no-this-alias */
+        let aDateTime = this;
+        let bDateTime = other;
+        if (this.second !== null &&
+            this.millisecond == null &&
+            unitField !== DateTime.Unit.MILLISECOND) {
+            aDateTime = this.copy();
+            aDateTime.millisecond = 0;
+        }
+        if (other.second != null &&
+            other.millisecond == null &&
+            unitField !== DateTime.Unit.MILLISECOND) {
+            bDateTime = other.copy();
+            bDateTime.millisecond = 0;
+        }
+        const a = aDateTime.toLuxonUncertainty();
+        const b = bDateTime.toLuxonUncertainty();
         return new uncertainty_1.Uncertainty(wholeLuxonDuration(b.low.diff(a.high, unitField), unitField), wholeLuxonDuration(b.high.diff(a.low, unitField), unitField));
     }
     isUTC() {
@@ -1610,7 +1629,7 @@ function compareWithDefaultResult(a, b, defaultResult) {
             // For the purposes of comparison, seconds and milliseconds are combined
             // as a single precision using a decimal, with decimal equality semantics
             if (field === 'second') {
-                // NOTE: if millisecond is null it will calcualte like this anyway, but
+                // NOTE: if millisecond is null it will calculate like this anyway, but
                 // if millisecond is undefined, using it will result in NaN calculations
                 const aMillisecond = a['millisecond'] != null ? a['millisecond'] : 0;
                 const aSecondAndMillisecond = a[field] + aMillisecond / 1000;

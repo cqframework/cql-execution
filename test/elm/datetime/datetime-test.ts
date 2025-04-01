@@ -1064,6 +1064,26 @@ describe('DurationBetween', () => {
   it('should properly execute hours between when springing ahead for DST', async function () {
     (await this.hoursBetween1and3CrossingFallDST.exec(this.ctx)).should.equal(3);
   });
+
+  it('should not return an uncertainty when the DateTimes have 0 ms', async function () {
+    (await this.durationInDaysWith0MS.exec(this.ctx)).should.equal(1);
+  });
+
+  it('should not return an uncertainty when the DateTimes do not specify ms', async function () {
+    (await this.durationInDaysNoMS.exec(this.ctx)).should.equal(1);
+  });
+
+  it('should not return an uncertainty when the DateTimes have the same nonzero ms', async function () {
+    (await this.durationInDaysSameMS.exec(this.ctx)).should.equal(1);
+  });
+
+  it('should not return an uncertainty when the DateTimes have different nonzero ms', async function () {
+    (await this.durationInDaysDiffMS.exec(this.ctx)).should.equal(0);
+  });
+
+  it('should return an uncertainty when the DateTimes do not specify ms but the duration unitField is is ms', async function () {
+    (await this.durationInMSNoMS.exec(this.ctx)).should.eql(new Uncertainty(-999, 999));
+  });
 });
 
 describe('DateMath', () => {
