@@ -464,7 +464,8 @@ function codesMatch(code1, code2) {
     return code1.code === code2.code && code1.system === code2.system;
 }
 class CodeSystem {
-    constructor(id, version) {
+    constructor(name, id, version) {
+        this.name = name;
         this.id = id;
         this.version = version;
     }
@@ -3771,7 +3772,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CalculateAgeAt = exports.CalculateAge = exports.Concept = exports.ConceptRef = exports.ConceptDef = exports.Code = exports.CodeRef = exports.CodeDef = exports.CodeSystemDef = exports.ExpandValueSet = exports.InValueSet = exports.AnyInValueSet = exports.ValueSetRef = exports.ValueSetDef = void 0;
+exports.CalculateAgeAt = exports.CalculateAge = exports.Concept = exports.ConceptRef = exports.ConceptDef = exports.Code = exports.CodeRef = exports.CodeDef = exports.CodeSystemRef = exports.CodeSystemDef = exports.ExpandValueSet = exports.InValueSet = exports.AnyInValueSet = exports.ValueSetRef = exports.ValueSetDef = void 0;
 const expression_1 = require("./expression");
 const dt = __importStar(require("../datatypes/datatypes"));
 const builder_1 = require("./builder");
@@ -3877,10 +3878,21 @@ class CodeSystemDef extends expression_1.Expression {
         this.version = json.version;
     }
     async exec(_ctx) {
-        return new dt.CodeSystem(this.id, this.version);
+        return new dt.CodeSystem(this.name, this.id, this.version);
     }
 }
 exports.CodeSystemDef = CodeSystemDef;
+class CodeSystemRef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+    }
+    async exec(ctx) {
+        const codeSystemDef = ctx.getCodeSystem(this.name);
+        return codeSystemDef ? codeSystemDef.execute(ctx) : undefined;
+    }
+}
+exports.CodeSystemRef = CodeSystemRef;
 class CodeDef extends expression_1.Expression {
     constructor(json) {
         super(json);
