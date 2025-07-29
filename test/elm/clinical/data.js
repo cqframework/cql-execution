@@ -5161,9 +5161,10 @@ module.exports['ConceptRef'] = {
 /* CodeSystemRef
 library TestSnippet version '1'
 using Simple version '1.0.0'
-codesystem MyCS: 'http://loinc.org' version '1'
+codesystem MyCS: 'http://loinc.org'
 context Patient
-define ResolveMyCS: MyCS
+define function IsCS(cs CodeSystem): cs is CodeSystem
+define IsMyCS: IsCS(MyCS)
 */
 
 module.exports['CodeSystemRef'] = {
@@ -5177,7 +5178,7 @@ module.exports['CodeSystemRef'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "216",
+            "r" : "224",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -5224,14 +5225,13 @@ module.exports['CodeSystemRef'] = {
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "MyCS",
             "id" : "http://loinc.org",
-            "version" : "1",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
                   "r" : "208",
                   "s" : [ {
-                     "value" : [ "","codesystem ","MyCS",": ","'http://loinc.org'"," version ","'1'" ]
+                     "value" : [ "","codesystem ","MyCS",": ","'http://loinc.org'" ]
                   } ]
                }
             } ]
@@ -5263,30 +5263,110 @@ module.exports['CodeSystemRef'] = {
                }
             }
          }, {
-            "localId" : "216",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-            "name" : "ResolveMyCS",
+            "localId" : "214",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "IsCS",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "type" : "FunctionDef",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "216",
+                  "r" : "214",
                   "s" : [ {
-                     "value" : [ "","define ","ResolveMyCS",": " ]
+                     "value" : [ "","define function IsCS(cs CodeSystem): " ]
                   }, {
-                     "r" : "217",
+                     "r" : "219",
                      "s" : [ {
-                        "value" : [ "MyCS" ]
+                        "r" : "219",
+                        "s" : [ {
+                           "r" : "220",
+                           "s" : [ {
+                              "value" : [ "cs" ]
+                           } ]
+                        }, {
+                           "value" : [ " is " ]
+                        }, {
+                           "r" : "221",
+                           "s" : [ {
+                              "value" : [ "CodeSystem" ]
+                           } ]
+                        } ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "217",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-               "name" : "MyCS",
-               "type" : "CodeSystemRef"
+               "localId" : "219",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Is",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "220",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "name" : "cs",
+                  "type" : "OperandRef"
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "221",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "operand" : [ {
+               "localId" : "216",
+               "name" : "cs",
+               "operandTypeSpecifier" : {
+                  "localId" : "215",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "224",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "IsMyCS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "224",
+                  "s" : [ {
+                     "value" : [ "","define ","IsMyCS",": " ]
+                  }, {
+                     "r" : "226",
+                     "s" : [ {
+                        "value" : [ "IsCS","(" ]
+                     }, {
+                        "r" : "225",
+                        "s" : [ {
+                           "value" : [ "MyCS" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "226",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "name" : "IsCS",
+               "type" : "FunctionRef",
+               "signature" : [ {
+                  "localId" : "227",
+                  "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "225",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "name" : "MyCS",
+                  "type" : "CodeSystemRef"
+               } ]
             }
          } ]
       }

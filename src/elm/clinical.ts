@@ -132,22 +132,23 @@ export class CodeSystemDef extends Expression {
   }
 
   async exec(_ctx: Context) {
-    return new dt.CodeSystem(this.id, this.version, this.name);
+    return new dt.CodeSystem(this.name, this.id, this.version);
   }
 }
 
 export class CodeSystemRef extends Expression {
   name: string;
-  libraryName: string;
+  library: string;
 
   constructor(json: any) {
     super(json);
     this.name = json.name;
-    this.libraryName = json.libraryName;
+    this.library = json.libraryName;
   }
 
   async exec(ctx: Context) {
-    const codeSystemDef = ctx.getCodeSystem(this.name, this.libraryName);
+    ctx = this.library ? ctx.getLibraryContext(this.library) : ctx;
+    const codeSystemDef = ctx.getCodeSystem(this.name);
     return codeSystemDef ? codeSystemDef.execute(ctx) : undefined;
   }
 }

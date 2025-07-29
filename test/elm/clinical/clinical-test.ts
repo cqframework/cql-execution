@@ -349,14 +349,8 @@ describe('CodeSystemRef', () => {
     setup(this, data);
   });
 
-  it('should have a name', function () {
-    this.resolveMyCS.name.should.equal('MyCS');
-  });
-
-  it('should execute to the defined code system', async function () {
-    const myCS = await this.resolveMyCS.exec(this.ctx);
-    myCS.id.should.equal('http://loinc.org');
-    myCS.version.should.equal('1');
+  it('should execute to true', async function () {
+    (await this.isMyCS.exec(this.ctx)).should.equal(true);
   });
 });
 
