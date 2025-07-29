@@ -344,6 +344,16 @@ describe('ConceptRef', () => {
   });
 });
 
+describe('CodeSystemRef', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should execute to true', async function () {
+    (await this.isMyCS.exec(this.ctx)).should.equal(true);
+  });
+});
+
 describe('CalculateAge: Fully Specified Birth Date', () => {
   // Patient birth date: 1980-06-17 at 9:00am GMT
   beforeEach(function () {

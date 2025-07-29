@@ -5158,6 +5158,221 @@ module.exports['ConceptRef'] = {
    }
 }
 
+/* CodeSystemRef
+library TestSnippet version '1'
+using Simple version '1.0.0'
+codesystem MyCS: 'http://loinc.org'
+context Patient
+define function IsCS(cs CodeSystem): cs is CodeSystem
+define IsMyCS: IsCS(MyCS)
+*/
+
+module.exports['CodeSystemRef'] = {
+   "library" : {
+      "localId" : "0",
+      "annotation" : [ {
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "219",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localId" : "1",
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "206",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "206",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version '1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "207",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "MyCS",
+            "id" : "http://loinc.org",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "207",
+                  "s" : [ {
+                     "value" : [ "","codesystem ","MyCS",": ","'http://loinc.org'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "localId" : "211",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "localId" : "209",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "localId" : "210",
+               "type" : "SingletonFrom",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "208",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         }, {
+            "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "IsCS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "212",
+                  "s" : [ {
+                     "value" : [ "","define function IsCS(cs CodeSystem): " ]
+                  }, {
+                     "r" : "215",
+                     "s" : [ {
+                        "r" : "215",
+                        "s" : [ {
+                           "r" : "216",
+                           "s" : [ {
+                              "value" : [ "cs" ]
+                           } ]
+                        }, {
+                           "value" : [ " is " ]
+                        }, {
+                           "r" : "217",
+                           "s" : [ {
+                              "value" : [ "CodeSystem" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "215",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Is",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "216",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "name" : "cs",
+                  "type" : "OperandRef"
+               },
+               "isTypeSpecifier" : {
+                  "localId" : "217",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "operand" : [ {
+               "localId" : "214",
+               "name" : "cs",
+               "operandTypeSpecifier" : {
+                  "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "219",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "IsMyCS",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "219",
+                  "s" : [ {
+                     "value" : [ "","define ","IsMyCS",": " ]
+                  }, {
+                     "r" : "221",
+                     "s" : [ {
+                        "value" : [ "IsCS","(" ]
+                     }, {
+                        "r" : "220",
+                        "s" : [ {
+                           "value" : [ "MyCS" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "221",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "name" : "IsCS",
+               "type" : "FunctionRef",
+               "signature" : [ {
+                  "localId" : "222",
+                  "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "220",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "name" : "MyCS",
+                  "type" : "CodeSystemRef"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
 /* CalculateAge: Fully Specified Birth Date
 library TestSnippet version '1'
 using Simple version '1.0.0'

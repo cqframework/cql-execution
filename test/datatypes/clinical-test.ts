@@ -1,4 +1,4 @@
-import { Code, Concept, ValueSet } from '../../src/datatypes/clinical';
+import { Code, CodeSystem, Concept, ValueSet } from '../../src/datatypes/clinical';
 
 describe('Code', () => {
   let code: Code, code_no_version: Code, code_no_codesystem: Code;
@@ -224,5 +224,25 @@ describe('ValueSet', () => {
     for (let i = 0; i < received.length; i++) {
       expected[i].hasMatch(received[i]).should.be.true();
     }
+  });
+});
+
+describe('CodeSystem', () => {
+  let codeSystemWithVersion: CodeSystem, codeSystemNoVersion: CodeSystem;
+
+  beforeEach(() => {
+    codeSystemWithVersion = new CodeSystem('ExampleName', '5.4.3.2.1', '1');
+    codeSystemNoVersion = new CodeSystem('ExampleName', '5.4.3.2.1', '1');
+  });
+
+  it('should properly represent the name, id, and version', () => {
+    codeSystemWithVersion.name.should.equal('ExampleName');
+    codeSystemWithVersion.id.should.equal('5.4.3.2.1');
+    codeSystemWithVersion.version.should.equal('1');
+  });
+
+  it('should properly represent the name and id when no version is present', () => {
+    codeSystemNoVersion.name.should.equal('ExampleName');
+    codeSystemNoVersion.id.should.equal('5.4.3.2.1');
   });
 });
