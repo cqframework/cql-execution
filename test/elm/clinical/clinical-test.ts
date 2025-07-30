@@ -352,6 +352,10 @@ describe('CodeSystemRef', () => {
   it('should execute to true', async function () {
     (await this.isMyCS.exec(this.ctx)).should.equal(true);
   });
+
+  it('should execute to string of CodeSystem id and version', async function () {
+    (await this.codeInfo.exec(this.ctx)).should.equal('http://loinc.org1');
+  });
 });
 
 describe('CalculateAge: Fully Specified Birth Date', () => {
