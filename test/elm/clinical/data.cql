@@ -102,9 +102,11 @@ concept "Tobacco smoking status": { "Tobacco smoking status code" } display 'Tob
 define Foo: "Tobacco smoking status"
 
 // @Test: CodeSystemRef
-codesystem MyCS: 'http://loinc.org'
+codesystem MyCS: 'http://loinc.org' version '1'
 define function IsCS(cs CodeSystem): cs is CodeSystem
+define function GetCodeSystemInfo(cs CodeSystem): cs.id + cs.version
 define IsMyCS: IsCS(MyCS)
+define CodeInfo: GetCodeSystemInfo(MyCS)
 
 // @Test: CalculateAge: Fully Specified Birth Date
 define Years: AgeInYears()

@@ -5161,10 +5161,12 @@ module.exports['ConceptRef'] = {
 /* CodeSystemRef
 library TestSnippet version '1'
 using Simple version '1.0.0'
-codesystem MyCS: 'http://loinc.org'
+codesystem MyCS: 'http://loinc.org' version '1'
 context Patient
 define function IsCS(cs CodeSystem): cs is CodeSystem
+define function GetCodeSystemInfo(cs CodeSystem): cs.id + cs.version
 define IsMyCS: IsCS(MyCS)
+define CodeInfo: GetCodeSystemInfo(MyCS)
 */
 
 module.exports['CodeSystemRef'] = {
@@ -5178,7 +5180,7 @@ module.exports['CodeSystemRef'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "219",
+            "r" : "235",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -5225,13 +5227,14 @@ module.exports['CodeSystemRef'] = {
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "MyCS",
             "id" : "http://loinc.org",
+            "version" : "1",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
                   "r" : "207",
                   "s" : [ {
-                     "value" : [ "","codesystem ","MyCS",": ","'http://loinc.org'" ]
+                     "value" : [ "","codesystem ","MyCS",": ","'http://loinc.org'"," version ","'1'" ]
                   } ]
                }
             } ]
@@ -5325,7 +5328,100 @@ module.exports['CodeSystemRef'] = {
                }
             } ]
          }, {
-            "localId" : "219",
+            "localId" : "218",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "name" : "GetCodeSystemInfo",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "218",
+                  "s" : [ {
+                     "value" : [ "","define function GetCodeSystemInfo(cs CodeSystem): " ]
+                  }, {
+                     "r" : "228",
+                     "s" : [ {
+                        "r" : "228",
+                        "s" : [ {
+                           "r" : "223",
+                           "s" : [ {
+                              "r" : "222",
+                              "s" : [ {
+                                 "value" : [ "cs" ]
+                              } ]
+                           }, {
+                              "value" : [ "." ]
+                           }, {
+                              "r" : "223",
+                              "s" : [ {
+                                 "value" : [ "id" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "225",
+                           "s" : [ {
+                              "r" : "224",
+                              "s" : [ {
+                                 "value" : [ "cs" ]
+                              } ]
+                           }, {
+                              "value" : [ "." ]
+                           }, {
+                              "r" : "225",
+                              "s" : [ {
+                                 "value" : [ "version" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "228",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "type" : "Concatenate",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "223",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "path" : "id",
+                  "type" : "Property",
+                  "source" : {
+                     "localId" : "222",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                     "name" : "cs",
+                     "type" : "OperandRef"
+                  }
+               }, {
+                  "localId" : "225",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "path" : "version",
+                  "type" : "Property",
+                  "source" : {
+                     "localId" : "224",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                     "name" : "cs",
+                     "type" : "OperandRef"
+                  }
+               } ]
+            },
+            "operand" : [ {
+               "localId" : "220",
+               "name" : "cs",
+               "operandTypeSpecifier" : {
+                  "localId" : "219",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "230",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "IsMyCS",
             "context" : "Patient",
@@ -5333,15 +5429,15 @@ module.exports['CodeSystemRef'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "230",
                   "s" : [ {
                      "value" : [ "","define ","IsMyCS",": " ]
                   }, {
-                     "r" : "221",
+                     "r" : "232",
                      "s" : [ {
                         "value" : [ "IsCS","(" ]
                      }, {
-                        "r" : "220",
+                        "r" : "231",
                         "s" : [ {
                            "value" : [ "MyCS" ]
                         } ]
@@ -5352,17 +5448,61 @@ module.exports['CodeSystemRef'] = {
                }
             } ],
             "expression" : {
-               "localId" : "221",
+               "localId" : "232",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "IsCS",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "222",
+                  "localId" : "233",
                   "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "220",
+                  "localId" : "231",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "name" : "MyCS",
+                  "type" : "CodeSystemRef"
+               } ]
+            }
+         }, {
+            "localId" : "235",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "name" : "CodeInfo",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "235",
+                  "s" : [ {
+                     "value" : [ "","define ","CodeInfo",": " ]
+                  }, {
+                     "r" : "237",
+                     "s" : [ {
+                        "value" : [ "GetCodeSystemInfo","(" ]
+                     }, {
+                        "r" : "236",
+                        "s" : [ {
+                           "value" : [ "MyCS" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "237",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "name" : "GetCodeSystemInfo",
+               "type" : "FunctionRef",
+               "signature" : [ {
+                  "localId" : "238",
+                  "name" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "236",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                   "name" : "MyCS",
                   "type" : "CodeSystemRef"
