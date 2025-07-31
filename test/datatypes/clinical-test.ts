@@ -1,4 +1,5 @@
 import { Code, CodeSystem, Concept, ValueSet } from '../../src/datatypes/clinical';
+import should from 'should';
 
 describe('Code', () => {
   let code: Code, code_no_version: Code, code_no_codesystem: Code;
@@ -232,7 +233,7 @@ describe('CodeSystem', () => {
 
   beforeEach(() => {
     codeSystemWithVersion = new CodeSystem('ExampleName', '5.4.3.2.1', '1');
-    codeSystemNoVersion = new CodeSystem('ExampleName', '5.4.3.2.1', '1');
+    codeSystemNoVersion = new CodeSystem('ExampleName', '5.4.3.2.1');
   });
 
   it('should properly represent the name, id, and version', () => {
@@ -244,5 +245,6 @@ describe('CodeSystem', () => {
   it('should properly represent the name and id when no version is present', () => {
     codeSystemNoVersion.name.should.equal('ExampleName');
     codeSystemNoVersion.id.should.equal('5.4.3.2.1');
+    should.not.exist(codeSystemNoVersion.version);
   });
 });
