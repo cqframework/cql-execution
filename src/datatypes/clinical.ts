@@ -151,5 +151,5 @@ function codesMatch(code1: Code, code2: Code) {
 }
 
 export class CodeSystem {
-  constructor(public name: string, public id: string, public version?: string) {}
+  constructor(public id: string, public version?: string, public name?: string) {}
 }

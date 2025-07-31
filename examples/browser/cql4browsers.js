@@ -464,10 +464,10 @@ function codesMatch(code1, code2) {
     return code1.code === code2.code && code1.system === code2.system;
 }
 class CodeSystem {
-    constructor(name, id, version) {
-        this.name = name;
+    constructor(id, version, name) {
         this.id = id;
         this.version = version;
+        this.name = name;
     }
 }
 exports.CodeSystem = CodeSystem;
@@ -3878,7 +3878,7 @@ class CodeSystemDef extends expression_1.Expression {
         this.version = json.version;
     }
     async exec(_ctx) {
-        return new dt.CodeSystem(this.name, this.id, this.version);
+        return new dt.CodeSystem(this.id, this.version, this.name);
     }
 }
 exports.CodeSystemDef = CodeSystemDef;

@@ -232,8 +232,8 @@ describe('CodeSystem', () => {
   let codeSystemWithVersion: CodeSystem, codeSystemNoVersion: CodeSystem;
 
   beforeEach(() => {
-    codeSystemWithVersion = new CodeSystem('ExampleName', '5.4.3.2.1', '1');
-    codeSystemNoVersion = new CodeSystem('ExampleName', '5.4.3.2.1');
+    codeSystemWithVersion = new CodeSystem('5.4.3.2.1', '1', 'ExampleName');
+    codeSystemNoVersion = new CodeSystem('5.4.3.2.1', null, 'ExampleName');
   });
 
   it('should properly represent the name, id, and version', () => {
