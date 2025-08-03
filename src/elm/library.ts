@@ -100,12 +100,11 @@ export class Library {
   }
 
   getValueSet(identifier: string, libraryName: string) {
-    if (this.valuesets[identifier] != null) {
+    if (libraryName && this.includes[libraryName]) {
+      return this.includes[libraryName].valuesets[identifier];
+    } else if (libraryName == null || libraryName === this.name) {
       return this.valuesets[identifier];
     }
-    return this.includes[libraryName] != null
-      ? this.includes[libraryName].valuesets[identifier]
-      : undefined;
   }
 
   getCodeSystem(identifier: string, libraryName?: string) {

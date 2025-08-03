@@ -5512,12 +5512,12 @@ class Library {
         return (this.expressions[identifier] || this.includes[identifier] || this.getFunction(identifier));
     }
     getValueSet(identifier, libraryName) {
-        if (this.valuesets[identifier] != null) {
+        if (libraryName && this.includes[libraryName]) {
+            return this.includes[libraryName].valuesets[identifier];
+        }
+        else if (libraryName == null || libraryName === this.name) {
             return this.valuesets[identifier];
         }
-        return this.includes[libraryName] != null
-            ? this.includes[libraryName].valuesets[identifier]
-            : undefined;
     }
     getCodeSystem(identifier, libraryName) {
         if (libraryName && this.includes[libraryName]) {
