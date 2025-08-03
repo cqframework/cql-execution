@@ -233,7 +233,7 @@ describe('CodeSystem', () => {
 
   beforeEach(() => {
     codeSystemWithVersion = new CodeSystem('5.4.3.2.1', '1', 'ExampleName');
-    codeSystemNoVersion = new CodeSystem('5.4.3.2.1', null, 'ExampleName');
+    codeSystemNoVersion = new CodeSystem('5.4.3.2.1', undefined, 'ExampleName');
   });
 
   it('should properly represent the name, id, and version', () => {
