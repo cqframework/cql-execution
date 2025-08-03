@@ -3886,9 +3886,10 @@ class CodeSystemRef extends expression_1.Expression {
     constructor(json) {
         super(json);
         this.name = json.name;
+        this.libraryName = json.libraryName;
     }
     async exec(ctx) {
-        const codeSystemDef = ctx.getCodeSystem(this.name);
+        const codeSystemDef = ctx.getCodeSystem(this.name, this.libraryName);
         return codeSystemDef ? codeSystemDef.execute(ctx) : undefined;
     }
 }
@@ -5438,7 +5439,11 @@ exports.Library = void 0;
 const expressions_1 = require("./expressions");
 class Library {
     constructor(json, libraryManager) {
+        var _a, _b;
         this.source = json;
+        // identifier
+        this.name = (_a = json.library.identifier) === null || _a === void 0 ? void 0 : _a.id;
+        this.version = (_b = json.library.identifier) === null || _b === void 0 ? void 0 : _b.version;
         // usings
         const usingDefs = (json.library.usings && json.library.usings.def) || [];
         this.usings = usingDefs
@@ -5499,14 +5504,6 @@ class Library {
                 this.includes[incl.localIdentifier] = libraryManager.resolve(incl.path, incl.version);
             }
         }
-        // Include codesystems from includes
-        for (const iProperty in this.includes) {
-            if (this.includes[iProperty] && this.includes[iProperty].codesystems) {
-                for (const csProperty in this.includes[iProperty].codesystems) {
-                    this.codesystems[csProperty] = this.includes[iProperty].codesystems[csProperty];
-                }
-            }
-        }
     }
     getFunction(identifier) {
         return this.functions[identifier];
@@ -5522,8 +5519,13 @@ class Library {
             ? this.includes[libraryName].valuesets[identifier]
             : undefined;
     }
-    getCodeSystem(identifier) {
-        return this.codesystems[identifier];
+    getCodeSystem(identifier, libraryName) {
+        if (libraryName && this.includes[libraryName]) {
+            return this.includes[libraryName].codesystems[identifier];
+        }
+        else if (libraryName == null || libraryName === this.name) {
+            return this.codesystems[identifier];
+        }
     }
     getCode(identifier) {
         return this.codes[identifier];
@@ -8109,8 +8111,8 @@ class Context {
     getValueSet(name, library) {
         return this.parent && this.parent.getValueSet(name, library);
     }
-    getCodeSystem(name) {
-        return this.parent && this.parent.getCodeSystem(name);
+    getCodeSystem(name, libraryName) {
+        return this.parent && this.parent.getCodeSystem(name, libraryName);
     }
     getCode(name) {
         return this.parent && this.parent.getCode(name);

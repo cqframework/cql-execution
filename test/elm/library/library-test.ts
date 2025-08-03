@@ -30,11 +30,6 @@ describe('Using CommonLib', () => {
     setup(this, data, [p1, p2], {}, {}, new Repository(data));
   });
 
-  it('should include codesystems from CommonLib', function () {
-    const codesystems = this.lib.codesystems;
-    codesystems.should.not.be.empty();
-  });
-
   it('should have using models defined', function () {
     this.lib.usings.should.not.be.empty();
     this.lib.usings.length.should.equal(1);
@@ -61,6 +56,18 @@ describe('Using CommonLib', () => {
       await this.supportLibCode.exec(this.ctx),
       new Code('428371000124100', '2.16.840.1.113883.6.96', 'foo', 'directReferenceCode')
     ).should.be.true();
+  });
+
+  it('should find the code system defined in the included library', async function () {
+    const snomed = await this.supportLibCodeSystem.exec(this.ctx);
+    should.exist(snomed);
+    snomed.id.should.equal('2.16.840.1.113883.6.96');
+  });
+
+  it('should differentiate between code systems with the same name', async function () {
+    const favorites = await this.supportClashingCodeSystemNames.exec(this.ctx);
+    favorites.MyFavorite.id.should.equal('2.4.6.8.10');
+    favorites.MyLibsFavorite.id.should.equal('1.3.5.7.9');
   });
 });
 
@@ -146,6 +153,11 @@ describe('Using CommonLib and CommonLib2', () => {
       .exec_patient_context(this.patientSource);
     this.commonLocalIdObject = this.results.localIdPatientResultsMap['1'].Common;
     this.common2LocalIdObject = this.results.localIdPatientResultsMap['1'].Common2;
+  });
+
+  it('should have name and version defined since CQL used library identifier', function () {
+    this.lib.name.should.equal('UsingTwoLibs');
+    this.lib.version.should.equal('0.0.1');
   });
 
   it('should contain TheParameter localId in the localIdMap', function () {
