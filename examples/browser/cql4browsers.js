@@ -3892,9 +3892,10 @@ class CodeSystemRef extends expression_1.Expression {
     constructor(json) {
         super(json);
         this.name = json.name;
+        this.libraryName = json.libraryName;
     }
     async exec(ctx) {
-        const codeSystemDef = ctx.getCodeSystem(this.name);
+        const codeSystemDef = ctx.getCodeSystem(this.name, this.libraryName);
         return codeSystemDef ? codeSystemDef.execute(ctx) : undefined;
     }
 }

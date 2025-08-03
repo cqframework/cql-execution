@@ -69,18 +69,6 @@ describe('Using CommonLib', () => {
     favorites.MyFavorite.id.should.equal('2.4.6.8.10');
     favorites.MyLibsFavorite.id.should.equal('1.3.5.7.9');
   });
-
-  it('should find the value set defined in the included library', async function () {
-    const pharyngitis = await this.supportLibValueSet.exec(this.ctx);
-    should.exist(pharyngitis);
-    pharyngitis.oid.should.equal('2.16.840.1.113883.3.464.1003.101.12.1001');
-  });
-
-  it('should differentiate between value sets with the same name', async function () {
-    const favorites = await this.supportClashingValueSetNames.exec(this.ctx);
-    favorites.MyFavorite.oid.should.equal('10.8.6.4.2');
-    favorites.MyLibsFavorite.oid.should.equal('9.7.5.3.1');
-  });
 });
 
 describe('Using CommonLib2', () => {

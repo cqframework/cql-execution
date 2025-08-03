@@ -138,14 +138,16 @@ export class CodeSystemDef extends Expression {
 
 export class CodeSystemRef extends Expression {
   name: string;
+  libraryName: string;
 
   constructor(json: any) {
     super(json);
     this.name = json.name;
+    this.libraryName = json.libraryName;
   }
 
   async exec(ctx: Context) {
-    const codeSystemDef = ctx.getCodeSystem(this.name);
+    const codeSystemDef = ctx.getCodeSystem(this.name, this.libraryName);
     return codeSystemDef ? codeSystemDef.execute(ctx) : undefined;
   }
 }

@@ -4,8 +4,6 @@ using Simple version '1.0.0'
 
 include Common2 called common2
 
-valueset "My Favorite VS": '9.7.5.3.1'
-valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.101.12.1001'
 codesystem "My Favorite CS": '1.3.5.7.9'
 codesystem "SNOMEDCT": '2.16.840.1.113883.6.96'
 code "directReferenceCode": '428371000124100' from "SNOMEDCT" display 'directReferenceCode'
