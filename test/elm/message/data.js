@@ -22,14 +22,14 @@ module.exports['Message'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "256",
+            "r" : "265",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -72,21 +72,21 @@ module.exports['Message'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -96,7 +96,7 @@ module.exports['Message'] = {
                }
             }
          }, {
-            "localId" : "211",
+            "localId" : "212",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "DoDivide",
             "context" : "Patient",
@@ -105,26 +105,26 @@ module.exports['Message'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "211",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define function DoDivide(num Integer, den Integer):\n  " ]
                   }, {
-                     "r" : "242",
+                     "r" : "249",
                      "s" : [ {
-                        "r" : "242",
+                        "r" : "249",
                         "s" : [ {
                            "value" : [ "Message","(" ]
                         }, {
-                           "r" : "216",
+                           "r" : "220",
                            "s" : [ {
-                              "r" : "217",
+                              "r" : "221",
                               "s" : [ {
                                  "value" : [ "num" ]
                               } ]
                            }, {
                               "value" : [ " / " ]
                            }, {
-                              "r" : "218",
+                              "r" : "222",
                               "s" : [ {
                                  "value" : [ "den" ]
                               } ]
@@ -132,34 +132,34 @@ module.exports['Message'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "227",
+                           "r" : "231",
                            "s" : [ {
-                              "r" : "228",
+                              "r" : "232",
                               "s" : [ {
                                  "value" : [ "den" ]
                               } ]
                            }, {
-                              "r" : "229",
+                              "r" : "233",
                               "value" : [ " ","="," ","0" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "232",
+                           "r" : "236",
                            "s" : [ {
                               "value" : [ "'DivideByZero'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "233",
+                           "r" : "238",
                            "s" : [ {
                               "value" : [ "'Error'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "234",
+                           "r" : "240",
                            "s" : [ {
                               "value" : [ "'Cannot divide by zero'" ]
                            } ]
@@ -171,67 +171,67 @@ module.exports['Message'] = {
                }
             } ],
             "expression" : {
-               "localId" : "242",
+               "localId" : "249",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Message",
                "signature" : [ {
-                  "localId" : "243",
+                  "localId" : "250",
                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "244",
+                  "localId" : "251",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "245",
+                  "localId" : "252",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "246",
+                  "localId" : "253",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "247",
+                  "localId" : "254",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "source" : {
-                  "localId" : "216",
+                  "localId" : "220",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "type" : "Divide",
                   "signature" : [ {
-                     "localId" : "225",
+                     "localId" : "229",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "226",
+                     "localId" : "230",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "localId" : "220",
+                     "localId" : "224",
                      "type" : "ToDecimal",
                      "signature" : [ {
-                        "localId" : "221",
+                        "localId" : "225",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "217",
+                        "localId" : "221",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "num",
                         "type" : "OperandRef"
                      }
                   }, {
-                     "localId" : "223",
+                     "localId" : "227",
                      "type" : "ToDecimal",
                      "signature" : [ {
-                        "localId" : "224",
+                        "localId" : "228",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "218",
+                        "localId" : "222",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "den",
                         "type" : "OperandRef"
@@ -239,25 +239,25 @@ module.exports['Message'] = {
                   } ]
                },
                "condition" : {
-                  "localId" : "227",
+                  "localId" : "231",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Equal",
                   "signature" : [ {
-                     "localId" : "230",
+                     "localId" : "234",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "231",
+                     "localId" : "235",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "localId" : "228",
+                     "localId" : "232",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "name" : "den",
                      "type" : "OperandRef"
                   }, {
-                     "localId" : "229",
+                     "localId" : "233",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
@@ -265,21 +265,21 @@ module.exports['Message'] = {
                   } ]
                },
                "code" : {
-                  "localId" : "232",
+                  "localId" : "236",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "DivideByZero",
                   "type" : "Literal"
                },
                "severity" : {
-                  "localId" : "233",
+                  "localId" : "238",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Error",
                   "type" : "Literal"
                },
                "message" : {
-                  "localId" : "234",
+                  "localId" : "240",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Cannot divide by zero",
@@ -287,26 +287,26 @@ module.exports['Message'] = {
                }
             },
             "operand" : [ {
-               "localId" : "213",
+               "localId" : "214",
                "name" : "num",
                "operandTypeSpecifier" : {
-                  "localId" : "212",
+                  "localId" : "213",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }, {
-               "localId" : "215",
+               "localId" : "216",
                "name" : "den",
                "operandTypeSpecifier" : {
-                  "localId" : "214",
+                  "localId" : "215",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "249",
+            "localId" : "257",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "oneOverTwo",
             "context" : "Patient",
@@ -314,40 +314,40 @@ module.exports['Message'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "249",
+                  "r" : "257",
                   "s" : [ {
                      "value" : [ "","define ","oneOverTwo",": " ]
                   }, {
-                     "r" : "252",
+                     "r" : "260",
                      "s" : [ {
-                        "r" : "250",
+                        "r" : "258",
                         "value" : [ "DoDivide","(","1",", ","2",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "252",
+               "localId" : "260",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "name" : "DoDivide",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "253",
+                  "localId" : "261",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "254",
+                  "localId" : "262",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "250",
+                  "localId" : "258",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                }, {
-                  "localId" : "251",
+                  "localId" : "259",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
@@ -355,7 +355,7 @@ module.exports['Message'] = {
                } ]
             }
          }, {
-            "localId" : "256",
+            "localId" : "265",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "oneOverZero",
             "context" : "Patient",
@@ -363,40 +363,40 @@ module.exports['Message'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "256",
+                  "r" : "265",
                   "s" : [ {
                      "value" : [ "","define ","oneOverZero",": " ]
                   }, {
-                     "r" : "259",
+                     "r" : "268",
                      "s" : [ {
-                        "r" : "257",
+                        "r" : "266",
                         "value" : [ "DoDivide","(","1",", ","0",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "259",
+               "localId" : "268",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "name" : "DoDivide",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "260",
+                  "localId" : "269",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "261",
+                  "localId" : "270",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "257",
+                  "localId" : "266",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                }, {
-                  "localId" : "258",
+                  "localId" : "267",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",
@@ -421,14 +421,14 @@ module.exports['Included'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "211",
+            "r" : "212",
             "s" : [ {
                "value" : [ "","library Included" ]
             } ]
@@ -470,21 +470,21 @@ module.exports['Included'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -494,7 +494,7 @@ module.exports['Included'] = {
                }
             }
          }, {
-            "localId" : "211",
+            "localId" : "212",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "DoDivide",
             "context" : "Patient",
@@ -503,26 +503,26 @@ module.exports['Included'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "211",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define function DoDivide(num Integer, den Integer):\n  " ]
                   }, {
-                     "r" : "242",
+                     "r" : "249",
                      "s" : [ {
-                        "r" : "242",
+                        "r" : "249",
                         "s" : [ {
                            "value" : [ "Message","(" ]
                         }, {
-                           "r" : "216",
+                           "r" : "220",
                            "s" : [ {
-                              "r" : "217",
+                              "r" : "221",
                               "s" : [ {
                                  "value" : [ "num" ]
                               } ]
                            }, {
                               "value" : [ " / " ]
                            }, {
-                              "r" : "218",
+                              "r" : "222",
                               "s" : [ {
                                  "value" : [ "den" ]
                               } ]
@@ -530,34 +530,34 @@ module.exports['Included'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "227",
+                           "r" : "231",
                            "s" : [ {
-                              "r" : "228",
+                              "r" : "232",
                               "s" : [ {
                                  "value" : [ "den" ]
                               } ]
                            }, {
-                              "r" : "229",
+                              "r" : "233",
                               "value" : [ " ","="," ","0" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "232",
+                           "r" : "236",
                            "s" : [ {
                               "value" : [ "'DivideByZero'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "233",
+                           "r" : "238",
                            "s" : [ {
                               "value" : [ "'Error'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "234",
+                           "r" : "240",
                            "s" : [ {
                               "value" : [ "'Cannot divide by zero in included'" ]
                            } ]
@@ -569,67 +569,67 @@ module.exports['Included'] = {
                }
             } ],
             "expression" : {
-               "localId" : "242",
+               "localId" : "249",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Message",
                "signature" : [ {
-                  "localId" : "243",
+                  "localId" : "250",
                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "244",
+                  "localId" : "251",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "245",
+                  "localId" : "252",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "246",
+                  "localId" : "253",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "247",
+                  "localId" : "254",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "source" : {
-                  "localId" : "216",
+                  "localId" : "220",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "type" : "Divide",
                   "signature" : [ {
-                     "localId" : "225",
+                     "localId" : "229",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "226",
+                     "localId" : "230",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "localId" : "220",
+                     "localId" : "224",
                      "type" : "ToDecimal",
                      "signature" : [ {
-                        "localId" : "221",
+                        "localId" : "225",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "217",
+                        "localId" : "221",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "num",
                         "type" : "OperandRef"
                      }
                   }, {
-                     "localId" : "223",
+                     "localId" : "227",
                      "type" : "ToDecimal",
                      "signature" : [ {
-                        "localId" : "224",
+                        "localId" : "228",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "218",
+                        "localId" : "222",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "den",
                         "type" : "OperandRef"
@@ -637,25 +637,25 @@ module.exports['Included'] = {
                   } ]
                },
                "condition" : {
-                  "localId" : "227",
+                  "localId" : "231",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Equal",
                   "signature" : [ {
-                     "localId" : "230",
+                     "localId" : "234",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "231",
+                     "localId" : "235",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "localId" : "228",
+                     "localId" : "232",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "name" : "den",
                      "type" : "OperandRef"
                   }, {
-                     "localId" : "229",
+                     "localId" : "233",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
@@ -663,21 +663,21 @@ module.exports['Included'] = {
                   } ]
                },
                "code" : {
-                  "localId" : "232",
+                  "localId" : "236",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "DivideByZero",
                   "type" : "Literal"
                },
                "severity" : {
-                  "localId" : "233",
+                  "localId" : "238",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Error",
                   "type" : "Literal"
                },
                "message" : {
-                  "localId" : "234",
+                  "localId" : "240",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Cannot divide by zero in included",
@@ -685,19 +685,19 @@ module.exports['Included'] = {
                }
             },
             "operand" : [ {
-               "localId" : "213",
+               "localId" : "214",
                "name" : "num",
                "operandTypeSpecifier" : {
-                  "localId" : "212",
+                  "localId" : "213",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }, {
-               "localId" : "215",
+               "localId" : "216",
                "name" : "den",
                "operandTypeSpecifier" : {
-                  "localId" : "214",
+                  "localId" : "215",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
@@ -722,14 +722,14 @@ module.exports['Retrieve'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "221",
+            "r" : "225",
             "s" : [ {
                "value" : [ "","library Retrieve" ]
             } ]
@@ -771,13 +771,13 @@ module.exports['Retrieve'] = {
       },
       "includes" : {
          "def" : [ {
-            "localId" : "207",
+            "localId" : "208",
             "localIdentifier" : "included",
             "path" : "Included",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "207",
+                  "r" : "208",
                   "s" : [ {
                      "value" : [ "","include " ]
                   }, {
@@ -793,21 +793,21 @@ module.exports['Retrieve'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "211",
+            "localId" : "213",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "209",
+            "localId" : "211",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "210",
+               "localId" : "212",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "208",
+                  "localId" : "210",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -817,7 +817,7 @@ module.exports['Retrieve'] = {
                }
             }
          }, {
-            "localId" : "213",
+            "localId" : "216",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "oneOverTwo",
             "context" : "Patient",
@@ -825,22 +825,22 @@ module.exports['Retrieve'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "213",
+                  "r" : "216",
                   "s" : [ {
                      "value" : [ "","define ","oneOverTwo",": " ]
                   }, {
-                     "r" : "217",
+                     "r" : "220",
                      "s" : [ {
-                        "r" : "214",
+                        "r" : "217",
                         "s" : [ {
                            "value" : [ "included" ]
                         } ]
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "217",
+                        "r" : "220",
                         "s" : [ {
-                           "r" : "215",
+                           "r" : "218",
                            "value" : [ "DoDivide","(","1",", ","2",")" ]
                         } ]
                      } ]
@@ -848,28 +848,28 @@ module.exports['Retrieve'] = {
                }
             } ],
             "expression" : {
-               "localId" : "217",
+               "localId" : "220",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "name" : "DoDivide",
                "libraryName" : "included",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "218",
+                  "localId" : "221",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "219",
+                  "localId" : "222",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "215",
+                  "localId" : "218",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                }, {
-                  "localId" : "216",
+                  "localId" : "219",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
@@ -877,7 +877,7 @@ module.exports['Retrieve'] = {
                } ]
             }
          }, {
-            "localId" : "221",
+            "localId" : "225",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "oneOverZero",
             "context" : "Patient",
@@ -885,22 +885,22 @@ module.exports['Retrieve'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "221",
+                  "r" : "225",
                   "s" : [ {
                      "value" : [ "","define ","oneOverZero",": " ]
                   }, {
-                     "r" : "225",
+                     "r" : "229",
                      "s" : [ {
-                        "r" : "222",
+                        "r" : "226",
                         "s" : [ {
                            "value" : [ "included" ]
                         } ]
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "225",
+                        "r" : "229",
                         "s" : [ {
-                           "r" : "223",
+                           "r" : "227",
                            "value" : [ "DoDivide","(","1",", ","0",")" ]
                         } ]
                      } ]
@@ -908,28 +908,28 @@ module.exports['Retrieve'] = {
                }
             } ],
             "expression" : {
-               "localId" : "225",
+               "localId" : "229",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "name" : "DoDivide",
                "libraryName" : "included",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "226",
+                  "localId" : "230",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "227",
+                  "localId" : "231",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "223",
+                  "localId" : "227",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                }, {
-                  "localId" : "224",
+                  "localId" : "228",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "0",

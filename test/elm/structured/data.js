@@ -20,14 +20,14 @@ module.exports['Tuple'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "227",
+            "r" : "230",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -70,21 +70,21 @@ module.exports['Tuple'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -94,30 +94,30 @@ module.exports['Tuple'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "name" : "tup",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","tup",": " ]
                   }, {
-                     "r" : "213",
+                     "r" : "215",
                      "s" : [ {
                         "value" : [ "{" ]
                      }, {
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "a",": ","1" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
                         "s" : [ {
-                           "r" : "215",
+                           "r" : "217",
                            "value" : [ "b",": ","2" ]
                         } ]
                      }, {
@@ -127,45 +127,45 @@ module.exports['Tuple'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "221",
+               "localId" : "223",
                "type" : "TupleTypeSpecifier",
                "element" : [ {
-                  "localId" : "222",
+                  "localId" : "224",
                   "name" : "a",
                   "elementType" : {
-                     "localId" : "223",
+                     "localId" : "225",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "224",
+                  "localId" : "226",
                   "name" : "b",
                   "elementType" : {
-                     "localId" : "225",
+                     "localId" : "227",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ]
             },
             "expression" : {
-               "localId" : "213",
+               "localId" : "215",
                "type" : "Tuple",
                "resultTypeSpecifier" : {
-                  "localId" : "216",
+                  "localId" : "218",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "217",
+                     "localId" : "219",
                      "name" : "a",
                      "elementType" : {
-                        "localId" : "218",
+                        "localId" : "220",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "219",
+                     "localId" : "221",
                      "name" : "b",
                      "elementType" : {
-                        "localId" : "220",
+                        "localId" : "222",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -174,7 +174,7 @@ module.exports['Tuple'] = {
                "element" : [ {
                   "name" : "a",
                   "value" : {
-                     "localId" : "214",
+                     "localId" : "216",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
@@ -183,7 +183,7 @@ module.exports['Tuple'] = {
                }, {
                   "name" : "b",
                   "value" : {
-                     "localId" : "215",
+                     "localId" : "217",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
@@ -192,30 +192,30 @@ module.exports['Tuple'] = {
                } ]
             }
          }, {
-            "localId" : "227",
+            "localId" : "230",
             "name" : "emptyTup",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "227",
+                  "r" : "230",
                   "s" : [ {
-                     "r" : "228",
+                     "r" : "231",
                      "value" : [ "","define ","emptyTup",": ","{:}" ]
                   } ]
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "230",
+               "localId" : "233",
                "type" : "TupleTypeSpecifier",
                "element" : [ ]
             },
             "expression" : {
-               "localId" : "228",
+               "localId" : "231",
                "type" : "Tuple",
                "resultTypeSpecifier" : {
-                  "localId" : "229",
+                  "localId" : "232",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ ]
                },

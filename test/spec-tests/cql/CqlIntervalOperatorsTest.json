@@ -1,7 +1,7 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "",
          "signatureLevel" : "None",
          "type" : "CqlToElmInfo"
@@ -6810,15 +6810,10 @@
                                  "annotation" : [ ]
                               }
                            }, {
-                              "type" : "ToQuantity",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "2",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              }
+                              "value" : 2,
+                              "unit" : "1",
+                              "type" : "Quantity",
+                              "annotation" : [ ]
                            } ]
                         }
                      }, {
