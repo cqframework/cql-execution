@@ -3174,6 +3174,9 @@ class AnyTrue extends AggregateExpression {
     }
     async exec(ctx) {
         const items = await this.source.execute(ctx);
+        if (items == null) {
+            return false;
+        }
         return (0, util_1.anyTrue)(items);
     }
 }
