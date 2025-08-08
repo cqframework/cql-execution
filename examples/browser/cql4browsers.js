@@ -7251,7 +7251,7 @@ class ReplaceMatches extends expression_1.Expression {
             return null;
         }
         else {
-            return args[0].replace(new RegExp(args[1], 'g'), args[2]);
+            return args[0].replace(new RegExp(args[1], 'g'), args[2].replace(/\\\$/g, '$$'));
         }
     }
 }
