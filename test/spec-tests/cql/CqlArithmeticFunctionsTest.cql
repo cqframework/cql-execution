@@ -45,9 +45,11 @@ define "Add": Tuple{
     output: 2
   },
   "Add1L2L": Tuple{
+    skipped: 'Long not implemented'
+    /*
     expression: 1L + 2L,
     output: 3L
-  },
+    */  },
   "Add1D1D": Tuple{
     expression: 1.0 + 1.0,
     output: 2.0
@@ -479,9 +481,11 @@ define "Multiply": Tuple{
     output: 1
   },
   "Multiply2LBy3L": Tuple{
+    skipped: 'Long not implemented'
+    /*
     expression: 2L * 3L,
     output: 6L
-  },
+    */  },
   "Multiply1DBy2D": Tuple{
     expression: 1.0 * 2.0,
     output: 2.0
@@ -689,9 +693,11 @@ define "Power": Tuple{
     output: 16
   },
   "Power2LTo3L": Tuple{
+    skipped: 'Long not implemented'
+    /*
     expression: 2L^3L,
     output: 8L
-  },
+    */  },
   "Power2DTo4D": Tuple{
     expression: 2.0^4.0,
     output: 16.0

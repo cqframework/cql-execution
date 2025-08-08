@@ -52,15 +52,20 @@ CqlListOperatorsTest.ProperContains                     ProperContains not imple
 CqlListOperatorsTest.ProperIn                           ProperIn not implemented
 
 # Unimplemented (New in CQL 1.5)
+CqlAggregateFunctionsTest.Product.ProductLong                         Long not implemented
+CqlAggregateFunctionsTest.Sum.SumTestLong                             Long not implemented
 CqlArithmeticFunctionsTest.Abs.AbsLong                                Long not implemented
 CqlArithmeticFunctionsTest.Add.Add1L1L                                Long not implemented
+CqlArithmeticFunctionsTest.Add.Add1L2L                                Long not implemented
 CqlArithmeticFunctionsTest.MinValue.LongMinValue                      Long not implemented
 CqlArithmeticFunctionsTest.MaxValue.LongMaxValue                      Long not implemented
 CqlArithmeticFunctionsTest.Modulo.Modulo4LBy2L                        Long not implemented
 CqlArithmeticFunctionsTest.Multiply.Multiply1By1L                     Long not implemented
+CqlArithmeticFunctionsTest.Multiply.Multiply2LBy3L                    Long not implemented
 CqlArithmeticFunctionsTest.Negate.NegateNeg1L                         Long not implemented
 CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1L                Long not implemented
 CqlArithmeticFunctionsTest.Power.Power2LTo2L                          Long not implemented
+CqlArithmeticFunctionsTest.Power.Power2LTo3L                          Long not implemented
 CqlArithmeticFunctionsTest.Subtract.Subtract1LAnd1L                   Long not implemented
 CqlArithmeticFunctionsTest.Successor.SuccessorOf1L                    Long not implemented
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10LBy3L"  Long not implemented
