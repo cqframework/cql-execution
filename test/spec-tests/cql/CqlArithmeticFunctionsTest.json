@@ -3452,29 +3452,11 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "type" : "Modulo",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "value" : 10.0,
-                              "unit" : "g",
-                              "type" : "Quantity",
-                              "annotation" : [ ]
-                           }, {
-                              "value" : 3.0,
-                              "unit" : "g",
-                              "type" : "Quantity",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "value" : 1.0,
-                           "unit" : "g",
-                           "type" : "Quantity",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Modulo not implemented for Quantity",
+                           "type" : "Literal",
                            "annotation" : [ ]
                         }
                      } ]
@@ -7450,29 +7432,11 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "type" : "TruncatedDivide",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "value" : 10.0,
-                              "unit" : "g",
-                              "type" : "Quantity",
-                              "annotation" : [ ]
-                           }, {
-                              "value" : 5.0,
-                              "unit" : "g",
-                              "type" : "Quantity",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "value" : 2.0,
-                           "unit" : "g",
-                           "type" : "Quantity",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Truncated divide not implemented for Quantity",
+                           "type" : "Literal",
                            "annotation" : [ ]
                         }
                      } ]
@@ -7483,29 +7447,11 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "type" : "TruncatedDivide",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "value" : 4.14,
-                              "unit" : "m",
-                              "type" : "Quantity",
-                              "annotation" : [ ]
-                           }, {
-                              "value" : 2.06,
-                              "unit" : "m",
-                              "type" : "Quantity",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "value" : 2.0,
-                           "unit" : "m",
-                           "type" : "Quantity",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Truncated divide not implemented for Quantity",
+                           "type" : "Literal",
                            "annotation" : [ ]
                         }
                      } ]

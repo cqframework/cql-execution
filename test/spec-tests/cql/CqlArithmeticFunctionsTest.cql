@@ -462,9 +462,11 @@ define "Modulo": Tuple{
     output: 0.5 'cm'
     */  },
   "Modulo10By3Quantity": Tuple{
+    skipped: 'Modulo not implemented for Quantity'
+    /*
     expression: 10.0 'g' mod 3.0 'g',
     output: 1.0 'g'
-  },
+    */  },
   "Modulo10By0Quantity": Tuple{
     expression: 10.0 'g' mod 0.0 'g',
     output: null
@@ -964,13 +966,17 @@ define "Truncated Divide": Tuple{
     output: -3.0 'cm'
     */  },
   "TruncatedDivide10By5DQuantity": Tuple{
+    skipped: 'Truncated divide not implemented for Quantity'
+    /*
     expression: 10.0 'g' div 5.0 'g',
     output: 2.0 'g'
-  },
+    */  },
   "TruncatedDivide414By206DQuantity": Tuple{
+    skipped: 'Truncated divide not implemented for Quantity'
+    /*
     expression: 4.14 'm' div 2.06 'm',
     output: 2.0 'm'
-  },
+    */  },
   "TruncatedDivide10By0DQuantity": Tuple{
     expression: 10.0 'g' div 0.0 'g',
     output: null

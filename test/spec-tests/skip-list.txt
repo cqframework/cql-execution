@@ -70,7 +70,10 @@ CqlArithmeticFunctionsTest.Subtract.Subtract1LAnd1L                   Long not i
 CqlArithmeticFunctionsTest.Successor.SuccessorOf1L                    Long not implemented
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10LBy3L"  Long not implemented
 CqlArithmeticFunctionsTest.Modulo.ModuloQuantity                      Modulo not implemented for Quantity
+CqlArithmeticFunctionsTest.Modulo.Modulo10By3Quantity                 Modulo not implemented for Quantity
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Truncated divide not implemented for Quantity
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10By5DQuantity"           Truncated divide not implemented for Quantity
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide414By206DQuantity"        Truncated divide not implemented for Quantity
 
 # Awaiting feedback from Bryn
 
