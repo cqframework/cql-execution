@@ -28,7 +28,7 @@ define "Convert": Tuple{
   },
   "StringToIntegerError": Tuple{
     expression: convert 'foo' to Integer,
-    invalid: true
+    output: null
   },
   "StringToDateTime": Tuple{
     skipped: 'Answer does not include timezone offset, but default offset depends on test environment'
@@ -42,7 +42,7 @@ define "Convert": Tuple{
   },
   "StringToDateTimeMalformed": Tuple{
     expression: convert '2014/01/01' to DateTime,
-    invalid: true
+    output: null
   }
 }
 
@@ -54,6 +54,10 @@ define "Is": Tuple{
   "StringIsInteger": Tuple{
     expression: '5' is Integer,
     output: false
+  },
+  "ValueSetIsVocabulary": Tuple{
+    expression: System.ValueSet{id: '123'} is Vocabulary,
+    output: true
   }
 }
 
@@ -110,7 +114,15 @@ define "ToDateTime": Tuple{
   },
   "ToDateTimeMalformed": Tuple{
     expression: ToDateTime('2014/01/01T12:05:05.955Z'),
-    invalid: true
+    output: null
+  },
+  "ToDateTimeDate": Tuple{
+    expression: ToDateTime(@2014-01-01),
+    output: @2014-01-01T
+  },
+  "ToDateTimeTimeUnspecified": Tuple{
+    expression: hour from ToDateTime(@2014-01-01) is null,
+    output: true
   }
 }
 
@@ -173,6 +185,6 @@ define "ToTime": Tuple{
   },
   "ToTimeMalformed": Tuple{
     expression: ToTime('T14-30-00.0'),
-    invalid: true
+    output: null
   }
 }

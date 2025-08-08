@@ -1,0 +1,84 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "3.22.0",
+         "translatorOptions" : "",
+         "signatureLevel" : "None",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "OverloadMatching",
+         "version" : "1.4.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
+         }, {
+            "localIdentifier" : "QUICK",
+            "uri" : "http://hl7.org/fhir/us/qicore",
+            "version" : "3.3.0",
+            "annotation" : [ ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "name" : "Patient",
+            "annotation" : [ ]
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "name" : "Patient",
+            "context" : "Patient",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "SingletonFrom",
+               "annotation" : [ ],
+               "signature" : [ ],
+               "operand" : {
+                  "dataType" : "{http://hl7.org/fhir/us/qicore}Patient",
+                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
+                  "type" : "Retrieve",
+                  "annotation" : [ ],
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         }, {
+            "name" : "OverloadMatching",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "Tuple",
+               "annotation" : [ ],
+               "element" : [ {
+                  "name" : "SimpleOverloadMatching",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Test <library> tag not supported in cql-execution test runner",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

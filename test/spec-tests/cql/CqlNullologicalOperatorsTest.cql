@@ -33,11 +33,11 @@ define "Coalesce": Tuple{
   },
   "DateTimeCoalesce": Tuple{
     expression: Coalesce(null, null, DateTime(2012, 5, 18)),
-    output: DateTime(2012, 5, 18)
+    output: @2012-05-18T
   },
   "DateTimeListCoalesce": Tuple{
     expression: Coalesce({ null, null, DateTime(2012, 5, 18) }),
-    output: DateTime(2012, 5, 18)
+    output: @2012-05-18T
   },
   "TimeCoalesce": Tuple{
     expression: Coalesce(null, null, @T05:15:33.556),

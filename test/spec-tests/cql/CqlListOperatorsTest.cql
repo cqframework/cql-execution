@@ -31,13 +31,13 @@ define "Sort": Tuple{
     skipped: 'Sort not implemented'
     /*
     expression: ({ DateTime(2012, 10, 5, 10), DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5) }) S sort asc,
-    output: {DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5), DateTime(2012, 10, 5, 10)}
+    output: { @2012-01-01T, @2012-01-01T12, @2012-10-05T, @2012-10-05T10 }
     */  },
   "SortDatesDesc": Tuple{
     skipped: 'Sort not implemented'
     /*
     expression: ({ DateTime(2012, 10, 5, 10), DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5) }) S sort desc,
-    output: {DateTime(2012, 10, 5, 10), DateTime(2012, 10, 5), DateTime(2012, 1, 1, 12), DateTime(2012, 1, 1)}
+    output: { @2012-10-05T10, @2012-10-05T, @2012-01-01T12, @2012-01-01T }
     */  },
   "intList": Tuple{
     skipped: 'Sort not implemented'
@@ -74,7 +74,7 @@ define "Sort": Tuple{
 define "Contains": Tuple{
   "ContainsABNullHasNull": Tuple{
     expression: { 'a', 'b', null } contains null,
-    output: null
+    output: true
   },
   "ContainsNullFirst": Tuple{
     expression: { null, 'b', 'c' } contains 'a',
@@ -146,7 +146,7 @@ define "Distinct": Tuple{
   },
   "DistinctDateTime": Tuple{
     expression: distinct { DateTime(2012, 10, 5), DateTime(2012, 1, 1), DateTime(2012, 1, 1)},
-    output: { DateTime(2012, 10, 5), DateTime(2012, 1, 1)}
+    output: { @2012-10-05T, @2012-01-01T }
   },
   "DistinctTime": Tuple{
     expression: distinct { @T15:59:59.999, @T20:59:59.999 },
@@ -157,7 +157,7 @@ define "Distinct": Tuple{
 define "Equal": Tuple{
   "EqualNullNull": Tuple{
     expression: {null} = {null},
-    output: null
+    output: true
   },
   "EqualEmptyListNull": Tuple{
     expression: {} as List<String> = null,
@@ -170,6 +170,26 @@ define "Equal": Tuple{
   "EqualEmptyListAndEmptyList": Tuple{
     expression: {} = {},
     output: true
+  },
+  "EqualABCAndABC": Tuple{
+    expression: { 'a', 'b', 'c' } = { 'a', 'b', 'c' },
+    output: true
+  },
+  "EqualABCAndAB": Tuple{
+    expression: { 'a', 'b', 'c' } = { 'a', 'b' },
+    output: false
+  },
+  "EqualABCAnd123": Tuple{
+    expression: { 'a', 'b', 'c' } = { 1, 2, 3 },
+    output: false
+  },
+  "Equal123AndABC": Tuple{
+    expression: { 1, 2, 3 } = { 'a', 'b', 'c' },
+    output: false
+  },
+  "Equal123AndString123": Tuple{
+    expression: { 1, 2, 3 } = { '1', '2', '3' },
+    output: false
   },
   "Equal12And123": Tuple{
     expression: { 1, 2 } = { 1, 2, 3 },
@@ -274,7 +294,7 @@ define "Flatten": Tuple{
   },
   "FlattenDateTime": Tuple{
     expression: Flatten({ {DateTime(2012, 5, 10)}, {DateTime(2014, 12, 10)} }),
-    output: { DateTime(2012, 5, 10), DateTime(2014, 12, 10) }
+    output: { @2012-05-10T, @2014-12-10T }
   },
   "FlattenTime": Tuple{
     expression: Flatten({ {@T15:59:59.999}, {@T20:59:59.999} }),
@@ -301,7 +321,7 @@ define "First": Tuple{
   },
   "FirstDateTime": Tuple{
     expression: First({ DateTime(2012, 5, 10), DateTime(2014, 12, 10) }),
-    output: DateTime(2012, 5, 10)
+    output: @2012-05-10T
   },
   "FirstTime": Tuple{
     expression: First({ @T15:59:59.999, @T20:59:59.999 }),
@@ -312,11 +332,11 @@ define "First": Tuple{
 define "In": Tuple{
   "InNullEmpty": Tuple{
     expression: null in {},
-    output: null
+    output: false
   },
   "InNullAnd1Null": Tuple{
     expression: null in { 1, null },
-    output: null
+    output: true
   },
   "In1Null": Tuple{
     expression: 1 in null,
@@ -471,7 +491,7 @@ define "Indexer": Tuple{
   },
   "IndexerDateTime": Tuple{
     expression: { DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) }[1],
-    output: DateTime(2012, 5, 10)
+    output: @2012-05-10T
   },
   "IndexerTime": Tuple{
     expression: { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }[1],
@@ -556,7 +576,7 @@ define "Last": Tuple{
   },
   "LastDateTime": Tuple{
     expression: Last({DateTime(2012, 5, 10), DateTime(2014, 12, 10)}),
-    output: DateTime(2014, 12, 10)
+    output: @2014-12-10T
   },
   "LastTime": Tuple{
     expression: Last({ @T15:59:59.999, @T20:59:59.999 }),
@@ -824,7 +844,7 @@ define "ProperlyIncludedIn": Tuple{
     output: false
   },
   "ProperlyIncludedInNulRight": Tuple{
-    expression: {'s', 'u', 'n'} properly included in null as List<String>,
+    expression: {'s', 'u', 'n'} properly included in null,
     output: null
   }
 }
@@ -848,7 +868,7 @@ define "SingletonFrom": Tuple{
   },
   "SingletonFromDateTime": Tuple{
     expression: singleton from { DateTime(2012, 5, 10) },
-    output: DateTime(2012, 5, 10)
+    output: @2012-05-10T
   },
   "SingletonFromTime": Tuple{
     expression: singleton from { @T15:59:59.999 },

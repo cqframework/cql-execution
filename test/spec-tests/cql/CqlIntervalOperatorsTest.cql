@@ -201,7 +201,7 @@ define "Collapse": Tuple{
     skipped: 'Wrong answer (Interval(null, null) vs null)'
     /*
     expression: collapse {Interval(null, null)},
-    output: null
+    output: { }
     */  },
   "IntegerIntervalCollapse": Tuple{
     expression: collapse { Interval[1,5], Interval[3,7], Interval[12,19], Interval[7,10] },
@@ -256,7 +256,7 @@ define "Expand": Tuple{
   },
   "ExpandPerHour": Tuple{
     expression: expand { Interval[@T10:00, @T12:30] } per hour,
-    output: { Interval[@T10, @T10], Interval[@T11, @T11], Interval[@T12, @T12] }
+    output: { Interval[@T10:00, @T11:00), Interval[@T11:00, @T12:00) }
   },
   "ExpandPer1": Tuple{
     skipped: 'Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Decimal>>,System.Integer).'
@@ -275,11 +275,11 @@ define "Expand": Tuple{
     output: { Interval[10.0, 10.0], Interval[10.1, 10.1], Interval[10.2, 10.2], Interval[10.3, 10.3], Interval[10.4, 10.4], Interval[10.5, 10.5], Interval[10.6, 10.6], Interval[10.7, 10.7], Interval[10.8, 10.8], Interval[10.9, 10.9] }
     */  },
   "ExpandInterval": Tuple{
-    expression: expand Interval[1, 10],
+    expression: expand { Interval[1, 10] },
     output: { Interval[1, 1], Interval[2, 2], Interval[3, 3], Interval[4, 4], Interval[5, 5], Interval[6, 6], Interval[7, 7], Interval[8, 8], Interval[9, 9], Interval[10, 10] }
   },
   "ExpandIntervalPer2": Tuple{
-    expression: expand Interval[1, 10] per 2,
+    expression: expand { Interval[1, 10] } per 2,
     output: { Interval[1, 2], Interval[3, 4], Interval[5, 6], Interval[7, 8], Interval[9, 10] }
   }
 }
@@ -516,7 +516,7 @@ define "Except": Tuple{
 define "In": Tuple{
   "TestInNullBoundaries": Tuple{
     expression: 5 in Interval[null, null],
-    output: true
+    output: false
   },
   "IntegerIntervalInTrue": Tuple{
     expression: 5 in Interval[1, 10],
@@ -693,8 +693,24 @@ define "Intersect": Tuple{
     skipped: 'Answer seems incorrect, but correct answer is unrepresentable'
     /*
     expression: Interval[1, 10] intersect Interval[5, null),
-    output: null
+    output: Interval[5, null)
     */  },
+  "TestIntersectNull1": Tuple{
+    expression: start of (Interval[1, 10] intersect Interval[5, null)) <= 10,
+    output: true
+  },
+  "TestIntersectNull2": Tuple{
+    expression: start of (Interval[1, 10] intersect Interval[5, null)) >= 5,
+    output: true
+  },
+  "TestIntersectNull3": Tuple{
+    expression: start of (Interval[1, 10] intersect Interval[5, null)) > 10,
+    output: false
+  },
+  "TestIntersectNull4": Tuple{
+    expression: start of (Interval[1, 10] intersect Interval[5, null)) < 5,
+    output: false
+  },
   "IntegerIntervalIntersectTest4to10": Tuple{
     expression: Interval[1, 10] intersect Interval[4, 10],
     output: Interval [ 4, 10 ]
@@ -871,7 +887,7 @@ define "MeetsAfter": Tuple{
     skipped: 'Answer seems incorrect, but requires (too?) "smart" processing'
     /*
     expression: Interval(null, 5] meets after Interval[11, null),
-    output: null
+    output: false
     */  },
   "IntegerIntervalMeetsAfterTrue": Tuple{
     expression: Interval[11, 20] meets after Interval[1, 10],
@@ -1037,8 +1053,48 @@ define "Overlaps": Tuple{
     expression: Interval[1, 10] overlaps Interval[4, 10],
     output: true
   },
+  "IntegerIntervalOverlapsTrue2": Tuple{
+    expression: Interval[4, 10] overlaps Interval[4, 10],
+    output: true
+  },
+  "IntegerIntervalOverlapsTrue3": Tuple{
+    expression: Interval[10, 15] overlaps Interval[4, 10],
+    output: true
+  },
   "IntegerIntervalOverlapsFalse": Tuple{
     expression: Interval[1, 10] overlaps Interval[11, 20],
+    output: false
+  },
+  "IntegerIntervalExclusiveOverlapsTrue": Tuple{
+    expression: Interval[4, 10) overlaps Interval[4, 10),
+    output: true
+  },
+  "IntegerIntervalExclusiveOverlapsTrue2": Tuple{
+    expression: Interval[4, 11) overlaps Interval[10, 20],
+    output: true
+  },
+  "IntegerIntervalExclusiveOverlapsTrue3": Tuple{
+    expression: Interval[4, 10] overlaps Interval(9, 20],
+    output: true
+  },
+  "IntegerIntervalExclusiveOverlapsTrue4": Tuple{
+    expression: Interval[4, 11) overlaps Interval(9, 20],
+    output: true
+  },
+  "IntegerIntervalExclusiveOverlapsFalse": Tuple{
+    expression: Interval[4, 10] overlaps Interval(10, 20],
+    output: false
+  },
+  "IntegerIntervalExclusiveOverlapsFalse2": Tuple{
+    expression: Interval[4, 10) overlaps Interval[10, 20],
+    output: false
+  },
+  "IntegerIntervalExclusiveOverlapsFalse3": Tuple{
+    expression: Interval[4, 10) overlaps Interval(10, 20],
+    output: false
+  },
+  "IntegerIntervalExclusiveOverlapsFalse4": Tuple{
+    expression: Interval[4, 10) overlaps Interval(9, 20],
     output: false
   },
   "DecimalIntervalOverlapsTrue": Tuple{
@@ -1065,6 +1121,26 @@ define "Overlaps": Tuple{
     expression: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] overlaps Interval[DateTime(2012, 1, 26), DateTime(2012, 1, 28)],
     output: false
   },
+  "DateTimeOverlapsPrecisionLeftPossiblyStartsDuringRight": Tuple{
+    expression: Interval[DateTime(2012, 2, 25), DateTime(2012, 3, 26)] overlaps Interval[DateTime(2012, 1, 10), DateTime(2012, 2)],
+    output: null
+  },
+  "DateTimeOverlapsPrecisioLeftPossiblyEndsDuringRight": Tuple{
+    expression: Interval[DateTime(2012, 1, 25), DateTime(2012, 2, 26)] overlaps Interval[DateTime(2012, 2), DateTime(2012, 3, 28)],
+    output: null
+  },
+  "DateTimeOverlapsPrecisionLeftPossiblyStartsAndEndsDuringRight": Tuple{
+    expression: Interval[DateTime(2012, 2), DateTime(2012, 3)] overlaps Interval[DateTime(2011, 1, 10), DateTime(2012)],
+    output: null
+  },
+  "DateTimeOverlapsPrecisionRightPossiblyStartsDuringLeftButEndsDuringLeft": Tuple{
+    expression: Interval[DateTime(2012), DateTime(2013, 3)] overlaps Interval[DateTime(2012, 2), DateTime(2013, 2)],
+    output: true
+  },
+  "DateTimeOverlapsPrecisionRightStartsDuringLeftAndPossiblyEndsDuringLeft": Tuple{
+    expression: Interval[DateTime(2012, 2), DateTime(2013)] overlaps Interval[DateTime(2012, 3), DateTime(2013, 2)],
+    output: true
+  },
   "TimeOverlapsTrue": Tuple{
     expression: Interval[@T10:00:00.000, @T19:59:59.999] overlaps Interval[@T12:00:00.000, @T21:59:59.999],
     output: true
@@ -1086,6 +1162,34 @@ define "OverlapsBefore": Tuple{
   },
   "IntegerIntervalOverlapsBeforeFalse": Tuple{
     expression: Interval[4, 10] overlaps before Interval[1, 10],
+    output: false
+  },
+  "IntegerIntervalOverlapsBeforeFalse2": Tuple{
+    expression: Interval[4, 10] overlaps before Interval[4, 10],
+    output: false
+  },
+  "IntegerIntervalExclusiveOverlapsBeforeTrue": Tuple{
+    expression: Interval[4, 10] overlaps before Interval(4, 10],
+    output: true
+  },
+  "IntegerIntervalExclusiveOverlapsBeforeTrue2": Tuple{
+    expression: Interval(3, 10] overlaps before Interval(4, 10],
+    output: true
+  },
+  "IntegerIntervalExclusiveOverlapsBeforeTrue3": Tuple{
+    expression: Interval(3, 10] overlaps before Interval[5, 10],
+    output: true
+  },
+  "IntegerIntervalExclusiveOverlapsBeforeFalse": Tuple{
+    expression: Interval(3, 10] overlaps before Interval(3, 10],
+    output: false
+  },
+  "IntegerIntervalExclusiveOverlapsBeforeFalse2": Tuple{
+    expression: Interval(3, 10] overlaps before Interval[4, 10],
+    output: false
+  },
+  "IntegerIntervalExclusiveOverlapsBeforeFalse3": Tuple{
+    expression: Interval[4, 10] overlaps before Interval(3, 10],
     output: false
   },
   "DecimalIntervalOverlapsBeforeTrue": Tuple{
@@ -1133,6 +1237,34 @@ define "OverlapsAfter": Tuple{
   },
   "IntegerIntervalOverlapsAfterFalse": Tuple{
     expression: Interval[4, 10] overlaps after Interval[1, 10],
+    output: false
+  },
+  "IntegerIntervalOverlapsAfterFalse2": Tuple{
+    expression: Interval[4, 10] overlaps after Interval[4, 10],
+    output: false
+  },
+  "IntegerIntervalExclusiveOverlapsAfterTrue": Tuple{
+    expression: Interval[4, 11) overlaps after Interval[4, 9],
+    output: true
+  },
+  "IntegerIntervalExclusiveOverlapsAfterTrue2": Tuple{
+    expression: Interval[4, 11) overlaps after Interval[4, 10),
+    output: true
+  },
+  "IntegerIntervalExclusiveOverlapsAfterTrue3": Tuple{
+    expression: Interval[4, 10] overlaps after Interval[4, 10),
+    output: true
+  },
+  "IntegerIntervalExclusiveOverlapsAfterFalse": Tuple{
+    expression: Interval[4, 11) overlaps after Interval[4, 11),
+    output: false
+  },
+  "IntegerIntervalExclusiveOverlapsAfterFalse2": Tuple{
+    expression: Interval[4, 11) overlaps after Interval[4, 10],
+    output: false
+  },
+  "IntegerIntervalExclusiveOverlapsAfterFalse3": Tuple{
+    expression: Interval[4, 10] overlaps after Interval[4, 11),
     output: false
   },
   "DecimalIntervalOverlapsAfterTrue": Tuple{

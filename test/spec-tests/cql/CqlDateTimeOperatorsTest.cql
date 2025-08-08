@@ -19,6 +19,14 @@ define "Add": Tuple{
     expression: DateTime(2005, 5, 10) + 10 months,
     output: @2006-03-10T
   },
+  "DateTimeAddThreeWeeks": Tuple{
+    expression: DateTime(2018, 5, 2) + 3 weeks = DateTime(2018, 5, 23),
+    output: true
+  },
+  "DateTimeAddYearInWeeks": Tuple{
+    expression: DateTime(2018, 5, 23) + 52 weeks = DateTime(2019, 5, 23),
+    output: true
+  },
   "DateTimeAdd5Days": Tuple{
     expression: DateTime(2005, 5, 10) + 5 days,
     output: @2005-05-15T
@@ -30,6 +38,34 @@ define "Add": Tuple{
   "DateTimeAdd5Hours": Tuple{
     expression: DateTime(2005, 5, 10, 5) + 5 hours,
     output: @2005-05-10T10
+  },
+  "DateTimeAdd5HoursWithLeftMinPrecisionSecond": Tuple{
+    expression: DateTime(2005, 5, 10, 5, 20, 30) + 5 hours,
+    output: @2005-05-10T10:20:30
+  },
+  "DateTimeAdd5HoursWithLeftMinPrecisionDay": Tuple{
+    expression: DateTime(2005, 5, 10) + 5 hours = DateTime(2005, 5, 10),
+    output: true
+  },
+  "DateTimeAdd5HoursWithLeftMinPrecisionDayOverflow": Tuple{
+    expression: DateTime(2005, 5, 10) + 25 hours = DateTime(2005, 5, 11),
+    output: true
+  },
+  "DateAdd2YearsAsMonths": Tuple{
+    expression: Date(2014) + 24 months,
+    output: @2016
+  },
+  "DateAdd2YearsAsMonthsRem1": Tuple{
+    expression: Date(2014) + 25 months,
+    output: @2016
+  },
+  "DateAdd33Days": Tuple{
+    expression: Date(2014,6) + 33 days,
+    output: @2014-07
+  },
+  "DateAdd1Year": Tuple{
+    expression: Date(2014,6) + 1 year,
+    output: @2015-06
   },
   "DateTimeAddHoursOverflow": Tuple{
     expression: DateTime(2016, 6, 10, 5) + 19 hours,
@@ -383,8 +419,12 @@ define "DateTimeComponentFrom": Tuple{
     skipped: 'Translation Error: Timezone keyword is only valid in 1.3 or lower'
     /*
     expression: timezone from DateTime(2003, 10, 29, 20, 50, 33, 955, 1),
-    output: 1.00
+    invalid: true
     */  },
+  "DateTimeComponentFromTimezone2": Tuple{
+    expression: timezoneoffset from DateTime(2003, 10, 29, 20, 50, 33, 955, 1),
+    output: 1.00
+  },
   "DateTimeComponentFromDate": Tuple{
     expression: date from DateTime(2003, 10, 29, 20, 50, 33, 955, 1),
     output: @2003-10-29
@@ -657,8 +697,12 @@ define "Uncertainty tests": Tuple{
     skipped: 'Translation Error: Syntax error at Z'
     /*
     expression: hours between @T06Z and @T07:00:00Z,
-    output: 1
+    invalid: true
     */  },
+  "TimeDurationBetweenHourDiffPrecision2": Tuple{
+    expression: hours between @T06 and @T07:00:00,
+    output: 1
+  },
   "TimeDurationBetweenMinute": Tuple{
     expression: minutes between @T23:20:16.555 and @T23:25:15.555,
     output: 4
@@ -1130,6 +1174,14 @@ define "Subtract": Tuple{
     expression: DateTime(2005, 5, 10) - 6 months,
     output: @2004-11-10T
   },
+  "DateTimeSubtractThreeWeeks": Tuple{
+    expression: DateTime(2018, 5, 23) - 3 weeks = DateTime(2018, 5, 2),
+    output: true
+  },
+  "DateTimeSubtractYearInWeeks": Tuple{
+    expression: DateTime(2018, 5, 23) - 52 weeks = DateTime(2017, 5, 23),
+    output: true
+  },
   "DateTimeSubtract5Days": Tuple{
     expression: DateTime(2005, 5, 10) - 5 days,
     output: @2005-05-05T
@@ -1158,6 +1210,14 @@ define "Subtract": Tuple{
     expression: DateTime(2005, 5, 10, 5, 5, 10) - 5 seconds,
     output: @2005-05-10T05:05:05
   },
+  "DateTimeSubtract1YearInSeconds": Tuple{
+    expression: DateTime(2016,5) - 31535999 seconds = DateTime(2015, 5),
+    output: true
+  },
+  "DateTimeSubtract15HourPrecisionSecond": Tuple{
+    expression: DateTime(2016, 10, 1, 10, 20, 30) - 15 hours,
+    output: @2016-09-30T19:20:30
+  },
   "DateTimeSubtractSecondsUnderflow": Tuple{
     expression: DateTime(2016, 6, 10, 5, 5, 5) - 6 seconds,
     output: @2016-06-10T05:04:59
@@ -1177,6 +1237,22 @@ define "Subtract": Tuple{
   "DateTimeSubtract2YearsAsMonthsRem1": Tuple{
     expression: DateTime(2014) - 25 months,
     output: @2012T
+  },
+  "DateSubtract2YearsAsMonths": Tuple{
+    expression: Date(2014) - 24 months,
+    output: @2012
+  },
+  "DateSubtract2YearsAsMonthsRem1": Tuple{
+    expression: Date(2014) - 25 months,
+    output: @2012
+  },
+  "DateSubtract33Days": Tuple{
+    expression: Date(2014,6) - 33 days,
+    output: @2014-05
+  },
+  "DateSubtract1Year": Tuple{
+    expression: Date(2014,6) - 1 year,
+    output: @2013-06
   },
   "TimeSubtract5Hours": Tuple{
     expression: @T15:59:59.999 - 5 hours,
@@ -1213,8 +1289,8 @@ define "Time": Tuple{
 
 define "TimeOfDay": Tuple{
   "TimeOfDayTest": Tuple{
-    expression: TimeOfDay(),
-    output: TimeOfDay()
+    expression: TimeOfDay() = TimeOfDay(),
+    output: true
   }
 }
 
@@ -1236,7 +1312,7 @@ define "Today": Tuple{
     output: true
   },
   "Issue34B": Tuple{
-    expression: Today(),
-    output: Today()
+    expression: Today() = Today(),
+    output: true
   }
 }

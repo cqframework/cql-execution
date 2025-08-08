@@ -83,17 +83,24 @@ fs.readdirSync(path.join(__dirname, 'xml')).forEach(file => {
       } else if (skippedTestMap.has(`${suiteName}.${groupName}.${testName}`)) {
         skipped = skippedTestMap.get(`${suiteName}.${groupName}.${testName}`);
         processedSkips.add(`${suiteName}.${groupName}.${testName}`);
+      } else if (test.library != null) {
+        skipped = 'Test <library> tag not supported in cql-execution test runner';
       }
       if (skipped != null) {
         cql += `    skipped: '${skipped.replace(/'/g, "\\'").trim()}'\n`;
         cql += '    /*\n';
       }
-      cql += `    expression: ${test.expression._text}`;
-      if (test.expression._attributes && test.expression._attributes.invalid) {
-        if (test.expression._attributes.invalid == 'true') {
-          cql += ',\n    invalid: true';
-        } else if (test.expression._attributes.invalid == 'semantic') {
-          cql += ",\n    invalid: 'semantic'";
+      if (test.library != null) {
+        cql += `    library: ${test.library._text}`;
+      }
+      if (test.expression != null) {
+        cql += `    expression: ${test.expression._text}`;
+        if (test.expression._attributes && test.expression._attributes.invalid) {
+          if (test.expression._attributes.invalid == 'true') {
+            cql += ',\n    invalid: true';
+          } else if (test.expression._attributes.invalid == 'semantic') {
+            cql += ",\n    invalid: 'semantic'";
+          }
         }
       }
       if (test.output != null) {

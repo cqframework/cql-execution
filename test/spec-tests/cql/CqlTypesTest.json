@@ -1002,6 +1002,57 @@
                         }
                      } ]
                   }
+               }, {
+                  "name" : "DateTimeTimeUnspecified",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "IsNull",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "precision" : "Hour",
+                              "type" : "DateTimeComponentFrom",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2015",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "10",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
                } ]
             }
          }, {
@@ -1231,8 +1282,8 @@
                      }, {
                         "name" : "invalid",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "semantic",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }

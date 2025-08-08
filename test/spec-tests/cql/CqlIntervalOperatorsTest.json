@@ -6398,7 +6398,7 @@
                            "annotation" : [ ],
                            "element" : [ {
                               "lowClosed" : true,
-                              "highClosed" : true,
+                              "highClosed" : false,
                               "type" : "Interval",
                               "annotation" : [ ],
                               "low" : {
@@ -6410,31 +6410,10 @@
                                     "value" : "10",
                                     "type" : "Literal",
                                     "annotation" : [ ]
-                                 }
-                              },
-                              "high" : {
-                                 "type" : "Time",
-                                 "annotation" : [ ],
-                                 "signature" : [ ],
-                                 "hour" : {
+                                 },
+                                 "minute" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "10",
-                                    "type" : "Literal",
-                                    "annotation" : [ ]
-                                 }
-                              }
-                           }, {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
-                              "annotation" : [ ],
-                              "low" : {
-                                 "type" : "Time",
-                                 "annotation" : [ ],
-                                 "signature" : [ ],
-                                 "hour" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "11",
+                                    "value" : "0",
                                     "type" : "Literal",
                                     "annotation" : [ ]
                                  }
@@ -6448,11 +6427,17 @@
                                     "value" : "11",
                                     "type" : "Literal",
                                     "annotation" : [ ]
+                                 },
+                                 "minute" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
                                  }
                               }
                            }, {
                               "lowClosed" : true,
-                              "highClosed" : true,
+                              "highClosed" : false,
                               "type" : "Interval",
                               "annotation" : [ ],
                               "low" : {
@@ -6461,7 +6446,13 @@
                                  "signature" : [ ],
                                  "hour" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "12",
+                                    "value" : "11",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "minute" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
                                     "type" : "Literal",
                                     "annotation" : [ ]
                                  }
@@ -6473,6 +6464,12 @@
                                  "hour" : {
                                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                     "value" : "12",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "minute" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "0",
                                     "type" : "Literal",
                                     "annotation" : [ ]
                                  }
@@ -6581,22 +6578,26 @@
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
+                              "type" : "List",
                               "annotation" : [ ],
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "1",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "10",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              }
+                              "element" : [ {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "annotation" : [ ],
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "10",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
                            }, {
                               "type" : "Null",
                               "annotation" : [ ]
@@ -6793,22 +6794,26 @@
                            "annotation" : [ ],
                            "signature" : [ ],
                            "operand" : [ {
-                              "lowClosed" : true,
-                              "highClosed" : true,
-                              "type" : "Interval",
+                              "type" : "List",
                               "annotation" : [ ],
-                              "low" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "1",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              },
-                              "high" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "10",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              }
+                              "element" : [ {
+                                 "lowClosed" : true,
+                                 "highClosed" : true,
+                                 "type" : "Interval",
+                                 "annotation" : [ ],
+                                 "low" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "high" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "10",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
                            }, {
                               "value" : 2,
                               "unit" : "1",
@@ -11632,7 +11637,7 @@
                         "name" : "output",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
+                           "value" : "false",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -15846,6 +15851,310 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "Answer seems incorrect, but correct answer is unrepresentable",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TestIntersectNull1",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "LessOrEqual",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Start",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Intersect",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "operand" : [ {
+                                    "lowClosed" : true,
+                                    "highClosed" : true,
+                                    "type" : "Interval",
+                                    "annotation" : [ ],
+                                    "low" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    },
+                                    "high" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "10",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "lowClosed" : true,
+                                    "highClosed" : false,
+                                    "type" : "Interval",
+                                    "annotation" : [ ],
+                                    "low" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "5",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    },
+                                    "high" : {
+                                       "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "As",
+                                       "annotation" : [ ],
+                                       "signature" : [ ],
+                                       "operand" : {
+                                          "type" : "Null",
+                                          "annotation" : [ ]
+                                       }
+                                    }
+                                 } ]
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "10",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TestIntersectNull2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "GreaterOrEqual",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Start",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Intersect",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "operand" : [ {
+                                    "lowClosed" : true,
+                                    "highClosed" : true,
+                                    "type" : "Interval",
+                                    "annotation" : [ ],
+                                    "low" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    },
+                                    "high" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "10",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "lowClosed" : true,
+                                    "highClosed" : false,
+                                    "type" : "Interval",
+                                    "annotation" : [ ],
+                                    "low" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "5",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    },
+                                    "high" : {
+                                       "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "As",
+                                       "annotation" : [ ],
+                                       "signature" : [ ],
+                                       "operand" : {
+                                          "type" : "Null",
+                                          "annotation" : [ ]
+                                       }
+                                    }
+                                 } ]
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "5",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TestIntersectNull3",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Greater",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Start",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Intersect",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "operand" : [ {
+                                    "lowClosed" : true,
+                                    "highClosed" : true,
+                                    "type" : "Interval",
+                                    "annotation" : [ ],
+                                    "low" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    },
+                                    "high" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "10",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "lowClosed" : true,
+                                    "highClosed" : false,
+                                    "type" : "Interval",
+                                    "annotation" : [ ],
+                                    "low" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "5",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    },
+                                    "high" : {
+                                       "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "As",
+                                       "annotation" : [ ],
+                                       "signature" : [ ],
+                                       "operand" : {
+                                          "type" : "Null",
+                                          "annotation" : [ ]
+                                       }
+                                    }
+                                 } ]
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "10",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TestIntersectNull4",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Less",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Start",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Intersect",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "operand" : [ {
+                                    "lowClosed" : true,
+                                    "highClosed" : true,
+                                    "type" : "Interval",
+                                    "annotation" : [ ],
+                                    "low" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    },
+                                    "high" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "10",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "lowClosed" : true,
+                                    "highClosed" : false,
+                                    "type" : "Interval",
+                                    "annotation" : [ ],
+                                    "low" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "5",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    },
+                                    "high" : {
+                                       "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "type" : "As",
+                                       "annotation" : [ ],
+                                       "signature" : [ ],
+                                       "operand" : {
+                                          "type" : "Null",
+                                          "annotation" : [ ]
+                                       }
+                                    }
+                                 } ]
+                              }
+                           }, {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "5",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -23507,6 +23816,120 @@
                      } ]
                   }
                }, {
+                  "name" : "IntegerIntervalOverlapsTrue2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalOverlapsTrue3",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "15",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "IntegerIntervalOverlapsFalse",
                   "value" : {
                      "type" : "Tuple",
@@ -23542,6 +23965,462 @@
                               "low" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "11",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "20",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsTrue2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "11",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "20",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsTrue3",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "9",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "20",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsTrue4",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "11",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "9",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "20",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "20",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsFalse2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "20",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsFalse3",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "20",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsFalse4",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "9",
                                  "type" : "Literal",
                                  "annotation" : [ ]
                               },
@@ -24042,6 +24921,529 @@
                      } ]
                   }
                }, {
+                  "name" : "DateTimeOverlapsPrecisionLeftPossiblyStartsDuringRight",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "25",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "high" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "3",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "26",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "10",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "high" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateTimeOverlapsPrecisioLeftPossiblyEndsDuringRight",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "25",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "high" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "26",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "high" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "3",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "28",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateTimeOverlapsPrecisionLeftPossiblyStartsAndEndsDuringRight",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "high" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "3",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2011",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "10",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "high" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateTimeOverlapsPrecisionRightPossiblyStartsDuringLeftButEndsDuringLeft",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "high" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2013",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "3",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "high" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2013",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateTimeOverlapsPrecisionRightStartsDuringLeftAndPossiblyEndsDuringLeft",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Overlaps",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "high" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2013",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2012",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "3",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              },
+                              "high" : {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2013",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "TimeOverlapsTrue",
                   "value" : {
                      "type" : "Tuple",
@@ -24493,6 +25895,405 @@
                               "low" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "1",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalOverlapsBeforeFalse2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsBefore",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsBeforeTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsBefore",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsBeforeTrue2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsBefore",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "3",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsBeforeTrue3",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsBefore",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "3",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "5",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsBeforeFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsBefore",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "3",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "3",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsBeforeFalse2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsBefore",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "3",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsBeforeFalse3",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsBefore",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : false,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "3",
                                  "type" : "Literal",
                                  "annotation" : [ ]
                               },
@@ -25450,6 +27251,405 @@
                               "high" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                                  "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalOverlapsAfterFalse2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsAfter",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsAfterTrue",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsAfter",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "11",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "9",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsAfterTrue2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsAfter",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "11",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsAfterTrue3",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsAfter",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsAfterFalse",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsAfter",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "11",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "11",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsAfterFalse2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsAfter",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "11",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "IntegerIntervalExclusiveOverlapsAfterFalse3",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "OverlapsAfter",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "lowClosed" : true,
+                              "highClosed" : true,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "lowClosed" : true,
+                              "highClosed" : false,
+                              "type" : "Interval",
+                              "annotation" : [ ],
+                              "low" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "high" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "11",
                                  "type" : "Literal",
                                  "annotation" : [ ]
                               }

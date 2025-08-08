@@ -74,36 +74,8 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Less",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "type" : "Date",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "year" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "2000",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "type" : "Date",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "year" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "2000",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              },
-                              "month" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "1",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              }
-                           } ]
+                           "type" : "Null",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -133,20 +105,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Equivalent",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -166,20 +128,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Equivalent",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -209,20 +161,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "42",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "42",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -242,20 +184,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "42",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "42",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -280,20 +212,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "42",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "42",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -313,20 +235,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "42",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "41",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -346,20 +258,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "42",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "41",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -384,20 +286,15 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
+                           "type" : "Negate",
                            "annotation" : [ ],
                            "signature" : [ ],
-                           "operand" : [ {
+                           "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "42",
+                              "value" : "1",
                               "type" : "Literal",
                               "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "43",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           }
                         }
                      } ]
                   }
@@ -417,20 +314,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "42",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "40",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -450,20 +337,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "42",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "40",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -488,20 +365,15 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
+                           "type" : "Negate",
                            "annotation" : [ ],
                            "signature" : [ ],
-                           "operand" : [ {
+                           "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "42",
+                              "value" : "2",
                               "type" : "Literal",
                               "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "44",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           }
                         }
                      } ]
                   }
@@ -513,14 +385,6 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1000000000",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
                            "type" : "Power",
                            "annotation" : [ ],
                            "signature" : [ ],
@@ -535,6 +399,14 @@
                               "type" : "Literal",
                               "annotation" : [ ]
                            } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1000000000",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -546,14 +418,6 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1000000000",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
                            "type" : "Power",
                            "annotation" : [ ],
                            "signature" : [ ],
@@ -569,6 +433,14 @@
                               "annotation" : [ ]
                            } ]
                         }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1000000000",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
                      } ]
                   }
                }, {
@@ -578,19 +450,6 @@
                      "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
-                        "value" : {
-                           "type" : "Negate",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "1000000000",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }
-                        }
-                     }, {
-                        "name" : "output",
                         "value" : {
                            "type" : "Negate",
                            "annotation" : [ ],
@@ -612,6 +471,19 @@
                               } ]
                            }
                         }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "1000000000",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
                      } ]
                   }
                }, {
@@ -621,14 +493,6 @@
                      "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2147483647",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
                         "value" : {
                            "type" : "Add",
                            "annotation" : [ ],
@@ -674,6 +538,14 @@
                                  "annotation" : [ ]
                               } ]
                            } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2147483647",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -685,14 +557,6 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "2147483647",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
                            "type" : "Add",
                            "annotation" : [ ],
                            "signature" : [ ],
@@ -738,6 +602,14 @@
                               } ]
                            } ]
                         }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "2147483647",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
                      } ]
                   }
                }, {
@@ -747,19 +619,6 @@
                      "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
-                        "value" : {
-                           "type" : "Negate",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2147483647",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }
-                        }
-                     }, {
-                        "name" : "output",
                         "value" : {
                            "type" : "Subtract",
                            "annotation" : [ ],
@@ -810,6 +669,19 @@
                                  "annotation" : [ ]
                               } ]
                            } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2147483647",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
                         }
                      } ]
                   }
@@ -867,19 +739,6 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "type" : "Negate",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "value" : "2147483648",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
                            "type" : "Subtract",
                            "annotation" : [ ],
                            "signature" : [ ],
@@ -919,6 +778,19 @@
                                  "annotation" : [ ]
                               } ]
                            } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2147483648",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
                         }
                      } ]
                   }
@@ -1022,20 +894,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1055,20 +917,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1093,20 +945,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1126,20 +968,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "41.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "1.0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1159,20 +991,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "41.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "1.0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1197,20 +1019,15 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
+                           "type" : "Negate",
                            "annotation" : [ ],
                            "signature" : [ ],
-                           "operand" : [ {
+                           "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
+                              "value" : "1.0",
                               "type" : "Literal",
                               "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "43.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           }
                         }
                      } ]
                   }
@@ -1230,20 +1047,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "40.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "2.0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1263,20 +1070,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "40.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "2.0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1301,20 +1098,15 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
+                           "type" : "Negate",
                            "annotation" : [ ],
                            "signature" : [ ],
-                           "operand" : [ {
+                           "operand" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
+                              "value" : "2.0",
                               "type" : "Literal",
                               "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "44.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           }
                         }
                      } ]
                   }
@@ -1326,14 +1118,6 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "1000000000.0",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
                            "type" : "Power",
                            "annotation" : [ ],
                            "signature" : [ ],
@@ -1348,6 +1132,14 @@
                               "type" : "Literal",
                               "annotation" : [ ]
                            } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "1000000000.0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1359,14 +1151,6 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "1000000000.0",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
                            "type" : "Power",
                            "annotation" : [ ],
                            "signature" : [ ],
@@ -1382,6 +1166,14 @@
                               "annotation" : [ ]
                            } ]
                         }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "1000000000.0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
                      } ]
                   }
                }, {
@@ -1391,19 +1183,6 @@
                      "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
-                        "value" : {
-                           "type" : "Negate",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "1000000000.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }
-                        }
-                     }, {
-                        "name" : "output",
                         "value" : {
                            "type" : "Negate",
                            "annotation" : [ ],
@@ -1425,6 +1204,19 @@
                               } ]
                            }
                         }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "value" : "1000000000.0",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
                      } ]
                   }
                }, {
@@ -1434,14 +1226,6 @@
                      "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "2147483647.0",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
                         "value" : {
                            "type" : "Add",
                            "annotation" : [ ],
@@ -1492,6 +1276,14 @@
                                  "annotation" : [ ]
                               } ]
                            } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "2147483647.0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1503,14 +1295,6 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "2147483647.0",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
                            "type" : "Add",
                            "annotation" : [ ],
                            "signature" : [ ],
@@ -1561,6 +1345,14 @@
                               } ]
                            } ]
                         }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "2147483647.0",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
                      } ]
                   }
                }, {
@@ -1570,19 +1362,6 @@
                      "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
-                        "value" : {
-                           "type" : "Negate",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "2147483647.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }
-                        }
-                     }, {
-                        "name" : "output",
                         "value" : {
                            "type" : "Subtract",
                            "annotation" : [ ],
@@ -1634,6 +1413,19 @@
                               } ]
                            } ]
                         }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "value" : "2147483647.0",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
                      } ]
                   }
                }, {
@@ -1674,19 +1466,6 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "type" : "Negate",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "2147483648.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
                            "type" : "Subtract",
                            "annotation" : [ ],
                            "signature" : [ ],
@@ -1726,6 +1505,19 @@
                                  "annotation" : [ ]
                               } ]
                            } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "value" : "2147483648.0",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
                         }
                      } ]
                   }
@@ -1790,20 +1582,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.00000000",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1823,20 +1605,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.00000000",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1861,20 +1633,10 @@
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Subtract",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "42.0",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.00000000",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1886,14 +1648,6 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "0.00000001",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
                            "type" : "Power",
                            "annotation" : [ ],
                            "signature" : [ ],
@@ -1913,6 +1667,14 @@
                                  "annotation" : [ ]
                               }
                            } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.00000001",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -1924,14 +1686,6 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "0.00000001",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
                            "type" : "Power",
                            "annotation" : [ ],
                            "signature" : [ ],
@@ -1952,6 +1706,14 @@
                               }
                            } ]
                         }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.00000001",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
                      } ]
                   }
                }, {
@@ -1961,19 +1723,6 @@
                      "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
-                        "value" : {
-                           "type" : "Negate",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "0.00000001",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }
-                        }
-                     }, {
-                        "name" : "output",
                         "value" : {
                            "type" : "Negate",
                            "annotation" : [ ],
@@ -2000,6 +1749,19 @@
                               } ]
                            }
                         }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "value" : "0.00000001",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
                      } ]
                   }
                }, {
@@ -2009,14 +1771,6 @@
                      "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "0.00000002",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
                         "value" : {
                            "type" : "Multiply",
                            "annotation" : [ ],
@@ -2052,6 +1806,14 @@
                                  } ]
                               }
                            } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.00000002",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -2063,14 +1825,6 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "0.00000002",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
                            "type" : "Multiply",
                            "annotation" : [ ],
                            "signature" : [ ],
@@ -2106,6 +1860,14 @@
                               }
                            } ]
                         }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.00000002",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
                      } ]
                   }
                }, {
@@ -2115,19 +1877,6 @@
                      "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
-                        "value" : {
-                           "type" : "Negate",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "0.00000002",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }
-                        }
-                     }, {
-                        "name" : "output",
                         "value" : {
                            "type" : "Multiply",
                            "annotation" : [ ],
@@ -2169,6 +1918,19 @@
                               }
                            } ]
                         }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "value" : "0.00000002",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
                      } ]
                   }
                }, {
@@ -2178,14 +1940,6 @@
                      "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "0.0000001",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
                         "value" : {
                            "type" : "Power",
                            "annotation" : [ ],
@@ -2206,6 +1960,14 @@
                                  "annotation" : [ ]
                               }
                            } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.0000001",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -2217,14 +1979,6 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                           "value" : "0.0000001",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
                            "type" : "Power",
                            "annotation" : [ ],
                            "signature" : [ ],
@@ -2245,6 +1999,14 @@
                               }
                            } ]
                         }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "0.0000001",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
                      } ]
                   }
                }, {
@@ -2254,19 +2016,6 @@
                      "annotation" : [ ],
                      "element" : [ {
                         "name" : "expression",
-                        "value" : {
-                           "type" : "Negate",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value" : "0.0000001",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }
-                        }
-                     }, {
-                        "name" : "output",
                         "value" : {
                            "type" : "Negate",
                            "annotation" : [ ],
@@ -2291,6 +2040,19 @@
                                     "annotation" : [ ]
                                  }
                               } ]
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Negate",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "value" : "0.0000001",
+                              "type" : "Literal",
+                              "annotation" : [ ]
                            }
                         }
                      } ]
