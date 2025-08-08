@@ -143,6 +143,9 @@ export function doContains(container: any[], item: any, nullEquivalence = false)
 
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
 export function doIncludes(list: any, sublist: any) {
+  if (list == null || sublist == null) {
+    return null;
+  }
   return sublist.every((x: any) => doContains(list, x));
 }
 

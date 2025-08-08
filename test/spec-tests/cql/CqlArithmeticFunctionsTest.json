@@ -453,28 +453,10 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "type" : "Add",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Long",
-                              "value" : "1",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Long",
-                              "value" : "1",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Long",
-                           "value" : "2",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Long not implemented",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }

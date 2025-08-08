@@ -12,6 +12,7 @@ CqlTypeOperatorsTest.ToDateTime.ToDateTime4         @2014-01-01T12:05:05.955+01:
 CqlTypeOperatorsTest.ToDateTime.ToDateTime5         @2014-01-01T12:05:05.955-01:15 Parsed with offset -1 (should be -1.25)
 
 # Invalid Translation (translates, but translates wrong)
+CqlListOperatorsTest.IncludedIn.IncludedInNullRight Converts included in to in, which has different semantics when second argument is null
 CqlIntervalOperatorsTest.After.TestAfterNull        Converts null to Interval[null,null] instead of Interval(null,null)
 CqlIntervalOperatorsTest.Before.TestBeforeNull      Converts null to Interval[null,null] instead of Interval(null,null)
 
@@ -52,6 +53,7 @@ CqlListOperatorsTest.ProperIn                           ProperIn not implemented
 
 # Unimplemented (New in CQL 1.5)
 CqlArithmeticFunctionsTest.Abs.AbsLong                                Long not implemented
+CqlArithmeticFunctionsTest.Add.Add1L1L                                Long not implemented
 CqlArithmeticFunctionsTest.MinValue.LongMinValue                      Long not implemented
 CqlArithmeticFunctionsTest.MaxValue.LongMaxValue                      Long not implemented
 CqlArithmeticFunctionsTest.Modulo.Modulo4LBy2L                        Long not implemented

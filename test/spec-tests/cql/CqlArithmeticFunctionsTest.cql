@@ -57,9 +57,11 @@ define "Add": Tuple{
     output: 3.0
   },
   "Add1L1L": Tuple{
+    skipped: 'Long not implemented'
+    /*
     expression: 1L + 1L,
     output: 2L
-  }
+    */  }
 }
 
 define "Ceiling": Tuple{
