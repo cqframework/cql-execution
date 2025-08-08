@@ -16,6 +16,14 @@ CqlListOperatorsTest.IncludedIn.IncludedInNullRight Converts included in to in, 
 CqlIntervalOperatorsTest.After.TestAfterNull        Converts null to Interval[null,null] instead of Interval(null,null)
 CqlIntervalOperatorsTest.Before.TestBeforeNull      Converts null to Interval[null,null] instead of Interval(null,null)
 
+# Incorrect Expected Output
+CqlDateTimeOperatorsTest.Add.DateTimeAddYearInWeeks             Wrong output: 2018-05-23 + 52 weeks should be 2019-05-22 (both dates should be Wednesdays)
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtractYearInWeeks   Wrong output: 2018-05-23 - 52 weeks should be 2019-05-24 (both dates should be Wednesdays)
+"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision2" Wrong output: Duration in hours between T06 and T07:00:00 should be Uncertainty[0, 1]
+
+# Potentially Incorrect Expected Output
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract1YearInSeconds  Spec says to convert more precise duration to most precise unit in Date. How do you convert seconds to months? 31535999 is 364.999 days, which isn't quite 12 months, so we answer 2015-06.
+
 # Incorrect answer
 
 CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)

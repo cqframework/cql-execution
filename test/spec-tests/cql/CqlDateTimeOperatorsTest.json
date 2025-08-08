@@ -394,72 +394,10 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "type" : "Equal",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "type" : "Add",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : [ {
-                                 "type" : "DateTime",
-                                 "annotation" : [ ],
-                                 "signature" : [ ],
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2018",
-                                    "type" : "Literal",
-                                    "annotation" : [ ]
-                                 },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "5",
-                                    "type" : "Literal",
-                                    "annotation" : [ ]
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "23",
-                                    "type" : "Literal",
-                                    "annotation" : [ ]
-                                 }
-                              }, {
-                                 "value" : 52,
-                                 "unit" : "weeks",
-                                 "type" : "Quantity",
-                                 "annotation" : [ ]
-                              } ]
-                           }, {
-                              "type" : "DateTime",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "year" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "2019",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              },
-                              "month" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "5",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              },
-                              "day" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "23",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Wrong output: 2018-05-23 + 52 weeks should be 2019-05-22 (both dates should be Wednesdays)",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -13841,51 +13779,10 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "precision" : "Hour",
-                           "type" : "DurationBetween",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "type" : "Time",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "hour" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "6",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "type" : "Time",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "hour" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "7",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              },
-                              "minute" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "0",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              },
-                              "second" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "0",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "value" : "1",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Wrong output: Duration in hours between T06 and T07:00:00 should be Uncertainty[0, 1]",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -23336,72 +23233,10 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "type" : "Equal",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "type" : "Subtract",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : [ {
-                                 "type" : "DateTime",
-                                 "annotation" : [ ],
-                                 "signature" : [ ],
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2018",
-                                    "type" : "Literal",
-                                    "annotation" : [ ]
-                                 },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "5",
-                                    "type" : "Literal",
-                                    "annotation" : [ ]
-                                 },
-                                 "day" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "23",
-                                    "type" : "Literal",
-                                    "annotation" : [ ]
-                                 }
-                              }, {
-                                 "value" : 52,
-                                 "unit" : "weeks",
-                                 "type" : "Quantity",
-                                 "annotation" : [ ]
-                              } ]
-                           }, {
-                              "type" : "DateTime",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "year" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "2017",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              },
-                              "month" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "5",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              },
-                              "day" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "23",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Wrong output: 2018-05-23 - 52 weeks should be 2019-05-24 (both dates should be Wednesdays)",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -23990,60 +23825,10 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "type" : "Equal",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "type" : "Subtract",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : [ {
-                                 "type" : "DateTime",
-                                 "annotation" : [ ],
-                                 "signature" : [ ],
-                                 "year" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "2016",
-                                    "type" : "Literal",
-                                    "annotation" : [ ]
-                                 },
-                                 "month" : {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                    "value" : "5",
-                                    "type" : "Literal",
-                                    "annotation" : [ ]
-                                 }
-                              }, {
-                                 "value" : 31535999,
-                                 "unit" : "seconds",
-                                 "type" : "Quantity",
-                                 "annotation" : [ ]
-                              } ]
-                           }, {
-                              "type" : "DateTime",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "year" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "2015",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              },
-                              "month" : {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "5",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Spec says to convert more precise duration to most precise unit in Date. How do you convert seconds to months? 31535999 is 364.999 days, which isn't quite 12 months, so we answer 2015-06.",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }

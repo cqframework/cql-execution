@@ -24,9 +24,11 @@ define "Add": Tuple{
     output: true
   },
   "DateTimeAddYearInWeeks": Tuple{
+    skipped: 'Wrong output: 2018-05-23 + 52 weeks should be 2019-05-22 (both dates should be Wednesdays)'
+    /*
     expression: DateTime(2018, 5, 23) + 52 weeks = DateTime(2019, 5, 23),
     output: true
-  },
+    */  },
   "DateTimeAdd5Days": Tuple{
     expression: DateTime(2005, 5, 10) + 5 days,
     output: @2005-05-15T
@@ -700,9 +702,11 @@ define "Uncertainty tests": Tuple{
     invalid: true
     */  },
   "TimeDurationBetweenHourDiffPrecision2": Tuple{
+    skipped: 'Wrong output: Duration in hours between T06 and T07:00:00 should be Uncertainty[0, 1]'
+    /*
     expression: hours between @T06 and @T07:00:00,
     output: 1
-  },
+    */  },
   "TimeDurationBetweenMinute": Tuple{
     expression: minutes between @T23:20:16.555 and @T23:25:15.555,
     output: 4
@@ -1179,9 +1183,11 @@ define "Subtract": Tuple{
     output: true
   },
   "DateTimeSubtractYearInWeeks": Tuple{
+    skipped: 'Wrong output: 2018-05-23 - 52 weeks should be 2019-05-24 (both dates should be Wednesdays)'
+    /*
     expression: DateTime(2018, 5, 23) - 52 weeks = DateTime(2017, 5, 23),
     output: true
-  },
+    */  },
   "DateTimeSubtract5Days": Tuple{
     expression: DateTime(2005, 5, 10) - 5 days,
     output: @2005-05-05T
@@ -1211,9 +1217,11 @@ define "Subtract": Tuple{
     output: @2005-05-10T05:05:05
   },
   "DateTimeSubtract1YearInSeconds": Tuple{
+    skipped: 'Spec says to convert more precise duration to most precise unit in Date. How do you convert seconds to months? 31535999 is 364.999 days, which isn\'t quite 12 months, so we answer 2015-06.'
+    /*
     expression: DateTime(2016,5) - 31535999 seconds = DateTime(2015, 5),
     output: true
-  },
+    */  },
   "DateTimeSubtract15HourPrecisionSecond": Tuple{
     expression: DateTime(2016, 10, 1, 10, 20, 30) - 15 hours,
     output: @2016-09-30T19:20:30
