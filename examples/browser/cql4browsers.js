@@ -3161,6 +3161,9 @@ class AllTrue extends AggregateExpression {
     }
     async exec(ctx) {
         const items = await this.source.execute(ctx);
+        if (items == null) {
+            return true;
+        }
         return (0, util_1.allTrue)((0, util_1.removeNulls)(items));
     }
 }
@@ -5679,6 +5682,9 @@ function doContains(container, item, nullEquivalence = false) {
 exports.doContains = doContains;
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
 function doIncludes(list, sublist) {
+    if (list == null || sublist == null) {
+        return null;
+    }
     return sublist.every((x) => doContains(list, x));
 }
 exports.doIncludes = doIncludes;

@@ -407,6 +407,9 @@ export class AllTrue extends AggregateExpression {
 
   async exec(ctx: Context) {
     const items = await this.source.execute(ctx);
+    if (items == null) {
+      return true;
+    }
     return allTrue(removeNulls(items));
   }
 }
