@@ -255,9 +255,11 @@ define "Expand": Tuple{
     output: { Interval[@2018-01-01, @2018-01-02], Interval[@2018-01-03, @2018-01-04] }
   },
   "ExpandPerHour": Tuple{
+    skipped: 'Wrong output: This test is drawn directly from an example in the spec and yet expects a different answer! See: https://cql.hl7.org/09-b-cqlreference.html#expand'
+    /*
     expression: expand { Interval[@T10:00, @T12:30] } per hour,
     output: { Interval[@T10:00, @T11:00), Interval[@T11:00, @T12:00) }
-  },
+    */  },
   "ExpandPer1": Tuple{
     skipped: 'Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Decimal>>,System.Integer).'
     /*
@@ -515,9 +517,11 @@ define "Except": Tuple{
 
 define "In": Tuple{
   "TestInNullBoundaries": Tuple{
+    skipped: 'Wrong output: According to spec, comparison against null closed boundaries should result in true'
+    /*
     expression: 5 in Interval[null, null],
     output: false
-  },
+    */  },
   "IntegerIntervalInTrue": Tuple{
     expression: 5 in Interval[1, 10],
     output: true
