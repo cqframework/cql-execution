@@ -22,6 +22,7 @@ CqlDateTimeOperatorsTest.Subtract.DateTimeSubtractYearInWeeks   Wrong output: 20
 "CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision2" Wrong output: Duration in hours between T06 and T07:00:00 should be Uncertainty[0, 1]
 CqlIntervalOperatorsTest.Expand.ExpandPerHour                   Wrong output: This test is drawn directly from an example in the spec and yet expects a different answer! See: https://cql.hl7.org/09-b-cqlreference.html#expand
 CqlIntervalOperatorsTest.In.TestInNullBoundaries                Wrong output: According to spec, comparison against null closed boundaries should result in true
+CqlListOperatorsTest.Equal.EqualNullNull                     Wrong output: According to spec, if either list contains a null, the result is null
 
 # Potentially Incorrect Expected Output
 CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract1YearInSeconds  Spec says to convert more precise duration to most precise unit in Date. How do you convert seconds to months? 31535999 is 364.999 days, which isn't quite 12 months, so we answer 2015-06.
@@ -34,6 +35,12 @@ CqlIntervalOperatorsTest.Except.NullInterval                    Wrong answer (In
 ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalNeg10Pow28ToZeroOneStepDecimalMinValue Wrong answer (null vs big number)
+
+# Incorrect answer due to changes / clarifications in CQL 1.5
+
+CqlListOperatorsTest.Contains.ContainsABNullHasNull   Wrong answer (now nulls are considered equal for this operation)
+CqlListOperatorsTest.In.InNullEmpty                   Wrong answer (now null in list is false if list has no nulls)
+CqlListOperatorsTest.In.InNullAnd1Null                Wrong answer (now null in list is true if list has any nulls)
 
 # Incorrect answer due to inability to distinguish integer and decimal for whole numbers (e.g., 1.0)
 
@@ -60,8 +67,10 @@ CqlListOperatorsTest.Sort                               Sort not implemented
 CqlListOperatorsTest.Descendents                        Descendents not implemented
 CqlListOperatorsTest.ProperContains                     ProperContains not implemented
 CqlListOperatorsTest.ProperIn                           ProperIn not implemented
+CqlListOperatorsTest.ProperlyIncludedIn.ProperlyIncludedInNulRight  ProperIn not implemented
 
 # Unimplemented (New in CQL 1.5)
+
 CqlAggregateFunctionsTest.Product.ProductLong                         Long not implemented
 CqlAggregateFunctionsTest.Sum.SumTestLong                             Long not implemented
 CqlArithmeticFunctionsTest.Abs.AbsLong                                Long not implemented
