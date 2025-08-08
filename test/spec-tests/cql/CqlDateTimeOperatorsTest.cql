@@ -720,17 +720,13 @@ define "Uncertainty tests": Tuple{
     output: 5
   },
   "DurationInHoursA": Tuple{
-    skipped: 'Is @2017-03-12T01:00:00-07:00 uncertain?'
-    /*
     expression: hours between @2017-03-12T01:00:00-07:00 and @2017-03-12T03:00:00-06:00,
     output: 1
-    */  },
+  },
   "DurationInMinutesA": Tuple{
-    skipped: 'Is @2017-03-12T01:00:00-07:00 uncertain?'
-    /*
     expression: minutes between @2017-11-05T01:30:00-06:00 and @2017-11-05T01:15:00-07:00,
     output: 45
-    */  },
+  },
   "DurationInDaysA": Tuple{
     expression: days between @2017-03-12T00:00:00-07:00 and @2017-03-13T00:00:00-06:00,
     output: 0

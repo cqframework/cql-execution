@@ -8,7 +8,7 @@ define "AggregateTests": Tuple{
     output: 120
   },
   "RolledOutIntervals": Tuple{
-    skipped: 'Translation Error: Could not resolve identifier MedicationRequestIntervals in the current library.'
+    skipped: 'CQL adds an integer to a date ("S + duration in days of X"). Should be "S + Quantity{ value: duration in days of X, unit: \'days\' }". Translator translates it, but probably shouldn\'t.'
     /*
     expression: ({
 				  Interval[@2012-01-01, @2012-02-28],

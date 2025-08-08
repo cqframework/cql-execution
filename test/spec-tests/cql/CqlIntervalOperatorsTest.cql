@@ -4,11 +4,9 @@ context Patient
 
 define "After": Tuple{
   "TestAfterNull": Tuple{
-    skipped: 'Converts null to Interval[null,null] instead of Interval(null,null)'
-    /*
     expression: (null as Integer) after Interval[1, 10],
     output: null
-    */  },
+  },
   "IntegerIntervalAfterTrue": Tuple{
     expression: Interval[11, 20] after Interval[1, 10],
     output: true
@@ -101,11 +99,9 @@ define "After": Tuple{
 
 define "Before": Tuple{
   "TestBeforeNull": Tuple{
-    skipped: 'Converts null to Interval[null,null] instead of Interval(null,null)'
-    /*
     expression: (null as Integer) before Interval[1, 10],
     output: null
-    */  },
+  },
   "IntegerIntervalBeforeFalse": Tuple{
     expression: Interval[11, 20] before Interval[1, 10],
     output: false
@@ -694,7 +690,7 @@ define "Included In": Tuple{
 
 define "Intersect": Tuple{
   "TestIntersectNull": Tuple{
-    skipped: 'Answer seems incorrect, but correct answer is unrepresentable'
+    skipped: 'Wrong answer (Interval[5, 10] vs Interval[5, null))'
     /*
     expression: Interval[1, 10] intersect Interval[5, null),
     output: Interval[5, null)
@@ -888,11 +884,9 @@ define "MeetsBefore": Tuple{
 
 define "MeetsAfter": Tuple{
   "TestMeetsAfterNull": Tuple{
-    skipped: 'Answer seems incorrect, but requires (too?) "smart" processing'
-    /*
     expression: Interval(null, 5] meets after Interval[11, null),
     output: false
-    */  },
+  },
   "IntegerIntervalMeetsAfterTrue": Tuple{
     expression: Interval[11, 20] meets after Interval[1, 10],
     output: true

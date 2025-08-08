@@ -150,7 +150,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Translation Error: Could not resolve identifier MedicationRequestIntervals in the current library.",
+                           "value" : "CQL adds an integer to a date (\"S + duration in days of X\"). Should be \"S + Quantity{ value: duration in days of X, unit: 'days' }\". Translator translates it, but probably shouldn't.",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }

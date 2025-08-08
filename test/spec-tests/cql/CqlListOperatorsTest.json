@@ -344,7 +344,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sort not implemented",
+                           "value" : "Wrong output: Queries return distinct lists by default; need to use \"all\" to retain duplicates",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -359,7 +359,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sort not implemented",
+                           "value" : "Wrong output: Queries return distinct lists by default; need to use \"all\" to retain duplicates",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -374,7 +374,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sort not implemented",
+                           "value" : "Wrong output: Queries return distinct lists by default; need to use \"all\" to retain duplicates",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -389,7 +389,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sort not implemented",
+                           "value" : "Wrong output: Queries return distinct lists by default; need to use \"all\" to retain duplicates",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -404,7 +404,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sort not implemented",
+                           "value" : "Wrong output: Queries return distinct lists by default; need to use \"all\" to retain duplicates",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -419,7 +419,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sort not implemented",
+                           "value" : "Wrong output: Queries return distinct lists by default; need to use \"all\" to retain duplicates",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -434,7 +434,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sort not implemented",
+                           "value" : "Wrong output: Queries return distinct lists by default; need to use \"all\" to retain duplicates",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -449,7 +449,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sort not implemented",
+                           "value" : "Wrong output: Queries return distinct lists by default; need to use \"all\" to retain duplicates",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -464,7 +464,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sort not implemented",
+                           "value" : "Wrong output: Queries return distinct lists by default; need to use \"all\" to retain duplicates",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -479,7 +479,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sort not implemented",
+                           "value" : "Wrong output: Queries return distinct lists by default; need to use \"all\" to retain duplicates",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -494,7 +494,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Sort not implemented",
+                           "value" : "Wrong output: Queries return distinct lists by default; need to use \"all\" to retain duplicates",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -5884,7 +5884,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Answer is incorrect according to spec, but not sure if correct answer is null or false",
+                           "value" : "Wrong answer (List Incudes List now treats nulls as equal)",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -6691,7 +6691,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Answer is incorrect according to spec, but not sure if correct answer is null or false",
+                           "value" : "Wrong answer (List Incuded In List now treats nulls as equal)",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }

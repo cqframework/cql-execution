@@ -97,17 +97,13 @@ define "ToDateTime": Tuple{
     output: @2014-01-01T12:05:05.955
     */  },
   "ToDateTime4": Tuple{
-    skipped: '@2014-01-01T12:05:05.955+01:30 Parsed with offset 1 (should be 1.5)'
-    /*
     expression: ToDateTime('2014-01-01T12:05:05.955+01:30'),
     output: @2014-01-01T12:05:05.955+01:30
-    */  },
+  },
   "ToDateTime5": Tuple{
-    skipped: '@2014-01-01T12:05:05.955-01:15 Parsed with offset -1 (should be -1.25)'
-    /*
     expression: ToDateTime('2014-01-01T12:05:05.955-01:15'),
     output: @2014-01-01T12:05:05.955-01:15
-    */  },
+  },
   "ToDateTime6": Tuple{
     expression: ToDateTime('2014-01-01T12:05:05.955Z'),
     output: @2014-01-01T12:05:05.955+00:00
