@@ -6229,14 +6229,18 @@ class In extends expression_1.Expression {
     }
     async exec(ctx) {
         const [item, container] = await this.execArgs(ctx);
-        if (item == null) {
-            return null;
-        }
         if (container == null) {
             return false;
         }
-        const lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
-        return lib.doContains(container, item, this.precision);
+        if ((0, util_1.typeIsArray)(container)) {
+            return LIST.doContains(container, item, true);
+        }
+        else {
+            if (item == null) {
+                return null;
+            }
+            return IVL.doContains(container, item, this.precision);
+        }
     }
 }
 exports.In = In;
@@ -6250,11 +6254,15 @@ class Contains extends expression_1.Expression {
         if (container == null) {
             return false;
         }
-        if (item == null) {
-            return null;
+        if ((0, util_1.typeIsArray)(container)) {
+            return LIST.doContains(container, item, true);
         }
-        const lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
-        return lib.doContains(container, item, this.precision);
+        else {
+            if (item == null) {
+                return null;
+            }
+            return IVL.doContains(container, item, this.precision);
+        }
     }
 }
 exports.Contains = Contains;

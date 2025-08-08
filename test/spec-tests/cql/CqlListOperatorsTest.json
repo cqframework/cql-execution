@@ -8,9 +8,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 381,
+         "startLine" : 375,
          "startChar" : 17,
-         "endLine" : 381,
+         "endLine" : 375,
          "endChar" : 18,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -19,9 +19,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 391,
+         "startLine" : 385,
          "startChar" : 36,
-         "endLine" : 391,
+         "endLine" : 385,
          "endChar" : 37,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -30,9 +30,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 395,
+         "startLine" : 389,
          "startChar" : 36,
-         "endLine" : 395,
+         "endLine" : 389,
          "endChar" : 38,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -41,9 +41,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 399,
+         "startLine" : 393,
          "startChar" : 36,
-         "endLine" : 399,
+         "endLine" : 393,
          "endChar" : 38,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -52,9 +52,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 403,
+         "startLine" : 397,
          "startChar" : 97,
-         "endLine" : 403,
+         "endLine" : 397,
          "endChar" : 119,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -63,10 +63,21 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 407,
+         "startLine" : 401,
          "startChar" : 97,
-         "endLine" : 407,
+         "endLine" : 401,
          "endChar" : 119,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 436,
+         "startChar" : 17,
+         "endLine" : 436,
+         "endChar" : 18,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -77,7 +88,7 @@
          "startLine" : 440,
          "startChar" : 17,
          "endLine" : 440,
-         "endChar" : 18,
+         "endChar" : 21,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -99,7 +110,7 @@
          "startLine" : 448,
          "startChar" : 17,
          "endLine" : 448,
-         "endChar" : 21,
+         "endChar" : 40,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -110,17 +121,6 @@
          "startLine" : 452,
          "startChar" : 17,
          "endLine" : 452,
-         "endChar" : 40,
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "CqlListOperatorsTest",
-         "libraryVersion" : "1.4.0",
-         "startLine" : 456,
-         "startChar" : 17,
-         "endLine" : 456,
          "endChar" : 39,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -129,9 +129,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 784,
+         "startLine" : 782,
          "startChar" : 45,
-         "endLine" : 784,
+         "endLine" : 782,
          "endChar" : 46,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -140,9 +140,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 788,
+         "startLine" : 786,
          "startChar" : 45,
-         "endLine" : 788,
+         "endLine" : 786,
          "endChar" : 47,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -151,9 +151,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 792,
+         "startLine" : 790,
          "startChar" : 45,
-         "endLine" : 792,
+         "endLine" : 790,
          "endChar" : 47,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -162,9 +162,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 796,
+         "startLine" : 794,
          "startChar" : 106,
-         "endLine" : 796,
+         "endLine" : 794,
          "endChar" : 152,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -173,9 +173,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 800,
+         "startLine" : 798,
          "startChar" : 106,
-         "endLine" : 800,
+         "endLine" : 798,
          "endChar" : 175,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -184,9 +184,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 804,
+         "startLine" : 802,
          "startChar" : 86,
-         "endLine" : 804,
+         "endLine" : 802,
          "endChar" : 119,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -195,9 +195,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 808,
+         "startLine" : 806,
          "startChar" : 86,
-         "endLine" : 808,
+         "endLine" : 806,
          "endChar" : 135,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -206,9 +206,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 827,
+         "startLine" : 825,
          "startChar" : 17,
-         "endLine" : 827,
+         "endLine" : 825,
          "endChar" : 18,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -217,9 +217,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 831,
+         "startLine" : 829,
          "startChar" : 17,
-         "endLine" : 831,
+         "endLine" : 829,
          "endChar" : 19,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -228,9 +228,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 835,
+         "startLine" : 833,
          "startChar" : 17,
-         "endLine" : 835,
+         "endLine" : 833,
          "endChar" : 19,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -239,9 +239,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 839,
+         "startLine" : 837,
          "startChar" : 17,
-         "endLine" : 839,
+         "endLine" : 837,
          "endChar" : 63,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -250,9 +250,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 843,
+         "startLine" : 841,
          "startChar" : 17,
-         "endLine" : 843,
+         "endLine" : 841,
          "endChar" : 86,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -261,9 +261,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 847,
+         "startLine" : 845,
          "startChar" : 17,
-         "endLine" : 847,
+         "endLine" : 845,
          "endChar" : 50,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -272,9 +272,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 851,
+         "startLine" : 849,
          "startChar" : 17,
-         "endLine" : 851,
+         "endLine" : 849,
          "endChar" : 66,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -516,10 +516,50 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (now nulls are considered equal for this operation)",
+                           "type" : "Contains",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "List",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "a",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }, {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "b",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }, {
+                                 "asType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "operand" : {
+                                    "type" : "Null",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           }, {
+                              "asType" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "As",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Null",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -5089,10 +5129,25 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (now null in list is false if list has no nulls)",
+                           "type" : "In",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Null",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "List",
+                              "annotation" : [ ],
+                              "element" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -5104,10 +5159,39 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (now null in list is true if list has any nulls)",
+                           "type" : "In",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Null",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "List",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "1",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }, {
+                                 "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "type" : "As",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "operand" : {
+                                    "type" : "Null",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -6548,45 +6632,11 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "type" : "Contains",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "type" : "List",
-                              "annotation" : [ ],
-                              "element" : [ {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "s",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "a",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "m",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              } ]
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}String",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Treats null as point overload, translating to \"Contains\" operator, which has different semantics (and different result)",
+                           "type" : "Literal",
                            "annotation" : [ ]
                         }
                      } ]
@@ -7317,35 +7367,11 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "type" : "In",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "type" : "List",
-                              "annotation" : [ ],
-                              "element" : [ {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "2",
-                                 "type" : "Literal",
-                                 "annotation" : [ ]
-                              } ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Treats null as point overload, translating to \"In\" operator, which has different semantics (and different result)",
+                           "type" : "Literal",
                            "annotation" : [ ]
                         }
                      } ]

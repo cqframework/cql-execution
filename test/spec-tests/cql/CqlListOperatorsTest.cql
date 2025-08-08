@@ -73,11 +73,9 @@ define "Sort": Tuple{
 
 define "Contains": Tuple{
   "ContainsABNullHasNull": Tuple{
-    skipped: 'Wrong answer (now nulls are considered equal for this operation)'
-    /*
     expression: { 'a', 'b', null } contains null,
     output: true
-    */  },
+  },
   "ContainsNullFirst": Tuple{
     expression: { null, 'b', 'c' } contains 'a',
     output: false
@@ -335,17 +333,13 @@ define "First": Tuple{
 
 define "In": Tuple{
   "InNullEmpty": Tuple{
-    skipped: 'Wrong answer (now null in list is false if list has no nulls)'
-    /*
     expression: null in {},
     output: false
-    */  },
+  },
   "InNullAnd1Null": Tuple{
-    skipped: 'Wrong answer (now null in list is true if list has any nulls)'
-    /*
     expression: null in { 1, null },
     output: true
-    */  },
+  },
   "In1Null": Tuple{
     expression: 1 in null,
     output: false
@@ -420,9 +414,11 @@ define "Includes": Tuple{
     output: null
   },
   "IncludesNullRight": Tuple{
+    skipped: 'Treats null as point overload, translating to "Contains" operator, which has different semantics (and different result)'
+    /*
     expression: {'s', 'a', 'm'} includes null,
     output: null
-  }
+    */  }
 }
 
 define "IncludedIn": Tuple{
@@ -465,9 +461,11 @@ define "IncludedIn": Tuple{
     output: false
   },
   "IncludedInNullLeft": Tuple{
+    skipped: 'Treats null as point overload, translating to "In" operator, which has different semantics (and different result)'
+    /*
     expression: null included in {2},
     output: null
-  },
+    */  },
   "IncludedInNullRight": Tuple{
     skipped: 'Converts included in to in, which has different semantics when second argument is null'
     /*
