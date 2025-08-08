@@ -183,7 +183,7 @@ class AggregateClause extends Expression {
     this.identifier = json.identifier;
     this.expression = build(json.expression);
     this.starting = json.starting ? build(json.starting) : null;
-    this.distinct = json.distinct != null ? json.distinct : true;
+    this.distinct = json.distinct != null ? json.distinct : false;
   }
 
   async aggregate(returnedValues: any, ctx: Context) {
