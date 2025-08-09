@@ -5597,14 +5597,14 @@ exports.doUnion = doUnion;
 function doExcept(a, b) {
     const distinct = (0, exports.toDistinctList)(a);
     const setList = removeDuplicateNulls(distinct);
-    return setList.filter(item => !doContains(b, item, true));
+    return setList.filter(item => !doContains(b, item));
 }
 exports.doExcept = doExcept;
 // Delegated to by overloaded#Intersect
 function doIntersect(a, b) {
     const distinct = (0, exports.toDistinctList)(a);
     const setList = removeDuplicateNulls(distinct);
-    return setList.filter(item => doContains(b, item, true));
+    return setList.filter(item => doContains(b, item));
 }
 exports.doIntersect = doIntersect;
 // ELM-only, not a product of CQL
@@ -5679,8 +5679,8 @@ class IndexOf extends expression_1.Expression {
 exports.IndexOf = IndexOf;
 // Indexer is completely handled by overloaded#Indexer
 // Delegated to by overloaded#Contains and overloaded#In
-function doContains(container, item, nullEquivalence = false) {
-    return container.some((element) => (0, comparison_1.equals)(element, item) || (nullEquivalence && element == null && item == null));
+function doContains(container, item) {
+    return container.some((element) => (0, comparison_1.equals)(element, item) || (element == null && item == null));
 }
 exports.doContains = doContains;
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
@@ -6233,7 +6233,7 @@ class In extends expression_1.Expression {
             return false;
         }
         if ((0, util_1.typeIsArray)(container)) {
-            return LIST.doContains(container, item, true);
+            return LIST.doContains(container, item);
         }
         else {
             if (item == null) {
@@ -6255,7 +6255,7 @@ class Contains extends expression_1.Expression {
             return false;
         }
         if ((0, util_1.typeIsArray)(container)) {
-            return LIST.doContains(container, item, true);
+            return LIST.doContains(container, item);
         }
         else {
             if (item == null) {

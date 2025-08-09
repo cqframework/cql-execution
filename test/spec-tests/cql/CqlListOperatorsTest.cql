@@ -376,11 +376,9 @@ define "Includes": Tuple{
     output: true
   },
   "IncludesListNullAndListNull": Tuple{
-    skipped: 'Wrong answer (List Incudes List now treats nulls as equal)'
-    /*
     expression: {null} includes {null},
     output: true
-    */  },
+  },
   "Includes123AndEmpty": Tuple{
     expression: {1, 2, 3} includes {},
     output: true
@@ -427,11 +425,9 @@ define "IncludedIn": Tuple{
     output: true
   },
   "IncludedInListNullAndListNull": Tuple{
-    skipped: 'Wrong answer (List Incuded In List now treats nulls as equal)'
-    /*
     expression: { null } included in { null },
     output: true
-    */  },
+  },
   "IncludedInEmptyAnd123": Tuple{
     expression: {} included in { 1, 2, 3 },
     output: true

@@ -149,7 +149,7 @@ export class In extends Expression {
       return false;
     }
     if (typeIsArray(container)) {
-      return LIST.doContains(container, item, true);
+      return LIST.doContains(container, item);
     } else {
       if (item == null) {
         return null;
@@ -173,7 +173,7 @@ export class Contains extends Expression {
       return false;
     }
     if (typeIsArray(container)) {
-      return LIST.doContains(container, item, true);
+      return LIST.doContains(container, item);
     } else {
       if (item == null) {
         return null;

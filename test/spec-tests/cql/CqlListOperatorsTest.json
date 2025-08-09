@@ -19,9 +19,20 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 385,
+         "startLine" : 379,
+         "startChar" : 17,
+         "endLine" : 379,
+         "endChar" : 22,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 383,
          "startChar" : 36,
-         "endLine" : 385,
+         "endLine" : 383,
          "endChar" : 37,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -30,9 +41,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 389,
+         "startLine" : 387,
          "startChar" : 36,
-         "endLine" : 389,
+         "endLine" : 387,
          "endChar" : 38,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -41,9 +52,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 393,
+         "startLine" : 391,
          "startChar" : 36,
-         "endLine" : 393,
+         "endLine" : 391,
          "endChar" : 38,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -52,9 +63,9 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 397,
+         "startLine" : 395,
          "startChar" : 97,
-         "endLine" : 397,
+         "endLine" : 395,
          "endChar" : 119,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -63,10 +74,21 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 401,
+         "startLine" : 399,
          "startChar" : 97,
-         "endLine" : 401,
+         "endLine" : 399,
          "endChar" : 119,
+         "message" : "List-valued expression was demoted to a singleton.",
+         "errorType" : "semantic",
+         "errorSeverity" : "warning",
+         "type" : "CqlToElmError"
+      }, {
+         "libraryId" : "CqlListOperatorsTest",
+         "libraryVersion" : "1.4.0",
+         "startLine" : 432,
+         "startChar" : 17,
+         "endLine" : 432,
+         "endChar" : 18,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -77,7 +99,7 @@
          "startLine" : 436,
          "startChar" : 17,
          "endLine" : 436,
-         "endChar" : 18,
+         "endChar" : 21,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -99,7 +121,7 @@
          "startLine" : 444,
          "startChar" : 17,
          "endLine" : 444,
-         "endChar" : 21,
+         "endChar" : 40,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -110,7 +132,7 @@
          "startLine" : 448,
          "startChar" : 17,
          "endLine" : 448,
-         "endChar" : 40,
+         "endChar" : 39,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -118,10 +140,10 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 452,
-         "startChar" : 17,
-         "endLine" : 452,
-         "endChar" : 39,
+         "startLine" : 778,
+         "startChar" : 45,
+         "endLine" : 778,
+         "endChar" : 46,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -132,7 +154,7 @@
          "startLine" : 782,
          "startChar" : 45,
          "endLine" : 782,
-         "endChar" : 46,
+         "endChar" : 47,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -152,9 +174,9 @@
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
          "startLine" : 790,
-         "startChar" : 45,
+         "startChar" : 106,
          "endLine" : 790,
-         "endChar" : 47,
+         "endChar" : 152,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -165,7 +187,7 @@
          "startLine" : 794,
          "startChar" : 106,
          "endLine" : 794,
-         "endChar" : 152,
+         "endChar" : 175,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -174,9 +196,9 @@
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
          "startLine" : 798,
-         "startChar" : 106,
+         "startChar" : 86,
          "endLine" : 798,
-         "endChar" : 175,
+         "endChar" : 119,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -187,7 +209,7 @@
          "startLine" : 802,
          "startChar" : 86,
          "endLine" : 802,
-         "endChar" : 119,
+         "endChar" : 135,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -195,10 +217,10 @@
       }, {
          "libraryId" : "CqlListOperatorsTest",
          "libraryVersion" : "1.4.0",
-         "startLine" : 806,
-         "startChar" : 86,
-         "endLine" : 806,
-         "endChar" : 135,
+         "startLine" : 821,
+         "startChar" : 17,
+         "endLine" : 821,
+         "endChar" : 18,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -209,7 +231,7 @@
          "startLine" : 825,
          "startChar" : 17,
          "endLine" : 825,
-         "endChar" : 18,
+         "endChar" : 19,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -231,7 +253,7 @@
          "startLine" : 833,
          "startChar" : 17,
          "endLine" : 833,
-         "endChar" : 19,
+         "endChar" : 63,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -242,7 +264,7 @@
          "startLine" : 837,
          "startChar" : 17,
          "endLine" : 837,
-         "endChar" : 63,
+         "endChar" : 86,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -253,7 +275,7 @@
          "startLine" : 841,
          "startChar" : 17,
          "endLine" : 841,
-         "endChar" : 86,
+         "endChar" : 50,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
@@ -264,17 +286,6 @@
          "startLine" : 845,
          "startChar" : 17,
          "endLine" : 845,
-         "endChar" : 50,
-         "message" : "List-valued expression was demoted to a singleton.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "CqlListOperatorsTest",
-         "libraryVersion" : "1.4.0",
-         "startLine" : 849,
-         "startChar" : 17,
-         "endLine" : 849,
          "endChar" : 66,
          "message" : "List-valued expression was demoted to a singleton.",
          "errorType" : "semantic",
@@ -5881,10 +5892,32 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (List Incudes List now treats nulls as equal)",
+                           "type" : "Includes",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "List",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "type" : "Null",
+                                 "annotation" : [ ]
+                              } ]
+                           }, {
+                              "type" : "List",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "type" : "Null",
+                                 "annotation" : [ ]
+                              } ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -6688,10 +6721,32 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Wrong answer (List Incuded In List now treats nulls as equal)",
+                           "type" : "IncludedIn",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "List",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "type" : "Null",
+                                 "annotation" : [ ]
+                              } ]
+                           }, {
+                              "type" : "List",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "type" : "Null",
+                                 "annotation" : [ ]
+                              } ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
