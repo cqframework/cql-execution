@@ -11,6 +11,9 @@ library Common
 using Simple version '1.0.0'
 include Common2 called common2
 
+valueset "My Favorite VS": '9.7.5.3.1'
+valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.101.12.1001'
+codesystem "My Favorite CS": '1.3.5.7.9'
 codesystem "SNOMEDCT": '2.16.840.1.113883.6.96'
 code "directReferenceCode": '428371000124100' from "SNOMEDCT" display 'directReferenceCode'
 
@@ -31,6 +34,10 @@ define SupportLibDef:
 using Simple version '1.0.0'
 
 include Common called common
+
+valueset "My Favorite VS": '10.8.6.4.2'
+codesystem "My Favorite CS": '2.4.6.8.10'
+
 parameter MeasurementPeriod default Interval[DateTime(2013, 1, 1), DateTime(2014, 1, 1))
 
 context Patient
@@ -40,6 +47,18 @@ define ID: common.InDemographic
 define L : Length(Patient.name)
 define FuncTest : common.foo(2, 5)
 define supportLibCode: common."directReferenceCode"
+define supportLibCodeSystem: common."SNOMEDCT"
+define supportClashingCodeSystemNames:
+  Tuple {
+    MyFavorite: "My Favorite CS",
+    MyLibsFavorite: common."My Favorite CS"
+  }
+define supportLibValueSet: common."Acute Pharyngitis"
+define supportClashingValueSetNames:
+  Tuple {
+    MyFavorite: "My Favorite VS",
+    MyLibsFavorite: common."My Favorite VS"
+  }
 
 // @Test: CommonLib2
 library Common2
@@ -102,6 +121,7 @@ define ExprSortsOnFunc: common2.SortUsingFunction
 
 
 // @Test: Using CommonLib and CommonLib2
+library UsingTwoLibs version '0.0.1'
 using Simple version '1.0.0'
 include Common2 called common2
 include Common called common

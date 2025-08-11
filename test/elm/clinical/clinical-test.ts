@@ -344,6 +344,22 @@ describe('ConceptRef', () => {
   });
 });
 
+describe('CodeSystemRef', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should have a name', function () {
+    this.resolveMyCS.name.should.equal('MyCS');
+  });
+
+  it('should execute to the defined code system', async function () {
+    const myCS = await this.resolveMyCS.exec(this.ctx);
+    myCS.id.should.equal('http://loinc.org');
+    myCS.version.should.equal('1');
+  });
+});
+
 describe('CalculateAge: Fully Specified Birth Date', () => {
   // Patient birth date: 1980-06-17 at 9:00am GMT
   beforeEach(function () {

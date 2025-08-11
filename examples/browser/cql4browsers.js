@@ -464,9 +464,10 @@ function codesMatch(code1, code2) {
     return code1.code === code2.code && code1.system === code2.system;
 }
 class CodeSystem {
-    constructor(id, version) {
+    constructor(id, version, name) {
         this.id = id;
         this.version = version;
+        this.name = name;
     }
 }
 exports.CodeSystem = CodeSystem;
@@ -3771,7 +3772,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CalculateAgeAt = exports.CalculateAge = exports.Concept = exports.ConceptRef = exports.ConceptDef = exports.Code = exports.CodeRef = exports.CodeDef = exports.CodeSystemDef = exports.ExpandValueSet = exports.InValueSet = exports.AnyInValueSet = exports.ValueSetRef = exports.ValueSetDef = void 0;
+exports.CalculateAgeAt = exports.CalculateAge = exports.Concept = exports.ConceptRef = exports.ConceptDef = exports.Code = exports.CodeRef = exports.CodeDef = exports.CodeSystemRef = exports.CodeSystemDef = exports.ExpandValueSet = exports.InValueSet = exports.AnyInValueSet = exports.ValueSetRef = exports.ValueSetDef = void 0;
 const expression_1 = require("./expression");
 const dt = __importStar(require("../datatypes/datatypes"));
 const builder_1 = require("./builder");
@@ -3877,10 +3878,22 @@ class CodeSystemDef extends expression_1.Expression {
         this.version = json.version;
     }
     async exec(_ctx) {
-        return new dt.CodeSystem(this.id, this.version);
+        return new dt.CodeSystem(this.id, this.version, this.name);
     }
 }
 exports.CodeSystemDef = CodeSystemDef;
+class CodeSystemRef extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.name = json.name;
+        this.libraryName = json.libraryName;
+    }
+    async exec(ctx) {
+        const codeSystemDef = ctx.getCodeSystem(this.name, this.libraryName);
+        return codeSystemDef ? codeSystemDef.execute(ctx) : undefined;
+    }
+}
+exports.CodeSystemRef = CodeSystemRef;
 class CodeDef extends expression_1.Expression {
     constructor(json) {
         super(json);
@@ -5426,7 +5439,11 @@ exports.Library = void 0;
 const expressions_1 = require("./expressions");
 class Library {
     constructor(json, libraryManager) {
+        var _a, _b;
         this.source = json;
+        // identifier
+        this.name = (_a = json.library.identifier) === null || _a === void 0 ? void 0 : _a.id;
+        this.version = (_b = json.library.identifier) === null || _b === void 0 ? void 0 : _b.version;
         // usings
         const usingDefs = (json.library.usings && json.library.usings.def) || [];
         this.usings = usingDefs
@@ -5487,14 +5504,6 @@ class Library {
                 this.includes[incl.localIdentifier] = libraryManager.resolve(incl.path, incl.version);
             }
         }
-        // Include codesystems from includes
-        for (const iProperty in this.includes) {
-            if (this.includes[iProperty] && this.includes[iProperty].codesystems) {
-                for (const csProperty in this.includes[iProperty].codesystems) {
-                    this.codesystems[csProperty] = this.includes[iProperty].codesystems[csProperty];
-                }
-            }
-        }
     }
     getFunction(identifier) {
         return this.functions[identifier];
@@ -5503,15 +5512,20 @@ class Library {
         return (this.expressions[identifier] || this.includes[identifier] || this.getFunction(identifier));
     }
     getValueSet(identifier, libraryName) {
-        if (this.valuesets[identifier] != null) {
+        if (libraryName && this.includes[libraryName]) {
+            return this.includes[libraryName].valuesets[identifier];
+        }
+        else if (libraryName == null || libraryName === this.name) {
             return this.valuesets[identifier];
         }
-        return this.includes[libraryName] != null
-            ? this.includes[libraryName].valuesets[identifier]
-            : undefined;
     }
-    getCodeSystem(identifier) {
-        return this.codesystems[identifier];
+    getCodeSystem(identifier, libraryName) {
+        if (libraryName && this.includes[libraryName]) {
+            return this.includes[libraryName].codesystems[identifier];
+        }
+        else if (libraryName == null || libraryName === this.name) {
+            return this.codesystems[identifier];
+        }
     }
     getCode(identifier) {
         return this.codes[identifier];
@@ -8097,8 +8111,8 @@ class Context {
     getValueSet(name, library) {
         return this.parent && this.parent.getValueSet(name, library);
     }
-    getCodeSystem(name) {
-        return this.parent && this.parent.getCodeSystem(name);
+    getCodeSystem(name, libraryName) {
+        return this.parent && this.parent.getCodeSystem(name, libraryName);
     }
     getCode(name) {
         return this.parent && this.parent.getCode(name);

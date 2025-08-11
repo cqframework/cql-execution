@@ -11,6 +11,8 @@ import {
 
 export class Library {
   source: any;
+  name?: string;
+  version?: string;
   usings: any;
   parameters: Parameter;
   codesystems: any;
@@ -23,6 +25,9 @@ export class Library {
 
   constructor(json: any, libraryManager?: any) {
     this.source = json;
+    // identifier
+    this.name = json.library.identifier?.id;
+    this.version = json.library.identifier?.version;
     // usings
     const usingDefs = (json.library.usings && json.library.usings.def) || [];
     this.usings = usingDefs
@@ -82,15 +87,6 @@ export class Library {
         this.includes[incl.localIdentifier] = libraryManager.resolve(incl.path, incl.version);
       }
     }
-
-    // Include codesystems from includes
-    for (const iProperty in this.includes) {
-      if (this.includes[iProperty] && this.includes[iProperty].codesystems) {
-        for (const csProperty in this.includes[iProperty].codesystems) {
-          this.codesystems[csProperty] = this.includes[iProperty].codesystems[csProperty];
-        }
-      }
-    }
   }
 
   getFunction(identifier: string) {
@@ -104,16 +100,19 @@ export class Library {
   }
 
   getValueSet(identifier: string, libraryName: string) {
-    if (this.valuesets[identifier] != null) {
+    if (libraryName && this.includes[libraryName]) {
+      return this.includes[libraryName].valuesets[identifier];
+    } else if (libraryName == null || libraryName === this.name) {
       return this.valuesets[identifier];
     }
-    return this.includes[libraryName] != null
-      ? this.includes[libraryName].valuesets[identifier]
-      : undefined;
   }
 
-  getCodeSystem(identifier: string) {
-    return this.codesystems[identifier];
+  getCodeSystem(identifier: string, libraryName?: string) {
+    if (libraryName && this.includes[libraryName]) {
+      return this.includes[libraryName].codesystems[identifier];
+    } else if (libraryName == null || libraryName === this.name) {
+      return this.codesystems[identifier];
+    }
   }
 
   getCode(identifier: string) {

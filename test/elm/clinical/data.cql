@@ -101,6 +101,10 @@ code "Tobacco smoking status code": '72166-2' from "LOINC" display 'Tobacco smok
 concept "Tobacco smoking status": { "Tobacco smoking status code" } display 'Tobacco smoking status'
 define Foo: "Tobacco smoking status"
 
+// @Test: CodeSystemRef
+codesystem MyCS: 'http://loinc.org' version '1'
+define ResolveMyCS: MyCS
+
 // @Test: CalculateAge: Fully Specified Birth Date
 define Years: AgeInYears()
 define Months: AgeInMonths()

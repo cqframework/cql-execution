@@ -143,8 +143,8 @@ export class Context {
     return this.parent && this.parent.getValueSet(name, library);
   }
 
-  getCodeSystem(name: string) {
-    return this.parent && this.parent.getCodeSystem(name);
+  getCodeSystem(name: string, libraryName?: string) {
+    return this.parent && this.parent.getCodeSystem(name, libraryName);
   }
 
   getCode(name: string) {
