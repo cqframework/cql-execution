@@ -22,14 +22,14 @@ module.exports['Count'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "261",
+            "r" : "266",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -72,21 +72,21 @@ module.exports['Count'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -96,7 +96,7 @@ module.exports['Count'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "not_null",
             "context" : "Patient",
@@ -104,17 +104,17 @@ module.exports['Count'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","not_null",": " ]
                   }, {
-                     "r" : "225",
+                     "r" : "227",
                      "s" : [ {
                         "value" : [ "Count","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","1",",","2",",","3",",","4",",","5","}" ]
                         } ]
                      }, {
@@ -124,56 +124,56 @@ module.exports['Count'] = {
                }
             } ],
             "expression" : {
-               "localId" : "225",
+               "localId" : "227",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Count",
                "signature" : [ {
-                  "localId" : "226",
+                  "localId" : "228",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "227",
+                     "localId" : "229",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "213",
+                  "localId" : "215",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "219",
+                     "localId" : "221",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "220",
+                        "localId" : "222",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "214",
+                     "localId" : "216",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "215",
+                     "localId" : "217",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "216",
+                     "localId" : "218",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   }, {
-                     "localId" : "217",
+                     "localId" : "219",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "218",
+                     "localId" : "220",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
@@ -182,7 +182,7 @@ module.exports['Count'] = {
                }
             }
          }, {
-            "localId" : "229",
+            "localId" : "232",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "has_null",
             "context" : "Patient",
@@ -190,17 +190,17 @@ module.exports['Count'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "229",
+                  "r" : "232",
                   "s" : [ {
                      "value" : [ "","define ","has_null",": " ]
                   }, {
-                     "r" : "245",
+                     "r" : "248",
                      "s" : [ {
                         "value" : [ "Count","(" ]
                      }, {
-                        "r" : "230",
+                        "r" : "233",
                         "s" : [ {
-                           "r" : "231",
+                           "r" : "234",
                            "value" : [ "{","1",",","null",",","null",",","null",",","2","}" ]
                         } ]
                      }, {
@@ -210,68 +210,68 @@ module.exports['Count'] = {
                }
             } ],
             "expression" : {
-               "localId" : "245",
+               "localId" : "248",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Count",
                "signature" : [ {
-                  "localId" : "246",
+                  "localId" : "249",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "247",
+                     "localId" : "250",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "230",
+                  "localId" : "233",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "239",
+                     "localId" : "242",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "240",
+                        "localId" : "243",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "231",
+                     "localId" : "234",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "236",
+                     "localId" : "239",
                      "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "232",
+                        "localId" : "235",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "237",
+                     "localId" : "240",
                      "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "233",
+                        "localId" : "236",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "241",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "signature" : [ ],
+                     "operand" : {
+                        "localId" : "237",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
                      "localId" : "238",
-                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "234",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                        "type" : "Null"
-                     }
-                  }, {
-                     "localId" : "235",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
@@ -280,7 +280,7 @@ module.exports['Count'] = {
                }
             }
          }, {
-            "localId" : "249",
+            "localId" : "253",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "empty",
             "context" : "Patient",
@@ -288,39 +288,39 @@ module.exports['Count'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "249",
+                  "r" : "253",
                   "s" : [ {
                      "value" : [ "","define ","empty",": " ]
                   }, {
-                     "r" : "257",
+                     "r" : "261",
                      "s" : [ {
-                        "r" : "250",
+                        "r" : "254",
                         "value" : [ "Count","(","{}",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "257",
+               "localId" : "261",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Count",
                "signature" : [ {
-                  "localId" : "258",
+                  "localId" : "262",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "259",
+                     "localId" : "263",
                      "name" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "250",
+                  "localId" : "254",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "251",
+                     "localId" : "255",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "252",
+                        "localId" : "256",
                         "name" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -329,7 +329,7 @@ module.exports['Count'] = {
                }
             }
          }, {
-            "localId" : "261",
+            "localId" : "266",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "is_null",
             "context" : "Patient",
@@ -337,24 +337,24 @@ module.exports['Count'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "261",
+                  "r" : "266",
                   "s" : [ {
                      "value" : [ "","define ","is_null",": " ]
                   }, {
-                     "r" : "274",
+                     "r" : "279",
                      "s" : [ {
                         "value" : [ "Count","(" ]
                      }, {
-                        "r" : "262",
+                        "r" : "267",
                         "s" : [ {
-                           "r" : "263",
+                           "r" : "268",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "264",
+                           "r" : "269",
                            "s" : [ {
                               "value" : [ "List<" ]
                            }, {
-                              "r" : "265",
+                              "r" : "270",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
@@ -369,51 +369,51 @@ module.exports['Count'] = {
                }
             } ],
             "expression" : {
-               "localId" : "274",
+               "localId" : "279",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Count",
                "signature" : [ {
-                  "localId" : "275",
+                  "localId" : "280",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "276",
+                     "localId" : "281",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "262",
+                  "localId" : "267",
                   "strict" : false,
                   "type" : "As",
                   "resultTypeSpecifier" : {
-                     "localId" : "268",
+                     "localId" : "273",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "269",
+                        "localId" : "274",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "263",
+                     "localId" : "268",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "264",
+                     "localId" : "269",
                      "type" : "ListTypeSpecifier",
                      "resultTypeSpecifier" : {
-                        "localId" : "266",
+                        "localId" : "271",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "267",
+                           "localId" : "272",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "elementType" : {
-                        "localId" : "265",
+                        "localId" : "270",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
@@ -445,14 +445,14 @@ module.exports['Sum'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "356",
+            "r" : "366",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -495,21 +495,21 @@ module.exports['Sum'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -519,7 +519,7 @@ module.exports['Sum'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "not_null",
             "context" : "Patient",
@@ -527,17 +527,17 @@ module.exports['Sum'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","not_null",": " ]
                   }, {
-                     "r" : "225",
+                     "r" : "227",
                      "s" : [ {
                         "value" : [ "Sum","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","1",",","2",",","3",",","4",",","5","}" ]
                         } ]
                      }, {
@@ -547,56 +547,56 @@ module.exports['Sum'] = {
                }
             } ],
             "expression" : {
-               "localId" : "225",
+               "localId" : "227",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Sum",
                "signature" : [ {
-                  "localId" : "226",
+                  "localId" : "228",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "227",
+                     "localId" : "229",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "213",
+                  "localId" : "215",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "219",
+                     "localId" : "221",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "220",
+                        "localId" : "222",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "214",
+                     "localId" : "216",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "215",
+                     "localId" : "217",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "216",
+                     "localId" : "218",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   }, {
-                     "localId" : "217",
+                     "localId" : "219",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "218",
+                     "localId" : "220",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
@@ -605,7 +605,7 @@ module.exports['Sum'] = {
                }
             }
          }, {
-            "localId" : "229",
+            "localId" : "232",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "has_null",
             "context" : "Patient",
@@ -613,17 +613,17 @@ module.exports['Sum'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "229",
+                  "r" : "232",
                   "s" : [ {
                      "value" : [ "","define ","has_null",": " ]
                   }, {
-                     "r" : "245",
+                     "r" : "248",
                      "s" : [ {
                         "value" : [ "Sum","(" ]
                      }, {
-                        "r" : "230",
+                        "r" : "233",
                         "s" : [ {
-                           "r" : "231",
+                           "r" : "234",
                            "value" : [ "{","1",",","null",",","null",",","null",",","2","}" ]
                         } ]
                      }, {
@@ -633,68 +633,68 @@ module.exports['Sum'] = {
                }
             } ],
             "expression" : {
-               "localId" : "245",
+               "localId" : "248",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Sum",
                "signature" : [ {
-                  "localId" : "246",
+                  "localId" : "249",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "247",
+                     "localId" : "250",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "230",
+                  "localId" : "233",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "239",
+                     "localId" : "242",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "240",
+                        "localId" : "243",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "231",
+                     "localId" : "234",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "236",
+                     "localId" : "239",
                      "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "232",
+                        "localId" : "235",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "237",
+                     "localId" : "240",
                      "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "233",
+                        "localId" : "236",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "241",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "signature" : [ ],
+                     "operand" : {
+                        "localId" : "237",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
                      "localId" : "238",
-                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "234",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                        "type" : "Null"
-                     }
-                  }, {
-                     "localId" : "235",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
@@ -703,7 +703,7 @@ module.exports['Sum'] = {
                }
             }
          }, {
-            "localId" : "249",
+            "localId" : "253",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "not_null_q",
             "context" : "Patient",
@@ -711,47 +711,47 @@ module.exports['Sum'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "249",
+                  "r" : "253",
                   "s" : [ {
                      "value" : [ "","define ","not_null_q",": " ]
                   }, {
-                     "r" : "262",
+                     "r" : "266",
                      "s" : [ {
                         "value" : [ "Sum","(" ]
                      }, {
-                        "r" : "250",
+                        "r" : "254",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "251",
+                           "r" : "255",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "252",
+                           "r" : "256",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "253",
+                           "r" : "257",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "254",
+                           "r" : "258",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "255",
+                           "r" : "259",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
@@ -765,56 +765,56 @@ module.exports['Sum'] = {
                }
             } ],
             "expression" : {
-               "localId" : "262",
+               "localId" : "266",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Sum",
                "signature" : [ {
-                  "localId" : "263",
+                  "localId" : "267",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "264",
+                     "localId" : "268",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "250",
+                  "localId" : "254",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "256",
+                     "localId" : "260",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "257",
+                        "localId" : "261",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "251",
+                     "localId" : "255",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "252",
+                     "localId" : "256",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "253",
+                     "localId" : "257",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "254",
+                     "localId" : "258",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "255",
+                     "localId" : "259",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
@@ -823,7 +823,7 @@ module.exports['Sum'] = {
                }
             }
          }, {
-            "localId" : "266",
+            "localId" : "271",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "has_null_q",
             "context" : "Patient",
@@ -831,27 +831,27 @@ module.exports['Sum'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "266",
+                  "r" : "271",
                   "s" : [ {
                      "value" : [ "","define ","has_null_q",": " ]
                   }, {
-                     "r" : "282",
+                     "r" : "287",
                      "s" : [ {
                         "value" : [ "Sum","(" ]
                      }, {
-                        "r" : "267",
+                        "r" : "272",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "268",
+                           "r" : "273",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
-                           "r" : "269",
+                           "r" : "274",
                            "value" : [ ",","null",",","null",",","null","," ]
                         }, {
-                           "r" : "272",
+                           "r" : "277",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
@@ -865,68 +865,68 @@ module.exports['Sum'] = {
                }
             } ],
             "expression" : {
-               "localId" : "282",
+               "localId" : "287",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Sum",
                "signature" : [ {
-                  "localId" : "283",
+                  "localId" : "288",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "284",
+                     "localId" : "289",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "267",
+                  "localId" : "272",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "276",
+                     "localId" : "281",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "277",
+                        "localId" : "282",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "268",
+                     "localId" : "273",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "273",
+                     "localId" : "278",
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "269",
+                        "localId" : "274",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "274",
+                     "localId" : "279",
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "270",
+                        "localId" : "275",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "275",
+                     "localId" : "280",
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "271",
+                        "localId" : "276",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "272",
+                     "localId" : "277",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
@@ -935,7 +935,7 @@ module.exports['Sum'] = {
                }
             }
          }, {
-            "localId" : "286",
+            "localId" : "292",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "unmatched_units_q",
             "context" : "Patient",
@@ -943,54 +943,54 @@ module.exports['Sum'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "286",
+                  "r" : "292",
                   "s" : [ {
                      "value" : [ "","define ","unmatched_units_q",": " ]
                   }, {
-                     "r" : "300",
+                     "r" : "306",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "287",
+                        "r" : "293",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "288",
+                           "r" : "294",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "289",
+                           "r" : "295",
                            "s" : [ {
                               "value" : [ "2 ","'m'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "290",
+                           "r" : "296",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "291",
+                           "r" : "297",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "292",
+                           "r" : "298",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "293",
+                           "r" : "299",
                            "s" : [ {
                               "value" : [ "0 ","'ml'" ]
                            } ]
@@ -1004,62 +1004,62 @@ module.exports['Sum'] = {
                }
             } ],
             "expression" : {
-               "localId" : "300",
+               "localId" : "306",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "301",
+                  "localId" : "307",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "302",
+                     "localId" : "308",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "287",
+                  "localId" : "293",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "294",
+                     "localId" : "300",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "295",
+                        "localId" : "301",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "288",
+                     "localId" : "294",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "289",
+                     "localId" : "295",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "m",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "290",
+                     "localId" : "296",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "291",
+                     "localId" : "297",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "292",
+                     "localId" : "298",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "293",
+                     "localId" : "299",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0,
                      "unit" : "ml",
@@ -1068,7 +1068,7 @@ module.exports['Sum'] = {
                }
             }
          }, {
-            "localId" : "304",
+            "localId" : "311",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "empty",
             "context" : "Patient",
@@ -1076,19 +1076,19 @@ module.exports['Sum'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "304",
+                  "r" : "311",
                   "s" : [ {
                      "value" : [ "","define ","empty",": " ]
                   }, {
-                     "r" : "314",
+                     "r" : "321",
                      "s" : [ {
                         "value" : [ "Sum","(" ]
                      }, {
-                        "r" : "306",
+                        "r" : "313",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "305",
+                           "r" : "312",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -1102,26 +1102,26 @@ module.exports['Sum'] = {
                }
             } ],
             "expression" : {
-               "localId" : "314",
+               "localId" : "321",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Sum",
                "signature" : [ {
-                  "localId" : "315",
+                  "localId" : "322",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "316",
+                     "localId" : "323",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "306",
+                  "localId" : "313",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "308",
+                     "localId" : "315",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "309",
+                        "localId" : "316",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -1130,7 +1130,7 @@ module.exports['Sum'] = {
                }
             }
          }, {
-            "localId" : "318",
+            "localId" : "326",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "q_diff_units",
             "context" : "Patient",
@@ -1138,47 +1138,47 @@ module.exports['Sum'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "318",
+                  "r" : "326",
                   "s" : [ {
                      "value" : [ "","define ","q_diff_units",": " ]
                   }, {
-                     "r" : "331",
+                     "r" : "339",
                      "s" : [ {
                         "value" : [ "Sum","(" ]
                      }, {
-                        "r" : "319",
+                        "r" : "327",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "320",
+                           "r" : "328",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "321",
+                           "r" : "329",
                            "s" : [ {
                               "value" : [ "0.002 ","'l'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "322",
+                           "r" : "330",
                            "s" : [ {
                               "value" : [ "0.03 ","'dl'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "323",
+                           "r" : "331",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "324",
+                           "r" : "332",
                            "s" : [ {
                               "value" : [ "0.005 ","'l'" ]
                            } ]
@@ -1192,56 +1192,56 @@ module.exports['Sum'] = {
                }
             } ],
             "expression" : {
-               "localId" : "331",
+               "localId" : "339",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Sum",
                "signature" : [ {
-                  "localId" : "332",
+                  "localId" : "340",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "333",
+                     "localId" : "341",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "319",
+                  "localId" : "327",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "325",
+                     "localId" : "333",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "326",
+                        "localId" : "334",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "320",
+                     "localId" : "328",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "321",
+                     "localId" : "329",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "l",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "322",
+                     "localId" : "330",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.03,
                      "unit" : "dl",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "323",
+                     "localId" : "331",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "324",
+                     "localId" : "332",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.005,
                      "unit" : "l",
@@ -1250,7 +1250,7 @@ module.exports['Sum'] = {
                }
             }
          }, {
-            "localId" : "335",
+            "localId" : "344",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "NumbersAndQuantities",
             "context" : "Patient",
@@ -1258,48 +1258,48 @@ module.exports['Sum'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "335",
+                  "r" : "344",
                   "s" : [ {
                      "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
-                     "r" : "352",
+                     "r" : "361",
                      "s" : [ {
                         "value" : [ "Sum","(" ]
                      }, {
-                        "r" : "336",
+                        "r" : "345",
                         "s" : [ {
-                           "r" : "337",
+                           "r" : "346",
                            "value" : [ "{","1"," ," ]
                         }, {
-                           "r" : "338",
+                           "r" : "347",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "339",
+                           "r" : "348",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "340",
+                           "r" : "349",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "341",
+                           "r" : "350",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "342",
+                           "r" : "351",
                            "s" : [ {
                               "value" : [ "0 ","'ml'" ]
                            } ]
@@ -1313,71 +1313,71 @@ module.exports['Sum'] = {
                }
             } ],
             "expression" : {
-               "localId" : "352",
+               "localId" : "361",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Sum",
                "signature" : [ {
-                  "localId" : "353",
+                  "localId" : "362",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "354",
+                     "localId" : "363",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "336",
+                  "localId" : "345",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "346",
+                     "localId" : "355",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "347",
+                        "localId" : "356",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "344",
+                     "localId" : "353",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "345",
+                        "localId" : "354",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "337",
+                        "localId" : "346",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "338",
+                     "localId" : "347",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "339",
+                     "localId" : "348",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "340",
+                     "localId" : "349",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "341",
+                     "localId" : "350",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "342",
+                     "localId" : "351",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0,
                      "unit" : "ml",
@@ -1386,7 +1386,7 @@ module.exports['Sum'] = {
                }
             }
          }, {
-            "localId" : "356",
+            "localId" : "366",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "IncompatibleUnitsNull",
             "context" : "Patient",
@@ -1394,26 +1394,26 @@ module.exports['Sum'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "356",
+                  "r" : "366",
                   "s" : [ {
                      "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
-                     "r" : "366",
+                     "r" : "376",
                      "s" : [ {
                         "value" : [ "Sum","(" ]
                      }, {
-                        "r" : "357",
+                        "r" : "367",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "358",
+                           "r" : "368",
                            "s" : [ {
                               "value" : [ "1 ","'mg/d'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "359",
+                           "r" : "369",
                            "s" : [ {
                               "value" : [ "0.002 ","'/d'" ]
                            } ]
@@ -1427,38 +1427,38 @@ module.exports['Sum'] = {
                }
             } ],
             "expression" : {
-               "localId" : "366",
+               "localId" : "376",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Sum",
                "signature" : [ {
-                  "localId" : "367",
+                  "localId" : "377",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "368",
+                     "localId" : "378",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "357",
+                  "localId" : "367",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "360",
+                     "localId" : "370",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "361",
+                        "localId" : "371",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "358",
+                     "localId" : "368",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "mg/d",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "359",
+                     "localId" : "369",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "/d",
@@ -1497,14 +1497,14 @@ module.exports['Min'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "542",
+            "r" : "563",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1547,21 +1547,21 @@ module.exports['Min'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -1571,7 +1571,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "not_null",
             "context" : "Patient",
@@ -1579,17 +1579,17 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","not_null",": " ]
                   }, {
-                     "r" : "226",
+                     "r" : "228",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","1",",","2",",","3",",","4",",","5",",","0","}" ]
                         } ]
                      }, {
@@ -1599,62 +1599,62 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "226",
+               "localId" : "228",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "227",
+                  "localId" : "229",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "228",
+                     "localId" : "230",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "213",
+                  "localId" : "215",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "220",
+                     "localId" : "222",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "221",
+                        "localId" : "223",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "214",
+                     "localId" : "216",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "215",
+                     "localId" : "217",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "216",
+                     "localId" : "218",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   }, {
-                     "localId" : "217",
+                     "localId" : "219",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "218",
+                     "localId" : "220",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   }, {
-                     "localId" : "219",
+                     "localId" : "221",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
@@ -1663,7 +1663,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "230",
+            "localId" : "233",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "has_null",
             "context" : "Patient",
@@ -1671,26 +1671,26 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "230",
+                  "r" : "233",
                   "s" : [ {
                      "value" : [ "","define ","has_null",": " ]
                   }, {
-                     "r" : "247",
+                     "r" : "250",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "231",
+                        "r" : "234",
                         "s" : [ {
-                           "r" : "232",
+                           "r" : "235",
                            "value" : [ "{","1",",","null","," ]
                         }, {
-                           "r" : "234",
+                           "r" : "237",
                            "s" : [ {
-                              "r" : "235",
+                              "r" : "238",
                               "value" : [ "-","1" ]
                            } ]
                         }, {
-                           "r" : "237",
+                           "r" : "240",
                            "value" : [ ",","null",",","2","}" ]
                         } ]
                      }, {
@@ -1700,74 +1700,74 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "247",
+               "localId" : "250",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "248",
+                  "localId" : "251",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "249",
+                     "localId" : "252",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "231",
+                  "localId" : "234",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "241",
+                     "localId" : "244",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "242",
+                        "localId" : "245",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "232",
+                     "localId" : "235",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "239",
+                     "localId" : "242",
                      "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "233",
+                        "localId" : "236",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "234",
+                     "localId" : "237",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "Negate",
                      "signature" : [ {
-                        "localId" : "236",
+                        "localId" : "239",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "235",
+                        "localId" : "238",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "240",
+                     "localId" : "243",
                      "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "237",
+                        "localId" : "240",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "238",
+                     "localId" : "241",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
@@ -1776,7 +1776,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "251",
+            "localId" : "255",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "empty",
             "context" : "Patient",
@@ -1784,19 +1784,19 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "251",
+                  "r" : "255",
                   "s" : [ {
                      "value" : [ "","define ","empty",": " ]
                   }, {
-                     "r" : "261",
+                     "r" : "265",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "253",
+                        "r" : "257",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "252",
+                           "r" : "256",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -1810,26 +1810,26 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "261",
+               "localId" : "265",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "262",
+                  "localId" : "266",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "263",
+                     "localId" : "267",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "253",
+                  "localId" : "257",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "255",
+                     "localId" : "259",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "256",
+                        "localId" : "260",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -1838,7 +1838,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "265",
+            "localId" : "270",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "not_null_q",
             "context" : "Patient",
@@ -1846,54 +1846,54 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "265",
+                  "r" : "270",
                   "s" : [ {
                      "value" : [ "","define ","not_null_q",": " ]
                   }, {
-                     "r" : "279",
+                     "r" : "284",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "266",
+                        "r" : "271",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "267",
+                           "r" : "272",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "268",
+                           "r" : "273",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "269",
+                           "r" : "274",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "270",
+                           "r" : "275",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "271",
+                           "r" : "276",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "272",
+                           "r" : "277",
                            "s" : [ {
                               "value" : [ "0 ","'ml'" ]
                            } ]
@@ -1907,62 +1907,62 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "279",
+               "localId" : "284",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "280",
+                  "localId" : "285",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "281",
+                     "localId" : "286",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "266",
+                  "localId" : "271",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "273",
+                     "localId" : "278",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "274",
+                        "localId" : "279",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "267",
+                     "localId" : "272",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "268",
+                     "localId" : "273",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "269",
+                     "localId" : "274",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "270",
+                     "localId" : "275",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "271",
+                     "localId" : "276",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "272",
+                     "localId" : "277",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0,
                      "unit" : "ml",
@@ -1971,7 +1971,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "283",
+            "localId" : "289",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "has_null_q",
             "context" : "Patient",
@@ -1979,40 +1979,40 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "283",
+                  "r" : "289",
                   "s" : [ {
                      "value" : [ "","define ","has_null_q",": " ]
                   }, {
-                     "r" : "300",
+                     "r" : "306",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "284",
+                        "r" : "290",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "285",
+                           "r" : "291",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
-                           "r" : "286",
+                           "r" : "292",
                            "value" : [ ",","null","," ]
                         }, {
-                           "r" : "287",
+                           "r" : "293",
                            "s" : [ {
                               "value" : [ "-" ]
                            }, {
-                              "r" : "288",
+                              "r" : "294",
                               "s" : [ {
                                  "value" : [ "1 ","'ml'" ]
                               } ]
                            } ]
                         }, {
-                           "r" : "290",
+                           "r" : "296",
                            "value" : [ ",","null","," ]
                         }, {
-                           "r" : "291",
+                           "r" : "297",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
@@ -2026,74 +2026,74 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "300",
+               "localId" : "306",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "301",
+                  "localId" : "307",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "302",
+                     "localId" : "308",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "284",
+                  "localId" : "290",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "294",
+                     "localId" : "300",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "295",
+                        "localId" : "301",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "285",
+                     "localId" : "291",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "292",
+                     "localId" : "298",
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "286",
+                        "localId" : "292",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "287",
+                     "localId" : "293",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "Negate",
                      "signature" : [ {
-                        "localId" : "289",
+                        "localId" : "295",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "288",
+                        "localId" : "294",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "value" : 1,
                         "unit" : "ml",
                         "type" : "Quantity"
                      }
                   }, {
-                     "localId" : "293",
+                     "localId" : "299",
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "290",
+                        "localId" : "296",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "291",
+                     "localId" : "297",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
@@ -2102,7 +2102,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "304",
+            "localId" : "311",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "q_diff_units",
             "context" : "Patient",
@@ -2110,54 +2110,54 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "304",
+                  "r" : "311",
                   "s" : [ {
                      "value" : [ "","define ","q_diff_units",": " ]
                   }, {
-                     "r" : "318",
+                     "r" : "325",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "305",
+                        "r" : "312",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "306",
+                           "r" : "313",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "307",
+                           "r" : "314",
                            "s" : [ {
                               "value" : [ "2 ","'dl'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "308",
+                           "r" : "315",
                            "s" : [ {
                               "value" : [ "3 ","'l'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "309",
+                           "r" : "316",
                            "s" : [ {
                               "value" : [ "4 ","'l'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "310",
+                           "r" : "317",
                            "s" : [ {
                               "value" : [ "5 ","'l'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "311",
+                           "r" : "318",
                            "s" : [ {
                               "value" : [ "0 ","'ml'" ]
                            } ]
@@ -2171,62 +2171,62 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "318",
+               "localId" : "325",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "319",
+                  "localId" : "326",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "320",
+                     "localId" : "327",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "305",
+                  "localId" : "312",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "312",
+                     "localId" : "319",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "313",
+                        "localId" : "320",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "306",
+                     "localId" : "313",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "307",
+                     "localId" : "314",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "dl",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "308",
+                     "localId" : "315",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "l",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "309",
+                     "localId" : "316",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "l",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "310",
+                     "localId" : "317",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "l",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "311",
+                     "localId" : "318",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0,
                      "unit" : "ml",
@@ -2235,7 +2235,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "322",
+            "localId" : "330",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "NumbersAndQuantities",
             "context" : "Patient",
@@ -2243,48 +2243,48 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "322",
+                  "r" : "330",
                   "s" : [ {
                      "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
-                     "r" : "339",
+                     "r" : "347",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "323",
+                        "r" : "331",
                         "s" : [ {
-                           "r" : "324",
+                           "r" : "332",
                            "value" : [ "{","1"," ," ]
                         }, {
-                           "r" : "325",
+                           "r" : "333",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "326",
+                           "r" : "334",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "327",
+                           "r" : "335",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "328",
+                           "r" : "336",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "329",
+                           "r" : "337",
                            "s" : [ {
                               "value" : [ "0 ","'ml'" ]
                            } ]
@@ -2298,71 +2298,71 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "339",
+               "localId" : "347",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "340",
+                  "localId" : "348",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "341",
+                     "localId" : "349",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "323",
+                  "localId" : "331",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "333",
+                     "localId" : "341",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "334",
+                        "localId" : "342",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "331",
+                     "localId" : "339",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "332",
+                        "localId" : "340",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "324",
+                        "localId" : "332",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "325",
+                     "localId" : "333",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "326",
+                     "localId" : "334",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "327",
+                     "localId" : "335",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "328",
+                     "localId" : "336",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "329",
+                     "localId" : "337",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0,
                      "unit" : "ml",
@@ -2371,7 +2371,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "343",
+            "localId" : "352",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "IntegerMin",
             "context" : "Patient",
@@ -2379,17 +2379,17 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "343",
+                  "r" : "352",
                   "s" : [ {
                      "value" : [ "","define ","IntegerMin",": " ]
                   }, {
-                     "r" : "355",
+                     "r" : "364",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "344",
+                        "r" : "353",
                         "s" : [ {
-                           "r" : "345",
+                           "r" : "354",
                            "value" : [ "{ ","2",", ","4",", ","8",", ","6"," }" ]
                         } ]
                      }, {
@@ -2399,50 +2399,50 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "355",
+               "localId" : "364",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "356",
+                  "localId" : "365",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "357",
+                     "localId" : "366",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "344",
+                  "localId" : "353",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "349",
+                     "localId" : "358",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "350",
+                        "localId" : "359",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "345",
+                     "localId" : "354",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "346",
+                     "localId" : "355",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "347",
+                     "localId" : "356",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "8",
                      "type" : "Literal"
                   }, {
-                     "localId" : "348",
+                     "localId" : "357",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "6",
@@ -2451,7 +2451,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "359",
+            "localId" : "369",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "DecimalMin",
             "context" : "Patient",
@@ -2459,22 +2459,22 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "359",
+                  "r" : "369",
                   "s" : [ {
                      "value" : [ "","define ","DecimalMin",": " ]
                   }, {
-                     "r" : "373",
+                     "r" : "383",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "360",
+                        "r" : "370",
                         "s" : [ {
-                           "r" : "361",
+                           "r" : "371",
                            "value" : [ "{ ","5.0",", ","4.9",", ","5.1",", " ]
                         }, {
-                           "r" : "364",
+                           "r" : "374",
                            "s" : [ {
-                              "r" : "365",
+                              "r" : "375",
                               "value" : [ "-","5.0" ]
                            } ]
                         }, {
@@ -2487,59 +2487,59 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "373",
+               "localId" : "383",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "374",
+                  "localId" : "384",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "375",
+                     "localId" : "385",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "360",
+                  "localId" : "370",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "367",
+                     "localId" : "377",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "368",
+                        "localId" : "378",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "361",
+                     "localId" : "371",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "5.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "362",
+                     "localId" : "372",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "4.9",
                      "type" : "Literal"
                   }, {
-                     "localId" : "363",
+                     "localId" : "373",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "5.1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "364",
+                     "localId" : "374",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Negate",
                      "signature" : [ {
-                        "localId" : "366",
+                        "localId" : "376",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "365",
+                        "localId" : "375",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "value" : "5.0",
@@ -2549,7 +2549,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "377",
+            "localId" : "388",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "name" : "DateMin",
             "context" : "Patient",
@@ -2557,17 +2557,17 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "377",
+                  "r" : "388",
                   "s" : [ {
                      "value" : [ "","define ","DateMin",": " ]
                   }, {
-                     "r" : "400",
+                     "r" : "411",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "378",
+                        "r" : "389",
                         "s" : [ {
-                           "r" : "383",
+                           "r" : "394",
                            "value" : [ "{ ","@2012-12-31",", ","@2013-01-01",", ","@2012-01-01"," }" ]
                         } ]
                      }, {
@@ -2577,95 +2577,95 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "400",
+               "localId" : "411",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "401",
+                  "localId" : "412",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "402",
+                     "localId" : "413",
                      "name" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "378",
+                  "localId" : "389",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "394",
+                     "localId" : "405",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "395",
+                        "localId" : "406",
                         "name" : "{urn:hl7-org:elm-types:r1}Date",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "383",
+                     "localId" : "394",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "Date",
                      "signature" : [ ],
                      "year" : {
-                        "localId" : "380",
+                        "localId" : "391",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "381",
+                        "localId" : "392",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "382",
+                        "localId" : "393",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "31",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "388",
+                     "localId" : "399",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "Date",
                      "signature" : [ ],
                      "year" : {
-                        "localId" : "385",
+                        "localId" : "396",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2013",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "386",
+                        "localId" : "397",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "387",
+                        "localId" : "398",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "393",
+                     "localId" : "404",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "Date",
                      "signature" : [ ],
                      "year" : {
-                        "localId" : "390",
+                        "localId" : "401",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "391",
+                        "localId" : "402",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "392",
+                        "localId" : "403",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
@@ -2674,7 +2674,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "404",
+            "localId" : "416",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "DateTimeMin",
             "context" : "Patient",
@@ -2682,29 +2682,29 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "404",
+                  "r" : "416",
                   "s" : [ {
                      "value" : [ "","define ","DateTimeMin",": " ]
                   }, {
-                     "r" : "436",
+                     "r" : "448",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "405",
+                        "r" : "417",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "414",
+                           "r" : "426",
                            "s" : [ {
-                              "r" : "406",
+                              "r" : "418",
                               "value" : [ "DateTime","(","2012",", ","9",", ","9",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "426",
+                           "r" : "438",
                            "s" : [ {
-                              "r" : "418",
+                              "r" : "430",
                               "value" : [ "DateTime","(","2012",", ","9",", ","5",")" ]
                            } ]
                         }, {
@@ -2717,69 +2717,31 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "436",
+               "localId" : "448",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "437",
+                  "localId" : "449",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "438",
+                     "localId" : "450",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "405",
+                  "localId" : "417",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "430",
+                     "localId" : "442",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "431",
+                        "localId" : "443",
                         "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "414",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
-                     "type" : "DateTime",
-                     "signature" : [ {
-                        "localId" : "415",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "localId" : "416",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "localId" : "417",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "year" : {
-                        "localId" : "406",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2012",
-                        "type" : "Literal"
-                     },
-                     "month" : {
-                        "localId" : "407",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "9",
-                        "type" : "Literal"
-                     },
-                     "day" : {
-                        "localId" : "408",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "9",
-                        "type" : "Literal"
-                     }
-                  }, {
                      "localId" : "426",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "DateTime",
@@ -2814,6 +2776,44 @@ module.exports['Min'] = {
                         "localId" : "420",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "9",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "438",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "DateTime",
+                     "signature" : [ {
+                        "localId" : "439",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "440",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "441",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "year" : {
+                        "localId" : "430",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "431",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "9",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "432",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }
@@ -2821,7 +2821,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "440",
+            "localId" : "453",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "name" : "TimeMin",
             "context" : "Patient",
@@ -2829,37 +2829,37 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "440",
+                  "r" : "453",
                   "s" : [ {
                      "value" : [ "","define ","TimeMin",": " ]
                   }, {
-                     "r" : "484",
+                     "r" : "497",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "441",
+                        "r" : "454",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "450",
+                           "r" : "463",
                            "s" : [ {
-                              "r" : "442",
+                              "r" : "455",
                               "value" : [ "Time","(","12",", ","30",", ","4",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "462",
+                           "r" : "475",
                            "s" : [ {
-                              "r" : "454",
+                              "r" : "467",
                               "value" : [ "Time","(","12",", ","30",", ","3",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "474",
+                           "r" : "487",
                            "s" : [ {
-                              "r" : "466",
+                              "r" : "479",
                               "value" : [ "Time","(","12",", ","30",", ","5",")" ]
                            } ]
                         }, {
@@ -2872,77 +2872,35 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "484",
+               "localId" : "497",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "485",
+                  "localId" : "498",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "486",
+                     "localId" : "499",
                      "name" : "{urn:hl7-org:elm-types:r1}Time",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "441",
+                  "localId" : "454",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "478",
+                     "localId" : "491",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "479",
+                        "localId" : "492",
                         "name" : "{urn:hl7-org:elm-types:r1}Time",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "450",
+                     "localId" : "463",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
                      "type" : "Time",
                      "signature" : [ {
-                        "localId" : "451",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "localId" : "452",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "localId" : "453",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "hour" : {
-                        "localId" : "442",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "12",
-                        "type" : "Literal"
-                     },
-                     "minute" : {
-                        "localId" : "443",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "30",
-                        "type" : "Literal"
-                     },
-                     "second" : {
-                        "localId" : "444",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "4",
-                        "type" : "Literal"
-                     }
-                  }, {
-                     "localId" : "462",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
-                     "type" : "Time",
-                     "signature" : [ {
-                        "localId" : "463",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
                         "localId" : "464",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
@@ -2950,37 +2908,37 @@ module.exports['Min'] = {
                         "localId" : "465",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "466",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
                      } ],
                      "hour" : {
-                        "localId" : "454",
+                        "localId" : "455",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "455",
+                        "localId" : "456",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "30",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "456",
+                        "localId" : "457",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
+                        "value" : "4",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "474",
+                     "localId" : "475",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
                      "type" : "Time",
                      "signature" : [ {
-                        "localId" : "475",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
                         "localId" : "476",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
@@ -2988,23 +2946,65 @@ module.exports['Min'] = {
                         "localId" : "477",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "478",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
                      } ],
                      "hour" : {
-                        "localId" : "466",
+                        "localId" : "467",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "467",
+                        "localId" : "468",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "30",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "468",
+                        "localId" : "469",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "487",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+                     "type" : "Time",
+                     "signature" : [ {
+                        "localId" : "488",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "489",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "490",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "hour" : {
+                        "localId" : "479",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "12",
+                        "type" : "Literal"
+                     },
+                     "minute" : {
+                        "localId" : "480",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "30",
+                        "type" : "Literal"
+                     },
+                     "second" : {
+                        "localId" : "481",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
@@ -3014,7 +3014,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "488",
+            "localId" : "502",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "StringMin",
             "context" : "Patient",
@@ -3022,40 +3022,40 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "488",
+                  "r" : "502",
                   "s" : [ {
                      "value" : [ "","define ","StringMin",": " ]
                   }, {
-                     "r" : "500",
+                     "r" : "518",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "489",
+                        "r" : "503",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "490",
+                           "r" : "504",
                            "s" : [ {
                               "value" : [ "'def'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "491",
+                           "r" : "506",
                            "s" : [ {
                               "value" : [ "'abc'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "492",
+                           "r" : "508",
                            "s" : [ {
                               "value" : [ "'jkl'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "493",
+                           "r" : "510",
                            "s" : [ {
                               "value" : [ "'ghi'" ]
                            } ]
@@ -3069,50 +3069,50 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "500",
+               "localId" : "518",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "501",
+                  "localId" : "519",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "502",
+                     "localId" : "520",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "489",
+                  "localId" : "503",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "494",
+                     "localId" : "512",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "495",
+                        "localId" : "513",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "490",
+                     "localId" : "504",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "def",
                      "type" : "Literal"
                   }, {
-                     "localId" : "491",
+                     "localId" : "506",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "abc",
                      "type" : "Literal"
                   }, {
-                     "localId" : "492",
+                     "localId" : "508",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "jkl",
                      "type" : "Literal"
                   }, {
-                     "localId" : "493",
+                     "localId" : "510",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "ghi",
@@ -3121,7 +3121,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "504",
+            "localId" : "523",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "MinIsNull",
             "context" : "Patient",
@@ -3129,24 +3129,24 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "504",
+                  "r" : "523",
                   "s" : [ {
                      "value" : [ "","define ","MinIsNull",": " ]
                   }, {
-                     "r" : "521",
+                     "r" : "540",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "505",
+                        "r" : "524",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "506",
+                           "r" : "525",
                            "s" : [ {
-                              "r" : "507",
+                              "r" : "526",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "508",
+                              "r" : "527",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -3154,12 +3154,12 @@ module.exports['Min'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "509",
+                           "r" : "528",
                            "s" : [ {
-                              "r" : "510",
+                              "r" : "529",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "511",
+                              "r" : "530",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -3167,12 +3167,12 @@ module.exports['Min'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "512",
+                           "r" : "531",
                            "s" : [ {
-                              "r" : "513",
+                              "r" : "532",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "514",
+                              "r" : "533",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -3187,77 +3187,77 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "521",
+               "localId" : "540",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "522",
+                  "localId" : "541",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "523",
+                     "localId" : "542",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "505",
+                  "localId" : "524",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "515",
+                     "localId" : "534",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "516",
+                        "localId" : "535",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "506",
+                     "localId" : "525",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "strict" : false,
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "507",
+                        "localId" : "526",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "508",
+                        "localId" : "527",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "509",
+                     "localId" : "528",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "strict" : false,
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "510",
+                        "localId" : "529",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "511",
+                        "localId" : "530",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "512",
+                     "localId" : "531",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "strict" : false,
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "513",
+                        "localId" : "532",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "514",
+                        "localId" : "533",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
@@ -3266,7 +3266,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "525",
+            "localId" : "545",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "MinIsAlsoNull",
             "context" : "Patient",
@@ -3274,24 +3274,24 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "525",
+                  "r" : "545",
                   "s" : [ {
                      "value" : [ "","define ","MinIsAlsoNull",": " ]
                   }, {
-                     "r" : "538",
+                     "r" : "558",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "526",
+                        "r" : "546",
                         "s" : [ {
-                           "r" : "527",
+                           "r" : "547",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "528",
+                           "r" : "548",
                            "s" : [ {
                               "value" : [ "List<" ]
                            }, {
-                              "r" : "529",
+                              "r" : "549",
                               "s" : [ {
                                  "value" : [ "Decimal" ]
                               } ]
@@ -3306,51 +3306,51 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "538",
+               "localId" : "558",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "539",
+                  "localId" : "559",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "540",
+                     "localId" : "560",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "526",
+                  "localId" : "546",
                   "strict" : false,
                   "type" : "As",
                   "resultTypeSpecifier" : {
-                     "localId" : "532",
+                     "localId" : "552",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "533",
+                        "localId" : "553",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "527",
+                     "localId" : "547",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "528",
+                     "localId" : "548",
                      "type" : "ListTypeSpecifier",
                      "resultTypeSpecifier" : {
-                        "localId" : "530",
+                        "localId" : "550",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "531",
+                           "localId" : "551",
                            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "elementType" : {
-                        "localId" : "529",
+                        "localId" : "549",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
@@ -3359,7 +3359,7 @@ module.exports['Min'] = {
                }
             }
          }, {
-            "localId" : "542",
+            "localId" : "563",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "IncompatibleUnitsNull",
             "context" : "Patient",
@@ -3367,26 +3367,26 @@ module.exports['Min'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "542",
+                  "r" : "563",
                   "s" : [ {
                      "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
-                     "r" : "552",
+                     "r" : "573",
                      "s" : [ {
                         "value" : [ "Min","(" ]
                      }, {
-                        "r" : "543",
+                        "r" : "564",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "544",
+                           "r" : "565",
                            "s" : [ {
                               "value" : [ "1 ","'mg/d'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "545",
+                           "r" : "566",
                            "s" : [ {
                               "value" : [ "0.002 ","'/d'" ]
                            } ]
@@ -3400,38 +3400,38 @@ module.exports['Min'] = {
                }
             } ],
             "expression" : {
-               "localId" : "552",
+               "localId" : "573",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Min",
                "signature" : [ {
-                  "localId" : "553",
+                  "localId" : "574",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "554",
+                     "localId" : "575",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "543",
+                  "localId" : "564",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "546",
+                     "localId" : "567",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "547",
+                        "localId" : "568",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "544",
+                     "localId" : "565",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "mg/d",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "545",
+                     "localId" : "566",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "/d",
@@ -3472,14 +3472,14 @@ module.exports['Max'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "533",
+            "r" : "554",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3522,21 +3522,21 @@ module.exports['Max'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -3546,7 +3546,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "not_null",
             "context" : "Patient",
@@ -3554,17 +3554,17 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","not_null",": " ]
                   }, {
-                     "r" : "226",
+                     "r" : "228",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","10",",","1",",","2",",","3",",","4",",","5","}" ]
                         } ]
                      }, {
@@ -3574,62 +3574,62 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "226",
+               "localId" : "228",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "227",
+                  "localId" : "229",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "228",
+                     "localId" : "230",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "213",
+                  "localId" : "215",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "220",
+                     "localId" : "222",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "221",
+                        "localId" : "223",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "214",
+                     "localId" : "216",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "10",
                      "type" : "Literal"
                   }, {
-                     "localId" : "215",
+                     "localId" : "217",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "216",
+                     "localId" : "218",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "217",
+                     "localId" : "219",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "3",
                      "type" : "Literal"
                   }, {
-                     "localId" : "218",
+                     "localId" : "220",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "219",
+                     "localId" : "221",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
@@ -3638,7 +3638,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "230",
+            "localId" : "233",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "has_null",
             "context" : "Patient",
@@ -3646,17 +3646,17 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "230",
+                  "r" : "233",
                   "s" : [ {
                      "value" : [ "","define ","has_null",": " ]
                   }, {
-                     "r" : "244",
+                     "r" : "247",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "231",
+                        "r" : "234",
                         "s" : [ {
-                           "r" : "232",
+                           "r" : "235",
                            "value" : [ "{","1",",","null",",","null",",","2","}" ]
                         } ]
                      }, {
@@ -3666,58 +3666,58 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "244",
+               "localId" : "247",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "245",
+                  "localId" : "248",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "246",
+                     "localId" : "249",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "231",
+                  "localId" : "234",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "238",
+                     "localId" : "241",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "239",
+                        "localId" : "242",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "232",
+                     "localId" : "235",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "236",
+                     "localId" : "239",
                      "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "233",
+                        "localId" : "236",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "237",
+                     "localId" : "240",
                      "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "234",
+                        "localId" : "237",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "235",
+                     "localId" : "238",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
@@ -3726,7 +3726,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "248",
+            "localId" : "252",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "not_null_q",
             "context" : "Patient",
@@ -3734,54 +3734,54 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "248",
+                  "r" : "252",
                   "s" : [ {
                      "value" : [ "","define ","not_null_q",": " ]
                   }, {
-                     "r" : "262",
+                     "r" : "266",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "249",
+                        "r" : "253",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "250",
+                           "r" : "254",
                            "s" : [ {
                               "value" : [ "10 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "251",
+                           "r" : "255",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "252",
+                           "r" : "256",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "253",
+                           "r" : "257",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "254",
+                           "r" : "258",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "255",
+                           "r" : "259",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
@@ -3795,62 +3795,62 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "262",
+               "localId" : "266",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "263",
+                  "localId" : "267",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "264",
+                     "localId" : "268",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "249",
+                  "localId" : "253",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "256",
+                     "localId" : "260",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "257",
+                        "localId" : "261",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "250",
+                     "localId" : "254",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 10,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "251",
+                     "localId" : "255",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "252",
+                     "localId" : "256",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "253",
+                     "localId" : "257",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "254",
+                     "localId" : "258",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "255",
+                     "localId" : "259",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
@@ -3859,7 +3859,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "266",
+            "localId" : "271",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "has_null_q",
             "context" : "Patient",
@@ -3867,27 +3867,27 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "266",
+                  "r" : "271",
                   "s" : [ {
                      "value" : [ "","define ","has_null_q",": " ]
                   }, {
-                     "r" : "280",
+                     "r" : "285",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "267",
+                        "r" : "272",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "268",
+                           "r" : "273",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
-                           "r" : "269",
+                           "r" : "274",
                            "value" : [ ",","null",",","null","," ]
                         }, {
-                           "r" : "271",
+                           "r" : "276",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
@@ -3901,58 +3901,58 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "280",
+               "localId" : "285",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "281",
+                  "localId" : "286",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "282",
+                     "localId" : "287",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "267",
+                  "localId" : "272",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "274",
+                     "localId" : "279",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "275",
+                        "localId" : "280",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "268",
+                     "localId" : "273",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "272",
+                     "localId" : "277",
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "269",
+                        "localId" : "274",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "273",
+                     "localId" : "278",
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "270",
+                        "localId" : "275",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "271",
+                     "localId" : "276",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
@@ -3961,7 +3961,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "284",
+            "localId" : "290",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "q_diff_units",
             "context" : "Patient",
@@ -3969,54 +3969,54 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "284",
+                  "r" : "290",
                   "s" : [ {
                      "value" : [ "","define ","q_diff_units",": " ]
                   }, {
-                     "r" : "298",
+                     "r" : "304",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "285",
+                        "r" : "291",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "286",
+                           "r" : "292",
                            "s" : [ {
                               "value" : [ "10 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "287",
+                           "r" : "293",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "288",
+                           "r" : "294",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "289",
+                           "r" : "295",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "290",
+                           "r" : "296",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "291",
+                           "r" : "297",
                            "s" : [ {
                               "value" : [ "5 ","'l'" ]
                            } ]
@@ -4030,62 +4030,62 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "298",
+               "localId" : "304",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "299",
+                  "localId" : "305",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "300",
+                     "localId" : "306",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "285",
+                  "localId" : "291",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "292",
+                     "localId" : "298",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "293",
+                        "localId" : "299",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "286",
+                     "localId" : "292",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 10,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "287",
+                     "localId" : "293",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "288",
+                     "localId" : "294",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "289",
+                     "localId" : "295",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "290",
+                     "localId" : "296",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "291",
+                     "localId" : "297",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "l",
@@ -4094,7 +4094,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "302",
+            "localId" : "309",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "NumbersAndQuantities",
             "context" : "Patient",
@@ -4102,48 +4102,48 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "302",
+                  "r" : "309",
                   "s" : [ {
                      "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
-                     "r" : "319",
+                     "r" : "326",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "303",
+                        "r" : "310",
                         "s" : [ {
-                           "r" : "304",
+                           "r" : "311",
                            "value" : [ "{","10"," ," ]
                         }, {
-                           "r" : "305",
+                           "r" : "312",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "306",
+                           "r" : "313",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "307",
+                           "r" : "314",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "308",
+                           "r" : "315",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "309",
+                           "r" : "316",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
@@ -4157,71 +4157,71 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "319",
+               "localId" : "326",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "320",
+                  "localId" : "327",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "321",
+                     "localId" : "328",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "303",
+                  "localId" : "310",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "313",
+                     "localId" : "320",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "314",
+                        "localId" : "321",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "311",
+                     "localId" : "318",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "312",
+                        "localId" : "319",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "304",
+                        "localId" : "311",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "10",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "305",
+                     "localId" : "312",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "306",
+                     "localId" : "313",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "307",
+                     "localId" : "314",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "308",
+                     "localId" : "315",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "309",
+                     "localId" : "316",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
@@ -4230,7 +4230,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "323",
+            "localId" : "331",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "IncompatibleUnitsNull",
             "context" : "Patient",
@@ -4238,26 +4238,26 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "323",
+                  "r" : "331",
                   "s" : [ {
                      "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
-                     "r" : "333",
+                     "r" : "341",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "324",
+                        "r" : "332",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "325",
+                           "r" : "333",
                            "s" : [ {
                               "value" : [ "1 ","'mg/d'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "326",
+                           "r" : "334",
                            "s" : [ {
                               "value" : [ "0.002 ","'/d'" ]
                            } ]
@@ -4271,38 +4271,38 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "333",
+               "localId" : "341",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "334",
+                  "localId" : "342",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "335",
+                     "localId" : "343",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "324",
+                  "localId" : "332",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "327",
+                     "localId" : "335",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "328",
+                        "localId" : "336",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "325",
+                     "localId" : "333",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "mg/d",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "326",
+                     "localId" : "334",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "/d",
@@ -4311,7 +4311,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "337",
+            "localId" : "346",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "empty",
             "context" : "Patient",
@@ -4319,19 +4319,19 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "337",
+                  "r" : "346",
                   "s" : [ {
                      "value" : [ "","define ","empty",": " ]
                   }, {
-                     "r" : "347",
+                     "r" : "356",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "339",
+                        "r" : "348",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "338",
+                           "r" : "347",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -4345,26 +4345,26 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "347",
+               "localId" : "356",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "348",
+                  "localId" : "357",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "349",
+                     "localId" : "358",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "339",
+                  "localId" : "348",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "341",
+                     "localId" : "350",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "342",
+                        "localId" : "351",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -4373,7 +4373,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "351",
+            "localId" : "361",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "IntegerMax",
             "context" : "Patient",
@@ -4381,17 +4381,17 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "351",
+                  "r" : "361",
                   "s" : [ {
                      "value" : [ "","define ","IntegerMax",": " ]
                   }, {
-                     "r" : "363",
+                     "r" : "373",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "352",
+                        "r" : "362",
                         "s" : [ {
-                           "r" : "353",
+                           "r" : "363",
                            "value" : [ "{ ","2",", ","4",", ","8",", ","6"," }" ]
                         } ]
                      }, {
@@ -4401,50 +4401,50 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "363",
+               "localId" : "373",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "364",
+                  "localId" : "374",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "365",
+                     "localId" : "375",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "352",
+                  "localId" : "362",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "357",
+                     "localId" : "367",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "358",
+                        "localId" : "368",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "353",
+                     "localId" : "363",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "354",
+                     "localId" : "364",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "355",
+                     "localId" : "365",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "8",
                      "type" : "Literal"
                   }, {
-                     "localId" : "356",
+                     "localId" : "366",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "6",
@@ -4453,7 +4453,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "367",
+            "localId" : "378",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "DecimalMax",
             "context" : "Patient",
@@ -4461,22 +4461,22 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "367",
+                  "r" : "378",
                   "s" : [ {
                      "value" : [ "","define ","DecimalMax",": " ]
                   }, {
-                     "r" : "381",
+                     "r" : "392",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "368",
+                        "r" : "379",
                         "s" : [ {
-                           "r" : "369",
+                           "r" : "380",
                            "value" : [ "{ ","5.0",", ","4.9",", ","5.1",", " ]
                         }, {
-                           "r" : "372",
+                           "r" : "383",
                            "s" : [ {
-                              "r" : "373",
+                              "r" : "384",
                               "value" : [ "-","5.0" ]
                            } ]
                         }, {
@@ -4489,59 +4489,59 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "381",
+               "localId" : "392",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "382",
+                  "localId" : "393",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "383",
+                     "localId" : "394",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "368",
+                  "localId" : "379",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "375",
+                     "localId" : "386",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "376",
+                        "localId" : "387",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "369",
+                     "localId" : "380",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "5.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "370",
+                     "localId" : "381",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "4.9",
                      "type" : "Literal"
                   }, {
-                     "localId" : "371",
+                     "localId" : "382",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "5.1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "372",
+                     "localId" : "383",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "Negate",
                      "signature" : [ {
-                        "localId" : "374",
+                        "localId" : "385",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "373",
+                        "localId" : "384",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "value" : "5.0",
@@ -4551,7 +4551,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "385",
+            "localId" : "397",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "name" : "DateMax",
             "context" : "Patient",
@@ -4559,17 +4559,17 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "385",
+                  "r" : "397",
                   "s" : [ {
                      "value" : [ "","define ","DateMax",": " ]
                   }, {
-                     "r" : "408",
+                     "r" : "420",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "386",
+                        "r" : "398",
                         "s" : [ {
-                           "r" : "391",
+                           "r" : "403",
                            "value" : [ "{ ","@2012-12-31",", ","@2013-01-01",", ","@2012-01-01"," }" ]
                         } ]
                      }, {
@@ -4579,95 +4579,95 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "408",
+               "localId" : "420",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "409",
+                  "localId" : "421",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "410",
+                     "localId" : "422",
                      "name" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "386",
+                  "localId" : "398",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "402",
+                     "localId" : "414",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "403",
+                        "localId" : "415",
                         "name" : "{urn:hl7-org:elm-types:r1}Date",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "391",
+                     "localId" : "403",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "Date",
                      "signature" : [ ],
                      "year" : {
-                        "localId" : "388",
+                        "localId" : "400",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "389",
+                        "localId" : "401",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "390",
+                        "localId" : "402",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "31",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "396",
+                     "localId" : "408",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "Date",
                      "signature" : [ ],
                      "year" : {
-                        "localId" : "393",
+                        "localId" : "405",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2013",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "394",
+                        "localId" : "406",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "395",
+                        "localId" : "407",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "401",
+                     "localId" : "413",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "Date",
                      "signature" : [ ],
                      "year" : {
-                        "localId" : "398",
+                        "localId" : "410",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "399",
+                        "localId" : "411",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "400",
+                        "localId" : "412",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
@@ -4676,7 +4676,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "412",
+            "localId" : "425",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "DateTimeMax",
             "context" : "Patient",
@@ -4684,29 +4684,29 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "412",
+                  "r" : "425",
                   "s" : [ {
                      "value" : [ "","define ","DateTimeMax",": " ]
                   }, {
-                     "r" : "444",
+                     "r" : "457",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "413",
+                        "r" : "426",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "422",
+                           "r" : "435",
                            "s" : [ {
-                              "r" : "414",
+                              "r" : "427",
                               "value" : [ "DateTime","(","2012",", ","2",", ","3",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "434",
+                           "r" : "447",
                            "s" : [ {
-                              "r" : "426",
+                              "r" : "439",
                               "value" : [ "DateTime","(","2012",", ","9",", ","5",")" ]
                            } ]
                         }, {
@@ -4719,77 +4719,35 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "444",
+               "localId" : "457",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "445",
+                  "localId" : "458",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "446",
+                     "localId" : "459",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "413",
+                  "localId" : "426",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "438",
+                     "localId" : "451",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "439",
+                        "localId" : "452",
                         "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "422",
+                     "localId" : "435",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "DateTime",
                      "signature" : [ {
-                        "localId" : "423",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "localId" : "424",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "localId" : "425",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "year" : {
-                        "localId" : "414",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2012",
-                        "type" : "Literal"
-                     },
-                     "month" : {
-                        "localId" : "415",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
-                        "type" : "Literal"
-                     },
-                     "day" : {
-                        "localId" : "416",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
-                        "type" : "Literal"
-                     }
-                  }, {
-                     "localId" : "434",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
-                     "type" : "DateTime",
-                     "signature" : [ {
-                        "localId" : "435",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
                         "localId" : "436",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
@@ -4797,23 +4755,65 @@ module.exports['Max'] = {
                         "localId" : "437",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "438",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
                      } ],
                      "year" : {
-                        "localId" : "426",
+                        "localId" : "427",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2012",
                         "type" : "Literal"
                      },
                      "month" : {
-                        "localId" : "427",
+                        "localId" : "428",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     },
+                     "day" : {
+                        "localId" : "429",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "447",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "DateTime",
+                     "signature" : [ {
+                        "localId" : "448",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "449",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "450",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "year" : {
+                        "localId" : "439",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2012",
+                        "type" : "Literal"
+                     },
+                     "month" : {
+                        "localId" : "440",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "9",
                         "type" : "Literal"
                      },
                      "day" : {
-                        "localId" : "428",
+                        "localId" : "441",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
@@ -4823,7 +4823,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "448",
+            "localId" : "462",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "name" : "TimeMax",
             "context" : "Patient",
@@ -4831,37 +4831,37 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "448",
+                  "r" : "462",
                   "s" : [ {
                      "value" : [ "","define ","TimeMax",": " ]
                   }, {
-                     "r" : "492",
+                     "r" : "506",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "449",
+                        "r" : "463",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "458",
+                           "r" : "472",
                            "s" : [ {
-                              "r" : "450",
+                              "r" : "464",
                               "value" : [ "Time","(","12",", ","30",", ","1",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "470",
+                           "r" : "484",
                            "s" : [ {
-                              "r" : "462",
+                              "r" : "476",
                               "value" : [ "Time","(","12",", ","30",", ","3",")" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "482",
+                           "r" : "496",
                            "s" : [ {
-                              "r" : "474",
+                              "r" : "488",
                               "value" : [ "Time","(","12",", ","30",", ","2",")" ]
                            } ]
                         }, {
@@ -4874,139 +4874,139 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "492",
+               "localId" : "506",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "493",
+                  "localId" : "507",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "494",
+                     "localId" : "508",
                      "name" : "{urn:hl7-org:elm-types:r1}Time",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "449",
+                  "localId" : "463",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "486",
+                     "localId" : "500",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "487",
+                        "localId" : "501",
                         "name" : "{urn:hl7-org:elm-types:r1}Time",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "458",
+                     "localId" : "472",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
                      "type" : "Time",
                      "signature" : [ {
-                        "localId" : "459",
+                        "localId" : "473",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }, {
-                        "localId" : "460",
+                        "localId" : "474",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }, {
-                        "localId" : "461",
+                        "localId" : "475",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "hour" : {
-                        "localId" : "450",
+                        "localId" : "464",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "451",
+                        "localId" : "465",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "30",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "452",
+                        "localId" : "466",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "470",
+                     "localId" : "484",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
                      "type" : "Time",
                      "signature" : [ {
-                        "localId" : "471",
+                        "localId" : "485",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }, {
-                        "localId" : "472",
+                        "localId" : "486",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }, {
-                        "localId" : "473",
+                        "localId" : "487",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "hour" : {
-                        "localId" : "462",
+                        "localId" : "476",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "463",
+                        "localId" : "477",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "30",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "464",
+                        "localId" : "478",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "482",
+                     "localId" : "496",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
                      "type" : "Time",
                      "signature" : [ {
-                        "localId" : "483",
+                        "localId" : "497",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }, {
-                        "localId" : "484",
+                        "localId" : "498",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }, {
-                        "localId" : "485",
+                        "localId" : "499",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "hour" : {
-                        "localId" : "474",
+                        "localId" : "488",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "12",
                         "type" : "Literal"
                      },
                      "minute" : {
-                        "localId" : "475",
+                        "localId" : "489",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "30",
                         "type" : "Literal"
                      },
                      "second" : {
-                        "localId" : "476",
+                        "localId" : "490",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
@@ -5016,7 +5016,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "496",
+            "localId" : "511",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "StringMax",
             "context" : "Patient",
@@ -5024,40 +5024,40 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "496",
+                  "r" : "511",
                   "s" : [ {
                      "value" : [ "","define ","StringMax",": " ]
                   }, {
-                     "r" : "508",
+                     "r" : "527",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "497",
+                        "r" : "512",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "498",
+                           "r" : "513",
                            "s" : [ {
                               "value" : [ "'def'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "499",
+                           "r" : "515",
                            "s" : [ {
                               "value" : [ "'abc'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "500",
+                           "r" : "517",
                            "s" : [ {
                               "value" : [ "'jkl'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "501",
+                           "r" : "519",
                            "s" : [ {
                               "value" : [ "'ghi'" ]
                            } ]
@@ -5071,50 +5071,50 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "508",
+               "localId" : "527",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "509",
+                  "localId" : "528",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "510",
+                     "localId" : "529",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "497",
+                  "localId" : "512",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "502",
+                     "localId" : "521",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "503",
+                        "localId" : "522",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "498",
+                     "localId" : "513",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "def",
                      "type" : "Literal"
                   }, {
-                     "localId" : "499",
+                     "localId" : "515",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "abc",
                      "type" : "Literal"
                   }, {
-                     "localId" : "500",
+                     "localId" : "517",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "jkl",
                      "type" : "Literal"
                   }, {
-                     "localId" : "501",
+                     "localId" : "519",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "ghi",
@@ -5123,7 +5123,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "512",
+            "localId" : "532",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "MaxIsNull",
             "context" : "Patient",
@@ -5131,24 +5131,24 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "512",
+                  "r" : "532",
                   "s" : [ {
                      "value" : [ "","define ","MaxIsNull",": " ]
                   }, {
-                     "r" : "529",
+                     "r" : "549",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "513",
+                        "r" : "533",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "514",
+                           "r" : "534",
                            "s" : [ {
-                              "r" : "515",
+                              "r" : "535",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "516",
+                              "r" : "536",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -5156,12 +5156,12 @@ module.exports['Max'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "517",
+                           "r" : "537",
                            "s" : [ {
-                              "r" : "518",
+                              "r" : "538",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "519",
+                              "r" : "539",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -5169,12 +5169,12 @@ module.exports['Max'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "520",
+                           "r" : "540",
                            "s" : [ {
-                              "r" : "521",
+                              "r" : "541",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "522",
+                              "r" : "542",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -5189,77 +5189,77 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "529",
+               "localId" : "549",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "530",
+                  "localId" : "550",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "531",
+                     "localId" : "551",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "513",
+                  "localId" : "533",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "523",
+                     "localId" : "543",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "524",
+                        "localId" : "544",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "514",
+                     "localId" : "534",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "strict" : false,
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "515",
+                        "localId" : "535",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "516",
+                        "localId" : "536",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "517",
+                     "localId" : "537",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "strict" : false,
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "518",
+                        "localId" : "538",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "519",
+                        "localId" : "539",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "520",
+                     "localId" : "540",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "strict" : false,
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "521",
+                        "localId" : "541",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "522",
+                        "localId" : "542",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
@@ -5268,7 +5268,7 @@ module.exports['Max'] = {
                }
             }
          }, {
-            "localId" : "533",
+            "localId" : "554",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "MaxIsAlsoNull",
             "context" : "Patient",
@@ -5276,24 +5276,24 @@ module.exports['Max'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "533",
+                  "r" : "554",
                   "s" : [ {
                      "value" : [ "","define ","MaxIsAlsoNull",": " ]
                   }, {
-                     "r" : "546",
+                     "r" : "567",
                      "s" : [ {
                         "value" : [ "Max","(" ]
                      }, {
-                        "r" : "534",
+                        "r" : "555",
                         "s" : [ {
-                           "r" : "535",
+                           "r" : "556",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "536",
+                           "r" : "557",
                            "s" : [ {
                               "value" : [ "List<" ]
                            }, {
-                              "r" : "537",
+                              "r" : "558",
                               "s" : [ {
                                  "value" : [ "Decimal" ]
                               } ]
@@ -5308,51 +5308,51 @@ module.exports['Max'] = {
                }
             } ],
             "expression" : {
-               "localId" : "546",
+               "localId" : "567",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Max",
                "signature" : [ {
-                  "localId" : "547",
+                  "localId" : "568",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "548",
+                     "localId" : "569",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "534",
+                  "localId" : "555",
                   "strict" : false,
                   "type" : "As",
                   "resultTypeSpecifier" : {
-                     "localId" : "540",
+                     "localId" : "561",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "541",
+                        "localId" : "562",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "535",
+                     "localId" : "556",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "536",
+                     "localId" : "557",
                      "type" : "ListTypeSpecifier",
                      "resultTypeSpecifier" : {
-                        "localId" : "538",
+                        "localId" : "559",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "539",
+                           "localId" : "560",
                            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "elementType" : {
-                        "localId" : "537",
+                        "localId" : "558",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
@@ -5383,14 +5383,14 @@ module.exports['Avg'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "376",
+            "r" : "385",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -5433,21 +5433,21 @@ module.exports['Avg'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -5457,7 +5457,7 @@ module.exports['Avg'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "not_null",
             "context" : "Patient",
@@ -5465,17 +5465,17 @@ module.exports['Avg'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","not_null",": " ]
                   }, {
-                     "r" : "232",
+                     "r" : "234",
                      "s" : [ {
                         "value" : [ "Avg","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","1",",","2",",","3",",","4",",","5","}" ]
                         } ]
                      }, {
@@ -5485,62 +5485,62 @@ module.exports['Avg'] = {
                }
             } ],
             "expression" : {
-               "localId" : "232",
+               "localId" : "234",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Avg",
                "signature" : [ {
-                  "localId" : "240",
+                  "localId" : "242",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "241",
+                     "localId" : "243",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "233",
+                  "localId" : "235",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "234",
+                     "localId" : "236",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "213",
+                        "localId" : "215",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "219",
+                           "localId" : "221",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "220",
+                              "localId" : "222",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "214",
+                           "localId" : "216",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }, {
-                           "localId" : "215",
+                           "localId" : "217",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "216",
+                           "localId" : "218",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",
                            "type" : "Literal"
                         }, {
-                           "localId" : "217",
+                           "localId" : "219",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "4",
                            "type" : "Literal"
                         }, {
-                           "localId" : "218",
+                           "localId" : "220",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
@@ -5551,18 +5551,18 @@ module.exports['Avg'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "235",
+                     "localId" : "237",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "238",
+                        "localId" : "240",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "239",
+                           "localId" : "241",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "236",
+                           "localId" : "238",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -5571,7 +5571,7 @@ module.exports['Avg'] = {
                }
             }
          }, {
-            "localId" : "243",
+            "localId" : "246",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "has_null",
             "context" : "Patient",
@@ -5579,17 +5579,17 @@ module.exports['Avg'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "243",
+                  "r" : "246",
                   "s" : [ {
                      "value" : [ "","define ","has_null",": " ]
                   }, {
-                     "r" : "264",
+                     "r" : "267",
                      "s" : [ {
                         "value" : [ "Avg","(" ]
                      }, {
-                        "r" : "244",
+                        "r" : "247",
                         "s" : [ {
-                           "r" : "245",
+                           "r" : "248",
                            "value" : [ "{","1",",","null",",","null",",","2","}" ]
                         } ]
                      }, {
@@ -5599,64 +5599,64 @@ module.exports['Avg'] = {
                }
             } ],
             "expression" : {
-               "localId" : "264",
+               "localId" : "267",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Avg",
                "signature" : [ {
-                  "localId" : "272",
+                  "localId" : "275",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "273",
+                     "localId" : "276",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "265",
+                  "localId" : "268",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "266",
+                     "localId" : "269",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "244",
+                        "localId" : "247",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "251",
+                           "localId" : "254",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "252",
+                              "localId" : "255",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "245",
+                           "localId" : "248",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }, {
-                           "localId" : "249",
+                           "localId" : "252",
                            "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "As",
                            "signature" : [ ],
                            "operand" : {
-                              "localId" : "246",
+                              "localId" : "249",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                               "type" : "Null"
                            }
                         }, {
-                           "localId" : "250",
+                           "localId" : "253",
                            "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "As",
                            "signature" : [ ],
                            "operand" : {
-                              "localId" : "247",
+                              "localId" : "250",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                               "type" : "Null"
                            }
                         }, {
-                           "localId" : "248",
+                           "localId" : "251",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
@@ -5667,18 +5667,18 @@ module.exports['Avg'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "267",
+                     "localId" : "270",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "270",
+                        "localId" : "273",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "271",
+                           "localId" : "274",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "268",
+                           "localId" : "271",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -5687,7 +5687,7 @@ module.exports['Avg'] = {
                }
             }
          }, {
-            "localId" : "275",
+            "localId" : "279",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "not_null_q",
             "context" : "Patient",
@@ -5695,47 +5695,47 @@ module.exports['Avg'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "275",
+                  "r" : "279",
                   "s" : [ {
                      "value" : [ "","define ","not_null_q",": " ]
                   }, {
-                     "r" : "288",
+                     "r" : "292",
                      "s" : [ {
                         "value" : [ "Avg","(" ]
                      }, {
-                        "r" : "276",
+                        "r" : "280",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "277",
+                           "r" : "281",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "278",
+                           "r" : "282",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "279",
+                           "r" : "283",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "280",
+                           "r" : "284",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "281",
+                           "r" : "285",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
@@ -5749,56 +5749,56 @@ module.exports['Avg'] = {
                }
             } ],
             "expression" : {
-               "localId" : "288",
+               "localId" : "292",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Avg",
                "signature" : [ {
-                  "localId" : "289",
+                  "localId" : "293",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "290",
+                     "localId" : "294",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "276",
+                  "localId" : "280",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "282",
+                     "localId" : "286",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "283",
+                        "localId" : "287",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "277",
+                     "localId" : "281",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "278",
+                     "localId" : "282",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "279",
+                     "localId" : "283",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "280",
+                     "localId" : "284",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "281",
+                     "localId" : "285",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
@@ -5807,7 +5807,7 @@ module.exports['Avg'] = {
                }
             }
          }, {
-            "localId" : "292",
+            "localId" : "297",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "has_null_q",
             "context" : "Patient",
@@ -5815,27 +5815,27 @@ module.exports['Avg'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "292",
+                  "r" : "297",
                   "s" : [ {
                      "value" : [ "","define ","has_null_q",": " ]
                   }, {
-                     "r" : "306",
+                     "r" : "311",
                      "s" : [ {
                         "value" : [ "Avg","(" ]
                      }, {
-                        "r" : "293",
+                        "r" : "298",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "294",
+                           "r" : "299",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
-                           "r" : "295",
+                           "r" : "300",
                            "value" : [ ",","null",",","null","," ]
                         }, {
-                           "r" : "297",
+                           "r" : "302",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
@@ -5849,58 +5849,58 @@ module.exports['Avg'] = {
                }
             } ],
             "expression" : {
-               "localId" : "306",
+               "localId" : "311",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Avg",
                "signature" : [ {
-                  "localId" : "307",
+                  "localId" : "312",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "308",
+                     "localId" : "313",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "293",
+                  "localId" : "298",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "300",
+                     "localId" : "305",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "301",
+                        "localId" : "306",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "294",
+                     "localId" : "299",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "298",
+                     "localId" : "303",
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "295",
+                        "localId" : "300",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "299",
+                     "localId" : "304",
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "296",
+                        "localId" : "301",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "297",
+                     "localId" : "302",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
@@ -5909,7 +5909,7 @@ module.exports['Avg'] = {
                }
             }
          }, {
-            "localId" : "310",
+            "localId" : "316",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "empty",
             "context" : "Patient",
@@ -5917,19 +5917,19 @@ module.exports['Avg'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "310",
+                  "r" : "316",
                   "s" : [ {
                      "value" : [ "","define ","empty",": " ]
                   }, {
-                     "r" : "327",
+                     "r" : "333",
                      "s" : [ {
                         "value" : [ "Avg","(" ]
                      }, {
-                        "r" : "312",
+                        "r" : "318",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "311",
+                           "r" : "317",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -5943,32 +5943,32 @@ module.exports['Avg'] = {
                }
             } ],
             "expression" : {
-               "localId" : "327",
+               "localId" : "333",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Avg",
                "signature" : [ {
-                  "localId" : "335",
+                  "localId" : "341",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "336",
+                     "localId" : "342",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "328",
+                  "localId" : "334",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "329",
+                     "localId" : "335",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "312",
+                        "localId" : "318",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "314",
+                           "localId" : "320",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "315",
+                              "localId" : "321",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -5979,18 +5979,18 @@ module.exports['Avg'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "330",
+                     "localId" : "336",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "333",
+                        "localId" : "339",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "334",
+                           "localId" : "340",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "331",
+                           "localId" : "337",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -5999,7 +5999,7 @@ module.exports['Avg'] = {
                }
             }
          }, {
-            "localId" : "338",
+            "localId" : "345",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "q_diff_units",
             "context" : "Patient",
@@ -6007,47 +6007,47 @@ module.exports['Avg'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "338",
+                  "r" : "345",
                   "s" : [ {
                      "value" : [ "","define ","q_diff_units",": " ]
                   }, {
-                     "r" : "351",
+                     "r" : "358",
                      "s" : [ {
                         "value" : [ "Avg","(" ]
                      }, {
-                        "r" : "339",
+                        "r" : "346",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "340",
+                           "r" : "347",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "341",
+                           "r" : "348",
                            "s" : [ {
                               "value" : [ "0.002 ","'l'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "342",
+                           "r" : "349",
                            "s" : [ {
                               "value" : [ "0.03 ","'dl'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "343",
+                           "r" : "350",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "344",
+                           "r" : "351",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
@@ -6061,56 +6061,56 @@ module.exports['Avg'] = {
                }
             } ],
             "expression" : {
-               "localId" : "351",
+               "localId" : "358",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Avg",
                "signature" : [ {
-                  "localId" : "352",
+                  "localId" : "359",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "353",
+                     "localId" : "360",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "339",
+                  "localId" : "346",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "345",
+                     "localId" : "352",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "346",
+                        "localId" : "353",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "340",
+                     "localId" : "347",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "341",
+                     "localId" : "348",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "l",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "342",
+                     "localId" : "349",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.03,
                      "unit" : "dl",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "343",
+                     "localId" : "350",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "344",
+                     "localId" : "351",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
@@ -6119,7 +6119,7 @@ module.exports['Avg'] = {
                }
             }
          }, {
-            "localId" : "355",
+            "localId" : "363",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "NumbersAndQuantities",
             "context" : "Patient",
@@ -6127,48 +6127,48 @@ module.exports['Avg'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "355",
+                  "r" : "363",
                   "s" : [ {
                      "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
-                     "r" : "372",
+                     "r" : "380",
                      "s" : [ {
                         "value" : [ "Avg","(" ]
                      }, {
-                        "r" : "356",
+                        "r" : "364",
                         "s" : [ {
-                           "r" : "357",
+                           "r" : "365",
                            "value" : [ "{","1"," ," ]
                         }, {
-                           "r" : "358",
+                           "r" : "366",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "359",
+                           "r" : "367",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "360",
+                           "r" : "368",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "361",
+                           "r" : "369",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "362",
+                           "r" : "370",
                            "s" : [ {
                               "value" : [ "0 ","'ml'" ]
                            } ]
@@ -6182,71 +6182,71 @@ module.exports['Avg'] = {
                }
             } ],
             "expression" : {
-               "localId" : "372",
+               "localId" : "380",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Avg",
                "signature" : [ {
-                  "localId" : "373",
+                  "localId" : "381",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "374",
+                     "localId" : "382",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "356",
+                  "localId" : "364",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "366",
+                     "localId" : "374",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "367",
+                        "localId" : "375",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "364",
+                     "localId" : "372",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "365",
+                        "localId" : "373",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "357",
+                        "localId" : "365",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "358",
+                     "localId" : "366",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "359",
+                     "localId" : "367",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "360",
+                     "localId" : "368",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "361",
+                     "localId" : "369",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "362",
+                     "localId" : "370",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0,
                      "unit" : "ml",
@@ -6255,7 +6255,7 @@ module.exports['Avg'] = {
                }
             }
          }, {
-            "localId" : "376",
+            "localId" : "385",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "IncompatibleUnitsNull",
             "context" : "Patient",
@@ -6263,26 +6263,26 @@ module.exports['Avg'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "376",
+                  "r" : "385",
                   "s" : [ {
                      "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
-                     "r" : "386",
+                     "r" : "395",
                      "s" : [ {
                         "value" : [ "Avg","(" ]
                      }, {
-                        "r" : "377",
+                        "r" : "386",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "378",
+                           "r" : "387",
                            "s" : [ {
                               "value" : [ "1 ","'mg/d'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "379",
+                           "r" : "388",
                            "s" : [ {
                               "value" : [ "0.002 ","'/d'" ]
                            } ]
@@ -6296,38 +6296,38 @@ module.exports['Avg'] = {
                }
             } ],
             "expression" : {
-               "localId" : "386",
+               "localId" : "395",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Avg",
                "signature" : [ {
-                  "localId" : "387",
+                  "localId" : "396",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "388",
+                     "localId" : "397",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "377",
+                  "localId" : "386",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "380",
+                     "localId" : "389",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "381",
+                        "localId" : "390",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "378",
+                     "localId" : "387",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "mg/d",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "379",
+                     "localId" : "388",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "/d",
@@ -6365,14 +6365,14 @@ module.exports['Median'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "546",
+            "r" : "561",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -6415,21 +6415,21 @@ module.exports['Median'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -6439,7 +6439,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "odd",
             "context" : "Patient",
@@ -6447,17 +6447,17 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","odd",": " ]
                   }, {
-                     "r" : "232",
+                     "r" : "234",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","5",",","1",",","2",",","3",",","4","}" ]
                         } ]
                      }, {
@@ -6467,62 +6467,62 @@ module.exports['Median'] = {
                }
             } ],
             "expression" : {
-               "localId" : "232",
+               "localId" : "234",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Median",
                "signature" : [ {
-                  "localId" : "240",
+                  "localId" : "242",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "241",
+                     "localId" : "243",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "233",
+                  "localId" : "235",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "234",
+                     "localId" : "236",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "213",
+                        "localId" : "215",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "219",
+                           "localId" : "221",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "220",
+                              "localId" : "222",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "214",
+                           "localId" : "216",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
                            "type" : "Literal"
                         }, {
-                           "localId" : "215",
+                           "localId" : "217",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }, {
-                           "localId" : "216",
+                           "localId" : "218",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "217",
+                           "localId" : "219",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",
                            "type" : "Literal"
                         }, {
-                           "localId" : "218",
+                           "localId" : "220",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "4",
@@ -6533,18 +6533,18 @@ module.exports['Median'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "235",
+                     "localId" : "237",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "238",
+                        "localId" : "240",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "239",
+                           "localId" : "241",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "236",
+                           "localId" : "238",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -6553,7 +6553,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "243",
+            "localId" : "246",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "even",
             "context" : "Patient",
@@ -6561,17 +6561,17 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "243",
+                  "r" : "246",
                   "s" : [ {
                      "value" : [ "","define ","even",": " ]
                   }, {
-                     "r" : "264",
+                     "r" : "267",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "244",
+                        "r" : "247",
                         "s" : [ {
-                           "r" : "245",
+                           "r" : "248",
                            "value" : [ "{","5",",","1",",","2",",","3",",","4",",","6","}" ]
                         } ]
                      }, {
@@ -6581,68 +6581,68 @@ module.exports['Median'] = {
                }
             } ],
             "expression" : {
-               "localId" : "264",
+               "localId" : "267",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Median",
                "signature" : [ {
-                  "localId" : "272",
+                  "localId" : "275",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "273",
+                     "localId" : "276",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "265",
+                  "localId" : "268",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "266",
+                     "localId" : "269",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "244",
+                        "localId" : "247",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "251",
+                           "localId" : "254",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "252",
+                              "localId" : "255",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "245",
+                           "localId" : "248",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
                            "type" : "Literal"
                         }, {
-                           "localId" : "246",
+                           "localId" : "249",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }, {
-                           "localId" : "247",
+                           "localId" : "250",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "248",
+                           "localId" : "251",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",
                            "type" : "Literal"
                         }, {
-                           "localId" : "249",
+                           "localId" : "252",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "4",
                            "type" : "Literal"
                         }, {
-                           "localId" : "250",
+                           "localId" : "253",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "6",
@@ -6653,18 +6653,18 @@ module.exports['Median'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "267",
+                     "localId" : "270",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "270",
+                        "localId" : "273",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "271",
+                           "localId" : "274",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "268",
+                           "localId" : "271",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -6673,7 +6673,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "275",
+            "localId" : "279",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "odd_q",
             "context" : "Patient",
@@ -6681,47 +6681,47 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "275",
+                  "r" : "279",
                   "s" : [ {
                      "value" : [ "","define ","odd_q",": " ]
                   }, {
-                     "r" : "288",
+                     "r" : "292",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "276",
+                        "r" : "280",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "277",
+                           "r" : "281",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "278",
+                           "r" : "282",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "279",
+                           "r" : "283",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "280",
+                           "r" : "284",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "281",
+                           "r" : "285",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
@@ -6735,56 +6735,56 @@ module.exports['Median'] = {
                }
             } ],
             "expression" : {
-               "localId" : "288",
+               "localId" : "292",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Median",
                "signature" : [ {
-                  "localId" : "289",
+                  "localId" : "293",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "290",
+                     "localId" : "294",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "276",
+                  "localId" : "280",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "282",
+                     "localId" : "286",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "283",
+                        "localId" : "287",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "277",
+                     "localId" : "281",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "278",
+                     "localId" : "282",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "279",
+                     "localId" : "283",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "280",
+                     "localId" : "284",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "281",
+                     "localId" : "285",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
@@ -6793,7 +6793,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "292",
+            "localId" : "297",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "even_q",
             "context" : "Patient",
@@ -6801,54 +6801,54 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "292",
+                  "r" : "297",
                   "s" : [ {
                      "value" : [ "","define ","even_q",": " ]
                   }, {
-                     "r" : "306",
+                     "r" : "311",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "293",
+                        "r" : "298",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "294",
+                           "r" : "299",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "295",
+                           "r" : "300",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "296",
+                           "r" : "301",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "297",
+                           "r" : "302",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "298",
+                           "r" : "303",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "299",
+                           "r" : "304",
                            "s" : [ {
                               "value" : [ "6 ","'ml'" ]
                            } ]
@@ -6862,62 +6862,62 @@ module.exports['Median'] = {
                }
             } ],
             "expression" : {
-               "localId" : "306",
+               "localId" : "311",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Median",
                "signature" : [ {
-                  "localId" : "307",
+                  "localId" : "312",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "308",
+                     "localId" : "313",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "293",
+                  "localId" : "298",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "300",
+                     "localId" : "305",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "301",
+                        "localId" : "306",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "294",
+                     "localId" : "299",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "295",
+                     "localId" : "300",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "296",
+                     "localId" : "301",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "297",
+                     "localId" : "302",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "298",
+                     "localId" : "303",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "299",
+                     "localId" : "304",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 6,
                      "unit" : "ml",
@@ -6926,7 +6926,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "310",
+            "localId" : "316",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "q_diff_units",
             "context" : "Patient",
@@ -6934,54 +6934,54 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "310",
+                  "r" : "316",
                   "s" : [ {
                      "value" : [ "","define ","q_diff_units",": " ]
                   }, {
-                     "r" : "324",
+                     "r" : "330",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "311",
+                        "r" : "317",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "312",
+                           "r" : "318",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "313",
+                           "r" : "319",
                            "s" : [ {
                               "value" : [ "0.001 ","'l'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "314",
+                           "r" : "320",
                            "s" : [ {
                               "value" : [ "0.02 ","'dl'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "315",
+                           "r" : "321",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "316",
+                           "r" : "322",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "317",
+                           "r" : "323",
                            "s" : [ {
                               "value" : [ "6 ","'ml'" ]
                            } ]
@@ -6995,62 +6995,62 @@ module.exports['Median'] = {
                }
             } ],
             "expression" : {
-               "localId" : "324",
+               "localId" : "330",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Median",
                "signature" : [ {
-                  "localId" : "325",
+                  "localId" : "331",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "326",
+                     "localId" : "332",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "311",
+                  "localId" : "317",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "318",
+                     "localId" : "324",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "319",
+                        "localId" : "325",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "312",
+                     "localId" : "318",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "313",
+                     "localId" : "319",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.001,
                      "unit" : "l",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "314",
+                     "localId" : "320",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.02,
                      "unit" : "dl",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "315",
+                     "localId" : "321",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "316",
+                     "localId" : "322",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "317",
+                     "localId" : "323",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 6,
                      "unit" : "ml",
@@ -7059,7 +7059,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "328",
+            "localId" : "335",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "NumbersAndQuantities",
             "context" : "Patient",
@@ -7067,27 +7067,27 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "328",
+                  "r" : "335",
                   "s" : [ {
                      "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
-                     "r" : "354",
+                     "r" : "361",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "329",
+                        "r" : "336",
                         "s" : [ {
-                           "r" : "330",
+                           "r" : "337",
                            "value" : [ "{","5"," ,","1"," ,","2"," ,","3"," ," ]
                         }, {
-                           "r" : "334",
+                           "r" : "341",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "335",
+                           "r" : "342",
                            "s" : [ {
                               "value" : [ "6 ","'ml'" ]
                            } ]
@@ -7101,98 +7101,98 @@ module.exports['Median'] = {
                }
             } ],
             "expression" : {
-               "localId" : "354",
+               "localId" : "361",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Median",
                "signature" : [ {
-                  "localId" : "355",
+                  "localId" : "362",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "356",
+                     "localId" : "363",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "329",
+                  "localId" : "336",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "348",
+                     "localId" : "355",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "349",
+                        "localId" : "356",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "337",
+                     "localId" : "344",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "338",
+                        "localId" : "345",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "330",
+                        "localId" : "337",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "340",
+                     "localId" : "347",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "341",
+                        "localId" : "348",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "331",
+                        "localId" : "338",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "343",
+                     "localId" : "350",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "344",
+                        "localId" : "351",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "332",
+                        "localId" : "339",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "346",
+                     "localId" : "353",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "347",
+                        "localId" : "354",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "333",
+                        "localId" : "340",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "334",
+                     "localId" : "341",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "335",
+                     "localId" : "342",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 6,
                      "unit" : "ml",
@@ -7201,7 +7201,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "358",
+            "localId" : "366",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "empty",
             "context" : "Patient",
@@ -7209,19 +7209,19 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "358",
+                  "r" : "366",
                   "s" : [ {
                      "value" : [ "","define ","empty",": " ]
                   }, {
-                     "r" : "375",
+                     "r" : "383",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "360",
+                        "r" : "368",
                         "s" : [ {
                            "value" : [ "List<" ]
                         }, {
-                           "r" : "359",
+                           "r" : "367",
                            "s" : [ {
                               "value" : [ "Integer" ]
                            } ]
@@ -7235,32 +7235,32 @@ module.exports['Median'] = {
                }
             } ],
             "expression" : {
-               "localId" : "375",
+               "localId" : "383",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Median",
                "signature" : [ {
-                  "localId" : "383",
+                  "localId" : "391",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "384",
+                     "localId" : "392",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "376",
+                  "localId" : "384",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "377",
+                     "localId" : "385",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "360",
+                        "localId" : "368",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "362",
+                           "localId" : "370",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "363",
+                              "localId" : "371",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -7271,18 +7271,18 @@ module.exports['Median'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "378",
+                     "localId" : "386",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "381",
+                        "localId" : "389",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "382",
+                           "localId" : "390",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "379",
+                           "localId" : "387",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -7291,7 +7291,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "386",
+            "localId" : "395",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "has_null",
             "context" : "Patient",
@@ -7299,17 +7299,17 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "386",
+                  "r" : "395",
                   "s" : [ {
                      "value" : [ "","define ","has_null",": " ]
                   }, {
-                     "r" : "407",
+                     "r" : "416",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "387",
+                        "r" : "396",
                         "s" : [ {
-                           "r" : "388",
+                           "r" : "397",
                            "value" : [ "{","1",",","null",",","null",",","2","}" ]
                         } ]
                      }, {
@@ -7319,64 +7319,64 @@ module.exports['Median'] = {
                }
             } ],
             "expression" : {
-               "localId" : "407",
+               "localId" : "416",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Median",
                "signature" : [ {
-                  "localId" : "415",
+                  "localId" : "424",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "416",
+                     "localId" : "425",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "408",
+                  "localId" : "417",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "409",
+                     "localId" : "418",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "387",
+                        "localId" : "396",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "394",
+                           "localId" : "403",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "395",
+                              "localId" : "404",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "388",
+                           "localId" : "397",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }, {
-                           "localId" : "392",
+                           "localId" : "401",
                            "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "As",
                            "signature" : [ ],
                            "operand" : {
-                              "localId" : "389",
+                              "localId" : "398",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                               "type" : "Null"
                            }
                         }, {
-                           "localId" : "393",
+                           "localId" : "402",
                            "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "As",
                            "signature" : [ ],
                            "operand" : {
-                              "localId" : "390",
+                              "localId" : "399",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                               "type" : "Null"
                            }
                         }, {
-                           "localId" : "391",
+                           "localId" : "400",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
@@ -7387,18 +7387,18 @@ module.exports['Median'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "410",
+                     "localId" : "419",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "413",
+                        "localId" : "422",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "414",
+                           "localId" : "423",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "411",
+                           "localId" : "420",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -7407,7 +7407,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "418",
+            "localId" : "428",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "dup_vals_even",
             "context" : "Patient",
@@ -7415,17 +7415,17 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "418",
+                  "r" : "428",
                   "s" : [ {
                      "value" : [ "","define ","dup_vals_even",": " ]
                   }, {
-                     "r" : "441",
+                     "r" : "451",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "419",
+                        "r" : "429",
                         "s" : [ {
-                           "r" : "420",
+                           "r" : "430",
                            "value" : [ "{","3",",","1",",","2",",","2",",","2",",","3",",","4",",","5","}" ]
                         } ]
                      }, {
@@ -7435,80 +7435,80 @@ module.exports['Median'] = {
                }
             } ],
             "expression" : {
-               "localId" : "441",
+               "localId" : "451",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Median",
                "signature" : [ {
-                  "localId" : "449",
+                  "localId" : "459",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "450",
+                     "localId" : "460",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "442",
+                  "localId" : "452",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "443",
+                     "localId" : "453",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "419",
+                        "localId" : "429",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "428",
+                           "localId" : "438",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "429",
+                              "localId" : "439",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "420",
+                           "localId" : "430",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",
                            "type" : "Literal"
                         }, {
-                           "localId" : "421",
+                           "localId" : "431",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }, {
-                           "localId" : "422",
+                           "localId" : "432",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "423",
+                           "localId" : "433",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "424",
+                           "localId" : "434",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "425",
+                           "localId" : "435",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",
                            "type" : "Literal"
                         }, {
-                           "localId" : "426",
+                           "localId" : "436",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "4",
                            "type" : "Literal"
                         }, {
-                           "localId" : "427",
+                           "localId" : "437",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
@@ -7519,18 +7519,18 @@ module.exports['Median'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "444",
+                     "localId" : "454",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "447",
+                        "localId" : "457",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "448",
+                           "localId" : "458",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "445",
+                           "localId" : "455",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -7539,7 +7539,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "452",
+            "localId" : "463",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "dup_vals_odd",
             "context" : "Patient",
@@ -7547,17 +7547,17 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "452",
+                  "r" : "463",
                   "s" : [ {
                      "value" : [ "","define ","dup_vals_odd",":  " ]
                   }, {
-                     "r" : "476",
+                     "r" : "487",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "453",
+                        "r" : "464",
                         "s" : [ {
-                           "r" : "454",
+                           "r" : "465",
                            "value" : [ "{","3",",","1",",","2",",","2",",","2",",","3",",","4",",","5",",","6","}" ]
                         } ]
                      }, {
@@ -7567,86 +7567,86 @@ module.exports['Median'] = {
                }
             } ],
             "expression" : {
-               "localId" : "476",
+               "localId" : "487",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Median",
                "signature" : [ {
-                  "localId" : "484",
+                  "localId" : "495",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "485",
+                     "localId" : "496",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "477",
+                  "localId" : "488",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "478",
+                     "localId" : "489",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "453",
+                        "localId" : "464",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "463",
+                           "localId" : "474",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "464",
+                              "localId" : "475",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "454",
+                           "localId" : "465",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",
                            "type" : "Literal"
                         }, {
-                           "localId" : "455",
+                           "localId" : "466",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }, {
-                           "localId" : "456",
+                           "localId" : "467",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "457",
+                           "localId" : "468",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "458",
+                           "localId" : "469",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "459",
+                           "localId" : "470",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",
                            "type" : "Literal"
                         }, {
-                           "localId" : "460",
+                           "localId" : "471",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "4",
                            "type" : "Literal"
                         }, {
-                           "localId" : "461",
+                           "localId" : "472",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
                            "type" : "Literal"
                         }, {
-                           "localId" : "462",
+                           "localId" : "473",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "6",
@@ -7657,18 +7657,18 @@ module.exports['Median'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "479",
+                     "localId" : "490",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "482",
+                        "localId" : "493",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "483",
+                           "localId" : "494",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "480",
+                           "localId" : "491",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -7677,7 +7677,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "487",
+            "localId" : "499",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "has_null_q",
             "context" : "Patient",
@@ -7685,27 +7685,27 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "487",
+                  "r" : "499",
                   "s" : [ {
                      "value" : [ "","define ","has_null_q",": " ]
                   }, {
-                     "r" : "501",
+                     "r" : "513",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "488",
+                        "r" : "500",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "489",
+                           "r" : "501",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
-                           "r" : "490",
+                           "r" : "502",
                            "value" : [ ",","null",",","null","," ]
                         }, {
-                           "r" : "492",
+                           "r" : "504",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
@@ -7719,58 +7719,58 @@ module.exports['Median'] = {
                }
             } ],
             "expression" : {
-               "localId" : "501",
+               "localId" : "513",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Median",
                "signature" : [ {
-                  "localId" : "502",
+                  "localId" : "514",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "503",
+                     "localId" : "515",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "488",
+                  "localId" : "500",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "495",
+                     "localId" : "507",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "496",
+                        "localId" : "508",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "489",
+                     "localId" : "501",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "493",
+                     "localId" : "505",
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "490",
+                        "localId" : "502",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "494",
+                     "localId" : "506",
                      "asType" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "491",
+                        "localId" : "503",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "492",
+                     "localId" : "504",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
@@ -7779,7 +7779,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "505",
+            "localId" : "518",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "dup_vals_even_q",
             "context" : "Patient",
@@ -7787,68 +7787,68 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "505",
+                  "r" : "518",
                   "s" : [ {
                      "value" : [ "","define ","dup_vals_even_q",": " ]
                   }, {
-                     "r" : "521",
+                     "r" : "534",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "506",
+                        "r" : "519",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "507",
+                           "r" : "520",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "508",
+                           "r" : "521",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "509",
+                           "r" : "522",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "510",
+                           "r" : "523",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "511",
+                           "r" : "524",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "512",
+                           "r" : "525",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "513",
+                           "r" : "526",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "514",
+                           "r" : "527",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
@@ -7862,74 +7862,74 @@ module.exports['Median'] = {
                }
             } ],
             "expression" : {
-               "localId" : "521",
+               "localId" : "534",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Median",
                "signature" : [ {
-                  "localId" : "522",
+                  "localId" : "535",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "523",
+                     "localId" : "536",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "506",
+                  "localId" : "519",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "515",
+                     "localId" : "528",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "516",
+                        "localId" : "529",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "507",
+                     "localId" : "520",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "508",
+                     "localId" : "521",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "509",
+                     "localId" : "522",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "510",
+                     "localId" : "523",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "511",
+                     "localId" : "524",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "512",
+                     "localId" : "525",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "513",
+                     "localId" : "526",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "514",
+                     "localId" : "527",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
@@ -7938,7 +7938,7 @@ module.exports['Median'] = {
                }
             }
          }, {
-            "localId" : "525",
+            "localId" : "539",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "dup_vals_odd_q",
             "context" : "Patient",
@@ -7946,200 +7946,77 @@ module.exports['Median'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "525",
+                  "r" : "539",
                   "s" : [ {
                      "value" : [ "","define ","dup_vals_odd_q",":  " ]
                   }, {
-                     "r" : "542",
+                     "r" : "556",
                      "s" : [ {
                         "value" : [ "Median","(" ]
                      }, {
-                        "r" : "526",
+                        "r" : "540",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "527",
+                           "r" : "541",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "528",
+                           "r" : "542",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "529",
+                           "r" : "543",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "530",
+                           "r" : "544",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "531",
+                           "r" : "545",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "532",
+                           "r" : "546",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "533",
+                           "r" : "547",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "534",
+                           "r" : "548",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "535",
-                           "s" : [ {
-                              "value" : [ "6 ","'ml'" ]
-                           } ]
-                        }, {
-                           "value" : [ "}" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "542",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-               "type" : "Median",
-               "signature" : [ {
-                  "localId" : "543",
-                  "type" : "ListTypeSpecifier",
-                  "elementType" : {
-                     "localId" : "544",
-                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               } ],
-               "source" : {
-                  "localId" : "526",
-                  "type" : "List",
-                  "resultTypeSpecifier" : {
-                     "localId" : "536",
-                     "type" : "ListTypeSpecifier",
-                     "elementType" : {
-                        "localId" : "537",
-                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  },
-                  "element" : [ {
-                     "localId" : "527",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "value" : 3,
-                     "unit" : "ml",
-                     "type" : "Quantity"
-                  }, {
-                     "localId" : "528",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "value" : 1,
-                     "unit" : "ml",
-                     "type" : "Quantity"
-                  }, {
-                     "localId" : "529",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "value" : 2,
-                     "unit" : "ml",
-                     "type" : "Quantity"
-                  }, {
-                     "localId" : "530",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "value" : 2,
-                     "unit" : "ml",
-                     "type" : "Quantity"
-                  }, {
-                     "localId" : "531",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "value" : 2,
-                     "unit" : "ml",
-                     "type" : "Quantity"
-                  }, {
-                     "localId" : "532",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "value" : 3,
-                     "unit" : "ml",
-                     "type" : "Quantity"
-                  }, {
-                     "localId" : "533",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "value" : 4,
-                     "unit" : "ml",
-                     "type" : "Quantity"
-                  }, {
-                     "localId" : "534",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "value" : 5,
-                     "unit" : "ml",
-                     "type" : "Quantity"
-                  }, {
-                     "localId" : "535",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "value" : 6,
-                     "unit" : "ml",
-                     "type" : "Quantity"
-                  } ]
-               }
-            }
-         }, {
-            "localId" : "546",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "name" : "IncompatibleUnitsNull",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "546",
-                  "s" : [ {
-                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
-                  }, {
-                     "r" : "556",
-                     "s" : [ {
-                        "value" : [ "Median","(" ]
-                     }, {
-                        "r" : "547",
-                        "s" : [ {
-                           "value" : [ "{" ]
-                        }, {
-                           "r" : "548",
-                           "s" : [ {
-                              "value" : [ "1 ","'mg/d'" ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
                            "r" : "549",
                            "s" : [ {
-                              "value" : [ "0.002 ","'/d'" ]
+                              "value" : [ "6 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "}" ]
@@ -8164,7 +8041,7 @@ module.exports['Median'] = {
                   }
                } ],
                "source" : {
-                  "localId" : "547",
+                  "localId" : "540",
                   "type" : "List",
                   "resultTypeSpecifier" : {
                      "localId" : "550",
@@ -8176,13 +8053,136 @@ module.exports['Median'] = {
                      }
                   },
                   "element" : [ {
+                     "localId" : "541",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "value" : 3,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "542",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "value" : 1,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "543",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "value" : 2,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "544",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "value" : 2,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "545",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "value" : 2,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "546",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "value" : 3,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "547",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "value" : 4,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }, {
                      "localId" : "548",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "value" : 5,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "549",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "value" : 6,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "561",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "name" : "IncompatibleUnitsNull",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "561",
+                  "s" : [ {
+                     "value" : [ "","define ","IncompatibleUnitsNull",": " ]
+                  }, {
+                     "r" : "571",
+                     "s" : [ {
+                        "value" : [ "Median","(" ]
+                     }, {
+                        "r" : "562",
+                        "s" : [ {
+                           "value" : [ "{" ]
+                        }, {
+                           "r" : "563",
+                           "s" : [ {
+                              "value" : [ "1 ","'mg/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "564",
+                           "s" : [ {
+                              "value" : [ "0.002 ","'/d'" ]
+                           } ]
+                        }, {
+                           "value" : [ "}" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "571",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+               "type" : "Median",
+               "signature" : [ {
+                  "localId" : "572",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "573",
+                     "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
+               "source" : {
+                  "localId" : "562",
+                  "type" : "List",
+                  "resultTypeSpecifier" : {
+                     "localId" : "565",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "566",
+                        "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "element" : [ {
+                     "localId" : "563",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "mg/d",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "549",
+                     "localId" : "564",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "/d",
@@ -8212,14 +8212,14 @@ module.exports['Mode'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "304",
+            "r" : "311",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -8262,21 +8262,21 @@ module.exports['Mode'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -8286,7 +8286,7 @@ module.exports['Mode'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "not_null",
             "context" : "Patient",
@@ -8294,17 +8294,17 @@ module.exports['Mode'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","not_null",": " ]
                   }, {
-                     "r" : "227",
+                     "r" : "229",
                      "s" : [ {
                         "value" : [ "Mode","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","1",",","2",",","2",",","2",",","3",",","4",",","5","}" ]
                         } ]
                      }, {
@@ -8314,47 +8314,35 @@ module.exports['Mode'] = {
                }
             } ],
             "expression" : {
-               "localId" : "227",
+               "localId" : "229",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Mode",
                "signature" : [ {
-                  "localId" : "228",
+                  "localId" : "230",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "229",
+                     "localId" : "231",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "213",
+                  "localId" : "215",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "221",
+                     "localId" : "223",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "222",
+                        "localId" : "224",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "214",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "215",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2",
-                     "type" : "Literal"
-                  }, {
                      "localId" : "216",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2",
+                     "value" : "1",
                      "type" : "Literal"
                   }, {
                      "localId" : "217",
@@ -8366,16 +8354,28 @@ module.exports['Mode'] = {
                      "localId" : "218",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
+                     "value" : "2",
                      "type" : "Literal"
                   }, {
                      "localId" : "219",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "4",
+                     "value" : "2",
                      "type" : "Literal"
                   }, {
                      "localId" : "220",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "221",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "222",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
@@ -8384,7 +8384,7 @@ module.exports['Mode'] = {
                }
             }
          }, {
-            "localId" : "231",
+            "localId" : "234",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "has_null",
             "context" : "Patient",
@@ -8392,17 +8392,17 @@ module.exports['Mode'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "231",
+                  "r" : "234",
                   "s" : [ {
                      "value" : [ "","define ","has_null",": " ]
                   }, {
-                     "r" : "246",
+                     "r" : "249",
                      "s" : [ {
                         "value" : [ "Mode","(" ]
                      }, {
-                        "r" : "232",
+                        "r" : "235",
                         "s" : [ {
-                           "r" : "233",
+                           "r" : "236",
                            "value" : [ "{","1",",","null",",","null",",","2",",","2","}" ]
                         } ]
                      }, {
@@ -8412,64 +8412,64 @@ module.exports['Mode'] = {
                }
             } ],
             "expression" : {
-               "localId" : "246",
+               "localId" : "249",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Mode",
                "signature" : [ {
-                  "localId" : "247",
+                  "localId" : "250",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "248",
+                     "localId" : "251",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "232",
+                  "localId" : "235",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "240",
+                     "localId" : "243",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "241",
+                        "localId" : "244",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "233",
+                     "localId" : "236",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "238",
+                     "localId" : "241",
                      "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "234",
+                        "localId" : "237",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "242",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "As",
+                     "signature" : [ ],
+                     "operand" : {
+                        "localId" : "238",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
                      "localId" : "239",
-                     "asType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "235",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                        "type" : "Null"
-                     }
-                  }, {
-                     "localId" : "236",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
                      "type" : "Literal"
                   }, {
-                     "localId" : "237",
+                     "localId" : "240",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "2",
@@ -8478,7 +8478,7 @@ module.exports['Mode'] = {
                }
             }
          }, {
-            "localId" : "250",
+            "localId" : "254",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
             "name" : "empty",
             "context" : "Patient",
@@ -8486,39 +8486,39 @@ module.exports['Mode'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "250",
+                  "r" : "254",
                   "s" : [ {
                      "value" : [ "","define ","empty",": " ]
                   }, {
-                     "r" : "258",
+                     "r" : "262",
                      "s" : [ {
-                        "r" : "251",
+                        "r" : "255",
                         "value" : [ "Mode","(","{}",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "258",
+               "localId" : "262",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                "type" : "Mode",
                "signature" : [ {
-                  "localId" : "259",
+                  "localId" : "263",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "260",
+                     "localId" : "264",
                      "name" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "251",
+                  "localId" : "255",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "252",
+                     "localId" : "256",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "253",
+                        "localId" : "257",
                         "name" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -8527,7 +8527,7 @@ module.exports['Mode'] = {
                }
             }
          }, {
-            "localId" : "262",
+            "localId" : "267",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "bi_modal",
             "context" : "Patient",
@@ -8535,17 +8535,17 @@ module.exports['Mode'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "262",
+                  "r" : "267",
                   "s" : [ {
                      "value" : [ "","define ","bi_modal",": " ]
                   }, {
-                     "r" : "279",
+                     "r" : "284",
                      "s" : [ {
                         "value" : [ "Mode","(" ]
                      }, {
-                        "r" : "263",
+                        "r" : "268",
                         "s" : [ {
-                           "r" : "264",
+                           "r" : "269",
                            "value" : [ "{","1",",","2",",","2",",","2",",","3",",","3",",","3",",","4",",","5","}" ]
                         } ]
                      }, {
@@ -8555,80 +8555,80 @@ module.exports['Mode'] = {
                }
             } ],
             "expression" : {
-               "localId" : "279",
+               "localId" : "284",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Mode",
                "signature" : [ {
-                  "localId" : "280",
+                  "localId" : "285",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "281",
+                     "localId" : "286",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "263",
+                  "localId" : "268",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "273",
+                     "localId" : "278",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "274",
+                        "localId" : "279",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "264",
+                     "localId" : "269",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "1",
                      "type" : "Literal"
                   }, {
-                     "localId" : "265",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "266",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "267",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "268",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "269",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
-                     "type" : "Literal"
-                  }, {
                      "localId" : "270",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "3",
+                     "value" : "2",
                      "type" : "Literal"
                   }, {
                      "localId" : "271",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "4",
+                     "value" : "2",
                      "type" : "Literal"
                   }, {
                      "localId" : "272",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "273",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "274",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "275",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "3",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "276",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "4",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "277",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
@@ -8637,7 +8637,7 @@ module.exports['Mode'] = {
                }
             }
          }, {
-            "localId" : "283",
+            "localId" : "289",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "NumbersAndQuantities",
             "context" : "Patient",
@@ -8645,48 +8645,48 @@ module.exports['Mode'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "283",
+                  "r" : "289",
                   "s" : [ {
                      "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
-                     "r" : "300",
+                     "r" : "306",
                      "s" : [ {
                         "value" : [ "Mode","(" ]
                      }, {
-                        "r" : "284",
+                        "r" : "290",
                         "s" : [ {
-                           "r" : "285",
+                           "r" : "291",
                            "value" : [ "{","1"," ," ]
                         }, {
-                           "r" : "286",
+                           "r" : "292",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "287",
+                           "r" : "293",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "288",
+                           "r" : "294",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "289",
+                           "r" : "295",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "290",
+                           "r" : "296",
                            "s" : [ {
                               "value" : [ "0 ","'ml'" ]
                            } ]
@@ -8700,71 +8700,71 @@ module.exports['Mode'] = {
                }
             } ],
             "expression" : {
-               "localId" : "300",
+               "localId" : "306",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Mode",
                "signature" : [ {
-                  "localId" : "301",
+                  "localId" : "307",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "302",
+                     "localId" : "308",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "284",
+                  "localId" : "290",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "294",
+                     "localId" : "300",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "295",
+                        "localId" : "301",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "292",
+                     "localId" : "298",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "293",
+                        "localId" : "299",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "285",
+                        "localId" : "291",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "286",
+                     "localId" : "292",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "287",
+                     "localId" : "293",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "288",
+                     "localId" : "294",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "289",
+                     "localId" : "295",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "290",
+                     "localId" : "296",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0,
                      "unit" : "ml",
@@ -8773,7 +8773,7 @@ module.exports['Mode'] = {
                }
             }
          }, {
-            "localId" : "304",
+            "localId" : "311",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "IncompatibleUnitsNull",
             "context" : "Patient",
@@ -8781,26 +8781,26 @@ module.exports['Mode'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "304",
+                  "r" : "311",
                   "s" : [ {
                      "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
-                     "r" : "314",
+                     "r" : "321",
                      "s" : [ {
                         "value" : [ "Mode","(" ]
                      }, {
-                        "r" : "305",
+                        "r" : "312",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "306",
+                           "r" : "313",
                            "s" : [ {
                               "value" : [ "1 ","'mg/d'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "307",
+                           "r" : "314",
                            "s" : [ {
                               "value" : [ "0.002 ","'/d'" ]
                            } ]
@@ -8814,38 +8814,38 @@ module.exports['Mode'] = {
                }
             } ],
             "expression" : {
-               "localId" : "314",
+               "localId" : "321",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Mode",
                "signature" : [ {
-                  "localId" : "315",
+                  "localId" : "322",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "316",
+                     "localId" : "323",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "305",
+                  "localId" : "312",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "308",
+                     "localId" : "315",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "309",
+                        "localId" : "316",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "306",
+                     "localId" : "313",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "mg/d",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "307",
+                     "localId" : "314",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "/d",
@@ -8873,14 +8873,14 @@ module.exports['Variance'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "303",
+            "r" : "309",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -8923,21 +8923,21 @@ module.exports['Variance'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -8947,7 +8947,7 @@ module.exports['Variance'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "v",
             "context" : "Patient",
@@ -8955,17 +8955,17 @@ module.exports['Variance'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","v",": " ]
                   }, {
-                     "r" : "232",
+                     "r" : "234",
                      "s" : [ {
                         "value" : [ "Variance","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","1",",","2",",","3",",","4",",","5","}" ]
                         } ]
                      }, {
@@ -8975,62 +8975,62 @@ module.exports['Variance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "232",
+               "localId" : "234",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Variance",
                "signature" : [ {
-                  "localId" : "240",
+                  "localId" : "242",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "241",
+                     "localId" : "243",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "233",
+                  "localId" : "235",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "234",
+                     "localId" : "236",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "213",
+                        "localId" : "215",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "219",
+                           "localId" : "221",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "220",
+                              "localId" : "222",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "214",
+                           "localId" : "216",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }, {
-                           "localId" : "215",
+                           "localId" : "217",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "216",
+                           "localId" : "218",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",
                            "type" : "Literal"
                         }, {
-                           "localId" : "217",
+                           "localId" : "219",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "4",
                            "type" : "Literal"
                         }, {
-                           "localId" : "218",
+                           "localId" : "220",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
@@ -9041,18 +9041,18 @@ module.exports['Variance'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "235",
+                     "localId" : "237",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "238",
+                        "localId" : "240",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "239",
+                           "localId" : "241",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "236",
+                           "localId" : "238",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -9061,7 +9061,7 @@ module.exports['Variance'] = {
                }
             }
          }, {
-            "localId" : "243",
+            "localId" : "246",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "v_q",
             "context" : "Patient",
@@ -9069,47 +9069,47 @@ module.exports['Variance'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "243",
+                  "r" : "246",
                   "s" : [ {
                      "value" : [ "","define ","v_q",": " ]
                   }, {
-                     "r" : "256",
+                     "r" : "259",
                      "s" : [ {
                         "value" : [ "Variance","(" ]
                      }, {
-                        "r" : "244",
+                        "r" : "247",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "245",
+                           "r" : "248",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "246",
+                           "r" : "249",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "247",
+                           "r" : "250",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "248",
+                           "r" : "251",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "249",
+                           "r" : "252",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
@@ -9123,56 +9123,56 @@ module.exports['Variance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "256",
+               "localId" : "259",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Variance",
                "signature" : [ {
-                  "localId" : "257",
+                  "localId" : "260",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "258",
+                     "localId" : "261",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "244",
+                  "localId" : "247",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "250",
+                     "localId" : "253",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "251",
+                        "localId" : "254",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "245",
+                     "localId" : "248",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "246",
+                     "localId" : "249",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "247",
+                     "localId" : "250",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "248",
+                     "localId" : "251",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "249",
+                     "localId" : "252",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
@@ -9181,7 +9181,7 @@ module.exports['Variance'] = {
                }
             }
          }, {
-            "localId" : "260",
+            "localId" : "264",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "q_diff_units",
             "context" : "Patient",
@@ -9189,47 +9189,47 @@ module.exports['Variance'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "260",
+                  "r" : "264",
                   "s" : [ {
                      "value" : [ "","define ","q_diff_units",": " ]
                   }, {
-                     "r" : "273",
+                     "r" : "277",
                      "s" : [ {
                         "value" : [ "Variance","(" ]
                      }, {
-                        "r" : "261",
+                        "r" : "265",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "262",
+                           "r" : "266",
                            "s" : [ {
                               "value" : [ "1.0 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "263",
+                           "r" : "267",
                            "s" : [ {
                               "value" : [ "0.002 ","'l'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "264",
+                           "r" : "268",
                            "s" : [ {
                               "value" : [ "0.003 ","'l'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "265",
+                           "r" : "269",
                            "s" : [ {
                               "value" : [ "0.04 ","'dl'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "266",
+                           "r" : "270",
                            "s" : [ {
                               "value" : [ "5.0 ","'ml'" ]
                            } ]
@@ -9243,56 +9243,56 @@ module.exports['Variance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "273",
+               "localId" : "277",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Variance",
                "signature" : [ {
-                  "localId" : "274",
+                  "localId" : "278",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "275",
+                     "localId" : "279",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "261",
+                  "localId" : "265",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "267",
+                     "localId" : "271",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "268",
+                        "localId" : "272",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "262",
+                     "localId" : "266",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1.0,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "263",
+                     "localId" : "267",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "l",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "264",
+                     "localId" : "268",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.003,
                      "unit" : "l",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "265",
+                     "localId" : "269",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.04,
                      "unit" : "dl",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "266",
+                     "localId" : "270",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5.0,
                      "unit" : "ml",
@@ -9301,7 +9301,7 @@ module.exports['Variance'] = {
                }
             }
          }, {
-            "localId" : "277",
+            "localId" : "282",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "NumbersAndQuantities",
             "context" : "Patient",
@@ -9309,27 +9309,27 @@ module.exports['Variance'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "277",
+                  "r" : "282",
                   "s" : [ {
                      "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
-                     "r" : "299",
+                     "r" : "304",
                      "s" : [ {
                         "value" : [ "Variance","(" ]
                      }, {
-                        "r" : "278",
+                        "r" : "283",
                         "s" : [ {
-                           "r" : "279",
+                           "r" : "284",
                            "value" : [ "{","1.0"," ,","2.0"," ,","3.0"," ," ]
                         }, {
-                           "r" : "282",
+                           "r" : "287",
                            "s" : [ {
                               "value" : [ "4.0 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "283",
+                           "r" : "288",
                            "s" : [ {
                               "value" : [ "5.0 ","'ml'" ]
                            } ]
@@ -9343,83 +9343,83 @@ module.exports['Variance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "299",
+               "localId" : "304",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Variance",
                "signature" : [ {
-                  "localId" : "300",
+                  "localId" : "305",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "301",
+                     "localId" : "306",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "278",
+                  "localId" : "283",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "293",
+                     "localId" : "298",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "294",
+                        "localId" : "299",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "285",
+                     "localId" : "290",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "286",
+                        "localId" : "291",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "279",
+                        "localId" : "284",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "value" : "1.0",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "288",
+                     "localId" : "293",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "289",
+                        "localId" : "294",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "280",
+                        "localId" : "285",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "value" : "2.0",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "291",
+                     "localId" : "296",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "292",
+                        "localId" : "297",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "281",
+                        "localId" : "286",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "value" : "3.0",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "282",
+                     "localId" : "287",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4.0,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "283",
+                     "localId" : "288",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5.0,
                      "unit" : "ml",
@@ -9428,7 +9428,7 @@ module.exports['Variance'] = {
                }
             }
          }, {
-            "localId" : "303",
+            "localId" : "309",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "IncompatibleUnitsNull",
             "context" : "Patient",
@@ -9436,26 +9436,26 @@ module.exports['Variance'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "303",
+                  "r" : "309",
                   "s" : [ {
                      "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
-                     "r" : "313",
+                     "r" : "319",
                      "s" : [ {
                         "value" : [ "Variance","(" ]
                      }, {
-                        "r" : "304",
+                        "r" : "310",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "305",
+                           "r" : "311",
                            "s" : [ {
                               "value" : [ "1 ","'mg/d'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "306",
+                           "r" : "312",
                            "s" : [ {
                               "value" : [ "0.002 ","'/d'" ]
                            } ]
@@ -9469,38 +9469,38 @@ module.exports['Variance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "313",
+               "localId" : "319",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Variance",
                "signature" : [ {
-                  "localId" : "314",
+                  "localId" : "320",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "315",
+                     "localId" : "321",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "304",
+                  "localId" : "310",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "307",
+                     "localId" : "313",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "308",
+                        "localId" : "314",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "305",
+                     "localId" : "311",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "mg/d",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "306",
+                     "localId" : "312",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "/d",
@@ -9528,14 +9528,14 @@ module.exports['PopulationVariance'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "289",
+            "r" : "295",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -9578,21 +9578,21 @@ module.exports['PopulationVariance'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -9602,7 +9602,7 @@ module.exports['PopulationVariance'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "v",
             "context" : "Patient",
@@ -9610,17 +9610,17 @@ module.exports['PopulationVariance'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","v",": " ]
                   }, {
-                     "r" : "225",
+                     "r" : "227",
                      "s" : [ {
                         "value" : [ "PopulationVariance","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","1.0",",","2.0",",","3.0",",","4.0",",","5.0","}" ]
                         } ]
                      }, {
@@ -9630,56 +9630,56 @@ module.exports['PopulationVariance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "225",
+               "localId" : "227",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "PopulationVariance",
                "signature" : [ {
-                  "localId" : "226",
+                  "localId" : "228",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "227",
+                     "localId" : "229",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "213",
+                  "localId" : "215",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "219",
+                     "localId" : "221",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "220",
+                        "localId" : "222",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "214",
+                     "localId" : "216",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "1.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "215",
+                     "localId" : "217",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "2.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "216",
+                     "localId" : "218",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "3.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "217",
+                     "localId" : "219",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "4.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "218",
+                     "localId" : "220",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "5.0",
@@ -9688,7 +9688,7 @@ module.exports['PopulationVariance'] = {
                }
             }
          }, {
-            "localId" : "229",
+            "localId" : "232",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "v_q",
             "context" : "Patient",
@@ -9696,47 +9696,47 @@ module.exports['PopulationVariance'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "229",
+                  "r" : "232",
                   "s" : [ {
                      "value" : [ "","define ","v_q",": " ]
                   }, {
-                     "r" : "242",
+                     "r" : "245",
                      "s" : [ {
                         "value" : [ "PopulationVariance","(" ]
                      }, {
-                        "r" : "230",
+                        "r" : "233",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "231",
+                           "r" : "234",
                            "s" : [ {
                               "value" : [ "1.0 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "232",
+                           "r" : "235",
                            "s" : [ {
                               "value" : [ "2.0 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "233",
+                           "r" : "236",
                            "s" : [ {
                               "value" : [ "3.0 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "234",
+                           "r" : "237",
                            "s" : [ {
                               "value" : [ "4.0 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "235",
+                           "r" : "238",
                            "s" : [ {
                               "value" : [ "5.0 ","'ml'" ]
                            } ]
@@ -9750,56 +9750,56 @@ module.exports['PopulationVariance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "242",
+               "localId" : "245",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "PopulationVariance",
                "signature" : [ {
-                  "localId" : "243",
+                  "localId" : "246",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "244",
+                     "localId" : "247",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "230",
+                  "localId" : "233",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "236",
+                     "localId" : "239",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "237",
+                        "localId" : "240",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "231",
+                     "localId" : "234",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1.0,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "232",
+                     "localId" : "235",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2.0,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "233",
+                     "localId" : "236",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3.0,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "234",
+                     "localId" : "237",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4.0,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "235",
+                     "localId" : "238",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5.0,
                      "unit" : "ml",
@@ -9808,7 +9808,7 @@ module.exports['PopulationVariance'] = {
                }
             }
          }, {
-            "localId" : "246",
+            "localId" : "250",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "q_diff_units",
             "context" : "Patient",
@@ -9816,47 +9816,47 @@ module.exports['PopulationVariance'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "246",
+                  "r" : "250",
                   "s" : [ {
                      "value" : [ "","define ","q_diff_units",": " ]
                   }, {
-                     "r" : "259",
+                     "r" : "263",
                      "s" : [ {
                         "value" : [ "PopulationVariance","(" ]
                      }, {
-                        "r" : "247",
+                        "r" : "251",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "248",
+                           "r" : "252",
                            "s" : [ {
                               "value" : [ "1.0 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "249",
+                           "r" : "253",
                            "s" : [ {
                               "value" : [ "0.002 ","'l'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "250",
+                           "r" : "254",
                            "s" : [ {
                               "value" : [ "0.003 ","'l'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "251",
+                           "r" : "255",
                            "s" : [ {
                               "value" : [ "0.04 ","'dl'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "252",
+                           "r" : "256",
                            "s" : [ {
                               "value" : [ "5.0 ","'ml'" ]
                            } ]
@@ -9870,56 +9870,56 @@ module.exports['PopulationVariance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "259",
+               "localId" : "263",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "PopulationVariance",
                "signature" : [ {
-                  "localId" : "260",
+                  "localId" : "264",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "261",
+                     "localId" : "265",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "247",
+                  "localId" : "251",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "253",
+                     "localId" : "257",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "254",
+                        "localId" : "258",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "248",
+                     "localId" : "252",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1.0,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "249",
+                     "localId" : "253",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "l",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "250",
+                     "localId" : "254",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.003,
                      "unit" : "l",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "251",
+                     "localId" : "255",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.04,
                      "unit" : "dl",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "252",
+                     "localId" : "256",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5.0,
                      "unit" : "ml",
@@ -9928,7 +9928,7 @@ module.exports['PopulationVariance'] = {
                }
             }
          }, {
-            "localId" : "263",
+            "localId" : "268",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "NumbersAndQuantities",
             "context" : "Patient",
@@ -9936,27 +9936,27 @@ module.exports['PopulationVariance'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "263",
+                  "r" : "268",
                   "s" : [ {
                      "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
-                     "r" : "285",
+                     "r" : "290",
                      "s" : [ {
                         "value" : [ "PopulationVariance","(" ]
                      }, {
-                        "r" : "264",
+                        "r" : "269",
                         "s" : [ {
-                           "r" : "265",
+                           "r" : "270",
                            "value" : [ "{","1.0"," ,","2.0"," ,","3.0"," ," ]
                         }, {
-                           "r" : "268",
+                           "r" : "273",
                            "s" : [ {
                               "value" : [ "4.0 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "269",
+                           "r" : "274",
                            "s" : [ {
                               "value" : [ "5.0 ","'ml'" ]
                            } ]
@@ -9970,83 +9970,83 @@ module.exports['PopulationVariance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "285",
+               "localId" : "290",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "PopulationVariance",
                "signature" : [ {
-                  "localId" : "286",
+                  "localId" : "291",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "287",
+                     "localId" : "292",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "264",
+                  "localId" : "269",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "279",
+                     "localId" : "284",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "280",
+                        "localId" : "285",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "271",
+                     "localId" : "276",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "272",
+                        "localId" : "277",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "265",
+                        "localId" : "270",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "value" : "1.0",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "274",
+                     "localId" : "279",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "275",
+                        "localId" : "280",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "266",
+                        "localId" : "271",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "value" : "2.0",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "277",
+                     "localId" : "282",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "278",
+                        "localId" : "283",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "267",
+                        "localId" : "272",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "value" : "3.0",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "268",
+                     "localId" : "273",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4.0,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "269",
+                     "localId" : "274",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5.0,
                      "unit" : "ml",
@@ -10055,7 +10055,7 @@ module.exports['PopulationVariance'] = {
                }
             }
          }, {
-            "localId" : "289",
+            "localId" : "295",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "IncompatibleUnitsNull",
             "context" : "Patient",
@@ -10063,26 +10063,26 @@ module.exports['PopulationVariance'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "289",
+                  "r" : "295",
                   "s" : [ {
                      "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
-                     "r" : "299",
+                     "r" : "305",
                      "s" : [ {
                         "value" : [ "PopulationVariance","(" ]
                      }, {
-                        "r" : "290",
+                        "r" : "296",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "291",
+                           "r" : "297",
                            "s" : [ {
                               "value" : [ "1 ","'mg/d'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "292",
+                           "r" : "298",
                            "s" : [ {
                               "value" : [ "0.002 ","'/d'" ]
                            } ]
@@ -10096,38 +10096,38 @@ module.exports['PopulationVariance'] = {
                }
             } ],
             "expression" : {
-               "localId" : "299",
+               "localId" : "305",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "PopulationVariance",
                "signature" : [ {
-                  "localId" : "300",
+                  "localId" : "306",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "301",
+                     "localId" : "307",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "290",
+                  "localId" : "296",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "293",
+                     "localId" : "299",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "294",
+                        "localId" : "300",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "291",
+                     "localId" : "297",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "mg/d",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "292",
+                     "localId" : "298",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "/d",
@@ -10156,14 +10156,14 @@ module.exports['StdDev'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "323",
+            "r" : "330",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -10206,21 +10206,21 @@ module.exports['StdDev'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -10230,7 +10230,7 @@ module.exports['StdDev'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "std",
             "context" : "Patient",
@@ -10238,17 +10238,17 @@ module.exports['StdDev'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","std",": " ]
                   }, {
-                     "r" : "232",
+                     "r" : "234",
                      "s" : [ {
                         "value" : [ "StdDev","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","1",",","2",",","3",",","4",",","5","}" ]
                         } ]
                      }, {
@@ -10258,62 +10258,62 @@ module.exports['StdDev'] = {
                }
             } ],
             "expression" : {
-               "localId" : "232",
+               "localId" : "234",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "StdDev",
                "signature" : [ {
-                  "localId" : "240",
+                  "localId" : "242",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "241",
+                     "localId" : "243",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "233",
+                  "localId" : "235",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "234",
+                     "localId" : "236",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "213",
+                        "localId" : "215",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "219",
+                           "localId" : "221",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "220",
+                              "localId" : "222",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "214",
+                           "localId" : "216",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }, {
-                           "localId" : "215",
+                           "localId" : "217",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "216",
+                           "localId" : "218",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",
                            "type" : "Literal"
                         }, {
-                           "localId" : "217",
+                           "localId" : "219",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "4",
                            "type" : "Literal"
                         }, {
-                           "localId" : "218",
+                           "localId" : "220",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
@@ -10324,18 +10324,18 @@ module.exports['StdDev'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "235",
+                     "localId" : "237",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "238",
+                        "localId" : "240",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "239",
+                           "localId" : "241",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "236",
+                           "localId" : "238",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -10344,7 +10344,7 @@ module.exports['StdDev'] = {
                }
             }
          }, {
-            "localId" : "243",
+            "localId" : "246",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "std_q",
             "context" : "Patient",
@@ -10352,47 +10352,47 @@ module.exports['StdDev'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "243",
+                  "r" : "246",
                   "s" : [ {
                      "value" : [ "","define ","std_q",": " ]
                   }, {
-                     "r" : "256",
+                     "r" : "259",
                      "s" : [ {
                         "value" : [ "StdDev","(" ]
                      }, {
-                        "r" : "244",
+                        "r" : "247",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "245",
+                           "r" : "248",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "246",
+                           "r" : "249",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "247",
+                           "r" : "250",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "248",
+                           "r" : "251",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "249",
+                           "r" : "252",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
@@ -10406,56 +10406,56 @@ module.exports['StdDev'] = {
                }
             } ],
             "expression" : {
-               "localId" : "256",
+               "localId" : "259",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "StdDev",
                "signature" : [ {
-                  "localId" : "257",
+                  "localId" : "260",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "258",
+                     "localId" : "261",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "244",
+                  "localId" : "247",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "250",
+                     "localId" : "253",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "251",
+                        "localId" : "254",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "245",
+                     "localId" : "248",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "246",
+                     "localId" : "249",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "247",
+                     "localId" : "250",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "248",
+                     "localId" : "251",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "249",
+                     "localId" : "252",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
@@ -10464,7 +10464,7 @@ module.exports['StdDev'] = {
                }
             }
          }, {
-            "localId" : "260",
+            "localId" : "264",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "q_diff_units",
             "context" : "Patient",
@@ -10472,47 +10472,47 @@ module.exports['StdDev'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "260",
+                  "r" : "264",
                   "s" : [ {
                      "value" : [ "","define ","q_diff_units",": " ]
                   }, {
-                     "r" : "273",
+                     "r" : "277",
                      "s" : [ {
                         "value" : [ "StdDev","(" ]
                      }, {
-                        "r" : "261",
+                        "r" : "265",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "262",
+                           "r" : "266",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "263",
+                           "r" : "267",
                            "s" : [ {
                               "value" : [ "0.002 ","'l'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "264",
+                           "r" : "268",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "265",
+                           "r" : "269",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "266",
+                           "r" : "270",
                            "s" : [ {
                               "value" : [ "0.05 ","'dl'" ]
                            } ]
@@ -10526,56 +10526,56 @@ module.exports['StdDev'] = {
                }
             } ],
             "expression" : {
-               "localId" : "273",
+               "localId" : "277",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "StdDev",
                "signature" : [ {
-                  "localId" : "274",
+                  "localId" : "278",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "275",
+                     "localId" : "279",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "261",
+                  "localId" : "265",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "267",
+                     "localId" : "271",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "268",
+                        "localId" : "272",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "262",
+                     "localId" : "266",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "263",
+                     "localId" : "267",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "l",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "264",
+                     "localId" : "268",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "265",
+                     "localId" : "269",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "266",
+                     "localId" : "270",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.05,
                      "unit" : "dl",
@@ -10584,7 +10584,7 @@ module.exports['StdDev'] = {
                }
             }
          }, {
-            "localId" : "277",
+            "localId" : "282",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "sq_throw1",
             "context" : "Patient",
@@ -10592,47 +10592,47 @@ module.exports['StdDev'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "277",
+                  "r" : "282",
                   "s" : [ {
                      "value" : [ "","define ","sq_throw1",": " ]
                   }, {
-                     "r" : "290",
+                     "r" : "295",
                      "s" : [ {
                         "value" : [ "StdDev","(" ]
                      }, {
-                        "r" : "278",
+                        "r" : "283",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "279",
+                           "r" : "284",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "280",
+                           "r" : "285",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "281",
+                           "r" : "286",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "282",
+                           "r" : "287",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "283",
+                           "r" : "288",
                            "s" : [ {
                               "value" : [ "5 ","'m'" ]
                            } ]
@@ -10646,56 +10646,56 @@ module.exports['StdDev'] = {
                }
             } ],
             "expression" : {
-               "localId" : "290",
+               "localId" : "295",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "StdDev",
                "signature" : [ {
-                  "localId" : "291",
+                  "localId" : "296",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "292",
+                     "localId" : "297",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "278",
+                  "localId" : "283",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "284",
+                     "localId" : "289",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "285",
+                        "localId" : "290",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "279",
+                     "localId" : "284",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "280",
+                     "localId" : "285",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "281",
+                     "localId" : "286",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "282",
+                     "localId" : "287",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "283",
+                     "localId" : "288",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "m",
@@ -10704,7 +10704,7 @@ module.exports['StdDev'] = {
                }
             }
          }, {
-            "localId" : "294",
+            "localId" : "300",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "NumbersAndQuantities",
             "context" : "Patient",
@@ -10712,25 +10712,25 @@ module.exports['StdDev'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "294",
+                  "r" : "300",
                   "s" : [ {
                      "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
-                     "r" : "319",
+                     "r" : "325",
                      "s" : [ {
                         "value" : [ "StdDev","(" ]
                      }, {
-                        "r" : "295",
+                        "r" : "301",
                         "s" : [ {
-                           "r" : "296",
+                           "r" : "302",
                            "value" : [ "{","1"," ,","2"," ,","3"," ," ]
                         }, {
-                           "r" : "299",
+                           "r" : "305",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
-                           "r" : "300",
+                           "r" : "306",
                            "value" : [ ",","5"," }" ]
                         } ]
                      }, {
@@ -10740,61 +10740,31 @@ module.exports['StdDev'] = {
                }
             } ],
             "expression" : {
-               "localId" : "319",
+               "localId" : "325",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "StdDev",
                "signature" : [ {
-                  "localId" : "320",
+                  "localId" : "326",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "321",
+                     "localId" : "327",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "295",
+                  "localId" : "301",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "313",
+                     "localId" : "319",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "314",
+                        "localId" : "320",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "302",
-                     "type" : "ToQuantity",
-                     "signature" : [ {
-                        "localId" : "303",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : {
-                        "localId" : "296",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "1",
-                        "type" : "Literal"
-                     }
-                  }, {
-                     "localId" : "305",
-                     "type" : "ToQuantity",
-                     "signature" : [ {
-                        "localId" : "306",
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : {
-                        "localId" : "297",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
-                        "type" : "Literal"
-                     }
-                  }, {
                      "localId" : "308",
                      "type" : "ToQuantity",
                      "signature" : [ {
@@ -10803,18 +10773,12 @@ module.exports['StdDev'] = {
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "298",
+                        "localId" : "302",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "3",
+                        "value" : "1",
                         "type" : "Literal"
                      }
-                  }, {
-                     "localId" : "299",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                     "value" : 4,
-                     "unit" : "ml",
-                     "type" : "Quantity"
                   }, {
                      "localId" : "311",
                      "type" : "ToQuantity",
@@ -10824,7 +10788,43 @@ module.exports['StdDev'] = {
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "300",
+                        "localId" : "303",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "2",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "314",
+                     "type" : "ToQuantity",
+                     "signature" : [ {
+                        "localId" : "315",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : {
+                        "localId" : "304",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "3",
+                        "type" : "Literal"
+                     }
+                  }, {
+                     "localId" : "305",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                     "value" : 4,
+                     "unit" : "ml",
+                     "type" : "Quantity"
+                  }, {
+                     "localId" : "317",
+                     "type" : "ToQuantity",
+                     "signature" : [ {
+                        "localId" : "318",
+                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : {
+                        "localId" : "306",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
@@ -10834,7 +10834,7 @@ module.exports['StdDev'] = {
                }
             }
          }, {
-            "localId" : "323",
+            "localId" : "330",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "IncompatibleUnitsNull",
             "context" : "Patient",
@@ -10842,26 +10842,26 @@ module.exports['StdDev'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "323",
+                  "r" : "330",
                   "s" : [ {
                      "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
-                     "r" : "333",
+                     "r" : "340",
                      "s" : [ {
                         "value" : [ "StdDev","(" ]
                      }, {
-                        "r" : "324",
+                        "r" : "331",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "325",
+                           "r" : "332",
                            "s" : [ {
                               "value" : [ "1 ","'mg/d'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "326",
+                           "r" : "333",
                            "s" : [ {
                               "value" : [ "0.002 ","'/d'" ]
                            } ]
@@ -10875,38 +10875,38 @@ module.exports['StdDev'] = {
                }
             } ],
             "expression" : {
-               "localId" : "333",
+               "localId" : "340",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "StdDev",
                "signature" : [ {
-                  "localId" : "334",
+                  "localId" : "341",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "335",
+                     "localId" : "342",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "324",
+                  "localId" : "331",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "327",
+                     "localId" : "334",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "328",
+                        "localId" : "335",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "325",
+                     "localId" : "332",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "mg/d",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "326",
+                     "localId" : "333",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "/d",
@@ -10934,14 +10934,14 @@ module.exports['PopulationStdDev'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "306",
+            "r" : "312",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -10984,21 +10984,21 @@ module.exports['PopulationStdDev'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -11008,7 +11008,7 @@ module.exports['PopulationStdDev'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "dev",
             "context" : "Patient",
@@ -11016,17 +11016,17 @@ module.exports['PopulationStdDev'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","dev",": " ]
                   }, {
-                     "r" : "232",
+                     "r" : "234",
                      "s" : [ {
                         "value" : [ "PopulationStdDev","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","1",",","2",",","3",",","4",",","5","}" ]
                         } ]
                      }, {
@@ -11036,62 +11036,62 @@ module.exports['PopulationStdDev'] = {
                }
             } ],
             "expression" : {
-               "localId" : "232",
+               "localId" : "234",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "PopulationStdDev",
                "signature" : [ {
-                  "localId" : "240",
+                  "localId" : "242",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "241",
+                     "localId" : "243",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "233",
+                  "localId" : "235",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "234",
+                     "localId" : "236",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "213",
+                        "localId" : "215",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "219",
+                           "localId" : "221",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "220",
+                              "localId" : "222",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "214",
+                           "localId" : "216",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }, {
-                           "localId" : "215",
+                           "localId" : "217",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "216",
+                           "localId" : "218",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",
                            "type" : "Literal"
                         }, {
-                           "localId" : "217",
+                           "localId" : "219",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "4",
                            "type" : "Literal"
                         }, {
-                           "localId" : "218",
+                           "localId" : "220",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "5",
@@ -11102,18 +11102,18 @@ module.exports['PopulationStdDev'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "235",
+                     "localId" : "237",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "238",
+                        "localId" : "240",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "239",
+                           "localId" : "241",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "236",
+                           "localId" : "238",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -11122,7 +11122,7 @@ module.exports['PopulationStdDev'] = {
                }
             }
          }, {
-            "localId" : "243",
+            "localId" : "246",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "dev_q",
             "context" : "Patient",
@@ -11130,47 +11130,47 @@ module.exports['PopulationStdDev'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "243",
+                  "r" : "246",
                   "s" : [ {
                      "value" : [ "","define ","dev_q",": " ]
                   }, {
-                     "r" : "256",
+                     "r" : "259",
                      "s" : [ {
                         "value" : [ "PopulationStdDev","(" ]
                      }, {
-                        "r" : "244",
+                        "r" : "247",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "245",
+                           "r" : "248",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "246",
+                           "r" : "249",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "247",
+                           "r" : "250",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "248",
+                           "r" : "251",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "249",
+                           "r" : "252",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
@@ -11184,56 +11184,56 @@ module.exports['PopulationStdDev'] = {
                }
             } ],
             "expression" : {
-               "localId" : "256",
+               "localId" : "259",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "PopulationStdDev",
                "signature" : [ {
-                  "localId" : "257",
+                  "localId" : "260",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "258",
+                     "localId" : "261",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "244",
+                  "localId" : "247",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "250",
+                     "localId" : "253",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "251",
+                        "localId" : "254",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "245",
+                     "localId" : "248",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "246",
+                     "localId" : "249",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "247",
+                     "localId" : "250",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "248",
+                     "localId" : "251",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "249",
+                     "localId" : "252",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
@@ -11242,7 +11242,7 @@ module.exports['PopulationStdDev'] = {
                }
             }
          }, {
-            "localId" : "260",
+            "localId" : "264",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "q_diff_units",
             "context" : "Patient",
@@ -11250,47 +11250,47 @@ module.exports['PopulationStdDev'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "260",
+                  "r" : "264",
                   "s" : [ {
                      "value" : [ "","define ","q_diff_units",": " ]
                   }, {
-                     "r" : "273",
+                     "r" : "277",
                      "s" : [ {
                         "value" : [ "PopulationStdDev","(" ]
                      }, {
-                        "r" : "261",
+                        "r" : "265",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "262",
+                           "r" : "266",
                            "s" : [ {
                               "value" : [ "1 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "263",
+                           "r" : "267",
                            "s" : [ {
                               "value" : [ "0.002 ","'l'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "264",
+                           "r" : "268",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "265",
+                           "r" : "269",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "266",
+                           "r" : "270",
                            "s" : [ {
                               "value" : [ "0.05 ","'dl'" ]
                            } ]
@@ -11304,56 +11304,56 @@ module.exports['PopulationStdDev'] = {
                }
             } ],
             "expression" : {
-               "localId" : "273",
+               "localId" : "277",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "PopulationStdDev",
                "signature" : [ {
-                  "localId" : "274",
+                  "localId" : "278",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "275",
+                     "localId" : "279",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "261",
+                  "localId" : "265",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "267",
+                     "localId" : "271",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "268",
+                        "localId" : "272",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "262",
+                     "localId" : "266",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "263",
+                     "localId" : "267",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "l",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "264",
+                     "localId" : "268",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "265",
+                     "localId" : "269",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "266",
+                     "localId" : "270",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.05,
                      "unit" : "dl",
@@ -11362,7 +11362,7 @@ module.exports['PopulationStdDev'] = {
                }
             }
          }, {
-            "localId" : "277",
+            "localId" : "282",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "NumbersAndQuantities",
             "context" : "Patient",
@@ -11370,25 +11370,25 @@ module.exports['PopulationStdDev'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "277",
+                  "r" : "282",
                   "s" : [ {
                      "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
-                     "r" : "302",
+                     "r" : "307",
                      "s" : [ {
                         "value" : [ "PopulationStdDev","(" ]
                      }, {
-                        "r" : "278",
+                        "r" : "283",
                         "s" : [ {
-                           "r" : "279",
+                           "r" : "284",
                            "value" : [ "{","1"," ,","2"," ,","3"," ," ]
                         }, {
-                           "r" : "282",
+                           "r" : "287",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
-                           "r" : "283",
+                           "r" : "288",
                            "value" : [ ",","5"," }" ]
                         } ]
                      }, {
@@ -11398,91 +11398,91 @@ module.exports['PopulationStdDev'] = {
                }
             } ],
             "expression" : {
-               "localId" : "302",
+               "localId" : "307",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "PopulationStdDev",
                "signature" : [ {
-                  "localId" : "303",
+                  "localId" : "308",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "304",
+                     "localId" : "309",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "278",
+                  "localId" : "283",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "296",
+                     "localId" : "301",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "297",
+                        "localId" : "302",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "285",
+                     "localId" : "290",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "286",
+                        "localId" : "291",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "279",
+                        "localId" : "284",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "288",
+                     "localId" : "293",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "289",
+                        "localId" : "294",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "280",
+                        "localId" : "285",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "2",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "291",
+                     "localId" : "296",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "292",
+                        "localId" : "297",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "281",
+                        "localId" : "286",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "3",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "282",
+                     "localId" : "287",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "294",
+                     "localId" : "299",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "295",
+                        "localId" : "300",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "283",
+                        "localId" : "288",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "5",
@@ -11492,7 +11492,7 @@ module.exports['PopulationStdDev'] = {
                }
             }
          }, {
-            "localId" : "306",
+            "localId" : "312",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "IncompatibleUnitsNull",
             "context" : "Patient",
@@ -11500,26 +11500,26 @@ module.exports['PopulationStdDev'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "306",
+                  "r" : "312",
                   "s" : [ {
                      "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
-                     "r" : "316",
+                     "r" : "322",
                      "s" : [ {
                         "value" : [ "PopulationStdDev","(" ]
                      }, {
-                        "r" : "307",
+                        "r" : "313",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "308",
+                           "r" : "314",
                            "s" : [ {
                               "value" : [ "1 ","'mg/d'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "309",
+                           "r" : "315",
                            "s" : [ {
                               "value" : [ "0.002 ","'/d'" ]
                            } ]
@@ -11533,38 +11533,38 @@ module.exports['PopulationStdDev'] = {
                }
             } ],
             "expression" : {
-               "localId" : "316",
+               "localId" : "322",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "PopulationStdDev",
                "signature" : [ {
-                  "localId" : "317",
+                  "localId" : "323",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "318",
+                     "localId" : "324",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "307",
+                  "localId" : "313",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "310",
+                     "localId" : "316",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "311",
+                        "localId" : "317",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "308",
+                     "localId" : "314",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "mg/d",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "309",
+                     "localId" : "315",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "/d",
@@ -11598,14 +11598,14 @@ module.exports['Product'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "383",
+            "r" : "395",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -11648,21 +11648,21 @@ module.exports['Product'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -11672,7 +11672,7 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "decimal_product",
             "context" : "Patient",
@@ -11680,17 +11680,17 @@ module.exports['Product'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","decimal_product",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "226",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","1.0",", ","2.0",", ","3.0",", ","4.0","}" ]
                         } ]
                      }, {
@@ -11700,50 +11700,50 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "226",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Product",
                "signature" : [ {
-                  "localId" : "225",
+                  "localId" : "227",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "226",
+                     "localId" : "228",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "213",
+                  "localId" : "215",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "218",
+                     "localId" : "220",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "219",
+                        "localId" : "221",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "214",
+                     "localId" : "216",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "1.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "215",
+                     "localId" : "217",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "2.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "216",
+                     "localId" : "218",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "3.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "217",
+                     "localId" : "219",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "4.0",
@@ -11752,7 +11752,7 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "228",
+            "localId" : "231",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "integer_product",
             "context" : "Patient",
@@ -11760,17 +11760,17 @@ module.exports['Product'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "228",
+                  "r" : "231",
                   "s" : [ {
                      "value" : [ "","define ","integer_product",": " ]
                   }, {
-                     "r" : "239",
+                     "r" : "242",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "229",
+                        "r" : "232",
                         "s" : [ {
-                           "r" : "230",
+                           "r" : "233",
                            "value" : [ "{","5",", ","4",", ","5","}" ]
                         } ]
                      }, {
@@ -11780,44 +11780,44 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "239",
+               "localId" : "242",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Product",
                "signature" : [ {
-                  "localId" : "240",
+                  "localId" : "243",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "241",
+                     "localId" : "244",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "229",
+                  "localId" : "232",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "233",
+                     "localId" : "236",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "234",
+                        "localId" : "237",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "230",
+                     "localId" : "233",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   }, {
-                     "localId" : "231",
+                     "localId" : "234",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "232",
+                     "localId" : "235",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
@@ -11826,7 +11826,7 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "243",
+            "localId" : "247",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "zero_product",
             "context" : "Patient",
@@ -11834,17 +11834,17 @@ module.exports['Product'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "243",
+                  "r" : "247",
                   "s" : [ {
                      "value" : [ "","define ","zero_product",": " ]
                   }, {
-                     "r" : "254",
+                     "r" : "258",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "244",
+                        "r" : "248",
                         "s" : [ {
-                           "r" : "245",
+                           "r" : "249",
                            "value" : [ "{","0",", ","5",", ","10","}" ]
                         } ]
                      }, {
@@ -11854,44 +11854,44 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "254",
+               "localId" : "258",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Product",
                "signature" : [ {
-                  "localId" : "255",
+                  "localId" : "259",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "256",
+                     "localId" : "260",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "244",
+                  "localId" : "248",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "248",
+                     "localId" : "252",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "249",
+                        "localId" : "253",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "245",
+                     "localId" : "249",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "246",
+                     "localId" : "250",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   }, {
-                     "localId" : "247",
+                     "localId" : "251",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "10",
@@ -11900,7 +11900,7 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "258",
+            "localId" : "263",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "quantity_product",
             "context" : "Patient",
@@ -11908,40 +11908,40 @@ module.exports['Product'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "258",
+                  "r" : "263",
                   "s" : [ {
                      "value" : [ "","define ","quantity_product",": " ]
                   }, {
-                     "r" : "270",
+                     "r" : "275",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "259",
+                        "r" : "264",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "260",
+                           "r" : "265",
                            "s" : [ {
                               "value" : [ "1.0 ","'g'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "261",
+                           "r" : "266",
                            "s" : [ {
                               "value" : [ "2.0 ","'g'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "262",
+                           "r" : "267",
                            "s" : [ {
                               "value" : [ "3.0 ","'g'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "263",
+                           "r" : "268",
                            "s" : [ {
                               "value" : [ "4.0 ","'g'" ]
                            } ]
@@ -11955,50 +11955,50 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "270",
+               "localId" : "275",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Product",
                "signature" : [ {
-                  "localId" : "271",
+                  "localId" : "276",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "272",
+                     "localId" : "277",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "259",
+                  "localId" : "264",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "264",
+                     "localId" : "269",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "265",
+                        "localId" : "270",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "260",
+                     "localId" : "265",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1.0,
                      "unit" : "g",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "261",
+                     "localId" : "266",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2.0,
                      "unit" : "g",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "262",
+                     "localId" : "267",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3.0,
                      "unit" : "g",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "263",
+                     "localId" : "268",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4.0,
                      "unit" : "g",
@@ -12007,7 +12007,7 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "274",
+            "localId" : "280",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "quantity_zero_product",
             "context" : "Patient",
@@ -12015,33 +12015,33 @@ module.exports['Product'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "274",
+                  "r" : "280",
                   "s" : [ {
                      "value" : [ "","define ","quantity_zero_product",": " ]
                   }, {
-                     "r" : "285",
+                     "r" : "291",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "275",
+                        "r" : "281",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "276",
+                           "r" : "282",
                            "s" : [ {
                               "value" : [ "1.0 ","'g'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "277",
+                           "r" : "283",
                            "s" : [ {
                               "value" : [ "2.0 ","'g'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "278",
+                           "r" : "284",
                            "s" : [ {
                               "value" : [ "0 ","'g'" ]
                            } ]
@@ -12055,44 +12055,44 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "285",
+               "localId" : "291",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Product",
                "signature" : [ {
-                  "localId" : "286",
+                  "localId" : "292",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "287",
+                     "localId" : "293",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "275",
+                  "localId" : "281",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "279",
+                     "localId" : "285",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "280",
+                        "localId" : "286",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "276",
+                     "localId" : "282",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1.0,
                      "unit" : "g",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "277",
+                     "localId" : "283",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2.0,
                      "unit" : "g",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "278",
+                     "localId" : "284",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0,
                      "unit" : "g",
@@ -12101,7 +12101,7 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "289",
+            "localId" : "296",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "product_with_null",
             "context" : "Patient",
@@ -12109,17 +12109,17 @@ module.exports['Product'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "289",
+                  "r" : "296",
                   "s" : [ {
                      "value" : [ "","define ","product_with_null",": " ]
                   }, {
-                     "r" : "301",
+                     "r" : "308",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "290",
+                        "r" : "297",
                         "s" : [ {
-                           "r" : "291",
+                           "r" : "298",
                            "value" : [ "{","5",", ","4",", ","null","}" ]
                         } ]
                      }, {
@@ -12129,49 +12129,49 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "301",
+               "localId" : "308",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Product",
                "signature" : [ {
-                  "localId" : "302",
+                  "localId" : "309",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "303",
+                     "localId" : "310",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "290",
+                  "localId" : "297",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "295",
+                     "localId" : "302",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "296",
+                        "localId" : "303",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "291",
+                     "localId" : "298",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "5",
                      "type" : "Literal"
                   }, {
-                     "localId" : "292",
+                     "localId" : "299",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "4",
                      "type" : "Literal"
                   }, {
-                     "localId" : "294",
+                     "localId" : "301",
                      "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "293",
+                        "localId" : "300",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
@@ -12179,7 +12179,7 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "305",
+            "localId" : "313",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "product_of_nulls",
             "context" : "Patient",
@@ -12187,30 +12187,30 @@ module.exports['Product'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "305",
+                  "r" : "313",
                   "s" : [ {
                      "value" : [ "","define ","product_of_nulls",": " ]
                   }, {
-                     "r" : "320",
+                     "r" : "328",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "306",
+                        "r" : "314",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "307",
+                           "r" : "315",
                            "s" : [ {
-                              "r" : "308",
+                              "r" : "316",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "309",
+                              "r" : "317",
                               "s" : [ {
                                  "value" : [ "Integer" ]
                               } ]
                            } ]
                         }, {
-                           "r" : "310",
+                           "r" : "318",
                            "value" : [ ", ","null",", ","null","}" ]
                         } ]
                      }, {
@@ -12220,64 +12220,64 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "320",
+               "localId" : "328",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Product",
                "signature" : [ {
-                  "localId" : "321",
+                  "localId" : "329",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "322",
+                     "localId" : "330",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "306",
+                  "localId" : "314",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "314",
+                     "localId" : "322",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "315",
+                        "localId" : "323",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "307",
+                     "localId" : "315",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "strict" : false,
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "308",
+                        "localId" : "316",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "309",
+                        "localId" : "317",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "312",
+                     "localId" : "320",
                      "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "310",
+                        "localId" : "318",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
                   }, {
-                     "localId" : "313",
+                     "localId" : "321",
                      "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "311",
+                        "localId" : "319",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
@@ -12285,7 +12285,7 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "324",
+            "localId" : "333",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "product_null",
             "context" : "Patient",
@@ -12293,24 +12293,24 @@ module.exports['Product'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "324",
+                  "r" : "333",
                   "s" : [ {
                      "value" : [ "","define ","product_null",": " ]
                   }, {
-                     "r" : "337",
+                     "r" : "346",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "325",
+                        "r" : "334",
                         "s" : [ {
-                           "r" : "326",
+                           "r" : "335",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "327",
+                           "r" : "336",
                            "s" : [ {
                               "value" : [ "List<" ]
                            }, {
-                              "r" : "328",
+                              "r" : "337",
                               "s" : [ {
                                  "value" : [ "Decimal" ]
                               } ]
@@ -12325,51 +12325,51 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "337",
+               "localId" : "346",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "Product",
                "signature" : [ {
-                  "localId" : "338",
+                  "localId" : "347",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "339",
+                     "localId" : "348",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "325",
+                  "localId" : "334",
                   "strict" : false,
                   "type" : "As",
                   "resultTypeSpecifier" : {
-                     "localId" : "331",
+                     "localId" : "340",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "332",
+                        "localId" : "341",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "326",
+                     "localId" : "335",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "327",
+                     "localId" : "336",
                      "type" : "ListTypeSpecifier",
                      "resultTypeSpecifier" : {
-                        "localId" : "329",
+                        "localId" : "338",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "330",
+                           "localId" : "339",
                            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "elementType" : {
-                        "localId" : "328",
+                        "localId" : "337",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
@@ -12378,7 +12378,7 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "341",
+            "localId" : "351",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "product_quantity_null",
             "context" : "Patient",
@@ -12386,24 +12386,24 @@ module.exports['Product'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "341",
+                  "r" : "351",
                   "s" : [ {
                      "value" : [ "","define ","product_quantity_null",": " ]
                   }, {
-                     "r" : "358",
+                     "r" : "368",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "342",
+                        "r" : "352",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "343",
+                           "r" : "353",
                            "s" : [ {
-                              "r" : "344",
+                              "r" : "354",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "345",
+                              "r" : "355",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -12411,12 +12411,12 @@ module.exports['Product'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "346",
+                           "r" : "356",
                            "s" : [ {
-                              "r" : "347",
+                              "r" : "357",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "348",
+                              "r" : "358",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -12424,12 +12424,12 @@ module.exports['Product'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "349",
+                           "r" : "359",
                            "s" : [ {
-                              "r" : "350",
+                              "r" : "360",
                               "value" : [ "null"," as " ]
                            }, {
-                              "r" : "351",
+                              "r" : "361",
                               "s" : [ {
                                  "value" : [ "Quantity" ]
                               } ]
@@ -12444,77 +12444,77 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "358",
+               "localId" : "368",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Product",
                "signature" : [ {
-                  "localId" : "359",
+                  "localId" : "369",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "360",
+                     "localId" : "370",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "342",
+                  "localId" : "352",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "352",
+                     "localId" : "362",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "353",
+                        "localId" : "363",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "343",
+                     "localId" : "353",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "strict" : false,
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "344",
+                        "localId" : "354",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "345",
+                        "localId" : "355",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "346",
+                     "localId" : "356",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "strict" : false,
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "347",
+                        "localId" : "357",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "348",
+                        "localId" : "358",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "349",
+                     "localId" : "359",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "strict" : false,
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "350",
+                        "localId" : "360",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "351",
+                        "localId" : "361",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
@@ -12523,7 +12523,7 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "362",
+            "localId" : "373",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "NumbersAndQuantities",
             "context" : "Patient",
@@ -12531,48 +12531,48 @@ module.exports['Product'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "362",
+                  "r" : "373",
                   "s" : [ {
                      "value" : [ "","define ","NumbersAndQuantities",": " ]
                   }, {
-                     "r" : "379",
+                     "r" : "390",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "363",
+                        "r" : "374",
                         "s" : [ {
-                           "r" : "364",
+                           "r" : "375",
                            "value" : [ "{","1"," ," ]
                         }, {
-                           "r" : "365",
+                           "r" : "376",
                            "s" : [ {
                               "value" : [ "2 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "366",
+                           "r" : "377",
                            "s" : [ {
                               "value" : [ "3 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "367",
+                           "r" : "378",
                            "s" : [ {
                               "value" : [ "4 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "368",
+                           "r" : "379",
                            "s" : [ {
                               "value" : [ "5 ","'ml'" ]
                            } ]
                         }, {
                            "value" : [ "," ]
                         }, {
-                           "r" : "369",
+                           "r" : "380",
                            "s" : [ {
                               "value" : [ "0 ","'ml'" ]
                            } ]
@@ -12586,71 +12586,71 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "379",
+               "localId" : "390",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Product",
                "signature" : [ {
-                  "localId" : "380",
+                  "localId" : "391",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "381",
+                     "localId" : "392",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "363",
+                  "localId" : "374",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "373",
+                     "localId" : "384",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "374",
+                        "localId" : "385",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "371",
+                     "localId" : "382",
                      "type" : "ToQuantity",
                      "signature" : [ {
-                        "localId" : "372",
+                        "localId" : "383",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "364",
+                        "localId" : "375",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "365",
+                     "localId" : "376",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 2,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "366",
+                     "localId" : "377",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 3,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "367",
+                     "localId" : "378",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 4,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "368",
+                     "localId" : "379",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 5,
                      "unit" : "ml",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "369",
+                     "localId" : "380",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0,
                      "unit" : "ml",
@@ -12659,7 +12659,7 @@ module.exports['Product'] = {
                }
             }
          }, {
-            "localId" : "383",
+            "localId" : "395",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "IncompatibleUnitsNull",
             "context" : "Patient",
@@ -12667,26 +12667,26 @@ module.exports['Product'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "383",
+                  "r" : "395",
                   "s" : [ {
                      "value" : [ "","define ","IncompatibleUnitsNull",": " ]
                   }, {
-                     "r" : "393",
+                     "r" : "405",
                      "s" : [ {
                         "value" : [ "Product","(" ]
                      }, {
-                        "r" : "384",
+                        "r" : "396",
                         "s" : [ {
                            "value" : [ "{" ]
                         }, {
-                           "r" : "385",
+                           "r" : "397",
                            "s" : [ {
                               "value" : [ "1 ","'mg/d'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "386",
+                           "r" : "398",
                            "s" : [ {
                               "value" : [ "0.002 ","'/d'" ]
                            } ]
@@ -12700,38 +12700,38 @@ module.exports['Product'] = {
                }
             } ],
             "expression" : {
-               "localId" : "393",
+               "localId" : "405",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                "type" : "Product",
                "signature" : [ {
-                  "localId" : "394",
+                  "localId" : "406",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "395",
+                     "localId" : "407",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "384",
+                  "localId" : "396",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "387",
+                     "localId" : "399",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "388",
+                        "localId" : "400",
                         "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "385",
+                     "localId" : "397",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
                      "unit" : "mg/d",
                      "type" : "Quantity"
                   }, {
-                     "localId" : "386",
+                     "localId" : "398",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 0.002,
                      "unit" : "/d",
@@ -12759,14 +12759,14 @@ module.exports['GeometricMean'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "301",
+            "r" : "307",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -12809,21 +12809,21 @@ module.exports['GeometricMean'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -12833,7 +12833,7 @@ module.exports['GeometricMean'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "decimal_geometric_mean",
             "context" : "Patient",
@@ -12841,17 +12841,17 @@ module.exports['GeometricMean'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","decimal_geometric_mean",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "226",
                      "s" : [ {
                         "value" : [ "GeometricMean","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","2.0",", ","8.0",", ","null","}" ]
                         } ]
                      }, {
@@ -12861,49 +12861,49 @@ module.exports['GeometricMean'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "226",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "GeometricMean",
                "signature" : [ {
-                  "localId" : "225",
+                  "localId" : "227",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "226",
+                     "localId" : "228",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "213",
+                  "localId" : "215",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "218",
+                     "localId" : "220",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "219",
+                        "localId" : "221",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "214",
+                     "localId" : "216",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "2.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "215",
+                     "localId" : "217",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "8.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "217",
+                     "localId" : "219",
                      "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "216",
+                        "localId" : "218",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      }
@@ -12911,7 +12911,7 @@ module.exports['GeometricMean'] = {
                }
             }
          }, {
-            "localId" : "228",
+            "localId" : "231",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "zero_geometric_mean",
             "context" : "Patient",
@@ -12919,17 +12919,17 @@ module.exports['GeometricMean'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "228",
+                  "r" : "231",
                   "s" : [ {
                      "value" : [ "","define ","zero_geometric_mean",": " ]
                   }, {
-                     "r" : "242",
+                     "r" : "245",
                      "s" : [ {
                         "value" : [ "GeometricMean","(" ]
                      }, {
-                        "r" : "229",
+                        "r" : "232",
                         "s" : [ {
-                           "r" : "230",
+                           "r" : "233",
                            "value" : [ "{","2.0",", ","8.0",", ","0","}" ]
                         } ]
                      }, {
@@ -12939,52 +12939,52 @@ module.exports['GeometricMean'] = {
                }
             } ],
             "expression" : {
-               "localId" : "242",
+               "localId" : "245",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "GeometricMean",
                "signature" : [ {
-                  "localId" : "243",
+                  "localId" : "246",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "244",
+                     "localId" : "247",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "229",
+                  "localId" : "232",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "236",
+                     "localId" : "239",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "237",
+                        "localId" : "240",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "230",
+                     "localId" : "233",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "2.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "231",
+                     "localId" : "234",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "value" : "8.0",
                      "type" : "Literal"
                   }, {
-                     "localId" : "234",
+                     "localId" : "237",
                      "type" : "ToDecimal",
                      "signature" : [ {
-                        "localId" : "235",
+                        "localId" : "238",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "localId" : "232",
+                        "localId" : "235",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "0",
@@ -12994,7 +12994,7 @@ module.exports['GeometricMean'] = {
                }
             }
          }, {
-            "localId" : "246",
+            "localId" : "250",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "null_geometric_mean",
             "context" : "Patient",
@@ -13002,17 +13002,17 @@ module.exports['GeometricMean'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "246",
+                  "r" : "250",
                   "s" : [ {
                      "value" : [ "","define ","null_geometric_mean",": " ]
                   }, {
-                     "r" : "265",
+                     "r" : "269",
                      "s" : [ {
                         "value" : [ "GeometricMean","(" ]
                      }, {
-                        "r" : "247",
+                        "r" : "251",
                         "s" : [ {
-                           "r" : "248",
+                           "r" : "252",
                            "value" : [ "{","1",", ","2",", ","null","}" ]
                         } ]
                      }, {
@@ -13022,55 +13022,55 @@ module.exports['GeometricMean'] = {
                }
             } ],
             "expression" : {
-               "localId" : "265",
+               "localId" : "269",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "GeometricMean",
                "signature" : [ {
-                  "localId" : "273",
+                  "localId" : "277",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "274",
+                     "localId" : "278",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "266",
+                  "localId" : "270",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "267",
+                     "localId" : "271",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "247",
+                        "localId" : "251",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "252",
+                           "localId" : "256",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "253",
+                              "localId" : "257",
                               "name" : "{urn:hl7-org:elm-types:r1}Integer",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "248",
+                           "localId" : "252",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "1",
                            "type" : "Literal"
                         }, {
-                           "localId" : "249",
+                           "localId" : "253",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "2",
                            "type" : "Literal"
                         }, {
-                           "localId" : "251",
+                           "localId" : "255",
                            "asType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "As",
                            "signature" : [ ],
                            "operand" : {
-                              "localId" : "250",
+                              "localId" : "254",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                               "type" : "Null"
                            }
@@ -13080,18 +13080,18 @@ module.exports['GeometricMean'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "268",
+                     "localId" : "272",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "271",
+                        "localId" : "275",
                         "type" : "ToDecimal",
                         "signature" : [ {
-                           "localId" : "272",
+                           "localId" : "276",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : {
-                           "localId" : "269",
+                           "localId" : "273",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -13100,7 +13100,7 @@ module.exports['GeometricMean'] = {
                }
             }
          }, {
-            "localId" : "276",
+            "localId" : "281",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "all_nulls",
             "context" : "Patient",
@@ -13108,17 +13108,17 @@ module.exports['GeometricMean'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "276",
+                  "r" : "281",
                   "s" : [ {
                      "value" : [ "","define ","all_nulls",": " ]
                   }, {
-                     "r" : "292",
+                     "r" : "297",
                      "s" : [ {
                         "value" : [ "GeometricMean","(" ]
                      }, {
-                        "r" : "277",
+                        "r" : "282",
                         "s" : [ {
-                           "r" : "278",
+                           "r" : "283",
                            "value" : [ "{","null",", ","null",", ","null","}" ]
                         } ]
                      }, {
@@ -13128,46 +13128,46 @@ module.exports['GeometricMean'] = {
                }
             } ],
             "expression" : {
-               "localId" : "292",
+               "localId" : "297",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "GeometricMean",
                "signature" : [ {
-                  "localId" : "298",
+                  "localId" : "303",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "299",
+                     "localId" : "304",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "293",
+                  "localId" : "298",
                   "type" : "Query",
                   "source" : [ {
-                     "localId" : "294",
+                     "localId" : "299",
                      "alias" : "X",
                      "expression" : {
-                        "localId" : "277",
+                        "localId" : "282",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "281",
+                           "localId" : "286",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "282",
+                              "localId" : "287",
                               "name" : "{urn:hl7-org:elm-types:r1}Any",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "278",
+                           "localId" : "283",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                            "type" : "Null"
                         }, {
-                           "localId" : "279",
+                           "localId" : "284",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                            "type" : "Null"
                         }, {
-                           "localId" : "280",
+                           "localId" : "285",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                            "type" : "Null"
                         } ]
@@ -13176,15 +13176,15 @@ module.exports['GeometricMean'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "return" : {
-                     "localId" : "295",
+                     "localId" : "300",
                      "distinct" : false,
                      "expression" : {
-                        "localId" : "297",
+                        "localId" : "302",
                         "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "As",
                         "signature" : [ ],
                         "operand" : {
-                           "localId" : "296",
+                           "localId" : "301",
                            "name" : "X",
                            "type" : "AliasRef"
                         }
@@ -13193,7 +13193,7 @@ module.exports['GeometricMean'] = {
                }
             }
          }, {
-            "localId" : "301",
+            "localId" : "307",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "name" : "also_null_geometric_mean",
             "context" : "Patient",
@@ -13201,24 +13201,24 @@ module.exports['GeometricMean'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "301",
+                  "r" : "307",
                   "s" : [ {
                      "value" : [ "","define ","also_null_geometric_mean",": " ]
                   }, {
-                     "r" : "314",
+                     "r" : "320",
                      "s" : [ {
                         "value" : [ "GeometricMean","(" ]
                      }, {
-                        "r" : "302",
+                        "r" : "308",
                         "s" : [ {
-                           "r" : "303",
+                           "r" : "309",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "304",
+                           "r" : "310",
                            "s" : [ {
                               "value" : [ "List<" ]
                            }, {
-                              "r" : "305",
+                              "r" : "311",
                               "s" : [ {
                                  "value" : [ "Decimal" ]
                               } ]
@@ -13233,51 +13233,51 @@ module.exports['GeometricMean'] = {
                }
             } ],
             "expression" : {
-               "localId" : "314",
+               "localId" : "320",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                "type" : "GeometricMean",
                "signature" : [ {
-                  "localId" : "315",
+                  "localId" : "321",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "316",
+                     "localId" : "322",
                      "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "302",
+                  "localId" : "308",
                   "strict" : false,
                   "type" : "As",
                   "resultTypeSpecifier" : {
-                     "localId" : "308",
+                     "localId" : "314",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "309",
+                        "localId" : "315",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "303",
+                     "localId" : "309",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "304",
+                     "localId" : "310",
                      "type" : "ListTypeSpecifier",
                      "resultTypeSpecifier" : {
-                        "localId" : "306",
+                        "localId" : "312",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "307",
+                           "localId" : "313",
                            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "elementType" : {
-                        "localId" : "305",
+                        "localId" : "311",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                         "type" : "NamedTypeSpecifier"
@@ -13305,14 +13305,14 @@ module.exports['AllTrue'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "264",
+            "r" : "269",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -13355,21 +13355,21 @@ module.exports['AllTrue'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -13379,7 +13379,7 @@ module.exports['AllTrue'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "at",
             "context" : "Patient",
@@ -13387,17 +13387,17 @@ module.exports['AllTrue'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","at",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "226",
                      "s" : [ {
                         "value" : [ "AllTrue","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","true",",","true",",","true",",","true","}" ]
                         } ]
                      }, {
@@ -13407,43 +13407,31 @@ module.exports['AllTrue'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "226",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AllTrue",
                "signature" : [ {
-                  "localId" : "225",
+                  "localId" : "227",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "226",
+                     "localId" : "228",
                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "213",
+                  "localId" : "215",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "218",
+                     "localId" : "220",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "219",
+                        "localId" : "221",
                         "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "214",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "value" : "true",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "215",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "value" : "true",
-                     "type" : "Literal"
-                  }, {
                      "localId" : "216",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -13455,11 +13443,23 @@ module.exports['AllTrue'] = {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
                      "type" : "Literal"
+                  }, {
+                     "localId" : "218",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "true",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "219",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "true",
+                     "type" : "Literal"
                   } ]
                }
             }
          }, {
-            "localId" : "228",
+            "localId" : "231",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "atwn",
             "context" : "Patient",
@@ -13467,17 +13467,17 @@ module.exports['AllTrue'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "228",
+                  "r" : "231",
                   "s" : [ {
                      "value" : [ "","define ","atwn",": " ]
                   }, {
-                     "r" : "244",
+                     "r" : "247",
                      "s" : [ {
                         "value" : [ "AllTrue","(" ]
                      }, {
-                        "r" : "229",
+                        "r" : "232",
                         "s" : [ {
-                           "r" : "230",
+                           "r" : "233",
                            "value" : [ "{","true",",","true",",","null",",","null",",","true",",","true","}" ]
                         } ]
                      }, {
@@ -13487,62 +13487,36 @@ module.exports['AllTrue'] = {
                }
             } ],
             "expression" : {
-               "localId" : "244",
+               "localId" : "247",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AllTrue",
                "signature" : [ {
-                  "localId" : "245",
+                  "localId" : "248",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "246",
+                     "localId" : "249",
                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "229",
+                  "localId" : "232",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "238",
+                     "localId" : "241",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "239",
+                        "localId" : "242",
                         "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "230",
+                     "localId" : "233",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
                      "type" : "Literal"
-                  }, {
-                     "localId" : "231",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "value" : "true",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "236",
-                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "232",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                        "type" : "Null"
-                     }
-                  }, {
-                     "localId" : "237",
-                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "233",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                        "type" : "Null"
-                     }
                   }, {
                      "localId" : "234",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -13550,7 +13524,33 @@ module.exports['AllTrue'] = {
                      "value" : "true",
                      "type" : "Literal"
                   }, {
-                     "localId" : "235",
+                     "localId" : "239",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "signature" : [ ],
+                     "operand" : {
+                        "localId" : "235",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "240",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "signature" : [ ],
+                     "operand" : {
+                        "localId" : "236",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "237",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "true",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "238",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
@@ -13559,7 +13559,7 @@ module.exports['AllTrue'] = {
                }
             }
          }, {
-            "localId" : "248",
+            "localId" : "252",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "atf",
             "context" : "Patient",
@@ -13567,17 +13567,17 @@ module.exports['AllTrue'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "248",
+                  "r" : "252",
                   "s" : [ {
                      "value" : [ "","define ","atf",": " ]
                   }, {
-                     "r" : "260",
+                     "r" : "264",
                      "s" : [ {
                         "value" : [ "AllTrue","(" ]
                      }, {
-                        "r" : "249",
+                        "r" : "253",
                         "s" : [ {
-                           "r" : "250",
+                           "r" : "254",
                            "value" : [ "{","true",",","true",",","true",",","false","}" ]
                         } ]
                      }, {
@@ -13587,50 +13587,50 @@ module.exports['AllTrue'] = {
                }
             } ],
             "expression" : {
-               "localId" : "260",
+               "localId" : "264",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AllTrue",
                "signature" : [ {
-                  "localId" : "261",
+                  "localId" : "265",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "262",
+                     "localId" : "266",
                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "249",
+                  "localId" : "253",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "254",
+                     "localId" : "258",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "255",
+                        "localId" : "259",
                         "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "250",
+                     "localId" : "254",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
                      "type" : "Literal"
                   }, {
-                     "localId" : "251",
+                     "localId" : "255",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
                      "type" : "Literal"
                   }, {
-                     "localId" : "252",
+                     "localId" : "256",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
                      "type" : "Literal"
                   }, {
-                     "localId" : "253",
+                     "localId" : "257",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "false",
@@ -13639,7 +13639,7 @@ module.exports['AllTrue'] = {
                }
             }
          }, {
-            "localId" : "264",
+            "localId" : "269",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "atfwn",
             "context" : "Patient",
@@ -13647,17 +13647,17 @@ module.exports['AllTrue'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "264",
+                  "r" : "269",
                   "s" : [ {
                      "value" : [ "","define ","atfwn",": " ]
                   }, {
-                     "r" : "280",
+                     "r" : "285",
                      "s" : [ {
                         "value" : [ "AllTrue","(" ]
                      }, {
-                        "r" : "265",
+                        "r" : "270",
                         "s" : [ {
-                           "r" : "266",
+                           "r" : "271",
                            "value" : [ "{","true",",","true",",","null",",","null",",","true",",","false","}" ]
                         } ]
                      }, {
@@ -13667,70 +13667,70 @@ module.exports['AllTrue'] = {
                }
             } ],
             "expression" : {
-               "localId" : "280",
+               "localId" : "285",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AllTrue",
                "signature" : [ {
-                  "localId" : "281",
+                  "localId" : "286",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "282",
+                     "localId" : "287",
                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "265",
+                  "localId" : "270",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "274",
+                     "localId" : "279",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "275",
+                        "localId" : "280",
                         "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "266",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "value" : "true",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "267",
+                     "localId" : "271",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
                      "type" : "Literal"
                   }, {
                      "localId" : "272",
-                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "268",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                        "type" : "Null"
-                     }
-                  }, {
-                     "localId" : "273",
-                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "269",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                        "type" : "Null"
-                     }
-                  }, {
-                     "localId" : "270",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
                      "type" : "Literal"
                   }, {
-                     "localId" : "271",
+                     "localId" : "277",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "signature" : [ ],
+                     "operand" : {
+                        "localId" : "273",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "278",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "signature" : [ ],
+                     "operand" : {
+                        "localId" : "274",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "275",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "true",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "276",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "false",
@@ -13758,14 +13758,14 @@ module.exports['AnyTrue'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "264",
+            "r" : "269",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -13808,21 +13808,21 @@ module.exports['AnyTrue'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -13832,7 +13832,7 @@ module.exports['AnyTrue'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "at",
             "context" : "Patient",
@@ -13840,17 +13840,17 @@ module.exports['AnyTrue'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","at",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "226",
                      "s" : [ {
                         "value" : [ "AnyTrue","(" ]
                      }, {
-                        "r" : "213",
+                        "r" : "215",
                         "s" : [ {
-                           "r" : "214",
+                           "r" : "216",
                            "value" : [ "{","true",",","false",",","false",",","true","}" ]
                         } ]
                      }, {
@@ -13860,50 +13860,50 @@ module.exports['AnyTrue'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "226",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyTrue",
                "signature" : [ {
-                  "localId" : "225",
+                  "localId" : "227",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "226",
+                     "localId" : "228",
                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "213",
+                  "localId" : "215",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "218",
+                     "localId" : "220",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "219",
+                        "localId" : "221",
                         "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "214",
+                     "localId" : "216",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
                      "type" : "Literal"
                   }, {
-                     "localId" : "215",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "value" : "false",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "216",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "value" : "false",
-                     "type" : "Literal"
-                  }, {
                      "localId" : "217",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "false",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "218",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "false",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "219",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
@@ -13912,7 +13912,7 @@ module.exports['AnyTrue'] = {
                }
             }
          }, {
-            "localId" : "228",
+            "localId" : "231",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "atwn",
             "context" : "Patient",
@@ -13920,17 +13920,17 @@ module.exports['AnyTrue'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "228",
+                  "r" : "231",
                   "s" : [ {
                      "value" : [ "","define ","atwn",": " ]
                   }, {
-                     "r" : "244",
+                     "r" : "247",
                      "s" : [ {
                         "value" : [ "AnyTrue","(" ]
                      }, {
-                        "r" : "229",
+                        "r" : "232",
                         "s" : [ {
-                           "r" : "230",
+                           "r" : "233",
                            "value" : [ "{","true",",","false",",","null",",","null",",","false",",","true","}" ]
                         } ]
                      }, {
@@ -13940,62 +13940,36 @@ module.exports['AnyTrue'] = {
                }
             } ],
             "expression" : {
-               "localId" : "244",
+               "localId" : "247",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyTrue",
                "signature" : [ {
-                  "localId" : "245",
+                  "localId" : "248",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "246",
+                     "localId" : "249",
                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "229",
+                  "localId" : "232",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "238",
+                     "localId" : "241",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "239",
+                        "localId" : "242",
                         "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "230",
+                     "localId" : "233",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
                      "type" : "Literal"
-                  }, {
-                     "localId" : "231",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "value" : "false",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "236",
-                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "232",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                        "type" : "Null"
-                     }
-                  }, {
-                     "localId" : "237",
-                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "233",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                        "type" : "Null"
-                     }
                   }, {
                      "localId" : "234",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
@@ -14003,7 +13977,33 @@ module.exports['AnyTrue'] = {
                      "value" : "false",
                      "type" : "Literal"
                   }, {
-                     "localId" : "235",
+                     "localId" : "239",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "signature" : [ ],
+                     "operand" : {
+                        "localId" : "235",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "240",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "signature" : [ ],
+                     "operand" : {
+                        "localId" : "236",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "237",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "false",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "238",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "true",
@@ -14012,7 +14012,7 @@ module.exports['AnyTrue'] = {
                }
             }
          }, {
-            "localId" : "248",
+            "localId" : "252",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "atf",
             "context" : "Patient",
@@ -14020,17 +14020,17 @@ module.exports['AnyTrue'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "248",
+                  "r" : "252",
                   "s" : [ {
                      "value" : [ "","define ","atf",": " ]
                   }, {
-                     "r" : "260",
+                     "r" : "264",
                      "s" : [ {
                         "value" : [ "AnyTrue","(" ]
                      }, {
-                        "r" : "249",
+                        "r" : "253",
                         "s" : [ {
-                           "r" : "250",
+                           "r" : "254",
                            "value" : [ "{","false",",","false",",","false",",","false","}" ]
                         } ]
                      }, {
@@ -14040,50 +14040,50 @@ module.exports['AnyTrue'] = {
                }
             } ],
             "expression" : {
-               "localId" : "260",
+               "localId" : "264",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyTrue",
                "signature" : [ {
-                  "localId" : "261",
+                  "localId" : "265",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "262",
+                     "localId" : "266",
                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "249",
+                  "localId" : "253",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "254",
+                     "localId" : "258",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "255",
+                        "localId" : "259",
                         "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "250",
+                     "localId" : "254",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "false",
                      "type" : "Literal"
                   }, {
-                     "localId" : "251",
+                     "localId" : "255",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "false",
                      "type" : "Literal"
                   }, {
-                     "localId" : "252",
+                     "localId" : "256",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "false",
                      "type" : "Literal"
                   }, {
-                     "localId" : "253",
+                     "localId" : "257",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "false",
@@ -14092,7 +14092,7 @@ module.exports['AnyTrue'] = {
                }
             }
          }, {
-            "localId" : "264",
+            "localId" : "269",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "atfwn",
             "context" : "Patient",
@@ -14100,17 +14100,17 @@ module.exports['AnyTrue'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "264",
+                  "r" : "269",
                   "s" : [ {
                      "value" : [ "","define ","atfwn",": " ]
                   }, {
-                     "r" : "280",
+                     "r" : "285",
                      "s" : [ {
                         "value" : [ "AnyTrue","(" ]
                      }, {
-                        "r" : "265",
+                        "r" : "270",
                         "s" : [ {
-                           "r" : "266",
+                           "r" : "271",
                            "value" : [ "{","false",",","false",",","null",",","null",",","false",",","false","}" ]
                         } ]
                      }, {
@@ -14120,70 +14120,70 @@ module.exports['AnyTrue'] = {
                }
             } ],
             "expression" : {
-               "localId" : "280",
+               "localId" : "285",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyTrue",
                "signature" : [ {
-                  "localId" : "281",
+                  "localId" : "286",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "282",
+                     "localId" : "287",
                      "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "265",
+                  "localId" : "270",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "274",
+                     "localId" : "279",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "275",
+                        "localId" : "280",
                         "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "266",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "value" : "false",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "267",
+                     "localId" : "271",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "false",
                      "type" : "Literal"
                   }, {
                      "localId" : "272",
-                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "268",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                        "type" : "Null"
-                     }
-                  }, {
-                     "localId" : "273",
-                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "As",
-                     "signature" : [ ],
-                     "operand" : {
-                        "localId" : "269",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                        "type" : "Null"
-                     }
-                  }, {
-                     "localId" : "270",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "false",
                      "type" : "Literal"
                   }, {
-                     "localId" : "271",
+                     "localId" : "277",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "signature" : [ ],
+                     "operand" : {
+                        "localId" : "273",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "278",
+                     "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "As",
+                     "signature" : [ ],
+                     "operand" : {
+                        "localId" : "274",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                        "type" : "Null"
+                     }
+                  }, {
+                     "localId" : "275",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "value" : "false",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "276",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "value" : "false",

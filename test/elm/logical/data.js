@@ -27,14 +27,14 @@ module.exports['And'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "273",
+            "r" : "283",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -77,21 +77,21 @@ module.exports['And'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -101,7 +101,7 @@ module.exports['And'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TT",
             "context" : "Patient",
@@ -109,39 +109,39 @@ module.exports['And'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","TT",": " ]
                   }, {
-                     "r" : "213",
+                     "r" : "215",
                      "s" : [ {
-                        "r" : "214",
+                        "r" : "216",
                         "value" : [ "true"," and ","true" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "213",
+               "localId" : "215",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "signature" : [ {
-                  "localId" : "216",
+                  "localId" : "218",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "217",
+                  "localId" : "219",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "214",
+                  "localId" : "216",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                }, {
-                  "localId" : "215",
+                  "localId" : "217",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -149,7 +149,7 @@ module.exports['And'] = {
                } ]
             }
          }, {
-            "localId" : "219",
+            "localId" : "222",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TF",
             "context" : "Patient",
@@ -157,39 +157,39 @@ module.exports['And'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "222",
                   "s" : [ {
                      "value" : [ "","define ","TF",": " ]
                   }, {
-                     "r" : "220",
+                     "r" : "223",
                      "s" : [ {
-                        "r" : "221",
+                        "r" : "224",
                         "value" : [ "true"," and ","false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "220",
+               "localId" : "223",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "signature" : [ {
-                  "localId" : "223",
+                  "localId" : "226",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "224",
+                  "localId" : "227",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "221",
+                  "localId" : "224",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                }, {
-                  "localId" : "222",
+                  "localId" : "225",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -197,7 +197,7 @@ module.exports['And'] = {
                } ]
             }
          }, {
-            "localId" : "226",
+            "localId" : "230",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TN",
             "context" : "Patient",
@@ -205,51 +205,51 @@ module.exports['And'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "230",
                   "s" : [ {
                      "value" : [ "","define ","TN",": " ]
                   }, {
-                     "r" : "227",
+                     "r" : "231",
                      "s" : [ {
-                        "r" : "228",
+                        "r" : "232",
                         "value" : [ "true"," and ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "227",
+               "localId" : "231",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "signature" : [ {
-                  "localId" : "231",
+                  "localId" : "235",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "232",
+                  "localId" : "236",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "228",
+                  "localId" : "232",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                }, {
-                  "localId" : "230",
+                  "localId" : "234",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "229",
+                     "localId" : "233",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                } ]
             }
          }, {
-            "localId" : "234",
+            "localId" : "239",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FF",
             "context" : "Patient",
@@ -257,39 +257,39 @@ module.exports['And'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "234",
+                  "r" : "239",
                   "s" : [ {
                      "value" : [ "","define ","FF",": " ]
                   }, {
-                     "r" : "235",
+                     "r" : "240",
                      "s" : [ {
-                        "r" : "236",
+                        "r" : "241",
                         "value" : [ "false"," and ","false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "235",
+               "localId" : "240",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "signature" : [ {
-                  "localId" : "238",
+                  "localId" : "243",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "239",
+                  "localId" : "244",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "236",
+                  "localId" : "241",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
                   "type" : "Literal"
                }, {
-                  "localId" : "237",
+                  "localId" : "242",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -297,7 +297,7 @@ module.exports['And'] = {
                } ]
             }
          }, {
-            "localId" : "241",
+            "localId" : "247",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FT",
             "context" : "Patient",
@@ -305,39 +305,39 @@ module.exports['And'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "241",
+                  "r" : "247",
                   "s" : [ {
                      "value" : [ "","define ","FT",": " ]
                   }, {
-                     "r" : "242",
+                     "r" : "248",
                      "s" : [ {
-                        "r" : "243",
+                        "r" : "249",
                         "value" : [ "false"," and ","true" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "242",
+               "localId" : "248",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "signature" : [ {
-                  "localId" : "245",
+                  "localId" : "251",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "246",
+                  "localId" : "252",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "243",
+                  "localId" : "249",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
                   "type" : "Literal"
                }, {
-                  "localId" : "244",
+                  "localId" : "250",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -345,7 +345,7 @@ module.exports['And'] = {
                } ]
             }
          }, {
-            "localId" : "248",
+            "localId" : "255",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FN",
             "context" : "Patient",
@@ -353,85 +353,39 @@ module.exports['And'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "248",
+                  "r" : "255",
                   "s" : [ {
                      "value" : [ "","define ","FN",": " ]
                   }, {
-                     "r" : "249",
+                     "r" : "256",
                      "s" : [ {
-                        "r" : "250",
+                        "r" : "257",
                         "value" : [ "false"," and ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "249",
+               "localId" : "256",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "signature" : [ {
-                  "localId" : "253",
+                  "localId" : "260",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "254",
+                  "localId" : "261",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "250",
+                  "localId" : "257",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
                   "type" : "Literal"
                }, {
-                  "localId" : "252",
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "251",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                     "type" : "Null"
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "256",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-            "name" : "NN",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "256",
-                  "s" : [ {
-                     "value" : [ "","define ","NN",": " ]
-                  }, {
-                     "r" : "257",
-                     "s" : [ {
-                        "r" : "258",
-                        "value" : [ "null"," and ","null" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "257",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-               "type" : "And",
-               "signature" : [ {
-                  "localId" : "262",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               }, {
-                  "localId" : "263",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               } ],
-               "operand" : [ {
-                  "localId" : "260",
+                  "localId" : "259",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "signature" : [ ],
@@ -440,41 +394,31 @@ module.exports['And'] = {
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
-               }, {
-                  "localId" : "261",
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "259",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                     "type" : "Null"
-                  }
                } ]
             }
          }, {
-            "localId" : "265",
+            "localId" : "264",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-            "name" : "NT",
+            "name" : "NN",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "265",
+                  "r" : "264",
                   "s" : [ {
-                     "value" : [ "","define ","NT",": " ]
+                     "value" : [ "","define ","NN",": " ]
                   }, {
-                     "r" : "266",
+                     "r" : "265",
                      "s" : [ {
-                        "r" : "267",
-                        "value" : [ "null"," and ","true" ]
+                        "r" : "266",
+                        "value" : [ "null"," and ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "266",
+               "localId" : "265",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "signature" : [ {
@@ -487,6 +431,16 @@ module.exports['And'] = {
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
+                  "localId" : "268",
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "266",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "Null"
+                  }
+               }, {
                   "localId" : "269",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
@@ -496,8 +450,54 @@ module.exports['And'] = {
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
+               } ]
+            }
+         }, {
+            "localId" : "274",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "NT",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "274",
+                  "s" : [ {
+                     "value" : [ "","define ","NT",": " ]
+                  }, {
+                     "r" : "275",
+                     "s" : [ {
+                        "r" : "276",
+                        "value" : [ "null"," and ","true" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "275",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "And",
+               "signature" : [ {
+                  "localId" : "279",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "268",
+                  "localId" : "280",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "278",
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "276",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "277",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -505,7 +505,7 @@ module.exports['And'] = {
                } ]
             }
          }, {
-            "localId" : "273",
+            "localId" : "283",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NF",
             "context" : "Patient",
@@ -513,43 +513,43 @@ module.exports['And'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "273",
+                  "r" : "283",
                   "s" : [ {
                      "value" : [ "","define ","NF",": " ]
                   }, {
-                     "r" : "274",
+                     "r" : "284",
                      "s" : [ {
-                        "r" : "275",
+                        "r" : "285",
                         "value" : [ "null"," and ","false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "274",
+               "localId" : "284",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "signature" : [ {
-                  "localId" : "278",
+                  "localId" : "288",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "279",
+                  "localId" : "289",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "277",
+                  "localId" : "287",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "275",
+                     "localId" : "285",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "276",
+                  "localId" : "286",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -580,14 +580,14 @@ module.exports['Or'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "273",
+            "r" : "283",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -630,21 +630,21 @@ module.exports['Or'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -654,7 +654,7 @@ module.exports['Or'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TT",
             "context" : "Patient",
@@ -662,39 +662,39 @@ module.exports['Or'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","TT",": " ]
                   }, {
-                     "r" : "213",
+                     "r" : "215",
                      "s" : [ {
-                        "r" : "214",
+                        "r" : "216",
                         "value" : [ "true"," or ","true" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "213",
+               "localId" : "215",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
-                  "localId" : "216",
+                  "localId" : "218",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "217",
+                  "localId" : "219",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "214",
+                  "localId" : "216",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                }, {
-                  "localId" : "215",
+                  "localId" : "217",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -702,7 +702,7 @@ module.exports['Or'] = {
                } ]
             }
          }, {
-            "localId" : "219",
+            "localId" : "222",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TF",
             "context" : "Patient",
@@ -710,39 +710,39 @@ module.exports['Or'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "222",
                   "s" : [ {
                      "value" : [ "","define ","TF",": " ]
                   }, {
-                     "r" : "220",
+                     "r" : "223",
                      "s" : [ {
-                        "r" : "221",
+                        "r" : "224",
                         "value" : [ "true"," or ","false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "220",
+               "localId" : "223",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
-                  "localId" : "223",
+                  "localId" : "226",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "224",
+                  "localId" : "227",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "221",
+                  "localId" : "224",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                }, {
-                  "localId" : "222",
+                  "localId" : "225",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -750,7 +750,7 @@ module.exports['Or'] = {
                } ]
             }
          }, {
-            "localId" : "226",
+            "localId" : "230",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TN",
             "context" : "Patient",
@@ -758,51 +758,51 @@ module.exports['Or'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "230",
                   "s" : [ {
                      "value" : [ "","define ","TN",": " ]
                   }, {
-                     "r" : "227",
+                     "r" : "231",
                      "s" : [ {
-                        "r" : "228",
+                        "r" : "232",
                         "value" : [ "true"," or ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "227",
+               "localId" : "231",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
-                  "localId" : "231",
+                  "localId" : "235",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "232",
+                  "localId" : "236",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "228",
+                  "localId" : "232",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                }, {
-                  "localId" : "230",
+                  "localId" : "234",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "229",
+                     "localId" : "233",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                } ]
             }
          }, {
-            "localId" : "234",
+            "localId" : "239",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FF",
             "context" : "Patient",
@@ -810,39 +810,39 @@ module.exports['Or'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "234",
+                  "r" : "239",
                   "s" : [ {
                      "value" : [ "","define ","FF",": " ]
                   }, {
-                     "r" : "235",
+                     "r" : "240",
                      "s" : [ {
-                        "r" : "236",
+                        "r" : "241",
                         "value" : [ "false"," or ","false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "235",
+               "localId" : "240",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
-                  "localId" : "238",
+                  "localId" : "243",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "239",
+                  "localId" : "244",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "236",
+                  "localId" : "241",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
                   "type" : "Literal"
                }, {
-                  "localId" : "237",
+                  "localId" : "242",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -850,7 +850,7 @@ module.exports['Or'] = {
                } ]
             }
          }, {
-            "localId" : "241",
+            "localId" : "247",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FT",
             "context" : "Patient",
@@ -858,39 +858,39 @@ module.exports['Or'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "241",
+                  "r" : "247",
                   "s" : [ {
                      "value" : [ "","define ","FT",": " ]
                   }, {
-                     "r" : "242",
+                     "r" : "248",
                      "s" : [ {
-                        "r" : "243",
+                        "r" : "249",
                         "value" : [ "false"," or ","true" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "242",
+               "localId" : "248",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
-                  "localId" : "245",
+                  "localId" : "251",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "246",
+                  "localId" : "252",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "243",
+                  "localId" : "249",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
                   "type" : "Literal"
                }, {
-                  "localId" : "244",
+                  "localId" : "250",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -898,7 +898,7 @@ module.exports['Or'] = {
                } ]
             }
          }, {
-            "localId" : "248",
+            "localId" : "255",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FN",
             "context" : "Patient",
@@ -906,85 +906,39 @@ module.exports['Or'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "248",
+                  "r" : "255",
                   "s" : [ {
                      "value" : [ "","define ","FN",": " ]
                   }, {
-                     "r" : "249",
+                     "r" : "256",
                      "s" : [ {
-                        "r" : "250",
+                        "r" : "257",
                         "value" : [ "false"," or ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "249",
+               "localId" : "256",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
-                  "localId" : "253",
+                  "localId" : "260",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "254",
+                  "localId" : "261",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "250",
+                  "localId" : "257",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
                   "type" : "Literal"
                }, {
-                  "localId" : "252",
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "251",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                     "type" : "Null"
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "256",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-            "name" : "NN",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "256",
-                  "s" : [ {
-                     "value" : [ "","define ","NN",": " ]
-                  }, {
-                     "r" : "257",
-                     "s" : [ {
-                        "r" : "258",
-                        "value" : [ "null"," or ","null" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "257",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-               "type" : "Or",
-               "signature" : [ {
-                  "localId" : "262",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               }, {
-                  "localId" : "263",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               } ],
-               "operand" : [ {
-                  "localId" : "260",
+                  "localId" : "259",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "signature" : [ ],
@@ -993,41 +947,31 @@ module.exports['Or'] = {
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
-               }, {
-                  "localId" : "261",
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "259",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                     "type" : "Null"
-                  }
                } ]
             }
          }, {
-            "localId" : "265",
+            "localId" : "264",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-            "name" : "NT",
+            "name" : "NN",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "265",
+                  "r" : "264",
                   "s" : [ {
-                     "value" : [ "","define ","NT",": " ]
+                     "value" : [ "","define ","NN",": " ]
                   }, {
-                     "r" : "266",
+                     "r" : "265",
                      "s" : [ {
-                        "r" : "267",
-                        "value" : [ "null"," or ","true" ]
+                        "r" : "266",
+                        "value" : [ "null"," or ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "266",
+               "localId" : "265",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
@@ -1040,6 +984,16 @@ module.exports['Or'] = {
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
+                  "localId" : "268",
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "266",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "Null"
+                  }
+               }, {
                   "localId" : "269",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
@@ -1049,8 +1003,54 @@ module.exports['Or'] = {
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
+               } ]
+            }
+         }, {
+            "localId" : "274",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "NT",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "274",
+                  "s" : [ {
+                     "value" : [ "","define ","NT",": " ]
+                  }, {
+                     "r" : "275",
+                     "s" : [ {
+                        "r" : "276",
+                        "value" : [ "null"," or ","true" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "275",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Or",
+               "signature" : [ {
+                  "localId" : "279",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "268",
+                  "localId" : "280",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "278",
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "276",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "277",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -1058,7 +1058,7 @@ module.exports['Or'] = {
                } ]
             }
          }, {
-            "localId" : "273",
+            "localId" : "283",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NF",
             "context" : "Patient",
@@ -1066,43 +1066,43 @@ module.exports['Or'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "273",
+                  "r" : "283",
                   "s" : [ {
                      "value" : [ "","define ","NF",": " ]
                   }, {
-                     "r" : "274",
+                     "r" : "284",
                      "s" : [ {
-                        "r" : "275",
+                        "r" : "285",
                         "value" : [ "null"," or ","false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "274",
+               "localId" : "284",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
-                  "localId" : "278",
+                  "localId" : "288",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "279",
+                  "localId" : "289",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "277",
+                  "localId" : "287",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "275",
+                     "localId" : "285",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "276",
+                  "localId" : "286",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -1133,14 +1133,14 @@ module.exports['XOr'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "273",
+            "r" : "283",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1183,21 +1183,21 @@ module.exports['XOr'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -1207,7 +1207,7 @@ module.exports['XOr'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TT",
             "context" : "Patient",
@@ -1215,39 +1215,39 @@ module.exports['XOr'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","TT",": " ]
                   }, {
-                     "r" : "213",
+                     "r" : "215",
                      "s" : [ {
-                        "r" : "214",
+                        "r" : "216",
                         "value" : [ "true"," xor ","true" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "213",
+               "localId" : "215",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Xor",
                "signature" : [ {
-                  "localId" : "216",
+                  "localId" : "218",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "217",
+                  "localId" : "219",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "214",
+                  "localId" : "216",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                }, {
-                  "localId" : "215",
+                  "localId" : "217",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -1255,7 +1255,7 @@ module.exports['XOr'] = {
                } ]
             }
          }, {
-            "localId" : "219",
+            "localId" : "222",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TF",
             "context" : "Patient",
@@ -1263,39 +1263,39 @@ module.exports['XOr'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "222",
                   "s" : [ {
                      "value" : [ "","define ","TF",": " ]
                   }, {
-                     "r" : "220",
+                     "r" : "223",
                      "s" : [ {
-                        "r" : "221",
+                        "r" : "224",
                         "value" : [ "true"," xor ","false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "220",
+               "localId" : "223",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Xor",
                "signature" : [ {
-                  "localId" : "223",
+                  "localId" : "226",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "224",
+                  "localId" : "227",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "221",
+                  "localId" : "224",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                }, {
-                  "localId" : "222",
+                  "localId" : "225",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -1303,7 +1303,7 @@ module.exports['XOr'] = {
                } ]
             }
          }, {
-            "localId" : "226",
+            "localId" : "230",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TN",
             "context" : "Patient",
@@ -1311,51 +1311,51 @@ module.exports['XOr'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "226",
+                  "r" : "230",
                   "s" : [ {
                      "value" : [ "","define ","TN",": " ]
                   }, {
-                     "r" : "227",
+                     "r" : "231",
                      "s" : [ {
-                        "r" : "228",
+                        "r" : "232",
                         "value" : [ "true"," xor ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "227",
+               "localId" : "231",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Xor",
                "signature" : [ {
-                  "localId" : "231",
+                  "localId" : "235",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "232",
+                  "localId" : "236",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "228",
+                  "localId" : "232",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
                   "type" : "Literal"
                }, {
-                  "localId" : "230",
+                  "localId" : "234",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "229",
+                     "localId" : "233",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                } ]
             }
          }, {
-            "localId" : "234",
+            "localId" : "239",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FF",
             "context" : "Patient",
@@ -1363,39 +1363,39 @@ module.exports['XOr'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "234",
+                  "r" : "239",
                   "s" : [ {
                      "value" : [ "","define ","FF",": " ]
                   }, {
-                     "r" : "235",
+                     "r" : "240",
                      "s" : [ {
-                        "r" : "236",
+                        "r" : "241",
                         "value" : [ "false"," xor ","false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "235",
+               "localId" : "240",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Xor",
                "signature" : [ {
-                  "localId" : "238",
+                  "localId" : "243",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "239",
+                  "localId" : "244",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "236",
+                  "localId" : "241",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
                   "type" : "Literal"
                }, {
-                  "localId" : "237",
+                  "localId" : "242",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -1403,7 +1403,7 @@ module.exports['XOr'] = {
                } ]
             }
          }, {
-            "localId" : "241",
+            "localId" : "247",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FT",
             "context" : "Patient",
@@ -1411,39 +1411,39 @@ module.exports['XOr'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "241",
+                  "r" : "247",
                   "s" : [ {
                      "value" : [ "","define ","FT",": " ]
                   }, {
-                     "r" : "242",
+                     "r" : "248",
                      "s" : [ {
-                        "r" : "243",
+                        "r" : "249",
                         "value" : [ "false"," xor ","true" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "242",
+               "localId" : "248",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Xor",
                "signature" : [ {
-                  "localId" : "245",
+                  "localId" : "251",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "246",
+                  "localId" : "252",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "243",
+                  "localId" : "249",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
                   "type" : "Literal"
                }, {
-                  "localId" : "244",
+                  "localId" : "250",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -1451,7 +1451,7 @@ module.exports['XOr'] = {
                } ]
             }
          }, {
-            "localId" : "248",
+            "localId" : "255",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FN",
             "context" : "Patient",
@@ -1459,85 +1459,39 @@ module.exports['XOr'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "248",
+                  "r" : "255",
                   "s" : [ {
                      "value" : [ "","define ","FN",": " ]
                   }, {
-                     "r" : "249",
+                     "r" : "256",
                      "s" : [ {
-                        "r" : "250",
+                        "r" : "257",
                         "value" : [ "false"," xor ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "249",
+               "localId" : "256",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Xor",
                "signature" : [ {
-                  "localId" : "253",
+                  "localId" : "260",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "254",
+                  "localId" : "261",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "250",
+                  "localId" : "257",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
                   "type" : "Literal"
                }, {
-                  "localId" : "252",
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "251",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                     "type" : "Null"
-                  }
-               } ]
-            }
-         }, {
-            "localId" : "256",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-            "name" : "NN",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "256",
-                  "s" : [ {
-                     "value" : [ "","define ","NN",": " ]
-                  }, {
-                     "r" : "257",
-                     "s" : [ {
-                        "r" : "258",
-                        "value" : [ "null"," xor ","null" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "257",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-               "type" : "Xor",
-               "signature" : [ {
-                  "localId" : "262",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               }, {
-                  "localId" : "263",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               } ],
-               "operand" : [ {
-                  "localId" : "260",
+                  "localId" : "259",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "signature" : [ ],
@@ -1546,41 +1500,31 @@ module.exports['XOr'] = {
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
-               }, {
-                  "localId" : "261",
-                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "As",
-                  "signature" : [ ],
-                  "operand" : {
-                     "localId" : "259",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                     "type" : "Null"
-                  }
                } ]
             }
          }, {
-            "localId" : "265",
+            "localId" : "264",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-            "name" : "NT",
+            "name" : "NN",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "265",
+                  "r" : "264",
                   "s" : [ {
-                     "value" : [ "","define ","NT",": " ]
+                     "value" : [ "","define ","NN",": " ]
                   }, {
-                     "r" : "266",
+                     "r" : "265",
                      "s" : [ {
-                        "r" : "267",
-                        "value" : [ "null"," xor ","true" ]
+                        "r" : "266",
+                        "value" : [ "null"," xor ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "266",
+               "localId" : "265",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Xor",
                "signature" : [ {
@@ -1593,6 +1537,16 @@ module.exports['XOr'] = {
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
+                  "localId" : "268",
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "266",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "Null"
+                  }
+               }, {
                   "localId" : "269",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
@@ -1602,8 +1556,54 @@ module.exports['XOr'] = {
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
+               } ]
+            }
+         }, {
+            "localId" : "274",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "NT",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "274",
+                  "s" : [ {
+                     "value" : [ "","define ","NT",": " ]
+                  }, {
+                     "r" : "275",
+                     "s" : [ {
+                        "r" : "276",
+                        "value" : [ "null"," xor ","true" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "275",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Xor",
+               "signature" : [ {
+                  "localId" : "279",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "268",
+                  "localId" : "280",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "278",
+                  "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "As",
+                  "signature" : [ ],
+                  "operand" : {
+                     "localId" : "276",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "Null"
+                  }
+               }, {
+                  "localId" : "277",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -1611,7 +1611,7 @@ module.exports['XOr'] = {
                } ]
             }
          }, {
-            "localId" : "273",
+            "localId" : "283",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NF",
             "context" : "Patient",
@@ -1619,43 +1619,43 @@ module.exports['XOr'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "273",
+                  "r" : "283",
                   "s" : [ {
                      "value" : [ "","define ","NF",": " ]
                   }, {
-                     "r" : "274",
+                     "r" : "284",
                      "s" : [ {
-                        "r" : "275",
+                        "r" : "285",
                         "value" : [ "null"," xor ","false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "274",
+               "localId" : "284",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Xor",
                "signature" : [ {
-                  "localId" : "278",
+                  "localId" : "288",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "279",
+                  "localId" : "289",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "277",
+                  "localId" : "287",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "275",
+                     "localId" : "285",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }, {
-                  "localId" : "276",
+                  "localId" : "286",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -1680,14 +1680,14 @@ module.exports['Not'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "222",
+            "r" : "226",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1730,21 +1730,21 @@ module.exports['Not'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -1754,7 +1754,7 @@ module.exports['Not'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NotTrue",
             "context" : "Patient",
@@ -1762,29 +1762,29 @@ module.exports['Not'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","NotTrue",": " ]
                   }, {
-                     "r" : "213",
+                     "r" : "215",
                      "s" : [ {
-                        "r" : "214",
+                        "r" : "216",
                         "value" : [ "not ","true" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "213",
+               "localId" : "215",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Not",
                "signature" : [ {
-                  "localId" : "215",
+                  "localId" : "217",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "214",
+                  "localId" : "216",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -1792,7 +1792,7 @@ module.exports['Not'] = {
                }
             }
          }, {
-            "localId" : "217",
+            "localId" : "220",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NotFalse",
             "context" : "Patient",
@@ -1800,29 +1800,29 @@ module.exports['Not'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "217",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define ","NotFalse",": " ]
                   }, {
-                     "r" : "218",
+                     "r" : "221",
                      "s" : [ {
-                        "r" : "219",
+                        "r" : "222",
                         "value" : [ "not ","false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "218",
+               "localId" : "221",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Not",
                "signature" : [ {
-                  "localId" : "220",
+                  "localId" : "223",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "219",
+                  "localId" : "222",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -1830,7 +1830,7 @@ module.exports['Not'] = {
                }
             }
          }, {
-            "localId" : "222",
+            "localId" : "226",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NotNull",
             "context" : "Patient",
@@ -1838,34 +1838,34 @@ module.exports['Not'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "222",
+                  "r" : "226",
                   "s" : [ {
                      "value" : [ "","define ","NotNull",": " ]
                   }, {
-                     "r" : "223",
+                     "r" : "227",
                      "s" : [ {
-                        "r" : "224",
+                        "r" : "228",
                         "value" : [ "not ","null" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "223",
+               "localId" : "227",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Not",
                "signature" : [ {
-                  "localId" : "226",
+                  "localId" : "230",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "225",
+                  "localId" : "229",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "224",
+                     "localId" : "228",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
@@ -1889,14 +1889,14 @@ module.exports['IsTrue'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "222",
+            "r" : "226",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -1939,21 +1939,21 @@ module.exports['IsTrue'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -1963,7 +1963,7 @@ module.exports['IsTrue'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TrueIsTrue",
             "context" : "Patient",
@@ -1971,29 +1971,29 @@ module.exports['IsTrue'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","TrueIsTrue",": " ]
                   }, {
-                     "r" : "214",
+                     "r" : "216",
                      "s" : [ {
-                        "r" : "213",
+                        "r" : "215",
                         "value" : [ "true"," is true" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "214",
+               "localId" : "216",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "IsTrue",
                "signature" : [ {
-                  "localId" : "215",
+                  "localId" : "217",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "213",
+                  "localId" : "215",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -2001,7 +2001,7 @@ module.exports['IsTrue'] = {
                }
             }
          }, {
-            "localId" : "217",
+            "localId" : "220",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FalseIsTrue",
             "context" : "Patient",
@@ -2009,29 +2009,29 @@ module.exports['IsTrue'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "217",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define ","FalseIsTrue",": " ]
                   }, {
-                     "r" : "219",
+                     "r" : "222",
                      "s" : [ {
-                        "r" : "218",
+                        "r" : "221",
                         "value" : [ "false"," is true" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "219",
+               "localId" : "222",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "IsTrue",
                "signature" : [ {
-                  "localId" : "220",
+                  "localId" : "223",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "218",
+                  "localId" : "221",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -2039,7 +2039,7 @@ module.exports['IsTrue'] = {
                }
             }
          }, {
-            "localId" : "222",
+            "localId" : "226",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullIsTrue",
             "context" : "Patient",
@@ -2047,34 +2047,34 @@ module.exports['IsTrue'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "222",
+                  "r" : "226",
                   "s" : [ {
                      "value" : [ "","define ","NullIsTrue",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "228",
                      "s" : [ {
-                        "r" : "223",
+                        "r" : "227",
                         "value" : [ "null"," is true" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "228",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "IsTrue",
                "signature" : [ {
-                  "localId" : "226",
+                  "localId" : "230",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "225",
+                  "localId" : "229",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "223",
+                     "localId" : "227",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
@@ -2098,14 +2098,14 @@ module.exports['IsFalse'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "222",
+            "r" : "226",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -2148,21 +2148,21 @@ module.exports['IsFalse'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -2172,7 +2172,7 @@ module.exports['IsFalse'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "TrueIsFalse",
             "context" : "Patient",
@@ -2180,29 +2180,29 @@ module.exports['IsFalse'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","TrueIsFalse",": " ]
                   }, {
-                     "r" : "214",
+                     "r" : "216",
                      "s" : [ {
-                        "r" : "213",
+                        "r" : "215",
                         "value" : [ "true"," is false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "214",
+               "localId" : "216",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "IsFalse",
                "signature" : [ {
-                  "localId" : "215",
+                  "localId" : "217",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "213",
+                  "localId" : "215",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "true",
@@ -2210,7 +2210,7 @@ module.exports['IsFalse'] = {
                }
             }
          }, {
-            "localId" : "217",
+            "localId" : "220",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FalseIsFalse",
             "context" : "Patient",
@@ -2218,29 +2218,29 @@ module.exports['IsFalse'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "217",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define ","FalseIsFalse",": " ]
                   }, {
-                     "r" : "219",
+                     "r" : "222",
                      "s" : [ {
-                        "r" : "218",
+                        "r" : "221",
                         "value" : [ "false"," is false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "219",
+               "localId" : "222",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "IsFalse",
                "signature" : [ {
-                  "localId" : "220",
+                  "localId" : "223",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "218",
+                  "localId" : "221",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "value" : "false",
@@ -2248,7 +2248,7 @@ module.exports['IsFalse'] = {
                }
             }
          }, {
-            "localId" : "222",
+            "localId" : "226",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullIsFalse",
             "context" : "Patient",
@@ -2256,34 +2256,34 @@ module.exports['IsFalse'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "222",
+                  "r" : "226",
                   "s" : [ {
                      "value" : [ "","define ","NullIsFalse",": " ]
                   }, {
-                     "r" : "224",
+                     "r" : "228",
                      "s" : [ {
-                        "r" : "223",
+                        "r" : "227",
                         "value" : [ "null"," is false" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "228",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "IsFalse",
                "signature" : [ {
-                  "localId" : "226",
+                  "localId" : "230",
                   "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "225",
+                  "localId" : "229",
                   "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "223",
+                     "localId" : "227",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }

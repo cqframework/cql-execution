@@ -19,14 +19,14 @@ module.exports['ExpressionDef'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "212",
+            "r" : "214",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -69,21 +69,21 @@ module.exports['ExpressionDef'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -93,7 +93,7 @@ module.exports['ExpressionDef'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Foo",
             "context" : "Patient",
@@ -101,11 +101,11 @@ module.exports['ExpressionDef'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","define ","Foo",": " ]
                   }, {
-                     "r" : "213",
+                     "r" : "215",
                      "s" : [ {
                         "value" : [ "'Bar'" ]
                      } ]
@@ -113,7 +113,7 @@ module.exports['ExpressionDef'] = {
                }
             } ],
             "expression" : {
-               "localId" : "213",
+               "localId" : "215",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "Bar",
@@ -149,14 +149,14 @@ module.exports['ExpressionRef'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "241",
+            "r" : "247",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -199,21 +199,21 @@ module.exports['ExpressionRef'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -223,7 +223,7 @@ module.exports['ExpressionRef'] = {
                }
             }
          }, {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Life",
             "context" : "Patient",
@@ -231,22 +231,22 @@ module.exports['ExpressionRef'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
-                     "r" : "213",
+                     "r" : "215",
                      "value" : [ "","define ","Life",": ","42" ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "213",
+               "localId" : "215",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                "value" : "42",
                "type" : "Literal"
             }
          }, {
-            "localId" : "215",
+            "localId" : "218",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Foo",
             "context" : "Patient",
@@ -254,11 +254,11 @@ module.exports['ExpressionRef'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "215",
+                  "r" : "218",
                   "s" : [ {
                      "value" : [ "","define ","Foo",": " ]
                   }, {
-                     "r" : "216",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "Life" ]
                      } ]
@@ -266,13 +266,13 @@ module.exports['ExpressionRef'] = {
                }
             } ],
             "expression" : {
-               "localId" : "216",
+               "localId" : "219",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "Life",
                "type" : "ExpressionRef"
             }
          }, {
-            "localId" : "217",
+            "localId" : "220",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "ExpensiveFunction",
             "context" : "Patient",
@@ -281,23 +281,23 @@ module.exports['ExpressionRef'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "217",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define function ExpensiveFunction():\n  " ]
                   }, {
-                     "r" : "234",
+                     "r" : "238",
                      "s" : [ {
-                        "r" : "234",
+                        "r" : "238",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "224",
+                           "r" : "228",
                            "s" : [ {
                               "value" : [ "expand " ]
                            }, {
-                              "r" : "220",
+                              "r" : "224",
                               "s" : [ {
-                                 "r" : "218",
+                                 "r" : "222",
                                  "value" : [ "Interval[","1",", ","100000","]" ]
                               } ]
                            } ]
@@ -309,73 +309,73 @@ module.exports['ExpressionRef'] = {
                }
             } ],
             "expression" : {
-               "localId" : "234",
+               "localId" : "238",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "First",
                "signature" : [ {
-                  "localId" : "235",
+                  "localId" : "239",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "236",
+                     "localId" : "240",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "source" : {
-                  "localId" : "224",
+                  "localId" : "228",
                   "type" : "Expand",
                   "resultTypeSpecifier" : {
-                     "localId" : "228",
+                     "localId" : "232",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "229",
+                        "localId" : "233",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "signature" : [ {
-                     "localId" : "225",
+                     "localId" : "229",
                      "type" : "IntervalTypeSpecifier",
                      "pointType" : {
-                        "localId" : "226",
+                        "localId" : "230",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "227",
+                     "localId" : "231",
                      "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "localId" : "220",
+                     "localId" : "224",
                      "lowClosed" : true,
                      "highClosed" : true,
                      "type" : "Interval",
                      "resultTypeSpecifier" : {
-                        "localId" : "221",
+                        "localId" : "225",
                         "type" : "IntervalTypeSpecifier",
                         "pointType" : {
-                           "localId" : "222",
+                           "localId" : "226",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "low" : {
-                        "localId" : "218",
+                        "localId" : "222",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "1",
                         "type" : "Literal"
                      },
                      "high" : {
-                        "localId" : "219",
+                        "localId" : "223",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                         "value" : "100000",
                         "type" : "Literal"
                      }
                   }, {
-                     "localId" : "223",
+                     "localId" : "227",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "type" : "Null"
                   } ]
@@ -383,7 +383,7 @@ module.exports['ExpressionRef'] = {
             },
             "operand" : [ ]
          }, {
-            "localId" : "238",
+            "localId" : "243",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "ExpensiveStatement",
             "context" : "Patient",
@@ -391,11 +391,11 @@ module.exports['ExpressionRef'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "238",
+                  "r" : "243",
                   "s" : [ {
                      "value" : [ "","define ","ExpensiveStatement",":\n  " ]
                   }, {
-                     "r" : "239",
+                     "r" : "244",
                      "s" : [ {
                         "value" : [ "ExpensiveFunction","()" ]
                      } ]
@@ -403,7 +403,7 @@ module.exports['ExpressionRef'] = {
                }
             } ],
             "expression" : {
-               "localId" : "239",
+               "localId" : "244",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "ExpensiveFunction",
                "type" : "FunctionRef",
@@ -411,33 +411,33 @@ module.exports['ExpressionRef'] = {
                "operand" : [ ]
             }
          }, {
-            "localId" : "241",
+            "localId" : "247",
             "name" : "ExpensiveStatementRef",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "241",
+                  "r" : "247",
                   "s" : [ {
                      "value" : [ "","define ","ExpensiveStatementRef",":\n  " ]
                   }, {
-                     "r" : "277",
+                     "r" : "283",
                      "s" : [ {
-                        "r" : "269",
+                        "r" : "275",
                         "s" : [ {
-                           "r" : "254",
+                           "r" : "260",
                            "s" : [ {
-                              "r" : "244",
+                              "r" : "250",
                               "s" : [ {
-                                 "r" : "242",
+                                 "r" : "248",
                                  "s" : [ {
                                     "value" : [ "ExpensiveStatement" ]
                                  } ]
                               }, {
                                  "value" : [ " union \n  " ]
                               }, {
-                                 "r" : "243",
+                                 "r" : "249",
                                  "s" : [ {
                                     "value" : [ "ExpensiveStatement" ]
                                  } ]
@@ -445,7 +445,7 @@ module.exports['ExpressionRef'] = {
                            }, {
                               "value" : [ " union \n  " ]
                            }, {
-                              "r" : "253",
+                              "r" : "259",
                               "s" : [ {
                                  "value" : [ "ExpensiveStatement" ]
                               } ]
@@ -453,7 +453,7 @@ module.exports['ExpressionRef'] = {
                         }, {
                            "value" : [ " union \n  " ]
                         }, {
-                           "r" : "262",
+                           "r" : "268",
                            "s" : [ {
                               "value" : [ "ExpensiveStatement" ]
                            } ]
@@ -461,7 +461,7 @@ module.exports['ExpressionRef'] = {
                      }, {
                         "value" : [ " union \n  " ]
                      }, {
-                        "r" : "276",
+                        "r" : "282",
                         "s" : [ {
                            "value" : [ "ExpensiveStatement" ]
                         } ]
@@ -470,158 +470,158 @@ module.exports['ExpressionRef'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "285",
+               "localId" : "291",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "286",
+                  "localId" : "292",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "277",
+               "localId" : "283",
                "type" : "Union",
                "resultTypeSpecifier" : {
-                  "localId" : "283",
+                  "localId" : "289",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "284",
+                     "localId" : "290",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "signature" : [ {
-                  "localId" : "279",
+                  "localId" : "285",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "280",
+                     "localId" : "286",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "281",
+                  "localId" : "287",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "282",
+                     "localId" : "288",
                      "name" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "operand" : [ {
-                  "localId" : "269",
+                  "localId" : "275",
                   "type" : "Union",
                   "resultTypeSpecifier" : {
-                     "localId" : "274",
+                     "localId" : "280",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "275",
+                        "localId" : "281",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "signature" : [ {
-                     "localId" : "270",
+                     "localId" : "276",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "271",
+                        "localId" : "277",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "272",
+                     "localId" : "278",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "273",
+                        "localId" : "279",
                         "name" : "{urn:hl7-org:elm-types:r1}Integer",
                         "type" : "NamedTypeSpecifier"
                      }
                   } ],
                   "operand" : [ {
-                     "localId" : "244",
+                     "localId" : "250",
                      "type" : "Union",
                      "resultTypeSpecifier" : {
-                        "localId" : "251",
+                        "localId" : "257",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "252",
+                           "localId" : "258",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "signature" : [ {
-                        "localId" : "247",
+                        "localId" : "253",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "248",
+                           "localId" : "254",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         }
                      }, {
-                        "localId" : "249",
+                        "localId" : "255",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "250",
+                           "localId" : "256",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ],
                      "operand" : [ {
-                        "localId" : "245",
+                        "localId" : "251",
                         "type" : "ToList",
                         "signature" : [ ],
                         "operand" : {
-                           "localId" : "242",
+                           "localId" : "248",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "ExpensiveStatement",
                            "type" : "ExpressionRef"
                         }
                      }, {
-                        "localId" : "246",
+                        "localId" : "252",
                         "type" : "ToList",
                         "signature" : [ ],
                         "operand" : {
-                           "localId" : "243",
+                           "localId" : "249",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "ExpensiveStatement",
                            "type" : "ExpressionRef"
                         }
                      } ]
                   }, {
-                     "localId" : "263",
+                     "localId" : "269",
                      "type" : "Union",
                      "signature" : [ {
-                        "localId" : "265",
+                        "localId" : "271",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "266",
+                           "localId" : "272",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         }
                      }, {
-                        "localId" : "267",
+                        "localId" : "273",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "268",
+                           "localId" : "274",
                            "name" : "{urn:hl7-org:elm-types:r1}Integer",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ],
                      "operand" : [ {
-                        "localId" : "255",
+                        "localId" : "261",
                         "type" : "ToList",
                         "signature" : [ ],
                         "operand" : {
-                           "localId" : "253",
+                           "localId" : "259",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "ExpensiveStatement",
                            "type" : "ExpressionRef"
                         }
                      }, {
-                        "localId" : "264",
+                        "localId" : "270",
                         "type" : "ToList",
                         "signature" : [ ],
                         "operand" : {
-                           "localId" : "262",
+                           "localId" : "268",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "ExpensiveStatement",
                            "type" : "ExpressionRef"
@@ -629,11 +629,11 @@ module.exports['ExpressionRef'] = {
                      } ]
                   } ]
                }, {
-                  "localId" : "278",
+                  "localId" : "284",
                   "type" : "ToList",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "276",
+                     "localId" : "282",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "name" : "ExpensiveStatement",
                      "type" : "ExpressionRef"
@@ -659,14 +659,14 @@ module.exports['FunctionDefinitions'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "222",
+            "r" : "227",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -709,21 +709,21 @@ module.exports['FunctionDefinitions'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -733,7 +733,7 @@ module.exports['FunctionDefinitions'] = {
                }
             }
          }, {
-            "localId" : "211",
+            "localId" : "212",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "foo bar",
             "context" : "Patient",
@@ -742,22 +742,22 @@ module.exports['FunctionDefinitions'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "211",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define function \"foo bar\"(a Integer, b Integer) :\n  " ]
                   }, {
-                     "r" : "216",
+                     "r" : "220",
                      "s" : [ {
-                        "r" : "216",
+                        "r" : "220",
                         "s" : [ {
-                           "r" : "217",
+                           "r" : "221",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "218",
+                           "r" : "222",
                            "s" : [ {
                               "value" : [ "b" ]
                            } ]
@@ -767,51 +767,51 @@ module.exports['FunctionDefinitions'] = {
                }
             } ],
             "expression" : {
-               "localId" : "216",
+               "localId" : "220",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Add",
                "signature" : [ {
-                  "localId" : "219",
+                  "localId" : "223",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "220",
+                  "localId" : "224",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "217",
+                  "localId" : "221",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "a",
                   "type" : "OperandRef"
                }, {
-                  "localId" : "218",
+                  "localId" : "222",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "b",
                   "type" : "OperandRef"
                } ]
             },
             "operand" : [ {
-               "localId" : "213",
+               "localId" : "214",
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "212",
+                  "localId" : "213",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }, {
-               "localId" : "215",
+               "localId" : "216",
                "name" : "b",
                "operandTypeSpecifier" : {
-                  "localId" : "214",
+                  "localId" : "215",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "222",
+            "localId" : "227",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "testValue",
             "context" : "Patient",
@@ -819,40 +819,40 @@ module.exports['FunctionDefinitions'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "222",
+                  "r" : "227",
                   "s" : [ {
                      "value" : [ "","define ","testValue",": " ]
                   }, {
-                     "r" : "225",
+                     "r" : "230",
                      "s" : [ {
-                        "r" : "223",
+                        "r" : "228",
                         "value" : [ "\"foo bar\"","(","1",",","2",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "225",
+               "localId" : "230",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "foo bar",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "226",
+                  "localId" : "231",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "227",
+                  "localId" : "232",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "223",
+                  "localId" : "228",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                }, {
-                  "localId" : "224",
+                  "localId" : "229",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
@@ -882,14 +882,14 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "234",
+            "r" : "242",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -932,21 +932,21 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -956,7 +956,7 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                }
             }
          }, {
-            "localId" : "211",
+            "localId" : "212",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "process",
             "context" : "Patient",
@@ -965,20 +965,20 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "211",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define function process(a System.Integer) :\n  " ]
                   }, {
-                     "r" : "214",
+                     "r" : "217",
                      "s" : [ {
-                        "r" : "214",
+                        "r" : "217",
                         "s" : [ {
-                           "r" : "215",
+                           "r" : "218",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
                         }, {
-                           "r" : "216",
+                           "r" : "219",
                            "value" : [ " + ","1" ]
                         } ]
                      } ]
@@ -986,25 +986,25 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                }
             } ],
             "expression" : {
-               "localId" : "214",
+               "localId" : "217",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Add",
                "signature" : [ {
-                  "localId" : "217",
+                  "localId" : "220",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "218",
+                  "localId" : "221",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "215",
+                  "localId" : "218",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "a",
                   "type" : "OperandRef"
                }, {
-                  "localId" : "216",
+                  "localId" : "219",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
@@ -1012,17 +1012,17 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                } ]
             },
             "operand" : [ {
-               "localId" : "213",
+               "localId" : "214",
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "212",
+                  "localId" : "213",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "219",
+            "localId" : "222",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "process",
             "context" : "Patient",
@@ -1031,22 +1031,22 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "219",
+                  "r" : "222",
                   "s" : [ {
                      "value" : [ "","define function process(a System.String) :\n  " ]
                   }, {
-                     "r" : "227",
+                     "r" : "233",
                      "s" : [ {
-                        "r" : "227",
+                        "r" : "233",
                         "s" : [ {
-                           "r" : "223",
+                           "r" : "228",
                            "s" : [ {
                               "value" : [ "'Hello '" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "224",
+                           "r" : "230",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
@@ -1056,35 +1056,35 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                }
             } ],
             "expression" : {
-               "localId" : "227",
+               "localId" : "233",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Concatenate",
                "signature" : [ ],
                "operand" : [ {
-                  "localId" : "223",
+                  "localId" : "228",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Hello ",
                   "type" : "Literal"
                }, {
-                  "localId" : "224",
+                  "localId" : "230",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "a",
                   "type" : "OperandRef"
                } ]
             },
             "operand" : [ {
-               "localId" : "221",
+               "localId" : "224",
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "220",
+                  "localId" : "223",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "229",
+            "localId" : "236",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "testValue1",
             "context" : "Patient",
@@ -1092,30 +1092,30 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "229",
+                  "r" : "236",
                   "s" : [ {
                      "value" : [ "","define ","testValue1",": " ]
                   }, {
-                     "r" : "231",
+                     "r" : "238",
                      "s" : [ {
-                        "r" : "230",
+                        "r" : "237",
                         "value" : [ "process","(","1",")" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
-               "localId" : "231",
+               "localId" : "238",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "process",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "232",
+                  "localId" : "239",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "230",
+                  "localId" : "237",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
@@ -1123,7 +1123,7 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                } ]
             }
          }, {
-            "localId" : "234",
+            "localId" : "242",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "testValue2",
             "context" : "Patient",
@@ -1131,15 +1131,15 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "234",
+                  "r" : "242",
                   "s" : [ {
                      "value" : [ "","define ","testValue2",": " ]
                   }, {
-                     "r" : "236",
+                     "r" : "245",
                      "s" : [ {
                         "value" : [ "process","(" ]
                      }, {
-                        "r" : "235",
+                        "r" : "243",
                         "s" : [ {
                            "value" : [ "'World'" ]
                         } ]
@@ -1150,17 +1150,17 @@ module.exports['FunctionOverloadsWithSingleArgument'] = {
                }
             } ],
             "expression" : {
-               "localId" : "236",
+               "localId" : "245",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "name" : "process",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "237",
+                  "localId" : "246",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "235",
+                  "localId" : "243",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "World",
@@ -1190,7 +1190,963 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "266",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localId" : "1",
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "206",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "206",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version '1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "localId" : "211",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "localId" : "209",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "localId" : "210",
+               "type" : "SingletonFrom",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "208",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         }, {
+            "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "process",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "212",
+                  "s" : [ {
+                     "value" : [ "","define function process(inverse System.Boolean, a System.Integer) :\n  " ]
+                  }, {
+                     "r" : "220",
+                     "s" : [ {
+                        "r" : "220",
+                        "s" : [ {
+                           "value" : [ "if " ]
+                        }, {
+                           "r" : "221",
+                           "s" : [ {
+                              "value" : [ "inverse" ]
+                           } ]
+                        }, {
+                           "value" : [ " then " ]
+                        }, {
+                           "r" : "222",
+                           "s" : [ {
+                              "r" : "223",
+                              "s" : [ {
+                                 "value" : [ "a" ]
+                              } ]
+                           }, {
+                              "r" : "224",
+                              "value" : [ " - ","1" ]
+                           } ]
+                        }, {
+                           "value" : [ " else " ]
+                        }, {
+                           "r" : "227",
+                           "s" : [ {
+                              "r" : "228",
+                              "s" : [ {
+                                 "value" : [ "a" ]
+                              } ]
+                           }, {
+                              "r" : "229",
+                              "value" : [ " + ","1" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "220",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "type" : "If",
+               "condition" : {
+                  "localId" : "221",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "inverse",
+                  "type" : "OperandRef"
+               },
+               "then" : {
+                  "localId" : "222",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "Subtract",
+                  "signature" : [ {
+                     "localId" : "225",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "226",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
+                  "operand" : [ {
+                     "localId" : "223",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "name" : "a",
+                     "type" : "OperandRef"
+                  }, {
+                     "localId" : "224",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  } ]
+               },
+               "else" : {
+                  "localId" : "227",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "Add",
+                  "signature" : [ {
+                     "localId" : "230",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "localId" : "231",
+                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "type" : "NamedTypeSpecifier"
+                  } ],
+                  "operand" : [ {
+                     "localId" : "228",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "name" : "a",
+                     "type" : "OperandRef"
+                  }, {
+                     "localId" : "229",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  } ]
+               }
+            },
+            "operand" : [ {
+               "localId" : "214",
+               "name" : "inverse",
+               "operandTypeSpecifier" : {
+                  "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }, {
+               "localId" : "216",
+               "name" : "a",
+               "operandTypeSpecifier" : {
+                  "localId" : "215",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "232",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "name" : "process",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "232",
+                  "s" : [ {
+                     "value" : [ "","define function process(inverse System.Boolean, a System.String) :\n  " ]
+                  }, {
+                     "r" : "240",
+                     "s" : [ {
+                        "r" : "240",
+                        "s" : [ {
+                           "value" : [ "if " ]
+                        }, {
+                           "r" : "241",
+                           "s" : [ {
+                              "value" : [ "inverse" ]
+                           } ]
+                        }, {
+                           "value" : [ " then " ]
+                        }, {
+                           "r" : "248",
+                           "s" : [ {
+                              "r" : "243",
+                              "s" : [ {
+                                 "value" : [ "'Goodbye '" ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "245",
+                              "s" : [ {
+                                 "value" : [ "a" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " else " ]
+                        }, {
+                           "r" : "255",
+                           "s" : [ {
+                              "r" : "250",
+                              "s" : [ {
+                                 "value" : [ "'Hello '" ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "252",
+                              "s" : [ {
+                                 "value" : [ "a" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "240",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "type" : "If",
+               "condition" : {
+                  "localId" : "241",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "inverse",
+                  "type" : "OperandRef"
+               },
+               "then" : {
+                  "localId" : "248",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "Concatenate",
+                  "signature" : [ ],
+                  "operand" : [ {
+                     "localId" : "243",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Goodbye ",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "245",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "name" : "a",
+                     "type" : "OperandRef"
+                  } ]
+               },
+               "else" : {
+                  "localId" : "255",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "Concatenate",
+                  "signature" : [ ],
+                  "operand" : [ {
+                     "localId" : "250",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "Hello ",
+                     "type" : "Literal"
+                  }, {
+                     "localId" : "252",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "name" : "a",
+                     "type" : "OperandRef"
+                  } ]
+               }
+            },
+            "operand" : [ {
+               "localId" : "234",
+               "name" : "inverse",
+               "operandTypeSpecifier" : {
+                  "localId" : "233",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }, {
+               "localId" : "236",
+               "name" : "a",
+               "operandTypeSpecifier" : {
+                  "localId" : "235",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "258",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "name" : "testValue1",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "258",
+                  "s" : [ {
+                     "value" : [ "","define ","testValue1",": " ]
+                  }, {
+                     "r" : "261",
+                     "s" : [ {
+                        "r" : "259",
+                        "value" : [ "process","(","true",", ","1",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "261",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+               "name" : "process",
+               "type" : "FunctionRef",
+               "signature" : [ {
+                  "localId" : "262",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "263",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "259",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "value" : "true",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "260",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "266",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "name" : "testValue2",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "266",
+                  "s" : [ {
+                     "value" : [ "","define ","testValue2",": " ]
+                  }, {
+                     "r" : "270",
+                     "s" : [ {
+                        "r" : "267",
+                        "value" : [ "process","(","true",", " ]
+                     }, {
+                        "r" : "268",
+                        "s" : [ {
+                           "value" : [ "'World'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "270",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "name" : "process",
+               "type" : "FunctionRef",
+               "signature" : [ {
+                  "localId" : "271",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "272",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "267",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "value" : "true",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "268",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "World",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+/* FunctionOverloadsWithDifferentNumberOfArguments
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define function process(a System.String) :
+  'Hello ' + a
+
+define function process(a System.String, isSpanish System.Boolean) :
+  if isSpanish then 'Hola ' + a + ' from Spain' else 'Hello ' + a + ' from England'
+
+define testValue1: process('World')
+define testValue2: process('World', true)
+define testValue3: process('World', false)
+*/
+
+module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
+   "library" : {
+      "localId" : "0",
+      "annotation" : [ {
+         "translatorVersion" : "3.27.0",
+         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+         "signatureLevel" : "All",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "278",
+            "s" : [ {
+               "value" : [ "","library TestSnippet version '1'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "TestSnippet",
+         "version" : "1"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localId" : "1",
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "206",
+            "localIdentifier" : "Simple",
+            "uri" : "https://github.com/cqframework/cql-execution/simple",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "206",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "Simple" ]
+                     } ]
+                  }, {
+                     "value" : [ " version '1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "localId" : "211",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "localId" : "209",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "localId" : "210",
+               "type" : "SingletonFrom",
+               "signature" : [ ],
+               "operand" : {
+                  "localId" : "208",
+                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+                  "type" : "Retrieve",
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         }, {
+            "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "name" : "process",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "212",
+                  "s" : [ {
+                     "value" : [ "","define function process(a System.String) :\n  " ]
+                  }, {
+                     "r" : "223",
+                     "s" : [ {
+                        "r" : "223",
+                        "s" : [ {
+                           "r" : "218",
+                           "s" : [ {
+                              "value" : [ "'Hello '" ]
+                           } ]
+                        }, {
+                           "value" : [ " + " ]
+                        }, {
+                           "r" : "220",
+                           "s" : [ {
+                              "value" : [ "a" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "223",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "type" : "Concatenate",
+               "signature" : [ ],
+               "operand" : [ {
+                  "localId" : "218",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Hello ",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "220",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "name" : "a",
+                  "type" : "OperandRef"
+               } ]
+            },
+            "operand" : [ {
+               "localId" : "214",
+               "name" : "a",
+               "operandTypeSpecifier" : {
+                  "localId" : "213",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "224",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "name" : "process",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "224",
+                  "s" : [ {
+                     "value" : [ "","define function process(a System.String, isSpanish System.Boolean) :\n  " ]
+                  }, {
+                     "r" : "232",
+                     "s" : [ {
+                        "r" : "232",
+                        "s" : [ {
+                           "value" : [ "if " ]
+                        }, {
+                           "r" : "233",
+                           "s" : [ {
+                              "value" : [ "isSpanish" ]
+                           } ]
+                        }, {
+                           "value" : [ " then " ]
+                        }, {
+                           "r" : "246",
+                           "s" : [ {
+                              "r" : "241",
+                              "s" : [ {
+                                 "r" : "236",
+                                 "s" : [ {
+                                    "value" : [ "'Hola '" ]
+                                 } ]
+                              }, {
+                                 "value" : [ " + " ]
+                              }, {
+                                 "r" : "238",
+                                 "s" : [ {
+                                    "value" : [ "a" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "242",
+                              "s" : [ {
+                                 "value" : [ "' from Spain'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " else " ]
+                        }, {
+                           "r" : "259",
+                           "s" : [ {
+                              "r" : "254",
+                              "s" : [ {
+                                 "r" : "249",
+                                 "s" : [ {
+                                    "value" : [ "'Hello '" ]
+                                 } ]
+                              }, {
+                                 "value" : [ " + " ]
+                              }, {
+                                 "r" : "251",
+                                 "s" : [ {
+                                    "value" : [ "a" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " + " ]
+                           }, {
+                              "r" : "255",
+                              "s" : [ {
+                                 "value" : [ "' from England'" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "232",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "type" : "If",
+               "condition" : {
+                  "localId" : "233",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "isSpanish",
+                  "type" : "OperandRef"
+               },
+               "then" : {
+                  "localId" : "246",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "Concatenate",
+                  "signature" : [ ],
+                  "operand" : [ {
+                     "localId" : "241",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "Concatenate",
+                     "signature" : [ ],
+                     "operand" : [ {
+                        "localId" : "236",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Hola ",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "238",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "name" : "a",
+                        "type" : "OperandRef"
+                     } ]
+                  }, {
+                     "localId" : "242",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : " from Spain",
+                     "type" : "Literal"
+                  } ]
+               },
+               "else" : {
+                  "localId" : "259",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "Concatenate",
+                  "signature" : [ ],
+                  "operand" : [ {
+                     "localId" : "254",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "Concatenate",
+                     "signature" : [ ],
+                     "operand" : [ {
+                        "localId" : "249",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "Hello ",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "251",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "name" : "a",
+                        "type" : "OperandRef"
+                     } ]
+                  }, {
+                     "localId" : "255",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : " from England",
+                     "type" : "Literal"
+                  } ]
+               }
+            },
+            "operand" : [ {
+               "localId" : "226",
+               "name" : "a",
+               "operandTypeSpecifier" : {
+                  "localId" : "225",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }, {
+               "localId" : "228",
+               "name" : "isSpanish",
+               "operandTypeSpecifier" : {
+                  "localId" : "227",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "localId" : "262",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "name" : "testValue1",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "262",
+                  "s" : [ {
+                     "value" : [ "","define ","testValue1",": " ]
+                  }, {
+                     "r" : "265",
+                     "s" : [ {
+                        "value" : [ "process","(" ]
+                     }, {
+                        "r" : "263",
+                        "s" : [ {
+                           "value" : [ "'World'" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "265",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "name" : "process",
+               "type" : "FunctionRef",
+               "signature" : [ {
+                  "localId" : "266",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "263",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "World",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "269",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "name" : "testValue2",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "269",
+                  "s" : [ {
+                     "value" : [ "","define ","testValue2",": " ]
+                  }, {
+                     "r" : "273",
+                     "s" : [ {
+                        "value" : [ "process","(" ]
+                     }, {
+                        "r" : "270",
+                        "s" : [ {
+                           "value" : [ "'World'" ]
+                        } ]
+                     }, {
+                        "r" : "272",
+                        "value" : [ ", ","true",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "273",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "name" : "process",
+               "type" : "FunctionRef",
+               "signature" : [ {
+                  "localId" : "274",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "275",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "270",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "World",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "272",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "value" : "true",
+                  "type" : "Literal"
+               } ]
+            }
+         }, {
+            "localId" : "278",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "name" : "testValue3",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "278",
+                  "s" : [ {
+                     "value" : [ "","define ","testValue3",": " ]
+                  }, {
+                     "r" : "282",
+                     "s" : [ {
+                        "value" : [ "process","(" ]
+                     }, {
+                        "r" : "279",
+                        "s" : [ {
+                           "value" : [ "'World'" ]
+                        } ]
+                     }, {
+                        "r" : "281",
+                        "value" : [ ", ","false",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "282",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "name" : "process",
+               "type" : "FunctionRef",
+               "signature" : [ {
+                  "localId" : "283",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }, {
+                  "localId" : "284",
+                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : [ {
+                  "localId" : "279",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "World",
+                  "type" : "Literal"
+               }, {
+                  "localId" : "281",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "value" : "false",
+                  "type" : "Literal"
+               } ]
+            }
+         } ]
+      }
+   }
+}
+
+/* FunctionOverloadsWithArgumentsFromCustomDataModel
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define function process(e Simple.Encounter) :
+  'Encounter ' + e.id
+
+define function process(c Simple.Condition) :
+  'Condition ' + c.id
+
+define testValue1: process(First([Encounter]))
+define testValue2: process(First([Condition]))
+*/
+
+module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
+   "library" : {
+      "localId" : "0",
+      "annotation" : [ {
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
@@ -1240,21 +2196,21 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -1264,144 +2220,7 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
                }
             }
          }, {
-            "localId" : "211",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-            "name" : "process",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "211",
-                  "s" : [ {
-                     "value" : [ "","define function process(inverse System.Boolean, a System.Integer) :\n  " ]
-                  }, {
-                     "r" : "216",
-                     "s" : [ {
-                        "r" : "216",
-                        "s" : [ {
-                           "value" : [ "if " ]
-                        }, {
-                           "r" : "217",
-                           "s" : [ {
-                              "value" : [ "inverse" ]
-                           } ]
-                        }, {
-                           "value" : [ " then " ]
-                        }, {
-                           "r" : "218",
-                           "s" : [ {
-                              "r" : "219",
-                              "s" : [ {
-                                 "value" : [ "a" ]
-                              } ]
-                           }, {
-                              "r" : "220",
-                              "value" : [ " - ","1" ]
-                           } ]
-                        }, {
-                           "value" : [ " else " ]
-                        }, {
-                           "r" : "223",
-                           "s" : [ {
-                              "r" : "224",
-                              "s" : [ {
-                                 "value" : [ "a" ]
-                              } ]
-                           }, {
-                              "r" : "225",
-                              "value" : [ " + ","1" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "216",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-               "type" : "If",
-               "condition" : {
-                  "localId" : "217",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "name" : "inverse",
-                  "type" : "OperandRef"
-               },
-               "then" : {
-                  "localId" : "218",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "Subtract",
-                  "signature" : [ {
-                     "localId" : "221",
-                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "NamedTypeSpecifier"
-                  }, {
-                     "localId" : "222",
-                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "NamedTypeSpecifier"
-                  } ],
-                  "operand" : [ {
-                     "localId" : "219",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "name" : "a",
-                     "type" : "OperandRef"
-                  }, {
-                     "localId" : "220",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
-                  } ]
-               },
-               "else" : {
-                  "localId" : "223",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "Add",
-                  "signature" : [ {
-                     "localId" : "226",
-                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "NamedTypeSpecifier"
-                  }, {
-                     "localId" : "227",
-                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "NamedTypeSpecifier"
-                  } ],
-                  "operand" : [ {
-                     "localId" : "224",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "name" : "a",
-                     "type" : "OperandRef"
-                  }, {
-                     "localId" : "225",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
-                  } ]
-               }
-            },
-            "operand" : [ {
-               "localId" : "213",
-               "name" : "inverse",
-               "operandTypeSpecifier" : {
-                  "localId" : "212",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               }
-            }, {
-               "localId" : "215",
-               "name" : "a",
-               "operandTypeSpecifier" : {
-                  "localId" : "214",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "localId" : "228",
+            "localId" : "212",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "process",
             "context" : "Patient",
@@ -1410,850 +2229,31 @@ module.exports['FunctionOverloadsWithMultipleArguments'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "228",
-                  "s" : [ {
-                     "value" : [ "","define function process(inverse System.Boolean, a System.String) :\n  " ]
-                  }, {
-                     "r" : "233",
-                     "s" : [ {
-                        "r" : "233",
-                        "s" : [ {
-                           "value" : [ "if " ]
-                        }, {
-                           "r" : "234",
-                           "s" : [ {
-                              "value" : [ "inverse" ]
-                           } ]
-                        }, {
-                           "value" : [ " then " ]
-                        }, {
-                           "r" : "240",
-                           "s" : [ {
-                              "r" : "236",
-                              "s" : [ {
-                                 "value" : [ "'Goodbye '" ]
-                              } ]
-                           }, {
-                              "value" : [ " + " ]
-                           }, {
-                              "r" : "237",
-                              "s" : [ {
-                                 "value" : [ "a" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ " else " ]
-                        }, {
-                           "r" : "246",
-                           "s" : [ {
-                              "r" : "242",
-                              "s" : [ {
-                                 "value" : [ "'Hello '" ]
-                              } ]
-                           }, {
-                              "value" : [ " + " ]
-                           }, {
-                              "r" : "243",
-                              "s" : [ {
-                                 "value" : [ "a" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "233",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-               "type" : "If",
-               "condition" : {
-                  "localId" : "234",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "name" : "inverse",
-                  "type" : "OperandRef"
-               },
-               "then" : {
-                  "localId" : "240",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "Concatenate",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "236",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "Goodbye ",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "237",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                     "name" : "a",
-                     "type" : "OperandRef"
-                  } ]
-               },
-               "else" : {
-                  "localId" : "246",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "Concatenate",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "242",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : "Hello ",
-                     "type" : "Literal"
-                  }, {
-                     "localId" : "243",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                     "name" : "a",
-                     "type" : "OperandRef"
-                  } ]
-               }
-            },
-            "operand" : [ {
-               "localId" : "230",
-               "name" : "inverse",
-               "operandTypeSpecifier" : {
-                  "localId" : "229",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               }
-            }, {
-               "localId" : "232",
-               "name" : "a",
-               "operandTypeSpecifier" : {
-                  "localId" : "231",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "name" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "localId" : "248",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-            "name" : "testValue1",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "248",
-                  "s" : [ {
-                     "value" : [ "","define ","testValue1",": " ]
-                  }, {
-                     "r" : "251",
-                     "s" : [ {
-                        "r" : "249",
-                        "value" : [ "process","(","true",", ","1",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "251",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-               "name" : "process",
-               "type" : "FunctionRef",
-               "signature" : [ {
-                  "localId" : "252",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               }, {
-                  "localId" : "253",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "type" : "NamedTypeSpecifier"
-               } ],
-               "operand" : [ {
-                  "localId" : "249",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "value" : "true",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "250",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "1",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "255",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-            "name" : "testValue2",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "255",
-                  "s" : [ {
-                     "value" : [ "","define ","testValue2",": " ]
-                  }, {
-                     "r" : "258",
-                     "s" : [ {
-                        "r" : "256",
-                        "value" : [ "process","(","true",", " ]
-                     }, {
-                        "r" : "257",
-                        "s" : [ {
-                           "value" : [ "'World'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "258",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-               "name" : "process",
-               "type" : "FunctionRef",
-               "signature" : [ {
-                  "localId" : "259",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               }, {
-                  "localId" : "260",
-                  "name" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "NamedTypeSpecifier"
-               } ],
-               "operand" : [ {
-                  "localId" : "256",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "value" : "true",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "257",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "World",
-                  "type" : "Literal"
-               } ]
-            }
-         } ]
-      }
-   }
-}
-
-/* FunctionOverloadsWithDifferentNumberOfArguments
-library TestSnippet version '1'
-using Simple version '1.0.0'
-context Patient
-define function process(a System.String) :
-  'Hello ' + a
-
-define function process(a System.String, isSpanish System.Boolean) :
-  if isSpanish then 'Hola ' + a + ' from Spain' else 'Hello ' + a + ' from England'
-
-define testValue1: process('World')
-define testValue2: process('World', true)
-define testValue3: process('World', false)
-*/
-
-module.exports['FunctionOverloadsWithDifferentNumberOfArguments'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.22.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
-         "signatureLevel" : "All",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "262",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "211",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-            "name" : "process",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "211",
-                  "s" : [ {
-                     "value" : [ "","define function process(a System.String) :\n  " ]
-                  }, {
-                     "r" : "219",
-                     "s" : [ {
-                        "r" : "219",
-                        "s" : [ {
-                           "r" : "215",
-                           "s" : [ {
-                              "value" : [ "'Hello '" ]
-                           } ]
-                        }, {
-                           "value" : [ " + " ]
-                        }, {
-                           "r" : "216",
-                           "s" : [ {
-                              "value" : [ "a" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "219",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-               "type" : "Concatenate",
-               "signature" : [ ],
-               "operand" : [ {
-                  "localId" : "215",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "Hello ",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "216",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "name" : "a",
-                  "type" : "OperandRef"
-               } ]
-            },
-            "operand" : [ {
-               "localId" : "213",
-               "name" : "a",
-               "operandTypeSpecifier" : {
-                  "localId" : "212",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "name" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "localId" : "220",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-            "name" : "process",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "220",
-                  "s" : [ {
-                     "value" : [ "","define function process(a System.String, isSpanish System.Boolean) :\n  " ]
-                  }, {
-                     "r" : "225",
-                     "s" : [ {
-                        "r" : "225",
-                        "s" : [ {
-                           "value" : [ "if " ]
-                        }, {
-                           "r" : "226",
-                           "s" : [ {
-                              "value" : [ "isSpanish" ]
-                           } ]
-                        }, {
-                           "value" : [ " then " ]
-                        }, {
-                           "r" : "237",
-                           "s" : [ {
-                              "r" : "233",
-                              "s" : [ {
-                                 "r" : "229",
-                                 "s" : [ {
-                                    "value" : [ "'Hola '" ]
-                                 } ]
-                              }, {
-                                 "value" : [ " + " ]
-                              }, {
-                                 "r" : "230",
-                                 "s" : [ {
-                                    "value" : [ "a" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " + " ]
-                           }, {
-                              "r" : "234",
-                              "s" : [ {
-                                 "value" : [ "' from Spain'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ " else " ]
-                        }, {
-                           "r" : "248",
-                           "s" : [ {
-                              "r" : "244",
-                              "s" : [ {
-                                 "r" : "240",
-                                 "s" : [ {
-                                    "value" : [ "'Hello '" ]
-                                 } ]
-                              }, {
-                                 "value" : [ " + " ]
-                              }, {
-                                 "r" : "241",
-                                 "s" : [ {
-                                    "value" : [ "a" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " + " ]
-                           }, {
-                              "r" : "245",
-                              "s" : [ {
-                                 "value" : [ "' from England'" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "225",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-               "type" : "If",
-               "condition" : {
-                  "localId" : "226",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "name" : "isSpanish",
-                  "type" : "OperandRef"
-               },
-               "then" : {
-                  "localId" : "237",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "Concatenate",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "233",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "Concatenate",
-                     "signature" : [ ],
-                     "operand" : [ {
-                        "localId" : "229",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Hola ",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "230",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "name" : "a",
-                        "type" : "OperandRef"
-                     } ]
-                  }, {
-                     "localId" : "234",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : " from Spain",
-                     "type" : "Literal"
-                  } ]
-               },
-               "else" : {
-                  "localId" : "248",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "Concatenate",
-                  "signature" : [ ],
-                  "operand" : [ {
-                     "localId" : "244",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                     "type" : "Concatenate",
-                     "signature" : [ ],
-                     "operand" : [ {
-                        "localId" : "240",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "Hello ",
-                        "type" : "Literal"
-                     }, {
-                        "localId" : "241",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "name" : "a",
-                        "type" : "OperandRef"
-                     } ]
-                  }, {
-                     "localId" : "245",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                     "value" : " from England",
-                     "type" : "Literal"
-                  } ]
-               }
-            },
-            "operand" : [ {
-               "localId" : "222",
-               "name" : "a",
-               "operandTypeSpecifier" : {
-                  "localId" : "221",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "name" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "NamedTypeSpecifier"
-               }
-            }, {
-               "localId" : "224",
-               "name" : "isSpanish",
-               "operandTypeSpecifier" : {
-                  "localId" : "223",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "localId" : "250",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-            "name" : "testValue1",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "250",
-                  "s" : [ {
-                     "value" : [ "","define ","testValue1",": " ]
-                  }, {
-                     "r" : "252",
-                     "s" : [ {
-                        "value" : [ "process","(" ]
-                     }, {
-                        "r" : "251",
-                        "s" : [ {
-                           "value" : [ "'World'" ]
-                        } ]
-                     }, {
-                        "value" : [ ")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "252",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-               "name" : "process",
-               "type" : "FunctionRef",
-               "signature" : [ {
-                  "localId" : "253",
-                  "name" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "NamedTypeSpecifier"
-               } ],
-               "operand" : [ {
-                  "localId" : "251",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "World",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "255",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-            "name" : "testValue2",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "255",
-                  "s" : [ {
-                     "value" : [ "","define ","testValue2",": " ]
-                  }, {
-                     "r" : "258",
-                     "s" : [ {
-                        "value" : [ "process","(" ]
-                     }, {
-                        "r" : "256",
-                        "s" : [ {
-                           "value" : [ "'World'" ]
-                        } ]
-                     }, {
-                        "r" : "257",
-                        "value" : [ ", ","true",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "258",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-               "name" : "process",
-               "type" : "FunctionRef",
-               "signature" : [ {
-                  "localId" : "259",
-                  "name" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "NamedTypeSpecifier"
-               }, {
-                  "localId" : "260",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               } ],
-               "operand" : [ {
-                  "localId" : "256",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "World",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "257",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "value" : "true",
-                  "type" : "Literal"
-               } ]
-            }
-         }, {
-            "localId" : "262",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-            "name" : "testValue3",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "262",
-                  "s" : [ {
-                     "value" : [ "","define ","testValue3",": " ]
-                  }, {
-                     "r" : "265",
-                     "s" : [ {
-                        "value" : [ "process","(" ]
-                     }, {
-                        "r" : "263",
-                        "s" : [ {
-                           "value" : [ "'World'" ]
-                        } ]
-                     }, {
-                        "r" : "264",
-                        "value" : [ ", ","false",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "265",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-               "name" : "process",
-               "type" : "FunctionRef",
-               "signature" : [ {
-                  "localId" : "266",
-                  "name" : "{urn:hl7-org:elm-types:r1}String",
-                  "type" : "NamedTypeSpecifier"
-               }, {
-                  "localId" : "267",
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               } ],
-               "operand" : [ {
-                  "localId" : "263",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "World",
-                  "type" : "Literal"
-               }, {
-                  "localId" : "264",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "value" : "false",
-                  "type" : "Literal"
-               } ]
-            }
-         } ]
-      }
-   }
-}
-
-/* FunctionOverloadsWithArgumentsFromCustomDataModel
-library TestSnippet version '1'
-using Simple version '1.0.0'
-context Patient
-define function process(e Simple.Encounter) :
-  'Encounter ' + e.id
-
-define function process(c Simple.Condition) :
-  'Condition ' + c.id
-
-define testValue1: process(First([Encounter]))
-define testValue2: process(First([Condition]))
-*/
-
-module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
-   "library" : {
-      "localId" : "0",
-      "annotation" : [ {
-         "translatorVersion" : "3.22.0",
-         "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
-         "signatureLevel" : "All",
-         "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "246",
-            "s" : [ {
-               "value" : [ "","library TestSnippet version '1'" ]
-            } ]
-         }
-      } ],
-      "identifier" : {
-         "id" : "TestSnippet",
-         "version" : "1"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localId" : "1",
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1"
-         }, {
-            "localId" : "206",
-            "localIdentifier" : "Simple",
-            "uri" : "https://github.com/cqframework/cql-execution/simple",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "206",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "Simple" ]
-                     } ]
-                  }, {
-                     "value" : [ " version '1.0.0'" ]
-                  } ]
-               }
-            } ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "localId" : "210",
-            "name" : "Patient"
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "localId" : "208",
-            "name" : "Patient",
-            "context" : "Patient",
-            "expression" : {
-               "localId" : "209",
-               "type" : "SingletonFrom",
-               "signature" : [ ],
-               "operand" : {
-                  "localId" : "207",
-                  "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
-                  "type" : "Retrieve",
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "localId" : "211",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-            "name" : "process",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "211",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define function process(e Simple.Encounter) :\n  " ]
                   }, {
-                     "r" : "220",
+                     "r" : "224",
                      "s" : [ {
-                        "r" : "220",
+                        "r" : "224",
                         "s" : [ {
-                           "r" : "215",
+                           "r" : "218",
                            "s" : [ {
                               "value" : [ "'Encounter '" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "217",
+                           "r" : "221",
                            "s" : [ {
-                              "r" : "216",
+                              "r" : "220",
                               "s" : [ {
                                  "value" : [ "e" ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "217",
+                              "r" : "221",
                               "s" : [ {
                                  "value" : [ "id" ]
                               } ]
@@ -2264,23 +2264,23 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                }
             } ],
             "expression" : {
-               "localId" : "220",
+               "localId" : "224",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Concatenate",
                "signature" : [ ],
                "operand" : [ {
-                  "localId" : "215",
+                  "localId" : "218",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Encounter ",
                   "type" : "Literal"
                }, {
-                  "localId" : "217",
+                  "localId" : "221",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "path" : "id",
                   "type" : "Property",
                   "source" : {
-                     "localId" : "216",
+                     "localId" : "220",
                      "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "name" : "e",
                      "type" : "OperandRef"
@@ -2288,17 +2288,17 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                } ]
             },
             "operand" : [ {
-               "localId" : "213",
+               "localId" : "214",
                "name" : "e",
                "operandTypeSpecifier" : {
-                  "localId" : "212",
+                  "localId" : "213",
                   "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "221",
+            "localId" : "225",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "process",
             "context" : "Patient",
@@ -2307,31 +2307,31 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "221",
+                  "r" : "225",
                   "s" : [ {
                      "value" : [ "","define function process(c Simple.Condition) :\n  " ]
                   }, {
-                     "r" : "230",
+                     "r" : "237",
                      "s" : [ {
-                        "r" : "230",
+                        "r" : "237",
                         "s" : [ {
-                           "r" : "225",
+                           "r" : "231",
                            "s" : [ {
                               "value" : [ "'Condition '" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "227",
+                           "r" : "234",
                            "s" : [ {
-                              "r" : "226",
+                              "r" : "233",
                               "s" : [ {
                                  "value" : [ "c" ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "227",
+                              "r" : "234",
                               "s" : [ {
                                  "value" : [ "id" ]
                               } ]
@@ -2342,23 +2342,23 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                }
             } ],
             "expression" : {
-               "localId" : "230",
+               "localId" : "237",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Concatenate",
                "signature" : [ ],
                "operand" : [ {
-                  "localId" : "225",
+                  "localId" : "231",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "Condition ",
                   "type" : "Literal"
                }, {
-                  "localId" : "227",
+                  "localId" : "234",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "path" : "id",
                   "type" : "Property",
                   "source" : {
-                     "localId" : "226",
+                     "localId" : "233",
                      "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "name" : "c",
                      "type" : "OperandRef"
@@ -2366,17 +2366,17 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                } ]
             },
             "operand" : [ {
-               "localId" : "223",
+               "localId" : "227",
                "name" : "c",
                "operandTypeSpecifier" : {
-                  "localId" : "222",
+                  "localId" : "226",
                   "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "232",
+            "localId" : "240",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "testValue1",
             "context" : "Patient",
@@ -2384,19 +2384,19 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "232",
+                  "r" : "240",
                   "s" : [ {
                      "value" : [ "","define ","testValue1",": " ]
                   }, {
-                     "r" : "243",
+                     "r" : "251",
                      "s" : [ {
                         "value" : [ "process","(" ]
                      }, {
-                        "r" : "240",
+                        "r" : "248",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "233",
+                           "r" : "241",
                            "s" : [ {
                               "value" : [ "[","Encounter","]" ]
                            } ]
@@ -2410,37 +2410,37 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                }
             } ],
             "expression" : {
-               "localId" : "243",
+               "localId" : "251",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "name" : "process",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "244",
+                  "localId" : "252",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "240",
+                  "localId" : "248",
                   "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "First",
                   "signature" : [ {
-                     "localId" : "241",
+                     "localId" : "249",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "242",
+                        "localId" : "250",
                         "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                         "type" : "NamedTypeSpecifier"
                      }
                   } ],
                   "source" : {
-                     "localId" : "233",
+                     "localId" : "241",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
                      "resultTypeSpecifier" : {
-                        "localId" : "234",
+                        "localId" : "242",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "235",
+                           "localId" : "243",
                            "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -2453,7 +2453,7 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                } ]
             }
          }, {
-            "localId" : "246",
+            "localId" : "255",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "testValue2",
             "context" : "Patient",
@@ -2461,19 +2461,19 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "246",
+                  "r" : "255",
                   "s" : [ {
                      "value" : [ "","define ","testValue2",": " ]
                   }, {
-                     "r" : "257",
+                     "r" : "266",
                      "s" : [ {
                         "value" : [ "process","(" ]
                      }, {
-                        "r" : "254",
+                        "r" : "263",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "247",
+                           "r" : "256",
                            "s" : [ {
                               "value" : [ "[","Condition","]" ]
                            } ]
@@ -2487,37 +2487,37 @@ module.exports['FunctionOverloadsWithArgumentsFromCustomDataModel'] = {
                }
             } ],
             "expression" : {
-               "localId" : "257",
+               "localId" : "266",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "name" : "process",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "258",
+                  "localId" : "267",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "254",
+                  "localId" : "263",
                   "resultTypeName" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                   "type" : "First",
                   "signature" : [ {
-                     "localId" : "255",
+                     "localId" : "264",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "256",
+                        "localId" : "265",
                         "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                         "type" : "NamedTypeSpecifier"
                      }
                   } ],
                   "source" : {
-                     "localId" : "247",
+                     "localId" : "256",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "type" : "Retrieve",
                      "resultTypeSpecifier" : {
-                        "localId" : "248",
+                        "localId" : "257",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "249",
+                           "localId" : "258",
                            "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -2552,14 +2552,14 @@ module.exports['FluentFunctions'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "241",
+            "r" : "252",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -2602,21 +2602,21 @@ module.exports['FluentFunctions'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -2626,7 +2626,7 @@ module.exports['FluentFunctions'] = {
                }
             }
          }, {
-            "localId" : "211",
+            "localId" : "212",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "greet",
             "context" : "Patient",
@@ -2636,24 +2636,24 @@ module.exports['FluentFunctions'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "211",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define fluent function greet(name System.String) :\n  " ]
                   }, {
-                     "r" : "224",
+                     "r" : "229",
                      "s" : [ {
-                        "r" : "224",
+                        "r" : "229",
                         "s" : [ {
-                           "r" : "220",
+                           "r" : "224",
                            "s" : [ {
-                              "r" : "216",
+                              "r" : "219",
                               "s" : [ {
                                  "value" : [ "'Hello '" ]
                               } ]
                            }, {
                               "value" : [ " + " ]
                            }, {
-                              "r" : "217",
+                              "r" : "221",
                               "s" : [ {
                                  "value" : [ "name" ]
                               } ]
@@ -2661,7 +2661,7 @@ module.exports['FluentFunctions'] = {
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "221",
+                           "r" : "225",
                            "s" : [ {
                               "value" : [ "'!'" ]
                            } ]
@@ -2671,29 +2671,29 @@ module.exports['FluentFunctions'] = {
                }
             } ],
             "expression" : {
-               "localId" : "224",
+               "localId" : "229",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "type" : "Concatenate",
                "signature" : [ ],
                "operand" : [ {
-                  "localId" : "220",
+                  "localId" : "224",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "Concatenate",
                   "signature" : [ ],
                   "operand" : [ {
-                     "localId" : "216",
+                     "localId" : "219",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "Hello ",
                      "type" : "Literal"
                   }, {
-                     "localId" : "217",
+                     "localId" : "221",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "name",
                      "type" : "OperandRef"
                   } ]
                }, {
-                  "localId" : "221",
+                  "localId" : "225",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "!",
@@ -2701,17 +2701,17 @@ module.exports['FluentFunctions'] = {
                } ]
             },
             "operand" : [ {
-               "localId" : "213",
+               "localId" : "214",
                "name" : "name",
                "operandTypeSpecifier" : {
-                  "localId" : "212",
+                  "localId" : "213",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "225",
+            "localId" : "230",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "add",
             "context" : "Patient",
@@ -2721,22 +2721,22 @@ module.exports['FluentFunctions'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "225",
+                  "r" : "230",
                   "s" : [ {
                      "value" : [ "","define fluent function add(a System.Integer, b System.Integer) :\n  " ]
                   }, {
-                     "r" : "230",
+                     "r" : "238",
                      "s" : [ {
-                        "r" : "230",
+                        "r" : "238",
                         "s" : [ {
-                           "r" : "231",
+                           "r" : "239",
                            "s" : [ {
                               "value" : [ "a" ]
                            } ]
                         }, {
                            "value" : [ " + " ]
                         }, {
-                           "r" : "232",
+                           "r" : "240",
                            "s" : [ {
                               "value" : [ "b" ]
                            } ]
@@ -2746,51 +2746,51 @@ module.exports['FluentFunctions'] = {
                }
             } ],
             "expression" : {
-               "localId" : "230",
+               "localId" : "238",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "type" : "Add",
                "signature" : [ {
-                  "localId" : "233",
+                  "localId" : "241",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "234",
+                  "localId" : "242",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "231",
+                  "localId" : "239",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "a",
                   "type" : "OperandRef"
                }, {
-                  "localId" : "232",
+                  "localId" : "240",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "b",
                   "type" : "OperandRef"
                } ]
             },
             "operand" : [ {
-               "localId" : "227",
+               "localId" : "232",
                "name" : "a",
                "operandTypeSpecifier" : {
-                  "localId" : "226",
+                  "localId" : "231",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             }, {
-               "localId" : "229",
+               "localId" : "234",
                "name" : "b",
                "operandTypeSpecifier" : {
-                  "localId" : "228",
+                  "localId" : "233",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "236",
+            "localId" : "245",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "testValue1",
             "context" : "Patient",
@@ -2798,20 +2798,20 @@ module.exports['FluentFunctions'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "236",
+                  "r" : "245",
                   "s" : [ {
                      "value" : [ "","define ","testValue1",": " ]
                   }, {
-                     "r" : "238",
+                     "r" : "248",
                      "s" : [ {
-                        "r" : "237",
+                        "r" : "246",
                         "s" : [ {
                            "value" : [ "'World'" ]
                         } ]
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "238",
+                        "r" : "248",
                         "s" : [ {
                            "value" : [ "greet","()" ]
                         } ]
@@ -2820,17 +2820,17 @@ module.exports['FluentFunctions'] = {
                }
             } ],
             "expression" : {
-               "localId" : "238",
+               "localId" : "248",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "name" : "greet",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "239",
+                  "localId" : "249",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "237",
+                  "localId" : "246",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "World",
@@ -2838,7 +2838,7 @@ module.exports['FluentFunctions'] = {
                } ]
             }
          }, {
-            "localId" : "241",
+            "localId" : "252",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "testValue2",
             "context" : "Patient",
@@ -2846,18 +2846,18 @@ module.exports['FluentFunctions'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "241",
+                  "r" : "252",
                   "s" : [ {
                      "value" : [ "","define ","testValue2",": " ]
                   }, {
-                     "r" : "244",
+                     "r" : "255",
                      "s" : [ {
-                        "r" : "242",
+                        "r" : "253",
                         "value" : [ "1","." ]
                      }, {
-                        "r" : "244",
+                        "r" : "255",
                         "s" : [ {
-                           "r" : "243",
+                           "r" : "254",
                            "value" : [ "add","(","2",")" ]
                         } ]
                      } ]
@@ -2865,27 +2865,27 @@ module.exports['FluentFunctions'] = {
                }
             } ],
             "expression" : {
-               "localId" : "244",
+               "localId" : "255",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                "name" : "add",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "245",
+                  "localId" : "256",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "246",
+                  "localId" : "257",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "242",
+                  "localId" : "253",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "type" : "Literal"
                }, {
-                  "localId" : "243",
+                  "localId" : "254",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2",
@@ -2945,24 +2945,24 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
-         "message" : "An operand identifier [targetMatches] is hiding another identifier of the same name.",
+         "message" : "An operand identifier targetMatches is hiding another identifier of the same name.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
-         "message" : "An operand identifier [targetMatches] is hiding another identifier of the same name.",
+         "message" : "An operand identifier targetMatches is hiding another identifier of the same name.",
          "errorType" : "semantic",
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "629",
+            "r" : "668",
             "s" : [ {
                "value" : [ "","library FluentFunctionsOverloadCallingSelf" ]
             } ]
@@ -3004,21 +3004,21 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "210",
+            "localId" : "211",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "208",
+            "localId" : "209",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "209",
+               "localId" : "210",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "207",
+                  "localId" : "208",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -3028,7 +3028,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             }
          }, {
-            "localId" : "211",
+            "localId" : "212",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "targetMatches",
             "context" : "Patient",
@@ -3038,24 +3038,24 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "211",
+                  "r" : "212",
                   "s" : [ {
                      "value" : [ "","define fluent function targetMatches(option Tuple { option System.String }, target Tuple { id System.String }):\n  " ]
                   }, {
-                     "r" : "226",
+                     "r" : "230",
                      "s" : [ {
-                        "r" : "226",
+                        "r" : "230",
                         "s" : [ {
-                           "r" : "231",
+                           "r" : "235",
                            "s" : [ {
-                              "r" : "227",
+                              "r" : "231",
                               "s" : [ {
                                  "value" : [ "target" ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "231",
+                              "r" : "235",
                               "s" : [ {
                                  "value" : [ "id" ]
                               } ]
@@ -3063,16 +3063,16 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                         }, {
                            "value" : [ " ","="," " ]
                         }, {
-                           "r" : "236",
+                           "r" : "240",
                            "s" : [ {
-                              "r" : "232",
+                              "r" : "236",
                               "s" : [ {
                                  "value" : [ "option" ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "236",
+                              "r" : "240",
                               "s" : [ {
                                  "value" : [ "option" ]
                               } ]
@@ -3083,35 +3083,35 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "226",
+               "localId" : "230",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Equal",
                "signature" : [ {
-                  "localId" : "237",
+                  "localId" : "241",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "238",
+                  "localId" : "242",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "231",
+                  "localId" : "235",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "path" : "id",
                   "type" : "Property",
                   "source" : {
-                     "localId" : "227",
+                     "localId" : "231",
                      "name" : "target",
                      "type" : "OperandRef",
                      "resultTypeSpecifier" : {
-                        "localId" : "228",
+                        "localId" : "232",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "229",
+                           "localId" : "233",
                            "name" : "id",
                            "elementType" : {
-                              "localId" : "230",
+                              "localId" : "234",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -3119,22 +3119,22 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   }
                }, {
-                  "localId" : "236",
+                  "localId" : "240",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "path" : "option",
                   "type" : "Property",
                   "source" : {
-                     "localId" : "232",
+                     "localId" : "236",
                      "name" : "option",
                      "type" : "OperandRef",
                      "resultTypeSpecifier" : {
-                        "localId" : "233",
+                        "localId" : "237",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "234",
+                           "localId" : "238",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "235",
+                              "localId" : "239",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -3144,29 +3144,29 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                } ]
             },
             "operand" : [ {
-               "localId" : "218",
+               "localId" : "219",
                "name" : "option",
                "operandTypeSpecifier" : {
-                  "localId" : "212",
+                  "localId" : "213",
                   "type" : "TupleTypeSpecifier",
                   "resultTypeSpecifier" : {
-                     "localId" : "215",
+                     "localId" : "216",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "216",
+                        "localId" : "217",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "217",
+                           "localId" : "218",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
                   },
                   "element" : [ {
-                     "localId" : "213",
+                     "localId" : "214",
                      "name" : "option",
                      "elementType" : {
-                        "localId" : "214",
+                        "localId" : "215",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
@@ -3174,29 +3174,29 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   } ]
                }
             }, {
-               "localId" : "225",
+               "localId" : "226",
                "name" : "target",
                "operandTypeSpecifier" : {
-                  "localId" : "219",
+                  "localId" : "220",
                   "type" : "TupleTypeSpecifier",
                   "resultTypeSpecifier" : {
-                     "localId" : "222",
+                     "localId" : "223",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "223",
+                        "localId" : "224",
                         "name" : "id",
                         "elementType" : {
-                           "localId" : "224",
+                           "localId" : "225",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
                   },
                   "element" : [ {
-                     "localId" : "220",
+                     "localId" : "221",
                      "name" : "id",
                      "elementType" : {
-                        "localId" : "221",
+                        "localId" : "222",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
@@ -3205,7 +3205,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ]
          }, {
-            "localId" : "239",
+            "localId" : "243",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "targetMatches",
             "context" : "Patient",
@@ -3215,31 +3215,31 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "239",
+                  "r" : "243",
                   "s" : [ {
                      "value" : [ "","define fluent function targetMatches(option Tuple { option System.String }, targetId System.String):\n  " ]
                   }, {
-                     "r" : "249",
+                     "r" : "256",
                      "s" : [ {
-                        "r" : "249",
+                        "r" : "256",
                         "s" : [ {
-                           "r" : "250",
+                           "r" : "257",
                            "s" : [ {
                               "value" : [ "targetId" ]
                            } ]
                         }, {
                            "value" : [ " ","="," " ]
                         }, {
-                           "r" : "255",
+                           "r" : "262",
                            "s" : [ {
-                              "r" : "251",
+                              "r" : "258",
                               "s" : [ {
                                  "value" : [ "option" ]
                               } ]
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "255",
+                              "r" : "262",
                               "s" : [ {
                                  "value" : [ "option" ]
                               } ]
@@ -3250,40 +3250,40 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "249",
+               "localId" : "256",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Equal",
                "signature" : [ {
-                  "localId" : "256",
+                  "localId" : "263",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "257",
+                  "localId" : "264",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "250",
+                  "localId" : "257",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "targetId",
                   "type" : "OperandRef"
                }, {
-                  "localId" : "255",
+                  "localId" : "262",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "path" : "option",
                   "type" : "Property",
                   "source" : {
-                     "localId" : "251",
+                     "localId" : "258",
                      "name" : "option",
                      "type" : "OperandRef",
                      "resultTypeSpecifier" : {
-                        "localId" : "252",
+                        "localId" : "259",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "253",
+                           "localId" : "260",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "254",
+                              "localId" : "261",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -3293,29 +3293,29 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                } ]
             },
             "operand" : [ {
-               "localId" : "246",
+               "localId" : "250",
                "name" : "option",
                "operandTypeSpecifier" : {
-                  "localId" : "240",
+                  "localId" : "244",
                   "type" : "TupleTypeSpecifier",
                   "resultTypeSpecifier" : {
-                     "localId" : "243",
+                     "localId" : "247",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "244",
+                        "localId" : "248",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "245",
+                           "localId" : "249",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
                   },
                   "element" : [ {
-                     "localId" : "241",
+                     "localId" : "245",
                      "name" : "option",
                      "elementType" : {
-                        "localId" : "242",
+                        "localId" : "246",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
@@ -3323,17 +3323,17 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   } ]
                }
             }, {
-               "localId" : "248",
+               "localId" : "252",
                "name" : "targetId",
                "operandTypeSpecifier" : {
-                  "localId" : "247",
+                  "localId" : "251",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "258",
+            "localId" : "265",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "targetMatches",
             "context" : "Patient",
@@ -3343,26 +3343,26 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "258",
+                  "r" : "265",
                   "s" : [ {
                      "value" : [ "","define fluent function targetMatches(targetMatches List<Tuple { option System.String }>, target Tuple { id System.String }):\n  " ]
                   }, {
-                     "r" : "278",
+                     "r" : "288",
                      "s" : [ {
-                        "r" : "278",
+                        "r" : "288",
                         "s" : [ {
                            "value" : [ "exists " ]
                         }, {
-                           "r" : "319",
+                           "r" : "330",
                            "s" : [ {
                               "value" : [ "(" ]
                            }, {
-                              "r" : "319",
+                              "r" : "330",
                               "s" : [ {
                                  "s" : [ {
-                                    "r" : "279",
+                                    "r" : "289",
                                     "s" : [ {
-                                       "r" : "280",
+                                       "r" : "290",
                                        "s" : [ {
                                           "s" : [ {
                                              "value" : [ "targetMatches" ]
@@ -3375,24 +3375,24 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                               }, {
                                  "value" : [ " " ]
                               }, {
-                                 "r" : "312",
+                                 "r" : "323",
                                  "s" : [ {
                                     "value" : [ "where " ]
                                  }, {
-                                    "r" : "312",
+                                    "r" : "323",
                                     "s" : [ {
-                                       "r" : "289",
+                                       "r" : "300",
                                        "s" : [ {
                                           "value" : [ "O" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "312",
+                                       "r" : "323",
                                        "s" : [ {
                                           "value" : [ "targetMatches","(" ]
                                        }, {
-                                          "r" : "293",
+                                          "r" : "304",
                                           "s" : [ {
                                              "value" : [ "target" ]
                                           } ]
@@ -3411,20 +3411,20 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "278",
+               "localId" : "288",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
-                  "localId" : "328",
+                  "localId" : "339",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "329",
+                     "localId" : "340",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "330",
+                        "localId" : "341",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "331",
+                           "localId" : "342",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -3432,19 +3432,19 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   }
                } ],
                "operand" : {
-                  "localId" : "319",
+                  "localId" : "330",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
-                     "localId" : "324",
+                     "localId" : "335",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "325",
+                        "localId" : "336",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "326",
+                           "localId" : "337",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "327",
+                              "localId" : "338",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -3452,19 +3452,19 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   },
                   "source" : [ {
-                     "localId" : "279",
+                     "localId" : "289",
                      "alias" : "O",
                      "resultTypeSpecifier" : {
-                        "localId" : "285",
+                        "localId" : "295",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "286",
+                           "localId" : "296",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "287",
+                              "localId" : "297",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "288",
+                                 "localId" : "298",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -3472,20 +3472,20 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                         }
                      },
                      "expression" : {
-                        "localId" : "280",
+                        "localId" : "290",
                         "name" : "targetMatches",
                         "type" : "OperandRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "281",
+                           "localId" : "291",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "282",
+                              "localId" : "292",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "283",
+                                 "localId" : "293",
                                  "name" : "option",
                                  "elementType" : {
-                                    "localId" : "284",
+                                    "localId" : "294",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -3497,64 +3497,64 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "312",
+                     "localId" : "323",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "targetMatches",
                      "type" : "FunctionRef",
                      "signature" : [ {
-                        "localId" : "313",
+                        "localId" : "324",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "314",
+                           "localId" : "325",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "315",
+                              "localId" : "326",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      }, {
-                        "localId" : "316",
+                        "localId" : "327",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "317",
+                           "localId" : "328",
                            "name" : "id",
                            "elementType" : {
-                              "localId" : "318",
+                              "localId" : "329",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      } ],
                      "operand" : [ {
-                        "localId" : "289",
+                        "localId" : "300",
                         "name" : "O",
                         "type" : "AliasRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "290",
+                           "localId" : "301",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "291",
+                              "localId" : "302",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "292",
+                                 "localId" : "303",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
                            } ]
                         }
                      }, {
-                        "localId" : "293",
+                        "localId" : "304",
                         "name" : "target",
                         "type" : "OperandRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "294",
+                           "localId" : "305",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "295",
+                              "localId" : "306",
                               "name" : "id",
                               "elementType" : {
-                                 "localId" : "296",
+                                 "localId" : "307",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -3565,22 +3565,22 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             },
             "operand" : [ {
-               "localId" : "270",
+               "localId" : "277",
                "name" : "targetMatches",
                "operandTypeSpecifier" : {
-                  "localId" : "259",
+                  "localId" : "266",
                   "type" : "ListTypeSpecifier",
                   "resultTypeSpecifier" : {
-                     "localId" : "266",
+                     "localId" : "273",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "267",
+                        "localId" : "274",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "268",
+                           "localId" : "275",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "269",
+                              "localId" : "276",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -3588,26 +3588,26 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   },
                   "elementType" : {
-                     "localId" : "260",
+                     "localId" : "267",
                      "type" : "TupleTypeSpecifier",
                      "resultTypeSpecifier" : {
-                        "localId" : "263",
+                        "localId" : "270",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "264",
+                           "localId" : "271",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "265",
+                              "localId" : "272",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      },
                      "element" : [ {
-                        "localId" : "261",
+                        "localId" : "268",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "262",
+                           "localId" : "269",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
@@ -3616,29 +3616,29 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   }
                }
             }, {
-               "localId" : "277",
+               "localId" : "284",
                "name" : "target",
                "operandTypeSpecifier" : {
-                  "localId" : "271",
+                  "localId" : "278",
                   "type" : "TupleTypeSpecifier",
                   "resultTypeSpecifier" : {
-                     "localId" : "274",
+                     "localId" : "281",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "275",
+                        "localId" : "282",
                         "name" : "id",
                         "elementType" : {
-                           "localId" : "276",
+                           "localId" : "283",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
                   },
                   "element" : [ {
-                     "localId" : "272",
+                     "localId" : "279",
                      "name" : "id",
                      "elementType" : {
-                        "localId" : "273",
+                        "localId" : "280",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
@@ -3647,7 +3647,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ]
          }, {
-            "localId" : "297",
+            "localId" : "308",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "targetMatches",
             "context" : "Patient",
@@ -3657,26 +3657,26 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "297",
+                  "r" : "308",
                   "s" : [ {
                      "value" : [ "","define fluent function targetMatches(targetMatches List<Tuple { option System.String }>, targetId System.String):\n  " ]
                   }, {
-                     "r" : "332",
+                     "r" : "346",
                      "s" : [ {
-                        "r" : "332",
+                        "r" : "346",
                         "s" : [ {
                            "value" : [ "exists " ]
                         }, {
-                           "r" : "353",
+                           "r" : "368",
                            "s" : [ {
                               "value" : [ "(" ]
                            }, {
-                              "r" : "353",
+                              "r" : "368",
                               "s" : [ {
                                  "s" : [ {
-                                    "r" : "333",
+                                    "r" : "347",
                                     "s" : [ {
-                                       "r" : "334",
+                                       "r" : "348",
                                        "s" : [ {
                                           "s" : [ {
                                              "value" : [ "targetMatches" ]
@@ -3689,24 +3689,24 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                               }, {
                                  "value" : [ " " ]
                               }, {
-                                 "r" : "348",
+                                 "r" : "363",
                                  "s" : [ {
                                     "value" : [ "where " ]
                                  }, {
-                                    "r" : "348",
+                                    "r" : "363",
                                     "s" : [ {
-                                       "r" : "343",
+                                       "r" : "358",
                                        "s" : [ {
                                           "value" : [ "O" ]
                                        } ]
                                     }, {
                                        "value" : [ "." ]
                                     }, {
-                                       "r" : "348",
+                                       "r" : "363",
                                        "s" : [ {
                                           "value" : [ "targetMatches","(" ]
                                        }, {
-                                          "r" : "347",
+                                          "r" : "362",
                                           "s" : [ {
                                              "value" : [ "targetId" ]
                                           } ]
@@ -3725,20 +3725,20 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "332",
+               "localId" : "346",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
-                  "localId" : "362",
+                  "localId" : "377",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "363",
+                     "localId" : "378",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "364",
+                        "localId" : "379",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "365",
+                           "localId" : "380",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -3746,19 +3746,19 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   }
                } ],
                "operand" : {
-                  "localId" : "353",
+                  "localId" : "368",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
-                     "localId" : "358",
+                     "localId" : "373",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "359",
+                        "localId" : "374",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "360",
+                           "localId" : "375",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "361",
+                              "localId" : "376",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -3766,19 +3766,19 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   },
                   "source" : [ {
-                     "localId" : "333",
+                     "localId" : "347",
                      "alias" : "O",
                      "resultTypeSpecifier" : {
-                        "localId" : "339",
+                        "localId" : "353",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "340",
+                           "localId" : "354",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "341",
+                              "localId" : "355",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "342",
+                                 "localId" : "356",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -3786,20 +3786,20 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                         }
                      },
                      "expression" : {
-                        "localId" : "334",
+                        "localId" : "348",
                         "name" : "targetMatches",
                         "type" : "OperandRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "335",
+                           "localId" : "349",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "336",
+                              "localId" : "350",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "337",
+                                 "localId" : "351",
                                  "name" : "option",
                                  "elementType" : {
-                                    "localId" : "338",
+                                    "localId" : "352",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -3811,46 +3811,46 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "348",
+                     "localId" : "363",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "targetMatches",
                      "type" : "FunctionRef",
                      "signature" : [ {
-                        "localId" : "349",
+                        "localId" : "364",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "350",
+                           "localId" : "365",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "351",
+                              "localId" : "366",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      }, {
-                        "localId" : "352",
+                        "localId" : "367",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "localId" : "343",
+                        "localId" : "358",
                         "name" : "O",
                         "type" : "AliasRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "344",
+                           "localId" : "359",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "345",
+                              "localId" : "360",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "346",
+                                 "localId" : "361",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
                            } ]
                         }
                      }, {
-                        "localId" : "347",
+                        "localId" : "362",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "targetId",
                         "type" : "OperandRef"
@@ -3859,22 +3859,22 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             },
             "operand" : [ {
-               "localId" : "309",
+               "localId" : "320",
                "name" : "targetMatches",
                "operandTypeSpecifier" : {
-                  "localId" : "298",
+                  "localId" : "309",
                   "type" : "ListTypeSpecifier",
                   "resultTypeSpecifier" : {
-                     "localId" : "305",
+                     "localId" : "316",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "306",
+                        "localId" : "317",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "307",
+                           "localId" : "318",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "308",
+                              "localId" : "319",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -3882,26 +3882,26 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   },
                   "elementType" : {
-                     "localId" : "299",
+                     "localId" : "310",
                      "type" : "TupleTypeSpecifier",
                      "resultTypeSpecifier" : {
-                        "localId" : "302",
+                        "localId" : "313",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "303",
+                           "localId" : "314",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "304",
+                              "localId" : "315",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      },
                      "element" : [ {
-                        "localId" : "300",
+                        "localId" : "311",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "301",
+                           "localId" : "312",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
@@ -3910,39 +3910,39 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   }
                }
             }, {
-               "localId" : "311",
+               "localId" : "322",
                "name" : "targetId",
                "operandTypeSpecifier" : {
-                  "localId" : "310",
+                  "localId" : "321",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "367",
+            "localId" : "383",
             "name" : "testOptionsList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "367",
+                  "r" : "383",
                   "s" : [ {
                      "value" : [ "","define ","testOptionsList",":\n  " ]
                   }, {
-                     "r" : "368",
+                     "r" : "384",
                      "s" : [ {
                         "value" : [ "{\n    " ]
                      }, {
-                        "r" : "369",
+                        "r" : "385",
                         "s" : [ {
                            "value" : [ "{\n      " ]
                         }, {
                            "s" : [ {
                               "value" : [ "option",": " ]
                            }, {
-                              "r" : "370",
+                              "r" : "386",
                               "s" : [ {
                                  "value" : [ "'test123'" ]
                               } ]
@@ -3953,14 +3953,14 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }, {
                         "value" : [ ",\n    " ]
                      }, {
-                        "r" : "374",
+                        "r" : "391",
                         "s" : [ {
                            "value" : [ "{\n      " ]
                         }, {
                            "s" : [ {
                               "value" : [ "option",": " ]
                            }, {
-                              "r" : "375",
+                              "r" : "392",
                               "s" : [ {
                                  "value" : [ "'test341'" ]
                               } ]
@@ -3975,16 +3975,16 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "383",
+               "localId" : "401",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "384",
+                  "localId" : "402",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "385",
+                     "localId" : "403",
                      "name" : "option",
                      "elementType" : {
-                        "localId" : "386",
+                        "localId" : "404",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -3992,19 +3992,19 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             },
             "expression" : {
-               "localId" : "368",
+               "localId" : "384",
                "type" : "List",
                "resultTypeSpecifier" : {
-                  "localId" : "379",
+                  "localId" : "397",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "380",
+                     "localId" : "398",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "381",
+                        "localId" : "399",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "382",
+                           "localId" : "400",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -4012,16 +4012,16 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   }
                },
                "element" : [ {
-                  "localId" : "369",
+                  "localId" : "385",
                   "type" : "Tuple",
                   "resultTypeSpecifier" : {
-                     "localId" : "371",
+                     "localId" : "388",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "372",
+                        "localId" : "389",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "373",
+                           "localId" : "390",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -4030,7 +4030,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   "element" : [ {
                      "name" : "option",
                      "value" : {
-                        "localId" : "370",
+                        "localId" : "386",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "test123",
@@ -4038,16 +4038,16 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   } ]
                }, {
-                  "localId" : "374",
+                  "localId" : "391",
                   "type" : "Tuple",
                   "resultTypeSpecifier" : {
-                     "localId" : "376",
+                     "localId" : "394",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "377",
+                        "localId" : "395",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "378",
+                           "localId" : "396",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -4056,7 +4056,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   "element" : [ {
                      "name" : "option",
                      "value" : {
-                        "localId" : "375",
+                        "localId" : "392",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "test341",
@@ -4066,7 +4066,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                } ]
             }
          }, {
-            "localId" : "388",
+            "localId" : "407",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestFalse",
             "context" : "Patient",
@@ -4074,17 +4074,17 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "388",
+                  "r" : "407",
                   "s" : [ {
                      "value" : [ "","define ","matchTestFalse",": " ]
                   }, {
-                     "r" : "409",
+                     "r" : "429",
                      "s" : [ {
-                        "r" : "400",
+                        "r" : "419",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "389",
+                           "r" : "408",
                            "s" : [ {
                               "value" : [ "\"testOptionsList\"" ]
                            } ]
@@ -4094,11 +4094,11 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "409",
+                        "r" : "429",
                         "s" : [ {
                            "value" : [ "targetMatches","(" ]
                         }, {
-                           "r" : "408",
+                           "r" : "427",
                            "s" : [ {
                               "value" : [ "'test789'" ]
                            } ]
@@ -4110,54 +4110,54 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "409",
+               "localId" : "429",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "targetMatches",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "410",
+                  "localId" : "430",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "411",
+                     "localId" : "431",
                      "name" : "option",
                      "elementType" : {
-                        "localId" : "412",
+                        "localId" : "432",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   } ]
                }, {
-                  "localId" : "413",
+                  "localId" : "433",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "400",
+                  "localId" : "419",
                   "type" : "First",
                   "resultTypeSpecifier" : {
-                     "localId" : "405",
+                     "localId" : "424",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "406",
+                        "localId" : "425",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "407",
+                           "localId" : "426",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
                   },
                   "signature" : [ {
-                     "localId" : "401",
+                     "localId" : "420",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "402",
+                        "localId" : "421",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "403",
+                           "localId" : "422",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "404",
+                              "localId" : "423",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -4165,20 +4165,20 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   } ],
                   "source" : {
-                     "localId" : "389",
+                     "localId" : "408",
                      "name" : "testOptionsList",
                      "type" : "ExpressionRef",
                      "resultTypeSpecifier" : {
-                        "localId" : "390",
+                        "localId" : "409",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "391",
+                           "localId" : "410",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "392",
+                              "localId" : "411",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "393",
+                                 "localId" : "412",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -4187,7 +4187,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   }
                }, {
-                  "localId" : "408",
+                  "localId" : "427",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "test789",
@@ -4195,7 +4195,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                } ]
             }
          }, {
-            "localId" : "415",
+            "localId" : "436",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestTrue",
             "context" : "Patient",
@@ -4203,17 +4203,17 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "415",
+                  "r" : "436",
                   "s" : [ {
                      "value" : [ "","define ","matchTestTrue",": " ]
                   }, {
-                     "r" : "436",
+                     "r" : "458",
                      "s" : [ {
-                        "r" : "427",
+                        "r" : "448",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "416",
+                           "r" : "437",
                            "s" : [ {
                               "value" : [ "\"testOptionsList\"" ]
                            } ]
@@ -4223,11 +4223,11 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "436",
+                        "r" : "458",
                         "s" : [ {
                            "value" : [ "targetMatches","(" ]
                         }, {
-                           "r" : "435",
+                           "r" : "456",
                            "s" : [ {
                               "value" : [ "'test123'" ]
                            } ]
@@ -4239,54 +4239,54 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "436",
+               "localId" : "458",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "targetMatches",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "437",
+                  "localId" : "459",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "438",
+                     "localId" : "460",
                      "name" : "option",
                      "elementType" : {
-                        "localId" : "439",
+                        "localId" : "461",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   } ]
                }, {
-                  "localId" : "440",
+                  "localId" : "462",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "427",
+                  "localId" : "448",
                   "type" : "First",
                   "resultTypeSpecifier" : {
-                     "localId" : "432",
+                     "localId" : "453",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "433",
+                        "localId" : "454",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "434",
+                           "localId" : "455",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
                   },
                   "signature" : [ {
-                     "localId" : "428",
+                     "localId" : "449",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "429",
+                        "localId" : "450",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "430",
+                           "localId" : "451",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "431",
+                              "localId" : "452",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -4294,20 +4294,20 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   } ],
                   "source" : {
-                     "localId" : "416",
+                     "localId" : "437",
                      "name" : "testOptionsList",
                      "type" : "ExpressionRef",
                      "resultTypeSpecifier" : {
-                        "localId" : "417",
+                        "localId" : "438",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "418",
+                           "localId" : "439",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "419",
+                              "localId" : "440",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "420",
+                                 "localId" : "441",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -4316,7 +4316,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   }
                }, {
-                  "localId" : "435",
+                  "localId" : "456",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "test123",
@@ -4324,7 +4324,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                } ]
             }
          }, {
-            "localId" : "442",
+            "localId" : "465",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestsFalse",
             "context" : "Patient",
@@ -4332,39 +4332,39 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "442",
+                  "r" : "465",
                   "s" : [ {
                      "value" : [ "","define ","matchTestsFalse",": " ]
                   }, {
-                     "r" : "443",
+                     "r" : "466",
                      "s" : [ {
                         "value" : [ "exists " ]
                      }, {
-                        "r" : "479",
+                        "r" : "505",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "479",
+                           "r" : "505",
                            "s" : [ {
                               "s" : [ {
-                                 "r" : "444",
+                                 "r" : "467",
                                  "s" : [ {
-                                    "r" : "445",
+                                    "r" : "468",
                                     "s" : [ {
                                        "value" : [ "(" ]
                                     }, {
-                                       "r" : "445",
+                                       "r" : "468",
                                        "s" : [ {
                                           "value" : [ "{" ]
                                        }, {
-                                          "r" : "446",
+                                          "r" : "469",
                                           "s" : [ {
                                              "value" : [ "'test789'" ]
                                           } ]
                                        }, {
                                           "value" : [ ", " ]
                                        }, {
-                                          "r" : "447",
+                                          "r" : "471",
                                           "s" : [ {
                                              "value" : [ "'test719'" ]
                                           } ]
@@ -4381,17 +4381,17 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            }, {
                               "value" : [ "\n  " ]
                            }, {
-                              "r" : "474",
+                              "r" : "500",
                               "s" : [ {
                                  "value" : [ "where " ]
                               }, {
-                                 "r" : "474",
+                                 "r" : "500",
                                  "s" : [ {
-                                    "r" : "465",
+                                    "r" : "491",
                                     "s" : [ {
                                        "value" : [ "First","(" ]
                                     }, {
-                                       "r" : "454",
+                                       "r" : "480",
                                        "s" : [ {
                                           "value" : [ "\"testOptionsList\"" ]
                                        } ]
@@ -4401,11 +4401,11 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "474",
+                                    "r" : "500",
                                     "s" : [ {
                                        "value" : [ "targetMatches","(" ]
                                     }, {
-                                       "r" : "473",
+                                       "r" : "499",
                                        "s" : [ {
                                           "value" : [ "T" ]
                                        } ]
@@ -4423,62 +4423,62 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "443",
+               "localId" : "466",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
-                  "localId" : "484",
+                  "localId" : "510",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "485",
+                     "localId" : "511",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "operand" : {
-                  "localId" : "479",
+                  "localId" : "505",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
-                     "localId" : "482",
+                     "localId" : "508",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "483",
+                        "localId" : "509",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "source" : [ {
-                     "localId" : "444",
+                     "localId" : "467",
                      "alias" : "T",
                      "resultTypeSpecifier" : {
-                        "localId" : "452",
+                        "localId" : "477",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "453",
+                           "localId" : "478",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "expression" : {
-                        "localId" : "445",
+                        "localId" : "468",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "450",
+                           "localId" : "475",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "451",
+                              "localId" : "476",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "446",
+                           "localId" : "469",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "test789",
                            "type" : "Literal"
                         }, {
-                           "localId" : "447",
+                           "localId" : "471",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "test719",
@@ -4489,54 +4489,54 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "474",
+                     "localId" : "500",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "targetMatches",
                      "type" : "FunctionRef",
                      "signature" : [ {
-                        "localId" : "475",
+                        "localId" : "501",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "476",
+                           "localId" : "502",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "477",
+                              "localId" : "503",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      }, {
-                        "localId" : "478",
+                        "localId" : "504",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "localId" : "465",
+                        "localId" : "491",
                         "type" : "First",
                         "resultTypeSpecifier" : {
-                           "localId" : "470",
+                           "localId" : "496",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "471",
+                              "localId" : "497",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "472",
+                                 "localId" : "498",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
                            } ]
                         },
                         "signature" : [ {
-                           "localId" : "466",
+                           "localId" : "492",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "467",
+                              "localId" : "493",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "468",
+                                 "localId" : "494",
                                  "name" : "option",
                                  "elementType" : {
-                                    "localId" : "469",
+                                    "localId" : "495",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -4544,20 +4544,20 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            }
                         } ],
                         "source" : {
-                           "localId" : "454",
+                           "localId" : "480",
                            "name" : "testOptionsList",
                            "type" : "ExpressionRef",
                            "resultTypeSpecifier" : {
-                              "localId" : "455",
+                              "localId" : "481",
                               "type" : "ListTypeSpecifier",
                               "elementType" : {
-                                 "localId" : "456",
+                                 "localId" : "482",
                                  "type" : "TupleTypeSpecifier",
                                  "element" : [ {
-                                    "localId" : "457",
+                                    "localId" : "483",
                                     "name" : "option",
                                     "elementType" : {
-                                       "localId" : "458",
+                                       "localId" : "484",
                                        "name" : "{urn:hl7-org:elm-types:r1}String",
                                        "type" : "NamedTypeSpecifier"
                                     }
@@ -4566,7 +4566,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            }
                         }
                      }, {
-                        "localId" : "473",
+                        "localId" : "499",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "T",
                         "type" : "AliasRef"
@@ -4575,7 +4575,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             }
          }, {
-            "localId" : "487",
+            "localId" : "514",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestsTrue",
             "context" : "Patient",
@@ -4583,39 +4583,39 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "487",
+                  "r" : "514",
                   "s" : [ {
                      "value" : [ "","define ","matchTestsTrue",": " ]
                   }, {
-                     "r" : "488",
+                     "r" : "515",
                      "s" : [ {
                         "value" : [ "exists " ]
                      }, {
-                        "r" : "524",
+                        "r" : "554",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "524",
+                           "r" : "554",
                            "s" : [ {
                               "s" : [ {
-                                 "r" : "489",
+                                 "r" : "516",
                                  "s" : [ {
-                                    "r" : "490",
+                                    "r" : "517",
                                     "s" : [ {
                                        "value" : [ "(" ]
                                     }, {
-                                       "r" : "490",
+                                       "r" : "517",
                                        "s" : [ {
                                           "value" : [ "{" ]
                                        }, {
-                                          "r" : "491",
+                                          "r" : "518",
                                           "s" : [ {
                                              "value" : [ "'test341'" ]
                                           } ]
                                        }, {
                                           "value" : [ ", " ]
                                        }, {
-                                          "r" : "492",
+                                          "r" : "520",
                                           "s" : [ {
                                              "value" : [ "'test719'" ]
                                           } ]
@@ -4632,17 +4632,17 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            }, {
                               "value" : [ "\n  " ]
                            }, {
-                              "r" : "519",
+                              "r" : "549",
                               "s" : [ {
                                  "value" : [ "where " ]
                               }, {
-                                 "r" : "519",
+                                 "r" : "549",
                                  "s" : [ {
-                                    "r" : "510",
+                                    "r" : "540",
                                     "s" : [ {
                                        "value" : [ "Last","(" ]
                                     }, {
-                                       "r" : "499",
+                                       "r" : "529",
                                        "s" : [ {
                                           "value" : [ "\"testOptionsList\"" ]
                                        } ]
@@ -4652,11 +4652,11 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "519",
+                                    "r" : "549",
                                     "s" : [ {
                                        "value" : [ "targetMatches","(" ]
                                     }, {
-                                       "r" : "518",
+                                       "r" : "548",
                                        "s" : [ {
                                           "value" : [ "T" ]
                                        } ]
@@ -4674,62 +4674,62 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "488",
+               "localId" : "515",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
-                  "localId" : "529",
+                  "localId" : "559",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "530",
+                     "localId" : "560",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "operand" : {
-                  "localId" : "524",
+                  "localId" : "554",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
-                     "localId" : "527",
+                     "localId" : "557",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "528",
+                        "localId" : "558",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "source" : [ {
-                     "localId" : "489",
+                     "localId" : "516",
                      "alias" : "T",
                      "resultTypeSpecifier" : {
-                        "localId" : "497",
+                        "localId" : "526",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "498",
+                           "localId" : "527",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "expression" : {
-                        "localId" : "490",
+                        "localId" : "517",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "495",
+                           "localId" : "524",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "496",
+                              "localId" : "525",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "491",
+                           "localId" : "518",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "test341",
                            "type" : "Literal"
                         }, {
-                           "localId" : "492",
+                           "localId" : "520",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "test719",
@@ -4740,54 +4740,54 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "519",
+                     "localId" : "549",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "targetMatches",
                      "type" : "FunctionRef",
                      "signature" : [ {
-                        "localId" : "520",
+                        "localId" : "550",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "521",
+                           "localId" : "551",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "522",
+                              "localId" : "552",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      }, {
-                        "localId" : "523",
+                        "localId" : "553",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "localId" : "510",
+                        "localId" : "540",
                         "type" : "Last",
                         "resultTypeSpecifier" : {
-                           "localId" : "515",
+                           "localId" : "545",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "516",
+                              "localId" : "546",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "517",
+                                 "localId" : "547",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
                            } ]
                         },
                         "signature" : [ {
-                           "localId" : "511",
+                           "localId" : "541",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "512",
+                              "localId" : "542",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "513",
+                                 "localId" : "543",
                                  "name" : "option",
                                  "elementType" : {
-                                    "localId" : "514",
+                                    "localId" : "544",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -4795,20 +4795,20 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            }
                         } ],
                         "source" : {
-                           "localId" : "499",
+                           "localId" : "529",
                            "name" : "testOptionsList",
                            "type" : "ExpressionRef",
                            "resultTypeSpecifier" : {
-                              "localId" : "500",
+                              "localId" : "530",
                               "type" : "ListTypeSpecifier",
                               "elementType" : {
-                                 "localId" : "501",
+                                 "localId" : "531",
                                  "type" : "TupleTypeSpecifier",
                                  "element" : [ {
-                                    "localId" : "502",
+                                    "localId" : "532",
                                     "name" : "option",
                                     "elementType" : {
-                                       "localId" : "503",
+                                       "localId" : "533",
                                        "name" : "{urn:hl7-org:elm-types:r1}String",
                                        "type" : "NamedTypeSpecifier"
                                     }
@@ -4817,7 +4817,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            }
                         }
                      }, {
-                        "localId" : "518",
+                        "localId" : "548",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "T",
                         "type" : "AliasRef"
@@ -4826,7 +4826,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             }
          }, {
-            "localId" : "532",
+            "localId" : "563",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestCallSelfFalse",
             "context" : "Patient",
@@ -4834,31 +4834,31 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "532",
+                  "r" : "563",
                   "s" : [ {
                      "value" : [ "","define ","matchTestCallSelfFalse",": " ]
                   }, {
-                     "r" : "543",
+                     "r" : "575",
                      "s" : [ {
-                        "r" : "533",
+                        "r" : "564",
                         "s" : [ {
                            "value" : [ "\"testOptionsList\"" ]
                         } ]
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "543",
+                        "r" : "575",
                         "s" : [ {
                            "value" : [ "targetMatches","(" ]
                         }, {
-                           "r" : "538",
+                           "r" : "569",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "id",": " ]
                               }, {
-                                 "r" : "539",
+                                 "r" : "570",
                                  "s" : [ {
                                     "value" : [ "'test789'" ]
                                  } ]
@@ -4874,54 +4874,54 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "543",
+               "localId" : "575",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "targetMatches",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "544",
+                  "localId" : "576",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "545",
+                     "localId" : "577",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "546",
+                        "localId" : "578",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "547",
+                           "localId" : "579",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
                   }
                }, {
-                  "localId" : "548",
+                  "localId" : "580",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "549",
+                     "localId" : "581",
                      "name" : "id",
                      "elementType" : {
-                        "localId" : "550",
+                        "localId" : "582",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   } ]
                } ],
                "operand" : [ {
-                  "localId" : "533",
+                  "localId" : "564",
                   "name" : "testOptionsList",
                   "type" : "ExpressionRef",
                   "resultTypeSpecifier" : {
-                     "localId" : "534",
+                     "localId" : "565",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "535",
+                        "localId" : "566",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "536",
+                           "localId" : "567",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "537",
+                              "localId" : "568",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -4929,16 +4929,16 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   }
                }, {
-                  "localId" : "538",
+                  "localId" : "569",
                   "type" : "Tuple",
                   "resultTypeSpecifier" : {
-                     "localId" : "540",
+                     "localId" : "572",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "541",
+                        "localId" : "573",
                         "name" : "id",
                         "elementType" : {
-                           "localId" : "542",
+                           "localId" : "574",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -4947,7 +4947,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   "element" : [ {
                      "name" : "id",
                      "value" : {
-                        "localId" : "539",
+                        "localId" : "570",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "test789",
@@ -4957,7 +4957,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                } ]
             }
          }, {
-            "localId" : "552",
+            "localId" : "585",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestCallSelfTrue",
             "context" : "Patient",
@@ -4965,31 +4965,31 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "552",
+                  "r" : "585",
                   "s" : [ {
                      "value" : [ "","define ","matchTestCallSelfTrue",": " ]
                   }, {
-                     "r" : "563",
+                     "r" : "597",
                      "s" : [ {
-                        "r" : "553",
+                        "r" : "586",
                         "s" : [ {
                            "value" : [ "\"testOptionsList\"" ]
                         } ]
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "563",
+                        "r" : "597",
                         "s" : [ {
                            "value" : [ "targetMatches","(" ]
                         }, {
-                           "r" : "558",
+                           "r" : "591",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "id",": " ]
                               }, {
-                                 "r" : "559",
+                                 "r" : "592",
                                  "s" : [ {
                                     "value" : [ "'test123'" ]
                                  } ]
@@ -5005,54 +5005,54 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "563",
+               "localId" : "597",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "targetMatches",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "564",
+                  "localId" : "598",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "565",
+                     "localId" : "599",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "566",
+                        "localId" : "600",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "567",
+                           "localId" : "601",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
                   }
                }, {
-                  "localId" : "568",
+                  "localId" : "602",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "569",
+                     "localId" : "603",
                      "name" : "id",
                      "elementType" : {
-                        "localId" : "570",
+                        "localId" : "604",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   } ]
                } ],
                "operand" : [ {
-                  "localId" : "553",
+                  "localId" : "586",
                   "name" : "testOptionsList",
                   "type" : "ExpressionRef",
                   "resultTypeSpecifier" : {
-                     "localId" : "554",
+                     "localId" : "587",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "555",
+                        "localId" : "588",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "556",
+                           "localId" : "589",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "557",
+                              "localId" : "590",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -5060,16 +5060,16 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   }
                }, {
-                  "localId" : "558",
+                  "localId" : "591",
                   "type" : "Tuple",
                   "resultTypeSpecifier" : {
-                     "localId" : "560",
+                     "localId" : "594",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "561",
+                        "localId" : "595",
                         "name" : "id",
                         "elementType" : {
-                           "localId" : "562",
+                           "localId" : "596",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -5078,7 +5078,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   "element" : [ {
                      "name" : "id",
                      "value" : {
-                        "localId" : "559",
+                        "localId" : "592",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "test123",
@@ -5088,7 +5088,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                } ]
             }
          }, {
-            "localId" : "572",
+            "localId" : "607",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestsCallSelfFalse",
             "context" : "Patient",
@@ -5096,39 +5096,39 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "572",
+                  "r" : "607",
                   "s" : [ {
                      "value" : [ "","define ","matchTestsCallSelfFalse",": " ]
                   }, {
-                     "r" : "573",
+                     "r" : "608",
                      "s" : [ {
                         "value" : [ "exists " ]
                      }, {
-                        "r" : "615",
+                        "r" : "653",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "615",
+                           "r" : "653",
                            "s" : [ {
                               "s" : [ {
-                                 "r" : "574",
+                                 "r" : "609",
                                  "s" : [ {
-                                    "r" : "575",
+                                    "r" : "610",
                                     "s" : [ {
                                        "value" : [ "(" ]
                                     }, {
-                                       "r" : "575",
+                                       "r" : "610",
                                        "s" : [ {
                                           "value" : [ "{ " ]
                                        }, {
-                                          "r" : "576",
+                                          "r" : "611",
                                           "s" : [ {
                                              "value" : [ "{" ]
                                           }, {
                                              "s" : [ {
                                                 "value" : [ "id",": " ]
                                              }, {
-                                                "r" : "577",
+                                                "r" : "612",
                                                 "s" : [ {
                                                    "value" : [ "'test789'" ]
                                                 } ]
@@ -5139,14 +5139,14 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                                        }, {
                                           "value" : [ ", " ]
                                        }, {
-                                          "r" : "581",
+                                          "r" : "617",
                                           "s" : [ {
                                              "value" : [ "{" ]
                                           }, {
                                              "s" : [ {
                                                 "value" : [ "id",": " ]
                                              }, {
-                                                "r" : "582",
+                                                "r" : "618",
                                                 "s" : [ {
                                                    "value" : [ "'test719'" ]
                                                 } ]
@@ -5167,24 +5167,24 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            }, {
                               "value" : [ "\n  " ]
                            }, {
-                              "r" : "607",
+                              "r" : "645",
                               "s" : [ {
                                  "value" : [ "where " ]
                               }, {
-                                 "r" : "607",
+                                 "r" : "645",
                                  "s" : [ {
-                                    "r" : "598",
+                                    "r" : "636",
                                     "s" : [ {
                                        "value" : [ "\"testOptionsList\"" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "607",
+                                    "r" : "645",
                                     "s" : [ {
                                        "value" : [ "targetMatches","(" ]
                                     }, {
-                                       "r" : "603",
+                                       "r" : "641",
                                        "s" : [ {
                                           "value" : [ "T" ]
                                        } ]
@@ -5202,20 +5202,20 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "573",
+               "localId" : "608",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
-                  "localId" : "624",
+                  "localId" : "662",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "625",
+                     "localId" : "663",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "626",
+                        "localId" : "664",
                         "name" : "id",
                         "elementType" : {
-                           "localId" : "627",
+                           "localId" : "665",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -5223,19 +5223,19 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   }
                } ],
                "operand" : {
-                  "localId" : "615",
+                  "localId" : "653",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
-                     "localId" : "620",
+                     "localId" : "658",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "621",
+                        "localId" : "659",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "622",
+                           "localId" : "660",
                            "name" : "id",
                            "elementType" : {
-                              "localId" : "623",
+                              "localId" : "661",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -5243,19 +5243,19 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   },
                   "source" : [ {
-                     "localId" : "574",
+                     "localId" : "609",
                      "alias" : "T",
                      "resultTypeSpecifier" : {
-                        "localId" : "594",
+                        "localId" : "631",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "595",
+                           "localId" : "632",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "596",
+                              "localId" : "633",
                               "name" : "id",
                               "elementType" : {
-                                 "localId" : "597",
+                                 "localId" : "634",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -5263,19 +5263,19 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                         }
                      },
                      "expression" : {
-                        "localId" : "575",
+                        "localId" : "610",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "590",
+                           "localId" : "627",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "591",
+                              "localId" : "628",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "592",
+                                 "localId" : "629",
                                  "name" : "id",
                                  "elementType" : {
-                                    "localId" : "593",
+                                    "localId" : "630",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -5283,16 +5283,16 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            }
                         },
                         "element" : [ {
-                           "localId" : "576",
+                           "localId" : "611",
                            "type" : "Tuple",
                            "resultTypeSpecifier" : {
-                              "localId" : "578",
+                              "localId" : "614",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "579",
+                                 "localId" : "615",
                                  "name" : "id",
                                  "elementType" : {
-                                    "localId" : "580",
+                                    "localId" : "616",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -5301,7 +5301,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            "element" : [ {
                               "name" : "id",
                               "value" : {
-                                 "localId" : "577",
+                                 "localId" : "612",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "test789",
@@ -5309,16 +5309,16 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                               }
                            } ]
                         }, {
-                           "localId" : "581",
+                           "localId" : "617",
                            "type" : "Tuple",
                            "resultTypeSpecifier" : {
-                              "localId" : "583",
+                              "localId" : "620",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "584",
+                                 "localId" : "621",
                                  "name" : "id",
                                  "elementType" : {
-                                    "localId" : "585",
+                                    "localId" : "622",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -5327,7 +5327,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            "element" : [ {
                               "name" : "id",
                               "value" : {
-                                 "localId" : "582",
+                                 "localId" : "618",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "test719",
@@ -5340,54 +5340,54 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "607",
+                     "localId" : "645",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "targetMatches",
                      "type" : "FunctionRef",
                      "signature" : [ {
-                        "localId" : "608",
+                        "localId" : "646",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "609",
+                           "localId" : "647",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "610",
+                              "localId" : "648",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "611",
+                                 "localId" : "649",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
                            } ]
                         }
                      }, {
-                        "localId" : "612",
+                        "localId" : "650",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "613",
+                           "localId" : "651",
                            "name" : "id",
                            "elementType" : {
-                              "localId" : "614",
+                              "localId" : "652",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      } ],
                      "operand" : [ {
-                        "localId" : "598",
+                        "localId" : "636",
                         "name" : "testOptionsList",
                         "type" : "ExpressionRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "599",
+                           "localId" : "637",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "600",
+                              "localId" : "638",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "601",
+                                 "localId" : "639",
                                  "name" : "option",
                                  "elementType" : {
-                                    "localId" : "602",
+                                    "localId" : "640",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -5395,17 +5395,17 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            }
                         }
                      }, {
-                        "localId" : "603",
+                        "localId" : "641",
                         "name" : "T",
                         "type" : "AliasRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "604",
+                           "localId" : "642",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "605",
+                              "localId" : "643",
                               "name" : "id",
                               "elementType" : {
-                                 "localId" : "606",
+                                 "localId" : "644",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -5416,7 +5416,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             }
          }, {
-            "localId" : "629",
+            "localId" : "668",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestsCallSelfTrue",
             "context" : "Patient",
@@ -5424,39 +5424,39 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "629",
+                  "r" : "668",
                   "s" : [ {
                      "value" : [ "","define ","matchTestsCallSelfTrue",": " ]
                   }, {
-                     "r" : "630",
+                     "r" : "669",
                      "s" : [ {
                         "value" : [ "exists " ]
                      }, {
-                        "r" : "672",
+                        "r" : "714",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "672",
+                           "r" : "714",
                            "s" : [ {
                               "s" : [ {
-                                 "r" : "631",
+                                 "r" : "670",
                                  "s" : [ {
-                                    "r" : "632",
+                                    "r" : "671",
                                     "s" : [ {
                                        "value" : [ "(" ]
                                     }, {
-                                       "r" : "632",
+                                       "r" : "671",
                                        "s" : [ {
                                           "value" : [ "{ " ]
                                        }, {
-                                          "r" : "633",
+                                          "r" : "672",
                                           "s" : [ {
                                              "value" : [ "{" ]
                                           }, {
                                              "s" : [ {
                                                 "value" : [ "id",": " ]
                                              }, {
-                                                "r" : "634",
+                                                "r" : "673",
                                                 "s" : [ {
                                                    "value" : [ "'test341'" ]
                                                 } ]
@@ -5467,14 +5467,14 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                                        }, {
                                           "value" : [ ", " ]
                                        }, {
-                                          "r" : "638",
+                                          "r" : "678",
                                           "s" : [ {
                                              "value" : [ "{" ]
                                           }, {
                                              "s" : [ {
                                                 "value" : [ "id",": " ]
                                              }, {
-                                                "r" : "639",
+                                                "r" : "679",
                                                 "s" : [ {
                                                    "value" : [ "'test719'" ]
                                                 } ]
@@ -5495,24 +5495,24 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            }, {
                               "value" : [ "\n  " ]
                            }, {
-                              "r" : "664",
+                              "r" : "706",
                               "s" : [ {
                                  "value" : [ "where " ]
                               }, {
-                                 "r" : "664",
+                                 "r" : "706",
                                  "s" : [ {
-                                    "r" : "655",
+                                    "r" : "697",
                                     "s" : [ {
                                        "value" : [ "\"testOptionsList\"" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "664",
+                                    "r" : "706",
                                     "s" : [ {
                                        "value" : [ "targetMatches","(" ]
                                     }, {
-                                       "r" : "660",
+                                       "r" : "702",
                                        "s" : [ {
                                           "value" : [ "T" ]
                                        } ]
@@ -5530,20 +5530,20 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                }
             } ],
             "expression" : {
-               "localId" : "630",
+               "localId" : "669",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
-                  "localId" : "681",
+                  "localId" : "723",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "682",
+                     "localId" : "724",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "683",
+                        "localId" : "725",
                         "name" : "id",
                         "elementType" : {
-                           "localId" : "684",
+                           "localId" : "726",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -5551,19 +5551,19 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   }
                } ],
                "operand" : {
-                  "localId" : "672",
+                  "localId" : "714",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
-                     "localId" : "677",
+                     "localId" : "719",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "678",
+                        "localId" : "720",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "679",
+                           "localId" : "721",
                            "name" : "id",
                            "elementType" : {
-                              "localId" : "680",
+                              "localId" : "722",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -5571,19 +5571,19 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                      }
                   },
                   "source" : [ {
-                     "localId" : "631",
+                     "localId" : "670",
                      "alias" : "T",
                      "resultTypeSpecifier" : {
-                        "localId" : "651",
+                        "localId" : "692",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "652",
+                           "localId" : "693",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "653",
+                              "localId" : "694",
                               "name" : "id",
                               "elementType" : {
-                                 "localId" : "654",
+                                 "localId" : "695",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -5591,19 +5591,19 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                         }
                      },
                      "expression" : {
-                        "localId" : "632",
+                        "localId" : "671",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "647",
+                           "localId" : "688",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "648",
+                              "localId" : "689",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "649",
+                                 "localId" : "690",
                                  "name" : "id",
                                  "elementType" : {
-                                    "localId" : "650",
+                                    "localId" : "691",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -5611,16 +5611,16 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            }
                         },
                         "element" : [ {
-                           "localId" : "633",
+                           "localId" : "672",
                            "type" : "Tuple",
                            "resultTypeSpecifier" : {
-                              "localId" : "635",
+                              "localId" : "675",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "636",
+                                 "localId" : "676",
                                  "name" : "id",
                                  "elementType" : {
-                                    "localId" : "637",
+                                    "localId" : "677",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -5629,7 +5629,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            "element" : [ {
                               "name" : "id",
                               "value" : {
-                                 "localId" : "634",
+                                 "localId" : "673",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "test341",
@@ -5637,16 +5637,16 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                               }
                            } ]
                         }, {
-                           "localId" : "638",
+                           "localId" : "678",
                            "type" : "Tuple",
                            "resultTypeSpecifier" : {
-                              "localId" : "640",
+                              "localId" : "681",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "641",
+                                 "localId" : "682",
                                  "name" : "id",
                                  "elementType" : {
-                                    "localId" : "642",
+                                    "localId" : "683",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -5655,7 +5655,7 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            "element" : [ {
                               "name" : "id",
                               "value" : {
-                                 "localId" : "639",
+                                 "localId" : "679",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "test719",
@@ -5668,54 +5668,54 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "664",
+                     "localId" : "706",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "targetMatches",
                      "type" : "FunctionRef",
                      "signature" : [ {
-                        "localId" : "665",
+                        "localId" : "707",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "666",
+                           "localId" : "708",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "667",
+                              "localId" : "709",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "668",
+                                 "localId" : "710",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
                            } ]
                         }
                      }, {
-                        "localId" : "669",
+                        "localId" : "711",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "670",
+                           "localId" : "712",
                            "name" : "id",
                            "elementType" : {
-                              "localId" : "671",
+                              "localId" : "713",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      } ],
                      "operand" : [ {
-                        "localId" : "655",
+                        "localId" : "697",
                         "name" : "testOptionsList",
                         "type" : "ExpressionRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "656",
+                           "localId" : "698",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "657",
+                              "localId" : "699",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "658",
+                                 "localId" : "700",
                                  "name" : "option",
                                  "elementType" : {
-                                    "localId" : "659",
+                                    "localId" : "701",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -5723,17 +5723,17 @@ module.exports['FluentFunctionsOverloadCallingSelf'] = {
                            }
                         }
                      }, {
-                        "localId" : "660",
+                        "localId" : "702",
                         "name" : "T",
                         "type" : "AliasRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "661",
+                           "localId" : "703",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "662",
+                              "localId" : "704",
                               "name" : "id",
                               "elementType" : {
-                                 "localId" : "663",
+                                 "localId" : "705",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -5785,14 +5785,14 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
    "library" : {
       "localId" : "0",
       "annotation" : [ {
-         "translatorVersion" : "3.22.0",
+         "translatorVersion" : "3.27.0",
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "475",
+            "r" : "501",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -5835,13 +5835,13 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
       },
       "includes" : {
          "def" : [ {
-            "localId" : "207",
+            "localId" : "208",
             "localIdentifier" : "FluentFunctionsOverloadCallingSelf",
             "path" : "FluentFunctionsOverloadCallingSelf",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "207",
+                  "r" : "208",
                   "s" : [ {
                      "value" : [ "","include " ]
                   }, {
@@ -5857,21 +5857,21 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "211",
+            "localId" : "213",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "209",
+            "localId" : "211",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "210",
+               "localId" : "212",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "208",
+                  "localId" : "210",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -5881,29 +5881,29 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             }
          }, {
-            "localId" : "213",
+            "localId" : "216",
             "name" : "testOptionsList",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "213",
+                  "r" : "216",
                   "s" : [ {
                      "value" : [ "","define ","testOptionsList",":\n  " ]
                   }, {
-                     "r" : "214",
+                     "r" : "217",
                      "s" : [ {
                         "value" : [ "{\n    " ]
                      }, {
-                        "r" : "215",
+                        "r" : "218",
                         "s" : [ {
                            "value" : [ "{\n      " ]
                         }, {
                            "s" : [ {
                               "value" : [ "option",": " ]
                            }, {
-                              "r" : "216",
+                              "r" : "219",
                               "s" : [ {
                                  "value" : [ "'test123'" ]
                               } ]
@@ -5914,14 +5914,14 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                      }, {
                         "value" : [ ",\n    " ]
                      }, {
-                        "r" : "220",
+                        "r" : "224",
                         "s" : [ {
                            "value" : [ "{\n      " ]
                         }, {
                            "s" : [ {
                               "value" : [ "option",": " ]
                            }, {
-                              "r" : "221",
+                              "r" : "225",
                               "s" : [ {
                                  "value" : [ "'test341'" ]
                               } ]
@@ -5936,16 +5936,16 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "229",
+               "localId" : "234",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "230",
+                  "localId" : "235",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "231",
+                     "localId" : "236",
                      "name" : "option",
                      "elementType" : {
-                        "localId" : "232",
+                        "localId" : "237",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -5953,19 +5953,19 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             },
             "expression" : {
-               "localId" : "214",
+               "localId" : "217",
                "type" : "List",
                "resultTypeSpecifier" : {
-                  "localId" : "225",
+                  "localId" : "230",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "226",
+                     "localId" : "231",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "227",
+                        "localId" : "232",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "228",
+                           "localId" : "233",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -5973,16 +5973,16 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                   }
                },
                "element" : [ {
-                  "localId" : "215",
+                  "localId" : "218",
                   "type" : "Tuple",
                   "resultTypeSpecifier" : {
-                     "localId" : "217",
+                     "localId" : "221",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "218",
+                        "localId" : "222",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "219",
+                           "localId" : "223",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -5991,7 +5991,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                   "element" : [ {
                      "name" : "option",
                      "value" : {
-                        "localId" : "216",
+                        "localId" : "219",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "test123",
@@ -5999,16 +5999,16 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                      }
                   } ]
                }, {
-                  "localId" : "220",
+                  "localId" : "224",
                   "type" : "Tuple",
                   "resultTypeSpecifier" : {
-                     "localId" : "222",
+                     "localId" : "227",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "223",
+                        "localId" : "228",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "224",
+                           "localId" : "229",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -6017,7 +6017,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                   "element" : [ {
                      "name" : "option",
                      "value" : {
-                        "localId" : "221",
+                        "localId" : "225",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "test341",
@@ -6027,7 +6027,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                } ]
             }
          }, {
-            "localId" : "234",
+            "localId" : "240",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestFalse",
             "context" : "Patient",
@@ -6035,17 +6035,17 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "234",
+                  "r" : "240",
                   "s" : [ {
                      "value" : [ "","define ","matchTestFalse",": " ]
                   }, {
-                     "r" : "255",
+                     "r" : "262",
                      "s" : [ {
-                        "r" : "246",
+                        "r" : "252",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "235",
+                           "r" : "241",
                            "s" : [ {
                               "value" : [ "\"testOptionsList\"" ]
                            } ]
@@ -6055,11 +6055,11 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "255",
+                        "r" : "262",
                         "s" : [ {
                            "value" : [ "targetMatches","(" ]
                         }, {
-                           "r" : "254",
+                           "r" : "260",
                            "s" : [ {
                               "value" : [ "'test789'" ]
                            } ]
@@ -6071,55 +6071,55 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             } ],
             "expression" : {
-               "localId" : "255",
+               "localId" : "262",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "targetMatches",
                "libraryName" : "FluentFunctionsOverloadCallingSelf",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "256",
+                  "localId" : "263",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "257",
+                     "localId" : "264",
                      "name" : "option",
                      "elementType" : {
-                        "localId" : "258",
+                        "localId" : "265",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   } ]
                }, {
-                  "localId" : "259",
+                  "localId" : "266",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "246",
+                  "localId" : "252",
                   "type" : "First",
                   "resultTypeSpecifier" : {
-                     "localId" : "251",
+                     "localId" : "257",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "252",
+                        "localId" : "258",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "253",
+                           "localId" : "259",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
                   },
                   "signature" : [ {
-                     "localId" : "247",
+                     "localId" : "253",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "248",
+                        "localId" : "254",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "249",
+                           "localId" : "255",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "250",
+                              "localId" : "256",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -6127,20 +6127,20 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                      }
                   } ],
                   "source" : {
-                     "localId" : "235",
+                     "localId" : "241",
                      "name" : "testOptionsList",
                      "type" : "ExpressionRef",
                      "resultTypeSpecifier" : {
-                        "localId" : "236",
+                        "localId" : "242",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "237",
+                           "localId" : "243",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "238",
+                              "localId" : "244",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "239",
+                                 "localId" : "245",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -6149,7 +6149,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                      }
                   }
                }, {
-                  "localId" : "254",
+                  "localId" : "260",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "test789",
@@ -6157,7 +6157,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                } ]
             }
          }, {
-            "localId" : "261",
+            "localId" : "269",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestTrue",
             "context" : "Patient",
@@ -6165,17 +6165,17 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "261",
+                  "r" : "269",
                   "s" : [ {
                      "value" : [ "","define ","matchTestTrue",": " ]
                   }, {
-                     "r" : "282",
+                     "r" : "291",
                      "s" : [ {
-                        "r" : "273",
+                        "r" : "281",
                         "s" : [ {
                            "value" : [ "First","(" ]
                         }, {
-                           "r" : "262",
+                           "r" : "270",
                            "s" : [ {
                               "value" : [ "\"testOptionsList\"" ]
                            } ]
@@ -6185,11 +6185,11 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "282",
+                        "r" : "291",
                         "s" : [ {
                            "value" : [ "targetMatches","(" ]
                         }, {
-                           "r" : "281",
+                           "r" : "289",
                            "s" : [ {
                               "value" : [ "'test123'" ]
                            } ]
@@ -6201,55 +6201,55 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             } ],
             "expression" : {
-               "localId" : "282",
+               "localId" : "291",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "targetMatches",
                "libraryName" : "FluentFunctionsOverloadCallingSelf",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "283",
+                  "localId" : "292",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "284",
+                     "localId" : "293",
                      "name" : "option",
                      "elementType" : {
-                        "localId" : "285",
+                        "localId" : "294",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   } ]
                }, {
-                  "localId" : "286",
+                  "localId" : "295",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "273",
+                  "localId" : "281",
                   "type" : "First",
                   "resultTypeSpecifier" : {
-                     "localId" : "278",
+                     "localId" : "286",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "279",
+                        "localId" : "287",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "280",
+                           "localId" : "288",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
                   },
                   "signature" : [ {
-                     "localId" : "274",
+                     "localId" : "282",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "275",
+                        "localId" : "283",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "276",
+                           "localId" : "284",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "277",
+                              "localId" : "285",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -6257,20 +6257,20 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                      }
                   } ],
                   "source" : {
-                     "localId" : "262",
+                     "localId" : "270",
                      "name" : "testOptionsList",
                      "type" : "ExpressionRef",
                      "resultTypeSpecifier" : {
-                        "localId" : "263",
+                        "localId" : "271",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "264",
+                           "localId" : "272",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "265",
+                              "localId" : "273",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "266",
+                                 "localId" : "274",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -6279,7 +6279,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                      }
                   }
                }, {
-                  "localId" : "281",
+                  "localId" : "289",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "test123",
@@ -6287,7 +6287,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                } ]
             }
          }, {
-            "localId" : "288",
+            "localId" : "298",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestsFalse",
             "context" : "Patient",
@@ -6295,39 +6295,39 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "288",
+                  "r" : "298",
                   "s" : [ {
                      "value" : [ "","define ","matchTestsFalse",": " ]
                   }, {
-                     "r" : "289",
+                     "r" : "299",
                      "s" : [ {
                         "value" : [ "exists " ]
                      }, {
-                        "r" : "325",
+                        "r" : "338",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "325",
+                           "r" : "338",
                            "s" : [ {
                               "s" : [ {
-                                 "r" : "290",
+                                 "r" : "300",
                                  "s" : [ {
-                                    "r" : "291",
+                                    "r" : "301",
                                     "s" : [ {
                                        "value" : [ "(" ]
                                     }, {
-                                       "r" : "291",
+                                       "r" : "301",
                                        "s" : [ {
                                           "value" : [ "{" ]
                                        }, {
-                                          "r" : "292",
+                                          "r" : "302",
                                           "s" : [ {
                                              "value" : [ "'test789'" ]
                                           } ]
                                        }, {
                                           "value" : [ ", " ]
                                        }, {
-                                          "r" : "293",
+                                          "r" : "304",
                                           "s" : [ {
                                              "value" : [ "'test719'" ]
                                           } ]
@@ -6344,17 +6344,17 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            }, {
                               "value" : [ "\n  " ]
                            }, {
-                              "r" : "320",
+                              "r" : "333",
                               "s" : [ {
                                  "value" : [ "where " ]
                               }, {
-                                 "r" : "320",
+                                 "r" : "333",
                                  "s" : [ {
-                                    "r" : "311",
+                                    "r" : "324",
                                     "s" : [ {
                                        "value" : [ "First","(" ]
                                     }, {
-                                       "r" : "300",
+                                       "r" : "313",
                                        "s" : [ {
                                           "value" : [ "\"testOptionsList\"" ]
                                        } ]
@@ -6364,11 +6364,11 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "320",
+                                    "r" : "333",
                                     "s" : [ {
                                        "value" : [ "targetMatches","(" ]
                                     }, {
-                                       "r" : "319",
+                                       "r" : "332",
                                        "s" : [ {
                                           "value" : [ "T" ]
                                        } ]
@@ -6386,62 +6386,62 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             } ],
             "expression" : {
-               "localId" : "289",
+               "localId" : "299",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
-                  "localId" : "330",
+                  "localId" : "343",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "331",
+                     "localId" : "344",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "operand" : {
-                  "localId" : "325",
+                  "localId" : "338",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
-                     "localId" : "328",
+                     "localId" : "341",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "329",
+                        "localId" : "342",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "source" : [ {
-                     "localId" : "290",
+                     "localId" : "300",
                      "alias" : "T",
                      "resultTypeSpecifier" : {
-                        "localId" : "298",
+                        "localId" : "310",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "299",
+                           "localId" : "311",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "expression" : {
-                        "localId" : "291",
+                        "localId" : "301",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "296",
+                           "localId" : "308",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "297",
+                              "localId" : "309",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "292",
+                           "localId" : "302",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "test789",
                            "type" : "Literal"
                         }, {
-                           "localId" : "293",
+                           "localId" : "304",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "test719",
@@ -6452,55 +6452,55 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "320",
+                     "localId" : "333",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "targetMatches",
                      "libraryName" : "FluentFunctionsOverloadCallingSelf",
                      "type" : "FunctionRef",
                      "signature" : [ {
-                        "localId" : "321",
+                        "localId" : "334",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "322",
+                           "localId" : "335",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "323",
+                              "localId" : "336",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      }, {
-                        "localId" : "324",
+                        "localId" : "337",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "localId" : "311",
+                        "localId" : "324",
                         "type" : "First",
                         "resultTypeSpecifier" : {
-                           "localId" : "316",
+                           "localId" : "329",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "317",
+                              "localId" : "330",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "318",
+                                 "localId" : "331",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
                            } ]
                         },
                         "signature" : [ {
-                           "localId" : "312",
+                           "localId" : "325",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "313",
+                              "localId" : "326",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "314",
+                                 "localId" : "327",
                                  "name" : "option",
                                  "elementType" : {
-                                    "localId" : "315",
+                                    "localId" : "328",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -6508,20 +6508,20 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            }
                         } ],
                         "source" : {
-                           "localId" : "300",
+                           "localId" : "313",
                            "name" : "testOptionsList",
                            "type" : "ExpressionRef",
                            "resultTypeSpecifier" : {
-                              "localId" : "301",
+                              "localId" : "314",
                               "type" : "ListTypeSpecifier",
                               "elementType" : {
-                                 "localId" : "302",
+                                 "localId" : "315",
                                  "type" : "TupleTypeSpecifier",
                                  "element" : [ {
-                                    "localId" : "303",
+                                    "localId" : "316",
                                     "name" : "option",
                                     "elementType" : {
-                                       "localId" : "304",
+                                       "localId" : "317",
                                        "name" : "{urn:hl7-org:elm-types:r1}String",
                                        "type" : "NamedTypeSpecifier"
                                     }
@@ -6530,7 +6530,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            }
                         }
                      }, {
-                        "localId" : "319",
+                        "localId" : "332",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "T",
                         "type" : "AliasRef"
@@ -6539,7 +6539,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             }
          }, {
-            "localId" : "333",
+            "localId" : "347",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestsTrue",
             "context" : "Patient",
@@ -6547,39 +6547,39 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "333",
+                  "r" : "347",
                   "s" : [ {
                      "value" : [ "","define ","matchTestsTrue",": " ]
                   }, {
-                     "r" : "334",
+                     "r" : "348",
                      "s" : [ {
                         "value" : [ "exists " ]
                      }, {
-                        "r" : "370",
+                        "r" : "387",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "370",
+                           "r" : "387",
                            "s" : [ {
                               "s" : [ {
-                                 "r" : "335",
+                                 "r" : "349",
                                  "s" : [ {
-                                    "r" : "336",
+                                    "r" : "350",
                                     "s" : [ {
                                        "value" : [ "(" ]
                                     }, {
-                                       "r" : "336",
+                                       "r" : "350",
                                        "s" : [ {
                                           "value" : [ "{" ]
                                        }, {
-                                          "r" : "337",
+                                          "r" : "351",
                                           "s" : [ {
                                              "value" : [ "'test341'" ]
                                           } ]
                                        }, {
                                           "value" : [ ", " ]
                                        }, {
-                                          "r" : "338",
+                                          "r" : "353",
                                           "s" : [ {
                                              "value" : [ "'test719'" ]
                                           } ]
@@ -6596,17 +6596,17 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            }, {
                               "value" : [ "\n  " ]
                            }, {
-                              "r" : "365",
+                              "r" : "382",
                               "s" : [ {
                                  "value" : [ "where " ]
                               }, {
-                                 "r" : "365",
+                                 "r" : "382",
                                  "s" : [ {
-                                    "r" : "356",
+                                    "r" : "373",
                                     "s" : [ {
                                        "value" : [ "Last","(" ]
                                     }, {
-                                       "r" : "345",
+                                       "r" : "362",
                                        "s" : [ {
                                           "value" : [ "\"testOptionsList\"" ]
                                        } ]
@@ -6616,11 +6616,11 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "365",
+                                    "r" : "382",
                                     "s" : [ {
                                        "value" : [ "targetMatches","(" ]
                                     }, {
-                                       "r" : "364",
+                                       "r" : "381",
                                        "s" : [ {
                                           "value" : [ "T" ]
                                        } ]
@@ -6638,62 +6638,62 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             } ],
             "expression" : {
-               "localId" : "334",
+               "localId" : "348",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
-                  "localId" : "375",
+                  "localId" : "392",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "376",
+                     "localId" : "393",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "operand" : {
-                  "localId" : "370",
+                  "localId" : "387",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
-                     "localId" : "373",
+                     "localId" : "390",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "374",
+                        "localId" : "391",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "source" : [ {
-                     "localId" : "335",
+                     "localId" : "349",
                      "alias" : "T",
                      "resultTypeSpecifier" : {
-                        "localId" : "343",
+                        "localId" : "359",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "344",
+                           "localId" : "360",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "expression" : {
-                        "localId" : "336",
+                        "localId" : "350",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "341",
+                           "localId" : "357",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "342",
+                              "localId" : "358",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         },
                         "element" : [ {
-                           "localId" : "337",
+                           "localId" : "351",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "test341",
                            "type" : "Literal"
                         }, {
-                           "localId" : "338",
+                           "localId" : "353",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "test719",
@@ -6704,55 +6704,55 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "365",
+                     "localId" : "382",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "targetMatches",
                      "libraryName" : "FluentFunctionsOverloadCallingSelf",
                      "type" : "FunctionRef",
                      "signature" : [ {
-                        "localId" : "366",
+                        "localId" : "383",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "367",
+                           "localId" : "384",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "368",
+                              "localId" : "385",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      }, {
-                        "localId" : "369",
+                        "localId" : "386",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "localId" : "356",
+                        "localId" : "373",
                         "type" : "Last",
                         "resultTypeSpecifier" : {
-                           "localId" : "361",
+                           "localId" : "378",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "362",
+                              "localId" : "379",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "363",
+                                 "localId" : "380",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
                            } ]
                         },
                         "signature" : [ {
-                           "localId" : "357",
+                           "localId" : "374",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "358",
+                              "localId" : "375",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "359",
+                                 "localId" : "376",
                                  "name" : "option",
                                  "elementType" : {
-                                    "localId" : "360",
+                                    "localId" : "377",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -6760,20 +6760,20 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            }
                         } ],
                         "source" : {
-                           "localId" : "345",
+                           "localId" : "362",
                            "name" : "testOptionsList",
                            "type" : "ExpressionRef",
                            "resultTypeSpecifier" : {
-                              "localId" : "346",
+                              "localId" : "363",
                               "type" : "ListTypeSpecifier",
                               "elementType" : {
-                                 "localId" : "347",
+                                 "localId" : "364",
                                  "type" : "TupleTypeSpecifier",
                                  "element" : [ {
-                                    "localId" : "348",
+                                    "localId" : "365",
                                     "name" : "option",
                                     "elementType" : {
-                                       "localId" : "349",
+                                       "localId" : "366",
                                        "name" : "{urn:hl7-org:elm-types:r1}String",
                                        "type" : "NamedTypeSpecifier"
                                     }
@@ -6782,7 +6782,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            }
                         }
                      }, {
-                        "localId" : "364",
+                        "localId" : "381",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "T",
                         "type" : "AliasRef"
@@ -6791,7 +6791,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             }
          }, {
-            "localId" : "378",
+            "localId" : "396",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestCallSelfFalse",
             "context" : "Patient",
@@ -6799,31 +6799,31 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "378",
+                  "r" : "396",
                   "s" : [ {
                      "value" : [ "","define ","matchTestCallSelfFalse",": " ]
                   }, {
-                     "r" : "389",
+                     "r" : "408",
                      "s" : [ {
-                        "r" : "379",
+                        "r" : "397",
                         "s" : [ {
                            "value" : [ "\"testOptionsList\"" ]
                         } ]
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "389",
+                        "r" : "408",
                         "s" : [ {
                            "value" : [ "targetMatches","(" ]
                         }, {
-                           "r" : "384",
+                           "r" : "402",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "id",": " ]
                               }, {
-                                 "r" : "385",
+                                 "r" : "403",
                                  "s" : [ {
                                     "value" : [ "'test789'" ]
                                  } ]
@@ -6839,55 +6839,55 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             } ],
             "expression" : {
-               "localId" : "389",
+               "localId" : "408",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "targetMatches",
                "libraryName" : "FluentFunctionsOverloadCallingSelf",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "390",
+                  "localId" : "409",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "391",
+                     "localId" : "410",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "392",
+                        "localId" : "411",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "393",
+                           "localId" : "412",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
                   }
                }, {
-                  "localId" : "394",
+                  "localId" : "413",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "395",
+                     "localId" : "414",
                      "name" : "id",
                      "elementType" : {
-                        "localId" : "396",
+                        "localId" : "415",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   } ]
                } ],
                "operand" : [ {
-                  "localId" : "379",
+                  "localId" : "397",
                   "name" : "testOptionsList",
                   "type" : "ExpressionRef",
                   "resultTypeSpecifier" : {
-                     "localId" : "380",
+                     "localId" : "398",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "381",
+                        "localId" : "399",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "382",
+                           "localId" : "400",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "383",
+                              "localId" : "401",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -6895,16 +6895,16 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                      }
                   }
                }, {
-                  "localId" : "384",
+                  "localId" : "402",
                   "type" : "Tuple",
                   "resultTypeSpecifier" : {
-                     "localId" : "386",
+                     "localId" : "405",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "387",
+                        "localId" : "406",
                         "name" : "id",
                         "elementType" : {
-                           "localId" : "388",
+                           "localId" : "407",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -6913,7 +6913,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                   "element" : [ {
                      "name" : "id",
                      "value" : {
-                        "localId" : "385",
+                        "localId" : "403",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "test789",
@@ -6923,7 +6923,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                } ]
             }
          }, {
-            "localId" : "398",
+            "localId" : "418",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestCallSelfTrue",
             "context" : "Patient",
@@ -6931,31 +6931,31 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "398",
+                  "r" : "418",
                   "s" : [ {
                      "value" : [ "","define ","matchTestCallSelfTrue",": " ]
                   }, {
-                     "r" : "409",
+                     "r" : "430",
                      "s" : [ {
-                        "r" : "399",
+                        "r" : "419",
                         "s" : [ {
                            "value" : [ "\"testOptionsList\"" ]
                         } ]
                      }, {
                         "value" : [ "." ]
                      }, {
-                        "r" : "409",
+                        "r" : "430",
                         "s" : [ {
                            "value" : [ "targetMatches","(" ]
                         }, {
-                           "r" : "404",
+                           "r" : "424",
                            "s" : [ {
                               "value" : [ "{" ]
                            }, {
                               "s" : [ {
                                  "value" : [ "id",": " ]
                               }, {
-                                 "r" : "405",
+                                 "r" : "425",
                                  "s" : [ {
                                     "value" : [ "'test123'" ]
                                  } ]
@@ -6971,55 +6971,55 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             } ],
             "expression" : {
-               "localId" : "409",
+               "localId" : "430",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "targetMatches",
                "libraryName" : "FluentFunctionsOverloadCallingSelf",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "410",
+                  "localId" : "431",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "411",
+                     "localId" : "432",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "412",
+                        "localId" : "433",
                         "name" : "option",
                         "elementType" : {
-                           "localId" : "413",
+                           "localId" : "434",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
                   }
                }, {
-                  "localId" : "414",
+                  "localId" : "435",
                   "type" : "TupleTypeSpecifier",
                   "element" : [ {
-                     "localId" : "415",
+                     "localId" : "436",
                      "name" : "id",
                      "elementType" : {
-                        "localId" : "416",
+                        "localId" : "437",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   } ]
                } ],
                "operand" : [ {
-                  "localId" : "399",
+                  "localId" : "419",
                   "name" : "testOptionsList",
                   "type" : "ExpressionRef",
                   "resultTypeSpecifier" : {
-                     "localId" : "400",
+                     "localId" : "420",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "401",
+                        "localId" : "421",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "402",
+                           "localId" : "422",
                            "name" : "option",
                            "elementType" : {
-                              "localId" : "403",
+                              "localId" : "423",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -7027,16 +7027,16 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                      }
                   }
                }, {
-                  "localId" : "404",
+                  "localId" : "424",
                   "type" : "Tuple",
                   "resultTypeSpecifier" : {
-                     "localId" : "406",
+                     "localId" : "427",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "407",
+                        "localId" : "428",
                         "name" : "id",
                         "elementType" : {
-                           "localId" : "408",
+                           "localId" : "429",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -7045,7 +7045,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                   "element" : [ {
                      "name" : "id",
                      "value" : {
-                        "localId" : "405",
+                        "localId" : "425",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "test123",
@@ -7055,7 +7055,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                } ]
             }
          }, {
-            "localId" : "418",
+            "localId" : "440",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestsCallSelfFalse",
             "context" : "Patient",
@@ -7063,39 +7063,39 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "418",
+                  "r" : "440",
                   "s" : [ {
                      "value" : [ "","define ","matchTestsCallSelfFalse",": " ]
                   }, {
-                     "r" : "419",
+                     "r" : "441",
                      "s" : [ {
                         "value" : [ "exists " ]
                      }, {
-                        "r" : "461",
+                        "r" : "486",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "461",
+                           "r" : "486",
                            "s" : [ {
                               "s" : [ {
-                                 "r" : "420",
+                                 "r" : "442",
                                  "s" : [ {
-                                    "r" : "421",
+                                    "r" : "443",
                                     "s" : [ {
                                        "value" : [ "(" ]
                                     }, {
-                                       "r" : "421",
+                                       "r" : "443",
                                        "s" : [ {
                                           "value" : [ "{ " ]
                                        }, {
-                                          "r" : "422",
+                                          "r" : "444",
                                           "s" : [ {
                                              "value" : [ "{" ]
                                           }, {
                                              "s" : [ {
                                                 "value" : [ "id",": " ]
                                              }, {
-                                                "r" : "423",
+                                                "r" : "445",
                                                 "s" : [ {
                                                    "value" : [ "'test789'" ]
                                                 } ]
@@ -7106,14 +7106,14 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                                        }, {
                                           "value" : [ ", " ]
                                        }, {
-                                          "r" : "427",
+                                          "r" : "450",
                                           "s" : [ {
                                              "value" : [ "{" ]
                                           }, {
                                              "s" : [ {
                                                 "value" : [ "id",": " ]
                                              }, {
-                                                "r" : "428",
+                                                "r" : "451",
                                                 "s" : [ {
                                                    "value" : [ "'test719'" ]
                                                 } ]
@@ -7134,24 +7134,24 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            }, {
                               "value" : [ "\n  " ]
                            }, {
-                              "r" : "453",
+                              "r" : "478",
                               "s" : [ {
                                  "value" : [ "where " ]
                               }, {
-                                 "r" : "453",
+                                 "r" : "478",
                                  "s" : [ {
-                                    "r" : "444",
+                                    "r" : "469",
                                     "s" : [ {
                                        "value" : [ "\"testOptionsList\"" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "453",
+                                    "r" : "478",
                                     "s" : [ {
                                        "value" : [ "targetMatches","(" ]
                                     }, {
-                                       "r" : "449",
+                                       "r" : "474",
                                        "s" : [ {
                                           "value" : [ "T" ]
                                        } ]
@@ -7169,20 +7169,20 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             } ],
             "expression" : {
-               "localId" : "419",
+               "localId" : "441",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
-                  "localId" : "470",
+                  "localId" : "495",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "471",
+                     "localId" : "496",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "472",
+                        "localId" : "497",
                         "name" : "id",
                         "elementType" : {
-                           "localId" : "473",
+                           "localId" : "498",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -7190,19 +7190,19 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                   }
                } ],
                "operand" : {
-                  "localId" : "461",
+                  "localId" : "486",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
-                     "localId" : "466",
+                     "localId" : "491",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "467",
+                        "localId" : "492",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "468",
+                           "localId" : "493",
                            "name" : "id",
                            "elementType" : {
-                              "localId" : "469",
+                              "localId" : "494",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -7210,19 +7210,19 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                      }
                   },
                   "source" : [ {
-                     "localId" : "420",
+                     "localId" : "442",
                      "alias" : "T",
                      "resultTypeSpecifier" : {
-                        "localId" : "440",
+                        "localId" : "464",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "441",
+                           "localId" : "465",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "442",
+                              "localId" : "466",
                               "name" : "id",
                               "elementType" : {
-                                 "localId" : "443",
+                                 "localId" : "467",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -7230,19 +7230,19 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                         }
                      },
                      "expression" : {
-                        "localId" : "421",
+                        "localId" : "443",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "436",
+                           "localId" : "460",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "437",
+                              "localId" : "461",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "438",
+                                 "localId" : "462",
                                  "name" : "id",
                                  "elementType" : {
-                                    "localId" : "439",
+                                    "localId" : "463",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -7250,16 +7250,16 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            }
                         },
                         "element" : [ {
-                           "localId" : "422",
+                           "localId" : "444",
                            "type" : "Tuple",
                            "resultTypeSpecifier" : {
-                              "localId" : "424",
+                              "localId" : "447",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "425",
+                                 "localId" : "448",
                                  "name" : "id",
                                  "elementType" : {
-                                    "localId" : "426",
+                                    "localId" : "449",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -7268,7 +7268,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            "element" : [ {
                               "name" : "id",
                               "value" : {
-                                 "localId" : "423",
+                                 "localId" : "445",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "test789",
@@ -7276,16 +7276,16 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                               }
                            } ]
                         }, {
-                           "localId" : "427",
+                           "localId" : "450",
                            "type" : "Tuple",
                            "resultTypeSpecifier" : {
-                              "localId" : "429",
+                              "localId" : "453",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "430",
+                                 "localId" : "454",
                                  "name" : "id",
                                  "elementType" : {
-                                    "localId" : "431",
+                                    "localId" : "455",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -7294,7 +7294,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            "element" : [ {
                               "name" : "id",
                               "value" : {
-                                 "localId" : "428",
+                                 "localId" : "451",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "test719",
@@ -7307,55 +7307,55 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "453",
+                     "localId" : "478",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "targetMatches",
                      "libraryName" : "FluentFunctionsOverloadCallingSelf",
                      "type" : "FunctionRef",
                      "signature" : [ {
-                        "localId" : "454",
+                        "localId" : "479",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "455",
+                           "localId" : "480",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "456",
+                              "localId" : "481",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "457",
+                                 "localId" : "482",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
                            } ]
                         }
                      }, {
-                        "localId" : "458",
+                        "localId" : "483",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "459",
+                           "localId" : "484",
                            "name" : "id",
                            "elementType" : {
-                              "localId" : "460",
+                              "localId" : "485",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      } ],
                      "operand" : [ {
-                        "localId" : "444",
+                        "localId" : "469",
                         "name" : "testOptionsList",
                         "type" : "ExpressionRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "445",
+                           "localId" : "470",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "446",
+                              "localId" : "471",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "447",
+                                 "localId" : "472",
                                  "name" : "option",
                                  "elementType" : {
-                                    "localId" : "448",
+                                    "localId" : "473",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -7363,17 +7363,17 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            }
                         }
                      }, {
-                        "localId" : "449",
+                        "localId" : "474",
                         "name" : "T",
                         "type" : "AliasRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "450",
+                           "localId" : "475",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "451",
+                              "localId" : "476",
                               "name" : "id",
                               "elementType" : {
-                                 "localId" : "452",
+                                 "localId" : "477",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -7384,7 +7384,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             }
          }, {
-            "localId" : "475",
+            "localId" : "501",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "matchTestsCallSelfTrue",
             "context" : "Patient",
@@ -7392,39 +7392,39 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "475",
+                  "r" : "501",
                   "s" : [ {
                      "value" : [ "","define ","matchTestsCallSelfTrue",": " ]
                   }, {
-                     "r" : "476",
+                     "r" : "502",
                      "s" : [ {
                         "value" : [ "exists " ]
                      }, {
-                        "r" : "518",
+                        "r" : "547",
                         "s" : [ {
                            "value" : [ "(" ]
                         }, {
-                           "r" : "518",
+                           "r" : "547",
                            "s" : [ {
                               "s" : [ {
-                                 "r" : "477",
+                                 "r" : "503",
                                  "s" : [ {
-                                    "r" : "478",
+                                    "r" : "504",
                                     "s" : [ {
                                        "value" : [ "(" ]
                                     }, {
-                                       "r" : "478",
+                                       "r" : "504",
                                        "s" : [ {
                                           "value" : [ "{ " ]
                                        }, {
-                                          "r" : "479",
+                                          "r" : "505",
                                           "s" : [ {
                                              "value" : [ "{" ]
                                           }, {
                                              "s" : [ {
                                                 "value" : [ "id",": " ]
                                              }, {
-                                                "r" : "480",
+                                                "r" : "506",
                                                 "s" : [ {
                                                    "value" : [ "'test341'" ]
                                                 } ]
@@ -7435,14 +7435,14 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                                        }, {
                                           "value" : [ ", " ]
                                        }, {
-                                          "r" : "484",
+                                          "r" : "511",
                                           "s" : [ {
                                              "value" : [ "{" ]
                                           }, {
                                              "s" : [ {
                                                 "value" : [ "id",": " ]
                                              }, {
-                                                "r" : "485",
+                                                "r" : "512",
                                                 "s" : [ {
                                                    "value" : [ "'test719'" ]
                                                 } ]
@@ -7463,24 +7463,24 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            }, {
                               "value" : [ "\n  " ]
                            }, {
-                              "r" : "510",
+                              "r" : "539",
                               "s" : [ {
                                  "value" : [ "where " ]
                               }, {
-                                 "r" : "510",
+                                 "r" : "539",
                                  "s" : [ {
-                                    "r" : "501",
+                                    "r" : "530",
                                     "s" : [ {
                                        "value" : [ "\"testOptionsList\"" ]
                                     } ]
                                  }, {
                                     "value" : [ "." ]
                                  }, {
-                                    "r" : "510",
+                                    "r" : "539",
                                     "s" : [ {
                                        "value" : [ "targetMatches","(" ]
                                     }, {
-                                       "r" : "506",
+                                       "r" : "535",
                                        "s" : [ {
                                           "value" : [ "T" ]
                                        } ]
@@ -7498,20 +7498,20 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                }
             } ],
             "expression" : {
-               "localId" : "476",
+               "localId" : "502",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
-                  "localId" : "527",
+                  "localId" : "556",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "528",
+                     "localId" : "557",
                      "type" : "TupleTypeSpecifier",
                      "element" : [ {
-                        "localId" : "529",
+                        "localId" : "558",
                         "name" : "id",
                         "elementType" : {
-                           "localId" : "530",
+                           "localId" : "559",
                            "name" : "{urn:hl7-org:elm-types:r1}String",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -7519,19 +7519,19 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                   }
                } ],
                "operand" : {
-                  "localId" : "518",
+                  "localId" : "547",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
-                     "localId" : "523",
+                     "localId" : "552",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "524",
+                        "localId" : "553",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "525",
+                           "localId" : "554",
                            "name" : "id",
                            "elementType" : {
-                              "localId" : "526",
+                              "localId" : "555",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
@@ -7539,19 +7539,19 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                      }
                   },
                   "source" : [ {
-                     "localId" : "477",
+                     "localId" : "503",
                      "alias" : "T",
                      "resultTypeSpecifier" : {
-                        "localId" : "497",
+                        "localId" : "525",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "498",
+                           "localId" : "526",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "499",
+                              "localId" : "527",
                               "name" : "id",
                               "elementType" : {
-                                 "localId" : "500",
+                                 "localId" : "528",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
@@ -7559,19 +7559,19 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                         }
                      },
                      "expression" : {
-                        "localId" : "478",
+                        "localId" : "504",
                         "type" : "List",
                         "resultTypeSpecifier" : {
-                           "localId" : "493",
+                           "localId" : "521",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "494",
+                              "localId" : "522",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "495",
+                                 "localId" : "523",
                                  "name" : "id",
                                  "elementType" : {
-                                    "localId" : "496",
+                                    "localId" : "524",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -7579,16 +7579,16 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            }
                         },
                         "element" : [ {
-                           "localId" : "479",
+                           "localId" : "505",
                            "type" : "Tuple",
                            "resultTypeSpecifier" : {
-                              "localId" : "481",
+                              "localId" : "508",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "482",
+                                 "localId" : "509",
                                  "name" : "id",
                                  "elementType" : {
-                                    "localId" : "483",
+                                    "localId" : "510",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -7597,7 +7597,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            "element" : [ {
                               "name" : "id",
                               "value" : {
-                                 "localId" : "480",
+                                 "localId" : "506",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "test341",
@@ -7605,16 +7605,16 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                               }
                            } ]
                         }, {
-                           "localId" : "484",
+                           "localId" : "511",
                            "type" : "Tuple",
                            "resultTypeSpecifier" : {
-                              "localId" : "486",
+                              "localId" : "514",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "487",
+                                 "localId" : "515",
                                  "name" : "id",
                                  "elementType" : {
-                                    "localId" : "488",
+                                    "localId" : "516",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -7623,7 +7623,7 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            "element" : [ {
                               "name" : "id",
                               "value" : {
-                                 "localId" : "485",
+                                 "localId" : "512",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                  "value" : "test719",
@@ -7636,55 +7636,55 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                   "let" : [ ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "510",
+                     "localId" : "539",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "targetMatches",
                      "libraryName" : "FluentFunctionsOverloadCallingSelf",
                      "type" : "FunctionRef",
                      "signature" : [ {
-                        "localId" : "511",
+                        "localId" : "540",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "512",
+                           "localId" : "541",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "513",
+                              "localId" : "542",
                               "name" : "option",
                               "elementType" : {
-                                 "localId" : "514",
+                                 "localId" : "543",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
                            } ]
                         }
                      }, {
-                        "localId" : "515",
+                        "localId" : "544",
                         "type" : "TupleTypeSpecifier",
                         "element" : [ {
-                           "localId" : "516",
+                           "localId" : "545",
                            "name" : "id",
                            "elementType" : {
-                              "localId" : "517",
+                              "localId" : "546",
                               "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
                      } ],
                      "operand" : [ {
-                        "localId" : "501",
+                        "localId" : "530",
                         "name" : "testOptionsList",
                         "type" : "ExpressionRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "502",
+                           "localId" : "531",
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
-                              "localId" : "503",
+                              "localId" : "532",
                               "type" : "TupleTypeSpecifier",
                               "element" : [ {
-                                 "localId" : "504",
+                                 "localId" : "533",
                                  "name" : "option",
                                  "elementType" : {
-                                    "localId" : "505",
+                                    "localId" : "534",
                                     "name" : "{urn:hl7-org:elm-types:r1}String",
                                     "type" : "NamedTypeSpecifier"
                                  }
@@ -7692,17 +7692,17 @@ module.exports['FluentFunctionsOverloadCallingSelfFromOtherLibrary'] = {
                            }
                         }
                      }, {
-                        "localId" : "506",
+                        "localId" : "535",
                         "name" : "T",
                         "type" : "AliasRef",
                         "resultTypeSpecifier" : {
-                           "localId" : "507",
+                           "localId" : "536",
                            "type" : "TupleTypeSpecifier",
                            "element" : [ {
-                              "localId" : "508",
+                              "localId" : "537",
                               "name" : "id",
                               "elementType" : {
-                                 "localId" : "509",
+                                 "localId" : "538",
                                  "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
                               }
