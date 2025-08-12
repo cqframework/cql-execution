@@ -2,6 +2,8 @@
 valueset "Known": '2.16.840.1.113883.3.464.1003.101.12.1061'
 valueset "Unknown One Arg": '1.2.3.4.5.6.7.8.9'
 valueset "Unknown Two Arg": '1.2.3.4.5.6.7.8.9' version '1'
+codesystem "CS4VS": 'http://loinc.org' version '2'
+valueset "Unknown Three Arg": '1.2.3.4.5.6.7.8.9' version '1' codesystems { "CS4VS" }
 define Foo: 'Bar'
 
 // @Test: ValueSetRef
@@ -102,8 +104,8 @@ concept "Tobacco smoking status": { "Tobacco smoking status code" } display 'Tob
 define Foo: "Tobacco smoking status"
 
 // @Test: CodeSystemRef
-codesystem MyCS: 'http://loinc.org' version '1'
-define ResolveMyCS: MyCS
+codesystem "MyCS": 'http://loinc.org' version '1'
+define ResolveMyCS: "MyCS"
 
 // @Test: CalculateAge: Fully Specified Birth Date
 define Years: AgeInYears()

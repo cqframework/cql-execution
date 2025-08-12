@@ -14,6 +14,8 @@ using Simple version '1.0.0'
 valueset "Known": '2.16.840.1.113883.3.464.1003.101.12.1061'
 valueset "Unknown One Arg": '1.2.3.4.5.6.7.8.9'
 valueset "Unknown Two Arg": '1.2.3.4.5.6.7.8.9' version '1'
+codesystem "CS4VS": 'http://loinc.org' version '2'
+valueset "Unknown Three Arg": '1.2.3.4.5.6.7.8.9' version '1' codesystems { "CS4VS" }
 context Patient
 define Foo: 'Bar'
 */
@@ -29,7 +31,7 @@ module.exports['ValueSetDef'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "220",
+            "r" : "218",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -65,6 +67,25 @@ module.exports['ValueSetDef'] = {
                      } ]
                   }, {
                      "value" : [ " version '1.0.0'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "210",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "CS4VS",
+            "id" : "http://loinc.org",
+            "version" : "2",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "210",
+                  "s" : [ {
+                     "value" : [ "","codesystem ","\"CS4VS\"",": ","'http://loinc.org'"," version ","'2'" ]
                   } ]
                }
             } ]
@@ -120,25 +141,53 @@ module.exports['ValueSetDef'] = {
                }
             } ],
             "codeSystem" : [ ]
+         }, {
+            "localId" : "211",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Unknown Three Arg",
+            "id" : "1.2.3.4.5.6.7.8.9",
+            "version" : "1",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "211",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Unknown Three Arg\"",": ","'1.2.3.4.5.6.7.8.9'"," version ","'1'"," codesystems { " ]
+                  }, {
+                     "r" : "212",
+                     "s" : [ {
+                        "value" : [ "\"CS4VS\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " }" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : [ {
+               "localId" : "212",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+               "name" : "CS4VS"
+            } ]
          } ]
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "217",
+            "localId" : "216",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "215",
+            "localId" : "214",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "216",
+               "localId" : "215",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "214",
+                  "localId" : "213",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -148,7 +197,7 @@ module.exports['ValueSetDef'] = {
                }
             }
          }, {
-            "localId" : "220",
+            "localId" : "218",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "name" : "Foo",
             "context" : "Patient",
@@ -156,11 +205,11 @@ module.exports['ValueSetDef'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "220",
+                  "r" : "218",
                   "s" : [ {
                      "value" : [ "","define ","Foo",": " ]
                   }, {
-                     "r" : "221",
+                     "r" : "219",
                      "s" : [ {
                         "value" : [ "'Bar'" ]
                      } ]
@@ -168,7 +217,7 @@ module.exports['ValueSetDef'] = {
                }
             } ],
             "expression" : {
-               "localId" : "221",
+               "localId" : "219",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                "valueType" : "{urn:hl7-org:elm-types:r1}String",
                "value" : "Bar",
@@ -5161,9 +5210,9 @@ module.exports['ConceptRef'] = {
 /* CodeSystemRef
 library TestSnippet version '1'
 using Simple version '1.0.0'
-codesystem MyCS: 'http://loinc.org' version '1'
+codesystem "MyCS": 'http://loinc.org' version '1'
 context Patient
-define ResolveMyCS: MyCS
+define ResolveMyCS: "MyCS"
 */
 
 module.exports['CodeSystemRef'] = {
@@ -5231,7 +5280,7 @@ module.exports['CodeSystemRef'] = {
                "s" : {
                   "r" : "208",
                   "s" : [ {
-                     "value" : [ "","codesystem ","MyCS",": ","'http://loinc.org'"," version ","'1'" ]
+                     "value" : [ "","codesystem ","\"MyCS\"",": ","'http://loinc.org'"," version ","'1'" ]
                   } ]
                }
             } ]
@@ -5277,7 +5326,7 @@ module.exports['CodeSystemRef'] = {
                   }, {
                      "r" : "214",
                      "s" : [ {
-                        "value" : [ "MyCS" ]
+                        "value" : [ "\"MyCS\"" ]
                      } ]
                   } ]
                }
