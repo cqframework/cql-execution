@@ -22,11 +22,13 @@ export class ValueSetDef extends Expression {
 
   async exec(ctx: Context) {
     let codeSystems;
-    if(this.codesystems){
-      codeSystems = await Promise.all(this.codesystems.map(async cs => {
-        const csdef = await cs.exec(ctx) as CodeSystemDef;
-        return new dt.CodeSystem(csdef.id, csdef.version, csdef.name);
-      }));
+    if (this.codesystems) {
+      codeSystems = await Promise.all(
+        this.codesystems.map(async cs => {
+          const csdef = (await cs.exec(ctx)) as CodeSystemDef;
+          return new dt.CodeSystem(csdef.id, csdef.version, csdef.name);
+        })
+      );
     }
     const valueset = new dt.ValueSet(this.id, this.version, this.name, codeSystems);
     // ctx.rootContext().set(this.name, valueset); Note (2025): this seems to be unneccesary, remove completely in future if not needed

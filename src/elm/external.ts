@@ -40,7 +40,7 @@ export class Retrieve extends Expression {
       }
 
       if (typeIsArray(executedCodes)) {
-        retrieveDetails.codes = (executedCodes as Code[]);
+        retrieveDetails.codes = executedCodes as Code[];
       } else if (executedCodes) {
         // retrieveDetails codes are expected to be expanded for external usage
         retrieveDetails.codes = await resolveValueSet(executedCodes as ValueSet, ctx);

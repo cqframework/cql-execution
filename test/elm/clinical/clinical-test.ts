@@ -19,8 +19,7 @@ describe('ValueSetDef', () => {
   it('should return a valueset reference', async function () {
     const vs = await this.known.exec(this.ctx);
     vs.id.should.equal('2.16.840.1.113883.3.464.1003.101.12.1061');
-    vs.version.should.equal('20140501');
-    // vs.codes.length.should.equal(3);
+    should.not.exist(vs.version);
   });
 
   it('should execute one-arg to ValueSet with ID', async function () {

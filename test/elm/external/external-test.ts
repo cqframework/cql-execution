@@ -1,8 +1,9 @@
 import should from 'should';
 import 'should-sinon';
 import sinon from 'sinon';
-import { Code, Interval, Repository, RetrieveDetails, ValueSet } from '../../../src/cql';
+import { Code, Interval, Repository, RetrieveDetails } from '../../../src/cql';
 import setup from '../../setup';
+import { ValueSetExpansion } from '../../../src/datatypes/clinical';
 const data = require('./data');
 const vsets = require('./valuesets');
 const { p1 } = require('./patients');
@@ -124,7 +125,7 @@ describe('Retrieve', () => {
     should(retrieveDetails.codes).not.be.undefined();
 
     // TODO: check this type
-    retrieveDetails.codes.should.be.instanceOf(ValueSet);
+    retrieveDetails.codes.should.be.instanceOf(ValueSetExpansion);
 
     const vs = retrieveDetails.codes;
     should(vs.codes).not.be.undefined();
