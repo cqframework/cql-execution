@@ -7,7 +7,7 @@ const vsets = require('./valuesets');
 
 describe('Equal', () => {
   beforeEach(function () {
-    setup(this, data, [], vsets);
+    setup(this, data);
   });
 
   it('should be false for 5 = 4', async function () {
@@ -281,7 +281,7 @@ describe('NotEqual', () => {
 
 describe('Equivalent', () => {
   beforeEach(function () {
-    setup(this, data);
+    setup(this, data, [], vsets);
   });
 
   it('should be false for null ~ 4', async function () {
@@ -541,7 +541,7 @@ describe('Equivalent', () => {
     });
 
     it('should return false for ValueSets with different version and different codes', async function () {
-      (await this.diffVSCodes.exec(this.ctx)).should.be.true();
+      (await this.diffVSCodes.exec(this.ctx)).should.be.false();
     });
 
     it('should return error for unresolvable valueset with different id/version', function () {

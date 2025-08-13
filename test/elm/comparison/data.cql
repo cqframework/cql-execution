@@ -87,9 +87,9 @@ concept "Tobacco smoking status clone": { "Tobacco smoking status code clone" } 
 concept "Total Score [AUDIT-C]": { "Total Score [AUDIT-C] code" } display 'Total Score [Audit-C]'
 valueset "Unknown": '1.2.3.4.5.6.7.8.9'
 valueset "UnknownSame": '1.2.3.4.5.6.7.8.9'
-valueset "Known": '2.16.840.1.113883.3.560.100.1' version 20121025
-valueset "KnownSameCodes": '2.16.840.1.113883.3.560.100.1' version 20131025
-valueset "KnownDifferentCodes": '2.16.840.1.113883.3.560.100.1' version 20141025
+valueset "Known": '2.16.840.1.113883.3.560.100.1' version '20121025'
+valueset "KnownSameCodes": '2.16.840.1.113883.3.560.100.1' version '20131025'
+valueset "KnownDifferentCodes": '2.16.840.1.113883.3.560.100.1' version '20141025'
 
 define ANull_BDefined: null ~ 4
 define ADefined_BNull: 5 ~ null
@@ -143,7 +143,7 @@ define DiffConceptAndConcept: "Tobacco smoking status" ~ "Total Score [AUDIT-C]"
 define SameVSIdAndVersion: "Unknown" ~ "UnknownSame"
 define SameVSCodes: "Known" ~ "KnownSameCodes"
 define DiffVSCodes: "Known" ~ "KnownDifferentCodes"
-define UnresolvableDiffVS: "Unknown" ~ "Known"
+define UnresolvableDiffVS: "Known" ~ "Unknown"
 
 define EqDateTimes: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) ~ DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
 define UneqDateTimes: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) ~ DateTime(2000, 3, 15, 13, 30, 25, 201, +1.0)

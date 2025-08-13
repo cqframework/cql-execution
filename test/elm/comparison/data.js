@@ -11134,9 +11134,9 @@ concept "Tobacco smoking status clone": { "Tobacco smoking status code clone" } 
 concept "Total Score [AUDIT-C]": { "Total Score [AUDIT-C] code" } display 'Total Score [Audit-C]'
 valueset "Unknown": '1.2.3.4.5.6.7.8.9'
 valueset "UnknownSame": '1.2.3.4.5.6.7.8.9'
-valueset "Known": '2.16.840.1.113883.3.560.100.1' version 20121025
-valueset "KnownSameCodes": '2.16.840.1.113883.3.560.100.1' version 20131025
-valueset "KnownDifferentCodes": '2.16.840.1.113883.3.560.100.1' version 20141025
+valueset "Known": '2.16.840.1.113883.3.560.100.1' version '20121025'
+valueset "KnownSameCodes": '2.16.840.1.113883.3.560.100.1' version '20131025'
+valueset "KnownDifferentCodes": '2.16.840.1.113883.3.560.100.1' version '20141025'
 context Patient
 
 define ANull_BDefined: null ~ 4
@@ -11191,7 +11191,7 @@ define DiffConceptAndConcept: "Tobacco smoking status" ~ "Total Score [AUDIT-C]"
 define SameVSIdAndVersion: "Unknown" ~ "UnknownSame"
 define SameVSCodes: "Known" ~ "KnownSameCodes"
 define DiffVSCodes: "Known" ~ "KnownDifferentCodes"
-define UnresolvableDiffVS: "Unknown" ~ "Known"
+define UnresolvableDiffVS: "Known" ~ "Unknown"
 
 define EqDateTimes: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) ~ DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0)
 define UneqDateTimes: DateTime(2000, 3, 15, 13, 30, 25, 200, +1.0) ~ DateTime(2000, 3, 15, 13, 30, 25, 201, +1.0)
@@ -11213,12 +11213,6 @@ define DateTimeAndDateNotEqual: DateTime(2000, 3, 12) ~ Date(2000, 3, 13)
 define DateTimeAndDateUncertainFalse: DateTime(2000, 3, 13, 2, 4, 23) ~ Date(2000, 3, 13)
 */
 
-/*
-Translation Error(s):
-[12:58, 12:58] Syntax error at 20121025
-[13:67, 13:67] Syntax error at 20131025
-[14:72, 14:72] Syntax error at 20141025
-*/
 module.exports['Equivalent'] = {
    "library" : {
       "localId" : "0",
@@ -11227,39 +11221,6 @@ module.exports['Equivalent'] = {
          "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
          "signatureLevel" : "All",
          "type" : "CqlToElmInfo"
-      }, {
-         "libraryId" : "TestSnippet",
-         "libraryVersion" : "1",
-         "startLine" : 12,
-         "startChar" : 58,
-         "endLine" : 12,
-         "endChar" : 58,
-         "message" : "Syntax error at 20121025",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "TestSnippet",
-         "libraryVersion" : "1",
-         "startLine" : 13,
-         "startChar" : 67,
-         "endLine" : 13,
-         "endChar" : 67,
-         "message" : "Syntax error at 20131025",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
-      }, {
-         "libraryId" : "TestSnippet",
-         "libraryVersion" : "1",
-         "startLine" : 14,
-         "startChar" : 72,
-         "endLine" : 14,
-         "endChar" : 72,
-         "message" : "Syntax error at 20141025",
-         "errorType" : "syntax",
-         "errorSeverity" : "error",
-         "type" : "CqlToElmError"
       }, {
          "libraryId" : "TestSnippet",
          "libraryVersion" : "1",
@@ -11382,13 +11343,14 @@ module.exports['Equivalent'] = {
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Known",
             "id" : "2.16.840.1.113883.3.560.100.1",
+            "version" : "20121025",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
                   "r" : "229",
                   "s" : [ {
-                     "value" : [ "","valueset ","\"Known\"",": ","'2.16.840.1.113883.3.560.100.1'"," version ","20121025" ]
+                     "value" : [ "","valueset ","\"Known\"",": ","'2.16.840.1.113883.3.560.100.1'"," version ","'20121025'" ]
                   } ]
                }
             } ],
@@ -11398,13 +11360,14 @@ module.exports['Equivalent'] = {
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "KnownSameCodes",
             "id" : "2.16.840.1.113883.3.560.100.1",
+            "version" : "20131025",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
                   "r" : "231",
                   "s" : [ {
-                     "value" : [ "","valueset ","\"KnownSameCodes\"",": ","'2.16.840.1.113883.3.560.100.1'"," version ","20131025" ]
+                     "value" : [ "","valueset ","\"KnownSameCodes\"",": ","'2.16.840.1.113883.3.560.100.1'"," version ","'20131025'" ]
                   } ]
                }
             } ],
@@ -11414,13 +11377,14 @@ module.exports['Equivalent'] = {
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "KnownDifferentCodes",
             "id" : "2.16.840.1.113883.3.560.100.1",
+            "version" : "20141025",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
                   "r" : "233",
                   "s" : [ {
-                     "value" : [ "","valueset ","\"KnownDifferentCodes\"",": ","'2.16.840.1.113883.3.560.100.1'"," version ","20141025" ]
+                     "value" : [ "","valueset ","\"KnownDifferentCodes\"",": ","'2.16.840.1.113883.3.560.100.1'"," version ","'20141025'" ]
                   } ]
                }
             } ],
@@ -16726,14 +16690,14 @@ module.exports['Equivalent'] = {
                      "s" : [ {
                         "r" : "1094",
                         "s" : [ {
-                           "value" : [ "\"Unknown\"" ]
+                           "value" : [ "\"Known\"" ]
                         } ]
                      }, {
                         "value" : [ " ","~"," " ]
                      }, {
                         "r" : "1095",
                         "s" : [ {
-                           "value" : [ "\"Known\"" ]
+                           "value" : [ "\"Unknown\"" ]
                         } ]
                      } ]
                   } ]
@@ -16755,13 +16719,13 @@ module.exports['Equivalent'] = {
                "operand" : [ {
                   "localId" : "1094",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                  "name" : "Unknown",
+                  "name" : "Known",
                   "preserve" : true,
                   "type" : "ValueSetRef"
                }, {
                   "localId" : "1095",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                  "name" : "Known",
+                  "name" : "Unknown",
                   "preserve" : true,
                   "type" : "ValueSetRef"
                } ]
