@@ -124,7 +124,6 @@ describe('Retrieve', () => {
 
     should(retrieveDetails.codes).not.be.undefined();
 
-    // TODO: check this type
     retrieveDetails.codes.should.be.instanceOf(ValueSetExpansion);
 
     const vs = retrieveDetails.codes;

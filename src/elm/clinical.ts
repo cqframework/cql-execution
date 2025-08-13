@@ -15,10 +15,8 @@ export class ValueSetDef extends Expression {
     this.name = json.name;
     this.id = json.id;
     this.version = json.version;
-    this.codesystems = json.codeSystems?.map((cs: any) => new CodeSystemRef(cs));
+    this.codesystems = json.codeSystem?.map((cs: any) => new CodeSystemRef(cs));
   }
-
-  //todo: code systems and versions
 
   async exec(ctx: Context) {
     let codeSystems;

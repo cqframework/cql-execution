@@ -17,7 +17,7 @@ valueset "Unknown Two Arg": '1.2.3.4.5.6.7.8.9' version '1'
 codesystem "CS4VS": 'http://loinc.org' version '2'
 valueset "Unknown Three Arg": '1.2.3.4.5.6.7.8.9' version '1' codesystems { "CS4VS" }
 context Patient
-define Foo: 'Bar'
+define ResolveValueSet: "Unknown Three Arg"
 */
 
 module.exports['ValueSetDef'] = {
@@ -198,8 +198,8 @@ module.exports['ValueSetDef'] = {
             }
          }, {
             "localId" : "225",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-            "name" : "Foo",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "ResolveValueSet",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -207,21 +207,21 @@ module.exports['ValueSetDef'] = {
                "s" : {
                   "r" : "225",
                   "s" : [ {
-                     "value" : [ "","define ","Foo",": " ]
+                     "value" : [ "","define ","ResolveValueSet",": " ]
                   }, {
                      "r" : "226",
                      "s" : [ {
-                        "value" : [ "'Bar'" ]
+                        "value" : [ "\"Unknown Three Arg\"" ]
                      } ]
                   } ]
                }
             } ],
             "expression" : {
                "localId" : "226",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-               "valueType" : "{urn:hl7-org:elm-types:r1}String",
-               "value" : "Bar",
-               "type" : "Literal"
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+               "name" : "Unknown Three Arg",
+               "preserve" : true,
+               "type" : "ValueSetRef"
             }
          } ]
       }
@@ -369,6 +369,7 @@ library TestSnippet version '1'
 using Simple version '1.0.0'
 valueset "Major Depressive Disorder Active": '2.16.840.1.113883.3.526.3.1491'
 valueset "Male": '2.16.840.1.113883.3.560.100.1'
+valueset "UnknownAny": '1.2.3.4.5.6.7.8.9'
 codesystem "SNOMED": 'http://snomed.info/sct'
 code "ChronicRecurrentDepression": '2618002' from "SNOMED" display 'Chronic recurrent major depressive disorder (disorder)'
 code "ModerateMajorDepression": '832007' from "SNOMED" display 'Moderate major depression (disorder)'
@@ -380,6 +381,7 @@ define AnyInListOfStrings: { '2618002', '12345' } in "Major Depressive Disorder 
 define AnyInNullList: null as List<Code> in "Major Depressive Disorder Active"
 define AnyInNullListNullVs: null as List<Code> in null as ValueSet
 define AnyInListOfCodesWithNull: { Code { code: 'M' }, (null as Code), "ChronicRecurrentDepression" } in "Major Depressive Disorder Active"
+define AnyInUnknown: { "Depression Concept" } in "UnknownAny"
 // expression data
 define ListOfCodes: { Code { code: 'M' } , "ChronicRecurrentDepression" }
 define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.840.1.113883.18.2' } }
@@ -403,7 +405,7 @@ module.exports['AnyInValueSet'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "397",
+            "r" : "410",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -446,7 +448,7 @@ module.exports['AnyInValueSet'] = {
       },
       "codeSystems" : {
          "def" : [ {
-            "localId" : "212",
+            "localId" : "214",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "SNOMED",
             "id" : "http://snomed.info/sct",
@@ -454,7 +456,7 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "212",
+                  "r" : "214",
                   "s" : [ {
                      "value" : [ "","codesystem ","\"SNOMED\"",": ","'http://snomed.info/sct'" ]
                   } ]
@@ -495,11 +497,27 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "codeSystem" : [ ]
+         }, {
+            "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "UnknownAny",
+            "id" : "1.2.3.4.5.6.7.8.9",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "212",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"UnknownAny\"",": ","'1.2.3.4.5.6.7.8.9'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : [ ]
          } ]
       },
       "codes" : {
          "def" : [ {
-            "localId" : "214",
+            "localId" : "216",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "ChronicRecurrentDepression",
             "id" : "2618002",
@@ -508,11 +526,11 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "214",
+                  "r" : "216",
                   "s" : [ {
                      "value" : [ "","code ","\"ChronicRecurrentDepression\"",": ","'2618002'"," from " ]
                   }, {
-                     "r" : "215",
+                     "r" : "217",
                      "s" : [ {
                         "value" : [ "\"SNOMED\"" ]
                      } ]
@@ -522,12 +540,12 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "codeSystem" : {
-               "localId" : "215",
+               "localId" : "217",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "SNOMED"
             }
          }, {
-            "localId" : "217",
+            "localId" : "219",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "ModerateMajorDepression",
             "id" : "832007",
@@ -536,11 +554,11 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "217",
+                  "r" : "219",
                   "s" : [ {
                      "value" : [ "","code ","\"ModerateMajorDepression\"",": ","'832007'"," from " ]
                   }, {
-                     "r" : "218",
+                     "r" : "220",
                      "s" : [ {
                         "value" : [ "\"SNOMED\"" ]
                      } ]
@@ -550,7 +568,7 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "codeSystem" : {
-               "localId" : "218",
+               "localId" : "220",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "SNOMED"
             }
@@ -558,7 +576,7 @@ module.exports['AnyInValueSet'] = {
       },
       "concepts" : {
          "def" : [ {
-            "localId" : "220",
+            "localId" : "222",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
             "name" : "Depression Concept",
             "display" : "Depression Concept",
@@ -566,18 +584,18 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "220",
+                  "r" : "222",
                   "s" : [ {
                      "value" : [ "","concept ","\"Depression Concept\"",": { " ]
                   }, {
-                     "r" : "221",
+                     "r" : "223",
                      "s" : [ {
                         "value" : [ "\"ChronicRecurrentDepression\"" ]
                      } ]
                   }, {
                      "value" : [ ", " ]
                   }, {
-                     "r" : "222",
+                     "r" : "224",
                      "s" : [ {
                         "value" : [ "\"ModerateMajorDepression\"" ]
                      } ]
@@ -587,11 +605,11 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "code" : [ {
-               "localId" : "221",
+               "localId" : "223",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "ChronicRecurrentDepression"
             }, {
-               "localId" : "222",
+               "localId" : "224",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "ModerateMajorDepression"
             } ]
@@ -599,21 +617,21 @@ module.exports['AnyInValueSet'] = {
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "226",
+            "localId" : "228",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "224",
+            "localId" : "226",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "225",
+               "localId" : "227",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "223",
+                  "localId" : "225",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -623,7 +641,7 @@ module.exports['AnyInValueSet'] = {
                }
             }
          }, {
-            "localId" : "229",
+            "localId" : "231",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "AnyInListOfConcepts",
             "context" : "Patient",
@@ -631,17 +649,17 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "229",
+                  "r" : "231",
                   "s" : [ {
                      "value" : [ "","define ","AnyInListOfConcepts",": " ]
                   }, {
-                     "r" : "235",
+                     "r" : "237",
                      "s" : [ {
-                        "r" : "230",
+                        "r" : "232",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "231",
+                           "r" : "233",
                            "s" : [ {
                               "value" : [ "\"Depression Concept\"" ]
                            } ]
@@ -651,7 +669,7 @@ module.exports['AnyInValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "234",
+                        "r" : "236",
                         "s" : [ {
                            "value" : [ "\"Major Depressive Disorder Active\"" ]
                         } ]
@@ -660,46 +678,46 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "235",
+               "localId" : "237",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyInValueSet",
                "signature" : [ {
-                  "localId" : "236",
+                  "localId" : "238",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "237",
+                     "localId" : "239",
                      "name" : "{urn:hl7-org:elm-types:r1}Concept",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "codes" : {
-                  "localId" : "230",
+                  "localId" : "232",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "232",
+                     "localId" : "234",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "233",
+                        "localId" : "235",
                         "name" : "{urn:hl7-org:elm-types:r1}Concept",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "231",
+                     "localId" : "233",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                      "name" : "Depression Concept",
                      "type" : "ConceptRef"
                   } ]
                },
                "valueset" : {
-                  "localId" : "234",
+                  "localId" : "236",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Major Depressive Disorder Active",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "240",
+            "localId" : "242",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "AnyInListOfCodes",
             "context" : "Patient",
@@ -707,24 +725,24 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "240",
+                  "r" : "242",
                   "s" : [ {
                      "value" : [ "","define ","AnyInListOfCodes",": " ]
                   }, {
-                     "r" : "247",
+                     "r" : "249",
                      "s" : [ {
-                        "r" : "241",
+                        "r" : "243",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "242",
+                           "r" : "244",
                            "s" : [ {
                               "value" : [ "\"ChronicRecurrentDepression\"" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "243",
+                           "r" : "245",
                            "s" : [ {
                               "value" : [ "\"ModerateMajorDepression\"" ]
                            } ]
@@ -734,7 +752,7 @@ module.exports['AnyInValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "246",
+                        "r" : "248",
                         "s" : [ {
                            "value" : [ "\"Major Depressive Disorder Active\"" ]
                         } ]
@@ -743,51 +761,51 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "247",
+               "localId" : "249",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyInValueSet",
                "signature" : [ {
-                  "localId" : "248",
+                  "localId" : "250",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "249",
+                     "localId" : "251",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "codes" : {
-                  "localId" : "241",
+                  "localId" : "243",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "244",
+                     "localId" : "246",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "245",
+                        "localId" : "247",
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "242",
+                     "localId" : "244",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                      "name" : "ChronicRecurrentDepression",
                      "type" : "CodeRef"
                   }, {
-                     "localId" : "243",
+                     "localId" : "245",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                      "name" : "ModerateMajorDepression",
                      "type" : "CodeRef"
                   } ]
                },
                "valueset" : {
-                  "localId" : "246",
+                  "localId" : "248",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Major Depressive Disorder Active",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "252",
+            "localId" : "254",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "AnyInListOfStrings",
             "context" : "Patient",
@@ -795,24 +813,24 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "252",
+                  "r" : "254",
                   "s" : [ {
                      "value" : [ "","define ","AnyInListOfStrings",": " ]
                   }, {
-                     "r" : "261",
+                     "r" : "263",
                      "s" : [ {
-                        "r" : "253",
+                        "r" : "255",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "254",
+                           "r" : "256",
                            "s" : [ {
                               "value" : [ "'2618002'" ]
                            } ]
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "256",
+                           "r" : "258",
                            "s" : [ {
                               "value" : [ "'12345'" ]
                            } ]
@@ -822,7 +840,7 @@ module.exports['AnyInValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "260",
+                        "r" : "262",
                         "s" : [ {
                            "value" : [ "\"Major Depressive Disorder Active\"" ]
                         } ]
@@ -831,38 +849,38 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "261",
+               "localId" : "263",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyInValueSet",
                "signature" : [ {
-                  "localId" : "262",
+                  "localId" : "264",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "263",
+                     "localId" : "265",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "codes" : {
-                  "localId" : "253",
+                  "localId" : "255",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "258",
+                     "localId" : "260",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "259",
+                        "localId" : "261",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "254",
+                     "localId" : "256",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "2618002",
                      "type" : "Literal"
                   }, {
-                     "localId" : "256",
+                     "localId" : "258",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "12345",
@@ -870,14 +888,14 @@ module.exports['AnyInValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "260",
+                  "localId" : "262",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Major Depressive Disorder Active",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "266",
+            "localId" : "268",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "AnyInNullList",
             "context" : "Patient",
@@ -885,22 +903,22 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "266",
+                  "r" : "268",
                   "s" : [ {
                      "value" : [ "","define ","AnyInNullList",": " ]
                   }, {
-                     "r" : "276",
+                     "r" : "278",
                      "s" : [ {
-                        "r" : "267",
+                        "r" : "269",
                         "s" : [ {
-                           "r" : "268",
+                           "r" : "270",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "269",
+                           "r" : "271",
                            "s" : [ {
                               "value" : [ "List<" ]
                            }, {
-                              "r" : "270",
+                              "r" : "272",
                               "s" : [ {
                                  "value" : [ "Code" ]
                               } ]
@@ -911,7 +929,7 @@ module.exports['AnyInValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "275",
+                        "r" : "277",
                         "s" : [ {
                            "value" : [ "\"Major Depressive Disorder Active\"" ]
                         } ]
@@ -920,51 +938,51 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "276",
+               "localId" : "278",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyInValueSet",
                "signature" : [ {
-                  "localId" : "277",
+                  "localId" : "279",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "278",
+                     "localId" : "280",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "codes" : {
-                  "localId" : "267",
+                  "localId" : "269",
                   "strict" : false,
                   "type" : "As",
                   "resultTypeSpecifier" : {
-                     "localId" : "273",
+                     "localId" : "275",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "274",
+                        "localId" : "276",
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "268",
+                     "localId" : "270",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "269",
+                     "localId" : "271",
                      "type" : "ListTypeSpecifier",
                      "resultTypeSpecifier" : {
-                        "localId" : "271",
+                        "localId" : "273",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "272",
+                           "localId" : "274",
                            "name" : "{urn:hl7-org:elm-types:r1}Code",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "elementType" : {
-                        "localId" : "270",
+                        "localId" : "272",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "type" : "NamedTypeSpecifier"
@@ -972,14 +990,14 @@ module.exports['AnyInValueSet'] = {
                   }
                },
                "valueset" : {
-                  "localId" : "275",
+                  "localId" : "277",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Major Depressive Disorder Active",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "281",
+            "localId" : "283",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "AnyInNullListNullVs",
             "context" : "Patient",
@@ -987,22 +1005,22 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "281",
+                  "r" : "283",
                   "s" : [ {
                      "value" : [ "","define ","AnyInNullListNullVs",": " ]
                   }, {
-                     "r" : "293",
+                     "r" : "295",
                      "s" : [ {
-                        "r" : "282",
+                        "r" : "284",
                         "s" : [ {
-                           "r" : "283",
+                           "r" : "285",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "284",
+                           "r" : "286",
                            "s" : [ {
                               "value" : [ "List<" ]
                            }, {
-                              "r" : "285",
+                              "r" : "287",
                               "s" : [ {
                                  "value" : [ "Code" ]
                               } ]
@@ -1013,12 +1031,12 @@ module.exports['AnyInValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "290",
+                        "r" : "292",
                         "s" : [ {
-                           "r" : "291",
+                           "r" : "293",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "292",
+                           "r" : "294",
                            "s" : [ {
                               "value" : [ "ValueSet" ]
                            } ]
@@ -1028,55 +1046,55 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "293",
+               "localId" : "295",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyInValueSet",
                "signature" : [ {
-                  "localId" : "294",
+                  "localId" : "296",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "295",
+                     "localId" : "297",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "296",
+                  "localId" : "298",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "codes" : {
-                  "localId" : "282",
+                  "localId" : "284",
                   "strict" : false,
                   "type" : "As",
                   "resultTypeSpecifier" : {
-                     "localId" : "288",
+                     "localId" : "290",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "289",
+                        "localId" : "291",
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "283",
+                     "localId" : "285",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "284",
+                     "localId" : "286",
                      "type" : "ListTypeSpecifier",
                      "resultTypeSpecifier" : {
-                        "localId" : "286",
+                        "localId" : "288",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "287",
+                           "localId" : "289",
                            "name" : "{urn:hl7-org:elm-types:r1}Code",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
                      "elementType" : {
-                        "localId" : "285",
+                        "localId" : "287",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "type" : "NamedTypeSpecifier"
@@ -1084,18 +1102,18 @@ module.exports['AnyInValueSet'] = {
                   }
                },
                "valuesetExpression" : {
-                  "localId" : "290",
+                  "localId" : "292",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "291",
+                     "localId" : "293",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "292",
+                     "localId" : "294",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "type" : "NamedTypeSpecifier"
@@ -1103,7 +1121,7 @@ module.exports['AnyInValueSet'] = {
                }
             }
          }, {
-            "localId" : "299",
+            "localId" : "301",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "AnyInListOfCodesWithNull",
             "context" : "Patient",
@@ -1111,24 +1129,24 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "299",
+                  "r" : "301",
                   "s" : [ {
                      "value" : [ "","define ","AnyInListOfCodesWithNull",": " ]
                   }, {
-                     "r" : "312",
+                     "r" : "314",
                      "s" : [ {
-                        "r" : "300",
+                        "r" : "302",
                         "s" : [ {
                            "value" : [ "{ " ]
                         }, {
-                           "r" : "301",
+                           "r" : "303",
                            "s" : [ {
                               "value" : [ "Code"," { " ]
                            }, {
                               "s" : [ {
                                  "value" : [ "code",": " ]
                               }, {
-                                 "r" : "303",
+                                 "r" : "305",
                                  "s" : [ {
                                     "value" : [ "'M'" ]
                                  } ]
@@ -1139,16 +1157,16 @@ module.exports['AnyInValueSet'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "305",
+                           "r" : "307",
                            "s" : [ {
                               "value" : [ "(" ]
                            }, {
-                              "r" : "305",
+                              "r" : "307",
                               "s" : [ {
-                                 "r" : "306",
+                                 "r" : "308",
                                  "value" : [ "null"," as " ]
                               }, {
-                                 "r" : "307",
+                                 "r" : "309",
                                  "s" : [ {
                                     "value" : [ "Code" ]
                                  } ]
@@ -1159,7 +1177,7 @@ module.exports['AnyInValueSet'] = {
                         }, {
                            "value" : [ ", " ]
                         }, {
-                           "r" : "308",
+                           "r" : "310",
                            "s" : [ {
                               "value" : [ "\"ChronicRecurrentDepression\"" ]
                            } ]
@@ -1169,7 +1187,7 @@ module.exports['AnyInValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "311",
+                        "r" : "313",
                         "s" : [ {
                            "value" : [ "\"Major Depressive Disorder Active\"" ]
                         } ]
@@ -1178,39 +1196,39 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "312",
+               "localId" : "314",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyInValueSet",
                "signature" : [ {
-                  "localId" : "313",
+                  "localId" : "315",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "314",
+                     "localId" : "316",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "codes" : {
-                  "localId" : "300",
+                  "localId" : "302",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "309",
+                     "localId" : "311",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "310",
+                        "localId" : "312",
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "301",
+                     "localId" : "303",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                      "classType" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "Instance",
                      "element" : [ {
                         "name" : "code",
                         "value" : {
-                           "localId" : "303",
+                           "localId" : "305",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "M",
@@ -1218,126 +1236,115 @@ module.exports['AnyInValueSet'] = {
                         }
                      } ]
                   }, {
-                     "localId" : "305",
+                     "localId" : "307",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                      "strict" : false,
                      "type" : "As",
                      "signature" : [ ],
                      "operand" : {
-                        "localId" : "306",
+                        "localId" : "308",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                         "type" : "Null"
                      },
                      "asTypeSpecifier" : {
-                        "localId" : "307",
+                        "localId" : "309",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "type" : "NamedTypeSpecifier"
                      }
                   }, {
-                     "localId" : "308",
+                     "localId" : "310",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                      "name" : "ChronicRecurrentDepression",
                      "type" : "CodeRef"
                   } ]
                },
                "valueset" : {
-                  "localId" : "311",
+                  "localId" : "313",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Major Depressive Disorder Active",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "317",
-            "name" : "ListOfCodes",
+            "localId" : "319",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "AnyInUnknown",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "317",
+                  "r" : "319",
                   "s" : [ {
-                     "value" : [ "// expression data\n","define ","ListOfCodes",": " ]
+                     "value" : [ "","define ","AnyInUnknown",": " ]
                   }, {
-                     "r" : "318",
+                     "r" : "325",
                      "s" : [ {
-                        "value" : [ "{ " ]
-                     }, {
-                        "r" : "319",
+                        "r" : "320",
                         "s" : [ {
-                           "value" : [ "Code"," { " ]
+                           "value" : [ "{ " ]
                         }, {
+                           "r" : "321",
                            "s" : [ {
-                              "value" : [ "code",": " ]
-                           }, {
-                              "r" : "321",
-                              "s" : [ {
-                                 "value" : [ "'M'" ]
-                              } ]
+                              "value" : [ "\"Depression Concept\"" ]
                            } ]
                         }, {
                            "value" : [ " }" ]
                         } ]
                      }, {
-                        "value" : [ " , " ]
+                        "value" : [ " in " ]
                      }, {
-                        "r" : "323",
+                        "r" : "324",
                         "s" : [ {
-                           "value" : [ "\"ChronicRecurrentDepression\"" ]
+                           "value" : [ "\"UnknownAny\"" ]
                         } ]
-                     }, {
-                        "value" : [ " }" ]
                      } ]
                   } ]
                }
             } ],
-            "resultTypeSpecifier" : {
-               "localId" : "326",
-               "type" : "ListTypeSpecifier",
-               "elementType" : {
-                  "localId" : "327",
-                  "name" : "{urn:hl7-org:elm-types:r1}Code",
-                  "type" : "NamedTypeSpecifier"
-               }
-            },
             "expression" : {
-               "localId" : "318",
-               "type" : "List",
-               "resultTypeSpecifier" : {
-                  "localId" : "324",
+               "localId" : "325",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "AnyInValueSet",
+               "signature" : [ {
+                  "localId" : "326",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "325",
-                     "name" : "{urn:hl7-org:elm-types:r1}Code",
+                     "localId" : "327",
+                     "name" : "{urn:hl7-org:elm-types:r1}Concept",
                      "type" : "NamedTypeSpecifier"
                   }
-               },
-               "element" : [ {
-                  "localId" : "319",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
-                  "type" : "Instance",
-                  "element" : [ {
-                     "name" : "code",
-                     "value" : {
-                        "localId" : "321",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "M",
-                        "type" : "Literal"
+               } ],
+               "codes" : {
+                  "localId" : "320",
+                  "type" : "List",
+                  "resultTypeSpecifier" : {
+                     "localId" : "322",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "323",
+                        "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                        "type" : "NamedTypeSpecifier"
                      }
+                  },
+                  "element" : [ {
+                     "localId" : "321",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
+                     "name" : "Depression Concept",
+                     "type" : "ConceptRef"
                   } ]
-               }, {
-                  "localId" : "323",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                  "name" : "ChronicRecurrentDepression",
-                  "type" : "CodeRef"
-               } ]
+               },
+               "valueset" : {
+                  "localId" : "324",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "name" : "UnknownAny",
+                  "preserve" : true
+               }
             }
          }, {
             "localId" : "330",
-            "name" : "WrongListOfCodes",
+            "name" : "ListOfCodes",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -1345,7 +1352,7 @@ module.exports['AnyInValueSet'] = {
                "s" : {
                   "r" : "330",
                   "s" : [ {
-                     "value" : [ "","define ","WrongListOfCodes",": " ]
+                     "value" : [ "// expression data\n","define ","ListOfCodes",": " ]
                   }, {
                      "r" : "331",
                      "s" : [ {
@@ -1367,33 +1374,11 @@ module.exports['AnyInValueSet'] = {
                            "value" : [ " }" ]
                         } ]
                      }, {
-                        "value" : [ ", " ]
+                        "value" : [ " , " ]
                      }, {
                         "r" : "336",
                         "s" : [ {
-                           "value" : [ "Code"," { " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "code",": " ]
-                           }, {
-                              "r" : "338",
-                              "s" : [ {
-                                 "value" : [ "'F'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "s" : [ {
-                              "value" : [ "system",": " ]
-                           }, {
-                              "r" : "340",
-                              "s" : [ {
-                                 "value" : [ "'3.16.840.1.113883.18.2'" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ " }" ]
+                           "value" : [ "\"ChronicRecurrentDepression\"" ]
                         } ]
                      }, {
                         "value" : [ " }" ]
@@ -1402,10 +1387,10 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "344",
+               "localId" : "339",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "345",
+                  "localId" : "340",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                }
@@ -1414,10 +1399,10 @@ module.exports['AnyInValueSet'] = {
                "localId" : "331",
                "type" : "List",
                "resultTypeSpecifier" : {
-                  "localId" : "342",
+                  "localId" : "337",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "343",
+                     "localId" : "338",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -1440,12 +1425,121 @@ module.exports['AnyInValueSet'] = {
                }, {
                   "localId" : "336",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                  "name" : "ChronicRecurrentDepression",
+                  "type" : "CodeRef"
+               } ]
+            }
+         }, {
+            "localId" : "343",
+            "name" : "WrongListOfCodes",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "343",
+                  "s" : [ {
+                     "value" : [ "","define ","WrongListOfCodes",": " ]
+                  }, {
+                     "r" : "344",
+                     "s" : [ {
+                        "value" : [ "{ " ]
+                     }, {
+                        "r" : "345",
+                        "s" : [ {
+                           "value" : [ "Code"," { " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "347",
+                              "s" : [ {
+                                 "value" : [ "'M'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ ", " ]
+                     }, {
+                        "r" : "349",
+                        "s" : [ {
+                           "value" : [ "Code"," { " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "code",": " ]
+                           }, {
+                              "r" : "351",
+                              "s" : [ {
+                                 "value" : [ "'F'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "s" : [ {
+                              "value" : [ "system",": " ]
+                           }, {
+                              "r" : "353",
+                              "s" : [ {
+                                 "value" : [ "'3.16.840.1.113883.18.2'" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " }" ]
+                        } ]
+                     }, {
+                        "value" : [ " }" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "357",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "358",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "344",
+               "type" : "List",
+               "resultTypeSpecifier" : {
+                  "localId" : "355",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "356",
+                     "name" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "element" : [ {
+                  "localId" : "345",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                   "classType" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "Instance",
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "localId" : "338",
+                        "localId" : "347",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "M",
+                        "type" : "Literal"
+                     }
+                  } ]
+               }, {
+                  "localId" : "349",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                  "classType" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "Instance",
+                  "element" : [ {
+                     "name" : "code",
+                     "value" : {
+                        "localId" : "351",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "F",
@@ -1454,7 +1548,7 @@ module.exports['AnyInValueSet'] = {
                   }, {
                      "name" : "system",
                      "value" : {
-                        "localId" : "340",
+                        "localId" : "353",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "3.16.840.1.113883.18.2",
@@ -1464,7 +1558,7 @@ module.exports['AnyInValueSet'] = {
                } ]
             }
          }, {
-            "localId" : "348",
+            "localId" : "361",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "AnyInListOfCodesExpressionRef",
             "context" : "Patient",
@@ -1472,20 +1566,20 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "348",
+                  "r" : "361",
                   "s" : [ {
                      "value" : [ "","define ","AnyInListOfCodesExpressionRef",": " ]
                   }, {
-                     "r" : "353",
+                     "r" : "366",
                      "s" : [ {
-                        "r" : "349",
+                        "r" : "362",
                         "s" : [ {
                            "value" : [ "ListOfCodes" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "352",
+                        "r" : "365",
                         "s" : [ {
                            "value" : [ "\"Major Depressive Disorder Active\"" ]
                         } ]
@@ -1494,41 +1588,41 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "353",
+               "localId" : "366",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyInValueSet",
                "signature" : [ {
-                  "localId" : "354",
+                  "localId" : "367",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "355",
+                     "localId" : "368",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "codes" : {
-                  "localId" : "349",
+                  "localId" : "362",
                   "name" : "ListOfCodes",
                   "type" : "ExpressionRef",
                   "resultTypeSpecifier" : {
-                     "localId" : "350",
+                     "localId" : "363",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "351",
+                        "localId" : "364",
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "type" : "NamedTypeSpecifier"
                      }
                   }
                },
                "valueset" : {
-                  "localId" : "352",
+                  "localId" : "365",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Major Depressive Disorder Active",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "358",
+            "localId" : "371",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "AnyInWrongListOfCodes",
             "context" : "Patient",
@@ -1536,20 +1630,20 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "358",
+                  "r" : "371",
                   "s" : [ {
                      "value" : [ "","define ","AnyInWrongListOfCodes",": " ]
                   }, {
-                     "r" : "363",
+                     "r" : "376",
                      "s" : [ {
-                        "r" : "359",
+                        "r" : "372",
                         "s" : [ {
                            "value" : [ "WrongListOfCodes" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "362",
+                        "r" : "375",
                         "s" : [ {
                            "value" : [ "\"Major Depressive Disorder Active\"" ]
                         } ]
@@ -1558,41 +1652,41 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "363",
+               "localId" : "376",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyInValueSet",
                "signature" : [ {
-                  "localId" : "364",
+                  "localId" : "377",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "365",
+                     "localId" : "378",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                } ],
                "codes" : {
-                  "localId" : "359",
+                  "localId" : "372",
                   "name" : "WrongListOfCodes",
                   "type" : "ExpressionRef",
                   "resultTypeSpecifier" : {
-                     "localId" : "360",
+                     "localId" : "373",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "361",
+                        "localId" : "374",
                         "name" : "{urn:hl7-org:elm-types:r1}Code",
                         "type" : "NamedTypeSpecifier"
                      }
                   }
                },
                "valueset" : {
-                  "localId" : "362",
+                  "localId" : "375",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Major Depressive Disorder Active",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "366",
+            "localId" : "379",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "ListInVS",
             "context" : "Patient",
@@ -1601,26 +1695,26 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "366",
+                  "r" : "379",
                   "s" : [ {
                      "value" : [ "// function data\n","define function ListInVS(vs ValueSet): " ]
                   }, {
-                     "r" : "379",
+                     "r" : "392",
                      "s" : [ {
-                        "r" : "379",
+                        "r" : "392",
                         "s" : [ {
-                           "r" : "371",
+                           "r" : "384",
                            "s" : [ {
                               "value" : [ "{ " ]
                            }, {
-                              "r" : "372",
+                              "r" : "385",
                               "s" : [ {
                                  "value" : [ "'2618002'" ]
                               } ]
                            }, {
                               "value" : [ ", " ]
                            }, {
-                              "r" : "374",
+                              "r" : "387",
                               "s" : [ {
                                  "value" : [ "'12345'" ]
                               } ]
@@ -1630,7 +1724,7 @@ module.exports['AnyInValueSet'] = {
                         }, {
                            "value" : [ " in " ]
                         }, {
-                           "r" : "378",
+                           "r" : "391",
                            "s" : [ {
                               "value" : [ "vs" ]
                            } ]
@@ -1640,42 +1734,42 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "379",
+               "localId" : "392",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "AnyInValueSet",
                "signature" : [ {
-                  "localId" : "380",
+                  "localId" : "393",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "381",
+                     "localId" : "394",
                      "name" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "NamedTypeSpecifier"
                   }
                }, {
-                  "localId" : "382",
+                  "localId" : "395",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "codes" : {
-                  "localId" : "371",
+                  "localId" : "384",
                   "type" : "List",
                   "resultTypeSpecifier" : {
-                     "localId" : "376",
+                     "localId" : "389",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "377",
+                        "localId" : "390",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "element" : [ {
-                     "localId" : "372",
+                     "localId" : "385",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "2618002",
                      "type" : "Literal"
                   }, {
-                     "localId" : "374",
+                     "localId" : "387",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
                      "value" : "12345",
@@ -1683,24 +1777,24 @@ module.exports['AnyInValueSet'] = {
                   } ]
                },
                "valuesetExpression" : {
-                  "localId" : "378",
+                  "localId" : "391",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "vs",
                   "type" : "OperandRef"
                }
             },
             "operand" : [ {
-               "localId" : "368",
+               "localId" : "381",
                "name" : "vs",
                "operandTypeSpecifier" : {
-                  "localId" : "367",
+                  "localId" : "380",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "385",
+            "localId" : "398",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "ListInPassedVS",
             "context" : "Patient",
@@ -1708,15 +1802,15 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "385",
+                  "r" : "398",
                   "s" : [ {
                      "value" : [ "","define ","ListInPassedVS",": " ]
                   }, {
-                     "r" : "387",
+                     "r" : "400",
                      "s" : [ {
                         "value" : [ "ListInVS","(" ]
                      }, {
-                        "r" : "386",
+                        "r" : "399",
                         "s" : [ {
                            "value" : [ "\"Major Depressive Disorder Active\"" ]
                         } ]
@@ -1727,17 +1821,17 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "387",
+               "localId" : "400",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "ListInVS",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "388",
+                  "localId" : "401",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "386",
+                  "localId" : "399",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Major Depressive Disorder Active",
                   "preserve" : true,
@@ -1745,7 +1839,7 @@ module.exports['AnyInValueSet'] = {
                } ]
             }
          }, {
-            "localId" : "391",
+            "localId" : "404",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "ListInWrongVS",
             "context" : "Patient",
@@ -1753,15 +1847,15 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "391",
+                  "r" : "404",
                   "s" : [ {
                      "value" : [ "","define ","ListInWrongVS",": " ]
                   }, {
-                     "r" : "393",
+                     "r" : "406",
                      "s" : [ {
                         "value" : [ "ListInVS","(" ]
                      }, {
-                        "r" : "392",
+                        "r" : "405",
                         "s" : [ {
                            "value" : [ "\"Male\"" ]
                         } ]
@@ -1772,17 +1866,17 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "393",
+               "localId" : "406",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "ListInVS",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "394",
+                  "localId" : "407",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "392",
+                  "localId" : "405",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Male",
                   "preserve" : true,
@@ -1790,7 +1884,7 @@ module.exports['AnyInValueSet'] = {
                } ]
             }
          }, {
-            "localId" : "397",
+            "localId" : "410",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "ListInNullVS",
             "context" : "Patient",
@@ -1798,20 +1892,20 @@ module.exports['AnyInValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "397",
+                  "r" : "410",
                   "s" : [ {
                      "value" : [ "","define ","ListInNullVS",": " ]
                   }, {
-                     "r" : "401",
+                     "r" : "414",
                      "s" : [ {
                         "value" : [ "ListInVS","(" ]
                      }, {
-                        "r" : "398",
+                        "r" : "411",
                         "s" : [ {
-                           "r" : "399",
+                           "r" : "412",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "400",
+                           "r" : "413",
                            "s" : [ {
                               "value" : [ "ValueSet" ]
                            } ]
@@ -1823,28 +1917,28 @@ module.exports['AnyInValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "401",
+               "localId" : "414",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "ListInVS",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "402",
+                  "localId" : "415",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "398",
+                  "localId" : "411",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "399",
+                     "localId" : "412",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "400",
+                     "localId" : "413",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "type" : "NamedTypeSpecifier"
@@ -1864,6 +1958,7 @@ valueset "Male": '2.16.840.1.113883.3.560.100.1'
 valueset "Versioned Female": '2.16.840.1.113883.3.560.100.2' version '20121025'
 valueset "SharedCodes": '2.16.840.1.113883.3.000.000.0'
 valueset "ImproperSharedCodes": '2.16.840.1.113883.3.000.000.1'
+valueset "UnknownIn": '1.2.3.4.5.6.7.8.9'
 context Patient
 define String: 'F' in "Female"
 define SharedCodesFoo: 'foo' in "SharedCodes"
@@ -1885,6 +1980,7 @@ define function FInVS(vs ValueSet): 'F' in vs
 define FInPassedVS: FInVS("Female")
 define FInWrongVS: FInVS("Male")
 define FInNullVS: FInVS(null as ValueSet)
+define InUnknown: 'F' in "UnknownIn"
 */
 
 module.exports['InValueSet'] = {
@@ -1898,7 +1994,7 @@ module.exports['InValueSet'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "410",
+            "r" : "420",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -2021,25 +2117,41 @@ module.exports['InValueSet'] = {
                }
             } ],
             "codeSystem" : [ ]
+         }, {
+            "localId" : "218",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "UnknownIn",
+            "id" : "1.2.3.4.5.6.7.8.9",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "218",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"UnknownIn\"",": ","'1.2.3.4.5.6.7.8.9'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : [ ]
          } ]
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "221",
+            "localId" : "223",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "219",
+            "localId" : "221",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "220",
+               "localId" : "222",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "218",
+                  "localId" : "220",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -2049,7 +2161,7 @@ module.exports['InValueSet'] = {
                }
             }
          }, {
-            "localId" : "224",
+            "localId" : "226",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "String",
             "context" : "Patient",
@@ -2057,20 +2169,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "224",
+                  "r" : "226",
                   "s" : [ {
                      "value" : [ "","define ","String",": " ]
                   }, {
-                     "r" : "228",
+                     "r" : "230",
                      "s" : [ {
-                        "r" : "225",
+                        "r" : "227",
                         "s" : [ {
                            "value" : [ "'F'" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "227",
+                        "r" : "229",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -2079,30 +2191,30 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "228",
+               "localId" : "230",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "229",
+                  "localId" : "231",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "225",
+                  "localId" : "227",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "F",
                   "type" : "Literal"
                },
                "valueset" : {
-                  "localId" : "227",
+                  "localId" : "229",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "232",
+            "localId" : "234",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "SharedCodesFoo",
             "context" : "Patient",
@@ -2110,20 +2222,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "232",
+                  "r" : "234",
                   "s" : [ {
                      "value" : [ "","define ","SharedCodesFoo",": " ]
                   }, {
-                     "r" : "236",
+                     "r" : "238",
                      "s" : [ {
-                        "r" : "233",
+                        "r" : "235",
                         "s" : [ {
                            "value" : [ "'foo'" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "235",
+                        "r" : "237",
                         "s" : [ {
                            "value" : [ "\"SharedCodes\"" ]
                         } ]
@@ -2132,30 +2244,30 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "236",
+               "localId" : "238",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "237",
+                  "localId" : "239",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "233",
+                  "localId" : "235",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "foo",
                   "type" : "Literal"
                },
                "valueset" : {
-                  "localId" : "235",
+                  "localId" : "237",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "SharedCodes",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "240",
+            "localId" : "242",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "SharedCodesNoMatch",
             "context" : "Patient",
@@ -2163,20 +2275,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "240",
+                  "r" : "242",
                   "s" : [ {
                      "value" : [ "","define ","SharedCodesNoMatch",": " ]
                   }, {
-                     "r" : "244",
+                     "r" : "246",
                      "s" : [ {
-                        "r" : "241",
+                        "r" : "243",
                         "s" : [ {
                            "value" : [ "'baz'" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "243",
+                        "r" : "245",
                         "s" : [ {
                            "value" : [ "\"SharedCodes\"" ]
                         } ]
@@ -2185,30 +2297,30 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "244",
+               "localId" : "246",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "245",
+                  "localId" : "247",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "241",
+                  "localId" : "243",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "baz",
                   "type" : "Literal"
                },
                "valueset" : {
-                  "localId" : "243",
+                  "localId" : "245",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "SharedCodes",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "248",
+            "localId" : "250",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "ImproperSharedCodesCodeValue",
             "context" : "Patient",
@@ -2216,20 +2328,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "248",
+                  "r" : "250",
                   "s" : [ {
                      "value" : [ "","define ","ImproperSharedCodesCodeValue",": " ]
                   }, {
-                     "r" : "252",
+                     "r" : "254",
                      "s" : [ {
-                        "r" : "249",
+                        "r" : "251",
                         "s" : [ {
                            "value" : [ "'codeValue'" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "251",
+                        "r" : "253",
                         "s" : [ {
                            "value" : [ "\"ImproperSharedCodes\"" ]
                         } ]
@@ -2238,30 +2350,30 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "252",
+               "localId" : "254",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "253",
+                  "localId" : "255",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "249",
+                  "localId" : "251",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "codeValue",
                   "type" : "Literal"
                },
                "valueset" : {
-                  "localId" : "251",
+                  "localId" : "253",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "ImproperSharedCodes",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "256",
+            "localId" : "258",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "StringInVersionedValueSet",
             "context" : "Patient",
@@ -2269,20 +2381,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "256",
+                  "r" : "258",
                   "s" : [ {
                      "value" : [ "","define ","StringInVersionedValueSet",": " ]
                   }, {
-                     "r" : "260",
+                     "r" : "262",
                      "s" : [ {
-                        "r" : "257",
+                        "r" : "259",
                         "s" : [ {
                            "value" : [ "'F'" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "259",
+                        "r" : "261",
                         "s" : [ {
                            "value" : [ "\"Versioned Female\"" ]
                         } ]
@@ -2291,30 +2403,30 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "260",
+               "localId" : "262",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "261",
+                  "localId" : "263",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "257",
+                  "localId" : "259",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "F",
                   "type" : "Literal"
                },
                "valueset" : {
-                  "localId" : "259",
+                  "localId" : "261",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Versioned Female",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "264",
+            "localId" : "266",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "ShortCode",
             "context" : "Patient",
@@ -2322,20 +2434,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "264",
+                  "r" : "266",
                   "s" : [ {
                      "value" : [ "","define ","ShortCode",": " ]
                   }, {
-                     "r" : "270",
+                     "r" : "272",
                      "s" : [ {
-                        "r" : "265",
+                        "r" : "267",
                         "s" : [ {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
                               "value" : [ "code",": " ]
                            }, {
-                              "r" : "267",
+                              "r" : "269",
                               "s" : [ {
                                  "value" : [ "'F'" ]
                               } ]
@@ -2346,7 +2458,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "269",
+                        "r" : "271",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -2355,23 +2467,23 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "270",
+               "localId" : "272",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "271",
+                  "localId" : "273",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "265",
+                  "localId" : "267",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                   "classType" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "Instance",
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "localId" : "267",
+                        "localId" : "269",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "F",
@@ -2380,14 +2492,14 @@ module.exports['InValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "269",
+                  "localId" : "271",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "274",
+            "localId" : "276",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "MediumCode",
             "context" : "Patient",
@@ -2395,20 +2507,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "274",
+                  "r" : "276",
                   "s" : [ {
                      "value" : [ "","define ","MediumCode",": " ]
                   }, {
-                     "r" : "282",
+                     "r" : "284",
                      "s" : [ {
-                        "r" : "275",
+                        "r" : "277",
                         "s" : [ {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
                               "value" : [ "code",": " ]
                            }, {
-                              "r" : "277",
+                              "r" : "279",
                               "s" : [ {
                                  "value" : [ "'F'" ]
                               } ]
@@ -2419,7 +2531,7 @@ module.exports['InValueSet'] = {
                            "s" : [ {
                               "value" : [ "system",": " ]
                            }, {
-                              "r" : "279",
+                              "r" : "281",
                               "s" : [ {
                                  "value" : [ "'2.16.840.1.113883.18.2'" ]
                               } ]
@@ -2430,7 +2542,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "281",
+                        "r" : "283",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -2439,23 +2551,23 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "282",
+               "localId" : "284",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "283",
+                  "localId" : "285",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "275",
+                  "localId" : "277",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                   "classType" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "Instance",
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "localId" : "277",
+                        "localId" : "279",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "F",
@@ -2464,7 +2576,7 @@ module.exports['InValueSet'] = {
                   }, {
                      "name" : "system",
                      "value" : {
-                        "localId" : "279",
+                        "localId" : "281",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "2.16.840.1.113883.18.2",
@@ -2473,14 +2585,14 @@ module.exports['InValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "281",
+                  "localId" : "283",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "286",
+            "localId" : "288",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "LongCode",
             "context" : "Patient",
@@ -2488,20 +2600,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "286",
+                  "r" : "288",
                   "s" : [ {
                      "value" : [ "","define ","LongCode",": " ]
                   }, {
-                     "r" : "296",
+                     "r" : "298",
                      "s" : [ {
-                        "r" : "287",
+                        "r" : "289",
                         "s" : [ {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
                               "value" : [ "code",": " ]
                            }, {
-                              "r" : "289",
+                              "r" : "291",
                               "s" : [ {
                                  "value" : [ "'F'" ]
                               } ]
@@ -2512,7 +2624,7 @@ module.exports['InValueSet'] = {
                            "s" : [ {
                               "value" : [ "system",": " ]
                            }, {
-                              "r" : "291",
+                              "r" : "293",
                               "s" : [ {
                                  "value" : [ "'2.16.840.1.113883.18.2'" ]
                               } ]
@@ -2523,7 +2635,7 @@ module.exports['InValueSet'] = {
                            "s" : [ {
                               "value" : [ "version",": " ]
                            }, {
-                              "r" : "293",
+                              "r" : "295",
                               "s" : [ {
                                  "value" : [ "'HL7V2.5'" ]
                               } ]
@@ -2534,7 +2646,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "295",
+                        "r" : "297",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -2543,23 +2655,23 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "296",
+               "localId" : "298",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "297",
+                  "localId" : "299",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "287",
+                  "localId" : "289",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                   "classType" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "Instance",
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "localId" : "289",
+                        "localId" : "291",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "F",
@@ -2568,7 +2680,7 @@ module.exports['InValueSet'] = {
                   }, {
                      "name" : "system",
                      "value" : {
-                        "localId" : "291",
+                        "localId" : "293",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "2.16.840.1.113883.18.2",
@@ -2577,7 +2689,7 @@ module.exports['InValueSet'] = {
                   }, {
                      "name" : "version",
                      "value" : {
-                        "localId" : "293",
+                        "localId" : "295",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "HL7V2.5",
@@ -2586,14 +2698,14 @@ module.exports['InValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "295",
+                  "localId" : "297",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "300",
+            "localId" : "302",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "WrongString",
             "context" : "Patient",
@@ -2601,20 +2713,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "300",
+                  "r" : "302",
                   "s" : [ {
                      "value" : [ "","define ","WrongString",": " ]
                   }, {
-                     "r" : "304",
+                     "r" : "306",
                      "s" : [ {
-                        "r" : "301",
+                        "r" : "303",
                         "s" : [ {
                            "value" : [ "'M'" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "303",
+                        "r" : "305",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -2623,30 +2735,30 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "304",
+               "localId" : "306",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "305",
+                  "localId" : "307",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "301",
+                  "localId" : "303",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "M",
                   "type" : "Literal"
                },
                "valueset" : {
-                  "localId" : "303",
+                  "localId" : "305",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "308",
+            "localId" : "310",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "WrongStringInVersionedValueSet",
             "context" : "Patient",
@@ -2654,20 +2766,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "308",
+                  "r" : "310",
                   "s" : [ {
                      "value" : [ "","define ","WrongStringInVersionedValueSet",": " ]
                   }, {
-                     "r" : "312",
+                     "r" : "314",
                      "s" : [ {
-                        "r" : "309",
+                        "r" : "311",
                         "s" : [ {
                            "value" : [ "'M'" ]
                         } ]
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "311",
+                        "r" : "313",
                         "s" : [ {
                            "value" : [ "\"Versioned Female\"" ]
                         } ]
@@ -2676,30 +2788,30 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "312",
+               "localId" : "314",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "313",
+                  "localId" : "315",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "309",
+                  "localId" : "311",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "M",
                   "type" : "Literal"
                },
                "valueset" : {
-                  "localId" : "311",
+                  "localId" : "313",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Versioned Female",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "316",
+            "localId" : "318",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "WrongShortCode",
             "context" : "Patient",
@@ -2707,20 +2819,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "316",
+                  "r" : "318",
                   "s" : [ {
                      "value" : [ "","define ","WrongShortCode",": " ]
                   }, {
-                     "r" : "322",
+                     "r" : "324",
                      "s" : [ {
-                        "r" : "317",
+                        "r" : "319",
                         "s" : [ {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
                               "value" : [ "code",": " ]
                            }, {
-                              "r" : "319",
+                              "r" : "321",
                               "s" : [ {
                                  "value" : [ "'M'" ]
                               } ]
@@ -2731,7 +2843,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "321",
+                        "r" : "323",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -2740,23 +2852,23 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "322",
+               "localId" : "324",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "323",
+                  "localId" : "325",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "317",
+                  "localId" : "319",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                   "classType" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "Instance",
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "localId" : "319",
+                        "localId" : "321",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "M",
@@ -2765,14 +2877,14 @@ module.exports['InValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "321",
+                  "localId" : "323",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "326",
+            "localId" : "328",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "WrongMediumCode",
             "context" : "Patient",
@@ -2780,20 +2892,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "326",
+                  "r" : "328",
                   "s" : [ {
                      "value" : [ "","define ","WrongMediumCode",": " ]
                   }, {
-                     "r" : "334",
+                     "r" : "336",
                      "s" : [ {
-                        "r" : "327",
+                        "r" : "329",
                         "s" : [ {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
                               "value" : [ "code",": " ]
                            }, {
-                              "r" : "329",
+                              "r" : "331",
                               "s" : [ {
                                  "value" : [ "'F'" ]
                               } ]
@@ -2804,7 +2916,7 @@ module.exports['InValueSet'] = {
                            "s" : [ {
                               "value" : [ "system",": " ]
                            }, {
-                              "r" : "331",
+                              "r" : "333",
                               "s" : [ {
                                  "value" : [ "'3.16.840.1.113883.18.2'" ]
                               } ]
@@ -2815,7 +2927,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "333",
+                        "r" : "335",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -2824,23 +2936,23 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "334",
+               "localId" : "336",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "335",
+                  "localId" : "337",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "327",
+                  "localId" : "329",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                   "classType" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "Instance",
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "localId" : "329",
+                        "localId" : "331",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "F",
@@ -2849,7 +2961,7 @@ module.exports['InValueSet'] = {
                   }, {
                      "name" : "system",
                      "value" : {
-                        "localId" : "331",
+                        "localId" : "333",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "3.16.840.1.113883.18.2",
@@ -2858,14 +2970,14 @@ module.exports['InValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "333",
+                  "localId" : "335",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "338",
+            "localId" : "340",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "LongCodeDifferentVersion",
             "context" : "Patient",
@@ -2873,20 +2985,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "338",
+                  "r" : "340",
                   "s" : [ {
                      "value" : [ "","define ","LongCodeDifferentVersion",": " ]
                   }, {
-                     "r" : "348",
+                     "r" : "350",
                      "s" : [ {
-                        "r" : "339",
+                        "r" : "341",
                         "s" : [ {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
                               "value" : [ "code",": " ]
                            }, {
-                              "r" : "341",
+                              "r" : "343",
                               "s" : [ {
                                  "value" : [ "'F'" ]
                               } ]
@@ -2897,7 +3009,7 @@ module.exports['InValueSet'] = {
                            "s" : [ {
                               "value" : [ "system",": " ]
                            }, {
-                              "r" : "343",
+                              "r" : "345",
                               "s" : [ {
                                  "value" : [ "'2.16.840.1.113883.18.2'" ]
                               } ]
@@ -2908,7 +3020,7 @@ module.exports['InValueSet'] = {
                            "s" : [ {
                               "value" : [ "version",": " ]
                            }, {
-                              "r" : "345",
+                              "r" : "347",
                               "s" : [ {
                                  "value" : [ "'HL7V2.6'" ]
                               } ]
@@ -2919,7 +3031,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "347",
+                        "r" : "349",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -2928,23 +3040,23 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "348",
+               "localId" : "350",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "349",
+                  "localId" : "351",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "339",
+                  "localId" : "341",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                   "classType" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "Instance",
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "localId" : "341",
+                        "localId" : "343",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "F",
@@ -2953,7 +3065,7 @@ module.exports['InValueSet'] = {
                   }, {
                      "name" : "system",
                      "value" : {
-                        "localId" : "343",
+                        "localId" : "345",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "2.16.840.1.113883.18.2",
@@ -2962,7 +3074,7 @@ module.exports['InValueSet'] = {
                   }, {
                      "name" : "version",
                      "value" : {
-                        "localId" : "345",
+                        "localId" : "347",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "HL7V2.6",
@@ -2971,14 +3083,14 @@ module.exports['InValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "347",
+                  "localId" : "349",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "352",
+            "localId" : "354",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullCode",
             "context" : "Patient",
@@ -2986,18 +3098,18 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "352",
+                  "r" : "354",
                   "s" : [ {
                      "value" : [ "","define ","NullCode",": " ]
                   }, {
-                     "r" : "362",
+                     "r" : "364",
                      "s" : [ {
-                        "r" : "353",
+                        "r" : "355",
                         "s" : [ {
                            "value" : [ "Code"," { " ]
                         }, {
                            "s" : [ {
-                              "r" : "355",
+                              "r" : "357",
                               "value" : [ "code",": ","null" ]
                            } ]
                         }, {
@@ -3006,7 +3118,7 @@ module.exports['InValueSet'] = {
                            "s" : [ {
                               "value" : [ "system",": " ]
                            }, {
-                              "r" : "357",
+                              "r" : "359",
                               "s" : [ {
                                  "value" : [ "'2.16.840.1.113883.18.2'" ]
                               } ]
@@ -3017,7 +3129,7 @@ module.exports['InValueSet'] = {
                            "s" : [ {
                               "value" : [ "version",": " ]
                            }, {
-                              "r" : "359",
+                              "r" : "361",
                               "s" : [ {
                                  "value" : [ "'HL7V2.6'" ]
                               } ]
@@ -3028,7 +3140,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "361",
+                        "r" : "363",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -3037,28 +3149,28 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "362",
+               "localId" : "364",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "363",
+                  "localId" : "365",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "353",
+                  "localId" : "355",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                   "classType" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "Instance",
                   "element" : [ {
                      "name" : "code",
                      "value" : {
-                        "localId" : "356",
+                        "localId" : "358",
                         "asType" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "As",
                         "signature" : [ ],
                         "operand" : {
-                           "localId" : "355",
+                           "localId" : "357",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                            "type" : "Null"
                         }
@@ -3066,7 +3178,7 @@ module.exports['InValueSet'] = {
                   }, {
                      "name" : "system",
                      "value" : {
-                        "localId" : "357",
+                        "localId" : "359",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "2.16.840.1.113883.18.2",
@@ -3075,7 +3187,7 @@ module.exports['InValueSet'] = {
                   }, {
                      "name" : "version",
                      "value" : {
-                        "localId" : "359",
+                        "localId" : "361",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "HL7V2.6",
@@ -3084,14 +3196,14 @@ module.exports['InValueSet'] = {
                   } ]
                },
                "valueset" : {
-                  "localId" : "361",
+                  "localId" : "363",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "366",
+            "localId" : "368",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullCastAsCode",
             "context" : "Patient",
@@ -3099,18 +3211,18 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "366",
+                  "r" : "368",
                   "s" : [ {
                      "value" : [ "","define ","NullCastAsCode",": " ]
                   }, {
-                     "r" : "371",
+                     "r" : "373",
                      "s" : [ {
-                        "r" : "367",
+                        "r" : "369",
                         "s" : [ {
-                           "r" : "368",
+                           "r" : "370",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "369",
+                           "r" : "371",
                            "s" : [ {
                               "value" : [ "Code" ]
                            } ]
@@ -3118,7 +3230,7 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "370",
+                        "r" : "372",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -3127,41 +3239,41 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "371",
+               "localId" : "373",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "372",
+                  "localId" : "374",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "367",
+                  "localId" : "369",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "368",
+                     "localId" : "370",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "369",
+                     "localId" : "371",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "valueset" : {
-                  "localId" : "370",
+                  "localId" : "372",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true
                }
             }
          }, {
-            "localId" : "375",
+            "localId" : "377",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "NullCastAsCodeWithNullVS",
             "context" : "Patient",
@@ -3169,18 +3281,18 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "375",
+                  "r" : "377",
                   "s" : [ {
                      "value" : [ "","define ","NullCastAsCodeWithNullVS",": " ]
                   }, {
-                     "r" : "382",
+                     "r" : "384",
                      "s" : [ {
-                        "r" : "376",
+                        "r" : "378",
                         "s" : [ {
-                           "r" : "377",
+                           "r" : "379",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "378",
+                           "r" : "380",
                            "s" : [ {
                               "value" : [ "Code" ]
                            } ]
@@ -3188,12 +3300,12 @@ module.exports['InValueSet'] = {
                      }, {
                         "value" : [ " in " ]
                      }, {
-                        "r" : "379",
+                        "r" : "381",
                         "s" : [ {
-                           "r" : "380",
+                           "r" : "382",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "381",
+                           "r" : "383",
                            "s" : [ {
                               "value" : [ "ValueSet" ]
                            } ]
@@ -3203,49 +3315,49 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "382",
+               "localId" : "384",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "383",
+                  "localId" : "385",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "384",
+                  "localId" : "386",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "376",
+                  "localId" : "378",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "377",
+                     "localId" : "379",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "378",
+                     "localId" : "380",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "valuesetExpression" : {
-                  "localId" : "379",
+                  "localId" : "381",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "380",
+                     "localId" : "382",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "381",
+                     "localId" : "383",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "type" : "NamedTypeSpecifier"
@@ -3253,7 +3365,7 @@ module.exports['InValueSet'] = {
                }
             }
          }, {
-            "localId" : "385",
+            "localId" : "387",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FInVS",
             "context" : "Patient",
@@ -3262,22 +3374,22 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "385",
+                  "r" : "387",
                   "s" : [ {
                      "value" : [ "","define function FInVS(vs ValueSet): " ]
                   }, {
-                     "r" : "393",
+                     "r" : "395",
                      "s" : [ {
-                        "r" : "393",
+                        "r" : "395",
                         "s" : [ {
-                           "r" : "390",
+                           "r" : "392",
                            "s" : [ {
                               "value" : [ "'F'" ]
                            } ]
                         }, {
                            "value" : [ " in " ]
                         }, {
-                           "r" : "392",
+                           "r" : "394",
                            "s" : [ {
                               "value" : [ "vs" ]
                            } ]
@@ -3287,44 +3399,44 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "393",
+               "localId" : "395",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "InValueSet",
                "signature" : [ {
-                  "localId" : "394",
+                  "localId" : "396",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "395",
+                  "localId" : "397",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "code" : {
-                  "localId" : "390",
+                  "localId" : "392",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
                   "value" : "F",
                   "type" : "Literal"
                },
                "valuesetExpression" : {
-                  "localId" : "392",
+                  "localId" : "394",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "vs",
                   "type" : "OperandRef"
                }
             },
             "operand" : [ {
-               "localId" : "387",
+               "localId" : "389",
                "name" : "vs",
                "operandTypeSpecifier" : {
-                  "localId" : "386",
+                  "localId" : "388",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "398",
+            "localId" : "400",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FInPassedVS",
             "context" : "Patient",
@@ -3332,15 +3444,15 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "398",
+                  "r" : "400",
                   "s" : [ {
                      "value" : [ "","define ","FInPassedVS",": " ]
                   }, {
-                     "r" : "400",
+                     "r" : "402",
                      "s" : [ {
                         "value" : [ "FInVS","(" ]
                      }, {
-                        "r" : "399",
+                        "r" : "401",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -3351,17 +3463,17 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "400",
+               "localId" : "402",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "FInVS",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "401",
+                  "localId" : "403",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "399",
+                  "localId" : "401",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true,
@@ -3369,7 +3481,7 @@ module.exports['InValueSet'] = {
                } ]
             }
          }, {
-            "localId" : "404",
+            "localId" : "406",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FInWrongVS",
             "context" : "Patient",
@@ -3377,15 +3489,15 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "404",
+                  "r" : "406",
                   "s" : [ {
                      "value" : [ "","define ","FInWrongVS",": " ]
                   }, {
-                     "r" : "406",
+                     "r" : "408",
                      "s" : [ {
                         "value" : [ "FInVS","(" ]
                      }, {
-                        "r" : "405",
+                        "r" : "407",
                         "s" : [ {
                            "value" : [ "\"Male\"" ]
                         } ]
@@ -3396,17 +3508,17 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "406",
+               "localId" : "408",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "FInVS",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "407",
+                  "localId" : "409",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "405",
+                  "localId" : "407",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Male",
                   "preserve" : true,
@@ -3414,7 +3526,7 @@ module.exports['InValueSet'] = {
                } ]
             }
          }, {
-            "localId" : "410",
+            "localId" : "412",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "FInNullVS",
             "context" : "Patient",
@@ -3422,20 +3534,20 @@ module.exports['InValueSet'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "410",
+                  "r" : "412",
                   "s" : [ {
                      "value" : [ "","define ","FInNullVS",": " ]
                   }, {
-                     "r" : "414",
+                     "r" : "416",
                      "s" : [ {
                         "value" : [ "FInVS","(" ]
                      }, {
-                        "r" : "411",
+                        "r" : "413",
                         "s" : [ {
-                           "r" : "412",
+                           "r" : "414",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "413",
+                           "r" : "415",
                            "s" : [ {
                               "value" : [ "ValueSet" ]
                            } ]
@@ -3447,33 +3559,86 @@ module.exports['InValueSet'] = {
                }
             } ],
             "expression" : {
-               "localId" : "414",
+               "localId" : "416",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "name" : "FInVS",
                "type" : "FunctionRef",
                "signature" : [ {
-                  "localId" : "415",
+                  "localId" : "417",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "411",
+                  "localId" : "413",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "412",
+                     "localId" : "414",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "413",
+                     "localId" : "415",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "type" : "NamedTypeSpecifier"
                   }
                } ]
+            }
+         }, {
+            "localId" : "420",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "InUnknown",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "420",
+                  "s" : [ {
+                     "value" : [ "","define ","InUnknown",": " ]
+                  }, {
+                     "r" : "424",
+                     "s" : [ {
+                        "r" : "421",
+                        "s" : [ {
+                           "value" : [ "'F'" ]
+                        } ]
+                     }, {
+                        "value" : [ " in " ]
+                     }, {
+                        "r" : "423",
+                        "s" : [ {
+                           "value" : [ "\"UnknownIn\"" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "424",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "InValueSet",
+               "signature" : [ {
+                  "localId" : "425",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "code" : {
+                  "localId" : "421",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "F",
+                  "type" : "Literal"
+               },
+               "valueset" : {
+                  "localId" : "423",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "name" : "UnknownIn",
+                  "preserve" : true
+               }
             }
          } ]
       }
@@ -3485,6 +3650,7 @@ library TestSnippet version '1'
 using Simple version '1.0.0'
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
 valueset "Known": '2.16.840.1.113883.3.464.1003.101.12.1061'
+valueset "UnknownExpand": '1.2.3.4.5.6.7.8.9'
 context Patient
 
 define ExpandFemale: ExpandValueSet("Female")
@@ -3496,6 +3662,7 @@ define ExpandPassedVS: ExpandVSHelper("Female")
 define ExpandNullVS: ExpandVSHelper(null as ValueSet)
 define function UnionVSs(vs1 ValueSet, vs2 ValueSet): vs1 union vs2
 define ExpandPassedWithUnion: UnionVSs("Female", "Known")
+define ExpandUnknown: ExpandValueSet("UnknownExpand")
 */
 
 module.exports['ExpandValueset'] = {
@@ -3509,7 +3676,7 @@ module.exports['ExpandValueset'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "345",
+            "r" : "359",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3583,25 +3750,41 @@ module.exports['ExpandValueset'] = {
                }
             } ],
             "codeSystem" : [ ]
+         }, {
+            "localId" : "212",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "UnknownExpand",
+            "id" : "1.2.3.4.5.6.7.8.9",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "212",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"UnknownExpand\"",": ","'1.2.3.4.5.6.7.8.9'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : [ ]
          } ]
       },
       "contexts" : {
          "def" : [ {
-            "localId" : "215",
+            "localId" : "217",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "localId" : "213",
+            "localId" : "215",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
-               "localId" : "214",
+               "localId" : "216",
                "type" : "SingletonFrom",
                "signature" : [ ],
                "operand" : {
-                  "localId" : "212",
+                  "localId" : "214",
                   "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
                   "type" : "Retrieve",
                   "include" : [ ],
@@ -3611,22 +3794,22 @@ module.exports['ExpandValueset'] = {
                }
             }
          }, {
-            "localId" : "218",
+            "localId" : "220",
             "name" : "ExpandFemale",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "218",
+                  "r" : "220",
                   "s" : [ {
                      "value" : [ "","define ","ExpandFemale",": " ]
                   }, {
-                     "r" : "223",
+                     "r" : "225",
                      "s" : [ {
                         "value" : [ "ExpandValueSet","(" ]
                      }, {
-                        "r" : "219",
+                        "r" : "221",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -3637,33 +3820,33 @@ module.exports['ExpandValueset'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "227",
+               "localId" : "229",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "228",
+                  "localId" : "230",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "223",
+               "localId" : "225",
                "type" : "ExpandValueSet",
                "resultTypeSpecifier" : {
-                  "localId" : "225",
+                  "localId" : "227",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "226",
+                     "localId" : "228",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "signature" : [ {
-                  "localId" : "224",
+                  "localId" : "226",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "219",
+                  "localId" : "221",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true,
@@ -3671,22 +3854,22 @@ module.exports['ExpandValueset'] = {
                }
             }
          }, {
-            "localId" : "231",
+            "localId" : "233",
             "name" : "ExpandKnown",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "231",
+                  "r" : "233",
                   "s" : [ {
                      "value" : [ "","define ","ExpandKnown",": " ]
                   }, {
-                     "r" : "236",
+                     "r" : "238",
                      "s" : [ {
                         "value" : [ "ExpandValueSet","(" ]
                      }, {
-                        "r" : "232",
+                        "r" : "234",
                         "s" : [ {
                            "value" : [ "\"Known\"" ]
                         } ]
@@ -3697,33 +3880,33 @@ module.exports['ExpandValueset'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "240",
+               "localId" : "242",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "241",
+                  "localId" : "243",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "236",
+               "localId" : "238",
                "type" : "ExpandValueSet",
                "resultTypeSpecifier" : {
-                  "localId" : "238",
+                  "localId" : "240",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "239",
+                     "localId" : "241",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "signature" : [ {
-                  "localId" : "237",
+                  "localId" : "239",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "232",
+                  "localId" : "234",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Known",
                   "preserve" : true,
@@ -3731,85 +3914,85 @@ module.exports['ExpandValueset'] = {
                }
             }
          }, {
-            "localId" : "244",
+            "localId" : "246",
             "name" : "ExpandNull",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "244",
+                  "r" : "246",
                   "s" : [ {
                      "value" : [ "","define ","ExpandNull",": " ]
                   }, {
-                     "r" : "250",
+                     "r" : "252",
                      "s" : [ {
-                        "r" : "245",
+                        "r" : "247",
                         "value" : [ "ExpandValueSet","(","null",")" ]
                      } ]
                   } ]
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "255",
+               "localId" : "257",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "256",
+                  "localId" : "258",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "250",
+               "localId" : "252",
                "type" : "ExpandValueSet",
                "resultTypeSpecifier" : {
-                  "localId" : "253",
+                  "localId" : "255",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "254",
+                     "localId" : "256",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "signature" : [ {
-                  "localId" : "252",
+                  "localId" : "254",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "251",
+                  "localId" : "253",
                   "asType" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "245",
+                     "localId" : "247",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   }
                }
             }
          }, {
-            "localId" : "259",
+            "localId" : "261",
             "name" : "InvokeExpandWithUnion",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "259",
+                  "r" : "261",
                   "s" : [ {
                      "value" : [ "","define ","InvokeExpandWithUnion",": " ]
                   }, {
-                     "r" : "262",
+                     "r" : "264",
                      "s" : [ {
-                        "r" : "260",
+                        "r" : "262",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
                      }, {
                         "value" : [ " union  " ]
                      }, {
-                        "r" : "261",
+                        "r" : "263",
                         "s" : [ {
                            "value" : [ "\"Known\"" ]
                         } ]
@@ -3818,35 +4001,27 @@ module.exports['ExpandValueset'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "275",
+               "localId" : "277",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "276",
+                  "localId" : "278",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "262",
+               "localId" : "264",
                "type" : "Union",
                "resultTypeSpecifier" : {
-                  "localId" : "273",
+                  "localId" : "275",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "274",
+                     "localId" : "276",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "signature" : [ {
-                  "localId" : "269",
-                  "type" : "ListTypeSpecifier",
-                  "elementType" : {
-                     "localId" : "270",
-                     "name" : "{urn:hl7-org:elm-types:r1}Code",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               }, {
                   "localId" : "271",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
@@ -3854,32 +4029,40 @@ module.exports['ExpandValueset'] = {
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
+               }, {
+                  "localId" : "273",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "274",
+                     "name" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "NamedTypeSpecifier"
+                  }
                } ],
                "operand" : [ {
-                  "localId" : "264",
+                  "localId" : "266",
                   "type" : "ExpandValueSet",
                   "signature" : [ {
-                     "localId" : "265",
+                     "localId" : "267",
                      "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : {
-                     "localId" : "260",
+                     "localId" : "262",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Female",
                      "preserve" : true,
                      "type" : "ValueSetRef"
                   }
                }, {
-                  "localId" : "267",
+                  "localId" : "269",
                   "type" : "ExpandValueSet",
                   "signature" : [ {
-                     "localId" : "268",
+                     "localId" : "270",
                      "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : {
-                     "localId" : "261",
+                     "localId" : "263",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "Known",
                      "preserve" : true,
@@ -3888,7 +4071,7 @@ module.exports['ExpandValueset'] = {
                } ]
             }
          }, {
-            "localId" : "277",
+            "localId" : "279",
             "name" : "ExpandVSHelper",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3896,17 +4079,17 @@ module.exports['ExpandValueset'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "277",
+                  "r" : "279",
                   "s" : [ {
                      "value" : [ "","define function ExpandVSHelper(vs ValueSet): " ]
                   }, {
-                     "r" : "286",
+                     "r" : "288",
                      "s" : [ {
-                        "r" : "286",
+                        "r" : "288",
                         "s" : [ {
                            "value" : [ "ExpandValueSet","(" ]
                         }, {
-                           "r" : "282",
+                           "r" : "284",
                            "s" : [ {
                               "value" : [ "vs" ]
                            } ]
@@ -3918,65 +4101,65 @@ module.exports['ExpandValueset'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "292",
+               "localId" : "294",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "293",
+                  "localId" : "295",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "286",
+               "localId" : "288",
                "type" : "ExpandValueSet",
                "resultTypeSpecifier" : {
-                  "localId" : "290",
+                  "localId" : "292",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "291",
+                     "localId" : "293",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "signature" : [ {
-                  "localId" : "287",
+                  "localId" : "289",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : {
-                  "localId" : "282",
+                  "localId" : "284",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "vs",
                   "type" : "OperandRef"
                }
             },
             "operand" : [ {
-               "localId" : "279",
+               "localId" : "281",
                "name" : "vs",
                "operandTypeSpecifier" : {
-                  "localId" : "278",
+                  "localId" : "280",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "localId" : "296",
+            "localId" : "298",
             "name" : "ExpandPassedVS",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "296",
+                  "r" : "298",
                   "s" : [ {
                      "value" : [ "","define ","ExpandPassedVS",": " ]
                   }, {
-                     "r" : "298",
+                     "r" : "300",
                      "s" : [ {
                         "value" : [ "ExpandVSHelper","(" ]
                      }, {
-                        "r" : "297",
+                        "r" : "299",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
@@ -3987,34 +4170,34 @@ module.exports['ExpandValueset'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "302",
+               "localId" : "304",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "303",
+                  "localId" : "305",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "298",
+               "localId" : "300",
                "name" : "ExpandVSHelper",
                "type" : "FunctionRef",
                "resultTypeSpecifier" : {
-                  "localId" : "300",
+                  "localId" : "302",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "301",
+                     "localId" : "303",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "signature" : [ {
-                  "localId" : "299",
+                  "localId" : "301",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "297",
+                  "localId" : "299",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true,
@@ -4022,27 +4205,27 @@ module.exports['ExpandValueset'] = {
                } ]
             }
          }, {
-            "localId" : "306",
+            "localId" : "308",
             "name" : "ExpandNullVS",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "306",
+                  "r" : "308",
                   "s" : [ {
                      "value" : [ "","define ","ExpandNullVS",": " ]
                   }, {
-                     "r" : "310",
+                     "r" : "312",
                      "s" : [ {
                         "value" : [ "ExpandVSHelper","(" ]
                      }, {
-                        "r" : "307",
+                        "r" : "309",
                         "s" : [ {
-                           "r" : "308",
+                           "r" : "310",
                            "value" : [ "null"," as " ]
                         }, {
-                           "r" : "309",
+                           "r" : "311",
                            "s" : [ {
                               "value" : [ "ValueSet" ]
                            } ]
@@ -4054,45 +4237,45 @@ module.exports['ExpandValueset'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "314",
+               "localId" : "316",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "315",
+                  "localId" : "317",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "310",
+               "localId" : "312",
                "name" : "ExpandVSHelper",
                "type" : "FunctionRef",
                "resultTypeSpecifier" : {
-                  "localId" : "312",
+                  "localId" : "314",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "313",
+                     "localId" : "315",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "signature" : [ {
-                  "localId" : "311",
+                  "localId" : "313",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "307",
+                  "localId" : "309",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "strict" : false,
                   "type" : "As",
                   "signature" : [ ],
                   "operand" : {
-                     "localId" : "308",
+                     "localId" : "310",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                      "type" : "Null"
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "309",
+                     "localId" : "311",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "type" : "NamedTypeSpecifier"
@@ -4100,7 +4283,7 @@ module.exports['ExpandValueset'] = {
                } ]
             }
          }, {
-            "localId" : "316",
+            "localId" : "318",
             "name" : "UnionVSs",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -4108,22 +4291,22 @@ module.exports['ExpandValueset'] = {
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "316",
+                  "r" : "318",
                   "s" : [ {
                      "value" : [ "","define function UnionVSs(vs1 ValueSet, vs2 ValueSet): " ]
                   }, {
-                     "r" : "326",
+                     "r" : "328",
                      "s" : [ {
-                        "r" : "326",
+                        "r" : "328",
                         "s" : [ {
-                           "r" : "324",
+                           "r" : "326",
                            "s" : [ {
                               "value" : [ "vs1" ]
                            } ]
                         }, {
                            "value" : [ " union " ]
                         }, {
-                           "r" : "325",
+                           "r" : "327",
                            "s" : [ {
                               "value" : [ "vs2" ]
                            } ]
@@ -4133,35 +4316,27 @@ module.exports['ExpandValueset'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "341",
+               "localId" : "343",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "342",
+                  "localId" : "344",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "326",
+               "localId" : "328",
                "type" : "Union",
                "resultTypeSpecifier" : {
-                  "localId" : "339",
+                  "localId" : "341",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "340",
+                     "localId" : "342",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "signature" : [ {
-                  "localId" : "333",
-                  "type" : "ListTypeSpecifier",
-                  "elementType" : {
-                     "localId" : "334",
-                     "name" : "{urn:hl7-org:elm-types:r1}Code",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               }, {
                   "localId" : "335",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
@@ -4169,31 +4344,39 @@ module.exports['ExpandValueset'] = {
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
+               }, {
+                  "localId" : "337",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "338",
+                     "name" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "NamedTypeSpecifier"
+                  }
                } ],
                "operand" : [ {
-                  "localId" : "328",
+                  "localId" : "330",
                   "type" : "ExpandValueSet",
                   "signature" : [ {
-                     "localId" : "329",
+                     "localId" : "331",
                      "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : {
-                     "localId" : "324",
+                     "localId" : "326",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "vs1",
                      "type" : "OperandRef"
                   }
                }, {
-                  "localId" : "331",
+                  "localId" : "333",
                   "type" : "ExpandValueSet",
                   "signature" : [ {
-                     "localId" : "332",
+                     "localId" : "334",
                      "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : {
-                     "localId" : "325",
+                     "localId" : "327",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                      "name" : "vs2",
                      "type" : "OperandRef"
@@ -4201,48 +4384,48 @@ module.exports['ExpandValueset'] = {
                } ]
             },
             "operand" : [ {
-               "localId" : "318",
-               "name" : "vs1",
-               "operandTypeSpecifier" : {
-                  "localId" : "317",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                  "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                  "type" : "NamedTypeSpecifier"
-               }
-            }, {
                "localId" : "320",
-               "name" : "vs2",
+               "name" : "vs1",
                "operandTypeSpecifier" : {
                   "localId" : "319",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                }
+            }, {
+               "localId" : "322",
+               "name" : "vs2",
+               "operandTypeSpecifier" : {
+                  "localId" : "321",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "NamedTypeSpecifier"
+               }
             } ]
          }, {
-            "localId" : "345",
+            "localId" : "347",
             "name" : "ExpandPassedWithUnion",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "345",
+                  "r" : "347",
                   "s" : [ {
                      "value" : [ "","define ","ExpandPassedWithUnion",": " ]
                   }, {
-                     "r" : "348",
+                     "r" : "350",
                      "s" : [ {
                         "value" : [ "UnionVSs","(" ]
                      }, {
-                        "r" : "346",
+                        "r" : "348",
                         "s" : [ {
                            "value" : [ "\"Female\"" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "347",
+                        "r" : "349",
                         "s" : [ {
                            "value" : [ "\"Known\"" ]
                         } ]
@@ -4253,49 +4436,109 @@ module.exports['ExpandValueset'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "353",
+               "localId" : "355",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "354",
+                  "localId" : "356",
                   "name" : "{urn:hl7-org:elm-types:r1}Code",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "348",
+               "localId" : "350",
                "name" : "UnionVSs",
                "type" : "FunctionRef",
                "resultTypeSpecifier" : {
-                  "localId" : "351",
+                  "localId" : "353",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "352",
+                     "localId" : "354",
                      "name" : "{urn:hl7-org:elm-types:r1}Code",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "signature" : [ {
-                  "localId" : "349",
+                  "localId" : "351",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                }, {
-                  "localId" : "350",
+                  "localId" : "352",
                   "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "localId" : "346",
+                  "localId" : "348",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Female",
                   "preserve" : true,
                   "type" : "ValueSetRef"
                }, {
-                  "localId" : "347",
+                  "localId" : "349",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                   "name" : "Known",
                   "preserve" : true,
                   "type" : "ValueSetRef"
                } ]
+            }
+         }, {
+            "localId" : "359",
+            "name" : "ExpandUnknown",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "359",
+                  "s" : [ {
+                     "value" : [ "","define ","ExpandUnknown",": " ]
+                  }, {
+                     "r" : "364",
+                     "s" : [ {
+                        "value" : [ "ExpandValueSet","(" ]
+                     }, {
+                        "r" : "360",
+                        "s" : [ {
+                           "value" : [ "\"UnknownExpand\"" ]
+                        } ]
+                     }, {
+                        "value" : [ ")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "368",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "369",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "364",
+               "type" : "ExpandValueSet",
+               "resultTypeSpecifier" : {
+                  "localId" : "366",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "367",
+                     "name" : "{urn:hl7-org:elm-types:r1}Code",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "signature" : [ {
+                  "localId" : "365",
+                  "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "NamedTypeSpecifier"
+               } ],
+               "operand" : {
+                  "localId" : "360",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "name" : "UnknownExpand",
+                  "preserve" : true,
+                  "type" : "ValueSetRef"
+               }
             }
          } ]
       }
