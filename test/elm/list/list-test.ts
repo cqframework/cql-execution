@@ -386,12 +386,12 @@ describe('In', () => {
     (await this.inNull.exec(this.ctx)).should.be.false();
   });
 
-  it('should return null if null is in list', async function () {
-    should(await this.nullIn.exec(this.ctx)).be.null();
+  it('should return true if null is in list', async function () {
+    (await this.nullIn.exec(this.ctx)).should.be.true();
   });
 
-  it('should return null if null is not in list', async function () {
-    should(await this.nullNotIn.exec(this.ctx)).be.null();
+  it('should return false if null is not in list', async function () {
+    (await this.nullNotIn.exec(this.ctx)).should.be.false();
   });
 });
 
@@ -416,12 +416,12 @@ describe('Contains', () => {
     (await this.tupleIsNotIn.exec(this.ctx)).should.be.false();
   });
 
-  it('should return null if null is contained in the list', async function () {
-    should(await this.nullIn.exec(this.ctx)).be.null();
+  it('should return true if null is contained in the list', async function () {
+    (await this.nullIn.exec(this.ctx)).should.be.true();
   });
 
-  it('should return null if null is not contained in the list', async function () {
-    should(await this.nullNotIn.exec(this.ctx)).be.null();
+  it('should return false if null is not contained in the list', async function () {
+    (await this.nullNotIn.exec(this.ctx)).should.be.false();
   });
 
   it('should return false if list is null', async function () {

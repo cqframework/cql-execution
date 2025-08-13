@@ -385,7 +385,7 @@
                               },
                               "then" : {
                                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                                 "value" : "5",
+                                 "value" : "10",
                                  "type" : "Literal",
                                  "annotation" : [ ]
                               }

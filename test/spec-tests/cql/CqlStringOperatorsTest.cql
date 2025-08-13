@@ -177,7 +177,7 @@ define "Matches": Tuple{
     output: true
   },
   "MatchesWordsAndSpacesFalse": Tuple{
-    expression: Matches('Not all who wander are lost - circa 2017', '[\\w]+'),
+    expression: Matches('Not all who wander are lost - circa 2017', '^[\\w\\s]+$'),
     output: false
   },
   "MatchesNotWords": Tuple{
@@ -231,7 +231,7 @@ define "ReplaceMatches": Tuple{
     output: 'Who put the bang in the bang she bang she bang?'
   },
   "ReplaceMatchesSpaces": Tuple{
-    expression: ReplaceMatches('All that glitters is not gold', '\\s', '$$'),
+    expression: ReplaceMatches('All that glitters is not gold', '\\s', '\\$'),
     output: 'All$that$glitters$is$not$gold'
   }
 }

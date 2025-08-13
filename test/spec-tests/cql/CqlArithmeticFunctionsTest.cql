@@ -44,6 +44,12 @@ define "Add": Tuple{
     expression: 1 + 1,
     output: 2
   },
+  "Add1L2L": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: 1L + 2L,
+    output: 3L
+    */  },
   "Add1D1D": Tuple{
     expression: 1.0 + 1.0,
     output: 2.0
@@ -57,9 +63,11 @@ define "Add": Tuple{
     output: 3.0
   },
   "Add1L1L": Tuple{
+    skipped: 'Long not implemented'
+    /*
     expression: 1L + 1L,
     output: 2L
-  }
+    */  }
 }
 
 define "Ceiling": Tuple{
@@ -110,12 +118,16 @@ define "Divide": Tuple{
     expression: 1 / 1,
     output: 1.0
   },
+  "Divide1L1L": Tuple{
+    expression: 1L / 1L,
+    output: 1.0
+  },
   "Divide1d1d": Tuple{
     expression: 1.0 / 1.0,
     output: 1.0
   },
   "Divide103": Tuple{
-    expression: 10 / 3,
+    expression: Round(10 / 3, 8),
     output: 3.33333333
   },
   "Divide1Q1": Tuple{
@@ -189,12 +201,16 @@ define "Exp": Tuple{
     output: 1.0
   },
   "Exp1": Tuple{
-    expression: Exp(1),
-    output: 2.718281828459045090795598298427648842334747314453125
+    expression: Round(Exp(1), 8),
+    output: 2.71828183
+  },
+  "Exp1L": Tuple{
+    expression: Round(Exp(1L), 8),
+    output: 2.71828183
   },
   "ExpNeg1": Tuple{
-    expression: Exp(-1),
-    output: 0.367879441171442334024277442949824035167694091796875
+    expression: Round(Exp(-1), 8),
+    output: 0.36787944
   },
   "Exp1000": Tuple{
     expression: Exp(1000),
@@ -246,12 +262,20 @@ define "Log": Tuple{
     expression: Log(1, 1),
     output: null
   },
+  "Log2Base1": Tuple{
+    expression: Log(2, 1),
+    output: null
+  },
   "Log1Base2": Tuple{
     expression: Log(1, 2),
     output: 0.0
   },
   "Log1Base100": Tuple{
     expression: Log(1, 100),
+    output: 0.0
+  },
+  "Log1Base100L": Tuple{
+    expression: Log(1L, 100L),
     output: 0.0
   },
   "Log16Base2": Tuple{
@@ -308,17 +332,21 @@ define "Ln": Tuple{
     expression: Ln(1),
     output: 0.0
   },
+  "Ln1L": Tuple{
+    expression: Ln(1L),
+    output: 0.0
+  },
   "LnNeg1": Tuple{
     expression: Ln(-1),
     output: null
   },
   "Ln1000": Tuple{
-    expression: Ln(1000),
-    output: 6.907755278982136815102421678602695465087890625
+    expression: Round(Ln(1000), 8),
+    output: 6.90775528
   },
   "Ln1000D": Tuple{
-    expression: Ln(1000.0),
-    output: 6.907755278982136815102421678602695465087890625
+    expression: Round(Ln(1000.0), 8),
+    output: 6.90775528
   }
 }
 
@@ -331,7 +359,7 @@ define "MinValue": Tuple{
     skipped: 'Long not implemented'
     /*
     expression: minimum Long,
-    output: -9223372036854775808
+    output: -9223372036854775808L
     */  },
   "DecimalMinValue": Tuple{
     expression: minimum Decimal,
@@ -339,7 +367,7 @@ define "MinValue": Tuple{
   },
   "DateTimeMinValue": Tuple{
     expression: minimum DateTime,
-    output: @0001-01-01T00:00:00.000
+    output: @0001-01-01T00:00:00.000Z
   },
   "DateMinValue": Tuple{
     expression: minimum Date,
@@ -348,6 +376,10 @@ define "MinValue": Tuple{
   "TimeMinValue": Tuple{
     expression: minimum Time,
     output: @T00:00:00.000
+  },
+  "BooleanMinValue": Tuple{
+    expression: minimum Boolean,
+    invalid: true
   }
 }
 
@@ -360,7 +392,7 @@ define "MaxValue": Tuple{
     skipped: 'Long not implemented'
     /*
     expression: maximum Long,
-    output: 9223372036854775807
+    output: 9223372036854775807L
     */  },
   "DecimalMaxValue": Tuple{
     expression: maximum Decimal,
@@ -368,7 +400,7 @@ define "MaxValue": Tuple{
   },
   "DateTimeMaxValue": Tuple{
     expression: maximum DateTime,
-    output: @9999-12-31T23:59:59.999
+    output: @9999-12-31T23:59:59.999Z
   },
   "DateMaxValue": Tuple{
     expression: maximum Date,
@@ -377,6 +409,10 @@ define "MaxValue": Tuple{
   "TimeMaxValue": Tuple{
     expression: maximum Time,
     output: @T23:59:59.999
+  },
+  "BooleanMaxValue": Tuple{
+    expression: maximum Boolean,
+    invalid: true
   }
 }
 
@@ -424,7 +460,17 @@ define "Modulo": Tuple{
     /*
     expression: 3.5 'cm' mod 3 'cm',
     output: 0.5 'cm'
-    */  }
+    */  },
+  "Modulo10By3Quantity": Tuple{
+    skipped: 'Modulo not implemented for Quantity'
+    /*
+    expression: 10.0 'g' mod 3.0 'g',
+    output: 1.0 'g'
+    */  },
+  "Modulo10By0Quantity": Tuple{
+    expression: 10.0 'g' mod 0.0 'g',
+    output: null
+  }
 }
 
 define "Multiply": Tuple{
@@ -436,6 +482,12 @@ define "Multiply": Tuple{
     expression: 1 * 1,
     output: 1
   },
+  "Multiply2LBy3L": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: 2L * 3L,
+    output: 6L
+    */  },
   "Multiply1DBy2D": Tuple{
     expression: 1.0 * 2.0,
     output: 2.0
@@ -472,6 +524,14 @@ define "Negate": Tuple{
   "Negate1": Tuple{
     expression: -1,
     output: -1
+  },
+  "Negate1L": Tuple{
+    expression: -1L,
+    output: -1L
+  },
+  "NegateMaxLong": Tuple{
+    expression: -9223372036854775807L,
+    output: -9223372036854775807L
   },
   "NegateNeg1": Tuple{
     expression: -(-1),
@@ -634,6 +694,12 @@ define "Power": Tuple{
     expression: 2^4,
     output: 16
   },
+  "Power2LTo3L": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: 2L^3L,
+    output: 8L
+    */  },
   "Power2DTo4D": Tuple{
     expression: 2.0^4.0,
     output: 16.0
@@ -827,6 +893,10 @@ define "Truncated Divide": Tuple{
     expression: 2 div 1,
     output: 2
   },
+  "TruncatedDivide2By0": Tuple{
+    expression: 2 div 0,
+    output: null
+  },
   "TruncatedDivide10By3": Tuple{
     expression: 10 div 3,
     output: 3
@@ -837,9 +907,17 @@ define "Truncated Divide": Tuple{
     expression: 10L div 3L,
     output: 3L
     */  },
+  "TruncatedDivide10LBy0L": Tuple{
+    expression: 10L div 0L,
+    output: null
+  },
   "TruncatedDivide10d1By3D1": Tuple{
     expression: 10.1 div 3.1,
     output: 3.0
+  },
+  "TruncatedDivide10D1By0D": Tuple{
+    expression: 10.1 div 0.0,
+    output: null
   },
   "TruncatedDivideNeg2ByNeg1": Tuple{
     expression: -2 div -1,
@@ -886,5 +964,21 @@ define "Truncated Divide": Tuple{
     /*
     expression: 10.1 'cm' div -3.1 'cm',
     output: -3.0 'cm'
-    */  }
+    */  },
+  "TruncatedDivide10By5DQuantity": Tuple{
+    skipped: 'Truncated divide not implemented for Quantity'
+    /*
+    expression: 10.0 'g' div 5.0 'g',
+    output: 2.0 'g'
+    */  },
+  "TruncatedDivide414By206DQuantity": Tuple{
+    skipped: 'Truncated divide not implemented for Quantity'
+    /*
+    expression: 4.14 'm' div 2.06 'm',
+    output: 2.0 'm'
+    */  },
+  "TruncatedDivide10By0DQuantity": Tuple{
+    expression: 10.0 'g' div 0.0 'g',
+    output: null
+  }
 }

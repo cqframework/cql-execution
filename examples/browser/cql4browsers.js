@@ -3161,6 +3161,9 @@ class AllTrue extends AggregateExpression {
     }
     async exec(ctx) {
         const items = await this.source.execute(ctx);
+        if (items == null) {
+            return true;
+        }
         return (0, util_1.allTrue)((0, util_1.removeNulls)(items));
     }
 }
@@ -3171,6 +3174,9 @@ class AnyTrue extends AggregateExpression {
     }
     async exec(ctx) {
         const items = await this.source.execute(ctx);
+        if (items == null) {
+            return false;
+        }
         return (0, util_1.anyTrue)(items);
     }
 }
@@ -5591,14 +5597,14 @@ exports.doUnion = doUnion;
 function doExcept(a, b) {
     const distinct = (0, exports.toDistinctList)(a);
     const setList = removeDuplicateNulls(distinct);
-    return setList.filter(item => !doContains(b, item, true));
+    return setList.filter(item => !doContains(b, item));
 }
 exports.doExcept = doExcept;
 // Delegated to by overloaded#Intersect
 function doIntersect(a, b) {
     const distinct = (0, exports.toDistinctList)(a);
     const setList = removeDuplicateNulls(distinct);
-    return setList.filter(item => doContains(b, item, true));
+    return setList.filter(item => doContains(b, item));
 }
 exports.doIntersect = doIntersect;
 // ELM-only, not a product of CQL
@@ -5673,12 +5679,15 @@ class IndexOf extends expression_1.Expression {
 exports.IndexOf = IndexOf;
 // Indexer is completely handled by overloaded#Indexer
 // Delegated to by overloaded#Contains and overloaded#In
-function doContains(container, item, nullEquivalence = false) {
-    return container.some((element) => (0, comparison_1.equals)(element, item) || (nullEquivalence && element == null && item == null));
+function doContains(container, item) {
+    return container.some((element) => (0, comparison_1.equals)(element, item) || (element == null && item == null));
 }
 exports.doContains = doContains;
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
 function doIncludes(list, sublist) {
+    if (list == null || sublist == null) {
+        return null;
+    }
     return sublist.every((x) => doContains(list, x));
 }
 exports.doIncludes = doIncludes;
@@ -6220,14 +6229,18 @@ class In extends expression_1.Expression {
     }
     async exec(ctx) {
         const [item, container] = await this.execArgs(ctx);
-        if (item == null) {
-            return null;
-        }
         if (container == null) {
             return false;
         }
-        const lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
-        return lib.doContains(container, item, this.precision);
+        if ((0, util_1.typeIsArray)(container)) {
+            return LIST.doContains(container, item);
+        }
+        else {
+            if (item == null) {
+                return null;
+            }
+            return IVL.doContains(container, item, this.precision);
+        }
     }
 }
 exports.In = In;
@@ -6241,11 +6254,15 @@ class Contains extends expression_1.Expression {
         if (container == null) {
             return false;
         }
-        if (item == null) {
-            return null;
+        if ((0, util_1.typeIsArray)(container)) {
+            return LIST.doContains(container, item);
         }
-        const lib = (0, util_1.typeIsArray)(container) ? LIST : IVL;
-        return lib.doContains(container, item, this.precision);
+        else {
+            if (item == null) {
+                return null;
+            }
+            return IVL.doContains(container, item, this.precision);
+        }
     }
 }
 exports.Contains = Contains;
@@ -6670,7 +6687,7 @@ class AggregateClause extends expression_1.Expression {
         this.identifier = json.identifier;
         this.expression = (0, builder_1.build)(json.expression);
         this.starting = json.starting ? (0, builder_1.build)(json.starting) : null;
-        this.distinct = json.distinct != null ? json.distinct : true;
+        this.distinct = json.distinct != null ? json.distinct : false;
     }
     async aggregate(returnedValues, ctx) {
         let aggregateValue = this.starting != null ? await this.starting.execute(ctx) : null;
@@ -7234,7 +7251,7 @@ class ReplaceMatches extends expression_1.Expression {
             return null;
         }
         else {
-            return args[0].replace(new RegExp(args[1], 'g'), args[2]);
+            return args[0].replace(new RegExp(args[1], 'g'), args[2].replace(/\\\$/g, '$$'));
         }
     }
 }

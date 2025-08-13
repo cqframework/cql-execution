@@ -5,21 +5,41 @@ CqlTypesTest.Time.TimeUpperBoundMinutes             Translation Error: Invalid t
 CqlTypesTest.Time.TimeUpperBoundSeconds             Translation Error: Invalid time input (T23:59:60.999). Use ISO 8601 time representation (hh:mm:ss.fff).
 "CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision" Translation Error: Syntax error at Z
 CqlDateTimeOperatorsTest.DateTimeComponentFrom.DateTimeComponentFromTimezone      Translation Error: Timezone keyword is only valid in 1.3 or lower
-CqlAggregateTest.AggregateTests.RolledOutIntervals  Translation Error: Could not resolve identifier MedicationRequestIntervals in the current library.
 CqlIntervalOperatorsTest.Expand.ExpandPer1          Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Decimal>>,System.Integer).
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1        Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Integer>>,System.Decimal).
-CqlTypeOperatorsTest.ToDateTime.ToDateTime4         @2014-01-01T12:05:05.955+01:30 Parsed with offset 1 (should be 1.5)
-CqlTypeOperatorsTest.ToDateTime.ToDateTime5         @2014-01-01T12:05:05.955-01:15 Parsed with offset -1 (should be -1.25)
 
 # Invalid Translation (translates, but translates wrong)
-CqlIntervalOperatorsTest.After.TestAfterNull        Converts null to Interval[null,null] instead of Interval(null,null)
-CqlIntervalOperatorsTest.Before.TestBeforeNull      Converts null to Interval[null,null] instead of Interval(null,null)
+CqlAggregateTest.AggregateTests.RolledOutIntervals  CQL adds an integer to a date ("S + duration in days of X"). Should be "S + Quantity{ value: duration in days of X, unit: 'days' }". Translator translates it, but probably shouldn't.
+CqlListOperatorsTest.IncludedIn.IncludedInNullRight Converts included in to in, which has different semantics when second argument is null
+
+# Potentially Invalid Translation (translates, but potentially translates wrong)
+CqlListOperatorsTest.IncludedIn.IncludedInNullLeft    Treats null as point overload, translating to "In" operator, which has different semantics (and different result)
+CqlListOperatorsTest.Includes.IncludesNullRight       Treats null as point overload, translating to "Contains" operator, which has different semantics (and different result)
+
+# Incorrect Expected Output
+CqlDateTimeOperatorsTest.Add.DateTimeAddYearInWeeks             Wrong output: 2018-05-23 + 52 weeks should be 2019-05-22 (both dates should be Wednesdays)
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtractYearInWeeks   Wrong output: 2018-05-23 - 52 weeks should be 2019-05-24 (both dates should be Wednesdays)
+"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision2" Wrong output: Duration in hours between T06 and T07:00:00 should be Uncertainty[0, 1]
+CqlIntervalOperatorsTest.Expand.ExpandPerHour                   Wrong output: This test is drawn directly from an example in the spec and yet expects a different answer! See: https://cql.hl7.org/09-b-cqlreference.html#expand
+CqlIntervalOperatorsTest.In.TestInNullBoundaries                Wrong output: According to spec, comparison against null closed boundaries should result in true
+CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
+CqlListOperatorsTest.Sort                                       Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
+
+# Potentially Incorrect Expected Output
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract1YearInSeconds  Spec says to convert more precise duration to most precise unit in Date. How do you convert seconds to months? 31535999 is 364.999 days, which isn't quite 12 months, so we answer 2015-06.
+"CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
+CqlTypeOperatorsTest.Convert.StringToDateTime                     Answer does not include timezone offset, but default offset depends on test environment
+CqlTypeOperatorsTest.ToDateTime.ToDateTime1                       Answer does not include timezone offset, but default offset depends on test environment
+CqlTypeOperatorsTest.ToDateTime.ToDateTime2                       Answer does not include timezone offset, but default offset depends on test environment
+CqlTypeOperatorsTest.ToDateTime.ToDateTime3                       Answer does not include timezone offset, but default offset depends on test environment
+CqlTypesTest.DateTime.DateTimeNull                                Should DateTime(null) really evaluate to null?
 
 # Incorrect answer
 
 CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.Except.NullInterval                    Wrong answer (Interval(null, null) vs null)
+CqlIntervalOperatorsTest.Intersect.TestIntersectNull            Wrong answer (Interval[5, 10] vs Interval[5, null))
 ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalNeg10Pow28ToZeroOneStepDecimalMinValue Wrong answer (null vs big number)
@@ -45,37 +65,32 @@ CqlArithmeticFunctionsTest.Precision.PrecisionDecimal   Precision for Decimal no
 CqlIntervalOperatorsTest.PointFrom                      PointFrom not implemented
 CqlIntervalOperatorsTest.ProperContains                 ProperContains not implemented
 CqlIntervalOperatorsTest.ProperIn                       ProperIn not implemented
-CqlListOperatorsTest.Sort                               Sort not implemented
 CqlListOperatorsTest.Descendents                        Descendents not implemented
 CqlListOperatorsTest.ProperContains                     ProperContains not implemented
 CqlListOperatorsTest.ProperIn                           ProperIn not implemented
+CqlListOperatorsTest.ProperlyIncludedIn.ProperlyIncludedInNulRight  ProperIn not implemented
 
 # Unimplemented (New in CQL 1.5)
+
+CqlAggregateFunctionsTest.Product.ProductLong                         Long not implemented
+CqlAggregateFunctionsTest.Sum.SumTestLong                             Long not implemented
 CqlArithmeticFunctionsTest.Abs.AbsLong                                Long not implemented
+CqlArithmeticFunctionsTest.Add.Add1L1L                                Long not implemented
+CqlArithmeticFunctionsTest.Add.Add1L2L                                Long not implemented
 CqlArithmeticFunctionsTest.MinValue.LongMinValue                      Long not implemented
 CqlArithmeticFunctionsTest.MaxValue.LongMaxValue                      Long not implemented
 CqlArithmeticFunctionsTest.Modulo.Modulo4LBy2L                        Long not implemented
 CqlArithmeticFunctionsTest.Multiply.Multiply1By1L                     Long not implemented
+CqlArithmeticFunctionsTest.Multiply.Multiply2LBy3L                    Long not implemented
 CqlArithmeticFunctionsTest.Negate.NegateNeg1L                         Long not implemented
 CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1L                Long not implemented
 CqlArithmeticFunctionsTest.Power.Power2LTo2L                          Long not implemented
+CqlArithmeticFunctionsTest.Power.Power2LTo3L                          Long not implemented
 CqlArithmeticFunctionsTest.Subtract.Subtract1LAnd1L                   Long not implemented
 CqlArithmeticFunctionsTest.Successor.SuccessorOf1L                    Long not implemented
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10LBy3L"  Long not implemented
 CqlArithmeticFunctionsTest.Modulo.ModuloQuantity                      Modulo not implemented for Quantity
+CqlArithmeticFunctionsTest.Modulo.Modulo10By3Quantity                 Modulo not implemented for Quantity
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Truncated divide not implemented for Quantity
-
-# Awaiting feedback from Bryn
-
-"CqlDateTimeOperatorsTest.Uncertainty tests.DurationInHoursA"   Is @2017-03-12T01:00:00-07:00 uncertain?
-"CqlDateTimeOperatorsTest.Uncertainty tests.DurationInMinutesA" Is @2017-03-12T01:00:00-07:00 uncertain?
-CqlIntervalOperatorsTest.Intersect.TestIntersectNull            Answer seems incorrect, but correct answer is unrepresentable
-CqlIntervalOperatorsTest.MeetsAfter.TestMeetsAfterNull          Answer seems incorrect, but requires (too?) "smart" processing
-CqlListOperatorsTest.Includes.IncludesListNullAndListNull       Answer is incorrect according to spec, but not sure if correct answer is null or false
-CqlListOperatorsTest.IncludedIn.IncludedInListNullAndListNull   Answer is incorrect according to spec, but not sure if correct answer is null or false
-"CqlStringOperatorsTest.toString tests.DateTimeToString2"       Answer does not include timezone offset, but default offset depends on test environment
-CqlTypeOperatorsTest.Convert.StringToDateTime                   Answer does not include timezone offset, but default offset depends on test environment
-CqlTypeOperatorsTest.ToDateTime.ToDateTime1                     Answer does not include timezone offset, but default offset depends on test environment
-CqlTypeOperatorsTest.ToDateTime.ToDateTime2                     Answer does not include timezone offset, but default offset depends on test environment
-CqlTypeOperatorsTest.ToDateTime.ToDateTime3                     Answer does not include timezone offset, but default offset depends on test environment
-CqlTypesTest.DateTime.DateTimeNull                              Should DateTime(null) really evaluate to null?
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10By5DQuantity"           Truncated divide not implemented for Quantity
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide414By206DQuantity"        Truncated divide not implemented for Quantity

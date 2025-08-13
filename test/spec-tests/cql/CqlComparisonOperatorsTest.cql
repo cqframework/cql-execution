@@ -94,6 +94,26 @@ define "Equal": Tuple{
     expression: Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : 'John' },
     output: false
   },
+  "TupleEqJohn1John2WithNullName": Tuple{
+    expression: Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : null },
+    output: false
+  },
+  "TupleEqDifferentNamesWithOneNullId": Tuple{
+    expression: Tuple { Id : null, Name : 'John' } = Tuple { Id : 1, Name : 'James' },
+    output: false
+  },
+  "TupleEqJohn1John1WithBothNamesNull": Tuple{
+    expression: Tuple { Id : 1, Name : null } = Tuple { Id : 1, Name : null },
+    output: true
+  },
+  "TupleEqJohnJohnWithBothIdsNull": Tuple{
+    expression: Tuple { Id : null, Name : 'John' } = Tuple { Id : null, Name : 'John' },
+    output: true
+  },
+  "TupleEqJohn1John1WithNullName": Tuple{
+    expression: Tuple { Id : 1, Name : 'John' } = Tuple { Id : 1, Name : null },
+    output: null
+  },
   "TupleEqDateTimeTrue": Tuple{
     expression: Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) },
     output: true
@@ -136,6 +156,10 @@ define "Equal": Tuple{
     expression: @2014-01-25T14:30:14.559+01:00 = @2014-01-25T14:30:14.559+01:00,
     output: true
   },
+  "DateTimeDayCompare": Tuple{
+    expression: @2022-02-22T00:00:00.000-05:00 same day as @2022-02-22T04:59:00.000Z,
+    output: true
+  },
   "TimeEq10A10A": Tuple{
     expression: @T10:00:00.000 = @T10:00:00.000,
     output: true
@@ -170,6 +194,10 @@ define "Greater": Tuple{
   "GreaterDecZNeg1": Tuple{
     expression: 0.0 > -1.0,
     output: true
+  },
+  "GreaterDec1Int2": Tuple{
+    expression: 1.0 > 2,
+    output: false
   },
   "GreaterCM0CM0": Tuple{
     expression: 0'cm' > 0'cm',
@@ -269,6 +297,10 @@ define "Greater Or Equal": Tuple{
   "GreaterOrEqualDecZNeg1": Tuple{
     expression: 0.0 >= -1.0,
     output: true
+  },
+  "GreaterOrEqualDec1Int2": Tuple{
+    expression: 1.0 >= 2,
+    output: false
   },
   "GreaterOrEqualCM0CM0": Tuple{
     expression: 0'cm' >= 0'cm',
@@ -377,6 +409,10 @@ define "Less": Tuple{
     expression: 0.0 < -1.0,
     output: false
   },
+  "LessDec1Int2": Tuple{
+    expression: 1.0 < 2,
+    output: true
+  },
   "LessCM0CM0": Tuple{
     expression: 0'cm' < 0'cm',
     output: false
@@ -475,6 +511,10 @@ define "Less Or Equal": Tuple{
   "LessOrEqualDecZNeg1": Tuple{
     expression: 0.0 <= -1.0,
     output: false
+  },
+  "LessOrEqualDec1Int2": Tuple{
+    expression: 1.0 <= 2,
+    output: true
   },
   "LessOrEqualCM0CM0": Tuple{
     expression: 0'cm' <= 0'cm',
@@ -741,6 +781,26 @@ define "Not Equal": Tuple{
   "TupleNotEqJohn1John2": Tuple{
     expression: Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : 'John' },
     output: true
+  },
+  "TupleNotEqJohn1John2WithNullName": Tuple{
+    expression: Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : null },
+    output: true
+  },
+  "TupleNotEqDifferingNamesWithOneNullId": Tuple{
+    expression: Tuple{ Id : null, Name : 'John' } != Tuple{ Id : 1, Name : 'Joe' },
+    output: true
+  },
+  "TupleNotEqJohn1John1WithBothNamesNull": Tuple{
+    expression: Tuple{ Id : 1, Name : null } != Tuple{ Id : 1, Name : null },
+    output: false
+  },
+  "TupleNotEqMatchingNamesWithNullIDs": Tuple{
+    expression: Tuple{ Id : null, Name : 'John' } != Tuple{ Id : null, Name : 'John' },
+    output: false
+  },
+  "TupleNotEqJohn1John1WithNullName": Tuple{
+    expression: Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 1, Name : null },
+    output: null
   },
   "DateTimeNotEqTodayToday": Tuple{
     expression: Today() != Today(),

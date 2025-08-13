@@ -4,67 +4,67 @@ context Patient
 
 define "Sort": Tuple{
   "simpleSortAsc": Tuple{
-    skipped: 'Sort not implemented'
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
     /*
     expression: ({4, 5, 1, 6, 2, 1}) sL sort asc,
     output: {1, 1, 2, 4, 5, 6}
     */  },
   "simpleSortDesc": Tuple{
-    skipped: 'Sort not implemented'
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
     /*
     expression: ({4, 5, 1, 6, 2, 1}) sL sort desc,
     output: {6, 5, 4, 2, 1, 1}
     */  },
   "simpleSortStringAsc": Tuple{
-    skipped: 'Sort not implemented'
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
     /*
     expression: ({'back', 'aardvark', 'alligator', 'zebra', 'iguana', 'Wolf', 'Armadillo'}) sls sort asc,
     output: {'Armadillo', 'Wolf', 'aardvark', 'alligator', 'back', 'iguana', 'zebra'}
     */  },
   "simpleSortStringDesc": Tuple{
-    skipped: 'Sort not implemented'
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
     /*
     expression: ({'back', 'aardvark', 'alligator', 'zebra', 'iguana', 'Wolf', 'Armadillo'}) sls sort desc,
     output: {'zebra', 'iguana', 'back', 'alligator', 'aardvark', 'Wolf', 'Armadillo'}
     */  },
   "SortDatesAsc": Tuple{
-    skipped: 'Sort not implemented'
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
     /*
     expression: ({ DateTime(2012, 10, 5, 10), DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5) }) S sort asc,
-    output: {DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5), DateTime(2012, 10, 5, 10)}
+    output: { @2012-01-01T, @2012-01-01T12, @2012-10-05T, @2012-10-05T10 }
     */  },
   "SortDatesDesc": Tuple{
-    skipped: 'Sort not implemented'
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
     /*
     expression: ({ DateTime(2012, 10, 5, 10), DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5) }) S sort desc,
-    output: {DateTime(2012, 10, 5, 10), DateTime(2012, 10, 5), DateTime(2012, 1, 1, 12), DateTime(2012, 1, 1)}
+    output: { @2012-10-05T10, @2012-10-05T, @2012-01-01T12, @2012-01-01T }
     */  },
   "intList": Tuple{
-    skipped: 'Sort not implemented'
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
     /*
     expression: { 3, 2, 1 },
     output: {3, 2, 1}
     */  },
   "decimalList": Tuple{
-    skipped: 'Sort not implemented'
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
     /*
     expression: { 3.8, 2.4, 1.9 },
     output: {3.8, 2.4, 1.9}
     */  },
   "quantityList": Tuple{
-    skipped: 'Sort not implemented'
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
     /*
     expression: { 19.99 '[lb_av]', 17.33 '[lb_av]', 10.66 '[lb_av]' },
     output: {19.99 '[lb_av]', 17.33 '[lb_av]', 10.66 '[lb_av]'}
     */  },
   "dateTimeList": Tuple{
-    skipped: 'Sort not implemented'
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
     /*
     expression: { DateTime(2016), DateTime(2015), DateTime(2010) },
     output: {@2016T, @2015T, @2010T}
     */  },
   "timeList": Tuple{
-    skipped: 'Sort not implemented'
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
     /*
     expression: { @T15:59:59.999, @T15:12:59.999, @T15:12:13.999 },
     output: {@T15:59:59.999, @T15:12:59.999, @T15:12:13.999}
@@ -74,7 +74,7 @@ define "Sort": Tuple{
 define "Contains": Tuple{
   "ContainsABNullHasNull": Tuple{
     expression: { 'a', 'b', null } contains null,
-    output: null
+    output: true
   },
   "ContainsNullFirst": Tuple{
     expression: { null, 'b', 'c' } contains 'a',
@@ -146,7 +146,7 @@ define "Distinct": Tuple{
   },
   "DistinctDateTime": Tuple{
     expression: distinct { DateTime(2012, 10, 5), DateTime(2012, 1, 1), DateTime(2012, 1, 1)},
-    output: { DateTime(2012, 10, 5), DateTime(2012, 1, 1)}
+    output: { @2012-10-05T, @2012-01-01T }
   },
   "DistinctTime": Tuple{
     expression: distinct { @T15:59:59.999, @T20:59:59.999 },
@@ -156,9 +156,11 @@ define "Distinct": Tuple{
 
 define "Equal": Tuple{
   "EqualNullNull": Tuple{
+    skipped: 'Wrong output: According to spec, if either list contains a null, the result is null'
+    /*
     expression: {null} = {null},
-    output: null
-  },
+    output: true
+    */  },
   "EqualEmptyListNull": Tuple{
     expression: {} as List<String> = null,
     output: null
@@ -170,6 +172,26 @@ define "Equal": Tuple{
   "EqualEmptyListAndEmptyList": Tuple{
     expression: {} = {},
     output: true
+  },
+  "EqualABCAndABC": Tuple{
+    expression: { 'a', 'b', 'c' } = { 'a', 'b', 'c' },
+    output: true
+  },
+  "EqualABCAndAB": Tuple{
+    expression: { 'a', 'b', 'c' } = { 'a', 'b' },
+    output: false
+  },
+  "EqualABCAnd123": Tuple{
+    expression: { 'a', 'b', 'c' } = { 1, 2, 3 },
+    output: false
+  },
+  "Equal123AndABC": Tuple{
+    expression: { 1, 2, 3 } = { 'a', 'b', 'c' },
+    output: false
+  },
+  "Equal123AndString123": Tuple{
+    expression: { 1, 2, 3 } = { '1', '2', '3' },
+    output: false
   },
   "Equal12And123": Tuple{
     expression: { 1, 2 } = { 1, 2, 3 },
@@ -274,7 +296,7 @@ define "Flatten": Tuple{
   },
   "FlattenDateTime": Tuple{
     expression: Flatten({ {DateTime(2012, 5, 10)}, {DateTime(2014, 12, 10)} }),
-    output: { DateTime(2012, 5, 10), DateTime(2014, 12, 10) }
+    output: { @2012-05-10T, @2014-12-10T }
   },
   "FlattenTime": Tuple{
     expression: Flatten({ {@T15:59:59.999}, {@T20:59:59.999} }),
@@ -301,7 +323,7 @@ define "First": Tuple{
   },
   "FirstDateTime": Tuple{
     expression: First({ DateTime(2012, 5, 10), DateTime(2014, 12, 10) }),
-    output: DateTime(2012, 5, 10)
+    output: @2012-05-10T
   },
   "FirstTime": Tuple{
     expression: First({ @T15:59:59.999, @T20:59:59.999 }),
@@ -312,11 +334,11 @@ define "First": Tuple{
 define "In": Tuple{
   "InNullEmpty": Tuple{
     expression: null in {},
-    output: null
+    output: false
   },
   "InNullAnd1Null": Tuple{
     expression: null in { 1, null },
-    output: null
+    output: true
   },
   "In1Null": Tuple{
     expression: 1 in null,
@@ -354,11 +376,9 @@ define "Includes": Tuple{
     output: true
   },
   "IncludesListNullAndListNull": Tuple{
-    skipped: 'Answer is incorrect according to spec, but not sure if correct answer is null or false'
-    /*
     expression: {null} includes {null},
     output: true
-    */  },
+  },
   "Includes123AndEmpty": Tuple{
     expression: {1, 2, 3} includes {},
     output: true
@@ -392,9 +412,11 @@ define "Includes": Tuple{
     output: null
   },
   "IncludesNullRight": Tuple{
+    skipped: 'Treats null as point overload, translating to "Contains" operator, which has different semantics (and different result)'
+    /*
     expression: {'s', 'a', 'm'} includes null,
     output: null
-  }
+    */  }
 }
 
 define "IncludedIn": Tuple{
@@ -403,11 +425,9 @@ define "IncludedIn": Tuple{
     output: true
   },
   "IncludedInListNullAndListNull": Tuple{
-    skipped: 'Answer is incorrect according to spec, but not sure if correct answer is null or false'
-    /*
     expression: { null } included in { null },
     output: true
-    */  },
+  },
   "IncludedInEmptyAnd123": Tuple{
     expression: {} included in { 1, 2, 3 },
     output: true
@@ -437,13 +457,17 @@ define "IncludedIn": Tuple{
     output: false
   },
   "IncludedInNullLeft": Tuple{
+    skipped: 'Treats null as point overload, translating to "In" operator, which has different semantics (and different result)'
+    /*
     expression: null included in {2},
     output: null
-  },
+    */  },
   "IncludedInNullRight": Tuple{
+    skipped: 'Converts included in to in, which has different semantics when second argument is null'
+    /*
     expression: {'s', 'a', 'm'} included in null,
     output: null
-  }
+    */  }
 }
 
 define "Indexer": Tuple{
@@ -469,7 +493,7 @@ define "Indexer": Tuple{
   },
   "IndexerDateTime": Tuple{
     expression: { DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) }[1],
-    output: DateTime(2012, 5, 10)
+    output: @2012-05-10T
   },
   "IndexerTime": Tuple{
     expression: { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }[1],
@@ -554,7 +578,7 @@ define "Last": Tuple{
   },
   "LastDateTime": Tuple{
     expression: Last({DateTime(2012, 5, 10), DateTime(2014, 12, 10)}),
-    output: DateTime(2014, 12, 10)
+    output: @2014-12-10T
   },
   "LastTime": Tuple{
     expression: Last({ @T15:59:59.999, @T20:59:59.999 }),
@@ -822,9 +846,11 @@ define "ProperlyIncludedIn": Tuple{
     output: false
   },
   "ProperlyIncludedInNulRight": Tuple{
-    expression: {'s', 'u', 'n'} properly included in null as List<String>,
+    skipped: 'ProperIn not implemented'
+    /*
+    expression: {'s', 'u', 'n'} properly included in null,
     output: null
-  }
+    */  }
 }
 
 define "SingletonFrom": Tuple{
@@ -846,7 +872,7 @@ define "SingletonFrom": Tuple{
   },
   "SingletonFromDateTime": Tuple{
     expression: singleton from { DateTime(2012, 5, 10) },
-    output: DateTime(2012, 5, 10)
+    output: @2012-05-10T
   },
   "SingletonFromTime": Tuple{
     expression: singleton from { @T15:59:59.999 },

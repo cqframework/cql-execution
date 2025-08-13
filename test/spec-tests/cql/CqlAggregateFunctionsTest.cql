@@ -30,6 +30,10 @@ define "AllTrue": Tuple{
   "AllTrueEmptyList": Tuple{
     expression: AllTrue({}),
     output: true
+  },
+  "AllTrueIsTrueWhenNull": Tuple{
+    expression: AllTrue(null),
+    output: true
   }
 }
 
@@ -69,6 +73,10 @@ define "AnyTrue": Tuple{
   "AnyTrueEmptyList": Tuple{
     expression: AnyTrue({}),
     output: false
+  },
+  "AnyTrueIsFalseWhenNull": Tuple{
+    expression: AnyTrue(null),
+    output: false
   }
 }
 
@@ -77,6 +85,15 @@ define "Avg": Tuple{
     expression: Avg({ 1.0, 2.0, 3.0, 6.0 }),
     output: 3.0
   }
+}
+
+define "Product": Tuple{
+  "ProductLong": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: Product({5L, 4L, 5L}),
+    output: 100L
+    */  }
 }
 
 define "Count": Tuple{
@@ -103,13 +120,17 @@ define "Max": Tuple{
     expression: Max({ 5, 12, 1, 15, 0, 4, 90, 44 }),
     output: 90
   },
+  "MaxTestLong": Tuple{
+    expression: Max({ 5L, 12L, 1L, 15L, 0L, 4L, 90L, 44L }),
+    output: 90L
+  },
   "MaxTestString": Tuple{
     expression: Max({ 'hi', 'bye', 'zebra' }),
     output: 'zebra'
   },
   "MaxTestDateTime": Tuple{
     expression: Max({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6) }),
-    output: DateTime(2012, 10, 6)
+    output: @2012-10-06T
   },
   "MaxTestTime": Tuple{
     expression: Max({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 }),
@@ -129,13 +150,17 @@ define "Min": Tuple{
     expression: Min({5, 12, 1, 15, 0, 4, 90, 44}),
     output: 0
   },
+  "MinTestLong": Tuple{
+    expression: Min({5L, 12L, 1L, 15L, 0L, 4L, 90L, 44L}),
+    output: 0L
+  },
   "MinTestString": Tuple{
     expression: Min({'hi', 'bye', 'zebra'}),
     output: 'bye'
   },
   "MinTestDateTime": Tuple{
     expression: Min({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6) }),
-    output: DateTime(2012, 9, 5)
+    output: @2012-09-05T
   },
   "MinTestTime": Tuple{
     expression: Min({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 }),
@@ -150,7 +175,11 @@ define "Mode": Tuple{
   },
   "ModeTestDateTime": Tuple{
     expression: Mode({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6), DateTime(2012, 9, 5) }),
-    output: DateTime(2012, 9, 5)
+    output: @2012-09-05T
+  },
+  "ModeTestDateTime2": Tuple{
+    expression: Mode({ DateTime(2012, 10, 5), DateTime(2012, 10, 5), DateTime(2012, 10, 6), DateTime(2012, 9, 5) }),
+    output: @2012-10-05T
   },
   "ModeTestTime": Tuple{
     expression: Mode({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999, @T05:59:59.999 }),
@@ -162,6 +191,10 @@ define "PopulationStdDev": Tuple{
   "PopStdDevTest1": Tuple{
     expression: PopulationStdDev({ 1.0, 2.0, 3.0, 4.0, 5.0 }),
     output: 1.41421356
+  },
+  "PopulationStdDevIsNull": Tuple{
+    expression: PopulationStdDev({ null as Quantity, null as Quantity, null as Quantity }),
+    output: null
   }
 }
 
@@ -169,6 +202,10 @@ define "PopulationVariance": Tuple{
   "PopVarianceTest1": Tuple{
     expression: PopulationVariance({ 1.0, 2.0, 3.0, 4.0, 5.0 }),
     output: 2.0
+  },
+  "PopVarianceIsNull": Tuple{
+    expression: PopulationVariance({ null as Quantity, null as Quantity, null as Quantity }),
+    output: null
   }
 }
 
@@ -176,6 +213,10 @@ define "StdDev": Tuple{
   "StdDevTest1": Tuple{
     expression: StdDev({ 1.0, 2.0, 3.0, 4.0, 5.0 }),
     output: 1.58113883
+  },
+  "StdDevIsNull": Tuple{
+    expression: StdDev({ null as Quantity, null as Quantity, null as Quantity }),
+    output: null
   }
 }
 
@@ -183,6 +224,16 @@ define "Sum": Tuple{
   "SumTest1": Tuple{
     expression: Sum({ 6.0, 2.0, 3.0, 4.0, 5.0 }),
     output: 20.0
+  },
+  "SumTestLong": Tuple{
+    skipped: 'Long not implemented'
+    /*
+    expression: Sum({ 6L, 2L, 3L, 4L, 5L }),
+    output: 20L
+    */  },
+  "SumTestQuantity": Tuple{
+    expression: Sum({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'}),
+    output: 15 'ml'
   },
   "SumTestNull": Tuple{
     expression: Sum({ null, 1, null }),

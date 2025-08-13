@@ -932,6 +932,305 @@
                      } ]
                   }
                }, {
+                  "name" : "TupleEqJohn1John2WithNullName",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Equal",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Tuple",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "name" : "Id",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "name" : "Name",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : "John",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           }, {
+                              "type" : "Tuple",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "name" : "Id",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "name" : "Name",
+                                 "value" : {
+                                    "type" : "Null",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TupleEqDifferentNamesWithOneNullId",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Equal",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Tuple",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "name" : "Id",
+                                 "value" : {
+                                    "type" : "Null",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "name" : "Name",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : "John",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           }, {
+                              "type" : "Tuple",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "name" : "Id",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "name" : "Name",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : "James",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TupleEqJohn1John1WithBothNamesNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Equal",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Tuple",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "name" : "Id",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "name" : "Name",
+                                 "value" : {
+                                    "type" : "Null",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           }, {
+                              "type" : "Tuple",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "name" : "Id",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "name" : "Name",
+                                 "value" : {
+                                    "type" : "Null",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TupleEqJohnJohnWithBothIdsNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Equal",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Tuple",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "name" : "Id",
+                                 "value" : {
+                                    "type" : "Null",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "name" : "Name",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : "John",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           }, {
+                              "type" : "Tuple",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "name" : "Id",
+                                 "value" : {
+                                    "type" : "Null",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "name" : "Name",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : "John",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TupleEqJohn1John1WithNullName",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Equal",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Tuple",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "name" : "Id",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "name" : "Name",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                    "value" : "John",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           }, {
+                              "type" : "Tuple",
+                              "annotation" : [ ],
+                              "element" : [ {
+                                 "name" : "Id",
+                                 "value" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "name" : "Name",
+                                 "value" : {
+                                    "type" : "Null",
+                                    "annotation" : [ ]
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "TupleEqDateTimeTrue",
                   "value" : {
                      "type" : "Tuple",
@@ -1928,6 +2227,134 @@
                      } ]
                   }
                }, {
+                  "name" : "DateTimeDayCompare",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "precision" : "Day",
+                           "type" : "SameAs",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2022",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "22",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "hour" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "minute" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "second" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "millisecond" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "timezoneOffset" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "value" : "-5.0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2022",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "22",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "hour" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "4",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "minute" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "59",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "second" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "millisecond" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "timezoneOffset" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "value" : "0.0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "TimeEq10A10A",
                   "value" : {
                      "type" : "Tuple",
@@ -2298,6 +2725,44 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "GreaterDec1Int2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Greater",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "value" : "1.0",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "ToDecimal",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -3339,6 +3804,44 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "GreaterOrEqualDec1Int2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "GreaterOrEqual",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "value" : "1.0",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "ToDecimal",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -4676,6 +5179,44 @@
                      } ]
                   }
                }, {
+                  "name" : "LessDec1Int2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Less",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "value" : "1.0",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "ToDecimal",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "LessCM0CM0",
                   "value" : {
                      "type" : "Tuple",
@@ -5711,6 +6252,44 @@
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "LessOrEqualDec1Int2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "LessOrEqual",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                              "value" : "1.0",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }, {
+                              "type" : "ToDecimal",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -8806,6 +9385,330 @@
                            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "value" : "true",
                            "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TupleNotEqJohn1John2WithNullName",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Not",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "type" : "Equal",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : [ {
+                                 "type" : "Tuple",
+                                 "annotation" : [ ],
+                                 "element" : [ {
+                                    "name" : "Id",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "John",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "Tuple",
+                                 "annotation" : [ ],
+                                 "element" : [ {
+                                    "name" : "Id",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "2",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "value" : {
+                                       "type" : "Null",
+                                       "annotation" : [ ]
+                                    }
+                                 } ]
+                              } ]
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TupleNotEqDifferingNamesWithOneNullId",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Not",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "type" : "Equal",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : [ {
+                                 "type" : "Tuple",
+                                 "annotation" : [ ],
+                                 "element" : [ {
+                                    "name" : "Id",
+                                    "value" : {
+                                       "type" : "Null",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "John",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "Tuple",
+                                 "annotation" : [ ],
+                                 "element" : [ {
+                                    "name" : "Id",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "Joe",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 } ]
+                              } ]
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TupleNotEqJohn1John1WithBothNamesNull",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Not",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "type" : "Equal",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : [ {
+                                 "type" : "Tuple",
+                                 "annotation" : [ ],
+                                 "element" : [ {
+                                    "name" : "Id",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "value" : {
+                                       "type" : "Null",
+                                       "annotation" : [ ]
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "Tuple",
+                                 "annotation" : [ ],
+                                 "element" : [ {
+                                    "name" : "Id",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "value" : {
+                                       "type" : "Null",
+                                       "annotation" : [ ]
+                                    }
+                                 } ]
+                              } ]
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TupleNotEqMatchingNamesWithNullIDs",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Not",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "type" : "Equal",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : [ {
+                                 "type" : "Tuple",
+                                 "annotation" : [ ],
+                                 "element" : [ {
+                                    "name" : "Id",
+                                    "value" : {
+                                       "type" : "Null",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "John",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "Tuple",
+                                 "annotation" : [ ],
+                                 "element" : [ {
+                                    "name" : "Id",
+                                    "value" : {
+                                       "type" : "Null",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "John",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 } ]
+                              } ]
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "false",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "TupleNotEqJohn1John1WithNullName",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Not",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "type" : "Equal",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : [ {
+                                 "type" : "Tuple",
+                                 "annotation" : [ ],
+                                 "element" : [ {
+                                    "name" : "Id",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "John",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 } ]
+                              }, {
+                                 "type" : "Tuple",
+                                 "annotation" : [ ],
+                                 "element" : [ {
+                                    "name" : "Id",
+                                    "value" : {
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                       "value" : "1",
+                                       "type" : "Literal",
+                                       "annotation" : [ ]
+                                    }
+                                 }, {
+                                    "name" : "Name",
+                                    "value" : {
+                                       "type" : "Null",
+                                       "annotation" : [ ]
+                                    }
+                                 } ]
+                              } ]
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Null",
                            "annotation" : [ ]
                         }
                      } ]

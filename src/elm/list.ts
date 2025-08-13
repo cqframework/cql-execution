@@ -52,14 +52,14 @@ export function doUnion(a: any, b: any) {
 export function doExcept(a: any, b: any) {
   const distinct = toDistinctList(a);
   const setList = removeDuplicateNulls(distinct);
-  return setList.filter(item => !doContains(b, item, true));
+  return setList.filter(item => !doContains(b, item));
 }
 
 // Delegated to by overloaded#Intersect
 export function doIntersect(a: any, b: any) {
   const distinct = toDistinctList(a);
   const setList = removeDuplicateNulls(distinct);
-  return setList.filter(item => doContains(b, item, true));
+  return setList.filter(item => doContains(b, item));
 }
 
 // ELM-only, not a product of CQL
@@ -135,14 +135,17 @@ export class IndexOf extends Expression {
 // Indexer is completely handled by overloaded#Indexer
 
 // Delegated to by overloaded#Contains and overloaded#In
-export function doContains(container: any[], item: any, nullEquivalence = false) {
+export function doContains(container: any[], item: any) {
   return container.some(
-    (element: any) => equals(element, item) || (nullEquivalence && element == null && item == null)
+    (element: any) => equals(element, item) || (element == null && item == null)
   );
 }
 
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
 export function doIncludes(list: any, sublist: any) {
+  if (list == null || sublist == null) {
+    return null;
+  }
   return sublist.every((x: any) => doContains(list, x));
 }
 

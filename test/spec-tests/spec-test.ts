@@ -43,7 +43,7 @@ describe('CQL Spec Tests (from XML)', () => {
             should.fail(suite.expression.type, 'Tuple', `Invalid test suite: ${suite.name}`);
           }
           suite.expression.element.forEach((t: any) => {
-            it(`should properly evaluate ${t.name}`, function () {
+            it(`should properly evaluate ${t.name}`, async function () {
               const testCaseMap = convertTupleToMap(t.value);
               if (testCaseMap.has('skipped')) {
                 this.skip();
@@ -52,9 +52,9 @@ describe('CQL Spec Tests (from XML)', () => {
                 const ctx = new PatientContext(library);
                 ctx.getExecutionDateTime().timezoneOffset = 0;
                 const actualExp = build(testCaseMap.get('expression')) as any;
-                let actual = actualExp.execute(ctx);
+                let actual = await actualExp.execute(ctx);
                 const expectedExp = build(testCaseMap.get('output')) as any;
-                let expected = expectedExp.execute(ctx);
+                let expected = await expectedExp.execute(ctx);
                 if (expectedExp.json && expectedExp.json.type === 'Null') {
                   should(actual).be.null();
                 } else if (actual && actual.isInterval && expected && expected.isInterval) {

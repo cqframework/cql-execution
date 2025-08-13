@@ -145,14 +145,17 @@ export class In extends Expression {
 
   async exec(ctx: Context) {
     const [item, container] = await this.execArgs(ctx);
-    if (item == null) {
-      return null;
-    }
     if (container == null) {
       return false;
     }
-    const lib = typeIsArray(container) ? LIST : IVL;
-    return lib.doContains(container, item, this.precision);
+    if (typeIsArray(container)) {
+      return LIST.doContains(container, item);
+    } else {
+      if (item == null) {
+        return null;
+      }
+      return IVL.doContains(container, item, this.precision);
+    }
   }
 }
 
@@ -169,11 +172,14 @@ export class Contains extends Expression {
     if (container == null) {
       return false;
     }
-    if (item == null) {
-      return null;
+    if (typeIsArray(container)) {
+      return LIST.doContains(container, item);
+    } else {
+      if (item == null) {
+        return null;
+      }
+      return IVL.doContains(container, item, this.precision);
     }
-    const lib = typeIsArray(container) ? LIST : IVL;
-    return lib.doContains(container, item, this.precision);
   }
 }
 

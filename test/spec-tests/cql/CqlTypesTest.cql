@@ -67,6 +67,10 @@ define "DateTime": Tuple{
   "DateTimeMax": Tuple{
     expression: DateTime(9999, 12, 31, 23, 59, 59, 999),
     output: @9999-12-31T23:59:59.999
+  },
+  "DateTimeTimeUnspecified": Tuple{
+    expression: hour from @2015-02-10T is null,
+    output: true
   }
 }
 
@@ -101,23 +105,23 @@ define "Time": Tuple{
     skipped: 'Translation Error: Invalid time input (T24:59:59.999). Use ISO 8601 time representation (hh:mm:ss.fff).'
     /*
     expression: @T24:59:59.999,
-    invalid: true
+    invalid: 'semantic'
     */  },
   "TimeUpperBoundMinutes": Tuple{
     skipped: 'Translation Error: Invalid time input (T23:60:59.999). Use ISO 8601 time representation (hh:mm:ss.fff).'
     /*
     expression: @T23:60:59.999,
-    invalid: true
+    invalid: 'semantic'
     */  },
   "TimeUpperBoundSeconds": Tuple{
     skipped: 'Translation Error: Invalid time input (T23:59:60.999). Use ISO 8601 time representation (hh:mm:ss.fff).'
     /*
     expression: @T23:59:60.999,
-    invalid: true
+    invalid: 'semantic'
     */  },
   "TimeUpperBoundMillis": Tuple{
     expression: @T23:59:59.10000,
-    invalid: true
+    invalid: 'semantic'
   },
   "TimeProper": Tuple{
     expression: @T10:25:12.863,

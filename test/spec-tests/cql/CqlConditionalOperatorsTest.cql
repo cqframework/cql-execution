@@ -29,7 +29,7 @@ define "standard case": Tuple{
   "StandardCase2": Tuple{
     expression: case
 					when 5 > 10 then 5 + 10
-					when 5 = 10 then 5
+					when 5 = 10 then 10
 					else 10 - 5
 				end,
     output: 5

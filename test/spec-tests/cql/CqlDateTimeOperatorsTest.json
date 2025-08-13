@@ -312,6 +312,98 @@
                      } ]
                   }
                }, {
+                  "name" : "DateTimeAddThreeWeeks",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Equal",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Add",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : [ {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2018",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "5",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "value" : 3,
+                                 "unit" : "weeks",
+                                 "type" : "Quantity",
+                                 "annotation" : [ ]
+                              } ]
+                           }, {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2018",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "5",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "23",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateTimeAddYearInWeeks",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Wrong output: 2018-05-23 + 52 weeks should be 2019-05-22 (both dates should be Wednesdays)",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "DateTimeAdd5Days",
                   "value" : {
                      "type" : "Tuple",
@@ -518,6 +610,459 @@
                            "hour" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "10",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateTimeAdd5HoursWithLeftMinPrecisionSecond",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Add",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2005",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "5",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "hour" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "5",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "minute" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "20",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "second" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "30",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "value" : 5,
+                              "unit" : "hours",
+                              "type" : "Quantity",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "year" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2005",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "month" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "5",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "day" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "10",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "hour" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "10",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "minute" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "20",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "second" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "30",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateTimeAdd5HoursWithLeftMinPrecisionDay",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Equal",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Add",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : [ {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2005",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "5",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "10",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "value" : 5,
+                                 "unit" : "hours",
+                                 "type" : "Quantity",
+                                 "annotation" : [ ]
+                              } ]
+                           }, {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2005",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "5",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateTimeAdd5HoursWithLeftMinPrecisionDayOverflow",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Equal",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Add",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : [ {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2005",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "5",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "10",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "value" : 25,
+                                 "unit" : "hours",
+                                 "type" : "Quantity",
+                                 "annotation" : [ ]
+                              } ]
+                           }, {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2005",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "5",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "11",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateAdd2YearsAsMonths",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Add",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Date",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2014",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "value" : 24,
+                              "unit" : "months",
+                              "type" : "Quantity",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Date",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "year" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2016",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateAdd2YearsAsMonthsRem1",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Add",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Date",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2014",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "value" : 25,
+                              "unit" : "months",
+                              "type" : "Quantity",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Date",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "year" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2016",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateAdd33Days",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Add",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Date",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2014",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "6",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "value" : 33,
+                              "unit" : "days",
+                              "type" : "Quantity",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Date",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "year" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2014",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "month" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "7",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateAdd1Year",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Add",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Date",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2014",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "6",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "value" : 1,
+                              "unit" : "year",
+                              "type" : "Quantity",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Date",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "year" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2015",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "month" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "6",
                               "type" : "Literal",
                               "annotation" : [ ]
                            }
@@ -7418,6 +7963,86 @@
                      } ]
                   }
                }, {
+                  "name" : "DateTimeComponentFromTimezone2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "TimezoneOffsetFrom",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2003",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "29",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "hour" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "20",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "minute" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "50",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "second" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "33",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "millisecond" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "955",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "timezoneOffset" : {
+                                 "type" : "ToDecimal",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "operand" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "1",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }
+                           }
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                           "value" : "1.00",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "DateTimeComponentFromDate",
                   "value" : {
                      "type" : "Tuple",
@@ -13149,6 +13774,21 @@
                      } ]
                   }
                }, {
+                  "name" : "TimeDurationBetweenHourDiffPrecision2",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Wrong output: Duration in hours between T06 and T07:00:00 should be Uncertainty[0, 1]",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "TimeDurationBetweenMinute",
                   "value" : {
                      "type" : "Tuple",
@@ -13394,10 +14034,111 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Is @2017-03-12T01:00:00-07:00 uncertain?",
+                           "precision" : "Hour",
+                           "type" : "DurationBetween",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2017",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "3",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "12",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "hour" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "1",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "minute" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "second" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "timezoneOffset" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "value" : "-7.0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2017",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "3",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "12",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "hour" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "3",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "minute" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "second" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "timezoneOffset" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "value" : "-6.0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "1",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -13409,10 +14150,111 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "skipped",
+                        "name" : "expression",
                         "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Is @2017-03-12T01:00:00-07:00 uncertain?",
+                           "precision" : "Minute",
+                           "type" : "DurationBetween",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2017",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "11",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "5",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "hour" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "1",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "minute" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "30",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "second" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "timezoneOffset" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "value" : "-6.0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2017",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "11",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "5",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "hour" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "1",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "minute" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "15",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "second" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "timezoneOffset" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                                 "value" : "-7.0",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "45",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -22511,6 +23353,98 @@
                      } ]
                   }
                }, {
+                  "name" : "DateTimeSubtractThreeWeeks",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Equal",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Subtract",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : [ {
+                                 "type" : "DateTime",
+                                 "annotation" : [ ],
+                                 "signature" : [ ],
+                                 "year" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "2018",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "month" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "5",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 },
+                                 "day" : {
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "23",
+                                    "type" : "Literal",
+                                    "annotation" : [ ]
+                                 }
+                              }, {
+                                 "value" : 3,
+                                 "unit" : "weeks",
+                                 "type" : "Quantity",
+                                 "annotation" : [ ]
+                              } ]
+                           }, {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2018",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "5",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateTimeSubtractYearInWeeks",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Wrong output: 2018-05-23 - 52 weeks should be 2019-05-24 (both dates should be Wednesdays)",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "DateTimeSubtract5Days",
                   "value" : {
                      "type" : "Tuple",
@@ -23088,6 +24022,124 @@
                      } ]
                   }
                }, {
+                  "name" : "DateTimeSubtract1YearInSeconds",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "skipped",
+                        "value" : {
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Spec says to convert more precise duration to most precise unit in Date. How do you convert seconds to months? 31535999 is 364.999 days, which isn't quite 12 months, so we answer 2015-06.",
+                           "type" : "Literal",
+                           "annotation" : [ ]
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateTimeSubtract15HourPrecisionSecond",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "DateTime",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2016",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "day" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "1",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "hour" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "10",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "minute" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "20",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "second" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "30",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "value" : 15,
+                              "unit" : "hours",
+                              "type" : "Quantity",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "DateTime",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "year" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2016",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "month" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "9",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "day" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "30",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "hour" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "19",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "minute" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "20",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "second" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "30",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
+                     } ]
+                  }
+               }, {
                   "name" : "DateTimeSubtractSecondsUnderflow",
                   "value" : {
                      "type" : "Tuple",
@@ -23500,6 +24552,202 @@
                            "year" : {
                               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                               "value" : "2012",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateSubtract2YearsAsMonths",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Date",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2014",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "value" : 24,
+                              "unit" : "months",
+                              "type" : "Quantity",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Date",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "year" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2012",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateSubtract2YearsAsMonthsRem1",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Date",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2014",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "value" : 25,
+                              "unit" : "months",
+                              "type" : "Quantity",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Date",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "year" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2012",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateSubtract33Days",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Date",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2014",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "6",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "value" : 33,
+                              "unit" : "days",
+                              "type" : "Quantity",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Date",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "year" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2014",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "month" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "5",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           }
+                        }
+                     } ]
+                  }
+               }, {
+                  "name" : "DateSubtract1Year",
+                  "value" : {
+                     "type" : "Tuple",
+                     "annotation" : [ ],
+                     "element" : [ {
+                        "name" : "expression",
+                        "value" : {
+                           "type" : "Subtract",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Date",
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "year" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "2014",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              },
+                              "month" : {
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                 "value" : "6",
+                                 "type" : "Literal",
+                                 "annotation" : [ ]
+                              }
+                           }, {
+                              "value" : 1,
+                              "unit" : "year",
+                              "type" : "Quantity",
+                              "annotation" : [ ]
+                           } ]
+                        }
+                     }, {
+                        "name" : "output",
+                        "value" : {
+                           "type" : "Date",
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "year" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "2013",
+                              "type" : "Literal",
+                              "annotation" : [ ]
+                           },
+                           "month" : {
+                              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "value" : "6",
                               "type" : "Literal",
                               "annotation" : [ ]
                            }
@@ -24087,16 +25335,26 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "type" : "TimeOfDay",
+                           "type" : "Equal",
                            "annotation" : [ ],
-                           "signature" : [ ]
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "TimeOfDay",
+                              "annotation" : [ ],
+                              "signature" : [ ]
+                           }, {
+                              "type" : "TimeOfDay",
+                              "annotation" : [ ],
+                              "signature" : [ ]
+                           } ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "TimeOfDay",
-                           "annotation" : [ ],
-                           "signature" : [ ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
@@ -24275,16 +25533,26 @@
                      "element" : [ {
                         "name" : "expression",
                         "value" : {
-                           "type" : "Today",
+                           "type" : "Equal",
                            "annotation" : [ ],
-                           "signature" : [ ]
+                           "signature" : [ ],
+                           "operand" : [ {
+                              "type" : "Today",
+                              "annotation" : [ ],
+                              "signature" : [ ]
+                           }, {
+                              "type" : "Today",
+                              "annotation" : [ ],
+                              "signature" : [ ]
+                           } ]
                         }
                      }, {
                         "name" : "output",
                         "value" : {
-                           "type" : "Today",
-                           "annotation" : [ ],
-                           "signature" : [ ]
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "value" : "true",
+                           "type" : "Literal",
+                           "annotation" : [ ]
                         }
                      } ]
                   }
