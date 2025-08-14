@@ -35,6 +35,7 @@ export class Concept {
     return codesInList(toCodeList(code), this.codes);
   }
 }
+
 export abstract class Vocabulary {
   constructor(public id: string, public version?: string, public name?: string) {}
 }
