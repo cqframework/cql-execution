@@ -3,7 +3,7 @@ import { resolveValueSet, typeIsArray } from '../util/util';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import { RetrieveDetails } from '../types/cql-patient.interfaces';
-import { Code, ValueSet } from '../datatypes/clinical';
+import { Code, CQLValueSet } from '../datatypes/clinical';
 
 export class Retrieve extends Expression {
   datatype: string;
@@ -33,7 +33,7 @@ export class Retrieve extends Expression {
     };
 
     if (this.codes) {
-      const executedCodes: Code[] | ValueSet | undefined = await this.codes.execute(ctx);
+      const executedCodes: Code[] | CQLValueSet | undefined = await this.codes.execute(ctx);
 
       if (executedCodes == null) {
         return [];
@@ -43,7 +43,7 @@ export class Retrieve extends Expression {
         retrieveDetails.codes = executedCodes as Code[];
       } else if (executedCodes) {
         // retrieveDetails codes are expected to be expanded for external usage
-        retrieveDetails.codes = await resolveValueSet(executedCodes as ValueSet, ctx);
+        retrieveDetails.codes = await resolveValueSet(executedCodes as CQLValueSet, ctx);
       } else {
         retrieveDetails.codes = undefined;
       }

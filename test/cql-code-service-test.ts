@@ -1,12 +1,9 @@
 import should from 'should';
 import { CodeService } from '../src/cql-code-service';
-import { Code, ValueSetExpansion } from '../src/datatypes/datatypes';
+import { Code, ValueSet } from '../src/datatypes/datatypes';
 
 describe('CodeService', () => {
-  let svc: CodeService,
-    vsOne: ValueSetExpansion,
-    vsTwo: ValueSetExpansion,
-    vsThree: ValueSetExpansion;
+  let svc: CodeService, vsOne: ValueSet, vsTwo: ValueSet, vsThree: ValueSet;
   beforeEach(() => {
     svc = new CodeService({
       '1.2.3.4.5': {
@@ -29,17 +26,17 @@ describe('CodeService', () => {
         ]
       }
     });
-    vsOne = new ValueSetExpansion('1.2.3.4.5', '1', [
+    vsOne = new ValueSet('1.2.3.4.5', '1', [
       new Code('ABC', '5.4.3.2.1', '1'),
       new Code('DEF', '5.4.3.2.1', '2'),
       new Code('GHI', '5.4.3.4.5', '3')
     ]);
-    vsTwo = new ValueSetExpansion('1.2.3.4.5', '2', [
+    vsTwo = new ValueSet('1.2.3.4.5', '2', [
       new Code('ABC', '5.4.3.2.1', '1'),
       new Code('DEF', '5.4.3.2.1', '2'),
       new Code('JKL', '5.4.3.2.1', '3')
     ]);
-    vsThree = new ValueSetExpansion('6.7.8.9.0', 'A', [
+    vsThree = new ValueSet('6.7.8.9.0', 'A', [
       new Code('MNO', '2.4.6.8.0', '3'),
       new Code('PQR', '2.4.6.8.0', '2'),
       new Code('STU', '2.4.6.8.0', '1')

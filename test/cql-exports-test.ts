@@ -20,7 +20,7 @@ libNames.push(
   'Interval',
   'Quantity',
   'Ratio',
-  'ValueSet'
+  'CQLValueSet'
 );
 
 describe('CQL Exports', () =>

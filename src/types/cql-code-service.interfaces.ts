@@ -1,4 +1,4 @@
-import { ValueSetExpansion } from '../datatypes/datatypes';
+import { ValueSet } from '../datatypes/datatypes';
 
 /*
  * Lookup of all codes used based on their ValueSet
@@ -19,7 +19,7 @@ export interface ValueSetDictionary {
  */
 export interface ValueSetObject {
   [oid: string]: {
-    [version: string]: ValueSetExpansion;
+    [version: string]: ValueSet;
   };
 }
 
@@ -27,9 +27,6 @@ export interface ValueSetObject {
  * Structure of an implementation to look up ValueSets based on oid and version
  */
 export interface TerminologyProvider {
-  findValueSetsByOid: (oid: string) => ValueSetExpansion[] | Promise<ValueSetExpansion[]>;
-  findValueSet: (
-    oid: string,
-    version?: string
-  ) => ValueSetExpansion | Promise<ValueSetExpansion> | null;
+  findValueSetsByOid: (oid: string) => ValueSet[] | Promise<ValueSet[]>;
+  findValueSet: (oid: string, version?: string) => ValueSet | Promise<ValueSet> | null;
 }

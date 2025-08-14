@@ -45,7 +45,7 @@ export class CodeSystem extends Vocabulary {
   }
 }
 
-export class ValueSet extends Vocabulary {
+export class CQLValueSet extends Vocabulary {
   constructor(
     public id: string,
     public version?: string,
@@ -60,7 +60,7 @@ export class ValueSet extends Vocabulary {
   }
 }
 
-export class ValueSetExpansion {
+export class ValueSet {
   constructor(public oid: string, public version?: string, public codes: any[] = []) {
     this.codes ||= [];
   }

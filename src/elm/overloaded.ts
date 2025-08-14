@@ -8,7 +8,7 @@ import * as DT from './datetime';
 import * as LIST from './list';
 import * as IVL from './interval';
 import { Context } from '../runtime/context';
-import { ValueSet } from '../datatypes/clinical';
+import { CQLValueSet } from '../datatypes/clinical';
 
 export class Equal extends Expression {
   constructor(json: any) {
@@ -44,10 +44,10 @@ export class Equivalent extends Expression {
         }
       }
       if (a.isValueSet) {
-        a = await resolveValueSet(a as ValueSet, ctx);
+        a = await resolveValueSet(a as CQLValueSet, ctx);
       }
       if (b.isValueSet) {
-        b = await resolveValueSet(b as ValueSet, ctx);
+        b = await resolveValueSet(b as CQLValueSet, ctx);
       }
       return equivalent(a, b);
     }

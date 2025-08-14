@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import should from 'should';
-import { Code, CodeSystem, Concept, DateTime, Quantity, Ratio, ValueSet } from '../../src/cql';
+import { Code, CodeSystem, Concept, DateTime, Quantity, Ratio, CQLValueSet } from '../../src/cql';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 import { equals } from '../../src/util/comparison';
 import { toNormalizedKey } from '../../src/util/immutableUtil';
@@ -282,7 +282,7 @@ describe('ImmutableUtil Tests', () => {
     const c1 = new Code('a', 'b');
     const c2 = new Code('a', 'b');
     const c3 = new Code('a', 'c');
-    const c4 = new ValueSet('1.2.3.4.5', undefined, 'name', [new CodeSystem('systemId')]);
+    const c4 = new CQLValueSet('1.2.3.4.5', undefined, 'name', [new CodeSystem('systemId')]);
 
     const ic1 = toNormalizedKey(c1);
     const ic2 = toNormalizedKey(c2);
@@ -400,7 +400,7 @@ describe('ImmutableUtil Tests', () => {
   it('should properly match Codes/Concepts/Valuesets', () => {
     const c1 = new Code('a', 'b', undefined, undefined);
     const c2 = new Concept([new Code('a', 'b', undefined, undefined)]);
-    const c3 = new ValueSet('', undefined, 'name', [new CodeSystem('systemId')]);
+    const c3 = new CQLValueSet('', undefined, 'name', [new CodeSystem('systemId')]);
     const c4 = 'a';
     const c5: { code: string; system: string; display: undefined; version: undefined } = {
       code: 'a',

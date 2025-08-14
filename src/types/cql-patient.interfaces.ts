@@ -1,4 +1,4 @@
-import { Code, ValueSetExpansion } from '../datatypes/clinical';
+import { Code, ValueSet } from '../datatypes/clinical';
 import { Interval } from '../datatypes/interval';
 import { AnyTypeSpecifier } from './type-specifiers.interfaces';
 
@@ -31,7 +31,7 @@ export interface RetrieveDetails {
   datatype: string;
   templateId?: string;
   codeProperty?: string;
-  codes?: Code[] | ValueSetExpansion;
+  codes?: Code[] | ValueSet;
   dateProperty?: string;
   dateRange?: Interval;
 }

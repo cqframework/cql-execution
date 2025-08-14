@@ -28,7 +28,7 @@ export class ValueSetDef extends Expression {
         })
       );
     }
-    const valueset = new dt.ValueSet(this.id, this.version, this.name, codeSystems);
+    const valueset = new dt.CQLValueSet(this.id, this.version, this.name, codeSystems);
     // ctx.rootContext().set(this.name, valueset); Note (2025): this seems to be unneccesary, remove completely in future if not needed
     return valueset;
   }
@@ -71,7 +71,7 @@ export class AnyInValueSet extends Expression {
     if (codes == null) {
       return false;
     }
-    const valueset: dt.ValueSet = await this.valueset.execute(ctx);
+    const valueset: dt.CQLValueSet = await this.valueset.execute(ctx);
     if (valueset == null || !valueset.isValueSet) {
       throw new Error('ValueSet must be provided to AnyInValueSet expression');
     }
@@ -98,7 +98,7 @@ export class InValueSet extends Expression {
     if (code == null) {
       return false;
     }
-    const valueset: dt.ValueSet = await this.valueset.execute(ctx);
+    const valueset: dt.CQLValueSet = await this.valueset.execute(ctx);
     if (valueset == null || !valueset.isValueSet) {
       throw new Error('ValueSet must be provided to InValueSet expression');
     }
@@ -117,7 +117,7 @@ export class ExpandValueSet extends Expression {
   }
 
   async exec(ctx: Context) {
-    const valueset: dt.ValueSet = await this.valueset.execute(ctx);
+    const valueset: dt.CQLValueSet = await this.valueset.execute(ctx);
     if (valueset == null) {
       return null;
     } else if (!valueset.isValueSet) {

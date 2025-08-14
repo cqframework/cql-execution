@@ -3,7 +3,7 @@ import 'should-sinon';
 import sinon from 'sinon';
 import { Code, Interval, Repository, RetrieveDetails } from '../../../src/cql';
 import setup from '../../setup';
-import { ValueSetExpansion } from '../../../src/datatypes/clinical';
+import { ValueSet } from '../../../src/datatypes/clinical';
 const data = require('./data');
 const vsets = require('./valuesets');
 const { p1 } = require('./patients');
@@ -124,7 +124,7 @@ describe('Retrieve', () => {
 
     should(retrieveDetails.codes).not.be.undefined();
 
-    retrieveDetails.codes.should.be.instanceOf(ValueSetExpansion);
+    retrieveDetails.codes.should.be.instanceOf(ValueSet);
 
     const vs = retrieveDetails.codes;
     should(vs.codes).not.be.undefined();

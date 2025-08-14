@@ -1,4 +1,4 @@
-import { ValueSet, ValueSetExpansion } from '../datatypes/clinical';
+import { CQLValueSet, ValueSet } from '../datatypes/clinical';
 import { Context } from '../runtime/context';
 
 export type Direction = 'asc' | 'ascending' | 'desc' | 'descending';
@@ -111,7 +111,7 @@ async function merge<T>(left: T[], right: T[], compareFn: SortCompareFn<T>) {
   return [...sorted, ...left, ...right];
 }
 
-export async function resolveValueSet(vs: ValueSet, ctx: Context): Promise<ValueSetExpansion> {
+export async function resolveValueSet(vs: CQLValueSet, ctx: Context): Promise<ValueSet> {
   // code service owns implementation of any valueset expansion caching
   const vsExpansion = await ctx.codeService.findValueSet(vs.id, vs.version);
   if (!vsExpansion) {
