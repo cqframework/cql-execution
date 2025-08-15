@@ -4659,12 +4659,9 @@ class Retrieve extends expression_1.Expression {
             if ((0, util_1.typeIsArray)(executedCodes)) {
                 retrieveDetails.codes = executedCodes;
             }
-            else if (executedCodes) {
+            else {
                 // retrieveDetails codes are expected to be expanded for external usage
                 retrieveDetails.codes = await (0, util_1.resolveValueSet)(executedCodes, ctx);
-            }
-            else {
-                retrieveDetails.codes = undefined;
             }
         }
         if (this.dateRange) {

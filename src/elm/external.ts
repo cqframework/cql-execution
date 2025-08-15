@@ -41,11 +41,9 @@ export class Retrieve extends Expression {
 
       if (typeIsArray(executedCodes)) {
         retrieveDetails.codes = executedCodes as Code[];
-      } else if (executedCodes) {
+      } else {
         // retrieveDetails codes are expected to be expanded for external usage
         retrieveDetails.codes = await resolveValueSet(executedCodes as CQLValueSet, ctx);
-      } else {
-        retrieveDetails.codes = undefined;
       }
     }
 
