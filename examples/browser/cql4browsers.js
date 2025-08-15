@@ -3922,9 +3922,6 @@ class CodeSystemRef extends expression_1.Expression {
     }
     async exec(ctx) {
         const codeSystemDef = ctx.getCodeSystem(this.name, this.libraryName);
-        if (!codeSystemDef) {
-            throw new Error(`Unable to resolve expected code system with name ${this.name} and library ${this.libraryName}`);
-        }
         return codeSystemDef.execute(ctx);
     }
 }

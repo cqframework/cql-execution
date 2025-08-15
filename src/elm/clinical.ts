@@ -154,11 +154,6 @@ export class CodeSystemRef extends Expression {
 
   async exec(ctx: Context) {
     const codeSystemDef = ctx.getCodeSystem(this.name, this.libraryName);
-    if (!codeSystemDef) {
-      throw new Error(
-        `Unable to resolve expected code system with name ${this.name} and library ${this.libraryName}`
-      );
-    }
     return codeSystemDef.execute(ctx);
   }
 }
