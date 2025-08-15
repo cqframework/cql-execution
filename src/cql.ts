@@ -25,7 +25,7 @@ import {
   Interval,
   Quantity,
   Ratio,
-  ValueSet
+  CQLValueSet
 } from './datatypes/datatypes';
 
 import { AnnotatedError } from './util/customErrors';
@@ -56,7 +56,7 @@ export {
   Interval,
   Quantity,
   Ratio,
-  ValueSet
+  CQLValueSet
 };
 
 export default {
@@ -82,5 +82,5 @@ export default {
   Interval,
   Quantity,
   Ratio,
-  ValueSet
+  CQLValueSet
 };

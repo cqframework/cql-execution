@@ -1,9 +1,9 @@
 import { Expression } from './expression';
-import { typeIsArray } from '../util/util';
+import { resolveValueSet, typeIsArray } from '../util/util';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import { RetrieveDetails } from '../types/cql-patient.interfaces';
-import { Code, ValueSet } from '../datatypes/clinical';
+import { Code, CQLValueSet } from '../datatypes/clinical';
 
 export class Retrieve extends Expression {
   datatype: string;
@@ -33,13 +33,18 @@ export class Retrieve extends Expression {
     };
 
     if (this.codes) {
-      const resolvedCodes: Code[] | ValueSet | undefined = await this.codes.execute(ctx);
+      const executedCodes: Code[] | CQLValueSet | undefined = await this.codes.execute(ctx);
 
-      if (resolvedCodes == null) {
+      if (executedCodes == null) {
         return [];
       }
 
-      retrieveDetails.codes = resolvedCodes;
+      if (typeIsArray(executedCodes)) {
+        retrieveDetails.codes = executedCodes as Code[];
+      } else {
+        // retrieveDetails codes are expected to be expanded for external usage
+        retrieveDetails.codes = await resolveValueSet(executedCodes as CQLValueSet, ctx);
+      }
     }
 
     if (this.dateRange) {

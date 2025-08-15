@@ -1,6 +1,7 @@
 import should from 'should';
 import setup from '../../setup';
 const data = require('./data');
+const vsets = require('./valuesets');
 
 // TODO: Comparisons for Dates
 
@@ -280,7 +281,7 @@ describe('NotEqual', () => {
 
 describe('Equivalent', () => {
   beforeEach(function () {
-    setup(this, data);
+    setup(this, data, [], vsets);
   });
 
   it('should be false for null ~ 4', async function () {
@@ -529,6 +530,26 @@ describe('Equivalent', () => {
 
     it('should return false for same Concept and Concept', async function () {
       (await this.diffConceptAndConcept.exec(this.ctx)).should.be.false();
+    });
+
+    it('should return true for ValueSets with same version and id', async function () {
+      (await this.sameVSIdAndVersion.exec(this.ctx)).should.be.true();
+    });
+
+    it('should return true for ValueSets with different version but same codes', async function () {
+      (await this.sameVSCodes.exec(this.ctx)).should.be.true();
+    });
+
+    it('should return false for ValueSets with different version and different codes', async function () {
+      (await this.diffVSCodes.exec(this.ctx)).should.be.false();
+    });
+
+    it('should return error for unresolvable valueset with different id/version', function () {
+      this.unresolvableDiffVS
+        .exec(this.ctx)
+        .should.be.rejectedWith(
+          /Unable to resolve expected valueset with id 1.2.3.4.5.6.7.8.9 and version undefined/
+        );
     });
   });
 });

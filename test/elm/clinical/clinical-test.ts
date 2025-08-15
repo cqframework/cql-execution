@@ -16,23 +16,36 @@ describe('ValueSetDef', () => {
     setup(this, data, [], vsets);
   });
 
-  it('should return a resolved value set when the codeService knows about it', async function () {
+  it('should return a valueset definition reference', async function () {
     const vs = await this.known.exec(this.ctx);
-    vs.oid.should.equal('2.16.840.1.113883.3.464.1003.101.12.1061');
-    vs.version.should.equal('20140501');
-    vs.codes.length.should.equal(3);
+    vs.id.should.equal('2.16.840.1.113883.3.464.1003.101.12.1061');
+    should.not.exist(vs.version);
   });
 
   it('should execute one-arg to ValueSet with ID', async function () {
     const vs = await this['unknown One Arg'].exec(this.ctx);
-    vs.oid.should.equal('1.2.3.4.5.6.7.8.9');
+    vs.id.should.equal('1.2.3.4.5.6.7.8.9');
     should.not.exist(vs.version);
   });
 
   it('should execute two-arg to ValueSet with ID and version', async function () {
     const vs = await this['unknown Two Arg'].exec(this.ctx);
-    vs.oid.should.equal('1.2.3.4.5.6.7.8.9');
+    vs.id.should.equal('1.2.3.4.5.6.7.8.9');
     vs.version.should.equal('1');
+  });
+
+  it('should execute three-arg to ValueSet with ID and version', async function () {
+    const vs = await this['unknown Three Arg'].exec(this.ctx);
+    vs.id.should.equal('1.2.3.4.5.6.7.8.9');
+    vs.version.should.equal('1');
+    vs.codesystems.length.should.equal(1);
+  });
+
+  it('should execute a ValueSet definition', async function () {
+    const vs = await this.resolveValueSet.exec(this.ctx);
+    vs.id.should.equal('1.2.3.4.5.6.7.8.9');
+    vs.version.should.equal('1');
+    vs.codesystems.length.should.equal(1);
   });
 });
 
@@ -46,7 +59,7 @@ describe('ValueSetRef', () => {
   });
 
   it('should execute to the defined value set', async function () {
-    (await this.foo.exec(this.ctx)).oid.should.equal('2.16.840.1.113883.3.464.1003.101.12.1001');
+    (await this.foo.exec(this.ctx)).id.should.equal('2.16.840.1.113883.3.464.1003.101.12.1001');
   });
 });
 
@@ -81,6 +94,14 @@ describe('AnyInValueSet', () => {
 
   it('should ignore null codes in list', async function () {
     (await this.anyInListOfCodesWithNull.exec(this.ctx)).should.be.true();
+  });
+
+  it('should return error on attempting to resolve unknown valueset', async function () {
+    return this.anyInUnknown
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Unable to resolve expected valueset with id 1.2.3.4.5.6.7.8.9 and version undefined/
+      );
   });
 
   it('should return true if code in list is equivalent using ExpressionRef', async function () {
@@ -196,6 +217,14 @@ describe('InValueSet', () => {
       .exec(this.ctx)
       .should.be.rejectedWith(/ValueSet must be provided to InValueSet expression/);
   });
+
+  it('should return error on attempting to resolve unknown valueset', async function () {
+    return this.inUnknown
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Unable to resolve expected valueset with id 1.2.3.4.5.6.7.8.9 and version undefined/
+      );
+  });
 });
 
 describe('ExpandValueset', () => {
@@ -243,6 +272,14 @@ describe('ExpandValueset', () => {
       new Code('406547006', '2.16.840.1.113883.6.96', '2013-09', undefined)
     ];
     received.should.eql(expected);
+  });
+
+  it('should return error on attempting to resolve unknown valueset', async function () {
+    return this.expandUnknown
+      .exec(this.ctx)
+      .should.be.rejectedWith(
+        /Unable to resolve expected valueset with id 1.2.3.4.5.6.7.8.9 and version undefined/
+      );
   });
 });
 

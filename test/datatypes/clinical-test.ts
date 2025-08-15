@@ -1,4 +1,4 @@
-import { Code, CodeSystem, Concept, ValueSet } from '../../src/datatypes/clinical';
+import { Code, CodeSystem, Concept, CQLValueSet, ValueSet } from '../../src/datatypes/clinical';
 import should from 'should';
 
 describe('Code', () => {
@@ -116,6 +116,21 @@ describe('Concept', () => {
     concept
       .hasMatch(new Concept([new Code('ABC', '5.4.3.2.1', '9'), new Code('ABC', '5.4.3.2.1', '8')]))
       .should.be.true();
+  });
+});
+
+describe('CQLValueSet', () => {
+  let valueSet: CQLValueSet;
+  beforeEach(() => {
+    valueSet = new CQLValueSet('1.2.3.4.5', '1', 'name', [new CodeSystem('systemId')]);
+  });
+
+  it('should properly represent the id, version, name, codesystems', () => {
+    valueSet.id.should.equal('1.2.3.4.5');
+    valueSet.version.should.equal('1');
+    valueSet.name.should.equal('name');
+    valueSet.codesystems.length.should.equal(1);
+    valueSet.codesystems[0].should.eql(new CodeSystem('systemId'));
   });
 });
 
