@@ -119,7 +119,7 @@ describe('Concept', () => {
   });
 });
 
-describe('ValueSet', () => {
+describe('CQLValueSet', () => {
   let valueSet: CQLValueSet;
   beforeEach(() => {
     valueSet = new CQLValueSet('1.2.3.4.5', '1', 'name', [new CodeSystem('systemId')]);
