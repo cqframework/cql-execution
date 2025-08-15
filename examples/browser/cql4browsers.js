@@ -3814,10 +3814,7 @@ class ValueSetDef extends expression_1.Expression {
     async exec(ctx) {
         let codeSystems;
         if (this.codesystems) {
-            codeSystems = await Promise.all(this.codesystems.map(async (cs) => {
-                const csdef = (await cs.exec(ctx));
-                return new dt.CodeSystem(csdef.id, csdef.version, csdef.name);
-            }));
+            codeSystems = (await Promise.all(this.codesystems.map(async (csRef) => csRef.exec(ctx))));
         }
         const valueset = new dt.CQLValueSet(this.id, this.version, this.name, codeSystems);
         // ctx.rootContext().set(this.name, valueset); Note (2025): this seems to be unneccesary, remove completely in future if not needed
@@ -3925,7 +3922,10 @@ class CodeSystemRef extends expression_1.Expression {
     }
     async exec(ctx) {
         const codeSystemDef = ctx.getCodeSystem(this.name, this.libraryName);
-        return codeSystemDef ? codeSystemDef.execute(ctx) : undefined;
+        if (!codeSystemDef) {
+            throw new Error(`Unable to resolve expected code system with name ${this.name} and library ${this.libraryName}`);
+        }
+        return codeSystemDef.execute(ctx);
     }
 }
 exports.CodeSystemRef = CodeSystemRef;
