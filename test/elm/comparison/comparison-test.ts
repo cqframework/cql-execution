@@ -533,15 +533,21 @@ describe('Equivalent', () => {
     });
 
     it('should return true for ValueSets with same version and id', async function () {
+      const findValueSetSpy = sinon.spy(this.ctx.codeService, 'findValueSet');
       (await this.sameVSIdAndVersion.exec(this.ctx)).should.be.true();
+      findValueSetSpy.should.not.be.called();
     });
 
     it('should return true for ValueSets with different version but same codes', async function () {
+      const findValueSetSpy = sinon.spy(this.ctx.codeService, 'findValueSet');
       (await this.sameVSCodes.exec(this.ctx)).should.be.true();
+      findValueSetSpy.should.be.calledTwice();
     });
 
     it('should return false for ValueSets with different version and different codes', async function () {
+      const findValueSetSpy = sinon.spy(this.ctx.codeService, 'findValueSet');
       (await this.diffVSCodes.exec(this.ctx)).should.be.false();
+      findValueSetSpy.should.be.calledTwice();
     });
 
     it('should return error for unresolvable valueset with different id/version', function () {
