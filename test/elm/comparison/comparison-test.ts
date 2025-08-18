@@ -1,5 +1,6 @@
 import should from 'should';
 import setup from '../../setup';
+import sinon from 'sinon';
 const data = require('./data');
 const vsets = require('./valuesets');
 

@@ -62,9 +62,7 @@ export class CQLValueSet extends Vocabulary {
 }
 
 export class ValueSet {
-  constructor(public oid: string, public version?: string, public codes: any[] = []) {
-    this.codes ||= [];
-  }
+  constructor(public oid: string, public version?: string, public codes: any[] = []) {}
 
   /**
    * Determines if the provided code matches any code in the current set.

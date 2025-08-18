@@ -246,7 +246,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CQLValueSet = exports.Ratio = exports.Quantity = exports.Interval = exports.DateTime = exports.Date = exports.Concept = exports.CodeSystem = exports.Code = exports.CodeService = exports.PatientSource = exports.Patient = exports.NullMessageListener = exports.ConsoleMessageListener = exports.Results = exports.Executor = exports.UnfilteredContext = exports.PatientContext = exports.Context = exports.Expression = exports.Repository = exports.Library = exports.AnnotatedError = void 0;
+exports.ValueSet = exports.CQLValueSet = exports.Ratio = exports.Quantity = exports.Interval = exports.DateTime = exports.Date = exports.Concept = exports.CodeSystem = exports.Code = exports.CodeService = exports.PatientSource = exports.Patient = exports.NullMessageListener = exports.ConsoleMessageListener = exports.Results = exports.Executor = exports.UnfilteredContext = exports.PatientContext = exports.Context = exports.Expression = exports.Repository = exports.Library = exports.AnnotatedError = void 0;
 // Library-related classes
 const library_1 = require("./elm/library");
 Object.defineProperty(exports, "Library", { enumerable: true, get: function () { return library_1.Library; } });
@@ -284,6 +284,7 @@ Object.defineProperty(exports, "Interval", { enumerable: true, get: function () 
 Object.defineProperty(exports, "Quantity", { enumerable: true, get: function () { return datatypes_1.Quantity; } });
 Object.defineProperty(exports, "Ratio", { enumerable: true, get: function () { return datatypes_1.Ratio; } });
 Object.defineProperty(exports, "CQLValueSet", { enumerable: true, get: function () { return datatypes_1.CQLValueSet; } });
+Object.defineProperty(exports, "ValueSet", { enumerable: true, get: function () { return datatypes_1.ValueSet; } });
 const customErrors_1 = require("./util/customErrors");
 Object.defineProperty(exports, "AnnotatedError", { enumerable: true, get: function () { return customErrors_1.AnnotatedError; } });
 // Custom Types
@@ -311,7 +312,8 @@ exports.default = {
     Interval: datatypes_1.Interval,
     Quantity: datatypes_1.Quantity,
     Ratio: datatypes_1.Ratio,
-    CQLValueSet: datatypes_1.CQLValueSet
+    CQLValueSet: datatypes_1.CQLValueSet,
+    ValueSet: datatypes_1.ValueSet
 };
 
 },{"./cql-code-service":2,"./cql-patient":3,"./datatypes/datatypes":6,"./elm/expression":22,"./elm/library":27,"./runtime/context":42,"./runtime/executor":43,"./runtime/messageListeners":44,"./runtime/repository":45,"./runtime/results":46,"./types":49,"./util/customErrors":53}],5:[function(require,module,exports){
@@ -389,7 +391,6 @@ class ValueSet {
         this.oid = oid;
         this.version = version;
         this.codes = codes;
-        this.codes || (this.codes = []);
     }
     /**
      * Determines if the provided code matches any code in the current set.
