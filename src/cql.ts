@@ -25,6 +25,7 @@ import {
   Interval,
   Quantity,
   Ratio,
+  CQLValueSet,
   ValueSet
 } from './datatypes/datatypes';
 
@@ -56,6 +57,7 @@ export {
   Interval,
   Quantity,
   Ratio,
+  CQLValueSet,
   ValueSet
 };
 
@@ -82,5 +84,6 @@ export default {
   Interval,
   Quantity,
   Ratio,
+  CQLValueSet,
   ValueSet
 };

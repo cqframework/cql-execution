@@ -2,7 +2,9 @@
 valueset "Known": '2.16.840.1.113883.3.464.1003.101.12.1061'
 valueset "Unknown One Arg": '1.2.3.4.5.6.7.8.9'
 valueset "Unknown Two Arg": '1.2.3.4.5.6.7.8.9' version '1'
-define Foo: 'Bar'
+codesystem "CS4VS": 'http://loinc.org' version '2'
+valueset "Unknown Three Arg": '1.2.3.4.5.6.7.8.9' version '1' codesystems { "CS4VS" }
+define ResolveValueSet: "Unknown Three Arg"
 
 // @Test: ValueSetRef
 valueset "Acute Pharyngitis": '2.16.840.1.113883.3.464.1003.101.12.1001'
@@ -11,6 +13,7 @@ define Foo: "Acute Pharyngitis"
 // @Test: AnyInValueSet
 valueset "Major Depressive Disorder Active": '2.16.840.1.113883.3.526.3.1491'
 valueset "Male": '2.16.840.1.113883.3.560.100.1'
+valueset "UnknownAny": '1.2.3.4.5.6.7.8.9'
 codesystem "SNOMED": 'http://snomed.info/sct'
 code "ChronicRecurrentDepression": '2618002' from "SNOMED" display 'Chronic recurrent major depressive disorder (disorder)'
 code "ModerateMajorDepression": '832007' from "SNOMED" display 'Moderate major depression (disorder)'
@@ -21,6 +24,7 @@ define AnyInListOfStrings: { '2618002', '12345' } in "Major Depressive Disorder 
 define AnyInNullList: null as List<Code> in "Major Depressive Disorder Active"
 define AnyInNullListNullVs: null as List<Code> in null as ValueSet
 define AnyInListOfCodesWithNull: { Code { code: 'M' }, (null as Code), "ChronicRecurrentDepression" } in "Major Depressive Disorder Active"
+define AnyInUnknown: { "Depression Concept" } in "UnknownAny"
 // expression data
 define ListOfCodes: { Code { code: 'M' } , "ChronicRecurrentDepression" }
 define WrongListOfCodes: { Code { code: 'M' }, Code { code: 'F', system: '3.16.840.1.113883.18.2' } }
@@ -38,6 +42,7 @@ valueset "Male": '2.16.840.1.113883.3.560.100.1'
 valueset "Versioned Female": '2.16.840.1.113883.3.560.100.2' version '20121025'
 valueset "SharedCodes": '2.16.840.1.113883.3.000.000.0'
 valueset "ImproperSharedCodes": '2.16.840.1.113883.3.000.000.1'
+valueset "UnknownIn": '1.2.3.4.5.6.7.8.9'
 define String: 'F' in "Female"
 define SharedCodesFoo: 'foo' in "SharedCodes"
 define SharedCodesNoMatch: 'baz' in "SharedCodes"
@@ -58,11 +63,13 @@ define function FInVS(vs ValueSet): 'F' in vs
 define FInPassedVS: FInVS("Female")
 define FInWrongVS: FInVS("Male")
 define FInNullVS: FInVS(null as ValueSet)
+define InUnknown: 'F' in "UnknownIn"
 
 
 // @Test: ExpandValueset
 valueset "Female": '2.16.840.1.113883.3.560.100.2'
 valueset "Known": '2.16.840.1.113883.3.464.1003.101.12.1061'
+valueset "UnknownExpand": '1.2.3.4.5.6.7.8.9'
 
 define ExpandFemale: ExpandValueSet("Female")
 define ExpandKnown: ExpandValueSet("Known")
@@ -73,6 +80,7 @@ define ExpandPassedVS: ExpandVSHelper("Female")
 define ExpandNullVS: ExpandVSHelper(null as ValueSet)
 define function UnionVSs(vs1 ValueSet, vs2 ValueSet): vs1 union vs2
 define ExpandPassedWithUnion: UnionVSs("Female", "Known")
+define ExpandUnknown: ExpandValueSet("UnknownExpand")
 
 
 // @Test: Patient Property In ValueSet
@@ -102,8 +110,8 @@ concept "Tobacco smoking status": { "Tobacco smoking status code" } display 'Tob
 define Foo: "Tobacco smoking status"
 
 // @Test: CodeSystemRef
-codesystem MyCS: 'http://loinc.org' version '1'
-define ResolveMyCS: MyCS
+codesystem "MyCS": 'http://loinc.org' version '1'
+define ResolveMyCS: "MyCS"
 
 // @Test: CalculateAge: Fully Specified Birth Date
 define Years: AgeInYears()

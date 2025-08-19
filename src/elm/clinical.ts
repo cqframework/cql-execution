@@ -2,26 +2,31 @@ import { Expression } from './expression';
 import * as dt from '../datatypes/datatypes';
 import { Context } from '../runtime/context';
 import { build } from './builder';
+import { resolveValueSet } from '../util/util';
 
 export class ValueSetDef extends Expression {
   name: string;
   id: string;
   version?: string;
+  codesystems?: CodeSystemRef[];
 
   constructor(json: any) {
     super(json);
     this.name = json.name;
     this.id = json.id;
     this.version = json.version;
+    this.codesystems = json.codeSystem?.map((cs: any) => new CodeSystemRef(cs));
   }
 
-  //todo: code systems and versions
-
   async exec(ctx: Context) {
-    const valueset =
-      (await ctx.codeService.findValueSet(this.id, this.version)) ||
-      new dt.ValueSet(this.id, this.version);
-    ctx.rootContext().set(this.name, valueset);
+    let codeSystems;
+    if (this.codesystems) {
+      codeSystems = (await Promise.all(
+        this.codesystems.map(async csRef => csRef.exec(ctx))
+      )) as dt.CodeSystem[];
+    }
+    const valueset = new dt.CQLValueSet(this.id, this.version, this.name, codeSystems);
+    // ctx.rootContext().set(this.name, valueset); Note (2025): this seems to be unneccesary, remove completely in future if not needed
     return valueset;
   }
 }
@@ -37,7 +42,6 @@ export class ValueSetRef extends Expression {
   }
 
   async exec(ctx: Context) {
-    // TODO: This calls the code service every time-- should be optimized
     let valueset = ctx.getValueSet(this.name, this.libraryName);
     if (valueset instanceof Expression) {
       valueset = await valueset.execute(ctx);
@@ -64,11 +68,12 @@ export class AnyInValueSet extends Expression {
     if (codes == null) {
       return false;
     }
-    const valueset = await this.valueset.execute(ctx);
+    const valueset: dt.CQLValueSet = await this.valueset.execute(ctx);
     if (valueset == null || !valueset.isValueSet) {
       throw new Error('ValueSet must be provided to AnyInValueSet expression');
     }
-    return codes.some((code: any) => valueset.hasMatch(code));
+    const vsExpansion = await resolveValueSet(valueset, ctx);
+    return codes.some((code: any) => vsExpansion.hasMatch(code));
   }
 }
 
@@ -90,12 +95,13 @@ export class InValueSet extends Expression {
     if (code == null) {
       return false;
     }
-    const valueset = await this.valueset.execute(ctx);
+    const valueset: dt.CQLValueSet = await this.valueset.execute(ctx);
     if (valueset == null || !valueset.isValueSet) {
       throw new Error('ValueSet must be provided to InValueSet expression');
     }
     // If there is a code and valueset return whether or not the valueset has the code
-    return valueset.hasMatch(code);
+    const vsExpansion = await resolveValueSet(valueset, ctx);
+    return vsExpansion.hasMatch(code);
   }
 }
 
@@ -108,14 +114,14 @@ export class ExpandValueSet extends Expression {
   }
 
   async exec(ctx: Context) {
-    const valueset = await this.valueset.execute(ctx);
+    const valueset: dt.CQLValueSet = await this.valueset.execute(ctx);
     if (valueset == null) {
       return null;
     } else if (!valueset.isValueSet) {
       throw new Error('ExpandValueSet function invoked on object that is not a ValueSet');
     }
-
-    return valueset.expand();
+    const vsExpansion = await resolveValueSet(valueset, ctx);
+    return vsExpansion.expand();
   }
 }
 
@@ -148,7 +154,7 @@ export class CodeSystemRef extends Expression {
 
   async exec(ctx: Context) {
     const codeSystemDef = ctx.getCodeSystem(this.name, this.libraryName);
-    return codeSystemDef ? codeSystemDef.execute(ctx) : undefined;
+    return codeSystemDef.execute(ctx);
   }
 }
 

@@ -9,7 +9,7 @@ libNames.push('Context', 'Executor', 'PatientContext', 'UnfilteredContext', 'Res
 // PatientSource-related classes
 libNames.push('Patient', 'PatientSource');
 // TerminologyService-related classes
-libNames.push('CodeService');
+libNames.push('CodeService', 'ValueSet');
 // DataType classes
 libNames.push(
   'Code',
@@ -20,7 +20,7 @@ libNames.push(
   'Interval',
   'Quantity',
   'Ratio',
-  'ValueSet'
+  'CQLValueSet'
 );
 
 describe('CQL Exports', () =>
