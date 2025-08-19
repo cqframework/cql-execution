@@ -38,14 +38,14 @@ describe('ValueSetDef', () => {
     const vs = await this['unknown Three Arg'].exec(this.ctx);
     vs.id.should.equal('1.2.3.4.5.6.7.8.9');
     vs.version.should.equal('1');
-    vs.codesystems.length.should.equal(1);
+    vs.codesystems.should.eql([new DT.CodeSystem('http://loinc.org', '2', 'CS4VS')]);
   });
 
   it('should execute a ValueSet definition', async function () {
     const vs = await this.resolveValueSet.exec(this.ctx);
     vs.id.should.equal('1.2.3.4.5.6.7.8.9');
     vs.version.should.equal('1');
-    vs.codesystems.length.should.equal(1);
+    vs.codesystems.should.eql([new DT.CodeSystem('http://loinc.org', '2', 'CS4VS')]);
   });
 });
 
