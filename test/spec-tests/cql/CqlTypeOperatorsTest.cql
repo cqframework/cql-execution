@@ -31,7 +31,7 @@ define "Convert": Tuple{
     output: null
   },
   "StringToDateTime": Tuple{
-    skipped: 'Answer does not include timezone offset, but default offset depends on test environment'
+    skipped: 'Wrong answer (different offsets)'
     /*
     expression: convert '2014-01-01' to DateTime,
     output: @2014-01-01T
@@ -79,19 +79,19 @@ define "ToConcept": Tuple{
 
 define "ToDateTime": Tuple{
   "ToDateTime1": Tuple{
-    skipped: 'Answer does not include timezone offset, but default offset depends on test environment'
+    skipped: 'Wrong answer (different offsets)'
     /*
     expression: ToDateTime('2014-01-01'),
     output: @2014-01-01T
     */  },
   "ToDateTime2": Tuple{
-    skipped: 'Answer does not include timezone offset, but default offset depends on test environment'
+    skipped: 'Wrong answer (different offsets)'
     /*
     expression: ToDateTime('2014-01-01T12:05'),
     output: @2014-01-01T12:05
     */  },
   "ToDateTime3": Tuple{
-    skipped: 'Answer does not include timezone offset, but default offset depends on test environment'
+    skipped: 'Wrong answer (different offsets)'
     /*
     expression: ToDateTime('2014-01-01T12:05:05.955'),
     output: @2014-01-01T12:05:05.955
