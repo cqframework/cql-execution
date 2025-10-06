@@ -16,59 +16,41 @@ define "Sort": Tuple{
     output: {6, 5, 4, 2, 1, 1}
     */  },
   "simpleSortStringAsc": Tuple{
-    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
-    /*
     expression: ({'back', 'aardvark', 'alligator', 'zebra', 'iguana', 'Wolf', 'Armadillo'}) sls sort asc,
     output: {'Armadillo', 'Wolf', 'aardvark', 'alligator', 'back', 'iguana', 'zebra'}
-    */  },
+  },
   "simpleSortStringDesc": Tuple{
-    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
-    /*
     expression: ({'back', 'aardvark', 'alligator', 'zebra', 'iguana', 'Wolf', 'Armadillo'}) sls sort desc,
     output: {'zebra', 'iguana', 'back', 'alligator', 'aardvark', 'Wolf', 'Armadillo'}
-    */  },
+  },
   "SortDatesAsc": Tuple{
-    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
-    /*
     expression: ({ DateTime(2012, 10, 5, 10), DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5) }) S sort asc,
     output: { @2012-01-01T, @2012-01-01T12, @2012-10-05T, @2012-10-05T10 }
-    */  },
+  },
   "SortDatesDesc": Tuple{
-    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
-    /*
     expression: ({ DateTime(2012, 10, 5, 10), DateTime(2012, 1, 1), DateTime(2012, 1, 1, 12), DateTime(2012, 10, 5) }) S sort desc,
     output: { @2012-10-05T10, @2012-10-05T, @2012-01-01T12, @2012-01-01T }
-    */  },
+  },
   "intList": Tuple{
-    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
-    /*
     expression: { 3, 2, 1 },
     output: {3, 2, 1}
-    */  },
+  },
   "decimalList": Tuple{
-    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
-    /*
     expression: { 3.8, 2.4, 1.9 },
     output: {3.8, 2.4, 1.9}
-    */  },
+  },
   "quantityList": Tuple{
-    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
-    /*
     expression: { 19.99 '[lb_av]', 17.33 '[lb_av]', 10.66 '[lb_av]' },
     output: {19.99 '[lb_av]', 17.33 '[lb_av]', 10.66 '[lb_av]'}
-    */  },
+  },
   "dateTimeList": Tuple{
-    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
-    /*
     expression: { DateTime(2016), DateTime(2015), DateTime(2010) },
     output: {@2016T, @2015T, @2010T}
-    */  },
+  },
   "timeList": Tuple{
-    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
-    /*
     expression: { @T15:59:59.999, @T15:12:59.999, @T15:12:13.999 },
     output: {@T15:59:59.999, @T15:12:59.999, @T15:12:13.999}
-    */  }
+  }
 }
 
 define "Contains": Tuple{

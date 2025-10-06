@@ -23,15 +23,12 @@ CqlDateTimeOperatorsTest.Subtract.DateTimeSubtractYearInWeeks   Wrong output: 20
 CqlIntervalOperatorsTest.Expand.ExpandPerHour                   Wrong output: This test is drawn directly from an example in the spec and yet expects a different answer! See: https://cql.hl7.org/09-b-cqlreference.html#expand
 CqlIntervalOperatorsTest.In.TestInNullBoundaries                Wrong output: According to spec, comparison against null closed boundaries should result in true
 CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
-CqlListOperatorsTest.Sort                                       Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
+CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
+CqlListOperatorsTest.Sort.simpleSortDesc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 
 # Potentially Incorrect Expected Output
 CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract1YearInSeconds  Spec says to convert more precise duration to most precise unit in Date. How do you convert seconds to months? 31535999 is 364.999 days, which isn't quite 12 months, so we answer 2015-06.
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
-CqlTypeOperatorsTest.Convert.StringToDateTime                     Answer does not include timezone offset, but default offset depends on test environment
-CqlTypeOperatorsTest.ToDateTime.ToDateTime1                       Answer does not include timezone offset, but default offset depends on test environment
-CqlTypeOperatorsTest.ToDateTime.ToDateTime2                       Answer does not include timezone offset, but default offset depends on test environment
-CqlTypeOperatorsTest.ToDateTime.ToDateTime3                       Answer does not include timezone offset, but default offset depends on test environment
 CqlTypesTest.DateTime.DateTimeNull                                Should DateTime(null) really evaluate to null?
 
 # Incorrect answer
@@ -40,6 +37,10 @@ CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (tr
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.Except.NullInterval                    Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.Intersect.TestIntersectNull            Wrong answer (Interval[5, 10] vs Interval[5, null))
+CqlTypeOperatorsTest.Convert.StringToDateTime                   Wrong answer (different offsets)
+CqlTypeOperatorsTest.ToDateTime.ToDateTime1                     Wrong answer (different offsets)
+CqlTypeOperatorsTest.ToDateTime.ToDateTime2                     Wrong answer (different offsets)
+CqlTypeOperatorsTest.ToDateTime.ToDateTime3                     Wrong answer (different offsets)
 ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalNeg10Pow28ToZeroOneStepDecimalMinValue Wrong answer (null vs big number)

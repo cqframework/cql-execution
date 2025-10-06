@@ -297,7 +297,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Answer does not include timezone offset, but default offset depends on test environment",
+                           "value" : "Wrong answer (different offsets)",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -621,7 +621,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Answer does not include timezone offset, but default offset depends on test environment",
+                           "value" : "Wrong answer (different offsets)",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -636,7 +636,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Answer does not include timezone offset, but default offset depends on test environment",
+                           "value" : "Wrong answer (different offsets)",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
@@ -651,7 +651,7 @@
                         "name" : "skipped",
                         "value" : {
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "Answer does not include timezone offset, but default offset depends on test environment",
+                           "value" : "Wrong answer (different offsets)",
                            "type" : "Literal",
                            "annotation" : [ ]
                         }
