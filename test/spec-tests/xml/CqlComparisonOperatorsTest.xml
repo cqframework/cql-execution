@@ -1,810 +1,810 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
-	name="CqlComparisonOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#comparison-operators-4">
-	<group name="Between">
-		<test name="BetweenIntTrue">
+	name="CqlComparisonOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#comparison-operators-4" version="1.0">
+	<group name="Between" version="1.0">
+		<test name="BetweenIntTrue" version="1.0">
 			<expression>4 between 2 and 6</expression>
 			<output>true</output>
 		</test>
 	</group>
-	<group name="Equal">
-		<test name="SimpleEqTrueTrue">
+	<group name="Equal" version="1.0">
+		<test name="SimpleEqTrueTrue" version="1.0">
 			<expression>true = true</expression>
 			<output>true</output>
 		</test>
-		<test name="SimpleEqTrueFalse">
+		<test name="SimpleEqTrueFalse" version="1.0">
 			<expression>true = false</expression>
 			<output>false</output>
 		</test>
-		<test name="SimpleEqFalseFalse">
+		<test name="SimpleEqFalseFalse" version="1.0">
 			<expression>false = false</expression>
 			<output>true</output>
 		</test>
-		<test name="SimpleEqFalseTrue">
+		<test name="SimpleEqFalseTrue" version="1.0">
 			<expression>false = true</expression>
 			<output>false</output>
 		</test>
-		<test name="SimpleEqNullNull">
+		<test name="SimpleEqNullNull" version="1.0">
 			<expression>null as String = null</expression>
 			<output>null</output>
 		</test>
-		<test name="SimpleEqTrueNull">
+		<test name="SimpleEqTrueNull" version="1.0">
 			<expression>true = null</expression>
 			<output>null</output>
 		</test>
-		<test name="SimpleEqNullTrue">
+		<test name="SimpleEqNullTrue" version="1.0">
 			<expression>null = true</expression>
 			<output>null</output>
 		</test>
-		<test name="SimpleEqInt1Int1">
+		<test name="SimpleEqInt1Int1" version="1.0">
 			<expression>1 = 1</expression>
 			<output>true</output>
 		</test>
-		<test name="SimpleEqInt1Int2">
+		<test name="SimpleEqInt1Int2" version="1.0">
 			<expression>1 = 2</expression>
 			<output>false</output>
 		</test>
-		<test name="SimpleEqStringAStringA">
+		<test name="SimpleEqStringAStringA" version="1.0">
 			<expression>'a' = 'a'</expression>
 			<output>true</output>
 		</test>
-		<test name="SimpleEqStringAStringB">
+		<test name="SimpleEqStringAStringB" version="1.0">
 			<expression>'a' = 'b'</expression>
 			<output>false</output>
 		</test>
-		<test name="SimpleEqFloat1Float1">
+		<test name="SimpleEqFloat1Float1" version="1.0">
 			<expression>1.0 = 1.0</expression>
 			<output>true</output>
 		</test>
-		<test name="SimpleEqFloat1Float2">
+		<test name="SimpleEqFloat1Float2" version="1.0">
 			<expression>1.0 = 2.0</expression>
 			<output>false</output>
 		</test>
-		<test name="SimpleEqFloat1Int1">
+		<test name="SimpleEqFloat1Int1" version="1.0">
 			<expression>1.0 = 1</expression>
 			<output>true</output>
 		</test>
-		<test name="SimpleEqFloat1Int2">
+		<test name="SimpleEqFloat1Int2" version="1.0">
 			<expression>1.0 = 2</expression>
 			<output>false</output>
 		</test>
-		<test name="QuantityEqCM1CM1">
+		<test name="QuantityEqCM1CM1" version="1.0">
 			<expression>1'cm' = 1'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="QuantityEqCM1M01">
+		<test name="QuantityEqCM1M01" version="1.4">
 			<expression>1'cm' = 0.01'm'</expression>
 			<output>true</output>
 		</test>
-		<test name="QuantityEqDiffPrecision">
+		<test name="QuantityEqDiffPrecision" version="1.0">
 			<expression>2.0'cm' = 2.00'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="TupleEqJohnJohn">
+		<test name="TupleEqJohnJohn" version="1.5">
 			<expression>Tuple { Id : 1, Name : 'John' } = Tuple { Id : 1, Name : 'John' }</expression>
 			<output>true</output>
 		</test>
-		<test name="TupleEqJohnJane">
+		<test name="TupleEqJohnJane" version="1.5">
 			<expression>Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : 'Jane' }</expression>
 			<output>false</output>
 		</test>
-		<test name="TupleEqJohn1John2">
+		<test name="TupleEqJohn1John2" version="1.5">
 			<expression>Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : 'John' }</expression>
 			<output>false</output>
 		</test>
-		<test name="TupleEqJohn1John2WithNullName">
+		<test name="TupleEqJohn1John2WithNullName" version="1.5">
 			<expression>Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : null }</expression>
 			<output>false</output>
 		</test>
-		<test name="TupleEqDifferentNamesWithOneNullId">
+		<test name="TupleEqDifferentNamesWithOneNullId" version="1.5">
 			<expression>Tuple { Id : null, Name : 'John' } = Tuple { Id : 1, Name : 'James' }</expression>
 			<output>false</output>
 		</test>
-		<test name="TupleEqJohn1John1WithBothNamesNull">
+		<test name="TupleEqJohn1John1WithBothNamesNull" version="1.5">
 			<expression>Tuple { Id : 1, Name : null } = Tuple { Id : 1, Name : null }</expression>
 			<output>true</output>
 		</test>
-		<test name="TupleEqJohnJohnWithBothIdsNull">
+		<test name="TupleEqJohnJohnWithBothIdsNull" version="1.5">
 			<expression>Tuple { Id : null, Name : 'John' } = Tuple { Id : null, Name : 'John' }</expression>
 			<output>true</output>
 		</test>
-		<test name="TupleEqJohn1John1WithNullName">
+		<test name="TupleEqJohn1John1WithNullName" version="1.5">
 			<expression>Tuple { Id : 1, Name : 'John' } = Tuple { Id : 1, Name : null }</expression>
 			<output>null</output>
 		</test>
-		<test name="TupleEqDateTimeTrue">
+		<test name="TupleEqDateTimeTrue" version="1.0">
 			<expression>Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) }</expression>
 			<output>true</output>
 		</test>
-		<test name="TupleEqDateTimeFalse">
+		<test name="TupleEqDateTimeFalse" version="1.0">
 			<expression>Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 5, 0, 0, 0) }</expression>
 			<output>false</output>
 		</test>
-		<test name="TupleEqTimeTrue">
+		<test name="TupleEqTimeTrue" version="1.0">
 			<expression>Tuple { timeId: 55, TheTime: @T05:15:15.541 } = Tuple { timeId: 55, TheTime: @T05:15:15.541 }</expression>
 			<output>true</output>
 		</test>
-		<test name="TupleEqTimeFalse">
+		<test name="TupleEqTimeFalse" version="1.0">
 			<expression>Tuple { timeId: 55, TheTime: @T05:15:15.541 } = Tuple { timeId: 55, TheTime: @T05:15:15.540 }</expression>
 			<output>false</output>
 		</test>
-		<test name="DateTimeEqTodayToday">
+		<test name="DateTimeEqTodayToday" version="1.0">
 			<expression>Today() = Today()</expression>
 			<output>true</output>
 		</test>
-		<test name="DateTimeEqTodayYesterday">
+		<test name="DateTimeEqTodayYesterday" version="1.0">
 			<expression>Today() = Today() - 1 days</expression>
 			<output>false</output>
 		</test>
-		<test name="DateTimeEqJanJan">
+		<test name="DateTimeEqJanJan" version="1.0">
 			<expression>DateTime(2014, 1, 5, 5, 0, 0, 0, 0) = DateTime(2014, 1, 5, 5, 0, 0, 0, 0)</expression>
 			<output>true</output>
 		</test>
-		<test name="DateTimeEqJanJuly">
+		<test name="DateTimeEqJanJuly" version="1.0">
 			<expression>DateTime(2014, 1, 5, 5, 0, 0, 0, 0) = DateTime(2014, 7, 5, 5, 0, 0, 0, 0)</expression>
 			<output>false</output>
 		</test>
-		<test name="DateTimeEqNull">
+		<test name="DateTimeEqNull" version="1.0">
 			<expression>DateTime(null) = DateTime(null)</expression>
 			<output>null</output>
 		</test>
-		<test name="DateTimeUTC">
+		<test name="DateTimeUTC" version="1.0">
 			<expression>@2014-01-25T14:30:14.559+01:00 = @2014-01-25T14:30:14.559+01:00</expression>
 			<output>true</output>
 		</test>
-		<test name="DateTimeDayCompare">
+		<test name="DateTimeDayCompare" version="1.0">
 			<expression>@2022-02-22T00:00:00.000-05:00 same day as @2022-02-22T04:59:00.000Z</expression>
 			<output>true</output>
 		</test>
-		<test name="TimeEq10A10A">
+		<test name="TimeEq10A10A" version="1.0">
 			<expression>@T10:00:00.000 = @T10:00:00.000</expression>
 			<output>true</output>
 		</test>
-		<test name="TimeEq10A10P">
+		<test name="TimeEq10A10P" version="1.0">
 			<expression>@T10:00:00.000 = @T22:00:00.000</expression>
 			<output>false</output>
 		</test>
 	</group>
-	<group name="Greater">
-		<test name="GreaterZZ">
+	<group name="Greater" version="1.0">
+		<test name="GreaterZZ" version="1.0">
 			<expression>0 &gt; 0</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterZ1">
+		<test name="GreaterZ1" version="1.0">
 			<expression>0 &gt; 1</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterZNeg1">
+		<test name="GreaterZNeg1" version="1.0">
 			<expression>0 &gt; -1</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterDecZZ">
+		<test name="GreaterDecZZ" version="1.0">
 			<expression>0.0 &gt; 0.0</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterDecZ1">
+		<test name="GreaterDecZ1" version="1.0">
 			<expression>0.0 &gt; 1.0</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterDecZNeg1">
+		<test name="GreaterDecZNeg1" version="1.0">
 			<expression>0.0 &gt; -1.0</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterDec1Int2">
+		<test name="GreaterDec1Int2" version="1.0">
 			<expression>1.0 &gt; 2</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterCM0CM0">
+		<test name="GreaterCM0CM0" version="1.0">
 			<expression>0'cm' &gt; 0'cm'</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterCM0CM1">
+		<test name="GreaterCM0CM1" version="1.0">
 			<expression>0'cm' &gt; 1'cm'</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterCM0NegCM1">
+		<test name="GreaterCM0NegCM1" version="1.0">
 			<expression>0'cm' &gt; -1'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterM1CM1">
+		<test name="GreaterM1CM1" version="1.0">
 			<expression>1'm' &gt; 1'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterM1CM10">
+		<test name="GreaterM1CM10" version="1.0">
 			<expression>1'm' &gt; 10'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterAA">
+		<test name="GreaterAA" version="1.0">
 			<expression>'a' &gt; 'a'</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterAB">
+		<test name="GreaterAB" version="1.0">
 			<expression>'a' &gt; 'b'</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterBA">
+		<test name="GreaterBA" version="1.0">
 			<expression>'b' &gt; 'a'</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterAThanAA">
+		<test name="GreaterAThanAA" version="1.0">
 			<expression>'a' &gt; 'aa'</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterAAThanA">
+		<test name="GreaterAAThanA" version="1.0">
 			<expression>'aa' &gt; 'a'</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterJackJill">
+		<test name="GreaterJackJill" version="1.0">
 			<expression>'Jack' &gt; 'Jill'</expression>
 			<output>false</output>
 		</test>
-		<test name="DateTimeGreaterTrue">
+		<test name="DateTimeGreaterTrue" version="1.0">
 			<expression>DateTime(2012, 2, 12) &gt; DateTime(2012, 2, 10)</expression>
 			<output>true</output>
 		</test>
-		<test name="DateTimeGreaterFalse">
+		<test name="DateTimeGreaterFalse" version="1.0">
 			<expression>DateTime(2012, 2, 12) &gt; DateTime(2012, 2, 13)</expression>
 			<output>false</output>
 		</test>
-		<test name="TimeGreaterTrue">
+		<test name="TimeGreaterTrue" version="1.0">
 			<expression>@T10:00:00.001 &gt; @T10:00:00.000</expression>
 			<output>true</output>
 		</test>
-		<test name="TimeGreaterFalse">
+		<test name="TimeGreaterFalse" version="1.0">
 			<expression>@T10:00:00.000 &gt; @T10:00:00.001</expression>
 			<output>false</output>
 		</test>
-		<test name="UncertaintyGreaterNull">
+		<test name="UncertaintyGreaterNull" version="1.0">
 			<expression>DateTime(2014) &gt; DateTime(2014, 2, 15)</expression>
 			<output>null</output>
 		</test>
-		<test name="UncertaintyGreaterTrue">
+		<test name="UncertaintyGreaterTrue" version="1.0">
 			<expression>DateTime(2015) &gt; DateTime(2014, 2, 15)</expression>
 			<output>true</output>
 		</test>
-		<test name="UncertaintyGreaterFalse">
+		<test name="UncertaintyGreaterFalse" version="1.0">
 			<expression>DateTime(2013) &gt; DateTime(2014, 2, 15)</expression>
 			<output>false</output>
 		</test>
 	</group>
-	<group name="Greater Or Equal">
-		<test name="GreaterOrEqualZZ">
+	<group name="Greater Or Equal" version="1.0">
+		<test name="GreaterOrEqualZZ" version="1.0">
 			<expression>0 &gt;= 0</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterOrEqualZ1">
+		<test name="GreaterOrEqualZ1" version="1.0">
 			<expression>0 &gt;= 1</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterOrEqualZNeg1">
+		<test name="GreaterOrEqualZNeg1" version="1.0">
 			<expression>0 &gt;= -1</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterOrEqualDecZZ">
+		<test name="GreaterOrEqualDecZZ" version="1.0">
 			<expression>0.0 &gt;= 0.0</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterOrEqualDecZ1">
+		<test name="GreaterOrEqualDecZ1" version="1.0">
 			<expression>0.0 &gt;= 1.0</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterOrEqualDecZNeg1">
+		<test name="GreaterOrEqualDecZNeg1" version="1.0">
 			<expression>0.0 &gt;= -1.0</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterOrEqualDec1Int2">
+		<test name="GreaterOrEqualDec1Int2" version="1.0">
 			<expression>1.0 &gt;= 2</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterOrEqualCM0CM0">
+		<test name="GreaterOrEqualCM0CM0" version="1.0">
 			<expression>0'cm' &gt;= 0'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterOrEqualCM0CM1">
+		<test name="GreaterOrEqualCM0CM1" version="1.0">
 			<expression>0'cm' &gt;= 1'cm'</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterOrEqualCM0NegCM1">
+		<test name="GreaterOrEqualCM0NegCM1" version="1.0">
 			<expression>0'cm' &gt;= -1'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterOrEqualM1CM1">
+		<test name="GreaterOrEqualM1CM1" version="1.0">
 			<expression>1'm' &gt;= 1'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterOrEqualM1CM10">
+		<test name="GreaterOrEqualM1CM10" version="1.0">
 			<expression>1'm' &gt;= 10'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterOrEqualAA">
+		<test name="GreaterOrEqualAA" version="1.0">
 			<expression>'a' &gt;= 'a'</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterOrEqualAB">
+		<test name="GreaterOrEqualAB" version="1.0">
 			<expression>'a' &gt;= 'b'</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterOrEqualBA">
+		<test name="GreaterOrEqualBA" version="1.0">
 			<expression>'b' &gt;= 'a'</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterOrEqualAThanAA">
+		<test name="GreaterOrEqualAThanAA" version="1.0">
 			<expression>'a' &gt;= 'aa'</expression>
 			<output>false</output>
 		</test>
-		<test name="GreaterOrEqualAAThanA">
+		<test name="GreaterOrEqualAAThanA" version="1.0">
 			<expression>'aa' &gt;= 'a'</expression>
 			<output>true</output>
 		</test>
-		<test name="GreaterOrEqualJackJill">
+		<test name="GreaterOrEqualJackJill" version="1.0">
 			<expression>'Jack' &gt;= 'Jill'</expression>
 			<output>false</output>
 		</test>
-		<test name="DateTimeGreaterEqTrue">
+		<test name="DateTimeGreaterEqTrue" version="1.0">
 			<expression>DateTime(2012, 2, 12, 0, 0, 0, 0) &gt;= DateTime(2012, 2, 10, 0, 0, 0, 0)</expression>
 			<output>true</output>
 		</test>
-		<test name="DateTimeGreaterEqTrue2">
+		<test name="DateTimeGreaterEqTrue2" version="1.0">
 			<expression>DateTime(2012, 2, 12, 0, 0, 0, 0) &gt;= DateTime(2012, 2, 12, 0, 0, 0, 0)</expression>
 			<output>true</output>
 		</test>
-		<test name="DateTimeGreaterEqFalse">
+		<test name="DateTimeGreaterEqFalse" version="1.0">
 			<expression>DateTime(2012, 2, 12, 0, 0, 0, 0) &gt;= DateTime(2012, 2, 13, 0, 0, 0, 0)</expression>
 			<output>false</output>
 		</test>
-		<test name="TimeGreaterEqTrue">
+		<test name="TimeGreaterEqTrue" version="1.0">
 			<expression>@T10:00:00.001 &gt;= @T10:00:00.000</expression>
 			<output>true</output>
 		</test>
-		<test name="TimeGreaterEqTrue2">
+		<test name="TimeGreaterEqTrue2" version="1.0">
 			<expression>@T10:00:00.000 &gt;= @T10:00:00.000</expression>
 			<output>true</output>
 		</test>
-		<test name="TimeGreaterEqFalse">
+		<test name="TimeGreaterEqFalse" version="1.0">
 			<expression>@T10:00:00.000 &gt;= @T10:00:00.001</expression>
 			<output>false</output>
 		</test>
-		<test name="UncertaintyGreaterEqualNull">
+		<test name="UncertaintyGreaterEqualNull" version="1.0">
 			<expression>DateTime(2014) &gt;= DateTime(2014, 2, 15)</expression>
 			<output>null</output>
 		</test>
-		<test name="UncertaintyGreaterEqualTrue">
+		<test name="UncertaintyGreaterEqualTrue" version="1.0">
 			<expression>DateTime(2015) &gt;= DateTime(2014, 2, 15)</expression>
 			<output>true</output>
 		</test>
-		<test name="UncertaintyGreaterEqualFalse">
+		<test name="UncertaintyGreaterEqualFalse" version="1.0">
 			<expression>DateTime(2013) &gt;= DateTime(2014, 2, 15)</expression>
 			<output>false</output>
 		</test>
 	</group>
-	<group name="Less">
-		<test name="LessZZ">
+	<group name="Less" version="1.0">
+		<test name="LessZZ" version="1.0">
 			<expression>0 &lt; 0</expression>
 			<output>false</output>
 		</test>
-		<test name="LessZ1">
+		<test name="LessZ1" version="1.0">
 			<expression>0 &lt; 1</expression>
 			<output>true</output>
 		</test>
-		<test name="LessZNeg1">
+		<test name="LessZNeg1" version="1.0">
 			<expression>0 &lt; -1</expression>
 			<output>false</output>
 		</test>
-		<test name="LessDecZZ">
+		<test name="LessDecZZ" version="1.0">
 			<expression>0.0 &lt; 0.0</expression>
 			<output>false</output>
 		</test>
-		<test name="LessDecZ1">
+		<test name="LessDecZ1" version="1.0">
 			<expression>0.0 &lt; 1.0</expression>
 			<output>true</output>
 		</test>
-		<test name="LessDecZNeg1">
+		<test name="LessDecZNeg1" version="1.0">
 			<expression>0.0 &lt; -1.0</expression>
 			<output>false</output>
 		</test>
-		<test name="LessDec1Int2">
+		<test name="LessDec1Int2" version="1.0">
 			<expression>1.0 &lt; 2</expression>
 			<output>true</output>
 		</test>
-		<test name="LessCM0CM0">
+		<test name="LessCM0CM0" version="1.0">
 			<expression>0'cm' &lt; 0'cm'</expression>
 			<output>false</output>
 		</test>
-		<test name="LessCM0CM1">
+		<test name="LessCM0CM1" version="1.0">
 			<expression>0'cm' &lt; 1'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="LessCM0NegCM1">
+		<test name="LessCM0NegCM1" version="1.0">
 			<expression>0'cm' &lt; -1'cm'</expression>
 			<output>false</output>
 		</test>
-		<test name="LessM1CM1">
+		<test name="LessM1CM1" version="1.0">
 			<expression>1'm' &lt; 1'cm'</expression>
 			<output>false</output>
 		</test>
-		<test name="LessM1CM10">
+		<test name="LessM1CM10" version="1.0">
 			<expression>1'm' &lt; 10'cm'</expression>
 			<output>false</output>
 		</test>
-		<test name="LessAA">
+		<test name="LessAA" version="1.0">
 			<expression>'a' &lt; 'a'</expression>
 			<output>false</output>
 		</test>
-		<test name="LessAB">
+		<test name="LessAB" version="1.0">
 			<expression>'a' &lt; 'b'</expression>
 			<output>true</output>
 		</test>
-		<test name="LessBA">
+		<test name="LessBA" version="1.0">
 			<expression>'b' &lt; 'a'</expression>
 			<output>false</output>
 		</test>
-		<test name="LessAThanAA">
+		<test name="LessAThanAA" version="1.0">
 			<expression>'a' &lt; 'aa'</expression>
 			<output>true</output>
 		</test>
-		<test name="LessAAThanA">
+		<test name="LessAAThanA" version="1.0">
 			<expression>'aa' &lt; 'a'</expression>
 			<output>false</output>
 		</test>
-		<test name="LessJackJill">
+		<test name="LessJackJill" version="1.0">
 			<expression>'Jack' &lt; 'Jill'</expression>
 			<output>true</output>
 		</test>
-		<test name="DateTimeLessTrue">
+		<test name="DateTimeLessTrue" version="1.0">
 			<expression>DateTime(2012, 2, 9) &lt; DateTime(2012, 2, 10)</expression>
 			<output>true</output>
 		</test>
-		<test name="DateTimeLessFalse">
+		<test name="DateTimeLessFalse" version="1.0">
 			<expression>DateTime(2012, 2, 14) &lt; DateTime(2012, 2, 13)</expression>
 			<output>false</output>
 		</test>
-		<test name="TimeLessTrue">
+		<test name="TimeLessTrue" version="1.0">
 			<expression>@T10:00:00.001 &lt; @T10:00:00.002</expression>
 			<output>true</output>
 		</test>
-		<test name="TimeLessFalse">
+		<test name="TimeLessFalse" version="1.0">
 			<expression>@T10:10:00.000 &lt; @T10:00:00.001</expression>
 			<output>false</output>
 		</test>
-		<test name="UncertaintyLessNull">
+		<test name="UncertaintyLessNull" version="1.0">
 			<expression>DateTime(2014) &lt; DateTime(2014, 2, 15)</expression>
 			<output>null</output>
 		</test>
-		<test name="UncertaintyLessTrue">
+		<test name="UncertaintyLessTrue" version="1.0">
 			<expression>DateTime(2013) &lt; DateTime(2014, 2, 15)</expression>
 			<output>true</output>
 		</test>
-		<test name="UncertaintyLessFalse">
+		<test name="UncertaintyLessFalse" version="1.0">
 			<expression>DateTime(2015) &lt; DateTime(2014, 2, 15)</expression>
 			<output>false</output>
 		</test>
 	</group>
-	<group name="Less Or Equal">
-		<test name="LessOrEqualZZ">
+	<group name="Less Or Equal" version="1.0">
+		<test name="LessOrEqualZZ" version="1.0">
 			<expression>0 &lt;= 0</expression>
 			<output>true</output>
 		</test>
-		<test name="LessOrEqualZ1">
+		<test name="LessOrEqualZ1" version="1.0">
 			<expression>0 &lt;= 1</expression>
 			<output>true</output>
 		</test>
-		<test name="LessOrEqualZNeg1">
+		<test name="LessOrEqualZNeg1" version="1.0">
 			<expression>0 &lt;= -1</expression>
 			<output>false</output>
 		</test>
-		<test name="LessOrEqualDecZZ">
+		<test name="LessOrEqualDecZZ" version="1.0">
 			<expression>0.0 &lt;= 0.0</expression>
 			<output>true</output>
 		</test>
-		<test name="LessOrEqualDecZ1">
+		<test name="LessOrEqualDecZ1" version="1.0">
 			<expression>0.0 &lt;= 1.0</expression>
 			<output>true</output>
 		</test>
-		<test name="LessOrEqualDecZNeg1">
+		<test name="LessOrEqualDecZNeg1" version="1.0">
 			<expression>0.0 &lt;= -1.0</expression>
 			<output>false</output>
 		</test>
-		<test name="LessOrEqualDec1Int2">
+		<test name="LessOrEqualDec1Int2" version="1.0">
 			<expression>1.0 &lt;= 2</expression>
 			<output>true</output>
 		</test>
-		<test name="LessOrEqualCM0CM0">
+		<test name="LessOrEqualCM0CM0" version="1.0">
 			<expression>0'cm' &lt;= 0'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="LessOrEqualCM0CM1">
+		<test name="LessOrEqualCM0CM1" version="1.0">
 			<expression>0'cm' &lt;= 1'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="LessOrEqualCM0NegCM1">
+		<test name="LessOrEqualCM0NegCM1" version="1.0">
 			<expression>0'cm' &lt;= -1'cm'</expression>
 			<output>false</output>
 		</test>
-		<test name="LessOrEqualM1CM1">
+		<test name="LessOrEqualM1CM1" version="1.0">
 			<expression>1'm' &lt;= 1'cm'</expression>
 			<output>false</output>
 		</test>
-		<test name="LessOrEqualM1CM10">
+		<test name="LessOrEqualM1CM10" version="1.0">
 			<expression>1'm' &lt;= 10'cm'</expression>
 			<output>false</output>
 		</test>
-		<test name="LessOrEqualAA">
+		<test name="LessOrEqualAA" version="1.0">
 			<expression>'a' &lt;= 'a'</expression>
 			<output>true</output>
 		</test>
-		<test name="LessOrEqualAB">
+		<test name="LessOrEqualAB" version="1.0">
 			<expression>'a' &lt;= 'b'</expression>
 			<output>true</output>
 		</test>
-		<test name="LessOrEqualBA">
+		<test name="LessOrEqualBA" version="1.0">
 			<expression>'b' &lt;= 'a'</expression>
 			<output>false</output>
 		</test>
-		<test name="LessOrEqualAThanAA">
+		<test name="LessOrEqualAThanAA" version="1.0">
 			<expression>'a' &lt;= 'aa'</expression>
 			<output>true</output>
 		</test>
-		<test name="LessOrEqualAAThanA">
+		<test name="LessOrEqualAAThanA" version="1.0">
 			<expression>'aa' &lt;= 'a'</expression>
 			<output>false</output>
 		</test>
-		<test name="LessOrEqualJackJill">
+		<test name="LessOrEqualJackJill" version="1.0">
 			<expression>'Jack' &lt;= 'Jill'</expression>
 			<output>true</output>
 		</test>
-		<test name="DateTimeLessEqTrue">
+		<test name="DateTimeLessEqTrue" version="1.0">
 			<expression>DateTime(2012, 2, 9, 0, 0, 0, 0) &lt;= DateTime(2012, 2, 10, 0, 0, 0, 0)</expression>
 			<output>true</output>
 		</test>
-		<test name="DateTimeLessEqTrue2">
+		<test name="DateTimeLessEqTrue2" version="1.0">
 			<expression>DateTime(2012, 2, 12, 0, 0, 0, 0) &lt;= DateTime(2012, 2, 12, 0, 0, 0, 0)</expression>
 			<output>true</output>
 		</test>
-		<test name="DateTimeLessEqFalse">
+		<test name="DateTimeLessEqFalse" version="1.0">
 			<expression>DateTime(2012, 2, 12, 1, 0, 0, 0) &lt;= DateTime(2012, 2, 12, 0, 0, 0, 0)</expression>
 			<output>false</output>
 		</test>
-		<test name="TimeLessEqTrue">
+		<test name="TimeLessEqTrue" version="1.0">
 			<expression>@T10:00:00.001 &lt;= @T10:00:00.002</expression>
 			<output>true</output>
 		</test>
-		<test name="TimeLessEqTrue2">
+		<test name="TimeLessEqTrue2" version="1.0">
 			<expression>@T10:00:00.000 &lt;= @T10:00:00.000</expression>
 			<output>true</output>
 		</test>
-		<test name="TimeLessEqFalse">
+		<test name="TimeLessEqFalse" version="1.0">
 			<expression>@T10:00:00.002 &lt;= @T10:00:00.001</expression>
 			<output>false</output>
 		</test>
-		<test name="UncertaintyLessEqualNull">
+		<test name="UncertaintyLessEqualNull" version="1.0">
 			<expression>DateTime(2014) &lt;= DateTime(2014, 2, 15)</expression>
 			<output>null</output>
 		</test>
-		<test name="UncertaintyLessEqualTrue">
+		<test name="UncertaintyLessEqualTrue" version="1.0">
 			<expression>DateTime(2013) &lt;= DateTime(2014, 2, 15)</expression>
 			<output>true</output>
 		</test>
-		<test name="UncertaintyLessEqualFalse">
+		<test name="UncertaintyLessEqualFalse" version="1.0">
 			<expression>DateTime(2015) &lt;= DateTime(2014, 2, 15)</expression>
 			<output>false</output>
 		</test>
 	</group>
-	<group name="Equivalent">
-		<test name="EquivTrueTrue">
+	<group name="Equivalent" version="1.0">
+		<test name="EquivTrueTrue" version="1.0">
 			<expression>true ~ true</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivTrueFalse">
+		<test name="EquivTrueFalse" version="1.0">
 			<expression>true ~ false</expression>
 			<output>false</output>
 		</test>
-		<test name="EquivFalseFalse">
+		<test name="EquivFalseFalse" version="1.0">
 			<expression>false ~ false</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivFalseTrue">
+		<test name="EquivFalseTrue" version="1.0">
 			<expression>false ~ true</expression>
 			<output>false</output>
 		</test>
-		<test name="EquivNullNull">
+		<test name="EquivNullNull" version="1.0">
 			<expression>null as String ~ null</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivTrueNull">
+		<test name="EquivTrueNull" version="1.0">
 			<expression>true ~ null</expression>
 			<output>false</output>
 		</test>
-		<test name="EquivNullTrue">
+		<test name="EquivNullTrue" version="1.0">
 			<expression>null ~ true</expression>
 			<output>false</output>
 		</test>
-		<test name="EquivInt1Int1">
+		<test name="EquivInt1Int1" version="1.0">
 			<expression>1 ~ 1</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivInt1Int2">
+		<test name="EquivInt1Int2" version="1.0">
 			<expression>1 ~ 2</expression>
 			<output>false</output>
 		</test>
-		<test name="EquivStringAStringA">
+		<test name="EquivStringAStringA" version="1.0">
 			<expression>'a' ~ 'a'</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivStringAStringB">
+		<test name="EquivStringAStringB" version="1.0">
 			<expression>'a' ~ 'b'</expression>
 			<output>false</output>
 		</test>
-		<test name="EquivFloat1Float1">
+		<test name="EquivFloat1Float1" version="1.0">
 			<expression>1.0 ~ 1.0</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivFloat1Float2">
+		<test name="EquivFloat1Float2" version="1.0">
 			<expression>1.0 ~ 2.0</expression>
 			<output>false</output>
 		</test>
-		<test name="EquivFloat1Int1">
+		<test name="EquivFloat1Int1" version="1.0">
 			<expression>1.0 ~ 1</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivFloat1Int2">
+		<test name="EquivFloat1Int2" version="1.0">
 			<expression>1.0 ~ 2</expression>
 			<output>false</output>
 		</test>
-		<test name="EquivEqCM1CM1">
+		<test name="EquivEqCM1CM1" version="1.0">
 			<expression>1'cm' ~ 1'cm'</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivEqCM1M01">
+		<test name="EquivEqCM1M01" version="1.0">
 			<expression>1'cm' ~ 0.01'm'</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivTupleJohnJohn">
+		<test name="EquivTupleJohnJohn" version="1.5">
 			<expression>Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 1, Name : 'John' }</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivTupleJohnJohnWithNulls">
+		<test name="EquivTupleJohnJohnWithNulls" version="1.5">
 			<expression>Tuple { Id : 1, Name : 'John', Position: null } ~ Tuple { Id : 1, Name : 'John', Position: null }</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivTupleJohnJane">
+		<test name="EquivTupleJohnJane" version="1.5">
 			<expression>Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 2, Name : 'Jane' }</expression>
 			<output>false</output>
 		</test>
-		<test name="EquivTupleJohn1John2">
+		<test name="EquivTupleJohn1John2" version="1.5">
 			<expression>Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 2, Name : 'John' }</expression>
 			<output>false</output>
 		</test>
-		<test name="EquivDateTimeTodayToday">
+		<test name="EquivDateTimeTodayToday" version="1.0">
 			<expression>Today() ~ Today()</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivDateTimeTodayYesterday">
+		<test name="EquivDateTimeTodayYesterday" version="1.0">
 			<expression>Today() ~ Today() - 1 days</expression>
 			<output>false</output>
 		</test>
-		<test name="EquivTime10A10A">
+		<test name="EquivTime10A10A" version="1.0">
 			<expression>@T10:00:00.000 ~ @T10:00:00.000</expression>
 			<output>true</output>
 		</test>
-		<test name="EquivTime10A10P">
+		<test name="EquivTime10A10P" version="1.0">
 			<expression>@T10:00:00.000 ~ @T22:00:00.000</expression>
 			<output>false</output>
 		</test>
 	</group>
-	<group name="Not Equal">
-		<test name="SimpleNotEqTrueTrue">
+	<group name="Not Equal" version="1.0">
+		<test name="SimpleNotEqTrueTrue" version="1.0">
 			<expression>true != true</expression>
 			<output>false</output>
 		</test>
-		<test name="SimpleNotEqTrueFalse">
+		<test name="SimpleNotEqTrueFalse" version="1.0">
 			<expression>true != false</expression>
 			<output>true</output>
 		</test>
-		<test name="SimpleNotEqFalseFalse">
+		<test name="SimpleNotEqFalseFalse" version="1.0">
 			<expression>false != false</expression>
 			<output>false</output>
 		</test>
-		<test name="SimpleNotEqFalseTrue">
+		<test name="SimpleNotEqFalseTrue" version="1.0">
 			<expression>false != true</expression>
 			<output>true</output>
 		</test>
-		<test name="SimpleNotEqNullNull">
+		<test name="SimpleNotEqNullNull" version="1.0">
 			<expression>null as String != null</expression>
 			<output>null</output>
 		</test>
-		<test name="SimpleNotEqTrueNull">
+		<test name="SimpleNotEqTrueNull" version="1.0">
 			<expression>true != null</expression>
 			<output>null</output>
 		</test>
-		<test name="SimpleNotEqNullTrue">
+		<test name="SimpleNotEqNullTrue" version="1.0">
 			<expression>null != true</expression>
 			<output>null</output>
 		</test>
-		<test name="SimpleNotEqInt1Int1">
+		<test name="SimpleNotEqInt1Int1" version="1.0">
 			<expression>1 != 1</expression>
 			<output>false</output>
 		</test>
-		<test name="SimpleNotEqInt1Int2">
+		<test name="SimpleNotEqInt1Int2" version="1.0">
 			<expression>1 != 2</expression>
 			<output>true</output>
 		</test>
-		<test name="SimpleNotEqStringAStringA">
+		<test name="SimpleNotEqStringAStringA" version="1.0">
 			<expression>'a' != 'a'</expression>
 			<output>false</output>
 		</test>
-		<test name="SimpleNotEqStringAStringB">
+		<test name="SimpleNotEqStringAStringB" version="1.0">
 			<expression>'a' != 'b'</expression>
 			<output>true</output>
 		</test>
-		<test name="SimpleNotEqFloat1Float1">
+		<test name="SimpleNotEqFloat1Float1" version="1.0">
 			<expression>1.0 != 1.0</expression>
 			<output>false</output>
 		</test>
-		<test name="SimpleNotEqFloat1Float2">
+		<test name="SimpleNotEqFloat1Float2" version="1.0">
 			<expression>1.0 != 2.0</expression>
 			<output>true</output>
 		</test>
-		<test name="SimpleNotEqFloat1Int1">
+		<test name="SimpleNotEqFloat1Int1" version="1.0">
 			<expression>1.0 != 1</expression>
 			<output>false</output>
 		</test>
-		<test name="SimpleNotEqFloat1Int2">
+		<test name="SimpleNotEqFloat1Int2" version="1.0">
 			<expression>1.0 != 2</expression>
 			<output>true</output>
 		</test>
-		<test name="QuantityNotEqCM1CM1">
+		<test name="QuantityNotEqCM1CM1" version="1.0">
 			<expression>1'cm' != 1'cm'</expression>
 			<output>false</output>
 		</test>
-		<test name="QuantityNotEqCM1M01">
+		<test name="QuantityNotEqCM1M01" version="1.0">
 			<expression>1'cm' != 0.01'm'</expression>
 			<output>false</output>
 		</test>
-		<test name="TupleNotEqJohnJohn">
+		<test name="TupleNotEqJohnJohn" version="1.5">
 			<expression>Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 1, Name : 'John' }</expression>
 			<output>false</output>
 		</test>
-		<test name="TupleNotEqJohnJane">
+		<test name="TupleNotEqJohnJane" version="1.5">
 			<expression>Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : 'Jane' }</expression>
 			<output>true</output>
 		</test>
-		<test name="TupleNotEqJohn1John2">
+		<test name="TupleNotEqJohn1John2" version="1.5">
 			<expression>Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : 'John' }</expression>
 			<output>true</output>
 		</test>
-		<test name="TupleNotEqJohn1John2WithNullName">
+		<test name="TupleNotEqJohn1John2WithNullName" version="1.5">
 			<expression>Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : null }</expression>
 			<output>true</output>
 		</test>
-		<test name="TupleNotEqDifferingNamesWithOneNullId">
+		<test name="TupleNotEqDifferingNamesWithOneNullId" version="1.5">
 			<expression>Tuple{ Id : null, Name : 'John' } != Tuple{ Id : 1, Name : 'Joe' }</expression>
 			<output>true</output>
 		</test>
-		<test name="TupleNotEqJohn1John1WithBothNamesNull">
+		<test name="TupleNotEqJohn1John1WithBothNamesNull" version="1.5">
 			<expression>Tuple{ Id : 1, Name : null } != Tuple{ Id : 1, Name : null }</expression>
 			<output>false</output>
 		</test>
-		<test name="TupleNotEqMatchingNamesWithNullIDs">
+		<test name="TupleNotEqMatchingNamesWithNullIDs" version="1.5">
 			<expression>Tuple{ Id : null, Name : 'John' } != Tuple{ Id : null, Name : 'John' }</expression>
 			<output>false</output>
 		</test>
-		<test name="TupleNotEqJohn1John1WithNullName">
+		<test name="TupleNotEqJohn1John1WithNullName" version="1.5">
 			<expression>Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 1, Name : null }</expression>
 			<output>null</output>
 		</test>
-		<test name="DateTimeNotEqTodayToday">
+		<test name="DateTimeNotEqTodayToday" version="1.0">
 			<expression>Today() != Today()</expression>
 			<output>false</output>
 		</test>
-		<test name="DateTimeNotEqTodayYesterday">
+		<test name="DateTimeNotEqTodayYesterday" version="1.0">
 			<expression>Today() != Today() - 1 days</expression>
 			<output>true</output>
 		</test>
-		<test name="TimeNotEq10A10A">
+		<test name="TimeNotEq10A10A" version="1.0">
 			<expression>@T10:00:00.000 != @T10:00:00.000</expression>
 			<output>false</output>
 		</test>
-		<test name="TimeNotEq10A10P">
+		<test name="TimeNotEq10A10P" version="1.0">
 			<expression>@T10:00:00.000 != @T22:00:00.000</expression>
 			<output>true</output>
 		</test>

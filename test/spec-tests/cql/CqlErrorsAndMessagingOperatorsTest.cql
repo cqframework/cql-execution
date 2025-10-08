@@ -2,7 +2,7 @@ library CqlErrorsAndMessagingOperatorsTest version '1.4.0'
 using QUICK version '3.3.0'
 context Patient
 
-define "Group1": Tuple{
+define "Messaging": Tuple{
   "TestMessageInfo": Tuple{
     expression: Message(1, true, '100', 'Message', 'Test Message'),
     output: 1

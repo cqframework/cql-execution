@@ -6511,6 +6511,90 @@
             "annotation": [],
             "element": [
               {
+                "name": "ExpandNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Expand",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            },
+                            "asTypeSpecifier": {
+                              "type": "IntervalTypeSpecifier",
+                              "annotation": [],
+                              "pointType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Any",
+                                "annotation": []
+                              }
+                            }
+                          },
+                          {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandEmptyList",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (should be empty list)",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandListWithNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (should be empty list due to removing nulls)",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "name": "ExpandPerDay",
                 "value": {
                   "type": "Tuple",
@@ -6811,6 +6895,24 @@
                 }
               },
               {
+                "name": "ExpandPerDayIntervalOverload",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (single interval overload should return list of points)",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "name": "ExpandPer2Days",
                 "value": {
                   "type": "Tuple",
@@ -7007,6 +7109,24 @@
                 }
               },
               {
+                "name": "ExpandPer2DaysIntervalOverload",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (single interval overload should return list of points)",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "name": "ExpandPerHour",
                 "value": {
                   "type": "Tuple",
@@ -7025,6 +7145,206 @@
                 }
               },
               {
+                "name": "ExpandPerHourIntervalOverload",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (single interval overload should return list of points)",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandPerHourOpen",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Expand",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "List",
+                            "annotation": [],
+                            "element": [
+                              {
+                                "type": "Interval",
+                                "lowClosed": true,
+                                "highClosed": false,
+                                "annotation": [],
+                                "low": {
+                                  "type": "Time",
+                                  "annotation": [],
+                                  "signature": [],
+                                  "hour": {
+                                    "type": "Literal",
+                                    "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value": "10",
+                                    "annotation": []
+                                  },
+                                  "minute": {
+                                    "type": "Literal",
+                                    "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value": "0",
+                                    "annotation": []
+                                  }
+                                },
+                                "high": {
+                                  "type": "Time",
+                                  "annotation": [],
+                                  "signature": [],
+                                  "hour": {
+                                    "type": "Literal",
+                                    "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value": "12",
+                                    "annotation": []
+                                  },
+                                  "minute": {
+                                    "type": "Literal",
+                                    "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value": "30",
+                                    "annotation": []
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Quantity",
+                            "value": 1,
+                            "unit": "hour",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "List",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "10",
+                                "annotation": []
+                              }
+                            },
+                            "high": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "10",
+                                "annotation": []
+                              }
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "11",
+                                "annotation": []
+                              }
+                            },
+                            "high": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "11",
+                                "annotation": []
+                              }
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "12",
+                                "annotation": []
+                              }
+                            },
+                            "high": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "12",
+                                "annotation": []
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandPerHourOpenIntervalOverload",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (single interval overload should return list of points)",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "name": "ExpandPer1",
                 "value": {
                   "type": "Tuple",
@@ -7036,6 +7356,154 @@
                         "type": "Literal",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
                         "value": "Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Decimal>>,System.Integer).",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandPer1IntervalOverload",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (single interval overload should return list of points)",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandPer1Open",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Expand",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "List",
+                            "annotation": [],
+                            "element": [
+                              {
+                                "type": "Interval",
+                                "lowClosed": true,
+                                "highClosed": false,
+                                "annotation": [],
+                                "low": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                                  "value": "10.0",
+                                  "annotation": []
+                                },
+                                "high": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                                  "value": "12.5",
+                                  "annotation": []
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Quantity",
+                            "value": 1,
+                            "unit": "1",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "List",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "10",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "10",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "11",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "11",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "12",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "12",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandPer1OpenIntervalOverload",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (single interval overload should return list of points)",
                         "annotation": []
                       }
                     }
@@ -7110,6 +7578,67 @@
                 }
               },
               {
+                "name": "ExpandPerMinuteIntervalOverload",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Expand",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "10",
+                                "annotation": []
+                              }
+                            },
+                            "high": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "10",
+                                "annotation": []
+                              }
+                            }
+                          },
+                          {
+                            "type": "Quantity",
+                            "value": 1,
+                            "unit": "minute",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "List",
+                        "annotation": [],
+                        "element": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "name": "ExpandPer0D1",
                 "value": {
                   "type": "Tuple",
@@ -7121,6 +7650,24 @@
                         "type": "Literal",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
                         "value": "Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Integer>>,System.Decimal).",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandPer0D1IntervalOverload",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (single interval overload should return list of points)",
                         "annotation": []
                       }
                     }
@@ -7364,6 +7911,260 @@
                 }
               },
               {
+                "name": "ExpandIntegerIntervalOverload",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (single interval overload should return list of points)",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandIntervalOpen",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Expand",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "List",
+                            "annotation": [],
+                            "element": [
+                              {
+                                "type": "Interval",
+                                "lowClosed": true,
+                                "highClosed": false,
+                                "annotation": [],
+                                "low": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "1",
+                                  "annotation": []
+                                },
+                                "high": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "10",
+                                  "annotation": []
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "List",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "1",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "1",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "3",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "3",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "4",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "4",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "5",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "5",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "6",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "6",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "7",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "7",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "8",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "8",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "9",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "9",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandIntegerOpenIntervalOverload",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (single interval overload should return list of points)",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "name": "ExpandIntervalPer2",
                 "value": {
                   "type": "Tuple",
@@ -7506,6 +8307,172 @@
                             }
                           }
                         ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandIntervalPer2IntervalOverload",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (single interval overload should return list of points)",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandIntervalOpenPer2",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Expand",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "List",
+                            "annotation": [],
+                            "element": [
+                              {
+                                "type": "Interval",
+                                "lowClosed": true,
+                                "highClosed": false,
+                                "annotation": [],
+                                "low": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "1",
+                                  "annotation": []
+                                },
+                                "high": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "10",
+                                  "annotation": []
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Quantity",
+                            "value": 2,
+                            "unit": "1",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "List",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "1",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "3",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "4",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "5",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "6",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "7",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "8",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ExpandIntervalOpenPer2IntervalOverload",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (single interval overload should return list of points)",
+                        "annotation": []
                       }
                     }
                   ]
