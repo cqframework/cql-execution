@@ -24,11 +24,9 @@ define "Add": Tuple{
     output: true
   },
   "DateTimeAddYearInWeeks": Tuple{
-    skipped: 'Wrong output: 2018-05-23 + 52 weeks should be 2019-05-22 (both dates should be Wednesdays)'
-    /*
     expression: DateTime(2018, 5, 23) + 52 weeks = DateTime(2019, 5, 22),
     output: true
-    */  },
+  },
   "DateTimeLeapDayAddYearInWeeks": Tuple{
     expression: DateTime(2023, 3, 2) + 52 weeks = DateTime(2024, 2, 29),
     output: true
@@ -1187,11 +1185,9 @@ define "Subtract": Tuple{
     output: true
   },
   "DateTimeSubtractYearInWeeks": Tuple{
-    skipped: 'Wrong output: 2018-05-23 - 52 weeks should be 2019-05-24 (both dates should be Wednesdays)'
-    /*
     expression: DateTime(2018, 5, 23) - 52 weeks = DateTime(2017, 5, 24),
     output: true
-    */  },
+  },
   "DateTimeLeapDaySubtractYearInWeeks": Tuple{
     expression: DateTime(2024, 2, 29) - 52 weeks = DateTime(2023, 3, 2),
     output: true
