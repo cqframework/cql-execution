@@ -24,6 +24,17 @@
     <ns4:typeInfo xsi:type="ns4:ClassInfo" name="Condition" baseType="Simple.Record" retrievable="true" primaryCodePath="code">
         <ns4:element name="code" elementType="System.Code"/>
         <ns4:element name="status" elementType="System.Code"/>
+        <ns4:element name="encounterId" elementType="System.String"/>
+        <ns4:element name="period">
+            <ns4:elementTypeSpecifier xsi:type="ns4:IntervalTypeSpecifier">
+                <ns4:pointTypeSpecifier xsi:type="ns4:NamedTypeSpecifier" modelName="System" name="DateTime"/>
+            </ns4:elementTypeSpecifier>
+        </ns4:element>
+    </ns4:typeInfo>
+    <ns4:typeInfo xsi:type="ns4:ClassInfo" name="Medication" baseType="Simple.Record" retrievable="true" primaryCodePath="code">
+        <ns4:element name="code" elementType="System.Code"/>
+        <ns4:element name="status" elementType="System.Code"/>
+        <ns4:element name="encounterId" elementType="System.String"/>
         <ns4:element name="period">
             <ns4:elementTypeSpecifier xsi:type="ns4:IntervalTypeSpecifier">
                 <ns4:pointTypeSpecifier xsi:type="ns4:NamedTypeSpecifier" modelName="System" name="DateTime"/>
