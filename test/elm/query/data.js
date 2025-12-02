@@ -2957,16 +2957,22 @@ library TestSnippet version '1'
 using Simple version '1.0.0'
 context Patient
 define withQuery:  [Encounter] E
-with [Condition] C such that C.id = 'http://cqframework.org/3/2'
+with [Condition] C such that C.encounterId = E.id
 
 define withQuery2:  [Encounter] E
-with [Condition] C such that C.id = 'http://cqframework.org/3'
+with [Condition] C such that C.encounterId = E.id and exists(C.status)
+
+define withQueryEmptySecondarySource:  [Encounter] E
+with [Medication] M such that M.encounterId = E.id
 
 define withOutQuery:  [Encounter] E
-without [Condition] C such that C.id = 'http://cqframework.org/3/'
+without [Condition] C such that C.encounterId = E.id and exists(C.status)
 
 define withOutQuery2:  [Encounter] E
-without [Condition] C such that C.id = 'http://cqframework.org/3/2'
+without [Condition] C such that C.encounterId = E.id
+
+define withOutQueryEmptySecondarySource:  [Encounter] E
+without [Medication] M such that M.encounterId = E.id
 */
 
 module.exports['QueryRelationship'] = {
@@ -2980,7 +2986,7 @@ module.exports['QueryRelationship'] = {
       }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "319",
+            "r" : "407",
             "s" : [ {
                "value" : [ "","library TestSnippet version '1'" ]
             } ]
@@ -3109,15 +3115,25 @@ module.exports['QueryRelationship'] = {
                               }, {
                                  "r" : "234",
                                  "s" : [ {
-                                    "value" : [ "id" ]
+                                    "value" : [ "encounterId" ]
                                  } ]
                               } ]
                            }, {
                               "value" : [ " ","="," " ]
                            }, {
-                              "r" : "235",
+                              "r" : "236",
                               "s" : [ {
-                                 "value" : [ "'http://cqframework.org/3/2'" ]
+                                 "r" : "235",
+                                 "s" : [ {
+                                    "value" : [ "E" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "236",
+                                 "s" : [ {
+                                    "value" : [ "id" ]
+                                 } ]
                               } ]
                            } ]
                         } ]
@@ -3225,15 +3241,15 @@ module.exports['QueryRelationship'] = {
                      "operand" : [ {
                         "localId" : "234",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "path" : "id",
+                        "path" : "encounterId",
                         "scope" : "C",
                         "type" : "Property"
                      }, {
-                        "localId" : "235",
+                        "localId" : "236",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "http://cqframework.org/3/2",
-                        "type" : "Literal"
+                        "path" : "id",
+                        "scope" : "E",
+                        "type" : "Property"
                      } ]
                   }
                } ]
@@ -3250,7 +3266,7 @@ module.exports['QueryRelationship'] = {
                   "s" : [ {
                      "value" : [ "","define ","withQuery2",":  " ]
                   }, {
-                     "r" : "277",
+                     "r" : "286",
                      "s" : [ {
                         "s" : [ {
                            "r" : "250",
@@ -3269,7 +3285,7 @@ module.exports['QueryRelationship'] = {
                      }, {
                         "value" : [ "\n" ]
                      }, {
-                        "r" : "274",
+                        "r" : "283",
                         "s" : [ {
                            "value" : [ "with " ]
                         }, {
@@ -3290,26 +3306,68 @@ module.exports['QueryRelationship'] = {
                         }, {
                            "r" : "267",
                            "s" : [ {
-                              "r" : "269",
+                              "r" : "268",
                               "s" : [ {
-                                 "r" : "268",
+                                 "r" : "270",
                                  "s" : [ {
-                                    "value" : [ "C" ]
+                                    "r" : "269",
+                                    "s" : [ {
+                                       "value" : [ "C" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "270",
+                                    "s" : [ {
+                                       "value" : [ "encounterId" ]
+                                    } ]
                                  } ]
                               }, {
-                                 "value" : [ "." ]
+                                 "value" : [ " ","="," " ]
                               }, {
-                                 "r" : "269",
+                                 "r" : "272",
                                  "s" : [ {
-                                    "value" : [ "id" ]
+                                    "r" : "271",
+                                    "s" : [ {
+                                       "value" : [ "E" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "272",
+                                    "s" : [ {
+                                       "value" : [ "id" ]
+                                    } ]
                                  } ]
                               } ]
                            }, {
-                              "value" : [ " ","="," " ]
+                              "value" : [ " and " ]
                            }, {
-                              "r" : "270",
+                              "r" : "275",
                               "s" : [ {
-                                 "value" : [ "'http://cqframework.org/3'" ]
+                                 "value" : [ "exists" ]
+                              }, {
+                                 "r" : "277",
+                                 "s" : [ {
+                                    "value" : [ "(" ]
+                                 }, {
+                                    "r" : "277",
+                                    "s" : [ {
+                                       "r" : "276",
+                                       "s" : [ {
+                                          "value" : [ "C" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "277",
+                                       "s" : [ {
+                                          "value" : [ "status" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ")" ]
+                                 } ]
                               } ]
                            } ]
                         } ]
@@ -3318,22 +3376,22 @@ module.exports['QueryRelationship'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "280",
+               "localId" : "289",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "281",
+                  "localId" : "290",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "277",
+               "localId" : "286",
                "type" : "Query",
                "resultTypeSpecifier" : {
-                  "localId" : "278",
+                  "localId" : "287",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "279",
+                     "localId" : "288",
                      "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "NamedTypeSpecifier"
                   }
@@ -3371,14 +3429,14 @@ module.exports['QueryRelationship'] = {
                } ],
                "let" : [ ],
                "relationship" : [ {
-                  "localId" : "274",
+                  "localId" : "283",
                   "alias" : "C",
                   "type" : "With",
                   "resultTypeSpecifier" : {
-                     "localId" : "275",
+                     "localId" : "284",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "276",
+                        "localId" : "285",
                         "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                         "type" : "NamedTypeSpecifier"
                      }
@@ -3404,104 +3462,153 @@ module.exports['QueryRelationship'] = {
                   "suchThat" : {
                      "localId" : "267",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "Equal",
+                     "type" : "And",
                      "signature" : [ {
-                        "localId" : "272",
-                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "localId" : "281",
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "NamedTypeSpecifier"
                      }, {
-                        "localId" : "273",
-                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "localId" : "282",
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "localId" : "269",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "path" : "id",
-                        "scope" : "C",
-                        "type" : "Property"
+                        "localId" : "268",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Equal",
+                        "signature" : [ {
+                           "localId" : "273",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "274",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : [ {
+                           "localId" : "270",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "path" : "encounterId",
+                           "scope" : "C",
+                           "type" : "Property"
+                        }, {
+                           "localId" : "272",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "path" : "id",
+                           "scope" : "E",
+                           "type" : "Property"
+                        } ]
                      }, {
-                        "localId" : "270",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "http://cqframework.org/3",
-                        "type" : "Literal"
+                        "localId" : "275",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Exists",
+                        "signature" : [ {
+                           "localId" : "279",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "280",
+                              "name" : "{urn:hl7-org:elm-types:r1}Code",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
+                        "operand" : {
+                           "localId" : "278",
+                           "type" : "ToList",
+                           "signature" : [ ],
+                           "operand" : {
+                              "localId" : "277",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                              "path" : "status",
+                              "scope" : "C",
+                              "type" : "Property"
+                           }
+                        }
                      } ]
                   }
                } ]
             }
          }, {
-            "localId" : "284",
-            "name" : "withOutQuery",
+            "localId" : "293",
+            "name" : "withQueryEmptySecondarySource",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "284",
+                  "r" : "293",
                   "s" : [ {
-                     "value" : [ "","define ","withOutQuery",":  " ]
+                     "value" : [ "","define ","withQueryEmptySecondarySource",":  " ]
                   }, {
-                     "r" : "312",
+                     "r" : "321",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "285",
-                           "s" : [ {
-                              "r" : "286",
-                              "s" : [ {
-                                 "r" : "286",
-                                 "s" : [ {
-                                    "value" : [ "[","Encounter","]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","E" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n" ]
-                     }, {
-                        "r" : "309",
-                        "s" : [ {
-                           "value" : [ "without " ]
-                        }, {
                            "r" : "294",
                            "s" : [ {
                               "r" : "295",
                               "s" : [ {
                                  "r" : "295",
                                  "s" : [ {
-                                    "value" : [ "[","Condition","]" ]
+                                    "value" : [ "[","Encounter","]" ]
                                  } ]
                               } ]
                            }, {
-                              "value" : [ " ","C" ]
+                              "value" : [ " ","E" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n" ]
+                     }, {
+                        "r" : "318",
+                        "s" : [ {
+                           "value" : [ "with " ]
+                        }, {
+                           "r" : "303",
+                           "s" : [ {
+                              "r" : "304",
+                              "s" : [ {
+                                 "r" : "304",
+                                 "s" : [ {
+                                    "value" : [ "[","Medication","]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","M" ]
                            } ]
                         }, {
                            "value" : [ " such that " ]
                         }, {
-                           "r" : "302",
+                           "r" : "311",
                            "s" : [ {
-                              "r" : "304",
+                              "r" : "313",
                               "s" : [ {
-                                 "r" : "303",
+                                 "r" : "312",
                                  "s" : [ {
-                                    "value" : [ "C" ]
+                                    "value" : [ "M" ]
                                  } ]
                               }, {
                                  "value" : [ "." ]
                               }, {
-                                 "r" : "304",
+                                 "r" : "313",
                                  "s" : [ {
-                                    "value" : [ "id" ]
+                                    "value" : [ "encounterId" ]
                                  } ]
                               } ]
                            }, {
                               "value" : [ " ","="," " ]
                            }, {
-                              "r" : "305",
+                              "r" : "315",
                               "s" : [ {
-                                 "value" : [ "'http://cqframework.org/3/'" ]
+                                 "r" : "314",
+                                 "s" : [ {
+                                    "value" : [ "E" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "315",
+                                 "s" : [ {
+                                    "value" : [ "id" ]
+                                 } ]
                               } ]
                            } ]
                         } ]
@@ -3510,47 +3617,47 @@ module.exports['QueryRelationship'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "315",
+               "localId" : "324",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "316",
+                  "localId" : "325",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "312",
+               "localId" : "321",
                "type" : "Query",
                "resultTypeSpecifier" : {
-                  "localId" : "313",
+                  "localId" : "322",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "314",
+                     "localId" : "323",
                      "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "source" : [ {
-                  "localId" : "285",
+                  "localId" : "294",
                   "alias" : "E",
                   "resultTypeSpecifier" : {
-                     "localId" : "291",
+                     "localId" : "300",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "292",
+                        "localId" : "301",
                         "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "expression" : {
-                     "localId" : "286",
+                     "localId" : "295",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
                      "resultTypeSpecifier" : {
-                        "localId" : "289",
+                        "localId" : "298",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "290",
+                           "localId" : "299",
                            "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -3563,28 +3670,28 @@ module.exports['QueryRelationship'] = {
                } ],
                "let" : [ ],
                "relationship" : [ {
-                  "localId" : "309",
-                  "alias" : "C",
-                  "type" : "Without",
+                  "localId" : "318",
+                  "alias" : "M",
+                  "type" : "With",
                   "resultTypeSpecifier" : {
-                     "localId" : "310",
+                     "localId" : "319",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "311",
-                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "localId" : "320",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Medication",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "expression" : {
-                     "localId" : "295",
-                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                     "localId" : "304",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Medication",
                      "type" : "Retrieve",
                      "resultTypeSpecifier" : {
-                        "localId" : "298",
+                        "localId" : "307",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "299",
-                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "localId" : "308",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Medication",
                            "type" : "NamedTypeSpecifier"
                         }
                      },
@@ -3594,54 +3701,54 @@ module.exports['QueryRelationship'] = {
                      "otherFilter" : [ ]
                   },
                   "suchThat" : {
-                     "localId" : "302",
+                     "localId" : "311",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
                      "signature" : [ {
-                        "localId" : "307",
+                        "localId" : "316",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }, {
-                        "localId" : "308",
+                        "localId" : "317",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "localId" : "304",
+                        "localId" : "313",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "path" : "id",
-                        "scope" : "C",
+                        "path" : "encounterId",
+                        "scope" : "M",
                         "type" : "Property"
                      }, {
-                        "localId" : "305",
+                        "localId" : "315",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "http://cqframework.org/3/",
-                        "type" : "Literal"
+                        "path" : "id",
+                        "scope" : "E",
+                        "type" : "Property"
                      } ]
                   }
                } ]
             }
          }, {
-            "localId" : "319",
-            "name" : "withOutQuery2",
+            "localId" : "328",
+            "name" : "withOutQuery",
             "context" : "Patient",
             "accessLevel" : "Public",
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "319",
+                  "r" : "328",
                   "s" : [ {
-                     "value" : [ "","define ","withOutQuery2",":  " ]
+                     "value" : [ "","define ","withOutQuery",":  " ]
                   }, {
-                     "r" : "347",
+                     "r" : "365",
                      "s" : [ {
                         "s" : [ {
-                           "r" : "320",
+                           "r" : "329",
                            "s" : [ {
-                              "r" : "321",
+                              "r" : "330",
                               "s" : [ {
-                                 "r" : "321",
+                                 "r" : "330",
                                  "s" : [ {
                                     "value" : [ "[","Encounter","]" ]
                                  } ]
@@ -3653,15 +3760,15 @@ module.exports['QueryRelationship'] = {
                      }, {
                         "value" : [ "\n" ]
                      }, {
-                        "r" : "344",
+                        "r" : "362",
                         "s" : [ {
                            "value" : [ "without " ]
                         }, {
-                           "r" : "329",
+                           "r" : "338",
                            "s" : [ {
-                              "r" : "330",
+                              "r" : "339",
                               "s" : [ {
-                                 "r" : "330",
+                                 "r" : "339",
                                  "s" : [ {
                                     "value" : [ "[","Condition","]" ]
                                  } ]
@@ -3672,28 +3779,70 @@ module.exports['QueryRelationship'] = {
                         }, {
                            "value" : [ " such that " ]
                         }, {
-                           "r" : "337",
+                           "r" : "346",
                            "s" : [ {
-                              "r" : "339",
+                              "r" : "347",
                               "s" : [ {
-                                 "r" : "338",
+                                 "r" : "349",
                                  "s" : [ {
-                                    "value" : [ "C" ]
+                                    "r" : "348",
+                                    "s" : [ {
+                                       "value" : [ "C" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "349",
+                                    "s" : [ {
+                                       "value" : [ "encounterId" ]
+                                    } ]
                                  } ]
                               }, {
-                                 "value" : [ "." ]
+                                 "value" : [ " ","="," " ]
                               }, {
-                                 "r" : "339",
+                                 "r" : "351",
                                  "s" : [ {
-                                    "value" : [ "id" ]
+                                    "r" : "350",
+                                    "s" : [ {
+                                       "value" : [ "E" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "351",
+                                    "s" : [ {
+                                       "value" : [ "id" ]
+                                    } ]
                                  } ]
                               } ]
                            }, {
-                              "value" : [ " ","="," " ]
+                              "value" : [ " and " ]
                            }, {
-                              "r" : "340",
+                              "r" : "354",
                               "s" : [ {
-                                 "value" : [ "'http://cqframework.org/3/2'" ]
+                                 "value" : [ "exists" ]
+                              }, {
+                                 "r" : "356",
+                                 "s" : [ {
+                                    "value" : [ "(" ]
+                                 }, {
+                                    "r" : "356",
+                                    "s" : [ {
+                                       "r" : "355",
+                                       "s" : [ {
+                                          "value" : [ "C" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "356",
+                                       "s" : [ {
+                                          "value" : [ "status" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ")" ]
+                                 } ]
                               } ]
                            } ]
                         } ]
@@ -3702,47 +3851,47 @@ module.exports['QueryRelationship'] = {
                }
             } ],
             "resultTypeSpecifier" : {
-               "localId" : "350",
+               "localId" : "368",
                "type" : "ListTypeSpecifier",
                "elementType" : {
-                  "localId" : "351",
+                  "localId" : "369",
                   "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                   "type" : "NamedTypeSpecifier"
                }
             },
             "expression" : {
-               "localId" : "347",
+               "localId" : "365",
                "type" : "Query",
                "resultTypeSpecifier" : {
-                  "localId" : "348",
+                  "localId" : "366",
                   "type" : "ListTypeSpecifier",
                   "elementType" : {
-                     "localId" : "349",
+                     "localId" : "367",
                      "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "NamedTypeSpecifier"
                   }
                },
                "source" : [ {
-                  "localId" : "320",
+                  "localId" : "329",
                   "alias" : "E",
                   "resultTypeSpecifier" : {
-                     "localId" : "326",
+                     "localId" : "335",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "327",
+                        "localId" : "336",
                         "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "expression" : {
-                     "localId" : "321",
+                     "localId" : "330",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                      "type" : "Retrieve",
                      "resultTypeSpecifier" : {
-                        "localId" : "324",
+                        "localId" : "333",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "325",
+                           "localId" : "334",
                            "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -3755,27 +3904,27 @@ module.exports['QueryRelationship'] = {
                } ],
                "let" : [ ],
                "relationship" : [ {
-                  "localId" : "344",
+                  "localId" : "362",
                   "alias" : "C",
                   "type" : "Without",
                   "resultTypeSpecifier" : {
-                     "localId" : "345",
+                     "localId" : "363",
                      "type" : "ListTypeSpecifier",
                      "elementType" : {
-                        "localId" : "346",
+                        "localId" : "364",
                         "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                         "type" : "NamedTypeSpecifier"
                      }
                   },
                   "expression" : {
-                     "localId" : "330",
+                     "localId" : "339",
                      "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                      "type" : "Retrieve",
                      "resultTypeSpecifier" : {
-                        "localId" : "333",
+                        "localId" : "342",
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
-                           "localId" : "334",
+                           "localId" : "343",
                            "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
                            "type" : "NamedTypeSpecifier"
                         }
@@ -3786,30 +3935,473 @@ module.exports['QueryRelationship'] = {
                      "otherFilter" : [ ]
                   },
                   "suchThat" : {
-                     "localId" : "337",
+                     "localId" : "346",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "And",
+                     "signature" : [ {
+                        "localId" : "360",
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "361",
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "localId" : "347",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Equal",
+                        "signature" : [ {
+                           "localId" : "352",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "localId" : "353",
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : [ {
+                           "localId" : "349",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "path" : "encounterId",
+                           "scope" : "C",
+                           "type" : "Property"
+                        }, {
+                           "localId" : "351",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "path" : "id",
+                           "scope" : "E",
+                           "type" : "Property"
+                        } ]
+                     }, {
+                        "localId" : "354",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Exists",
+                        "signature" : [ {
+                           "localId" : "358",
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "localId" : "359",
+                              "name" : "{urn:hl7-org:elm-types:r1}Code",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
+                        "operand" : {
+                           "localId" : "357",
+                           "type" : "ToList",
+                           "signature" : [ ],
+                           "operand" : {
+                              "localId" : "356",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                              "path" : "status",
+                              "scope" : "C",
+                              "type" : "Property"
+                           }
+                        }
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "372",
+            "name" : "withOutQuery2",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "372",
+                  "s" : [ {
+                     "value" : [ "","define ","withOutQuery2",":  " ]
+                  }, {
+                     "r" : "400",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "373",
+                           "s" : [ {
+                              "r" : "374",
+                              "s" : [ {
+                                 "r" : "374",
+                                 "s" : [ {
+                                    "value" : [ "[","Encounter","]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","E" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n" ]
+                     }, {
+                        "r" : "397",
+                        "s" : [ {
+                           "value" : [ "without " ]
+                        }, {
+                           "r" : "382",
+                           "s" : [ {
+                              "r" : "383",
+                              "s" : [ {
+                                 "r" : "383",
+                                 "s" : [ {
+                                    "value" : [ "[","Condition","]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","C" ]
+                           } ]
+                        }, {
+                           "value" : [ " such that " ]
+                        }, {
+                           "r" : "390",
+                           "s" : [ {
+                              "r" : "392",
+                              "s" : [ {
+                                 "r" : "391",
+                                 "s" : [ {
+                                    "value" : [ "C" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "392",
+                                 "s" : [ {
+                                    "value" : [ "encounterId" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","="," " ]
+                           }, {
+                              "r" : "394",
+                              "s" : [ {
+                                 "r" : "393",
+                                 "s" : [ {
+                                    "value" : [ "E" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "394",
+                                 "s" : [ {
+                                    "value" : [ "id" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "403",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "404",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "400",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "401",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "402",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "373",
+                  "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "379",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "380",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "374",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "377",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "378",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ {
+                  "localId" : "397",
+                  "alias" : "C",
+                  "type" : "Without",
+                  "resultTypeSpecifier" : {
+                     "localId" : "398",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "399",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "383",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                     "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "386",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "387",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
+                  },
+                  "suchThat" : {
+                     "localId" : "390",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
                      "signature" : [ {
-                        "localId" : "342",
+                        "localId" : "395",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      }, {
-                        "localId" : "343",
+                        "localId" : "396",
                         "name" : "{urn:hl7-org:elm-types:r1}String",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "localId" : "339",
+                        "localId" : "392",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "path" : "id",
+                        "path" : "encounterId",
                         "scope" : "C",
                         "type" : "Property"
                      }, {
-                        "localId" : "340",
+                        "localId" : "394",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                        "value" : "http://cqframework.org/3/2",
-                        "type" : "Literal"
+                        "path" : "id",
+                        "scope" : "E",
+                        "type" : "Property"
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "407",
+            "name" : "withOutQueryEmptySecondarySource",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "407",
+                  "s" : [ {
+                     "value" : [ "","define ","withOutQueryEmptySecondarySource",":  " ]
+                  }, {
+                     "r" : "435",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "408",
+                           "s" : [ {
+                              "r" : "409",
+                              "s" : [ {
+                                 "r" : "409",
+                                 "s" : [ {
+                                    "value" : [ "[","Encounter","]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","E" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n" ]
+                     }, {
+                        "r" : "432",
+                        "s" : [ {
+                           "value" : [ "without " ]
+                        }, {
+                           "r" : "417",
+                           "s" : [ {
+                              "r" : "418",
+                              "s" : [ {
+                                 "r" : "418",
+                                 "s" : [ {
+                                    "value" : [ "[","Medication","]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","M" ]
+                           } ]
+                        }, {
+                           "value" : [ " such that " ]
+                        }, {
+                           "r" : "425",
+                           "s" : [ {
+                              "r" : "427",
+                              "s" : [ {
+                                 "r" : "426",
+                                 "s" : [ {
+                                    "value" : [ "M" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "427",
+                                 "s" : [ {
+                                    "value" : [ "encounterId" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","="," " ]
+                           }, {
+                              "r" : "429",
+                              "s" : [ {
+                                 "r" : "428",
+                                 "s" : [ {
+                                    "value" : [ "E" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "429",
+                                 "s" : [ {
+                                    "value" : [ "id" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "localId" : "438",
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "localId" : "439",
+                  "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "435",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "localId" : "436",
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "localId" : "437",
+                     "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "408",
+                  "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "localId" : "414",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "415",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "409",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                     "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "412",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "413",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
+                  }
+               } ],
+               "let" : [ ],
+               "relationship" : [ {
+                  "localId" : "432",
+                  "alias" : "M",
+                  "type" : "Without",
+                  "resultTypeSpecifier" : {
+                     "localId" : "433",
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "localId" : "434",
+                        "name" : "{https://github.com/cqframework/cql-execution/simple}Medication",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "418",
+                     "dataType" : "{https://github.com/cqframework/cql-execution/simple}Medication",
+                     "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "localId" : "421",
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "localId" : "422",
+                           "name" : "{https://github.com/cqframework/cql-execution/simple}Medication",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "include" : [ ],
+                     "codeFilter" : [ ],
+                     "dateFilter" : [ ],
+                     "otherFilter" : [ ]
+                  },
+                  "suchThat" : {
+                     "localId" : "425",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Equal",
+                     "signature" : [ {
+                        "localId" : "430",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "localId" : "431",
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "localId" : "427",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "path" : "encounterId",
+                        "scope" : "M",
+                        "type" : "Property"
+                     }, {
+                        "localId" : "429",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "path" : "id",
+                        "scope" : "E",
+                        "type" : "Property"
                      } ]
                   }
                } ]

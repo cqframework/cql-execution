@@ -37,6 +37,7 @@ const p1 = {
         version: '2013-09',
         display: 'Viral pharyngitis (disorder)'
       },
+      encounterId: 'http://cqframework.org/3/3',
       period: { low: '1982-03-12', high: '1982-03-26' }
     },
     {

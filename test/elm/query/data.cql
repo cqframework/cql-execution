@@ -30,16 +30,22 @@ define multiSourceWithArrays:
 
 // @Test: QueryRelationship
 define withQuery:  [Encounter] E
-with [Condition] C such that C.id = 'http://cqframework.org/3/2'
+with [Condition] C such that C.encounterId = E.id
 
 define withQuery2:  [Encounter] E
-with [Condition] C such that C.id = 'http://cqframework.org/3'
+with [Condition] C such that C.encounterId = E.id and exists(C.status)
+
+define withQueryEmptySecondarySource:  [Encounter] E
+with [Medication] M such that M.encounterId = E.id
 
 define withOutQuery:  [Encounter] E
-without [Condition] C such that C.id = 'http://cqframework.org/3/'
+without [Condition] C such that C.encounterId = E.id and exists(C.status)
 
 define withOutQuery2:  [Encounter] E
-without [Condition] C such that C.id = 'http://cqframework.org/3/2'
+without [Condition] C such that C.encounterId = E.id
+
+define withOutQueryEmptySecondarySource:  [Encounter] E
+without [Medication] M such that M.encounterId = E.id
 
 // @Test: QueryLet
 define query:  [Encounter] E

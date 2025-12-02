@@ -115,24 +115,39 @@ describe('QueryRelationship', async function () {
     setup(this, data, [p1]);
   });
 
-  it('should be able to filter items with a with clause', async function () {
+  it('should return items that satisfy the relationship in the with clause', async function () {
     const e = await this.withQuery.exec(this.ctx);
-    e.should.have.length(3);
+    e.should.have.length(1);
+    e[0]['id'].should.equal('http://cqframework.org/3/3');
   });
 
-  it('with clause should filter out items not available', async function () {
+  it('should not return any items when the relationship in the with cause is not satisfied', async function () {
     const e = await this.withQuery2.exec(this.ctx);
     e.should.have.length(0);
   });
 
-  it('should be able to filter items with a without clause', async function () {
+  it('should not return any items when the secondary source is empty', async function () {
+    const e = await this.withQueryEmptySecondarySource.exec(this.ctx);
+    e.should.have.length(0);
+  });
+
+  it('should return items that do not satisfy the relationship in the without clause', async function () {
     const e = await this.withOutQuery.exec(this.ctx);
     e.should.have.length(3);
   });
 
-  it('without clause should be able to filter items with a without clause', async function () {
+  it('should not return items that satisfy the relationship in the without clause', async function () {
     const e = await this.withOutQuery2.exec(this.ctx);
-    e.should.have.length(0);
+    e.should.have.length(2);
+    e.map((enc: any) => enc.id).should.eql([
+      'http://cqframework.org/3/1',
+      'http://cqframework.org/3/5'
+    ]);
+  });
+
+  it('should return all items when the secondary source is empty', async function () {
+    const e = await this.withOutQueryEmptySecondarySource.exec(this.ctx);
+    e.should.have.length(3);
   });
 });
 
