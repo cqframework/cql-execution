@@ -437,7 +437,7 @@ describe('ToRatio', () => {
   it('should be valid given quantities with custom UCUM units', async function () {
     const ratio = await this.isValidWithCustomUCUM.exec(this.ctx);
     ratio.numerator.value.should.eql(1.0);
-    ratio.numerator.unit.should.eql('{foo:bar }');
+    ratio.numerator.unit.should.eql('{foo:bar}');
     ratio.denominator.value.should.eql(2.0);
     ratio.denominator.unit.should.eql('mg');
   });

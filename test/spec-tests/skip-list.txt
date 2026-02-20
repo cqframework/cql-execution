@@ -8,6 +8,9 @@ CqlDateTimeOperatorsTest.DateTimeComponentFrom.DateTimeComponentFromTimezone    
 CqlIntervalOperatorsTest.Expand.ExpandPer1          Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Decimal>>,System.Integer).
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1        Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Integer>>,System.Decimal).
 
+# Invalid CQL (translates, but invalid for another reason)
+CqlTypesTest.Quantity.QuantityTest2     Invalid UCUM unit: According to UCUM spec, custom units only support ASCII characters 33-126, which does not include the space character
+
 # Invalid Translation (translates, but translates wrong)
 CqlAggregateTest.AggregateTests.RolledOutIntervals  CQL adds an integer to a date ("S + duration in days of X"). Should be "S + Quantity{ value: duration in days of X, unit: 'days' }". Translator translates it, but probably shouldn't.
 CqlListOperatorsTest.IncludedIn.IncludedInNullRight Converts included in to in, which has different semantics when second argument is null

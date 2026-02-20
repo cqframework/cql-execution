@@ -4470,7 +4470,7 @@ using Simple version '1.0.0'
 context Patient
 define NullArg: ToRatio((null as String))
 define IsValid: ToRatio('1.0 \'mg\':2.0 \'mg\'')
-define IsValidWithCustomUCUM: ToRatio('1.0 \'{foo:bar }\':2.0 \'mg\'')
+define IsValidWithCustomUCUM: ToRatio('1.0 \'{foo:bar}\':2.0 \'mg\'')
 define InvalidSeparator: ToRatio('1.0 \'mg\';2.0 \'mg\'')
 define InvalidNumerator: ToRatio('1.0 \'cc\':2.0 \'mg\'')
 define InvalidDenominator: ToRatio('1.0 \'mg\':2.0 \'cc\'')
@@ -4684,7 +4684,7 @@ module.exports['ToRatio'] = {
                      }, {
                         "r" : "236",
                         "s" : [ {
-                           "value" : [ "'1.0 \\'{foo:bar }\\':2.0 \\'mg\\''" ]
+                           "value" : [ "'1.0 \\'{foo:bar}\\':2.0 \\'mg\\''" ]
                         } ]
                      }, {
                         "value" : [ ")" ]
@@ -4705,7 +4705,7 @@ module.exports['ToRatio'] = {
                   "localId" : "236",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                  "value" : "1.0 '{foo:bar }':2.0 'mg'",
+                  "value" : "1.0 '{foo:bar}':2.0 'mg'",
                   "type" : "Literal"
                }
             }

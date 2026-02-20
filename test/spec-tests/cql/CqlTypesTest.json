@@ -1092,19 +1092,11 @@
                      "type" : "Tuple",
                      "annotation" : [ ],
                      "element" : [ {
-                        "name" : "expression",
+                        "name" : "skipped",
                         "value" : {
-                           "value" : 2.5589,
-                           "unit" : "{eskimo kisses}",
-                           "type" : "Quantity",
-                           "annotation" : [ ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "value" : 2.5589,
-                           "unit" : "{eskimo kisses}",
-                           "type" : "Quantity",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "Invalid UCUM unit: According to UCUM spec, custom units only support ASCII characters 33-126, which does not include the space character",
+                           "type" : "Literal",
                            "annotation" : [ ]
                         }
                      } ]
