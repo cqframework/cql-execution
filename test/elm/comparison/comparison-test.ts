@@ -401,7 +401,6 @@ describe('Equivalent', () => {
       (await this.emptyTuples.exec(this.ctx)).should.be.true();
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     it.skip('should return false if Tuples are not of the same type', async function () {});
     // Note: There is currently no way to tell the type of Tuples as they are all treated as Objects
 

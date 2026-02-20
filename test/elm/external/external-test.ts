@@ -65,13 +65,13 @@ describe('Retrieve', () => {
   it('should not find conditions with wrong valueset', async function () {
     const e = await this.wrongValueSet.exec(this.ctx);
     should(e).be.empty();
-    this.ctx.evaluatedRecords.should.be.empty;
+    this.ctx.evaluatedRecords.should.be.empty();
   });
 
   it('should not find encounter performances using wrong codeProperty', async function () {
     const e = await this.wrongCodeProperty.exec(this.ctx);
     should(e).be.empty();
-    this.ctx.evaluatedRecords.should.be.empty;
+    this.ctx.evaluatedRecords.should.be.empty();
   });
 
   it('should find conditions by specific pharyngitis code', async function () {

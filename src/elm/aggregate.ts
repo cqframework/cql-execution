@@ -42,7 +42,7 @@ export class Sum extends AggregateExpression {
 
     try {
       items = processQuantities(items);
-    } catch (e) {
+    } catch {
       return null;
     }
 
@@ -76,7 +76,7 @@ export class Min extends AggregateExpression {
     // the units for Min/Max, so we throw away the converted array if it succeeds
     try {
       processQuantities(list);
-    } catch (e) {
+    } catch {
       return null;
     }
 
@@ -110,7 +110,7 @@ export class Max extends AggregateExpression {
     // the units for Min/Max, so we throw away the converted array if it succeeds
     try {
       processQuantities(items);
-    } catch (e) {
+    } catch {
       return null;
     }
 
@@ -141,7 +141,7 @@ export class Avg extends AggregateExpression {
 
     try {
       items = processQuantities(items);
-    } catch (e) {
+    } catch {
       return null;
     }
 
@@ -176,7 +176,7 @@ export class Median extends AggregateExpression {
 
     try {
       items = processQuantities(items);
-    } catch (e) {
+    } catch {
       return null;
     }
 
@@ -207,7 +207,7 @@ export class Mode extends AggregateExpression {
     let filtered;
     try {
       filtered = processQuantities(items);
-    } catch (e) {
+    } catch {
       return null;
     }
 
@@ -269,7 +269,7 @@ export class StdDev extends AggregateExpression {
 
     try {
       items = processQuantities(items);
-    } catch (e) {
+    } catch {
       return null;
     }
 
@@ -328,7 +328,7 @@ export class Product extends AggregateExpression {
 
     try {
       items = processQuantities(items);
-    } catch (e) {
+    } catch {
       return null;
     }
     if (items.length === 0) {
@@ -359,7 +359,7 @@ export class GeometricMean extends AggregateExpression {
 
     try {
       items = processQuantities(items);
-    } catch (e) {
+    } catch {
       return null;
     }
 

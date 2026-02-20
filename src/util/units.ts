@@ -131,7 +131,7 @@ export function compareUnits(unit1: any, unit2: any) {
     }
     //units are the same
     return 0;
-  } catch (e) {
+  } catch {
     return null;
   }
 }

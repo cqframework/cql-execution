@@ -96,8 +96,10 @@ public class JavaScriptTestDataGenerator {
         pw.println("       - From java dir: ./gradlew :cql-to-elm:generateTestData");
         pw.println("*/");
         pw.println();
-        pw.println("/* eslint-disable */");
-        pw.println();
+        if (snippets.size() > 0) {
+          pw.println("/* eslint-disable */");
+          pw.println();
+        }
 
         for (Map.Entry<String, StringBuilder> entry : snippets.entrySet()) {
             updateSnippet(entry.getValue());

@@ -215,9 +215,9 @@ describe('Now', () => {
     now.month.should.equal(this.ctx.getExecutionDateTime().month);
     now.day.should.equal(this.ctx.getExecutionDateTime().day);
     now.hour.should.equal(this.ctx.getExecutionDateTime().hour);
-    now.minute.should.exist;
-    now.second.should.exist;
-    now.millisecond.should.exist;
+    should.exist(now.minute);
+    should.exist(now.second);
+    should.exist(now.millisecond);
     now.timezoneOffset.should.equal(this.ctx.getTimezoneOffset());
   });
 
@@ -235,9 +235,9 @@ describe('Now', () => {
     now.month.should.equal(this.ctx.getExecutionDateTime().month);
     now.day.should.equal(this.ctx.getExecutionDateTime().day);
     now.hour.should.equal(this.ctx.getExecutionDateTime().hour);
-    now.minute.should.exist;
-    now.second.should.exist;
-    now.millisecond.should.exist;
+    should.exist(now.minute);
+    should.exist(now.second);
+    should.exist(now.millisecond);
     now.timezoneOffset.should.equal('0');
   });
 
@@ -256,9 +256,9 @@ describe('Now', () => {
     now.month.should.equal(this.child_ctx.getExecutionDateTime().month);
     now.day.should.equal(this.child_ctx.getExecutionDateTime().day);
     now.hour.should.equal(this.child_ctx.getExecutionDateTime().hour);
-    now.minute.should.exist;
-    now.second.should.exist;
-    now.millisecond.should.exist;
+    should.exist(now.minute);
+    should.exist(now.second);
+    should.exist(now.millisecond);
     now.timezoneOffset.should.equal(this.child_ctx.getTimezoneOffset());
     now.timezoneOffset.should.equal('0');
   });
@@ -277,9 +277,9 @@ describe('TimeOfDay', () => {
     tod.month.should.equal(1);
     tod.day.should.equal(1);
     tod.hour.should.equal(jsDate.getHours());
-    tod.minute.should.exist;
-    tod.second.should.exist;
-    tod.millisecond.should.exist;
+    should.exist(tod.minute);
+    should.exist(tod.second);
+    should.exist(tod.millisecond);
     should(tod.timezoneOffset).be.null();
   });
 });

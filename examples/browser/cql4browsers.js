@@ -1,7 +1,4 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-/* eslint-disable
-    no-undef,
-*/
 // TODO: This file was created by bulk-decaffeinate.
 // Fix any style issues and re-enable lint.
 /*
@@ -2172,7 +2169,7 @@ class Interval {
                 return cmp.equals(this.toClosed().low, (0, math_1.successor)(other.toClosed().high));
             }
         }
-        catch (error) {
+        catch (_a) {
             return false;
         }
     }
@@ -2185,7 +2182,7 @@ class Interval {
                 return cmp.equals(this.toClosed().high, (0, math_1.predecessor)(other.toClosed().low));
             }
         }
-        catch (error) {
+        catch (_a) {
             return false;
         }
     }
@@ -2276,8 +2273,8 @@ class Interval {
             }
             const lowValue = closed.low.value;
             const highValue = closed.high.value;
-            const diff = Math.abs(highValue - lowValue) + pointSize.value;
-            Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
+            let diff = Math.abs(highValue - lowValue) + pointSize.value;
+            diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
             return new quantity_1.Quantity(diff, closed.low.unit);
         }
         else {
@@ -2882,7 +2879,7 @@ class Sum extends AggregateExpression {
         try {
             items = processQuantities(items);
         }
-        catch (e) {
+        catch (_a) {
             return null;
         }
         if (items.length === 0) {
@@ -2914,7 +2911,7 @@ class Min extends AggregateExpression {
         try {
             processQuantities(list);
         }
-        catch (e) {
+        catch (_a) {
             return null;
         }
         if (listWithoutNulls.length === 0) {
@@ -2946,7 +2943,7 @@ class Max extends AggregateExpression {
         try {
             processQuantities(items);
         }
-        catch (e) {
+        catch (_a) {
             return null;
         }
         if (listWithoutNulls.length === 0) {
@@ -2975,7 +2972,7 @@ class Avg extends AggregateExpression {
         try {
             items = processQuantities(items);
         }
-        catch (e) {
+        catch (_a) {
             return null;
         }
         if (items.length === 0) {
@@ -3008,7 +3005,7 @@ class Median extends AggregateExpression {
         try {
             items = processQuantities(items);
         }
-        catch (e) {
+        catch (_a) {
             return null;
         }
         if (!hasOnlyQuantities(items)) {
@@ -3036,7 +3033,7 @@ class Mode extends AggregateExpression {
         try {
             filtered = processQuantities(items);
         }
-        catch (e) {
+        catch (_a) {
             return null;
         }
         if (hasOnlyQuantities(filtered)) {
@@ -3088,7 +3085,7 @@ class StdDev extends AggregateExpression {
         try {
             items = processQuantities(items);
         }
-        catch (e) {
+        catch (_a) {
             return null;
         }
         if (items.length === 0) {
@@ -3141,7 +3138,7 @@ class Product extends AggregateExpression {
         try {
             items = processQuantities(items);
         }
-        catch (e) {
+        catch (_a) {
             return null;
         }
         if (items.length === 0) {
@@ -3171,7 +3168,7 @@ class GeometricMean extends AggregateExpression {
         try {
             items = processQuantities(items);
         }
-        catch (e) {
+        catch (_a) {
             return null;
         }
         if (items.length === 0) {
@@ -7740,7 +7737,7 @@ class ToRatio extends expression_1.Expression {
                 numerator = (0, quantity_1.parseQuantity)(splitRatioString[1]);
                 denominator = (0, quantity_1.parseQuantity)(splitRatioString[4]);
             }
-            catch (error) {
+            catch (_a) {
                 // If the input string is not formatted correctly, or cannot be
                 // interpreted as a valid Quantity value, the result is null.
                 return null;
@@ -8008,7 +8005,7 @@ async function canConvertToType(ConversionClass, operand, ctx) {
             return false;
         }
     }
-    catch (error) {
+    catch (_a) {
         return false;
     }
 }
@@ -8022,7 +8019,7 @@ class ConvertQuantity extends expression_1.Expression {
             try {
                 return quantity.convertUnit(newUnit);
             }
-            catch (error) {
+            catch (_a) {
                 // Cannot convert input to target unit, spec says to return null
                 return null;
             }
@@ -8041,7 +8038,7 @@ class CanConvertQuantity extends expression_1.Expression {
                 quantity.convertUnit(newUnit);
                 return true;
             }
-            catch (error) {
+            catch (_a) {
                 return false;
             }
         }
@@ -8993,7 +8990,7 @@ function codesAreEquivalent(code1, code2) {
     return code1.hasMatch(code2);
 }
 function getClassOfObjects(object1, object2) {
-    return [object1, object2].map(obj => ({}.toString.call(obj)));
+    return [object1, object2].map(obj => ({}).toString.call(obj));
 }
 function compareEveryItemInArrays(array1, array2, comparisonFunction) {
     return (array1.length === array2.length &&
@@ -9308,7 +9305,6 @@ exports.minValueForInstance = minValueForInstance;
 exports.minValueForType = minValueForType;
 exports.decimalAdjust = decimalAdjust;
 exports.decimalOrNull = decimalOrNull;
-/* eslint-disable @typescript-eslint/no-loss-of-precision */
 const exception_1 = require("../datatypes/exception");
 const datetime_1 = require("../datatypes/datetime");
 const uncertainty_1 = require("../datatypes/uncertainty");
@@ -9462,7 +9458,7 @@ function successor(val) {
             try {
                 return successor(val.high);
             }
-            catch (e) {
+            catch (_a) {
                 return val.high;
             }
         })();
@@ -9526,7 +9522,7 @@ function predecessor(val) {
             try {
                 return predecessor(val.low);
             }
-            catch (e) {
+            catch (_a) {
                 return val.low;
             }
         })();
@@ -9834,7 +9830,7 @@ function compareUnits(unit1, unit2) {
         //units are the same
         return 0;
     }
-    catch (e) {
+    catch (_a) {
         return null;
     }
 }
@@ -9998,7 +9994,7 @@ function numerical_sort(things, direction) {
 function isNull(value) {
     return value === null;
 }
-exports.typeIsArray = Array.isArray || (value => ({}.toString.call(value) === '[object Array]'));
+exports.typeIsArray = Array.isArray || (value => ({}).toString.call(value) === '[object Array]');
 function allTrue(things) {
     if ((0, exports.typeIsArray)(things)) {
         return things.every(x => x);

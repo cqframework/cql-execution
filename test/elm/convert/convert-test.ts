@@ -76,7 +76,7 @@ describe('FromString', () => {
     date.year.should.equal(2015);
     date.month.should.equal(1);
     date.day.should.equal(2);
-    date.isDateTime.should.equal.true;
+    date.isDateTime.should.equal(true);
   });
 
   it("should convert '2015-01-02' to Date", async function () {
@@ -84,7 +84,7 @@ describe('FromString', () => {
     date.year.should.equal(2015);
     date.month.should.equal(1);
     date.day.should.equal(2);
-    date.isDate.should.equal.true;
+    date.isDate.should.equal(true);
   });
 
   it('should be null if cannot convert', async function () {
@@ -219,7 +219,7 @@ describe('FromDate', () => {
     should.not.exist(dateTime.second);
     should.not.exist(dateTime.millisecond);
     dateTime.timezoneOffset.should.equal(this.ctx.getTimezoneOffset());
-    dateTime.isDateTime.should.equal.true;
+    dateTime.isDateTime.should.equal(true);
   });
 
   it('should convert @2015-01 to DateTime with null for day and time components', async function () {
@@ -232,7 +232,7 @@ describe('FromDate', () => {
       should.not.exist(dateTime[field]);
     }
     dateTime.timezoneOffset.should.equal(this.ctx.getTimezoneOffset());
-    dateTime.isDateTime.should.equal.true;
+    dateTime.isDateTime.should.equal(true);
   });
 
   it('should convert @2015-01 to DateTime with null for day, month, and time components', async function () {
@@ -245,7 +245,7 @@ describe('FromDate', () => {
       should.not.exist(dateTime[field]);
     }
     dateTime.timezoneOffset.should.equal(this.ctx.getTimezoneOffset());
-    dateTime.isDateTime.should.equal.true;
+    dateTime.isDateTime.should.equal(true);
   });
 
   it('should convert @2015-01-01 to Date', async function () {
@@ -256,7 +256,7 @@ describe('FromDate', () => {
     for (const field of ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']) {
       should.not.exist(date[field]);
     }
-    date.isDate.should.equal.true;
+    date.isDate.should.equal(true);
   });
 
   it("should convert @2015-01-01 to '2015-01-01'", async function () {
@@ -547,7 +547,7 @@ describe('ToDate', () => {
     for (const field of ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']) {
       should.not.exist(date[field]);
     }
-    date.isDate.should.equal.true;
+    date.isDate.should.equal(true);
   });
 
   it('should convert Datetime to Date', async function () {
@@ -558,7 +558,7 @@ describe('ToDate', () => {
     for (const field of ['hour', 'minute', 'second', 'millisecond', 'timezoneOffset']) {
       should.not.exist(date[field]);
     }
-    date.isDate.should.equal.true;
+    date.isDate.should.equal(true);
   });
 
   it('should return null for null input', async function () {

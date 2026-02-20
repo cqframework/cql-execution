@@ -410,7 +410,7 @@ export class Interval {
       } else {
         return cmp.equals(this.toClosed().low, successor(other.toClosed().high));
       }
-    } catch (error) {
+    } catch {
       return false;
     }
   }
@@ -425,7 +425,7 @@ export class Interval {
       } else {
         return cmp.equals(this.toClosed().high, predecessor(other.toClosed().low));
       }
-    } catch (error) {
+    } catch {
       return false;
     }
   }
@@ -525,8 +525,8 @@ export class Interval {
       }
       const lowValue = closed.low.value;
       const highValue = closed.high.value;
-      const diff = Math.abs(highValue - lowValue) + pointSize.value;
-      Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
+      let diff = Math.abs(highValue - lowValue) + pointSize.value;
+      diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
       return new Quantity(diff, closed.low.unit);
     } else {
       const diff = Math.abs(closed.high - closed.low) + pointSize.value;
