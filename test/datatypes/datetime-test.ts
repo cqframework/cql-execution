@@ -332,7 +332,9 @@ describe('DateTime', () => {
   });
 
   it('should floor unknown values when it converts to javascript Date', () =>
-    DateTime.parse('2012').toJSDate().should.eql(tzDate(2012, 0, 1, 0, 0, 0, 0)));
+    DateTime.parse('2012')
+      .toJSDate()
+      .should.eql(tzDate(2012, 0, 1, 0, 0, 0, 0)));
 
   it('should convert to Luxon DateTime', () =>
     DateTime.parse('2012-02-25T12:55:14.456')
@@ -352,7 +354,9 @@ describe('DateTime', () => {
   });
 
   it('should floor unknown values when it converts to Luxon DateTime', () =>
-    DateTime.parse('2012').toLuxonDateTime().should.eql(luxonTzDate(2012, 1, 1, 0, 0, 0, 0)));
+    DateTime.parse('2012')
+      .toLuxonDateTime()
+      .should.eql(luxonTzDate(2012, 1, 1, 0, 0, 0, 0)));
 });
 
 describe('DateTime.add', () => {

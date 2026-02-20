@@ -193,8 +193,8 @@ describe('Using CommonLib and CommonLib2', () => {
   });
 
   it('should contain SortUsingFunction localId in the localIdMap', function () {
-    const sortUsingFunctionLocalId = this.lib.includes.common2.expressions.SortUsingFunction
-      .localId;
+    const sortUsingFunctionLocalId =
+      this.lib.includes.common2.expressions.SortUsingFunction.localId;
     should.exist(this.common2LocalIdObject[sortUsingFunctionLocalId]);
   });
 });
@@ -232,8 +232,8 @@ describe('Using CommonLib and CommonLib2 with namespace support', () => {
   });
 
   it('should contain SortUsingFunction localId in the localIdMap with namespace support', function () {
-    const sortUsingFunctionLocalId = this.lib.includes.common2.expressions.SortUsingFunction
-      .localId;
+    const sortUsingFunctionLocalId =
+      this.lib.includes.common2.expressions.SortUsingFunction.localId;
     should.exist(this.common2LocalIdObject[sortUsingFunctionLocalId]);
   });
 });

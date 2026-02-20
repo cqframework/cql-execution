@@ -116,16 +116,24 @@ describe('Date', () => {
   });
 
   it('should convert to javascript Date', () =>
-    Date.parse('2012-02-25').toJSDate().should.eql(new jsDate(2012, 1, 25)));
+    Date.parse('2012-02-25')
+      .toJSDate()
+      .should.eql(new jsDate(2012, 1, 25)));
 
   it('should floor unknown values when it converts to javascript Date', () =>
-    Date.parse('2012').toJSDate().should.eql(new jsDate(2012, 0, 1)));
+    Date.parse('2012')
+      .toJSDate()
+      .should.eql(new jsDate(2012, 0, 1)));
 
   it('should convert to Luxon DateTime', () =>
-    Date.parse('2012-02-25').toLuxonDateTime().should.eql(luxon.DateTime.utc(2012, 2, 25)));
+    Date.parse('2012-02-25')
+      .toLuxonDateTime()
+      .should.eql(luxon.DateTime.utc(2012, 2, 25)));
 
   it('should floor unknown values when it converts to Luxon DateTime', () =>
-    Date.parse('2012').toLuxonDateTime().should.eql(luxon.DateTime.utc(2012, 1, 1)));
+    Date.parse('2012')
+      .toLuxonDateTime()
+      .should.eql(luxon.DateTime.utc(2012, 1, 1)));
 });
 
 describe('Date.add', () => {

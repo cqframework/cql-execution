@@ -167,21 +167,7 @@ describe('Union', () => {
 
   it('should return one list for multiple nested unions', async function () {
     (await this.nestedToFifteen.exec(this.ctx)).should.eql([
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15
     ]);
   });
 
@@ -605,24 +591,7 @@ describe('Flatten', () => {
 
   it('should flatten a list of lists', async function () {
     (await this.listOfLists.exec(this.ctx)).should.eql([
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      9,
-      8,
-      7,
-      6,
-      5,
-      4,
-      3,
-      2,
-      1
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 8, 7, 6, 5, 4, 3, 2, 1
     ]);
   });
 

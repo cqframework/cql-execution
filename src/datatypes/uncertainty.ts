@@ -10,7 +10,10 @@ export class Uncertainty {
     }
   }
 
-  constructor(public low: any = null, public high?: any) {
+  constructor(
+    public low: any = null,
+    public high?: any
+  ) {
     const gt = (a: any, b: any) => {
       if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
         // TODO: This should probably throw rather than return false.
