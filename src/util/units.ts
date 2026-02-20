@@ -73,7 +73,8 @@ export function convertUnit(fromVal: any, fromUnit: any, toUnit: any, adjustPrec
   if (result.status !== 'succeeded') {
     return;
   }
-  return adjustPrecision ? decimalAdjust('round', result.toVal, -8) : result.toVal;
+  // note: convert result.toVal to number (by prefixing +) to keep typescript happy
+  return adjustPrecision ? decimalAdjust('round', result.toVal, -8) : +result.toVal;
 }
 
 export function normalizeUnitsWhenPossible(val1: any, unit1: any, val2: any, unit2: any) {
