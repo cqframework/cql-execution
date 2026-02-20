@@ -94,7 +94,7 @@
   },
   "dependencies": {
     "@lhncbc/ucum-lhc": "^7.1.6",
-    "immutable": "^4.1.0",
+    "immutable": "^5.1.4",
     "luxon": "^1.28.1"
   },
   "resolutions": {
