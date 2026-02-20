@@ -33,17 +33,21 @@ const luxonTzDate = function (
   if (offset == null) {
     offset = new Date().getTimezoneOffset() * -1;
   }
-  return luxon.DateTime.fromObject({
-    year: y,
-    month: mo,
-    day: d,
-    hour: h,
-    minute: mi,
-    second: s,
-    millisecond: ms,
-    // @ts-ignore
-    zone: luxon.FixedOffsetZone.instance(offset)
-  });
+  return luxon.DateTime.fromObject(
+    {
+      year: y,
+      month: mo,
+      day: d,
+      hour: h,
+      minute: mi,
+      second: s,
+      millisecond: ms
+    },
+    {
+      // @ts-ignore
+      zone: luxon.FixedOffsetZone.instance(offset)
+    }
+  );
 };
 
 describe('DateTime', () => {

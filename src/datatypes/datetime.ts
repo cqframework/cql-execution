@@ -6,14 +6,12 @@ import {
   normalizeMillisecondsFieldInString
 } from '../util/util';
 import {
+  DateTimeUnit,
   Duration,
   DurationUnit,
   DateTime as LuxonDateTime,
-  DurationObjectUnits,
   FixedOffsetZone
 } from 'luxon';
-
-type DateTimeUnit = keyof DurationObjectUnits;
 
 // It's easiest and most performant to organize formats by length of the supported strings.
 // This way we can test strings only against the formats that have a chance of working.
@@ -900,16 +898,20 @@ export class DateTime extends AbstractDate {
       this.timezoneOffset != null
         ? this.timezoneOffset * 60
         : new jsDate().getTimezoneOffset() * -1;
-    return LuxonDateTime.fromObject({
-      year: this.year ?? undefined,
-      month: this.month ?? undefined,
-      day: this.day ?? undefined,
-      hour: this.hour ?? undefined,
-      minute: this.minute ?? undefined,
-      second: this.second ?? undefined,
-      millisecond: this.millisecond ?? undefined,
-      zone: FixedOffsetZone.instance(offsetMins)
-    });
+    return LuxonDateTime.fromObject(
+      {
+        year: this.year ?? undefined,
+        month: this.month ?? undefined,
+        day: this.day ?? undefined,
+        hour: this.hour ?? undefined,
+        minute: this.minute ?? undefined,
+        second: this.second ?? undefined,
+        millisecond: this.millisecond ?? undefined
+      },
+      {
+        zone: FixedOffsetZone.instance(offsetMins)
+      }
+    );
   }
 
   toLuxonUncertainty() {
@@ -1168,12 +1170,16 @@ export class Date extends AbstractDate {
   }
 
   toLuxonDateTime() {
-    return LuxonDateTime.fromObject({
-      year: this.year ?? undefined,
-      month: this.month ?? undefined,
-      day: this.day ?? undefined,
-      zone: FixedOffsetZone.utcInstance
-    });
+    return LuxonDateTime.fromObject(
+      {
+        year: this.year ?? undefined,
+        month: this.month ?? undefined,
+        day: this.day ?? undefined
+      },
+      {
+        zone: FixedOffsetZone.utcInstance
+      }
+    );
   }
 
   toLuxonUncertainty() {

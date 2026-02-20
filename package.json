@@ -68,7 +68,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",
     "@eslint/js": "^10.0.1",
-    "@types/luxon": "1",
+    "@types/luxon": "^3.7.1",
     "@types/mocha": "^10.0.10",
     "@types/node": "^18.19.130",
     "@types/should-sinon": "^0.0.13",
@@ -95,7 +95,7 @@
   "dependencies": {
     "@lhncbc/ucum-lhc": "^7.1.6",
     "immutable": "^5.1.4",
-    "luxon": "^1.28.1"
+    "luxon": "^3.7.2"
   },
   "resolutions": {
     "glob-parent": "^5.1.2",
