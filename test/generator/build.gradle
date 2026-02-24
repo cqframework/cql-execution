@@ -1,6 +1,8 @@
 apply plugin:'java'
 
-sourceCompatibility = '17'
+java {
+    sourceCompatibility = '17'
+}
 
 repositories {
     mavenCentral()
@@ -19,19 +21,19 @@ dependencies {
 }
 
 task generateTestData (dependsOn: 'classes', type: JavaExec) {
-    main = 'JavaScriptTestDataGenerator'
+    mainClass = 'JavaScriptTestDataGenerator'
     classpath = sourceSets.main.runtimeClasspath
     args = ["-r", "-i", "${projectDir}/../elm"]
 }
 
 task watchTestData (dependsOn: 'classes', type: JavaExec) {
-    main = 'JavaScriptTestDataGenerator'
+    mainClass = 'JavaScriptTestDataGenerator'
     classpath = sourceSets.main.runtimeClasspath
     args = ["-r", "-w", "-i", "${projectDir}/../elm"]
 }
 
 task generateSpecTestData(dependsOn: 'classes', type: JavaExec) {
   classpath = sourceSets.main.runtimeClasspath
-  main = 'org.cqframework.cql.cql2elm.cli.Main'
+  mainClass = 'org.cqframework.cql.cql2elm.cli.Main'
   args '--input', "${projectDir}/../spec-tests/cql", '--format', 'JSON'
 }
