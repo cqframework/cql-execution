@@ -1,13 +1,15 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
+import kotlinx.io.Source;
 import org.cqframework.cql.cql2elm.*;
-import org.cqframework.cql.elm.tracking.TrackBack;
+import org.cqframework.cql.cql2elm.tracking.TrackBack;
 import org.hl7.cql.model.ModelIdentifier;
 import org.hl7.cql.model.ModelInfoProvider;
-import org.hl7.elm.r1.VersionedIdentifier;
 import org.hl7.elm_modelinfo.r1.ModelInfo;
-import org.hl7.elm_modelinfo.r1.serializing.ModelInfoReaderFactory;
+import org.hl7.elm_modelinfo.r1.serializing.XmlModelInfoReaderKt;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,7 +21,6 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
-import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
@@ -33,6 +34,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
+import static kotlinx.io.CoreKt.buffered;
+import static kotlinx.io.JvmCoreKt.asSource;
+
 
 public class JavaScriptTestDataGenerator {
     private static final Pattern SNIPPET_START = Pattern.compile("^\\s*\\/\\/\\s+\\@Test\\:\\s+(.*\\S)\\s*$");
@@ -47,9 +51,8 @@ public class JavaScriptTestDataGenerator {
         String currentSnippetName = null;
         StringBuilder currentSnippet = null;
 
-        try (BufferedReader br = new BufferedReader(
-                new InputStreamReader(new FileInputStream(file.toFile()), "UTF-8"))) {
-            for (String line; (line = br.readLine()) != null;) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file.toFile()), "UTF-8"))) {
+            for (String line; (line = br.readLine()) != null; ) {
                 Matcher snippetMatcher = SNIPPET_START.matcher(line);
                 if (snippetMatcher.matches()) {
                     if (currentSnippetName != null) {
@@ -74,9 +77,9 @@ public class JavaScriptTestDataGenerator {
 
     public static void loadModelInfo(File modelInfoXML, ModelManager modelManager) {
         try {
-            final ModelInfo modelInfo = ModelInfoReaderFactory.getReader("application/xml").read(modelInfoXML);
-            final ModelIdentifier modelId = new ModelIdentifier().withId(modelInfo.getName())
-                    .withVersion(modelInfo.getVersion());
+            final Source source = buffered(asSource(new FileInputStream(modelInfoXML)));
+            final ModelInfo modelInfo = XmlModelInfoReaderKt.parseModelInfoXml(source);
+            final ModelIdentifier modelId = new ModelIdentifier(modelInfo.getName(), null, modelInfo.getVersion());
             final ModelInfoProvider modelProvider = (ModelIdentifier modelIdentifier) -> modelInfo;
             modelManager.getModelInfoLoader().registerModelInfoProvider(modelProvider);
         } catch (IOException e) {
@@ -85,8 +88,7 @@ public class JavaScriptTestDataGenerator {
         }
     }
 
-    private static void writeSnippetsToJavaScriptFile(Map<String, StringBuilder> snippets, Path file)
-            throws IOException {
+    private static void writeSnippetsToJavaScriptFile(Map<String, StringBuilder> snippets, Path file) throws IOException {
         PrintWriter pw = new PrintWriter(file.toFile(), "UTF-8");
         pw.println("/*");
         pw.println("   WARNING: This is a GENERATED file.  Do not manually edit!");
@@ -97,8 +99,8 @@ public class JavaScriptTestDataGenerator {
         pw.println("*/");
         pw.println();
         if (snippets.size() > 0) {
-          pw.println("/* eslint-disable */");
-          pw.println();
+            pw.println("/* eslint-disable */");
+            pw.println();
         }
 
         for (Map.Entry<String, StringBuilder> entry : snippets.entrySet()) {
@@ -123,23 +125,22 @@ public class JavaScriptTestDataGenerator {
                                 // CqlCompilerOptions.Options.DisableListPromotion,
                                 CqlCompilerOptions.Options.EnableResultTypes));
                 libraryManager.getCqlCompilerOptions().setSignatureLevel(LibraryBuilder.SignatureLevel.All);
-                libraryManager.getLibrarySourceLoader()
-                        .registerProvider(new DefaultLibrarySourceProvider(file.getParent()));
+                var parentPath = new kotlinx.io.files.Path(new File(file.getParent().toString()));
+                libraryManager.getLibrarySourceLoader().registerProvider(new DefaultLibrarySourceProvider(parentPath));
                 CqlTranslator cqlt = CqlTranslator.fromText(snippet, libraryManager);
                 if (!cqlt.getErrors().isEmpty()) {
                     pw.println("/*");
                     pw.println("Translation Error(s):");
                     for (CqlCompilerException e : cqlt.getErrors()) {
                         TrackBack tb = e.getLocator();
-                        String lines = tb == null ? "[n/a]"
-                                : String.format("[%d:%d, %d:%d]",
-                                        tb.getStartLine(), tb.getStartChar(), tb.getEndLine(), tb.getEndChar());
+                        String lines = tb == null ? "[n/a]" : String.format("[%d:%d, %d:%d]",
+                                tb.getStartLine(), tb.getStartChar(), tb.getEndLine(), tb.getEndChar());
                         pw.printf("%s %s%n", lines, e.getMessage());
                         System.err.printf("<%s#%s%s> %s%n", file.toFile().getName(), name, lines, e.getMessage());
                     }
                     pw.println("*/");
                 }
-                pw.println("module.exports['" + name + "'] = " + cqlt.toJson());
+                pw.println("module.exports['" + name + "'] = " + prettyPrint(cqlt.toJson()));
             } catch (Exception e) {
                 pw.println("/*");
                 pw.println("Translation Exception: " + e.getMessage());
@@ -151,6 +152,12 @@ public class JavaScriptTestDataGenerator {
         }
         pw.close();
         System.out.println("Generated " + file.toAbsolutePath().normalize());
+    }
+
+    private static String prettyPrint(String jsonString) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Object jsonObject = objectMapper.readValue(jsonString, Object.class);
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonObject);
     }
 
     private static void updateSnippet(StringBuilder snippet) {
@@ -202,9 +209,7 @@ public class JavaScriptTestDataGenerator {
 
         final OptionSet options = parser.parse(args);
         final File inputFile = input.value(options);
-        final WatchService watcher = options.has(watch)
-                ? input.value(options).toPath().getFileSystem().newWatchService()
-                : null;
+        final WatchService watcher = options.has(watch) ? input.value(options).toPath().getFileSystem().newWatchService() : null;
         final HashMap<WatchKey, Path> watchKeys = new HashMap<>();
         if (options.has(recursive)) {
             if (inputFile.isFile()) {
@@ -227,8 +232,7 @@ public class JavaScriptTestDataGenerator {
                 @Override
                 public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
                     if (watcher != null) {
-                        WatchKey key = dir.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY,
-                                StandardWatchEventKinds.ENTRY_CREATE);
+                        WatchKey key = dir.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_CREATE);
                         watchKeys.put(key, dir);
                     }
                     return CONTINUE;
@@ -251,7 +255,7 @@ public class JavaScriptTestDataGenerator {
 
         if (watcher != null) {
             System.out.println("Watching " + inputFile.toPath().toAbsolutePath().normalize());
-            for (;;) {
+            for (; ; ) {
                 WatchKey watchKey = watcher.take();
                 if (watchKeys.containsKey(watchKey)) {
                     List<WatchEvent<?>> events = watchKey.pollEvents();
@@ -261,10 +265,8 @@ public class JavaScriptTestDataGenerator {
                             if (inputFile.isDirectory() || (inputFile.isFile() && file.equals(inputFile.toPath()))) {
                                 fileToJavaScript(file);
                             }
-                        } else if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE
-                                && file.toFile().isDirectory()) {
-                            WatchKey key = file.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY,
-                                    StandardWatchEventKinds.ENTRY_CREATE);
+                        } else if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE && file.toFile().isDirectory()) {
+                            WatchKey key = file.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY, StandardWatchEventKinds.ENTRY_CREATE);
                             watchKeys.put(key, file);
                         }
                     }

@@ -6,18 +6,13 @@ java {
 
 repositories {
     mavenCentral()
-    maven {
-        url "https://oss.sonatype.org/content/repositories/snapshots"
-    }
 }
 
 dependencies {
-    implementation group: 'info.cqframework', name: 'cql-to-elm-cli', version: '3.27.0'
-    implementation group: 'info.cqframework', name: 'cql-to-elm', version: '3.27.0'
-    implementation group: 'info.cqframework', name: 'model-jaxb', version: '3.27.0'
-    implementation group: 'info.cqframework', name: 'elm-jaxb', version: '3.27.0'
+    implementation group: 'org.cqframework', name: 'cql-to-elm-cli', version: '4.2.0'
+    implementation group: 'org.cqframework', name: 'cql-to-elm', version: '4.2.0'
     implementation group: 'net.sf.jopt-simple', name: 'jopt-simple', version: '4.7'
-    runtimeOnly group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy', version: '2.7.7'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.0'
 }
 
 task generateTestData (dependsOn: 'classes', type: JavaExec) {
