@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 import cql from '../../src/cql';
 import * as measure from './age.json'; // Ensure "resolveJsonModule" is set to true in tsconfig.json
 

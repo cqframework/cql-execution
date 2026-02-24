@@ -8,7 +8,7 @@ import {
   Quantity
 } from '../../../src/datatypes/quantity';
 import setup from '../../setup';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+
 const data = require('./data');
 
 const validateQuantity = function (object: any, expectedValue: number, expectedUnit: string) {
@@ -239,7 +239,6 @@ describe('MinValue', () => {
   });
 
   it('of Decimal should return minimum representable Decimal value', async function () {
-    // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
     const minDecimalValue = -99999999999999999999.99999999;
     (await this.minDecimal.exec(this.ctx)).should.be.approximately(minDecimalValue, 0.000000001);
   });
@@ -279,7 +278,6 @@ describe('MaxValue', () => {
   });
 
   it('of Decimal should return maximum representable Decimal value', async function () {
-    // eslint-disable-next-line @typescript-eslint/no-loss-of-precision
     const maxDecimalValue = 99999999999999999999.99999999;
     (await this.maxDecimal.exec(this.ctx)).should.be.approximately(maxDecimalValue, 0.000000001);
   });

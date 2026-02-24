@@ -23,7 +23,10 @@ export class Code {
 }
 
 export class Concept {
-  constructor(public codes: any[], public display?: string) {
+  constructor(
+    public codes: any[],
+    public display?: string
+  ) {
     this.codes ||= [];
   }
 
@@ -37,11 +40,19 @@ export class Concept {
 }
 
 export abstract class Vocabulary {
-  constructor(public id: string, public version?: string, public name?: string) {}
+  constructor(
+    public id: string,
+    public version?: string,
+    public name?: string
+  ) {}
 }
 
 export class CodeSystem extends Vocabulary {
-  constructor(public id: string, public version?: string, public name?: string) {
+  constructor(
+    public id: string,
+    public version?: string,
+    public name?: string
+  ) {
     super(id, version, name);
   }
 }
@@ -62,7 +73,11 @@ export class CQLValueSet extends Vocabulary {
 }
 
 export class ValueSet {
-  constructor(public oid: string, public version?: string, public codes: any[] = []) {}
+  constructor(
+    public oid: string,
+    public version?: string,
+    public codes: any[] = []
+  ) {}
 
   /**
    * Determines if the provided code matches any code in the current set.

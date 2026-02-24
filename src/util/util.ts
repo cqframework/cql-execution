@@ -22,7 +22,7 @@ export function isNull(value: any) {
 }
 
 export const typeIsArray =
-  Array.isArray || (value => ({}.toString.call(value) === '[object Array]'));
+  Array.isArray || (value => ({}).toString.call(value) === '[object Array]');
 
 export function allTrue(things: any) {
   if (typeIsArray(things)) {

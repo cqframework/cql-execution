@@ -31,7 +31,7 @@ describe('checkUnit', () => {
   });
 
   it('should validate custom units with {} syntax', () => {
-    checkUnit('{butterfly kisses}').should.eql({ valid: true });
+    checkUnit('{butterfly_kisses}').should.eql({ valid: true });
   });
 
   it('should validate empty and null units as 1 by default', () => {

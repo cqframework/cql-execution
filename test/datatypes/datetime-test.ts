@@ -33,17 +33,21 @@ const luxonTzDate = function (
   if (offset == null) {
     offset = new Date().getTimezoneOffset() * -1;
   }
-  return luxon.DateTime.fromObject({
-    year: y,
-    month: mo,
-    day: d,
-    hour: h,
-    minute: mi,
-    second: s,
-    millisecond: ms,
-    // @ts-ignore
-    zone: luxon.FixedOffsetZone.instance(offset)
-  });
+  return luxon.DateTime.fromObject(
+    {
+      year: y,
+      month: mo,
+      day: d,
+      hour: h,
+      minute: mi,
+      second: s,
+      millisecond: ms
+    },
+    {
+      // @ts-ignore
+      zone: luxon.FixedOffsetZone.instance(offset)
+    }
+  );
 };
 
 describe('DateTime', () => {
@@ -332,7 +336,9 @@ describe('DateTime', () => {
   });
 
   it('should floor unknown values when it converts to javascript Date', () =>
-    DateTime.parse('2012').toJSDate().should.eql(tzDate(2012, 0, 1, 0, 0, 0, 0)));
+    DateTime.parse('2012')
+      .toJSDate()
+      .should.eql(tzDate(2012, 0, 1, 0, 0, 0, 0)));
 
   it('should convert to Luxon DateTime', () =>
     DateTime.parse('2012-02-25T12:55:14.456')
@@ -352,7 +358,9 @@ describe('DateTime', () => {
   });
 
   it('should floor unknown values when it converts to Luxon DateTime', () =>
-    DateTime.parse('2012').toLuxonDateTime().should.eql(luxonTzDate(2012, 1, 1, 0, 0, 0, 0)));
+    DateTime.parse('2012')
+      .toLuxonDateTime()
+      .should.eql(luxonTzDate(2012, 1, 1, 0, 0, 0, 0)));
 });
 
 describe('DateTime.add', () => {

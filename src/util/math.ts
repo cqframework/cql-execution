@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-loss-of-precision */
 import { Exception } from '../datatypes/exception';
 import { Quantity } from '../datatypes/quantity';
 import {
@@ -149,7 +148,7 @@ export function successor(val: any): any {
     const high = (() => {
       try {
         return successor(val.high);
-      } catch (e) {
+      } catch {
         return val.high;
       }
     })();
@@ -201,7 +200,7 @@ export function predecessor(val: any): any {
     const low = ((): any => {
       try {
         return predecessor(val.low);
-      } catch (e) {
+      } catch {
         return val.low;
       }
     })();

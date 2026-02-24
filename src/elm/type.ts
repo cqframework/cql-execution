@@ -205,7 +205,7 @@ export class ToRatio extends Expression {
         }
         numerator = parseQuantity(splitRatioString[1]);
         denominator = parseQuantity(splitRatioString[4]);
-      } catch (error) {
+      } catch {
         // If the input string is not formatted correctly, or cannot be
         // interpreted as a valid Quantity value, the result is null.
         return null;
@@ -247,9 +247,10 @@ export class ToTime extends Expression {
       const timeString = arg.toString();
       // Return null if string doesn't represent a valid ISO-8601 Time
       // hh:mm:ss.fff or hh:mm:ss.fff
-      const matches = /^T?((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(:?(\d{2}))?))?$/.exec(
-        timeString
-      );
+      const matches =
+        /^T?((\d{2})(:(\d{2})(:(\d{2})(\.(\d+))?)?)?)?(Z|(([+-])(\d{2})(:?(\d{2}))?))?$/.exec(
+          timeString
+        );
       if (matches == null) {
         return null;
       }
@@ -495,7 +496,7 @@ async function canConvertToType(ConversionClass: typeof Expression, operand: any
     } else {
       return false;
     }
-  } catch (error) {
+  } catch {
     return false;
   }
 }
@@ -511,7 +512,7 @@ export class ConvertQuantity extends Expression {
     if (quantity != null && newUnit != null) {
       try {
         return quantity.convertUnit(newUnit);
-      } catch (error) {
+      } catch {
         // Cannot convert input to target unit, spec says to return null
         return null;
       }
@@ -531,7 +532,7 @@ export class CanConvertQuantity extends Expression {
       try {
         quantity.convertUnit(newUnit);
         return true;
-      } catch (error) {
+      } catch {
         return false;
       }
     }

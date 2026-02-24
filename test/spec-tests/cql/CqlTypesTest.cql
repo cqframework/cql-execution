@@ -80,9 +80,11 @@ define "Quantity": Tuple{
     output: 150.2 '[lb_av]'
   },
   "QuantityTest2": Tuple{
+    skipped: 'Invalid UCUM unit: According to UCUM spec, custom units only support ASCII characters 33-126, which does not include the space character'
+    /*
     expression: 2.5589 '{eskimo kisses}',
     output: 2.5589 '{eskimo kisses}'
-  },
+    */  },
   "QuantityFractionalTooBig": Tuple{
     expression: 5.999999999 'g',
     output: 5.999999999 'g'

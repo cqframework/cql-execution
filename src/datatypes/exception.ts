@@ -1,3 +1,6 @@
 export class Exception {
-  constructor(public message?: string, public wrapped?: any) {}
+  constructor(
+    public message?: string,
+    public wrapped?: any
+  ) {}
 }
