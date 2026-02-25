@@ -1,2 +1,3586 @@
-{"library":{"annotation":[{"type":"CqlToElmInfo","translatorVersion":"4.2.0","translatorOptions":"","signatureLevel":"None"}],"identifier":{"id":"CqlStringOperatorsTest","version":"1.4.0"},"schemaIdentifier":{"id":"urn:hl7-org:elm","version":"r1"},"usings":{"def":[{"localIdentifier":"System","uri":"urn:hl7-org:elm-types:r1","annotation":[]},{"localIdentifier":"QUICK","uri":"http://hl7.org/fhir/us/qicore","version":"3.3.0","annotation":[]}]},"contexts":{"def":[{"name":"Patient","annotation":[]}]},"statements":{"def":[{"name":"Patient","context":"Patient","annotation":[],"expression":{"type":"SingletonFrom","annotation":[],"signature":[],"operand":{"type":"Retrieve","dataType":"{http://hl7.org/fhir/us/qicore}Patient","templateId":"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient","annotation":[],"include":[],"codeFilter":[],"dateFilter":[],"otherFilter":[]}}},{"name":"Combine","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"CombineNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Combine","annotation":[],"signature":[],"source":{"type":"As","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]},"asTypeSpecifier":{"type":"ListTypeSpecifier","annotation":[],"elementType":{"type":"NamedTypeSpecifier","name":"{urn:hl7-org:elm-types:r1}String","annotation":[]}}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"CombineEmptyList","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Combine","annotation":[],"signature":[],"source":{"type":"Query","annotation":[],"source":[{"alias":"X","annotation":[],"expression":{"type":"List","annotation":[],"element":[]}}],"let":[],"relationship":[],"return":{"distinct":false,"annotation":[],"expression":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"AliasRef","name":"X","annotation":[]}}}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"CombineABC","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Combine","annotation":[],"signature":[],"source":{"type":"List","annotation":[],"element":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"b","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"c","annotation":[]}]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"abc","annotation":[]}}]}},{"name":"CombineABCSepDash","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Combine","annotation":[],"signature":[],"source":{"type":"List","annotation":[],"element":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"b","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"c","annotation":[]}]},"separator":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"-","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a-b-c","annotation":[]}}]}}]}},{"name":"Concatenate","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"ConcatenateNullNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Concatenate","annotation":[],"signature":[],"operand":[{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"ConcatenateANull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Concatenate","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]},{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"ConcatenateNullB","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Concatenate","annotation":[],"signature":[],"operand":[{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"b","annotation":[]}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"ConcatenateAB","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Concatenate","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"b","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]}}]}},{"name":"ConcatenateABWithAdd","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Concatenate","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"b","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]}}]}}]}},{"name":"EndsWith","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"EndsWithNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"EndsWith","annotation":[],"signature":[],"operand":[{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"EndsWithTrue","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"EndsWith","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Chris Schuler is the man!!","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"n!!","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"true","annotation":[]}}]}},{"name":"EndsWithFalse","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"EndsWith","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Chris Schuler is the man!!","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"n!","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"false","annotation":[]}}]}}]}},{"name":"Indexer","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"IndexerNullNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Indexer","annotation":[],"signature":[],"operand":[{"type":"As","strict":false,"annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]},"asTypeSpecifier":{"type":"NamedTypeSpecifier","name":"{urn:hl7-org:elm-types:r1}String","annotation":[]}},{"type":"As","asType":"{urn:hl7-org:elm-types:r1}Integer","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"IndexerANull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Indexer","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]},{"type":"As","asType":"{urn:hl7-org:elm-types:r1}Integer","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"IndexerNull1String","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Indexer","annotation":[],"signature":[],"operand":[{"type":"As","strict":false,"annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]},"asTypeSpecifier":{"type":"NamedTypeSpecifier","name":"{urn:hl7-org:elm-types:r1}String","annotation":[]}},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"IndexerAB0","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Indexer","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]}}]}},{"name":"IndexerAB1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Indexer","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"b","annotation":[]}}]}},{"name":"IndexerAB2","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Indexer","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2","annotation":[]}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"IndexerABNeg1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Indexer","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]},{"type":"Negate","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}}]}},{"name":"LastPositionOf","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"LastPositionOfNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"LastPositionOf","annotation":[],"signature":[],"pattern":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},"string":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"LastPositionOfNull1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"LastPositionOf","annotation":[],"signature":[],"pattern":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},"string":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"hi","annotation":[]}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"LastPositionOfNull2","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"LastPositionOf","annotation":[],"signature":[],"pattern":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"hi","annotation":[]},"string":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"LastPositionOf1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"LastPositionOf","annotation":[],"signature":[],"pattern":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"hi","annotation":[]},"string":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Ohio is the place to be!","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}}]}},{"name":"LastPositionOf2","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"LastPositionOf","annotation":[],"signature":[],"pattern":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"hi","annotation":[]},"string":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Say hi to Ohio!","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"11","annotation":[]}}]}}]}},{"name":"Length","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"LengthNullString","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Length","annotation":[],"signature":[],"operand":{"type":"As","strict":false,"annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]},"asTypeSpecifier":{"type":"NamedTypeSpecifier","name":"{urn:hl7-org:elm-types:r1}String","annotation":[]}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"LengthEmptyString","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Length","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]}}]}},{"name":"LengthA","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Length","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}}]}},{"name":"LengthAB","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Length","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2","annotation":[]}}]}}]}},{"name":"Lower","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"LowerNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Lower","annotation":[],"signature":[],"operand":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"LowerEmpty","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Lower","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"","annotation":[]}}]}},{"name":"LowerA","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Lower","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"A","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]}}]}},{"name":"LowerB","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Lower","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"b","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"b","annotation":[]}}]}},{"name":"LowerAB","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Lower","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Ab","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]}}]}}]}},{"name":"Matches","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"MatchesNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Matches","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Not all who wander are lost","annotation":[]},{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"MatchesNumberFalse","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Matches","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Not all who wander are lost","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":".*\\d+","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"false","annotation":[]}}]}},{"name":"MatchesNumberTrue","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Matches","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Not all who wander are lost - circa 2017","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":".*\\d+","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"true","annotation":[]}}]}},{"name":"MatchesAllTrue","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Matches","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Not all who wander are lost","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":".*","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"true","annotation":[]}}]}},{"name":"MatchesWordsAndSpacesTrue","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Matches","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Not all who wander are lost","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"[\\w|\\s]+","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"true","annotation":[]}}]}},{"name":"MatchesWordsAndSpacesFalse","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Matches","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Not all who wander are lost - circa 2017","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"^[\\w\\s]+$","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"false","annotation":[]}}]}},{"name":"MatchesNotWords","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Matches","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"   ","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"\\W+","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"true","annotation":[]}}]}},{"name":"MatchesWhiteSpace","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Matches","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":" \n\t","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"\\s+","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"true","annotation":[]}}]}}]}},{"name":"PositionOf","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"PositionOfNullNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"PositionOf","annotation":[],"signature":[],"pattern":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},"string":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"PositionOfANull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"PositionOf","annotation":[],"signature":[],"pattern":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]},"string":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"PositionOfNullA","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"PositionOf","annotation":[],"signature":[],"pattern":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},"string":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"PositionOfAInAB","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"PositionOf","annotation":[],"signature":[],"pattern":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]},"string":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]}}]}},{"name":"PositionOfBInAB","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"PositionOf","annotation":[],"signature":[],"pattern":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"b","annotation":[]},"string":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}}]}},{"name":"PositionOfCInAB","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"PositionOf","annotation":[],"signature":[],"pattern":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"c","annotation":[]},"string":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]}}},{"name":"output","value":{"type":"Negate","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}}}]}}]}},{"name":"ReplaceMatches","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"ReplaceMatchesNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"ReplaceMatches","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Not all who wander are lost","annotation":[]},{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"But I am...","annotation":[]}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"ReplaceMatchesAll","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"ReplaceMatches","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Not all who wander are lost","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Not all who wander are lost","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"But still waters run deep","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"But still waters run deep","annotation":[]}}]}},{"name":"ReplaceMatchesMany","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"ReplaceMatches","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Who put the bop in the bop she bop she bop?","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"bop","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"bang","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Who put the bang in the bang she bang she bang?","annotation":[]}}]}},{"name":"ReplaceMatchesSpaces","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"ReplaceMatches","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"All that glitters is not gold","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"\\s","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"\\$","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"All$that$glitters$is$not$gold","annotation":[]}}]}}]}},{"name":"Split","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"SplitNullNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Split","annotation":[],"signature":[],"stringToSplit":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},"separator":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"SplitNullComma","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Split","annotation":[],"signature":[],"stringToSplit":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},"separator":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":",","annotation":[]}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"SplitABNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Split","annotation":[],"signature":[],"stringToSplit":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a,b","annotation":[]},"separator":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}}},{"name":"output","value":{"type":"List","annotation":[],"element":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a,b","annotation":[]}]}}]}},{"name":"SplitABDash","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Split","annotation":[],"signature":[],"stringToSplit":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a,b","annotation":[]},"separator":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"-","annotation":[]}}},{"name":"output","value":{"type":"List","annotation":[],"element":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a,b","annotation":[]}]}}]}},{"name":"SplitABComma","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Split","annotation":[],"signature":[],"stringToSplit":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a,b","annotation":[]},"separator":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":",","annotation":[]}}},{"name":"output","value":{"type":"List","annotation":[],"element":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"b","annotation":[]}]}}]}}]}},{"name":"StartsWith","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"StartsWithNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"StartsWith","annotation":[],"signature":[],"operand":[{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"StartsWithNull1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"StartsWith","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"hi","annotation":[]},{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"StartsWithNull2","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"StartsWith","annotation":[],"signature":[],"operand":[{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"hi","annotation":[]}]}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"StartsWithTrue1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"StartsWith","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Breathe deep the gathering gloom","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Bre","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"true","annotation":[]}}]}},{"name":"StartsWithFalse1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"StartsWith","annotation":[],"signature":[],"operand":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Breathe deep the gathering gloom","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"bre","annotation":[]}]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"false","annotation":[]}}]}}]}},{"name":"Substring","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"SubstringNullNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Substring","annotation":[],"signature":[],"stringToSub":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},"startIndex":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}Integer","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"SubstringANull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Substring","annotation":[],"signature":[],"stringToSub":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]},"startIndex":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}Integer","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"SubstringNull1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Substring","annotation":[],"signature":[],"stringToSub":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}},"startIndex":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"SubstringAB0","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Substring","annotation":[],"signature":[],"stringToSub":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]},"startIndex":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]}}]}},{"name":"SubstringAB1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Substring","annotation":[],"signature":[],"stringToSub":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]},"startIndex":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"b","annotation":[]}}]}},{"name":"SubstringAB2","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Substring","annotation":[],"signature":[],"stringToSub":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]},"startIndex":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2","annotation":[]}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"SubstringABNeg1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Substring","annotation":[],"signature":[],"stringToSub":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]},"startIndex":{"type":"Negate","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"SubstringAB0To1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Substring","annotation":[],"signature":[],"stringToSub":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]},"startIndex":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"length":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]}}]}},{"name":"SubstringABC1To1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Substring","annotation":[],"signature":[],"stringToSub":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"abc","annotation":[]},"startIndex":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},"length":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"b","annotation":[]}}]}},{"name":"SubstringAB0To3","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Substring","annotation":[],"signature":[],"stringToSub":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]},"startIndex":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"length":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"3","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"ab","annotation":[]}}]}}]}},{"name":"Upper","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"UpperNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Upper","annotation":[],"signature":[],"operand":{"type":"As","asType":"{urn:hl7-org:elm-types:r1}String","annotation":[],"signature":[],"operand":{"type":"Null","annotation":[]}}}},{"name":"output","value":{"type":"Null","annotation":[]}}]}},{"name":"UpperEmpty","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Upper","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"","annotation":[]}}]}},{"name":"UpperA","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Upper","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"a","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"A","annotation":[]}}]}},{"name":"UpperB","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Upper","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"B","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"B","annotation":[]}}]}},{"name":"UpperAB","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Upper","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"aB","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"AB","annotation":[]}}]}}]}},{"name":"toString tests","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"QuantityToString","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"ToString","annotation":[],"signature":[],"operand":{"type":"Quantity","value":125,"unit":"cm","annotation":[]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"125 'cm'","annotation":[]}}]}},{"name":"DateTimeToString1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"ToString","annotation":[],"signature":[],"operand":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2000","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]}}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"2000-01-01","annotation":[]}}]}},{"name":"DateTimeToString2","value":{"type":"Tuple","annotation":[],"element":[{"name":"skipped","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Answer does not include timezone offset, but default offset depends on test environment","annotation":[]}}]}},{"name":"DateTimeToString3","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"ToString","annotation":[],"signature":[],"operand":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2000","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"8","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"25","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"25","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"300","annotation":[]},"timezoneOffset":{"type":"ToDecimal","annotation":[],"signature":[],"operand":{"type":"Negate","annotation":[],"signature":[],"operand":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"7","annotation":[]}}}}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"2000-01-01T08:25:25.300-07:00","annotation":[]}}]}},{"name":"TimeToString1","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"ToString","annotation":[],"signature":[],"operand":{"type":"Time","annotation":[],"signature":[],"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"9","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"30","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"3","annotation":[]}}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"09:30:01.003","annotation":[]}}]}}]}}]}}}
-
+{
+  "library": {
+    "annotation": [
+      {
+        "type": "CqlToElmInfo",
+        "translatorVersion": "4.2.0",
+        "translatorOptions": "",
+        "signatureLevel": "None"
+      }
+    ],
+    "identifier": {
+      "id": "CqlStringOperatorsTest",
+      "version": "1.4.0"
+    },
+    "schemaIdentifier": {
+      "id": "urn:hl7-org:elm",
+      "version": "r1"
+    },
+    "usings": {
+      "def": [
+        {
+          "localIdentifier": "System",
+          "uri": "urn:hl7-org:elm-types:r1",
+          "annotation": []
+        },
+        {
+          "localIdentifier": "QUICK",
+          "uri": "http://hl7.org/fhir/us/qicore",
+          "version": "3.3.0",
+          "annotation": []
+        }
+      ]
+    },
+    "contexts": {
+      "def": [
+        {
+          "name": "Patient",
+          "annotation": []
+        }
+      ]
+    },
+    "statements": {
+      "def": [
+        {
+          "name": "Patient",
+          "context": "Patient",
+          "annotation": [],
+          "expression": {
+            "type": "SingletonFrom",
+            "annotation": [],
+            "signature": [],
+            "operand": {
+              "type": "Retrieve",
+              "dataType": "{http://hl7.org/fhir/us/qicore}Patient",
+              "templateId": "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
+              "annotation": [],
+              "include": [],
+              "codeFilter": [],
+              "dateFilter": [],
+              "otherFilter": []
+            }
+          }
+        },
+        {
+          "name": "Combine",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "CombineNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Combine",
+                        "annotation": [],
+                        "signature": [],
+                        "source": {
+                          "type": "As",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          },
+                          "asTypeSpecifier": {
+                            "type": "ListTypeSpecifier",
+                            "annotation": [],
+                            "elementType": {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{urn:hl7-org:elm-types:r1}String",
+                              "annotation": []
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CombineEmptyList",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Combine",
+                        "annotation": [],
+                        "signature": [],
+                        "source": {
+                          "type": "Query",
+                          "annotation": [],
+                          "source": [
+                            {
+                              "alias": "X",
+                              "annotation": [],
+                              "expression": {
+                                "type": "List",
+                                "annotation": [],
+                                "element": []
+                              }
+                            }
+                          ],
+                          "let": [],
+                          "relationship": [],
+                          "return": {
+                            "distinct": false,
+                            "annotation": [],
+                            "expression": {
+                              "type": "As",
+                              "asType": "{urn:hl7-org:elm-types:r1}String",
+                              "annotation": [],
+                              "signature": [],
+                              "operand": {
+                                "type": "AliasRef",
+                                "name": "X",
+                                "annotation": []
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CombineABC",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Combine",
+                        "annotation": [],
+                        "signature": [],
+                        "source": {
+                          "type": "List",
+                          "annotation": [],
+                          "element": [
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}String",
+                              "value": "a",
+                              "annotation": []
+                            },
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}String",
+                              "value": "b",
+                              "annotation": []
+                            },
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}String",
+                              "value": "c",
+                              "annotation": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "abc",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CombineABCSepDash",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Combine",
+                        "annotation": [],
+                        "signature": [],
+                        "source": {
+                          "type": "List",
+                          "annotation": [],
+                          "element": [
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}String",
+                              "value": "a",
+                              "annotation": []
+                            },
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}String",
+                              "value": "b",
+                              "annotation": []
+                            },
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}String",
+                              "value": "c",
+                              "annotation": []
+                            }
+                          ]
+                        },
+                        "separator": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "-",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "a-b-c",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Concatenate",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "ConcatenateNullNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Concatenate",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ConcatenateANull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Concatenate",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "a",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ConcatenateNullB",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Concatenate",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "b",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ConcatenateAB",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Concatenate",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "a",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "b",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "ab",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ConcatenateABWithAdd",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Concatenate",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "a",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "b",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "ab",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "EndsWith",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "EndsWithNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "EndsWith",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "EndsWithTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "EndsWith",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Chris Schuler is the man!!",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "n!!",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "EndsWithFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "EndsWith",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Chris Schuler is the man!!",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "n!",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Indexer",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "IndexerNullNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Indexer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "strict": false,
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            },
+                            "asTypeSpecifier": {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{urn:hl7-org:elm-types:r1}String",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IndexerANull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Indexer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "a",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IndexerNull1String",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Indexer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "strict": false,
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            },
+                            "asTypeSpecifier": {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{urn:hl7-org:elm-types:r1}String",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "1",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IndexerAB0",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Indexer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "ab",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "0",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "a",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IndexerAB1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Indexer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "ab",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "1",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "b",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IndexerAB2",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Indexer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "ab",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "2",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IndexerABNeg1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Indexer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "ab",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Negate",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "1",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "LastPositionOf",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "LastPositionOfNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "LastPositionOf",
+                        "annotation": [],
+                        "signature": [],
+                        "pattern": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        },
+                        "string": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LastPositionOfNull1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "LastPositionOf",
+                        "annotation": [],
+                        "signature": [],
+                        "pattern": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        },
+                        "string": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "hi",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LastPositionOfNull2",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "LastPositionOf",
+                        "annotation": [],
+                        "signature": [],
+                        "pattern": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "hi",
+                          "annotation": []
+                        },
+                        "string": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LastPositionOf1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "LastPositionOf",
+                        "annotation": [],
+                        "signature": [],
+                        "pattern": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "hi",
+                          "annotation": []
+                        },
+                        "string": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "Ohio is the place to be!",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "1",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LastPositionOf2",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "LastPositionOf",
+                        "annotation": [],
+                        "signature": [],
+                        "pattern": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "hi",
+                          "annotation": []
+                        },
+                        "string": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "Say hi to Ohio!",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "11",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Length",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "LengthNullString",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Length",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "As",
+                          "strict": false,
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          },
+                          "asTypeSpecifier": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LengthEmptyString",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Length",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "0",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LengthA",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Length",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "a",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "1",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LengthAB",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Length",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "ab",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "2",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Lower",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "LowerNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Lower",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LowerEmpty",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Lower",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LowerA",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Lower",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "A",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "a",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LowerB",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Lower",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "b",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "b",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LowerAB",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Lower",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "Ab",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "ab",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Matches",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "MatchesNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Matches",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Not all who wander are lost",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "MatchesNumberFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Matches",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Not all who wander are lost",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": ".*\\d+",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "MatchesNumberTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Matches",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Not all who wander are lost - circa 2017",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": ".*\\d+",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "MatchesAllTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Matches",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Not all who wander are lost",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": ".*",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "MatchesWordsAndSpacesTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Matches",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Not all who wander are lost",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "[\\w|\\s]+",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "MatchesWordsAndSpacesFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Matches",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Not all who wander are lost - circa 2017",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "^[\\w\\s]+$",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "MatchesNotWords",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Matches",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "   ",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "\\W+",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "MatchesWhiteSpace",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Matches",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": " \n\t",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "\\s+",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "PositionOf",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "PositionOfNullNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "PositionOf",
+                        "annotation": [],
+                        "signature": [],
+                        "pattern": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        },
+                        "string": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "PositionOfANull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "PositionOf",
+                        "annotation": [],
+                        "signature": [],
+                        "pattern": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "a",
+                          "annotation": []
+                        },
+                        "string": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "PositionOfNullA",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "PositionOf",
+                        "annotation": [],
+                        "signature": [],
+                        "pattern": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        },
+                        "string": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "a",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "PositionOfAInAB",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "PositionOf",
+                        "annotation": [],
+                        "signature": [],
+                        "pattern": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "a",
+                          "annotation": []
+                        },
+                        "string": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "ab",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "0",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "PositionOfBInAB",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "PositionOf",
+                        "annotation": [],
+                        "signature": [],
+                        "pattern": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "b",
+                          "annotation": []
+                        },
+                        "string": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "ab",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "1",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "PositionOfCInAB",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "PositionOf",
+                        "annotation": [],
+                        "signature": [],
+                        "pattern": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "c",
+                          "annotation": []
+                        },
+                        "string": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "ab",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Negate",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "ReplaceMatches",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "ReplaceMatchesNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "ReplaceMatches",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Not all who wander are lost",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "But I am...",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ReplaceMatchesAll",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "ReplaceMatches",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Not all who wander are lost",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Not all who wander are lost",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "But still waters run deep",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "But still waters run deep",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ReplaceMatchesMany",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "ReplaceMatches",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Who put the bop in the bop she bop she bop?",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "bop",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "bang",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Who put the bang in the bang she bang she bang?",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "ReplaceMatchesSpaces",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "ReplaceMatches",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "All that glitters is not gold",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "\\s",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "\\$",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "All$that$glitters$is$not$gold",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Split",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "SplitNullNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Split",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSplit": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        },
+                        "separator": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SplitNullComma",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Split",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSplit": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        },
+                        "separator": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": ",",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SplitABNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Split",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSplit": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "a,b",
+                          "annotation": []
+                        },
+                        "separator": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "List",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "a,b",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SplitABDash",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Split",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSplit": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "a,b",
+                          "annotation": []
+                        },
+                        "separator": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "-",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "List",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "a,b",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SplitABComma",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Split",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSplit": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "a,b",
+                          "annotation": []
+                        },
+                        "separator": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": ",",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "List",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "a",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "b",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "StartsWith",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "StartsWithNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "StartsWith",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "StartsWithNull1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "StartsWith",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "hi",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "StartsWithNull2",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "StartsWith",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "hi",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "StartsWithTrue1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "StartsWith",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Breathe deep the gathering gloom",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Bre",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "StartsWithFalse1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "StartsWith",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "Breathe deep the gathering gloom",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}String",
+                            "value": "bre",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Substring",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "SubstringNullNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Substring",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSub": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        },
+                        "startIndex": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SubstringANull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Substring",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSub": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "a",
+                          "annotation": []
+                        },
+                        "startIndex": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SubstringNull1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Substring",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSub": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        },
+                        "startIndex": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SubstringAB0",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Substring",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSub": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "ab",
+                          "annotation": []
+                        },
+                        "startIndex": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "ab",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SubstringAB1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Substring",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSub": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "ab",
+                          "annotation": []
+                        },
+                        "startIndex": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "b",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SubstringAB2",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Substring",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSub": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "ab",
+                          "annotation": []
+                        },
+                        "startIndex": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SubstringABNeg1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Substring",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSub": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "ab",
+                          "annotation": []
+                        },
+                        "startIndex": {
+                          "type": "Negate",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "1",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SubstringAB0To1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Substring",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSub": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "ab",
+                          "annotation": []
+                        },
+                        "startIndex": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "length": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "a",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SubstringABC1To1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Substring",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSub": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "abc",
+                          "annotation": []
+                        },
+                        "startIndex": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "length": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "b",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SubstringAB0To3",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Substring",
+                        "annotation": [],
+                        "signature": [],
+                        "stringToSub": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "ab",
+                          "annotation": []
+                        },
+                        "startIndex": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "length": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "3",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "ab",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Upper",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "UpperNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Upper",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "UpperEmpty",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Upper",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "UpperA",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Upper",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "a",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "A",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "UpperB",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Upper",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "B",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "B",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "UpperAB",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Upper",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}String",
+                          "value": "aB",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "AB",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "toString tests",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "QuantityToString",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "ToString",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Quantity",
+                          "value": 125,
+                          "unit": "cm",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "125 'cm'",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeToString1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "ToString",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "DateTime",
+                          "annotation": [],
+                          "signature": [],
+                          "year": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "2000",
+                            "annotation": []
+                          },
+                          "month": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "1",
+                            "annotation": []
+                          },
+                          "day": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "1",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "2000-01-01",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeToString2",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Answer does not include timezone offset, but default offset depends on test environment",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeToString3",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "ToString",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "DateTime",
+                          "annotation": [],
+                          "signature": [],
+                          "year": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "2000",
+                            "annotation": []
+                          },
+                          "month": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "1",
+                            "annotation": []
+                          },
+                          "day": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "1",
+                            "annotation": []
+                          },
+                          "hour": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "8",
+                            "annotation": []
+                          },
+                          "minute": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "25",
+                            "annotation": []
+                          },
+                          "second": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "25",
+                            "annotation": []
+                          },
+                          "millisecond": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "300",
+                            "annotation": []
+                          },
+                          "timezoneOffset": {
+                            "type": "ToDecimal",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Negate",
+                              "annotation": [],
+                              "signature": [],
+                              "operand": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "7",
+                                "annotation": []
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "2000-01-01T08:25:25.300-07:00",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TimeToString1",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "ToString",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Time",
+                          "annotation": [],
+                          "signature": [],
+                          "hour": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "9",
+                            "annotation": []
+                          },
+                          "minute": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "30",
+                            "annotation": []
+                          },
+                          "second": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "1",
+                            "annotation": []
+                          },
+                          "millisecond": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "3",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "09:30:01.003",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

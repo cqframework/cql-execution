@@ -1,2 +1,1642 @@
-{"library":{"annotation":[{"type":"CqlToElmInfo","translatorVersion":"4.2.0","translatorOptions":"","signatureLevel":"None"}],"identifier":{"id":"CqlTypesTest","version":"1.4.0"},"schemaIdentifier":{"id":"urn:hl7-org:elm","version":"r1"},"usings":{"def":[{"localIdentifier":"System","uri":"urn:hl7-org:elm-types:r1","annotation":[]},{"localIdentifier":"QUICK","uri":"http://hl7.org/fhir/us/qicore","version":"3.3.0","annotation":[]}]},"contexts":{"def":[{"name":"Patient","annotation":[]}]},"statements":{"def":[{"name":"Patient","context":"Patient","annotation":[],"expression":{"type":"SingletonFrom","annotation":[],"signature":[],"operand":{"type":"Retrieve","dataType":"{http://hl7.org/fhir/us/qicore}Patient","templateId":"http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient","annotation":[],"include":[],"codeFilter":[],"dateFilter":[],"otherFilter":[]}}},{"name":"Any","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"AnyQuantity","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Quantity","value":5.0,"unit":"g","annotation":[]}},{"name":"output","value":{"type":"Quantity","value":5.0,"unit":"g","annotation":[]}}]}},{"name":"AnyDateTime","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2012","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"4","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"4","annotation":[]}}},{"name":"output","value":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2012","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"4","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"4","annotation":[]}}}]}},{"name":"AnyTime","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Time","annotation":[],"signature":[],"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"9","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]}}},{"name":"output","value":{"type":"Time","annotation":[],"signature":[],"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"9","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]}}}]}},{"name":"AnyInterval","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Interval","lowClosed":true,"highClosed":true,"annotation":[],"low":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2","annotation":[]},"high":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"7","annotation":[]}}},{"name":"output","value":{"type":"Interval","lowClosed":true,"highClosed":true,"annotation":[],"low":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2","annotation":[]},"high":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"7","annotation":[]}}}]}},{"name":"AnyList","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"List","annotation":[],"element":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"3","annotation":[]}]}},{"name":"output","value":{"type":"List","annotation":[],"element":[{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2","annotation":[]},{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"3","annotation":[]}]}}]}},{"name":"AnyTuple","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Tuple","annotation":[],"element":[{"name":"id","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"5","annotation":[]}},{"name":"name","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Chris","annotation":[]}}]}},{"name":"output","value":{"type":"Tuple","annotation":[],"element":[{"name":"id","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"5","annotation":[]}},{"name":"name","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Chris","annotation":[]}}]}}]}},{"name":"AnyString","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Property","path":"name","annotation":[],"source":{"type":"Tuple","annotation":[],"element":[{"name":"id","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"5","annotation":[]}},{"name":"name","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Chris","annotation":[]}}]}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Chris","annotation":[]}}]}}]}},{"name":"DateTime","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"DateTimeNull","value":{"type":"Tuple","annotation":[],"element":[{"name":"skipped","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Should DateTime(null) really evaluate to null?","annotation":[]}}]}},{"name":"DateTimeUpperBoundExcept","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"10000","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"12","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"31","annotation":[]},"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"23","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"59","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"59","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"999","annotation":[]}}},{"name":"invalid","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"true","annotation":[]}}]}},{"name":"DateTimeLowerBoundExcept","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0000","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]}}},{"name":"invalid","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"true","annotation":[]}}]}},{"name":"DateTimeProper","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2016","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"7","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"7","annotation":[]},"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"6","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"25","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"33","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"910","annotation":[]}}},{"name":"output","value":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2016","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"7","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"7","annotation":[]},"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"6","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"25","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"33","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"910","annotation":[]}}}]}},{"name":"DateTimeIncomplete","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2015","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"10","annotation":[]}}},{"name":"output","value":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2015","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"10","annotation":[]}}}]}},{"name":"DateTimeUncertain","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"DurationBetween","precision":"Day","annotation":[],"signature":[],"operand":[{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2015","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"10","annotation":[]}},{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2015","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"3","annotation":[]}}]}},{"name":"output","value":{"type":"Interval","lowClosed":true,"highClosed":true,"annotation":[],"low":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"18","annotation":[]},"high":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"49","annotation":[]}}}]}},{"name":"DateTimeMin","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0001","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]}}},{"name":"output","value":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"1","annotation":[]},"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]}}}]}},{"name":"DateTimeMax","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"9999","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"12","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"31","annotation":[]},"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"23","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"59","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"59","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"999","annotation":[]}}},{"name":"output","value":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"9999","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"12","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"31","annotation":[]},"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"23","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"59","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"59","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"999","annotation":[]}}}]}},{"name":"DateTimeTimeUnspecified","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"IsNull","annotation":[],"signature":[],"operand":{"type":"DateTimeComponentFrom","precision":"Hour","annotation":[],"signature":[],"operand":{"type":"DateTime","annotation":[],"signature":[],"year":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2015","annotation":[]},"month":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"2","annotation":[]},"day":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"10","annotation":[]}}}}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Boolean","value":"true","annotation":[]}}]}}]}},{"name":"Quantity","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"QuantityTest","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Quantity","value":150.2,"unit":"[lb_av]","annotation":[]}},{"name":"output","value":{"type":"Quantity","value":150.2,"unit":"[lb_av]","annotation":[]}}]}},{"name":"QuantityTest2","value":{"type":"Tuple","annotation":[],"element":[{"name":"skipped","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Invalid UCUM unit: According to UCUM spec, custom units only support ASCII characters 33-126, which does not include the space character","annotation":[]}}]}},{"name":"QuantityFractionalTooBig","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Quantity","value":5.999999999,"unit":"g","annotation":[]}},{"name":"output","value":{"type":"Quantity","value":5.999999999,"unit":"g","annotation":[]}}]}}]}},{"name":"String","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"StringTestEscapeQuotes","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"'I start with a single quote and end with a double quote\"","annotation":[]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"'I start with a single quote and end with a double quote\"","annotation":[]}}]}},{"name":"StringUnicodeTest","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Hi","annotation":[]}},{"name":"output","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Hi","annotation":[]}}]}}]}},{"name":"Time","context":"Patient","accessLevel":"Public","annotation":[],"expression":{"type":"Tuple","annotation":[],"element":[{"name":"TimeUpperBoundHours","value":{"type":"Tuple","annotation":[],"element":[{"name":"skipped","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Translation Error: Invalid time input (T24:59:59.999). Use ISO 8601 time representation (hh:mm:ss.fff).","annotation":[]}}]}},{"name":"TimeUpperBoundMinutes","value":{"type":"Tuple","annotation":[],"element":[{"name":"skipped","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Translation Error: Invalid time input (T23:60:59.999). Use ISO 8601 time representation (hh:mm:ss.fff).","annotation":[]}}]}},{"name":"TimeUpperBoundSeconds","value":{"type":"Tuple","annotation":[],"element":[{"name":"skipped","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"Translation Error: Invalid time input (T23:59:60.999). Use ISO 8601 time representation (hh:mm:ss.fff).","annotation":[]}}]}},{"name":"TimeUpperBoundMillis","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Time","annotation":[],"signature":[],"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"23","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"59","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"59","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"10000","annotation":[]}}},{"name":"invalid","value":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}String","value":"semantic","annotation":[]}}]}},{"name":"TimeProper","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Time","annotation":[],"signature":[],"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"10","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"25","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"12","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"863","annotation":[]}}},{"name":"output","value":{"type":"Time","annotation":[],"signature":[],"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"10","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"25","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"12","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"863","annotation":[]}}}]}},{"name":"TimeAllMax","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Time","annotation":[],"signature":[],"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"23","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"59","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"59","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"999","annotation":[]}}},{"name":"output","value":{"type":"Time","annotation":[],"signature":[],"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"23","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"59","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"59","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"999","annotation":[]}}}]}},{"name":"TimeAllMin","value":{"type":"Tuple","annotation":[],"element":[{"name":"expression","value":{"type":"Time","annotation":[],"signature":[],"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]}}},{"name":"output","value":{"type":"Time","annotation":[],"signature":[],"hour":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"minute":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"second":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]},"millisecond":{"type":"Literal","valueType":"{urn:hl7-org:elm-types:r1}Integer","value":"0","annotation":[]}}}]}}]}}]}}}
-
+{
+  "library": {
+    "annotation": [
+      {
+        "type": "CqlToElmInfo",
+        "translatorVersion": "4.2.0",
+        "translatorOptions": "",
+        "signatureLevel": "None"
+      }
+    ],
+    "identifier": {
+      "id": "CqlTypesTest",
+      "version": "1.4.0"
+    },
+    "schemaIdentifier": {
+      "id": "urn:hl7-org:elm",
+      "version": "r1"
+    },
+    "usings": {
+      "def": [
+        {
+          "localIdentifier": "System",
+          "uri": "urn:hl7-org:elm-types:r1",
+          "annotation": []
+        },
+        {
+          "localIdentifier": "QUICK",
+          "uri": "http://hl7.org/fhir/us/qicore",
+          "version": "3.3.0",
+          "annotation": []
+        }
+      ]
+    },
+    "contexts": {
+      "def": [
+        {
+          "name": "Patient",
+          "annotation": []
+        }
+      ]
+    },
+    "statements": {
+      "def": [
+        {
+          "name": "Patient",
+          "context": "Patient",
+          "annotation": [],
+          "expression": {
+            "type": "SingletonFrom",
+            "annotation": [],
+            "signature": [],
+            "operand": {
+              "type": "Retrieve",
+              "dataType": "{http://hl7.org/fhir/us/qicore}Patient",
+              "templateId": "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
+              "annotation": [],
+              "include": [],
+              "codeFilter": [],
+              "dateFilter": [],
+              "otherFilter": []
+            }
+          }
+        },
+        {
+          "name": "Any",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "AnyQuantity",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Quantity",
+                        "value": 5,
+                        "unit": "g",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Quantity",
+                        "value": 5,
+                        "unit": "g",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "AnyDateTime",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2012",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "4",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "4",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2012",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "4",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "4",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "AnyTime",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Time",
+                        "annotation": [],
+                        "signature": [],
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "9",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Time",
+                        "annotation": [],
+                        "signature": [],
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "9",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "AnyInterval",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Interval",
+                        "lowClosed": true,
+                        "highClosed": true,
+                        "annotation": [],
+                        "low": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2",
+                          "annotation": []
+                        },
+                        "high": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "7",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Interval",
+                        "lowClosed": true,
+                        "highClosed": true,
+                        "annotation": [],
+                        "low": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2",
+                          "annotation": []
+                        },
+                        "high": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "7",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "AnyList",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "List",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "1",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "2",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "3",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "List",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "1",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "2",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "3",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "AnyTuple",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Tuple",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "name": "id",
+                            "value": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "5",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "name": "name",
+                            "value": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}String",
+                              "value": "Chris",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Tuple",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "name": "id",
+                            "value": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "5",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "name": "name",
+                            "value": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}String",
+                              "value": "Chris",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "AnyString",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Property",
+                        "path": "name",
+                        "annotation": [],
+                        "source": {
+                          "type": "Tuple",
+                          "annotation": [],
+                          "element": [
+                            {
+                              "name": "id",
+                              "value": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "5",
+                                "annotation": []
+                              }
+                            },
+                            {
+                              "name": "name",
+                              "value": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}String",
+                                "value": "Chris",
+                                "annotation": []
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Chris",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "DateTime",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "DateTimeNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Should DateTime(null) really evaluate to null?",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeUpperBoundExcept",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "10000",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "12",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "31",
+                          "annotation": []
+                        },
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "23",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "999",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "invalid",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeLowerBoundExcept",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0000",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "invalid",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeProper",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2016",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "7",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "7",
+                          "annotation": []
+                        },
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "6",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "25",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "33",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "910",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2016",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "7",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "7",
+                          "annotation": []
+                        },
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "6",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "25",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "33",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "910",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeIncomplete",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2015",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "10",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2015",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "10",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeUncertain",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "DurationBetween",
+                        "precision": "Day",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2015",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "10",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2015",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "3",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Interval",
+                        "lowClosed": true,
+                        "highClosed": true,
+                        "annotation": [],
+                        "low": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "18",
+                          "annotation": []
+                        },
+                        "high": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "49",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeMin",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0001",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "1",
+                          "annotation": []
+                        },
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeMax",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "9999",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "12",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "31",
+                          "annotation": []
+                        },
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "23",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "999",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "DateTime",
+                        "annotation": [],
+                        "signature": [],
+                        "year": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "9999",
+                          "annotation": []
+                        },
+                        "month": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "12",
+                          "annotation": []
+                        },
+                        "day": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "31",
+                          "annotation": []
+                        },
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "23",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "999",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeTimeUnspecified",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "IsNull",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "DateTimeComponentFrom",
+                          "precision": "Hour",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2015",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "10",
+                              "annotation": []
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Quantity",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "QuantityTest",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Quantity",
+                        "value": 150.2,
+                        "unit": "[lb_av]",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Quantity",
+                        "value": 150.2,
+                        "unit": "[lb_av]",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "QuantityTest2",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Invalid UCUM unit: According to UCUM spec, custom units only support ASCII characters 33-126, which does not include the space character",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "QuantityFractionalTooBig",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Quantity",
+                        "value": 5.999999999,
+                        "unit": "g",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Quantity",
+                        "value": 5.999999999,
+                        "unit": "g",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "String",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "StringTestEscapeQuotes",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "'I start with a single quote and end with a double quote\"",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "'I start with a single quote and end with a double quote\"",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "StringUnicodeTest",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Hi",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Hi",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Time",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "TimeUpperBoundHours",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Translation Error: Invalid time input (T24:59:59.999). Use ISO 8601 time representation (hh:mm:ss.fff).",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TimeUpperBoundMinutes",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Translation Error: Invalid time input (T23:60:59.999). Use ISO 8601 time representation (hh:mm:ss.fff).",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TimeUpperBoundSeconds",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Translation Error: Invalid time input (T23:59:60.999). Use ISO 8601 time representation (hh:mm:ss.fff).",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TimeUpperBoundMillis",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Time",
+                        "annotation": [],
+                        "signature": [],
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "23",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "10000",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "invalid",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "semantic",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TimeProper",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Time",
+                        "annotation": [],
+                        "signature": [],
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "10",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "25",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "12",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "863",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Time",
+                        "annotation": [],
+                        "signature": [],
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "10",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "25",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "12",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "863",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TimeAllMax",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Time",
+                        "annotation": [],
+                        "signature": [],
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "23",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "999",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Time",
+                        "annotation": [],
+                        "signature": [],
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "23",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "59",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "999",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TimeAllMin",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Time",
+                        "annotation": [],
+                        "signature": [],
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Time",
+                        "annotation": [],
+                        "signature": [],
+                        "hour": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "minute": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "second": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        },
+                        "millisecond": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "0",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
