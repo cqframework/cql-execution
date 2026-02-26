@@ -35,11 +35,9 @@ define "Any": Tuple{
 
 define "DateTime": Tuple{
   "DateTimeNull": Tuple{
-    skipped: 'Should DateTime(null) really evaluate to null?'
-    /*
     expression: DateTime(null),
     output: null
-    */  },
+  },
   "DateTimeUpperBoundExcept": Tuple{
     expression: DateTime(10000, 12, 31, 23, 59, 59, 999),
     invalid: true
@@ -80,11 +78,9 @@ define "Quantity": Tuple{
     output: 150.2 '[lb_av]'
   },
   "QuantityTest2": Tuple{
-    skipped: 'Invalid UCUM unit: According to UCUM spec, custom units only support ASCII characters 33-126, which does not include the space character'
-    /*
     expression: 2.5589 '{eskimo kisses}',
     output: 2.5589 '{eskimo kisses}'
-    */  },
+  },
   "QuantityFractionalTooBig": Tuple{
     expression: 5.999999999 'g',
     output: 5.999999999 'g'
@@ -104,23 +100,17 @@ define "String": Tuple{
 
 define "Time": Tuple{
   "TimeUpperBoundHours": Tuple{
-    skipped: 'Translation Error: Invalid time input (T24:59:59.999). Use ISO 8601 time representation (hh:mm:ss.fff).'
-    /*
     expression: @T24:59:59.999,
     invalid: 'semantic'
-    */  },
+  },
   "TimeUpperBoundMinutes": Tuple{
-    skipped: 'Translation Error: Invalid time input (T23:60:59.999). Use ISO 8601 time representation (hh:mm:ss.fff).'
-    /*
     expression: @T23:60:59.999,
     invalid: 'semantic'
-    */  },
+  },
   "TimeUpperBoundSeconds": Tuple{
-    skipped: 'Translation Error: Invalid time input (T23:59:60.999). Use ISO 8601 time representation (hh:mm:ss.fff).'
-    /*
     expression: @T23:59:60.999,
     invalid: 'semantic'
-    */  },
+  },
   "TimeUpperBoundMillis": Tuple{
     expression: @T23:59:59.10000,
     invalid: 'semantic'

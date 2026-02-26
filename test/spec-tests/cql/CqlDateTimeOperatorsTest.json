@@ -443,11 +443,254 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
+                      "value": {
+                        "type": "Equal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Add",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": [
+                              {
+                                "type": "DateTime",
+                                "annotation": [],
+                                "signature": [],
+                                "year": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "2018",
+                                  "annotation": []
+                                },
+                                "month": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "5",
+                                  "annotation": []
+                                },
+                                "day": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "23",
+                                  "annotation": []
+                                }
+                              },
+                              {
+                                "type": "Quantity",
+                                "value": 52,
+                                "unit": "weeks",
+                                "annotation": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2019",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "5",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "22",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
                       "value": {
                         "type": "Literal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: 2018-05-23 + 52 weeks should be 2019-05-22 (both dates should be Wednesdays)",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeLeapDayAddYearInWeeks",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Equal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Add",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": [
+                              {
+                                "type": "DateTime",
+                                "annotation": [],
+                                "signature": [],
+                                "year": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "2023",
+                                  "annotation": []
+                                },
+                                "month": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "3",
+                                  "annotation": []
+                                },
+                                "day": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "2",
+                                  "annotation": []
+                                }
+                              },
+                              {
+                                "type": "Quantity",
+                                "value": 52,
+                                "unit": "weeks",
+                                "annotation": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2024",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "29",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeLeapYearAddYearInWeeks",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Equal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Add",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": [
+                              {
+                                "type": "DateTime",
+                                "annotation": [],
+                                "signature": [],
+                                "year": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "2024",
+                                  "annotation": []
+                                },
+                                "month": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "2",
+                                  "annotation": []
+                                },
+                                "day": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "28",
+                                  "annotation": []
+                                }
+                              },
+                              {
+                                "type": "Quantity",
+                                "value": 52,
+                                "unit": "weeks",
+                                "annotation": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2025",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "26",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
                         "annotation": []
                       }
                     }
@@ -25381,11 +25624,254 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
+                      "value": {
+                        "type": "Equal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Subtract",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": [
+                              {
+                                "type": "DateTime",
+                                "annotation": [],
+                                "signature": [],
+                                "year": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "2018",
+                                  "annotation": []
+                                },
+                                "month": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "5",
+                                  "annotation": []
+                                },
+                                "day": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "23",
+                                  "annotation": []
+                                }
+                              },
+                              {
+                                "type": "Quantity",
+                                "value": 52,
+                                "unit": "weeks",
+                                "annotation": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2017",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "5",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "24",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
                       "value": {
                         "type": "Literal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: 2018-05-23 - 52 weeks should be 2019-05-24 (both dates should be Wednesdays)",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeLeapDaySubtractYearInWeeks",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Equal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Subtract",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": [
+                              {
+                                "type": "DateTime",
+                                "annotation": [],
+                                "signature": [],
+                                "year": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "2024",
+                                  "annotation": []
+                                },
+                                "month": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "2",
+                                  "annotation": []
+                                },
+                                "day": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "29",
+                                  "annotation": []
+                                }
+                              },
+                              {
+                                "type": "Quantity",
+                                "value": 52,
+                                "unit": "weeks",
+                                "annotation": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2023",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "3",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeLeapYearSubtractYearInWeeks",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Equal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Subtract",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": [
+                              {
+                                "type": "DateTime",
+                                "annotation": [],
+                                "signature": [],
+                                "year": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "2024",
+                                  "annotation": []
+                                },
+                                "month": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "3",
+                                  "annotation": []
+                                },
+                                "day": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "value": "1",
+                                  "annotation": []
+                                }
+                              },
+                              {
+                                "type": "Quantity",
+                                "value": 52,
+                                "unit": "weeks",
+                                "annotation": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "DateTime",
+                            "annotation": [],
+                            "signature": [],
+                            "year": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2023",
+                              "annotation": []
+                            },
+                            "month": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "3",
+                              "annotation": []
+                            },
+                            "day": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "3",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
                         "annotation": []
                       }
                     }

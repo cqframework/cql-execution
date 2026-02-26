@@ -1,169 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
-	name="CqlLogicalOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#logical-operators-3">
-	<group name="And">
-		<test name="TrueAndTrue">
+	name="CqlLogicalOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#logical-operators-3" version="1.0">
+	<group name="And" version="1.0">
+		<test name="TrueAndTrue" version="1.0">
 			<expression>true and true</expression>
 			<output>true</output>
 		</test>
-		<test name="TrueAndFalse">
+		<test name="TrueAndFalse" version="1.0">
 			<expression>true and false</expression>
 			<output>false</output>
 		</test>
-		<test name="TrueAndNull">
+		<test name="TrueAndNull" version="1.0">
 			<expression>true and null</expression>
 			<output>null</output>
 		</test>
-		<test name="FalseAndTrue">
+		<test name="FalseAndTrue" version="1.0">
 			<expression>false and true</expression>
 			<output>false</output>
 		</test>
-		<test name="FalseAndFalse">
+		<test name="FalseAndFalse" version="1.0">
 			<expression>false and false</expression>
 			<output>false</output>
 		</test>
-		<test name="FalseAndNull">
+		<test name="FalseAndNull" version="1.0">
 			<expression>false and null</expression>
 			<output>false</output>
 		</test>
-		<test name="NullAndTrue">
+		<test name="NullAndTrue" version="1.0">
 			<expression>null and true</expression>
 			<output>null</output>
 		</test>
-		<test name="NullAndFalse">
+		<test name="NullAndFalse" version="1.0">
 			<expression>null and false</expression>
 			<output>false</output>
 		</test>
-		<test name="NullAndNull">
+		<test name="NullAndNull" version="1.0">
 			<expression>null and null</expression>
 			<output>null</output>
 		</test>
 	</group>
-	<group name="Implies">
+	<group name="Implies" version="1.0">
 		<!-- TODO: make Translator resolve Implies operator signatures -->
-		<test name="TrueImpliesTrue">
+		<test name="TrueImpliesTrue" version="1.0">
 			<expression>true implies true</expression>
 			<output>true</output>
 		</test>
-		<test name="TrueImpliesFalse">
+		<test name="TrueImpliesFalse" version="1.0">
 			<expression>true implies false</expression>
 			<output>false</output>
 		</test>
-		<test name="TrueImpliesNull">
+		<test name="TrueImpliesNull" version="1.0">
 			<expression>true implies null</expression>
 			<output>null</output>
 		</test>
-		<test name="FalseImpliesTrue">
+		<test name="FalseImpliesTrue" version="1.0">
 			<expression>false implies true</expression>
 			<output>true</output>
 		</test>
-		<test name="FalseImpliesFalse">
+		<test name="FalseImpliesFalse" version="1.0">
 			<expression>false implies false</expression>
 			<output>true</output>
 		</test>
-		<test name="FalseImpliesNull">
+		<test name="FalseImpliesNull" version="1.0">
 			<expression>false implies null</expression>
 			<output>true</output>
 		</test>
-		<test name="NullImpliesTrue">
+		<test name="NullImpliesTrue" version="1.0">
 			<expression>null implies true</expression>
 			<output>true</output>
 		</test>
-		<test name="NullImpliesFalse">
+		<test name="NullImpliesFalse" version="1.0">
 			<expression>null implies false</expression>
 			<output>null</output>
 		</test>
-		<test name="NullImpliesNull">
+		<test name="NullImpliesNull" version="1.0">
 			<expression>null implies null</expression>
 			<output>null</output>
 		</test>
 	</group>
-	<group name="Not">
-		<test name="NotTrue">
+	<group name="Not" version="1.0">
+		<test name="NotTrue" version="1.0">
 			<expression>not true</expression>
 			<output>false</output>
 		</test>
-		<test name="NotFalse">
+		<test name="NotFalse" version="1.0">
 			<expression>not false</expression>
 			<output>true</output>
 		</test>
-		<test name="NotNull">
+		<test name="NotNull" version="1.0">
 			<expression>not null</expression>
 			<output>null</output>
 		</test>
 	</group>
-	<group name="Or">
-		<test name="TrueOrTrue">
+	<group name="Or" version="1.0">
+		<test name="TrueOrTrue" version="1.0">
 			<expression>true or true</expression>
 			<output>true</output>
 		</test>
-		<test name="TrueOrFalse">
+		<test name="TrueOrFalse" version="1.0">
 			<expression>true or false</expression>
 			<output>true</output>
 		</test>
-		<test name="TrueOrNull">
+		<test name="TrueOrNull" version="1.0">
 			<expression>true or null</expression>
 			<output>true</output>
 		</test>
-		<test name="FalseOrTrue">
+		<test name="FalseOrTrue" version="1.0">
 			<expression>false or true</expression>
 			<output>true</output>
 		</test>
-		<test name="FalseOrFalse">
+		<test name="FalseOrFalse" version="1.0">
 			<expression>false or false</expression>
 			<output>false</output>
 		</test>
-		<test name="FalseOrNull">
+		<test name="FalseOrNull" version="1.0">
 			<expression>false or null</expression>
 			<output>null</output>
 		</test>
-		<test name="NullOrTrue">
+		<test name="NullOrTrue" version="1.0">
 			<expression>null or true</expression>
 			<output>true</output>
 		</test>
-		<test name="NullOrFalse">
+		<test name="NullOrFalse" version="1.0">
 			<expression>null or false</expression>
 			<output>null</output>
 		</test>
-		<test name="NullOrNull">
+		<test name="NullOrNull" version="1.0">
 			<expression>null or null</expression>
 			<output>null</output>
 		</test>
 	</group>
-	<group name="Xor">
-		<test name="TrueXorTrue">
+	<group name="Xor" version="1.0">
+		<test name="TrueXorTrue" version="1.0">
 			<expression>true xor true</expression>
 			<output>false</output>
 		</test>
-		<test name="TrueXorFalse">
+		<test name="TrueXorFalse" version="1.0">
 			<expression>true xor false</expression>
 			<output>true</output>
 		</test>
-		<test name="TrueXorNull">
+		<test name="TrueXorNull" version="1.0">
 			<expression>true xor null</expression>
 			<output>null</output>
 		</test>
-		<test name="FalseXorTrue">
+		<test name="FalseXorTrue" version="1.0">
 			<expression>false xor true</expression>
 			<output>true</output>
 		</test>
-		<test name="FalseXorFalse">
+		<test name="FalseXorFalse" version="1.0">
 			<expression>false xor false</expression>
 			<output>false</output>
 		</test>
-		<test name="FalseXorNull">
+		<test name="FalseXorNull" version="1.0">
 			<expression>false xor null</expression>
 			<output>null</output>
 		</test>
-		<test name="NullXorTrue">
+		<test name="NullXorTrue" version="1.0">
 			<expression>null xor true</expression>
 			<output>null</output>
 		</test>
-		<test name="NullXorFalse">
+		<test name="NullXorFalse" version="1.0">
 			<expression>null xor false</expression>
 			<output>null</output>
 		</test>
-		<test name="NullXorNull">
+		<test name="NullXorNull" version="1.0">
 			<expression>null xor null</expression>
 			<output>null</output>
 		</test>

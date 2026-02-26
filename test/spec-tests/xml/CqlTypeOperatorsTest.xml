@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
-	name="CqlTypeOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#type-operators-1">
-	<group name="As">
-		<test name="AsQuantity">
+	name="CqlTypeOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#type-operators-1" version="1.0">
+	<group name="As" version="1.0">
+		<test name="AsQuantity" version="1.0">
 			<expression>45.5 'g' as Quantity</expression>
 			<output>45.5 'g'</output>
 		</test>
-		<test name="CastAsQuantity">
+		<test name="CastAsQuantity" version="1.0">
 			<expression>cast 45.5 'g' as Quantity</expression>
 			<output>45.5 'g'</output>
 		</test>
-		<test name="AsDateTime">
+		<test name="AsDateTime" version="1.0">
 			<expression>DateTime(2014, 01, 01) as DateTime</expression>
 			<output>@2014-01-01T</output>
 		</test>
 	</group>
-	<group name="Convert">
-		<test name="IntegerToDecimal">
+	<group name="Convert" version="1.0">
+		<test name="IntegerToDecimal" version="1.0">
 			<expression>convert 5 to Decimal</expression>
 			<output>5.0</output>
 		</test>
-		<test name="IntegerToString">
+		<test name="IntegerToString" version="1.0">
 			<expression>convert 5 to String</expression>
 			<output>'5'</output>
 		</test>
-		<test name="StringToIntegerError">
+		<test name="StringToIntegerError" version="1.0">
 			<expression>convert 'foo' to Integer</expression>
 			<output>null</output>
 		</test>
-		<test name="StringToDateTime">
+		<test name="StringToDateTime" version="1.0">
 			<expression>convert '2014-01-01' to DateTime</expression>
 			<output>@2014-01-01T</output>
 		</test>
-		<test name="StringToTime">
+		<test name="StringToTime" version="1.0">
 			<expression>convert 'T14:30:00.0' to Time</expression>
 			<output>@T14:30:00.000</output>
 		</test>
-		<test name="StringToDateTimeMalformed">
+		<test name="StringToDateTimeMalformed" version="1.0">
 			<expression>convert '2014/01/01' to DateTime</expression>
 			<output>null</output>
 		</test>
 	</group>
-	<group name="Is">
-		<test name="IntegerIsInteger">
+	<group name="Is" version="1.0">
+		<test name="IntegerIsInteger" version="1.0">
 			<expression>5 is Integer</expression>
 			<output>true</output>
 		</test>
-		<test name="StringIsInteger">
+		<test name="StringIsInteger" version="1.0">
 			<expression>'5' is Integer</expression>
 			<output>false</output>
 		</test>
-		<test name="ValueSetIsVocabulary">
+		<test name="ValueSetIsVocabulary" version="1.5">
 			<expression>System.ValueSet{id: '123'} is Vocabulary</expression>
 			<output>true</output>
 			<notes>This should return true because ValueSet is derived from Vocabulary.</notes>
 		</test>
 	</group>
-	<group name="ToBoolean">
-		<test name="StringNoToBoolean">
+	<group name="ToBoolean" version="1.0">
+		<test name="StringNoToBoolean" version="1.0">
 			<expression>ToBoolean('NO')</expression>
 			<output>false</output>
 		</test>
 	</group>
-	<group name="ToConcept">
-		<test name="CodeToConcept1">
+	<group name="ToConcept" version="1.0">
+		<test name="CodeToConcept1" version="1.0">
 			<expression>ToConcept(Code { code: '8480-6' })</expression>
 			<output>
 				Concept {
@@ -72,98 +72,98 @@
 			</output>
 		</test>
 	</group>
-	<group name="ToDateTime">
-		<test name="ToDateTime1">
+	<group name="ToDateTime" version="1.0">
+		<test name="ToDateTime1" version="1.0">
 			<expression>ToDateTime('2014-01-01')</expression>
 			<output>@2014-01-01T</output>
 		</test>
-		<test name="ToDateTime2">
+		<test name="ToDateTime2" version="1.0">
 			<expression>ToDateTime('2014-01-01T12:05')</expression>
 			<output>@2014-01-01T12:05</output>
 		</test>
-		<test name="ToDateTime3">
+		<test name="ToDateTime3" version="1.0">
 			<expression>ToDateTime('2014-01-01T12:05:05.955')</expression>
 			<output>@2014-01-01T12:05:05.955</output>
 		</test>
-		<test name="ToDateTime4">
+		<test name="ToDateTime4" version="1.0">
 			<expression>ToDateTime('2014-01-01T12:05:05.955+01:30')</expression>
 			<output>@2014-01-01T12:05:05.955+01:30</output>
 		</test>
-		<test name="ToDateTime5">
+		<test name="ToDateTime5" version="1.0">
 			<expression>ToDateTime('2014-01-01T12:05:05.955-01:15')</expression>
 			<output>@2014-01-01T12:05:05.955-01:15</output>
 		</test>
-		<test name="ToDateTime6">
+		<test name="ToDateTime6" version="1.0">
 			<expression>ToDateTime('2014-01-01T12:05:05.955Z')</expression>
 			<output>@2014-01-01T12:05:05.955+00:00</output>
 		</test>
-		<test name="ToDateTimeMalformed">
+		<test name="ToDateTimeMalformed" version="1.0">
 			<expression>ToDateTime('2014/01/01T12:05:05.955Z')</expression>
 			<output>null</output>
 		</test>
-		<test name="ToDateTimeDate">
+		<test name="ToDateTimeDate" version="1.0">
 			<expression>ToDateTime(@2014-01-01)</expression>
 			<output>@2014-01-01T</output>
 		</test>
-		<test name="ToDateTimeTimeUnspecified">
+		<test name="ToDateTimeTimeUnspecified" version="1.0">
 			<expression>hour from ToDateTime(@2014-01-01) is null</expression>
 			<output>true</output>
 		</test>
 	</group>
-	<group name="ToDecimal">
-		<test name="String25D5ToDecimal">
+	<group name="ToDecimal" version="1.4">
+		<test name="String25D5ToDecimal" version="1.0">
 			<expression>ToDecimal('+25.5')</expression>
 			<output>25.5</output>
 		</test>
 	</group>
-	<group name="ToInteger">
-		<test name="StringNeg25ToInteger">
+	<group name="ToInteger" version="1.4">
+		<test name="StringNeg25ToInteger" version="1.0">
 			<expression>ToInteger('-25')</expression>
 			<output>-25</output>
 		</test>
 	</group>
-	<group name="ToQuantity">
-		<test name="String5D5CMToQuantity">
+	<group name="ToQuantity" version="1.4">
+		<test name="String5D5CMToQuantity" version="1.4">
 			<expression>ToQuantity('5.5 \'cm\'')</expression>
 			<output>5.5'cm'</output>
 		</test>
 	</group>
-	<group name="ToString">
-		<test name="IntegerNeg5ToString">
+	<group name="ToString" version="1.4">
+		<test name="IntegerNeg5ToString" version="1.4">
 			<expression>ToString(-5)</expression>
 			<output>'-5'</output>
 		</test>
-		<test name="Decimal18D55ToString">
+		<test name="Decimal18D55ToString" version="1.4">
 			<expression>ToString(18.55)</expression>
 			<output>'18.55'</output>
 		</test>
-		<test name="Quantity5D5CMToString">
+		<test name="Quantity5D5CMToString" version="1.4">
 			<expression>ToString(5.5 'cm')</expression>
 			<output>'5.5 \'cm\''</output>
 		</test>
-		<test name="BooleanTrueToString">
+		<test name="BooleanTrueToString" version="1.4">
 			<expression>ToString(true)</expression>
 			<output>'true'</output>
 		</test>
 	</group>
-	<group name="ToTime">
-		<test name="ToTime1">
+	<group name="ToTime" version="1.4">
+		<test name="ToTime1" version="1.4">
 			<expression>ToTime('T14:30:00.0')</expression>
 			<output>@T14:30:00.000</output>
 		</test>
-		<test name="ToTime2">
+		<test name="ToTime2" version="1.4">
 			<expression>ToTime('T14:30:00.0+05:30')</expression>
 			<output>@T14:30:00.000</output>
 		</test>
-		<test name="ToTime3">
+		<test name="ToTime3" version="1.4">
 			<expression>ToTime('T14:30:00.0-05:45')</expression>
 			<output>@T14:30:00.000</output>
 		</test>
-		<test name="ToTime4">
+		<test name="ToTime4" version="1.4">
 			<expression>ToTime('T14:30:00.0Z')</expression>
 			<output>@T14:30:00.000</output>
 		</test>
-		<test name="ToTimeMalformed">
+		<test name="ToTimeMalformed" version="1.4">
 			<expression>ToTime('T14-30-00.0')</expression>
 			<output>null</output>
 		</test>

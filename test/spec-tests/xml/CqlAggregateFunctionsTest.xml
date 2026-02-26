@@ -1,232 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
-	name="CqlAggregateFunctionsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#aggregate-functions">
-	<group name="AllTrue">
-		<test name="AllTrueAllTrue">
+	name="CqlAggregateFunctionsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#aggregate-functions" version="1.5">
+	<group name="AllTrue" version="1.5">
+		<test name="AllTrueAllTrue" version="1.5">
 			<expression>AllTrue({true,true})</expression>
 			<output>true</output>
 		</test>
-		<test name="AllTrueTrueFirst">
+		<test name="AllTrueTrueFirst" version="1.5">
 			<expression>AllTrue({true,false})</expression>
 			<output>false</output>
 		</test>
-		<test name="AllTrueFalseFirst">
+		<test name="AllTrueFalseFirst" version="1.5">
 			<expression>AllTrue({false,true})</expression>
 			<output>false</output>
 		</test>
-		<test name="AllTrueAllTrueFalseTrue">
+		<test name="AllTrueAllTrueFalseTrue" version="1.5">
 			<expression>AllTrue({true,false,true})</expression>
 			<output>false</output>
 		</test>
-		<test name="AllTrueAllFalseTrueFalse">
+		<test name="AllTrueAllFalseTrueFalse" version="1.5">
 			<expression>AllTrue({false,true,false})</expression>
 			<output>false</output>
 		</test>
-		<test name="AllTrueNullFirst">
+		<test name="AllTrueNullFirst" version="1.5">
 			<expression>AllTrue({null,true,true})</expression>
 			<output>true</output>
 		</test>
-		<test name="AllTrueEmptyList">
+		<test name="AllTrueEmptyList" version="1.5">
 			<expression>AllTrue({})</expression>
 			<output>true</output>
 		</test>
-		<test name="AllTrueIsTrueWhenNull">
+		<test name="AllTrueIsTrueWhenNull" version="1.5">
 			<expression>AllTrue(null)</expression>
 			<output>true</output>
 		</test>
 	</group>
-	<group name="AnyTrue">
-		<test name="AnyTrueAllTrue">
+	<group name="AnyTrue" version="1.5">
+		<test name="AnyTrueAllTrue" version="1.5">
 			<expression>AnyTrue({true,true})</expression>
 			<output>true</output>
 		</test>
-		<test name="AnyTrueAllFalse">
+		<test name="AnyTrueAllFalse" version="1.5">
 			<expression>AnyTrue({false,false})</expression>
 			<output>false</output>
 		</test>
-		<test name="AnyTrueAllTrueFalseTrue">
+		<test name="AnyTrueAllTrueFalseTrue" version="1.5">
 			<expression>AnyTrue({true,false,true})</expression>
 			<output>true</output>
 		</test>
-		<test name="AnyTrueAllFalseTrueFalse">
+		<test name="AnyTrueAllFalseTrueFalse" version="1.5">
 			<expression>AnyTrue({false,true,false})</expression>
 			<output>true</output>
 		</test>
-		<test name="AnyTrueTrueFirst">
+		<test name="AnyTrueTrueFirst" version="1.5">
 			<expression>AnyTrue({true,false})</expression>
 			<output>true</output>
 		</test>
-		<test name="AnyTrueFalseFirst">
+		<test name="AnyTrueFalseFirst" version="1.5">
 			<expression>AnyTrue({false,true})</expression>
 			<output>true</output>
 		</test>
-		<test name="AnyTrueNullFirstThenTrue">
+		<test name="AnyTrueNullFirstThenTrue" version="1.5">
 			<expression>AnyTrue({null,true})</expression>
 			<output>true</output>
 		</test>
-		<test name="AnyTrueNullFirstThenFalse">
+		<test name="AnyTrueNullFirstThenFalse" version="1.5">
 			<expression>AnyTrue({null,false})</expression>
 			<output>false</output>
 		</test>
-		<test name="AnyTrueEmptyList">
+		<test name="AnyTrueEmptyList" version="1.5">
 			<expression>AnyTrue({})</expression>
 			<output>false</output>
 		</test>
-		<test name="AnyTrueIsFalseWhenNull">
+		<test name="AnyTrueIsFalseWhenNull" version="1.5">
 			<expression>AnyTrue(null)</expression>
 			<output>false</output>
 		</test>
 	</group>
-	<group name="Avg">
-		<test name="AvgTest1">
+	<group name="Avg" version="1.5">
+		<test name="AvgTest1" version="1.5">
 			<expression>Avg({ 1.0, 2.0, 3.0, 6.0 })</expression>
 			<output>3.0</output>
 		</test>
 	</group>
-	<group name="Product">
-		<test name="ProductLong">
+	<group name="Product" version="1.5">
+		<test name="ProductLong" version="1.5">
 			<expression>Product({5L, 4L, 5L})</expression>
 			<output>100L</output>
 		</test>
 	</group>
-	<group name="Count">
-		<test name="CountTest1">
+	<group name="Count" version="1.5">
+		<test name="CountTest1" version="1.5">
 			<expression>Count({ 15, 5, 99, null, 1 })</expression>
 			<output>4</output>
 		</test>
-		<test name="CountTestDateTime">
+		<test name="CountTestDateTime" version="1.5">
 			<expression>Count({ DateTime(2014), DateTime(2001), DateTime(2010) })</expression>
 			<output>3</output>
 		</test>
-		<test name="CountTestTime">
+		<test name="CountTestTime" version="1.5">
 			<expression>Count({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 })</expression>
 			<output>3</output>
 		</test>
-		<test name="CountTestNull">
+		<test name="CountTestNull" version="1.5">
 			<expression>Count({})</expression>
 			<output>0</output>
 		</test>
 	</group>
-	<group name="Max">
-		<test name="MaxTestInteger">
+	<group name="Max" version="1.5">
+		<test name="MaxTestInteger" version="1.5">
 			<expression>Max({ 5, 12, 1, 15, 0, 4, 90, 44 })</expression>
 			<output>90</output>
 		</test>
-		<test name="MaxTestLong">
+		<test name="MaxTestLong" version="1.5">
 			<expression>Max({ 5L, 12L, 1L, 15L, 0L, 4L, 90L, 44L })</expression>
 			<output>90L</output>
 		</test>
-		<test name="MaxTestString">
+		<test name="MaxTestString" version="1.5">
 			<expression>Max({ 'hi', 'bye', 'zebra' })</expression>
 			<output>'zebra'</output>
 		</test>
-		<test name="MaxTestDateTime">
+		<test name="MaxTestDateTime" version="1.5">
 			<expression>Max({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6) })</expression>
 			<output>@2012-10-06T</output>
 		</test>
-		<test name="MaxTestTime">
+		<test name="MaxTestTime" version="1.5">
 			<expression>Max({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 })</expression>
 			<output>@T20:59:59.999</output>
 		</test>
 	</group>
-	<group name="Median">
-		<test name="MedianTestDecimal">
+	<group name="Median" version="1.5">
+		<test name="MedianTestDecimal" version="1.5">
 			<expression>Median({6.0, 5.0, 4.0, 3.0, 2.0, 1.0})</expression>
 			<output>3.5</output>
 		</test>
 	</group>
-	<group name="Min">
-		<test name="MinTestInteger">
+	<group name="Min" version="1.5">
+		<test name="MinTestInteger" version="1.5">
 			<expression>Min({5, 12, 1, 15, 0, 4, 90, 44})</expression>
 			<output>0</output>
 		</test>
-		<test name="MinTestLong">
+		<test name="MinTestLong" version="1.5">
 			<expression>Min({5L, 12L, 1L, 15L, 0L, 4L, 90L, 44L})</expression>
 			<output>0L</output>
 		</test>
-		<test name="MinTestString">
+		<test name="MinTestString" version="1.5">
 			<expression>Min({'hi', 'bye', 'zebra'})</expression>
 			<output>'bye'</output>
 		</test>
-		<test name="MinTestDateTime">
+		<test name="MinTestDateTime" version="1.5">
 			<expression>Min({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6) })</expression>
 			<output>@2012-09-05T</output>
 		</test>
-		<test name="MinTestTime">
+		<test name="MinTestTime" version="1.5">
 			<expression>Min({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 })</expression>
 			<output>@T05:59:59.999</output>
 		</test>
 	</group>
-	<group name="Mode">
-		<test name="ModeTestInteger">
+	<group name="Mode" version="1.5">
+		<test name="ModeTestInteger" version="1.5">
 			<expression>Mode({ 2, 1, 8, 2, 9, 1, 9, 9 })</expression>
 			<output>9</output>
 		</test>
-		<test name="ModeTestDateTime">
+		<test name="ModeTestDateTime" version="1.5">
 			<expression>Mode({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6), DateTime(2012, 9, 5) })</expression>
 			<output>@2012-09-05T</output>
 		</test>
-		<test name="ModeTestDateTime2">
+		<test name="ModeTestDateTime2" version="1.5">
 			<expression>Mode({ DateTime(2012, 10, 5), DateTime(2012, 10, 5), DateTime(2012, 10, 6), DateTime(2012, 9, 5) })</expression>
 			<output>@2012-10-05T</output>
 		</test>
-		<test name="ModeTestTime">
+		<test name="ModeTestTime" version="1.5">
 			<expression>Mode({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999, @T05:59:59.999 })</expression>
 			<output>@T05:59:59.999</output>
 		</test>
 	</group>
-	<group name="PopulationStdDev">
-		<test name="PopStdDevTest1">
+	<group name="PopulationStdDev" version="1.5">
+		<test name="PopStdDevTest1" version="1.5">
 			<expression>PopulationStdDev({ 1.0, 2.0, 3.0, 4.0, 5.0 })</expression>
 			<output>1.41421356</output>
 			<!-- 23730951454746218587388284504413604736328125 -->
 		</test>
-		<test name="PopulationStdDevIsNull">
+		<test name="PopulationStdDevIsNull" version="1.5">
 			<expression>PopulationStdDev({ null as Quantity, null as Quantity, null as Quantity })</expression>
 			<output>null</output>
 		</test>
 	</group>
-	<group name="PopulationVariance">
-		<test name="PopVarianceTest1">
+	<group name="PopulationVariance" version="1.5">
+		<test name="PopVarianceTest1" version="1.5">
 			<expression>PopulationVariance({ 1.0, 2.0, 3.0, 4.0, 5.0 })</expression>
 			<output>2.0</output>
 		</test>
-		<test name="PopVarianceIsNull">
+		<test name="PopVarianceIsNull" version="1.5">
 			<expression>PopulationVariance({ null as Quantity, null as Quantity, null as Quantity })</expression>
 			<output>null</output>
 		</test>
 	</group>
-	<group name="StdDev">
-		<test name="StdDevTest1">
+	<group name="StdDev" version="1.5">
+		<test name="StdDevTest1" version="1.5">
 			<expression>StdDev({ 1.0, 2.0, 3.0, 4.0, 5.0 })</expression>
 			<output>1.58113883</output>
 			<!-- 00841897613935316257993690669536590576171875 -->
 		</test>
-		<test name="StdDevIsNull">
+		<test name="StdDevIsNull" version="1.5">
 			<expression>StdDev({ null as Quantity, null as Quantity, null as Quantity })</expression>
 			<output>null</output>
 		</test>
 	</group>
-	<group name="Sum">
-		<test name="SumTest1">
+	<group name="Sum" version="1.5">
+		<test name="SumTest1" version="1.5">
 			<expression>Sum({ 6.0, 2.0, 3.0, 4.0, 5.0 })</expression>
 			<output>20.0</output>
 		</test>
-		<test name="SumTestLong">
+		<test name="SumTestLong" version="1.5">
 			<expression>Sum({ 6L, 2L, 3L, 4L, 5L })</expression>
 			<output>20L</output>
 		</test>
-		<test name="SumTestQuantity">
+		<test name="SumTestQuantity" version="1.5">
 			<expression>Sum({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})</expression>
 			<output>15 'ml'</output>
 		</test>
-		<test name="SumTestNull">
+		<test name="SumTestNull" version="1.5">
 			<expression>Sum({ null, 1, null })</expression>
 			<output>1</output>
 		</test>
 	</group>
-	<group name="Variance">
-		<test name="VarianceTest1">
+	<group name="Variance" version="1.5">
+		<test name="VarianceTest1" version="1.5">
 			<expression>Variance({ 1.0, 2.0, 3.0, 4.0, 5.0 })</expression>
 			<output>2.5</output>
 		</test>

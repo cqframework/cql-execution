@@ -62,7 +62,7 @@
           }
         },
         {
-          "name": "Group1",
+          "name": "Messaging",
           "context": "Patient",
           "accessLevel": "Public",
           "annotation": [],
