@@ -1,1451 +1,1733 @@
 {
-   "library" : {
-      "annotation" : [ {
-         "translatorVersion" : "3.27.0",
-         "translatorOptions" : "",
-         "signatureLevel" : "None",
-         "type" : "CqlToElmInfo"
-      } ],
-      "identifier" : {
-         "id" : "CqlLogicalOperatorsTest",
-         "version" : "1.4.0"
-      },
-      "schemaIdentifier" : {
-         "id" : "urn:hl7-org:elm",
-         "version" : "r1"
-      },
-      "usings" : {
-         "def" : [ {
-            "localIdentifier" : "System",
-            "uri" : "urn:hl7-org:elm-types:r1",
-            "annotation" : [ ]
-         }, {
-            "localIdentifier" : "QUICK",
-            "uri" : "http://hl7.org/fhir/us/qicore",
-            "version" : "3.3.0",
-            "annotation" : [ ]
-         } ]
-      },
-      "contexts" : {
-         "def" : [ {
-            "name" : "Patient",
-            "annotation" : [ ]
-         } ]
-      },
-      "statements" : {
-         "def" : [ {
-            "name" : "Patient",
-            "context" : "Patient",
-            "annotation" : [ ],
-            "expression" : {
-               "type" : "SingletonFrom",
-               "annotation" : [ ],
-               "signature" : [ ],
-               "operand" : {
-                  "dataType" : "{http://hl7.org/fhir/us/qicore}Patient",
-                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
-                  "type" : "Retrieve",
-                  "annotation" : [ ],
-                  "include" : [ ],
-                  "codeFilter" : [ ],
-                  "dateFilter" : [ ],
-                  "otherFilter" : [ ]
-               }
-            }
-         }, {
-            "name" : "And",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ ],
-            "expression" : {
-               "type" : "Tuple",
-               "annotation" : [ ],
-               "element" : [ {
-                  "name" : "TrueAndTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "And",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "TrueAndFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "And",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "false",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "TrueAndNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "And",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "FalseAndTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "And",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "false",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "FalseAndFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "And",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "false",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "FalseAndNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "And",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "false",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NullAndTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "And",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NullAndFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "And",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "false",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NullAndNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "And",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               } ]
-            }
-         }, {
-            "name" : "Implies",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ ],
-            "expression" : {
-               "type" : "Tuple",
-               "annotation" : [ ],
-               "element" : [ {
-                  "name" : "TrueImpliesTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Implies",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "TrueImpliesFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Implies",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "false",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "TrueImpliesNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Implies",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "FalseImpliesTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Implies",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "FalseImpliesFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Implies",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "FalseImpliesNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Implies",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NullImpliesTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Implies",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NullImpliesFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Implies",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NullImpliesNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Implies",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               } ]
-            }
-         }, {
-            "name" : "Not",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ ],
-            "expression" : {
-               "type" : "Tuple",
-               "annotation" : [ ],
-               "element" : [ {
-                  "name" : "NotTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Not",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "false",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NotFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Not",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NotNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Not",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               } ]
-            }
-         }, {
-            "name" : "Or",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ ],
-            "expression" : {
-               "type" : "Tuple",
-               "annotation" : [ ],
-               "element" : [ {
-                  "name" : "TrueOrTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Or",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "TrueOrFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Or",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "TrueOrNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Or",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "FalseOrTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Or",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "FalseOrFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Or",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "false",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "FalseOrNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Or",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NullOrTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Or",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NullOrFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Or",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NullOrNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Or",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               } ]
-            }
-         }, {
-            "name" : "Xor",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "annotation" : [ ],
-            "expression" : {
-               "type" : "Tuple",
-               "annotation" : [ ],
-               "element" : [ {
-                  "name" : "TrueXorTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Xor",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "false",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "TrueXorFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Xor",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "TrueXorNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Xor",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "FalseXorTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Xor",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "true",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "FalseXorFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Xor",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "value" : "false",
-                           "type" : "Literal",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "FalseXorNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Xor",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NullXorTrue",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Xor",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "true",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NullXorFalse",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Xor",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "value" : "false",
-                              "type" : "Literal",
-                              "annotation" : [ ]
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               }, {
-                  "name" : "NullXorNull",
-                  "value" : {
-                     "type" : "Tuple",
-                     "annotation" : [ ],
-                     "element" : [ {
-                        "name" : "expression",
-                        "value" : {
-                           "type" : "Xor",
-                           "annotation" : [ ],
-                           "signature" : [ ],
-                           "operand" : [ {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           }, {
-                              "asType" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "As",
-                              "annotation" : [ ],
-                              "signature" : [ ],
-                              "operand" : {
-                                 "type" : "Null",
-                                 "annotation" : [ ]
-                              }
-                           } ]
-                        }
-                     }, {
-                        "name" : "output",
-                        "value" : {
-                           "type" : "Null",
-                           "annotation" : [ ]
-                        }
-                     } ]
-                  }
-               } ]
-            }
-         } ]
+  "library": {
+    "annotation": [
+      {
+        "type": "CqlToElmInfo",
+        "translatorVersion": "4.2.0",
+        "translatorOptions": "",
+        "signatureLevel": "None"
       }
-   }
+    ],
+    "identifier": {
+      "id": "CqlLogicalOperatorsTest",
+      "version": "1.4.0"
+    },
+    "schemaIdentifier": {
+      "id": "urn:hl7-org:elm",
+      "version": "r1"
+    },
+    "usings": {
+      "def": [
+        {
+          "localIdentifier": "System",
+          "uri": "urn:hl7-org:elm-types:r1",
+          "annotation": []
+        },
+        {
+          "localIdentifier": "QUICK",
+          "uri": "http://hl7.org/fhir/us/qicore",
+          "version": "3.3.0",
+          "annotation": []
+        }
+      ]
+    },
+    "contexts": {
+      "def": [
+        {
+          "name": "Patient",
+          "annotation": []
+        }
+      ]
+    },
+    "statements": {
+      "def": [
+        {
+          "name": "Patient",
+          "context": "Patient",
+          "annotation": [],
+          "expression": {
+            "type": "SingletonFrom",
+            "annotation": [],
+            "signature": [],
+            "operand": {
+              "type": "Retrieve",
+              "dataType": "{http://hl7.org/fhir/us/qicore}Patient",
+              "templateId": "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
+              "annotation": [],
+              "include": [],
+              "codeFilter": [],
+              "dateFilter": [],
+              "otherFilter": []
+            }
+          }
+        },
+        {
+          "name": "And",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "TrueAndTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "And",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TrueAndFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "And",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TrueAndNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "And",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FalseAndTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "And",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FalseAndFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "And",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FalseAndNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "And",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NullAndTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "And",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NullAndFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "And",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NullAndNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "And",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Implies",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "TrueImpliesTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Implies",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TrueImpliesFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Implies",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TrueImpliesNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Implies",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FalseImpliesTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Implies",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FalseImpliesFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Implies",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FalseImpliesNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Implies",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NullImpliesTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Implies",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NullImpliesFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Implies",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NullImpliesNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Implies",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Not",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "NotTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Not",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "value": "true",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NotFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Not",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "value": "false",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NotNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Not",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "As",
+                          "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Null",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Or",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "TrueOrTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Or",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TrueOrFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Or",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TrueOrNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Or",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FalseOrTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Or",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FalseOrFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Or",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FalseOrNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Or",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NullOrTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Or",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NullOrFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Or",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NullOrNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Or",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "Xor",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "expression": {
+            "type": "Tuple",
+            "annotation": [],
+            "element": [
+              {
+                "name": "TrueXorTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Xor",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TrueXorFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Xor",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TrueXorNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Xor",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FalseXorTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Xor",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "true",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FalseXorFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Xor",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "value": "false",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FalseXorNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Xor",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NullXorTrue",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Xor",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "true",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NullXorFalse",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Xor",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "value": "false",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NullXorNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Xor",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "As",
+                            "asType": "{urn:hl7-org:elm-types:r1}Boolean",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Null",
+                              "annotation": []
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
 }
-
