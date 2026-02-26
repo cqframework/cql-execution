@@ -424,11 +424,9 @@ define "DateTimeComponentFrom": Tuple{
     output: 955
   },
   "DateTimeComponentFromTimezone": Tuple{
-    skipped: 'Translation Error: Timezone keyword is only valid in 1.3 or lower'
-    /*
     expression: timezone from DateTime(2003, 10, 29, 20, 50, 33, 955, 1),
     invalid: true
-    */  },
+  },
   "DateTimeComponentFromTimezone2": Tuple{
     expression: timezoneoffset from DateTime(2003, 10, 29, 20, 50, 33, 955, 1),
     output: 1.00
@@ -702,17 +700,13 @@ define "Uncertainty tests": Tuple{
     output: 2
   },
   "TimeDurationBetweenHourDiffPrecision": Tuple{
-    skipped: 'Translation Error: Syntax error at Z'
-    /*
     expression: hours between @T06Z and @T07:00:00Z,
     invalid: true
-    */  },
+  },
   "TimeDurationBetweenHourDiffPrecision2": Tuple{
-    skipped: 'Wrong output: Duration in hours between T06 and T07:00:00 should be Uncertainty[0, 1]'
-    /*
     expression: hours between @T06 and @T07:00:00,
     output: 1
-    */  },
+  },
   "TimeDurationBetweenMinute": Tuple{
     expression: minutes between @T23:20:16.555 and @T23:25:15.555,
     output: 4
@@ -1225,11 +1219,9 @@ define "Subtract": Tuple{
     output: @2005-05-10T05:05:05
   },
   "DateTimeSubtract1YearInSeconds": Tuple{
-    skipped: 'Spec says to convert more precise duration to most precise unit in Date. How do you convert seconds to months? 31535999 is 364.999 days, which isn\'t quite 12 months, so we answer 2015-06.'
-    /*
     expression: DateTime(2016,5) - 31535999 seconds = DateTime(2015, 5),
     output: true
-    */  },
+  },
   "DateTimeSubtract15HourPrecisionSecond": Tuple{
     expression: DateTime(2016, 10, 1, 10, 20, 30) - 15 hours,
     output: @2016-09-30T19:20:30

@@ -7133,12 +7133,158 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: This test is drawn directly from an example in the spec and yet expects a different answer! See: https://cql.hl7.org/09-b-cqlreference.html#expand",
-                        "annotation": []
+                        "type": "Expand",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "List",
+                            "annotation": [],
+                            "element": [
+                              {
+                                "type": "Interval",
+                                "lowClosed": true,
+                                "highClosed": true,
+                                "annotation": [],
+                                "low": {
+                                  "type": "Time",
+                                  "annotation": [],
+                                  "signature": [],
+                                  "hour": {
+                                    "type": "Literal",
+                                    "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value": "10",
+                                    "annotation": []
+                                  },
+                                  "minute": {
+                                    "type": "Literal",
+                                    "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value": "0",
+                                    "annotation": []
+                                  }
+                                },
+                                "high": {
+                                  "type": "Time",
+                                  "annotation": [],
+                                  "signature": [],
+                                  "hour": {
+                                    "type": "Literal",
+                                    "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value": "12",
+                                    "annotation": []
+                                  },
+                                  "minute": {
+                                    "type": "Literal",
+                                    "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value": "30",
+                                    "annotation": []
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Quantity",
+                            "value": 1,
+                            "unit": "hour",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "List",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "10",
+                                "annotation": []
+                              }
+                            },
+                            "high": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "10",
+                                "annotation": []
+                              }
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "11",
+                                "annotation": []
+                              }
+                            },
+                            "high": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "11",
+                                "annotation": []
+                              }
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "12",
+                                "annotation": []
+                              }
+                            },
+                            "high": {
+                              "type": "Time",
+                              "annotation": [],
+                              "signature": [],
+                              "hour": {
+                                "type": "Literal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                "value": "12",
+                                "annotation": []
+                              }
+                            }
+                          }
+                        ]
                       }
                     }
                   ]
@@ -7351,12 +7497,106 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Decimal>>,System.Integer).",
-                        "annotation": []
+                        "type": "Expand",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "List",
+                            "annotation": [],
+                            "element": [
+                              {
+                                "type": "Interval",
+                                "lowClosed": true,
+                                "highClosed": true,
+                                "annotation": [],
+                                "low": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                                  "value": "10.0",
+                                  "annotation": []
+                                },
+                                "high": {
+                                  "type": "Literal",
+                                  "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                                  "value": "12.5",
+                                  "annotation": []
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Quantity",
+                            "value": 1,
+                            "unit": "1",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "List",
+                        "annotation": [],
+                        "element": [
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "10",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "10",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "11",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "11",
+                              "annotation": []
+                            }
+                          },
+                          {
+                            "type": "Interval",
+                            "lowClosed": true,
+                            "highClosed": true,
+                            "annotation": [],
+                            "low": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "12",
+                              "annotation": []
+                            },
+                            "high": {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "12",
+                              "annotation": []
+                            }
+                          }
+                        ]
                       }
                     }
                   ]

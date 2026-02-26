@@ -1,14 +1,5 @@
 # Invalid CQL (does not translate)
-CqlTypesTest.Time.TimeUpperBoundHours               Translation Error: Invalid time input (T24:59:59.999). Use ISO 8601 time representation (hh:mm:ss.fff).
-CqlTypesTest.Time.TimeUpperBoundMinutes             Translation Error: Invalid time input (T23:60:59.999). Use ISO 8601 time representation (hh:mm:ss.fff).
-CqlTypesTest.Time.TimeUpperBoundSeconds             Translation Error: Invalid time input (T23:59:60.999). Use ISO 8601 time representation (hh:mm:ss.fff).
-"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision" Translation Error: Syntax error at Z
-CqlDateTimeOperatorsTest.DateTimeComponentFrom.DateTimeComponentFromTimezone      Translation Error: Timezone keyword is only valid in 1.3 or lower
-CqlIntervalOperatorsTest.Expand.ExpandPer1          Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Decimal>>,System.Integer).
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1        Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Integer>>,System.Decimal).
-
-# Invalid CQL (translates, but invalid for another reason)
-CqlTypesTest.Quantity.QuantityTest2     Invalid UCUM unit: According to UCUM spec, custom units only support ASCII characters 33-126, which does not include the space character
 
 # Invalid Translation (translates, but translates wrong)
 CqlAggregateTest.AggregateTests.RolledOutIntervals  CQL adds an integer to a date ("S + duration in days of X"). Should be "S + Quantity{ value: duration in days of X, unit: 'days' }". Translator translates it, but probably shouldn't.
@@ -19,17 +10,13 @@ CqlListOperatorsTest.IncludedIn.IncludedInNullLeft    Treats null as point overl
 CqlListOperatorsTest.Includes.IncludesNullRight       Treats null as point overload, translating to "Contains" operator, which has different semantics (and different result)
 
 # Incorrect Expected Output
-"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision2" Wrong output: Duration in hours between T06 and T07:00:00 should be Uncertainty[0, 1]
-CqlIntervalOperatorsTest.Expand.ExpandPerHour                   Wrong output: This test is drawn directly from an example in the spec and yet expects a different answer! See: https://cql.hl7.org/09-b-cqlreference.html#expand
 CqlIntervalOperatorsTest.In.TestInNullBoundaries                Wrong output: According to spec, comparison against null closed boundaries should result in true
 CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
 CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 
 # Potentially Incorrect Expected Output
-CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract1YearInSeconds  Spec says to convert more precise duration to most precise unit in Date. How do you convert seconds to months? 31535999 is 364.999 days, which isn't quite 12 months, so we answer 2015-06.
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
-CqlTypesTest.DateTime.DateTimeNull                                Should DateTime(null) really evaluate to null?
 
 # Incorrect answer
 CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)

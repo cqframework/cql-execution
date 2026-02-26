@@ -54,12 +54,16 @@ async function main() {
   try {
     await fs.stat(SKIP_LIST_PATH);
   } catch {
-    console.error('The check-skip-list script must be run from the project root directory. Use "npm run check-skip-list".');
+    console.error(
+      'The check-skip-list script must be run from the project root directory. Use "npm run check-skip-list".'
+    );
     process.exit(1);
   }
 
   console.log('NOTE: This script incrementally modifies the file: test/spec-tests/skip-list.txt.');
-  console.log('If you abort the script before it is completed, check that file to ensure it is correct.\n');
+  console.log(
+    'If you abort the script before it is completed, check that file to ensure it is correct.\n'
+  );
 
   const originalText = await fs.readFile(SKIP_LIST_PATH, 'utf8');
   const nl = originalText.includes('\r\n') ? '\r\n' : '\n';
@@ -93,7 +97,9 @@ async function main() {
       totalCandidateSuites++;
     }
   }
-  console.log(`\nOriginal skip-list.txt file skips ${totalCandidateSuites} test suites and ${totalCandidateTests} test cases.`);
+  console.log(
+    `\nOriginal skip-list.txt file skips ${totalCandidateSuites} test suites and ${totalCandidateTests} test cases.`
+  );
 
   // Iterate through skip-list entries
   for (let i = 0; i < lines.length; ) {
@@ -113,7 +119,9 @@ async function main() {
     await fs.writeFile(SKIP_LIST_PATH, lines.join(nl), 'utf8');
 
     // Rebuild then tests
-    console.log(`\n[${processed}/${totalCandidateSuites + totalCandidateTests}] Testing without skipping ${token}`);
+    console.log(
+      `\n[${processed}/${totalCandidateSuites + totalCandidateTests}] Testing without skipping ${token}`
+    );
     try {
       await rebuildSpec();
     } catch (e) {

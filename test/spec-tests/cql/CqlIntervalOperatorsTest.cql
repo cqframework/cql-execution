@@ -279,11 +279,9 @@ define "Expand": Tuple{
     output: { @2018-01-01, @2018-01-03 }
     */  },
   "ExpandPerHour": Tuple{
-    skipped: 'Wrong output: This test is drawn directly from an example in the spec and yet expects a different answer! See: https://cql.hl7.org/09-b-cqlreference.html#expand'
-    /*
     expression: expand { Interval[@T10:00, @T12:30] } per hour,
     output: { Interval[@T10, @T10], Interval[@T11, @T11], Interval[@T12, @T12] }
-    */  },
+  },
   "ExpandPerHourIntervalOverload": Tuple{
     skipped: 'Wrong answer (single interval overload should return list of points)'
     /*
@@ -301,11 +299,9 @@ define "Expand": Tuple{
     output: { @T10, @T11, @T12 }
     */  },
   "ExpandPer1": Tuple{
-    skipped: 'Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Decimal>>,System.Integer).'
-    /*
     expression: expand { Interval[10.0, 12.5] } per 1,
     output: { Interval[10, 10], Interval[11, 11], Interval[12, 12] }
-    */  },
+  },
   "ExpandPer1IntervalOverload": Tuple{
     skipped: 'Wrong answer (single interval overload should return list of points)'
     /*
