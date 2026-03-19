@@ -86,7 +86,7 @@
     "prettier": "^3.8.1",
     "should": "^13.2.3",
     "should-sinon": "0.0.6",
-    "sinon": "^21.0.1",
+    "sinon": "^21.0.3",
     "test-console": "^2.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
