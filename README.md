@@ -62,8 +62,10 @@ The above is a partial list covering the most significant limitations. For more 
 
 To use this project, you should perform the following steps:
 
-1. Install [Node.js](http://nodejs.org/) (Note: `npm` version `6.x.x` recommended)
+1. Install [Node.js](http://nodejs.org/) LTS<sup>*</sup>
 2. Execute the following from the root directory: `npm install`
+
+<sup>*</sup> This project is primarily developed and tested using Node 24.x, but all versions >= 18.x are expected to work. Since Node 18.x has reached end-of-life, developers should consider this project's support for Node 18.x to be _deprecated_.
 
 # To Execute Your CQL
 

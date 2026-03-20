@@ -7,56 +7,54 @@ jobs:
     name: Check npm audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: '18.x'
+          node-version: 24.x
       - run: npm audit
-        env:
-          CI: true
   cql4browsers:
     name: Check cql4browsers
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: '18.x'
+          node-version: 24.x
       - run: ./bin/validate_cql4browsers.sh
-        env:
-          CI: true
   lint:
     name: Check lint and prettier
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: '18.x'
+          node-version: 24.x
       - run: npm install
       - run: npm run lint
       - run: npm run prettier
-        env:
-          CI: true
+      - run: ./bin/check_for_nonassertive_tests.sh
   test:
-    name: Test on node 18 and ubuntu-latest
+    name: Test using Node ${{ matrix.node }} on ubuntu-latest
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18.x, 22.x, 24.x]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: '18.x'
+          node-version: ${{ matrix.node }}
       - name: Set timezone to America/New_York
         uses: zcong1993/setup-timezone@master
         with:
           timezone: America/New_York
       - run: date +"%Y-%m-%d %T"
       - run: npm install
-      - run: ./bin/check_for_nonassertive_tests.sh
       - run: npx nyc --reporter=lcov npm test
         env:
           CI: true
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        if: ${{ matrix.node == '24.x' }}
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
