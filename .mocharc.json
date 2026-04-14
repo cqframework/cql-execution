@@ -1,4 +1,5 @@
 {
+  "ignore": ["test/spec-tests/*.js"],
   "extension": ["ts"],
   "require": "ts-node/register"
 }
