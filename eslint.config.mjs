@@ -19,6 +19,7 @@ export default defineConfig([
     '**/.eslintrc.json',
     '**/lib',
     '**/lib-test',
+    'test-server',
     'examples/browser/cql4browsers.js',
     'test/elm/library/data-with-namespace.js'
   ]),
