@@ -6,7 +6,7 @@ import {
   TupleTypeSpecifier,
   TupleElementDefinition,
   AnyTypeSpecifier
-} from 'cql-execution';
+} from '../../..';
 
 export function typeToCqlTypeSpecifier(
   typeOrSpecifier: string | AnyTypeSpecifier = '{urn:hl7-org:elm-types:r1}Any'

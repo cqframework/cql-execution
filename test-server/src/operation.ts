@@ -1,7 +1,7 @@
 import { Parameters } from 'fhir/r4';
 import logger from './logger';
 import { translate } from './translate';
-import { CodeService, DateTime, Executor, Library } from 'cql-execution';
+import { CodeService, DateTime, Executor, Library } from '../..';
 import { PatientSource } from 'cql-exec-fhir';
 import { toParameters } from './convert';
 
