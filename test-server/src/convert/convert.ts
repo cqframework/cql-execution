@@ -21,7 +21,7 @@ import {
   IntervalTypeSpecifier,
   ListTypeSpecifier,
   TupleTypeSpecifier
-} from 'cql-execution';
+} from '../../..';
 import { guessSpecifierType, typeToCqlTypeSpecifier, typeToCqlTypeString } from './cqlTypes';
 import { emptyListParameter, nullValueParameter, emptyTupleParameter } from './specialParameters';
 import logger from '../logger';

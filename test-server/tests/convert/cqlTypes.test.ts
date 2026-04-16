@@ -18,8 +18,8 @@ import {
   Quantity,
   RecordObject,
   TupleTypeSpecifier
-} from 'cql-execution';
-import { Uncertainty } from 'cql-execution/lib/datatypes/uncertainty';
+} from '../../..';
+import { Uncertainty } from '../../../lib/datatypes/uncertainty';
 
 describe('typeToCqlTypeSpecifier', () => {
   it('converts System.* string to NamedTypeSpecifier with ELM namespace', () => {

@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "build": "tsc && npm run copyfiles",
+    "build": "npm --prefix .. run build && tsc && npm run copyfiles",
     "copyfiles": "copyfiles -u 1 src/translate/**/*.{xml,cql} dist",
     "start": "node dist/app.js",
-    "dev": "tsx watch src/app.ts",
+    "dev": "npm --prefix .. run build && tsx watch src/app.ts",
     "check": "npm run test && npm run lint && npm run prettier",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -22,7 +22,6 @@
   "dependencies": {
     "@cqframework/cql": "^4.0.0-beta.1",
     "cql-exec-fhir": "^2.1.6",
-    "cql-execution": "^3.3.0",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "tslog": "^4.9.3"
