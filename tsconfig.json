@@ -11,7 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "sourceMap": true,
-    "moduleResolution": "node",
-    "module": "CommonJS"
+    "moduleResolution": "nodenext",
+    "module": "NodeNext"
   }
 }
