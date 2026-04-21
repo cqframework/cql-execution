@@ -1,6 +1,6 @@
 import * as luxon from 'luxon';
 import should from 'should';
-import { Date, DateTime } from '../../src/datatypes/datetime';
+import { Date, DateTime, MAX_DATE_VALUE, MIN_DATE_VALUE } from '../../src/datatypes/datetime';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 import { jsDate } from '../../src/util/util';
 
@@ -47,6 +47,11 @@ describe('Date', () => {
   it('should toString yyyy-mm-dd', () => {
     const d = new Date(2012, 10, 25);
     d.toString().should.eql('2012-10-25');
+  });
+
+  it('should toString min and max values', () => {
+    MIN_DATE_VALUE.toString().should.eql('0001-01-01');
+    MAX_DATE_VALUE.toString().should.eql('9999-12-31');
   });
 
   it('should return null when parsing non-string', () => should(Date.parse(20121025)).be.null());
