@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as luxon from 'luxon';
 import should from 'should';
-import { DateTime } from '../../src/datatypes/datetime';
+import { DateTime, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } from '../../src/datatypes/datetime';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 
 const tzDate = function (
@@ -185,6 +185,11 @@ describe('DateTime', () => {
 
     d = new DateTime(2012, 10, 25, 12, 55, 14, 953, -5);
     d.toString().should.eql('2012-10-25T12:55:14.953-05:00');
+  });
+
+  it('should toString min and max values', () => {
+    MIN_DATETIME_VALUE.toString().should.match(/^0001-01-01T00:00:00\.000([+-]\d\d:\d\d|Z)$/);
+    MAX_DATETIME_VALUE.toString().should.match(/^9999-12-31T23:59:59\.999([+-]\d\d:\d\d|Z)$/);
   });
 
   it('should be null when parsing non-string', () => should(DateTime.parse(20121025)).be.null());

@@ -1327,9 +1327,6 @@ class DateTime extends AbstractDate {
     toJSON() {
         return this.toString();
     }
-    _pad(num) {
-        return String('0' + num).slice(-2);
-    }
     toString() {
         if (this.isTime()) {
             return this.toStringTime();
@@ -1341,13 +1338,13 @@ class DateTime extends AbstractDate {
     toStringTime() {
         let str = '';
         if (this.hour != null) {
-            str += this._pad(this.hour);
+            str += String(this.hour).padStart(2, '0');
             if (this.minute != null) {
-                str += ':' + this._pad(this.minute);
+                str += ':' + String(this.minute).padStart(2, '0');
                 if (this.second != null) {
-                    str += ':' + this._pad(this.second);
+                    str += ':' + String(this.second).padStart(2, '0');
                     if (this.millisecond != null) {
-                        str += '.' + String('00' + this.millisecond).slice(-3);
+                        str += '.' + String(this.millisecond).padStart(3, '0');
                     }
                 }
             }
@@ -1357,19 +1354,19 @@ class DateTime extends AbstractDate {
     toStringDateTime() {
         let str = '';
         if (this.year != null) {
-            str += this.year;
+            str += String(this.year).padStart(4, '0');
             if (this.month != null) {
-                str += '-' + this._pad(this.month);
+                str += '-' + String(this.month).padStart(2, '0');
                 if (this.day != null) {
-                    str += '-' + this._pad(this.day);
+                    str += '-' + String(this.day).padStart(2, '0');
                     if (this.hour != null) {
-                        str += 'T' + this._pad(this.hour);
+                        str += 'T' + String(this.hour).padStart(2, '0');
                         if (this.minute != null) {
-                            str += ':' + this._pad(this.minute);
+                            str += ':' + String(this.minute).padStart(2, '0');
                             if (this.second != null) {
-                                str += ':' + this._pad(this.second);
+                                str += ':' + String(this.second).padStart(2, '0');
                                 if (this.millisecond != null) {
-                                    str += '.' + String('00' + this.millisecond).slice(-3);
+                                    str += '.' + String(this.millisecond).padStart(3, '0');
                                 }
                             }
                         }
@@ -1380,9 +1377,9 @@ class DateTime extends AbstractDate {
         if (str.indexOf('T') !== -1 && this.timezoneOffset != null) {
             str += this.timezoneOffset < 0 ? '-' : '+';
             const offsetHours = Math.floor(Math.abs(this.timezoneOffset));
-            str += this._pad(offsetHours);
+            str += String(offsetHours).padStart(2, '0');
             const offsetMin = (Math.abs(this.timezoneOffset) - offsetHours) * 60;
-            str += ':' + this._pad(offsetMin);
+            str += ':' + String(offsetMin).padStart(2, '0');
         }
         return str;
     }
@@ -1589,7 +1586,7 @@ class Date extends AbstractDate {
     toString() {
         let str = '';
         if (this.year != null) {
-            str += this.year.toString();
+            str += this.year.toString().padStart(4, '0');
             if (this.month != null) {
                 str += '-' + this.month.toString().padStart(2, '0');
                 if (this.day != null) {
