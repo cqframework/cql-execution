@@ -1,0 +1,46 @@
+{
+  "name": "cql-test-server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "build": "npm --prefix .. run build && tsc && npm run copyfiles",
+    "copyfiles": "copyfiles -u 1 src/translate/**/*.{xml,cql} dist",
+    "start": "node dist/app.js",
+    "dev": "npm --prefix .. run build && tsx watch src/app.ts",
+    "check": "npm run test && npm run lint && npm run prettier",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier --check \"**/*.{js,mjs,ts}\"",
+    "prettier:fix": "prettier --write \"**/*.{js,mjs,ts}\"",
+    "test": "vitest run",
+    "test:watch": "vitest -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@cqframework/cql": "^4.0.0-beta.1",
+    "cql-exec-fhir": "^2.1.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "tslog": "^4.9.3"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/js": "^10.0.1",
+    "@types/express": "^5.0.6",
+    "@types/fhir": "^0.0.41",
+    "@types/node": "^25.5.0",
+    "@typescript-eslint/eslint-plugin": "^8.58.2",
+    "@typescript-eslint/parser": "^8.58.2",
+    "copyfiles": "^2.4.1",
+    "eslint": "^10.2.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.8.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.4"
+  }
+}

@@ -15,14 +15,7 @@ const compat = new FlatCompat({
 });
 
 export default defineConfig([
-  globalIgnores([
-    '**/.eslintrc.json',
-    '**/lib',
-    '**/lib-test',
-    'test-server',
-    'examples/browser/cql4browsers.js',
-    'test/elm/library/data-with-namespace.js'
-  ]),
+  globalIgnores(['dist', 'node_modules']),
   {
     extends: compat.extends('plugin:@typescript-eslint/recommended', 'prettier'),
     languageOptions: {

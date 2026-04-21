@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "rootDir": "..",
+    "types": ["vitest/globals"],
+    "noEmit": true,
+    "paths": {
+      "@src/*": ["../src/*"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "exclude": []
+}

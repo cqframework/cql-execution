@@ -350,6 +350,10 @@ modification to the test data text file, you can setup a process to _watch_ for 
 regenerate the `data.js` files every time it detects changes in the source text file.  Simply
 execute `npm run watch:test-data`.
 
+# Using the Test Server and CQL Tests Runner
+
+See [test-server/README.md](test-server/README.md).
+
 # Pull Requests
 
 If TypeScript source code is modified, `cql4browsers.js` needs to be included in the pull request,
