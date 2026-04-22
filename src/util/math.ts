@@ -12,6 +12,8 @@ import { Uncertainty } from '../datatypes/uncertainty';
 
 export const MAX_INT_VALUE = Math.pow(2, 31) - 1;
 export const MIN_INT_VALUE = Math.pow(-2, 31);
+export const MAX_LONG_VALUE = Math.pow(2, 63) - 1;
+export const MIN_LONG_VALUE = Math.pow(-2, 63);
 export const MAX_FLOAT_VALUE = 99999999999999999999.99999999;
 export const MIN_FLOAT_VALUE = -99999999999999999999.99999999;
 export const MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
@@ -52,6 +54,7 @@ export function overflowsOrUnderflows(value: any): boolean {
       return true;
     }
   } else if (Number.isInteger(value)) {
+    // TODO: Somehow distinguish Integer from Long
     if (!isValidInteger(value)) {
       return true;
     }
@@ -73,6 +76,19 @@ export function isValidInteger(integer: any) {
     return false;
   }
   if (integer < MIN_INT_VALUE) {
+    return false;
+  }
+  return true;
+}
+
+export function isValidLong(long: any) {
+  if (isNaN(long)) {
+    return false;
+  }
+  if (long > MAX_LONG_VALUE) {
+    return false;
+  }
+  if (long < MIN_LONG_VALUE) {
     return false;
   }
   return true;
@@ -113,6 +129,7 @@ export class OverFlowException extends Exception {}
 export function successor(val: any): any {
   if (typeof val === 'number') {
     if (Number.isInteger(val)) {
+      // TODO: Somehow distinguish Integer from Long
       if (val >= MAX_INT_VALUE) {
         throw new OverFlowException();
       } else {
@@ -165,6 +182,7 @@ export function successor(val: any): any {
 export function predecessor(val: any): any {
   if (typeof val === 'number') {
     if (Number.isInteger(val)) {
+      // TODO: Somehow distinguish Integer from Long
       if (val <= MIN_INT_VALUE) {
         throw new OverFlowException();
       } else {
@@ -216,6 +234,7 @@ export function predecessor(val: any): any {
 
 export function maxValueForInstance(val: any) {
   if (typeof val === 'number') {
+    // TODO: Somehow distinguish Integer from Long
     if (Number.isInteger(val)) {
       return MAX_INT_VALUE;
     } else {
@@ -240,6 +259,8 @@ export function maxValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
     case '{urn:hl7-org:elm-types:r1}Integer':
       return MAX_INT_VALUE;
+    case '{urn:hl7-org:elm-types:r1}Long':
+      return MAX_LONG_VALUE;
     case '{urn:hl7-org:elm-types:r1}Decimal':
       return MAX_FLOAT_VALUE;
     case '{urn:hl7-org:elm-types:r1}DateTime':
@@ -263,6 +284,7 @@ export function maxValueForType(type: string, quantityInstance?: Quantity) {
 
 export function minValueForInstance(val: any) {
   if (typeof val === 'number') {
+    // TODO: Somehow distinguish Integer from Long
     if (Number.isInteger(val)) {
       return MIN_INT_VALUE;
     } else {
@@ -287,6 +309,8 @@ export function minValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
     case '{urn:hl7-org:elm-types:r1}Integer':
       return MIN_INT_VALUE;
+    case '{urn:hl7-org:elm-types:r1}Long':
+      return MIN_LONG_VALUE;
     case '{urn:hl7-org:elm-types:r1}Decimal':
       return MIN_FLOAT_VALUE;
     case '{urn:hl7-org:elm-types:r1}DateTime':
