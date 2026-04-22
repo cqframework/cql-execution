@@ -3677,6 +3677,7 @@ class MinValue extends expression_1.Expression {
 exports.MinValue = MinValue;
 MinValue.MIN_VALUES = {
     '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MIN_INT_VALUE,
+    '{urn:hl7-org:elm-types:r1}Long': MathUtil.MIN_LONG_VALUE,
     '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MIN_FLOAT_VALUE,
     '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MIN_DATETIME_VALUE,
     '{urn:hl7-org:elm-types:r1}Date': MathUtil.MIN_DATE_VALUE,
@@ -3706,6 +3707,7 @@ class MaxValue extends expression_1.Expression {
 exports.MaxValue = MaxValue;
 MaxValue.MAX_VALUES = {
     '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MAX_INT_VALUE,
+    '{urn:hl7-org:elm-types:r1}Long': MathUtil.MAX_LONG_VALUE,
     '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MAX_FLOAT_VALUE,
     '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MAX_DATETIME_VALUE,
     '{urn:hl7-org:elm-types:r1}Date': MathUtil.MAX_DATE_VALUE,
@@ -5964,7 +5966,7 @@ exports.Slice = Slice;
 },{"../util/comparison":52,"../util/immutableUtil":54,"../util/util":57,"./builder":16,"./expression":22,"immutable":72}],29:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.StringLiteral = exports.DecimalLiteral = exports.IntegerLiteral = exports.BooleanLiteral = exports.Literal = void 0;
+exports.StringLiteral = exports.DecimalLiteral = exports.LongLiteral = exports.IntegerLiteral = exports.BooleanLiteral = exports.Literal = void 0;
 const expression_1 = require("./expression");
 class Literal extends expression_1.Expression {
     static from(json) {
@@ -5973,6 +5975,8 @@ class Literal extends expression_1.Expression {
                 return new BooleanLiteral(json);
             case '{urn:hl7-org:elm-types:r1}Integer':
                 return new IntegerLiteral(json);
+            case '{urn:hl7-org:elm-types:r1}Long':
+                return new LongLiteral(json);
             case '{urn:hl7-org:elm-types:r1}Decimal':
                 return new DecimalLiteral(json);
             case '{urn:hl7-org:elm-types:r1}String':
@@ -6022,6 +6026,21 @@ class IntegerLiteral extends Literal {
     }
 }
 exports.IntegerLiteral = IntegerLiteral;
+class LongLiteral extends Literal {
+    constructor(json) {
+        super(json);
+        this.value = parseInt(this.value, 10);
+    }
+    // Define a simple getter to allow type-checking of this class without instanceof
+    // and in a way that survives minification (as opposed to checking constructor.name)
+    get isLongLiteral() {
+        return true;
+    }
+    async exec(_ctx) {
+        return this.value;
+    }
+}
+exports.LongLiteral = LongLiteral;
 class DecimalLiteral extends Literal {
     constructor(json) {
         super(json);
@@ -7529,7 +7548,7 @@ exports.TupleElementDefinition = TupleElementDefinition;
 },{"./builder":16,"./expression":22}],41:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TupleTypeSpecifier = exports.NamedTypeSpecifier = exports.ListTypeSpecifier = exports.IntervalTypeSpecifier = exports.Is = exports.CanConvertQuantity = exports.ConvertQuantity = exports.ConvertsToTime = exports.ConvertsToString = exports.ConvertsToRatio = exports.ConvertsToQuantity = exports.ConvertsToInteger = exports.ConvertsToDecimal = exports.ConvertsToDateTime = exports.ConvertsToDate = exports.ConvertsToBoolean = exports.Convert = exports.ToTime = exports.ToString = exports.ToRatio = exports.ToQuantity = exports.ToInteger = exports.ToDecimal = exports.ToDateTime = exports.ToDate = exports.ToConcept = exports.ToBoolean = exports.As = void 0;
+exports.TupleTypeSpecifier = exports.NamedTypeSpecifier = exports.ListTypeSpecifier = exports.IntervalTypeSpecifier = exports.Is = exports.CanConvertQuantity = exports.ConvertQuantity = exports.ConvertsToTime = exports.ConvertsToString = exports.ConvertsToRatio = exports.ConvertsToQuantity = exports.ConvertsToInteger = exports.ConvertsToDecimal = exports.ConvertsToDateTime = exports.ConvertsToDate = exports.ConvertsToBoolean = exports.Convert = exports.ToTime = exports.ToString = exports.ToRatio = exports.ToQuantity = exports.ToLong = exports.ToInteger = exports.ToDecimal = exports.ToDateTime = exports.ToDate = exports.ToConcept = exports.ToBoolean = exports.As = void 0;
 const expression_1 = require("./expression");
 const datetime_1 = require("../datatypes/datetime");
 const clinical_1 = require("../datatypes/clinical");
@@ -7675,7 +7694,12 @@ class ToInteger extends expression_1.Expression {
     }
     async exec(ctx) {
         const arg = await this.execArgs(ctx);
-        if (typeof arg === 'string') {
+        if (typeof arg === 'number') {
+            if ((0, math_1.isValidInteger)(arg)) {
+                return arg;
+            }
+        }
+        else if (typeof arg === 'string') {
             const integer = parseInt(arg);
             if ((0, math_1.isValidInteger)(integer)) {
                 return integer;
@@ -7688,6 +7712,30 @@ class ToInteger extends expression_1.Expression {
     }
 }
 exports.ToInteger = ToInteger;
+class ToLong extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    async exec(ctx) {
+        const arg = await this.execArgs(ctx);
+        if (typeof arg === 'number') {
+            if ((0, math_1.isValidLong)(arg)) {
+                return arg;
+            }
+        }
+        else if (typeof arg === 'string') {
+            const long = parseInt(arg);
+            if ((0, math_1.isValidLong)(long)) {
+                return long;
+            }
+        }
+        else if (typeof arg === 'boolean') {
+            return arg ? 1 : 0;
+        }
+        return null;
+    }
+}
+exports.ToLong = ToLong;
 class ToQuantity extends expression_1.Expression {
     constructor(json) {
         super(json);
@@ -8487,6 +8535,7 @@ class Context {
             case '{urn:hl7-org:elm-types:r1}Decimal':
                 return typeof val === 'number';
             case '{urn:hl7-org:elm-types:r1}Integer':
+            case '{urn:hl7-org:elm-types:r1}Long':
                 return typeof val === 'number' && Math.floor(val) === val;
             case '{urn:hl7-org:elm-types:r1}String':
                 return typeof val === 'string';
@@ -8533,6 +8582,9 @@ class Context {
             return typeof val === 'number';
         }
         else if (inst.isIntegerLiteral) {
+            return typeof val === 'number' && Math.floor(val) === val;
+        }
+        else if (inst.isLongLiteral) {
             return typeof val === 'number' && Math.floor(val) === val;
         }
         else if (inst.isStringLiteral) {
@@ -9291,9 +9343,10 @@ exports.toNormalizedKey = toNormalizedKey;
 },{"../datatypes/datatypes":6,"./math":55,"./units":56,"@lhncbc/ucum-lhc":68,"immutable":72}],55:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OverFlowException = exports.MAX_TIME_VALUE = exports.MIN_TIME_VALUE = exports.MAX_DATE_VALUE = exports.MIN_DATE_VALUE = exports.MAX_DATETIME_VALUE = exports.MIN_DATETIME_VALUE = exports.MIN_FLOAT_PRECISION_VALUE = exports.MIN_FLOAT_VALUE = exports.MAX_FLOAT_VALUE = exports.MIN_INT_VALUE = exports.MAX_INT_VALUE = void 0;
+exports.OverFlowException = exports.MAX_TIME_VALUE = exports.MIN_TIME_VALUE = exports.MAX_DATE_VALUE = exports.MIN_DATE_VALUE = exports.MAX_DATETIME_VALUE = exports.MIN_DATETIME_VALUE = exports.MIN_FLOAT_PRECISION_VALUE = exports.MIN_FLOAT_VALUE = exports.MAX_FLOAT_VALUE = exports.MIN_LONG_VALUE = exports.MAX_LONG_VALUE = exports.MIN_INT_VALUE = exports.MAX_INT_VALUE = void 0;
 exports.overflowsOrUnderflows = overflowsOrUnderflows;
 exports.isValidInteger = isValidInteger;
+exports.isValidLong = isValidLong;
 exports.isValidDecimal = isValidDecimal;
 exports.limitDecimalPrecision = limitDecimalPrecision;
 exports.successor = successor;
@@ -9309,6 +9362,8 @@ const datetime_1 = require("../datatypes/datetime");
 const uncertainty_1 = require("../datatypes/uncertainty");
 exports.MAX_INT_VALUE = Math.pow(2, 31) - 1;
 exports.MIN_INT_VALUE = Math.pow(-2, 31);
+exports.MAX_LONG_VALUE = Math.pow(2, 63) - 1;
+exports.MIN_LONG_VALUE = Math.pow(-2, 63);
 exports.MAX_FLOAT_VALUE = 99999999999999999999.99999999;
 exports.MIN_FLOAT_VALUE = -99999999999999999999.99999999;
 exports.MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
@@ -9352,6 +9407,7 @@ function overflowsOrUnderflows(value) {
         }
     }
     else if (Number.isInteger(value)) {
+        // TODO: Somehow distinguish Integer from Long
         if (!isValidInteger(value)) {
             return true;
         }
@@ -9374,6 +9430,18 @@ function isValidInteger(integer) {
         return false;
     }
     if (integer < exports.MIN_INT_VALUE) {
+        return false;
+    }
+    return true;
+}
+function isValidLong(long) {
+    if (isNaN(long)) {
+        return false;
+    }
+    if (long > exports.MAX_LONG_VALUE) {
+        return false;
+    }
+    if (long < exports.MIN_LONG_VALUE) {
         return false;
     }
     return true;
@@ -9411,6 +9479,7 @@ exports.OverFlowException = OverFlowException;
 function successor(val) {
     if (typeof val === 'number') {
         if (Number.isInteger(val)) {
+            // TODO: Somehow distinguish Integer from Long
             if (val >= exports.MAX_INT_VALUE) {
                 throw new OverFlowException();
             }
@@ -9475,6 +9544,7 @@ function successor(val) {
 function predecessor(val) {
     if (typeof val === 'number') {
         if (Number.isInteger(val)) {
+            // TODO: Somehow distinguish Integer from Long
             if (val <= exports.MIN_INT_VALUE) {
                 throw new OverFlowException();
             }
@@ -9538,6 +9608,7 @@ function predecessor(val) {
 }
 function maxValueForInstance(val) {
     if (typeof val === 'number') {
+        // TODO: Somehow distinguish Integer from Long
         if (Number.isInteger(val)) {
             return exports.MAX_INT_VALUE;
         }
@@ -9567,6 +9638,8 @@ function maxValueForType(type, quantityInstance) {
     switch (type) {
         case '{urn:hl7-org:elm-types:r1}Integer':
             return exports.MAX_INT_VALUE;
+        case '{urn:hl7-org:elm-types:r1}Long':
+            return exports.MAX_LONG_VALUE;
         case '{urn:hl7-org:elm-types:r1}Decimal':
             return exports.MAX_FLOAT_VALUE;
         case '{urn:hl7-org:elm-types:r1}DateTime':
@@ -9589,6 +9662,7 @@ function maxValueForType(type, quantityInstance) {
 }
 function minValueForInstance(val) {
     if (typeof val === 'number') {
+        // TODO: Somehow distinguish Integer from Long
         if (Number.isInteger(val)) {
             return exports.MIN_INT_VALUE;
         }
@@ -9618,6 +9692,8 @@ function minValueForType(type, quantityInstance) {
     switch (type) {
         case '{urn:hl7-org:elm-types:r1}Integer':
             return exports.MIN_INT_VALUE;
+        case '{urn:hl7-org:elm-types:r1}Long':
+            return exports.MIN_LONG_VALUE;
         case '{urn:hl7-org:elm-types:r1}Decimal':
             return exports.MIN_FLOAT_VALUE;
         case '{urn:hl7-org:elm-types:r1}DateTime':

@@ -4,7 +4,7 @@ import { Expression, UnimplementedExpression } from './expression';
 import { DateTime, Date } from '../datatypes/datetime';
 import { Concept } from '../datatypes/clinical';
 import { Quantity, parseQuantity } from '../datatypes/quantity';
-import { isValidDecimal, isValidInteger, limitDecimalPrecision } from '../util/math';
+import { isValidDecimal, isValidInteger, isValidLong, limitDecimalPrecision } from '../util/math';
 import { normalizeMillisecondsField } from '../util/util';
 import { Ratio } from '../datatypes/ratio';
 import { Uncertainty } from '../datatypes/uncertainty';
@@ -147,10 +147,37 @@ export class ToInteger extends Expression {
 
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
-    if (typeof arg === 'string') {
+    if (typeof arg === 'number') {
+      if (isValidInteger(arg)) {
+        return arg;
+      }
+    } else if (typeof arg === 'string') {
       const integer = parseInt(arg);
       if (isValidInteger(integer)) {
         return integer;
+      }
+    } else if (typeof arg === 'boolean') {
+      return arg ? 1 : 0;
+    }
+    return null;
+  }
+}
+
+export class ToLong extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
+    if (typeof arg === 'number') {
+      if (isValidLong(arg)) {
+        return arg;
+      }
+    } else if (typeof arg === 'string') {
+      const long = parseInt(arg);
+      if (isValidLong(long)) {
+        return long;
       }
     } else if (typeof arg === 'boolean') {
       return arg ? 1 : 0;

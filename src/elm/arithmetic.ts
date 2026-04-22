@@ -383,6 +383,7 @@ export class Power extends Expression {
 export class MinValue extends Expression {
   static readonly MIN_VALUES = {
     '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MIN_INT_VALUE,
+    '{urn:hl7-org:elm-types:r1}Long': MathUtil.MIN_LONG_VALUE,
     '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MIN_FLOAT_VALUE,
     '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MIN_DATETIME_VALUE,
     '{urn:hl7-org:elm-types:r1}Date': MathUtil.MIN_DATE_VALUE,
@@ -414,6 +415,7 @@ export class MinValue extends Expression {
 export class MaxValue extends Expression {
   static readonly MAX_VALUES = {
     '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MAX_INT_VALUE,
+    '{urn:hl7-org:elm-types:r1}Long': MathUtil.MAX_LONG_VALUE,
     '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MAX_FLOAT_VALUE,
     '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MAX_DATETIME_VALUE,
     '{urn:hl7-org:elm-types:r1}Date': MathUtil.MAX_DATE_VALUE,

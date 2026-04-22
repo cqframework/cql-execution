@@ -21,6 +21,9 @@ define decimalInvalid: convert 'abc' to Decimal
 define integerValid: convert '10' to Integer
 define integerDropDecimal: convert '10.2' to Integer
 define integerInvalid: convert 'abc' to Integer
+define longValid: convert '10' to Long
+define longDropDecimal: convert '10.2' to Long
+define longInvalid: convert 'abc' to Long
 define quantityStr: convert '10 \'A\'' to Quantity
 define posQuantityStr: convert '+10 \'A\'' to Quantity
 define negQuantityStr: convert '-10 \'A\'' to Quantity
@@ -45,7 +48,7 @@ module.exports['FromString'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "370",
+        "r" : "397",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -572,8 +575,8 @@ module.exports['FromString'] = {
         }
       }, {
         "localId" : "289",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "quantityStr",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "longValid",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -582,7 +585,7 @@ module.exports['FromString'] = {
           "s" : {
             "r" : "289",
             "s" : [ {
-              "value" : [ "", "define ", "quantityStr", ": " ]
+              "value" : [ "", "define ", "longValid", ": " ]
             }, {
               "r" : "294",
               "s" : [ {
@@ -590,23 +593,23 @@ module.exports['FromString'] = {
               }, {
                 "r" : "291",
                 "s" : [ {
-                  "value" : [ "'10 \\'A\\''" ]
+                  "value" : [ "'10'" ]
                 } ]
               }, {
                 "value" : [ " to " ]
               }, {
                 "r" : "290",
                 "s" : [ {
-                  "value" : [ "Quantity" ]
+                  "value" : [ "Long" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "ToQuantity",
+          "type" : "ToLong",
           "localId" : "294",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
@@ -619,14 +622,14 @@ module.exports['FromString'] = {
             "localId" : "291",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "10 'A'",
+            "value" : "10",
             "annotation" : [ ]
           }
         }
       }, {
         "localId" : "298",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "posQuantityStr",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "longDropDecimal",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -635,7 +638,7 @@ module.exports['FromString'] = {
           "s" : {
             "r" : "298",
             "s" : [ {
-              "value" : [ "", "define ", "posQuantityStr", ": " ]
+              "value" : [ "", "define ", "longDropDecimal", ": " ]
             }, {
               "r" : "303",
               "s" : [ {
@@ -643,23 +646,23 @@ module.exports['FromString'] = {
               }, {
                 "r" : "300",
                 "s" : [ {
-                  "value" : [ "'+10 \\'A\\''" ]
+                  "value" : [ "'10.2'" ]
                 } ]
               }, {
                 "value" : [ " to " ]
               }, {
                 "r" : "299",
                 "s" : [ {
-                  "value" : [ "Quantity" ]
+                  "value" : [ "Long" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "ToQuantity",
+          "type" : "ToLong",
           "localId" : "303",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
@@ -672,14 +675,14 @@ module.exports['FromString'] = {
             "localId" : "300",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "+10 'A'",
+            "value" : "10.2",
             "annotation" : [ ]
           }
         }
       }, {
         "localId" : "307",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "negQuantityStr",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "longInvalid",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -688,7 +691,7 @@ module.exports['FromString'] = {
           "s" : {
             "r" : "307",
             "s" : [ {
-              "value" : [ "", "define ", "negQuantityStr", ": " ]
+              "value" : [ "", "define ", "longInvalid", ": " ]
             }, {
               "r" : "312",
               "s" : [ {
@@ -696,23 +699,23 @@ module.exports['FromString'] = {
               }, {
                 "r" : "309",
                 "s" : [ {
-                  "value" : [ "'-10 \\'A\\''" ]
+                  "value" : [ "'abc'" ]
                 } ]
               }, {
                 "value" : [ " to " ]
               }, {
                 "r" : "308",
                 "s" : [ {
-                  "value" : [ "Quantity" ]
+                  "value" : [ "Long" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "ToQuantity",
+          "type" : "ToLong",
           "localId" : "312",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
@@ -725,14 +728,14 @@ module.exports['FromString'] = {
             "localId" : "309",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "-10 'A'",
+            "value" : "abc",
             "annotation" : [ ]
           }
         }
       }, {
         "localId" : "316",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "quantityStrDecimal",
+        "name" : "quantityStr",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -741,7 +744,7 @@ module.exports['FromString'] = {
           "s" : {
             "r" : "316",
             "s" : [ {
-              "value" : [ "", "define ", "quantityStrDecimal", ": " ]
+              "value" : [ "", "define ", "quantityStr", ": " ]
             }, {
               "r" : "321",
               "s" : [ {
@@ -749,7 +752,7 @@ module.exports['FromString'] = {
               }, {
                 "r" : "318",
                 "s" : [ {
-                  "value" : [ "'10.0 \\'mA\\''" ]
+                  "value" : [ "'10 \\'A\\''" ]
                 } ]
               }, {
                 "value" : [ " to " ]
@@ -778,14 +781,14 @@ module.exports['FromString'] = {
             "localId" : "318",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "10.0 'mA'",
+            "value" : "10 'A'",
             "annotation" : [ ]
           }
         }
       }, {
         "localId" : "325",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
-        "name" : "dateTimeStr",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "posQuantityStr",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -794,7 +797,7 @@ module.exports['FromString'] = {
           "s" : {
             "r" : "325",
             "s" : [ {
-              "value" : [ "", "define ", "dateTimeStr", ": " ]
+              "value" : [ "", "define ", "posQuantityStr", ": " ]
             }, {
               "r" : "330",
               "s" : [ {
@@ -802,23 +805,23 @@ module.exports['FromString'] = {
               }, {
                 "r" : "327",
                 "s" : [ {
-                  "value" : [ "'2015-01-02'" ]
+                  "value" : [ "'+10 \\'A\\''" ]
                 } ]
               }, {
                 "value" : [ " to " ]
               }, {
                 "r" : "326",
                 "s" : [ {
-                  "value" : [ "DateTime" ]
+                  "value" : [ "Quantity" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "ToDateTime",
+          "type" : "ToQuantity",
           "localId" : "330",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
@@ -831,14 +834,14 @@ module.exports['FromString'] = {
             "localId" : "327",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "2015-01-02",
+            "value" : "+10 'A'",
             "annotation" : [ ]
           }
         }
       }, {
         "localId" : "334",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
-        "name" : "dateStr",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "negQuantityStr",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -847,7 +850,7 @@ module.exports['FromString'] = {
           "s" : {
             "r" : "334",
             "s" : [ {
-              "value" : [ "", "define ", "dateStr", ": " ]
+              "value" : [ "", "define ", "negQuantityStr", ": " ]
             }, {
               "r" : "339",
               "s" : [ {
@@ -855,23 +858,23 @@ module.exports['FromString'] = {
               }, {
                 "r" : "336",
                 "s" : [ {
-                  "value" : [ "'2015-01-02'" ]
+                  "value" : [ "'-10 \\'A\\''" ]
                 } ]
               }, {
                 "value" : [ " to " ]
               }, {
                 "r" : "335",
                 "s" : [ {
-                  "value" : [ "Date" ]
+                  "value" : [ "Quantity" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "ToDate",
+          "type" : "ToQuantity",
           "localId" : "339",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
@@ -884,14 +887,14 @@ module.exports['FromString'] = {
             "localId" : "336",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "2015-01-02",
+            "value" : "-10 'A'",
             "annotation" : [ ]
           }
         }
       }, {
         "localId" : "343",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
-        "name" : "NullConvert",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "quantityStrDecimal",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -900,7 +903,7 @@ module.exports['FromString'] = {
           "s" : {
             "r" : "343",
             "s" : [ {
-              "value" : [ "", "define ", "NullConvert", ": " ]
+              "value" : [ "", "define ", "quantityStrDecimal", ": " ]
             }, {
               "r" : "348",
               "s" : [ {
@@ -908,23 +911,23 @@ module.exports['FromString'] = {
               }, {
                 "r" : "345",
                 "s" : [ {
-                  "value" : [ "'foo'" ]
+                  "value" : [ "'10.0 \\'mA\\''" ]
                 } ]
               }, {
                 "value" : [ " to " ]
               }, {
                 "r" : "344",
                 "s" : [ {
-                  "value" : [ "DateTime" ]
+                  "value" : [ "Quantity" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "ToDateTime",
+          "type" : "ToQuantity",
           "localId" : "348",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
@@ -937,14 +940,14 @@ module.exports['FromString'] = {
             "localId" : "345",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "foo",
+            "value" : "10.0 'mA'",
             "annotation" : [ ]
           }
         }
       }, {
         "localId" : "352",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
-        "name" : "ZDateTime",
+        "name" : "dateTimeStr",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -953,7 +956,7 @@ module.exports['FromString'] = {
           "s" : {
             "r" : "352",
             "s" : [ {
-              "value" : [ "", "define ", "ZDateTime", ": " ]
+              "value" : [ "", "define ", "dateTimeStr", ": " ]
             }, {
               "r" : "357",
               "s" : [ {
@@ -961,7 +964,7 @@ module.exports['FromString'] = {
               }, {
                 "r" : "354",
                 "s" : [ {
-                  "value" : [ "'2014-01-01T14:30:00.0Z'" ]
+                  "value" : [ "'2015-01-02'" ]
                 } ]
               }, {
                 "value" : [ " to " ]
@@ -990,14 +993,14 @@ module.exports['FromString'] = {
             "localId" : "354",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "2014-01-01T14:30:00.0Z",
+            "value" : "2015-01-02",
             "annotation" : [ ]
           }
         }
       }, {
         "localId" : "361",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
-        "name" : "TimezoneDateTime",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+        "name" : "dateStr",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -1006,7 +1009,7 @@ module.exports['FromString'] = {
           "s" : {
             "r" : "361",
             "s" : [ {
-              "value" : [ "// January 1st, 2014, 2:30PM UTC\n", "define ", "TimezoneDateTime", ": " ]
+              "value" : [ "", "define ", "dateStr", ": " ]
             }, {
               "r" : "366",
               "s" : [ {
@@ -1014,23 +1017,23 @@ module.exports['FromString'] = {
               }, {
                 "r" : "363",
                 "s" : [ {
-                  "value" : [ "'2014-01-01T14:30:00.0-07:00'" ]
+                  "value" : [ "'2015-01-02'" ]
                 } ]
               }, {
                 "value" : [ " to " ]
               }, {
                 "r" : "362",
                 "s" : [ {
-                  "value" : [ "DateTime" ]
+                  "value" : [ "Date" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "ToDateTime",
+          "type" : "ToDate",
           "localId" : "366",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
@@ -1043,14 +1046,14 @@ module.exports['FromString'] = {
             "localId" : "363",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "2014-01-01T14:30:00.0-07:00",
+            "value" : "2015-01-02",
             "annotation" : [ ]
           }
         }
       }, {
         "localId" : "370",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
-        "name" : "TimezoneTime",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "NullConvert",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -1059,7 +1062,7 @@ module.exports['FromString'] = {
           "s" : {
             "r" : "370",
             "s" : [ {
-              "value" : [ "// January 1st, 2014, 2:30PM Mountain Standard (GMT-7:00)\n", "define ", "TimezoneTime", ": " ]
+              "value" : [ "", "define ", "NullConvert", ": " ]
             }, {
               "r" : "375",
               "s" : [ {
@@ -1067,23 +1070,23 @@ module.exports['FromString'] = {
               }, {
                 "r" : "372",
                 "s" : [ {
-                  "value" : [ "'14:30:00.0-07:00'" ]
+                  "value" : [ "'foo'" ]
                 } ]
               }, {
                 "value" : [ " to " ]
               }, {
                 "r" : "371",
                 "s" : [ {
-                  "value" : [ "Time" ]
+                  "value" : [ "DateTime" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "ToTime",
+          "type" : "ToDateTime",
           "localId" : "375",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
@@ -1094,6 +1097,165 @@ module.exports['FromString'] = {
           "operand" : {
             "type" : "Literal",
             "localId" : "372",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "foo",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "379",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "ZDateTime",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "379",
+            "s" : [ {
+              "value" : [ "", "define ", "ZDateTime", ": " ]
+            }, {
+              "r" : "384",
+              "s" : [ {
+                "value" : [ "convert " ]
+              }, {
+                "r" : "381",
+                "s" : [ {
+                  "value" : [ "'2014-01-01T14:30:00.0Z'" ]
+                } ]
+              }, {
+                "value" : [ " to " ]
+              }, {
+                "r" : "380",
+                "s" : [ {
+                  "value" : [ "DateTime" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToDateTime",
+          "localId" : "384",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "385",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "381",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "2014-01-01T14:30:00.0Z",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "388",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "TimezoneDateTime",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "388",
+            "s" : [ {
+              "value" : [ "// January 1st, 2014, 2:30PM UTC\n", "define ", "TimezoneDateTime", ": " ]
+            }, {
+              "r" : "393",
+              "s" : [ {
+                "value" : [ "convert " ]
+              }, {
+                "r" : "390",
+                "s" : [ {
+                  "value" : [ "'2014-01-01T14:30:00.0-07:00'" ]
+                } ]
+              }, {
+                "value" : [ " to " ]
+              }, {
+                "r" : "389",
+                "s" : [ {
+                  "value" : [ "DateTime" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToDateTime",
+          "localId" : "393",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "394",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "390",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "2014-01-01T14:30:00.0-07:00",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "397",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimezoneTime",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "397",
+            "s" : [ {
+              "value" : [ "// January 1st, 2014, 2:30PM Mountain Standard (GMT-7:00)\n", "define ", "TimezoneTime", ": " ]
+            }, {
+              "r" : "402",
+              "s" : [ {
+                "value" : [ "convert " ]
+              }, {
+                "r" : "399",
+                "s" : [ {
+                  "value" : [ "'14:30:00.0-07:00'" ]
+                } ]
+              }, {
+                "value" : [ " to " ]
+              }, {
+                "r" : "398",
+                "s" : [ {
+                  "value" : [ "Time" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToTime",
+          "localId" : "402",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "403",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "399",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
             "value" : "14:30:00.0-07:00",
@@ -1110,8 +1272,9 @@ library TestSnippet version '1'
 using Simple version '1.0.0'
 context Patient
 define string10: convert 10 to String
+define long10: convert 10 to Long
 define decimal10: convert 10 to Decimal
-define intNull: convert null to Decimal
+define intNull: convert (null as Integer) to Decimal
 define intInt: convert 10 to Integer
 */
 
@@ -1127,7 +1290,7 @@ module.exports['FromInteger'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "236",
+        "r" : "248",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -1248,8 +1411,8 @@ module.exports['FromInteger'] = {
         }
       }, {
         "localId" : "222",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
-        "name" : "decimal10",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "long10",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -1258,7 +1421,7 @@ module.exports['FromInteger'] = {
           "s" : {
             "r" : "222",
             "s" : [ {
-              "value" : [ "", "define ", "decimal10", ": " ]
+              "value" : [ "", "define ", "long10", ": " ]
             }, {
               "r" : "226",
               "s" : [ {
@@ -1267,16 +1430,16 @@ module.exports['FromInteger'] = {
               }, {
                 "r" : "223",
                 "s" : [ {
-                  "value" : [ "Decimal" ]
+                  "value" : [ "Long" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "ToDecimal",
+          "type" : "ToLong",
           "localId" : "226",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
@@ -1296,7 +1459,7 @@ module.exports['FromInteger'] = {
       }, {
         "localId" : "230",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
-        "name" : "intNull",
+        "name" : "decimal10",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -1305,12 +1468,12 @@ module.exports['FromInteger'] = {
           "s" : {
             "r" : "230",
             "s" : [ {
-              "value" : [ "", "define ", "intNull", ": " ]
+              "value" : [ "", "define ", "decimal10", ": " ]
             }, {
-              "r" : "233",
+              "r" : "234",
               "s" : [ {
                 "r" : "232",
-                "value" : [ "convert ", "null", " to " ]
+                "value" : [ "convert ", "10", " to " ]
               }, {
                 "r" : "231",
                 "s" : [ {
@@ -1321,21 +1484,106 @@ module.exports['FromInteger'] = {
           }
         } ],
         "expression" : {
-          "type" : "As",
-          "localId" : "233",
+          "type" : "ToDecimal",
+          "localId" : "234",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
-          "asType" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
-          "signature" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "235",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
           "operand" : {
-            "type" : "Null",
+            "type" : "Literal",
             "localId" : "232",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "10",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "236",
+        "localId" : "238",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "intNull",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "238",
+            "s" : [ {
+              "value" : [ "", "define ", "intNull", ": " ]
+            }, {
+              "r" : "244",
+              "s" : [ {
+                "value" : [ "convert " ]
+              }, {
+                "r" : "240",
+                "s" : [ {
+                  "value" : [ "(" ]
+                }, {
+                  "r" : "240",
+                  "s" : [ {
+                    "r" : "241",
+                    "value" : [ "null", " as " ]
+                  }, {
+                    "r" : "242",
+                    "s" : [ {
+                      "value" : [ "Integer" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ ")" ]
+                } ]
+              }, {
+                "value" : [ " to " ]
+              }, {
+                "r" : "239",
+                "s" : [ {
+                  "value" : [ "Decimal" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToDecimal",
+          "localId" : "244",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "245",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "As",
+            "localId" : "240",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "strict" : false,
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "241",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "242",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "248",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
         "name" : "intInt",
         "context" : "Patient",
@@ -1344,16 +1592,16 @@ module.exports['FromInteger'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "236",
+            "r" : "248",
             "s" : [ {
               "value" : [ "", "define ", "intInt", ": " ]
             }, {
-              "r" : "238",
+              "r" : "250",
               "s" : [ {
-                "r" : "238",
+                "r" : "250",
                 "value" : [ "convert ", "10", " to " ]
               }, {
-                "r" : "237",
+                "r" : "249",
                 "s" : [ {
                   "value" : [ "Integer" ]
                 } ]
@@ -1363,9 +1611,364 @@ module.exports['FromInteger'] = {
         } ],
         "expression" : {
           "type" : "Literal",
-          "localId" : "238",
+          "localId" : "250",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+          "value" : "10",
+          "annotation" : [ ]
+        }
+      } ]
+    }
+  }
+}
+
+/* FromLong
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define string10: convert 10L to String
+define integer10: convert 10L to Integer
+define decimal10: convert 10L to Decimal
+define longNull: convert (null as Long) to Decimal
+define longLong: convert 10L to Long
+*/
+
+module.exports['FromLong'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "248",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "211",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "209",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "210",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "208",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "214",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+        "name" : "string10",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "214",
+            "s" : [ {
+              "value" : [ "", "define ", "string10", ": " ]
+            }, {
+              "r" : "218",
+              "s" : [ {
+                "r" : "216",
+                "value" : [ "convert ", "10L", " to " ]
+              }, {
+                "r" : "215",
+                "s" : [ {
+                  "value" : [ "String" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToString",
+          "localId" : "218",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "219",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "216",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "value" : "10",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "222",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "integer10",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "222",
+            "s" : [ {
+              "value" : [ "", "define ", "integer10", ": " ]
+            }, {
+              "r" : "226",
+              "s" : [ {
+                "r" : "224",
+                "value" : [ "convert ", "10L", " to " ]
+              }, {
+                "r" : "223",
+                "s" : [ {
+                  "value" : [ "Integer" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToInteger",
+          "localId" : "226",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "227",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "224",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "value" : "10",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "230",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "decimal10",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "230",
+            "s" : [ {
+              "value" : [ "", "define ", "decimal10", ": " ]
+            }, {
+              "r" : "234",
+              "s" : [ {
+                "r" : "232",
+                "value" : [ "convert ", "10L", " to " ]
+              }, {
+                "r" : "231",
+                "s" : [ {
+                  "value" : [ "Decimal" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToDecimal",
+          "localId" : "234",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "235",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "232",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "value" : "10",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "238",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "longNull",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "238",
+            "s" : [ {
+              "value" : [ "", "define ", "longNull", ": " ]
+            }, {
+              "r" : "244",
+              "s" : [ {
+                "value" : [ "convert " ]
+              }, {
+                "r" : "240",
+                "s" : [ {
+                  "value" : [ "(" ]
+                }, {
+                  "r" : "240",
+                  "s" : [ {
+                    "r" : "241",
+                    "value" : [ "null", " as " ]
+                  }, {
+                    "r" : "242",
+                    "s" : [ {
+                      "value" : [ "Long" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ ")" ]
+                } ]
+              }, {
+                "value" : [ " to " ]
+              }, {
+                "r" : "239",
+                "s" : [ {
+                  "value" : [ "Decimal" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToDecimal",
+          "localId" : "244",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "245",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "As",
+            "localId" : "240",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "strict" : false,
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "241",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "242",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+              "name" : "{urn:hl7-org:elm-types:r1}Long",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "248",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "longLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "248",
+            "s" : [ {
+              "value" : [ "", "define ", "longLong", ": " ]
+            }, {
+              "r" : "250",
+              "s" : [ {
+                "r" : "250",
+                "value" : [ "convert ", "10L", " to " ]
+              }, {
+                "r" : "249",
+                "s" : [ {
+                  "value" : [ "Long" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "250",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Long",
           "value" : "10",
           "annotation" : [ ]
         }
@@ -3761,10 +4364,18 @@ define PositiveSign: ToInteger('+12345')
 define NegativeSign: ToInteger('-12345')
 define TooLargeInt: ToInteger('2147483648')
 define TooSmallInt: ToInteger('-2147483649')
+define LongTwenty: ToInteger(20L);
+define TooLargeLong: ToInteger(2147483648L);
+define TooSmallLong: ToInteger(-2147483649L)
 define BooleanTrue: ToInteger(true)
 define BooleanFalse: ToInteger(false)
 */
 
+/*
+Translation Error(s):
+[9:33, 9:33] Syntax error
+[10:43, 10:43] Syntax error
+*/
 module.exports['ToInteger'] = {
   "library" : {
     "localId" : "0",
@@ -3774,10 +4385,32 @@ module.exports['ToInteger'] = {
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
     }, {
+      "type" : "CqlToElmError",
+      "librarySystem" : "text/cql",
+      "libraryId" : "Anonymous",
+      "startLine" : 9,
+      "startChar" : 33,
+      "endLine" : 9,
+      "endChar" : 33,
+      "message" : "Syntax error",
+      "errorType" : "syntax",
+      "errorSeverity" : "error"
+    }, {
+      "type" : "CqlToElmError",
+      "librarySystem" : "text/cql",
+      "libraryId" : "Anonymous",
+      "startLine" : 10,
+      "startChar" : 43,
+      "endLine" : 10,
+      "endChar" : 43,
+      "message" : "Syntax error",
+      "errorType" : "syntax",
+      "errorSeverity" : "error"
+    }, {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "273",
+        "r" : "302",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -4092,7 +4725,7 @@ module.exports['ToInteger'] = {
       }, {
         "localId" : "264",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-        "name" : "BooleanTrue",
+        "name" : "LongTwenty",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -4101,12 +4734,12 @@ module.exports['ToInteger'] = {
           "s" : {
             "r" : "264",
             "s" : [ {
-              "value" : [ "", "define ", "BooleanTrue", ": " ]
+              "value" : [ "", "define ", "LongTwenty", ": " ]
             }, {
               "r" : "269",
               "s" : [ {
                 "r" : "265",
-                "value" : [ "ToInteger", "(", "true", ")" ]
+                "value" : [ "ToInteger", "(", "20L", ")" ]
               } ]
             } ]
           }
@@ -4119,22 +4752,22 @@ module.exports['ToInteger'] = {
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
             "localId" : "270",
-            "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Literal",
             "localId" : "265",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
-            "value" : "true",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "value" : "20",
             "annotation" : [ ]
           }
         }
       }, {
         "localId" : "273",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-        "name" : "BooleanFalse",
+        "name" : "TooLargeLong",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -4143,12 +4776,12 @@ module.exports['ToInteger'] = {
           "s" : {
             "r" : "273",
             "s" : [ {
-              "value" : [ "", "define ", "BooleanFalse", ": " ]
+              "value" : [ "", "define ", "TooLargeLong", ": " ]
             }, {
               "r" : "278",
               "s" : [ {
                 "r" : "274",
-                "value" : [ "ToInteger", "(", "false", ")" ]
+                "value" : [ "ToInteger", "(", "2147483648L", ")" ]
               } ]
             } ]
           }
@@ -4161,12 +4794,724 @@ module.exports['ToInteger'] = {
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
             "localId" : "279",
-            "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Literal",
             "localId" : "274",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "value" : "2147483648",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "282",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "TooSmallLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "282",
+            "s" : [ {
+              "value" : [ "", "define ", "TooSmallLong", ": " ]
+            }, {
+              "r" : "289",
+              "s" : [ {
+                "value" : [ "ToInteger", "(" ]
+              }, {
+                "r" : "283",
+                "s" : [ {
+                  "r" : "284",
+                  "value" : [ "-", "2147483649L" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToInteger",
+          "localId" : "289",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "290",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Negate",
+            "localId" : "283",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "285",
+              "name" : "{urn:hl7-org:elm-types:r1}Long",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "284",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+              "value" : "2147483649",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "293",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "BooleanTrue",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "293",
+            "s" : [ {
+              "value" : [ "", "define ", "BooleanTrue", ": " ]
+            }, {
+              "r" : "298",
+              "s" : [ {
+                "r" : "294",
+                "value" : [ "ToInteger", "(", "true", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToInteger",
+          "localId" : "298",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "299",
+            "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "294",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "true",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "302",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "BooleanFalse",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "302",
+            "s" : [ {
+              "value" : [ "", "define ", "BooleanFalse", ": " ]
+            }, {
+              "r" : "307",
+              "s" : [ {
+                "r" : "303",
+                "value" : [ "ToInteger", "(", "false", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToInteger",
+          "localId" : "307",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "308",
+            "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "303",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "false",
+            "annotation" : [ ]
+          }
+        }
+      } ]
+    }
+  }
+}
+
+/* ToLong
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define NoSign: ToLong('12345')
+define PositiveSign: ToLong('+12345')
+define NegativeSign: ToLong('-12345')
+define TooLargeLong: ToLong('9223372036854775808')
+define DefinitelyTooLargeLong: ToLong('9223372036854780000')
+define TooSmallLong: ToLong('-9223372036854775809')
+define DefinitelyTooSmallLong: ToLong('-92233720368547800000')
+define Int: ToLong(12345)
+define BooleanTrue: ToLong(true)
+define BooleanFalse: ToLong(false)
+*/
+
+module.exports['ToLong'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "302",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "211",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "209",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "210",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "208",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "214",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "NoSign",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "214",
+            "s" : [ {
+              "value" : [ "", "define ", "NoSign", ": " ]
+            }, {
+              "r" : "220",
+              "s" : [ {
+                "value" : [ "ToLong", "(" ]
+              }, {
+                "r" : "215",
+                "s" : [ {
+                  "value" : [ "'12345'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToLong",
+          "localId" : "220",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "221",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "215",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "12345",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "224",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "PositiveSign",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "224",
+            "s" : [ {
+              "value" : [ "", "define ", "PositiveSign", ": " ]
+            }, {
+              "r" : "230",
+              "s" : [ {
+                "value" : [ "ToLong", "(" ]
+              }, {
+                "r" : "225",
+                "s" : [ {
+                  "value" : [ "'+12345'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToLong",
+          "localId" : "230",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "231",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "225",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "+12345",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "234",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "NegativeSign",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "234",
+            "s" : [ {
+              "value" : [ "", "define ", "NegativeSign", ": " ]
+            }, {
+              "r" : "240",
+              "s" : [ {
+                "value" : [ "ToLong", "(" ]
+              }, {
+                "r" : "235",
+                "s" : [ {
+                  "value" : [ "'-12345'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToLong",
+          "localId" : "240",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "241",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "235",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "-12345",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "244",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "TooLargeLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "244",
+            "s" : [ {
+              "value" : [ "", "define ", "TooLargeLong", ": " ]
+            }, {
+              "r" : "250",
+              "s" : [ {
+                "value" : [ "ToLong", "(" ]
+              }, {
+                "r" : "245",
+                "s" : [ {
+                  "value" : [ "'9223372036854775808'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToLong",
+          "localId" : "250",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "251",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "245",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "9223372036854775808",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "254",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "DefinitelyTooLargeLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "254",
+            "s" : [ {
+              "value" : [ "", "define ", "DefinitelyTooLargeLong", ": " ]
+            }, {
+              "r" : "260",
+              "s" : [ {
+                "value" : [ "ToLong", "(" ]
+              }, {
+                "r" : "255",
+                "s" : [ {
+                  "value" : [ "'9223372036854780000'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToLong",
+          "localId" : "260",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "261",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "255",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "9223372036854780000",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "264",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "TooSmallLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "264",
+            "s" : [ {
+              "value" : [ "", "define ", "TooSmallLong", ": " ]
+            }, {
+              "r" : "270",
+              "s" : [ {
+                "value" : [ "ToLong", "(" ]
+              }, {
+                "r" : "265",
+                "s" : [ {
+                  "value" : [ "'-9223372036854775809'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToLong",
+          "localId" : "270",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "271",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "265",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "-9223372036854775809",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "274",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "DefinitelyTooSmallLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "274",
+            "s" : [ {
+              "value" : [ "", "define ", "DefinitelyTooSmallLong", ": " ]
+            }, {
+              "r" : "280",
+              "s" : [ {
+                "value" : [ "ToLong", "(" ]
+              }, {
+                "r" : "275",
+                "s" : [ {
+                  "value" : [ "'-92233720368547800000'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToLong",
+          "localId" : "280",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "281",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "275",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "-92233720368547800000",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "284",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "Int",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "284",
+            "s" : [ {
+              "value" : [ "", "define ", "Int", ": " ]
+            }, {
+              "r" : "289",
+              "s" : [ {
+                "r" : "285",
+                "value" : [ "ToLong", "(", "12345", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToLong",
+          "localId" : "289",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "290",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "285",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "12345",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "293",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "BooleanTrue",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "293",
+            "s" : [ {
+              "value" : [ "", "define ", "BooleanTrue", ": " ]
+            }, {
+              "r" : "298",
+              "s" : [ {
+                "r" : "294",
+                "value" : [ "ToLong", "(", "true", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToLong",
+          "localId" : "298",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "299",
+            "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "294",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "true",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "302",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "BooleanFalse",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "302",
+            "s" : [ {
+              "value" : [ "", "define ", "BooleanFalse", ": " ]
+            }, {
+              "r" : "307",
+              "s" : [ {
+                "r" : "303",
+                "value" : [ "ToLong", "(", "false", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ToLong",
+          "localId" : "307",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "308",
+            "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "303",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
             "value" : "false",

@@ -11,6 +11,8 @@ export class Literal extends Expression {
         return new BooleanLiteral(json);
       case '{urn:hl7-org:elm-types:r1}Integer':
         return new IntegerLiteral(json);
+      case '{urn:hl7-org:elm-types:r1}Long':
+        return new LongLiteral(json);
       case '{urn:hl7-org:elm-types:r1}Decimal':
         return new DecimalLiteral(json);
       case '{urn:hl7-org:elm-types:r1}String':
@@ -59,6 +61,23 @@ export class IntegerLiteral extends Literal {
   // Define a simple getter to allow type-checking of this class without instanceof
   // and in a way that survives minification (as opposed to checking constructor.name)
   get isIntegerLiteral() {
+    return true;
+  }
+
+  async exec(_ctx: Context) {
+    return this.value;
+  }
+}
+
+export class LongLiteral extends Literal {
+  constructor(json: any) {
+    super(json);
+    this.value = parseInt(this.value, 10);
+  }
+
+  // Define a simple getter to allow type-checking of this class without instanceof
+  // and in a way that survives minification (as opposed to checking constructor.name)
+  get isLongLiteral() {
     return true;
   }
 

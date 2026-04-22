@@ -15,6 +15,7 @@ context Patient
 define BoolTrue: true
 define BoolFalse: false
 define IntOne: 1
+define LongOne: 1L
 define DecimalTenth: 0.1
 define StringTrue: 'true'
 define DateTimeX: @2012-02-15T12:10:59.456Z
@@ -33,7 +34,7 @@ module.exports['Literal'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "247",
+        "r" : "251",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -182,8 +183,8 @@ module.exports['Literal'] = {
         }
       }, {
         "localId" : "226",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
-        "name" : "DecimalTenth",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "LongOne",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -193,22 +194,22 @@ module.exports['Literal'] = {
             "r" : "226",
             "s" : [ {
               "r" : "227",
-              "value" : [ "", "define ", "DecimalTenth", ": ", "0.1" ]
+              "value" : [ "", "define ", "LongOne", ": ", "1L" ]
             } ]
           }
         } ],
         "expression" : {
           "type" : "Literal",
           "localId" : "227",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
-          "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-          "value" : "0.1",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+          "value" : "1",
           "annotation" : [ ]
         }
       }, {
         "localId" : "230",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-        "name" : "StringTrue",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "DecimalTenth",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -217,9 +218,34 @@ module.exports['Literal'] = {
           "s" : {
             "r" : "230",
             "s" : [ {
+              "r" : "231",
+              "value" : [ "", "define ", "DecimalTenth", ": ", "0.1" ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Literal",
+          "localId" : "231",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "value" : "0.1",
+          "annotation" : [ ]
+        }
+      }, {
+        "localId" : "234",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+        "name" : "StringTrue",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "234",
+            "s" : [ {
               "value" : [ "", "define ", "StringTrue", ": " ]
             }, {
-              "r" : "231",
+              "r" : "235",
               "s" : [ {
                 "value" : [ "'true'" ]
               } ]
@@ -228,14 +254,14 @@ module.exports['Literal'] = {
         } ],
         "expression" : {
           "type" : "Literal",
-          "localId" : "231",
+          "localId" : "235",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
           "valueType" : "{urn:hl7-org:elm-types:r1}String",
           "value" : "true",
           "annotation" : [ ]
         }
       }, {
-        "localId" : "235",
+        "localId" : "239",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimeX",
         "context" : "Patient",
@@ -244,78 +270,78 @@ module.exports['Literal'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "235",
+            "r" : "239",
             "s" : [ {
-              "r" : "236",
+              "r" : "240",
               "value" : [ "", "define ", "DateTimeX", ": ", "@2012-02-15T12:10:59.456Z" ]
             } ]
           }
         } ],
         "expression" : {
           "type" : "DateTime",
-          "localId" : "236",
+          "localId" : "240",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ ],
           "year" : {
             "type" : "Literal",
-            "localId" : "237",
+            "localId" : "241",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "2012",
             "annotation" : [ ]
           },
           "month" : {
             "type" : "Literal",
-            "localId" : "238",
+            "localId" : "242",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "2",
             "annotation" : [ ]
           },
           "day" : {
             "type" : "Literal",
-            "localId" : "239",
+            "localId" : "243",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "15",
             "annotation" : [ ]
           },
           "hour" : {
             "type" : "Literal",
-            "localId" : "240",
+            "localId" : "244",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "12",
             "annotation" : [ ]
           },
           "minute" : {
             "type" : "Literal",
-            "localId" : "241",
+            "localId" : "245",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "10",
             "annotation" : [ ]
           },
           "second" : {
             "type" : "Literal",
-            "localId" : "242",
+            "localId" : "246",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "59",
             "annotation" : [ ]
           },
           "millisecond" : {
             "type" : "Literal",
-            "localId" : "243",
+            "localId" : "247",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "456",
             "annotation" : [ ]
           },
           "timezoneOffset" : {
             "type" : "Literal",
-            "localId" : "244",
+            "localId" : "248",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "value" : "0.0",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "247",
+        "localId" : "251",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimeX",
         "context" : "Patient",
@@ -324,43 +350,43 @@ module.exports['Literal'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "247",
+            "r" : "251",
             "s" : [ {
-              "r" : "248",
+              "r" : "252",
               "value" : [ "", "define ", "TimeX", ": ", "@T12:10:59.456" ]
             } ]
           }
         } ],
         "expression" : {
           "type" : "Time",
-          "localId" : "248",
+          "localId" : "252",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ ],
           "hour" : {
             "type" : "Literal",
-            "localId" : "249",
+            "localId" : "253",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "12",
             "annotation" : [ ]
           },
           "minute" : {
             "type" : "Literal",
-            "localId" : "250",
+            "localId" : "254",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "10",
             "annotation" : [ ]
           },
           "second" : {
             "type" : "Literal",
-            "localId" : "251",
+            "localId" : "255",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "59",
             "annotation" : [ ]
           },
           "millisecond" : {
             "type" : "Literal",
-            "localId" : "252",
+            "localId" : "256",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "456",
             "annotation" : [ ]
