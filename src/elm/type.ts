@@ -151,8 +151,8 @@ export class ToInteger extends Expression {
       if (isValidInteger(arg)) {
         return arg;
       }
-    } else if (typeof arg === 'string') {
-      const integer = parseInt(arg);
+    } else if (typeof arg === 'string' || typeof arg === 'bigint') {
+      const integer = Number(arg);
       if (isValidInteger(integer)) {
         return integer;
       }
@@ -170,17 +170,21 @@ export class ToLong extends Expression {
 
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
-    if (typeof arg === 'number') {
+    if (typeof arg === 'bigint') {
       if (isValidLong(arg)) {
         return arg;
       }
-    } else if (typeof arg === 'string') {
-      const long = parseInt(arg);
-      if (isValidLong(long)) {
-        return long;
+    } else if (typeof arg === 'number' || typeof arg === 'string') {
+      try {
+        const long = BigInt(arg);
+        if (isValidLong(long)) {
+          return long;
+        }
+      } catch {
+        return null;
       }
     } else if (typeof arg === 'boolean') {
-      return arg ? 1 : 0;
+      return arg ? 1n : 0n;
     }
     return null;
   }

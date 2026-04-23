@@ -32,11 +32,11 @@ describe('Literal', () => {
   });
 
   it('should convert 1L to 1', function () {
-    this.longOne.value.should.equal(1);
+    this.longOne.value.should.equal(1n);
   });
 
   it('should execute 1L as 1', async function () {
-    (await this.longOne.exec(this.ctx)).should.equal(1);
+    (await this.longOne.exec(this.ctx)).should.equal(1n);
   });
 
   it('should convert .1 to decimal .1', function () {

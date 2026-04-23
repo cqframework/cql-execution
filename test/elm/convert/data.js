@@ -19,10 +19,10 @@ define boolFalse: convert 'false' to Boolean
 define decimalValid: convert '10.2' to Decimal
 define decimalInvalid: convert 'abc' to Decimal
 define integerValid: convert '10' to Integer
-define integerDropDecimal: convert '10.2' to Integer
+define integerWithDecimal: convert '10.2' to Integer
 define integerInvalid: convert 'abc' to Integer
 define longValid: convert '10' to Long
-define longDropDecimal: convert '10.2' to Long
+define longWithDecimal: convert '10.2' to Long
 define longInvalid: convert 'abc' to Long
 define quantityStr: convert '10 \'A\'' to Quantity
 define posQuantityStr: convert '+10 \'A\'' to Quantity
@@ -470,7 +470,7 @@ module.exports['FromString'] = {
       }, {
         "localId" : "271",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-        "name" : "integerDropDecimal",
+        "name" : "integerWithDecimal",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -479,7 +479,7 @@ module.exports['FromString'] = {
           "s" : {
             "r" : "271",
             "s" : [ {
-              "value" : [ "", "define ", "integerDropDecimal", ": " ]
+              "value" : [ "", "define ", "integerWithDecimal", ": " ]
             }, {
               "r" : "276",
               "s" : [ {
@@ -629,7 +629,7 @@ module.exports['FromString'] = {
       }, {
         "localId" : "298",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-        "name" : "longDropDecimal",
+        "name" : "longWithDecimal",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -638,7 +638,7 @@ module.exports['FromString'] = {
           "s" : {
             "r" : "298",
             "s" : [ {
-              "value" : [ "", "define ", "longDropDecimal", ": " ]
+              "value" : [ "", "define ", "longWithDecimal", ": " ]
             }, {
               "r" : "303",
               "s" : [ {
@@ -4364,18 +4364,13 @@ define PositiveSign: ToInteger('+12345')
 define NegativeSign: ToInteger('-12345')
 define TooLargeInt: ToInteger('2147483648')
 define TooSmallInt: ToInteger('-2147483649')
-define LongTwenty: ToInteger(20L);
-define TooLargeLong: ToInteger(2147483648L);
+define LongTwenty: ToInteger(20L)
+define TooLargeLong: ToInteger(2147483648L)
 define TooSmallLong: ToInteger(-2147483649L)
 define BooleanTrue: ToInteger(true)
 define BooleanFalse: ToInteger(false)
 */
 
-/*
-Translation Error(s):
-[9:33, 9:33] Syntax error
-[10:43, 10:43] Syntax error
-*/
 module.exports['ToInteger'] = {
   "library" : {
     "localId" : "0",
@@ -4384,28 +4379,6 @@ module.exports['ToInteger'] = {
       "translatorVersion" : "4.2.0",
       "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
       "signatureLevel" : "All"
-    }, {
-      "type" : "CqlToElmError",
-      "librarySystem" : "text/cql",
-      "libraryId" : "Anonymous",
-      "startLine" : 9,
-      "startChar" : 33,
-      "endLine" : 9,
-      "endChar" : 33,
-      "message" : "Syntax error",
-      "errorType" : "syntax",
-      "errorSeverity" : "error"
-    }, {
-      "type" : "CqlToElmError",
-      "librarySystem" : "text/cql",
-      "libraryId" : "Anonymous",
-      "startLine" : 10,
-      "startChar" : 43,
-      "endLine" : 10,
-      "endChar" : 43,
-      "message" : "Syntax error",
-      "errorType" : "syntax",
-      "errorSeverity" : "error"
     }, {
       "type" : "Annotation",
       "t" : [ ],
@@ -4964,9 +4937,7 @@ define NoSign: ToLong('12345')
 define PositiveSign: ToLong('+12345')
 define NegativeSign: ToLong('-12345')
 define TooLargeLong: ToLong('9223372036854775808')
-define DefinitelyTooLargeLong: ToLong('9223372036854780000')
 define TooSmallLong: ToLong('-9223372036854775809')
-define DefinitelyTooSmallLong: ToLong('-92233720368547800000')
 define Int: ToLong(12345)
 define BooleanTrue: ToLong(true)
 define BooleanFalse: ToLong(false)
@@ -4984,7 +4955,7 @@ module.exports['ToLong'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "302",
+        "r" : "282",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -5251,7 +5222,7 @@ module.exports['ToLong'] = {
       }, {
         "localId" : "254",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-        "name" : "DefinitelyTooLargeLong",
+        "name" : "TooSmallLong",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -5260,7 +5231,7 @@ module.exports['ToLong'] = {
           "s" : {
             "r" : "254",
             "s" : [ {
-              "value" : [ "", "define ", "DefinitelyTooLargeLong", ": " ]
+              "value" : [ "", "define ", "TooSmallLong", ": " ]
             }, {
               "r" : "260",
               "s" : [ {
@@ -5268,7 +5239,7 @@ module.exports['ToLong'] = {
               }, {
                 "r" : "255",
                 "s" : [ {
-                  "value" : [ "'9223372036854780000'" ]
+                  "value" : [ "'-9223372036854775809'" ]
                 } ]
               }, {
                 "value" : [ ")" ]
@@ -5292,108 +5263,12 @@ module.exports['ToLong'] = {
             "localId" : "255",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "9223372036854780000",
-            "annotation" : [ ]
-          }
-        }
-      }, {
-        "localId" : "264",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-        "name" : "TooSmallLong",
-        "context" : "Patient",
-        "accessLevel" : "Public",
-        "annotation" : [ {
-          "type" : "Annotation",
-          "t" : [ ],
-          "s" : {
-            "r" : "264",
-            "s" : [ {
-              "value" : [ "", "define ", "TooSmallLong", ": " ]
-            }, {
-              "r" : "270",
-              "s" : [ {
-                "value" : [ "ToLong", "(" ]
-              }, {
-                "r" : "265",
-                "s" : [ {
-                  "value" : [ "'-9223372036854775809'" ]
-                } ]
-              }, {
-                "value" : [ ")" ]
-              } ]
-            } ]
-          }
-        } ],
-        "expression" : {
-          "type" : "ToLong",
-          "localId" : "270",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-          "annotation" : [ ],
-          "signature" : [ {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "271",
-            "name" : "{urn:hl7-org:elm-types:r1}String",
-            "annotation" : [ ]
-          } ],
-          "operand" : {
-            "type" : "Literal",
-            "localId" : "265",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-            "valueType" : "{urn:hl7-org:elm-types:r1}String",
             "value" : "-9223372036854775809",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "274",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-        "name" : "DefinitelyTooSmallLong",
-        "context" : "Patient",
-        "accessLevel" : "Public",
-        "annotation" : [ {
-          "type" : "Annotation",
-          "t" : [ ],
-          "s" : {
-            "r" : "274",
-            "s" : [ {
-              "value" : [ "", "define ", "DefinitelyTooSmallLong", ": " ]
-            }, {
-              "r" : "280",
-              "s" : [ {
-                "value" : [ "ToLong", "(" ]
-              }, {
-                "r" : "275",
-                "s" : [ {
-                  "value" : [ "'-92233720368547800000'" ]
-                } ]
-              }, {
-                "value" : [ ")" ]
-              } ]
-            } ]
-          }
-        } ],
-        "expression" : {
-          "type" : "ToLong",
-          "localId" : "280",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-          "annotation" : [ ],
-          "signature" : [ {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "281",
-            "name" : "{urn:hl7-org:elm-types:r1}String",
-            "annotation" : [ ]
-          } ],
-          "operand" : {
-            "type" : "Literal",
-            "localId" : "275",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-            "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "-92233720368547800000",
-            "annotation" : [ ]
-          }
-        }
-      }, {
-        "localId" : "284",
+        "localId" : "264",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "Int",
         "context" : "Patient",
@@ -5402,13 +5277,13 @@ module.exports['ToLong'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "284",
+            "r" : "264",
             "s" : [ {
               "value" : [ "", "define ", "Int", ": " ]
             }, {
-              "r" : "289",
+              "r" : "269",
               "s" : [ {
-                "r" : "285",
+                "r" : "265",
                 "value" : [ "ToLong", "(", "12345", ")" ]
               } ]
             } ]
@@ -5416,18 +5291,18 @@ module.exports['ToLong'] = {
         } ],
         "expression" : {
           "type" : "ToLong",
-          "localId" : "289",
+          "localId" : "269",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "290",
+            "localId" : "270",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Literal",
-            "localId" : "285",
+            "localId" : "265",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "12345",
@@ -5435,7 +5310,7 @@ module.exports['ToLong'] = {
           }
         }
       }, {
-        "localId" : "293",
+        "localId" : "273",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "BooleanTrue",
         "context" : "Patient",
@@ -5444,13 +5319,13 @@ module.exports['ToLong'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "293",
+            "r" : "273",
             "s" : [ {
               "value" : [ "", "define ", "BooleanTrue", ": " ]
             }, {
-              "r" : "298",
+              "r" : "278",
               "s" : [ {
-                "r" : "294",
+                "r" : "274",
                 "value" : [ "ToLong", "(", "true", ")" ]
               } ]
             } ]
@@ -5458,18 +5333,18 @@ module.exports['ToLong'] = {
         } ],
         "expression" : {
           "type" : "ToLong",
-          "localId" : "298",
+          "localId" : "278",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "299",
+            "localId" : "279",
             "name" : "{urn:hl7-org:elm-types:r1}Boolean",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Literal",
-            "localId" : "294",
+            "localId" : "274",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
             "value" : "true",
@@ -5477,7 +5352,7 @@ module.exports['ToLong'] = {
           }
         }
       }, {
-        "localId" : "302",
+        "localId" : "282",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "BooleanFalse",
         "context" : "Patient",
@@ -5486,13 +5361,13 @@ module.exports['ToLong'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "302",
+            "r" : "282",
             "s" : [ {
               "value" : [ "", "define ", "BooleanFalse", ": " ]
             }, {
-              "r" : "307",
+              "r" : "287",
               "s" : [ {
-                "r" : "303",
+                "r" : "283",
                 "value" : [ "ToLong", "(", "false", ")" ]
               } ]
             } ]
@@ -5500,18 +5375,18 @@ module.exports['ToLong'] = {
         } ],
         "expression" : {
           "type" : "ToLong",
-          "localId" : "307",
+          "localId" : "287",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "308",
+            "localId" : "288",
             "name" : "{urn:hl7-org:elm-types:r1}Boolean",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Literal",
-            "localId" : "303",
+            "localId" : "283",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
             "value" : "false",

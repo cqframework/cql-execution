@@ -75,8 +75,16 @@ describe('Add', () => {
     (await this.addVariables.exec(this.ctx)).should.equal(21);
   });
 
-  it('should add two short longs', async function () {
-    (await this.onePlusTwoLong.exec(this.ctx)).should.equal(3);
+  it('should add two longs', async function () {
+    (await this.onePlusTwoLong.exec(this.ctx)).should.equal(3n);
+  });
+
+  it('should add integer and long', async function () {
+    (await this.onePlusTwoMixed.exec(this.ctx)).should.equal(3n);
+  });
+
+  it('should add long and integer', async function () {
+    (await this.onePlusTwoReverseMixed.exec(this.ctx)).should.equal(3n);
   });
 
   it('should add Time/Quantity', async function () {
@@ -120,7 +128,15 @@ describe('Subtract', () => {
   });
 
   it('should subtract two longs', async function () {
-    (await this.fiveMinusTwoLong.exec(this.ctx)).should.equal(3);
+    (await this.fiveMinusTwoLong.exec(this.ctx)).should.equal(3n);
+  });
+
+  it('should subtract long from integer', async function () {
+    (await this.fiveMinusTwoMixed.exec(this.ctx)).should.equal(3n);
+  });
+
+  it('should subtract integer from long', async function () {
+    (await this.fiveMinusTwoReverseMixed.exec(this.ctx)).should.equal(3n);
   });
 
   it('should subtract uncertainty from uncertainty', async function () {
@@ -160,7 +176,15 @@ describe('Multiply', () => {
   });
 
   it('should multiply two longs', async function () {
-    (await this.fiveTimesTwoLong.exec(this.ctx)).should.equal(10);
+    (await this.fiveTimesTwoLong.exec(this.ctx)).should.equal(10n);
+  });
+
+  it('should multiply two integer by long', async function () {
+    (await this.fiveTimesTwoMixed.exec(this.ctx)).should.equal(10n);
+  });
+
+  it('should multiply long by integer', async function () {
+    (await this.fiveTimesTwoReverseMixed.exec(this.ctx)).should.equal(10n);
   });
 
   it('should multiply uncertainty and uncertainty', async function () {
@@ -204,7 +228,30 @@ describe('Divide', () => {
   });
 
   it('should divide two longs', async function () {
+    // NOTE: Divide always returns a Decimal
     (await this.tenDividedByTwoLong.exec(this.ctx)).should.equal(5);
+  });
+
+  it('should divide integer by long', async function () {
+    // NOTE: Divide always returns a Decimal
+    (await this.tenDividedByTwoMixed.exec(this.ctx)).should.equal(5);
+  });
+
+  it('should divide long by integer', async function () {
+    // NOTE: Divide always returns a Decimal
+    (await this.tenDividedByTwoReverseMixed.exec(this.ctx)).should.equal(5);
+  });
+
+  it('should divide two longs with decimal result', async function () {
+    (await this.tenDividedByFourLong.exec(this.ctx)).should.equal(2.5);
+  });
+
+  it('should divide integer by long with decimal result', async function () {
+    (await this.tenDividedByFourMixed.exec(this.ctx)).should.equal(2.5);
+  });
+
+  it('should divide long by integer with decimal result', async function () {
+    (await this.tenDividedByFourReverseMixed.exec(this.ctx)).should.equal(2.5);
   });
 
   it('should divide uncertainty by uncertainty', async function () {
@@ -236,7 +283,7 @@ describe('Negate', () => {
   });
 
   it('should negate a long', async function () {
-    (await this.negativeOneLong.exec(this.ctx)).should.equal(-1);
+    (await this.negativeOneLong.exec(this.ctx)).should.equal(-1n);
   });
 });
 
@@ -264,7 +311,15 @@ describe('Power', () => {
   });
 
   it('should be able to calculate the power of a long', async function () {
-    (await this.threeExpFourLong.exec(this.ctx)).should.equal(81);
+    (await this.threeExpFourLong.exec(this.ctx)).should.equal(81n);
+  });
+
+  it('should be able to calculate the long power of an integer', async function () {
+    (await this.threeExpFourMixed.exec(this.ctx)).should.equal(81n);
+  });
+
+  it('should be able to calculate the integer power of a long', async function () {
+    (await this.threeExpFourReverseMixed.exec(this.ctx)).should.equal(81n);
   });
 });
 
@@ -281,15 +336,8 @@ describe('MinValue', () => {
     String(minIntegerResult).should.equal(minIntegerStringValue);
   });
 
-  // JS number doesn't handle limits of Long precisely, but this ensures we are in the ballpark
-  it('of Long should return approximate minimum representable Long value', async function () {
-    const minLongResult = await this.minLong.exec(this.ctx);
-    minLongResult.should.be.aboveOrEqual(-9223372036854776000);
-    minLongResult.should.be.belowOrEqual(-9223372036854775000);
-  });
-
-  it.skip('of Long should return exact minimum representable Long value', async function () {
-    const minLongValue = -9223372036854775808;
+  it('of Long should return exact minimum representable Long value', async function () {
+    const minLongValue = -9223372036854775808n;
     const minLongStringValue = '-9223372036854775808';
     const minLongResult = await this.minLong.exec(this.ctx);
     minLongResult.should.equal(minLongValue);
@@ -348,15 +396,8 @@ describe('MaxValue', () => {
     String(maxIntegerResult).should.equal(maxIntegerStringValue);
   });
 
-  // JS number doesn't handle limits of Long precisely, but this ensures we are in the ballpark
-  it('of Long should return approximate maximum representable Long value', async function () {
-    const maxLongResult = await this.maxLong.exec(this.ctx);
-    maxLongResult.should.be.aboveOrEqual(9223372036854775000);
-    maxLongResult.should.be.belowOrEqual(9223372036854776000);
-  });
-
-  it.skip('of Long should return exact maximum representable Long value', async function () {
-    const maxLongValue = 9223372036854775807;
+  it('of Long should return exact maximum representable Long value', async function () {
+    const maxLongValue = 9223372036854775807n;
     const maxLongStringValue = '9223372036854775807';
     const maxLongResult = await this.maxLong.exec(this.ctx);
     maxLongResult.should.equal(maxLongValue);
@@ -426,7 +467,15 @@ describe('TruncatedDivide', () => {
   });
 
   it('should be able to return just the long portion of a division', async function () {
-    (await this.tenDivThreeLong.exec(this.ctx)).should.equal(3);
+    (await this.tenDivThreeLong.exec(this.ctx)).should.equal(3n);
+  });
+
+  it('should be able to return just the long portion of a dividing an integer by a long', async function () {
+    (await this.tenDivThreeMixed.exec(this.ctx)).should.equal(3n);
+  });
+
+  it('should be able to return just the long portion of a dividing a long by an integer', async function () {
+    (await this.tenDivThreeReverseMixed.exec(this.ctx)).should.equal(3n);
   });
 });
 
@@ -441,6 +490,7 @@ describe('Truncate', () => {
   });
 
   it('should be able to return the long portion of a number', async function () {
+    // NOTE: Truncate returns an integer (not specified to return a Long)
     (await this.truncTenLong.exec(this.ctx)).should.equal(10);
   });
 });
@@ -509,7 +559,15 @@ describe('Modulo', () => {
   });
 
   it('should be able to return the long remainder of a division', async function () {
-    (await this.threeModTwoLong.exec(this.ctx)).should.equal(1);
+    (await this.threeModTwoLong.exec(this.ctx)).should.equal(1n);
+  });
+
+  it('should be able to return the long remainder of a dividing an integer by a long', async function () {
+    (await this.threeModTwoMixed.exec(this.ctx)).should.equal(1n);
+  });
+
+  it('should be able to return the long remainder of a dividing a long by an integer', async function () {
+    (await this.threeModTwoReverseMixed.exec(this.ctx)).should.equal(1n);
   });
 });
 
@@ -528,7 +586,7 @@ describe('Abs', () => {
     (await this.zero.exec(this.ctx)).should.equal(0);
   });
   it('should be able to return the absolute value of a negative long', async function () {
-    (await this.absNegTenLong.exec(this.ctx)).should.equal(10);
+    (await this.absNegTenLong.exec(this.ctx)).should.equal(10n);
   });
 });
 
@@ -557,7 +615,7 @@ describe('Successor', () => {
   });
 
   it('should be able to get Long Successor', async function () {
-    (await this.ls.exec(this.ctx)).should.equal(3);
+    (await this.ls.exec(this.ctx)).should.equal(3n);
   });
 
   it('should be able to get Real Successor', async function () {
@@ -660,7 +718,7 @@ describe('Predecessor', () => {
   });
 
   it('should be able to get Long Predecessor', async function () {
-    (await this.ls.exec(this.ctx)).should.equal(1);
+    (await this.ls.exec(this.ctx)).should.equal(1n);
   });
 
   it('should be able to get Real Predecessor', async function () {
@@ -975,13 +1033,11 @@ describe('OutOfBounds', () => {
       should(await this.longAddUnderflow.exec(this.ctx)).be.null();
     });
 
-    // skipping this and other long tests because logic can't distinguish between integer and long
-    // so it doesn't know when to overflow (and currently defaults to integer overflows)
-    it.skip('should return value for Add near overflow', async function () {
+    it('should return value for Add near overflow', async function () {
       should(await this.longAddNearOverflow.exec(this.ctx)).equal(MAX_LONG_VALUE);
     });
 
-    it.skip('should return value for Add near underflow', async function () {
+    it('should return value for Add near underflow', async function () {
       should(await this.longAddNearUnderflow.exec(this.ctx)).equal(MIN_LONG_VALUE);
     });
 
@@ -993,11 +1049,11 @@ describe('OutOfBounds', () => {
       should(await this.longSubtractUnderflow.exec(this.ctx)).be.null();
     });
 
-    it.skip('should return value for Subtract near overflow', async function () {
+    it('should return value for Subtract near overflow', async function () {
       should(await this.longSubtractNearOverflow.exec(this.ctx)).equal(MAX_LONG_VALUE);
     });
 
-    it.skip('should return value for Subtract near underflow', async function () {
+    it('should return value for Subtract near underflow', async function () {
       should(await this.longSubtractNearUnderflow.exec(this.ctx)).equal(MIN_LONG_VALUE);
     });
 
@@ -1009,11 +1065,11 @@ describe('OutOfBounds', () => {
       should(await this.longMultiplyUnderflow.exec(this.ctx)).be.null();
     });
 
-    it.skip('should return value for Multiply near overflow', async function () {
+    it('should return value for Multiply near overflow', async function () {
       should(await this.longMultiplyNearOverflow.exec(this.ctx)).equal(MAX_LONG_VALUE);
     });
 
-    it.skip('should return value for Multiply near underflow', async function () {
+    it('should return value for Multiply near underflow', async function () {
       should(await this.longMultiplyNearUnderflow.exec(this.ctx)).equal(MIN_LONG_VALUE);
     });
 
@@ -1025,12 +1081,14 @@ describe('OutOfBounds', () => {
       should(await this.longDivideUnderflow.exec(this.ctx)).be.null();
     });
 
-    it.skip('should return value for Divide near overflow', async function () {
-      should(await this.longDivideNearOverflow.exec(this.ctx)).equal(MAX_LONG_VALUE);
+    it('should return value for Divide near overflow', async function () {
+      // Since Divide does not return Longs, use max int value
+      should(await this.longDivideNearOverflow.exec(this.ctx)).equal(MAX_INT_VALUE);
     });
 
-    it.skip('should return value for Divide near underflow', async function () {
-      should(await this.longDivideNearUnderflow.exec(this.ctx)).equal(MIN_LONG_VALUE);
+    it('should return value for Divide near underflow', async function () {
+      // Since Divide does not return Longs, use min int value
+      should(await this.longDivideNearUnderflow.exec(this.ctx)).equal(MIN_INT_VALUE);
     });
 
     it('should return null for Divide By Zero', async function () {
@@ -1045,11 +1103,11 @@ describe('OutOfBounds', () => {
       should(await this.longPowerUnderflow.exec(this.ctx)).be.null();
     });
 
-    it.skip('should return value for Power near overflow', async function () {
+    it('should return value for Power near overflow', async function () {
       should(await this.longPowerNearOverflow.exec(this.ctx)).equal(MAX_LONG_VALUE);
     });
 
-    it.skip('should return value for Power near underflow', async function () {
+    it('should return value for Power near underflow', async function () {
       should(await this.longPowerNearUnderflow.exec(this.ctx)).equal(MIN_LONG_VALUE);
     });
 
@@ -1061,11 +1119,11 @@ describe('OutOfBounds', () => {
       should(await this.longPredecessorUnderflow.exec(this.ctx)).be.null();
     });
 
-    it.skip('should return value for successor near overflow', async function () {
+    it('should return value for successor near overflow', async function () {
       should(await this.longSuccessorNearOverflow.exec(this.ctx)).equal(MAX_LONG_VALUE);
     });
 
-    it.skip('should return value for predecessor near underflow', async function () {
+    it('should return value for predecessor near underflow', async function () {
       should(await this.longPredecessorNearUnderflow.exec(this.ctx)).equal(MIN_LONG_VALUE);
     });
   });
