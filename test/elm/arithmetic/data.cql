@@ -5,6 +5,8 @@ define OnePlusTwo: 1 + 2
 define AddMultiple: 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10
 define AddVariables: Ten + Eleven
 define OnePlusTwoLong: 1L + 2L
+define OnePlusTwoMixed: 1 + 2L
+define OnePlusTwoReverseMixed: 1L + 2
 define AddTime: Time(12) + 1 'hour'
 define UncertaintyZeroToTwelve: months between DateTime(2005, 12) and DateTime(2006)
 define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
@@ -19,6 +21,8 @@ define FiveMinusTwo: 5 - 2
 define SubtractMultiple: 100 - 50 - 25 - 10
 define SubtractVariables: Eleven - Ten
 define FiveMinusTwoLong: 5L - 2L
+define FiveMinusTwoMixed: 5 - 2L
+define FiveMinusTwoReverseMixed: 5L - 2
 define UncertaintyZeroToTwelve: months between DateTime(2005, 12) and DateTime(2006)
 define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
 define SubtractUncertainties: UncertaintySixToEighteen - UncertaintyZeroToTwelve
@@ -31,7 +35,9 @@ define Eleven: 11
 define FiveTimesTwo: 5 * 2
 define MultiplyMultiple: 1 * 2 * 3 * 4 * 5
 define MultiplyVariables: Eleven * Ten
-define FiveTimesTwoLong: 5 * 2
+define FiveTimesTwoLong: 5L * 2L
+define FiveTimesTwoMixed: 5 * 2L
+define FiveTimesTwoReverseMixed: 5L * 2
 define UncertaintyTwoToFourteen: months between DateTime(2005, 10) and DateTime(2006)
 define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
 define MultiplyUncertainties: UncertaintyTwoToFourteen * UncertaintySixToEighteen
@@ -45,7 +51,12 @@ define TenDividedByTwo: 10 / 2
 define TenDividedByFour: 10 / 4
 define DivideMultiple: 1000 / 4 / 10 / 5
 define DivideVariables: Hundred / Four
-define TenDividedByTwoLong: 10 / 2
+define TenDividedByTwoLong: 10L / 2L
+define TenDividedByTwoMixed: 10 / 2L
+define TenDividedByTwoReverseMixed: 10L / 2
+define TenDividedByFourLong: 10L / 4L
+define TenDividedByFourMixed: 10 / 4L
+define TenDividedByFourReverseMixed: 10L / 4
 define UncertaintyTwoToFourteen: months between DateTime(2005, 10) and DateTime(2006)
 define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
 define DivideUncertainties: UncertaintySixToEighteen / UncertaintyTwoToFourteen
@@ -63,6 +74,8 @@ define Parenthetical: (1 + 5) * (10 - 15) / 3
 // @Test: Power
 define Pow: 3 ^ 4
 define ThreeExpFourLong: 3L ^ 4L
+define ThreeExpFourMixed: 3 ^ 4L
+define ThreeExpFourReverseMixed: 3L ^ 4
 
 // @Test: MinValue
 define MinInteger: minimum Integer
@@ -84,10 +97,15 @@ define MaxWrongType: maximum Quantity
 define Trunc: 10 div 3
 define Even: 9 div 3
 define TenDivThreeLong: 10L div 3L
+define TenDivThreeMixed: 10 div 3L
+define TenDivThreeReverseMixed: 10L div 3
 
 // @Test: Modulo
 define Mod: 3 mod 2
 define ThreeModTwoLong: 3L mod 2L
+define ThreeModTwoMixed: 3 mod 2L
+define ThreeModTwoReverseMixed: 3L mod 2
+
 
 // @Test: Ceiling
 define Ceil: Ceiling(10.1)
@@ -219,8 +237,8 @@ define LongMultiplyNearOverflow: maximum Long * 1L
 define LongMultiplyNearUnderflow: minimum Long * 1L
 define LongDivideOverflow: maximum Long / 0.5
 define LongDivideUnderflow: minimum Long / 0.5
-define LongDivideNearOverflow: maximum Long / 1L
-define LongDivideNearUnderflow: minimum Long / 1L
+define LongDivideNearOverflow: ToLong(maximum Integer) / 1L
+define LongDivideNearUnderflow: ToLong(minimum Integer) / 1L
 define LongDivideByZero: 1L / 0L
 define LongPowerOverflow: (maximum Long)^3L
 define LongPowerUnderflow: (minimum Long)^3L

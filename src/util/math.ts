@@ -12,8 +12,8 @@ import { Uncertainty } from '../datatypes/uncertainty';
 
 export const MAX_INT_VALUE = Math.pow(2, 31) - 1;
 export const MIN_INT_VALUE = Math.pow(-2, 31);
-export const MAX_LONG_VALUE = Math.pow(2, 63) - 1;
-export const MIN_LONG_VALUE = Math.pow(-2, 63);
+export const MAX_LONG_VALUE = 9223372036854775807n;
+export const MIN_LONG_VALUE = -9223372036854775808n;
 export const MAX_FLOAT_VALUE = 99999999999999999999.99999999;
 export const MIN_FLOAT_VALUE = -99999999999999999999.99999999;
 export const MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
@@ -53,8 +53,11 @@ export function overflowsOrUnderflows(value: any): boolean {
     if (value.before(MIN_DATE_VALUE)) {
       return true;
     }
+  } else if (typeof value === 'bigint') {
+    if (!isValidLong(value)) {
+      return true;
+    }
   } else if (Number.isInteger(value)) {
-    // TODO: Somehow distinguish Integer from Long
     if (!isValidInteger(value)) {
       return true;
     }
@@ -69,7 +72,7 @@ export function overflowsOrUnderflows(value: any): boolean {
 }
 
 export function isValidInteger(integer: any) {
-  if (isNaN(integer)) {
+  if (!Number.isInteger(integer)) {
     return false;
   }
   if (integer > MAX_INT_VALUE) {
@@ -82,7 +85,7 @@ export function isValidInteger(integer: any) {
 }
 
 export function isValidLong(long: any) {
-  if (isNaN(long)) {
+  if (typeof long !== 'bigint') {
     return false;
   }
   if (long > MAX_LONG_VALUE) {
@@ -96,6 +99,9 @@ export function isValidLong(long: any) {
 
 export function isValidDecimal(decimal: any) {
   if (isNaN(decimal)) {
+    return false;
+  }
+  if (typeof decimal !== 'number') {
     return false;
   }
   if (decimal > MAX_FLOAT_VALUE) {
@@ -129,7 +135,6 @@ export class OverFlowException extends Exception {}
 export function successor(val: any): any {
   if (typeof val === 'number') {
     if (Number.isInteger(val)) {
-      // TODO: Somehow distinguish Integer from Long
       if (val >= MAX_INT_VALUE) {
         throw new OverFlowException();
       } else {
@@ -141,6 +146,12 @@ export function successor(val: any): any {
       } else {
         return val + MIN_FLOAT_PRECISION_VALUE;
       }
+    }
+  } else if (typeof val === 'bigint') {
+    if (val >= MAX_LONG_VALUE) {
+      throw new OverFlowException();
+    } else {
+      return val + 1n;
     }
   } else if (val && val.isTime && val.isTime()) {
     if (val.sameAs(MAX_TIME_VALUE)) {
@@ -182,7 +193,6 @@ export function successor(val: any): any {
 export function predecessor(val: any): any {
   if (typeof val === 'number') {
     if (Number.isInteger(val)) {
-      // TODO: Somehow distinguish Integer from Long
       if (val <= MIN_INT_VALUE) {
         throw new OverFlowException();
       } else {
@@ -194,6 +204,12 @@ export function predecessor(val: any): any {
       } else {
         return val - MIN_FLOAT_PRECISION_VALUE;
       }
+    }
+  } else if (typeof val === 'bigint') {
+    if (val <= MIN_LONG_VALUE) {
+      throw new OverFlowException();
+    } else {
+      return val - 1n;
     }
   } else if (val && val.isTime && val.isTime()) {
     if (val.sameAs(MIN_TIME_VALUE)) {
@@ -234,12 +250,13 @@ export function predecessor(val: any): any {
 
 export function maxValueForInstance(val: any) {
   if (typeof val === 'number') {
-    // TODO: Somehow distinguish Integer from Long
     if (Number.isInteger(val)) {
       return MAX_INT_VALUE;
     } else {
       return MAX_FLOAT_VALUE;
     }
+  } else if (typeof val === 'bigint') {
+    return MAX_LONG_VALUE;
   } else if (val && val.isTime && val.isTime()) {
     return MAX_TIME_VALUE?.copy();
   } else if (val && val.isDateTime) {
@@ -284,12 +301,13 @@ export function maxValueForType(type: string, quantityInstance?: Quantity) {
 
 export function minValueForInstance(val: any) {
   if (typeof val === 'number') {
-    // TODO: Somehow distinguish Integer from Long
     if (Number.isInteger(val)) {
       return MIN_INT_VALUE;
     } else {
       return MIN_FLOAT_VALUE;
     }
+  } else if (typeof val === 'bigint') {
+    return MIN_LONG_VALUE;
   } else if (val && val.isTime && val.isTime()) {
     return MIN_TIME_VALUE?.copy();
   } else if (val && val.isDateTime) {
@@ -357,4 +375,11 @@ export function decimalAdjust(type: MathFn, value: any, exp: any) {
 
 export function decimalOrNull(value: any) {
   return isValidDecimal(value) ? value : null;
+}
+
+export function decimalLongOrNull(value: any) {
+  return (typeof value === 'number' && isValidDecimal(value)) ||
+    (typeof value === 'bigint' && isValidLong(value))
+    ? value
+    : null;
 }
