@@ -39,8 +39,8 @@ describe('FromString', () => {
     (await this.integerValid.exec(this.ctx)).should.equal(10);
   });
 
-  it("should convert '10.2' to Integer 10", async function () {
-    (await this.integerDropDecimal.exec(this.ctx)).should.equal(10);
+  it("should be null trying to convert '10.2' to Integer", async function () {
+    should(await this.integerWithDecimal.exec(this.ctx)).be.null();
   });
 
   it("should be null trying to convert 'abc' to Integer", async function () {
@@ -48,11 +48,11 @@ describe('FromString', () => {
   });
 
   it("should convert '10' to Long", async function () {
-    (await this.longValid.exec(this.ctx)).should.equal(10);
+    (await this.longValid.exec(this.ctx)).should.equal(10n);
   });
 
-  it("should convert '10.2' to Long 10", async function () {
-    (await this.longDropDecimal.exec(this.ctx)).should.equal(10);
+  it("should be null trying to convert '10.2' to Long", async function () {
+    should(await this.longWithDecimal.exec(this.ctx)).be.null();
   });
 
   it("should be null trying to convert 'abc' to Long", async function () {
@@ -124,7 +124,7 @@ describe('FromInteger', () => {
   });
 
   it('should convert 10 to 10L', async function () {
-    (await this.long10.exec(this.ctx)).should.equal(10);
+    (await this.long10.exec(this.ctx)).should.equal(10n);
   });
 
   it('should convert 10 to 10.0', async function () {
@@ -162,7 +162,7 @@ describe('FromLong', () => {
   });
 
   it('should convert 10L to 10L', async function () {
-    (await this.longLong.exec(this.ctx)).should.equal(10);
+    (await this.longLong.exec(this.ctx)).should.equal(10n);
   });
 });
 
@@ -429,45 +429,35 @@ describe('ToLong', () => {
   });
 
   it('should return positive long without polarity sign', async function () {
-    (await this.noSign.exec(this.ctx)).should.equal(12345);
+    (await this.noSign.exec(this.ctx)).should.equal(12345n);
   });
 
   it('should return positive long with polarity sign', async function () {
-    (await this.positiveSign.exec(this.ctx)).should.equal(12345);
+    (await this.positiveSign.exec(this.ctx)).should.equal(12345n);
   });
 
   it('should return negative long', async function () {
-    (await this.negativeSign.exec(this.ctx)).should.equal(-12345);
+    (await this.negativeSign.exec(this.ctx)).should.equal(-12345n);
   });
 
-  it('should return null if long larger than max by a significant amount', async function () {
-    should(await this.definitelyTooLargeLong.exec(this.ctx)).be.null();
-  });
-
-  // skipping because js number is imprecise at long max
-  it.skip('should return null if long larger than max', async function () {
+  it('should return null if long larger than max', async function () {
     should(await this.tooLargeLong.exec(this.ctx)).be.null();
   });
 
-  it('should return null if long smaller than min by a significant amount', async function () {
-    should(await this.definitelyTooSmallLong.exec(this.ctx)).be.null();
-  });
-
-  // skipping because js number is imprecise at long max
-  it.skip('should return null if long smaller than min', async function () {
+  it('should return null if long smaller than min', async function () {
     should(await this.tooSmallLong.exec(this.ctx)).be.null();
   });
 
   it('should return 12345 for integer 12345', async function () {
-    (await this.int.exec(this.ctx)).should.equal(12345);
+    (await this.int.exec(this.ctx)).should.equal(12345n);
   });
 
   it('should return 1 for boolean true', async function () {
-    (await this.booleanTrue.exec(this.ctx)).should.equal(1);
+    (await this.booleanTrue.exec(this.ctx)).should.equal(1n);
   });
 
   it('should return 0 for boolean false', async function () {
-    (await this.booleanFalse.exec(this.ctx)).should.equal(0);
+    (await this.booleanFalse.exec(this.ctx)).should.equal(0n);
   });
 });
 
