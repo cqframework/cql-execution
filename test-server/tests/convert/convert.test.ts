@@ -49,7 +49,7 @@ describe('convert.toParameters', () => {
     });
 
     it('converts long to valueString (R4)', () => {
-      expect(toParameters(1234567890123, 'System.Long')).toEqual({
+      expect(toParameters(1234567890123n, 'System.Long')).toEqual({
         resourceType: 'Parameters',
         parameter: [
           { extension: cqlTypeExt('System.Long'), name: 'return', valueString: '1234567890123' }

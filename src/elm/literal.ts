@@ -72,7 +72,7 @@ export class IntegerLiteral extends Literal {
 export class LongLiteral extends Literal {
   constructor(json: any) {
     super(json);
-    this.value = parseInt(this.value, 10);
+    this.value = BigInt(this.value);
   }
 
   // Define a simple getter to allow type-checking of this class without instanceof

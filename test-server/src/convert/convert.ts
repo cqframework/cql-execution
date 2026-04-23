@@ -308,6 +308,8 @@ function toFhirQuantity(val: CqlQuantity | number, isIntegerOrLong = false): Fhi
   let fq: FhirQuantity;
   if (typeof val === 'number') {
     fq = { value: val };
+  } else if (typeof val === 'bigint') {
+    fq = { value: Number(val) };
   } else {
     const cq = val as CqlQuantity;
     fq = { value: cq.value } as FhirQuantity;
