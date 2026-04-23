@@ -28,11 +28,9 @@ define "Abs": Tuple{
     output: 1.0'cm'
   },
   "AbsLong": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: Abs(-1L),
     output: 1L
-    */  }
+  }
 }
 
 define "Add": Tuple{
@@ -45,11 +43,9 @@ define "Add": Tuple{
     output: 2
   },
   "Add1L2L": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: 1L + 2L,
     output: 3L
-    */  },
+  },
   "Add1D1D": Tuple{
     expression: 1.0 + 1.0,
     output: 2.0
@@ -63,11 +59,9 @@ define "Add": Tuple{
     output: 3.0
   },
   "Add1L1L": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: 1L + 1L,
     output: 2L
-    */  }
+  }
 }
 
 define "Ceiling": Tuple{
@@ -356,11 +350,9 @@ define "MinValue": Tuple{
     output: -2147483648
   },
   "LongMinValue": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: minimum Long,
     output: -9223372036854775808L
-    */  },
+  },
   "DecimalMinValue": Tuple{
     expression: minimum Decimal,
     output: -99999999999999999999.99999999
@@ -389,11 +381,9 @@ define "MaxValue": Tuple{
     output: 2147483647
   },
   "LongMaxValue": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: maximum Long,
     output: 9223372036854775807L
-    */  },
+  },
   "DecimalMaxValue": Tuple{
     expression: maximum Decimal,
     output: 99999999999999999999.99999999
@@ -430,11 +420,9 @@ define "Modulo": Tuple{
     output: 0
   },
   "Modulo4LBy2L": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: 4L mod 2L,
     output: 0L
-    */  },
+  },
   "Modulo4DBy2D": Tuple{
     expression: 4.0 mod 2.0,
     output: 0.0
@@ -483,21 +471,17 @@ define "Multiply": Tuple{
     output: 1
   },
   "Multiply2LBy3L": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: 2L * 3L,
     output: 6L
-    */  },
+  },
   "Multiply1DBy2D": Tuple{
     expression: 1.0 * 2.0,
     output: 2.0
   },
   "Multiply1By1L": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: 1 * 1L,
     output: 1L
-    */  },
+  },
   "Multiply1IBy2D": Tuple{
     expression: 1 * 2.0,
     output: 2.0
@@ -538,11 +522,9 @@ define "Negate": Tuple{
     output: 1
   },
   "NegateNeg1L": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: -(-1L),
     output: 1L
-    */  },
+  },
   "Negate0D": Tuple{
     expression: -(0.0),
     output: 0.0
@@ -604,11 +586,9 @@ define "Predecessor": Tuple{
     output: 0
   },
   "PredecessorOf1L": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: predecessor of 1L,
     output: 0L
-    */  },
+  },
   "PredecessorOf1D": Tuple{
     skipped: 'Wrong answer (doesn\'t recognize 1.0 as decimal)'
     /*
@@ -665,11 +645,9 @@ define "Power": Tuple{
     output: 0.25
   },
   "Power2LTo2L": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: Power(2L, 2L),
     output: 4L
-    */  },
+  },
   "Power2DTo2D": Tuple{
     expression: Power(2.0, 2.0),
     output: 4.0
@@ -695,11 +673,9 @@ define "Power": Tuple{
     output: 16
   },
   "Power2LTo3L": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: 2L^3L,
     output: 8L
-    */  },
+  },
   "Power2DTo4D": Tuple{
     expression: 2.0^4.0,
     output: 16.0
@@ -767,11 +743,9 @@ define "Subtract": Tuple{
     output: 0
   },
   "Subtract1LAnd1L": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: 1L - 1L,
     output: 0L
-    */  },
+  },
   "Subtract1DAnd2D": Tuple{
     expression: 1.0 - 2.0,
     output: -1.0
@@ -800,11 +774,9 @@ define "Successor": Tuple{
     output: 2
   },
   "SuccessorOf1L": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: successor of 1L,
     output: 2L
-    */  },
+  },
   "SuccessorOf1D": Tuple{
     skipped: 'Wrong answer (doesn\'t recognize 1.0 as decimal)'
     /*
@@ -902,11 +874,9 @@ define "Truncated Divide": Tuple{
     output: 3
   },
   "TruncatedDivide10LBy3L": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: 10L div 3L,
     output: 3L
-    */  },
+  },
   "TruncatedDivide10LBy0L": Tuple{
     expression: 10L div 0L,
     output: null

@@ -89,11 +89,9 @@ define "Avg": Tuple{
 
 define "Product": Tuple{
   "ProductLong": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: Product({5L, 4L, 5L}),
     output: 100L
-    */  }
+  }
 }
 
 define "Count": Tuple{
@@ -226,11 +224,9 @@ define "Sum": Tuple{
     output: 20.0
   },
   "SumTestLong": Tuple{
-    skipped: 'Long not implemented'
-    /*
     expression: Sum({ 6L, 2L, 3L, 4L, 5L }),
     output: 20L
-    */  },
+  },
   "SumTestQuantity": Tuple{
     expression: Sum({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'}),
     output: 15 'ml'

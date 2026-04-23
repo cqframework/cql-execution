@@ -327,6 +327,8 @@ export class Context {
         return typeof val === 'number';
       case '{urn:hl7-org:elm-types:r1}Integer':
         return typeof val === 'number' && Math.floor(val) === val;
+      case '{urn:hl7-org:elm-types:r1}Long':
+        return typeof val === 'bigint';
       case '{urn:hl7-org:elm-types:r1}String':
         return typeof val === 'string';
       case '{urn:hl7-org:elm-types:r1}Concept':
@@ -372,6 +374,8 @@ export class Context {
       return typeof val === 'number';
     } else if (inst.isIntegerLiteral) {
       return typeof val === 'number' && Math.floor(val) === val;
+    } else if (inst.isLongLiteral) {
+      return typeof val === 'bigint';
     } else if (inst.isStringLiteral) {
       return typeof val === 'string';
     } else if (inst.isCode) {

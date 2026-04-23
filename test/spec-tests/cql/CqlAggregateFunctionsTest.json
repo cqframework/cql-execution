@@ -1031,11 +1031,43 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
+                      "value": {
+                        "type": "Product",
+                        "annotation": [],
+                        "signature": [],
+                        "source": {
+                          "type": "List",
+                          "annotation": [],
+                          "element": [
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Long",
+                              "value": "5",
+                              "annotation": []
+                            },
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Long",
+                              "value": "4",
+                              "annotation": []
+                            },
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Long",
+                              "value": "5",
+                              "annotation": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
                       "value": {
                         "type": "Literal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Long not implemented",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Long",
+                        "value": "100",
                         "annotation": []
                       }
                     }
@@ -3452,11 +3484,55 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
+                      "value": {
+                        "type": "Sum",
+                        "annotation": [],
+                        "signature": [],
+                        "source": {
+                          "type": "List",
+                          "annotation": [],
+                          "element": [
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Long",
+                              "value": "6",
+                              "annotation": []
+                            },
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Long",
+                              "value": "2",
+                              "annotation": []
+                            },
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Long",
+                              "value": "3",
+                              "annotation": []
+                            },
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Long",
+                              "value": "4",
+                              "annotation": []
+                            },
+                            {
+                              "type": "Literal",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Long",
+                              "value": "5",
+                              "annotation": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
                       "value": {
                         "type": "Literal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Long not implemented",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Long",
+                        "value": "20",
                         "annotation": []
                       }
                     }

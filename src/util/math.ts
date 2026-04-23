@@ -12,6 +12,8 @@ import { Uncertainty } from '../datatypes/uncertainty';
 
 export const MAX_INT_VALUE = Math.pow(2, 31) - 1;
 export const MIN_INT_VALUE = Math.pow(-2, 31);
+export const MAX_LONG_VALUE = 9223372036854775807n;
+export const MIN_LONG_VALUE = -9223372036854775808n;
 export const MAX_FLOAT_VALUE = 99999999999999999999.99999999;
 export const MIN_FLOAT_VALUE = -99999999999999999999.99999999;
 export const MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
@@ -51,6 +53,10 @@ export function overflowsOrUnderflows(value: any): boolean {
     if (value.before(MIN_DATE_VALUE)) {
       return true;
     }
+  } else if (typeof value === 'bigint') {
+    if (!isValidLong(value)) {
+      return true;
+    }
   } else if (Number.isInteger(value)) {
     if (!isValidInteger(value)) {
       return true;
@@ -66,7 +72,7 @@ export function overflowsOrUnderflows(value: any): boolean {
 }
 
 export function isValidInteger(integer: any) {
-  if (isNaN(integer)) {
+  if (!Number.isInteger(integer)) {
     return false;
   }
   if (integer > MAX_INT_VALUE) {
@@ -78,8 +84,24 @@ export function isValidInteger(integer: any) {
   return true;
 }
 
+export function isValidLong(long: any) {
+  if (typeof long !== 'bigint') {
+    return false;
+  }
+  if (long > MAX_LONG_VALUE) {
+    return false;
+  }
+  if (long < MIN_LONG_VALUE) {
+    return false;
+  }
+  return true;
+}
+
 export function isValidDecimal(decimal: any) {
   if (isNaN(decimal)) {
+    return false;
+  }
+  if (typeof decimal !== 'number') {
     return false;
   }
   if (decimal > MAX_FLOAT_VALUE) {
@@ -124,6 +146,12 @@ export function successor(val: any): any {
       } else {
         return val + MIN_FLOAT_PRECISION_VALUE;
       }
+    }
+  } else if (typeof val === 'bigint') {
+    if (val >= MAX_LONG_VALUE) {
+      throw new OverFlowException();
+    } else {
+      return val + 1n;
     }
   } else if (val && val.isTime && val.isTime()) {
     if (val.sameAs(MAX_TIME_VALUE)) {
@@ -177,6 +205,12 @@ export function predecessor(val: any): any {
         return val - MIN_FLOAT_PRECISION_VALUE;
       }
     }
+  } else if (typeof val === 'bigint') {
+    if (val <= MIN_LONG_VALUE) {
+      throw new OverFlowException();
+    } else {
+      return val - 1n;
+    }
   } else if (val && val.isTime && val.isTime()) {
     if (val.sameAs(MIN_TIME_VALUE)) {
       throw new OverFlowException();
@@ -221,6 +255,8 @@ export function maxValueForInstance(val: any) {
     } else {
       return MAX_FLOAT_VALUE;
     }
+  } else if (typeof val === 'bigint') {
+    return MAX_LONG_VALUE;
   } else if (val && val.isTime && val.isTime()) {
     return MAX_TIME_VALUE?.copy();
   } else if (val && val.isDateTime) {
@@ -240,6 +276,8 @@ export function maxValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
     case '{urn:hl7-org:elm-types:r1}Integer':
       return MAX_INT_VALUE;
+    case '{urn:hl7-org:elm-types:r1}Long':
+      return MAX_LONG_VALUE;
     case '{urn:hl7-org:elm-types:r1}Decimal':
       return MAX_FLOAT_VALUE;
     case '{urn:hl7-org:elm-types:r1}DateTime':
@@ -268,6 +306,8 @@ export function minValueForInstance(val: any) {
     } else {
       return MIN_FLOAT_VALUE;
     }
+  } else if (typeof val === 'bigint') {
+    return MIN_LONG_VALUE;
   } else if (val && val.isTime && val.isTime()) {
     return MIN_TIME_VALUE?.copy();
   } else if (val && val.isDateTime) {
@@ -287,6 +327,8 @@ export function minValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
     case '{urn:hl7-org:elm-types:r1}Integer':
       return MIN_INT_VALUE;
+    case '{urn:hl7-org:elm-types:r1}Long':
+      return MIN_LONG_VALUE;
     case '{urn:hl7-org:elm-types:r1}Decimal':
       return MIN_FLOAT_VALUE;
     case '{urn:hl7-org:elm-types:r1}DateTime':
@@ -333,4 +375,11 @@ export function decimalAdjust(type: MathFn, value: any, exp: any) {
 
 export function decimalOrNull(value: any) {
   return isValidDecimal(value) ? value : null;
+}
+
+export function decimalLongOrNull(value: any) {
+  return (typeof value === 'number' && isValidDecimal(value)) ||
+    (typeof value === 'bigint' && isValidLong(value))
+    ? value
+    : null;
 }

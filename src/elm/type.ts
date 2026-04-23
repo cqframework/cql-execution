@@ -4,7 +4,7 @@ import { Expression, UnimplementedExpression } from './expression';
 import { DateTime, Date } from '../datatypes/datetime';
 import { Concept } from '../datatypes/clinical';
 import { Quantity, parseQuantity } from '../datatypes/quantity';
-import { isValidDecimal, isValidInteger, limitDecimalPrecision } from '../util/math';
+import { isValidDecimal, isValidInteger, isValidLong, limitDecimalPrecision } from '../util/math';
 import { normalizeMillisecondsField } from '../util/util';
 import { Ratio } from '../datatypes/ratio';
 import { Uncertainty } from '../datatypes/uncertainty';
@@ -147,13 +147,44 @@ export class ToInteger extends Expression {
 
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
-    if (typeof arg === 'string') {
-      const integer = parseInt(arg);
+    if (typeof arg === 'number') {
+      if (isValidInteger(arg)) {
+        return arg;
+      }
+    } else if (typeof arg === 'string' || typeof arg === 'bigint') {
+      const integer = Number(arg);
       if (isValidInteger(integer)) {
         return integer;
       }
     } else if (typeof arg === 'boolean') {
       return arg ? 1 : 0;
+    }
+    return null;
+  }
+}
+
+export class ToLong extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
+    if (typeof arg === 'bigint') {
+      if (isValidLong(arg)) {
+        return arg;
+      }
+    } else if (typeof arg === 'number' || typeof arg === 'string') {
+      try {
+        const long = BigInt(arg);
+        if (isValidLong(long)) {
+          return long;
+        }
+      } catch {
+        return null;
+      }
+    } else if (typeof arg === 'boolean') {
+      return arg ? 1n : 0n;
     }
     return null;
   }

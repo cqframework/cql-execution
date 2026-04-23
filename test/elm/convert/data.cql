@@ -6,8 +6,11 @@ define boolFalse: convert 'false' to Boolean
 define decimalValid: convert '10.2' to Decimal
 define decimalInvalid: convert 'abc' to Decimal
 define integerValid: convert '10' to Integer
-define integerDropDecimal: convert '10.2' to Integer
+define integerWithDecimal: convert '10.2' to Integer
 define integerInvalid: convert 'abc' to Integer
+define longValid: convert '10' to Long
+define longWithDecimal: convert '10.2' to Long
+define longInvalid: convert 'abc' to Long
 define quantityStr: convert '10 \'A\'' to Quantity
 define posQuantityStr: convert '+10 \'A\'' to Quantity
 define negQuantityStr: convert '-10 \'A\'' to Quantity
@@ -21,9 +24,17 @@ define TimezoneTime: convert '14:30:00.0-07:00' to Time // 2:30PM Mountain Stand
 
 // @Test: FromInteger
 define string10: convert 10 to String
+define long10: convert 10 to Long
 define decimal10: convert 10 to Decimal
-define intNull: convert null to Decimal
+define intNull: convert (null as Integer) to Decimal
 define intInt: convert 10 to Integer
+
+// @Test: FromLong
+define string10: convert 10L to String
+define integer10: convert 10L to Integer
+define decimal10: convert 10L to Decimal
+define longNull: convert (null as Long) to Decimal
+define longLong: convert 10L to Long
 
 // @Test: FromQuantity
 define quantityStr: convert 10 'A' to String
@@ -77,8 +88,21 @@ define PositiveSign: ToInteger('+12345')
 define NegativeSign: ToInteger('-12345')
 define TooLargeInt: ToInteger('2147483648')
 define TooSmallInt: ToInteger('-2147483649')
+define LongTwenty: ToInteger(20L)
+define TooLargeLong: ToInteger(2147483648L)
+define TooSmallLong: ToInteger(-2147483649L)
 define BooleanTrue: ToInteger(true)
 define BooleanFalse: ToInteger(false)
+
+// @Test: ToLong
+define NoSign: ToLong('12345')
+define PositiveSign: ToLong('+12345')
+define NegativeSign: ToLong('-12345')
+define TooLargeLong: ToLong('9223372036854775808')
+define TooSmallLong: ToLong('-9223372036854775809')
+define Int: ToLong(12345)
+define BooleanTrue: ToLong(true)
+define BooleanFalse: ToLong(false)
 
 // @Test: ToQuantity
 define DecimalOverload: ToQuantity(0.1)

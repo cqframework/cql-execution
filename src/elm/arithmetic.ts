@@ -182,8 +182,19 @@ export class TruncatedDivide extends Expression {
       return null;
     }
 
-    const quotient = args.reduce((x: number, y: number) => x / y);
-    const truncatedQuotient = quotient >= 0 ? Math.floor(quotient) : Math.ceil(quotient);
+    let truncatedQuotient: number | bigint;
+    if (typeof args[0] === 'bigint') {
+      // bigint division always truncates
+      try {
+        truncatedQuotient = args.reduce((x: bigint, y: bigint) => x / y);
+      } catch {
+        // bigint divide by 0 throws an error
+        return null;
+      }
+    } else {
+      const quotient = args.reduce((x: number, y: number) => x / y);
+      truncatedQuotient = quotient >= 0 ? Math.floor(quotient) : Math.ceil(quotient);
+    }
 
     if (MathUtil.overflowsOrUnderflows(truncatedQuotient)) {
       return null;
@@ -205,7 +216,7 @@ export class Modulo extends Expression {
 
     const modulo = args.reduce((x: number, y: number) => x % y);
 
-    return MathUtil.decimalOrNull(modulo);
+    return MathUtil.decimalLongOrNull(modulo);
   }
 }
 
@@ -264,6 +275,8 @@ export class Abs extends Expression {
       return null;
     } else if (arg.isQuantity) {
       return new Quantity(Math.abs(arg.value), arg.unit);
+    } else if (typeof arg === 'bigint') {
+      return arg < 0n ? -arg : arg;
     } else {
       return Math.abs(arg);
     }
@@ -281,6 +294,8 @@ export class Negate extends Expression {
       return null;
     } else if (arg.isQuantity) {
       return new Quantity(arg.value * -1, arg.unit);
+    } else if (typeof arg === 'bigint') {
+      return arg * -1n;
     } else {
       return arg * -1;
     }
@@ -371,7 +386,7 @@ export class Power extends Expression {
       return null;
     }
 
-    const power = args.reduce((x: number, y: number) => Math.pow(x, y));
+    const power = args.reduce((x: any, y: any) => x ** y);
 
     if (MathUtil.overflowsOrUnderflows(power)) {
       return null;
@@ -383,6 +398,7 @@ export class Power extends Expression {
 export class MinValue extends Expression {
   static readonly MIN_VALUES = {
     '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MIN_INT_VALUE,
+    '{urn:hl7-org:elm-types:r1}Long': MathUtil.MIN_LONG_VALUE,
     '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MIN_FLOAT_VALUE,
     '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MIN_DATETIME_VALUE,
     '{urn:hl7-org:elm-types:r1}Date': MathUtil.MIN_DATE_VALUE,
@@ -414,6 +430,7 @@ export class MinValue extends Expression {
 export class MaxValue extends Expression {
   static readonly MAX_VALUES = {
     '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MAX_INT_VALUE,
+    '{urn:hl7-org:elm-types:r1}Long': MathUtil.MAX_LONG_VALUE,
     '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MAX_FLOAT_VALUE,
     '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MAX_DATETIME_VALUE,
     '{urn:hl7-org:elm-types:r1}Date': MathUtil.MAX_DATE_VALUE,

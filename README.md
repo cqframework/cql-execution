@@ -42,8 +42,6 @@ Implementors should be aware of the following limitations and gaps in `cql-execu
   * Issues typically associated with floating point arithmetic
   * Decimals without a decimal portion (e.g., `2.0`) may be treated as CQL `Integer`s
 * The following STU (non-normative) features introduced in CQL 1.5 are not yet supported:
-  * `Long` datatype
-  * Fluent functions
   * Retrieve search paths
   * Retrieve includes
 * In addition the following features defined prior to CQL 1.5 are also not yet supported:
