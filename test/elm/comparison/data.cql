@@ -2,6 +2,9 @@
 define AGtB_Int: 5 = 4
 define AEqB_Int: 5 = 5
 define ALtB_Int: 5 = 6
+define AGtB_Long: 5L = 4L
+define AEqB_Long: 5L = 5L
+define ALtB_Long: 5L = 6L
 define EqTuples: Tuple{a: 1, b: Tuple{c: 1}} = Tuple{a: 1, b: Tuple{c: 1}}
 define UneqTuples: Tuple{a: 1, b: Tuple{c: 1}} = Tuple{a: 1, b: Tuple{c: -1}}
 define EqTuplesWithNullFields: Tuple{a: 'Hello', b: null} = Tuple{a: 'Hello', b: null}
@@ -44,6 +47,9 @@ define UneqRatios: 10 'mg' : 2 'dL' = 15 'mg' : 4 'dL'
 define AGtB_Int: 5 != 4
 define AEqB_Int: 5 != 5
 define ALtB_Int: 5 != 6
+define AGtB_Long: 5L != 4L
+define AEqB_Long: 5L != 5L
+define ALtB_Long: 5L != 6L
 define EqTuples: Tuple{a: 1, b: Tuple{c: 1}} != Tuple{a: 1, b: Tuple{c: 1}}
 define UneqTuples: Tuple{a: 1, b: Tuple{c: 1}} != Tuple{a: 1, b: Tuple{c: -1}}
 define EqTuplesWithNullFields: Tuple{a: 'Hello', b: null} != Tuple{a: 'Hello', b: null}
@@ -90,11 +96,12 @@ valueset "UnknownSame": '1.2.3.4.5.6.7.8.9'
 valueset "Known": '2.16.840.1.113883.3.560.100.1' version '20121025'
 valueset "KnownSameCodes": '2.16.840.1.113883.3.560.100.1' version '20131025'
 valueset "KnownDifferentCodes": '2.16.840.1.113883.3.560.100.1' version '20141025'
-
 define ANull_BDefined: null ~ 4
 define ADefined_BNull: 5 ~ null
 define ANull_BNull: (null as String) ~ (null as String)
 define ADefined_BDefined: 3 ~ 3
+define EqLong: 5L ~ 5L
+define UneqLong: 5L ~ 6L
 define CaseInsensitiveStrings: 'FOO' ~ 'foo'
 define WhiteSpaceTabTrue: 'foo bar' ~ 'foo\tbar'
 define WhiteSpaceTabReturnTrue: 'foo\tbar' ~ 'foo\nbar'
@@ -106,7 +113,7 @@ define UneqRatios: 10 'mg' : 2 'dL' ~ 15 'mg' : 4 'dL'
 define UneqRatioTypes: 10 'mg' : 2 'dL' ~ DateTime(2000, 3, 13, 2, 4, 23)
 
 // define EmptyTuples: { : } ~ { : } // TODO: We don't seem to support this format
-define SameTuples: Tuple{a: 'a', b: 'b'} ~ Tuple{a: 'a', b: 'b'}
+define SameTuples: Tuple{a: 'a', b: 'b', z: 9L } ~ Tuple{a: 'a', b: 'b', z: 9L }
 define SameTuplesNull: Tuple{a: null} ~ Tuple{a : null}
 define DifferentTuples: Tuple{a: 'a', b: 'b'} ~ Tuple{a: 'x', b: 'b'}
 define SameNestedTuples: Tuple{a: 'a', b: Tuple{c: 'c'}} ~ Tuple{a: 'a', b: Tuple{c: 'c'}}
@@ -116,7 +123,9 @@ define EmptyLists: { } ~ { }
 define DifferentTypesLists: {'1', '2', '3'} ~ {1, 2, 3}
 define DifferentLengthLists: {'a'} ~ {'a', 'a'}
 define DifferentOrderLists: {'a', 'b'} ~ {'b', 'a'}
+define DifferentOrderListsLong: {1L, 5L, 10L} ~ {5L, 1L, 10L}
 define SameLists: {'a', 'b', 'c'} ~ {'a', 'b', 'c'}
+define SameListsLong: {1L, 5L, 10L} ~ {1L, 5L, 10L}
 define SameListsNull: {null, null, null} ~ {null, null, null}
 define SameNestedLists: {{'a','d'}, {'b', 'c'}} ~ {{'a','d'}, {'b', 'c'}}
 define SameNestedListsNull: {null, {null, null}} ~ {null, {null, null}}
@@ -168,6 +177,9 @@ define DateTimeAndDateUncertainFalse: DateTime(2000, 3, 13, 2, 4, 23) ~ Date(200
 define AGtB_Int: 5 < 4
 define AEqB_Int: 5 < 5
 define ALtB_Int: 5 < 6
+define AGtB_Long: 5L < 4L
+define AEqB_Long: 5L < 5L
+define ALtB_Long: 5L < 6L
 define AGtB_Quantity: 5 'm' < 4 'm'
 define AEqB_Quantity: 5 'm' < 5 'm'
 define ALtB_Quantity: 5 'm' < 6 'm'
@@ -182,6 +194,9 @@ define ALtB_Quantity_incompatible: 5 'Cel' < 40 'm'
 define AGtB_Int: 5 <= 4
 define AEqB_Int: 5 <= 5
 define ALtB_Int: 5 <= 6
+define AGtB_Long: 5L <= 4L
+define AEqB_Long: 5L <= 5L
+define ALtB_Long: 5L <= 6L
 define AGtB_Quantity: 5 'm' <= 4 'm'
 define AEqB_Quantity: 5 'm' <= 5 'm'
 define ALtB_Quantity: 5 'm' <= 6 'm'
@@ -197,6 +212,9 @@ define ALtB_Quantity_incompatible: 5 'Cel' <= 40 'm'
 define AGtB_Int: 5 > 4
 define AEqB_Int: 5 > 5
 define ALtB_Int: 5 > 6
+define AGtB_Long: 5L > 4L
+define AEqB_Long: 5L > 5L
+define ALtB_Long: 5L > 6L
 define AGtB_Quantity: 5 'm' > 4 'm'
 define AEqB_Quantity: 5 'm' > 5 'm'
 define ALtB_Quantity: 5 'm' > 6 'm'
@@ -211,6 +229,9 @@ define ALtB_Quantity_incompatible: 5 'Cel' > 40 'm'
 define AGtB_Int: 5 >= 4
 define AEqB_Int: 5 >= 5
 define ALtB_Int: 5 >= 6
+define AGtB_Long: 5L >= 4L
+define AEqB_Long: 5L >= 5L
+define ALtB_Long: 5L >= 6L
 define AGtB_Quantity: 5 'm' >= 4 'm'
 define AEqB_Quantity: 5 'm' >= 5 'm'
 define ALtB_Quantity: 5 'm' >= 6 'm'

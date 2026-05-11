@@ -12,6 +12,10 @@ describe('List', () => {
     (await this.intList.exec(this.ctx)).should.eql([9, 7, 8]);
   });
 
+  it('should execute to an array (longs)', async function () {
+    (await this.longList.exec(this.ctx)).should.eql([9n, 7n, 8n]);
+  });
+
   it('should execute to an array (strings)', async function () {
     (await this.stringList.exec(this.ctx)).should.eql(['a', 'bee', 'see']);
   });
@@ -75,6 +79,14 @@ describe('Equal', () => {
     (await this.unequalIntList.exec(this.ctx)).should.be.false();
   });
 
+  it('should identify equal lists of longs', async function () {
+    (await this.equalLongList.exec(this.ctx)).should.be.true();
+  });
+
+  it('should identify unequal lists of longs', async function () {
+    (await this.unequalLongList.exec(this.ctx)).should.be.false();
+  });
+
   it('should identify re-ordered lists of integers as unequal', async function () {
     (await this.reverseIntList.exec(this.ctx)).should.be.false();
   });
@@ -123,6 +135,14 @@ describe('NotEqual', () => {
     (await this.unequalIntList.exec(this.ctx)).should.be.true();
   });
 
+  it('should identify equal lists of longs', async function () {
+    (await this.equalLongList.exec(this.ctx)).should.be.false();
+  });
+
+  it('should identify unequal lists of longs', async function () {
+    (await this.unequalLongList.exec(this.ctx)).should.be.true();
+  });
+
   it('should identify re-ordered lists of integers as unequal', async function () {
     (await this.reverseIntList.exec(this.ctx)).should.be.true();
   });
@@ -157,6 +177,10 @@ describe('Union', () => {
     (await this.oneToFiveOverlapped.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
   });
 
+  it('should remove duplicate long elements (according to CQL 1.2 spec)', async function () {
+    (await this.oneToFiveLongOverlapped.exec(this.ctx)).should.eql([1n, 2n, 3n, 4n, 5n]);
+  });
+
   it('should remove duplicate null elements', async function () {
     (await this.oneToFiveOverlappedWithNulls.exec(this.ctx)).should.eql([1, null, 2, 3, 4, 5]);
   });
@@ -188,6 +212,10 @@ describe('Except', () => {
 
   it('should remove items in second list', async function () {
     (await this.exceptThreeFour.exec(this.ctx)).should.eql([1, 2, 5]);
+  });
+
+  it('should remove items in second list', async function () {
+    (await this.exceptThreeFourLong.exec(this.ctx)).should.eql([1n, 2n, 5n]);
   });
 
   it('should not be commutative', async function () {
@@ -244,6 +272,10 @@ describe('Intersect', () => {
     (await this.intersectOnFive.exec(this.ctx)).should.eql([5]);
   });
 
+  it('should intersect two lists with a single common long element', async function () {
+    (await this.intersectOnFiveLong.exec(this.ctx)).should.eql([5n]);
+  });
+
   it('should intersect two lists with a single common element even with duplicates', async function () {
     (await this.intersectionOnFourDuplicates.exec(this.ctx)).should.eql([4]);
   });
@@ -286,6 +318,10 @@ describe('IndexOf', () => {
     (await this.indexOfSecond.exec(this.ctx)).should.equal(1);
     this.ctx.rootContext().localId_context[this.indexOfSecond.source.localId].should.not.be.null();
     this.ctx.rootContext().localId_context[this.indexOfSecond.element.localId].should.not.be.null();
+  });
+
+  it('should return the correct 0-based index when a long item is in the list', async function () {
+    (await this.indexOfSecondLong.exec(this.ctx)).should.equal(1);
   });
 
   it('should work with complex types like tuples', async function () {
@@ -333,6 +369,10 @@ describe('Indexer', () => {
     (await this.secondItem.exec(this.ctx)).should.equal('b');
   });
 
+  it('should return the correct long item based on the 0-based index', async function () {
+    (await this.secondItemLong.exec(this.ctx)).should.equal(34n);
+  });
+
   it('should NOT return null when accessing index 0', async function () {
     should(await this.zeroIndex.exec(this.ctx)).not.be.null();
   });
@@ -358,6 +398,14 @@ describe('In', () => {
 
   it('should execute to false when item is not in list', async function () {
     (await this.isNotIn.exec(this.ctx)).should.be.false();
+  });
+
+  it('should execute to true when long item is in list', async function () {
+    (await this.isInLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to false when long item is not in list', async function () {
+    (await this.isNotInLong.exec(this.ctx)).should.be.false();
   });
 
   it('should execute to true when tuple is in list', async function () {
@@ -392,6 +440,14 @@ describe('Contains', () => {
 
   it('should execute to false when item is not in list', async function () {
     (await this.isNotIn.exec(this.ctx)).should.be.false();
+  });
+
+  it('should execute to true when long item is in list', async function () {
+    (await this.isInLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to false when long item is not in list', async function () {
+    (await this.isNotInLong.exec(this.ctx)).should.be.false();
   });
 
   it('should execute to true when tuple is in list', async function () {
@@ -434,6 +490,22 @@ describe('Includes', () => {
 
   it('should execute to false when sublist is not in list', async function () {
     (await this.isNotIncluded.exec(this.ctx)).should.be.false();
+  });
+
+  it('should execute to true when sublist of longs is in list', async function () {
+    (await this.isIncludedLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to true when sublist of longs is in list in different order', async function () {
+    (await this.isIncludedReversedLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to true when lists of longs are the same', async function () {
+    (await this.isSameLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to false when sublist of longs is not in list', async function () {
+    (await this.isNotIncludedLong.exec(this.ctx)).should.be.false();
   });
 
   it('should execute to true when tuple sublist is in list', async function () {
@@ -485,6 +557,22 @@ describe('IncludedIn', () => {
     (await this.isNotIncluded.exec(this.ctx)).should.be.false();
   });
 
+  it('should execute to true when sublist of longs is in list', async function () {
+    (await this.isIncludedLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to true when sublist of longs is in list in different order', async function () {
+    (await this.isIncludedReversedLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to true when lists of longs are the same', async function () {
+    (await this.isSameLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to false when sublist of longs is not in list', async function () {
+    (await this.isNotIncludedLong.exec(this.ctx)).should.be.false();
+  });
+
   it('should execute to true when tuple sublist is in list', async function () {
     (await this.tuplesIncluded.exec(this.ctx)).should.be.true();
   });
@@ -534,6 +622,22 @@ describe('ProperIncludes', () => {
     (await this.isNotIncluded.exec(this.ctx)).should.be.false();
   });
 
+  it('should execute to true when sublist of longs is in list', async function () {
+    (await this.isIncludedLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to true when sublist of longs is in list in different order', async function () {
+    (await this.isIncludedReversedLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to false when lists of longs are the same', async function () {
+    (await this.isSameLong.exec(this.ctx)).should.be.false();
+  });
+
+  it('should execute to false when sublist of longs is not in list', async function () {
+    (await this.isNotIncludedLong.exec(this.ctx)).should.be.false();
+  });
+
   it('should execute to true when tuple sublist is in list', async function () {
     (await this.tuplesIncluded.exec(this.ctx)).should.be.true();
   });
@@ -568,6 +672,22 @@ describe('ProperIncludedIn', () => {
 
   it('should execute to false when sublist is not in list', async function () {
     (await this.isNotIncluded.exec(this.ctx)).should.be.false();
+  });
+
+  it('should execute to true when sublist of longs is in list', async function () {
+    (await this.isIncludedLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to true when sublist of longs is in list in different order', async function () {
+    (await this.isIncludedReversedLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to false when lists of longs are the same', async function () {
+    (await this.isSameLong.exec(this.ctx)).should.be.false();
+  });
+
+  it('should execute to false when sublist of longs is not in list', async function () {
+    (await this.isNotIncludedLong.exec(this.ctx)).should.be.false();
   });
 
   it('should execute to true when tuple sublist is in list', async function () {
@@ -609,6 +729,10 @@ describe('Distinct', () => {
     (await this.lotsOfDups.exec(this.ctx)).should.eql([1, 2, 3, 4, 5]);
   });
 
+  it('should remove long duplicates', async function () {
+    (await this.lotsOfLongDups.exec(this.ctx)).should.eql([1n, 2n, 3n, 4n, 5n]);
+  });
+
   it('should do nothing to an already distinct array', async function () {
     (await this.noDups.exec(this.ctx)).should.eql([2, 4, 6, 8, 10]);
   });
@@ -642,6 +766,12 @@ describe('First', () => {
   it('should get first of a list of numbers and the localId should exist on the root context', async function () {
     (await this.numbers.exec(this.ctx)).should.equal(1);
     const listLocalId = getLocalIdByPath(data, 'First', 'Numbers', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
+  });
+
+  it('should get first of a list of longs and the localId should exist on the root context', async function () {
+    (await this.longs.exec(this.ctx)).should.equal(1n);
+    const listLocalId = getLocalIdByPath(data, 'First', 'Longs', 'source');
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
@@ -693,6 +823,12 @@ describe('Last', () => {
     should(this.ctx.localId_context[listLocalId]).not.be.undefined();
   });
 
+  it('should get last of a list of longs and the localId should exist on the root context', async function () {
+    (await this.longs.exec(this.ctx)).should.equal(4n);
+    const listLocalId = getLocalIdByPath(data, 'Last', 'Longs', 'source');
+    should(this.ctx.localId_context[listLocalId]).not.be.undefined();
+  });
+
   it('should get last of a list of letters and the localId should exist on the root context', async function () {
     (await this.letters.exec(this.ctx)).should.equal('c');
     const listLocalId = getLocalIdByPath(data, 'Last', 'Letters', 'source');
@@ -737,6 +873,10 @@ describe('Length', () => {
 
   it('should get length of a list of numbers', async function () {
     (await this.numbers.exec(this.ctx)).should.equal(5);
+  });
+
+  it('should get length of a list of longs', async function () {
+    (await this.longs.exec(this.ctx)).should.equal(5);
   });
 
   it('should get length of a list of lists', async function () {

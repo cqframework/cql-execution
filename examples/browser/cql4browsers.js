@@ -7602,7 +7602,7 @@ exports.TupleElementDefinition = TupleElementDefinition;
 },{"./builder":17,"./expression":23}],42:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TupleTypeSpecifier = exports.NamedTypeSpecifier = exports.ListTypeSpecifier = exports.IntervalTypeSpecifier = exports.Is = exports.CanConvertQuantity = exports.ConvertQuantity = exports.ConvertsToTime = exports.ConvertsToString = exports.ConvertsToRatio = exports.ConvertsToQuantity = exports.ConvertsToInteger = exports.ConvertsToDecimal = exports.ConvertsToDateTime = exports.ConvertsToDate = exports.ConvertsToBoolean = exports.Convert = exports.ToTime = exports.ToString = exports.ToRatio = exports.ToQuantity = exports.ToLong = exports.ToInteger = exports.ToDecimal = exports.ToDateTime = exports.ToDate = exports.ToConcept = exports.ToBoolean = exports.As = void 0;
+exports.TupleTypeSpecifier = exports.NamedTypeSpecifier = exports.ListTypeSpecifier = exports.IntervalTypeSpecifier = exports.Is = exports.CanConvertQuantity = exports.ConvertQuantity = exports.ConvertsToTime = exports.ConvertsToString = exports.ConvertsToRatio = exports.ConvertsToQuantity = exports.ConvertsToLong = exports.ConvertsToInteger = exports.ConvertsToDecimal = exports.ConvertsToDateTime = exports.ConvertsToDate = exports.ConvertsToBoolean = exports.Convert = exports.ToTime = exports.ToString = exports.ToRatio = exports.ToQuantity = exports.ToLong = exports.ToInteger = exports.ToDecimal = exports.ToDateTime = exports.ToDate = exports.ToConcept = exports.ToBoolean = exports.As = void 0;
 const expression_1 = require("./expression");
 const datetime_1 = require("../datatypes/datetime");
 const clinical_1 = require("../datatypes/clinical");
@@ -7940,6 +7940,8 @@ class Convert extends expression_1.Expression {
                 return new ToDecimal({ type: 'ToDecimal', operand: this.operand }).execute(ctx);
             case '{urn:hl7-org:elm-types:r1}Integer':
                 return new ToInteger({ type: 'ToInteger', operand: this.operand }).execute(ctx);
+            case '{urn:hl7-org:elm-types:r1}Long':
+                return new ToLong({ type: 'ToLong', operand: this.operand }).execute(ctx);
             case '{urn:hl7-org:elm-types:r1}String':
                 return new ToString({ type: 'ToString', operand: this.operand }).execute(ctx);
             case '{urn:hl7-org:elm-types:r1}Quantity':
@@ -8036,6 +8038,22 @@ class ConvertsToInteger extends expression_1.Expression {
     }
 }
 exports.ConvertsToInteger = ConvertsToInteger;
+class ConvertsToLong extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.operand = json.operand;
+    }
+    async exec(ctx) {
+        const operatorValue = await this.execArgs(ctx);
+        if (operatorValue === null) {
+            return null;
+        }
+        else {
+            return canConvertToType(ToLong, this.operand, ctx);
+        }
+    }
+}
+exports.ConvertsToLong = ConvertsToLong;
 class ConvertsToQuantity extends expression_1.Expression {
     constructor(json) {
         super(json);
@@ -8979,6 +8997,9 @@ const datatypes_1 = require("../datatypes/datatypes");
 function areNumbers(a, b) {
     return typeof a === 'number' && typeof b === 'number';
 }
+function areBigInts(a, b) {
+    return typeof a === 'bigint' && typeof b === 'bigint';
+}
 function areStrings(a, b) {
     return typeof a === 'string' && typeof b === 'string';
 }
@@ -8991,7 +9012,7 @@ function isUncertainty(x) {
     return x instanceof datatypes_1.Uncertainty;
 }
 function lessThan(a, b, precision) {
-    if (areNumbers(a, b) || areStrings(a, b)) {
+    if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
         return a < b;
     }
     else if (areDateTimesOrQuantities(a, b)) {
@@ -9008,7 +9029,7 @@ function lessThan(a, b, precision) {
     }
 }
 function lessThanOrEquals(a, b, precision) {
-    if (areNumbers(a, b) || areStrings(a, b)) {
+    if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
         return a <= b;
     }
     else if (areDateTimesOrQuantities(a, b)) {
@@ -9025,7 +9046,7 @@ function lessThanOrEquals(a, b, precision) {
     }
 }
 function greaterThan(a, b, precision) {
-    if (areNumbers(a, b) || areStrings(a, b)) {
+    if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
         return a > b;
     }
     else if (areDateTimesOrQuantities(a, b)) {
@@ -9042,7 +9063,7 @@ function greaterThan(a, b, precision) {
     }
 }
 function greaterThanOrEquals(a, b, precision) {
-    if (areNumbers(a, b) || areStrings(a, b)) {
+    if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
         return a >= b;
     }
     else if (areDateTimesOrQuantities(a, b)) {
@@ -9178,6 +9199,7 @@ function equals(a, b) {
     // Return true of the objects are primitives and are strictly equal
     if ((typeof a === typeof b && typeof a === 'string') ||
         typeof a === 'number' ||
+        typeof a === 'bigint' ||
         typeof a === 'boolean') {
         return a === b;
     }
