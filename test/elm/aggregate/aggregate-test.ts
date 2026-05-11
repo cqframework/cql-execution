@@ -35,6 +35,10 @@ describe('Sum', () => {
     (await this.not_null.exec(this.ctx)).should.equal(15);
   });
 
+  it('should be able to sum lists with longs', async function () {
+    (await this.longs.exec(this.ctx)).should.equal(15n);
+  });
+
   it('should be able to sum lists with nulls', async function () {
     (await this.has_null.exec(this.ctx)).should.equal(3);
   });
@@ -96,6 +100,10 @@ describe('Min', () => {
 
   it('list of Integers', async function () {
     (await this.integerMin.exec(this.ctx)).should.equal(2);
+  });
+
+  it('list of Longs', async function () {
+    (await this.longMin.exec(this.ctx)).should.equal(2n);
   });
 
   it('list of Decimals', async function () {
@@ -169,6 +177,10 @@ describe('Max', () => {
 
   it('list of Integers', async function () {
     (await this.integerMax.exec(this.ctx)).should.equal(8);
+  });
+
+  it('list of Longs', async function () {
+    (await this.longMax.exec(this.ctx)).should.equal(8n);
   });
 
   it('list of Decimals', async function () {
@@ -322,6 +334,9 @@ describe('Mode', () => {
   it('should be able to find mode of lists without nulls', async function () {
     (await this.not_null.exec(this.ctx)).should.equal(2);
   });
+  it('should be able to find mode of list of longs', async function () {
+    (await this.longs.exec(this.ctx)).should.equal(2n);
+  });
   it('should be able to find Mode lists with nulls', async function () {
     (await this.has_null.exec(this.ctx)).should.equal(2);
   });
@@ -436,6 +451,10 @@ describe('Product', () => {
 
   it('should return a integer product', async function () {
     (await this.integer_product.exec(this.ctx)).should.equal(100);
+  });
+
+  it('should return a long product', async function () {
+    (await this.long_product.exec(this.ctx)).should.equal(100n);
   });
 
   it('should return 0', async function () {

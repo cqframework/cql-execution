@@ -340,6 +340,8 @@ export class Convert extends Expression {
         return new ToDecimal({ type: 'ToDecimal', operand: this.operand }).execute(ctx);
       case '{urn:hl7-org:elm-types:r1}Integer':
         return new ToInteger({ type: 'ToInteger', operand: this.operand }).execute(ctx);
+      case '{urn:hl7-org:elm-types:r1}Long':
+        return new ToLong({ type: 'ToLong', operand: this.operand }).execute(ctx);
       case '{urn:hl7-org:elm-types:r1}String':
         return new ToString({ type: 'ToString', operand: this.operand }).execute(ctx);
       case '{urn:hl7-org:elm-types:r1}Quantity':
@@ -442,6 +444,24 @@ export class ConvertsToInteger extends Expression {
       return null;
     } else {
       return canConvertToType(ToInteger, this.operand, ctx);
+    }
+  }
+}
+
+export class ConvertsToLong extends Expression {
+  operand: any;
+
+  constructor(json: any) {
+    super(json);
+    this.operand = json.operand;
+  }
+
+  async exec(ctx: Context) {
+    const operatorValue = await this.execArgs(ctx);
+    if (operatorValue === null) {
+      return null;
+    } else {
+      return canConvertToType(ToLong, this.operand, ctx);
     }
   }
 }

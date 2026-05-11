@@ -1,5 +1,14 @@
 import should from 'should';
-import { equals, equivalent } from '../../src/util/comparison';
+import { Date as CQLDate, DateTime as CQLDateTime } from '../../src/datatypes/datetime';
+import { Quantity } from '../../src/datatypes/quantity';
+import {
+  equals,
+  equivalent,
+  greaterThan,
+  greaterThanOrEquals,
+  lessThan,
+  lessThanOrEquals
+} from '../../src/util/comparison';
 import { Code, Concept } from '../../src/datatypes/clinical';
 
 describe('equals', () => {
@@ -9,6 +18,11 @@ describe('equals', () => {
     equals(5, 2 + 3).should.be.true();
     equals(1.2345, 1.2345).should.be.true();
     equals(1.2345, 1.23456).should.be.false();
+  });
+
+  it('should detect equality/inequality for longs', () => {
+    equals(1n, 1n).should.be.true();
+    equals(1n, 2n).should.be.false();
   });
 
   it('should detect equality/inequality for strings', () => {
@@ -244,6 +258,7 @@ describe('equivalent', () => {
   it('should detect if parameters are not codes and return using equals', () => {
     equivalent('123', '123').should.be.true();
     equivalent(123, 123).should.be.true();
+    equivalent(123n, 123n).should.be.true();
     equivalent('123', new Code('123', 'test', '2016')).should.be.false();
   });
 
@@ -310,5 +325,80 @@ describe('equivalent', () => {
     equivalent('a', 'A').should.be.true();
     equivalent('abc', 'abc').should.be.true();
     equivalent('abc', 'abcd').should.be.false();
+  });
+});
+
+describe('comparison helpers', () => {
+  const orderedCases = [
+    {
+      type: 'Number',
+      low: 1,
+      same: 1,
+      high: 2
+    },
+    {
+      type: 'CQL Long',
+      low: 1n,
+      same: 1n,
+      high: 2n
+    },
+    {
+      type: 'CQL Quantity',
+      low: new Quantity(1, 'mg'),
+      same: new Quantity(1, 'mg'),
+      high: new Quantity(2, 'mg')
+    },
+    {
+      type: 'CQL Date',
+      low: new CQLDate(2020, 1, 1),
+      same: new CQLDate(2020, 1, 1),
+      high: new CQLDate(2020, 1, 2)
+    },
+    {
+      type: 'CQL DateTime',
+      low: new CQLDateTime(2020, 1, 1, 12, 0, 0, 0, 0),
+      same: new CQLDateTime(2020, 1, 1, 12, 0, 0, 0, 0),
+      high: new CQLDateTime(2020, 1, 1, 13, 0, 0, 0, 0)
+    },
+    {
+      type: 'CQL Time',
+      low: new CQLDateTime(0, 1, 1, 12, 0, 0, 0, null),
+      same: new CQLDateTime(0, 1, 1, 12, 0, 0, 0, null),
+      high: new CQLDateTime(0, 1, 1, 13, 0, 0, 0, null)
+    },
+    {
+      type: 'String',
+      low: 'abc',
+      same: 'abc',
+      high: 'def'
+    }
+  ];
+
+  orderedCases.forEach(({ type, low, same, high }) => {
+    describe(type, () => {
+      it('should compare using lessThan', () => {
+        should(lessThan(low, high)).be.true();
+        should(lessThan(high, low)).be.false();
+        should(lessThan(low, same)).be.false();
+      });
+
+      it('should compare using lessThanOrEquals', () => {
+        should(lessThanOrEquals(low, high)).be.true();
+        should(lessThanOrEquals(low, same)).be.true();
+        should(lessThanOrEquals(high, low)).be.false();
+      });
+
+      it('should compare using greaterThan', () => {
+        should(greaterThan(high, low)).be.true();
+        should(greaterThan(low, high)).be.false();
+        should(greaterThan(low, same)).be.false();
+      });
+
+      it('should compare using greaterThanOrEquals', () => {
+        should(greaterThanOrEquals(high, low)).be.true();
+        should(greaterThanOrEquals(low, same)).be.true();
+        should(greaterThanOrEquals(low, high)).be.false();
+      });
+    });
   });
 });
