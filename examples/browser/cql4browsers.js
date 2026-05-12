@@ -1407,6 +1407,28 @@ class DateTime extends AbstractDate {
         }
         return reduced;
     }
+    highBoundary(precision = null) {
+        const precisionMap = this.isTime() ? PRECISION_TIME_VALUE_MAP : PRECISION_DATETIME_VALUE_MAP;
+        const unit = precisionMap.get(precision ?? (this.isTime() ? 9 : 17));
+        if (unit == null) {
+            return null;
+        }
+        const boundary = DateTime.fromLuxonDateTime(this.toLuxonUncertainty().high);
+        return this.isTime()
+            ? boundary.getTime().reducedPrecision(unit)
+            : boundary.reducedPrecision(unit);
+    }
+    lowBoundary(precision = null) {
+        const precisionMap = this.isTime() ? PRECISION_TIME_VALUE_MAP : PRECISION_DATETIME_VALUE_MAP;
+        const unit = precisionMap.get(precision ?? (this.isTime() ? 9 : 17));
+        if (unit == null) {
+            return null;
+        }
+        const boundary = DateTime.fromLuxonDateTime(this.toLuxonUncertainty().low);
+        return this.isTime()
+            ? boundary.getTime().reducedPrecision(unit)
+            : boundary.reducedPrecision(unit);
+    }
 }
 exports.DateTime = DateTime;
 DateTime.Unit = {
@@ -1619,6 +1641,20 @@ class Date extends AbstractDate {
         }
         return reduced;
     }
+    highBoundary(precision = null) {
+        const unit = PRECISION_DATETIME_VALUE_MAP.get(precision ?? 8);
+        if (unit == null || !Date.FIELDS.includes(unit)) {
+            return null;
+        }
+        return Date.fromLuxonDateTime(this.toLuxonUncertainty().high).reducedPrecision(unit);
+    }
+    lowBoundary(precision = null) {
+        const unit = PRECISION_DATETIME_VALUE_MAP.get(precision ?? 8);
+        if (unit == null || !Date.FIELDS.includes(unit)) {
+            return null;
+        }
+        return Date.fromLuxonDateTime(this.toLuxonUncertainty().low).reducedPrecision(unit);
+    }
 }
 exports.Date = Date;
 Date.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' };
@@ -1629,25 +1665,26 @@ exports.MIN_DATE_VALUE = Date.parse(limits_1.MIN_DATE_VALUE_STRING);
 exports.MAX_DATE_VALUE = Date.parse(limits_1.MAX_DATE_VALUE_STRING);
 exports.MIN_TIME_VALUE = DateTime.parse(limits_1.MIN_TIME_VALUE_STRING)?.getTime();
 exports.MAX_TIME_VALUE = DateTime.parse(limits_1.MAX_TIME_VALUE_STRING)?.getTime();
-const DATETIME_PRECISION_VALUE_MAP = (() => {
-    const dtpvMap = new Map();
-    dtpvMap.set(DateTime.Unit.YEAR, 4);
-    dtpvMap.set(DateTime.Unit.MONTH, 6);
-    dtpvMap.set(DateTime.Unit.DAY, 8);
-    dtpvMap.set(DateTime.Unit.HOUR, 10);
-    dtpvMap.set(DateTime.Unit.MINUTE, 12);
-    dtpvMap.set(DateTime.Unit.SECOND, 14);
-    dtpvMap.set(DateTime.Unit.MILLISECOND, 17);
-    return dtpvMap;
-})();
-const TIME_PRECISION_VALUE_MAP = (() => {
-    const tpvMap = new Map();
-    tpvMap.set(DateTime.Unit.HOUR, 2);
-    tpvMap.set(DateTime.Unit.MINUTE, 4);
-    tpvMap.set(DateTime.Unit.SECOND, 6);
-    tpvMap.set(DateTime.Unit.MILLISECOND, 9);
-    return tpvMap;
-})();
+const DATETIME_PRECISION_VALUE_MAP = new Map([
+    [DateTime.Unit.YEAR, 4],
+    [DateTime.Unit.MONTH, 6],
+    [DateTime.Unit.DAY, 8],
+    [DateTime.Unit.HOUR, 10],
+    [DateTime.Unit.MINUTE, 12],
+    [DateTime.Unit.SECOND, 14],
+    [DateTime.Unit.MILLISECOND, 17]
+]);
+const PRECISION_DATETIME_VALUE_MAP = invertMap(DATETIME_PRECISION_VALUE_MAP);
+const TIME_PRECISION_VALUE_MAP = new Map([
+    [DateTime.Unit.HOUR, 2],
+    [DateTime.Unit.MINUTE, 4],
+    [DateTime.Unit.SECOND, 6],
+    [DateTime.Unit.MILLISECOND, 9]
+]);
+const PRECISION_TIME_VALUE_MAP = invertMap(TIME_PRECISION_VALUE_MAP);
+function invertMap(map) {
+    return new Map([...map.entries()].map(([k, v]) => [v, k]));
+}
 function compareWithDefaultResult(a, b, defaultResult) {
     // return false there is a type mismatch
     if ((!a.isDate || !b.isDate) && (!a.isDateTime || !b.isDateTime)) {
@@ -3484,7 +3521,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Predecessor = exports.Successor = exports.MaxValue = exports.MinValue = exports.Power = exports.Log = exports.Exp = exports.Ln = exports.Round = exports.Negate = exports.Abs = exports.Truncate = exports.Floor = exports.Ceiling = exports.Modulo = exports.TruncatedDivide = exports.Divide = exports.Multiply = exports.Subtract = exports.Add = void 0;
+exports.Predecessor = exports.Successor = exports.LowBoundary = exports.HighBoundary = exports.MaxValue = exports.MinValue = exports.Power = exports.Log = exports.Exp = exports.Ln = exports.Round = exports.Negate = exports.Abs = exports.Truncate = exports.Floor = exports.Ceiling = exports.Modulo = exports.TruncatedDivide = exports.Divide = exports.Multiply = exports.Subtract = exports.Add = void 0;
 const expression_1 = require("./expression");
 const MathUtil = __importStar(require("../util/math"));
 const quantity_1 = require("../datatypes/quantity");
@@ -3901,6 +3938,56 @@ MaxValue.MAX_VALUES = {
     [elmTypes_1.ELM_DATE_TYPE]: datetime_1.MAX_DATE_VALUE,
     [elmTypes_1.ELM_TIME_TYPE]: datetime_1.MAX_TIME_VALUE
 };
+function decimalBoundary(value, precision, boundary) {
+    precision ?? (precision = 8);
+    if (precision < 0 || precision > 8) {
+        return null;
+    }
+    const [whole = '0', decimalPart = ''] = value.toString().split('.');
+    // we can't do much w/ decimals that are using scientific notation
+    if (decimalPart.includes('e')) {
+        return value;
+    }
+    const filledDecimalPart = decimalPart
+        .padEnd(precision, boundary === 'high' ? '9' : '0')
+        .slice(0, precision);
+    return Number(`${whole}.${filledDecimalPart}`);
+}
+function boundary(value, precision, boundary) {
+    if (value == null) {
+        return null;
+    }
+    if (typeof value === 'number') {
+        return decimalBoundary(value, precision, boundary);
+    }
+    if (boundary === 'high') {
+        return value.highBoundary?.(precision);
+    }
+    else if (boundary === 'low') {
+        return value.lowBoundary?.(precision);
+    }
+    return null;
+}
+class HighBoundary extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    async exec(ctx) {
+        const [value, precision] = await this.execArgs(ctx);
+        return boundary(value, precision, 'high');
+    }
+}
+exports.HighBoundary = HighBoundary;
+class LowBoundary extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    async exec(ctx) {
+        const [value, precision] = await this.execArgs(ctx);
+        return boundary(value, precision, 'low');
+    }
+}
+exports.LowBoundary = LowBoundary;
 class Successor extends expression_1.Expression {
     constructor(json) {
         super(json);
