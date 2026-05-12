@@ -5,6 +5,7 @@ import { Uncertainty } from '../datatypes/uncertainty';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import {
+  Date as CQLDate,
   DateTime,
   MAX_DATE_VALUE,
   MAX_DATETIME_VALUE,
@@ -440,6 +441,69 @@ export class MaxValue extends Expression {
     } else {
       throw new Error(`Maximum not supported for ${this.valueType}`);
     }
+  }
+}
+
+function decimalBoundary(value: Decimal, precision: number | null, boundary: 'high' | 'low') {
+  precision ??= 8;
+  if (precision < 0 || precision > 8) {
+    return null;
+  }
+
+  const [whole = '0', decimalPart = ''] = value.toString().split('.');
+  // we can't do much w/ decimals that are using scientific notation
+  if (decimalPart.includes('e')) {
+    return value;
+  }
+
+  const filledDecimalPart = decimalPart
+    .padEnd(precision, boundary === 'high' ? '9' : '0')
+    .slice(0, precision);
+
+  return Decimal.from(`${whole}.${filledDecimalPart}`);
+}
+
+function boundary(
+  value: CQLDate | DateTime | Decimal,
+  precision: number | null,
+  boundary: 'high' | 'low'
+) {
+  if (value == null) {
+    return null;
+  }
+
+  if (value instanceof Decimal) {
+    return decimalBoundary(value, precision, boundary);
+  }
+
+  if (boundary === 'high') {
+    return value.highBoundary?.(precision);
+  } else if (boundary === 'low') {
+    return value.lowBoundary?.(precision);
+  }
+
+  return null;
+}
+
+export class HighBoundary extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const [value, precision] = await this.execArgs(ctx);
+    return boundary(value, precision, 'high');
+  }
+}
+
+export class LowBoundary extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const [value, precision] = await this.execArgs(ctx);
+    return boundary(value, precision, 'low');
   }
 }
 
