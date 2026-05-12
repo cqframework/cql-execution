@@ -3940,6 +3940,154 @@ describe('DateTime.reducedPrecision', () => {
   });
 });
 
+describe('DateTime.highBoundary', () => {
+  it('should return the greatest possible DateTime boundary for each supported precision', () => {
+    const dateTime = DateTime.parse('2014-06-07T08');
+    dateTime.highBoundary(4).should.eql(new DateTime(2014));
+    dateTime.highBoundary(6).should.eql(new DateTime(2014, 6));
+    dateTime.highBoundary(8).should.eql(new DateTime(2014, 6, 7));
+    dateTime.highBoundary(10).should.eql(new DateTime(2014, 6, 7, 8));
+    dateTime.highBoundary(12).should.eql(new DateTime(2014, 6, 7, 8, 59));
+    dateTime.highBoundary(14).should.eql(new DateTime(2014, 6, 7, 8, 59, 59));
+    dateTime.highBoundary(17).should.eql(new DateTime(2014, 6, 7, 8, 59, 59, 999));
+  });
+
+  it('should return the greatest possible DateTime boundary for minimally specified DateTime', () => {
+    const dateTime = DateTime.parse('2014');
+    dateTime.highBoundary(4).should.eql(new DateTime(2014));
+    dateTime.highBoundary(6).should.eql(new DateTime(2014, 12));
+    dateTime.highBoundary(8).should.eql(new DateTime(2014, 12, 31));
+    dateTime.highBoundary(10).should.eql(new DateTime(2014, 12, 31, 23));
+    dateTime.highBoundary(12).should.eql(new DateTime(2014, 12, 31, 23, 59));
+    dateTime.highBoundary(14).should.eql(new DateTime(2014, 12, 31, 23, 59, 59));
+    dateTime.highBoundary(17).should.eql(new DateTime(2014, 12, 31, 23, 59, 59, 999));
+  });
+
+  it('should return the greatest possible DateTime boundary fully specified DateTime', () => {
+    const dateTime = DateTime.parse('2014-05-06T07:08:09.123');
+    dateTime.highBoundary(4).should.eql(new DateTime(2014));
+    dateTime.highBoundary(6).should.eql(new DateTime(2014, 5));
+    dateTime.highBoundary(8).should.eql(new DateTime(2014, 5, 6));
+    dateTime.highBoundary(10).should.eql(new DateTime(2014, 5, 6, 7));
+    dateTime.highBoundary(12).should.eql(new DateTime(2014, 5, 6, 7, 8));
+    dateTime.highBoundary(14).should.eql(new DateTime(2014, 5, 6, 7, 8, 9));
+    dateTime.highBoundary(17).should.eql(new DateTime(2014, 5, 6, 7, 8, 9, 123));
+  });
+
+  it('should return the greatest possible Time boundary for each supported precision', () => {
+    const time = DateTime.parse('0000-01-01T10:30').getTime();
+    time.highBoundary(2).should.eql(new DateTime(0, 1, 1, 10).getTime());
+    time.highBoundary(4).should.eql(new DateTime(0, 1, 1, 10, 30).getTime());
+    time.highBoundary(6).should.eql(new DateTime(0, 1, 1, 10, 30, 59).getTime());
+    time.highBoundary(9).should.eql(new DateTime(0, 1, 1, 10, 30, 59, 999).getTime());
+  });
+
+  it('should return the greatest possible Time boundary for minimally specified Time', () => {
+    const time = DateTime.parse('0000-01-01T10').getTime();
+    time.highBoundary(2).should.eql(new DateTime(0, 1, 1, 10).getTime());
+    time.highBoundary(4).should.eql(new DateTime(0, 1, 1, 10, 59).getTime());
+    time.highBoundary(6).should.eql(new DateTime(0, 1, 1, 10, 59, 59).getTime());
+    time.highBoundary(9).should.eql(new DateTime(0, 1, 1, 10, 59, 59, 999).getTime());
+  });
+
+  it('should return the greatest possible Time boundary for fully specified Time', () => {
+    const time = DateTime.parse('0000-01-01T10:11:12.789').getTime();
+    time.highBoundary(2).should.eql(new DateTime(0, 1, 1, 10).getTime());
+    time.highBoundary(4).should.eql(new DateTime(0, 1, 1, 10, 11).getTime());
+    time.highBoundary(6).should.eql(new DateTime(0, 1, 1, 10, 11, 12).getTime());
+    time.highBoundary(9).should.eql(new DateTime(0, 1, 1, 10, 11, 12, 789).getTime());
+  });
+
+  it('should use the default precision when no precision is provided', () => {
+    DateTime.parse('2014-01-01T08')
+      .highBoundary()
+      .should.eql(new DateTime(2014, 1, 1, 8, 59, 59, 999));
+    DateTime.parse('0000-01-01T10:30')
+      .getTime()
+      .highBoundary()
+      .should.eql(new DateTime(0, 1, 1, 10, 30, 59, 999).getTime());
+  });
+
+  it('should return null when the precision is unsupported', () => {
+    should(DateTime.parse('2014-01-01T08').highBoundary(18)).be.null();
+    should(DateTime.parse('0000-01-01T10:30').getTime().highBoundary(10)).be.null();
+  });
+});
+
+describe('DateTime.lowBoundary', () => {
+  it('should return the least possible DateTime boundary for each supported precision', () => {
+    const dateTime = DateTime.parse('2014-06-07T08');
+    dateTime.lowBoundary(4).should.eql(new DateTime(2014));
+    dateTime.lowBoundary(6).should.eql(new DateTime(2014, 6));
+    dateTime.lowBoundary(8).should.eql(new DateTime(2014, 6, 7));
+    dateTime.lowBoundary(10).should.eql(new DateTime(2014, 6, 7, 8));
+    dateTime.lowBoundary(12).should.eql(new DateTime(2014, 6, 7, 8, 0));
+    dateTime.lowBoundary(14).should.eql(new DateTime(2014, 6, 7, 8, 0, 0));
+    dateTime.lowBoundary(17).should.eql(new DateTime(2014, 6, 7, 8, 0, 0, 0));
+  });
+
+  it('should return the least possible DateTime boundary for minimally specified DateTime', () => {
+    const dateTime = DateTime.parse('2014');
+    dateTime.lowBoundary(4).should.eql(new DateTime(2014));
+    dateTime.lowBoundary(6).should.eql(new DateTime(2014, 1));
+    dateTime.lowBoundary(8).should.eql(new DateTime(2014, 1, 1));
+    dateTime.lowBoundary(10).should.eql(new DateTime(2014, 1, 1, 0));
+    dateTime.lowBoundary(12).should.eql(new DateTime(2014, 1, 1, 0, 0));
+    dateTime.lowBoundary(14).should.eql(new DateTime(2014, 1, 1, 0, 0, 0));
+    dateTime.lowBoundary(17).should.eql(new DateTime(2014, 1, 1, 0, 0, 0, 0));
+  });
+
+  it('should return the least possible DateTime boundary for fully specified DateTime', () => {
+    const dateTime = DateTime.parse('2014-06-07T08:09:10.345');
+    dateTime.lowBoundary(4).should.eql(new DateTime(2014));
+    dateTime.lowBoundary(6).should.eql(new DateTime(2014, 6));
+    dateTime.lowBoundary(8).should.eql(new DateTime(2014, 6, 7));
+    dateTime.lowBoundary(10).should.eql(new DateTime(2014, 6, 7, 8));
+    dateTime.lowBoundary(12).should.eql(new DateTime(2014, 6, 7, 8, 9));
+    dateTime.lowBoundary(14).should.eql(new DateTime(2014, 6, 7, 8, 9, 10));
+    dateTime.lowBoundary(17).should.eql(new DateTime(2014, 6, 7, 8, 9, 10, 345));
+  });
+
+  it('should return the least possible Time boundary for each supported precision', () => {
+    const time = DateTime.parse('0000-01-01T10:30').getTime();
+    time.lowBoundary(2).should.eql(new DateTime(0, 1, 1, 10).getTime());
+    time.lowBoundary(4).should.eql(new DateTime(0, 1, 1, 10, 30).getTime());
+    time.lowBoundary(6).should.eql(new DateTime(0, 1, 1, 10, 30, 0).getTime());
+    time.lowBoundary(9).should.eql(new DateTime(0, 1, 1, 10, 30, 0, 0).getTime());
+  });
+
+  it('should return the least possible Time boundary for minimally specified Time', () => {
+    const time = DateTime.parse('0000-01-01T10').getTime();
+    time.lowBoundary(2).should.eql(new DateTime(0, 1, 1, 10).getTime());
+    time.lowBoundary(4).should.eql(new DateTime(0, 1, 1, 10, 0).getTime());
+    time.lowBoundary(6).should.eql(new DateTime(0, 1, 1, 10, 0, 0).getTime());
+    time.lowBoundary(9).should.eql(new DateTime(0, 1, 1, 10, 0, 0, 0).getTime());
+  });
+
+  it('should return the least possible Time boundary for fully specified Time', () => {
+    const time = DateTime.parse('0000-01-01T10:30:45.123').getTime();
+    time.lowBoundary(2).should.eql(new DateTime(0, 1, 1, 10).getTime());
+    time.lowBoundary(4).should.eql(new DateTime(0, 1, 1, 10, 30).getTime());
+    time.lowBoundary(6).should.eql(new DateTime(0, 1, 1, 10, 30, 45).getTime());
+    time.lowBoundary(9).should.eql(new DateTime(0, 1, 1, 10, 30, 45, 123).getTime());
+  });
+
+  it('should use the default precision when no precision is provided', () => {
+    DateTime.parse('2014-01-01T08')
+      .lowBoundary()
+      .should.eql(new DateTime(2014, 1, 1, 8, 0, 0, 0));
+    DateTime.parse('0000-01-01T10:30')
+      .getTime()
+      .lowBoundary()
+      .should.eql(new DateTime(0, 1, 1, 10, 30, 0, 0).getTime());
+  });
+
+  it('should return null when the precision is unsupported', () => {
+    should(DateTime.parse('2014-01-01T08').lowBoundary(18)).be.null();
+    should(DateTime.parse('0000-01-01T10:30').getTime().lowBoundary(10)).be.null();
+  });
+});
+
 describe('DateTime.getPrecisionValue', () => {
   it('should properly get precision value for years', () => {
     DateTime.parse('2012').getPrecisionValue().should.equal(4);

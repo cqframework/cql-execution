@@ -4880,6 +4880,3819 @@ module.exports['MaxValue'] = {
   }
 }
 
+/* HighBoundary
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define DecimalEightPrecision: HighBoundary(1.587, 8)
+define MinimalDecimalFivePrecision: HighBoundary(1.1, 5)
+define FullDecimalFivePrecision: HighBoundary(1.58794328, 5)
+define DecimalTrailingZeroFivePrecision: HighBoundary(1.0, 5)
+define DateYearPrecision: HighBoundary(@2014, 4)
+define DateMonthPrecision: HighBoundary(@2014, 6)
+define DateDayPrecision: HighBoundary(@2014, 8)
+define DateTimeYearPrecision: HighBoundary(@2014-01-01T08, 4)
+define DateTimeMonthPrecision: HighBoundary(@2014-01-01T08, 6)
+define DateTimeDayPrecision: HighBoundary(@2014-01-01T08, 8)
+define DateTimeHourPrecision: HighBoundary(@2014-01-01T08, 10)
+define DateTimeMinutePrecision: HighBoundary(@2014-01-01T08, 12)
+define DateTimeSecondPrecision: HighBoundary(@2014-01-01T08, 14)
+define DateTimeMillisecondPrecision: HighBoundary(@2014-01-01T08, 17)
+define TimeHourPrecision: HighBoundary(@T10:30, 2)
+define TimeMinutePrecision: HighBoundary(@T10:30, 4)
+define TimeSecondPrecision: HighBoundary(@T10:30, 6)
+define TimeMillisecondPrecision: HighBoundary(@T10:30, 9)
+define DecimalPrecisionTooHigh: HighBoundary(1.587, 9)
+define DatePrecisionTooHigh: HighBoundary(@2014, 9)
+define DateTimePrecisionTooHigh: HighBoundary(@2014-01-01T08, 18)
+define TimePrecisionTooHigh: HighBoundary(@T10:30, 10)
+define NullDecimal: HighBoundary(null as Decimal, 8)
+define NullDate: HighBoundary(null as Date, 8)
+define NullDateTime: HighBoundary(null as DateTime, 17)
+define NullTime: HighBoundary(null as Time, 9)
+*/
+
+module.exports['HighBoundary'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "570",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "211",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "209",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "210",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "208",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "214",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "DecimalEightPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "214",
+            "s" : [ {
+              "value" : [ "", "define ", "DecimalEightPrecision", ": " ]
+            }, {
+              "r" : "221",
+              "s" : [ {
+                "r" : "215",
+                "value" : [ "HighBoundary", "(", "1.587", ", ", "8", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "221",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "222",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "223",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "215",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.587",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "216",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "8",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "226",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "MinimalDecimalFivePrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "226",
+            "s" : [ {
+              "value" : [ "", "define ", "MinimalDecimalFivePrecision", ": " ]
+            }, {
+              "r" : "233",
+              "s" : [ {
+                "r" : "227",
+                "value" : [ "HighBoundary", "(", "1.1", ", ", "5", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "233",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "234",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "235",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "227",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.1",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "228",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "5",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "238",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "FullDecimalFivePrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "238",
+            "s" : [ {
+              "value" : [ "", "define ", "FullDecimalFivePrecision", ": " ]
+            }, {
+              "r" : "245",
+              "s" : [ {
+                "r" : "239",
+                "value" : [ "HighBoundary", "(", "1.58794328", ", ", "5", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "245",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "246",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "247",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "239",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.58794328",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "240",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "5",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "250",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "DecimalTrailingZeroFivePrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "250",
+            "s" : [ {
+              "value" : [ "", "define ", "DecimalTrailingZeroFivePrecision", ": " ]
+            }, {
+              "r" : "257",
+              "s" : [ {
+                "r" : "251",
+                "value" : [ "HighBoundary", "(", "1.0", ", ", "5", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "257",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "258",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "259",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "251",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.0",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "252",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "5",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "262",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+        "name" : "DateYearPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "262",
+            "s" : [ {
+              "value" : [ "", "define ", "DateYearPrecision", ": " ]
+            }, {
+              "r" : "271",
+              "s" : [ {
+                "r" : "265",
+                "value" : [ "HighBoundary", "(", "@2014", ", ", "4", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "271",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "272",
+            "name" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "273",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Date",
+            "localId" : "265",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "264",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "266",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "276",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+        "name" : "DateMonthPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "276",
+            "s" : [ {
+              "value" : [ "", "define ", "DateMonthPrecision", ": " ]
+            }, {
+              "r" : "285",
+              "s" : [ {
+                "r" : "279",
+                "value" : [ "HighBoundary", "(", "@2014", ", ", "6", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "285",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "286",
+            "name" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "287",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Date",
+            "localId" : "279",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "278",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "280",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "6",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "290",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+        "name" : "DateDayPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "290",
+            "s" : [ {
+              "value" : [ "", "define ", "DateDayPrecision", ": " ]
+            }, {
+              "r" : "299",
+              "s" : [ {
+                "r" : "293",
+                "value" : [ "HighBoundary", "(", "@2014", ", ", "8", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "299",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "300",
+            "name" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "301",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Date",
+            "localId" : "293",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "292",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "294",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "8",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "304",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeYearPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "304",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeYearPrecision", ": " ]
+            }, {
+              "r" : "315",
+              "s" : [ {
+                "r" : "305",
+                "value" : [ "HighBoundary", "(", "@2014-01-01T08", ", ", "4", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "315",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "316",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "317",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "305",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "306",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "307",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "308",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "309",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "310",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "320",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeMonthPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "320",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeMonthPrecision", ": " ]
+            }, {
+              "r" : "331",
+              "s" : [ {
+                "r" : "321",
+                "value" : [ "HighBoundary", "(", "@2014-01-01T08", ", ", "6", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "331",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "332",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "333",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "321",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "322",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "323",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "324",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "325",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "326",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "6",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "336",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeDayPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "336",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeDayPrecision", ": " ]
+            }, {
+              "r" : "347",
+              "s" : [ {
+                "r" : "337",
+                "value" : [ "HighBoundary", "(", "@2014-01-01T08", ", ", "8", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "347",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "348",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "349",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "337",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "338",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "339",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "340",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "341",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "342",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "8",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "352",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeHourPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "352",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeHourPrecision", ": " ]
+            }, {
+              "r" : "363",
+              "s" : [ {
+                "r" : "353",
+                "value" : [ "HighBoundary", "(", "@2014-01-01T08", ", ", "10", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "363",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "364",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "365",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "353",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "354",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "355",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "356",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "357",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "358",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "10",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "368",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeMinutePrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "368",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeMinutePrecision", ": " ]
+            }, {
+              "r" : "379",
+              "s" : [ {
+                "r" : "369",
+                "value" : [ "HighBoundary", "(", "@2014-01-01T08", ", ", "12", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "379",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "380",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "381",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "369",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "370",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "371",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "372",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "373",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "374",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "12",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "384",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeSecondPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "384",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeSecondPrecision", ": " ]
+            }, {
+              "r" : "395",
+              "s" : [ {
+                "r" : "385",
+                "value" : [ "HighBoundary", "(", "@2014-01-01T08", ", ", "14", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "395",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "396",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "397",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "385",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "386",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "387",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "388",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "389",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "390",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "14",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "400",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeMillisecondPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "400",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeMillisecondPrecision", ": " ]
+            }, {
+              "r" : "411",
+              "s" : [ {
+                "r" : "401",
+                "value" : [ "HighBoundary", "(", "@2014-01-01T08", ", ", "17", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "411",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "412",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "413",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "401",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "402",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "403",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "404",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "405",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "406",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "17",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "416",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimeHourPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "416",
+            "s" : [ {
+              "value" : [ "", "define ", "TimeHourPrecision", ": " ]
+            }, {
+              "r" : "425",
+              "s" : [ {
+                "r" : "417",
+                "value" : [ "HighBoundary", "(", "@T10:30", ", ", "2", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "425",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "426",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "427",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "417",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "418",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "419",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "30",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "420",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "430",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimeMinutePrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "430",
+            "s" : [ {
+              "value" : [ "", "define ", "TimeMinutePrecision", ": " ]
+            }, {
+              "r" : "439",
+              "s" : [ {
+                "r" : "431",
+                "value" : [ "HighBoundary", "(", "@T10:30", ", ", "4", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "439",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "440",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "441",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "431",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "432",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "433",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "30",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "434",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "444",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimeSecondPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "444",
+            "s" : [ {
+              "value" : [ "", "define ", "TimeSecondPrecision", ": " ]
+            }, {
+              "r" : "453",
+              "s" : [ {
+                "r" : "445",
+                "value" : [ "HighBoundary", "(", "@T10:30", ", ", "6", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "453",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "454",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "455",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "445",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "446",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "447",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "30",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "448",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "6",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "458",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimeMillisecondPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "458",
+            "s" : [ {
+              "value" : [ "", "define ", "TimeMillisecondPrecision", ": " ]
+            }, {
+              "r" : "467",
+              "s" : [ {
+                "r" : "459",
+                "value" : [ "HighBoundary", "(", "@T10:30", ", ", "9", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "467",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "468",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "469",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "459",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "460",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "461",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "30",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "462",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "9",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "472",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "DecimalPrecisionTooHigh",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "472",
+            "s" : [ {
+              "value" : [ "", "define ", "DecimalPrecisionTooHigh", ": " ]
+            }, {
+              "r" : "479",
+              "s" : [ {
+                "r" : "473",
+                "value" : [ "HighBoundary", "(", "1.587", ", ", "9", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "479",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "480",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "481",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "473",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.587",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "474",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "9",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "484",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+        "name" : "DatePrecisionTooHigh",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "484",
+            "s" : [ {
+              "value" : [ "", "define ", "DatePrecisionTooHigh", ": " ]
+            }, {
+              "r" : "493",
+              "s" : [ {
+                "r" : "487",
+                "value" : [ "HighBoundary", "(", "@2014", ", ", "9", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "493",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "494",
+            "name" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "495",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Date",
+            "localId" : "487",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "486",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "488",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "9",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "498",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimePrecisionTooHigh",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "498",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimePrecisionTooHigh", ": " ]
+            }, {
+              "r" : "509",
+              "s" : [ {
+                "r" : "499",
+                "value" : [ "HighBoundary", "(", "@2014-01-01T08", ", ", "18", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "509",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "510",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "511",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "499",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "500",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "501",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "502",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "503",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "504",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "18",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "514",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimePrecisionTooHigh",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "514",
+            "s" : [ {
+              "value" : [ "", "define ", "TimePrecisionTooHigh", ": " ]
+            }, {
+              "r" : "523",
+              "s" : [ {
+                "r" : "515",
+                "value" : [ "HighBoundary", "(", "@T10:30", ", ", "10", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "523",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "524",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "525",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "515",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "516",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "517",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "30",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "518",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "10",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "528",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "NullDecimal",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "528",
+            "s" : [ {
+              "value" : [ "", "define ", "NullDecimal", ": " ]
+            }, {
+              "r" : "537",
+              "s" : [ {
+                "value" : [ "HighBoundary", "(" ]
+              }, {
+                "r" : "529",
+                "s" : [ {
+                  "r" : "530",
+                  "value" : [ "null", " as " ]
+                }, {
+                  "r" : "531",
+                  "s" : [ {
+                    "value" : [ "Decimal" ]
+                  } ]
+                } ]
+              }, {
+                "r" : "532",
+                "value" : [ ", ", "8", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "537",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "538",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "539",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "529",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "strict" : false,
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "530",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "531",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "532",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "8",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "542",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+        "name" : "NullDate",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "542",
+            "s" : [ {
+              "value" : [ "", "define ", "NullDate", ": " ]
+            }, {
+              "r" : "551",
+              "s" : [ {
+                "value" : [ "HighBoundary", "(" ]
+              }, {
+                "r" : "543",
+                "s" : [ {
+                  "r" : "544",
+                  "value" : [ "null", " as " ]
+                }, {
+                  "r" : "545",
+                  "s" : [ {
+                    "value" : [ "Date" ]
+                  } ]
+                } ]
+              }, {
+                "r" : "546",
+                "value" : [ ", ", "8", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "551",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "552",
+            "name" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "553",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "543",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+            "strict" : false,
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "544",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "545",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+              "name" : "{urn:hl7-org:elm-types:r1}Date",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "546",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "8",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "556",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "NullDateTime",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "556",
+            "s" : [ {
+              "value" : [ "", "define ", "NullDateTime", ": " ]
+            }, {
+              "r" : "565",
+              "s" : [ {
+                "value" : [ "HighBoundary", "(" ]
+              }, {
+                "r" : "557",
+                "s" : [ {
+                  "r" : "558",
+                  "value" : [ "null", " as " ]
+                }, {
+                  "r" : "559",
+                  "s" : [ {
+                    "value" : [ "DateTime" ]
+                  } ]
+                } ]
+              }, {
+                "r" : "560",
+                "value" : [ ", ", "17", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "565",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "566",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "567",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "557",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "strict" : false,
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "558",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "559",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "560",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "17",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "570",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "NullTime",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "570",
+            "s" : [ {
+              "value" : [ "", "define ", "NullTime", ": " ]
+            }, {
+              "r" : "579",
+              "s" : [ {
+                "value" : [ "HighBoundary", "(" ]
+              }, {
+                "r" : "571",
+                "s" : [ {
+                  "r" : "572",
+                  "value" : [ "null", " as " ]
+                }, {
+                  "r" : "573",
+                  "s" : [ {
+                    "value" : [ "Time" ]
+                  } ]
+                } ]
+              }, {
+                "r" : "574",
+                "value" : [ ", ", "9", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "HighBoundary",
+          "localId" : "579",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "580",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "581",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "571",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "strict" : false,
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "572",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "573",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+              "name" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "574",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "9",
+            "annotation" : [ ]
+          } ]
+        }
+      } ]
+    }
+  }
+}
+
+/* LowBoundary
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define DecimalEightPrecision: LowBoundary(1.587, 8)
+define MinimalDecimalFivePrecision: LowBoundary(1.0, 5)
+define FullDecimalFivePrecision: LowBoundary(1.58794328, 5)
+define DateYearPrecision: LowBoundary(@2014, 4)
+define DateMonthPrecision: LowBoundary(@2014, 6)
+define DateDayPrecision: LowBoundary(@2014, 8)
+define DateTimeYearPrecision: LowBoundary(@2014-01-01T08, 4)
+define DateTimeMonthPrecision: LowBoundary(@2014-01-01T08, 6)
+define DateTimeDayPrecision: LowBoundary(@2014-01-01T08, 8)
+define DateTimeHourPrecision: LowBoundary(@2014-01-01T08, 10)
+define DateTimeMinutePrecision: LowBoundary(@2014-01-01T08, 12)
+define DateTimeSecondPrecision: LowBoundary(@2014-01-01T08, 14)
+define DateTimeMillisecondPrecision: LowBoundary(@2014-01-01T08, 17)
+define TimeHourPrecision: LowBoundary(@T10:30, 2)
+define TimeMinutePrecision: LowBoundary(@T10:30, 4)
+define TimeSecondPrecision: LowBoundary(@T10:30, 6)
+define TimeMillisecondPrecision: LowBoundary(@T10:30, 9)
+define DecimalPrecisionTooHigh: LowBoundary(1.587, 9)
+define DatePrecisionTooHigh: LowBoundary(@2014, 9)
+define DateTimePrecisionTooHigh: LowBoundary(@2014-01-01T08, 18)
+define TimePrecisionTooHigh: LowBoundary(@T10:30, 10)
+define NullDecimal: LowBoundary(null as Decimal, 8)
+define NullDate: LowBoundary(null as Date, 8)
+define NullDateTime: LowBoundary(null as DateTime, 17)
+define NullTime: LowBoundary(null as Time, 9)
+*/
+
+module.exports['LowBoundary'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "558",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "211",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "209",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "210",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "208",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "214",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "DecimalEightPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "214",
+            "s" : [ {
+              "value" : [ "", "define ", "DecimalEightPrecision", ": " ]
+            }, {
+              "r" : "221",
+              "s" : [ {
+                "r" : "215",
+                "value" : [ "LowBoundary", "(", "1.587", ", ", "8", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "221",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "222",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "223",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "215",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.587",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "216",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "8",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "226",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "MinimalDecimalFivePrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "226",
+            "s" : [ {
+              "value" : [ "", "define ", "MinimalDecimalFivePrecision", ": " ]
+            }, {
+              "r" : "233",
+              "s" : [ {
+                "r" : "227",
+                "value" : [ "LowBoundary", "(", "1.0", ", ", "5", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "233",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "234",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "235",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "227",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.0",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "228",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "5",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "238",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "FullDecimalFivePrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "238",
+            "s" : [ {
+              "value" : [ "", "define ", "FullDecimalFivePrecision", ": " ]
+            }, {
+              "r" : "245",
+              "s" : [ {
+                "r" : "239",
+                "value" : [ "LowBoundary", "(", "1.58794328", ", ", "5", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "245",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "246",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "247",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "239",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.58794328",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "240",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "5",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "250",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+        "name" : "DateYearPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "250",
+            "s" : [ {
+              "value" : [ "", "define ", "DateYearPrecision", ": " ]
+            }, {
+              "r" : "259",
+              "s" : [ {
+                "r" : "253",
+                "value" : [ "LowBoundary", "(", "@2014", ", ", "4", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "259",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "260",
+            "name" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "261",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Date",
+            "localId" : "253",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "252",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "254",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "264",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+        "name" : "DateMonthPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "264",
+            "s" : [ {
+              "value" : [ "", "define ", "DateMonthPrecision", ": " ]
+            }, {
+              "r" : "273",
+              "s" : [ {
+                "r" : "267",
+                "value" : [ "LowBoundary", "(", "@2014", ", ", "6", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "273",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "274",
+            "name" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "275",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Date",
+            "localId" : "267",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "266",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "268",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "6",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "278",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+        "name" : "DateDayPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "278",
+            "s" : [ {
+              "value" : [ "", "define ", "DateDayPrecision", ": " ]
+            }, {
+              "r" : "287",
+              "s" : [ {
+                "r" : "281",
+                "value" : [ "LowBoundary", "(", "@2014", ", ", "8", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "287",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "288",
+            "name" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "289",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Date",
+            "localId" : "281",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "280",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "282",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "8",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "292",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeYearPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "292",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeYearPrecision", ": " ]
+            }, {
+              "r" : "303",
+              "s" : [ {
+                "r" : "293",
+                "value" : [ "LowBoundary", "(", "@2014-01-01T08", ", ", "4", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "303",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "304",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "305",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "293",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "294",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "295",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "296",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "297",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "298",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "308",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeMonthPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "308",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeMonthPrecision", ": " ]
+            }, {
+              "r" : "319",
+              "s" : [ {
+                "r" : "309",
+                "value" : [ "LowBoundary", "(", "@2014-01-01T08", ", ", "6", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "319",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "320",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "321",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "309",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "310",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "311",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "312",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "313",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "314",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "6",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "324",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeDayPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "324",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeDayPrecision", ": " ]
+            }, {
+              "r" : "335",
+              "s" : [ {
+                "r" : "325",
+                "value" : [ "LowBoundary", "(", "@2014-01-01T08", ", ", "8", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "335",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "336",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "337",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "325",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "326",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "327",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "328",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "329",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "330",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "8",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "340",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeHourPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "340",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeHourPrecision", ": " ]
+            }, {
+              "r" : "351",
+              "s" : [ {
+                "r" : "341",
+                "value" : [ "LowBoundary", "(", "@2014-01-01T08", ", ", "10", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "351",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "352",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "353",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "341",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "342",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "343",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "344",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "345",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "346",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "10",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "356",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeMinutePrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "356",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeMinutePrecision", ": " ]
+            }, {
+              "r" : "367",
+              "s" : [ {
+                "r" : "357",
+                "value" : [ "LowBoundary", "(", "@2014-01-01T08", ", ", "12", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "367",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "368",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "369",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "357",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "358",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "359",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "360",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "361",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "362",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "12",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "372",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeSecondPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "372",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeSecondPrecision", ": " ]
+            }, {
+              "r" : "383",
+              "s" : [ {
+                "r" : "373",
+                "value" : [ "LowBoundary", "(", "@2014-01-01T08", ", ", "14", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "383",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "384",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "385",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "373",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "374",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "375",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "376",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "377",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "378",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "14",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "388",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeMillisecondPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "388",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimeMillisecondPrecision", ": " ]
+            }, {
+              "r" : "399",
+              "s" : [ {
+                "r" : "389",
+                "value" : [ "LowBoundary", "(", "@2014-01-01T08", ", ", "17", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "399",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "400",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "401",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "389",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "390",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "391",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "392",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "393",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "394",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "17",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "404",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimeHourPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "404",
+            "s" : [ {
+              "value" : [ "", "define ", "TimeHourPrecision", ": " ]
+            }, {
+              "r" : "413",
+              "s" : [ {
+                "r" : "405",
+                "value" : [ "LowBoundary", "(", "@T10:30", ", ", "2", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "413",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "414",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "415",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "405",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "406",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "407",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "30",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "408",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "418",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimeMinutePrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "418",
+            "s" : [ {
+              "value" : [ "", "define ", "TimeMinutePrecision", ": " ]
+            }, {
+              "r" : "427",
+              "s" : [ {
+                "r" : "419",
+                "value" : [ "LowBoundary", "(", "@T10:30", ", ", "4", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "427",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "428",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "429",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "419",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "420",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "421",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "30",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "422",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "432",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimeSecondPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "432",
+            "s" : [ {
+              "value" : [ "", "define ", "TimeSecondPrecision", ": " ]
+            }, {
+              "r" : "441",
+              "s" : [ {
+                "r" : "433",
+                "value" : [ "LowBoundary", "(", "@T10:30", ", ", "6", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "441",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "442",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "443",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "433",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "434",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "435",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "30",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "436",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "6",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "446",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimeMillisecondPrecision",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "446",
+            "s" : [ {
+              "value" : [ "", "define ", "TimeMillisecondPrecision", ": " ]
+            }, {
+              "r" : "455",
+              "s" : [ {
+                "r" : "447",
+                "value" : [ "LowBoundary", "(", "@T10:30", ", ", "9", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "455",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "456",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "457",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "447",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "448",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "449",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "30",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "450",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "9",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "460",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "DecimalPrecisionTooHigh",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "460",
+            "s" : [ {
+              "value" : [ "", "define ", "DecimalPrecisionTooHigh", ": " ]
+            }, {
+              "r" : "467",
+              "s" : [ {
+                "r" : "461",
+                "value" : [ "LowBoundary", "(", "1.587", ", ", "9", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "467",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "468",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "469",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "461",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.587",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "462",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "9",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "472",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+        "name" : "DatePrecisionTooHigh",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "472",
+            "s" : [ {
+              "value" : [ "", "define ", "DatePrecisionTooHigh", ": " ]
+            }, {
+              "r" : "481",
+              "s" : [ {
+                "r" : "475",
+                "value" : [ "LowBoundary", "(", "@2014", ", ", "9", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "481",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "482",
+            "name" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "483",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Date",
+            "localId" : "475",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "474",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "476",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "9",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "486",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimePrecisionTooHigh",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "486",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimePrecisionTooHigh", ": " ]
+            }, {
+              "r" : "497",
+              "s" : [ {
+                "r" : "487",
+                "value" : [ "LowBoundary", "(", "@2014-01-01T08", ", ", "18", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "497",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "498",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "499",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "DateTime",
+            "localId" : "487",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "year" : {
+              "type" : "Literal",
+              "localId" : "488",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2014",
+              "annotation" : [ ]
+            },
+            "month" : {
+              "type" : "Literal",
+              "localId" : "489",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "day" : {
+              "type" : "Literal",
+              "localId" : "490",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "491",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "8",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "492",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "18",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "502",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimePrecisionTooHigh",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "502",
+            "s" : [ {
+              "value" : [ "", "define ", "TimePrecisionTooHigh", ": " ]
+            }, {
+              "r" : "511",
+              "s" : [ {
+                "r" : "503",
+                "value" : [ "LowBoundary", "(", "@T10:30", ", ", "10", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "511",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "512",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "513",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Time",
+            "localId" : "503",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "hour" : {
+              "type" : "Literal",
+              "localId" : "504",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10",
+              "annotation" : [ ]
+            },
+            "minute" : {
+              "type" : "Literal",
+              "localId" : "505",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "30",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "506",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "10",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "516",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "NullDecimal",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "516",
+            "s" : [ {
+              "value" : [ "", "define ", "NullDecimal", ": " ]
+            }, {
+              "r" : "525",
+              "s" : [ {
+                "value" : [ "LowBoundary", "(" ]
+              }, {
+                "r" : "517",
+                "s" : [ {
+                  "r" : "518",
+                  "value" : [ "null", " as " ]
+                }, {
+                  "r" : "519",
+                  "s" : [ {
+                    "value" : [ "Decimal" ]
+                  } ]
+                } ]
+              }, {
+                "r" : "520",
+                "value" : [ ", ", "8", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "525",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "526",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "527",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "517",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "strict" : false,
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "518",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "519",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "520",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "8",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "530",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+        "name" : "NullDate",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "530",
+            "s" : [ {
+              "value" : [ "", "define ", "NullDate", ": " ]
+            }, {
+              "r" : "539",
+              "s" : [ {
+                "value" : [ "LowBoundary", "(" ]
+              }, {
+                "r" : "531",
+                "s" : [ {
+                  "r" : "532",
+                  "value" : [ "null", " as " ]
+                }, {
+                  "r" : "533",
+                  "s" : [ {
+                    "value" : [ "Date" ]
+                  } ]
+                } ]
+              }, {
+                "r" : "534",
+                "value" : [ ", ", "8", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "539",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "540",
+            "name" : "{urn:hl7-org:elm-types:r1}Date",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "541",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "531",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+            "strict" : false,
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "532",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "533",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+              "name" : "{urn:hl7-org:elm-types:r1}Date",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "534",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "8",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "544",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "NullDateTime",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "544",
+            "s" : [ {
+              "value" : [ "", "define ", "NullDateTime", ": " ]
+            }, {
+              "r" : "553",
+              "s" : [ {
+                "value" : [ "LowBoundary", "(" ]
+              }, {
+                "r" : "545",
+                "s" : [ {
+                  "r" : "546",
+                  "value" : [ "null", " as " ]
+                }, {
+                  "r" : "547",
+                  "s" : [ {
+                    "value" : [ "DateTime" ]
+                  } ]
+                } ]
+              }, {
+                "r" : "548",
+                "value" : [ ", ", "17", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "553",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "554",
+            "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "555",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "545",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "strict" : false,
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "546",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "547",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "548",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "17",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "558",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "NullTime",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "558",
+            "s" : [ {
+              "value" : [ "", "define ", "NullTime", ": " ]
+            }, {
+              "r" : "567",
+              "s" : [ {
+                "value" : [ "LowBoundary", "(" ]
+              }, {
+                "r" : "559",
+                "s" : [ {
+                  "r" : "560",
+                  "value" : [ "null", " as " ]
+                }, {
+                  "r" : "561",
+                  "s" : [ {
+                    "value" : [ "Time" ]
+                  } ]
+                } ]
+              }, {
+                "r" : "562",
+                "value" : [ ", ", "9", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "LowBoundary",
+          "localId" : "567",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "568",
+            "name" : "{urn:hl7-org:elm-types:r1}Time",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "569",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "559",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+            "strict" : false,
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "560",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "561",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+              "name" : "{urn:hl7-org:elm-types:r1}Time",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "562",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "9",
+            "annotation" : [ ]
+          } ]
+        }
+      } ]
+    }
+  }
+}
+
 /* TruncatedDivide
 library TestSnippet version '1'
 using Simple version '1.0.0'

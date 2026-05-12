@@ -838,6 +838,72 @@ describe('Date.reducedPrecision', () => {
   });
 });
 
+describe('Date.highBoundary', () => {
+  it('should return the greatest possible Date boundary for each supported precision', () => {
+    const date = Date.parse('2014-02');
+    date.highBoundary(4).should.eql(new Date(2014));
+    date.highBoundary(6).should.eql(new Date(2014, 2));
+    date.highBoundary(8).should.eql(new Date(2014, 2, 28));
+  });
+
+  it('should return the greatest possible Date boundary for minimally specified Date', () => {
+    const date = Date.parse('2014');
+    date.highBoundary(4).should.eql(new Date(2014));
+    date.highBoundary(6).should.eql(new Date(2014, 12));
+    date.highBoundary(8).should.eql(new Date(2014, 12, 31));
+  });
+
+  it('should return the greatest possible Date boundary for fully specified Date', () => {
+    const date = Date.parse('2014-05-17');
+    date.highBoundary(4).should.eql(new Date(2014));
+    date.highBoundary(6).should.eql(new Date(2014, 5));
+    date.highBoundary(8).should.eql(new Date(2014, 5, 17));
+  });
+
+  it('should use the default precision when no precision is provided', () => {
+    Date.parse('2014')
+      .highBoundary()
+      .should.eql(new Date(2014, 12, 31));
+  });
+
+  it('should return null when the precision is unsupported', () => {
+    should(Date.parse('2014').highBoundary(10)).be.null();
+  });
+});
+
+describe('Date.lowBoundary', () => {
+  it('should return the least possible Date boundary for each supported precision', () => {
+    const date = Date.parse('2014-02');
+    date.lowBoundary(4).should.eql(new Date(2014));
+    date.lowBoundary(6).should.eql(new Date(2014, 2));
+    date.lowBoundary(8).should.eql(new Date(2014, 2, 1));
+  });
+
+  it('should return the least possible Date boundary for minimally specified Date', () => {
+    const date = Date.parse('2014');
+    date.lowBoundary(4).should.eql(new Date(2014));
+    date.lowBoundary(6).should.eql(new Date(2014, 1));
+    date.lowBoundary(8).should.eql(new Date(2014, 1, 1));
+  });
+
+  it('should return the least possible Date boundary for fully specified Date', () => {
+    const date = Date.parse('2014-05-17');
+    date.lowBoundary(4).should.eql(new Date(2014));
+    date.lowBoundary(6).should.eql(new Date(2014, 5));
+    date.lowBoundary(8).should.eql(new Date(2014, 5, 17));
+  });
+
+  it('should use the default precision when no precision is provided', () => {
+    Date.parse('2014')
+      .lowBoundary()
+      .should.eql(new Date(2014, 1, 1));
+  });
+
+  it('should return null when the precision is unsupported', () => {
+    should(Date.parse('2014').lowBoundary(10)).be.null();
+  });
+});
+
 describe('Date.getPrecisionValue', () => {
   it('should properly get precision value for years', () => {
     Date.parse('2012').getPrecisionValue().should.equal(4);

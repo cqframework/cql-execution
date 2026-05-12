@@ -7,6 +7,7 @@ import {
   parseQuantity,
   Quantity
 } from '../../../src/datatypes/quantity';
+import { Date as CQLDate, DateTime } from '../../../src/datatypes/datetime';
 import setup from '../../setup';
 
 const data = require('./data');
@@ -316,6 +317,164 @@ describe('MaxValue', () => {
 
   it('of types other than Integer/Decimal/DateTime/Time should throw an error', async function () {
     return this.maxWrongType.exec(this.ctx).should.be.rejected();
+  });
+});
+
+describe('HighBoundary', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should return the greatest possible Decimal boundaries', async function () {
+    (await this.decimalEightPrecision.exec(this.ctx)).should.equal(1.58799999);
+    (await this.minimalDecimalFivePrecision.exec(this.ctx)).should.equal(1.19999);
+    (await this.fullDecimalFivePrecision.exec(this.ctx)).should.equal(1.58794);
+  });
+
+  it.skip('should return the greatest possible Decimal boundaries with trailing zero on input', async function () {
+    (await this.decimalTrailingZeroFivePrecision.exec(this.ctx)).should.equal(1.09999);
+  });
+
+  it('should return the greatest possible Date boundaries', async function () {
+    (await this.dateYearPrecision.exec(this.ctx)).should.eql(new CQLDate(2014));
+    (await this.dateMonthPrecision.exec(this.ctx)).should.eql(new CQLDate(2014, 12));
+    (await this.dateDayPrecision.exec(this.ctx)).should.eql(new CQLDate(2014, 12, 31));
+  });
+
+  it('should return the greatest possible DateTime boundaries', async function () {
+    (await this.dateTimeYearPrecision.exec(this.ctx)).should.eql(new DateTime(2014));
+    (await this.dateTimeMonthPrecision.exec(this.ctx)).should.eql(new DateTime(2014, 1));
+    (await this.dateTimeDayPrecision.exec(this.ctx)).should.eql(new DateTime(2014, 1, 1));
+    (await this.dateTimeHourPrecision.exec(this.ctx)).should.eql(new DateTime(2014, 1, 1, 8));
+    (await this.dateTimeMinutePrecision.exec(this.ctx)).should.eql(new DateTime(2014, 1, 1, 8, 59));
+    (await this.dateTimeSecondPrecision.exec(this.ctx)).should.eql(
+      new DateTime(2014, 1, 1, 8, 59, 59)
+    );
+    (await this.dateTimeMillisecondPrecision.exec(this.ctx)).should.eql(
+      new DateTime(2014, 1, 1, 8, 59, 59, 999)
+    );
+  });
+
+  it('should return the greatest possible Time boundaries', async function () {
+    (await this.timeHourPrecision.exec(this.ctx)).should.eql(new DateTime(0, 1, 1, 10).getTime());
+    (await this.timeMinutePrecision.exec(this.ctx)).should.eql(
+      new DateTime(0, 1, 1, 10, 30).getTime()
+    );
+    (await this.timeSecondPrecision.exec(this.ctx)).should.eql(
+      new DateTime(0, 1, 1, 10, 30, 59).getTime()
+    );
+    (await this.timeMillisecondPrecision.exec(this.ctx)).should.eql(
+      new DateTime(0, 1, 1, 10, 30, 59, 999).getTime()
+    );
+  });
+
+  it('should return null for Decimal precision greater than supported precision', async function () {
+    should(await this.decimalPrecisionTooHigh.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for null Decimal input', async function () {
+    should(await this.nullDecimal.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for Date precision greater than supported precision', async function () {
+    should(await this.datePrecisionTooHigh.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for null Date input', async function () {
+    should(await this.nullDate.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for DateTime precision greater than supported precision', async function () {
+    should(await this.dateTimePrecisionTooHigh.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for null DateTime input', async function () {
+    should(await this.nullDateTime.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for Time precision greater than supported precision', async function () {
+    should(await this.timePrecisionTooHigh.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for null Time input', async function () {
+    should(await this.nullTime.exec(this.ctx)).be.null();
+  });
+});
+
+describe('LowBoundary', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should return the least possible Decimal boundaries', async function () {
+    (await this.decimalEightPrecision.exec(this.ctx)).should.equal(1.587);
+    (await this.minimalDecimalFivePrecision.exec(this.ctx)).should.equal(1.0); // note: Number doesn't keep trailing 0s in decimal
+    (await this.fullDecimalFivePrecision.exec(this.ctx)).should.equal(1.58794);
+  });
+
+  it('should return the least possible Date boundaries', async function () {
+    (await this.dateYearPrecision.exec(this.ctx)).should.eql(new CQLDate(2014));
+    (await this.dateMonthPrecision.exec(this.ctx)).should.eql(new CQLDate(2014, 1));
+    (await this.dateDayPrecision.exec(this.ctx)).should.eql(new CQLDate(2014, 1, 1));
+  });
+
+  it('should return the least possible DateTime boundaries', async function () {
+    (await this.dateTimeYearPrecision.exec(this.ctx)).should.eql(new DateTime(2014));
+    (await this.dateTimeMonthPrecision.exec(this.ctx)).should.eql(new DateTime(2014, 1));
+    (await this.dateTimeDayPrecision.exec(this.ctx)).should.eql(new DateTime(2014, 1, 1));
+    (await this.dateTimeHourPrecision.exec(this.ctx)).should.eql(new DateTime(2014, 1, 1, 8));
+    (await this.dateTimeMinutePrecision.exec(this.ctx)).should.eql(new DateTime(2014, 1, 1, 8, 0));
+    (await this.dateTimeSecondPrecision.exec(this.ctx)).should.eql(
+      new DateTime(2014, 1, 1, 8, 0, 0)
+    );
+    (await this.dateTimeMillisecondPrecision.exec(this.ctx)).should.eql(
+      new DateTime(2014, 1, 1, 8, 0, 0, 0)
+    );
+  });
+
+  it('should return the least possible Time boundaries', async function () {
+    (await this.timeHourPrecision.exec(this.ctx)).should.eql(new DateTime(0, 1, 1, 10).getTime());
+    (await this.timeMinutePrecision.exec(this.ctx)).should.eql(
+      new DateTime(0, 1, 1, 10, 30).getTime()
+    );
+    (await this.timeSecondPrecision.exec(this.ctx)).should.eql(
+      new DateTime(0, 1, 1, 10, 30, 0).getTime()
+    );
+    (await this.timeMillisecondPrecision.exec(this.ctx)).should.eql(
+      new DateTime(0, 1, 1, 10, 30, 0, 0).getTime()
+    );
+  });
+
+  it('should return null for Decimal precision greater than supported precision', async function () {
+    should(await this.decimalPrecisionTooHigh.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for null Decimal input', async function () {
+    should(await this.nullDecimal.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for Date precision greater than supported precision', async function () {
+    should(await this.datePrecisionTooHigh.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for null Date input', async function () {
+    should(await this.nullDate.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for DateTime precision greater than supported precision', async function () {
+    should(await this.dateTimePrecisionTooHigh.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for null DateTime input', async function () {
+    should(await this.nullDateTime.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for Time precision greater than supported precision', async function () {
+    should(await this.timePrecisionTooHigh.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for null Time input', async function () {
+    should(await this.nullTime.exec(this.ctx)).be.null();
   });
 });
 

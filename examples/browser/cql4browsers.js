@@ -1414,6 +1414,28 @@ class DateTime extends AbstractDate {
         }
         return reduced;
     }
+    highBoundary(precision = null) {
+        const precisionMap = this.isTime() ? PRECISION_TIME_VALUE_MAP : PRECISION_DATETIME_VALUE_MAP;
+        const unit = precisionMap.get(precision !== null && precision !== void 0 ? precision : (this.isTime() ? 9 : 17));
+        if (unit == null) {
+            return null;
+        }
+        const boundary = DateTime.fromLuxonDateTime(this.toLuxonUncertainty().high);
+        return this.isTime()
+            ? boundary.getTime().reducedPrecision(unit)
+            : boundary.reducedPrecision(unit);
+    }
+    lowBoundary(precision = null) {
+        const precisionMap = this.isTime() ? PRECISION_TIME_VALUE_MAP : PRECISION_DATETIME_VALUE_MAP;
+        const unit = precisionMap.get(precision !== null && precision !== void 0 ? precision : (this.isTime() ? 9 : 17));
+        if (unit == null) {
+            return null;
+        }
+        const boundary = DateTime.fromLuxonDateTime(this.toLuxonUncertainty().low);
+        return this.isTime()
+            ? boundary.getTime().reducedPrecision(unit)
+            : boundary.reducedPrecision(unit);
+    }
 }
 exports.DateTime = DateTime;
 DateTime.Unit = {
@@ -1621,6 +1643,20 @@ class Date extends AbstractDate {
         }
         return reduced;
     }
+    highBoundary(precision = null) {
+        const unit = PRECISION_DATETIME_VALUE_MAP.get(precision !== null && precision !== void 0 ? precision : 8);
+        if (unit == null || !Date.FIELDS.includes(unit)) {
+            return null;
+        }
+        return Date.fromLuxonDateTime(this.toLuxonUncertainty().high).reducedPrecision(unit);
+    }
+    lowBoundary(precision = null) {
+        const unit = PRECISION_DATETIME_VALUE_MAP.get(precision !== null && precision !== void 0 ? precision : 8);
+        if (unit == null || !Date.FIELDS.includes(unit)) {
+            return null;
+        }
+        return Date.fromLuxonDateTime(this.toLuxonUncertainty().low).reducedPrecision(unit);
+    }
 }
 exports.Date = Date;
 Date.Unit = { YEAR: 'year', MONTH: 'month', WEEK: 'week', DAY: 'day' };
@@ -1634,25 +1670,26 @@ exports.MIN_DATE_VALUE = Date.parse('0001-01-01');
 exports.MAX_DATE_VALUE = Date.parse('9999-12-31');
 exports.MIN_TIME_VALUE = (_a = DateTime.parse('0000-01-01T00:00:00.000')) === null || _a === void 0 ? void 0 : _a.getTime();
 exports.MAX_TIME_VALUE = (_b = DateTime.parse('0000-01-01T23:59:59.999')) === null || _b === void 0 ? void 0 : _b.getTime();
-const DATETIME_PRECISION_VALUE_MAP = (() => {
-    const dtpvMap = new Map();
-    dtpvMap.set(DateTime.Unit.YEAR, 4);
-    dtpvMap.set(DateTime.Unit.MONTH, 6);
-    dtpvMap.set(DateTime.Unit.DAY, 8);
-    dtpvMap.set(DateTime.Unit.HOUR, 10);
-    dtpvMap.set(DateTime.Unit.MINUTE, 12);
-    dtpvMap.set(DateTime.Unit.SECOND, 14);
-    dtpvMap.set(DateTime.Unit.MILLISECOND, 17);
-    return dtpvMap;
-})();
-const TIME_PRECISION_VALUE_MAP = (() => {
-    const tpvMap = new Map();
-    tpvMap.set(DateTime.Unit.HOUR, 2);
-    tpvMap.set(DateTime.Unit.MINUTE, 4);
-    tpvMap.set(DateTime.Unit.SECOND, 6);
-    tpvMap.set(DateTime.Unit.MILLISECOND, 9);
-    return tpvMap;
-})();
+const DATETIME_PRECISION_VALUE_MAP = new Map([
+    [DateTime.Unit.YEAR, 4],
+    [DateTime.Unit.MONTH, 6],
+    [DateTime.Unit.DAY, 8],
+    [DateTime.Unit.HOUR, 10],
+    [DateTime.Unit.MINUTE, 12],
+    [DateTime.Unit.SECOND, 14],
+    [DateTime.Unit.MILLISECOND, 17]
+]);
+const PRECISION_DATETIME_VALUE_MAP = invertMap(DATETIME_PRECISION_VALUE_MAP);
+const TIME_PRECISION_VALUE_MAP = new Map([
+    [DateTime.Unit.HOUR, 2],
+    [DateTime.Unit.MINUTE, 4],
+    [DateTime.Unit.SECOND, 6],
+    [DateTime.Unit.MILLISECOND, 9]
+]);
+const PRECISION_TIME_VALUE_MAP = invertMap(TIME_PRECISION_VALUE_MAP);
+function invertMap(map) {
+    return new Map([...map.entries()].map(([k, v]) => [v, k]));
+}
 function compareWithDefaultResult(a, b, defaultResult) {
     // return false there is a type mismatch
     if ((!a.isDate || !b.isDate) && (!a.isDateTime || !b.isDateTime)) {
@@ -3306,7 +3343,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Predecessor = exports.Successor = exports.MaxValue = exports.MinValue = exports.Power = exports.Log = exports.Exp = exports.Ln = exports.Round = exports.Negate = exports.Abs = exports.Truncate = exports.Floor = exports.Ceiling = exports.Modulo = exports.TruncatedDivide = exports.Divide = exports.Multiply = exports.Subtract = exports.Add = void 0;
+exports.Predecessor = exports.Successor = exports.LowBoundary = exports.HighBoundary = exports.MaxValue = exports.MinValue = exports.Power = exports.Log = exports.Exp = exports.Ln = exports.Round = exports.Negate = exports.Abs = exports.Truncate = exports.Floor = exports.Ceiling = exports.Modulo = exports.TruncatedDivide = exports.Divide = exports.Multiply = exports.Subtract = exports.Add = void 0;
 const expression_1 = require("./expression");
 const MathUtil = __importStar(require("../util/math"));
 const quantity_1 = require("../datatypes/quantity");
@@ -3711,6 +3748,57 @@ MaxValue.MAX_VALUES = {
     '{urn:hl7-org:elm-types:r1}Date': MathUtil.MAX_DATE_VALUE,
     '{urn:hl7-org:elm-types:r1}Time': MathUtil.MAX_TIME_VALUE
 };
+function decimalBoundary(value, precision, boundary) {
+    precision !== null && precision !== void 0 ? precision : (precision = 8);
+    if (precision < 0 || precision > 8) {
+        return null;
+    }
+    const [whole = '0', decimalPart = ''] = value.toString().split('.');
+    // we can't do much w/ decimals that are using scientific notation
+    if (decimalPart.includes('e')) {
+        return value;
+    }
+    const filledDecimalPart = decimalPart
+        .padEnd(precision, boundary === 'high' ? '9' : '0')
+        .slice(0, precision);
+    return Number(`${whole}.${filledDecimalPart}`);
+}
+function boundary(value, precision, boundary) {
+    var _a, _b;
+    if (value == null) {
+        return null;
+    }
+    if (typeof value === 'number') {
+        return decimalBoundary(value, precision, boundary);
+    }
+    if (boundary === 'high') {
+        return (_a = value.highBoundary) === null || _a === void 0 ? void 0 : _a.call(value, precision);
+    }
+    else if (boundary === 'low') {
+        return (_b = value.lowBoundary) === null || _b === void 0 ? void 0 : _b.call(value, precision);
+    }
+    return null;
+}
+class HighBoundary extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    async exec(ctx) {
+        const [value, precision] = await this.execArgs(ctx);
+        return boundary(value, precision, 'high');
+    }
+}
+exports.HighBoundary = HighBoundary;
+class LowBoundary extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    async exec(ctx) {
+        const [value, precision] = await this.execArgs(ctx);
+        return boundary(value, precision, 'low');
+    }
+}
+exports.LowBoundary = LowBoundary;
 class Successor extends expression_1.Expression {
     constructor(json) {
         super(json);
@@ -8863,7 +8951,7 @@ exports.greaterThan = greaterThan;
 exports.greaterThanOrEquals = greaterThanOrEquals;
 exports.equivalent = equivalent;
 exports.equals = equals;
-const datatypes_1 = require("../datatypes/datatypes");
+const uncertainty_1 = require("../datatypes/uncertainty");
 function areNumbers(a, b) {
     return typeof a === 'number' && typeof b === 'number';
 }
@@ -8876,7 +8964,7 @@ function areDateTimesOrQuantities(a, b) {
         (a && a.isQuantity && b && b.isQuantity));
 }
 function isUncertainty(x) {
-    return x instanceof datatypes_1.Uncertainty;
+    return x instanceof uncertainty_1.Uncertainty;
 }
 function lessThan(a, b, precision) {
     if (areNumbers(a, b) || areStrings(a, b)) {
@@ -8889,7 +8977,7 @@ function lessThan(a, b, precision) {
         return a.lessThan(b);
     }
     else if (isUncertainty(b)) {
-        return datatypes_1.Uncertainty.from(a).lessThan(b);
+        return uncertainty_1.Uncertainty.from(a).lessThan(b);
     }
     else {
         return null;
@@ -8906,7 +8994,7 @@ function lessThanOrEquals(a, b, precision) {
         return a.lessThanOrEquals(b);
     }
     else if (isUncertainty(b)) {
-        return datatypes_1.Uncertainty.from(a).lessThanOrEquals(b);
+        return uncertainty_1.Uncertainty.from(a).lessThanOrEquals(b);
     }
     else {
         return null;
@@ -8923,7 +9011,7 @@ function greaterThan(a, b, precision) {
         return a.greaterThan(b);
     }
     else if (isUncertainty(b)) {
-        return datatypes_1.Uncertainty.from(a).greaterThan(b);
+        return uncertainty_1.Uncertainty.from(a).greaterThan(b);
     }
     else {
         return null;
@@ -8940,7 +9028,7 @@ function greaterThanOrEquals(a, b, precision) {
         return a.greaterThanOrEquals(b);
     }
     else if (isUncertainty(b)) {
-        return datatypes_1.Uncertainty.from(a).greaterThanOrEquals(b);
+        return uncertainty_1.Uncertainty.from(a).greaterThanOrEquals(b);
     }
     else {
         return null;
@@ -9053,11 +9141,11 @@ function equals(a, b) {
         return a.equals(b);
     }
     // If one is an Uncertainty, convert the other to an Uncertainty
-    if (a instanceof datatypes_1.Uncertainty) {
-        b = datatypes_1.Uncertainty.from(b);
+    if (a instanceof uncertainty_1.Uncertainty) {
+        b = uncertainty_1.Uncertainty.from(b);
     }
-    else if (b instanceof datatypes_1.Uncertainty) {
-        a = datatypes_1.Uncertainty.from(a);
+    else if (b instanceof uncertainty_1.Uncertainty) {
+        a = uncertainty_1.Uncertainty.from(a);
     }
     // Use overloaded 'equals' function if it is available
     if (typeof a.equals === 'function') {
@@ -9098,7 +9186,7 @@ function equals(a, b) {
     return false;
 }
 
-},{"../datatypes/datatypes":6}],53:[function(require,module,exports){
+},{"../datatypes/uncertainty":13}],53:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AnnotatedError = void 0;

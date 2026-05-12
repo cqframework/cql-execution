@@ -1031,6 +1031,32 @@ export class DateTime extends AbstractDate {
     }
     return reduced;
   }
+
+  highBoundary(precision: number | null = null) {
+    const precisionMap = this.isTime() ? PRECISION_TIME_VALUE_MAP : PRECISION_DATETIME_VALUE_MAP;
+    const unit = precisionMap.get(precision ?? (this.isTime() ? 9 : 17));
+    if (unit == null) {
+      return null;
+    }
+
+    const boundary = DateTime.fromLuxonDateTime(this.toLuxonUncertainty().high);
+    return this.isTime()
+      ? boundary.getTime().reducedPrecision(unit)
+      : boundary.reducedPrecision(unit);
+  }
+
+  lowBoundary(precision: number | null = null) {
+    const precisionMap = this.isTime() ? PRECISION_TIME_VALUE_MAP : PRECISION_DATETIME_VALUE_MAP;
+    const unit = precisionMap.get(precision ?? (this.isTime() ? 9 : 17));
+    if (unit == null) {
+      return null;
+    }
+
+    const boundary = DateTime.fromLuxonDateTime(this.toLuxonUncertainty().low);
+    return this.isTime()
+      ? boundary.getTime().reducedPrecision(unit)
+      : boundary.reducedPrecision(unit);
+  }
 }
 
 export class Date extends AbstractDate {
@@ -1250,6 +1276,24 @@ export class Date extends AbstractDate {
     }
     return reduced;
   }
+
+  highBoundary(precision: number | null = null) {
+    const unit = PRECISION_DATETIME_VALUE_MAP.get(precision ?? 8);
+    if (unit == null || !Date.FIELDS.includes(unit)) {
+      return null;
+    }
+
+    return Date.fromLuxonDateTime(this.toLuxonUncertainty().high).reducedPrecision(unit);
+  }
+
+  lowBoundary(precision: number | null = null) {
+    const unit = PRECISION_DATETIME_VALUE_MAP.get(precision ?? 8);
+    if (unit == null || !Date.FIELDS.includes(unit)) {
+      return null;
+    }
+
+    return Date.fromLuxonDateTime(this.toLuxonUncertainty().low).reducedPrecision(unit);
+  }
 }
 
 // Require MIN/MAX here because math.js requires this file, and when we make this file require
@@ -1262,26 +1306,30 @@ export const MAX_DATE_VALUE = Date.parse('9999-12-31');
 export const MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000')?.getTime();
 export const MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999')?.getTime();
 
-const DATETIME_PRECISION_VALUE_MAP = (() => {
-  const dtpvMap = new Map();
-  dtpvMap.set(DateTime.Unit.YEAR, 4);
-  dtpvMap.set(DateTime.Unit.MONTH, 6);
-  dtpvMap.set(DateTime.Unit.DAY, 8);
-  dtpvMap.set(DateTime.Unit.HOUR, 10);
-  dtpvMap.set(DateTime.Unit.MINUTE, 12);
-  dtpvMap.set(DateTime.Unit.SECOND, 14);
-  dtpvMap.set(DateTime.Unit.MILLISECOND, 17);
-  return dtpvMap;
-})();
+const DATETIME_PRECISION_VALUE_MAP = new Map<string | null, number>([
+  [DateTime.Unit.YEAR, 4],
+  [DateTime.Unit.MONTH, 6],
+  [DateTime.Unit.DAY, 8],
+  [DateTime.Unit.HOUR, 10],
+  [DateTime.Unit.MINUTE, 12],
+  [DateTime.Unit.SECOND, 14],
+  [DateTime.Unit.MILLISECOND, 17]
+]);
 
-const TIME_PRECISION_VALUE_MAP = (() => {
-  const tpvMap = new Map();
-  tpvMap.set(DateTime.Unit.HOUR, 2);
-  tpvMap.set(DateTime.Unit.MINUTE, 4);
-  tpvMap.set(DateTime.Unit.SECOND, 6);
-  tpvMap.set(DateTime.Unit.MILLISECOND, 9);
-  return tpvMap;
-})();
+const PRECISION_DATETIME_VALUE_MAP = invertMap(DATETIME_PRECISION_VALUE_MAP);
+
+const TIME_PRECISION_VALUE_MAP = new Map<string | null, number>([
+  [DateTime.Unit.HOUR, 2],
+  [DateTime.Unit.MINUTE, 4],
+  [DateTime.Unit.SECOND, 6],
+  [DateTime.Unit.MILLISECOND, 9]
+]);
+
+const PRECISION_TIME_VALUE_MAP = invertMap(TIME_PRECISION_VALUE_MAP);
+
+function invertMap<K, V>(map: Map<K, V>): Map<V, K> {
+  return new Map([...map.entries()].map(([k, v]) => [v, k]));
+}
 
 function compareWithDefaultResult(a: any, b: any, defaultResult: any) {
   // return false there is a type mismatch
