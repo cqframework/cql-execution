@@ -1,5 +1,6 @@
 import { Expression } from './expression';
 import { Quantity, doAddition } from '../datatypes/quantity';
+import { equals } from '../util/comparison';
 import { successor, predecessor, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } from '../util/math';
 import { convertUnit, compareUnits, convertToCQLDateUnit } from '../util/units';
 import * as dtivl from '../datatypes/interval';
@@ -242,6 +243,24 @@ export class Size extends Expression {
       return null;
     }
     return interval.size();
+  }
+}
+
+export class PointFrom extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const interval = await this.arg?.execute(ctx);
+    if (interval == null) {
+      return null;
+    }
+    const closed = interval.toClosed();
+    if (!equals(closed.low, closed.high)) {
+      throw new Error('Cannot get point from an interval with different low and high boundaries');
+    }
+    return closed.low;
   }
 }
 

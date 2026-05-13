@@ -781,6 +781,36 @@ define SizeOfDateTimeInterval: Size(Interval[DateTime(2012,01,01), DateTime(2012
 define SizeOfDateInterval: Size(Interval[Date(2012,01,01), Date(2012,01,03)])
 define SizeOfTimeInterval: Size(Interval[Time(12,00,00), Time(12,30,02)])
 
+// @Test: PointFrom
+define ClosedIntegerPoint: point from Interval[4, 4]
+define OpenIntegerPoint: point from Interval(3, 5)
+define OpenEndIntegerPoint: point from Interval[4, 5)
+define OpenStartIntegerPoint: point from Interval(3, 4]
+define NonPointIntegerInterval: point from Interval[1, 4]
+define NullClosedEndIntegerInterval: point from Interval[4, null]
+define NullOpenEndIntegerInterval: point from Interval[4, null)
+define NullClosedStartIntegerInterval: point from Interval[null, 4]
+define NullOpenStartIntegerInterval: point from Interval(null, 4]
+define ClosedDecimalPoint: point from Interval[1.23, 1.23]
+define OpenDecimalPoint: point from Interval(1.22999999, 1.23000001)
+define NonPointDecimalInterval: point from Interval[1.23, 1.24]
+define ClosedDatePoint: point from Interval[Date(2014, 2, 3), Date(2014, 2, 3)]
+define OpenDatePoint: point from Interval(Date(2014, 2, 2), Date(2014, 2, 4))
+define ImpreciseDatePoint: point from Interval[Date(2014, 2), Date(2014, 2)]
+define PartiallyImpreciseDateInterval: point from Interval[Date(2014, 2, 3), Date(2014, 2)]
+define NonPointDateInterval: point from Interval[Date(2014, 2, 3), Date(2014, 2, 4)]
+define ClosedDateTimePoint: point from Interval[DateTime(2012, 1, 25, 0, 0, 0, 0), DateTime(2012, 1, 25, 0, 0, 0, 0)]
+define OpenDateTimePoint: point from Interval(DateTime(2012, 1, 24, 23, 59, 59, 999), DateTime(2012, 1, 25, 0, 0, 0, 1))
+define ImpreciseDateTimePoint: point from Interval[DateTime(2012, 1, 25, 0, 0), DateTime(2012, 1, 25, 0, 0)]
+define PartiallyImpreciseDateTimeInterval: point from Interval[DateTime(2012, 1, 25, 0, 0, 0, 0), DateTime(2012, 1, 25, 0, 0)]
+define NonPointDateTimeInterval: point from Interval[DateTime(2012, 1, 25, 0, 0, 0, 0), DateTime(2012, 1, 25, 0, 0, 0, 1)]
+define ClosedTimePoint: point from Interval[Time(0, 0, 0, 0), Time(0, 0, 0, 0)]
+define OpenTimePoint: point from Interval(Time(11, 59, 59, 999), Time(12, 0, 0, 1))
+define ImpreciseTimePoint: point from Interval[Time(0, 0), Time(0, 0)]
+define PartiallyImpreciseTimeInterval: point from Interval[Time(0, 0, 0), Time(0, 0)]
+define NonPointTimeInterval: point from Interval[Time(0, 0, 0, 0), Time(0, 0, 0, 1)]
+define NullInterval: point from (null as Interval<Integer>)
+
 // @Test: Start
 define ClosedNotNull: start of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
 define ClosedNullDateTime: start of Interval[null, DateTime(2013, 1, 1)]

@@ -4954,7 +4954,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Collapse = exports.Expand = exports.Ends = exports.Starts = exports.End = exports.Start = exports.Size = exports.Width = exports.OverlapsBefore = exports.OverlapsAfter = exports.Overlaps = exports.MeetsBefore = exports.MeetsAfter = exports.Meets = exports.Interval = void 0;
+exports.Collapse = exports.Expand = exports.Ends = exports.Starts = exports.End = exports.Start = exports.PointFrom = exports.Size = exports.Width = exports.OverlapsBefore = exports.OverlapsAfter = exports.Overlaps = exports.MeetsBefore = exports.MeetsAfter = exports.Meets = exports.Interval = void 0;
 exports.doContains = doContains;
 exports.doIncludes = doIncludes;
 exports.doProperIncludes = doProperIncludes;
@@ -4965,6 +4965,7 @@ exports.doExcept = doExcept;
 exports.doIntersect = doIntersect;
 const expression_1 = require("./expression");
 const quantity_1 = require("../datatypes/quantity");
+const comparison_1 = require("../util/comparison");
 const math_1 = require("../util/math");
 const units_1 = require("../util/units");
 const dtivl = __importStar(require("../datatypes/interval"));
@@ -5176,6 +5177,24 @@ class Size extends expression_1.Expression {
     }
 }
 exports.Size = Size;
+class PointFrom extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    async exec(ctx) {
+        var _a;
+        const interval = await ((_a = this.arg) === null || _a === void 0 ? void 0 : _a.execute(ctx));
+        if (interval == null) {
+            return null;
+        }
+        const closed = interval.toClosed();
+        if (!(0, comparison_1.equals)(closed.low, closed.high)) {
+            throw new Error('Cannot get point from an interval with different low and high boundaries');
+        }
+        return closed.low;
+    }
+}
+exports.PointFrom = PointFrom;
 class Start extends expression_1.Expression {
     constructor(json) {
         super(json);
@@ -5664,7 +5683,7 @@ function truncateDecimal(decimal, decimalPlaces) {
     return parseFloat(decimal.toString().match(re)[0]);
 }
 
-},{"../datatypes/interval":9,"../datatypes/quantity":11,"../util/math":55,"../util/units":56,"./builder":16,"./expression":22}],27:[function(require,module,exports){
+},{"../datatypes/interval":9,"../datatypes/quantity":11,"../util/comparison":52,"../util/math":55,"../util/units":56,"./builder":16,"./expression":22}],27:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Library = void 0;

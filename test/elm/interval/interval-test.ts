@@ -2,7 +2,7 @@ import should from 'should';
 import setup from '../../setup';
 const data = require('./data');
 import { Interval } from '../../../src/datatypes/interval';
-import { DateTime } from '../../../src/datatypes/datetime';
+import { Date as CQLDate, DateTime } from '../../../src/datatypes/datetime';
 import {
   MIN_INT_VALUE,
   MAX_INT_VALUE,
@@ -1357,6 +1357,84 @@ describe('Size', () => {
   it('should throw for Time Interval', async function () {
     // define SizeOfTimeInterval: Size(Interval[Time(12,00,00), Time(12,30,02)])
     return await this.sizeOfTimeInterval.exec(this.ctx).should.be.rejected();
+  });
+});
+
+describe('PointFrom', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should return a point from valid integer point intervals', async function () {
+    (await this.closedIntegerPoint.exec(this.ctx)).should.equal(4);
+    (await this.openIntegerPoint.exec(this.ctx)).should.equal(4);
+    (await this.openEndIntegerPoint.exec(this.ctx)).should.equal(4);
+    (await this.openStartIntegerPoint.exec(this.ctx)).should.equal(4);
+  });
+
+  it('should throw for integer intervals that are not points', async function () {
+    await this.nonPointIntegerInterval.exec(this.ctx).should.be.rejected();
+    await this.nullClosedEndIntegerInterval.exec(this.ctx).should.be.rejected();
+    await this.nullOpenEndIntegerInterval.exec(this.ctx).should.be.rejected();
+    await this.nullClosedStartIntegerInterval.exec(this.ctx).should.be.rejected();
+    await this.nullOpenStartIntegerInterval.exec(this.ctx).should.be.rejected();
+  });
+
+  it('should return a point from valid decimal point intervals', async function () {
+    (await this.closedDecimalPoint.exec(this.ctx)).should.equal(1.23);
+    (await this.openDecimalPoint.exec(this.ctx)).should.equal(1.23);
+  });
+
+  it('should throw for decimal intervals that are not points', async function () {
+    await this.nonPointDecimalInterval.exec(this.ctx).should.be.rejected();
+  });
+
+  it('should return a point from valid Date point intervals', async function () {
+    (await this.closedDatePoint.exec(this.ctx)).should.eql(new CQLDate(2014, 2, 3));
+    (await this.openDatePoint.exec(this.ctx)).should.eql(new CQLDate(2014, 2, 3));
+    // based on CQL equality @2014-02 = @2104-02, so I guess it is a point?
+    (await this.impreciseDatePoint.exec(this.ctx)).should.eql(new CQLDate(2014, 2));
+  });
+
+  it('should throw for Date intervals that are not points', async function () {
+    await this.partiallyImpreciseDateInterval.exec(this.ctx).should.be.rejected();
+    await this.nonPointDateInterval.exec(this.ctx).should.be.rejected();
+  });
+
+  it('should return a point from valid DateTime point intervals', async function () {
+    (await this.closedDateTimePoint.exec(this.ctx)).should.eql(
+      new DateTime(2012, 1, 25, 0, 0, 0, 0)
+    );
+    (await this.openDateTimePoint.exec(this.ctx)).should.eql(new DateTime(2012, 1, 25, 0, 0, 0, 0));
+    // based on CQL equality @2012-01-25T00:00 = @2012-01-25T00:00, so I guess it is a point?
+    (await this.impreciseDateTimePoint.exec(this.ctx)).should.eql(new DateTime(2012, 1, 25, 0, 0));
+  });
+
+  it('should throw for DateTime intervals that are not points', async function () {
+    await this.partiallyImpreciseDateTimeInterval.exec(this.ctx).should.be.rejected();
+    await this.nonPointDateTimeInterval.exec(this.ctx).should.be.rejected();
+  });
+
+  it('should return a point from valid Time point intervals', async function () {
+    (await this.closedTimePoint.exec(this.ctx)).should.eql(
+      new DateTime(0, 1, 1, 0, 0, 0, 0).getTime()
+    );
+    (await this.openTimePoint.exec(this.ctx)).should.eql(
+      new DateTime(0, 1, 1, 12, 0, 0, 0).getTime()
+    );
+    // based on CQL equality @T00:00 = @2T00:00, so I guess it is a point?
+    (await this.impreciseTimePoint.exec(this.ctx)).should.eql(
+      new DateTime(0, 1, 1, 0, 0).getTime()
+    );
+  });
+
+  it('should throw for Time intervals that are not points', async function () {
+    await this.partiallyImpreciseTimeInterval.exec(this.ctx).should.be.rejected();
+    await this.nonPointTimeInterval.exec(this.ctx).should.be.rejected();
+  });
+
+  it('should return null for null intervals', async function () {
+    should(await this.nullInterval.exec(this.ctx)).be.null();
   });
 });
 
