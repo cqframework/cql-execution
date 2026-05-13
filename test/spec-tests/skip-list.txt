@@ -46,8 +46,6 @@ ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    
 ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number)
 
 # Unimplemented
-CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not implemented
-CqlArithmeticFunctionsTest.LowBoundary                  LowBoundary not implemented
 CqlArithmeticFunctionsTest.Precision.PrecisionDecimal   Precision for Decimal not implemented
 CqlListOperatorsTest.Descendents                        Descendents not implemented
 
