@@ -81,8 +81,6 @@ CqlTypesTest.Time.TimeMillisParsing                                             
 CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1QCMPrecision          Wrong answer: Translator loses Decimal precision (trailing zeros) in ELM representation of Quantity literal
 
 # Unimplemented
-CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not implemented
-CqlArithmeticFunctionsTest.LowBoundary                  LowBoundary not implemented
 CqlArithmeticFunctionsTest.Precision.PrecisionDecimal   Precision for Decimal not implemented
 CqlListOperatorsTest.Descendents                        Descendents not implemented
 

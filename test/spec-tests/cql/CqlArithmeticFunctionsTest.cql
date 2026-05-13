@@ -298,41 +298,29 @@ define "Exp": Tuple{
 
 define "HighBoundary": Tuple{
   "HighBoundaryDecimal": Tuple{
-    skipped: 'HighBoundary not implemented'
-    /*
     expression: HighBoundary(1.587, 8),
     output: 1.58799999
-    */  },
+  },
   "HighBoundaryDateMonth": Tuple{
-    skipped: 'HighBoundary not implemented'
-    /*
     expression: HighBoundary(@2014, 6),
     output: @2014-12
-    */  },
+  },
   "HighBoundaryDateTimeMillisecond": Tuple{
-    skipped: 'HighBoundary not implemented'
-    /*
     expression: HighBoundary(@2014-01-01T08, 17),
     output: @2014-01-01T08:59:59.999
-    */  },
+  },
   "HighBoundaryTimeMillisecond": Tuple{
-    skipped: 'HighBoundary not implemented'
-    /*
     expression: HighBoundary(@T10:30, 9),
     output: @T10:30:59.999
-    */  },
+  },
   "HighBoundaryNull": Tuple{
-    skipped: 'HighBoundary not implemented'
-    /*
     expression: HighBoundary(null as Decimal, 8),
     output: null
-    */  },
+  },
   "HighBoundaryNullPrecision": Tuple{
-    skipped: 'HighBoundary not implemented'
-    /*
     expression: HighBoundary(1.58888, null),
     output: 1.58888999
-    */  }
+  }
 }
 
 define "Log": Tuple{
@@ -376,41 +364,29 @@ define "Log": Tuple{
 
 define "LowBoundary": Tuple{
   "LowBoundaryDecimal": Tuple{
-    skipped: 'LowBoundary not implemented'
-    /*
     expression: LowBoundary(1.587, 8),
     output: 1.58700000
-    */  },
+  },
   "LowBoundaryDateMonth": Tuple{
-    skipped: 'LowBoundary not implemented'
-    /*
     expression: LowBoundary(@2014, 6),
     output: @2014-01
-    */  },
+  },
   "LowBoundaryDateTimeMillisecond": Tuple{
-    skipped: 'LowBoundary not implemented'
-    /*
     expression: LowBoundary(@2014-01-01T08, 17),
     output: @2014-01-01T08:00:00.000
-    */  },
+  },
   "LowBoundaryTimeMillisecond": Tuple{
-    skipped: 'LowBoundary not implemented'
-    /*
     expression: LowBoundary(@T10:30, 9),
     output: @T10:30:00.000
-    */  },
+  },
   "LowBoundaryNull": Tuple{
-    skipped: 'LowBoundary not implemented'
-    /*
     expression: LowBoundary(null as Decimal, 8),
     output: null
-    */  },
+  },
   "LowBoundaryNullPrecision": Tuple{
-    skipped: 'LowBoundary not implemented'
-    /*
     expression: LowBoundary(1.58888, null),
     output: 1.58888000
-    */  }
+  }
 }
 
 define "Ln": Tuple{
