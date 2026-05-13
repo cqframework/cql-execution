@@ -59,7 +59,7 @@ The development mode builds the `cql-execution` source (to ensure it uses the la
 
 _NOTE: The watch mode will NOT detect or hot-reload changes in the `cql-execution` source. You must stop and restart the `test-server` to pick up changes in the `cql-execution` source._
 
-# Production mode::
+# Production mode:
 
 ```sh
 npm run build
@@ -73,7 +73,7 @@ The production mode builds the `cql-execution` source and `test-server` source t
 - `PORT` (optional): Port to bind. Defaults to `8000`.
 - `USE_TRANSLATION_SERVICE` (optional, default: `false`): If `true`, the server will use a local [CQL Translation Service](https://github.com/cqframework/cql-translation-service) for CQL-to-ELM. In this case, the CQL Translation service must be running and available at `http://localhost:8080`. If `false`, the server will use the javascript CQL-to-ELM module to compile CQL.
 
-You can export these variable before running the server or place them in a `.env` file:
+You can export these variables before running the server or place them in a `.env` file:
 
 ```ini
 PORT=8000
