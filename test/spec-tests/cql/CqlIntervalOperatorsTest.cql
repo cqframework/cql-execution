@@ -1399,29 +1399,23 @@ define "OverlapsAfter": Tuple{
 
 define "PointFrom": Tuple{
   "TestPointFromNull": Tuple{
-    skipped: 'PointFrom not implemented'
+    skipped: 'Potentially Wrong answer (Interval(null, null) not interpreted as null so it throws)'
     /*
     expression: point from Interval[null, null],
     output: null
     */  },
   "TestPointFromInteger": Tuple{
-    skipped: 'PointFrom not implemented'
-    /*
     expression: point from Interval[1, 1],
     output: 1
-    */  },
+  },
   "TestPointFromDecimal": Tuple{
-    skipped: 'PointFrom not implemented'
-    /*
     expression: point from Interval[1.0, 1.0],
     output: 1.0
-    */  },
+  },
   "TestPointFromQuantity": Tuple{
-    skipped: 'PointFrom not implemented'
-    /*
     expression: point from Interval[1.0 'cm', 1.0 'cm'],
     output: 1.0'cm'
-    */  }
+  }
 }
 
 define "ProperContains": Tuple{

@@ -31887,7 +31887,7 @@
                       "value": {
                         "type": "Literal",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "PointFrom not implemented",
+                        "value": "Potentially Wrong answer (Interval(null, null) not interpreted as null so it throws)",
                         "annotation": []
                       }
                     }
@@ -31901,11 +31901,37 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
+                      "value": {
+                        "type": "PointFrom",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Interval",
+                          "lowClosed": true,
+                          "highClosed": true,
+                          "annotation": [],
+                          "low": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "1",
+                            "annotation": []
+                          },
+                          "high": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "1",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
                       "value": {
                         "type": "Literal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "PointFrom not implemented",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "1",
                         "annotation": []
                       }
                     }
@@ -31919,11 +31945,37 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
+                      "value": {
+                        "type": "PointFrom",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Interval",
+                          "lowClosed": true,
+                          "highClosed": true,
+                          "annotation": [],
+                          "low": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "value": "1.0",
+                            "annotation": []
+                          },
+                          "high": {
+                            "type": "Literal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "value": "1.0",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
                       "value": {
                         "type": "Literal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "PointFrom not implemented",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "value": "1.0",
                         "annotation": []
                       }
                     }
@@ -31937,11 +31989,37 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "PointFrom not implemented",
+                        "type": "PointFrom",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Interval",
+                          "lowClosed": true,
+                          "highClosed": true,
+                          "annotation": [],
+                          "low": {
+                            "type": "Quantity",
+                            "value": 1,
+                            "unit": "cm",
+                            "annotation": []
+                          },
+                          "high": {
+                            "type": "Quantity",
+                            "value": 1,
+                            "unit": "cm",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Quantity",
+                        "value": 1,
+                        "unit": "cm",
                         "annotation": []
                       }
                     }

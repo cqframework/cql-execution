@@ -22,6 +22,7 @@ CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Qu
 CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.Except.NullInterval                    Wrong answer (Interval(null, null) vs null)
+CqlIntervalOperatorsTest.PointFrom.TestPointFromNull            Potentially Wrong answer (Interval(null, null) not interpreted as null so it throws)
 CqlIntervalOperatorsTest.Expand.ExpandEmptyList                           Wrong answer (should be empty list)
 CqlIntervalOperatorsTest.Expand.ExpandIntegerIntervalOverload             Wrong answer (single interval overload should return list of points)
 CqlIntervalOperatorsTest.Expand.ExpandIntegerOpenIntervalOverload         Wrong answer (single interval overload should return list of points)
@@ -57,10 +58,7 @@ ValueLiteralsAndSelectors.Decimal.DecimalPos2Pow31ToInf1    Overflows because it
 ValueLiteralsAndSelectors.Decimal.DecimalNeg2Pow31ToInf1    Underflows because it thinks it is an integer
 
 # Unimplemented
-CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not implemented
-CqlArithmeticFunctionsTest.LowBoundary                  LowBoundary not implemented
 CqlArithmeticFunctionsTest.Precision.PrecisionDecimal   Precision for Decimal not implemented
-CqlIntervalOperatorsTest.PointFrom                      PointFrom not implemented
 CqlIntervalOperatorsTest.ProperContains                 ProperContains not implemented
 CqlIntervalOperatorsTest.ProperIn                       ProperIn not implemented
 CqlListOperatorsTest.Descendents                        Descendents not implemented
