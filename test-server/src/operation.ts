@@ -5,7 +5,7 @@ import { CodeService, DateTime, Executor, Library } from '../..';
 import { PatientSource } from 'cql-exec-fhir';
 import { toParameters } from './convert';
 
-const USE_TRANSLATION_SERVICE = process.env['USE_TRANSLATION_SERVICE'] == 'true';
+const USE_TRANSLATION_SERVICE = process.env['USE_TRANSLATION_SERVICE'] === 'true';
 
 let counter = 0;
 

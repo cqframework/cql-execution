@@ -6,7 +6,7 @@
     "build": "npm --prefix .. run build && tsc && npm run copyfiles",
     "copyfiles": "copyfiles -u 1 src/translate/**/*.{xml,cql} dist",
     "start": "node dist/app.js",
-    "dev": "npm --prefix .. run build && tsx watch src/app.ts",
+    "dev": "npm --prefix .. run build && tsx watch --include \"src/**/*.ts\" src/app.ts",
     "check": "npm run test && npm run lint && npm run prettier",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

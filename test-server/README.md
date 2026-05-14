@@ -16,7 +16,14 @@ A barebones implementation of the FHIR [$cql](https://build.fhir.org/ig/HL7/cql-
     ```json
     {
       "resourceType": "Parameters",
-      "parameter": [{ "name": "return", "valueInteger": 3 }]
+      "parameter": [{
+          "extension": [{
+            "url": "http://hl7.org/fhir/StructureDefinition/cqf-cqlType",
+            "valueString": "System.Integer"
+          }],
+          "name": "return",
+          "valueInteger": 3
+      }]
     }
     ```
   - Errors:

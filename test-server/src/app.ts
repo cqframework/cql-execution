@@ -1,12 +1,10 @@
+import 'dotenv/config';
 import express, { type Request, type Response } from 'express';
-import dotenv from 'dotenv';
 import logger from './logger';
 import { $cql } from './operation';
 
-dotenv.config();
-
 const app = express();
-app.use(express.json());
+app.use(express.json({ type: ['application/json', 'application/fhir+json'] }));
 const port = process.env.PORT || 8000;
 
 app.post('/fhir/$cql', async (req: Request, res: Response) => {
