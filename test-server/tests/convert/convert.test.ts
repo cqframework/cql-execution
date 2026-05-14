@@ -12,8 +12,8 @@ import {
   Quantity,
   Ratio,
   TupleTypeSpecifier
-} from '../../..';
-import { Uncertainty } from '../../../lib/datatypes/uncertainty';
+} from 'cql-execution';
+import { Uncertainty } from 'cql-execution/lib/datatypes/uncertainty';
 import logger from '@src/logger';
 
 function cqlTypeExt(type: string) {
@@ -30,7 +30,7 @@ describe('convert.toParameters', () => {
   let logErrorSpy: MockInstance<typeof logger.error>;
 
   beforeEach(() => {
-    logErrorSpy = vi.spyOn(logger, 'error').mockImplementation(() => {});
+    logErrorSpy = vi.spyOn(logger, 'error').mockImplementation(() => undefined);
   });
 
   describe('primitives', () => {

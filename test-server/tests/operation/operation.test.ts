@@ -42,7 +42,7 @@ describe('operation.$cql', () => {
   } as Parameters;
 
   beforeEach(() => {
-    vi.spyOn(logger, 'debug').mockImplementation(() => {}); // suppress logs
+    vi.spyOn(logger, 'debug').mockImplementation(() => undefined); // suppress logs
     translateSpy = vi.spyOn(translateModule, 'translate').mockResolvedValue(elm);
     toParametersSpy = vi.spyOn(convertModule, 'toParameters').mockReturnValue(parameters);
   });

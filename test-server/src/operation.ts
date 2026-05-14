@@ -1,7 +1,7 @@
 import { Parameters } from 'fhir/r4';
 import logger from './logger';
 import { translate } from './translate';
-import { CodeService, DateTime, Executor, Library, PatientSource } from '../..';
+import { CodeService, DateTime, Executor, Library, PatientSource } from 'cql-execution';
 import { toParameters } from './convert';
 
 const USE_TRANSLATION_SERVICE = process.env['USE_TRANSLATION_SERVICE'] === 'true';

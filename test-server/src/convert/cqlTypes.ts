@@ -3,10 +3,11 @@ import {
   ChoiceTypeSpecifier,
   IntervalTypeSpecifier,
   ListTypeSpecifier,
+  Interval,
   TupleTypeSpecifier,
   TupleElementDefinition,
   AnyTypeSpecifier
-} from '../../..';
+} from 'cql-execution';
 
 export function typeToCqlTypeSpecifier(
   typeOrSpecifier: string | AnyTypeSpecifier = '{urn:hl7-org:elm-types:r1}Any'

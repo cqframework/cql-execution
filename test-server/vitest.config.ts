@@ -8,8 +8,13 @@ export default defineConfig({
     globals: true
   },
   resolve: {
-    alias: {
-      '@src': path.resolve(__dirname, 'src')
-    }
+    alias: [
+      { find: '@src', replacement: path.resolve(__dirname, 'src') },
+      { find: /^cql-execution$/, replacement: path.resolve(__dirname, '../src/cql.ts') },
+      {
+        find: /^cql-execution\/lib\/(.+)$/,
+        replacement: `${path.resolve(__dirname, '../src')}/$1`
+      }
+    ]
   }
 });
