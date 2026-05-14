@@ -1,8 +1,7 @@
 import { Parameters } from 'fhir/r4';
 import logger from './logger';
 import { translate } from './translate';
-import { CodeService, DateTime, Executor, Library } from '../..';
-import { PatientSource } from 'cql-exec-fhir';
+import { CodeService, DateTime, Executor, Library, PatientSource } from '../..';
 import { toParameters } from './convert';
 
 const USE_TRANSLATION_SERVICE = process.env['USE_TRANSLATION_SERVICE'] === 'true';
@@ -19,7 +18,7 @@ export async function $cql(expression: string): Promise<Parameters> {
   // 2: Execute ELM
   const library = new Library(elm);
   const codeService = new CodeService();
-  const patientSource = PatientSource.FHIRv401();
+  const patientSource = new PatientSource([]);
   const executionDateTime = DateTime.fromJSDate(new Date(), 0);
   const executor = new Executor(library, codeService);
   const result = await executor.exec(patientSource, executionDateTime);
