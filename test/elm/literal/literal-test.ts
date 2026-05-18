@@ -31,11 +31,11 @@ describe('Literal', () => {
     (await this.intOne.exec(this.ctx)).should.equal(1);
   });
 
-  it('should convert 1L to 1', function () {
+  it('should convert 1L to 1n', function () {
     this.longOne.value.should.equal(1n);
   });
 
-  it('should execute 1L as 1', async function () {
+  it('should execute 1L as 1n', async function () {
     (await this.longOne.exec(this.ctx)).should.equal(1n);
   });
 
