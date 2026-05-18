@@ -35,6 +35,8 @@ export class Interval {
         pointType = Number.isInteger(point)
           ? '{urn:hl7-org:elm-types:r1}Integer'
           : '{urn:hl7-org:elm-types:r1}Decimal';
+      } else if (typeof point === 'bigint') {
+        pointType = '{urn:hl7-org:elm-types:r1}Long';
       } else if (point.isTime && point.isTime()) {
         pointType = '{urn:hl7-org:elm-types:r1}Time';
       } else if (point.isDate) {
@@ -288,7 +290,7 @@ export class Interval {
         !other.highClosed &&
         !this.highClosed)
     ) {
-      if (typeof this.low === 'number') {
+      if (typeof this.low === 'number' || typeof this.low === 'bigint') {
         if (!(this.start() === other.start())) {
           return false;
         }
@@ -302,7 +304,7 @@ export class Interval {
       (this.low == null && other.low != null && this.high != null && other.high != null) ||
       (this.low == null && other.low == null && this.high != null && other.high != null)
     ) {
-      if (typeof this.high === 'number') {
+      if (typeof this.high === 'number' || typeof this.high === 'bigint') {
         if (!(this.end() === other.end())) {
           return false;
         }
@@ -337,7 +339,7 @@ export class Interval {
       return false;
     }
 
-    if (typeof this.low === 'number') {
+    if (typeof this.low === 'number' || typeof this.low === 'bigint') {
       return this.start() === other.start() && this.end() === other.end();
     } else {
       return (
@@ -497,6 +499,8 @@ export class Interval {
       let diff = Math.abs(highValue - lowValue);
       diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
       return new Quantity(diff, closed.low.unit);
+    } else if (typeof closed.low === 'bigint') {
+      return closed.high >= closed.low ? closed.high - closed.low : closed.low - closed.high;
     } else {
       // TODO: Fix precision to 8 decimals in other places that return numbers
       const diff = Math.abs(closed.high - closed.low);
@@ -528,6 +532,9 @@ export class Interval {
       let diff = Math.abs(highValue - lowValue) + pointSize.value;
       diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
       return new Quantity(diff, closed.low.unit);
+    } else if (typeof closed.low === 'bigint') {
+      const diff = closed.high >= closed.low ? closed.high - closed.low : closed.low - closed.high;
+      return diff + 1n;
     } else {
       const diff = Math.abs(closed.high - closed.low) + pointSize.value;
       return Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
@@ -556,8 +563,8 @@ export class Interval {
       throw new Error('Point type of intervals cannot be determined.');
     }
 
-    if (typeof pointSize === 'number') {
-      pointSize = new Quantity(pointSize, '1');
+    if (typeof pointSize === 'number' || typeof pointSize === 'bigint') {
+      pointSize = new Quantity(Number(pointSize), '1');
     }
 
     return pointSize;
@@ -610,7 +617,11 @@ function areDateTimes(x: any, y: any) {
 
 function areNumeric(x: any, y: any) {
   return [x, y].every(z => {
-    return typeof z === 'number' || (z != null && z.isUncertainty && typeof z.low === 'number');
+    return (
+      typeof z === 'number' ||
+      typeof z === 'bigint' ||
+      (z != null && z.isUncertainty && (typeof z.low === 'number' || typeof z.low === 'bigint'))
+    );
   });
 }
 

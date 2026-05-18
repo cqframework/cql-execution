@@ -375,7 +375,10 @@ function intervalListType(intervals: any) {
       } else {
         return 'mismatch';
       }
-    } else if (Number.isInteger(low) && Number.isInteger(high)) {
+    } else if (
+      (Number.isInteger(low) && Number.isInteger(high)) ||
+      (typeof low === 'bigint' && typeof high === 'bigint')
+    ) {
       if (type == null) {
         type = 'integer';
       } else if (type === 'integer' || type === 'decimal') {
@@ -588,9 +591,41 @@ export class Expand extends Expression {
     // Integers should have 0 Decimal places
     const perIsDecimal = perValue.toString().includes('.');
     const decimalPrecision = perIsDecimal ? 8 : 0;
+    const hasLongBoundaries = typeof low === 'bigint' || typeof high === 'bigint';
 
     low = lowClosed ? low : successor(low);
     high = highClosed ? high : predecessor(high);
+
+    if (hasLongBoundaries && !perIsDecimal) {
+      const longLow = low as bigint;
+      const longHigh = high as bigint;
+
+      if (longLow > longHigh) {
+        return [];
+      }
+      if (longLow == null || longHigh == null) {
+        return [];
+      }
+
+      const perBigInt = BigInt(perValue);
+      if (perBigInt > longHigh - longLow + 1n) {
+        return [];
+      }
+
+      let current_low = longLow;
+      let current_high = current_low + perBigInt - 1n;
+      const results = [];
+      while (current_high <= longHigh) {
+        results.push(new dtivl.Interval(current_low, current_high, true, true));
+        current_low += perBigInt;
+        current_high = current_low + perBigInt - 1n;
+      }
+
+      return results;
+    } else if (hasLongBoundaries) {
+      low = Number(low);
+      high = Number(high);
+    }
 
     // If the interval boundaries are more precise than the per quantity, the
     // more precise values will be truncated to the precision specified by the
@@ -747,7 +782,16 @@ function collapseIntervals(intervals: any, perWidth: any) {
           a = b;
         }
       } else {
-        if (b.low - a.high <= perWidth.value) {
+        const distance = b.low - a.high;
+        const comparablePerWidth =
+          typeof distance === 'bigint' && Number.isInteger(perWidth.value)
+            ? BigInt(perWidth.value)
+            : perWidth.value;
+        const withinPerWidth =
+          typeof distance === 'bigint' && typeof comparablePerWidth !== 'bigint'
+            ? Number(b.low) - Number(a.high) <= comparablePerWidth
+            : distance <= comparablePerWidth;
+        if (withinPerWidth) {
           if (b.high > a.high || b.high == null) {
             a.high = b.high;
           }

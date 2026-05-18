@@ -5,6 +5,7 @@
     "../src"
   ],
   "compilerOptions": {
+    "types": ["mocha", "node"],
     "strictNullChecks": false,
     "rootDir": "../"
   }

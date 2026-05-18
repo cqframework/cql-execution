@@ -1820,6 +1820,9 @@ class Interval {
                     ? '{urn:hl7-org:elm-types:r1}Integer'
                     : '{urn:hl7-org:elm-types:r1}Decimal';
             }
+            else if (typeof point === 'bigint') {
+                pointType = '{urn:hl7-org:elm-types:r1}Long';
+            }
             else if (point.isTime && point.isTime()) {
                 pointType = '{urn:hl7-org:elm-types:r1}Time';
             }
@@ -2070,7 +2073,7 @@ class Interval {
                 other.high == null &&
                 !other.highClosed &&
                 !this.highClosed)) {
-            if (typeof this.low === 'number') {
+            if (typeof this.low === 'number' || typeof this.low === 'bigint') {
                 if (!(this.start() === other.start())) {
                     return false;
                 }
@@ -2084,7 +2087,7 @@ class Interval {
         else if ((this.low != null && other.low == null && this.high != null && other.high != null) ||
             (this.low == null && other.low != null && this.high != null && other.high != null) ||
             (this.low == null && other.low == null && this.high != null && other.high != null)) {
-            if (typeof this.high === 'number') {
+            if (typeof this.high === 'number' || typeof this.high === 'bigint') {
                 if (!(this.end() === other.end())) {
                     return false;
                 }
@@ -2114,7 +2117,7 @@ class Interval {
         if (other.lowClosed && other.low == null && other.highClosed && other.high == null) {
             return false;
         }
-        if (typeof this.low === 'number') {
+        if (typeof this.low === 'number' || typeof this.low === 'bigint') {
             return this.start() === other.start() && this.end() === other.end();
         }
         else {
@@ -2261,6 +2264,9 @@ class Interval {
             diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
             return new quantity_1.Quantity(diff, closed.low.unit);
         }
+        else if (typeof closed.low === 'bigint') {
+            return closed.high >= closed.low ? closed.high - closed.low : closed.low - closed.high;
+        }
         else {
             // TODO: Fix precision to 8 decimals in other places that return numbers
             const diff = Math.abs(closed.high - closed.low);
@@ -2287,6 +2293,10 @@ class Interval {
             let diff = Math.abs(highValue - lowValue) + pointSize.value;
             diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
             return new quantity_1.Quantity(diff, closed.low.unit);
+        }
+        else if (typeof closed.low === 'bigint') {
+            const diff = closed.high >= closed.low ? closed.high - closed.low : closed.low - closed.high;
+            return diff + 1n;
         }
         else {
             const diff = Math.abs(closed.high - closed.low) + pointSize.value;
@@ -2320,8 +2330,8 @@ class Interval {
         else {
             throw new Error('Point type of intervals cannot be determined.');
         }
-        if (typeof pointSize === 'number') {
-            pointSize = new quantity_1.Quantity(pointSize, '1');
+        if (typeof pointSize === 'number' || typeof pointSize === 'bigint') {
+            pointSize = new quantity_1.Quantity(Number(pointSize), '1');
         }
         return pointSize;
     }
@@ -2375,7 +2385,9 @@ function areDateTimes(x, y) {
 }
 function areNumeric(x, y) {
     return [x, y].every(z => {
-        return typeof z === 'number' || (z != null && z.isUncertainty && typeof z.low === 'number');
+        return (typeof z === 'number' ||
+            typeof z === 'bigint' ||
+            (z != null && z.isUncertainty && (typeof z.low === 'number' || typeof z.low === 'bigint')));
     });
 }
 function lowestNumericUncertainty(x, y) {
@@ -5250,7 +5262,8 @@ function intervalListType(intervals) {
                 return 'mismatch';
             }
         }
-        else if (Number.isInteger(low) && Number.isInteger(high)) {
+        else if ((Number.isInteger(low) && Number.isInteger(high)) ||
+            (typeof low === 'bigint' && typeof high === 'bigint')) {
             if (type == null) {
                 type = 'integer';
             }
@@ -5430,8 +5443,36 @@ class Expand extends expression_1.Expression {
         // Integers should have 0 Decimal places
         const perIsDecimal = perValue.toString().includes('.');
         const decimalPrecision = perIsDecimal ? 8 : 0;
+        const hasLongBoundaries = typeof low === 'bigint' || typeof high === 'bigint';
         low = lowClosed ? low : (0, math_1.successor)(low);
         high = highClosed ? high : (0, math_1.predecessor)(high);
+        if (hasLongBoundaries && !perIsDecimal) {
+            const longLow = low;
+            const longHigh = high;
+            if (longLow > longHigh) {
+                return [];
+            }
+            if (longLow == null || longHigh == null) {
+                return [];
+            }
+            const perBigInt = BigInt(perValue);
+            if (perBigInt > longHigh - longLow + 1n) {
+                return [];
+            }
+            let current_low = longLow;
+            let current_high = current_low + perBigInt - 1n;
+            const results = [];
+            while (current_high <= longHigh) {
+                results.push(new dtivl.Interval(current_low, current_high, true, true));
+                current_low += perBigInt;
+                current_high = current_low + perBigInt - 1n;
+            }
+            return results;
+        }
+        else if (hasLongBoundaries) {
+            low = Number(low);
+            high = Number(high);
+        }
         // If the interval boundaries are more precise than the per quantity, the
         // more precise values will be truncated to the precision specified by the
         // per quantity.
@@ -5584,7 +5625,14 @@ function collapseIntervals(intervals, perWidth) {
                 }
             }
             else {
-                if (b.low - a.high <= perWidth.value) {
+                const distance = b.low - a.high;
+                const comparablePerWidth = typeof distance === 'bigint' && Number.isInteger(perWidth.value)
+                    ? BigInt(perWidth.value)
+                    : perWidth.value;
+                const withinPerWidth = typeof distance === 'bigint' && typeof comparablePerWidth !== 'bigint'
+                    ? Number(b.low) - Number(a.high) <= comparablePerWidth
+                    : distance <= comparablePerWidth;
+                if (withinPerWidth) {
                     if (b.high > a.high || b.high == null) {
                         a.high = b.high;
                     }
