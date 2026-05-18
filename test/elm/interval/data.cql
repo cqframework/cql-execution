@@ -3,6 +3,8 @@ define Open: Interval(DateTime(2012, 1, 1), DateTime(2013, 1, 1))
 define LeftOpen: Interval(DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
 define RightOpen: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1))
 define Closed: Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
+define LongOpen: Interval(1L, 3L)
+define LongClosed: Interval[1L, 3L]
 
 // @Test: Equal
 define EqualClosed: Interval[1, 5] = Interval[1, 5]
@@ -11,6 +13,12 @@ define EqualOpenClosed: Interval(1, 5) = Interval[2, 4]
 define UnequalClosed: Interval[1, 5] = Interval[2, 4]
 define UnequalOpen: Interval(1, 5) = Interval(2, 4)
 define UnequalClosedOpen: Interval[1, 5] = Interval(2, 4)
+define EqualLongClosed: Interval[1L, 5L] = Interval[1L, 5L]
+define EqualLongOpen: Interval(1L, 5L) = Interval(1L, 5L)
+define EqualLongOpenClosed: Interval(1L, 5L) = Interval[2L, 4L]
+define UnequalLongClosed: Interval[1L, 5L] = Interval[2L, 4L]
+define UnequalLongOpen: Interval(1L, 5L) = Interval(2L, 4L)
+define UnequalLongClosedOpen: Interval[1L, 5L] = Interval(2L, 4L)
 define EqualQuantityClosed: Interval[1 'mg', 5 'mg'] = Interval[1 'mg', 5 'mg']
 define EqualQuantityOpen: Interval(1 'mg', 5 'mg') = Interval(1 'mg', 5 'mg')
 define EqualQuantityOpenClosed: Interval(1 'mg', 5 'mg') = Interval[2 'mg', 4 'mg']
@@ -30,6 +38,12 @@ define EqualOpenClosed: Interval(1, 5) != Interval[2, 4]
 define UnequalClosed: Interval[1, 5] != Interval[2, 4]
 define UnequalOpen: Interval(1, 5) != Interval(2, 4)
 define UnequalClosedOpen: Interval[1, 5] != Interval(2, 4)
+define EqualLongClosed: Interval[1L, 5L] != Interval[1L, 5L]
+define EqualLongOpen: Interval(1L, 5L) != Interval(1L, 5L)
+define EqualLongOpenClosed: Interval(1L, 5L) != Interval[2L, 4L]
+define UnequalLongClosed: Interval[1L, 5L] != Interval[2L, 4L]
+define UnequalLongOpen: Interval(1L, 5L) != Interval(2L, 4L)
+define UnequalLongClosedOpen: Interval[1L, 5L] != Interval(2L, 4L)
 define EqualQuantityClosed: Interval[1 'mg', 5 'mg'] != Interval[1 'mg', 5 'mg']
 define EqualQuantityOpen: Interval(1 'mg', 5 'mg') != Interval(1 'mg', 5 'mg')
 define EqualQuantityOpenClosed: Interval(1 'mg', 5 'mg') != Interval[2 'mg', 4 'mg']
@@ -45,6 +59,8 @@ define DifferingPrecision: Interval[DateTime(2012, 1, 1, 12, 30, 21), DateTime(2
 // @Test: Contains
 define ContainsInt: Interval[1, 5] contains 3
 define NotContainsInt: Interval(1, 5] contains 1
+define ContainsLong: Interval[1L, 5L] contains 3L
+define NotContainsLong: Interval(1L, 5L] contains 1L
 define ContainsReal: Interval[1.234, 3.456] contains 2.345
 define NotContainsReal: Interval[1.234, 3.456] contains 4.567
 define ContainsQuantity: Interval[1 'mg', 5 'mg'] contains 3 'mg'
@@ -90,6 +106,18 @@ define UnknownOpenEndContainsInt: Interval[0, null) contains 0
 define UnknownClosedEndContainsInt: Interval[0, null] contains 0
 define UnknownEndMayContainInt: Interval[0, null) contains 123456789
 define UnknownEndNotContainsInt: Interval[0, null) contains -1
+define NegInfBegContainsLong: Interval[null, 5L] contains -7L
+define NegInfBegNotContainsLong: Interval[null, 5L] contains 7L
+define UnknownOpenBegContainsLong: Interval(null, 5L] contains 5L
+define UnknownClosedBegContainsLong: Interval[null, 5L] contains 5L
+define UnknownBegMayContainLong: Interval(null, 5L] contains -7L
+define UnknownBegNotContainsLong: Interval(null, 5L] contains 7L
+define PosInfEndContainsLong: Interval[0L, null] contains 123456789L
+define PosInfEndNotContainsLong: Interval[0L, null] contains -1L
+define UnknownOpenEndContainsLong: Interval[0L, null) contains 0L
+define UnknownClosedEndContainsLong: Interval[0L, null] contains 0L
+define UnknownEndMayContainLong: Interval[0L, null) contains 123456789L
+define UnknownEndNotContainsLong: Interval[0L, null) contains -1L
 define NegInfBegContainsDate: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) contains DateTime(1, 1, 1, 0, 0, 0, 0)
 define NegInfBegNotContainsDate: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) contains DateTime(2013, 1, 2, 0, 0, 0, 0)
 define UnknownOpenBegMayContainDate: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0)) contains DateTime(2012, 12, 31, 23, 59, 59, 999)
@@ -106,6 +134,8 @@ define UnknownEndNotContainsDate: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), nul
 // @Test: In
 define ContainsInt: 3 in Interval[1, 5]
 define NotContainsInt: 1 in Interval(1, 5]
+define ContainsLong: 3L in Interval[1L, 5L]
+define NotContainsLong: 1L in Interval(1L, 5L]
 define ContainsReal: 2.345 in Interval[1.234, 3.456]
 define NotContainsReal: 4.567 in Interval[1.234, 3.456]
 define ContainsQuantity: 5 'mg' in Interval[4 'mg', 6 'mg']
@@ -151,6 +181,18 @@ define UnknownOpenEndContainsInt: 0 in Interval[0, null)
 define UnknownClosedEndContainsInt: 0 in Interval[0, null]
 define UnknownEndMayContainInt: 123456789 in Interval[0, null)
 define UnknownEndNotContainsInt: -1 in Interval[0, null)
+define NegInfBegContainsLong: -7L in Interval[null, 5L]
+define NegInfBegNotContainsLong: 7L in Interval[null, 5L]
+define UnknownOpenBegContainsLong: 5L in Interval(null, 5L]
+define UnknownClosedBegContainsLong: 5L in Interval[null, 5L]
+define UnknownBegMayContainLong: -7L in Interval(null, 5L]
+define UnknownBegNotContainsLong: 7L in Interval(null, 5L]
+define PosInfEndContainsLong: 123456789L in Interval[0L, null]
+define PosInfEndNotContainsLong: -1L in Interval[0L, null]
+define UnknownOpenEndContainsLong: 0L in Interval[0L, null)
+define UnknownClosedEndContainsLong: 0L in Interval[0L, null]
+define UnknownEndMayContainLong: 123456789L in Interval[0L, null)
+define UnknownEndNotContainsLong: -1L in Interval[0L, null)
 define NegInfBegContainsDate: DateTime(1, 1, 1, 0, 0, 0, 0) in Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0))
 define NegInfBegNotContainsDate: DateTime(2013, 1, 2, 0, 0, 0, 0) in Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0))
 define UnknownOpenBegMayContainDate: DateTime(2012, 12, 31, 23, 59, 59, 999) in Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0))
@@ -167,6 +209,8 @@ define UnknownEndNotContainsDate: DateTime(2012, 1, 1, 0, 0, 0, 0) in Interval[D
 // @Test: Includes
 define IncludesIntIvl: Interval[1, 5] includes Interval[1, 4]
 define NotIncludesIntIvl: Interval(1, 5] includes Interval[1, 4]
+define IncludesLongIvl: Interval[1L, 5L] includes Interval[1L, 4L]
+define NotIncludesLongIvl: Interval(1L, 5L] includes Interval[1L, 4L]
 define IncludesRealIvl: Interval[1.234, 3.456] includes Interval[2.34, 2.56]
 define NotIncludesRealIvl: Interval[1.234, 3.456] includes Interval[1.23, 2.56]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
@@ -206,6 +250,16 @@ define PosInfEndNotIncludesIntIvl: Interval[0, null] includes Interval[-1234, 56
 define UnknownEndIncludesIntIvl: Interval[0, null) includes Interval[0, 0]
 define UnknownEndMayIncludeIntIvl: Interval[0, null) includes Interval[1234, 5678]
 define UnknownEndNotIncludesIntIvl: Interval[0, null) includes Interval[-1234, 5678]
+define NegInfBegIncludesLongIvl: Interval[null, 5L] includes Interval[-7L, 2L]
+define NegInfBegNotIncludesLongIvl: Interval[null, 5L] includes Interval[4L, 7L]
+define UnknownBegIncludesLongIvl: Interval(null, 5L] includes Interval[5L, 5L]
+define UnknownBegMayIncludeLongIvl: Interval(null, 5L] includes Interval[-7L, 2L]
+define UnknownBegNotIncludesLongIvl: Interval(null, 5L] includes Interval[4L, 7L]
+define PosInfEndIncludesLongIvl: Interval[0L, null] includes Interval[1234L, 5678L]
+define PosInfEndNotIncludesLongIvl: Interval[0L, null] includes Interval[-1234L, 5678L]
+define UnknownEndIncludesLongIvl: Interval[0L, null) includes Interval[0L, 0L]
+define UnknownEndMayIncludeLongIvl: Interval[0L, null) includes Interval[1234L, 5678L]
+define UnknownEndNotIncludesLongIvl: Interval[0L, null) includes Interval[-1234L, 5678L]
 define NegInfBegIncludesDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) includes Interval[DateTime(1, 1, 1, 0, 0, 0, 0), DateTime(2000, 1, 1, 0, 0, 0, 0)]
 define NegInfBegNotIncludesDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) includes Interval[DateTime(1, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)]
 define UnknownBegIncludesDateIvl: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0)) includes Interval[DateTime(2012, 12, 31, 23, 59, 59, 999), DateTime(2012, 12, 31, 23, 59, 59, 999)]
@@ -222,6 +276,8 @@ define ProperlyIncludesIntIvl: Interval[1, 5] properly includes Interval[2, 4]
 define ProperlyIncludesIntBeginsIvl: Interval[1, 5] properly includes Interval[1, 4]
 define ProperlyIncludesIntEndsIvl: Interval[1, 5] properly includes Interval[2, 5]
 define NotProperlyIncludesIntIvl: Interval[1, 5] properly includes Interval[1, 5]
+define ProperlyIncludesLongIvl: Interval[1L, 5L] properly includes Interval[2L, 4L]
+define NotProperlyIncludesLongIvl: Interval[1L, 5L] properly includes Interval[1L, 5L]
 define ProperlyIncludesRealIvl: Interval[1.234, 3.456] properly includes Interval[2.34, 2.56]
 define NotProperlyIncludesRealIvl: Interval[1.234, 3.456] properly includes Interval[1.234, 3.456]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
@@ -230,6 +286,11 @@ define NotProperlyIncludesDateIvl: DateIvl properly includes Interval[DateTime(2
 define PosInfEndProperlyIncludesIntIvl: Interval[0, null] properly includes Interval[1234, 5678]
 define PosInfEndNotProperlyIncludesIntIvl: Interval[0, null] properly includes Interval[0, null]
 define UnknownEndMayProperlyIncludeIntIvl: Interval[0, null) properly includes Interval[0, 0]
+define ProperlyIncludesLongBeginsIvl: Interval[1L, 5L] properly includes Interval[1L, 4L]
+define ProperlyIncludesLongEndsIvl: Interval[1L, 5L] properly includes Interval[2L, 5L]
+define PosInfEndProperlyIncludesLongIvl: Interval[0L, null] properly includes Interval[1234L, 5678L]
+define PosInfEndNotProperlyIncludesLongIvl: Interval[0L, null] properly includes Interval[0L, null]
+define UnknownEndMayProperlyIncludeLongIvl: Interval[0L, null) properly includes Interval[0L, 0L]
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 define ProperlyIncludesDayOfIvlLowEdge: PrecisionDateIvl properly includes day of Interval[DateTime(2012, 3, 2, 0, 0, 0, 0), DateTime(2012, 6, 1, 0, 0, 0, 0))
 define ProperlyIncludesDayOfIvlHighEdge: PrecisionDateIvl properly includes day of Interval[DateTime(2012, 6, 1, 0, 0, 0, 0), DateTime(2012, 9, 2, 23, 59, 59, 999))
@@ -243,6 +304,8 @@ define MayProperlyIncludeDayOfIvlVeryImpreciseSurrounding: PrecisionDateIvl prop
 // @Test: IncludedIn
 define IncludesIntIvl: Interval[1, 4] included in Interval[1, 5]
 define NotIncludesIntIvl: Interval[1, 4] included in Interval(1, 5]
+define IncludesLongIvl: Interval[1L, 4L] included in Interval[1L, 5L]
+define NotIncludesLongIvl: Interval[1L, 4L] included in Interval(1L, 5L]
 define IncludesRealIvl: Interval[2.34, 2.56] included in Interval[1.234, 3.456]
 define NotIncludesRealIvl: Interval[1.23, 2.56] included in Interval[1.234, 3.456]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
@@ -282,6 +345,16 @@ define PosInfEndNotIncludedInIntIvl: Interval[0, null] included in Interval[-100
 define UnknownEndIncludedInIntIvl: Interval[0, null) included in Interval[-100, null]
 define UnknownEndMayBeIncludedInIntIvl: Interval[0, null) included in Interval[-100, 100]
 define UnknownEndNotIncludedInIntIvl: Interval[0, null) included in Interval[100, 200]
+define NegInfBegIncludedInLongIvl: Interval[null, 5L] included in Interval[null, 100L]
+define NegInfBegNotIncludedInLongIvl: Interval[null, 5L] included in Interval[-100L, 100L]
+define UnknownBegIncludedInLongIvl: Interval(null, 5L] included in Interval[null, 100L]
+define UnknownBegMayBeIncludedInLongIvl: Interval(null, 5L] included in Interval[-100L, 100L]
+define UnknownBegNotIncludedInLongIvl: Interval(null, 5L] included in Interval[-100L, 0L]
+define PosInfEndIncludedInLongIvl: Interval[0L, null] included in Interval[-100L, null]
+define PosInfEndNotIncludedInLongIvl: Interval[0L, null] included in Interval[-100L, 100L]
+define UnknownEndIncludedInLongIvl: Interval[0L, null) included in Interval[-100L, null]
+define UnknownEndMayBeIncludedInLongIvl: Interval[0L, null) included in Interval[-100L, 100L]
+define UnknownEndNotIncludedInLongIvl: Interval[0L, null) included in Interval[100L, 200L]
 define NegInfBegIncludedInDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) included in Interval[null, DateTime(2020, 1, 1, 0, 0, 0, 0)]
 define NegInfBegNotIncludedInDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) included in Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2020, 1, 1, 0, 0, 0, 0)]
 define UnknownBegIncludedInDateIvl: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0)) included in Interval[null, DateTime(2020, 1, 1, 0, 0, 0, 0)]
@@ -298,6 +371,10 @@ define ProperlyIncludesIntIvl: Interval[2, 4] properly included in Interval[1, 5
 define ProperlyIncludesIntBeginsIvl: Interval[1, 4] properly included in Interval[1, 5]
 define ProperlyIncludesIntEndsIvl: Interval[2, 5] properly included in Interval[1, 5]
 define NotProperlyIncludesIntIvl: Interval[1, 5] properly included in Interval[1, 5]
+define ProperlyIncludesLongIvl: Interval[2L, 4L] properly included in Interval[1L, 5L]
+define ProperlyIncludesLongBeginsIvl: Interval[1L, 4L] properly included in Interval[1L, 5L]
+define ProperlyIncludesLongEndsIvl: Interval[2L, 5L] properly included in Interval[1L, 5L]
+define NotProperlyIncludesLongIvl: Interval[1L, 5L] properly included in Interval[1L, 5L]
 define ProperlyIncludesRealIvl: Interval[2.34, 2.56] properly included in Interval[1.234, 3.456]
 define NotProperlyIncludesRealIvl: Interval[1.23, 2.56] properly included in Interval[1.23, 2.56]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
@@ -319,6 +396,8 @@ define MayProperlyIncludeDayOfIvlVeryImpreciseSurrounding: Interval[DateTime(201
 // @Test: After
 define AfterIntIvl: Interval[5, 10] after Interval[2, 4]
 define NotAfterIntIvl: Interval[5, 10] after Interval[2, 5]
+define AfterLongIvl: Interval[5L, 10L] after Interval[2L, 4L]
+define NotAfterLongIvl: Interval[5L, 10L] after Interval[2L, 5L]
 define AfterRealIvl: Interval[1.234, 2.345] after Interval[0.0, 1.23]
 define NotAfterRealIvl: Interval[1.234, 2.345] after Interval[0.0, 1.234]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
@@ -345,6 +424,13 @@ define PosInfEndAfterIntIvl: Interval[0, null] after Interval[-100, -20]
 define PosInfEndNotAfterIntIvl: Interval[0, null] after Interval[-100, 0]
 define UnknownEndAfterIntIvl: Interval[0, null) after Interval[-100, -20]
 define UnknownEndNotAfterIntIvl: Interval[0, null) after Interval[-100, 0]
+define NegInfBegNotAfterLongIvl: Interval[null, 100L] after Interval[-100L, 0L]
+define UnknownBegMayBeAfterLongIvl: Interval(null, 100L] after Interval[-100L, 0L]
+define UnknownBegNotAfterLongIvl: Interval(null, 5L] after Interval[0L, 100L]
+define PosInfEndAfterLongIvl: Interval[0L, null] after Interval[-100L, -20L]
+define PosInfEndNotAfterLongIvl: Interval[0L, null] after Interval[-100L, 0L]
+define UnknownEndAfterLongIvl: Interval[0L, null) after Interval[-100L, -20L]
+define UnknownEndNotAfterLongIvl: Interval[0L, null) after Interval[-100L, 0L]
 define NegInfBegNotAfterDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) after Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2010, 1, 1, 0, 0, 0, 0)]
 define UnknownBegMayBeAfterDateIvl: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0)) after Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2010, 1, 1, 0, 0, 0, 0)]
 define UnknownBegNotAfterDateIvl: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0)) after Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2020, 1, 1, 0, 0, 0, 0)]
@@ -356,6 +442,8 @@ define UnknownEndNotAfterDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), nul
 // @Test: Before
 define BeforeIntIvl: Interval[2, 4] before Interval[5, 10]
 define NotBeforeIntIvl: Interval[2, 5] before Interval[5, 10]
+define BeforeLongIvl: Interval[2L, 4L] before Interval[5L, 10L]
+define NotBeforeLongIvl: Interval[2L, 5L] before Interval[5L, 10L]
 define BeforeRealIvl: Interval[0.0, 1.23] before Interval[1.234, 2.345]
 define NotBeforeRealIvl: Interval[1.234, 2.345] before Interval[0.0, 1.234]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
@@ -382,6 +470,13 @@ define UnknownBegNotBeforeIntIvl: Interval(null, 5] before Interval[0, 100]
 define PosInfEndNotBeforeIntIvl: Interval[0, null] before Interval[1000, 2000]
 define UnknownEndMayBeBeforeIntIvl: Interval[0, null) before Interval[1000, 2000]
 define UnknownEndNotBeforeIntIvl: Interval[0, null) before Interval[-100, 0]
+define NegInfBegBeforeLongIvl: Interval[null, 100L] before Interval[101L, 200L]
+define NegInfBegNotBeforeLongIvl: Interval[null, 100L] before Interval[100L, 200L]
+define UnknownBegBeforeLongIvl: Interval(null, 100L] before Interval[101L, 200L]
+define UnknownBegNotBeforeLongIvl: Interval(null, 5L] before Interval[0L, 100L]
+define PosInfEndNotBeforeLongIvl: Interval[0L, null] before Interval[1000L, 2000L]
+define UnknownEndMayBeBeforeLongIvl: Interval[0L, null) before Interval[1000L, 2000L]
+define UnknownEndNotBeforeLongIvl: Interval[0L, null) before Interval[-100L, 0L]
 define NegInfBegBeforeDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) before Interval[DateTime(2020, 1, 1, 0, 0, 0, 0), DateTime(2030, 1, 1, 0, 0, 0, 0)]
 define NegInfBegNotBeforeDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) before Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2010, 1, 1, 0, 0, 0, 0)]
 define UnknownBegBeforeDateIvl: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 0)) before Interval[DateTime(2020, 1, 1, 0, 0, 0, 0), DateTime(2030, 1, 1, 0, 0, 0, 0)]
@@ -476,6 +571,9 @@ define DateOnlyMeetsAfterDateIvl: Interval[Date(2012, 9, 1), Date(2012, 10, 1)] 
 define MeetsAfterIntIvl: Interval[11, 15] meets Interval[5, 10]
 define MeetsBeforeIntIvl: Interval[1, 4] meets Interval[5, 10]
 define NotMeetsIntIvl: Interval[1, 2] meets Interval[5, 10]
+define MeetsAfterLongIvl: Interval[11L, 15L] meets Interval[5L, 10L]
+define MeetsBeforeLongIvl: Interval[1L, 4L] meets Interval[5L, 10L]
+define NotMeetsLongIvl: Interval[1L, 2L] meets Interval[5L, 10L]
 define MeetsAfterRealIvl: Interval[1.50000001, 2.5] meets Interval[0.5, 1.5]
 define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets Interval[1.50000001, 2.5]
 define NotMeetsRealIvl: Interval[0.0, 1.0] meets Interval[1.1, 2.0]
@@ -511,6 +609,20 @@ define UnknownEndMeetsAfterIntIvl: Interval[100, null) meets Interval[0, 99]
 define UnknownEndMayMeetBeforeIntIvl: Interval[0, null) meets Interval[50, 100]
 define UnknownEndNotMeetsIntIvl: Interval[0, null) meets Interval[0, 100]
 define IntIvlMayMeetAfterUnknownEnd: Interval[0, 100] meets Interval[-100, null)
+define NegInfBegMeetsBeforeLongIvl: Interval[null, 100L] meets Interval[101L, 200L]
+define NegInfBegNotMeetsLongIvl: Interval[null, 100L] meets Interval[100L, 200L]
+define LongIvlNotMeetsNegInfBeg: Interval[100L, 200L] meets Interval[null, 400L]
+define UnknownBegMeetsBeforeLongIvl: Interval(null, 100L] meets Interval[101L, 200L]
+define UnknownBegMayMeetAfterLongIvl: Interval(null, 100L] meets Interval[0L, 50L]
+define UnknownBegNotMeetsLongIvl: Interval(null, 5L] meets Interval[0L, 100L]
+define LongIvlMayMeetBeforeUnknownBeg: Interval[0L, 100L] meets Interval(null, 400L)
+define PosInfEndMeetsAfterLongIvl: Interval[100L, null] meets Interval[0L, 99L]
+define PosInfEndNotMeetsLongIvl: Interval[0L, null] meets Interval[1000L, 2000L]
+define LongIvlNotMeetsPosInfEnd: Interval[100L, 200L] meets Interval[0L, null]
+define UnknownEndMeetsAfterLongIvl: Interval[100L, null) meets Interval[0L, 99L]
+define UnknownEndMayMeetBeforeLongIvl: Interval[0L, null) meets Interval[50L, 100L]
+define UnknownEndNotMeetsLongIvl: Interval[0L, null) meets Interval[0L, 100L]
+define LongIvlMayMeetAfterUnknownEnd: Interval[0L, 100L] meets Interval[-100L, null)
 define NegInfBegMeetsBeforeDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) meets Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2030, 1, 1, 0, 0, 0, 0)]
 define NegInfBegNotMeetsDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) meets Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2010, 1, 1, 0, 0, 0, 0)]
 define DateIvlNotMeetsNegInfBeg: Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2010, 1, 1, 0, 0, 0, 0)] meets Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0))
@@ -530,6 +642,9 @@ define DateIvlMayMeetAfterUnknownEnd: Interval[DateTime(2020, 1, 1, 0, 0, 0, 0),
 define MeetsAfterIntIvl: Interval[11, 15] meets after Interval[5, 10]
 define MeetsBeforeIntIvl: Interval[1, 4] meets after Interval[5, 10]
 define NotMeetsIntIvl: Interval[1, 2] meets after Interval[5, 10]
+define MeetsAfterLongIvl: Interval[11L, 15L] meets after Interval[5L, 10L]
+define MeetsBeforeLongIvl: Interval[1L, 4L] meets after Interval[5L, 10L]
+define NotMeetsLongIvl: Interval[1L, 2L] meets after Interval[5L, 10L]
 define MeetsAfterRealIvl: Interval[1.50000001, 2.5] meets after Interval[0.5, 1.5]
 define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets after Interval[1.50000001, 2.5]
 define NotMeetsRealIvl: Interval[0.0, 1.0] meets after Interval[1.1, 2.0]
@@ -565,6 +680,20 @@ define UnknownEndMeetsAfterIntIvl: Interval[100, null) meets after Interval[0, 9
 define UnknownEndMayMeetBeforeIntIvl: Interval[0, null) meets after Interval[50, 100]
 define UnknownEndNotMeetsIntIvl: Interval[0, null) meets after Interval[0, 100]
 define IntIvlMayMeetAfterUnknownEnd: Interval[0, 100] meets after Interval[-100, null)
+define NegInfBegMeetsBeforeLongIvl: Interval[null, 100L] meets after Interval[101L, 200L]
+define NegInfBegNotMeetsLongIvl: Interval[null, 100L] meets after Interval[100L, 200L]
+define LongIvlNotMeetsNegInfBeg: Interval[100L, 200L] meets after Interval[null, 400L]
+define UnknownBegMeetsBeforeLongIvl: Interval(null, 100L] meets after Interval[101L, 200L]
+define UnknownBegMayMeetAfterLongIvl: Interval(null, 100L] meets after Interval[0L, 50L]
+define UnknownBegNotMeetsLongIvl: Interval(null, 5L] meets after Interval[0L, 100L]
+define LongIvlMayMeetBeforeUnknownBeg: Interval[0L, 100L] meets after Interval(null, 400L)
+define PosInfEndMeetsAfterLongIvl: Interval[100L, null] meets after Interval[0L, 99L]
+define PosInfEndNotMeetsLongIvl: Interval[0L, null] meets after Interval[1000L, 2000L]
+define LongIvlNotMeetsPosInfEnd: Interval[100L, 200L] meets after Interval[0L, null]
+define UnknownEndMeetsAfterLongIvl: Interval[100L, null) meets after Interval[0L, 99L]
+define UnknownEndMayMeetBeforeLongIvl: Interval[0L, null) meets after Interval[50L, 100L]
+define UnknownEndNotMeetsLongIvl: Interval[0L, null) meets after Interval[0L, 100L]
+define LongIvlMayMeetAfterUnknownEnd: Interval[0L, 100L] meets after Interval[-100L, null)
 define NegInfBegMeetsBeforeDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) meets after Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2030, 1, 1, 0, 0, 0, 0)]
 define NegInfBegNotMeetsDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) meets after Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2010, 1, 1, 0, 0, 0, 0)]
 define DateIvlNotMeetsNegInfBeg: Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2010, 1, 1, 0, 0, 0, 0)] meets after Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0))
@@ -584,6 +713,9 @@ define DateIvlMayMeetAfterUnknownEnd: Interval[DateTime(2020, 1, 1, 0, 0, 0, 0),
 define MeetsAfterIntIvl: Interval[11, 15] meets before Interval[5, 10]
 define MeetsBeforeIntIvl: Interval[1, 4] meets before Interval[5, 10]
 define NotMeetsIntIvl: Interval[1, 2] meets before Interval[5, 10]
+define MeetsAfterLongIvl: Interval[11L, 15L] meets before Interval[5L, 10L]
+define MeetsBeforeLongIvl: Interval[1L, 4L] meets before Interval[5L, 10L]
+define NotMeetsLongIvl: Interval[1L, 2L] meets before Interval[5L, 10L]
 define MeetsAfterRealIvl: Interval[1.50000001, 2.5] meets before Interval[0.5, 1.5]
 define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets before Interval[1.50000001, 2.5]
 define NotMeetsRealIvl: Interval[0.0, 1.0] meets before Interval[1.1, 2.0]
@@ -619,6 +751,20 @@ define UnknownEndMeetsAfterIntIvl: Interval[100, null) meets before Interval[0, 
 define UnknownEndMayMeetBeforeIntIvl: Interval[0, null) meets before Interval[50, 100]
 define UnknownEndNotMeetsIntIvl: Interval[0, null) meets before Interval[0, 100]
 define IntIvlMayMeetAfterUnknownEnd: Interval[0, 100] meets before Interval[-100, null)
+define NegInfBegMeetsBeforeLongIvl: Interval[null, 100L] meets before Interval[101L, 200L]
+define NegInfBegNotMeetsLongIvl: Interval[null, 100L] meets before Interval[100L, 200L]
+define LongIvlNotMeetsNegInfBeg: Interval[100L, 200L] meets before Interval[null, 400L]
+define UnknownBegMeetsBeforeLongIvl: Interval(null, 100L] meets before Interval[101L, 200L]
+define UnknownBegMayMeetAfterLongIvl: Interval(null, 100L] meets before Interval[0L, 50L]
+define UnknownBegNotMeetsLongIvl: Interval(null, 5L] meets before Interval[0L, 100L]
+define LongIvlMayMeetBeforeUnknownBeg: Interval[0L, 100L] meets before Interval(null, 400L)
+define PosInfEndMeetsAfterLongIvl: Interval[100L, null] meets before Interval[0L, 99L]
+define PosInfEndNotMeetsLongIvl: Interval[0L, null] meets before Interval[1000L, 2000L]
+define LongIvlNotMeetsPosInfEnd: Interval[100L, 200L] meets before Interval[0L, null]
+define UnknownEndMeetsAfterLongIvl: Interval[100L, null) meets before Interval[0L, 99L]
+define UnknownEndMayMeetBeforeLongIvl: Interval[0L, null) meets before Interval[50L, 100L]
+define UnknownEndNotMeetsLongIvl: Interval[0L, null) meets before Interval[0L, 100L]
+define LongIvlMayMeetAfterUnknownEnd: Interval[0L, 100L] meets before Interval[-100L, null)
 define NegInfBegMeetsBeforeDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) meets before Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), DateTime(2030, 1, 1, 0, 0, 0, 0)]
 define NegInfBegNotMeetsDateIvl: Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0)) meets before Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2010, 1, 1, 0, 0, 0, 0)]
 define DateIvlNotMeetsNegInfBeg: Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2010, 1, 1, 0, 0, 0, 0)] meets before Interval[null, DateTime(2013, 1, 1, 0, 0, 0, 0))
@@ -639,6 +785,10 @@ define OverlapsBeforeIntIvl: Interval[1, 5] overlaps Interval[2, 7]
 define OverlapsAfterIntIvl: Interval[3, 8] overlaps Interval[1, 6]
 define OverlapsBoundaryIntIvl: Interval[1, 5] overlaps Interval[5, 10]
 define NoOverlapsIntIvl: Interval[1,5) overlaps Interval[5, 10]
+define OverlapsBeforeLongIvl: Interval[1L, 5L] overlaps Interval[2L, 7L]
+define OverlapsAfterLongIvl: Interval[3L, 8L] overlaps Interval[1L, 6L]
+define OverlapsBoundaryLongIvl: Interval[1L, 5L] overlaps Interval[5L, 10L]
+define NoOverlapsLongIvl: Interval[1L,5L) overlaps Interval[5L, 10L]
 define OverlapsBeforeRealIvl: Interval[1.234, 1.567] overlaps Interval[1.345, 1.678]
 define OverlapsAfterRealIvl: Interval[1.345, 1.678] overlaps Interval[1.234, 1.567]
 define OverlapsBoundaryRealIvl: Interval[1.0, 1.234] overlaps Interval[1.234, 2.0]
@@ -683,6 +833,10 @@ define OverlapsBeforeIntIvl: Interval[1, 5] overlaps after Interval[2, 7]
 define OverlapsAfterIntIvl: Interval[3, 8] overlaps after Interval[1, 6]
 define OverlapsBoundaryIntIvl: Interval[5, 10] overlaps after Interval[1, 5]
 define NoOverlapsIntIvl: Interval[1,5) overlaps after Interval[5, 10]
+define OverlapsBeforeLongIvl: Interval[1L, 5L] overlaps after Interval[2L, 7L]
+define OverlapsAfterLongIvl: Interval[3L, 8L] overlaps after Interval[1L, 6L]
+define OverlapsBoundaryLongIvl: Interval[5L, 10L] overlaps after Interval[1L, 5L]
+define NoOverlapsLongIvl: Interval[1L,5L) overlaps after Interval[5L, 10L]
 define OverlapsBeforeRealIvl: Interval[1.234, 1.567] overlaps after Interval[1.345, 1.678]
 define OverlapsAfterRealIvl: Interval[1.345, 1.678] overlaps after Interval[1.234, 1.567]
 define OverlapsBoundaryRealIvl: Interval[1.234, 2.0] overlaps after Interval[1.0, 1.234]
@@ -722,6 +876,10 @@ define OverlapsBeforeIntIvl: Interval[1, 5] overlaps before Interval[2, 7]
 define OverlapsAfterIntIvl: Interval[3, 8] overlaps before Interval[1, 6]
 define OverlapsBoundaryIntIvl: Interval[1, 5] overlaps before Interval[5, 10]
 define NoOverlapsIntIvl: Interval[1,5) overlaps before Interval[5, 10]
+define OverlapsBeforeLongIvl: Interval[1L, 5L] overlaps before Interval[2L, 7L]
+define OverlapsAfterLongIvl: Interval[3L, 8L] overlaps before Interval[1L, 6L]
+define OverlapsBoundaryLongIvl: Interval[1L, 5L] overlaps before Interval[5L, 10L]
+define NoOverlapsLongIvl: Interval[1L,5L) overlaps before Interval[5L, 10L]
 define OverlapsBeforeRealIvl: Interval[1.234, 1.567] overlaps before Interval[1.345, 1.678]
 define OverlapsAfterRealIvl: Interval[1.345, 1.678] overlaps before Interval[1.234, 1.567]
 define OverlapsBoundaryRealIvl: Interval[1.0, 1.234] overlaps before Interval[1.234, 2.0]
@@ -759,6 +917,8 @@ define MayOverlapAfterDayOfImpreciseIvl: PrecisionDateIvl overlaps before day of
 // @Test: Width
 define IntWidth: width of Interval[-2, 5]
 define IntOpenWidth: width of Interval(-2, 5)
+define LongWidth: width of Interval[-2L, 5L]
+define LongOpenWidth: width of Interval(-2L, 5L)
 define IntWidthThreeToMax: width of Interval[3, null]
 define IntWidthMinToThree: width of Interval[null, 3]
 define IntWidthThreeToUnknown: width of Interval[3, null)
@@ -773,6 +933,8 @@ define WidthOfTimeInterval: width of Interval[Time(12,00,00), Time(12,30,02)]
 // @Test: Size
 define IntSize: Size(Interval[-2, 5])
 define IntOpenSize: Size(Interval(-2, 5))
+define LongSize: Size(Interval[-2L, 5L])
+define LongOpenSize: Size(Interval(-2L, 5L))
 define IntSizeThreeToMax: Size(Interval[3, null])
 define IntSizeMinToThree: Size(Interval[null, 3])
 define IntSizeThreeToUnknown: Size(Interval[3, null))
@@ -789,18 +951,22 @@ define SizeOfTimeInterval: Size(Interval[Time(12,00,00), Time(12,30,02)])
 define ClosedNotNull: start of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
 define ClosedNullDateTime: start of Interval[null, DateTime(2013, 1, 1)]
 define ClosedNullInteger: start of Interval[null, 3]
+define ClosedNullLong: start of Interval[null, 3L]
 define ClosedNullDecimal: start of Interval[null, 5.1]
 define NullInterval: start of (null as Interval<DateTime>)
 define OpenNotNull: start of Interval(DateTime(2012, 1, 1), DateTime(2013, 1, 1))
+define OpenLongNotNull: start of Interval(1L, 3L)
 define OpenNull: start of Interval(null, DateTime(2013, 1, 1))
 
 // @Test: End
 define ClosedNotNull: end of Interval[DateTime(2012, 1, 1), DateTime(2013, 1, 1)]
 define ClosedNullDateTime: end of Interval[DateTime(2013, 1, 1), null]
 define ClosedNullInteger: end of Interval[5, null]
+define ClosedNullLong: end of Interval[5L, null]
 define ClosedNullDecimal: end of Interval[7.3, null]
 define NullInterval: end of (null as Interval<DateTime>)
 define OpenNotNull: end of Interval(DateTime(2012, 1, 1), DateTime(2013, 1, 1))
+define OpenLongNotNull: end of Interval(1L, 3L)
 define OpenNull: end of Interval(DateTime(2013, 1, 1), null)
 
 // @Test: Starts
@@ -808,6 +974,9 @@ define TestStartsNull: Interval[null, null] starts Interval[1, 10]
 define IntegerIntervalStartsTrue: Interval[4,10] starts Interval[4, 15]
 define IntegerIntervalStartsFalse: Interval[1, 10] starts Interval[4, 10]
 define IntegerIntervalStartEndsFalse: Interval[4, 10] starts Interval[4, 9]
+define LongIntervalStartsTrue: Interval[4L,10L] starts Interval[4L, 15L]
+define LongIntervalStartsFalse: Interval[1L, 10L] starts Interval[4L, 10L]
+define LongIntervalStartEndsFalse: Interval[4L, 10L] starts Interval[4L, 9L]
 define DecimalIntervalStartsTrue: Interval[4.0, 10.0] starts Interval[4.0, 15.0]
 define DecimalIntervalStartsFalse: Interval[1.0, 10.0] starts Interval[4.0, 10.0]
 define DecimalIntervalStartsEndsFalse: Interval[4.0, 10.0] starts Interval[4.0, 9.0]
@@ -824,6 +993,9 @@ define TestEndsNull: Interval[1, 10] ends Interval[null, null]
 define IntegerIntervalEndsTrue: Interval[4,10] ends Interval[1,10]
 define IntegerIntervalEndsFalse: Interval[4, 9] ends Interval[1,10]
 define IntegerIntervalEndsStartsFalse: Interval[0, 10] ends Interval[1,10]
+define LongIntervalEndsTrue: Interval[4L,10L] ends Interval[1L,10L]
+define LongIntervalEndsFalse: Interval[4L, 9L] ends Interval[1L,10L]
+define LongIntervalEndsStartsFalse: Interval[0L, 10L] ends Interval[1L,10L]
 define DecimalIntervalEndsTrue: Interval[4.0,10.0] ends Interval[1.0,10.0]
 define DecimalIntervalEndsFalse: Interval[11.0, 20.0] ends Interval[1.0,10.0]
 define DecimalIntervalEndsStartsFalse: Interval[0.0, 10.0] ends Interval[1.0, 10.0]
@@ -852,6 +1024,23 @@ define NullUnion: null union Interval[0,10]
 define UnionNull: Interval[5,10] union null
 define NullUnionNull: (null as Interval<Integer>) union (null as Interval<Integer>)
 
+// @Test: LongIntervalUnion
+define LongFullInterval: Interval[0L,10L]
+define LongClosedUnionClosed: Interval[0L,5L] union Interval[5L,10L]
+define LongClosedUnionOpen: Interval[0L,5L] union Interval[5L,10L)
+define LongOpenUnionOpen: Interval(0L,5L] union Interval[5L,10L)
+define LongOpenUnionClosed: Interval(0L,5L] union Interval[5L,10L]
+define LongSameAsUnion: Interval[0L,10L] union Interval[0L,10L]
+define LongBeforeUnion: Interval[0L,4L] union Interval[6L,10L]
+define LongMeetsUnion: Interval[0L,5L] union Interval[5L,10L]
+define LongOverlapsUnion: Interval[0L,7L] union Interval[3L,10L]
+define LongBeginsUnion: Interval[0L,5L] union Interval[0L,10L]
+define LongDuringUnion: Interval[3L,5L] union Interval[0L,10L]
+define LongEndsUnion: Interval[5L,10L] union Interval[0L,10L]
+define NullUnion: null union Interval[0L,10L]
+define UnionNull: Interval[5L,10L] union null
+define NullUnionNull: (null as Interval<Long>) union (null as Interval<Long>)
+
 // @Test: DateTimeIntervalUnion
 define DateTimeFullInterval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)]
 define DateTimeClosedUnionClosed: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 6, 1, 0, 0, 0, 0)] union Interval[DateTime(2012, 6, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)]
@@ -876,6 +1065,17 @@ define IntOverlapsExcept: Interval[0,7] except Interval[5,10]
 define IntBeginsExcept: Interval[0,5] except Interval[0,10]
 define IntDuringExcept: Interval[3,5] except Interval[0,10]
 define IntEndsExcept: Interval[5,10] except Interval[0,10]
+
+// @Test: LongIntervalExcept
+define LongFullInterval: Interval[0L,10L]
+define LongHalfInterval: Interval[0L,5L)
+define LongSameAsExcept: Interval[0L,10L] except Interval[0L,10L]
+define LongBeforeExcept: Interval[0L,4L] except Interval[6L,10L]
+define LongMeetsExcept: Interval[0L,5L] except Interval[5L,10L]
+define LongOverlapsExcept: Interval[0L,7L] except Interval[5L,10L]
+define LongBeginsExcept: Interval[0L,5L] except Interval[0L,10L]
+define LongDuringExcept: Interval[3L,5L] except Interval[0L,10L]
+define LongEndsExcept: Interval[5L,10L] except Interval[0L,10L]
 
 // @Test: DateTimeIntervalExcept
 define DateTimeFullInterval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)]
@@ -902,6 +1102,21 @@ define IntOverlapsIntersect: Interval[0,7] intersect Interval[5,10]
 define IntBeginsIntersect: Interval[0,5] intersect Interval[0,10]
 define IntDuringIntersect: Interval[3,5] intersect Interval[0,10]
 define IntEndsIntersect: Interval[5,10] intersect Interval[0,10]
+
+// @Test: LongIntervalIntersect
+define LongFullInterval: Interval[0L,10L]
+define LongMeetsInterval: Interval[5L,5L]
+define LongOverlapsInterval: Interval[5L,7L]
+define LongBeginsInterval: Interval[0L,5L]
+define LongDuringInterval: Interval[3L,5L]
+define LongEndsInterval: Interval[5L,10L]
+define LongSameAsIntersect: Interval[0L,10L] intersect Interval[0L,10L]
+define LongBeforeIntersect: Interval[0L,4L] intersect Interval[6L,10L]
+define LongMeetsIntersect: Interval[0L,5L] intersect Interval[5L,10L]
+define LongOverlapsIntersect: Interval[0L,7L] intersect Interval[5L,10L]
+define LongBeginsIntersect: Interval[0L,5L] intersect Interval[0L,10L]
+define LongDuringIntersect: Interval[3L,5L] intersect Interval[0L,10L]
+define LongEndsIntersect: Interval[5L,10L] intersect Interval[0L,10L]
 
 // @Test: DateTimeIntervalIntersect
 define DateTimeFullInterval: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)]
@@ -942,6 +1157,31 @@ define IntCollapseOverlapContained: collapse { Int1_15Interval, Int5_12Interval 
 define IntCollapseOverlapContainedEdge: collapse { Int1_10Interval, Int5_10Interval }
 define IntCollapseOverlapContainedEdge2: collapse { Int1_15Interval, Int1_10Interval }
 define IntCollapseOverlapMultipleCombine: collapse { Int1_6Interval, Int5_12Interval, Int10_15Interval }
+
+// @Test: LongIntervalCollapse
+define LongEmptyIntervalList: List<Interval<Long>>{}
+define Long1_6Interval: Interval[1L, 6L]
+define Long1_10Interval: Interval[1L, 10L]
+define Long5_10Interval: Interval[5L, 10L]
+define Long5_12Interval: Interval[5L, 12L]
+define Long10_15Interval: Interval[10L, 15L]
+define Long15_20Interval: Interval[15L, 20L]
+define Long1_12Interval: Interval[1L, 12L]
+define Long1_15Interval: Interval[1L, 15L]
+define Long1_10IntervalList: { Long1_10Interval }
+define Long1_12IntervalList: { Long1_12Interval }
+define Long1_15IntervalList: { Long1_15Interval }
+define LongTwoItemDisjointList: { Long1_10Interval, Long15_20Interval }
+define LongCollapseEmpty: collapse LongEmptyIntervalList
+define LongCollapseSingleInterval: collapse Long1_10IntervalList
+define LongCollapseDisjoint: collapse LongTwoItemDisjointList
+define LongCollapseDisjointReversed: collapse { Long15_20Interval, Long1_10Interval }
+define LongCollapseAdjacent: collapse { Long1_10Interval, Long10_15Interval }
+define LongCollapseOverlap: collapse { Long1_10Interval, Long5_12Interval }
+define LongCollapseOverlapContained: collapse { Long1_15Interval, Long5_12Interval }
+define LongCollapseOverlapContainedEdge: collapse { Long1_10Interval, Long5_10Interval }
+define LongCollapseOverlapContainedEdge2: collapse { Long1_15Interval, Long1_10Interval }
+define LongCollapseOverlapMultipleCombine: collapse { Long1_6Interval, Long5_12Interval, Long10_15Interval }
 
 // @Test: DateTimeIntervalCollapse
 define DateTimeEmptyIntervalList: List<Interval<DateTime>>{}
@@ -1276,6 +1516,30 @@ define BadPerMinute: expand { Interval(2, 4] } per 1 minute
 
 define PerDecimalMorePrecise: expand { Interval[10, 10] } per 0.1
 
+// @Test: LongIntervalExpand
+define LongClosedSinglePer1: expand { Interval[2L, 4L] } per 1 '1'
+define LongClosedSinglePer3: expand { Interval[2L, 10L] } per 3 '1'
+define LongClosedSinglePer3NoteTheWidth: expand { Interval[2L, 4L] } per 3 '1'
+
+define LongNullInList: expand { Interval[2L, 4L], null } per 1 '1'
+define LongOverlapping: expand { Interval[2L, 4L], Interval[3L, 5L] } per 1 '1'
+define LongNonOverlapping: expand { Interval[2L, 4L], Interval[6L, 6L] } per 1 '1'
+
+define LongNoPer: expand { Interval[2L, 4L] }
+
+define LongOpenStart: expand { Interval(2L, 4L] } per 1 '1'
+define LongOpenEnd: expand { Interval[2L, 4L) } per 1 '1'
+define LongOpenBoth: expand { Interval(2L, 4L) } per 1 '1'
+
+define LongEmptyList: List<Interval<Long>>{}
+define LongPerTooBig: expand { Interval[2L, 4L], null } per 5 '1'
+define LongNullOpen: expand { Interval[null, 4L] } per 1 '1'
+define LongNullClose: expand { Interval[2L, null] } per 1 '1'
+define LongNullBoth: expand { Interval[null, null] } per 1 '1'
+define LongBadPerMinute: expand { Interval(2L, 4L] } per 1 minute
+
+define LongPerDecimalMorePrecise: expand { Interval[10L, 10L] } per 0.1
+
 // @Test: DecimalIntervalExpand
 define ClosedSingle: expand { Interval[2, 5] } per 1.5 '1'
 define ClosedSingle1: expand { Interval[2.5, 10] } per 2 '1'
@@ -1338,6 +1602,9 @@ define DateTimeMillisecondPrecisionNotSame: Interval[DateTime(2018,01,01,01,01,0
 define IntegerIntervalSame: Interval[2,5] same as Interval[2,5]
 define IntegerIntervalNotSame: Interval[2,5] same as Interval[2,4]
 define IntegerIntervalSameOpen: Interval[2,5] same as Interval[2,6)
+define LongIntervalSame: Interval[2L,5L] same as Interval[2L,5L]
+define LongIntervalNotSame: Interval[2L,5L] same as Interval[2L,4L]
+define LongIntervalSameOpen: Interval[2L,5L] same as Interval[2L,6L)
 define OpenNullHighLowDifferent: Interval(3,null) same as Interval(2,4)
 define OpenNullLowHighDifferent: Interval(1,5) same as Interval(null,4)
 define OpenNullHighLowSame: Interval(2,null) same as Interval(2,4)
@@ -1346,3 +1613,11 @@ define OpenNullLowOpenNullHigh: Interval(1,null) same as Interval(null,4)
 define OpenNullHighsLowsDifferent: Interval(1,null) same as Interval(2,null)
 define OpenNullHighsLowsSame: Interval(1,null) same as Interval(1,null)
 define OpenNullLowsHighsSame: Interval(null,3) same as Interval(null,3)
+define LongOpenNullHighLowDifferent: Interval(3L,null) same as Interval(2L,4L)
+define LongOpenNullLowHighDifferent: Interval(1L,5L) same as Interval(null,4L)
+define LongOpenNullHighLowSame: Interval(2L,null) same as Interval(2L,4L)
+define LongOpenNullLowHighSame: Interval(1L,4L) same as Interval(null,4L)
+define LongOpenNullLowOpenNullHigh: Interval(1L,null) same as Interval(null,4L)
+define LongOpenNullHighsLowsDifferent: Interval(1L,null) same as Interval(2L,null)
+define LongOpenNullHighsLowsSame: Interval(1L,null) same as Interval(1L,null)
+define LongOpenNullLowsHighsSame: Interval(null,3L) same as Interval(null,3L)

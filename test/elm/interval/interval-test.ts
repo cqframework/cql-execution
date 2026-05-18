@@ -6,6 +6,8 @@ import { DateTime } from '../../../src/datatypes/datetime';
 import {
   MIN_INT_VALUE,
   MAX_INT_VALUE,
+  MIN_LONG_VALUE,
+  MAX_LONG_VALUE,
   MIN_FLOAT_VALUE,
   MIN_FLOAT_PRECISION_VALUE,
   MAX_FLOAT_VALUE,
@@ -46,6 +48,18 @@ describe('Interval', () => {
     (await this.closed.high.exec(this.ctx)).should.eql(new DateTime(2013, 1, 1));
   });
 
+  it('should properly represent long intervals', async function () {
+    this.longOpen.lowClosed.should.be.false();
+    this.longOpen.highClosed.should.be.false();
+    (await this.longOpen.low.exec(this.ctx)).should.eql(1n);
+    (await this.longOpen.high.exec(this.ctx)).should.eql(3n);
+
+    this.longClosed.lowClosed.should.be.true();
+    this.longClosed.highClosed.should.be.true();
+    (await this.longClosed.low.exec(this.ctx)).should.eql(1n);
+    (await this.longClosed.high.exec(this.ctx)).should.eql(3n);
+  });
+
   it('should exec to native Interval datatype', async function () {
     const ivl = await this.open.exec(this.ctx);
     ivl.should.be.instanceOf(Interval);
@@ -71,6 +85,18 @@ describe('Equal', () => {
     (await this.unequalClosed.exec(this.ctx)).should.be.false();
     (await this.unequalOpen.exec(this.ctx)).should.be.false();
     (await this.unequalClosedOpen.exec(this.ctx)).should.be.false();
+  });
+
+  it('should determine equal long intervals', async function () {
+    (await this.equalLongClosed.exec(this.ctx)).should.be.true();
+    (await this.equalLongOpen.exec(this.ctx)).should.be.true();
+    (await this.equalLongOpenClosed.exec(this.ctx)).should.be.true();
+  });
+
+  it('should determine unequal long intervals', async function () {
+    (await this.unequalLongClosed.exec(this.ctx)).should.be.false();
+    (await this.unequalLongOpen.exec(this.ctx)).should.be.false();
+    (await this.unequalLongClosedOpen.exec(this.ctx)).should.be.false();
   });
 
   it('should determine equal quantity intervals', async function () {
@@ -114,6 +140,18 @@ describe('NotEqual', () => {
     (await this.unequalClosedOpen.exec(this.ctx)).should.be.true();
   });
 
+  it('should determine equal long intervals', async function () {
+    (await this.equalLongClosed.exec(this.ctx)).should.be.false();
+    (await this.equalLongOpen.exec(this.ctx)).should.be.false();
+    (await this.equalLongOpenClosed.exec(this.ctx)).should.be.false();
+  });
+
+  it('should determine unequal long intervals', async function () {
+    (await this.unequalLongClosed.exec(this.ctx)).should.be.true();
+    (await this.unequalLongOpen.exec(this.ctx)).should.be.true();
+    (await this.unequalLongClosedOpen.exec(this.ctx)).should.be.true();
+  });
+
   it('should determine equal quantity intervals', async function () {
     (await this.equalQuantityClosed.exec(this.ctx)).should.be.false();
     (await this.equalQuantityOpen.exec(this.ctx)).should.be.false();
@@ -145,6 +183,7 @@ describe('Contains', () => {
 
   it('should accept contained items', async function () {
     (await this.containsInt.exec(this.ctx)).should.be.true();
+    (await this.containsLong.exec(this.ctx)).should.be.true();
     (await this.containsReal.exec(this.ctx)).should.be.true();
     (await this.containsQuantity.exec(this.ctx)).should.be.true();
     (await this.containsQuantityInclusiveEdge.exec(this.ctx)).should.be.true();
@@ -153,6 +192,7 @@ describe('Contains', () => {
 
   it('should reject uncontained items', async function () {
     (await this.notContainsInt.exec(this.ctx)).should.be.false();
+    (await this.notContainsLong.exec(this.ctx)).should.be.false();
     (await this.notContainsReal.exec(this.ctx)).should.be.false();
     (await this.notContainsQuantity.exec(this.ctx)).should.be.false();
     (await this.notContainsQuantityExclusiveEdge.exec(this.ctx)).should.be.false();
@@ -172,6 +212,21 @@ describe('Contains', () => {
     (await this.unknownClosedEndContainsInt.exec(this.ctx)).should.be.true();
     should(await this.unknownEndMayContainInt.exec(this.ctx)).be.null();
     (await this.unknownEndNotContainsInt.exec(this.ctx)).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (long)', async function () {
+    (await this.negInfBegContainsLong.exec(this.ctx)).should.be.true();
+    (await this.negInfBegNotContainsLong.exec(this.ctx)).should.be.false();
+    (await this.unknownOpenBegContainsLong.exec(this.ctx)).should.be.true();
+    (await this.unknownClosedBegContainsLong.exec(this.ctx)).should.be.true();
+    should(await this.unknownBegMayContainLong.exec(this.ctx)).be.null();
+    (await this.unknownBegNotContainsLong.exec(this.ctx)).should.be.false();
+    (await this.posInfEndContainsLong.exec(this.ctx)).should.be.true();
+    (await this.posInfEndNotContainsLong.exec(this.ctx)).should.be.false();
+    (await this.unknownOpenEndContainsLong.exec(this.ctx)).should.be.true();
+    (await this.unknownClosedEndContainsLong.exec(this.ctx)).should.be.true();
+    should(await this.unknownEndMayContainLong.exec(this.ctx)).be.null();
+    (await this.unknownEndNotContainsLong.exec(this.ctx)).should.be.false();
   });
 
   it('should correctly handle null endpoints (date)', async function () {
@@ -223,6 +278,7 @@ describe('In', () => {
 
   it('should accept contained items', async function () {
     (await this.containsInt.exec(this.ctx)).should.be.true();
+    (await this.containsLong.exec(this.ctx)).should.be.true();
     (await this.containsReal.exec(this.ctx)).should.be.true();
     (await this.containsQuantity.exec(this.ctx)).should.be.true();
     (await this.containsQuantityInclusiveEdge.exec(this.ctx)).should.be.true();
@@ -231,6 +287,7 @@ describe('In', () => {
 
   it('should reject uncontained items', async function () {
     (await this.notContainsInt.exec(this.ctx)).should.be.false();
+    (await this.notContainsLong.exec(this.ctx)).should.be.false();
     (await this.notContainsReal.exec(this.ctx)).should.be.false();
     (await this.notContainsQuantity.exec(this.ctx)).should.be.false();
     (await this.notContainsQuantityExclusiveEdge.exec(this.ctx)).should.be.false();
@@ -250,6 +307,21 @@ describe('In', () => {
     (await this.unknownClosedEndContainsInt.exec(this.ctx)).should.be.true();
     should(await this.unknownEndMayContainInt.exec(this.ctx)).be.null();
     (await this.unknownEndNotContainsInt.exec(this.ctx)).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (long)', async function () {
+    (await this.negInfBegContainsLong.exec(this.ctx)).should.be.true();
+    (await this.negInfBegNotContainsLong.exec(this.ctx)).should.be.false();
+    (await this.unknownOpenBegContainsLong.exec(this.ctx)).should.be.true();
+    (await this.unknownClosedBegContainsLong.exec(this.ctx)).should.be.true();
+    should(await this.unknownBegMayContainLong.exec(this.ctx)).be.null();
+    (await this.unknownBegNotContainsLong.exec(this.ctx)).should.be.false();
+    (await this.posInfEndContainsLong.exec(this.ctx)).should.be.true();
+    (await this.posInfEndNotContainsLong.exec(this.ctx)).should.be.false();
+    (await this.unknownOpenEndContainsLong.exec(this.ctx)).should.be.true();
+    (await this.unknownClosedEndContainsLong.exec(this.ctx)).should.be.true();
+    should(await this.unknownEndMayContainLong.exec(this.ctx)).be.null();
+    (await this.unknownEndNotContainsLong.exec(this.ctx)).should.be.false();
   });
 
   it('should correctly handle null endpoints (date)', async function () {
@@ -301,12 +373,14 @@ describe('Includes', () => {
 
   it('should accept included items', async function () {
     (await this.includesIntIvl.exec(this.ctx)).should.be.true();
+    (await this.includesLongIvl.exec(this.ctx)).should.be.true();
     (await this.includesRealIvl.exec(this.ctx)).should.be.true();
     (await this.includesDateIvl.exec(this.ctx)).should.be.true();
   });
 
   it('should reject unincluded items', async function () {
     (await this.notIncludesIntIvl.exec(this.ctx)).should.be.false();
+    (await this.notIncludesLongIvl.exec(this.ctx)).should.be.false();
     (await this.notIncludesRealIvl.exec(this.ctx)).should.be.false();
     (await this.notIncludesDateIvl.exec(this.ctx)).should.be.false();
   });
@@ -322,6 +396,19 @@ describe('Includes', () => {
     (await this.unknownEndIncludesIntIvl.exec(this.ctx)).should.be.true();
     should(await this.unknownEndMayIncludeIntIvl.exec(this.ctx)).be.null();
     (await this.unknownEndNotIncludesIntIvl.exec(this.ctx)).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (long)', async function () {
+    (await this.negInfBegIncludesLongIvl.exec(this.ctx)).should.be.true();
+    (await this.negInfBegNotIncludesLongIvl.exec(this.ctx)).should.be.false();
+    (await this.unknownBegIncludesLongIvl.exec(this.ctx)).should.be.true();
+    should(await this.unknownBegMayIncludeLongIvl.exec(this.ctx)).be.null();
+    (await this.unknownBegNotIncludesLongIvl.exec(this.ctx)).should.be.false();
+    (await this.posInfEndIncludesLongIvl.exec(this.ctx)).should.be.true();
+    (await this.posInfEndNotIncludesLongIvl.exec(this.ctx)).should.be.false();
+    (await this.unknownEndIncludesLongIvl.exec(this.ctx)).should.be.true();
+    should(await this.unknownEndMayIncludeLongIvl.exec(this.ctx)).be.null();
+    (await this.unknownEndNotIncludesLongIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should correctly handle null endpoints (date)', async function () {
@@ -378,12 +465,16 @@ describe('ProperlyIncludes', () => {
     (await this.properlyIncludesIntIvl.exec(this.ctx)).should.be.true();
     (await this.properlyIncludesIntBeginsIvl.exec(this.ctx)).should.be.true();
     (await this.properlyIncludesIntEndsIvl.exec(this.ctx)).should.be.true();
+    (await this.properlyIncludesLongIvl.exec(this.ctx)).should.be.true();
+    (await this.properlyIncludesLongBeginsIvl.exec(this.ctx)).should.be.true();
+    (await this.properlyIncludesLongEndsIvl.exec(this.ctx)).should.be.true();
     (await this.properlyIncludesRealIvl.exec(this.ctx)).should.be.true();
     (await this.properlyIncludesDateIvl.exec(this.ctx)).should.be.true();
   });
 
   it('should reject intervals not properly included', async function () {
     (await this.notProperlyIncludesIntIvl.exec(this.ctx)).should.be.false();
+    (await this.notProperlyIncludesLongIvl.exec(this.ctx)).should.be.false();
     (await this.notProperlyIncludesRealIvl.exec(this.ctx)).should.be.false();
     (await this.notProperlyIncludesDateIvl.exec(this.ctx)).should.be.false();
   });
@@ -392,6 +483,12 @@ describe('ProperlyIncludes', () => {
     (await this.posInfEndProperlyIncludesIntIvl.exec(this.ctx)).should.be.true();
     (await this.posInfEndNotProperlyIncludesIntIvl.exec(this.ctx)).should.be.false();
     should(await this.unknownEndMayProperlyIncludeIntIvl.exec(this.ctx)).be.null();
+  });
+
+  it('should correctly handle null endpoints (long)', async function () {
+    (await this.posInfEndProperlyIncludesLongIvl.exec(this.ctx)).should.be.true();
+    (await this.posInfEndNotProperlyIncludesLongIvl.exec(this.ctx)).should.be.false();
+    should(await this.unknownEndMayProperlyIncludeLongIvl.exec(this.ctx)).be.null();
   });
 
   it('should correctly compare using the requested precision', async function () {
@@ -413,12 +510,14 @@ describe('IncludedIn', () => {
 
   it('should accept included items', async function () {
     (await this.includesIntIvl.exec(this.ctx)).should.be.true();
+    (await this.includesLongIvl.exec(this.ctx)).should.be.true();
     (await this.includesRealIvl.exec(this.ctx)).should.be.true();
     (await this.includesDateIvl.exec(this.ctx)).should.be.true();
   });
 
   it('should reject unincluded items', async function () {
     (await this.notIncludesIntIvl.exec(this.ctx)).should.be.false();
+    (await this.notIncludesLongIvl.exec(this.ctx)).should.be.false();
     (await this.notIncludesRealIvl.exec(this.ctx)).should.be.false();
     (await this.notIncludesDateIvl.exec(this.ctx)).should.be.false();
   });
@@ -434,6 +533,19 @@ describe('IncludedIn', () => {
     (await this.unknownEndIncludedInIntIvl.exec(this.ctx)).should.be.true();
     should(await this.unknownEndMayBeIncludedInIntIvl.exec(this.ctx)).be.null();
     (await this.unknownEndNotIncludedInIntIvl.exec(this.ctx)).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (long)', async function () {
+    (await this.negInfBegIncludedInLongIvl.exec(this.ctx)).should.be.true();
+    (await this.negInfBegNotIncludedInLongIvl.exec(this.ctx)).should.be.false();
+    (await this.unknownBegIncludedInLongIvl.exec(this.ctx)).should.be.true();
+    should(await this.unknownBegMayBeIncludedInLongIvl.exec(this.ctx)).be.null();
+    (await this.unknownBegNotIncludedInLongIvl.exec(this.ctx)).should.be.false();
+    (await this.posInfEndIncludedInLongIvl.exec(this.ctx)).should.be.true();
+    (await this.posInfEndNotIncludedInLongIvl.exec(this.ctx)).should.be.false();
+    (await this.unknownEndIncludedInLongIvl.exec(this.ctx)).should.be.true();
+    should(await this.unknownEndMayBeIncludedInLongIvl.exec(this.ctx)).be.null();
+    (await this.unknownEndNotIncludedInLongIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should correctly handle null endpoints (date)', async function () {
@@ -490,12 +602,16 @@ describe('ProperlyIncludedIn', () => {
     (await this.properlyIncludesIntIvl.exec(this.ctx)).should.be.true();
     (await this.properlyIncludesIntBeginsIvl.exec(this.ctx)).should.be.true();
     (await this.properlyIncludesIntEndsIvl.exec(this.ctx)).should.be.true();
+    (await this.properlyIncludesLongIvl.exec(this.ctx)).should.be.true();
+    (await this.properlyIncludesLongBeginsIvl.exec(this.ctx)).should.be.true();
+    (await this.properlyIncludesLongEndsIvl.exec(this.ctx)).should.be.true();
     (await this.properlyIncludesRealIvl.exec(this.ctx)).should.be.true();
     (await this.properlyIncludesDateIvl.exec(this.ctx)).should.be.true();
   });
 
   it('should reject intervals not properly included', async function () {
     (await this.notProperlyIncludesIntIvl.exec(this.ctx)).should.be.false();
+    (await this.notProperlyIncludesLongIvl.exec(this.ctx)).should.be.false();
     (await this.notProperlyIncludesRealIvl.exec(this.ctx)).should.be.false();
     (await this.notProperlyIncludesDateIvl.exec(this.ctx)).should.be.false();
   });
@@ -525,12 +641,14 @@ describe('After', () => {
 
   it('should accept intervals before it', async function () {
     (await this.afterIntIvl.exec(this.ctx)).should.be.true();
+    (await this.afterLongIvl.exec(this.ctx)).should.be.true();
     (await this.afterRealIvl.exec(this.ctx)).should.be.true();
     (await this.afterDateIvl.exec(this.ctx)).should.be.true();
   });
 
   it('should reject intervals on or after it', async function () {
     (await this.notAfterIntIvl.exec(this.ctx)).should.be.false();
+    (await this.notAfterLongIvl.exec(this.ctx)).should.be.false();
     (await this.notAfterRealIvl.exec(this.ctx)).should.be.false();
     (await this.notAfterDateIvl.exec(this.ctx)).should.be.false();
   });
@@ -543,6 +661,16 @@ describe('After', () => {
     (await this.posInfEndNotAfterIntIvl.exec(this.ctx)).should.be.false();
     (await this.unknownEndAfterIntIvl.exec(this.ctx)).should.be.true();
     (await this.unknownEndNotAfterIntIvl.exec(this.ctx)).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (long)', async function () {
+    (await this.negInfBegNotAfterLongIvl.exec(this.ctx)).should.be.false();
+    should(await this.unknownBegMayBeAfterLongIvl.exec(this.ctx)).be.null();
+    (await this.unknownBegNotAfterLongIvl.exec(this.ctx)).should.be.false();
+    (await this.posInfEndAfterLongIvl.exec(this.ctx)).should.be.true();
+    (await this.posInfEndNotAfterLongIvl.exec(this.ctx)).should.be.false();
+    (await this.unknownEndAfterLongIvl.exec(this.ctx)).should.be.true();
+    (await this.unknownEndNotAfterLongIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should correctly handle null endpoints (date)', async function () {
@@ -582,12 +710,14 @@ describe('Before', () => {
 
   it('should accept intervals before it', async function () {
     (await this.beforeIntIvl.exec(this.ctx)).should.be.true();
+    (await this.beforeLongIvl.exec(this.ctx)).should.be.true();
     (await this.beforeRealIvl.exec(this.ctx)).should.be.true();
     (await this.beforeDateIvl.exec(this.ctx)).should.be.true();
   });
 
   it('should reject intervals on or after it', async function () {
     (await this.notBeforeIntIvl.exec(this.ctx)).should.be.false();
+    (await this.notBeforeLongIvl.exec(this.ctx)).should.be.false();
     (await this.notBeforeRealIvl.exec(this.ctx)).should.be.false();
     (await this.notBeforeDateIvl.exec(this.ctx)).should.be.false();
   });
@@ -600,6 +730,16 @@ describe('Before', () => {
     (await this.posInfEndNotBeforeIntIvl.exec(this.ctx)).should.be.false();
     should(await this.unknownEndMayBeBeforeIntIvl.exec(this.ctx)).be.null();
     (await this.unknownEndNotBeforeIntIvl.exec(this.ctx)).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (long)', async function () {
+    (await this.negInfBegBeforeLongIvl.exec(this.ctx)).should.be.true();
+    (await this.negInfBegNotBeforeLongIvl.exec(this.ctx)).should.be.false();
+    (await this.unknownBegBeforeLongIvl.exec(this.ctx)).should.be.true();
+    (await this.unknownBegNotBeforeLongIvl.exec(this.ctx)).should.be.false();
+    (await this.posInfEndNotBeforeLongIvl.exec(this.ctx)).should.be.false();
+    should(await this.unknownEndMayBeBeforeLongIvl.exec(this.ctx)).be.null();
+    (await this.unknownEndNotBeforeLongIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should correctly handle null endpoints (date)', async function () {
@@ -777,18 +917,21 @@ describe('Meets', () => {
 
   it('should accept intervals meeting after it', async function () {
     (await this.meetsBeforeIntIvl.exec(this.ctx)).should.be.true();
+    (await this.meetsBeforeLongIvl.exec(this.ctx)).should.be.true();
     (await this.meetsBeforeRealIvl.exec(this.ctx)).should.be.true();
     (await this.meetsBeforeDateIvl.exec(this.ctx)).should.be.true();
   });
 
   it('should accept intervals meeting before it', async function () {
     (await this.meetsAfterIntIvl.exec(this.ctx)).should.be.true();
+    (await this.meetsAfterLongIvl.exec(this.ctx)).should.be.true();
     (await this.meetsAfterRealIvl.exec(this.ctx)).should.be.true();
     (await this.meetsAfterDateIvl.exec(this.ctx)).should.be.true();
   });
 
   it('should reject intervals not meeting it', async function () {
     (await this.notMeetsIntIvl.exec(this.ctx)).should.be.false();
+    (await this.notMeetsLongIvl.exec(this.ctx)).should.be.false();
     (await this.notMeetsRealIvl.exec(this.ctx)).should.be.false();
     (await this.notMeetsDateIvl.exec(this.ctx)).should.be.false();
   });
@@ -808,6 +951,23 @@ describe('Meets', () => {
     should(await this.unknownEndMayMeetBeforeIntIvl.exec(this.ctx)).be.null();
     (await this.unknownEndNotMeetsIntIvl.exec(this.ctx)).should.be.false();
     should(await this.intIvlMayMeetAfterUnknownEnd.exec(this.ctx)).be.null();
+  });
+
+  it('should correctly handle null endpoints (long)', async function () {
+    (await this.negInfBegMeetsBeforeLongIvl.exec(this.ctx)).should.be.true();
+    (await this.negInfBegNotMeetsLongIvl.exec(this.ctx)).should.be.false();
+    (await this.longIvlNotMeetsNegInfBeg.exec(this.ctx)).should.be.false();
+    (await this.unknownBegMeetsBeforeLongIvl.exec(this.ctx)).should.be.true();
+    should(await this.unknownBegMayMeetAfterLongIvl.exec(this.ctx)).be.null();
+    (await this.unknownBegNotMeetsLongIvl.exec(this.ctx)).should.be.false();
+    should(await this.longIvlMayMeetBeforeUnknownBeg.exec(this.ctx)).be.null();
+    (await this.posInfEndMeetsAfterLongIvl.exec(this.ctx)).should.be.true();
+    (await this.posInfEndNotMeetsLongIvl.exec(this.ctx)).should.be.false();
+    (await this.longIvlNotMeetsPosInfEnd.exec(this.ctx)).should.be.false();
+    (await this.unknownEndMeetsAfterLongIvl.exec(this.ctx)).should.be.true();
+    should(await this.unknownEndMayMeetBeforeLongIvl.exec(this.ctx)).be.null();
+    (await this.unknownEndNotMeetsLongIvl.exec(this.ctx)).should.be.false();
+    should(await this.longIvlMayMeetAfterUnknownEnd.exec(this.ctx)).be.null();
   });
 
   it('should correctly handle null endpoints (date)', async function () {
@@ -853,18 +1013,21 @@ describe('MeetsAfter', () => {
 
   it('should accept intervals meeting before it', async function () {
     (await this.meetsAfterIntIvl.exec(this.ctx)).should.be.true();
+    (await this.meetsAfterLongIvl.exec(this.ctx)).should.be.true();
     (await this.meetsAfterRealIvl.exec(this.ctx)).should.be.true();
     (await this.meetsAfterDateIvl.exec(this.ctx)).should.be.true();
   });
 
   it('should reject intervals meeting after it', async function () {
     (await this.meetsBeforeIntIvl.exec(this.ctx)).should.be.false();
+    (await this.meetsBeforeLongIvl.exec(this.ctx)).should.be.false();
     (await this.meetsBeforeRealIvl.exec(this.ctx)).should.be.false();
     (await this.meetsBeforeDateIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should reject intervals not meeting it', async function () {
     (await this.notMeetsIntIvl.exec(this.ctx)).should.be.false();
+    (await this.notMeetsLongIvl.exec(this.ctx)).should.be.false();
     (await this.notMeetsRealIvl.exec(this.ctx)).should.be.false();
     (await this.notMeetsDateIvl.exec(this.ctx)).should.be.false();
   });
@@ -884,6 +1047,23 @@ describe('MeetsAfter', () => {
     (await this.unknownEndMayMeetBeforeIntIvl.exec(this.ctx)).should.be.false();
     (await this.unknownEndNotMeetsIntIvl.exec(this.ctx)).should.be.false();
     should(await this.intIvlMayMeetAfterUnknownEnd.exec(this.ctx)).be.null();
+  });
+
+  it('should correctly handle null endpoints (long)', async function () {
+    (await this.negInfBegMeetsBeforeLongIvl.exec(this.ctx)).should.be.false();
+    (await this.negInfBegNotMeetsLongIvl.exec(this.ctx)).should.be.false();
+    (await this.longIvlNotMeetsNegInfBeg.exec(this.ctx)).should.be.false();
+    (await this.unknownBegMeetsBeforeLongIvl.exec(this.ctx)).should.be.false();
+    should(await this.unknownBegMayMeetAfterLongIvl.exec(this.ctx)).be.null();
+    (await this.unknownBegNotMeetsLongIvl.exec(this.ctx)).should.be.false();
+    (await this.longIvlMayMeetBeforeUnknownBeg.exec(this.ctx)).should.be.false();
+    (await this.posInfEndMeetsAfterLongIvl.exec(this.ctx)).should.be.true();
+    (await this.posInfEndNotMeetsLongIvl.exec(this.ctx)).should.be.false();
+    (await this.longIvlNotMeetsPosInfEnd.exec(this.ctx)).should.be.false();
+    (await this.unknownEndMeetsAfterLongIvl.exec(this.ctx)).should.be.true();
+    (await this.unknownEndMayMeetBeforeLongIvl.exec(this.ctx)).should.be.false();
+    (await this.unknownEndNotMeetsLongIvl.exec(this.ctx)).should.be.false();
+    should(await this.longIvlMayMeetAfterUnknownEnd.exec(this.ctx)).be.null();
   });
 
   it('should correctly handle null endpoints (date)', async function () {
@@ -929,18 +1109,21 @@ describe('MeetsBefore', () => {
 
   it('should accept intervals meeting after it', async function () {
     (await this.meetsBeforeIntIvl.exec(this.ctx)).should.be.true();
+    (await this.meetsBeforeLongIvl.exec(this.ctx)).should.be.true();
     (await this.meetsBeforeRealIvl.exec(this.ctx)).should.be.true();
     (await this.meetsBeforeDateIvl.exec(this.ctx)).should.be.true();
   });
 
   it('should reject intervals meeting before it', async function () {
     (await this.meetsAfterIntIvl.exec(this.ctx)).should.be.false();
+    (await this.meetsAfterLongIvl.exec(this.ctx)).should.be.false();
     (await this.meetsAfterRealIvl.exec(this.ctx)).should.be.false();
     (await this.meetsAfterDateIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should reject intervals not meeting it', async function () {
     (await this.notMeetsIntIvl.exec(this.ctx)).should.be.false();
+    (await this.notMeetsLongIvl.exec(this.ctx)).should.be.false();
     (await this.notMeetsRealIvl.exec(this.ctx)).should.be.false();
     (await this.notMeetsDateIvl.exec(this.ctx)).should.be.false();
   });
@@ -960,6 +1143,23 @@ describe('MeetsBefore', () => {
     should(await this.unknownEndMayMeetBeforeIntIvl.exec(this.ctx)).be.null();
     (await this.unknownEndNotMeetsIntIvl.exec(this.ctx)).should.be.false();
     (await this.intIvlMayMeetAfterUnknownEnd.exec(this.ctx)).should.be.false();
+  });
+
+  it('should correctly handle null endpoints (long)', async function () {
+    (await this.negInfBegMeetsBeforeLongIvl.exec(this.ctx)).should.be.true();
+    (await this.negInfBegNotMeetsLongIvl.exec(this.ctx)).should.be.false();
+    (await this.longIvlNotMeetsNegInfBeg.exec(this.ctx)).should.be.false();
+    (await this.unknownBegMeetsBeforeLongIvl.exec(this.ctx)).should.be.true();
+    (await this.unknownBegMayMeetAfterLongIvl.exec(this.ctx)).should.be.false();
+    (await this.unknownBegNotMeetsLongIvl.exec(this.ctx)).should.be.false();
+    should(await this.longIvlMayMeetBeforeUnknownBeg.exec(this.ctx)).be.null();
+    (await this.posInfEndMeetsAfterLongIvl.exec(this.ctx)).should.be.false();
+    (await this.posInfEndNotMeetsLongIvl.exec(this.ctx)).should.be.false();
+    (await this.longIvlNotMeetsPosInfEnd.exec(this.ctx)).should.be.false();
+    (await this.unknownEndMeetsAfterLongIvl.exec(this.ctx)).should.be.false();
+    should(await this.unknownEndMayMeetBeforeLongIvl.exec(this.ctx)).be.null();
+    (await this.unknownEndNotMeetsLongIvl.exec(this.ctx)).should.be.false();
+    (await this.longIvlMayMeetAfterUnknownEnd.exec(this.ctx)).should.be.false();
   });
 
   it('should correctly handle null endpoints (date)', async function () {
@@ -1009,6 +1209,12 @@ describe('Overlaps', () => {
     (await this.overlapsBoundaryIntIvl.exec(this.ctx)).should.be.true();
   });
 
+  it('should accept overlaps (long)', async function () {
+    (await this.overlapsBeforeLongIvl.exec(this.ctx)).should.be.true();
+    (await this.overlapsAfterLongIvl.exec(this.ctx)).should.be.true();
+    (await this.overlapsBoundaryLongIvl.exec(this.ctx)).should.be.true();
+  });
+
   it('should accept overlaps (real)', async function () {
     (await this.overlapsBeforeRealIvl.exec(this.ctx)).should.be.true();
     (await this.overlapsAfterRealIvl.exec(this.ctx)).should.be.true();
@@ -1017,6 +1223,10 @@ describe('Overlaps', () => {
 
   it('should reject non-overlaps (integer)', async function () {
     (await this.noOverlapsIntIvl.exec(this.ctx)).should.be.false();
+  });
+
+  it('should reject non-overlaps (long)', async function () {
+    (await this.noOverlapsLongIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should reject non-overlaps (real)', async function () {
@@ -1092,6 +1302,11 @@ describe('OverlapsAfter', () => {
     (await this.overlapsBoundaryIntIvl.exec(this.ctx)).should.be.true();
   });
 
+  it('should accept overlaps that are after (long)', async function () {
+    (await this.overlapsAfterIntIvl.exec(this.ctx)).should.be.true();
+    (await this.overlapsBoundaryIntIvl.exec(this.ctx)).should.be.true();
+  });
+
   it('should accept overlaps that are after (real)', async function () {
     (await this.overlapsAfterRealIvl.exec(this.ctx)).should.be.true();
     (await this.overlapsBoundaryRealIvl.exec(this.ctx)).should.be.true();
@@ -1101,12 +1316,20 @@ describe('OverlapsAfter', () => {
     (await this.overlapsBeforeIntIvl.exec(this.ctx)).should.be.false();
   });
 
+  it('should reject overlaps that are before (long)', async function () {
+    (await this.overlapsBeforeLongIvl.exec(this.ctx)).should.be.false();
+  });
+
   it('should reject overlaps that are before (real)', async function () {
     (await this.overlapsBeforeRealIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should reject non-overlaps (integer)', async function () {
     (await this.noOverlapsIntIvl.exec(this.ctx)).should.be.false();
+  });
+
+  it('should reject non-overlaps (long)', async function () {
+    (await this.noOverlapsLongIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should reject non-overlaps (real)', async function () {
@@ -1175,6 +1398,11 @@ describe('OverlapsBefore', () => {
     (await this.overlapsBoundaryIntIvl.exec(this.ctx)).should.be.true();
   });
 
+  it('should accept overlaps that are before (long)', async function () {
+    (await this.overlapsBeforeLongIvl.exec(this.ctx)).should.be.true();
+    (await this.overlapsBoundaryLongIvl.exec(this.ctx)).should.be.true();
+  });
+
   it('should accept overlaps that are before (real)', async function () {
     (await this.overlapsBeforeRealIvl.exec(this.ctx)).should.be.true();
     (await this.overlapsBoundaryRealIvl.exec(this.ctx)).should.be.true();
@@ -1184,12 +1412,20 @@ describe('OverlapsBefore', () => {
     (await this.overlapsAfterIntIvl.exec(this.ctx)).should.be.false();
   });
 
+  it('should reject overlaps that are after (long)', async function () {
+    (await this.overlapsAfterLongIvl.exec(this.ctx)).should.be.false();
+  });
+
   it('should reject overlaps that are after (real)', async function () {
     (await this.overlapsAfterRealIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should reject non-overlaps (integer)', async function () {
     (await this.noOverlapsIntIvl.exec(this.ctx)).should.be.false();
+  });
+
+  it('should reject non-overlaps (long)', async function () {
+    (await this.noOverlapsLongIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should reject non-overlaps (real)', async function () {
@@ -1260,6 +1496,13 @@ describe('Width', () => {
     (await this.intOpenWidth.exec(this.ctx)).should.equal(5);
   });
 
+  it('should calculate the width of long intervals', async function () {
+    // define LongWidth: width of Interval[1L, 8L]
+    (await this.longWidth.exec(this.ctx)).should.equal(7n);
+    // define LongOpenWidth: width of Interval(1L, 8L)
+    (await this.longOpenWidth.exec(this.ctx)).should.equal(5n);
+  });
+
   it('should calculate the width of real intervals', async function () {
     // define RealWidth: width of Interval[1.23, 4.56]
     (await this.realWidth.exec(this.ctx)).should.equal(3.33);
@@ -1314,6 +1557,13 @@ describe('Size', () => {
     (await this.intSize.exec(this.ctx)).should.equal(8);
     // define IntOpenSize: Size(Interval(-2, 5))
     (await this.intOpenSize.exec(this.ctx)).should.equal(6);
+  });
+
+  it('should calculate the size of long intervals', async function () {
+    // define LongSize: Size(Interval[1L, 8L])
+    (await this.longSize.exec(this.ctx)).should.equal(8n);
+    // define LongOpenSize: Size(Interval(1L, 8L))
+    (await this.longOpenSize.exec(this.ctx)).should.equal(6n);
   });
 
   it('should calculate the size of real intervals', async function () {
@@ -1393,6 +1643,10 @@ describe('Start', () => {
     (await this.closedNullInteger.exec(this.ctx)).should.eql(MIN_INT_VALUE);
   });
 
+  it('should return the minimum possible Long', async function () {
+    (await this.closedNullLong.exec(this.ctx)).should.eql(MIN_LONG_VALUE);
+  });
+
   it('should return the minimum possible Decimal', async function () {
     (await this.closedNullDecimal.exec(this.ctx)).should.eql(MIN_FLOAT_VALUE);
   });
@@ -1403,6 +1657,10 @@ describe('Start', () => {
 
   it('should return successor of low when the interval is open', async function () {
     (await this.openNotNull.exec(this.ctx)).should.eql(new DateTime(2012, 1, 1).successor());
+  });
+
+  it('should return successor of long low when the interval is open', async function () {
+    (await this.openLongNotNull.exec(this.ctx)).should.eql(2n);
   });
 
   it('should return null for open interval with null high value', async function () {
@@ -1433,6 +1691,10 @@ describe('End', () => {
     (await this.closedNullInteger.exec(this.ctx)).should.eql(MAX_INT_VALUE);
   });
 
+  it('should return the maximum possible Long', async function () {
+    (await this.closedNullLong.exec(this.ctx)).should.eql(MAX_LONG_VALUE);
+  });
+
   it('should return the maximum possible Decimal', async function () {
     (await this.closedNullDecimal.exec(this.ctx)).should.eql(MAX_FLOAT_VALUE);
   });
@@ -1443,6 +1705,10 @@ describe('End', () => {
 
   it('should return predecessor of high when the interval is open', async function () {
     (await this.openNotNull.exec(this.ctx)).should.eql(new DateTime(2013, 1, 1).predecessor());
+  });
+
+  it('should return predecessor of long high when the interval is open', async function () {
+    (await this.openLongNotNull.exec(this.ctx)).should.eql(2n);
   });
 
   it('should return null for open interval with null low value', async function () {
@@ -1463,6 +1729,12 @@ describe('Starts', () => {
     (await this.integerIntervalStartsTrue.exec(this.ctx)).should.be.true();
     (await this.integerIntervalStartsFalse.exec(this.ctx)).should.be.false();
     (await this.integerIntervalStartEndsFalse.exec(this.ctx)).should.be.false();
+  });
+
+  it('should calculate long intervals properly', async function () {
+    (await this.longIntervalStartsTrue.exec(this.ctx)).should.be.true();
+    (await this.longIntervalStartsFalse.exec(this.ctx)).should.be.false();
+    (await this.longIntervalStartEndsFalse.exec(this.ctx)).should.be.false();
   });
 
   it('should calculate decimal intervals properly', async function () {
@@ -1498,6 +1770,12 @@ describe('Ends', () => {
     (await this.integerIntervalEndsTrue.exec(this.ctx)).should.be.true();
     (await this.integerIntervalEndsFalse.exec(this.ctx)).should.be.false();
     (await this.integerIntervalEndsStartsFalse.exec(this.ctx)).should.be.false();
+  });
+
+  it('should calculate long intervals properly', async function () {
+    (await this.longIntervalEndsTrue.exec(this.ctx)).should.be.true();
+    (await this.longIntervalEndsFalse.exec(this.ctx)).should.be.false();
+    (await this.longIntervalEndsStartsFalse.exec(this.ctx)).should.be.false();
   });
 
   it('should calculate decimal intervals properly', async function () {
@@ -1586,6 +1864,77 @@ describe('IntegerIntervalUnion', () => {
   it('should properly handle null unions', async function () {
     should(await this.nullUnion.exec(this.ctx)).be.null();
     should(await this.unionNull.exec(this.ctx)).be.null();
+    should(await this.nullUnionNull.exec(this.ctx)).be.null();
+  });
+});
+
+describe('LongIntervalUnion', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should properly calculate open and closed unions', async function () {
+    const x = await this.longFullInterval.exec(this.ctx);
+    let y = await this.longClosedUnionClosed.exec(this.ctx);
+    y.equals(x).should.be.true();
+
+    y = await this.longClosedUnionOpen.exec(this.ctx);
+    y.contains(0n).should.be.true();
+    y.contains(10n).should.be.false();
+
+    y = await this.longOpenUnionOpen.exec(this.ctx);
+    y.contains(0n).should.be.false();
+    y.contains(10n).should.be.false();
+
+    y = await this.longOpenUnionClosed.exec(this.ctx);
+    y.contains(0n).should.be.false();
+    y.contains(10n).should.be.true();
+  });
+
+  it('should properly calculate sameAs unions', async function () {
+    const x = await this.longFullInterval.exec(this.ctx);
+    const y = await this.longSameAsUnion.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate before/after unions', async function () {
+    should(await this.longBeforeUnion.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate meets unions', async function () {
+    const x = await this.longFullInterval.exec(this.ctx);
+    const y = await this.longMeetsUnion.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate left/right overlapping unions', async function () {
+    const x = await this.longFullInterval.exec(this.ctx);
+    const y = await this.longOverlapsUnion.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate begins/begun by unions', async function () {
+    const x = await this.longFullInterval.exec(this.ctx);
+    const y = await this.longBeginsUnion.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate includes/included by unions', async function () {
+    const x = await this.longFullInterval.exec(this.ctx);
+    const y = await this.longDuringUnion.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate ends/ended by unions', async function () {
+    const x = await this.longFullInterval.exec(this.ctx);
+    const y = await this.longEndsUnion.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+
+  it('should properly handle null unions', async function () {
+    should(await this.nullUnion.exec(this.ctx)).be.null();
+    should(await this.unionNull.exec(this.ctx)).be.null();
+    should(await this.nullUnionNull.exec(this.ctx)).be.null();
   });
 });
 
@@ -1700,6 +2049,44 @@ describe('IntegerIntervalExcept', () => {
   });
 });
 
+describe('LongIntervalExcept', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should properly calculate sameAs except', async function () {
+    should(await this.longSameAsExcept.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate before/after except', async function () {
+    (await this.longBeforeExcept.exec(this.ctx)).should.eql(new Interval(1n, 5n));
+  });
+
+  it('should properly calculate meets except', async function () {
+    const x = await this.longHalfInterval.exec(this.ctx);
+    const y = await this.longMeetsExcept.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate left/right overlapping except', async function () {
+    const x = await this.longHalfInterval.exec(this.ctx);
+    const y = await this.longOverlapsExcept.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate begins/begun by except', async function () {
+    should(await this.longBeginsExcept.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate includes/included by except', async function () {
+    should(await this.longDuringExcept.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate ends/ended by except', async function () {
+    should(await this.longEndsExcept.exec(this.ctx)).be.null();
+  });
+});
+
 // TODO
 // it 'should properly handle imprecision', ->
 
@@ -1788,6 +2175,52 @@ describe('IntegerIntervalIntersect', () => {
   it('should properly calculate ends/ended by intersect', async function () {
     const x = await this.intEndsInterval.exec(this.ctx);
     const y = await this.intEndsIntersect.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+});
+
+describe('LongIntervalIntersect', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should properly calculate sameAs intersect', async function () {
+    const x = await this.longSameAsIntersect.exec(this.ctx);
+    const y = await this.longFullInterval.exec(this.ctx);
+    x.equals(y).should.be.true();
+  });
+
+  it('should properly calculate before/after intersect', async function () {
+    should(await this.longBeforeIntersect.exec(this.ctx)).be.null();
+  });
+
+  it('should properly calculate meets intersect', async function () {
+    const x = await this.longMeetsInterval.exec(this.ctx);
+    const y = await this.longMeetsIntersect.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate left/right overlapping intersect', async function () {
+    const x = await this.longOverlapsInterval.exec(this.ctx);
+    const y = await this.longOverlapsIntersect.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate begins/begun by intersect', async function () {
+    const x = await this.longBeginsInterval.exec(this.ctx);
+    const y = await this.longBeginsIntersect.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate includes/included by intersect', async function () {
+    const x = await this.longDuringInterval.exec(this.ctx);
+    const y = await this.longDuringIntersect.exec(this.ctx);
+    y.equals(x).should.be.true();
+  });
+
+  it('should properly calculate ends/ended by intersect', async function () {
+    const x = await this.longEndsInterval.exec(this.ctx);
+    const y = await this.longEndsIntersect.exec(this.ctx);
     y.equals(x).should.be.true();
   });
 });
@@ -1888,6 +2321,57 @@ describe('IntegerIntervalCollapse', () => {
     );
     (await this.intCollapseOverlapMultipleCombine.exec(this.ctx)).should.eql(
       await this.int1_15IntervalList.exec(this.ctx)
+    );
+  });
+});
+
+describe('LongIntervalCollapse', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('empty interval collapses to empty', async function () {
+    (await this.longCollapseEmpty.exec(this.ctx)).should.eql(
+      await this.longEmptyIntervalList.exec(this.ctx)
+    );
+  });
+
+  it('single interval list collapse to self', async function () {
+    (await this.longCollapseSingleInterval.exec(this.ctx)).should.eql(
+      await this.long1_10IntervalList.exec(this.ctx)
+    );
+  });
+
+  it('disjoint intervals list collapses to ordered self', async function () {
+    (await this.longCollapseDisjoint.exec(this.ctx)).should.eql(
+      await this.longTwoItemDisjointList.exec(this.ctx)
+    );
+    (await this.longCollapseDisjointReversed.exec(this.ctx)).should.eql(
+      await this.longTwoItemDisjointList.exec(this.ctx)
+    );
+  });
+
+  it('adjacent intervals list combines', async function () {
+    (await this.longCollapseAdjacent.exec(this.ctx)).should.eql(
+      await this.long1_15IntervalList.exec(this.ctx)
+    );
+  });
+
+  it('overlapping intervals list combine', async function () {
+    (await this.longCollapseOverlap.exec(this.ctx)).should.eql(
+      await this.long1_12IntervalList.exec(this.ctx)
+    );
+    (await this.longCollapseOverlapContained.exec(this.ctx)).should.eql(
+      await this.long1_15IntervalList.exec(this.ctx)
+    );
+    (await this.longCollapseOverlapContainedEdge.exec(this.ctx)).should.eql(
+      await this.long1_10IntervalList.exec(this.ctx)
+    );
+    (await this.longCollapseOverlapContainedEdge2.exec(this.ctx)).should.eql(
+      await this.long1_15IntervalList.exec(this.ctx)
+    );
+    (await this.longCollapseOverlapMultipleCombine.exec(this.ctx)).should.eql(
+      await this.long1_15IntervalList.exec(this.ctx)
     );
   });
 });
@@ -2939,6 +3423,74 @@ describe('IntegerIntervalExpand', () => {
   });
 });
 
+describe('LongIntervalExpand', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('expands single intervals', async function () {
+    let a = await this.longClosedSinglePer1.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4] }');
+    a = await this.longClosedSinglePer3.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 4], [5, 7], [8, 10] }');
+    a = await this.longClosedSinglePer3NoteTheWidth.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 4] }');
+  });
+
+  it('expands lists of multiple intervals', async function () {
+    let a = await this.longNullInList.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4] }');
+    a = await this.longOverlapping.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4], [5, 5] }');
+    a = await this.longNonOverlapping.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4], [6, 6] }');
+  });
+
+  it('expands interval using default per of 1', async function () {
+    const a = await this.longNoPer.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4] }');
+  });
+
+  it('expands interval with open ends', async function () {
+    let a = await this.longOpenStart.exec(this.ctx);
+    prettyList(a).should.equal('{ [3, 3], [4, 4] }');
+    a = await this.longOpenEnd.exec(this.ctx);
+    prettyList(a).should.equal('{ [2, 2], [3, 3] }');
+    a = await this.longOpenBoth.exec(this.ctx);
+    prettyList(a).should.equal('{ [3, 3] }');
+  });
+
+  it('returns an empty list if we get an empty list or if there are no results', async function () {
+    let a = await this.longEmptyList.exec(this.ctx);
+    a.should.be.instanceof(Array);
+    a.length.should.equal(0);
+    a = await this.longPerTooBig.exec(this.ctx);
+    a.should.be.instanceof(Array);
+    a.length.should.equal(0);
+  });
+
+  it('returns null with open ended intervals', async function () {
+    let a = await this.longNullClose.exec(this.ctx);
+    should.not.exist(a);
+    a = await this.longNullOpen.exec(this.ctx);
+    should.not.exist(a);
+    a = await this.longNullBoth.exec(this.ctx);
+    should.not.exist(a);
+  });
+
+  it('returns null when per not applicable or mismatch interval', async function () {
+    const a = await this.longBadPerMinute.exec(this.ctx);
+    should.not.exist(a);
+  });
+
+  it('produces a more precise value for output intervals', async function () {
+    const a = await this.longPerDecimalMorePrecise.exec(this.ctx);
+    prettyList(a).should.equal(
+      '{ [10, 10.09999999], [10.1, 10.19999999], [10.2, 10.29999999], [10.3, 10.39999999], [10.4, 10.49999999], [10.5, 10.59999999], [10.6, 10.69999999], [10.7, 10.79999999], [10.8, 10.89999999], [10.9, 10.99999999] }'
+    );
+  });
+});
+
 describe('DecimalIntervalExpand', () => {
   beforeEach(function () {
     setup(this, data);
@@ -3228,6 +3780,21 @@ describe('SameAs', () => {
     (await this.integerIntervalSameOpen.exec(this.ctx)).should.be.true();
   });
 
+  it('returns true when long interval is the same', async function () {
+    // define LongIntervalSame: Interval[3L,6L] same as Interval[3L,6L]
+    (await this.longIntervalSame.exec(this.ctx)).should.be.true();
+  });
+
+  it('returns false when long interval is not the same', async function () {
+    // define LongIntervalNotSame: Interval[3L,6L] same as Interval[3L,5L]
+    (await this.longIntervalNotSame.exec(this.ctx)).should.be.false();
+  });
+
+  it('returns true when long interval is same after the open interval is closed', async function () {
+    // define LongIntervalSameOpen: Interval[3L,6L] same as Interval[3L,7L)
+    (await this.longIntervalSameOpen.exec(this.ctx)).should.be.true();
+  });
+
   it('returns false even with an open ended null because the lows are not null and not same', async function () {
     // define OpenNullHighLowDifferent: Interval(3,null) same as Interval(2,4)
     (await this.openNullHighLowDifferent.exec(this.ctx)).should.be.false();
@@ -3266,5 +3833,45 @@ describe('SameAs', () => {
   it('returns null if lows have open null and highs are same', async function () {
     // OpenNullLowsHighsSame: Interval(null,3) same as Interval(null,3)
     should(await this.openNullLowsHighsSame.exec(this.ctx)).be.null();
+  });
+
+  it('returns false even with an open ended null because the long lows are not null and not same', async function () {
+    // define LongOpenNullHighLowDifferent: Interval(4L,null) same as Interval(3L,5L)
+    (await this.longOpenNullHighLowDifferent.exec(this.ctx)).should.be.false();
+  });
+
+  it('returns false even with an open ended null because the long highs are not null and not same', async function () {
+    // define LongOpenNullLowHighDifferent: Interval(2L,6L) same as Interval(null,5L)
+    (await this.longOpenNullLowHighDifferent.exec(this.ctx)).should.be.false();
+  });
+
+  it('returns null if long lows are same and highs have an open null', async function () {
+    // LongOpenNullHighLowSame: Interval(3L,null) same as Interval(3L,5L)
+    should(await this.longOpenNullHighLowSame.exec(this.ctx)).be.null();
+  });
+
+  it('returns null if long lows have an open null and highs are same', async function () {
+    // LongOpenNullLowHighSame: Interval(2L,5L) same as Interval(null,5L)
+    should(await this.longOpenNullLowHighSame.exec(this.ctx)).be.null();
+  });
+
+  it('returns null if both long lows and highs have open null', async function () {
+    // LongOpenNullLowOpenNullHigh: Interval(2L,null) same as Interval(null,5L)
+    should(await this.longOpenNullLowOpenNullHigh.exec(this.ctx)).be.null();
+  });
+
+  it('returns false if long lows are different and highs have open null', async function () {
+    // LongOpenNullHighsLowsDifferent: Interval(2L,null) same as Interval(3L,null)
+    (await this.longOpenNullHighsLowsDifferent.exec(this.ctx)).should.be.false();
+  });
+
+  it('returns null if long lows are same and highs have open null', async function () {
+    // LongOpenNullHighsLowsSame: Interval(2L,null) same as Interval(2L,null)
+    should(await this.longOpenNullHighsLowsSame.exec(this.ctx)).be.null();
+  });
+
+  it('returns null if long lows have open null and highs are same', async function () {
+    // LongOpenNullLowsHighsSame: Interval(null,4L) same as Interval(null,4L)
+    should(await this.longOpenNullLowsHighsSame.exec(this.ctx)).be.null();
   });
 });
