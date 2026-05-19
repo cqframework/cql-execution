@@ -2900,6 +2900,7 @@ const datatypes_1 = require("../datatypes/datatypes");
 const exception_1 = require("../datatypes/exception");
 const comparison_1 = require("../util/comparison");
 const builder_1 = require("./builder");
+const math_1 = require("../util/math");
 class AggregateExpression extends expression_1.Expression {
     constructor(json) {
         super(json);
@@ -2922,6 +2923,7 @@ exports.Count = Count;
 class Sum extends AggregateExpression {
     constructor(json) {
         super(json);
+        this.resultTypeName = json.resultTypeName;
     }
     async exec(ctx) {
         let items = await this.source.execute(ctx);
@@ -2940,10 +2942,13 @@ class Sum extends AggregateExpression {
         if (hasOnlyQuantities(items)) {
             const values = getValuesFromQuantities(items);
             const sum = values.reduce((x, y) => x + y);
-            return new datatypes_1.Quantity(sum, items[0].unit);
+            return (0, math_1.overflowsOrUnderflows)(sum, '{urn:hl7-org:elm-types:r1}Decimal')
+                ? null
+                : new datatypes_1.Quantity(sum, items[0].unit);
         }
         else {
-            return items.reduce((x, y) => x + y);
+            const sum = items.reduce((x, y) => x + y);
+            return (0, math_1.overflowsOrUnderflows)(sum, this.resultTypeName) ? null : sum;
         }
     }
 }
@@ -3181,6 +3186,7 @@ exports.StdDev = StdDev;
 class Product extends AggregateExpression {
     constructor(json) {
         super(json);
+        this.resultTypeName = json.resultTypeName;
     }
     async exec(ctx) {
         let items = await this.source.execute(ctx);
@@ -3200,10 +3206,13 @@ class Product extends AggregateExpression {
             const values = getValuesFromQuantities(items);
             const product = values.reduce((x, y) => x * y);
             // Units are not multiplied for the geometric product
-            return new datatypes_1.Quantity(product, items[0].unit);
+            return (0, math_1.overflowsOrUnderflows)(product, '{urn:hl7-org:elm-types:r1}Decimal')
+                ? null
+                : new datatypes_1.Quantity(product, items[0].unit);
         }
         else {
-            return items.reduce((x, y) => x * y);
+            const product = items.reduce((x, y) => x * y);
+            return (0, math_1.overflowsOrUnderflows)(product, this.resultTypeName) ? null : product;
         }
     }
 }
@@ -3323,7 +3332,7 @@ function medianOfNumbers(numbers) {
     }
 }
 
-},{"../datatypes/datatypes":7,"../datatypes/exception":9,"../util/comparison":53,"../util/util":58,"./builder":17,"./expression":23}],16:[function(require,module,exports){
+},{"../datatypes/datatypes":7,"../datatypes/exception":9,"../util/comparison":53,"../util/math":56,"../util/util":58,"./builder":17,"./expression":23}],16:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -9500,7 +9509,7 @@ exports.MIN_DATE_VALUE = datetime_1.MIN_DATE_VALUE;
 exports.MAX_DATE_VALUE = datetime_1.MAX_DATE_VALUE;
 exports.MIN_TIME_VALUE = datetime_1.MIN_TIME_VALUE;
 exports.MAX_TIME_VALUE = datetime_1.MAX_TIME_VALUE;
-function overflowsOrUnderflows(value) {
+function overflowsOrUnderflows(value, type) {
     if (value == null) {
         return false;
     }
@@ -9538,18 +9547,28 @@ function overflowsOrUnderflows(value) {
             return true;
         }
     }
-    else if (Number.isInteger(value)) {
-        if (!isValidInteger(value)) {
+    else if (typeof value === 'number') {
+        if (type === '{urn:hl7-org:elm-types:r1}Integer') {
+            if (!isValidInteger(value)) {
+                return true;
+            }
+        }
+        else if (type === '{urn:hl7-org:elm-types:r1}Decimal') {
+            if (!isValidDecimal(value)) {
+                return true;
+            }
+        }
+        else if (Number.isInteger(value)) {
+            if (!isValidInteger(value)) {
+                return true;
+            }
+        }
+        else if (!isValidDecimal(value)) {
             return true;
         }
     }
     else if (value.isUncertainty) {
-        return overflowsOrUnderflows(value.low) || overflowsOrUnderflows(value.high);
-    }
-    else {
-        if (!isValidDecimal(value)) {
-            return true;
-        }
+        return overflowsOrUnderflows(value.low, type) || overflowsOrUnderflows(value.high, type);
     }
     return false;
 }

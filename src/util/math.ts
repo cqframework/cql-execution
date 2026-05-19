@@ -24,7 +24,7 @@ export const MAX_DATE_VALUE = dtMaxDateValue;
 export const MIN_TIME_VALUE = dtMinTimeValue;
 export const MAX_TIME_VALUE = dtMaxTimeValue;
 
-export function overflowsOrUnderflows(value: any): boolean {
+export function overflowsOrUnderflows(value: any, type?: string): boolean {
   if (value == null) {
     return false;
   }
@@ -57,16 +57,24 @@ export function overflowsOrUnderflows(value: any): boolean {
     if (!isValidLong(value)) {
       return true;
     }
-  } else if (Number.isInteger(value)) {
-    if (!isValidInteger(value)) {
+  } else if (typeof value === 'number') {
+    if (type === '{urn:hl7-org:elm-types:r1}Integer') {
+      if (!isValidInteger(value)) {
+        return true;
+      }
+    } else if (type === '{urn:hl7-org:elm-types:r1}Decimal') {
+      if (!isValidDecimal(value)) {
+        return true;
+      }
+    } else if (Number.isInteger(value)) {
+      if (!isValidInteger(value)) {
+        return true;
+      }
+    } else if (!isValidDecimal(value)) {
       return true;
     }
   } else if (value.isUncertainty) {
-    return overflowsOrUnderflows(value.low) || overflowsOrUnderflows(value.high);
-  } else {
-    if (!isValidDecimal(value)) {
-      return true;
-    }
+    return overflowsOrUnderflows(value.low, type) || overflowsOrUnderflows(value.high, type);
   }
   return false;
 }
