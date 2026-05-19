@@ -7851,6 +7851,9 @@ class ToQuantity extends expression_1.Expression {
         else if (typeof val === 'number') {
             return new quantity_1.Quantity(val, '1');
         }
+        else if (typeof val === 'bigint') {
+            return new quantity_1.Quantity(Number(val), '1');
+        }
         else if (val.isRatio) {
             // numerator and denominator are guaranteed non-null
             return val.numerator.dividedBy(val.denominator);
@@ -8296,6 +8299,9 @@ function guessSpecifierType(val) {
     }
     else if (typeof val === 'number') {
         return { type: elmTypes_1.ELM_NAMED_TYPE_SPECIFIER, name: elmTypes_1.ELM_DECIMAL_TYPE };
+    }
+    else if (typeof val === 'bigint') {
+        return { type: elmTypes_1.ELM_NAMED_TYPE_SPECIFIER, name: elmTypes_1.ELM_LONG_TYPE };
     }
     else if (typeof val === 'string') {
         return { type: elmTypes_1.ELM_NAMED_TYPE_SPECIFIER, name: elmTypes_1.ELM_STRING_TYPE };

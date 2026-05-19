@@ -221,6 +221,8 @@ export class ToQuantity extends Expression {
       return null;
     } else if (typeof val === 'number') {
       return new Quantity(val, '1');
+    } else if (typeof val === 'bigint') {
+      return new Quantity(Number(val), '1');
     } else if (val.isRatio) {
       // numerator and denominator are guaranteed non-null
       return val.numerator.dividedBy(val.denominator);
@@ -692,6 +694,8 @@ function guessSpecifierType(val: any): any {
     return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_INTEGER_TYPE };
   } else if (typeof val === 'number') {
     return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_DECIMAL_TYPE };
+  } else if (typeof val === 'bigint') {
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_LONG_TYPE };
   } else if (typeof val === 'string') {
     return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_STRING_TYPE };
   } else if (val.isConcept) {
