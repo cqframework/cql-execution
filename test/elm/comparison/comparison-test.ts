@@ -23,6 +23,18 @@ describe('Equal', () => {
     (await this.aLtB_Int.exec(this.ctx)).should.be.false();
   });
 
+  it('should be false for 5L = 4L', async function () {
+    (await this.aGtB_Long.exec(this.ctx)).should.be.false();
+  });
+
+  it('should be true for 5L = 5L', async function () {
+    (await this.aEqB_Long.exec(this.ctx)).should.be.true();
+  });
+
+  it('should be false for 5L = 6L', async function () {
+    (await this.aLtB_Long.exec(this.ctx)).should.be.false();
+  });
+
   it('should identify equal/unequal tuples', async function () {
     (await this.eqTuples.exec(this.ctx)).should.be.true();
     (await this.uneqTuples.exec(this.ctx)).should.be.false();
@@ -169,6 +181,18 @@ describe('NotEqual', () => {
     (await this.aLtB_Int.exec(this.ctx)).should.be.true();
   });
 
+  it('should be true for 5L <> 4L', async function () {
+    (await this.aGtB_Long.exec(this.ctx)).should.be.true();
+  });
+
+  it('should be false for 5L <> 5L', async function () {
+    (await this.aEqB_Long.exec(this.ctx)).should.be.false();
+  });
+
+  it('should be true for 5L <> 6L', async function () {
+    (await this.aLtB_Long.exec(this.ctx)).should.be.true();
+  });
+
   it('should identify equal/unequal tuples', async function () {
     (await this.eqTuples.exec(this.ctx)).should.be.false();
     (await this.uneqTuples.exec(this.ctx)).should.be.true();
@@ -297,13 +321,20 @@ describe('Equivalent', () => {
     (await this.aDefined_BNull.exec(this.ctx)).should.be.false();
   });
 
-  it.skip('should be true for null ~ null', async function () {
-    // Skipping because of cql-to-elm issue that will be fixed in 1.4
+  it('should be true for null ~ null', async function () {
     (await this.aNull_BNull.exec(this.ctx)).should.be.true();
   });
 
   it('should be true for 3 ~ 3', async function () {
     (await this.aDefined_BDefined.exec(this.ctx)).should.be.true();
+  });
+
+  it('should be true for 5L ~ 5L', async function () {
+    (await this.eqLong.exec(this.ctx)).should.be.true();
+  });
+
+  it('should be false for 5L ~ 6L', async function () {
+    (await this.uneqLong.exec(this.ctx)).should.be.false();
   });
 
   it('should be true for FOO ~ foo', async function () {
@@ -442,8 +473,16 @@ describe('Equivalent', () => {
       (await this.differentOrderLists.exec(this.ctx)).should.be.false();
     });
 
+    it('should return false for lists with same long elements in different order', async function () {
+      (await this.differentOrderListsLong.exec(this.ctx)).should.be.false();
+    });
+
     it('should return true for lists with same elements in same order', async function () {
       (await this.sameLists.exec(this.ctx)).should.be.true();
+    });
+
+    it('should return true for lists with same long elements in same order', async function () {
+      (await this.sameListsLong.exec(this.ctx)).should.be.true();
     });
 
     it('should return true for lists with same elements in same order including nulls', async function () {
@@ -577,6 +616,18 @@ describe('Less', () => {
     (await this.aLtB_Int.exec(this.ctx)).should.be.true();
   });
 
+  it('should be false for 5L < 4L', async function () {
+    (await this.aGtB_Long.exec(this.ctx)).should.be.false();
+  });
+
+  it('should be false for 5L < 5L', async function () {
+    (await this.aEqB_Long.exec(this.ctx)).should.be.false();
+  });
+
+  it('should be true for 5L < 6L', async function () {
+    (await this.aLtB_Long.exec(this.ctx)).should.be.true();
+  });
+
   it('should be false for 5 m < 4 m', async function () {
     (await this.aGtB_Quantity.exec(this.ctx)).should.be.false();
   });
@@ -629,6 +680,18 @@ describe('LessOrEqual', () => {
 
   it('should be true for 5 <= 6', async function () {
     (await this.aLtB_Int.exec(this.ctx)).should.be.true();
+  });
+
+  it('should be false for 5L <= 4L', async function () {
+    (await this.aGtB_Long.exec(this.ctx)).should.be.false();
+  });
+
+  it('should be true for 5L <= 5L', async function () {
+    (await this.aEqB_Long.exec(this.ctx)).should.be.true();
+  });
+
+  it('should be true for 5L <= 6L', async function () {
+    (await this.aLtB_Long.exec(this.ctx)).should.be.true();
   });
 
   it('should be true for 5 m <= 4 m', async function () {
@@ -685,6 +748,18 @@ describe('Greater', () => {
     (await this.aLtB_Int.exec(this.ctx)).should.be.false();
   });
 
+  it('should be true for 5L > 4L', async function () {
+    (await this.aGtB_Long.exec(this.ctx)).should.be.true();
+  });
+
+  it('should be false for 5L > 5L', async function () {
+    (await this.aEqB_Long.exec(this.ctx)).should.be.false();
+  });
+
+  it('should be false for 5L > 6L', async function () {
+    (await this.aLtB_Long.exec(this.ctx)).should.be.false();
+  });
+
   it('should be true for 5 m > 4 m', async function () {
     (await this.aGtB_Quantity.exec(this.ctx)).should.be.true();
   });
@@ -737,6 +812,18 @@ describe('GreaterOrEqual', () => {
 
   it('should be false for 5 >= 6', async function () {
     (await this.aLtB_Int.exec(this.ctx)).should.be.false();
+  });
+
+  it('should be true for 5L >= 4L', async function () {
+    (await this.aGtB_Long.exec(this.ctx)).should.be.true();
+  });
+
+  it('should be true for 5L >= 5L', async function () {
+    (await this.aEqB_Long.exec(this.ctx)).should.be.true();
+  });
+
+  it('should be false for 5L >= 6L', async function () {
+    (await this.aLtB_Long.exec(this.ctx)).should.be.false();
   });
 
   it('should be true for 5 m >= 4 m', async function () {

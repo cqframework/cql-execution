@@ -5,9 +5,27 @@ define empty: Count({})
 define is_null: Count(null as List<Integer>)
 
 // @Test: Sum
-define not_null: Sum({1,2,3,4,5})
+define integers: Sum({1,2,3,4,5})
+define integers_at_max_value: Sum({1,2,2147483644}) // 2147483647
+define integers_above_max_value: Sum({1,2,2147483645}) // 2147483648
+define integers_at_min_value: Sum({-1,-2,-2147483645}) // -2147483648
+define integers_below_min_value: Sum({-1,-2,-2147483646}) //-2147483649
+define longs: Sum({1L,2L,3L,4L,5L})
+define longs_at_max_value: Sum({1L,2L,9223372036854775804L}) // 9223372036854775807
+define longs_above_max_value: Sum({1L,2L,9223372036854775805L}) // 9223372036854775808
+define longs_at_min_value: Sum({-1L,-2L,-9223372036854775805L}) // -9223372036854775808
+define longs_below_min_value: Sum({-1L,-2L,-9223372036854775806L}) //-9223372036854775809
+define decimals: Sum({1.1,2.2,3.3,4.4,5.5})
+define decimals_at_max_value: Sum({99999999999999999999.99999999})
+define decimals_above_max_value: Sum({99999999999999999999.99999999, 99999999999999999999.99999999})
+define decimals_at_min_value: Sum({-99999999999999999999.99999999})
+define decimals_below_min_value: Sum({-99999999999999999999.99999999, -99999999999999999999.99999999})
+define quantities: Sum({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
+define quantities_at_max_value: Sum({99999999999999999999.99999999 'ml'})
+define quantities_above_max_value: Sum({99999999999999999999.99999999 'ml', 99999999999999999999.99999999 'ml'})
+define quantities_at_min_value: Sum({-99999999999999999999.99999999 'ml'})
+define quantities_below_min_value: Sum({-99999999999999999999.99999999 'ml', -99999999999999999999.99999999 'ml'})
 define has_null: Sum({1,null,null,null,2})
-define not_null_q: Sum({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define has_null_q: Sum({1 'ml',null,null,null,2 'ml'})
 define unmatched_units_q: Min({1 'ml',2 'm',3 'ml',4 'ml',5 'ml',0 'ml'})
 define empty: Sum(List<Integer>{})
@@ -24,6 +42,7 @@ define has_null_q: Min({1 'ml',null,-1 'ml',null,2 'ml'})
 define q_diff_units: Min({1 'ml',2 'dl',3 'l',4 'l',5 'l',0 'ml'})
 define NumbersAndQuantities: Min({1 ,2 'ml',3 'ml',4 'ml',5 'ml',0 'ml'})
 define IntegerMin: Min({ 2, 4, 8, 6 })
+define LongMin: Min({ 4L, 2L, 8L, 6L })
 define DecimalMin: Min({ 5.0, 4.9, 5.1, -5.0 })
 define DateMin: Min({ @2012-12-31, @2013-01-01, @2012-01-01 })
 define DateTimeMin: Min({ DateTime(2012, 9, 9), DateTime(2012, 9, 5) })
@@ -45,6 +64,7 @@ define IncompatibleUnitsNull: Max({1 'mg/d', 0.002 '/d'})
 define empty: Max(List<Integer>{})
 
 define IntegerMax: Max({ 2, 4, 8, 6 })
+define LongMax: Max({ 2L, 4L, 8L, 6L })
 define DecimalMax: Max({ 5.0, 4.9, 5.1, -5.0 })
 define DateMax: Max({ @2012-12-31, @2013-01-01, @2012-01-01 })
 define DateTimeMax: Max({ DateTime(2012, 2, 3), DateTime(2012, 9, 5) })
@@ -82,6 +102,7 @@ define IncompatibleUnitsNull: Median({1 'mg/d', 0.002 '/d'})
 
 // @Test: Mode
 define not_null: Mode({1,2,2,2,3,4,5})
+define longs: Mode({1L,2L,2L,2L,3L,4L,5L})
 define has_null: Mode({1,null,null,2,2})
 define empty: Mode({})
 
@@ -119,11 +140,28 @@ define NumbersAndQuantities: PopulationStdDev({1 ,2 ,3 ,4 'ml',5 })
 define IncompatibleUnitsNull: PopulationStdDev({1 'mg/d', 0.002 '/d'})
 
 // @Test: Product
-define decimal_product: Product({1.0, 2.0, 3.0, 4.0})
 define integer_product: Product({5, 4, 5})
-define zero_product: Product({0, 5, 10})
+define integers_at_max_value_product: Product({1, 2147483647}) // 2147483647
+define integers_above_max_value_product: Product({2, 1073741824}) // 2147483648
+define integers_at_min_value_product: Product({-1, 2, 1073741824}) // -2147483648
+define integers_below_min_value_product: Product({-2, 1073741825}) // -2147483650
+define long_product: Product({5L, 4L, 5L})
+define longs_at_max_value_product: Product({1L, 9223372036854775807L}) // 9223372036854775807
+define longs_above_max_value_product: Product({2L, 4611686018427387904L}) // 9223372036854775808
+define longs_at_min_value_product: Product({-1L, 2L, 4611686018427387904L}) // -9223372036854775808
+define longs_below_min_value_product: Product({-1L, 3L, 3074457345618258603L}) // -9223372036854775809
+define decimal_product: Product({1.0, 2.0, 3.0, 4.0})
+define decimals_at_max_value_product: Product({99999999999999999999.99999999})
+define decimals_above_max_value_product: Product({99999999999999999999.99999999, 2.0})
+define decimals_at_min_value_product: Product({-99999999999999999999.99999999})
+define decimals_below_min_value_product: Product({-99999999999999999999.99999999, 2.0})
 define quantity_product: Product({1.0 'g', 2.0 'g', 3.0 'g', 4.0 'g'})
+define quantities_at_max_value_product: Product({99999999999999999999.99999999 'g'})
+define quantities_above_max_value_product: Product({99999999999999999999.99999999 'g', 2.0 'g'})
+define quantities_at_min_value_product: Product({-99999999999999999999.99999999 'g'})
+define quantities_below_min_value_product: Product({-99999999999999999999.99999999 'g', 2.0 'g'})
 define quantity_zero_product: Product({1.0 'g', 2.0 'g', 0 'g'})
+define zero_product: Product({0, 5, 10})
 define product_with_null: Product({5, 4, null})
 define product_of_nulls: Product({null as Integer, null, null})
 define product_null: Product(null as List<Decimal>)

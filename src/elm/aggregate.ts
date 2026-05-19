@@ -5,6 +5,8 @@ import { Context } from '../runtime/context';
 import { Exception } from '../datatypes/exception';
 import { greaterThan, lessThan } from '../util/comparison';
 import { build } from './builder';
+import { overflowsOrUnderflows } from '../util/math';
+import { ELM_DECIMAL_TYPE } from '../util/elmTypes';
 
 class AggregateExpression extends Expression {
   source: any;
@@ -53,9 +55,10 @@ export class Sum extends AggregateExpression {
     if (hasOnlyQuantities(items)) {
       const values = getValuesFromQuantities(items);
       const sum = values.reduce((x, y) => x + y);
-      return new Quantity(sum, items[0].unit);
+      return overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE) ? null : new Quantity(sum, items[0].unit);
     } else {
-      return items.reduce((x: number, y: number) => x + y);
+      const sum = items.reduce((x: any, y: any) => x + y);
+      return overflowsOrUnderflows(sum, this.resultTypeName) ? null : sum;
     }
   }
 }
@@ -339,9 +342,12 @@ export class Product extends AggregateExpression {
       const values = getValuesFromQuantities(items);
       const product = values.reduce((x, y) => x * y);
       // Units are not multiplied for the geometric product
-      return new Quantity(product, items[0].unit);
+      return overflowsOrUnderflows(product, ELM_DECIMAL_TYPE)
+        ? null
+        : new Quantity(product, items[0].unit);
     } else {
-      return items.reduce((x: number, y: number) => x * y);
+      const product = items.reduce((x: any, y: any) => x * y);
+      return overflowsOrUnderflows(product, this.resultTypeName) ? null : product;
     }
   }
 }

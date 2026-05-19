@@ -18,6 +18,9 @@ CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Qu
 # Potentially Incorrect Expected Output
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
 
+# Equivalent answer but represented differently than expected output
+CqlIntervalOperatorsTest.Except.DecimalIntervalExcept1to3       Expected Interval[1.0, 3.99999999] but got Interval[1.0, 4) (closed boundary vs equivalent open boundary)
+
 # Incorrect answer
 CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
@@ -44,18 +47,6 @@ ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    
 ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalNeg10Pow28ToZeroOneStepDecimalMinValue Wrong answer (null vs big number)
 
-# Incorrect answer due to inability to distinguish integer and decimal for whole numbers (e.g., 1.0)
-CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1D      Wrong answer (doesn't recognize 1.0 as decimal)
-CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1QCM    Wrong answer (doesn't recognize 1.0 as decimal)
-CqlArithmeticFunctionsTest.Successor.SuccessorOf1D          Wrong answer (doesn't recognize 1.0 as decimal)
-CqlIntervalOperatorsTest.Except.DecimalIntervalExcept1to3   (Sort of) wrong answer (is open 4 end boundary 3 or 3.99999999?)
-CqlIntervalOperatorsTest.Except.QuantityIntervalExcept1to4  (Sort of) wrong answer (is open 5 end boundary 4 or 4.99999999?)
-ValueLiteralsAndSelectors.Decimal.Decimal2Pow31             Overflows because it thinks it is an integer
-ValueLiteralsAndSelectors.Decimal.DecimalPos2Pow31          Overflows because it thinks it is an integer
-ValueLiteralsAndSelectors.Decimal.Decimal2Pow31ToInf1       Overflows because it thinks it is an integer
-ValueLiteralsAndSelectors.Decimal.DecimalPos2Pow31ToInf1    Overflows because it thinks it is an integer
-ValueLiteralsAndSelectors.Decimal.DecimalNeg2Pow31ToInf1    Underflows because it thinks it is an integer
-
 # Unimplemented
 CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not implemented
 CqlArithmeticFunctionsTest.LowBoundary                  LowBoundary not implemented
@@ -69,23 +60,6 @@ CqlListOperatorsTest.ProperIn                           ProperIn not implemented
 CqlListOperatorsTest.ProperlyIncludedIn.ProperlyIncludedInNulRight  ProperIn not implemented
 
 # Unimplemented (New in CQL 1.5)
-CqlAggregateFunctionsTest.Product.ProductLong                         Long not implemented
-CqlAggregateFunctionsTest.Sum.SumTestLong                             Long not implemented
-CqlArithmeticFunctionsTest.Abs.AbsLong                                Long not implemented
-CqlArithmeticFunctionsTest.Add.Add1L1L                                Long not implemented
-CqlArithmeticFunctionsTest.Add.Add1L2L                                Long not implemented
-CqlArithmeticFunctionsTest.MinValue.LongMinValue                      Long not implemented
-CqlArithmeticFunctionsTest.MaxValue.LongMaxValue                      Long not implemented
-CqlArithmeticFunctionsTest.Modulo.Modulo4LBy2L                        Long not implemented
-CqlArithmeticFunctionsTest.Multiply.Multiply1By1L                     Long not implemented
-CqlArithmeticFunctionsTest.Multiply.Multiply2LBy3L                    Long not implemented
-CqlArithmeticFunctionsTest.Negate.NegateNeg1L                         Long not implemented
-CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1L                Long not implemented
-CqlArithmeticFunctionsTest.Power.Power2LTo2L                          Long not implemented
-CqlArithmeticFunctionsTest.Power.Power2LTo3L                          Long not implemented
-CqlArithmeticFunctionsTest.Subtract.Subtract1LAnd1L                   Long not implemented
-CqlArithmeticFunctionsTest.Successor.SuccessorOf1L                    Long not implemented
-"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10LBy3L"  Long not implemented
 CqlArithmeticFunctionsTest.Modulo.ModuloQuantity                      Modulo not implemented for Quantity
 CqlArithmeticFunctionsTest.Modulo.Modulo10By3Quantity                 Modulo not implemented for Quantity
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Truncated divide not implemented for Quantity

@@ -228,5 +228,53 @@ export default () => {
       y: new TestInterval(0, 100)
     }
   };
+  data['zeroToHundredLong'] = new TestInterval(0n, 100n);
+  data['zeroToFortyLong'] = new TestInterval(0n, 40n);
+  data['fortyToSixtyLong'] = new TestInterval(40n, 60n);
+  data['sixtyToHundredLong'] = new TestInterval(60n, 100n);
+  data['lIvl'] = {
+    sameAs: {
+      //    |----------X----------|
+      //    |----------Y----------|
+      x: new TestInterval(0n, 100n),
+      y: new TestInterval(0n, 100n)
+    },
+    before: {
+      //    |----------X----------|
+      //                                   |----------Y----------|
+      x: new TestInterval(0n, 40n),
+      y: new TestInterval(60n, 100n)
+    },
+    meets: {
+      //    |----------X----------|
+      //                           |-----------Y----------|
+      x: new TestInterval(0n, 50n),
+      y: new TestInterval(51n, 100n)
+    },
+    overlaps: {
+      //    |----------X----------|
+      //                  |----------Y----------|
+      x: new TestInterval(0n, 60n),
+      y: new TestInterval(40n, 100n)
+    },
+    begins: {
+      //    |-----X-----|
+      //    |----------Y----------|
+      x: new TestInterval(0n, 60n),
+      y: new TestInterval(0n, 100n)
+    },
+    during: {
+      //         |-----X-----|
+      //    |----------Y----------|
+      x: new TestInterval(30n, 70n),
+      y: new TestInterval(0n, 100n)
+    },
+    ends: {
+      //              |-----X-----|
+      //    |----------Y----------|
+      x: new TestInterval(40n, 100n),
+      y: new TestInterval(0n, 100n)
+    }
+  };
   return data;
 };

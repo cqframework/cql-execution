@@ -4,6 +4,7 @@ import { build } from './builder';
 import { Literal } from './literal';
 import * as DT from '../datatypes/datatypes';
 import { Context } from '../runtime/context';
+import { ELM_INTEGER_TYPE } from '../util/elmTypes';
 
 export class DateTime extends Expression {
   json: any;
@@ -35,7 +36,7 @@ export class DateTime extends Expression {
         this[property] = Literal.from({
           type: 'Literal',
           value: ctx.getTimezoneOffset(),
-          valueType: '{urn:hl7-org:elm-types:r1}Integer'
+          valueType: ELM_INTEGER_TYPE
         });
       }
     }

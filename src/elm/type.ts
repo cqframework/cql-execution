@@ -4,10 +4,27 @@ import { Expression, UnimplementedExpression } from './expression';
 import { DateTime, Date } from '../datatypes/datetime';
 import { Concept } from '../datatypes/clinical';
 import { Quantity, parseQuantity } from '../datatypes/quantity';
-import { isValidDecimal, isValidInteger, limitDecimalPrecision } from '../util/math';
+import { isValidDecimal, isValidInteger, isValidLong, limitDecimalPrecision } from '../util/math';
 import { normalizeMillisecondsField } from '../util/util';
 import { Ratio } from '../datatypes/ratio';
 import { Uncertainty } from '../datatypes/uncertainty';
+import {
+  ELM_NAMED_TYPE_SPECIFIER,
+  ELM_BOOLEAN_TYPE,
+  ELM_CONCEPT_TYPE,
+  ELM_DECIMAL_TYPE,
+  ELM_INTEGER_TYPE,
+  ELM_LONG_TYPE,
+  ELM_STRING_TYPE,
+  ELM_QUANTITY_TYPE,
+  ELM_DATETIME_TYPE,
+  ELM_DATE_TYPE,
+  ELM_TIME_TYPE,
+  ELM_LIST_TYPE_SPECIFIER,
+  ELM_TUPLE_TYPE_SPECIFIER,
+  ELM_INTERVAL_TYPE_SPECIFIER,
+  ELM_CHOICE_TYPE_SPECIFIER
+} from '../util/elmTypes';
 
 // TODO: Casting and Conversion needs unit tests!
 
@@ -23,7 +40,7 @@ export class As extends Expression {
       // convert it to a NamedTypedSpecifier
       this.asTypeSpecifier = {
         name: json.asType,
-        type: 'NamedTypeSpecifier'
+        type: ELM_NAMED_TYPE_SPECIFIER
       };
     }
     this.strict = json.strict != null ? json.strict : false;
@@ -147,13 +164,44 @@ export class ToInteger extends Expression {
 
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
-    if (typeof arg === 'string') {
-      const integer = parseInt(arg);
+    if (typeof arg === 'number') {
+      if (isValidInteger(arg)) {
+        return arg;
+      }
+    } else if (typeof arg === 'string' || typeof arg === 'bigint') {
+      const integer = Number(arg);
       if (isValidInteger(integer)) {
         return integer;
       }
     } else if (typeof arg === 'boolean') {
       return arg ? 1 : 0;
+    }
+    return null;
+  }
+}
+
+export class ToLong extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const arg = await this.execArgs(ctx);
+    if (typeof arg === 'bigint') {
+      if (isValidLong(arg)) {
+        return arg;
+      }
+    } else if (typeof arg === 'number' || typeof arg === 'string') {
+      try {
+        const long = BigInt(arg);
+        if (isValidLong(long)) {
+          return long;
+        }
+      } catch {
+        return null;
+      }
+    } else if (typeof arg === 'boolean') {
+      return arg ? 1n : 0n;
     }
     return null;
   }
@@ -173,6 +221,8 @@ export class ToQuantity extends Expression {
       return null;
     } else if (typeof val === 'number') {
       return new Quantity(val, '1');
+    } else if (typeof val === 'bigint') {
+      return new Quantity(Number(val), '1');
     } else if (val.isRatio) {
       // numerator and denominator are guaranteed non-null
       return val.numerator.dividedBy(val.denominator);
@@ -301,23 +351,25 @@ export class Convert extends Expression {
 
   async exec(ctx: Context) {
     switch (this.toType) {
-      case '{urn:hl7-org:elm-types:r1}Boolean':
+      case ELM_BOOLEAN_TYPE:
         return new ToBoolean({ type: 'ToBoolean', operand: this.operand }).execute(ctx);
-      case '{urn:hl7-org:elm-types:r1}Concept':
+      case ELM_CONCEPT_TYPE:
         return new ToConcept({ type: 'ToConcept', operand: this.operand }).execute(ctx);
-      case '{urn:hl7-org:elm-types:r1}Decimal':
+      case ELM_DECIMAL_TYPE:
         return new ToDecimal({ type: 'ToDecimal', operand: this.operand }).execute(ctx);
-      case '{urn:hl7-org:elm-types:r1}Integer':
+      case ELM_INTEGER_TYPE:
         return new ToInteger({ type: 'ToInteger', operand: this.operand }).execute(ctx);
-      case '{urn:hl7-org:elm-types:r1}String':
+      case ELM_LONG_TYPE:
+        return new ToLong({ type: 'ToLong', operand: this.operand }).execute(ctx);
+      case ELM_STRING_TYPE:
         return new ToString({ type: 'ToString', operand: this.operand }).execute(ctx);
-      case '{urn:hl7-org:elm-types:r1}Quantity':
+      case ELM_QUANTITY_TYPE:
         return new ToQuantity({ type: 'ToQuantity', operand: this.operand }).execute(ctx);
-      case '{urn:hl7-org:elm-types:r1}DateTime':
+      case ELM_DATETIME_TYPE:
         return new ToDateTime({ type: 'ToDateTime', operand: this.operand }).execute(ctx);
-      case '{urn:hl7-org:elm-types:r1}Date':
+      case ELM_DATE_TYPE:
         return new ToDate({ type: 'ToDate', operand: this.operand }).execute(ctx);
-      case '{urn:hl7-org:elm-types:r1}Time':
+      case ELM_TIME_TYPE:
         return new ToTime({ type: 'ToTime', operand: this.operand }).execute(ctx);
       default:
         return this.execArgs(ctx);
@@ -411,6 +463,24 @@ export class ConvertsToInteger extends Expression {
       return null;
     } else {
       return canConvertToType(ToInteger, this.operand, ctx);
+    }
+  }
+}
+
+export class ConvertsToLong extends Expression {
+  operand: any;
+
+  constructor(json: any) {
+    super(json);
+    this.operand = json.operand;
+  }
+
+  async exec(ctx: Context) {
+    const operatorValue = await this.execArgs(ctx);
+    if (operatorValue === null) {
+      return null;
+    } else {
+      return canConvertToType(ToLong, this.operand, ctx);
     }
   }
 }
@@ -551,7 +621,7 @@ export class Is extends Expression {
       // Convert it to a NamedTypeSpecifier
       this.isTypeSpecifier = {
         name: json.isType,
-        type: 'NamedTypeSpecifier'
+        type: ELM_NAMED_TYPE_SPECIFIER
       };
     }
   }
@@ -571,15 +641,15 @@ export class Is extends Expression {
 
 function isSystemType(spec: any): any {
   switch (spec.type) {
-    case 'NamedTypeSpecifier':
+    case ELM_NAMED_TYPE_SPECIFIER:
       return spec.name.startsWith('{urn:hl7-org:elm-types:r1}');
-    case 'ListTypeSpecifier':
+    case ELM_LIST_TYPE_SPECIFIER:
       return isSystemType(spec.elementType);
-    case 'TupleTypeSpecifier':
+    case ELM_TUPLE_TYPE_SPECIFIER:
       return spec.element.every((e: any) => isSystemType(e.elementType));
-    case 'IntervalTypeSpecifier':
+    case ELM_INTERVAL_TYPE_SPECIFIER:
       return isSystemType(spec.pointType);
-    case 'ChoiceTypeSpecifier':
+    case ELM_CHOICE_TYPE_SPECIFIER:
       return spec.choice.every((c: any) => isSystemType(c));
     default:
       return false;
@@ -593,17 +663,17 @@ function specifierToString(spec: any): any {
     return '';
   }
   switch (spec.type) {
-    case 'NamedTypeSpecifier':
+    case ELM_NAMED_TYPE_SPECIFIER:
       return spec.name;
-    case 'ListTypeSpecifier':
+    case ELM_LIST_TYPE_SPECIFIER:
       return `List<${specifierToString(spec.elementType)}>`;
-    case 'TupleTypeSpecifier':
+    case ELM_TUPLE_TYPE_SPECIFIER:
       return `Tuple<${spec.element
         .map((e: any) => `${e.name} ${specifierToString(e.elementType)}`)
         .join(', ')}>`;
-    case 'IntervalTypeSpecifier':
+    case ELM_INTERVAL_TYPE_SPECIFIER:
       return `Interval<${specifierToString(spec.pointType)}>`;
-    case 'ChoiceTypeSpecifier':
+    case ELM_CHOICE_TYPE_SPECIFIER:
       return `Choice<${spec.choice.map((c: any) => specifierToString(c)).join(', ')}>`;
     default:
       return JSON.stringify(spec);
@@ -618,42 +688,44 @@ function guessSpecifierType(val: any): any {
   if (typeHierarchy && typeHierarchy.length > 0) {
     return typeHierarchy[0];
   } else if (typeof val === 'boolean') {
-    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Boolean' };
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_BOOLEAN_TYPE };
   } else if (typeof val === 'number' && Math.floor(val) === val) {
     // it could still be a decimal, but we have to just take our best guess!
-    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Integer' };
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_INTEGER_TYPE };
   } else if (typeof val === 'number') {
-    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Decimal' };
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_DECIMAL_TYPE };
+  } else if (typeof val === 'bigint') {
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_LONG_TYPE };
   } else if (typeof val === 'string') {
-    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}String' };
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_STRING_TYPE };
   } else if (val.isConcept) {
-    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Concept' };
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_CONCEPT_TYPE };
   } else if (val.isCode) {
-    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Code' };
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: '{urn:hl7-org:elm-types:r1}Code' };
   } else if (val.isDate) {
-    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Date' };
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_DATE_TYPE };
   } else if (val.isTime && val.isTime()) {
-    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Time' };
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_TIME_TYPE };
   } else if (val.isDateTime) {
-    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}DateTime' };
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_DATETIME_TYPE };
   } else if (val.isQuantity) {
-    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}DateTime' };
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_DATETIME_TYPE };
   } else if (Array.isArray(val)) {
     // Get unique types from the array (by converting to string and putting in a Set)
     const typesAsStrings = Array.from(new Set(val.map(v => JSON.stringify(guessSpecifierType(v)))));
     const types = typesAsStrings.map(ts => (/^{/.test(ts) ? JSON.parse(ts) : ts));
     return {
-      type: 'ListTypeSpecifier',
-      elementType: types.length == 1 ? types[0] : { type: 'ChoiceTypeSpecifier', choice: types }
+      type: ELM_LIST_TYPE_SPECIFIER,
+      elementType: types.length == 1 ? types[0] : { type: ELM_CHOICE_TYPE_SPECIFIER, choice: types }
     };
   } else if (val.isInterval) {
     return {
-      type: 'IntervalTypeSpecifier',
+      type: ELM_INTERVAL_TYPE_SPECIFIER,
       pointType: val.pointType
     };
   } else if (typeof val === 'object' && Object.keys(val).length > 0) {
     return {
-      type: 'TupleTypeSpecifier',
+      type: ELM_TUPLE_TYPE_SPECIFIER,
       element: Object.keys(val).map(k => ({ name: k, elementType: guessSpecifierType(val[k]) }))
     };
   }
