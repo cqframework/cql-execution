@@ -4,7 +4,7 @@
       {
         "type": "CqlToElmInfo",
         "translatorVersion": "4.2.0",
-        "translatorOptions": "",
+        "translatorOptions": "EnableResultTypes",
         "signatureLevel": "None"
       }
     ],
@@ -66,25 +66,711 @@
           "context": "Patient",
           "accessLevel": "Public",
           "annotation": [],
+          "resultTypeSpecifier": {
+            "type": "TupleTypeSpecifier",
+            "annotation": [],
+            "element": [
+              {
+                "name": "CoalesceANull",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CoalesceNullA",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CoalesceEmptyList",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CoalesceListFirstA",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CoalesceListLastA",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CoalesceFirstList",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CoalesceLastList",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeCoalesce",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeListCoalesce",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TimeCoalesce",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Time",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "TimeListCoalesce",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Time",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Time",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
           "expression": {
             "type": "Tuple",
             "annotation": [],
+            "resultTypeSpecifier": {
+              "type": "TupleTypeSpecifier",
+              "annotation": [],
+              "element": [
+                {
+                  "name": "CoalesceANull",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CoalesceNullA",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CoalesceEmptyList",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CoalesceListFirstA",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CoalesceListLastA",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CoalesceFirstList",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CoalesceLastList",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "DateTimeCoalesce",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "DateTimeListCoalesce",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "TimeCoalesce",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "TimeListCoalesce",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
             "element": [
               {
                 "name": "CoalesceANull",
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Coalesce",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": [],
                         "signature": [],
                         "operand": [
                           {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                             "valueType": "{urn:hl7-org:elm-types:r1}String",
                             "value": "a",
                             "annotation": []
@@ -96,6 +782,7 @@
                             "signature": [],
                             "operand": {
                               "type": "Null",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                               "annotation": []
                             }
                           }
@@ -106,6 +793,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
                         "value": "a",
                         "annotation": []
@@ -119,11 +807,36 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Coalesce",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": [],
                         "signature": [],
                         "operand": [
@@ -134,11 +847,13 @@
                             "signature": [],
                             "operand": {
                               "type": "Null",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                               "annotation": []
                             }
                           },
                           {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                             "valueType": "{urn:hl7-org:elm-types:r1}String",
                             "value": "a",
                             "annotation": []
@@ -150,6 +865,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
                         "value": "a",
                         "annotation": []
@@ -163,17 +879,51 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Coalesce",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                         "annotation": [],
                         "signature": [],
                         "operand": [
                           {
                             "type": "List",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Any",
+                                "annotation": []
+                              }
+                            },
                             "element": []
                           }
                         ]
@@ -183,6 +933,7 @@
                       "name": "output",
                       "value": {
                         "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                         "annotation": []
                       }
                     }
@@ -194,20 +945,55 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Coalesce",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": [],
                         "signature": [],
                         "operand": [
                           {
                             "type": "List",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}String",
+                                "annotation": []
+                              }
+                            },
                             "element": [
                               {
                                 "type": "Literal",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                                 "valueType": "{urn:hl7-org:elm-types:r1}String",
                                 "value": "a",
                                 "annotation": []
@@ -219,6 +1005,7 @@
                                 "signature": [],
                                 "operand": {
                                   "type": "Null",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                                   "annotation": []
                                 }
                               },
@@ -229,6 +1016,7 @@
                                 "signature": [],
                                 "operand": {
                                   "type": "Null",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                                   "annotation": []
                                 }
                               }
@@ -241,6 +1029,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
                         "value": "a",
                         "annotation": []
@@ -254,17 +1043,51 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Coalesce",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": [],
                         "signature": [],
                         "operand": [
                           {
                             "type": "List",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}String",
+                                "annotation": []
+                              }
+                            },
                             "element": [
                               {
                                 "type": "As",
@@ -273,6 +1096,7 @@
                                 "signature": [],
                                 "operand": {
                                   "type": "Null",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                                   "annotation": []
                                 }
                               },
@@ -283,11 +1107,13 @@
                                 "signature": [],
                                 "operand": {
                                   "type": "Null",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                                   "annotation": []
                                 }
                               },
                               {
                                 "type": "Literal",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                                 "valueType": "{urn:hl7-org:elm-types:r1}String",
                                 "value": "a",
                                 "annotation": []
@@ -301,6 +1127,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
                         "value": "a",
                         "annotation": []
@@ -314,20 +1141,71 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Coalesce",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        },
                         "signature": [],
                         "operand": [
                           {
                             "type": "List",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}String",
+                                "annotation": []
+                              }
+                            },
                             "element": [
                               {
                                 "type": "Literal",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                                 "valueType": "{urn:hl7-org:elm-types:r1}String",
                                 "value": "a",
                                 "annotation": []
@@ -340,6 +1218,7 @@
                             "signature": [],
                             "operand": {
                               "type": "Null",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                               "annotation": []
                             },
                             "asTypeSpecifier": {
@@ -358,6 +1237,7 @@
                             "signature": [],
                             "operand": {
                               "type": "Null",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                               "annotation": []
                             },
                             "asTypeSpecifier": {
@@ -378,9 +1258,19 @@
                       "value": {
                         "type": "List",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        },
                         "element": [
                           {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                             "valueType": "{urn:hl7-org:elm-types:r1}String",
                             "value": "a",
                             "annotation": []
@@ -396,12 +1286,53 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Coalesce",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        },
                         "signature": [],
                         "operand": [
                           {
@@ -410,6 +1341,7 @@
                             "signature": [],
                             "operand": {
                               "type": "Null",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                               "annotation": []
                             },
                             "asTypeSpecifier": {
@@ -428,6 +1360,7 @@
                             "signature": [],
                             "operand": {
                               "type": "Null",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                               "annotation": []
                             },
                             "asTypeSpecifier": {
@@ -443,9 +1376,19 @@
                           {
                             "type": "List",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}String",
+                                "annotation": []
+                              }
+                            },
                             "element": [
                               {
                                 "type": "Literal",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                                 "valueType": "{urn:hl7-org:elm-types:r1}String",
                                 "value": "a",
                                 "annotation": []
@@ -460,9 +1403,19 @@
                       "value": {
                         "type": "List",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}String",
+                            "annotation": []
+                          }
+                        },
                         "element": [
                           {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                             "valueType": "{urn:hl7-org:elm-types:r1}String",
                             "value": "a",
                             "annotation": []
@@ -478,40 +1431,71 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Coalesce",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                         "annotation": [],
                         "signature": [],
                         "operand": [
                           {
                             "type": "Null",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                             "annotation": []
                           },
                           {
                             "type": "Null",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                             "annotation": []
                           },
                           {
                             "type": "DateTime",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                             "annotation": [],
                             "signature": [],
                             "year": {
                               "type": "Literal",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                               "value": "2012",
                               "annotation": []
                             },
                             "month": {
                               "type": "Literal",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                               "value": "5",
                               "annotation": []
                             },
                             "day": {
                               "type": "Literal",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                               "value": "18",
                               "annotation": []
@@ -524,6 +1508,7 @@
                       "name": "output",
                       "value": {
                         "type": "DateTime",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                         "annotation": [],
                         "signature": [],
                         "year": {
@@ -554,17 +1539,51 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Coalesce",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                         "annotation": [],
                         "signature": [],
                         "operand": [
                           {
                             "type": "List",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                                "annotation": []
+                              }
+                            },
                             "element": [
                               {
                                 "type": "As",
@@ -573,6 +1592,7 @@
                                 "signature": [],
                                 "operand": {
                                   "type": "Null",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                                   "annotation": []
                                 }
                               },
@@ -583,27 +1603,32 @@
                                 "signature": [],
                                 "operand": {
                                   "type": "Null",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                                   "annotation": []
                                 }
                               },
                               {
                                 "type": "DateTime",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                                 "annotation": [],
                                 "signature": [],
                                 "year": {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "2012",
                                   "annotation": []
                                 },
                                 "month": {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "5",
                                   "annotation": []
                                 },
                                 "day": {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "18",
                                   "annotation": []
@@ -618,6 +1643,7 @@
                       "name": "output",
                       "value": {
                         "type": "DateTime",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                         "annotation": [],
                         "signature": [],
                         "year": {
@@ -648,24 +1674,52 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Coalesce",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                         "annotation": [],
                         "signature": [],
                         "operand": [
                           {
                             "type": "Null",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                             "annotation": []
                           },
                           {
                             "type": "Null",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                             "annotation": []
                           },
                           {
                             "type": "Time",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Time",
                             "annotation": [],
                             "signature": [],
                             "hour": {
@@ -700,6 +1754,7 @@
                       "name": "output",
                       "value": {
                         "type": "Time",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Time",
                         "annotation": [],
                         "signature": [],
                         "hour": {
@@ -736,17 +1791,51 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Time",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Coalesce",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Time",
                         "annotation": [],
                         "signature": [],
                         "operand": [
                           {
                             "type": "List",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Time",
+                                "annotation": []
+                              }
+                            },
                             "element": [
                               {
                                 "type": "As",
@@ -755,6 +1844,7 @@
                                 "signature": [],
                                 "operand": {
                                   "type": "Null",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                                   "annotation": []
                                 }
                               },
@@ -765,11 +1855,13 @@
                                 "signature": [],
                                 "operand": {
                                   "type": "Null",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                                   "annotation": []
                                 }
                               },
                               {
                                 "type": "Time",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}Time",
                                 "annotation": [],
                                 "signature": [],
                                 "hour": {
@@ -806,6 +1898,7 @@
                       "name": "output",
                       "value": {
                         "type": "Time",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Time",
                         "annotation": [],
                         "signature": [],
                         "hour": {
@@ -845,24 +1938,342 @@
           "context": "Patient",
           "accessLevel": "Public",
           "annotation": [],
+          "resultTypeSpecifier": {
+            "type": "TupleTypeSpecifier",
+            "annotation": [],
+            "element": [
+              {
+                "name": "IsNullTrue",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IsNullFalseEmptyString",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IsNullAlsoFalseAbcString",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IsNullAlsoFalseNumber1",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IsNullAlsoFalseNumberZero",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
           "expression": {
             "type": "Tuple",
             "annotation": [],
+            "resultTypeSpecifier": {
+              "type": "TupleTypeSpecifier",
+              "annotation": [],
+              "element": [
+                {
+                  "name": "IsNullTrue",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "IsNullFalseEmptyString",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "IsNullAlsoFalseAbcString",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "IsNullAlsoFalseNumber1",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "IsNullAlsoFalseNumberZero",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
             "element": [
               {
                 "name": "IsNullTrue",
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "IsNull",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "annotation": [],
                         "signature": [],
                         "operand": {
                           "type": "Null",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                           "annotation": []
                         }
                       }
@@ -871,6 +2282,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                         "value": "true",
                         "annotation": []
@@ -884,15 +2296,41 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "IsNull",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "annotation": [],
                         "signature": [],
                         "operand": {
                           "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                           "valueType": "{urn:hl7-org:elm-types:r1}String",
                           "value": "",
                           "annotation": []
@@ -903,6 +2341,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                         "value": "false",
                         "annotation": []
@@ -916,15 +2355,41 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "IsNull",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "annotation": [],
                         "signature": [],
                         "operand": {
                           "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                           "valueType": "{urn:hl7-org:elm-types:r1}String",
                           "value": "abc",
                           "annotation": []
@@ -935,6 +2400,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                         "value": "false",
                         "annotation": []
@@ -948,15 +2414,41 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "IsNull",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "annotation": [],
                         "signature": [],
                         "operand": {
                           "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                           "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                           "value": "1",
                           "annotation": []
@@ -967,6 +2459,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                         "value": "false",
                         "annotation": []
@@ -980,15 +2473,41 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "IsNull",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "annotation": [],
                         "signature": [],
                         "operand": {
                           "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                           "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                           "value": "0",
                           "annotation": []
@@ -999,6 +2518,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                         "value": "false",
                         "annotation": []
@@ -1015,24 +2535,230 @@
           "context": "Patient",
           "accessLevel": "Public",
           "annotation": [],
+          "resultTypeSpecifier": {
+            "type": "TupleTypeSpecifier",
+            "annotation": [],
+            "element": [
+              {
+                "name": "IsFalseFalse",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IsFalseTrue",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IsFalseNull",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
           "expression": {
             "type": "Tuple",
             "annotation": [],
+            "resultTypeSpecifier": {
+              "type": "TupleTypeSpecifier",
+              "annotation": [],
+              "element": [
+                {
+                  "name": "IsFalseFalse",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "IsFalseTrue",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "IsFalseNull",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
             "element": [
               {
                 "name": "IsFalseFalse",
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "IsFalse",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "annotation": [],
                         "signature": [],
                         "operand": {
                           "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                           "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                           "value": "false",
                           "annotation": []
@@ -1043,6 +2769,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                         "value": "true",
                         "annotation": []
@@ -1056,15 +2783,41 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "IsFalse",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "annotation": [],
                         "signature": [],
                         "operand": {
                           "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                           "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                           "value": "true",
                           "annotation": []
@@ -1075,6 +2828,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                         "value": "false",
                         "annotation": []
@@ -1088,11 +2842,36 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "IsFalse",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "annotation": [],
                         "signature": [],
                         "operand": {
@@ -1102,6 +2881,7 @@
                           "signature": [],
                           "operand": {
                             "type": "Null",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                             "annotation": []
                           }
                         }
@@ -1111,6 +2891,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                         "value": "false",
                         "annotation": []
@@ -1127,24 +2908,230 @@
           "context": "Patient",
           "accessLevel": "Public",
           "annotation": [],
+          "resultTypeSpecifier": {
+            "type": "TupleTypeSpecifier",
+            "annotation": [],
+            "element": [
+              {
+                "name": "IsTrueTrue",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IsTrueFalse",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IsTrueNull",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
           "expression": {
             "type": "Tuple",
             "annotation": [],
+            "resultTypeSpecifier": {
+              "type": "TupleTypeSpecifier",
+              "annotation": [],
+              "element": [
+                {
+                  "name": "IsTrueTrue",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "IsTrueFalse",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "IsTrueNull",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
             "element": [
               {
                 "name": "IsTrueTrue",
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "IsTrue",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "annotation": [],
                         "signature": [],
                         "operand": {
                           "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                           "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                           "value": "true",
                           "annotation": []
@@ -1155,6 +3142,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                         "value": "true",
                         "annotation": []
@@ -1168,15 +3156,41 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "IsTrue",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "annotation": [],
                         "signature": [],
                         "operand": {
                           "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                           "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                           "value": "false",
                           "annotation": []
@@ -1187,6 +3201,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                         "value": "false",
                         "annotation": []
@@ -1200,11 +3215,36 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Boolean",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "IsTrue",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "annotation": [],
                         "signature": [],
                         "operand": {
@@ -1214,6 +3254,7 @@
                           "signature": [],
                           "operand": {
                             "type": "Null",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                             "annotation": []
                           }
                         }
@@ -1223,6 +3264,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
                         "valueType": "{urn:hl7-org:elm-types:r1}Boolean",
                         "value": "false",
                         "annotation": []

@@ -1600,7 +1600,7 @@ describe('Size', () => {
   it('should calculate size of interval of quantities', async function () {
     // define SizeOfQuantityInterval: Size(Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}])
     const size = await this.sizeOfQuantityInterval.exec(this.ctx);
-    size.value.should.equal(10);
+    size.value.should.equal(9.00000001);
     size.unit.should.equal('mm');
   });
 
@@ -2571,12 +2571,6 @@ describe('Collapse', () => {
     );
   });
 
-  it('Quantity with units uses point type as default per value', async function () {
-    (await this.collapseDisjointQuantityUnits.exec(this.ctx)).should.eql(
-      await this.expectedQuantityUnitsCollapse.exec(this.ctx)
-    );
-  });
-
   it('Quantity with units disjoint but within per', async function () {
     (await this.collapseQuantityUnitsWithinPer.exec(this.ctx)).should.eql(
       await this.expectedQuantityUnitsCollapse.exec(this.ctx)
@@ -2586,6 +2580,18 @@ describe('Collapse', () => {
   it('Quantity with units disjoint and not within per', async function () {
     (await this.collapseQuantityUnitsNotWithinPer.exec(this.ctx)).should.eql(
       await this.quantityMeterIntervalList.exec(this.ctx)
+    );
+  });
+
+  it('Quantity with units uses point type as default per value', async function () {
+    (await this.collapseDisjointQuantityUnits.exec(this.ctx)).should.eql(
+      await this.quantityMeterIntervalList.exec(this.ctx)
+    );
+  });
+
+  it('Quantity with units within default per', async function () {
+    (await this.collapseQuantityUnitsWithinDefaultPer.exec(this.ctx)).should.eql(
+      await this.expectedQuantityUnitsCollapse.exec(this.ctx)
     );
   });
 

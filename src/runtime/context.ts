@@ -3,6 +3,23 @@ import { Exception } from '../datatypes/exception';
 import { Library } from '../elm/library';
 import { PatientObject, RetrieveDetails, TerminologyProvider } from '../types';
 import { Parameter } from '../types/runtime.types';
+import {
+  ELM_NAMED_TYPE_SPECIFIER,
+  ELM_LIST_TYPE_SPECIFIER,
+  ELM_TUPLE_TYPE_SPECIFIER,
+  ELM_INTERVAL_TYPE_SPECIFIER,
+  ELM_CHOICE_TYPE_SPECIFIER,
+  ELM_BOOLEAN_TYPE,
+  ELM_DECIMAL_TYPE,
+  ELM_INTEGER_TYPE,
+  ELM_LONG_TYPE,
+  ELM_STRING_TYPE,
+  ELM_CONCEPT_TYPE,
+  ELM_DATETIME_TYPE,
+  ELM_DATE_TYPE,
+  ELM_QUANTITY_TYPE,
+  ELM_TIME_TYPE
+} from '../util/elmTypes';
 import { typeIsArray } from '../util/util';
 import { MessageListener, NullMessageListener } from './messageListeners';
 
@@ -263,15 +280,15 @@ export class Context {
 
   matchesTypeSpecifier(val: any, spec: any) {
     switch (spec.type) {
-      case 'NamedTypeSpecifier':
+      case ELM_NAMED_TYPE_SPECIFIER:
         return this.matchesNamedTypeSpecifier(val, spec);
-      case 'ListTypeSpecifier':
+      case ELM_LIST_TYPE_SPECIFIER:
         return this.matchesListTypeSpecifier(val, spec);
-      case 'TupleTypeSpecifier':
+      case ELM_TUPLE_TYPE_SPECIFIER:
         return this.matchesTupleTypeSpecifier(val, spec);
-      case 'IntervalTypeSpecifier':
+      case ELM_INTERVAL_TYPE_SPECIFIER:
         return this.matchesIntervalTypeSpecifier(val, spec);
-      case 'ChoiceTypeSpecifier':
+      case ELM_CHOICE_TYPE_SPECIFIER:
         return this.matchesChoiceTypeSpecifier(val, spec);
       default:
         return true; // default to true when we don't know
@@ -321,27 +338,27 @@ export class Context {
       return true;
     }
     switch (spec.name) {
-      case '{urn:hl7-org:elm-types:r1}Boolean':
+      case ELM_BOOLEAN_TYPE:
         return typeof val === 'boolean';
-      case '{urn:hl7-org:elm-types:r1}Decimal':
+      case ELM_DECIMAL_TYPE:
         return typeof val === 'number';
-      case '{urn:hl7-org:elm-types:r1}Integer':
+      case ELM_INTEGER_TYPE:
         return typeof val === 'number' && Math.floor(val) === val;
-      case '{urn:hl7-org:elm-types:r1}Long':
+      case ELM_LONG_TYPE:
         return typeof val === 'bigint';
-      case '{urn:hl7-org:elm-types:r1}String':
+      case ELM_STRING_TYPE:
         return typeof val === 'string';
-      case '{urn:hl7-org:elm-types:r1}Concept':
+      case ELM_CONCEPT_TYPE:
         return val && val.isConcept;
       case '{urn:hl7-org:elm-types:r1}Code':
         return val && val.isCode;
-      case '{urn:hl7-org:elm-types:r1}DateTime':
+      case ELM_DATETIME_TYPE:
         return val && val.isDateTime;
-      case '{urn:hl7-org:elm-types:r1}Date':
+      case ELM_DATE_TYPE:
         return val && val.isDate;
-      case '{urn:hl7-org:elm-types:r1}Quantity':
+      case ELM_QUANTITY_TYPE:
         return val && val.isQuantity;
-      case '{urn:hl7-org:elm-types:r1}Time':
+      case ELM_TIME_TYPE:
         return val && val.isTime && val.isTime();
       default:
         // Use the data model's implementation of _is, if it is available

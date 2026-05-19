@@ -311,11 +311,11 @@ describe('FromTime', () => {
     setup(this, data);
   });
 
-  it.skip("should convert @T11:57 to '11:57'", async function () {
+  it("should convert @T11:57 to '11:57'", async function () {
     (await this.timeStr.exec(this.ctx)).should.equal('11:57');
   });
 
-  it.skip('should convert @T11:57 to @11:57', async function () {
+  it('should convert @T11:57 to @11:57', async function () {
     const time = await this.timeTime.exec(this.ctx);
     time.hour.should.equal(11);
     time.minute.should.equal(57);

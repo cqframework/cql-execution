@@ -4,7 +4,7 @@
       {
         "type": "CqlToElmInfo",
         "translatorVersion": "4.2.0",
-        "translatorOptions": "",
+        "translatorOptions": "EnableResultTypes",
         "signatureLevel": "None"
       }
     ],
@@ -66,27 +66,326 @@
           "context": "Patient",
           "accessLevel": "Public",
           "annotation": [],
+          "resultTypeSpecifier": {
+            "type": "TupleTypeSpecifier",
+            "annotation": [],
+            "element": [
+              {
+                "name": "NonListSource",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "NonListSourceWithReturn",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "MultiSource",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "TupleTypeSpecifier",
+                          "annotation": [],
+                          "element": [
+                            {
+                              "name": "A",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            },
+                            {
+                              "name": "B",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "TupleTypeSpecifier",
+                          "annotation": [],
+                          "element": [
+                            {
+                              "name": "A",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            },
+                            {
+                              "name": "B",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
           "expression": {
             "type": "Tuple",
             "annotation": [],
+            "resultTypeSpecifier": {
+              "type": "TupleTypeSpecifier",
+              "annotation": [],
+              "element": [
+                {
+                  "name": "NonListSource",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "NonListSourceWithReturn",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "MultiSource",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "TupleTypeSpecifier",
+                            "annotation": [],
+                            "element": [
+                              {
+                                "name": "A",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
+                              {
+                                "name": "B",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "TupleTypeSpecifier",
+                            "annotation": [],
+                            "element": [
+                              {
+                                "name": "A",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
+                              {
+                                "name": "B",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
             "element": [
               {
                 "name": "NonListSource",
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Query",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "annotation": [],
                         "source": [
                           {
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "alias": "l",
                             "annotation": [],
                             "expression": {
                               "type": "Literal",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                               "value": "4",
                               "annotation": []
@@ -101,6 +400,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                         "value": "4",
                         "annotation": []
@@ -114,18 +414,45 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Query",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": [],
                         "source": [
                           {
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "alias": "l",
                             "annotation": [],
                             "expression": {
                               "type": "Literal",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                               "value": "4",
                               "annotation": []
@@ -135,9 +462,11 @@
                         "let": [],
                         "relationship": [],
                         "return": {
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": [],
                           "expression": {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                             "valueType": "{urn:hl7-org:elm-types:r1}String",
                             "value": "Hello World",
                             "annotation": []
@@ -149,6 +478,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
                         "value": "Hello World",
                         "annotation": []
@@ -162,28 +492,146 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "TupleTypeSpecifier",
+                            "annotation": [],
+                            "element": [
+                              {
+                                "name": "A",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
+                              {
+                                "name": "B",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "TupleTypeSpecifier",
+                            "annotation": [],
+                            "element": [
+                              {
+                                "name": "A",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
+                              {
+                                "name": "B",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Query",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "TupleTypeSpecifier",
+                            "annotation": [],
+                            "element": [
+                              {
+                                "name": "A",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
+                              {
+                                "name": "B",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              }
+                            ]
+                          }
+                        },
                         "source": [
                           {
                             "alias": "A",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            },
                             "expression": {
                               "type": "List",
                               "annotation": [],
+                              "resultTypeSpecifier": {
+                                "type": "ListTypeSpecifier",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
                               "element": [
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "2",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
@@ -194,18 +642,38 @@
                           {
                             "alias": "B",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            },
                             "expression": {
                               "type": "List",
                               "annotation": [],
+                              "resultTypeSpecifier": {
+                                "type": "ListTypeSpecifier",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
                               "element": [
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "5",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "6",
                                   "annotation": []
@@ -249,15 +717,68 @@
                       "value": {
                         "type": "List",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "TupleTypeSpecifier",
+                            "annotation": [],
+                            "element": [
+                              {
+                                "name": "A",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
+                              {
+                                "name": "B",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              }
+                            ]
+                          }
+                        },
                         "element": [
                           {
                             "type": "Tuple",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "TupleTypeSpecifier",
+                              "annotation": [],
+                              "element": [
+                                {
+                                  "name": "A",
+                                  "annotation": [],
+                                  "elementType": {
+                                    "type": "NamedTypeSpecifier",
+                                    "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "annotation": []
+                                  }
+                                },
+                                {
+                                  "name": "B",
+                                  "annotation": [],
+                                  "elementType": {
+                                    "type": "NamedTypeSpecifier",
+                                    "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "annotation": []
+                                  }
+                                }
+                              ]
+                            },
                             "element": [
                               {
                                 "name": "A",
                                 "value": {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "2",
                                   "annotation": []
@@ -267,6 +788,7 @@
                                 "name": "B",
                                 "value": {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "5",
                                   "annotation": []
@@ -277,11 +799,36 @@
                           {
                             "type": "Tuple",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "TupleTypeSpecifier",
+                              "annotation": [],
+                              "element": [
+                                {
+                                  "name": "A",
+                                  "annotation": [],
+                                  "elementType": {
+                                    "type": "NamedTypeSpecifier",
+                                    "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "annotation": []
+                                  }
+                                },
+                                {
+                                  "name": "B",
+                                  "annotation": [],
+                                  "elementType": {
+                                    "type": "NamedTypeSpecifier",
+                                    "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "annotation": []
+                                  }
+                                }
+                              ]
+                            },
                             "element": [
                               {
                                 "name": "A",
                                 "value": {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "2",
                                   "annotation": []
@@ -291,6 +838,7 @@
                                 "name": "B",
                                 "value": {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "6",
                                   "annotation": []
@@ -301,11 +849,36 @@
                           {
                             "type": "Tuple",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "TupleTypeSpecifier",
+                              "annotation": [],
+                              "element": [
+                                {
+                                  "name": "A",
+                                  "annotation": [],
+                                  "elementType": {
+                                    "type": "NamedTypeSpecifier",
+                                    "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "annotation": []
+                                  }
+                                },
+                                {
+                                  "name": "B",
+                                  "annotation": [],
+                                  "elementType": {
+                                    "type": "NamedTypeSpecifier",
+                                    "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "annotation": []
+                                  }
+                                }
+                              ]
+                            },
                             "element": [
                               {
                                 "name": "A",
                                 "value": {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
@@ -315,6 +888,7 @@
                                 "name": "B",
                                 "value": {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "5",
                                   "annotation": []
@@ -325,11 +899,36 @@
                           {
                             "type": "Tuple",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "TupleTypeSpecifier",
+                              "annotation": [],
+                              "element": [
+                                {
+                                  "name": "A",
+                                  "annotation": [],
+                                  "elementType": {
+                                    "type": "NamedTypeSpecifier",
+                                    "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "annotation": []
+                                  }
+                                },
+                                {
+                                  "name": "B",
+                                  "annotation": [],
+                                  "elementType": {
+                                    "type": "NamedTypeSpecifier",
+                                    "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "annotation": []
+                                  }
+                                }
+                              ]
+                            },
                             "element": [
                               {
                                 "name": "A",
                                 "value": {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
@@ -339,6 +938,7 @@
                                 "name": "B",
                                 "value": {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "6",
                                   "annotation": []
@@ -360,43 +960,405 @@
           "context": "Patient",
           "accessLevel": "Public",
           "annotation": [],
+          "resultTypeSpecifier": {
+            "type": "TupleTypeSpecifier",
+            "annotation": [],
+            "element": [
+              {
+                "name": "IntegerDescending",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "IntegerAscending",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeDescending",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "DateTimeAscending",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
           "expression": {
             "type": "Tuple",
             "annotation": [],
+            "resultTypeSpecifier": {
+              "type": "TupleTypeSpecifier",
+              "annotation": [],
+              "element": [
+                {
+                  "name": "IntegerDescending",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": []
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "IntegerAscending",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": []
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "DateTimeDescending",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": []
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "DateTimeAscending",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": []
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
             "element": [
               {
                 "name": "IntegerDescending",
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": []
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Query",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": []
+                          }
+                        },
                         "source": [
                           {
                             "alias": "l",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            },
                             "expression": {
                               "type": "List",
                               "annotation": [],
+                              "resultTypeSpecifier": {
+                                "type": "ListTypeSpecifier",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
                               "element": [
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "1",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "2",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
@@ -424,21 +1386,33 @@
                       "value": {
                         "type": "List",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": []
+                          }
+                        },
                         "element": [
                           {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                             "value": "3",
                             "annotation": []
                           },
                           {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                             "value": "2",
                             "annotation": []
                           },
                           {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                             "value": "1",
                             "annotation": []
@@ -454,34 +1428,96 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": []
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Query",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": []
+                          }
+                        },
                         "source": [
                           {
                             "alias": "l",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            },
                             "expression": {
                               "type": "List",
                               "annotation": [],
+                              "resultTypeSpecifier": {
+                                "type": "ListTypeSpecifier",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
                               "element": [
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "1",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "2",
                                   "annotation": []
@@ -509,21 +1545,33 @@
                       "value": {
                         "type": "List",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": []
+                          }
+                        },
                         "element": [
                           {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                             "value": "1",
                             "annotation": []
                           },
                           {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                             "value": "2",
                             "annotation": []
                           },
                           {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                             "value": "3",
                             "annotation": []
@@ -539,22 +1587,82 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": []
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Query",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": []
+                          }
+                        },
                         "source": [
                           {
                             "alias": "l",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                                "annotation": []
+                              }
+                            },
                             "expression": {
                               "type": "List",
                               "annotation": [],
+                              "resultTypeSpecifier": {
+                                "type": "ListTypeSpecifier",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                                  "annotation": []
+                                }
+                              },
                               "element": [
                                 {
                                   "type": "DateTime",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                                   "annotation": [],
                                   "signature": [],
                                   "year": {
@@ -608,6 +1716,7 @@
                                 },
                                 {
                                   "type": "DateTime",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                                   "annotation": [],
                                   "signature": [],
                                   "year": {
@@ -661,6 +1770,7 @@
                                 },
                                 {
                                   "type": "DateTime",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                                   "annotation": [],
                                   "signature": [],
                                   "year": {
@@ -735,9 +1845,19 @@
                       "value": {
                         "type": "List",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": []
+                          }
+                        },
                         "element": [
                           {
                             "type": "DateTime",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                             "annotation": [],
                             "signature": [],
                             "year": {
@@ -791,6 +1911,7 @@
                           },
                           {
                             "type": "DateTime",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                             "annotation": [],
                             "signature": [],
                             "year": {
@@ -844,6 +1965,7 @@
                           },
                           {
                             "type": "DateTime",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                             "annotation": [],
                             "signature": [],
                             "year": {
@@ -906,22 +2028,82 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": []
+                          }
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Query",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": []
+                          }
+                        },
                         "source": [
                           {
                             "alias": "l",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                                "annotation": []
+                              }
+                            },
                             "expression": {
                               "type": "List",
                               "annotation": [],
+                              "resultTypeSpecifier": {
+                                "type": "ListTypeSpecifier",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                                  "annotation": []
+                                }
+                              },
                               "element": [
                                 {
                                   "type": "DateTime",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                                   "annotation": [],
                                   "signature": [],
                                   "year": {
@@ -975,6 +2157,7 @@
                                 },
                                 {
                                   "type": "DateTime",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                                   "annotation": [],
                                   "signature": [],
                                   "year": {
@@ -1028,6 +2211,7 @@
                                 },
                                 {
                                   "type": "DateTime",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                                   "annotation": [],
                                   "signature": [],
                                   "year": {
@@ -1102,9 +2286,19 @@
                       "value": {
                         "type": "List",
                         "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}DateTime",
+                            "annotation": []
+                          }
+                        },
                         "element": [
                           {
                             "type": "DateTime",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                             "annotation": [],
                             "signature": [],
                             "year": {
@@ -1158,6 +2352,7 @@
                           },
                           {
                             "type": "DateTime",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                             "annotation": [],
                             "signature": [],
                             "year": {
@@ -1211,6 +2406,7 @@
                           },
                           {
                             "type": "DateTime",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime",
                             "annotation": [],
                             "signature": [],
                             "year": {
@@ -1276,55 +2472,395 @@
           "context": "Patient",
           "accessLevel": "Public",
           "annotation": [],
+          "resultTypeSpecifier": {
+            "type": "TupleTypeSpecifier",
+            "annotation": [],
+            "element": [
+              {
+                "name": "MultiplyIntegers",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "MultiplyIntegersAll",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "MultiplyIntegersDistinct",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "MultiplyIntegersNoStartingExpression",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "Multi-Source",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          },
           "expression": {
             "type": "Tuple",
             "annotation": [],
+            "resultTypeSpecifier": {
+              "type": "TupleTypeSpecifier",
+              "annotation": [],
+              "element": [
+                {
+                  "name": "MultiplyIntegers",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "MultiplyIntegersAll",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "MultiplyIntegersDistinct",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "MultiplyIntegersNoStartingExpression",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "Multi-Source",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
             "element": [
               {
                 "name": "MultiplyIntegers",
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Query",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "annotation": [],
                         "source": [
                           {
                             "alias": "L",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            },
                             "expression": {
                               "type": "List",
                               "annotation": [],
+                              "resultTypeSpecifier": {
+                                "type": "ListTypeSpecifier",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
                               "element": [
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "1",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "2",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "4",
                                   "annotation": []
@@ -1336,20 +2872,24 @@
                         "let": [],
                         "relationship": [],
                         "aggregate": {
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                           "identifier": "A",
                           "annotation": [],
                           "expression": {
                             "type": "Multiply",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "annotation": [],
                             "signature": [],
                             "operand": [
                               {
                                 "type": "QueryLetRef",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                 "name": "A",
                                 "annotation": []
                               },
                               {
                                 "type": "AliasRef",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                 "name": "L",
                                 "annotation": []
                               }
@@ -1357,6 +2897,7 @@
                           },
                           "starting": {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                             "value": "1",
                             "annotation": []
@@ -1368,6 +2909,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                         "value": "72",
                         "annotation": []
@@ -1381,46 +2923,94 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Query",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "annotation": [],
                         "source": [
                           {
                             "alias": "L",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            },
                             "expression": {
                               "type": "List",
                               "annotation": [],
+                              "resultTypeSpecifier": {
+                                "type": "ListTypeSpecifier",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
                               "element": [
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "1",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "2",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "4",
                                   "annotation": []
@@ -1432,21 +3022,25 @@
                         "let": [],
                         "relationship": [],
                         "aggregate": {
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                           "identifier": "A",
                           "distinct": false,
                           "annotation": [],
                           "expression": {
                             "type": "Multiply",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "annotation": [],
                             "signature": [],
                             "operand": [
                               {
                                 "type": "QueryLetRef",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                 "name": "A",
                                 "annotation": []
                               },
                               {
                                 "type": "AliasRef",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                 "name": "L",
                                 "annotation": []
                               }
@@ -1454,6 +3048,7 @@
                           },
                           "starting": {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                             "value": "1",
                             "annotation": []
@@ -1465,6 +3060,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                         "value": "72",
                         "annotation": []
@@ -1478,46 +3074,94 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Query",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "annotation": [],
                         "source": [
                           {
                             "alias": "L",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            },
                             "expression": {
                               "type": "List",
                               "annotation": [],
+                              "resultTypeSpecifier": {
+                                "type": "ListTypeSpecifier",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
                               "element": [
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "1",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "2",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "4",
                                   "annotation": []
@@ -1529,21 +3173,25 @@
                         "let": [],
                         "relationship": [],
                         "aggregate": {
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                           "identifier": "A",
                           "distinct": true,
                           "annotation": [],
                           "expression": {
                             "type": "Multiply",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "annotation": [],
                             "signature": [],
                             "operand": [
                               {
                                 "type": "QueryLetRef",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                 "name": "A",
                                 "annotation": []
                               },
                               {
                                 "type": "AliasRef",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                 "name": "L",
                                 "annotation": []
                               }
@@ -1551,6 +3199,7 @@
                           },
                           "starting": {
                             "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                             "value": "1",
                             "annotation": []
@@ -1562,6 +3211,7 @@
                       "name": "output",
                       "value": {
                         "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                         "value": "24",
                         "annotation": []
@@ -1575,34 +3225,80 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Query",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "annotation": [],
                         "source": [
                           {
                             "alias": "L",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            },
                             "expression": {
                               "type": "List",
                               "annotation": [],
+                              "resultTypeSpecifier": {
+                                "type": "ListTypeSpecifier",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
                               "element": [
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "1",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "2",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
@@ -1614,10 +3310,12 @@
                         "let": [],
                         "relationship": [],
                         "aggregate": {
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                           "identifier": "A",
                           "annotation": [],
                           "expression": {
                             "type": "Multiply",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "annotation": [],
                             "signature": [],
                             "operand": [
@@ -1628,12 +3326,14 @@
                                 "signature": [],
                                 "operand": {
                                   "type": "QueryLetRef",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                                   "name": "A",
                                   "annotation": []
                                 }
                               },
                               {
                                 "type": "AliasRef",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                 "name": "L",
                                 "annotation": []
                               }
@@ -1641,6 +3341,7 @@
                           },
                           "starting": {
                             "type": "Null",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                             "annotation": []
                           }
                         }
@@ -1650,6 +3351,7 @@
                       "name": "output",
                       "value": {
                         "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                         "annotation": []
                       }
                     }
@@ -1661,34 +3363,80 @@
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
                   "element": [
                     {
                       "name": "expression",
                       "value": {
                         "type": "Query",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "annotation": [],
                         "source": [
                           {
                             "alias": "B",
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "ListTypeSpecifier",
+                              "annotation": [],
+                              "elementType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            },
                             "expression": {
                               "type": "List",
                               "annotation": [],
+                              "resultTypeSpecifier": {
+                                "type": "ListTypeSpecifier",
+                                "annotation": [],
+                                "elementType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
                               "element": [
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "1",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "2",
                                   "annotation": []
                                 },
                                 {
                                   "type": "Literal",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                   "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                                   "value": "3",
                                   "annotation": []
@@ -1697,10 +3445,12 @@
                             }
                           },
                           {
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "alias": "C",
                             "annotation": [],
                             "expression": {
                               "type": "Literal",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                               "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                               "value": "4",
                               "annotation": []
@@ -1710,15 +3460,18 @@
                         "let": [],
                         "relationship": [],
                         "aggregate": {
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                           "identifier": "A",
                           "annotation": [],
                           "expression": {
                             "type": "Add",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                             "annotation": [],
                             "signature": [],
                             "operand": [
                               {
                                 "type": "Add",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                 "annotation": [],
                                 "signature": [],
                                 "operand": [
@@ -1729,12 +3482,14 @@
                                     "signature": [],
                                     "operand": {
                                       "type": "QueryLetRef",
+                                      "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                                       "name": "A",
                                       "annotation": []
                                     }
                                   },
                                   {
                                     "type": "AliasRef",
+                                    "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                     "name": "B",
                                     "annotation": []
                                   }
@@ -1742,6 +3497,7 @@
                               },
                               {
                                 "type": "AliasRef",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                 "name": "C",
                                 "annotation": []
                               }
@@ -1749,6 +3505,7 @@
                           },
                           "starting": {
                             "type": "Null",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                             "annotation": []
                           }
                         }
@@ -1758,6 +3515,7 @@
                       "name": "output",
                       "value": {
                         "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                         "annotation": []
                       }
                     }

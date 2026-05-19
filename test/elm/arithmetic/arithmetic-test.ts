@@ -310,6 +310,10 @@ describe('Power', () => {
     (await this.pow.exec(this.ctx)).should.equal(81);
   });
 
+  it('should be able to calculate the negative power of a number', async function () {
+    (await this.negPow.exec(this.ctx)).should.equal(0.1);
+  });
+
   it('should be able to calculate the power of a long', async function () {
     (await this.threeExpFourLong.exec(this.ctx)).should.equal(81n);
   });
@@ -980,11 +984,13 @@ describe('OutOfBounds', () => {
     });
 
     it('should return value for Divide near overflow', async function () {
-      should(await this.integerDivideNearOverflow.exec(this.ctx)).equal(MAX_INT_VALUE);
+      // not really near overflow, but more than max integer and near JavaScript max safe number
+      should(await this.integerDivideNearOverflow.exec(this.ctx)).equal(8589934588000000);
     });
 
     it('should return value for Divide near underflow', async function () {
-      should(await this.integerDivideNearUnderflow.exec(this.ctx)).equal(MIN_INT_VALUE);
+      // not really near underflow, but less than min integer and near JavaScript min safe number
+      should(await this.integerDivideNearUnderflow.exec(this.ctx)).equal(-8589934592000000);
     });
 
     it('should return null for Divide By Zero', async function () {
@@ -1082,13 +1088,13 @@ describe('OutOfBounds', () => {
     });
 
     it('should return value for Divide near overflow', async function () {
-      // Since Divide does not return Longs, use max int value
-      should(await this.longDivideNearOverflow.exec(this.ctx)).equal(MAX_INT_VALUE);
+      // not really near overflow, but near JavaScript max safe number
+      should(await this.longDivideNearOverflow.exec(this.ctx)).equal(9007199254740992);
     });
 
     it('should return value for Divide near underflow', async function () {
-      // Since Divide does not return Longs, use min int value
-      should(await this.longDivideNearUnderflow.exec(this.ctx)).equal(MIN_INT_VALUE);
+      // not really near underflow, but near JavaScript min safe number
+      should(await this.longDivideNearUnderflow.exec(this.ctx)).equal(-9007199254740992);
     });
 
     it('should return null for Divide By Zero', async function () {
@@ -1137,13 +1143,11 @@ describe('OutOfBounds', () => {
       should(await this.decimalAddUnderflow.exec(this.ctx)).be.null();
     });
 
-    // skipping this and other decimal tests because javascript floats are imprecise
-    // at CQL's defined min/max for decimal, so near over/underflow still over/underflows
-    it.skip('should return value for Add near overflow', async function () {
+    it('should return value for Add near overflow', async function () {
       should(await this.decimalAddNearOverflow.exec(this.ctx)).equal(MAX_FLOAT_VALUE);
     });
 
-    it.skip('should return value for Add near underflow', async function () {
+    it('should return value for Add near underflow', async function () {
       should(await this.decimalAddNearUnderflow.exec(this.ctx)).equal(MIN_FLOAT_VALUE);
     });
 
@@ -1155,11 +1159,11 @@ describe('OutOfBounds', () => {
       should(await this.decimalSubtractUnderflow.exec(this.ctx)).be.null();
     });
 
-    it.skip('should return value for Subtract near overflow', async function () {
+    it('should return value for Subtract near overflow', async function () {
       should(await this.decimalSubtractNearOverflow.exec(this.ctx)).equal(MAX_FLOAT_VALUE);
     });
 
-    it.skip('should return value for Subtract near underflow', async function () {
+    it('should return value for Subtract near underflow', async function () {
       should(await this.decimalSubtractNearUnderflow.exec(this.ctx)).equal(MIN_FLOAT_VALUE);
     });
 
@@ -1171,11 +1175,11 @@ describe('OutOfBounds', () => {
       should(await this.decimalMultiplyUnderflow.exec(this.ctx)).be.null();
     });
 
-    it.skip('should return value for Multiply near overflow', async function () {
+    it('should return value for Multiply near overflow', async function () {
       should(await this.decimalMultiplyNearOverflow.exec(this.ctx)).equal(MAX_FLOAT_VALUE);
     });
 
-    it.skip('should return value for Multiply near underflow', async function () {
+    it('should return value for Multiply near underflow', async function () {
       should(await this.decimalMultiplyNearUnderflow.exec(this.ctx)).equal(MIN_FLOAT_VALUE);
     });
 
@@ -1187,11 +1191,11 @@ describe('OutOfBounds', () => {
       should(await this.decimalDivideUnderflow.exec(this.ctx)).be.null();
     });
 
-    it.skip('should return value for Divide near overflow', async function () {
+    it('should return value for Divide near overflow', async function () {
       should(await this.decimalDivideNearOverflow.exec(this.ctx)).equal(MAX_FLOAT_VALUE);
     });
 
-    it.skip('should return value for Divide near underflow', async function () {
+    it('should return value for Divide near underflow', async function () {
       should(await this.decimalDivideNearUnderflow.exec(this.ctx)).equal(MIN_FLOAT_VALUE);
     });
 
@@ -1207,11 +1211,11 @@ describe('OutOfBounds', () => {
       should(await this.decimalPowerUnderflow.exec(this.ctx)).be.null();
     });
 
-    it.skip('should return value for Power near overflow', async function () {
+    it('should return value for Power near overflow', async function () {
       should(await this.decimalPowerNearOverflow.exec(this.ctx)).equal(MAX_FLOAT_VALUE);
     });
 
-    it.skip('should return value for Power near underflow', async function () {
+    it('should return value for Power near underflow', async function () {
       should(await this.decimalPowerNearUnderflow.exec(this.ctx)).equal(MIN_FLOAT_VALUE);
     });
 
@@ -1223,6 +1227,7 @@ describe('OutOfBounds', () => {
       should(await this.decimalPredecessorUnderflow.exec(this.ctx)).be.null();
     });
 
+    // NOTE: skipping successor/predecessor tests near overflow due to JS Number impreciision
     it.skip('should return value for successor near overflow', async function () {
       should(await this.decimalSuccessorNearOverflow.exec(this.ctx)).equal(MAX_FLOAT_VALUE);
     });
@@ -1241,16 +1246,14 @@ describe('OutOfBounds', () => {
       should(await this.quantityAddUnderflow.exec(this.ctx)).be.null();
     });
 
-    // skipping this and other quantity tests because javascript floats are imprecise
-    // at CQL's defined min/max for decimal, so near over/underflow still over/underflows
-    it.skip('should return value for Add near overflow', async function () {
+    it('should return value for Add near overflow', async function () {
       const result = await this.quantityAddNearOverflow.exec(this.ctx);
       should(result).not.be.null();
       validateQuantity(result, MAX_FLOAT_VALUE, 'mm');
     });
 
-    it.skip('should return value for Add near underflow', async function () {
-      const result = await this.quantityAddNearOverflow.exec(this.ctx);
+    it('should return value for Add near underflow', async function () {
+      const result = await this.quantityAddNearUnderflow.exec(this.ctx);
       should(result).not.be.null();
       validateQuantity(result, MIN_FLOAT_VALUE, 'mm');
     });
@@ -1263,14 +1266,14 @@ describe('OutOfBounds', () => {
       should(await this.quantitySubtractUnderflow.exec(this.ctx)).be.null();
     });
 
-    it.skip('should return value for Subtract near overflow', async function () {
+    it('should return value for Subtract near overflow', async function () {
       const result = await this.quantitySubtractNearOverflow.exec(this.ctx);
       should(result).not.be.null();
       validateQuantity(result, MAX_FLOAT_VALUE, 'mm');
     });
 
-    it.skip('should return value for Subtract near underflow', async function () {
-      const result = await this.quantitySubtractNearOverflow.exec(this.ctx);
+    it('should return value for Subtract near underflow', async function () {
+      const result = await this.quantitySubtractNearUnderflow.exec(this.ctx);
       should(result).not.be.null();
       validateQuantity(result, MIN_FLOAT_VALUE, 'mm');
     });
@@ -1283,16 +1286,16 @@ describe('OutOfBounds', () => {
       should(await this.quantityMultiplyUnderflow.exec(this.ctx)).be.null();
     });
 
-    it.skip('should return value for Multiply near overflow', async function () {
+    it('should return value for Multiply near overflow', async function () {
       const result = await this.quantityMultiplyNearOverflow.exec(this.ctx);
       should(result).not.be.null();
-      validateQuantity(result, MAX_FLOAT_VALUE, 'mm');
+      validateQuantity(result, MAX_FLOAT_VALUE, 'mm2');
     });
 
-    it.skip('should return value for Multiply near underflow', async function () {
-      const result = await this.quantityMultiplyNearOverflow.exec(this.ctx);
+    it('should return value for Multiply near underflow', async function () {
+      const result = await this.quantityMultiplyNearUnderflow.exec(this.ctx);
       should(result).not.be.null();
-      validateQuantity(result, MIN_FLOAT_VALUE, 'mm');
+      validateQuantity(result, MIN_FLOAT_VALUE, 'mm2');
     });
 
     it('should return null for Divide overflow', async function () {
@@ -1303,16 +1306,16 @@ describe('OutOfBounds', () => {
       should(await this.quantityDivideUnderflow.exec(this.ctx)).be.null();
     });
 
-    it.skip('should return value for Divide near overflow', async function () {
+    it('should return value for Divide near overflow', async function () {
       const result = await this.quantityDivideNearOverflow.exec(this.ctx);
       should(result).not.be.null();
-      validateQuantity(result, MAX_FLOAT_VALUE, 'mm');
+      validateQuantity(result, MAX_FLOAT_VALUE, '1');
     });
 
-    it.skip('should return value for Divide near underflow', async function () {
-      const result = await this.quantityDivideNearOverflow.exec(this.ctx);
+    it('should return value for Divide near underflow', async function () {
+      const result = await this.quantityDivideNearUnderflow.exec(this.ctx);
       should(result).not.be.null();
-      validateQuantity(result, MIN_FLOAT_VALUE, 'mm');
+      validateQuantity(result, MIN_FLOAT_VALUE, '1');
     });
 
     it('should return null for Divide By Zero', async function () {
@@ -1327,6 +1330,7 @@ describe('OutOfBounds', () => {
       should(await this.quantityPredecessorUnderflow.exec(this.ctx)).be.null();
     });
 
+    // NOTE: skipping successor/predecessor tests near overflow due to JS Number impreciision
     it.skip('should return value for successor near overflow', async function () {
       const result = await this.quantitySuccessorNearOverflow.exec(this.ctx);
       should(result).not.be.null();
