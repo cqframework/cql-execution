@@ -5,6 +5,7 @@ import { Context } from '../runtime/context';
 import { Exception } from '../datatypes/exception';
 import { greaterThan, lessThan } from '../util/comparison';
 import { build } from './builder';
+import { overflowsOrUnderflows } from '../util/math';
 
 class AggregateExpression extends Expression {
   source: any;
@@ -30,8 +31,11 @@ export class Count extends AggregateExpression {
 }
 
 export class Sum extends AggregateExpression {
+  resultTypeName?: string;
+
   constructor(json: any) {
     super(json);
+    this.resultTypeName = json.resultTypeName;
   }
 
   async exec(ctx: Context) {
@@ -53,9 +57,12 @@ export class Sum extends AggregateExpression {
     if (hasOnlyQuantities(items)) {
       const values = getValuesFromQuantities(items);
       const sum = values.reduce((x, y) => x + y);
-      return new Quantity(sum, items[0].unit);
+      return overflowsOrUnderflows(sum, '{urn:hl7-org:elm-types:r1}Decimal')
+        ? null
+        : new Quantity(sum, items[0].unit);
     } else {
-      return items.reduce((x: number, y: number) => x + y);
+      const sum = items.reduce((x: any, y: any) => x + y);
+      return overflowsOrUnderflows(sum, this.resultTypeName) ? null : sum;
     }
   }
 }
@@ -316,8 +323,11 @@ export class StdDev extends AggregateExpression {
 }
 
 export class Product extends AggregateExpression {
+  resultTypeName?: string;
+
   constructor(json: any) {
     super(json);
+    this.resultTypeName = json.resultTypeName;
   }
 
   async exec(ctx: Context) {
@@ -339,9 +349,12 @@ export class Product extends AggregateExpression {
       const values = getValuesFromQuantities(items);
       const product = values.reduce((x, y) => x * y);
       // Units are not multiplied for the geometric product
-      return new Quantity(product, items[0].unit);
+      return overflowsOrUnderflows(product, '{urn:hl7-org:elm-types:r1}Decimal')
+        ? null
+        : new Quantity(product, items[0].unit);
     } else {
-      return items.reduce((x: number, y: number) => x * y);
+      const product = items.reduce((x: any, y: any) => x * y);
+      return overflowsOrUnderflows(product, this.resultTypeName) ? null : product;
     }
   }
 }

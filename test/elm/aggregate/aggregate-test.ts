@@ -31,12 +31,93 @@ describe('Sum', () => {
     setup(this, data);
   });
 
-  it('should be able to sum lists without nulls', async function () {
-    (await this.not_null.exec(this.ctx)).should.equal(15);
+  it('should be able to sum lists with integers nulls', async function () {
+    (await this.integers.exec(this.ctx)).should.equal(15);
+  });
+
+  it('should be able to sum integers up to max integer value', async function () {
+    (await this.integers_at_max_value.exec(this.ctx)).should.equal(2147483647);
+  });
+
+  it('should return null when overflowing the max integer value', async function () {
+    should(await this.integers_above_max_value.exec(this.ctx)).be.null();
+  });
+
+  it('should be able to sum integers down to min integer value', async function () {
+    (await this.integers_at_min_value.exec(this.ctx)).should.equal(-2147483648);
+  });
+
+  it('should return null when underflowing the min integer value', async function () {
+    should(await this.integers_below_min_value.exec(this.ctx)).be.null();
   });
 
   it('should be able to sum lists with longs', async function () {
     (await this.longs.exec(this.ctx)).should.equal(15n);
+  });
+
+  it('should be able to sum longs up to max long value', async function () {
+    (await this.longs_at_max_value.exec(this.ctx)).should.equal(9223372036854775807n);
+  });
+
+  it('should return null when overflowing the max long value', async function () {
+    should(await this.longs_above_max_value.exec(this.ctx)).be.null();
+  });
+
+  it('should be able to sum longs down to min long value', async function () {
+    (await this.longs_at_min_value.exec(this.ctx)).should.equal(-9223372036854775808n);
+  });
+
+  it('should return null when underflowing the min long value', async function () {
+    should(await this.longs_below_min_value.exec(this.ctx)).be.null();
+  });
+
+  it('should be able to sum lists with decimals', async function () {
+    (await this.decimals.exec(this.ctx)).should.equal(16.5);
+  });
+
+  it('should be able to sum decimals up to max decimal value', async function () {
+    (await this.decimals_at_max_value.exec(this.ctx)).should.equal(99999999999999999999.99999999);
+  });
+
+  it('should return null when overflowing the max decimal value', async function () {
+    should(await this.decimals_above_max_value.exec(this.ctx)).be.null();
+  });
+
+  it('should be able to sum decimals down to min decimal value', async function () {
+    (await this.decimals_at_min_value.exec(this.ctx)).should.equal(-99999999999999999999.99999999);
+  });
+
+  it('should return null when underflowing the min decimal value', async function () {
+    should(await this.decimals_below_min_value.exec(this.ctx)).be.null();
+  });
+
+  it('should be able to sum lists with quantities', async function () {
+    const q = await this.quantities.exec(this.ctx);
+    validateQuantity(q, 15, 'ml');
+  });
+
+  it('should be able to sum quantities up to max decimal value', async function () {
+    validateQuantity(
+      await this.quantities_at_max_value.exec(this.ctx),
+      99999999999999999999.99999999,
+      'ml'
+    );
+  });
+
+  it('should return null when overflowing the max quantity value', async function () {
+    should(await this.quantities_above_max_value.exec(this.ctx)).be.null();
+  });
+
+  it('should be able to sum quantities down to min decimal value', async function () {
+    validateQuantity(
+      await this.quantities_at_min_value.exec(this.ctx),
+      -99999999999999999999.99999999,
+      'ml'
+    );
+  });
+
+  it('should return null when underflowing the min quantity value', async function () {
+    should(await this.quantities_below_min_value.exec(this.ctx)).be.null();
   });
 
   it('should be able to sum lists with nulls', async function () {
@@ -45,11 +126,6 @@ describe('Sum', () => {
 
   it('should be able to sum empty list', async function () {
     should(await this.empty.exec(this.ctx)).be.null();
-  });
-
-  it('should be able to sum quantity lists without nulls', async function () {
-    const q = await this.not_null_q.exec(this.ctx);
-    validateQuantity(q, 15, 'ml');
   });
 
   it('should be able to sum  quantity lists with nulls', async function () {
@@ -445,20 +521,68 @@ describe('Product', () => {
     setup(this, data);
   });
 
-  it('should return a decimal product', async function () {
-    (await this.decimal_product.exec(this.ctx)).should.equal(24.0);
-  });
-
   it('should return a integer product', async function () {
     (await this.integer_product.exec(this.ctx)).should.equal(100);
+  });
+
+  it('should return integer product up to max integer value', async function () {
+    (await this.integers_at_max_value_product.exec(this.ctx)).should.equal(2147483647);
+  });
+
+  it('should return null when integer product overflows max integer value', async function () {
+    should(await this.integers_above_max_value_product.exec(this.ctx)).be.null();
+  });
+
+  it('should return integer product down to min integer value', async function () {
+    (await this.integers_at_min_value_product.exec(this.ctx)).should.equal(-2147483648);
+  });
+
+  it('should return null when integer product underflows min integer value', async function () {
+    should(await this.integers_below_min_value_product.exec(this.ctx)).be.null();
   });
 
   it('should return a long product', async function () {
     (await this.long_product.exec(this.ctx)).should.equal(100n);
   });
 
-  it('should return 0', async function () {
-    (await this.zero_product.exec(this.ctx)).should.equal(0);
+  it('should return long product up to max long value', async function () {
+    (await this.longs_at_max_value_product.exec(this.ctx)).should.equal(9223372036854775807n);
+  });
+
+  it('should return null when long product overflows max long value', async function () {
+    should(await this.longs_above_max_value_product.exec(this.ctx)).be.null();
+  });
+
+  it('should return long product down to min long value', async function () {
+    (await this.longs_at_min_value_product.exec(this.ctx)).should.equal(-9223372036854775808n);
+  });
+
+  it('should return null when long product underflows min long value', async function () {
+    should(await this.longs_below_min_value_product.exec(this.ctx)).be.null();
+  });
+
+  it('should return a decimal product', async function () {
+    (await this.decimal_product.exec(this.ctx)).should.equal(24.0);
+  });
+
+  it('should return decimal product up to max decimal value', async function () {
+    (await this.decimals_at_max_value_product.exec(this.ctx)).should.equal(
+      99999999999999999999.99999999
+    );
+  });
+
+  it('should return null when decimal product overflows max decimal value', async function () {
+    should(await this.decimals_above_max_value_product.exec(this.ctx)).be.null();
+  });
+
+  it('should return decimal product down to min decimal value', async function () {
+    (await this.decimals_at_min_value_product.exec(this.ctx)).should.equal(
+      -99999999999999999999.99999999
+    );
+  });
+
+  it('should return null when decimal product underflows min decimal value', async function () {
+    should(await this.decimals_below_min_value_product.exec(this.ctx)).be.null();
   });
 
   it('should return product of non-null items', async function () {
@@ -469,9 +593,37 @@ describe('Product', () => {
     validateQuantity(await this.quantity_product.exec(this.ctx), 24, 'g');
   });
 
+  it('should return quantity product up to max decimal value', async function () {
+    validateQuantity(
+      await this.quantities_at_max_value_product.exec(this.ctx),
+      99999999999999999999.99999999,
+      'g'
+    );
+  });
+
+  it('should return null when quantity product overflows max decimal value', async function () {
+    should(await this.quantities_above_max_value_product.exec(this.ctx)).be.null();
+  });
+
+  it('should return quantity product down to min decimal value', async function () {
+    validateQuantity(
+      await this.quantities_at_min_value_product.exec(this.ctx),
+      -99999999999999999999.99999999,
+      'g'
+    );
+  });
+
+  it('should return null when quantity product underflows min decimal value', async function () {
+    should(await this.quantities_below_min_value_product.exec(this.ctx)).be.null();
+  });
+
   it('should return a 0 quantity product', async function () {
     const q = await this.quantity_zero_product.exec(this.ctx);
     validateQuantity(q, 0, 'g');
+  });
+
+  it('should return 0', async function () {
+    (await this.zero_product.exec(this.ctx)).should.equal(0);
   });
 
   it('should return null when null list is passed in', async function () {
