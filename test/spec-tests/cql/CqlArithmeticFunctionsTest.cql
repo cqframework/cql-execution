@@ -590,21 +590,17 @@ define "Predecessor": Tuple{
     output: 0L
   },
   "PredecessorOf1D": Tuple{
-    skipped: 'Wrong answer (doesn\'t recognize 1.0 as decimal)'
-    /*
     expression: predecessor of 1.0,
     output: 0.99999999
-    */  },
+  },
   "PredecessorOf101D": Tuple{
     expression: predecessor of 1.01,
     output: 1.00999999
   },
   "PredecessorOf1QCM": Tuple{
-    skipped: 'Wrong answer (doesn\'t recognize 1.0 as decimal)'
-    /*
     expression: predecessor of 1.0 'cm',
     output: 0.99999999'cm'
-    */  },
+  },
   "PredecessorOfJan12000": Tuple{
     expression: predecessor of DateTime(2000,1,1),
     output: @1999-12-31T
@@ -778,11 +774,9 @@ define "Successor": Tuple{
     output: 2L
   },
   "SuccessorOf1D": Tuple{
-    skipped: 'Wrong answer (doesn\'t recognize 1.0 as decimal)'
-    /*
     expression: successor of 1.0,
     output: 1.00000001
-    */  },
+  },
   "SuccessorOf101D": Tuple{
     expression: successor of 1.01,
     output: 1.01000001

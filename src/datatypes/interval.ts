@@ -10,6 +10,15 @@ import {
   minValueForType
 } from '../util/math';
 import * as cmp from '../util/comparison';
+import {
+  ELM_INTEGER_TYPE,
+  ELM_DECIMAL_TYPE,
+  ELM_LONG_TYPE,
+  ELM_TIME_TYPE,
+  ELM_DATE_TYPE,
+  ELM_DATETIME_TYPE,
+  ELM_QUANTITY_TYPE
+} from '../util/elmTypes';
 
 export class Interval {
   constructor(
@@ -32,19 +41,17 @@ export class Interval {
     const point = this.low != null ? this.low : this.high;
     if (point != null) {
       if (typeof point === 'number') {
-        pointType = Number.isInteger(point)
-          ? '{urn:hl7-org:elm-types:r1}Integer'
-          : '{urn:hl7-org:elm-types:r1}Decimal';
+        pointType = Number.isInteger(point) ? ELM_INTEGER_TYPE : ELM_DECIMAL_TYPE;
       } else if (typeof point === 'bigint') {
-        pointType = '{urn:hl7-org:elm-types:r1}Long';
+        pointType = ELM_LONG_TYPE;
       } else if (point.isTime && point.isTime()) {
-        pointType = '{urn:hl7-org:elm-types:r1}Time';
+        pointType = ELM_TIME_TYPE;
       } else if (point.isDate) {
-        pointType = '{urn:hl7-org:elm-types:r1}Date';
+        pointType = ELM_DATE_TYPE;
       } else if (point.isDateTime) {
-        pointType = '{urn:hl7-org:elm-types:r1}DateTime';
+        pointType = ELM_DATETIME_TYPE;
       } else if (point.isQuantity) {
-        pointType = '{urn:hl7-org:elm-types:r1}Quantity';
+        pointType = ELM_QUANTITY_TYPE;
       }
     }
     if (pointType == null && this.defaultPointType != null) {

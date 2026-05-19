@@ -5,6 +5,7 @@ import { convertUnit, compareUnits, convertToCQLDateUnit } from '../util/units';
 import * as dtivl from '../datatypes/interval';
 import { Context } from '../runtime/context';
 import { build } from './builder';
+import { ELM_NAMED_TYPE_SPECIFIER } from '../util/elmTypes';
 
 export class Interval extends Expression {
   lowClosed: boolean;
@@ -44,11 +45,11 @@ export class Interval extends Expression {
     let defaultPointType;
     if (lowValue == null && highValue == null) {
       // try to get the default point type from a cast
-      if (this.low.asTypeSpecifier && this.low.asTypeSpecifier.type === 'NamedTypeSpecifier') {
+      if (this.low.asTypeSpecifier && this.low.asTypeSpecifier.type === ELM_NAMED_TYPE_SPECIFIER) {
         defaultPointType = this.low.asTypeSpecifier.name;
       } else if (
         this.high.asTypeSpecifier &&
-        this.high.asTypeSpecifier.type === 'NamedTypeSpecifier'
+        this.high.asTypeSpecifier.type === ELM_NAMED_TYPE_SPECIFIER
       ) {
         defaultPointType = this.high.asTypeSpecifier.name;
       }

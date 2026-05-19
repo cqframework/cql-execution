@@ -65,7 +65,7 @@ describe('Combine', () => {
     setup(this, data);
   });
 
-  it.skip('should be a Combine', function () {
+  it('should be a Combine', function () {
     this.separator.should.be.an.instanceOf(str.Combine);
   });
 
@@ -99,7 +99,7 @@ describe('Split', () => {
     setup(this, data);
   });
 
-  it.skip('should be a Split', function () {
+  it('should be a Split', function () {
     this.commaSeparated.should.be.an.instanceOf(str.Split);
   });
 
@@ -181,7 +181,7 @@ describe('Length', () => {
     setup(this, data);
   });
 
-  it.skip('should be a Length', function () {
+  it('should be a Length', function () {
     this.elevenLetters.should.be.an.instanceOf(overloaded.Length);
   });
 
@@ -199,7 +199,7 @@ describe('Upper', () => {
     setup(this, data);
   });
 
-  it.skip('should be an Upper', function () {
+  it('should be an Upper', function () {
     this.upperC.should.be.an.instanceOf(str.Upper);
   });
 
@@ -225,7 +225,7 @@ describe('Lower', () => {
     setup(this, data);
   });
 
-  it.skip('should be a Lower', function () {
+  it('should be a Lower', function () {
     this.lowerC.should.be.an.instanceOf(str.Lower);
   });
 
@@ -330,7 +330,7 @@ describe('Substring', () => {
     setup(this, data);
   });
 
-  it.skip('should be a Substring', function () {
+  it('should be a Substring', function () {
     this.world.should.be.an.instanceOf(str.Substring);
   });
 

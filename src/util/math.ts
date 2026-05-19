@@ -9,9 +9,18 @@ import {
   MAX_TIME_VALUE as dtMaxTimeValue
 } from '../datatypes/datetime';
 import { Uncertainty } from '../datatypes/uncertainty';
+import {
+  ELM_INTEGER_TYPE,
+  ELM_DECIMAL_TYPE,
+  ELM_LONG_TYPE,
+  ELM_DATETIME_TYPE,
+  ELM_DATE_TYPE,
+  ELM_TIME_TYPE,
+  ELM_QUANTITY_TYPE
+} from './elmTypes';
 
-export const MAX_INT_VALUE = Math.pow(2, 31) - 1;
-export const MIN_INT_VALUE = Math.pow(-2, 31);
+export const MAX_INT_VALUE = Math.pow(2, 31) - 1; // 2147483647
+export const MIN_INT_VALUE = Math.pow(-2, 31); // -2147483648
 export const MAX_LONG_VALUE = 9223372036854775807n;
 export const MIN_LONG_VALUE = -9223372036854775808n;
 export const MAX_FLOAT_VALUE = 99999999999999999999.99999999;
@@ -58,15 +67,8 @@ export function overflowsOrUnderflows(value: any, type?: string): boolean {
       return true;
     }
   } else if (typeof value === 'number') {
-    if (type === '{urn:hl7-org:elm-types:r1}Integer') {
-      if (!isValidInteger(value)) {
-        return true;
-      }
-    } else if (type === '{urn:hl7-org:elm-types:r1}Decimal') {
-      if (!isValidDecimal(value)) {
-        return true;
-      }
-    } else if (Number.isInteger(value)) {
+    const isInteger = type === ELM_INTEGER_TYPE || (type == null && Number.isInteger(value));
+    if (isInteger) {
       if (!isValidInteger(value)) {
         return true;
       }
@@ -140,9 +142,10 @@ export function limitDecimalPrecision(decimal: any) {
 
 export class OverFlowException extends Exception {}
 
-export function successor(val: any): any {
+export function successor(val: any, type?: string): any {
   if (typeof val === 'number') {
-    if (Number.isInteger(val)) {
+    const isInteger = type === ELM_INTEGER_TYPE || (type == null && Number.isInteger(val));
+    if (isInteger) {
       if (val >= MAX_INT_VALUE) {
         throw new OverFlowException();
       } else {
@@ -183,7 +186,7 @@ export function successor(val: any): any {
     // For uncertainties, if the high is the max val, don't increment it
     const high = (() => {
       try {
-        return successor(val.high);
+        return successor(val.high, type);
       } catch {
         return val.high;
       }
@@ -191,16 +194,17 @@ export function successor(val: any): any {
     return new Uncertainty(successor(val.low), high);
   } else if (val && val.isQuantity) {
     const succ = val.clone();
-    succ.value = successor(val.value);
+    succ.value = successor(val.value, ELM_DECIMAL_TYPE);
     return succ;
   } else if (val == null) {
     return null;
   }
 }
 
-export function predecessor(val: any): any {
+export function predecessor(val: any, type?: string): any {
   if (typeof val === 'number') {
-    if (Number.isInteger(val)) {
+    const isInteger = type === ELM_INTEGER_TYPE || (type == null && Number.isInteger(val));
+    if (isInteger) {
       if (val <= MIN_INT_VALUE) {
         throw new OverFlowException();
       } else {
@@ -241,7 +245,7 @@ export function predecessor(val: any): any {
     // For uncertainties, if the low is the min val, don't decrement it
     const low = ((): any => {
       try {
-        return predecessor(val.low);
+        return predecessor(val.low, type);
       } catch {
         return val.low;
       }
@@ -249,7 +253,7 @@ export function predecessor(val: any): any {
     return new Uncertainty(low, predecessor(val.high));
   } else if (val && val.isQuantity) {
     const pred = val.clone();
-    pred.value = predecessor(val.value);
+    pred.value = predecessor(val.value, ELM_DECIMAL_TYPE);
     return pred;
   } else if (val == null) {
     return null;
@@ -282,25 +286,25 @@ export function maxValueForInstance(val: any) {
 
 export function maxValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
-    case '{urn:hl7-org:elm-types:r1}Integer':
+    case ELM_INTEGER_TYPE:
       return MAX_INT_VALUE;
-    case '{urn:hl7-org:elm-types:r1}Long':
+    case ELM_LONG_TYPE:
       return MAX_LONG_VALUE;
-    case '{urn:hl7-org:elm-types:r1}Decimal':
+    case ELM_DECIMAL_TYPE:
       return MAX_FLOAT_VALUE;
-    case '{urn:hl7-org:elm-types:r1}DateTime':
+    case ELM_DATETIME_TYPE:
       return MAX_DATETIME_VALUE?.copy();
-    case '{urn:hl7-org:elm-types:r1}Date':
+    case ELM_DATE_TYPE:
       return MAX_DATE_VALUE?.copy();
-    case '{urn:hl7-org:elm-types:r1}Time':
+    case ELM_TIME_TYPE:
       return MAX_TIME_VALUE?.copy();
-    case '{urn:hl7-org:elm-types:r1}Quantity': {
+    case ELM_QUANTITY_TYPE: {
       if (quantityInstance == null) {
         // can't infer a quantity unit type from nothing]
         return null;
       }
       const maxQty = quantityInstance.clone();
-      maxQty.value = maxValueForInstance(maxQty.value);
+      maxQty.value = MAX_FLOAT_VALUE;
       return maxQty;
     }
   }
@@ -333,25 +337,25 @@ export function minValueForInstance(val: any) {
 
 export function minValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
-    case '{urn:hl7-org:elm-types:r1}Integer':
+    case ELM_INTEGER_TYPE:
       return MIN_INT_VALUE;
-    case '{urn:hl7-org:elm-types:r1}Long':
+    case ELM_LONG_TYPE:
       return MIN_LONG_VALUE;
-    case '{urn:hl7-org:elm-types:r1}Decimal':
+    case ELM_DECIMAL_TYPE:
       return MIN_FLOAT_VALUE;
-    case '{urn:hl7-org:elm-types:r1}DateTime':
+    case ELM_DATETIME_TYPE:
       return MIN_DATETIME_VALUE?.copy();
-    case '{urn:hl7-org:elm-types:r1}Date':
+    case ELM_DATE_TYPE:
       return MIN_DATE_VALUE?.copy();
-    case '{urn:hl7-org:elm-types:r1}Time':
+    case ELM_TIME_TYPE:
       return MIN_TIME_VALUE?.copy();
-    case '{urn:hl7-org:elm-types:r1}Quantity': {
+    case ELM_QUANTITY_TYPE: {
       if (quantityInstance == null) {
         // can't infer a quantity unit type from nothing]
         return null;
       }
       const minQty = quantityInstance.clone();
-      minQty.value = minValueForInstance(minQty.value);
+      minQty.value = MIN_FLOAT_VALUE;
       return minQty;
     }
   }

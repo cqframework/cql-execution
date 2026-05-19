@@ -5271,6 +5271,7 @@ library TestSnippet version '1'
 using Simple version '1.0.0'
 context Patient
 define Pow: 3 ^ 4
+define NegPow: 10 ^ -1
 define ThreeExpFourLong: 3L ^ 4L
 define ThreeExpFourMixed: 3 ^ 4L
 define ThreeExpFourReverseMixed: 3L ^ 4
@@ -5288,7 +5289,7 @@ module.exports['Power'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "241",
+        "r" : "251",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -5416,8 +5417,8 @@ module.exports['Power'] = {
         }
       }, {
         "localId" : "222",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-        "name" : "ThreeExpFourLong",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "NegPow",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -5426,12 +5427,18 @@ module.exports['Power'] = {
           "s" : {
             "r" : "222",
             "s" : [ {
-              "value" : [ "", "define ", "ThreeExpFourLong", ": " ]
+              "value" : [ "", "define ", "NegPow", ": " ]
             }, {
               "r" : "223",
               "s" : [ {
                 "r" : "224",
-                "value" : [ "3L", " ^ ", "4L" ]
+                "value" : [ "10", " ^ " ]
+              }, {
+                "r" : "225",
+                "s" : [ {
+                  "r" : "226",
+                  "value" : [ "-", "1" ]
+                } ]
               } ]
             } ]
           }
@@ -5439,29 +5446,95 @@ module.exports['Power'] = {
         "expression" : {
           "type" : "Power",
           "localId" : "223",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "226",
-            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "localId" : "228",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "227",
-            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "localId" : "229",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "Literal",
             "localId" : "224",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "10",
+            "annotation" : [ ]
+          }, {
+            "type" : "Negate",
+            "localId" : "225",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "227",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "226",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "232",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "ThreeExpFourLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "232",
+            "s" : [ {
+              "value" : [ "", "define ", "ThreeExpFourLong", ": " ]
+            }, {
+              "r" : "233",
+              "s" : [ {
+                "r" : "234",
+                "value" : [ "3L", " ^ ", "4L" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Power",
+          "localId" : "233",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "236",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "237",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "234",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "3",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "225",
+            "localId" : "235",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "4",
@@ -5469,7 +5542,7 @@ module.exports['Power'] = {
           } ]
         }
       }, {
-        "localId" : "230",
+        "localId" : "240",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "ThreeExpFourMixed",
         "context" : "Patient",
@@ -5478,13 +5551,13 @@ module.exports['Power'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "230",
+            "r" : "240",
             "s" : [ {
               "value" : [ "", "define ", "ThreeExpFourMixed", ": " ]
             }, {
-              "r" : "231",
+              "r" : "241",
               "s" : [ {
-                "r" : "232",
+                "r" : "242",
                 "value" : [ "3", " ^ ", "4L" ]
               } ]
             } ]
@@ -5492,33 +5565,33 @@ module.exports['Power'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "231",
+          "localId" : "241",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "237",
+            "localId" : "247",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "238",
+            "localId" : "248",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "ToLong",
-            "localId" : "235",
+            "localId" : "245",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "236",
+              "localId" : "246",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "232",
+              "localId" : "242",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "3",
@@ -5526,7 +5599,7 @@ module.exports['Power'] = {
             }
           }, {
             "type" : "Literal",
-            "localId" : "233",
+            "localId" : "243",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "4",
@@ -5534,7 +5607,7 @@ module.exports['Power'] = {
           } ]
         }
       }, {
-        "localId" : "241",
+        "localId" : "251",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "ThreeExpFourReverseMixed",
         "context" : "Patient",
@@ -5543,13 +5616,13 @@ module.exports['Power'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "241",
+            "r" : "251",
             "s" : [ {
               "value" : [ "", "define ", "ThreeExpFourReverseMixed", ": " ]
             }, {
-              "r" : "242",
+              "r" : "252",
               "s" : [ {
-                "r" : "243",
+                "r" : "253",
                 "value" : [ "3L", " ^ ", "4" ]
               } ]
             } ]
@@ -5557,40 +5630,40 @@ module.exports['Power'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "242",
+          "localId" : "252",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "248",
+            "localId" : "258",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "249",
+            "localId" : "259",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "Literal",
-            "localId" : "243",
+            "localId" : "253",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "3",
             "annotation" : [ ]
           }, {
             "type" : "ToLong",
-            "localId" : "246",
+            "localId" : "256",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "247",
+              "localId" : "257",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "244",
+              "localId" : "254",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "4",
@@ -12586,10 +12659,11 @@ define IntegerMultiplyOverflow: maximum Integer * 2
 define IntegerMultiplyUnderflow: minimum Integer * 2
 define IntegerMultiplyNearOverflow: maximum Integer * 1
 define IntegerMultiplyNearUnderflow: minimum Integer * 1
-define IntegerDivideOverflow: maximum Integer / 0.5
-define IntegerDivideUnderflow: minimum Integer / 0.5
-define IntegerDivideNearOverflow: maximum Integer / 1
-define IntegerDivideNearUnderflow: minimum Integer / 1
+// NOTE: Integer division results in decimal, so it must overflow/underflow decimal
+define IntegerDivideOverflow: maximum Integer / 0.00000000001
+define IntegerDivideUnderflow: minimum Integer / 0.00000000001
+define IntegerDivideNearOverflow: maximum Integer / 0.00000025
+define IntegerDivideNearUnderflow: minimum Integer / 0.00000025
 define IntegerDivideByZero: 1 / 0
 define IntegerPowerOverflow: (maximum Integer)^3
 define IntegerPowerUnderflow: (minimum Integer)^3
@@ -12612,10 +12686,11 @@ define LongMultiplyOverflow: maximum Long * 2L
 define LongMultiplyUnderflow: minimum Long * 2L
 define LongMultiplyNearOverflow: maximum Long * 1L
 define LongMultiplyNearUnderflow: minimum Long * 1L
-define LongDivideOverflow: maximum Long / 0.5
-define LongDivideUnderflow: minimum Long / 0.5
-define LongDivideNearOverflow: ToLong(maximum Integer) / 1L
-define LongDivideNearUnderflow: ToLong(minimum Integer) / 1L
+// NOTE: Long division results in decimal, so it must overflow/underflow decimal
+define LongDivideOverflow: maximum Long / 0.05
+define LongDivideUnderflow: minimum Long / 0.05
+define LongDivideNearOverflow: maximum Long / 1024L
+define LongDivideNearUnderflow: minimum Long / 1024L
 define LongDivideByZero: 1L / 0L
 define LongPowerOverflow: (maximum Long)^3L
 define LongPowerUnderflow: (minimum Long)^3L
@@ -12626,12 +12701,13 @@ define LongPredecessorUnderflow: predecessor of minimum Long
 define LongSuccessorNearOverflow: successor of (maximum Long - 1L)
 define LongPredecessorNearUnderflow: predecessor of (minimum Long + 1L)
 
-define DecimalAddOverflow: maximum Decimal + 1.0
-define DecimalAddUnderflow: minimum Decimal + -1.0
+// NOTE: Due to JS Number imprecision, we need to exceed min/max by 10000 for it to actually produce a different number
+define DecimalAddOverflow: maximum Decimal + 10000.0
+define DecimalAddUnderflow: minimum Decimal + -10000.0
 define DecimalAddNearOverflow: maximum Decimal + 0.0
 define DecimalAddNearUnderflow: minimum Decimal + 0.0
-define DecimalSubtractOverflow: maximum Decimal - -1.0
-define DecimalSubtractUnderflow: minimum Decimal - 1.0
+define DecimalSubtractOverflow: maximum Decimal - -10000.0
+define DecimalSubtractUnderflow: minimum Decimal - 10000.0
 define DecimalSubtractNearOverflow: maximum Decimal - 0.0
 define DecimalSubtractNearUnderflow: minimum Decimal - 0.0
 define DecimalMultiplyOverflow: maximum Decimal * 2
@@ -12654,12 +12730,13 @@ define DecimalPredecessorNearUnderflow: predecessor of (minimum Decimal + 0.0000
 
 define MaxQuantity: Quantity { value: maximum Decimal, unit: 'mm' }
 define MinQuantity: Quantity { value: minimum Decimal, unit: 'mm' }
-define QuantityAddOverflow: MaxQuantity + 1.0 'mm'
-define QuantityAddUnderflow: MinQuantity + (-1.0 'mm')
+// NOTE: Due to JS Number imprecision, we need to exceed min/max by 10000 for it to actually produce a different number
+define QuantityAddOverflow: MaxQuantity + 10000.0 'mm'
+define QuantityAddUnderflow: MinQuantity + (-10000.0 'mm')
 define QuantityAddNearOverflow: MaxQuantity + 0.0 'mm'
 define QuantityAddNearUnderflow: MinQuantity + 0.0 'mm'
-define QuantitySubtractOverflow: MaxQuantity - (-1 'mm')
-define QuantitySubtractUnderflow: MinQuantity - 1 'mm'
+define QuantitySubtractOverflow: MaxQuantity - (-10000 'mm')
+define QuantitySubtractUnderflow: MinQuantity - 10000 'mm'
 define QuantitySubtractNearOverflow: MaxQuantity - 0.0 'mm'
 define QuantitySubtractNearUnderflow: MinQuantity - 0.0 'mm'
 define QuantityMultiplyOverflow: MaxQuantity * 2 'mm'
@@ -12730,7 +12807,7 @@ module.exports['OutOfBounds'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "1519",
+        "r" : "1503",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -13604,7 +13681,7 @@ module.exports['OutOfBounds'] = {
           "s" : {
             "r" : "326",
             "s" : [ {
-              "value" : [ "", "define ", "IntegerDivideOverflow", ": " ]
+              "value" : [ "// NOTE: Integer division results in decimal, so it must overflow/underflow decimal\n", "define ", "IntegerDivideOverflow", ": " ]
             }, {
               "r" : "327",
               "s" : [ {
@@ -13619,7 +13696,7 @@ module.exports['OutOfBounds'] = {
                 } ]
               }, {
                 "r" : "330",
-                "value" : [ " / ", "0.5" ]
+                "value" : [ " / ", "0.00000000001" ]
               } ]
             } ]
           }
@@ -13662,7 +13739,7 @@ module.exports['OutOfBounds'] = {
             "localId" : "330",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-            "value" : "0.5",
+            "value" : "0.00000000001",
             "annotation" : [ ]
           } ]
         }
@@ -13693,7 +13770,7 @@ module.exports['OutOfBounds'] = {
                 } ]
               }, {
                 "r" : "342",
-                "value" : [ " / ", "0.5" ]
+                "value" : [ " / ", "0.00000000001" ]
               } ]
             } ]
           }
@@ -13736,7 +13813,7 @@ module.exports['OutOfBounds'] = {
             "localId" : "342",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-            "value" : "0.5",
+            "value" : "0.00000000001",
             "annotation" : [ ]
           } ]
         }
@@ -13767,7 +13844,7 @@ module.exports['OutOfBounds'] = {
                 } ]
               }, {
                 "r" : "354",
-                "value" : [ " / ", "1" ]
+                "value" : [ " / ", "0.00000025" ]
               } ]
             } ]
           }
@@ -13779,12 +13856,12 @@ module.exports['OutOfBounds'] = {
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "361",
+            "localId" : "358",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "362",
+            "localId" : "359",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
@@ -13806,27 +13883,16 @@ module.exports['OutOfBounds'] = {
               "annotation" : [ ]
             }
           }, {
-            "type" : "ToDecimal",
-            "localId" : "359",
-            "annotation" : [ ],
-            "signature" : [ {
-              "type" : "NamedTypeSpecifier",
-              "localId" : "360",
-              "name" : "{urn:hl7-org:elm-types:r1}Integer",
-              "annotation" : [ ]
-            } ],
-            "operand" : {
-              "type" : "Literal",
-              "localId" : "354",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-              "value" : "1",
-              "annotation" : [ ]
-            }
+            "type" : "Literal",
+            "localId" : "354",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.00000025",
+            "annotation" : [ ]
           } ]
         }
       }, {
-        "localId" : "365",
+        "localId" : "362",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "IntegerDivideNearUnderflow",
         "context" : "Patient",
@@ -13835,83 +13901,72 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "365",
+            "r" : "362",
             "s" : [ {
               "value" : [ "", "define ", "IntegerDivideNearUnderflow", ": " ]
             }, {
-              "r" : "366",
+              "r" : "363",
               "s" : [ {
-                "r" : "368",
+                "r" : "365",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "367",
+                  "r" : "364",
                   "s" : [ {
                     "value" : [ "Integer" ]
                   } ]
                 } ]
               }, {
-                "r" : "369",
-                "value" : [ " / ", "1" ]
+                "r" : "366",
+                "value" : [ " / ", "0.00000025" ]
               } ]
             } ]
           }
         } ],
         "expression" : {
           "type" : "Divide",
-          "localId" : "366",
+          "localId" : "363",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "376",
+            "localId" : "370",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "377",
+            "localId" : "371",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "ToDecimal",
-            "localId" : "371",
+            "localId" : "368",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "372",
+              "localId" : "369",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "MinValue",
-              "localId" : "368",
+              "localId" : "365",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
           }, {
-            "type" : "ToDecimal",
-            "localId" : "374",
-            "annotation" : [ ],
-            "signature" : [ {
-              "type" : "NamedTypeSpecifier",
-              "localId" : "375",
-              "name" : "{urn:hl7-org:elm-types:r1}Integer",
-              "annotation" : [ ]
-            } ],
-            "operand" : {
-              "type" : "Literal",
-              "localId" : "369",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-              "value" : "1",
-              "annotation" : [ ]
-            }
+            "type" : "Literal",
+            "localId" : "366",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.00000025",
+            "annotation" : [ ]
           } ]
         }
       }, {
-        "localId" : "380",
+        "localId" : "374",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "IntegerDivideByZero",
         "context" : "Patient",
@@ -13920,13 +13975,13 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "380",
+            "r" : "374",
             "s" : [ {
               "value" : [ "", "define ", "IntegerDivideByZero", ": " ]
             }, {
-              "r" : "381",
+              "r" : "375",
               "s" : [ {
-                "r" : "382",
+                "r" : "376",
                 "value" : [ "1", " / ", "0" ]
               } ]
             } ]
@@ -13934,33 +13989,33 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Divide",
-          "localId" : "381",
+          "localId" : "375",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "390",
+            "localId" : "384",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "391",
+            "localId" : "385",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "ToDecimal",
-            "localId" : "385",
+            "localId" : "379",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "386",
+              "localId" : "380",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "382",
+              "localId" : "376",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "1",
@@ -13968,17 +14023,17 @@ module.exports['OutOfBounds'] = {
             }
           }, {
             "type" : "ToDecimal",
-            "localId" : "388",
+            "localId" : "382",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "389",
+              "localId" : "383",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "383",
+              "localId" : "377",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "0",
@@ -13987,7 +14042,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "394",
+        "localId" : "388",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
         "name" : "IntegerPowerOverflow",
         "context" : "Patient",
@@ -13996,21 +14051,21 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "394",
+            "r" : "388",
             "s" : [ {
               "value" : [ "", "define ", "IntegerPowerOverflow", ": " ]
             }, {
-              "r" : "395",
+              "r" : "389",
               "s" : [ {
-                "r" : "397",
+                "r" : "391",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "397",
+                  "r" : "391",
                   "s" : [ {
                     "value" : [ "maximum", " " ]
                   }, {
-                    "r" : "396",
+                    "r" : "390",
                     "s" : [ {
                       "value" : [ "Integer" ]
                     } ]
@@ -14019,7 +14074,7 @@ module.exports['OutOfBounds'] = {
                   "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "398",
+                "r" : "392",
                 "value" : [ "^", "3" ]
               } ]
             } ]
@@ -14027,29 +14082,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "395",
+          "localId" : "389",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "399",
+            "localId" : "393",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "400",
+            "localId" : "394",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "397",
+            "localId" : "391",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "398",
+            "localId" : "392",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "3",
@@ -14057,7 +14112,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "403",
+        "localId" : "397",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
         "name" : "IntegerPowerUnderflow",
         "context" : "Patient",
@@ -14066,21 +14121,21 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "403",
+            "r" : "397",
             "s" : [ {
               "value" : [ "", "define ", "IntegerPowerUnderflow", ": " ]
             }, {
-              "r" : "404",
+              "r" : "398",
               "s" : [ {
-                "r" : "406",
+                "r" : "400",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "406",
+                  "r" : "400",
                   "s" : [ {
                     "value" : [ "minimum", " " ]
                   }, {
-                    "r" : "405",
+                    "r" : "399",
                     "s" : [ {
                       "value" : [ "Integer" ]
                     } ]
@@ -14089,7 +14144,7 @@ module.exports['OutOfBounds'] = {
                   "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "407",
+                "r" : "401",
                 "value" : [ "^", "3" ]
               } ]
             } ]
@@ -14097,29 +14152,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "404",
+          "localId" : "398",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "408",
+            "localId" : "402",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "409",
+            "localId" : "403",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "406",
+            "localId" : "400",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "407",
+            "localId" : "401",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "3",
@@ -14127,7 +14182,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "412",
+        "localId" : "406",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
         "name" : "IntegerPowerNearOverflow",
         "context" : "Patient",
@@ -14136,21 +14191,21 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "412",
+            "r" : "406",
             "s" : [ {
               "value" : [ "", "define ", "IntegerPowerNearOverflow", ": " ]
             }, {
-              "r" : "413",
+              "r" : "407",
               "s" : [ {
-                "r" : "415",
+                "r" : "409",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "415",
+                  "r" : "409",
                   "s" : [ {
                     "value" : [ "maximum", " " ]
                   }, {
-                    "r" : "414",
+                    "r" : "408",
                     "s" : [ {
                       "value" : [ "Integer" ]
                     } ]
@@ -14159,7 +14214,7 @@ module.exports['OutOfBounds'] = {
                   "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "416",
+                "r" : "410",
                 "value" : [ "^", "1" ]
               } ]
             } ]
@@ -14167,29 +14222,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "413",
+          "localId" : "407",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "417",
+            "localId" : "411",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "418",
+            "localId" : "412",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "415",
+            "localId" : "409",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "416",
+            "localId" : "410",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "1",
@@ -14197,7 +14252,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "421",
+        "localId" : "415",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
         "name" : "IntegerPowerNearUnderflow",
         "context" : "Patient",
@@ -14206,21 +14261,21 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "421",
+            "r" : "415",
             "s" : [ {
               "value" : [ "", "define ", "IntegerPowerNearUnderflow", ": " ]
             }, {
-              "r" : "422",
+              "r" : "416",
               "s" : [ {
-                "r" : "424",
+                "r" : "418",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "424",
+                  "r" : "418",
                   "s" : [ {
                     "value" : [ "minimum", " " ]
                   }, {
-                    "r" : "423",
+                    "r" : "417",
                     "s" : [ {
                       "value" : [ "Integer" ]
                     } ]
@@ -14229,7 +14284,7 @@ module.exports['OutOfBounds'] = {
                   "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "425",
+                "r" : "419",
                 "value" : [ "^", "1" ]
               } ]
             } ]
@@ -14237,29 +14292,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "422",
+          "localId" : "416",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "426",
+            "localId" : "420",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "427",
+            "localId" : "421",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "424",
+            "localId" : "418",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "425",
+            "localId" : "419",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "1",
@@ -14267,7 +14322,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "430",
+        "localId" : "424",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
         "name" : "IntegerSuccessorOverflow",
         "context" : "Patient",
@@ -14276,19 +14331,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "430",
+            "r" : "424",
             "s" : [ {
               "value" : [ "", "define ", "IntegerSuccessorOverflow", ": " ]
             }, {
-              "r" : "433",
+              "r" : "427",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "432",
+                "r" : "426",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "431",
+                  "r" : "425",
                   "s" : [ {
                     "value" : [ "Integer" ]
                   } ]
@@ -14299,25 +14354,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "433",
+          "localId" : "427",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "434",
+            "localId" : "428",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MaxValue",
-            "localId" : "432",
+            "localId" : "426",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "437",
+        "localId" : "431",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
         "name" : "IntegerPredecessorUnderflow",
         "context" : "Patient",
@@ -14326,19 +14381,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "437",
+            "r" : "431",
             "s" : [ {
               "value" : [ "", "define ", "IntegerPredecessorUnderflow", ": " ]
             }, {
-              "r" : "440",
+              "r" : "434",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "439",
+                "r" : "433",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "438",
+                  "r" : "432",
                   "s" : [ {
                     "value" : [ "Integer" ]
                   } ]
@@ -14349,25 +14404,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "440",
+          "localId" : "434",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "441",
+            "localId" : "435",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MinValue",
-            "localId" : "439",
+            "localId" : "433",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "444",
+        "localId" : "438",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
         "name" : "IntegerSuccessorNearOverflow",
         "context" : "Patient",
@@ -14376,31 +14431,31 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "444",
+            "r" : "438",
             "s" : [ {
               "value" : [ "", "define ", "IntegerSuccessorNearOverflow", ": " ]
             }, {
-              "r" : "451",
+              "r" : "445",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "445",
+                "r" : "439",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "445",
+                  "r" : "439",
                   "s" : [ {
-                    "r" : "447",
+                    "r" : "441",
                     "s" : [ {
                       "value" : [ "maximum", " " ]
                     }, {
-                      "r" : "446",
+                      "r" : "440",
                       "s" : [ {
                         "value" : [ "Integer" ]
                       } ]
                     } ]
                   }, {
-                    "r" : "448",
+                    "r" : "442",
                     "value" : [ " - ", "1" ]
                   } ]
                 }, {
@@ -14412,40 +14467,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "451",
+          "localId" : "445",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "452",
+            "localId" : "446",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Subtract",
-            "localId" : "445",
+            "localId" : "439",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "449",
+              "localId" : "443",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }, {
               "type" : "NamedTypeSpecifier",
-              "localId" : "450",
+              "localId" : "444",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "MaxValue",
-              "localId" : "447",
+              "localId" : "441",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "448",
+              "localId" : "442",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "1",
@@ -14454,7 +14509,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "455",
+        "localId" : "449",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
         "name" : "IntegerPredecessorNearUnderflow",
         "context" : "Patient",
@@ -14463,31 +14518,31 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "455",
+            "r" : "449",
             "s" : [ {
               "value" : [ "", "define ", "IntegerPredecessorNearUnderflow", ": " ]
             }, {
-              "r" : "462",
+              "r" : "456",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "456",
+                "r" : "450",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "456",
+                  "r" : "450",
                   "s" : [ {
-                    "r" : "458",
+                    "r" : "452",
                     "s" : [ {
                       "value" : [ "minimum", " " ]
                     }, {
-                      "r" : "457",
+                      "r" : "451",
                       "s" : [ {
                         "value" : [ "Integer" ]
                       } ]
                     } ]
                   }, {
-                    "r" : "459",
+                    "r" : "453",
                     "value" : [ " + ", "1" ]
                   } ]
                 }, {
@@ -14499,40 +14554,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "462",
+          "localId" : "456",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "463",
+            "localId" : "457",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Add",
-            "localId" : "456",
+            "localId" : "450",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "460",
+              "localId" : "454",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }, {
               "type" : "NamedTypeSpecifier",
-              "localId" : "461",
+              "localId" : "455",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "MinValue",
-              "localId" : "458",
+              "localId" : "452",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "459",
+              "localId" : "453",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "1",
@@ -14541,7 +14596,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "466",
+        "localId" : "460",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongAddOverflow",
         "context" : "Patient",
@@ -14550,23 +14605,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "466",
+            "r" : "460",
             "s" : [ {
               "value" : [ "", "define ", "LongAddOverflow", ": " ]
             }, {
-              "r" : "467",
+              "r" : "461",
               "s" : [ {
-                "r" : "469",
+                "r" : "463",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "468",
+                  "r" : "462",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
                 } ]
               }, {
-                "r" : "470",
+                "r" : "464",
                 "value" : [ " + ", "1L" ]
               } ]
             } ]
@@ -14574,29 +14629,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "467",
+          "localId" : "461",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "471",
+            "localId" : "465",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "472",
+            "localId" : "466",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "469",
+            "localId" : "463",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "470",
+            "localId" : "464",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "1",
@@ -14604,7 +14659,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "475",
+        "localId" : "469",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongAddUnderflow",
         "context" : "Patient",
@@ -14613,17 +14668,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "475",
+            "r" : "469",
             "s" : [ {
               "value" : [ "", "define ", "LongAddUnderflow", ": " ]
             }, {
-              "r" : "476",
+              "r" : "470",
               "s" : [ {
-                "r" : "478",
+                "r" : "472",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "477",
+                  "r" : "471",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
@@ -14631,9 +14686,9 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "479",
+                "r" : "473",
                 "s" : [ {
-                  "r" : "480",
+                  "r" : "474",
                   "value" : [ "-", "1L" ]
                 } ]
               } ]
@@ -14642,40 +14697,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "476",
+          "localId" : "470",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "482",
+            "localId" : "476",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "483",
+            "localId" : "477",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "478",
+            "localId" : "472",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Negate",
-            "localId" : "479",
+            "localId" : "473",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "481",
+              "localId" : "475",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "480",
+              "localId" : "474",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
               "value" : "1",
@@ -14684,7 +14739,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "486",
+        "localId" : "480",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongAddNearOverflow",
         "context" : "Patient",
@@ -14693,23 +14748,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "486",
+            "r" : "480",
             "s" : [ {
               "value" : [ "", "define ", "LongAddNearOverflow", ": " ]
             }, {
-              "r" : "487",
+              "r" : "481",
               "s" : [ {
-                "r" : "489",
+                "r" : "483",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "488",
+                  "r" : "482",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
                 } ]
               }, {
-                "r" : "490",
+                "r" : "484",
                 "value" : [ " + ", "0L" ]
               } ]
             } ]
@@ -14717,29 +14772,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "487",
+          "localId" : "481",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "491",
+            "localId" : "485",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "492",
+            "localId" : "486",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "489",
+            "localId" : "483",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "490",
+            "localId" : "484",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "0",
@@ -14747,7 +14802,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "495",
+        "localId" : "489",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongAddNearUnderflow",
         "context" : "Patient",
@@ -14756,23 +14811,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "495",
+            "r" : "489",
             "s" : [ {
               "value" : [ "", "define ", "LongAddNearUnderflow", ": " ]
             }, {
-              "r" : "496",
+              "r" : "490",
               "s" : [ {
-                "r" : "498",
+                "r" : "492",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "497",
+                  "r" : "491",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
                 } ]
               }, {
-                "r" : "499",
+                "r" : "493",
                 "value" : [ " + ", "0L" ]
               } ]
             } ]
@@ -14780,29 +14835,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "496",
+          "localId" : "490",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "500",
+            "localId" : "494",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "501",
+            "localId" : "495",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "498",
+            "localId" : "492",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "499",
+            "localId" : "493",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "0",
@@ -14810,7 +14865,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "504",
+        "localId" : "498",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongSubtractOverflow",
         "context" : "Patient",
@@ -14819,17 +14874,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "504",
+            "r" : "498",
             "s" : [ {
               "value" : [ "", "define ", "LongSubtractOverflow", ": " ]
             }, {
-              "r" : "505",
+              "r" : "499",
               "s" : [ {
-                "r" : "507",
+                "r" : "501",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "506",
+                  "r" : "500",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
@@ -14837,9 +14892,9 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "508",
+                "r" : "502",
                 "s" : [ {
-                  "r" : "509",
+                  "r" : "503",
                   "value" : [ "-", "1L" ]
                 } ]
               } ]
@@ -14848,40 +14903,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "505",
+          "localId" : "499",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "511",
+            "localId" : "505",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "512",
+            "localId" : "506",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "507",
+            "localId" : "501",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Negate",
-            "localId" : "508",
+            "localId" : "502",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "510",
+              "localId" : "504",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "509",
+              "localId" : "503",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
               "value" : "1",
@@ -14890,7 +14945,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "515",
+        "localId" : "509",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongSubtractUnderflow",
         "context" : "Patient",
@@ -14899,23 +14954,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "515",
+            "r" : "509",
             "s" : [ {
               "value" : [ "", "define ", "LongSubtractUnderflow", ": " ]
             }, {
-              "r" : "516",
+              "r" : "510",
               "s" : [ {
-                "r" : "518",
+                "r" : "512",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "517",
+                  "r" : "511",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
                 } ]
               }, {
-                "r" : "519",
+                "r" : "513",
                 "value" : [ " - ", "1L" ]
               } ]
             } ]
@@ -14923,29 +14978,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "516",
+          "localId" : "510",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "520",
+            "localId" : "514",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "521",
+            "localId" : "515",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "518",
+            "localId" : "512",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "519",
+            "localId" : "513",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "1",
@@ -14953,7 +15008,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "524",
+        "localId" : "518",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongSubtractNearOverflow",
         "context" : "Patient",
@@ -14962,23 +15017,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "524",
+            "r" : "518",
             "s" : [ {
               "value" : [ "", "define ", "LongSubtractNearOverflow", ": " ]
             }, {
-              "r" : "525",
+              "r" : "519",
               "s" : [ {
-                "r" : "527",
+                "r" : "521",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "526",
+                  "r" : "520",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
                 } ]
               }, {
-                "r" : "528",
+                "r" : "522",
                 "value" : [ " - ", "0L" ]
               } ]
             } ]
@@ -14986,29 +15041,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "525",
+          "localId" : "519",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "529",
+            "localId" : "523",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "530",
+            "localId" : "524",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "527",
+            "localId" : "521",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "528",
+            "localId" : "522",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "0",
@@ -15016,7 +15071,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "533",
+        "localId" : "527",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongSubtractNearUnderflow",
         "context" : "Patient",
@@ -15025,23 +15080,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "533",
+            "r" : "527",
             "s" : [ {
               "value" : [ "", "define ", "LongSubtractNearUnderflow", ": " ]
             }, {
-              "r" : "534",
+              "r" : "528",
               "s" : [ {
-                "r" : "536",
+                "r" : "530",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "535",
+                  "r" : "529",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
                 } ]
               }, {
-                "r" : "537",
+                "r" : "531",
                 "value" : [ " - ", "0L" ]
               } ]
             } ]
@@ -15049,29 +15104,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "534",
+          "localId" : "528",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "538",
+            "localId" : "532",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "539",
+            "localId" : "533",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "536",
+            "localId" : "530",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "537",
+            "localId" : "531",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "0",
@@ -15079,7 +15134,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "542",
+        "localId" : "536",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongMultiplyOverflow",
         "context" : "Patient",
@@ -15088,23 +15143,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "542",
+            "r" : "536",
             "s" : [ {
               "value" : [ "", "define ", "LongMultiplyOverflow", ": " ]
             }, {
-              "r" : "543",
+              "r" : "537",
               "s" : [ {
-                "r" : "545",
+                "r" : "539",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "544",
+                  "r" : "538",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
                 } ]
               }, {
-                "r" : "546",
+                "r" : "540",
                 "value" : [ " * ", "2L" ]
               } ]
             } ]
@@ -15112,29 +15167,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Multiply",
-          "localId" : "543",
+          "localId" : "537",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "547",
+            "localId" : "541",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "548",
+            "localId" : "542",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "545",
+            "localId" : "539",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "546",
+            "localId" : "540",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "2",
@@ -15142,7 +15197,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "551",
+        "localId" : "545",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongMultiplyUnderflow",
         "context" : "Patient",
@@ -15151,23 +15206,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "551",
+            "r" : "545",
             "s" : [ {
               "value" : [ "", "define ", "LongMultiplyUnderflow", ": " ]
             }, {
-              "r" : "552",
+              "r" : "546",
               "s" : [ {
-                "r" : "554",
+                "r" : "548",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "553",
+                  "r" : "547",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
                 } ]
               }, {
-                "r" : "555",
+                "r" : "549",
                 "value" : [ " * ", "2L" ]
               } ]
             } ]
@@ -15175,29 +15230,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Multiply",
-          "localId" : "552",
+          "localId" : "546",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "556",
+            "localId" : "550",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "557",
+            "localId" : "551",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "554",
+            "localId" : "548",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "555",
+            "localId" : "549",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "2",
@@ -15205,7 +15260,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "560",
+        "localId" : "554",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongMultiplyNearOverflow",
         "context" : "Patient",
@@ -15214,23 +15269,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "560",
+            "r" : "554",
             "s" : [ {
               "value" : [ "", "define ", "LongMultiplyNearOverflow", ": " ]
             }, {
-              "r" : "561",
+              "r" : "555",
               "s" : [ {
-                "r" : "563",
+                "r" : "557",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "562",
+                  "r" : "556",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
                 } ]
               }, {
-                "r" : "564",
+                "r" : "558",
                 "value" : [ " * ", "1L" ]
               } ]
             } ]
@@ -15238,29 +15293,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Multiply",
-          "localId" : "561",
+          "localId" : "555",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "565",
+            "localId" : "559",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "566",
+            "localId" : "560",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "563",
+            "localId" : "557",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "564",
+            "localId" : "558",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "1",
@@ -15268,7 +15323,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "569",
+        "localId" : "563",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongMultiplyNearUnderflow",
         "context" : "Patient",
@@ -15277,23 +15332,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "569",
+            "r" : "563",
             "s" : [ {
               "value" : [ "", "define ", "LongMultiplyNearUnderflow", ": " ]
             }, {
-              "r" : "570",
+              "r" : "564",
               "s" : [ {
-                "r" : "572",
+                "r" : "566",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "571",
+                  "r" : "565",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
                 } ]
               }, {
-                "r" : "573",
+                "r" : "567",
                 "value" : [ " * ", "1L" ]
               } ]
             } ]
@@ -15301,29 +15356,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Multiply",
-          "localId" : "570",
+          "localId" : "564",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "574",
+            "localId" : "568",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "575",
+            "localId" : "569",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "572",
+            "localId" : "566",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "573",
+            "localId" : "567",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "1",
@@ -15331,7 +15386,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "578",
+        "localId" : "572",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "LongDivideOverflow",
         "context" : "Patient",
@@ -15340,72 +15395,72 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "578",
+            "r" : "572",
             "s" : [ {
-              "value" : [ "", "define ", "LongDivideOverflow", ": " ]
+              "value" : [ "// NOTE: Long division results in decimal, so it must overflow/underflow decimal\n", "define ", "LongDivideOverflow", ": " ]
             }, {
-              "r" : "579",
+              "r" : "573",
               "s" : [ {
-                "r" : "581",
+                "r" : "575",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "580",
+                  "r" : "574",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
                 } ]
               }, {
-                "r" : "582",
-                "value" : [ " / ", "0.5" ]
+                "r" : "576",
+                "value" : [ " / ", "0.05" ]
               } ]
             } ]
           }
         } ],
         "expression" : {
           "type" : "Divide",
-          "localId" : "579",
+          "localId" : "573",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "586",
+            "localId" : "580",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "587",
+            "localId" : "581",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "ToDecimal",
-            "localId" : "584",
+            "localId" : "578",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "585",
+              "localId" : "579",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "MaxValue",
-              "localId" : "581",
+              "localId" : "575",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             }
           }, {
             "type" : "Literal",
-            "localId" : "582",
+            "localId" : "576",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-            "value" : "0.5",
+            "value" : "0.05",
             "annotation" : [ ]
           } ]
         }
       }, {
-        "localId" : "590",
+        "localId" : "584",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "LongDivideUnderflow",
         "context" : "Patient",
@@ -15414,72 +15469,72 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "590",
+            "r" : "584",
             "s" : [ {
               "value" : [ "", "define ", "LongDivideUnderflow", ": " ]
             }, {
-              "r" : "591",
+              "r" : "585",
               "s" : [ {
-                "r" : "593",
+                "r" : "587",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "592",
+                  "r" : "586",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
                 } ]
               }, {
-                "r" : "594",
-                "value" : [ " / ", "0.5" ]
+                "r" : "588",
+                "value" : [ " / ", "0.05" ]
               } ]
             } ]
           }
         } ],
         "expression" : {
           "type" : "Divide",
-          "localId" : "591",
+          "localId" : "585",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "598",
+            "localId" : "592",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "599",
+            "localId" : "593",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "ToDecimal",
-            "localId" : "596",
+            "localId" : "590",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "597",
+              "localId" : "591",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "MinValue",
-              "localId" : "593",
+              "localId" : "587",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             }
           }, {
             "type" : "Literal",
-            "localId" : "594",
+            "localId" : "588",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-            "value" : "0.5",
+            "value" : "0.05",
             "annotation" : [ ]
           } ]
         }
       }, {
-        "localId" : "602",
+        "localId" : "596",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "LongDivideNearOverflow",
         "context" : "Patient",
@@ -15488,102 +15543,83 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "602",
+            "r" : "596",
             "s" : [ {
               "value" : [ "", "define ", "LongDivideNearOverflow", ": " ]
             }, {
-              "r" : "603",
+              "r" : "597",
               "s" : [ {
-                "r" : "609",
+                "r" : "599",
                 "s" : [ {
-                  "value" : [ "ToLong", "(" ]
+                  "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "605",
+                  "r" : "598",
                   "s" : [ {
-                    "value" : [ "maximum", " " ]
-                  }, {
-                    "r" : "604",
-                    "s" : [ {
-                      "value" : [ "Integer" ]
-                    } ]
+                    "value" : [ "Long" ]
                   } ]
-                }, {
-                  "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "611",
-                "value" : [ " / ", "1L" ]
+                "r" : "600",
+                "value" : [ " / ", "1024L" ]
               } ]
             } ]
           }
         } ],
         "expression" : {
           "type" : "Divide",
-          "localId" : "603",
+          "localId" : "597",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "618",
+            "localId" : "607",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "619",
+            "localId" : "608",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "ToDecimal",
-            "localId" : "613",
+            "localId" : "602",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "614",
+              "localId" : "603",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : {
-              "type" : "ToLong",
-              "localId" : "609",
+              "type" : "MaxValue",
+              "localId" : "599",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-              "annotation" : [ ],
-              "signature" : [ {
-                "type" : "NamedTypeSpecifier",
-                "localId" : "610",
-                "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                "annotation" : [ ]
-              } ],
-              "operand" : {
-                "type" : "MaxValue",
-                "localId" : "605",
-                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "annotation" : [ ]
-              }
+              "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+              "annotation" : [ ]
             }
           }, {
             "type" : "ToDecimal",
-            "localId" : "616",
+            "localId" : "605",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "617",
+              "localId" : "606",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "611",
+              "localId" : "600",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
-              "value" : "1",
+              "value" : "1024",
               "annotation" : [ ]
             }
           } ]
         }
       }, {
-        "localId" : "622",
+        "localId" : "611",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "LongDivideNearUnderflow",
         "context" : "Patient",
@@ -15592,102 +15628,83 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "622",
+            "r" : "611",
             "s" : [ {
               "value" : [ "", "define ", "LongDivideNearUnderflow", ": " ]
             }, {
-              "r" : "623",
+              "r" : "612",
               "s" : [ {
-                "r" : "629",
+                "r" : "614",
                 "s" : [ {
-                  "value" : [ "ToLong", "(" ]
+                  "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "625",
+                  "r" : "613",
                   "s" : [ {
-                    "value" : [ "minimum", " " ]
-                  }, {
-                    "r" : "624",
-                    "s" : [ {
-                      "value" : [ "Integer" ]
-                    } ]
+                    "value" : [ "Long" ]
                   } ]
-                }, {
-                  "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "631",
-                "value" : [ " / ", "1L" ]
+                "r" : "615",
+                "value" : [ " / ", "1024L" ]
               } ]
             } ]
           }
         } ],
         "expression" : {
           "type" : "Divide",
-          "localId" : "623",
+          "localId" : "612",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "638",
+            "localId" : "622",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "639",
+            "localId" : "623",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "ToDecimal",
-            "localId" : "633",
+            "localId" : "617",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "634",
+              "localId" : "618",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : {
-              "type" : "ToLong",
-              "localId" : "629",
+              "type" : "MinValue",
+              "localId" : "614",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-              "annotation" : [ ],
-              "signature" : [ {
-                "type" : "NamedTypeSpecifier",
-                "localId" : "630",
-                "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                "annotation" : [ ]
-              } ],
-              "operand" : {
-                "type" : "MinValue",
-                "localId" : "625",
-                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "annotation" : [ ]
-              }
+              "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+              "annotation" : [ ]
             }
           }, {
             "type" : "ToDecimal",
-            "localId" : "636",
+            "localId" : "620",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "637",
+              "localId" : "621",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "631",
+              "localId" : "615",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
-              "value" : "1",
+              "value" : "1024",
               "annotation" : [ ]
             }
           } ]
         }
       }, {
-        "localId" : "642",
+        "localId" : "626",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "LongDivideByZero",
         "context" : "Patient",
@@ -15696,13 +15713,13 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "642",
+            "r" : "626",
             "s" : [ {
               "value" : [ "", "define ", "LongDivideByZero", ": " ]
             }, {
-              "r" : "643",
+              "r" : "627",
               "s" : [ {
-                "r" : "644",
+                "r" : "628",
                 "value" : [ "1L", " / ", "0L" ]
               } ]
             } ]
@@ -15710,33 +15727,33 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Divide",
-          "localId" : "643",
+          "localId" : "627",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "652",
+            "localId" : "636",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "653",
+            "localId" : "637",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "ToDecimal",
-            "localId" : "647",
+            "localId" : "631",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "648",
+              "localId" : "632",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "644",
+              "localId" : "628",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
               "value" : "1",
@@ -15744,17 +15761,17 @@ module.exports['OutOfBounds'] = {
             }
           }, {
             "type" : "ToDecimal",
-            "localId" : "650",
+            "localId" : "634",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "651",
+              "localId" : "635",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "645",
+              "localId" : "629",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
               "value" : "0",
@@ -15763,7 +15780,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "656",
+        "localId" : "640",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongPowerOverflow",
         "context" : "Patient",
@@ -15772,21 +15789,21 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "656",
+            "r" : "640",
             "s" : [ {
               "value" : [ "", "define ", "LongPowerOverflow", ": " ]
             }, {
-              "r" : "657",
+              "r" : "641",
               "s" : [ {
-                "r" : "659",
+                "r" : "643",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "659",
+                  "r" : "643",
                   "s" : [ {
                     "value" : [ "maximum", " " ]
                   }, {
-                    "r" : "658",
+                    "r" : "642",
                     "s" : [ {
                       "value" : [ "Long" ]
                     } ]
@@ -15795,7 +15812,7 @@ module.exports['OutOfBounds'] = {
                   "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "660",
+                "r" : "644",
                 "value" : [ "^", "3L" ]
               } ]
             } ]
@@ -15803,29 +15820,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "657",
+          "localId" : "641",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "661",
+            "localId" : "645",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "662",
+            "localId" : "646",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "659",
+            "localId" : "643",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "660",
+            "localId" : "644",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "3",
@@ -15833,7 +15850,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "665",
+        "localId" : "649",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongPowerUnderflow",
         "context" : "Patient",
@@ -15842,21 +15859,21 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "665",
+            "r" : "649",
             "s" : [ {
               "value" : [ "", "define ", "LongPowerUnderflow", ": " ]
             }, {
-              "r" : "666",
+              "r" : "650",
               "s" : [ {
-                "r" : "668",
+                "r" : "652",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "668",
+                  "r" : "652",
                   "s" : [ {
                     "value" : [ "minimum", " " ]
                   }, {
-                    "r" : "667",
+                    "r" : "651",
                     "s" : [ {
                       "value" : [ "Long" ]
                     } ]
@@ -15865,7 +15882,7 @@ module.exports['OutOfBounds'] = {
                   "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "669",
+                "r" : "653",
                 "value" : [ "^", "3L" ]
               } ]
             } ]
@@ -15873,29 +15890,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "666",
+          "localId" : "650",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "670",
+            "localId" : "654",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "671",
+            "localId" : "655",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "668",
+            "localId" : "652",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "669",
+            "localId" : "653",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "3",
@@ -15903,7 +15920,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "674",
+        "localId" : "658",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongPowerNearOverflow",
         "context" : "Patient",
@@ -15912,21 +15929,21 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "674",
+            "r" : "658",
             "s" : [ {
               "value" : [ "", "define ", "LongPowerNearOverflow", ": " ]
             }, {
-              "r" : "675",
+              "r" : "659",
               "s" : [ {
-                "r" : "677",
+                "r" : "661",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "677",
+                  "r" : "661",
                   "s" : [ {
                     "value" : [ "maximum", " " ]
                   }, {
-                    "r" : "676",
+                    "r" : "660",
                     "s" : [ {
                       "value" : [ "Long" ]
                     } ]
@@ -15935,7 +15952,7 @@ module.exports['OutOfBounds'] = {
                   "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "678",
+                "r" : "662",
                 "value" : [ "^", "1L" ]
               } ]
             } ]
@@ -15943,29 +15960,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "675",
+          "localId" : "659",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "679",
+            "localId" : "663",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "680",
+            "localId" : "664",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "677",
+            "localId" : "661",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "678",
+            "localId" : "662",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "1",
@@ -15973,7 +15990,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "683",
+        "localId" : "667",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongPowerNearUnderflow",
         "context" : "Patient",
@@ -15982,21 +15999,21 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "683",
+            "r" : "667",
             "s" : [ {
               "value" : [ "", "define ", "LongPowerNearUnderflow", ": " ]
             }, {
-              "r" : "684",
+              "r" : "668",
               "s" : [ {
-                "r" : "686",
+                "r" : "670",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "686",
+                  "r" : "670",
                   "s" : [ {
                     "value" : [ "minimum", " " ]
                   }, {
-                    "r" : "685",
+                    "r" : "669",
                     "s" : [ {
                       "value" : [ "Long" ]
                     } ]
@@ -16005,7 +16022,7 @@ module.exports['OutOfBounds'] = {
                   "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "687",
+                "r" : "671",
                 "value" : [ "^", "1L" ]
               } ]
             } ]
@@ -16013,29 +16030,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "684",
+          "localId" : "668",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "688",
+            "localId" : "672",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "689",
+            "localId" : "673",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "686",
+            "localId" : "670",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "687",
+            "localId" : "671",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "1",
@@ -16043,7 +16060,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "692",
+        "localId" : "676",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongSuccessorOverflow",
         "context" : "Patient",
@@ -16052,19 +16069,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "692",
+            "r" : "676",
             "s" : [ {
               "value" : [ "", "define ", "LongSuccessorOverflow", ": " ]
             }, {
-              "r" : "695",
+              "r" : "679",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "694",
+                "r" : "678",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "693",
+                  "r" : "677",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
@@ -16075,25 +16092,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "695",
+          "localId" : "679",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "696",
+            "localId" : "680",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MaxValue",
-            "localId" : "694",
+            "localId" : "678",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "699",
+        "localId" : "683",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongPredecessorUnderflow",
         "context" : "Patient",
@@ -16102,19 +16119,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "699",
+            "r" : "683",
             "s" : [ {
               "value" : [ "", "define ", "LongPredecessorUnderflow", ": " ]
             }, {
-              "r" : "702",
+              "r" : "686",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "701",
+                "r" : "685",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "700",
+                  "r" : "684",
                   "s" : [ {
                     "value" : [ "Long" ]
                   } ]
@@ -16125,25 +16142,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "702",
+          "localId" : "686",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "703",
+            "localId" : "687",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MinValue",
-            "localId" : "701",
+            "localId" : "685",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "706",
+        "localId" : "690",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongSuccessorNearOverflow",
         "context" : "Patient",
@@ -16152,31 +16169,31 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "706",
+            "r" : "690",
             "s" : [ {
               "value" : [ "", "define ", "LongSuccessorNearOverflow", ": " ]
             }, {
-              "r" : "713",
+              "r" : "697",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "707",
+                "r" : "691",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "707",
+                  "r" : "691",
                   "s" : [ {
-                    "r" : "709",
+                    "r" : "693",
                     "s" : [ {
                       "value" : [ "maximum", " " ]
                     }, {
-                      "r" : "708",
+                      "r" : "692",
                       "s" : [ {
                         "value" : [ "Long" ]
                       } ]
                     } ]
                   }, {
-                    "r" : "710",
+                    "r" : "694",
                     "value" : [ " - ", "1L" ]
                   } ]
                 }, {
@@ -16188,40 +16205,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "713",
+          "localId" : "697",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "714",
+            "localId" : "698",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Subtract",
-            "localId" : "707",
+            "localId" : "691",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "711",
+              "localId" : "695",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             }, {
               "type" : "NamedTypeSpecifier",
-              "localId" : "712",
+              "localId" : "696",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "MaxValue",
-              "localId" : "709",
+              "localId" : "693",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "710",
+              "localId" : "694",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
               "value" : "1",
@@ -16230,7 +16247,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "717",
+        "localId" : "701",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "LongPredecessorNearUnderflow",
         "context" : "Patient",
@@ -16239,31 +16256,31 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "717",
+            "r" : "701",
             "s" : [ {
               "value" : [ "", "define ", "LongPredecessorNearUnderflow", ": " ]
             }, {
-              "r" : "724",
+              "r" : "708",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "718",
+                "r" : "702",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "718",
+                  "r" : "702",
                   "s" : [ {
-                    "r" : "720",
+                    "r" : "704",
                     "s" : [ {
                       "value" : [ "minimum", " " ]
                     }, {
-                      "r" : "719",
+                      "r" : "703",
                       "s" : [ {
                         "value" : [ "Long" ]
                       } ]
                     } ]
                   }, {
-                    "r" : "721",
+                    "r" : "705",
                     "value" : [ " + ", "1L" ]
                   } ]
                 }, {
@@ -16275,40 +16292,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "724",
+          "localId" : "708",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "725",
+            "localId" : "709",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Add",
-            "localId" : "718",
+            "localId" : "702",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "722",
+              "localId" : "706",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             }, {
               "type" : "NamedTypeSpecifier",
-              "localId" : "723",
+              "localId" : "707",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "MinValue",
-              "localId" : "720",
+              "localId" : "704",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "721",
+              "localId" : "705",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
               "value" : "1",
@@ -16317,7 +16334,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "728",
+        "localId" : "712",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalAddOverflow",
         "context" : "Patient",
@@ -16326,61 +16343,61 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "728",
+            "r" : "712",
             "s" : [ {
-              "value" : [ "", "define ", "DecimalAddOverflow", ": " ]
+              "value" : [ "// NOTE: Due to JS Number imprecision, we need to exceed min/max by 10000 for it to actually produce a different number\n", "define ", "DecimalAddOverflow", ": " ]
             }, {
-              "r" : "729",
+              "r" : "713",
               "s" : [ {
-                "r" : "731",
+                "r" : "715",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "730",
+                  "r" : "714",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "732",
-                "value" : [ " + ", "1.0" ]
+                "r" : "716",
+                "value" : [ " + ", "10000.0" ]
               } ]
             } ]
           }
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "729",
+          "localId" : "713",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "733",
+            "localId" : "717",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "734",
+            "localId" : "718",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "731",
+            "localId" : "715",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "732",
+            "localId" : "716",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-            "value" : "1.0",
+            "value" : "10000.0",
             "annotation" : [ ]
           } ]
         }
       }, {
-        "localId" : "737",
+        "localId" : "721",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalAddUnderflow",
         "context" : "Patient",
@@ -16389,17 +16406,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "737",
+            "r" : "721",
             "s" : [ {
               "value" : [ "", "define ", "DecimalAddUnderflow", ": " ]
             }, {
-              "r" : "738",
+              "r" : "722",
               "s" : [ {
-                "r" : "740",
+                "r" : "724",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "739",
+                  "r" : "723",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
@@ -16407,10 +16424,10 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "741",
+                "r" : "725",
                 "s" : [ {
-                  "r" : "742",
-                  "value" : [ "-", "1.0" ]
+                  "r" : "726",
+                  "value" : [ "-", "10000.0" ]
                 } ]
               } ]
             } ]
@@ -16418,49 +16435,49 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "738",
+          "localId" : "722",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "744",
+            "localId" : "728",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "745",
+            "localId" : "729",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "740",
+            "localId" : "724",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "Negate",
-            "localId" : "741",
+            "localId" : "725",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "743",
+              "localId" : "727",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "742",
+              "localId" : "726",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-              "value" : "1.0",
+              "value" : "10000.0",
               "annotation" : [ ]
             }
           } ]
         }
       }, {
-        "localId" : "748",
+        "localId" : "732",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalAddNearOverflow",
         "context" : "Patient",
@@ -16469,23 +16486,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "748",
+            "r" : "732",
             "s" : [ {
               "value" : [ "", "define ", "DecimalAddNearOverflow", ": " ]
             }, {
-              "r" : "749",
+              "r" : "733",
               "s" : [ {
-                "r" : "751",
+                "r" : "735",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "750",
+                  "r" : "734",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "752",
+                "r" : "736",
                 "value" : [ " + ", "0.0" ]
               } ]
             } ]
@@ -16493,29 +16510,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "749",
+          "localId" : "733",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "753",
+            "localId" : "737",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "754",
+            "localId" : "738",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "751",
+            "localId" : "735",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "752",
+            "localId" : "736",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "value" : "0.0",
@@ -16523,7 +16540,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "757",
+        "localId" : "741",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalAddNearUnderflow",
         "context" : "Patient",
@@ -16532,23 +16549,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "757",
+            "r" : "741",
             "s" : [ {
               "value" : [ "", "define ", "DecimalAddNearUnderflow", ": " ]
             }, {
-              "r" : "758",
+              "r" : "742",
               "s" : [ {
-                "r" : "760",
+                "r" : "744",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "759",
+                  "r" : "743",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "761",
+                "r" : "745",
                 "value" : [ " + ", "0.0" ]
               } ]
             } ]
@@ -16556,29 +16573,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "758",
+          "localId" : "742",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "762",
+            "localId" : "746",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "763",
+            "localId" : "747",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "760",
+            "localId" : "744",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "761",
+            "localId" : "745",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "value" : "0.0",
@@ -16586,7 +16603,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "766",
+        "localId" : "750",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalSubtractOverflow",
         "context" : "Patient",
@@ -16595,17 +16612,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "766",
+            "r" : "750",
             "s" : [ {
               "value" : [ "", "define ", "DecimalSubtractOverflow", ": " ]
             }, {
-              "r" : "767",
+              "r" : "751",
               "s" : [ {
-                "r" : "769",
+                "r" : "753",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "768",
+                  "r" : "752",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
@@ -16613,10 +16630,10 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "770",
+                "r" : "754",
                 "s" : [ {
-                  "r" : "771",
-                  "value" : [ "-", "1.0" ]
+                  "r" : "755",
+                  "value" : [ "-", "10000.0" ]
                 } ]
               } ]
             } ]
@@ -16624,49 +16641,49 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "767",
+          "localId" : "751",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "773",
+            "localId" : "757",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "774",
+            "localId" : "758",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "769",
+            "localId" : "753",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "Negate",
-            "localId" : "770",
+            "localId" : "754",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "772",
+              "localId" : "756",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "771",
+              "localId" : "755",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-              "value" : "1.0",
+              "value" : "10000.0",
               "annotation" : [ ]
             }
           } ]
         }
       }, {
-        "localId" : "777",
+        "localId" : "761",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalSubtractUnderflow",
         "context" : "Patient",
@@ -16675,61 +16692,61 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "777",
+            "r" : "761",
             "s" : [ {
               "value" : [ "", "define ", "DecimalSubtractUnderflow", ": " ]
             }, {
-              "r" : "778",
+              "r" : "762",
               "s" : [ {
-                "r" : "780",
+                "r" : "764",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "779",
+                  "r" : "763",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "781",
-                "value" : [ " - ", "1.0" ]
+                "r" : "765",
+                "value" : [ " - ", "10000.0" ]
               } ]
             } ]
           }
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "778",
+          "localId" : "762",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "782",
+            "localId" : "766",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "783",
+            "localId" : "767",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "780",
+            "localId" : "764",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "781",
+            "localId" : "765",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-            "value" : "1.0",
+            "value" : "10000.0",
             "annotation" : [ ]
           } ]
         }
       }, {
-        "localId" : "786",
+        "localId" : "770",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalSubtractNearOverflow",
         "context" : "Patient",
@@ -16738,23 +16755,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "786",
+            "r" : "770",
             "s" : [ {
               "value" : [ "", "define ", "DecimalSubtractNearOverflow", ": " ]
             }, {
-              "r" : "787",
+              "r" : "771",
               "s" : [ {
-                "r" : "789",
+                "r" : "773",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "788",
+                  "r" : "772",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "790",
+                "r" : "774",
                 "value" : [ " - ", "0.0" ]
               } ]
             } ]
@@ -16762,29 +16779,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "787",
+          "localId" : "771",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "791",
+            "localId" : "775",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "792",
+            "localId" : "776",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "789",
+            "localId" : "773",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "790",
+            "localId" : "774",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "value" : "0.0",
@@ -16792,7 +16809,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "795",
+        "localId" : "779",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalSubtractNearUnderflow",
         "context" : "Patient",
@@ -16801,23 +16818,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "795",
+            "r" : "779",
             "s" : [ {
               "value" : [ "", "define ", "DecimalSubtractNearUnderflow", ": " ]
             }, {
-              "r" : "796",
+              "r" : "780",
               "s" : [ {
-                "r" : "798",
+                "r" : "782",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "797",
+                  "r" : "781",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "799",
+                "r" : "783",
                 "value" : [ " - ", "0.0" ]
               } ]
             } ]
@@ -16825,29 +16842,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "796",
+          "localId" : "780",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "800",
+            "localId" : "784",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "801",
+            "localId" : "785",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "798",
+            "localId" : "782",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "799",
+            "localId" : "783",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "value" : "0.0",
@@ -16855,7 +16872,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "804",
+        "localId" : "788",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalMultiplyOverflow",
         "context" : "Patient",
@@ -16864,23 +16881,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "804",
+            "r" : "788",
             "s" : [ {
               "value" : [ "", "define ", "DecimalMultiplyOverflow", ": " ]
             }, {
-              "r" : "805",
+              "r" : "789",
               "s" : [ {
-                "r" : "807",
+                "r" : "791",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "806",
+                  "r" : "790",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "808",
+                "r" : "792",
                 "value" : [ " * ", "2" ]
               } ]
             } ]
@@ -16888,39 +16905,39 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Multiply",
-          "localId" : "805",
+          "localId" : "789",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "812",
+            "localId" : "796",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "813",
+            "localId" : "797",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "807",
+            "localId" : "791",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "ToDecimal",
-            "localId" : "810",
+            "localId" : "794",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "811",
+              "localId" : "795",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "808",
+              "localId" : "792",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "2",
@@ -16929,7 +16946,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "816",
+        "localId" : "800",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalMultiplyUnderflow",
         "context" : "Patient",
@@ -16938,23 +16955,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "816",
+            "r" : "800",
             "s" : [ {
               "value" : [ "", "define ", "DecimalMultiplyUnderflow", ": " ]
             }, {
-              "r" : "817",
+              "r" : "801",
               "s" : [ {
-                "r" : "819",
+                "r" : "803",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "818",
+                  "r" : "802",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "820",
+                "r" : "804",
                 "value" : [ " * ", "2" ]
               } ]
             } ]
@@ -16962,39 +16979,39 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Multiply",
-          "localId" : "817",
+          "localId" : "801",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "824",
+            "localId" : "808",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "825",
+            "localId" : "809",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "819",
+            "localId" : "803",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "ToDecimal",
-            "localId" : "822",
+            "localId" : "806",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "823",
+              "localId" : "807",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "820",
+              "localId" : "804",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "2",
@@ -17003,7 +17020,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "828",
+        "localId" : "812",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalMultiplyNearOverflow",
         "context" : "Patient",
@@ -17012,23 +17029,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "828",
+            "r" : "812",
             "s" : [ {
               "value" : [ "", "define ", "DecimalMultiplyNearOverflow", ": " ]
             }, {
-              "r" : "829",
+              "r" : "813",
               "s" : [ {
-                "r" : "831",
+                "r" : "815",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "830",
+                  "r" : "814",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "832",
+                "r" : "816",
                 "value" : [ " * ", "1" ]
               } ]
             } ]
@@ -17036,39 +17053,39 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Multiply",
-          "localId" : "829",
+          "localId" : "813",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "836",
+            "localId" : "820",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "837",
+            "localId" : "821",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "831",
+            "localId" : "815",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "ToDecimal",
-            "localId" : "834",
+            "localId" : "818",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "835",
+              "localId" : "819",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "832",
+              "localId" : "816",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "1",
@@ -17077,7 +17094,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "840",
+        "localId" : "824",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalMultiplyNearUnderflow",
         "context" : "Patient",
@@ -17086,23 +17103,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "840",
+            "r" : "824",
             "s" : [ {
               "value" : [ "", "define ", "DecimalMultiplyNearUnderflow", ": " ]
             }, {
-              "r" : "841",
+              "r" : "825",
               "s" : [ {
-                "r" : "843",
+                "r" : "827",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "842",
+                  "r" : "826",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "844",
+                "r" : "828",
                 "value" : [ " * ", "1" ]
               } ]
             } ]
@@ -17110,39 +17127,39 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Multiply",
-          "localId" : "841",
+          "localId" : "825",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "848",
+            "localId" : "832",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "849",
+            "localId" : "833",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "843",
+            "localId" : "827",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "ToDecimal",
-            "localId" : "846",
+            "localId" : "830",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "847",
+              "localId" : "831",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "844",
+              "localId" : "828",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "1",
@@ -17151,7 +17168,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "852",
+        "localId" : "836",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalDivideOverflow",
         "context" : "Patient",
@@ -17160,23 +17177,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "852",
+            "r" : "836",
             "s" : [ {
               "value" : [ "", "define ", "DecimalDivideOverflow", ": " ]
             }, {
-              "r" : "853",
+              "r" : "837",
               "s" : [ {
-                "r" : "855",
+                "r" : "839",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "854",
+                  "r" : "838",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "856",
+                "r" : "840",
                 "value" : [ " / ", "0.5" ]
               } ]
             } ]
@@ -17184,29 +17201,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Divide",
-          "localId" : "853",
+          "localId" : "837",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "857",
+            "localId" : "841",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "858",
+            "localId" : "842",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "855",
+            "localId" : "839",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "856",
+            "localId" : "840",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "value" : "0.5",
@@ -17214,7 +17231,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "861",
+        "localId" : "845",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalDivideUnderflow",
         "context" : "Patient",
@@ -17223,23 +17240,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "861",
+            "r" : "845",
             "s" : [ {
               "value" : [ "", "define ", "DecimalDivideUnderflow", ": " ]
             }, {
-              "r" : "862",
+              "r" : "846",
               "s" : [ {
-                "r" : "864",
+                "r" : "848",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "863",
+                  "r" : "847",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "865",
+                "r" : "849",
                 "value" : [ " / ", "0.5" ]
               } ]
             } ]
@@ -17247,29 +17264,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Divide",
-          "localId" : "862",
+          "localId" : "846",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "866",
+            "localId" : "850",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "867",
+            "localId" : "851",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "864",
+            "localId" : "848",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "865",
+            "localId" : "849",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "value" : "0.5",
@@ -17277,7 +17294,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "870",
+        "localId" : "854",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalDivideNearOverflow",
         "context" : "Patient",
@@ -17286,23 +17303,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "870",
+            "r" : "854",
             "s" : [ {
               "value" : [ "", "define ", "DecimalDivideNearOverflow", ": " ]
             }, {
-              "r" : "871",
+              "r" : "855",
               "s" : [ {
-                "r" : "873",
+                "r" : "857",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "872",
+                  "r" : "856",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "874",
+                "r" : "858",
                 "value" : [ " / ", "1.0" ]
               } ]
             } ]
@@ -17310,29 +17327,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Divide",
-          "localId" : "871",
+          "localId" : "855",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "875",
+            "localId" : "859",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "876",
+            "localId" : "860",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "873",
+            "localId" : "857",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "874",
+            "localId" : "858",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "value" : "1.0",
@@ -17340,7 +17357,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "879",
+        "localId" : "863",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalDivideNearUnderflow",
         "context" : "Patient",
@@ -17349,23 +17366,23 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "879",
+            "r" : "863",
             "s" : [ {
               "value" : [ "", "define ", "DecimalDivideNearUnderflow", ": " ]
             }, {
-              "r" : "880",
+              "r" : "864",
               "s" : [ {
-                "r" : "882",
+                "r" : "866",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "881",
+                  "r" : "865",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
                 } ]
               }, {
-                "r" : "883",
+                "r" : "867",
                 "value" : [ " / ", "1.0" ]
               } ]
             } ]
@@ -17373,29 +17390,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Divide",
-          "localId" : "880",
+          "localId" : "864",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "884",
+            "localId" : "868",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "885",
+            "localId" : "869",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "882",
+            "localId" : "866",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "883",
+            "localId" : "867",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "value" : "1.0",
@@ -17403,7 +17420,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "888",
+        "localId" : "872",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalDivideByZero",
         "context" : "Patient",
@@ -17412,13 +17429,13 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "888",
+            "r" : "872",
             "s" : [ {
               "value" : [ "", "define ", "DecimalDivideByZero", ": " ]
             }, {
-              "r" : "889",
+              "r" : "873",
               "s" : [ {
-                "r" : "890",
+                "r" : "874",
                 "value" : [ "1.0", " / ", "0" ]
               } ]
             } ]
@@ -17426,40 +17443,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Divide",
-          "localId" : "889",
+          "localId" : "873",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "895",
+            "localId" : "879",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "896",
+            "localId" : "880",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "Literal",
-            "localId" : "890",
+            "localId" : "874",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "value" : "1.0",
             "annotation" : [ ]
           }, {
             "type" : "ToDecimal",
-            "localId" : "893",
+            "localId" : "877",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "894",
+              "localId" : "878",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "891",
+              "localId" : "875",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "0",
@@ -17468,7 +17485,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "899",
+        "localId" : "883",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalPowerOverflow",
         "context" : "Patient",
@@ -17477,21 +17494,21 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "899",
+            "r" : "883",
             "s" : [ {
               "value" : [ "", "define ", "DecimalPowerOverflow", ": " ]
             }, {
-              "r" : "900",
+              "r" : "884",
               "s" : [ {
-                "r" : "902",
+                "r" : "886",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "902",
+                  "r" : "886",
                   "s" : [ {
                     "value" : [ "maximum", " " ]
                   }, {
-                    "r" : "901",
+                    "r" : "885",
                     "s" : [ {
                       "value" : [ "Decimal" ]
                     } ]
@@ -17500,7 +17517,7 @@ module.exports['OutOfBounds'] = {
                   "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "903",
+                "r" : "887",
                 "value" : [ "^", "2" ]
               } ]
             } ]
@@ -17508,39 +17525,39 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "900",
+          "localId" : "884",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "907",
+            "localId" : "891",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "908",
+            "localId" : "892",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "902",
+            "localId" : "886",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "ToDecimal",
-            "localId" : "905",
+            "localId" : "889",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "906",
+              "localId" : "890",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "903",
+              "localId" : "887",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "2",
@@ -17549,7 +17566,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "911",
+        "localId" : "895",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalPowerUnderflow",
         "context" : "Patient",
@@ -17558,21 +17575,21 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "911",
+            "r" : "895",
             "s" : [ {
               "value" : [ "", "define ", "DecimalPowerUnderflow", ": " ]
             }, {
-              "r" : "912",
+              "r" : "896",
               "s" : [ {
-                "r" : "914",
+                "r" : "898",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "914",
+                  "r" : "898",
                   "s" : [ {
                     "value" : [ "minimum", " " ]
                   }, {
-                    "r" : "913",
+                    "r" : "897",
                     "s" : [ {
                       "value" : [ "Decimal" ]
                     } ]
@@ -17581,7 +17598,7 @@ module.exports['OutOfBounds'] = {
                   "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "915",
+                "r" : "899",
                 "value" : [ "^", "3" ]
               } ]
             } ]
@@ -17589,39 +17606,39 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "912",
+          "localId" : "896",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "919",
+            "localId" : "903",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "920",
+            "localId" : "904",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "914",
+            "localId" : "898",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "ToDecimal",
-            "localId" : "917",
+            "localId" : "901",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "918",
+              "localId" : "902",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "915",
+              "localId" : "899",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "3",
@@ -17630,7 +17647,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "923",
+        "localId" : "907",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalPowerNearOverflow",
         "context" : "Patient",
@@ -17639,21 +17656,21 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "923",
+            "r" : "907",
             "s" : [ {
               "value" : [ "", "define ", "DecimalPowerNearOverflow", ": " ]
             }, {
-              "r" : "924",
+              "r" : "908",
               "s" : [ {
-                "r" : "926",
+                "r" : "910",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "926",
+                  "r" : "910",
                   "s" : [ {
                     "value" : [ "maximum", " " ]
                   }, {
-                    "r" : "925",
+                    "r" : "909",
                     "s" : [ {
                       "value" : [ "Decimal" ]
                     } ]
@@ -17662,7 +17679,7 @@ module.exports['OutOfBounds'] = {
                   "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "927",
+                "r" : "911",
                 "value" : [ "^", "1" ]
               } ]
             } ]
@@ -17670,39 +17687,39 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "924",
+          "localId" : "908",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "931",
+            "localId" : "915",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "932",
+            "localId" : "916",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "926",
+            "localId" : "910",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "ToDecimal",
-            "localId" : "929",
+            "localId" : "913",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "930",
+              "localId" : "914",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "927",
+              "localId" : "911",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "1",
@@ -17711,7 +17728,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "935",
+        "localId" : "919",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalPowerNearUnderflow",
         "context" : "Patient",
@@ -17720,21 +17737,21 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "935",
+            "r" : "919",
             "s" : [ {
               "value" : [ "", "define ", "DecimalPowerNearUnderflow", ": " ]
             }, {
-              "r" : "936",
+              "r" : "920",
               "s" : [ {
-                "r" : "938",
+                "r" : "922",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "938",
+                  "r" : "922",
                   "s" : [ {
                     "value" : [ "minimum", " " ]
                   }, {
-                    "r" : "937",
+                    "r" : "921",
                     "s" : [ {
                       "value" : [ "Decimal" ]
                     } ]
@@ -17743,7 +17760,7 @@ module.exports['OutOfBounds'] = {
                   "value" : [ ")" ]
                 } ]
               }, {
-                "r" : "939",
+                "r" : "923",
                 "value" : [ "^", "1" ]
               } ]
             } ]
@@ -17751,39 +17768,39 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Power",
-          "localId" : "936",
+          "localId" : "920",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "943",
+            "localId" : "927",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "944",
+            "localId" : "928",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "938",
+            "localId" : "922",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }, {
             "type" : "ToDecimal",
-            "localId" : "941",
+            "localId" : "925",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "942",
+              "localId" : "926",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "939",
+              "localId" : "923",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "1",
@@ -17792,7 +17809,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "947",
+        "localId" : "931",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalSuccessorOverflow",
         "context" : "Patient",
@@ -17801,19 +17818,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "947",
+            "r" : "931",
             "s" : [ {
               "value" : [ "", "define ", "DecimalSuccessorOverflow", ": " ]
             }, {
-              "r" : "950",
+              "r" : "934",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "949",
+                "r" : "933",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "948",
+                  "r" : "932",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
@@ -17824,25 +17841,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "950",
+          "localId" : "934",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "951",
+            "localId" : "935",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MaxValue",
-            "localId" : "949",
+            "localId" : "933",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "954",
+        "localId" : "938",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalPredecessorUnderflow",
         "context" : "Patient",
@@ -17851,19 +17868,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "954",
+            "r" : "938",
             "s" : [ {
               "value" : [ "", "define ", "DecimalPredecessorUnderflow", ": " ]
             }, {
-              "r" : "957",
+              "r" : "941",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "956",
+                "r" : "940",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "955",
+                  "r" : "939",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
@@ -17874,25 +17891,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "957",
+          "localId" : "941",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "958",
+            "localId" : "942",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MinValue",
-            "localId" : "956",
+            "localId" : "940",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "961",
+        "localId" : "945",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalSuccessorNearOverflow",
         "context" : "Patient",
@@ -17901,31 +17918,31 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "961",
+            "r" : "945",
             "s" : [ {
               "value" : [ "", "define ", "DecimalSuccessorNearOverflow", ": " ]
             }, {
-              "r" : "968",
+              "r" : "952",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "962",
+                "r" : "946",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "962",
+                  "r" : "946",
                   "s" : [ {
-                    "r" : "964",
+                    "r" : "948",
                     "s" : [ {
                       "value" : [ "maximum", " " ]
                     }, {
-                      "r" : "963",
+                      "r" : "947",
                       "s" : [ {
                         "value" : [ "Decimal" ]
                       } ]
                     } ]
                   }, {
-                    "r" : "965",
+                    "r" : "949",
                     "value" : [ " - ", "0.00000001" ]
                   } ]
                 }, {
@@ -17937,40 +17954,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "968",
+          "localId" : "952",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "969",
+            "localId" : "953",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Subtract",
-            "localId" : "962",
+            "localId" : "946",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "966",
+              "localId" : "950",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             }, {
               "type" : "NamedTypeSpecifier",
-              "localId" : "967",
+              "localId" : "951",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "MaxValue",
-              "localId" : "964",
+              "localId" : "948",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "965",
+              "localId" : "949",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
               "value" : "0.00000001",
@@ -17979,7 +17996,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "972",
+        "localId" : "956",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "DecimalPredecessorNearUnderflow",
         "context" : "Patient",
@@ -17988,31 +18005,31 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "972",
+            "r" : "956",
             "s" : [ {
               "value" : [ "", "define ", "DecimalPredecessorNearUnderflow", ": " ]
             }, {
-              "r" : "979",
+              "r" : "963",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "973",
+                "r" : "957",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "973",
+                  "r" : "957",
                   "s" : [ {
-                    "r" : "975",
+                    "r" : "959",
                     "s" : [ {
                       "value" : [ "minimum", " " ]
                     }, {
-                      "r" : "974",
+                      "r" : "958",
                       "s" : [ {
                         "value" : [ "Decimal" ]
                       } ]
                     } ]
                   }, {
-                    "r" : "976",
+                    "r" : "960",
                     "value" : [ " + ", "0.00000001" ]
                   } ]
                 }, {
@@ -18024,40 +18041,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "979",
+          "localId" : "963",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "980",
+            "localId" : "964",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Add",
-            "localId" : "973",
+            "localId" : "957",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "977",
+              "localId" : "961",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             }, {
               "type" : "NamedTypeSpecifier",
-              "localId" : "978",
+              "localId" : "962",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "MinValue",
-              "localId" : "975",
+              "localId" : "959",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "976",
+              "localId" : "960",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
               "value" : "0.00000001",
@@ -18066,7 +18083,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "983",
+        "localId" : "967",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "MaxQuantity",
         "context" : "Patient",
@@ -18075,22 +18092,22 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "983",
+            "r" : "967",
             "s" : [ {
               "value" : [ "", "define ", "MaxQuantity", ": " ]
             }, {
-              "r" : "984",
+              "r" : "968",
               "s" : [ {
                 "value" : [ "Quantity", " { " ]
               }, {
                 "s" : [ {
                   "value" : [ "value", ": " ]
                 }, {
-                  "r" : "987",
+                  "r" : "971",
                   "s" : [ {
                     "value" : [ "maximum", " " ]
                   }, {
-                    "r" : "986",
+                    "r" : "970",
                     "s" : [ {
                       "value" : [ "Decimal" ]
                     } ]
@@ -18102,7 +18119,7 @@ module.exports['OutOfBounds'] = {
                 "s" : [ {
                   "value" : [ "unit", ": " ]
                 }, {
-                  "r" : "988",
+                  "r" : "972",
                   "s" : [ {
                     "value" : [ "'mm'" ]
                   } ]
@@ -18115,7 +18132,7 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Instance",
-          "localId" : "984",
+          "localId" : "968",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
@@ -18123,7 +18140,7 @@ module.exports['OutOfBounds'] = {
             "name" : "value",
             "value" : {
               "type" : "MaxValue",
-              "localId" : "987",
+              "localId" : "971",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
@@ -18132,7 +18149,7 @@ module.exports['OutOfBounds'] = {
             "name" : "unit",
             "value" : {
               "type" : "Literal",
-              "localId" : "988",
+              "localId" : "972",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
               "valueType" : "{urn:hl7-org:elm-types:r1}String",
               "value" : "mm",
@@ -18141,7 +18158,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "992",
+        "localId" : "976",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "MinQuantity",
         "context" : "Patient",
@@ -18150,22 +18167,22 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "992",
+            "r" : "976",
             "s" : [ {
               "value" : [ "", "define ", "MinQuantity", ": " ]
             }, {
-              "r" : "993",
+              "r" : "977",
               "s" : [ {
                 "value" : [ "Quantity", " { " ]
               }, {
                 "s" : [ {
                   "value" : [ "value", ": " ]
                 }, {
-                  "r" : "996",
+                  "r" : "980",
                   "s" : [ {
                     "value" : [ "minimum", " " ]
                   }, {
-                    "r" : "995",
+                    "r" : "979",
                     "s" : [ {
                       "value" : [ "Decimal" ]
                     } ]
@@ -18177,7 +18194,7 @@ module.exports['OutOfBounds'] = {
                 "s" : [ {
                   "value" : [ "unit", ": " ]
                 }, {
-                  "r" : "997",
+                  "r" : "981",
                   "s" : [ {
                     "value" : [ "'mm'" ]
                   } ]
@@ -18190,7 +18207,7 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Instance",
-          "localId" : "993",
+          "localId" : "977",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
@@ -18198,7 +18215,7 @@ module.exports['OutOfBounds'] = {
             "name" : "value",
             "value" : {
               "type" : "MinValue",
-              "localId" : "996",
+              "localId" : "980",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
@@ -18207,7 +18224,7 @@ module.exports['OutOfBounds'] = {
             "name" : "unit",
             "value" : {
               "type" : "Literal",
-              "localId" : "997",
+              "localId" : "981",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
               "valueType" : "{urn:hl7-org:elm-types:r1}String",
               "value" : "mm",
@@ -18216,7 +18233,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1001",
+        "localId" : "985",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "QuantityAddOverflow",
         "context" : "Patient",
@@ -18225,22 +18242,22 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1001",
+            "r" : "985",
             "s" : [ {
-              "value" : [ "", "define ", "QuantityAddOverflow", ": " ]
+              "value" : [ "// NOTE: Due to JS Number imprecision, we need to exceed min/max by 10000 for it to actually produce a different number\n", "define ", "QuantityAddOverflow", ": " ]
             }, {
-              "r" : "1002",
+              "r" : "986",
               "s" : [ {
-                "r" : "1003",
+                "r" : "987",
                 "s" : [ {
                   "value" : [ "MaxQuantity" ]
                 } ]
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1004",
+                "r" : "988",
                 "s" : [ {
-                  "value" : [ "1.0 ", "'mm'" ]
+                  "value" : [ "10000.0 ", "'mm'" ]
                 } ]
               } ]
             } ]
@@ -18248,37 +18265,37 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1002",
+          "localId" : "986",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1005",
+            "localId" : "989",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1006",
+            "localId" : "990",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "ExpressionRef",
-            "localId" : "1003",
+            "localId" : "987",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "MaxQuantity",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1004",
+            "localId" : "988",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 1.0,
+            "value" : 10000.0,
             "unit" : "mm",
             "annotation" : [ ]
           } ]
         }
       }, {
-        "localId" : "1009",
+        "localId" : "993",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "QuantityAddUnderflow",
         "context" : "Patient",
@@ -18287,30 +18304,30 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1009",
+            "r" : "993",
             "s" : [ {
               "value" : [ "", "define ", "QuantityAddUnderflow", ": " ]
             }, {
-              "r" : "1010",
+              "r" : "994",
               "s" : [ {
-                "r" : "1011",
+                "r" : "995",
                 "s" : [ {
                   "value" : [ "MinQuantity" ]
                 } ]
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1012",
+                "r" : "996",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1012",
+                  "r" : "996",
                   "s" : [ {
                     "value" : [ "-" ]
                   }, {
-                    "r" : "1013",
+                    "r" : "997",
                     "s" : [ {
-                      "value" : [ "1.0 ", "'mm'" ]
+                      "value" : [ "10000.0 ", "'mm'" ]
                     } ]
                   } ]
                 }, {
@@ -18322,7 +18339,143 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1010",
+          "localId" : "994",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "999",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "1000",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "ExpressionRef",
+            "localId" : "995",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "name" : "MinQuantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "Negate",
+            "localId" : "996",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "998",
+              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Quantity",
+              "localId" : "997",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 10000.0,
+              "unit" : "mm",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "1003",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "QuantityAddNearOverflow",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "1003",
+            "s" : [ {
+              "value" : [ "", "define ", "QuantityAddNearOverflow", ": " ]
+            }, {
+              "r" : "1004",
+              "s" : [ {
+                "r" : "1005",
+                "s" : [ {
+                  "value" : [ "MaxQuantity" ]
+                } ]
+              }, {
+                "value" : [ " + " ]
+              }, {
+                "r" : "1006",
+                "s" : [ {
+                  "value" : [ "0.0 ", "'mm'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Add",
+          "localId" : "1004",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "1007",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "1008",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "ExpressionRef",
+            "localId" : "1005",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "name" : "MaxQuantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "Quantity",
+            "localId" : "1006",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 0.0,
+            "unit" : "mm",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "1011",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "QuantityAddNearUnderflow",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "1011",
+            "s" : [ {
+              "value" : [ "", "define ", "QuantityAddNearUnderflow", ": " ]
+            }, {
+              "r" : "1012",
+              "s" : [ {
+                "r" : "1013",
+                "s" : [ {
+                  "value" : [ "MinQuantity" ]
+                } ]
+              }, {
+                "value" : [ " + " ]
+              }, {
+                "r" : "1014",
+                "s" : [ {
+                  "value" : [ "0.0 ", "'mm'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Add",
+          "localId" : "1012",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
@@ -18338,157 +18491,21 @@ module.exports['OutOfBounds'] = {
           } ],
           "operand" : [ {
             "type" : "ExpressionRef",
-            "localId" : "1011",
+            "localId" : "1013",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "MinQuantity",
             "annotation" : [ ]
           }, {
-            "type" : "Negate",
-            "localId" : "1012",
+            "type" : "Quantity",
+            "localId" : "1014",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "annotation" : [ ],
-            "signature" : [ {
-              "type" : "NamedTypeSpecifier",
-              "localId" : "1014",
-              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-              "annotation" : [ ]
-            } ],
-            "operand" : {
-              "type" : "Quantity",
-              "localId" : "1013",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-              "value" : 1.0,
-              "unit" : "mm",
-              "annotation" : [ ]
-            }
+            "value" : 0.0,
+            "unit" : "mm",
+            "annotation" : [ ]
           } ]
         }
       }, {
         "localId" : "1019",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantityAddNearOverflow",
-        "context" : "Patient",
-        "accessLevel" : "Public",
-        "annotation" : [ {
-          "type" : "Annotation",
-          "t" : [ ],
-          "s" : {
-            "r" : "1019",
-            "s" : [ {
-              "value" : [ "", "define ", "QuantityAddNearOverflow", ": " ]
-            }, {
-              "r" : "1020",
-              "s" : [ {
-                "r" : "1021",
-                "s" : [ {
-                  "value" : [ "MaxQuantity" ]
-                } ]
-              }, {
-                "value" : [ " + " ]
-              }, {
-                "r" : "1022",
-                "s" : [ {
-                  "value" : [ "0.0 ", "'mm'" ]
-                } ]
-              } ]
-            } ]
-          }
-        } ],
-        "expression" : {
-          "type" : "Add",
-          "localId" : "1020",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-          "annotation" : [ ],
-          "signature" : [ {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "1023",
-            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "annotation" : [ ]
-          }, {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "1024",
-            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "annotation" : [ ]
-          } ],
-          "operand" : [ {
-            "type" : "ExpressionRef",
-            "localId" : "1021",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "name" : "MaxQuantity",
-            "annotation" : [ ]
-          }, {
-            "type" : "Quantity",
-            "localId" : "1022",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 0.0,
-            "unit" : "mm",
-            "annotation" : [ ]
-          } ]
-        }
-      }, {
-        "localId" : "1027",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantityAddNearUnderflow",
-        "context" : "Patient",
-        "accessLevel" : "Public",
-        "annotation" : [ {
-          "type" : "Annotation",
-          "t" : [ ],
-          "s" : {
-            "r" : "1027",
-            "s" : [ {
-              "value" : [ "", "define ", "QuantityAddNearUnderflow", ": " ]
-            }, {
-              "r" : "1028",
-              "s" : [ {
-                "r" : "1029",
-                "s" : [ {
-                  "value" : [ "MinQuantity" ]
-                } ]
-              }, {
-                "value" : [ " + " ]
-              }, {
-                "r" : "1030",
-                "s" : [ {
-                  "value" : [ "0.0 ", "'mm'" ]
-                } ]
-              } ]
-            } ]
-          }
-        } ],
-        "expression" : {
-          "type" : "Add",
-          "localId" : "1028",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-          "annotation" : [ ],
-          "signature" : [ {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "1031",
-            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "annotation" : [ ]
-          }, {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "1032",
-            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "annotation" : [ ]
-          } ],
-          "operand" : [ {
-            "type" : "ExpressionRef",
-            "localId" : "1029",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "name" : "MinQuantity",
-            "annotation" : [ ]
-          }, {
-            "type" : "Quantity",
-            "localId" : "1030",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 0.0,
-            "unit" : "mm",
-            "annotation" : [ ]
-          } ]
-        }
-      }, {
-        "localId" : "1035",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "QuantitySubtractOverflow",
         "context" : "Patient",
@@ -18497,30 +18514,30 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1035",
+            "r" : "1019",
             "s" : [ {
               "value" : [ "", "define ", "QuantitySubtractOverflow", ": " ]
             }, {
-              "r" : "1036",
+              "r" : "1020",
               "s" : [ {
-                "r" : "1037",
+                "r" : "1021",
                 "s" : [ {
                   "value" : [ "MaxQuantity" ]
                 } ]
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1038",
+                "r" : "1022",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1038",
+                  "r" : "1022",
                   "s" : [ {
                     "value" : [ "-" ]
                   }, {
-                    "r" : "1039",
+                    "r" : "1023",
                     "s" : [ {
-                      "value" : [ "1 ", "'mm'" ]
+                      "value" : [ "10000 ", "'mm'" ]
                     } ]
                   } ]
                 }, {
@@ -18532,7 +18549,143 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1036",
+          "localId" : "1020",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "1025",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "1026",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "ExpressionRef",
+            "localId" : "1021",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "name" : "MaxQuantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "Negate",
+            "localId" : "1022",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "1024",
+              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Quantity",
+              "localId" : "1023",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 10000,
+              "unit" : "mm",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "1029",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "QuantitySubtractUnderflow",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "1029",
+            "s" : [ {
+              "value" : [ "", "define ", "QuantitySubtractUnderflow", ": " ]
+            }, {
+              "r" : "1030",
+              "s" : [ {
+                "r" : "1031",
+                "s" : [ {
+                  "value" : [ "MinQuantity" ]
+                } ]
+              }, {
+                "value" : [ " - " ]
+              }, {
+                "r" : "1032",
+                "s" : [ {
+                  "value" : [ "10000 ", "'mm'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Subtract",
+          "localId" : "1030",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "1033",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "1034",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "ExpressionRef",
+            "localId" : "1031",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "name" : "MinQuantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "Quantity",
+            "localId" : "1032",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 10000,
+            "unit" : "mm",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "1037",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "QuantitySubtractNearOverflow",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "1037",
+            "s" : [ {
+              "value" : [ "", "define ", "QuantitySubtractNearOverflow", ": " ]
+            }, {
+              "r" : "1038",
+              "s" : [ {
+                "r" : "1039",
+                "s" : [ {
+                  "value" : [ "MaxQuantity" ]
+                } ]
+              }, {
+                "value" : [ " - " ]
+              }, {
+                "r" : "1040",
+                "s" : [ {
+                  "value" : [ "0.0 ", "'mm'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Subtract",
+          "localId" : "1038",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
@@ -18548,35 +18701,23 @@ module.exports['OutOfBounds'] = {
           } ],
           "operand" : [ {
             "type" : "ExpressionRef",
-            "localId" : "1037",
+            "localId" : "1039",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "MaxQuantity",
             "annotation" : [ ]
           }, {
-            "type" : "Negate",
-            "localId" : "1038",
+            "type" : "Quantity",
+            "localId" : "1040",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "annotation" : [ ],
-            "signature" : [ {
-              "type" : "NamedTypeSpecifier",
-              "localId" : "1040",
-              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-              "annotation" : [ ]
-            } ],
-            "operand" : {
-              "type" : "Quantity",
-              "localId" : "1039",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-              "value" : 1,
-              "unit" : "mm",
-              "annotation" : [ ]
-            }
+            "value" : 0.0,
+            "unit" : "mm",
+            "annotation" : [ ]
           } ]
         }
       }, {
         "localId" : "1045",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantitySubtractUnderflow",
+        "name" : "QuantitySubtractNearUnderflow",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -18585,7 +18726,7 @@ module.exports['OutOfBounds'] = {
           "s" : {
             "r" : "1045",
             "s" : [ {
-              "value" : [ "", "define ", "QuantitySubtractUnderflow", ": " ]
+              "value" : [ "", "define ", "QuantitySubtractNearUnderflow", ": " ]
             }, {
               "r" : "1046",
               "s" : [ {
@@ -18598,7 +18739,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "r" : "1048",
                 "s" : [ {
-                  "value" : [ "1 ", "'mm'" ]
+                  "value" : [ "0.0 ", "'mm'" ]
                 } ]
               } ]
             } ]
@@ -18630,7 +18771,7 @@ module.exports['OutOfBounds'] = {
             "type" : "Quantity",
             "localId" : "1048",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 1,
+            "value" : 0.0,
             "unit" : "mm",
             "annotation" : [ ]
           } ]
@@ -18638,7 +18779,7 @@ module.exports['OutOfBounds'] = {
       }, {
         "localId" : "1053",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantitySubtractNearOverflow",
+        "name" : "QuantityMultiplyOverflow",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -18647,7 +18788,7 @@ module.exports['OutOfBounds'] = {
           "s" : {
             "r" : "1053",
             "s" : [ {
-              "value" : [ "", "define ", "QuantitySubtractNearOverflow", ": " ]
+              "value" : [ "", "define ", "QuantityMultiplyOverflow", ": " ]
             }, {
               "r" : "1054",
               "s" : [ {
@@ -18656,18 +18797,18 @@ module.exports['OutOfBounds'] = {
                   "value" : [ "MaxQuantity" ]
                 } ]
               }, {
-                "value" : [ " - " ]
+                "value" : [ " * " ]
               }, {
                 "r" : "1056",
                 "s" : [ {
-                  "value" : [ "0.0 ", "'mm'" ]
+                  "value" : [ "2 ", "'mm'" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "Subtract",
+          "type" : "Multiply",
           "localId" : "1054",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
@@ -18692,7 +18833,7 @@ module.exports['OutOfBounds'] = {
             "type" : "Quantity",
             "localId" : "1056",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 0.0,
+            "value" : 2,
             "unit" : "mm",
             "annotation" : [ ]
           } ]
@@ -18700,7 +18841,7 @@ module.exports['OutOfBounds'] = {
       }, {
         "localId" : "1061",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantitySubtractNearUnderflow",
+        "name" : "QuantityMultiplyUnderflow",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -18709,7 +18850,7 @@ module.exports['OutOfBounds'] = {
           "s" : {
             "r" : "1061",
             "s" : [ {
-              "value" : [ "", "define ", "QuantitySubtractNearUnderflow", ": " ]
+              "value" : [ "", "define ", "QuantityMultiplyUnderflow", ": " ]
             }, {
               "r" : "1062",
               "s" : [ {
@@ -18718,18 +18859,18 @@ module.exports['OutOfBounds'] = {
                   "value" : [ "MinQuantity" ]
                 } ]
               }, {
-                "value" : [ " - " ]
+                "value" : [ " * " ]
               }, {
                 "r" : "1064",
                 "s" : [ {
-                  "value" : [ "0.0 ", "'mm'" ]
+                  "value" : [ "2 ", "'mm'" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "Subtract",
+          "type" : "Multiply",
           "localId" : "1062",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
@@ -18754,7 +18895,7 @@ module.exports['OutOfBounds'] = {
             "type" : "Quantity",
             "localId" : "1064",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 0.0,
+            "value" : 2,
             "unit" : "mm",
             "annotation" : [ ]
           } ]
@@ -18762,7 +18903,7 @@ module.exports['OutOfBounds'] = {
       }, {
         "localId" : "1069",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantityMultiplyOverflow",
+        "name" : "QuantityMultiplyNearOverflow",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -18771,7 +18912,7 @@ module.exports['OutOfBounds'] = {
           "s" : {
             "r" : "1069",
             "s" : [ {
-              "value" : [ "", "define ", "QuantityMultiplyOverflow", ": " ]
+              "value" : [ "", "define ", "QuantityMultiplyNearOverflow", ": " ]
             }, {
               "r" : "1070",
               "s" : [ {
@@ -18784,7 +18925,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "r" : "1072",
                 "s" : [ {
-                  "value" : [ "2 ", "'mm'" ]
+                  "value" : [ "1 ", "'mm'" ]
                 } ]
               } ]
             } ]
@@ -18816,7 +18957,7 @@ module.exports['OutOfBounds'] = {
             "type" : "Quantity",
             "localId" : "1072",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 2,
+            "value" : 1,
             "unit" : "mm",
             "annotation" : [ ]
           } ]
@@ -18824,7 +18965,7 @@ module.exports['OutOfBounds'] = {
       }, {
         "localId" : "1077",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantityMultiplyUnderflow",
+        "name" : "QuantityMultiplyNearUnderflow",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -18833,7 +18974,7 @@ module.exports['OutOfBounds'] = {
           "s" : {
             "r" : "1077",
             "s" : [ {
-              "value" : [ "", "define ", "QuantityMultiplyUnderflow", ": " ]
+              "value" : [ "", "define ", "QuantityMultiplyNearUnderflow", ": " ]
             }, {
               "r" : "1078",
               "s" : [ {
@@ -18846,7 +18987,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "r" : "1080",
                 "s" : [ {
-                  "value" : [ "2 ", "'mm'" ]
+                  "value" : [ "1 ", "'mm'" ]
                 } ]
               } ]
             } ]
@@ -18878,7 +19019,7 @@ module.exports['OutOfBounds'] = {
             "type" : "Quantity",
             "localId" : "1080",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 2,
+            "value" : 1,
             "unit" : "mm",
             "annotation" : [ ]
           } ]
@@ -18886,7 +19027,7 @@ module.exports['OutOfBounds'] = {
       }, {
         "localId" : "1085",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantityMultiplyNearOverflow",
+        "name" : "QuantityDivideOverflow",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -18895,7 +19036,7 @@ module.exports['OutOfBounds'] = {
           "s" : {
             "r" : "1085",
             "s" : [ {
-              "value" : [ "", "define ", "QuantityMultiplyNearOverflow", ": " ]
+              "value" : [ "", "define ", "QuantityDivideOverflow", ": " ]
             }, {
               "r" : "1086",
               "s" : [ {
@@ -18904,18 +19045,18 @@ module.exports['OutOfBounds'] = {
                   "value" : [ "MaxQuantity" ]
                 } ]
               }, {
-                "value" : [ " * " ]
+                "value" : [ " / " ]
               }, {
                 "r" : "1088",
                 "s" : [ {
-                  "value" : [ "1 ", "'mm'" ]
+                  "value" : [ "0.5 ", "'mm'" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "Multiply",
+          "type" : "Divide",
           "localId" : "1086",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
@@ -18940,7 +19081,7 @@ module.exports['OutOfBounds'] = {
             "type" : "Quantity",
             "localId" : "1088",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 1,
+            "value" : 0.5,
             "unit" : "mm",
             "annotation" : [ ]
           } ]
@@ -18948,7 +19089,7 @@ module.exports['OutOfBounds'] = {
       }, {
         "localId" : "1093",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantityMultiplyNearUnderflow",
+        "name" : "QuantityDivideUnderflow",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -18957,7 +19098,7 @@ module.exports['OutOfBounds'] = {
           "s" : {
             "r" : "1093",
             "s" : [ {
-              "value" : [ "", "define ", "QuantityMultiplyNearUnderflow", ": " ]
+              "value" : [ "", "define ", "QuantityDivideUnderflow", ": " ]
             }, {
               "r" : "1094",
               "s" : [ {
@@ -18966,18 +19107,18 @@ module.exports['OutOfBounds'] = {
                   "value" : [ "MinQuantity" ]
                 } ]
               }, {
-                "value" : [ " * " ]
+                "value" : [ " / " ]
               }, {
                 "r" : "1096",
                 "s" : [ {
-                  "value" : [ "1 ", "'mm'" ]
+                  "value" : [ "0.5 ", "'mm'" ]
                 } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "Multiply",
+          "type" : "Divide",
           "localId" : "1094",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
@@ -19002,7 +19143,7 @@ module.exports['OutOfBounds'] = {
             "type" : "Quantity",
             "localId" : "1096",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 1,
+            "value" : 0.5,
             "unit" : "mm",
             "annotation" : [ ]
           } ]
@@ -19010,7 +19151,7 @@ module.exports['OutOfBounds'] = {
       }, {
         "localId" : "1101",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantityDivideOverflow",
+        "name" : "QuantityDivideNearOverflow",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -19019,7 +19160,7 @@ module.exports['OutOfBounds'] = {
           "s" : {
             "r" : "1101",
             "s" : [ {
-              "value" : [ "", "define ", "QuantityDivideOverflow", ": " ]
+              "value" : [ "", "define ", "QuantityDivideNearOverflow", ": " ]
             }, {
               "r" : "1102",
               "s" : [ {
@@ -19032,7 +19173,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "r" : "1104",
                 "s" : [ {
-                  "value" : [ "0.5 ", "'mm'" ]
+                  "value" : [ "1 ", "'mm'" ]
                 } ]
               } ]
             } ]
@@ -19064,7 +19205,7 @@ module.exports['OutOfBounds'] = {
             "type" : "Quantity",
             "localId" : "1104",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 0.5,
+            "value" : 1,
             "unit" : "mm",
             "annotation" : [ ]
           } ]
@@ -19072,7 +19213,7 @@ module.exports['OutOfBounds'] = {
       }, {
         "localId" : "1109",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantityDivideUnderflow",
+        "name" : "QuantityDivideNearUnderflow",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -19081,7 +19222,7 @@ module.exports['OutOfBounds'] = {
           "s" : {
             "r" : "1109",
             "s" : [ {
-              "value" : [ "", "define ", "QuantityDivideUnderflow", ": " ]
+              "value" : [ "", "define ", "QuantityDivideNearUnderflow", ": " ]
             }, {
               "r" : "1110",
               "s" : [ {
@@ -19094,7 +19235,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "r" : "1112",
                 "s" : [ {
-                  "value" : [ "0.5 ", "'mm'" ]
+                  "value" : [ "1 ", "'mm'" ]
                 } ]
               } ]
             } ]
@@ -19126,7 +19267,7 @@ module.exports['OutOfBounds'] = {
             "type" : "Quantity",
             "localId" : "1112",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 0.5,
+            "value" : 1,
             "unit" : "mm",
             "annotation" : [ ]
           } ]
@@ -19134,7 +19275,7 @@ module.exports['OutOfBounds'] = {
       }, {
         "localId" : "1117",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantityDivideNearOverflow",
+        "name" : "QuantityDivideByZero",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -19143,20 +19284,20 @@ module.exports['OutOfBounds'] = {
           "s" : {
             "r" : "1117",
             "s" : [ {
-              "value" : [ "", "define ", "QuantityDivideNearOverflow", ": " ]
+              "value" : [ "", "define ", "QuantityDivideByZero", ": " ]
             }, {
               "r" : "1118",
               "s" : [ {
                 "r" : "1119",
                 "s" : [ {
-                  "value" : [ "MaxQuantity" ]
+                  "value" : [ "1.0 ", "'mm'" ]
                 } ]
               }, {
                 "value" : [ " / " ]
               }, {
                 "r" : "1120",
                 "s" : [ {
-                  "value" : [ "1 ", "'mm'" ]
+                  "value" : [ "0 ", "'mm'" ]
                 } ]
               } ]
             } ]
@@ -19179,139 +19320,15 @@ module.exports['OutOfBounds'] = {
             "annotation" : [ ]
           } ],
           "operand" : [ {
-            "type" : "ExpressionRef",
+            "type" : "Quantity",
             "localId" : "1119",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "name" : "MaxQuantity",
-            "annotation" : [ ]
-          }, {
-            "type" : "Quantity",
-            "localId" : "1120",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 1,
-            "unit" : "mm",
-            "annotation" : [ ]
-          } ]
-        }
-      }, {
-        "localId" : "1125",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantityDivideNearUnderflow",
-        "context" : "Patient",
-        "accessLevel" : "Public",
-        "annotation" : [ {
-          "type" : "Annotation",
-          "t" : [ ],
-          "s" : {
-            "r" : "1125",
-            "s" : [ {
-              "value" : [ "", "define ", "QuantityDivideNearUnderflow", ": " ]
-            }, {
-              "r" : "1126",
-              "s" : [ {
-                "r" : "1127",
-                "s" : [ {
-                  "value" : [ "MinQuantity" ]
-                } ]
-              }, {
-                "value" : [ " / " ]
-              }, {
-                "r" : "1128",
-                "s" : [ {
-                  "value" : [ "1 ", "'mm'" ]
-                } ]
-              } ]
-            } ]
-          }
-        } ],
-        "expression" : {
-          "type" : "Divide",
-          "localId" : "1126",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-          "annotation" : [ ],
-          "signature" : [ {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "1129",
-            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "annotation" : [ ]
-          }, {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "1130",
-            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "annotation" : [ ]
-          } ],
-          "operand" : [ {
-            "type" : "ExpressionRef",
-            "localId" : "1127",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "name" : "MinQuantity",
-            "annotation" : [ ]
-          }, {
-            "type" : "Quantity",
-            "localId" : "1128",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 1,
-            "unit" : "mm",
-            "annotation" : [ ]
-          } ]
-        }
-      }, {
-        "localId" : "1133",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "QuantityDivideByZero",
-        "context" : "Patient",
-        "accessLevel" : "Public",
-        "annotation" : [ {
-          "type" : "Annotation",
-          "t" : [ ],
-          "s" : {
-            "r" : "1133",
-            "s" : [ {
-              "value" : [ "", "define ", "QuantityDivideByZero", ": " ]
-            }, {
-              "r" : "1134",
-              "s" : [ {
-                "r" : "1135",
-                "s" : [ {
-                  "value" : [ "1.0 ", "'mm'" ]
-                } ]
-              }, {
-                "value" : [ " / " ]
-              }, {
-                "r" : "1136",
-                "s" : [ {
-                  "value" : [ "0 ", "'mm'" ]
-                } ]
-              } ]
-            } ]
-          }
-        } ],
-        "expression" : {
-          "type" : "Divide",
-          "localId" : "1134",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-          "annotation" : [ ],
-          "signature" : [ {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "1137",
-            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "annotation" : [ ]
-          }, {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "1138",
-            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "annotation" : [ ]
-          } ],
-          "operand" : [ {
-            "type" : "Quantity",
-            "localId" : "1135",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 1.0,
             "unit" : "mm",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1136",
+            "localId" : "1120",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "mm",
@@ -19319,7 +19336,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1141",
+        "localId" : "1125",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "QuantitySuccessorOverflow",
         "context" : "Patient",
@@ -19328,15 +19345,15 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1141",
+            "r" : "1125",
             "s" : [ {
               "value" : [ "", "define ", "QuantitySuccessorOverflow", ": " ]
             }, {
-              "r" : "1143",
+              "r" : "1127",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "1142",
+                "r" : "1126",
                 "s" : [ {
                   "value" : [ "MaxQuantity" ]
                 } ]
@@ -19346,25 +19363,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "1143",
+          "localId" : "1127",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1144",
+            "localId" : "1128",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "ExpressionRef",
-            "localId" : "1142",
+            "localId" : "1126",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "MaxQuantity",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "1147",
+        "localId" : "1131",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "QuantityPredecessorUnderflow",
         "context" : "Patient",
@@ -19373,15 +19390,15 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1147",
+            "r" : "1131",
             "s" : [ {
               "value" : [ "", "define ", "QuantityPredecessorUnderflow", ": " ]
             }, {
-              "r" : "1149",
+              "r" : "1133",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "1148",
+                "r" : "1132",
                 "s" : [ {
                   "value" : [ "MinQuantity" ]
                 } ]
@@ -19391,25 +19408,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "1149",
+          "localId" : "1133",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1150",
+            "localId" : "1134",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "ExpressionRef",
-            "localId" : "1148",
+            "localId" : "1132",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "name" : "MinQuantity",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "1153",
+        "localId" : "1137",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "QuantitySuccessorNearOverflow",
         "context" : "Patient",
@@ -19418,34 +19435,34 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1153",
+            "r" : "1137",
             "s" : [ {
               "value" : [ "", "define ", "QuantitySuccessorNearOverflow", ": " ]
             }, {
-              "r" : "1164",
+              "r" : "1148",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "1154",
+                "r" : "1138",
                 "s" : [ {
                   "value" : [ "Quantity", " { " ]
                 }, {
                   "s" : [ {
                     "value" : [ "value", ": " ]
                   }, {
-                    "r" : "1156",
+                    "r" : "1140",
                     "s" : [ {
-                      "r" : "1158",
+                      "r" : "1142",
                       "s" : [ {
                         "value" : [ "maximum", " " ]
                       }, {
-                        "r" : "1157",
+                        "r" : "1141",
                         "s" : [ {
                           "value" : [ "Decimal" ]
                         } ]
                       } ]
                     }, {
-                      "r" : "1159",
+                      "r" : "1143",
                       "value" : [ " - ", "0.00000001" ]
                     } ]
                   } ]
@@ -19455,7 +19472,7 @@ module.exports['OutOfBounds'] = {
                   "s" : [ {
                     "value" : [ "unit", ": " ]
                   }, {
-                    "r" : "1162",
+                    "r" : "1146",
                     "s" : [ {
                       "value" : [ "'mm'" ]
                     } ]
@@ -19469,18 +19486,18 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "1164",
+          "localId" : "1148",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1165",
+            "localId" : "1149",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Instance",
-            "localId" : "1154",
+            "localId" : "1138",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ],
@@ -19488,29 +19505,29 @@ module.exports['OutOfBounds'] = {
               "name" : "value",
               "value" : {
                 "type" : "Subtract",
-                "localId" : "1156",
+                "localId" : "1140",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ],
                 "signature" : [ {
                   "type" : "NamedTypeSpecifier",
-                  "localId" : "1160",
+                  "localId" : "1144",
                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "annotation" : [ ]
                 }, {
                   "type" : "NamedTypeSpecifier",
-                  "localId" : "1161",
+                  "localId" : "1145",
                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "annotation" : [ ]
                 } ],
                 "operand" : [ {
                   "type" : "MaxValue",
-                  "localId" : "1158",
+                  "localId" : "1142",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "annotation" : [ ]
                 }, {
                   "type" : "Literal",
-                  "localId" : "1159",
+                  "localId" : "1143",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "value" : "0.00000001",
@@ -19521,7 +19538,7 @@ module.exports['OutOfBounds'] = {
               "name" : "unit",
               "value" : {
                 "type" : "Literal",
-                "localId" : "1162",
+                "localId" : "1146",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
                 "value" : "mm",
@@ -19531,7 +19548,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "1168",
+        "localId" : "1152",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "QuantityPredecessorNearUnderflow",
         "context" : "Patient",
@@ -19540,34 +19557,34 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1168",
+            "r" : "1152",
             "s" : [ {
               "value" : [ "", "define ", "QuantityPredecessorNearUnderflow", ": " ]
             }, {
-              "r" : "1179",
+              "r" : "1163",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "1169",
+                "r" : "1153",
                 "s" : [ {
                   "value" : [ "Quantity", " { " ]
                 }, {
                   "s" : [ {
                     "value" : [ "value", ": " ]
                   }, {
-                    "r" : "1171",
+                    "r" : "1155",
                     "s" : [ {
-                      "r" : "1173",
+                      "r" : "1157",
                       "s" : [ {
                         "value" : [ "minimum", " " ]
                       }, {
-                        "r" : "1172",
+                        "r" : "1156",
                         "s" : [ {
                           "value" : [ "Decimal" ]
                         } ]
                       } ]
                     }, {
-                      "r" : "1174",
+                      "r" : "1158",
                       "value" : [ " + ", "0.00000001" ]
                     } ]
                   } ]
@@ -19577,7 +19594,7 @@ module.exports['OutOfBounds'] = {
                   "s" : [ {
                     "value" : [ "unit", ": " ]
                   }, {
-                    "r" : "1177",
+                    "r" : "1161",
                     "s" : [ {
                       "value" : [ "'mm'" ]
                     } ]
@@ -19591,18 +19608,18 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "1179",
+          "localId" : "1163",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1180",
+            "localId" : "1164",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Instance",
-            "localId" : "1169",
+            "localId" : "1153",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ],
@@ -19610,29 +19627,29 @@ module.exports['OutOfBounds'] = {
               "name" : "value",
               "value" : {
                 "type" : "Add",
-                "localId" : "1171",
+                "localId" : "1155",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ],
                 "signature" : [ {
                   "type" : "NamedTypeSpecifier",
-                  "localId" : "1175",
+                  "localId" : "1159",
                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "annotation" : [ ]
                 }, {
                   "type" : "NamedTypeSpecifier",
-                  "localId" : "1176",
+                  "localId" : "1160",
                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "annotation" : [ ]
                 } ],
                 "operand" : [ {
                   "type" : "MinValue",
-                  "localId" : "1173",
+                  "localId" : "1157",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "annotation" : [ ]
                 }, {
                   "type" : "Literal",
-                  "localId" : "1174",
+                  "localId" : "1158",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "value" : "0.00000001",
@@ -19643,7 +19660,7 @@ module.exports['OutOfBounds'] = {
               "name" : "unit",
               "value" : {
                 "type" : "Literal",
-                "localId" : "1177",
+                "localId" : "1161",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
                 "value" : "mm",
@@ -19653,7 +19670,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "1183",
+        "localId" : "1167",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimeAddOverflow",
         "context" : "Patient",
@@ -19662,17 +19679,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1183",
+            "r" : "1167",
             "s" : [ {
               "value" : [ "", "define ", "DateTimeAddOverflow", ": " ]
             }, {
-              "r" : "1184",
+              "r" : "1168",
               "s" : [ {
-                "r" : "1186",
+                "r" : "1170",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1185",
+                  "r" : "1169",
                   "s" : [ {
                     "value" : [ "DateTime" ]
                   } ]
@@ -19680,7 +19697,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1187",
+                "r" : "1171",
                 "s" : [ {
                   "value" : [ "1 ", "day" ]
                 } ]
@@ -19690,29 +19707,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1184",
+          "localId" : "1168",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1188",
+            "localId" : "1172",
             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1189",
+            "localId" : "1173",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "1186",
+            "localId" : "1170",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1187",
+            "localId" : "1171",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 1,
             "unit" : "day",
@@ -19720,7 +19737,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1192",
+        "localId" : "1176",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimeAddUnderflow",
         "context" : "Patient",
@@ -19729,17 +19746,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1192",
+            "r" : "1176",
             "s" : [ {
               "value" : [ "", "define ", "DateTimeAddUnderflow", ": " ]
             }, {
-              "r" : "1193",
+              "r" : "1177",
               "s" : [ {
-                "r" : "1195",
+                "r" : "1179",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1194",
+                  "r" : "1178",
                   "s" : [ {
                     "value" : [ "DateTime" ]
                   } ]
@@ -19747,15 +19764,15 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1196",
+                "r" : "1180",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1196",
+                  "r" : "1180",
                   "s" : [ {
                     "value" : [ "-" ]
                   }, {
-                    "r" : "1197",
+                    "r" : "1181",
                     "s" : [ {
                       "value" : [ "1 ", "day" ]
                     } ]
@@ -19769,40 +19786,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1193",
+          "localId" : "1177",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1199",
+            "localId" : "1183",
             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1200",
+            "localId" : "1184",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "1195",
+            "localId" : "1179",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "Negate",
-            "localId" : "1196",
+            "localId" : "1180",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1198",
+              "localId" : "1182",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Quantity",
-              "localId" : "1197",
+              "localId" : "1181",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "day",
@@ -19811,7 +19828,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1203",
+        "localId" : "1187",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimeAddNearOverflow",
         "context" : "Patient",
@@ -19820,17 +19837,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1203",
+            "r" : "1187",
             "s" : [ {
               "value" : [ "", "define ", "DateTimeAddNearOverflow", ": " ]
             }, {
-              "r" : "1204",
+              "r" : "1188",
               "s" : [ {
-                "r" : "1206",
+                "r" : "1190",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1205",
+                  "r" : "1189",
                   "s" : [ {
                     "value" : [ "DateTime" ]
                   } ]
@@ -19838,7 +19855,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1207",
+                "r" : "1191",
                 "s" : [ {
                   "value" : [ "0 ", "days" ]
                 } ]
@@ -19848,29 +19865,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1204",
+          "localId" : "1188",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1208",
+            "localId" : "1192",
             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1209",
+            "localId" : "1193",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "1206",
+            "localId" : "1190",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1207",
+            "localId" : "1191",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "days",
@@ -19878,7 +19895,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1212",
+        "localId" : "1196",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimeAddNearUnderflow",
         "context" : "Patient",
@@ -19887,17 +19904,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1212",
+            "r" : "1196",
             "s" : [ {
               "value" : [ "", "define ", "DateTimeAddNearUnderflow", ": " ]
             }, {
-              "r" : "1213",
+              "r" : "1197",
               "s" : [ {
-                "r" : "1215",
+                "r" : "1199",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1214",
+                  "r" : "1198",
                   "s" : [ {
                     "value" : [ "DateTime" ]
                   } ]
@@ -19905,7 +19922,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1216",
+                "r" : "1200",
                 "s" : [ {
                   "value" : [ "0 ", "days" ]
                 } ]
@@ -19915,29 +19932,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1213",
+          "localId" : "1197",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1217",
+            "localId" : "1201",
             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1218",
+            "localId" : "1202",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "1215",
+            "localId" : "1199",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1216",
+            "localId" : "1200",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "days",
@@ -19945,7 +19962,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1221",
+        "localId" : "1205",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimeSubtractOverflow",
         "context" : "Patient",
@@ -19954,17 +19971,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1221",
+            "r" : "1205",
             "s" : [ {
               "value" : [ "", "define ", "DateTimeSubtractOverflow", ": " ]
             }, {
-              "r" : "1222",
+              "r" : "1206",
               "s" : [ {
-                "r" : "1224",
+                "r" : "1208",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1223",
+                  "r" : "1207",
                   "s" : [ {
                     "value" : [ "DateTime" ]
                   } ]
@@ -19972,15 +19989,15 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1225",
+                "r" : "1209",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1225",
+                  "r" : "1209",
                   "s" : [ {
                     "value" : [ "-" ]
                   }, {
-                    "r" : "1226",
+                    "r" : "1210",
                     "s" : [ {
                       "value" : [ "1 ", "day" ]
                     } ]
@@ -19994,40 +20011,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1222",
+          "localId" : "1206",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1228",
+            "localId" : "1212",
             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1229",
+            "localId" : "1213",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "1224",
+            "localId" : "1208",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "Negate",
-            "localId" : "1225",
+            "localId" : "1209",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1227",
+              "localId" : "1211",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Quantity",
-              "localId" : "1226",
+              "localId" : "1210",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "day",
@@ -20036,7 +20053,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1232",
+        "localId" : "1216",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimeSubtractUnderflow",
         "context" : "Patient",
@@ -20045,17 +20062,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1232",
+            "r" : "1216",
             "s" : [ {
               "value" : [ "", "define ", "DateTimeSubtractUnderflow", ": " ]
             }, {
-              "r" : "1233",
+              "r" : "1217",
               "s" : [ {
-                "r" : "1235",
+                "r" : "1219",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1234",
+                  "r" : "1218",
                   "s" : [ {
                     "value" : [ "DateTime" ]
                   } ]
@@ -20063,7 +20080,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1236",
+                "r" : "1220",
                 "s" : [ {
                   "value" : [ "1 ", "day" ]
                 } ]
@@ -20073,29 +20090,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1233",
+          "localId" : "1217",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1237",
+            "localId" : "1221",
             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1238",
+            "localId" : "1222",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "1235",
+            "localId" : "1219",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1236",
+            "localId" : "1220",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 1,
             "unit" : "day",
@@ -20103,7 +20120,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1241",
+        "localId" : "1225",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimeSubtractNearOverflow",
         "context" : "Patient",
@@ -20112,17 +20129,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1241",
+            "r" : "1225",
             "s" : [ {
               "value" : [ "", "define ", "DateTimeSubtractNearOverflow", ": " ]
             }, {
-              "r" : "1242",
+              "r" : "1226",
               "s" : [ {
-                "r" : "1244",
+                "r" : "1228",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1243",
+                  "r" : "1227",
                   "s" : [ {
                     "value" : [ "DateTime" ]
                   } ]
@@ -20130,7 +20147,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1245",
+                "r" : "1229",
                 "s" : [ {
                   "value" : [ "0 ", "days" ]
                 } ]
@@ -20140,29 +20157,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1242",
+          "localId" : "1226",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1246",
+            "localId" : "1230",
             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1247",
+            "localId" : "1231",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "1244",
+            "localId" : "1228",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1245",
+            "localId" : "1229",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "days",
@@ -20170,7 +20187,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1250",
+        "localId" : "1234",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimeSubtractNearUnderflow",
         "context" : "Patient",
@@ -20179,17 +20196,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1250",
+            "r" : "1234",
             "s" : [ {
               "value" : [ "", "define ", "DateTimeSubtractNearUnderflow", ": " ]
             }, {
-              "r" : "1251",
+              "r" : "1235",
               "s" : [ {
-                "r" : "1253",
+                "r" : "1237",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1252",
+                  "r" : "1236",
                   "s" : [ {
                     "value" : [ "DateTime" ]
                   } ]
@@ -20197,7 +20214,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1254",
+                "r" : "1238",
                 "s" : [ {
                   "value" : [ "0 ", "days" ]
                 } ]
@@ -20207,29 +20224,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1251",
+          "localId" : "1235",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1255",
+            "localId" : "1239",
             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1256",
+            "localId" : "1240",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "1253",
+            "localId" : "1237",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1254",
+            "localId" : "1238",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "days",
@@ -20237,7 +20254,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1259",
+        "localId" : "1243",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimeSuccessorOverflow",
         "context" : "Patient",
@@ -20246,19 +20263,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1259",
+            "r" : "1243",
             "s" : [ {
               "value" : [ "", "define ", "DateTimeSuccessorOverflow", ": " ]
             }, {
-              "r" : "1262",
+              "r" : "1246",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "1261",
+                "r" : "1245",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1260",
+                  "r" : "1244",
                   "s" : [ {
                     "value" : [ "DateTime" ]
                   } ]
@@ -20269,25 +20286,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "1262",
+          "localId" : "1246",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1263",
+            "localId" : "1247",
             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MaxValue",
-            "localId" : "1261",
+            "localId" : "1245",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "1266",
+        "localId" : "1250",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimePredecessorUnderflow",
         "context" : "Patient",
@@ -20296,19 +20313,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1266",
+            "r" : "1250",
             "s" : [ {
               "value" : [ "", "define ", "DateTimePredecessorUnderflow", ": " ]
             }, {
-              "r" : "1269",
+              "r" : "1253",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "1268",
+                "r" : "1252",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1267",
+                  "r" : "1251",
                   "s" : [ {
                     "value" : [ "DateTime" ]
                   } ]
@@ -20319,25 +20336,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "1269",
+          "localId" : "1253",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1270",
+            "localId" : "1254",
             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MinValue",
-            "localId" : "1268",
+            "localId" : "1252",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "1273",
+        "localId" : "1257",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimeSuccessorNearOverflow",
         "context" : "Patient",
@@ -20346,25 +20363,25 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1273",
+            "r" : "1257",
             "s" : [ {
               "value" : [ "", "define ", "DateTimeSuccessorNearOverflow", ": " ]
             }, {
-              "r" : "1280",
+              "r" : "1264",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "1274",
+                "r" : "1258",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1274",
+                  "r" : "1258",
                   "s" : [ {
-                    "r" : "1276",
+                    "r" : "1260",
                     "s" : [ {
                       "value" : [ "maximum", " " ]
                     }, {
-                      "r" : "1275",
+                      "r" : "1259",
                       "s" : [ {
                         "value" : [ "DateTime" ]
                       } ]
@@ -20372,7 +20389,7 @@ module.exports['OutOfBounds'] = {
                   }, {
                     "value" : [ " - " ]
                   }, {
-                    "r" : "1277",
+                    "r" : "1261",
                     "s" : [ {
                       "value" : [ "1 ", "millisecond" ]
                     } ]
@@ -20386,40 +20403,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "1280",
+          "localId" : "1264",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1281",
+            "localId" : "1265",
             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Subtract",
-            "localId" : "1274",
+            "localId" : "1258",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1278",
+              "localId" : "1262",
               "name" : "{urn:hl7-org:elm-types:r1}DateTime",
               "annotation" : [ ]
             }, {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1279",
+              "localId" : "1263",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "MaxValue",
-              "localId" : "1276",
+              "localId" : "1260",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
               "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "1277",
+              "localId" : "1261",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "millisecond",
@@ -20428,7 +20445,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "1284",
+        "localId" : "1268",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
         "name" : "DateTimePredecessorNearUnderflow",
         "context" : "Patient",
@@ -20437,25 +20454,25 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1284",
+            "r" : "1268",
             "s" : [ {
               "value" : [ "", "define ", "DateTimePredecessorNearUnderflow", ": " ]
             }, {
-              "r" : "1291",
+              "r" : "1275",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "1285",
+                "r" : "1269",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1285",
+                  "r" : "1269",
                   "s" : [ {
-                    "r" : "1287",
+                    "r" : "1271",
                     "s" : [ {
                       "value" : [ "minimum", " " ]
                     }, {
-                      "r" : "1286",
+                      "r" : "1270",
                       "s" : [ {
                         "value" : [ "DateTime" ]
                       } ]
@@ -20463,7 +20480,7 @@ module.exports['OutOfBounds'] = {
                   }, {
                     "value" : [ " + " ]
                   }, {
-                    "r" : "1288",
+                    "r" : "1272",
                     "s" : [ {
                       "value" : [ "1 ", "millisecond" ]
                     } ]
@@ -20477,40 +20494,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "1291",
+          "localId" : "1275",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1292",
+            "localId" : "1276",
             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Add",
-            "localId" : "1285",
+            "localId" : "1269",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1289",
+              "localId" : "1273",
               "name" : "{urn:hl7-org:elm-types:r1}DateTime",
               "annotation" : [ ]
             }, {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1290",
+              "localId" : "1274",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "MinValue",
-              "localId" : "1287",
+              "localId" : "1271",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
               "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "1288",
+              "localId" : "1272",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "millisecond",
@@ -20519,7 +20536,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "1295",
+        "localId" : "1279",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
         "name" : "DateAddOverflow",
         "context" : "Patient",
@@ -20528,17 +20545,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1295",
+            "r" : "1279",
             "s" : [ {
               "value" : [ "", "define ", "DateAddOverflow", ": " ]
             }, {
-              "r" : "1296",
+              "r" : "1280",
               "s" : [ {
-                "r" : "1298",
+                "r" : "1282",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1297",
+                  "r" : "1281",
                   "s" : [ {
                     "value" : [ "Date" ]
                   } ]
@@ -20546,7 +20563,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1299",
+                "r" : "1283",
                 "s" : [ {
                   "value" : [ "1 ", "day" ]
                 } ]
@@ -20556,29 +20573,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1296",
+          "localId" : "1280",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1300",
+            "localId" : "1284",
             "name" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1301",
+            "localId" : "1285",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "1298",
+            "localId" : "1282",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "valueType" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1299",
+            "localId" : "1283",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 1,
             "unit" : "day",
@@ -20586,7 +20603,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1304",
+        "localId" : "1288",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
         "name" : "DateAddUnderflow",
         "context" : "Patient",
@@ -20595,17 +20612,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1304",
+            "r" : "1288",
             "s" : [ {
               "value" : [ "", "define ", "DateAddUnderflow", ": " ]
             }, {
-              "r" : "1305",
+              "r" : "1289",
               "s" : [ {
-                "r" : "1307",
+                "r" : "1291",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1306",
+                  "r" : "1290",
                   "s" : [ {
                     "value" : [ "Date" ]
                   } ]
@@ -20613,15 +20630,15 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1308",
+                "r" : "1292",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1308",
+                  "r" : "1292",
                   "s" : [ {
                     "value" : [ "-" ]
                   }, {
-                    "r" : "1309",
+                    "r" : "1293",
                     "s" : [ {
                       "value" : [ "1 ", "day" ]
                     } ]
@@ -20635,40 +20652,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1305",
+          "localId" : "1289",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1311",
+            "localId" : "1295",
             "name" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1312",
+            "localId" : "1296",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "1307",
+            "localId" : "1291",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "valueType" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "Negate",
-            "localId" : "1308",
+            "localId" : "1292",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1310",
+              "localId" : "1294",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Quantity",
-              "localId" : "1309",
+              "localId" : "1293",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "day",
@@ -20677,7 +20694,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1315",
+        "localId" : "1299",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
         "name" : "DateAddNearOverflow",
         "context" : "Patient",
@@ -20686,17 +20703,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1315",
+            "r" : "1299",
             "s" : [ {
               "value" : [ "", "define ", "DateAddNearOverflow", ": " ]
             }, {
-              "r" : "1316",
+              "r" : "1300",
               "s" : [ {
-                "r" : "1318",
+                "r" : "1302",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1317",
+                  "r" : "1301",
                   "s" : [ {
                     "value" : [ "Date" ]
                   } ]
@@ -20704,7 +20721,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1319",
+                "r" : "1303",
                 "s" : [ {
                   "value" : [ "0 ", "days" ]
                 } ]
@@ -20714,29 +20731,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1316",
+          "localId" : "1300",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1320",
+            "localId" : "1304",
             "name" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1321",
+            "localId" : "1305",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "1318",
+            "localId" : "1302",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "valueType" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1319",
+            "localId" : "1303",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "days",
@@ -20744,7 +20761,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1324",
+        "localId" : "1308",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
         "name" : "DateAddNearUnderflow",
         "context" : "Patient",
@@ -20753,17 +20770,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1324",
+            "r" : "1308",
             "s" : [ {
               "value" : [ "", "define ", "DateAddNearUnderflow", ": " ]
             }, {
-              "r" : "1325",
+              "r" : "1309",
               "s" : [ {
-                "r" : "1327",
+                "r" : "1311",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1326",
+                  "r" : "1310",
                   "s" : [ {
                     "value" : [ "Date" ]
                   } ]
@@ -20771,7 +20788,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1328",
+                "r" : "1312",
                 "s" : [ {
                   "value" : [ "0 ", "days" ]
                 } ]
@@ -20781,29 +20798,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1325",
+          "localId" : "1309",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1329",
+            "localId" : "1313",
             "name" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1330",
+            "localId" : "1314",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "1327",
+            "localId" : "1311",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "valueType" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1328",
+            "localId" : "1312",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "days",
@@ -20811,7 +20828,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1333",
+        "localId" : "1317",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
         "name" : "DateSubtractOverflow",
         "context" : "Patient",
@@ -20820,17 +20837,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1333",
+            "r" : "1317",
             "s" : [ {
               "value" : [ "", "define ", "DateSubtractOverflow", ": " ]
             }, {
-              "r" : "1334",
+              "r" : "1318",
               "s" : [ {
-                "r" : "1336",
+                "r" : "1320",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1335",
+                  "r" : "1319",
                   "s" : [ {
                     "value" : [ "Date" ]
                   } ]
@@ -20838,15 +20855,15 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1337",
+                "r" : "1321",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1337",
+                  "r" : "1321",
                   "s" : [ {
                     "value" : [ "-" ]
                   }, {
-                    "r" : "1338",
+                    "r" : "1322",
                     "s" : [ {
                       "value" : [ "1 ", "day" ]
                     } ]
@@ -20860,40 +20877,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1334",
+          "localId" : "1318",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1340",
+            "localId" : "1324",
             "name" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1341",
+            "localId" : "1325",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "1336",
+            "localId" : "1320",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "valueType" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "Negate",
-            "localId" : "1337",
+            "localId" : "1321",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1339",
+              "localId" : "1323",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Quantity",
-              "localId" : "1338",
+              "localId" : "1322",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "day",
@@ -20902,7 +20919,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1344",
+        "localId" : "1328",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
         "name" : "DateSubtractUnderflow",
         "context" : "Patient",
@@ -20911,17 +20928,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1344",
+            "r" : "1328",
             "s" : [ {
               "value" : [ "", "define ", "DateSubtractUnderflow", ": " ]
             }, {
-              "r" : "1345",
+              "r" : "1329",
               "s" : [ {
-                "r" : "1347",
+                "r" : "1331",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1346",
+                  "r" : "1330",
                   "s" : [ {
                     "value" : [ "Date" ]
                   } ]
@@ -20929,7 +20946,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1348",
+                "r" : "1332",
                 "s" : [ {
                   "value" : [ "1 ", "day" ]
                 } ]
@@ -20939,29 +20956,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1345",
+          "localId" : "1329",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1349",
+            "localId" : "1333",
             "name" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1350",
+            "localId" : "1334",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "1347",
+            "localId" : "1331",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "valueType" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1348",
+            "localId" : "1332",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 1,
             "unit" : "day",
@@ -20969,7 +20986,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1353",
+        "localId" : "1337",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
         "name" : "DateSubtractNearOverflow",
         "context" : "Patient",
@@ -20978,17 +20995,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1353",
+            "r" : "1337",
             "s" : [ {
               "value" : [ "", "define ", "DateSubtractNearOverflow", ": " ]
             }, {
-              "r" : "1354",
+              "r" : "1338",
               "s" : [ {
-                "r" : "1356",
+                "r" : "1340",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1355",
+                  "r" : "1339",
                   "s" : [ {
                     "value" : [ "Date" ]
                   } ]
@@ -20996,7 +21013,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1357",
+                "r" : "1341",
                 "s" : [ {
                   "value" : [ "0 ", "days" ]
                 } ]
@@ -21006,29 +21023,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1354",
+          "localId" : "1338",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1358",
+            "localId" : "1342",
             "name" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1359",
+            "localId" : "1343",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "1356",
+            "localId" : "1340",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "valueType" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1357",
+            "localId" : "1341",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "days",
@@ -21036,7 +21053,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1362",
+        "localId" : "1346",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
         "name" : "DateSubtractNearUnderflow",
         "context" : "Patient",
@@ -21045,17 +21062,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1362",
+            "r" : "1346",
             "s" : [ {
               "value" : [ "", "define ", "DateSubtractNearUnderflow", ": " ]
             }, {
-              "r" : "1363",
+              "r" : "1347",
               "s" : [ {
-                "r" : "1365",
+                "r" : "1349",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1364",
+                  "r" : "1348",
                   "s" : [ {
                     "value" : [ "Date" ]
                   } ]
@@ -21063,7 +21080,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1366",
+                "r" : "1350",
                 "s" : [ {
                   "value" : [ "0 ", "days" ]
                 } ]
@@ -21073,29 +21090,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1363",
+          "localId" : "1347",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1367",
+            "localId" : "1351",
             "name" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1368",
+            "localId" : "1352",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "1365",
+            "localId" : "1349",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "valueType" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1366",
+            "localId" : "1350",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "days",
@@ -21103,7 +21120,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1371",
+        "localId" : "1355",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
         "name" : "DateSuccessorOverflow",
         "context" : "Patient",
@@ -21112,19 +21129,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1371",
+            "r" : "1355",
             "s" : [ {
               "value" : [ "", "define ", "DateSuccessorOverflow", ": " ]
             }, {
-              "r" : "1374",
+              "r" : "1358",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "1373",
+                "r" : "1357",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1372",
+                  "r" : "1356",
                   "s" : [ {
                     "value" : [ "Date" ]
                   } ]
@@ -21135,25 +21152,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "1374",
+          "localId" : "1358",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1375",
+            "localId" : "1359",
             "name" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MaxValue",
-            "localId" : "1373",
+            "localId" : "1357",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "valueType" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "1378",
+        "localId" : "1362",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
         "name" : "DatePredecessorUnderflow",
         "context" : "Patient",
@@ -21162,19 +21179,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1378",
+            "r" : "1362",
             "s" : [ {
               "value" : [ "", "define ", "DatePredecessorUnderflow", ": " ]
             }, {
-              "r" : "1381",
+              "r" : "1365",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "1380",
+                "r" : "1364",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1379",
+                  "r" : "1363",
                   "s" : [ {
                     "value" : [ "Date" ]
                   } ]
@@ -21185,25 +21202,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "1381",
+          "localId" : "1365",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1382",
+            "localId" : "1366",
             "name" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MinValue",
-            "localId" : "1380",
+            "localId" : "1364",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "valueType" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "1385",
+        "localId" : "1369",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
         "name" : "DateSuccessorNearOverflow",
         "context" : "Patient",
@@ -21212,25 +21229,25 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1385",
+            "r" : "1369",
             "s" : [ {
               "value" : [ "", "define ", "DateSuccessorNearOverflow", ": " ]
             }, {
-              "r" : "1392",
+              "r" : "1376",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "1386",
+                "r" : "1370",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1386",
+                  "r" : "1370",
                   "s" : [ {
-                    "r" : "1388",
+                    "r" : "1372",
                     "s" : [ {
                       "value" : [ "maximum", " " ]
                     }, {
-                      "r" : "1387",
+                      "r" : "1371",
                       "s" : [ {
                         "value" : [ "Date" ]
                       } ]
@@ -21238,7 +21255,7 @@ module.exports['OutOfBounds'] = {
                   }, {
                     "value" : [ " - " ]
                   }, {
-                    "r" : "1389",
+                    "r" : "1373",
                     "s" : [ {
                       "value" : [ "1 ", "day" ]
                     } ]
@@ -21252,40 +21269,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "1392",
+          "localId" : "1376",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1393",
+            "localId" : "1377",
             "name" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Subtract",
-            "localId" : "1386",
+            "localId" : "1370",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1390",
+              "localId" : "1374",
               "name" : "{urn:hl7-org:elm-types:r1}Date",
               "annotation" : [ ]
             }, {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1391",
+              "localId" : "1375",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "MaxValue",
-              "localId" : "1388",
+              "localId" : "1372",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
               "valueType" : "{urn:hl7-org:elm-types:r1}Date",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "1389",
+              "localId" : "1373",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "day",
@@ -21294,7 +21311,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "1396",
+        "localId" : "1380",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
         "name" : "DatePredecessorNearUnderflow",
         "context" : "Patient",
@@ -21303,25 +21320,25 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1396",
+            "r" : "1380",
             "s" : [ {
               "value" : [ "", "define ", "DatePredecessorNearUnderflow", ": " ]
             }, {
-              "r" : "1403",
+              "r" : "1387",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "1397",
+                "r" : "1381",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1397",
+                  "r" : "1381",
                   "s" : [ {
-                    "r" : "1399",
+                    "r" : "1383",
                     "s" : [ {
                       "value" : [ "minimum", " " ]
                     }, {
-                      "r" : "1398",
+                      "r" : "1382",
                       "s" : [ {
                         "value" : [ "Date" ]
                       } ]
@@ -21329,7 +21346,7 @@ module.exports['OutOfBounds'] = {
                   }, {
                     "value" : [ " + " ]
                   }, {
-                    "r" : "1400",
+                    "r" : "1384",
                     "s" : [ {
                       "value" : [ "1 ", "day" ]
                     } ]
@@ -21343,40 +21360,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "1403",
+          "localId" : "1387",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1404",
+            "localId" : "1388",
             "name" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Add",
-            "localId" : "1397",
+            "localId" : "1381",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1401",
+              "localId" : "1385",
               "name" : "{urn:hl7-org:elm-types:r1}Date",
               "annotation" : [ ]
             }, {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1402",
+              "localId" : "1386",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "MinValue",
-              "localId" : "1399",
+              "localId" : "1383",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
               "valueType" : "{urn:hl7-org:elm-types:r1}Date",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "1400",
+              "localId" : "1384",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "day",
@@ -21385,7 +21402,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "1407",
+        "localId" : "1391",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimeAddOverflow",
         "context" : "Patient",
@@ -21394,17 +21411,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1407",
+            "r" : "1391",
             "s" : [ {
               "value" : [ "", "define ", "TimeAddOverflow", ": " ]
             }, {
-              "r" : "1408",
+              "r" : "1392",
               "s" : [ {
-                "r" : "1410",
+                "r" : "1394",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1409",
+                  "r" : "1393",
                   "s" : [ {
                     "value" : [ "Time" ]
                   } ]
@@ -21412,7 +21429,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1411",
+                "r" : "1395",
                 "s" : [ {
                   "value" : [ "1 ", "second" ]
                 } ]
@@ -21422,29 +21439,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1408",
+          "localId" : "1392",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1412",
+            "localId" : "1396",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1413",
+            "localId" : "1397",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "1410",
+            "localId" : "1394",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "valueType" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1411",
+            "localId" : "1395",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 1,
             "unit" : "second",
@@ -21452,7 +21469,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1416",
+        "localId" : "1400",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimeAddUnderflow",
         "context" : "Patient",
@@ -21461,17 +21478,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1416",
+            "r" : "1400",
             "s" : [ {
               "value" : [ "", "define ", "TimeAddUnderflow", ": " ]
             }, {
-              "r" : "1417",
+              "r" : "1401",
               "s" : [ {
-                "r" : "1419",
+                "r" : "1403",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1418",
+                  "r" : "1402",
                   "s" : [ {
                     "value" : [ "Time" ]
                   } ]
@@ -21479,15 +21496,15 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1420",
+                "r" : "1404",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1420",
+                  "r" : "1404",
                   "s" : [ {
                     "value" : [ "-" ]
                   }, {
-                    "r" : "1421",
+                    "r" : "1405",
                     "s" : [ {
                       "value" : [ "1 ", "second" ]
                     } ]
@@ -21501,40 +21518,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1417",
+          "localId" : "1401",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1423",
+            "localId" : "1407",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1424",
+            "localId" : "1408",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "1419",
+            "localId" : "1403",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "valueType" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "Negate",
-            "localId" : "1420",
+            "localId" : "1404",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1422",
+              "localId" : "1406",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Quantity",
-              "localId" : "1421",
+              "localId" : "1405",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "second",
@@ -21543,7 +21560,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1427",
+        "localId" : "1411",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimeAddNearOverflow",
         "context" : "Patient",
@@ -21552,17 +21569,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1427",
+            "r" : "1411",
             "s" : [ {
               "value" : [ "", "define ", "TimeAddNearOverflow", ": " ]
             }, {
-              "r" : "1428",
+              "r" : "1412",
               "s" : [ {
-                "r" : "1430",
+                "r" : "1414",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1429",
+                  "r" : "1413",
                   "s" : [ {
                     "value" : [ "Time" ]
                   } ]
@@ -21570,7 +21587,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1431",
+                "r" : "1415",
                 "s" : [ {
                   "value" : [ "0 ", "seconds" ]
                 } ]
@@ -21580,29 +21597,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1428",
+          "localId" : "1412",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1432",
+            "localId" : "1416",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1433",
+            "localId" : "1417",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "1430",
+            "localId" : "1414",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "valueType" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1431",
+            "localId" : "1415",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "seconds",
@@ -21610,7 +21627,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1436",
+        "localId" : "1420",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimeAddNearUnderflow",
         "context" : "Patient",
@@ -21619,17 +21636,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1436",
+            "r" : "1420",
             "s" : [ {
               "value" : [ "", "define ", "TimeAddNearUnderflow", ": " ]
             }, {
-              "r" : "1437",
+              "r" : "1421",
               "s" : [ {
-                "r" : "1439",
+                "r" : "1423",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1438",
+                  "r" : "1422",
                   "s" : [ {
                     "value" : [ "Time" ]
                   } ]
@@ -21637,7 +21654,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " + " ]
               }, {
-                "r" : "1440",
+                "r" : "1424",
                 "s" : [ {
                   "value" : [ "0 ", "seconds" ]
                 } ]
@@ -21647,29 +21664,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Add",
-          "localId" : "1437",
+          "localId" : "1421",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1441",
+            "localId" : "1425",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1442",
+            "localId" : "1426",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "1439",
+            "localId" : "1423",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "valueType" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1440",
+            "localId" : "1424",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "seconds",
@@ -21677,7 +21694,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1445",
+        "localId" : "1429",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimeSubtractOverflow",
         "context" : "Patient",
@@ -21686,17 +21703,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1445",
+            "r" : "1429",
             "s" : [ {
               "value" : [ "", "define ", "TimeSubtractOverflow", ": " ]
             }, {
-              "r" : "1446",
+              "r" : "1430",
               "s" : [ {
-                "r" : "1448",
+                "r" : "1432",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1447",
+                  "r" : "1431",
                   "s" : [ {
                     "value" : [ "Time" ]
                   } ]
@@ -21704,15 +21721,15 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1449",
+                "r" : "1433",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1449",
+                  "r" : "1433",
                   "s" : [ {
                     "value" : [ "-" ]
                   }, {
-                    "r" : "1450",
+                    "r" : "1434",
                     "s" : [ {
                       "value" : [ "1 ", "second" ]
                     } ]
@@ -21726,40 +21743,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1446",
+          "localId" : "1430",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1452",
+            "localId" : "1436",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1453",
+            "localId" : "1437",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "1448",
+            "localId" : "1432",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "valueType" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "Negate",
-            "localId" : "1449",
+            "localId" : "1433",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1451",
+              "localId" : "1435",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Quantity",
-              "localId" : "1450",
+              "localId" : "1434",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "second",
@@ -21768,7 +21785,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1456",
+        "localId" : "1440",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimeSubtractUnderflow",
         "context" : "Patient",
@@ -21777,17 +21794,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1456",
+            "r" : "1440",
             "s" : [ {
               "value" : [ "", "define ", "TimeSubtractUnderflow", ": " ]
             }, {
-              "r" : "1457",
+              "r" : "1441",
               "s" : [ {
-                "r" : "1459",
+                "r" : "1443",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1458",
+                  "r" : "1442",
                   "s" : [ {
                     "value" : [ "Time" ]
                   } ]
@@ -21795,7 +21812,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1460",
+                "r" : "1444",
                 "s" : [ {
                   "value" : [ "1 ", "second" ]
                 } ]
@@ -21805,29 +21822,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1457",
+          "localId" : "1441",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1461",
+            "localId" : "1445",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1462",
+            "localId" : "1446",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "1459",
+            "localId" : "1443",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "valueType" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1460",
+            "localId" : "1444",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 1,
             "unit" : "second",
@@ -21835,7 +21852,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1465",
+        "localId" : "1449",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimeSubtractNearOverflow",
         "context" : "Patient",
@@ -21844,17 +21861,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1465",
+            "r" : "1449",
             "s" : [ {
               "value" : [ "", "define ", "TimeSubtractNearOverflow", ": " ]
             }, {
-              "r" : "1466",
+              "r" : "1450",
               "s" : [ {
-                "r" : "1468",
+                "r" : "1452",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1467",
+                  "r" : "1451",
                   "s" : [ {
                     "value" : [ "Time" ]
                   } ]
@@ -21862,7 +21879,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1469",
+                "r" : "1453",
                 "s" : [ {
                   "value" : [ "0 ", "seconds" ]
                 } ]
@@ -21872,29 +21889,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1466",
+          "localId" : "1450",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1470",
+            "localId" : "1454",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1471",
+            "localId" : "1455",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MaxValue",
-            "localId" : "1468",
+            "localId" : "1452",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "valueType" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1469",
+            "localId" : "1453",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "seconds",
@@ -21902,7 +21919,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1474",
+        "localId" : "1458",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimeSubtractNearUnderflow",
         "context" : "Patient",
@@ -21911,17 +21928,17 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1474",
+            "r" : "1458",
             "s" : [ {
               "value" : [ "", "define ", "TimeSubtractNearUnderflow", ": " ]
             }, {
-              "r" : "1475",
+              "r" : "1459",
               "s" : [ {
-                "r" : "1477",
+                "r" : "1461",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1476",
+                  "r" : "1460",
                   "s" : [ {
                     "value" : [ "Time" ]
                   } ]
@@ -21929,7 +21946,7 @@ module.exports['OutOfBounds'] = {
               }, {
                 "value" : [ " - " ]
               }, {
-                "r" : "1478",
+                "r" : "1462",
                 "s" : [ {
                   "value" : [ "0 ", "seconds" ]
                 } ]
@@ -21939,29 +21956,29 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Subtract",
-          "localId" : "1475",
+          "localId" : "1459",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1479",
+            "localId" : "1463",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1480",
+            "localId" : "1464",
             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "MinValue",
-            "localId" : "1477",
+            "localId" : "1461",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "valueType" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }, {
             "type" : "Quantity",
-            "localId" : "1478",
+            "localId" : "1462",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0,
             "unit" : "seconds",
@@ -21969,7 +21986,7 @@ module.exports['OutOfBounds'] = {
           } ]
         }
       }, {
-        "localId" : "1483",
+        "localId" : "1467",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimeSuccessorOverflow",
         "context" : "Patient",
@@ -21978,19 +21995,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1483",
+            "r" : "1467",
             "s" : [ {
               "value" : [ "", "define ", "TimeSuccessorOverflow", ": " ]
             }, {
-              "r" : "1486",
+              "r" : "1470",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "1485",
+                "r" : "1469",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1484",
+                  "r" : "1468",
                   "s" : [ {
                     "value" : [ "Time" ]
                   } ]
@@ -22001,25 +22018,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "1486",
+          "localId" : "1470",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1487",
+            "localId" : "1471",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MaxValue",
-            "localId" : "1485",
+            "localId" : "1469",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "valueType" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "1490",
+        "localId" : "1474",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimePredecessorUnderflow",
         "context" : "Patient",
@@ -22028,19 +22045,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1490",
+            "r" : "1474",
             "s" : [ {
               "value" : [ "", "define ", "TimePredecessorUnderflow", ": " ]
             }, {
-              "r" : "1493",
+              "r" : "1477",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "1492",
+                "r" : "1476",
                 "s" : [ {
                   "value" : [ "minimum", " " ]
                 }, {
-                  "r" : "1491",
+                  "r" : "1475",
                   "s" : [ {
                     "value" : [ "Time" ]
                   } ]
@@ -22051,25 +22068,25 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "1493",
+          "localId" : "1477",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1494",
+            "localId" : "1478",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MinValue",
-            "localId" : "1492",
+            "localId" : "1476",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "valueType" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           }
         }
       }, {
-        "localId" : "1497",
+        "localId" : "1481",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimeSuccessorNearOverflow",
         "context" : "Patient",
@@ -22078,25 +22095,25 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1497",
+            "r" : "1481",
             "s" : [ {
               "value" : [ "", "define ", "TimeSuccessorNearOverflow", ": " ]
             }, {
-              "r" : "1504",
+              "r" : "1488",
               "s" : [ {
                 "value" : [ "successor of " ]
               }, {
-                "r" : "1498",
+                "r" : "1482",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1498",
+                  "r" : "1482",
                   "s" : [ {
-                    "r" : "1500",
+                    "r" : "1484",
                     "s" : [ {
                       "value" : [ "maximum", " " ]
                     }, {
-                      "r" : "1499",
+                      "r" : "1483",
                       "s" : [ {
                         "value" : [ "Time" ]
                       } ]
@@ -22104,7 +22121,7 @@ module.exports['OutOfBounds'] = {
                   }, {
                     "value" : [ " - " ]
                   }, {
-                    "r" : "1501",
+                    "r" : "1485",
                     "s" : [ {
                       "value" : [ "1 ", "millisecond" ]
                     } ]
@@ -22118,40 +22135,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Successor",
-          "localId" : "1504",
+          "localId" : "1488",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1505",
+            "localId" : "1489",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Subtract",
-            "localId" : "1498",
+            "localId" : "1482",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1502",
+              "localId" : "1486",
               "name" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ]
             }, {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1503",
+              "localId" : "1487",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "MaxValue",
-              "localId" : "1500",
+              "localId" : "1484",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
               "valueType" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "1501",
+              "localId" : "1485",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "millisecond",
@@ -22160,7 +22177,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "1508",
+        "localId" : "1492",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
         "name" : "TimePredecessorNearUnderflow",
         "context" : "Patient",
@@ -22169,25 +22186,25 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1508",
+            "r" : "1492",
             "s" : [ {
               "value" : [ "", "define ", "TimePredecessorNearUnderflow", ": " ]
             }, {
-              "r" : "1515",
+              "r" : "1499",
               "s" : [ {
                 "value" : [ "predecessor of " ]
               }, {
-                "r" : "1509",
+                "r" : "1493",
                 "s" : [ {
                   "value" : [ "(" ]
                 }, {
-                  "r" : "1509",
+                  "r" : "1493",
                   "s" : [ {
-                    "r" : "1511",
+                    "r" : "1495",
                     "s" : [ {
                       "value" : [ "minimum", " " ]
                     }, {
-                      "r" : "1510",
+                      "r" : "1494",
                       "s" : [ {
                         "value" : [ "Time" ]
                       } ]
@@ -22195,7 +22212,7 @@ module.exports['OutOfBounds'] = {
                   }, {
                     "value" : [ " + " ]
                   }, {
-                    "r" : "1512",
+                    "r" : "1496",
                     "s" : [ {
                       "value" : [ "1 ", "millisecond" ]
                     } ]
@@ -22209,40 +22226,40 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Predecessor",
-          "localId" : "1515",
+          "localId" : "1499",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1516",
+            "localId" : "1500",
             "name" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Add",
-            "localId" : "1509",
+            "localId" : "1493",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1513",
+              "localId" : "1497",
               "name" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ]
             }, {
               "type" : "NamedTypeSpecifier",
-              "localId" : "1514",
+              "localId" : "1498",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "MinValue",
-              "localId" : "1511",
+              "localId" : "1495",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
               "valueType" : "{urn:hl7-org:elm-types:r1}Time",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "1512",
+              "localId" : "1496",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "millisecond",
@@ -22251,7 +22268,7 @@ module.exports['OutOfBounds'] = {
           }
         }
       }, {
-        "localId" : "1519",
+        "localId" : "1503",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "ExpOverflow",
         "context" : "Patient",
@@ -22260,19 +22277,19 @@ module.exports['OutOfBounds'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "1519",
+            "r" : "1503",
             "s" : [ {
               "value" : [ "", "define ", "ExpOverflow", ": " ]
             }, {
-              "r" : "1525",
+              "r" : "1509",
               "s" : [ {
                 "value" : [ "Exp", "(" ]
               }, {
-                "r" : "1521",
+                "r" : "1505",
                 "s" : [ {
                   "value" : [ "maximum", " " ]
                 }, {
-                  "r" : "1520",
+                  "r" : "1504",
                   "s" : [ {
                     "value" : [ "Decimal" ]
                   } ]
@@ -22285,18 +22302,18 @@ module.exports['OutOfBounds'] = {
         } ],
         "expression" : {
           "type" : "Exp",
-          "localId" : "1525",
+          "localId" : "1509",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "1526",
+            "localId" : "1510",
             "name" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "MaxValue",
-            "localId" : "1521",
+            "localId" : "1505",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
             "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
             "annotation" : [ ]

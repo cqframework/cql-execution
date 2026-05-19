@@ -21,7 +21,7 @@ define UnequalLongOpen: Interval(1L, 5L) = Interval(2L, 4L)
 define UnequalLongClosedOpen: Interval[1L, 5L] = Interval(2L, 4L)
 define EqualQuantityClosed: Interval[1 'mg', 5 'mg'] = Interval[1 'mg', 5 'mg']
 define EqualQuantityOpen: Interval(1 'mg', 5 'mg') = Interval(1 'mg', 5 'mg')
-define EqualQuantityOpenClosed: Interval(1 'mg', 5 'mg') = Interval[2 'mg', 4 'mg']
+define EqualQuantityOpenClosed: Interval(1.99999999 'mg', 4.00000001 'mg') = Interval[2 'mg', 4 'mg']
 define UnequalQuantityClosed: Interval[1 'mg', 5 'mg'] = Interval[2 'mg', 4 'mg']
 define UnequalQuantityOpen: Interval(1 'mg', 5 'mg') = Interval(2 'mg', 4 'mg')
 define UnequalQuantityClosedOpen: Interval[1 'mg', 5 'mg'] = Interval(2 'mg', 4 'mg')
@@ -46,7 +46,7 @@ define UnequalLongOpen: Interval(1L, 5L) != Interval(2L, 4L)
 define UnequalLongClosedOpen: Interval[1L, 5L] != Interval(2L, 4L)
 define EqualQuantityClosed: Interval[1 'mg', 5 'mg'] != Interval[1 'mg', 5 'mg']
 define EqualQuantityOpen: Interval(1 'mg', 5 'mg') != Interval(1 'mg', 5 'mg')
-define EqualQuantityOpenClosed: Interval(1 'mg', 5 'mg') != Interval[2 'mg', 4 'mg']
+define EqualQuantityOpenClosed: Interval(1.99999999 'mg', 4.00000001 'mg') != Interval[2 'mg', 4 'mg']
 define UnequalQuantityClosed: Interval[1 'mg', 5 'mg'] != Interval[2 'mg', 4 'mg']
 define UnequalQuantityOpen: Interval(1 'mg', 5 'mg') != Interval(2 'mg', 4 'mg')
 define UnequalQuantityClosedOpen: Interval[1 'mg', 5 'mg'] != Interval(2 'mg', 4 'mg')
@@ -1249,10 +1249,12 @@ define CollapseSeparatedQuantityPer3: collapse QuantitySeparatedBy3 per 3
 
 // Quantity Intervals with units
 define QuantityMeterIntervalList: { Interval[ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\'')], Interval[ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')] }
-define CollapseDisjointQuantityUnits: collapse QuantityMeterIntervalList
 define ExpectedQuantityUnitsCollapse: { Interval[ToQuantity('1 \'m\''), ToQuantity('3 \'m\'')] }
 define CollapseQuantityUnitsWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'cm\'')
 define CollapseQuantityUnitsNotWithinPer: collapse QuantityMeterIntervalList per ToQuantity('1 \'mm\'')
+define CollapseDisjointQuantityUnits: collapse QuantityMeterIntervalList
+define QuantityMeterIntervalListWithinDefaultPer: { Interval[ToQuantity('1 \'m\''), ToQuantity('1.99999999 \'m\'')], Interval[ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')] }
+define CollapseQuantityUnitsWithinDefaultPer: collapse QuantityMeterIntervalListWithinDefaultPer
 
 // Null test cases
 define NullLowIntervalList: { Interval[null, 4], Interval[3, 5] }

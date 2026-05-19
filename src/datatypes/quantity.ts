@@ -1,3 +1,4 @@
+import { ELM_DECIMAL_TYPE } from '../util/elmTypes';
 import { decimalAdjust, isValidDecimal, overflowsOrUnderflows } from '../util/math';
 import {
   checkUnit,
@@ -125,7 +126,7 @@ export class Quantity {
     const resultUnit = getQuotientOfUnits(unit1, unit2);
 
     // Check for invalid unit or value
-    if (resultUnit == null || overflowsOrUnderflows(resultValue)) {
+    if (resultUnit == null || overflowsOrUnderflows(resultValue, ELM_DECIMAL_TYPE)) {
       return null;
     }
     return new Quantity(decimalAdjust('round', resultValue, -8), resultUnit);
@@ -149,7 +150,7 @@ export class Quantity {
     const resultUnit = getProductOfUnits(unit1, unit2);
 
     // Check for invalid unit or value
-    if (resultUnit == null || overflowsOrUnderflows(resultValue)) {
+    if (resultUnit == null || overflowsOrUnderflows(resultValue, ELM_DECIMAL_TYPE)) {
       return null;
     }
     return new Quantity(decimalAdjust('round', resultValue, -8), resultUnit);
@@ -188,7 +189,7 @@ function doScaledAddition(a: any, b: any, scaleForB: any) {
       return null;
     }
     const sum = val1 + val2;
-    if (overflowsOrUnderflows(sum)) {
+    if (overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE)) {
       return null;
     }
     return new Quantity(sum, unit1);

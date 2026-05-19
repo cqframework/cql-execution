@@ -9,6 +9,7 @@ import * as LIST from './list';
 import * as IVL from './interval';
 import { Context } from '../runtime/context';
 import { CQLValueSet } from '../datatypes/clinical';
+import { ELM_LIST_TYPE_SPECIFIER } from '../util/elmTypes';
 
 export class Equal extends Expression {
   constructor(json: any) {
@@ -93,7 +94,7 @@ export class Union extends Expression {
 
   listTypeArgs() {
     return this.args?.some((arg: any) => {
-      return arg.asTypeSpecifier != null && arg.asTypeSpecifier.type === 'ListTypeSpecifier';
+      return arg.asTypeSpecifier != null && arg.asTypeSpecifier.type === ELM_LIST_TYPE_SPECIFIER;
     });
   }
 }
@@ -277,7 +278,7 @@ export class Length extends Expression {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
       return arg.length;
-    } else if ((this.arg as any).asTypeSpecifier.type === 'ListTypeSpecifier') {
+    } else if ((this.arg as any).asTypeSpecifier.type === ELM_LIST_TYPE_SPECIFIER) {
       return 0;
     } else {
       return null;

@@ -321,8 +321,7 @@ describe('Equivalent', () => {
     (await this.aDefined_BNull.exec(this.ctx)).should.be.false();
   });
 
-  it.skip('should be true for null ~ null', async function () {
-    // Skipping because of cql-to-elm issue that will be fixed in 1.4
+  it('should be true for null ~ null', async function () {
     (await this.aNull_BNull.exec(this.ctx)).should.be.true();
   });
 

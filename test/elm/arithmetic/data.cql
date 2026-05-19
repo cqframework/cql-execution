@@ -73,6 +73,7 @@ define Parenthetical: (1 + 5) * (10 - 15) / 3
 
 // @Test: Power
 define Pow: 3 ^ 4
+define NegPow: 10 ^ -1
 define ThreeExpFourLong: 3L ^ 4L
 define ThreeExpFourMixed: 3 ^ 4L
 define ThreeExpFourReverseMixed: 3L ^ 4
@@ -209,10 +210,11 @@ define IntegerMultiplyOverflow: maximum Integer * 2
 define IntegerMultiplyUnderflow: minimum Integer * 2
 define IntegerMultiplyNearOverflow: maximum Integer * 1
 define IntegerMultiplyNearUnderflow: minimum Integer * 1
-define IntegerDivideOverflow: maximum Integer / 0.5
-define IntegerDivideUnderflow: minimum Integer / 0.5
-define IntegerDivideNearOverflow: maximum Integer / 1
-define IntegerDivideNearUnderflow: minimum Integer / 1
+// NOTE: Integer division results in decimal, so it must overflow/underflow decimal
+define IntegerDivideOverflow: maximum Integer / 0.00000000001
+define IntegerDivideUnderflow: minimum Integer / 0.00000000001
+define IntegerDivideNearOverflow: maximum Integer / 0.00000025
+define IntegerDivideNearUnderflow: minimum Integer / 0.00000025
 define IntegerDivideByZero: 1 / 0
 define IntegerPowerOverflow: (maximum Integer)^3
 define IntegerPowerUnderflow: (minimum Integer)^3
@@ -235,10 +237,11 @@ define LongMultiplyOverflow: maximum Long * 2L
 define LongMultiplyUnderflow: minimum Long * 2L
 define LongMultiplyNearOverflow: maximum Long * 1L
 define LongMultiplyNearUnderflow: minimum Long * 1L
-define LongDivideOverflow: maximum Long / 0.5
-define LongDivideUnderflow: minimum Long / 0.5
-define LongDivideNearOverflow: ToLong(maximum Integer) / 1L
-define LongDivideNearUnderflow: ToLong(minimum Integer) / 1L
+// NOTE: Long division results in decimal, so it must overflow/underflow decimal
+define LongDivideOverflow: maximum Long / 0.05
+define LongDivideUnderflow: minimum Long / 0.05
+define LongDivideNearOverflow: maximum Long / 1024L
+define LongDivideNearUnderflow: minimum Long / 1024L
 define LongDivideByZero: 1L / 0L
 define LongPowerOverflow: (maximum Long)^3L
 define LongPowerUnderflow: (minimum Long)^3L
@@ -249,12 +252,13 @@ define LongPredecessorUnderflow: predecessor of minimum Long
 define LongSuccessorNearOverflow: successor of (maximum Long - 1L)
 define LongPredecessorNearUnderflow: predecessor of (minimum Long + 1L)
 
-define DecimalAddOverflow: maximum Decimal + 1.0
-define DecimalAddUnderflow: minimum Decimal + -1.0
+// NOTE: Due to JS Number imprecision, we need to exceed min/max by 10000 for it to actually produce a different number
+define DecimalAddOverflow: maximum Decimal + 10000.0
+define DecimalAddUnderflow: minimum Decimal + -10000.0
 define DecimalAddNearOverflow: maximum Decimal + 0.0
 define DecimalAddNearUnderflow: minimum Decimal + 0.0
-define DecimalSubtractOverflow: maximum Decimal - -1.0
-define DecimalSubtractUnderflow: minimum Decimal - 1.0
+define DecimalSubtractOverflow: maximum Decimal - -10000.0
+define DecimalSubtractUnderflow: minimum Decimal - 10000.0
 define DecimalSubtractNearOverflow: maximum Decimal - 0.0
 define DecimalSubtractNearUnderflow: minimum Decimal - 0.0
 define DecimalMultiplyOverflow: maximum Decimal * 2
@@ -277,12 +281,13 @@ define DecimalPredecessorNearUnderflow: predecessor of (minimum Decimal + 0.0000
 
 define MaxQuantity: Quantity { value: maximum Decimal, unit: 'mm' }
 define MinQuantity: Quantity { value: minimum Decimal, unit: 'mm' }
-define QuantityAddOverflow: MaxQuantity + 1.0 'mm'
-define QuantityAddUnderflow: MinQuantity + (-1.0 'mm')
+// NOTE: Due to JS Number imprecision, we need to exceed min/max by 10000 for it to actually produce a different number
+define QuantityAddOverflow: MaxQuantity + 10000.0 'mm'
+define QuantityAddUnderflow: MinQuantity + (-10000.0 'mm')
 define QuantityAddNearOverflow: MaxQuantity + 0.0 'mm'
 define QuantityAddNearUnderflow: MinQuantity + 0.0 'mm'
-define QuantitySubtractOverflow: MaxQuantity - (-1 'mm')
-define QuantitySubtractUnderflow: MinQuantity - 1 'mm'
+define QuantitySubtractOverflow: MaxQuantity - (-10000 'mm')
+define QuantitySubtractUnderflow: MinQuantity - 10000 'mm'
 define QuantitySubtractNearOverflow: MaxQuantity - 0.0 'mm'
 define QuantitySubtractNearUnderflow: MinQuantity - 0.0 'mm'
 define QuantityMultiplyOverflow: MaxQuantity * 2 'mm'

@@ -9,6 +9,7 @@ export class Expression {
   locator?: string;
   arg?: Expression;
   args?: Expression[];
+  resultTypeName?: string;
 
   constructor(json: any) {
     if (json.operand != null) {
@@ -26,6 +27,10 @@ export class Expression {
 
     if (json.locator != null) {
       this.locator = json.locator;
+    }
+
+    if (json.resultTypeName != null) {
+      this.resultTypeName = json.resultTypeName;
     }
   }
 
