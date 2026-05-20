@@ -6,6 +6,7 @@
   ],
   "compilerOptions": {
     "strictNullChecks": false,
-    "rootDir": "../"
+    "rootDir": "../",
+    "types": ["node", "mocha"]
   }
 }
