@@ -3,6 +3,7 @@
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["es2015.core", "ESNext"],
+    "types": ["node", "mocha"],
     "outDir": "./lib",
     "rootDir": "./src",
     "strict": true,
