@@ -5,7 +5,8 @@ import {
   ListTypeSpecifier,
   TupleTypeSpecifier,
   TupleElementDefinition,
-  AnyTypeSpecifier
+  AnyTypeSpecifier,
+  Interval
 } from '../../..';
 
 export function typeToCqlTypeSpecifier(
