@@ -13,7 +13,7 @@ if [ $? != 0 ]; then
   echo "cql4browsers.js not found. Run this script from the base repository directory."
   exit 1
 fi
-npm install
+npm ci
 
 # comm -3 only returns lines that differ between the two files. If none are different, diff will be empty
 diff=`diff ./examples/browser/cql4browsers.js.original ./examples/browser/cql4browsers.js`
