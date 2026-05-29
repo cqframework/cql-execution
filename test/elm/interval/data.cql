@@ -832,8 +832,8 @@ define OverlapsBeforeRealIvl: Interval[1.234, 1.567] overlaps Interval[1.345, 1.
 define OverlapsAfterRealIvl: Interval[1.345, 1.678] overlaps Interval[1.234, 1.567]
 define OverlapsBoundaryRealIvl: Interval[1.0, 1.234] overlaps Interval[1.234, 2.0]
 define NoOverlapsRealIvl: Interval[1.0, 1.23456789) overlaps Interval[1.23456789, 2.0]
-define OverlapsClosedNullIntervalLHS: Interval[null, null] overlaps Interval[6, 10]
-define OverlapsClosedNullIntervalRHS: Interval[6, 10] overlaps Interval[null, null]
+define OverlapsClosedNullIntervalLHS: (Interval[null, null] as Interval<Integer>) overlaps Interval[6, 10]
+define OverlapsClosedNullIntervalRHS: Interval[6, 10] overlaps (Interval[null, null] as Interval<Integer>)
 define OverlapsIsNull: Interval[6, 10] overlaps (null as Interval<Integer>)
 
 // @Test: OverlapsDateTime
@@ -854,8 +854,8 @@ define NoOverlap: ivlC overlaps ivlD
 define NoImpreciseOverlap: ivlE overlaps ivlG
 define UnknownOverlap: ivlE overlaps ivlH
 define MatchingPrecisionOverlap: ivlF overlaps ivlG
-define OverlapsClosedNullIntervalLHS: Interval[null, null] overlaps ivlA
-define OverlapsClosedNullIntervalRHS: ivlA overlaps Interval[null, null]
+define OverlapsClosedNullIntervalLHS: (Interval[null, null] as Interval<DateTime>) overlaps ivlA
+define OverlapsClosedNullIntervalRHS: ivlA overlaps (Interval[null, null] as Interval<DateTime>)
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 // NOTE: There appears to be a bug in cql-to-elm that translates these 'overlaps' to 'OverlapsAfter'!
 define OverlapsBeforeDayOfIvlEdge: PrecisionDateIvl overlaps day of Interval[DateTime(2012, 9, 2, 23, 59, 59, 999), DateTime(2012, 10, 1, 0, 0, 0, 0)]

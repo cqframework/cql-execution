@@ -39,6 +39,7 @@ CqlIntervalOperatorsTest.Intersect.TestIntersectNull            Wrong answer (In
 CqlIntervalOperatorsTest.Overlaps.TestOverlapsNull              Wrong answer (Interval[null, null] should overlap everything)
 CqlIntervalOperatorsTest.OverlapsBefore.TestOverlapsBeforeNull  Wrong answer (Interval[null, null] should overlap before anything but another interval w/ null low closed boundary)
 CqlIntervalOperatorsTest.OverlapsAfter.TestOverlapsAfterNull    Wrong answer (Interval[null, null] should overlap after anything but another interval w/ null high closed boundary)
+CqlIntervalOperatorsTest.Starts.TestStartsNull                  Wrong answer (Interval[null, null] can only start Interval[null, null])
 CqlIntervalOperatorsTest.Union.TestUnionNull                    Wrong answer (Interval[null, null] union any valid interval of the same point type is Interval[null, null])
 CqlTypeOperatorsTest.Convert.StringToDateTime                   Wrong answer (different offsets)
 CqlTypeOperatorsTest.ToDateTime.ToDateTime1                     Wrong answer (different offsets)

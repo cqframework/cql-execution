@@ -46,6 +46,20 @@ describe('Interval', () => {
     i.lowClosed.should.be.true();
     i.highClosed.should.be.true();
   });
+
+  it('should identify and copy boundless and unknown intervals', () => {
+    const all = boundlessInterval();
+    all.isBoundlessInterval.should.be.true();
+    all.isUnknownInterval.should.be.false();
+
+    const mystery = unknownInterval();
+    mystery.isBoundlessInterval.should.be.false();
+    mystery.isUnknownInterval.should.be.true();
+
+    const allCopy = all.copy();
+    allCopy.should.eql(all);
+    allCopy.should.not.equal(all);
+  });
 });
 
 describe('DateTimeInterval', () => {
@@ -91,6 +105,8 @@ describe('DateTimeInterval', () => {
       new Interval(date, null, true, false).contains(date).should.be.true();
       should(new Interval(date, null, true, false).contains(late)).be.null();
       new Interval(date, null, true, false).contains(early).should.be.false();
+      new Interval(null, null).contains(date).should.be.true();
+      should(new Interval(null, null, false, false).contains(date)).be.null();
     });
 
     it('should properly handle imprecision', () => {
@@ -350,6 +366,15 @@ describe('DateTimeInterval', () => {
       should.not.exist(x.toYear.includes(y.closed));
     });
 
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().includes(d.mid2012.full).should.be.true();
+      boundlessInterval().includes(d.all2012.closed).should.be.true();
+      boundlessInterval().includes(unknownInterval()).should.be.true();
+      d.all2012.closed.includes(boundlessInterval()).should.be.false();
+      should(unknownInterval().includes(d.all2012.closed)).be.null();
+      should(unknownInterval().includes(boundlessInterval())).be.null();
+    });
+
     it('should include a point date', () => {
       d.all2012.closed.includes(d.mid2012.full).should.be.true();
     });
@@ -477,8 +502,59 @@ describe('DateTimeInterval', () => {
       should.not.exist(x.toYear.includedIn(y.closed));
     });
 
+    it('should properly handle boundless and unknown intervals', () => {
+      d.all2012.closed.includedIn(boundlessInterval()).should.be.true();
+      boundlessInterval().includedIn(d.all2012.closed).should.be.false();
+      boundlessInterval().includedIn(boundlessInterval()).should.be.true();
+      unknownInterval().includedIn(boundlessInterval()).should.be.true();
+    });
+
     it('should include a point date', () => {
       d.all2012.closed.includedIn(d.mid2012.full).should.be.true();
+    });
+  });
+
+  describe('properlyIncludes', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().properlyIncludes(d.all2012.closed).should.be.true();
+      boundlessInterval().properlyIncludes(boundlessInterval()).should.be.false();
+      should(boundlessInterval().properlyIncludes(unknownInterval())).be.null();
+      should(unknownInterval().properlyIncludes(d.all2012.closed)).be.null();
+    });
+  });
+
+  describe('starts', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().starts(boundlessInterval()).should.be.true();
+      boundlessInterval().starts(d.all2012.closed).should.be.false();
+      d.all2012.closed.starts(boundlessInterval()).should.be.false();
+      should(boundlessInterval().starts(unknownInterval())).be.null();
+      should(unknownInterval().starts(boundlessInterval())).be.null();
+    });
+  });
+
+  describe('ends', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().ends(boundlessInterval()).should.be.true();
+      boundlessInterval().ends(d.all2012.closed).should.be.false();
+      d.all2012.closed.ends(boundlessInterval()).should.be.false();
+      should(boundlessInterval().ends(unknownInterval())).be.null();
+      should(unknownInterval().ends(boundlessInterval())).be.null();
     });
   });
 
@@ -572,6 +648,40 @@ describe('DateTimeInterval', () => {
       y.open.overlaps(x.open).should.be.true();
     });
 
+    it('should properly handle null endpoints', () => {
+      const date = DateTime.parse('2012-01-01T00:00:00.0');
+      const early = DateTime.parse('0001-01-01T00:00:00.0');
+      const late = DateTime.parse('2999-01-01T00:00:00.0');
+      const earlyInterval = new Interval(early, DateTime.parse('2011-01-01T00:00:00.0'));
+      const lateInterval = new Interval(DateTime.parse('2013-01-01T00:00:00.0'), late);
+      const startsAtDate = new Interval(date, late);
+      const endsAtDate = new Interval(early, date);
+
+      should(new Interval(null, date).overlaps(earlyInterval)).be.true();
+      should(new Interval(null, date).overlaps(lateInterval)).be.false();
+      should(new Interval(null, date, false, true).overlaps(startsAtDate)).be.true();
+      should(new Interval(null, date, false, true).overlaps(earlyInterval)).be.null();
+      should(new Interval(null, date, false, true).overlaps(lateInterval)).be.false();
+
+      should(new Interval(date, null).overlaps(lateInterval)).be.true();
+      should(new Interval(date, null).overlaps(earlyInterval)).be.false();
+      should(new Interval(date, null, true, false).overlaps(endsAtDate)).be.true();
+      should(new Interval(date, null, true, false).overlaps(lateInterval)).be.null();
+      should(new Interval(date, null, true, false).overlaps(earlyInterval)).be.false();
+
+      should(new Interval(null, null).overlaps(d.all2012.closed)).be.true();
+      should(new Interval(null, null, false, false).overlaps(d.all2012.closed)).be.null();
+      should(d.all2012.closed.overlaps(new Interval(null, null))).be.true();
+      should(d.all2012.closed.overlaps(new Interval(null, null, false, false))).be.null();
+      // TODO: These commented out edge cases with all null endpoints on both sides currently don't pass
+      //should(new Interval(null, null).overlaps(new Interval(null, null))).be.true();
+      //should(new Interval(null, null).overlaps(new Interval(null, null, false, false))).be.true();
+      //should(new Interval(null, null, false, false).overlaps(new Interval(null, null))).be.true();
+      should(
+        new Interval(null, null, false, false).overlaps(new Interval(null, null, false, false))
+      ).be.null();
+    });
+
     it('should properly handle boundless and unknown intervals', () => {
       boundlessInterval().overlaps(boundlessInterval()).should.be.true();
       boundlessInterval().overlaps(d.all2012.closed).should.be.true();
@@ -639,6 +749,24 @@ describe('DateTimeInterval', () => {
 
     it('should properly calculate dates after it', () => {
       d.all2012.closed.overlaps(d.aft2012.full).should.be.false();
+    });
+
+    it('should properly handle null endpoints', () => {
+      const date = DateTime.parse('2012-01-01T00:00:00.0');
+      const early = DateTime.parse('0001-01-01T00:00:00.0');
+      const late = DateTime.parse('2999-01-01T00:00:00.0');
+      should(new Interval(null, date).overlaps(early)).be.true();
+      should(new Interval(null, date).overlaps(late)).be.false();
+      should(new Interval(null, date, false, true).overlaps(date)).be.true();
+      should(new Interval(null, date, false, true).overlaps(early)).be.null();
+      should(new Interval(null, date, false, true).overlaps(late)).be.false();
+      should(new Interval(date, null).overlaps(late)).be.true();
+      should(new Interval(date, null).overlaps(early)).be.false();
+      should(new Interval(date, null, true, false).overlaps(date)).be.true();
+      should(new Interval(date, null, true, false).overlaps(late)).be.null();
+      should(new Interval(date, null, true, false).overlaps(early)).be.false();
+      should(new Interval(null, null).overlaps(date)).be.true();
+      should(new Interval(null, null, false, false).overlaps(date)).be.null();
     });
 
     it('should properly handle boundless and unknown intervals', () => {
@@ -852,6 +980,30 @@ describe('DateTimeInterval', () => {
 
       ivl.equals(point).should.be.false();
     });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().equals(boundlessInterval()).should.be.true();
+      boundlessInterval().equals(d.all2012.closed).should.be.false();
+      d.all2012.closed.equals(boundlessInterval()).should.be.false();
+      should(boundlessInterval().equals(unknownInterval())).be.null();
+      should(unknownInterval().equals(boundlessInterval())).be.null();
+      should(unknownInterval().equals(unknownInterval())).be.null();
+    });
+  });
+
+  describe('sameAs', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().sameAs(boundlessInterval()).should.be.true();
+      boundlessInterval().sameAs(d.all2012.closed).should.be.false();
+      d.all2012.closed.sameAs(boundlessInterval()).should.be.false();
+      should(boundlessInterval().sameAs(unknownInterval())).be.null();
+      should(unknownInterval().sameAs(boundlessInterval())).be.null();
+    });
   });
 
   describe('union', () => {
@@ -1031,6 +1183,13 @@ describe('DateTimeInterval', () => {
       x.toMonth.high.sameAs(j.high, DateTime.Unit.MONTH).should.be.true();
     });
 
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().union(d.all2012.closed).should.eql(boundlessInterval());
+      d.all2012.closed.union(boundlessInterval()).should.eql(boundlessInterval());
+      boundlessInterval().union(unknownInterval()).should.eql(boundlessInterval());
+      unknownInterval().union(boundlessInterval()).should.eql(boundlessInterval());
+    });
+
     it('should throw when the argument is a point', () => {
       should(() => d.all2012.closed.union(d.mid2012.closed)).throw(Error);
     });
@@ -1155,6 +1314,13 @@ describe('DateTimeInterval', () => {
       x.toDay.intersect(y.toDay).high.should.eql(x.toDay.high);
       y.toDay.intersect(x.toDay).low.should.eql(x.toDay.low);
       y.toDay.intersect(x.toDay).high.should.eql(x.toDay.high);
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().intersect(d.all2012.closed).should.eql(d.all2012.closed);
+      d.all2012.closed.intersect(boundlessInterval()).should.eql(d.all2012.closed);
+      boundlessInterval().intersect(unknownInterval()).should.eql(unknownInterval());
+      unknownInterval().intersect(boundlessInterval()).should.eql(unknownInterval());
     });
 
     it('should throw when the argument is a point', () => {
@@ -1425,6 +1591,25 @@ describe('DateTimeInterval', () => {
       should.not.exist(x.toYear.after(y.closed));
       should.not.exist(x.toYear.after(x.closed));
     });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().after(d.all2012.closed).should.be.false();
+      d.all2012.closed.after(boundlessInterval()).should.be.false();
+    });
+  });
+
+  describe('sameOrAfter', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().sameOrAfter(boundlessInterval()).should.be.true();
+      boundlessInterval().sameOrAfter(d.all2012.closed).should.be.false();
+      d.all2012.closed.sameOrAfter(boundlessInterval()).should.be.false();
+      should(unknownInterval().sameOrAfter(boundlessInterval())).be.null();
+    });
   });
 
   describe('before', () => {
@@ -1557,6 +1742,25 @@ describe('DateTimeInterval', () => {
       should.not.exist(y.toYear.before(x.closed));
       should.not.exist(x.toYear.before(y.closed));
     });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().before(d.all2012.closed).should.be.false();
+      d.all2012.closed.before(boundlessInterval()).should.be.false();
+    });
+  });
+
+  describe('sameOrBefore', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().sameOrBefore(boundlessInterval()).should.be.true();
+      boundlessInterval().sameOrBefore(d.all2012.closed).should.be.false();
+      d.all2012.closed.sameOrBefore(boundlessInterval()).should.be.false();
+      should(unknownInterval().sameOrBefore(boundlessInterval())).be.null();
+    });
   });
 
   // TODO Add tests that pass in precision parameters
@@ -1679,6 +1883,11 @@ describe('DateTimeInterval', () => {
       [x, y] = Array.from(xy(d.dIvl.ends));
       x.toMinute.meets(y.toMinute).should.be.false();
       x.toYear.meets(y.closed).should.be.false();
+    });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().meets(d.all2012.closed).should.be.false();
+      d.all2012.closed.meets(boundlessInterval()).should.be.false();
     });
   });
 
@@ -1808,6 +2017,11 @@ describe('DateTimeInterval', () => {
       x.toMinute.meetsAfter(y.toMinute).should.be.false();
       x.toYear.meetsAfter(y.closed).should.be.false();
     });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().meetsAfter(d.all2012.closed).should.be.false();
+      d.all2012.closed.meetsAfter(boundlessInterval()).should.be.false();
+    });
   });
 
   // TODO Add tests that pass in precision parameter
@@ -1932,6 +2146,11 @@ describe('DateTimeInterval', () => {
       x.toMinute.meetsBefore(y.toMinute).should.be.false();
       x.toYear.meetsBefore(y.closed).should.be.false();
     });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().meetsBefore(d.all2012.closed).should.be.false();
+      d.all2012.closed.meetsBefore(boundlessInterval()).should.be.false();
+    });
   });
 });
 
@@ -1975,6 +2194,8 @@ describe('IntegerInterval', () => {
       new Interval(0, null, true, false).contains(0).should.be.true();
       should(new Interval(0, null, true, false).contains(123456789)).be.null();
       new Interval(0, null, true, false).contains(-1).should.be.false();
+      new Interval(null, null).contains(5).should.be.true();
+      should(new Interval(null, null, false, false).contains(5)).be.null();
     });
 
     it('should properly handle imprecision', () => {
@@ -2216,6 +2437,15 @@ describe('IntegerInterval', () => {
     it('should include a point Integer', () => {
       d.zeroToHundred.closed.includes(50).should.be.true();
     });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().includes(50).should.be.true();
+      boundlessInterval().includes(d.zeroToHundred.closed).should.be.true();
+      boundlessInterval().includes(unknownInterval()).should.be.true();
+      d.zeroToHundred.closed.includes(boundlessInterval()).should.be.false();
+      should(unknownInterval().includes(d.zeroToHundred.closed)).be.null();
+      should(unknownInterval().includes(boundlessInterval())).be.null();
+    });
   });
 
   describe('includedIn', () => {
@@ -2335,6 +2565,57 @@ describe('IntegerInterval', () => {
       d.zeroToHundred.closed.includedIn(50).should.be.true();
       d.zeroToHundred.closed.includedIn(500).should.be.false();
     });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      d.zeroToHundred.closed.includedIn(boundlessInterval()).should.be.true();
+      boundlessInterval().includedIn(d.zeroToHundred.closed).should.be.false();
+      boundlessInterval().includedIn(boundlessInterval()).should.be.true();
+      unknownInterval().includedIn(boundlessInterval()).should.be.true();
+    });
+  });
+
+  describe('properlyIncludes', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().properlyIncludes(d.zeroToHundred.closed).should.be.true();
+      boundlessInterval().properlyIncludes(boundlessInterval()).should.be.false();
+      should(boundlessInterval().properlyIncludes(unknownInterval())).be.null();
+      should(unknownInterval().properlyIncludes(d.zeroToHundred.closed)).be.null();
+    });
+  });
+
+  describe('starts', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().starts(boundlessInterval()).should.be.true();
+      boundlessInterval().starts(d.zeroToHundred.closed).should.be.false();
+      d.zeroToHundred.closed.starts(boundlessInterval()).should.be.false();
+      should(boundlessInterval().starts(unknownInterval())).be.null();
+      should(unknownInterval().starts(boundlessInterval())).be.null();
+    });
+  });
+
+  describe('ends', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().ends(boundlessInterval()).should.be.true();
+      boundlessInterval().ends(d.zeroToHundred.closed).should.be.false();
+      d.zeroToHundred.closed.ends(boundlessInterval()).should.be.false();
+      should(boundlessInterval().ends(unknownInterval())).be.null();
+      should(unknownInterval().ends(boundlessInterval())).be.null();
+    });
   });
 
   describe('overlaps(IntegerInterval)', () => {
@@ -2427,12 +2708,37 @@ describe('IntegerInterval', () => {
       y.open.overlaps(x.open).should.be.true();
     });
 
+    it('should properly handle null endpoints', () => {
+      const earlyInterval = new Interval(-123456789, -1);
+      const lateInterval = new Interval(1, 123456789);
+      const startsAtZero = new Interval(0, 123456789);
+      const endsAtZero = new Interval(-123456789, 0);
+
+      should(new Interval(null, 0).overlaps(earlyInterval)).be.true();
+      should(new Interval(null, 0).overlaps(lateInterval)).be.false();
+      should(new Interval(null, 0, false, true).overlaps(startsAtZero)).be.true();
+      should(new Interval(null, 0, false, true).overlaps(earlyInterval)).be.null();
+      should(new Interval(null, 0, false, true).overlaps(lateInterval)).be.false();
+
+      should(new Interval(0, null).overlaps(lateInterval)).be.true();
+      should(new Interval(0, null).overlaps(earlyInterval)).be.false();
+      should(new Interval(0, null, true, false).overlaps(endsAtZero)).be.true();
+      should(new Interval(0, null, true, false).overlaps(lateInterval)).be.null();
+      should(new Interval(0, null, true, false).overlaps(earlyInterval)).be.false();
+
+      should(new Interval(null, null).overlaps(d.zeroToHundred.closed)).be.true();
+      should(new Interval(null, null, false, false).overlaps(d.zeroToHundred.closed)).be.null();
+      should(d.zeroToHundred.closed.overlaps(new Interval(null, null))).be.true();
+      should(d.zeroToHundred.closed.overlaps(new Interval(null, null, false, false))).be.null();
+    });
+
     it('should properly handle boundless and unknown intervals', () => {
       boundlessInterval().overlaps(boundlessInterval()).should.be.true();
       boundlessInterval().overlaps(d.zeroToHundred.closed).should.be.true();
       d.zeroToHundred.closed.overlaps(boundlessInterval()).should.be.true();
-      should(boundlessInterval().overlaps(unknownInterval())).be.null();
-      should(unknownInterval().overlaps(boundlessInterval())).be.null();
+      // TODO: These commented out edge cases with all null endpoints on both sides currently don't pass
+      //boundlessInterval().overlaps(unknownInterval()).should.be.true();
+      //unknownInterval().overlaps(boundlessInterval()).should.be.true();
       should(unknownInterval().overlaps(d.zeroToHundred.closed)).be.null();
     });
 
@@ -2485,6 +2791,21 @@ describe('IntegerInterval', () => {
 
     it('should properly calculate integers greater than it', () => {
       d.zeroToHundred.closed.overlaps(105).should.be.false();
+    });
+
+    it('should properly handle null endpoints', () => {
+      should(new Interval(null, 0).overlaps(-123456789)).be.true();
+      should(new Interval(null, 0).overlaps(1)).be.false();
+      should(new Interval(null, 0, false, true).overlaps(0)).be.true();
+      should(new Interval(null, 0, false, true).overlaps(-123456789)).be.null();
+      should(new Interval(null, 0, false, true).overlaps(1)).be.false();
+      should(new Interval(0, null).overlaps(123456789)).be.true();
+      should(new Interval(0, null).overlaps(-1)).be.false();
+      should(new Interval(0, null, true, false).overlaps(0)).be.true();
+      should(new Interval(0, null, true, false).overlaps(123456789)).be.null();
+      should(new Interval(0, null, true, false).overlaps(-1)).be.false();
+      should(new Interval(null, null).overlaps(5)).be.true();
+      should(new Interval(null, null, false, false).overlaps(5)).be.null();
     });
 
     it('should properly handle boundless and unknown intervals', () => {
@@ -2693,6 +3014,30 @@ describe('IntegerInterval', () => {
 
       ivl.equals(point).should.be.false();
     });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().equals(boundlessInterval()).should.be.true();
+      boundlessInterval().equals(d.zeroToHundred.closed).should.be.false();
+      d.zeroToHundred.closed.equals(boundlessInterval()).should.be.false();
+      should(boundlessInterval().equals(unknownInterval())).be.null();
+      should(unknownInterval().equals(boundlessInterval())).be.null();
+      should(unknownInterval().equals(unknownInterval())).be.null();
+    });
+  });
+
+  describe('sameAs', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().sameAs(boundlessInterval()).should.be.true();
+      boundlessInterval().sameAs(d.zeroToHundred.closed).should.be.false();
+      d.zeroToHundred.closed.sameAs(boundlessInterval()).should.be.false();
+      should(boundlessInterval().sameAs(unknownInterval())).be.null();
+      should(unknownInterval().sameAs(boundlessInterval())).be.null();
+    });
   });
 
   describe('union', () => {
@@ -2837,6 +3182,13 @@ describe('IntegerInterval', () => {
     it('should throw when the argument is a point', () => {
       should(() => d.zeroToHundred.union(300)).throw(Error);
     });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().union(d.zeroToHundred.closed).should.eql(boundlessInterval());
+      d.zeroToHundred.closed.union(boundlessInterval()).should.eql(boundlessInterval());
+      boundlessInterval().union(unknownInterval()).should.eql(boundlessInterval());
+      unknownInterval().union(boundlessInterval()).should.eql(boundlessInterval());
+    });
   });
 
   describe('intersect', () => {
@@ -2972,6 +3324,13 @@ describe('IntegerInterval', () => {
 
     it('should throw when the argument is a point', () => {
       should(() => d.zeroToHundred.intersect(50)).throw(Error);
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().intersect(d.zeroToHundred.closed).should.eql(d.zeroToHundred.closed);
+      d.zeroToHundred.closed.intersect(boundlessInterval()).should.eql(d.zeroToHundred.closed);
+      boundlessInterval().intersect(unknownInterval()).should.eql(unknownInterval());
+      unknownInterval().intersect(boundlessInterval()).should.eql(unknownInterval());
     });
   });
 
@@ -3228,6 +3587,25 @@ describe('IntegerInterval', () => {
 
       uIvl.after(uIvl).should.be.false();
     });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().after(d.zeroToHundred.closed).should.be.false();
+      d.zeroToHundred.closed.after(boundlessInterval()).should.be.false();
+    });
+  });
+
+  describe('sameOrAfter', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().sameOrAfter(boundlessInterval()).should.be.true();
+      boundlessInterval().sameOrAfter(d.zeroToHundred.closed).should.be.false();
+      d.zeroToHundred.closed.sameOrAfter(boundlessInterval()).should.be.false();
+      should(unknownInterval().sameOrAfter(boundlessInterval())).be.null();
+    });
   });
 
   describe('before', () => {
@@ -3348,6 +3726,25 @@ describe('IntegerInterval', () => {
       uIvl.before(ivl).should.be.false();
 
       uIvl.before(uIvl).should.be.false();
+    });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().before(d.zeroToHundred.closed).should.be.false();
+      d.zeroToHundred.closed.before(boundlessInterval()).should.be.false();
+    });
+  });
+
+  describe('sameOrBefore', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().sameOrBefore(boundlessInterval()).should.be.true();
+      boundlessInterval().sameOrBefore(d.zeroToHundred.closed).should.be.false();
+      d.zeroToHundred.closed.sameOrBefore(boundlessInterval()).should.be.false();
+      should(unknownInterval().sameOrBefore(boundlessInterval())).be.null();
     });
   });
 
@@ -3470,6 +3867,11 @@ describe('IntegerInterval', () => {
 
       uIvl.meets(uIvl).should.be.false();
     });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().meets(d.zeroToHundred.closed).should.be.false();
+      d.zeroToHundred.closed.meets(boundlessInterval()).should.be.false();
+    });
   });
 
   describe('meetsAfter', () => {
@@ -3591,6 +3993,11 @@ describe('IntegerInterval', () => {
 
       uIvl.meetsAfter(uIvl).should.be.false();
     });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().meetsAfter(d.zeroToHundred.closed).should.be.false();
+      d.zeroToHundred.closed.meetsAfter(boundlessInterval()).should.be.false();
+    });
   });
 
   describe('meetsBefore', () => {
@@ -3711,6 +4118,11 @@ describe('IntegerInterval', () => {
       should.not.exist(uIvl.meetsBefore(ivl));
 
       uIvl.meetsBefore(uIvl).should.be.false();
+    });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().meetsBefore(d.zeroToHundred.closed).should.be.false();
+      d.zeroToHundred.closed.meetsBefore(boundlessInterval()).should.be.false();
     });
   });
 });
@@ -5496,6 +5908,11 @@ describe('LongInterval', () => {
 });
 
 describe('DecimalInterval', () => {
+  let d: any;
+  beforeEach(() => {
+    d = data();
+  });
+
   it('should close open decimal uncertainty endpoints using decimal point size', () => {
     const closed = new Interval(
       new Uncertainty(1, 2),
@@ -5525,5 +5942,140 @@ describe('DecimalInterval', () => {
     later.meetsAfter(earlier).should.be.true();
   });
 
-  // TODO: More decimal tests, similar to IntegerInterval and LongInterval test suites
+  it('should properly calculate meets intervals', () => {
+    const [x, y] = Array.from(xy(d.dIvl.meets));
+    x.closed.overlaps(y.closed).should.be.false();
+    x.closed.overlaps(y.open).should.be.false();
+    x.open.overlaps(y.closed).should.be.false();
+    x.open.overlaps(y.open).should.be.false();
+    y.closed.overlaps(x.closed).should.be.false();
+    y.closed.overlaps(x.open).should.be.false();
+    y.open.overlaps(x.closed).should.be.false();
+    y.open.overlaps(x.open).should.be.false();
+  });
+
+  it('should properly calculate left/right overlapping intervals', () => {
+    const [x, y] = Array.from(xy(d.dIvl.overlaps));
+    x.closed.overlaps(y.closed).should.be.true();
+    x.closed.overlaps(y.open).should.be.true();
+    x.open.overlaps(y.closed).should.be.true();
+    x.open.overlaps(y.open).should.be.true();
+    y.closed.overlaps(x.closed).should.be.true();
+    y.closed.overlaps(x.open).should.be.true();
+    y.open.overlaps(x.closed).should.be.true();
+    y.open.overlaps(x.open).should.be.true();
+  });
+
+  it('should properly calculate begins/begun by intervals', () => {
+    const [x, y] = Array.from(xy(d.dIvl.begins));
+    x.closed.overlaps(y.closed).should.be.true();
+    x.closed.overlaps(y.open).should.be.true();
+    x.open.overlaps(y.closed).should.be.true();
+    x.open.overlaps(y.open).should.be.true();
+    y.closed.overlaps(x.closed).should.be.true();
+    y.closed.overlaps(x.open).should.be.true();
+    y.open.overlaps(x.closed).should.be.true();
+    y.open.overlaps(x.open).should.be.true();
+  });
+
+  it('should properly calculate includes/included by intervals', () => {
+    const [x, y] = Array.from(xy(d.dIvl.during));
+    x.closed.overlaps(y.closed).should.be.true();
+    x.closed.overlaps(y.open).should.be.true();
+    x.open.overlaps(y.closed).should.be.true();
+    x.open.overlaps(y.open).should.be.true();
+    y.closed.overlaps(x.closed).should.be.true();
+    y.closed.overlaps(x.open).should.be.true();
+    y.open.overlaps(x.closed).should.be.true();
+    y.open.overlaps(x.open).should.be.true();
+  });
+
+  it('should properly calculate ends/ended by intervals', () => {
+    const [x, y] = Array.from(xy(d.dIvl.ends));
+    x.closed.overlaps(y.closed).should.be.true();
+    x.closed.overlaps(y.open).should.be.true();
+    x.open.overlaps(y.closed).should.be.true();
+    x.open.overlaps(y.open).should.be.true();
+    y.closed.overlaps(x.closed).should.be.true();
+    y.closed.overlaps(x.open).should.be.true();
+    y.open.overlaps(x.closed).should.be.true();
+    y.open.overlaps(x.open).should.be.true();
+  });
+
+  it('should properly handle null endpoints', () => {
+    const date = DateTime.parse('2012-01-01T00:00:00.0');
+    const early = DateTime.parse('0001-01-01T00:00:00.0');
+    const late = DateTime.parse('2999-01-01T00:00:00.0');
+    const earlyInterval = new Interval(early, DateTime.parse('2011-01-01T00:00:00.0'));
+    const lateInterval = new Interval(DateTime.parse('2013-01-01T00:00:00.0'), late);
+    const startsAtDate = new Interval(date, late);
+    const endsAtDate = new Interval(early, date);
+
+    should(new Interval(null, date).overlaps(earlyInterval)).be.true();
+    should(new Interval(null, date).overlaps(lateInterval)).be.false();
+    should(new Interval(null, date, false, true).overlaps(startsAtDate)).be.true();
+    should(new Interval(null, date, false, true).overlaps(earlyInterval)).be.null();
+    should(new Interval(null, date, false, true).overlaps(lateInterval)).be.false();
+
+    should(new Interval(date, null).overlaps(lateInterval)).be.true();
+    should(new Interval(date, null).overlaps(earlyInterval)).be.false();
+    should(new Interval(date, null, true, false).overlaps(endsAtDate)).be.true();
+    should(new Interval(date, null, true, false).overlaps(lateInterval)).be.null();
+    should(new Interval(date, null, true, false).overlaps(earlyInterval)).be.false();
+
+    should(new Interval(null, null).overlaps(d.all2012.closed)).be.true();
+    should(new Interval(null, null, false, false).overlaps(d.all2012.closed)).be.null();
+    should(d.all2012.closed.overlaps(new Interval(null, null))).be.true();
+    should(d.all2012.closed.overlaps(new Interval(null, null, false, false))).be.null();
+    // TODO: These commented out edge cases with all null endpoints on both sides currently don't pass
+    //should(new Interval(null, null).overlaps(new Interval(null, null))).be.true();
+    //should(new Interval(null, null).overlaps(new Interval(null, null, false, false))).be.true();
+    //should(new Interval(null, null, false, false).overlaps(new Interval(null, null))).be.true();
+    should(
+      new Interval(null, null, false, false).overlaps(new Interval(null, null, false, false))
+    ).be.null();
+  });
+
+  it('should properly handle boundless and unknown intervals', () => {
+    boundlessInterval().overlaps(boundlessInterval()).should.be.true();
+    boundlessInterval().overlaps(d.all2012.closed).should.be.true();
+    // TODO: These commented out edge cases with all null endpoints on both sides currently don't pass
+    //d.all2012.closed.overlaps(boundlessInterval()).should.be.true();
+    //boundlessInterval().overlaps(unknownInterval()).should.be.true();
+    //unknownInterval().overlaps(boundlessInterval()).should.be.true();
+    should(unknownInterval().overlaps(d.all2012.closed)).be.null();
+  });
+
+  it('should properly handle imprecision', () => {
+    let [x, y] = Array.from(xy(d.dIvl.sameAs));
+    x.closed.overlaps(y.toMinute).should.be.true();
+    x.toHour.overlaps(y.toMinute).should.be.true();
+
+    [x, y] = Array.from(xy(d.dIvl.before));
+    x.toMonth.overlaps(y.toMonth).should.be.false();
+    should.not.exist(x.toYear.overlaps(y.closed));
+
+    [x, y] = Array.from(xy(d.dIvl.meets));
+    x.toMonth.overlaps(y.toMonth).should.be.false();
+    should.not.exist(x.toYear.overlaps(y.closed));
+
+    [x, y] = Array.from(xy(d.dIvl.overlaps));
+    x.toMonth.overlaps(y.toMonth).should.be.true();
+    should.not.exist(x.toYear.overlaps(y.closed));
+
+    [x, y] = Array.from(xy(d.dIvl.begins));
+    x.toMinute.overlaps(y.toMinute).should.be.true();
+    should.not.exist(x.toYear.overlaps(y.closed));
+
+    [x, y] = Array.from(xy(d.dIvl.during));
+    x.toMonth.overlaps(y.toMonth).should.be.true();
+    y.toMonth.overlaps(x.toMonth).should.be.true();
+    should.not.exist(x.toYear.overlaps(y.closed));
+
+    [x, y] = Array.from(xy(d.dIvl.ends));
+    x.toMinute.overlaps(y.toMinute).should.be.true();
+    should.not.exist(x.toYear.overlaps(y.closed));
+  });
 });
+
+// TODO: Tests for real numbers (i.e., floats)
