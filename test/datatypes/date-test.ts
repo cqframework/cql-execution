@@ -196,6 +196,36 @@ describe('Date.add', () => {
   });
 });
 
+describe('Date.successor', () => {
+  it('should use the specified precision', () => {
+    const date = Date.parse('2000-06-15');
+    date.successor(Date.Unit.YEAR).should.eql(Date.parse('2001-06-15'));
+    date.successor(Date.Unit.MONTH).should.eql(Date.parse('2000-07-15'));
+    date.successor(Date.Unit.DAY).should.eql(Date.parse('2000-06-16'));
+  });
+
+  it("should use the date's finest precision when precision is not specified", () => {
+    Date.parse('2000-06-15').successor().should.eql(Date.parse('2000-06-16'));
+    Date.parse('2000-06').successor().should.eql(Date.parse('2000-07'));
+    Date.parse('2000').successor().should.eql(Date.parse('2001'));
+  });
+});
+
+describe('Date.predecessor', () => {
+  it('should use the specified precision', () => {
+    const date = Date.parse('2000-06-15');
+    date.predecessor(Date.Unit.YEAR).should.eql(Date.parse('1999-06-15'));
+    date.predecessor(Date.Unit.MONTH).should.eql(Date.parse('2000-05-15'));
+    date.predecessor(Date.Unit.DAY).should.eql(Date.parse('2000-06-14'));
+  });
+
+  it("should use the date's finest precision when precision is not specified", () => {
+    Date.parse('2000-06-15').predecessor().should.eql(Date.parse('2000-06-14'));
+    Date.parse('2000-06').predecessor().should.eql(Date.parse('2000-05'));
+    Date.parse('2000').predecessor().should.eql(Date.parse('1999'));
+  });
+});
+
 describe('Date.differenceBetween', () => {
   it('should return null if passed a non-Date object', () => {
     const a = Date.parse('2018-01-23');

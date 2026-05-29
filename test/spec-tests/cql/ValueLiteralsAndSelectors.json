@@ -4150,11 +4150,20 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
                         "annotation": []
                       }
                     }
@@ -5308,11 +5317,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
                           "annotation": []
                         }
                       }
@@ -8317,11 +8335,20 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "skipped",
+                        "name": "expression",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
                           "annotation": []
                         }
                       }
@@ -8329,13 +8356,70 @@
                   },
                   "element": [
                     {
-                      "name": "skipped",
+                      "name": "expression",
                       "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong answer (null vs big number)",
-                        "annotation": []
+                        "type": "Add",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": [
+                          {
+                            "type": "Multiply",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": [
+                              {
+                                "type": "ToDecimal",
+                                "annotation": [],
+                                "signature": [],
+                                "operand": {
+                                  "type": "Negate",
+                                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": [],
+                                  "signature": [],
+                                  "operand": {
+                                    "type": "Literal",
+                                    "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value": "10",
+                                    "annotation": []
+                                  }
+                                }
+                              },
+                              {
+                                "type": "Literal",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                                "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                                "value": "1000000000000000000000000000.00000000",
+                                "annotation": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "value": "0.00000001",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Negate",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "value": "9999999999999999999999999999.99999999",
+                          "annotation": []
+                        }
                       }
                     }
                   ]

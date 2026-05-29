@@ -1,16 +1,18 @@
 import { Expression } from './expression';
 import * as MathUtil from '../util/math';
-import {
-  Quantity,
-  doAddition,
-  doSubtraction,
-  doMultiplication,
-  doDivision
-} from '../datatypes/quantity';
+import { Quantity, doMultiplication, doDivision } from '../datatypes/quantity';
 import { Uncertainty } from '../datatypes/uncertainty';
 import { Context } from '../runtime/context';
 import { build } from './builder';
-import { DateTime } from '../datatypes/datetime';
+import {
+  DateTime,
+  MAX_DATE_VALUE,
+  MAX_DATETIME_VALUE,
+  MAX_TIME_VALUE,
+  MIN_DATE_VALUE,
+  MIN_DATETIME_VALUE,
+  MIN_TIME_VALUE
+} from '../datatypes/datetime';
 import {
   ELM_DECIMAL_TYPE,
   ELM_DATETIME_TYPE,
@@ -19,6 +21,14 @@ import {
   ELM_LONG_TYPE,
   ELM_TIME_TYPE
 } from '../util/elmTypes';
+import {
+  MAX_FLOAT_VALUE,
+  MAX_INT_VALUE,
+  MAX_LONG_VALUE,
+  MIN_FLOAT_VALUE,
+  MIN_INT_VALUE,
+  MIN_LONG_VALUE
+} from '../util/limits';
 
 export class Add extends Expression {
   constructor(json: any) {
@@ -31,35 +41,7 @@ export class Add extends Expression {
       return null;
     }
 
-    const sum = args.reduce((x: any, y: any) => {
-      if (x.isUncertainty && !y.isUncertainty) {
-        y = new Uncertainty(y, y);
-      } else if (y.isUncertainty && !x.isUncertainty) {
-        x = new Uncertainty(x, x);
-      }
-
-      if (x.isQuantity || x.isDateTime || x.isDate || (x.isTime && x.isTime())) {
-        return doAddition(x, y);
-      } else if (x.isUncertainty && y.isUncertainty) {
-        if (
-          x.low.isQuantity ||
-          x.low.isDateTime ||
-          x.low.isDate ||
-          (x.low.isTime && x.low.isTime())
-        ) {
-          return new Uncertainty(doAddition(x.low, y.low), doAddition(x.high, y.high));
-        } else {
-          return new Uncertainty(x.low + y.low, x.high + y.high);
-        }
-      } else {
-        return x + y;
-      }
-    });
-
-    if (MathUtil.overflowsOrUnderflows(sum, this.resultTypeName)) {
-      return null;
-    }
-    return sum;
+    return MathUtil.add(args[0], args[1], this.resultTypeName);
   }
 }
 
@@ -74,30 +56,7 @@ export class Subtract extends Expression {
       return null;
     }
 
-    const difference = args.reduce((x: any, y: any) => {
-      if (x.isUncertainty && !y.isUncertainty) {
-        y = new Uncertainty(y, y);
-      } else if (y.isUncertainty && !x.isUncertainty) {
-        x = new Uncertainty(x, x);
-      }
-
-      if (x.isQuantity || x.isDateTime || x.isDate) {
-        return doSubtraction(x, y);
-      } else if (x.isUncertainty && y.isUncertainty) {
-        if (x.low.isQuantity || x.low.isDateTime || x.low.isDate) {
-          return new Uncertainty(doSubtraction(x.low, y.high), doSubtraction(x.high, y.low));
-        } else {
-          return new Uncertainty(x.low - y.high, x.high - y.low);
-        }
-      } else {
-        return x - y;
-      }
-    });
-
-    if (MathUtil.overflowsOrUnderflows(difference, this.resultTypeName)) {
-      return null;
-    }
-    return difference;
+    return MathUtil.subtract(args[0], args[1], this.resultTypeName);
   }
 }
 
@@ -448,12 +407,12 @@ function doPower(x: any, y: any) {
 
 export class MinValue extends Expression {
   static readonly MIN_VALUES = {
-    [ELM_INTEGER_TYPE]: MathUtil.MIN_INT_VALUE,
-    [ELM_LONG_TYPE]: MathUtil.MIN_LONG_VALUE,
-    [ELM_DECIMAL_TYPE]: MathUtil.MIN_FLOAT_VALUE,
-    [ELM_DATETIME_TYPE]: MathUtil.MIN_DATETIME_VALUE,
-    [ELM_DATE_TYPE]: MathUtil.MIN_DATE_VALUE,
-    [ELM_TIME_TYPE]: MathUtil.MIN_TIME_VALUE
+    [ELM_INTEGER_TYPE]: MIN_INT_VALUE,
+    [ELM_LONG_TYPE]: MIN_LONG_VALUE,
+    [ELM_DECIMAL_TYPE]: MIN_FLOAT_VALUE,
+    [ELM_DATETIME_TYPE]: MIN_DATETIME_VALUE,
+    [ELM_DATE_TYPE]: MIN_DATE_VALUE,
+    [ELM_TIME_TYPE]: MIN_TIME_VALUE
   };
 
   valueType: keyof typeof MinValue.MIN_VALUES;
@@ -480,12 +439,12 @@ export class MinValue extends Expression {
 
 export class MaxValue extends Expression {
   static readonly MAX_VALUES = {
-    [ELM_INTEGER_TYPE]: MathUtil.MAX_INT_VALUE,
-    [ELM_LONG_TYPE]: MathUtil.MAX_LONG_VALUE,
-    [ELM_DECIMAL_TYPE]: MathUtil.MAX_FLOAT_VALUE,
-    [ELM_DATETIME_TYPE]: MathUtil.MAX_DATETIME_VALUE,
-    [ELM_DATE_TYPE]: MathUtil.MAX_DATE_VALUE,
-    [ELM_TIME_TYPE]: MathUtil.MAX_TIME_VALUE
+    [ELM_INTEGER_TYPE]: MAX_INT_VALUE,
+    [ELM_LONG_TYPE]: MAX_LONG_VALUE,
+    [ELM_DECIMAL_TYPE]: MAX_FLOAT_VALUE,
+    [ELM_DATETIME_TYPE]: MAX_DATETIME_VALUE,
+    [ELM_DATE_TYPE]: MAX_DATE_VALUE,
+    [ELM_TIME_TYPE]: MAX_TIME_VALUE
   };
 
   valueType: keyof typeof MaxValue.MAX_VALUES;
