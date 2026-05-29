@@ -61,7 +61,7 @@ export class Interval {
       newHigh = this.high.copy();
     }
 
-    return new Interval(newLow, newHigh, this.lowClosed, this.highClosed);
+    return new Interval(newLow, newHigh, this.lowClosed, this.highClosed, this.defaultPointType);
   }
 
   contains(item: any, precision?: any) {
@@ -111,8 +111,8 @@ export class Interval {
     if (other == null || !other.isInterval) {
       return this.contains(other, precision);
     }
-    const a = this.toClosed();
-    const b = other.toClosed();
+    const a = this.toClosed(other.pointType);
+    const b = other.toClosed(this.pointType);
     return ThreeValuedLogic.and(
       cmp.lessThanOrEquals(a.low, b.low, precision),
       cmp.greaterThanOrEquals(a.high, b.high, precision)
@@ -129,10 +129,10 @@ export class Interval {
   }
 
   overlaps(item: any, precision?: any) {
-    const closed = this.toClosed();
+    const closed = this.toClosed(getPointTypeFromItem(item));
     const [low, high] = (() => {
       if (item != null && item.isInterval) {
-        const itemClosed = item.toClosed();
+        const itemClosed = item.toClosed(this.pointType);
         return [itemClosed.low, itemClosed.high];
       } else {
         return [item, item];
@@ -145,8 +145,8 @@ export class Interval {
   }
 
   overlapsAfter(item: any, precision?: any) {
-    const closed = this.toClosed();
-    const high = item != null && item.isInterval ? item.toClosed().high : item;
+    const closed = this.toClosed(getPointTypeFromItem(item));
+    const high = item != null && item.isInterval ? item.toClosed(this.pointType).high : item;
     return ThreeValuedLogic.and(
       cmp.lessThanOrEquals(closed.low, high, precision),
       cmp.greaterThan(closed.high, high, precision)
@@ -154,8 +154,8 @@ export class Interval {
   }
 
   overlapsBefore(item: any, precision?: any) {
-    const closed = this.toClosed();
-    const low = item != null && item.isInterval ? item.toClosed().low : item;
+    const closed = this.toClosed(getPointTypeFromItem(item));
+    const low = item != null && item.isInterval ? item.toClosed(this.pointType).low : item;
     return ThreeValuedLogic.and(
       cmp.lessThan(closed.low, low, precision),
       cmp.greaterThanOrEquals(closed.high, low, precision)
@@ -168,7 +168,7 @@ export class Interval {
     }
     // Note that interval union is only defined if the arguments overlap or meet.
     if (this.overlaps(other) || this.meets(other)) {
-      const [a, b] = [this.toClosed(), other.toClosed()];
+      const [a, b] = [this.toClosed(other.pointType), other.toClosed(this.pointType)];
       let l, lc;
       if (cmp.lessThanOrEquals(a.low, b.low)) {
         [l, lc] = [this.low, this.lowClosed];
@@ -207,7 +207,7 @@ export class Interval {
     }
     // Note that interval union is only defined if the arguments overlap.
     if (this.overlaps(other)) {
-      const [a, b] = [this.toClosed(), other.toClosed()];
+      const [a, b] = [this.toClosed(other.pointType), other.toClosed(this.pointType)];
       let l, lc;
       if (cmp.greaterThanOrEquals(a.low, b.low)) {
         [l, lc] = [this.low, this.lowClosed];
@@ -364,7 +364,7 @@ export class Interval {
 
   equals(other: any) {
     if (other != null && other.isInterval) {
-      const [a, b] = [this.toClosed(), other.toClosed()];
+      const [a, b] = [this.toClosed(other.pointType), other.toClosed(this.pointType)];
       return ThreeValuedLogic.and(cmp.equals(a.low, b.low), cmp.equals(a.high, b.high));
     } else {
       return false;
@@ -372,22 +372,22 @@ export class Interval {
   }
 
   after(other: any, precision?: any) {
-    const closed = this.toClosed();
+    const closed = this.toClosed(getPointTypeFromItem(other));
     // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
     // Simple way to fix it: and w/ not overlaps
     if (other.toClosed) {
-      return cmp.greaterThan(closed.low, other.toClosed().high, precision);
+      return cmp.greaterThan(closed.low, other.toClosed(this.pointType).high, precision);
     } else {
       return cmp.greaterThan(closed.low, other, precision);
     }
   }
 
   before(other: any, precision?: any) {
-    const closed = this.toClosed();
+    const closed = this.toClosed(getPointTypeFromItem(other));
     // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
     // Simple way to fix it: and w/ not overlaps
     if (other.toClosed) {
-      return cmp.lessThan(closed.high, other.toClosed().low, precision);
+      return cmp.lessThan(closed.high, other.toClosed(this.pointType).low, precision);
     } else {
       return cmp.lessThan(closed.high, other, precision);
     }
@@ -403,12 +403,17 @@ export class Interval {
   meetsAfter(other: any, precision?: any) {
     try {
       if (precision != null && this.low != null && this.low.isDateTime) {
-        return this.toClosed().low.sameAs(
-          other.toClosed().high != null ? other.toClosed().high.add(1, precision) : null,
+        return this.toClosed(getPointTypeFromItem(other)).low.sameAs(
+          other.toClosed(this.pointType).high != null
+            ? other.toClosed(this.pointType).high.add(1, precision)
+            : null,
           precision
         );
       } else {
-        return cmp.equals(this.toClosed().low, successor(other.toClosed().high));
+        return cmp.equals(
+          this.toClosed(getPointTypeFromItem(other)).low,
+          successor(other.toClosed(this.pointType).high)
+        );
       }
     } catch {
       return false;
@@ -418,12 +423,17 @@ export class Interval {
   meetsBefore(other: any, precision?: any) {
     try {
       if (precision != null && this.high != null && this.high.isDateTime) {
-        return this.toClosed().high.sameAs(
-          other.toClosed().low != null ? other.toClosed().low.add(-1, precision) : null,
+        return this.toClosed(getPointTypeFromItem(other)).high.sameAs(
+          other.toClosed(this.pointType).low != null
+            ? other.toClosed(this.pointType).low.add(-1, precision)
+            : null,
           precision
         );
       } else {
-        return cmp.equals(this.toClosed().high, predecessor(other.toClosed().low));
+        return cmp.equals(
+          this.toClosed(getPointTypeFromItem(other)).high,
+          predecessor(other.toClosed(this.pointType).low)
+        );
       }
     } catch {
       return false;
@@ -563,15 +573,16 @@ export class Interval {
     return pointSize;
   }
 
-  toClosed() {
-    // Calculate the closed flags. Despite the name of this function, if a boundary is null open,
-    // we cannot close the boundary because that changes its meaning from "unknown" to "max/min value"
-    const lowClosed = this.lowClosed || this.low != null;
-    const highClosed = this.highClosed || this.high != null;
-    if (this.pointType != null) {
+  // NOTE: The passed in defaultPointType is only used if this interval cannot determine its own pointType
+  // (e.g., both low and high are null). In this case, the passed in defaultPointType should correspond to
+  // the point type of the other argument involved in the operation (since CQL interval operations generally
+  // require that the arguments have matchin point types).
+  toClosed(defaultPointType?: any) {
+    const pointType = this.pointType != null ? this.pointType : defaultPointType;
+    if (pointType != null) {
       let low;
       if (this.lowClosed && this.low == null) {
-        low = minValueForType(this.pointType);
+        low = minValueForType(pointType);
       } else if (!this.lowClosed && this.low != null) {
         low = successor(this.low);
       } else {
@@ -579,21 +590,23 @@ export class Interval {
       }
       let high;
       if (this.highClosed && this.high == null) {
-        high = maxValueForType(this.pointType);
+        high = maxValueForType(pointType);
       } else if (!this.highClosed && this.high != null) {
         high = predecessor(this.high);
       } else {
         high = this.high;
       }
       if (low == null) {
-        low = new Uncertainty(minValueForType(this.pointType), high);
+        low = new Uncertainty(minValueForType(pointType), high);
       }
       if (high == null) {
-        high = new Uncertainty(low, maxValueForType(this.pointType));
+        high = new Uncertainty(low, maxValueForType(pointType));
       }
-      return new Interval(low, high, lowClosed, highClosed);
+      return new Interval(low, high, true, true);
     } else {
-      return new Interval(this.low, this.high, lowClosed, highClosed);
+      // If we don't know the point type, then that means both sides are null.
+      // We can't convert to closed without knowing the point type.
+      return this.copy();
     }
   }
 
@@ -643,5 +656,15 @@ function highestNumericUncertainty(x: any, y: any) {
     return new Uncertainty(low, high);
   } else {
     return low;
+  }
+}
+
+function getPointTypeFromItem(item: any) {
+  if (item == null) {
+    return undefined;
+  } else if (item.isInterval) {
+    return item.pointType;
+  } else {
+    return new Interval(item, item).pointType;
   }
 }
