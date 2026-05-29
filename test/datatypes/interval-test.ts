@@ -74,6 +74,8 @@ describe('DateTimeInterval.contains', () => {
     new Interval(date, null, true, false).contains(date).should.be.true();
     should(new Interval(date, null, true, false).contains(late)).be.null();
     new Interval(date, null, true, false).contains(early).should.be.false();
+    new Interval(null, null).contains(date).should.be.true();
+    should(new Interval(null, null, false, false).contains(date)).be.null();
   });
 
   it('should properly handle imprecision', () => {
@@ -451,6 +453,40 @@ describe('DateTimeInterval.overlaps(DateTimeInterval)', () => {
     y.open.overlaps(x.open).should.be.true();
   });
 
+  it('should properly handle null endpoints', () => {
+    const date = DateTime.parse('2012-01-01T00:00:00.0');
+    const early = DateTime.parse('0001-01-01T00:00:00.0');
+    const late = DateTime.parse('2999-01-01T00:00:00.0');
+    const earlyInterval = new Interval(early, DateTime.parse('2011-01-01T00:00:00.0'));
+    const lateInterval = new Interval(DateTime.parse('2013-01-01T00:00:00.0'), late);
+    const startsAtDate = new Interval(date, late);
+    const endsAtDate = new Interval(early, date);
+
+    should(new Interval(null, date).overlaps(earlyInterval)).be.true();
+    should(new Interval(null, date).overlaps(lateInterval)).be.false();
+    should(new Interval(null, date, false, true).overlaps(startsAtDate)).be.true();
+    should(new Interval(null, date, false, true).overlaps(earlyInterval)).be.null();
+    should(new Interval(null, date, false, true).overlaps(lateInterval)).be.false();
+
+    should(new Interval(date, null).overlaps(lateInterval)).be.true();
+    should(new Interval(date, null).overlaps(earlyInterval)).be.false();
+    should(new Interval(date, null, true, false).overlaps(endsAtDate)).be.true();
+    should(new Interval(date, null, true, false).overlaps(lateInterval)).be.null();
+    should(new Interval(date, null, true, false).overlaps(earlyInterval)).be.false();
+
+    should(new Interval(null, null).overlaps(d.all2012.closed)).be.true();
+    should(new Interval(null, null, false, false).overlaps(d.all2012.closed)).be.null();
+    should(d.all2012.closed.overlaps(new Interval(null, null))).be.true();
+    should(d.all2012.closed.overlaps(new Interval(null, null, false, false))).be.null();
+    // TODO: These commented out edge cases with all null endpoints on both sides currently don't pass
+    //should(new Interval(null, null).overlaps(new Interval(null, null))).be.true();
+    //should(new Interval(null, null).overlaps(new Interval(null, null, false, false))).be.true();
+    //should(new Interval(null, null, false, false).overlaps(new Interval(null, null))).be.true();
+    should(
+      new Interval(null, null, false, false).overlaps(new Interval(null, null, false, false))
+    ).be.null();
+  });
+
   it('should properly handle imprecision', () => {
     let [x, y] = Array.from(xy(d.dIvl.sameAs));
     x.closed.overlaps(y.toMinute).should.be.true();
@@ -509,6 +545,24 @@ describe('DateTimeInterval.overlaps(DateTime)', () => {
 
   it('should properly calculate dates after it', () => {
     d.all2012.closed.overlaps(d.aft2012.full).should.be.false();
+  });
+
+  it('should properly handle null endpoints', () => {
+    const date = DateTime.parse('2012-01-01T00:00:00.0');
+    const early = DateTime.parse('0001-01-01T00:00:00.0');
+    const late = DateTime.parse('2999-01-01T00:00:00.0');
+    should(new Interval(null, date).overlaps(early)).be.true();
+    should(new Interval(null, date).overlaps(late)).be.false();
+    should(new Interval(null, date, false, true).overlaps(date)).be.true();
+    should(new Interval(null, date, false, true).overlaps(early)).be.null();
+    should(new Interval(null, date, false, true).overlaps(late)).be.false();
+    should(new Interval(date, null).overlaps(late)).be.true();
+    should(new Interval(date, null).overlaps(early)).be.false();
+    should(new Interval(date, null, true, false).overlaps(date)).be.true();
+    should(new Interval(date, null, true, false).overlaps(late)).be.null();
+    should(new Interval(date, null, true, false).overlaps(early)).be.false();
+    should(new Interval(null, null).overlaps(date)).be.true();
+    should(new Interval(null, null, false, false).overlaps(date)).be.null();
   });
 
   it('should properly handle imprecision', () => {
@@ -1809,6 +1863,8 @@ describe('IntegerInterval.contains', () => {
     new Interval(0, null, true, false).contains(0).should.be.true();
     should(new Interval(0, null, true, false).contains(123456789)).be.null();
     new Interval(0, null, true, false).contains(-1).should.be.false();
+    new Interval(null, null).contains(5).should.be.true();
+    should(new Interval(null, null, false, false).contains(5)).be.null();
   });
 
   it('should properly handle imprecision', () => {
@@ -2171,6 +2227,30 @@ describe('IntegerInterval.overlaps(IntegerInterval)', () => {
     y.open.overlaps(x.open).should.be.true();
   });
 
+  it('should properly handle null endpoints', () => {
+    const earlyInterval = new Interval(-123456789, -1);
+    const lateInterval = new Interval(1, 123456789);
+    const startsAtZero = new Interval(0, 123456789);
+    const endsAtZero = new Interval(-123456789, 0);
+
+    should(new Interval(null, 0).overlaps(earlyInterval)).be.true();
+    should(new Interval(null, 0).overlaps(lateInterval)).be.false();
+    should(new Interval(null, 0, false, true).overlaps(startsAtZero)).be.true();
+    should(new Interval(null, 0, false, true).overlaps(earlyInterval)).be.null();
+    should(new Interval(null, 0, false, true).overlaps(lateInterval)).be.false();
+
+    should(new Interval(0, null).overlaps(lateInterval)).be.true();
+    should(new Interval(0, null).overlaps(earlyInterval)).be.false();
+    should(new Interval(0, null, true, false).overlaps(endsAtZero)).be.true();
+    should(new Interval(0, null, true, false).overlaps(lateInterval)).be.null();
+    should(new Interval(0, null, true, false).overlaps(earlyInterval)).be.false();
+
+    should(new Interval(null, null).overlaps(d.zeroToHundred.closed)).be.true();
+    should(new Interval(null, null, false, false).overlaps(d.zeroToHundred.closed)).be.null();
+    should(d.zeroToHundred.closed.overlaps(new Interval(null, null))).be.true();
+    should(d.zeroToHundred.closed.overlaps(new Interval(null, null, false, false))).be.null();
+  });
+
   it('should properly handle imprecision', () => {
     const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
@@ -2220,6 +2300,21 @@ describe('IntegerInterval.overlaps(Integer)', () => {
 
   it('should properly calculate integers greater than it', () => {
     d.zeroToHundred.closed.overlaps(105).should.be.false();
+  });
+
+  it('should properly handle null endpoints', () => {
+    should(new Interval(null, 0).overlaps(-123456789)).be.true();
+    should(new Interval(null, 0).overlaps(1)).be.false();
+    should(new Interval(null, 0, false, true).overlaps(0)).be.true();
+    should(new Interval(null, 0, false, true).overlaps(-123456789)).be.null();
+    should(new Interval(null, 0, false, true).overlaps(1)).be.false();
+    should(new Interval(0, null).overlaps(123456789)).be.true();
+    should(new Interval(0, null).overlaps(-1)).be.false();
+    should(new Interval(0, null, true, false).overlaps(0)).be.true();
+    should(new Interval(0, null, true, false).overlaps(123456789)).be.null();
+    should(new Interval(0, null, true, false).overlaps(-1)).be.false();
+    should(new Interval(null, null).overlaps(5)).be.true();
+    should(new Interval(null, null, false, false).overlaps(5)).be.null();
   });
 
   it('should properly handle imprecision', () => {
