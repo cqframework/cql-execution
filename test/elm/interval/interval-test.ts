@@ -2,7 +2,8 @@ import should from 'should';
 import setup from '../../setup';
 const data = require('./data');
 import { Interval } from '../../../src/datatypes/interval';
-import { DateTime } from '../../../src/datatypes/datetime';
+import { DateTime, MIN_DATETIME_VALUE, MAX_DATETIME_VALUE } from '../../../src/datatypes/datetime';
+import { Uncertainty } from '../../../src/datatypes/uncertainty';
 import {
   MIN_INT_VALUE,
   MAX_INT_VALUE,
@@ -10,10 +11,8 @@ import {
   MAX_LONG_VALUE,
   MIN_FLOAT_VALUE,
   MIN_FLOAT_PRECISION_VALUE,
-  MAX_FLOAT_VALUE,
-  MIN_DATETIME_VALUE,
-  MAX_DATETIME_VALUE
-} from '../../../src/util/math';
+  MAX_FLOAT_VALUE
+} from '../../../src/util/limits';
 
 describe('Interval', () => {
   beforeEach(function () {
@@ -249,12 +248,12 @@ describe('Contains', () => {
 
   it('should correctly compare using the requested precision', async function () {
     (await this.containsDayOfDateLowEdge.exec(this.ctx)).should.be.true();
-    (await this.notContainsDayOfDateHighEdgeOpen.exec(this.ctx)).should.be.false();
+    (await this.containsDayOfDateHighEdgeOpen.exec(this.ctx)).should.be.true();
     (await this.containsDayOfDateHighEdgeClosed.exec(this.ctx)).should.be.true();
     (await this.notContainsDayOfDateLowEdge.exec(this.ctx)).should.be.false();
     (await this.notContainsDayOfDateBeyondHighEdge.exec(this.ctx)).should.be.false();
     (await this.containsDayOfDateImpreciseLowEdge.exec(this.ctx)).should.be.true();
-    (await this.notContainsDayOfDateImpreciseHighEdgeOpen.exec(this.ctx)).should.be.false();
+    (await this.containsDayOfDateImpreciseHighEdgeOpen.exec(this.ctx)).should.be.true();
     (await this.containsDayOfDateImpreciseHighEdgeClosed.exec(this.ctx)).should.be.true();
     (await this.containsDayOfDateVeryImpreciseMiddle.exec(this.ctx)).should.be.true();
     (await this.notContainsDayOfDateVeryImpreciseLow.exec(this.ctx)).should.be.false();
@@ -338,12 +337,12 @@ describe('In', () => {
 
   it('should correctly compare using the requested precision', async function () {
     (await this.containsDayOfDateLowEdge.exec(this.ctx)).should.be.true();
-    (await this.notContainsDayOfDateHighEdgeOpen.exec(this.ctx)).should.be.false();
+    (await this.containsDayOfDateHighEdgeOpen.exec(this.ctx)).should.be.true();
     (await this.containsDayOfDateHighEdgeClosed.exec(this.ctx)).should.be.true();
     (await this.notContainsDayOfDateLowEdge.exec(this.ctx)).should.be.false();
     (await this.notContainsDayOfDateBeyondHighEdge.exec(this.ctx)).should.be.false();
     (await this.containsDayOfDateImpreciseLowEdge.exec(this.ctx)).should.be.true();
-    (await this.notContainsDayOfDateImpreciseHighEdgeOpen.exec(this.ctx)).should.be.false();
+    (await this.containsDayOfDateImpreciseHighEdgeOpen.exec(this.ctx)).should.be.true();
     (await this.containsDayOfDateImpreciseHighEdgeClosed.exec(this.ctx)).should.be.true();
     (await this.containsDayOfDateVeryImpreciseMiddle.exec(this.ctx)).should.be.true();
     (await this.notContainsDayOfDateVeryImpreciseLow.exec(this.ctx)).should.be.false();
@@ -713,6 +712,19 @@ describe('After', () => {
     (await this.notAfterDateIvl.exec(this.ctx)).should.be.false();
   });
 
+  it('should compare interval starts to points', async function () {
+    (await this.afterIntPoint.exec(this.ctx)).should.be.true();
+    (await this.notAfterIntPoint.exec(this.ctx)).should.be.false();
+    (await this.afterLongPoint.exec(this.ctx)).should.be.true();
+    (await this.notAfterLongPoint.exec(this.ctx)).should.be.false();
+    (await this.afterRealPoint.exec(this.ctx)).should.be.true();
+    (await this.notAfterRealPoint.exec(this.ctx)).should.be.false();
+    (await this.afterDatePoint.exec(this.ctx)).should.be.true();
+    (await this.notAfterDatePoint.exec(this.ctx)).should.be.false();
+    (await this.afterDayOfDatePoint.exec(this.ctx)).should.be.true();
+    (await this.notAfterDayOfDatePoint.exec(this.ctx)).should.be.false();
+  });
+
   it('should correctly handle null endpoints (int)', async function () {
     (await this.negInfBegNotAfterIntIvl.exec(this.ctx)).should.be.false();
     should(await this.unknownBegMayBeAfterIntIvl.exec(this.ctx)).be.null();
@@ -741,6 +753,13 @@ describe('After', () => {
     (await this.posInfEndNotAfterDateIvl.exec(this.ctx)).should.be.false();
     (await this.unknownEndAfterDateIvl.exec(this.ctx)).should.be.true();
     (await this.unknownEndNotAfterDateIvl.exec(this.ctx)).should.be.false();
+  });
+
+  it('should compare boundless and unknown intervals', async function () {
+    (await this.afterBoundlessInterval.exec(this.ctx)).should.be.false();
+    (await this.afterUnknownInterval.exec(this.ctx)).should.be.true();
+    (await this.notAfterUnknownInterval.exec(this.ctx)).should.be.false();
+    should(await this.mayBeAfterUnknownEndInterval.exec(this.ctx)).be.null();
   });
 
   it('should correctly handle imprecision', async function () {
@@ -782,6 +801,19 @@ describe('Before', () => {
     (await this.notBeforeDateIvl.exec(this.ctx)).should.be.false();
   });
 
+  it('should compare interval ends to points', async function () {
+    (await this.beforeIntPoint.exec(this.ctx)).should.be.true();
+    (await this.notBeforeIntPoint.exec(this.ctx)).should.be.false();
+    (await this.beforeLongPoint.exec(this.ctx)).should.be.true();
+    (await this.notBeforeLongPoint.exec(this.ctx)).should.be.false();
+    (await this.beforeRealPoint.exec(this.ctx)).should.be.true();
+    (await this.notBeforeRealPoint.exec(this.ctx)).should.be.false();
+    (await this.beforeDatePoint.exec(this.ctx)).should.be.true();
+    (await this.notBeforeDatePoint.exec(this.ctx)).should.be.false();
+    (await this.beforeDayOfDatePoint.exec(this.ctx)).should.be.true();
+    (await this.notBeforeDayOfDatePoint.exec(this.ctx)).should.be.false();
+  });
+
   it('should correctly handle null endpoints (int)', async function () {
     (await this.negInfBegBeforeIntIvl.exec(this.ctx)).should.be.true();
     (await this.negInfBegNotBeforeIntIvl.exec(this.ctx)).should.be.false();
@@ -812,6 +844,13 @@ describe('Before', () => {
     (await this.unknownEndNotBeforeDateIvl.exec(this.ctx)).should.be.false();
   });
 
+  it('should compare boundless and unknown intervals', async function () {
+    (await this.beforeBoundlessInterval.exec(this.ctx)).should.be.false();
+    (await this.beforeUnknownInterval.exec(this.ctx)).should.be.true();
+    (await this.notBeforeUnknownInterval.exec(this.ctx)).should.be.false();
+    should(await this.mayBeBeforeUnknownStartInterval.exec(this.ctx)).be.null();
+  });
+
   it('should correctly handle imprecision', async function () {
     (await this.beforeImpreciseDateIvl.exec(this.ctx)).should.be.true();
     // meets with uncertaintity due to toClose
@@ -834,7 +873,6 @@ describe('Before', () => {
 
 describe('BeforeOrOn', () => {
   // NOTE: BeforeOrOn is synonym for SameOrBefore.
-  // NOTE: SameOrBefore for numeric intervals is tests in spec tests
 
   beforeEach(function () {
     setup(this, data);
@@ -869,12 +907,12 @@ describe('BeforeOrOn', () => {
     (await this.beforeNullEndIvl.exec(this.ctx)).should.be.true();
     (await this.afterStartNullEndIvl.exec(this.ctx)).should.be.false();
     should(await this.nullEndStartBeforeIvl.exec(this.ctx)).be.null();
-    should(await this.nullEndStartAfterIvl.exec(this.ctx)).be.null();
+    (await this.nullEndStartAfterIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should handle intervals with null start', async function () {
     should(await this.endsBeforeNullStartIvlEnds.exec(this.ctx)).be.null();
-    should(await this.afterEndOfNullStartIvl.exec(this.ctx)).be.null();
+    (await this.afterEndOfNullStartIvl.exec(this.ctx)).should.be.false();
     (await this.nullStartStartBeforeIvl.exec(this.ctx)).should.be.true();
     (await this.nullStartStartAfterIvl.exec(this.ctx)).should.be.false();
   });
@@ -896,6 +934,13 @@ describe('BeforeOrOn', () => {
     (await this.dateIvlAfterDateOnlyIvl.exec(this.ctx)).should.be.false();
   });
 
+  it('should compare integer and long intervals to points', async function () {
+    (await this.integerIvlBeforeOrOnPoint.exec(this.ctx)).should.be.true();
+    (await this.integerIvlNotBeforeOrOnPoint.exec(this.ctx)).should.be.false();
+    (await this.longIvlBeforeOrOnPoint.exec(this.ctx)).should.be.true();
+    (await this.longIvlNotBeforeOrOnPoint.exec(this.ctx)).should.be.false();
+  });
+
   it('should handle null Interval<Date> on boundary of Interval<DateTime>', async function () {
     should(await this.dateOnlyMeetsBeforeDateIvl.exec(this.ctx)).be.null();
   });
@@ -903,7 +948,6 @@ describe('BeforeOrOn', () => {
 
 describe('AfterOrOn', () => {
   // NOTE: AfterOrOn is synonym for SameOrAfter.
-  // NOTE: SameOrAfter for numeric intervals is tests in spec tests
 
   beforeEach(function () {
     setup(this, data);
@@ -935,7 +979,7 @@ describe('AfterOrOn', () => {
   });
 
   it('should handle intervals with null end', async function () {
-    should(await this.beforeNullEndIvl.exec(this.ctx)).be.null();
+    (await this.beforeNullEndIvl.exec(this.ctx)).should.be.false();
     should(await this.afterStartNullEndIvl.exec(this.ctx)).be.null();
     (await this.nullEndStartBeforeIvl.exec(this.ctx)).should.be.false();
     (await this.nullEndStartAfterIvl.exec(this.ctx)).should.be.true();
@@ -944,7 +988,7 @@ describe('AfterOrOn', () => {
   it('should handle intervals with null start', async function () {
     (await this.endsBeforeNullStartIvlEnds.exec(this.ctx)).should.be.false();
     (await this.afterEndOfNullStartIvl.exec(this.ctx)).should.be.true();
-    should(await this.nullStartStartBeforeIvl.exec(this.ctx)).be.null();
+    (await this.nullStartStartBeforeIvl.exec(this.ctx)).should.be.false();
     should(await this.nullStartStartAfterIvl.exec(this.ctx)).be.null();
   });
 
@@ -963,6 +1007,13 @@ describe('AfterOrOn', () => {
   it('should handle Interval<Date> and Interval<DateTime> on either side', async function () {
     (await this.dateOnlyIvlBeforeDateIvl.exec(this.ctx)).should.be.false();
     (await this.dateIvlAfterDateOnlyIvl.exec(this.ctx)).should.be.true();
+  });
+
+  it('should compare integer and long intervals to points', async function () {
+    (await this.integerIvlAfterOrOnPoint.exec(this.ctx)).should.be.true();
+    (await this.integerIvlNotAfterOrOnPoint.exec(this.ctx)).should.be.false();
+    (await this.longIvlAfterOrOnPoint.exec(this.ctx)).should.be.true();
+    (await this.longIvlNotAfterOrOnPoint.exec(this.ctx)).should.be.false();
   });
 
   it('should handle null Interval<Date> on boundary of Interval<DateTime>', async function () {
@@ -1574,13 +1625,17 @@ describe('Width', () => {
     // define IntWidthThreeToMax: width of Interval[3, null]
     (await this.intWidthThreeToMax.exec(this.ctx)).should.equal(Math.pow(2, 31) - 4);
     // define IntWidthMinToThree: width of Interval[null, 3]
-    (await this.intWidthMinToThree.exec(this.ctx)).should.equal(Math.pow(2, 31) + 3);
+    // returns null because width overflows max integer
+    should(await this.intWidthMinToThree.exec(this.ctx)).be.null();
   });
 
   it('should calculate the width of infinite intervals that result in null', async function () {
     // define IntWidthThreeToUnknown: width of Interval[3, null)
-    should(await this.intWidthThreeToUnknown.exec(this.ctx)).be.null();
+    (await this.intWidthThreeToUnknown.exec(this.ctx)).should.eql(
+      new Uncertainty(0, MAX_INT_VALUE - 3)
+    );
     // define IntWidthUnknownToThree: width of Interval(null, 3]
+    // returns null because width overflows max integer
     should(await this.intWidthUnknownToThree.exec(this.ctx)).be.null();
   });
 
@@ -1637,13 +1692,17 @@ describe('Size', () => {
     // define IntSizeThreeToMax: Size(Interval[3, null])
     (await this.intSizeThreeToMax.exec(this.ctx)).should.equal(Math.pow(2, 31) - 4 + 1);
     // define IntSizeMinToThree: Size(Interval[null, 3])
-    (await this.intSizeMinToThree.exec(this.ctx)).should.equal(Math.pow(2, 31) + 3 + 1);
+    // returns null because width overflows max integer
+    should(await this.intSizeMinToThree.exec(this.ctx)).be.null();
   });
 
   it('should calculate the size of infinite intervals that result in null', async function () {
     // define IntSizeThreeToUnknown: Size(Interval[3, null))
-    should(await this.intSizeThreeToUnknown.exec(this.ctx)).be.null();
+    (await this.intSizeThreeToUnknown.exec(this.ctx)).should.eql(
+      new Uncertainty(1, MAX_INT_VALUE - 2)
+    );
     // define IntSizeUnknownToThree: Size(Interval(null, 3])
+    // returns null because width overflows max integer
     should(await this.intSizeUnknownToThree.exec(this.ctx)).be.null();
   });
 
@@ -1723,8 +1782,10 @@ describe('Start', () => {
     (await this.openLongNotNull.exec(this.ctx)).should.eql(2n);
   });
 
-  it('should return null for open interval with null high value', async function () {
-    should(await this.openNull.exec(this.ctx)).be.null();
+  it('should return uncertainty for open interval with null low value', async function () {
+    (await this.openNull.exec(this.ctx)).should.eql(
+      new Uncertainty(MIN_DATETIME_VALUE, new DateTime(2012, 12, 31))
+    );
   });
 });
 
@@ -1771,8 +1832,10 @@ describe('End', () => {
     (await this.openLongNotNull.exec(this.ctx)).should.eql(2n);
   });
 
-  it('should return null for open interval with null low value', async function () {
-    should(await this.openNull.exec(this.ctx)).be.null();
+  it('should return uncertainty for open interval with null high value', async function () {
+    (await this.openNull.exec(this.ctx)).should.eql(
+      new Uncertainty(new DateTime(2013, 1, 2), MAX_DATETIME_VALUE)
+    );
   });
 });
 
@@ -1781,8 +1844,8 @@ describe('Starts', () => {
     setup(this, data);
   });
 
-  it('should calculate to null', async function () {
-    should(await this.testStartsNull.exec(this.ctx)).be.null();
+  it('should calculate to false for boundless interval starts bounded interval', async function () {
+    should(await this.testStartsNull.exec(this.ctx)).be.false();
   });
 
   it('should calculate integer intervals properly', async function () {
@@ -1822,8 +1885,8 @@ describe('Ends', () => {
     setup(this, data);
   });
 
-  it('should calculate to null', async function () {
-    should(await this.testEndsNull.exec(this.ctx)).be.null();
+  it('should calculate to false for boundless interval ends bounded interval', async function () {
+    should(await this.testEndsNull.exec(this.ctx)).be.false();
   });
 
   it('should calculate integer intervals properly', async function () {
@@ -3665,12 +3728,12 @@ describe('SameAs', () => {
   });
 
   it('returns true when both intervals values are null and closed', async function () {
-    // define NullBoth: Interval[null,null] same as Interval[null,null]
+    // define NullBoth: Interval[null as DateTime, null as DateTime] same as Interval[null as DateTime, null as DateTime]
     (await this.nullBoth.exec(this.ctx)).should.be.true();
   });
 
   it('returns false when one intervals low and high are null', async function () {
-    // define NullOne: Interval[DateTime(2018,01,01), DateTime(2018,02,02)] same as Interval[null,null]
+    // define NullOne: Interval[DateTime(2018,01,01), DateTime(2018,02,02)] same as Interval[null as DateTime, null as DateTime]
     (await this.nullOne.exec(this.ctx)).should.be.false();
   });
 

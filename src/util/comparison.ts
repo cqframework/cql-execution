@@ -1,4 +1,4 @@
-import { Uncertainty } from '../datatypes/datatypes';
+import { Uncertainty } from '../datatypes/uncertainty';
 
 function areNumbers(a: any, b: any) {
   return typeof a === 'number' && typeof b === 'number';
@@ -30,9 +30,9 @@ export function lessThan(a: any, b: any, precision?: any) {
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.before(b, precision);
   } else if (isUncertainty(a)) {
-    return a.lessThan(b);
+    return a.lessThan(b, precision);
   } else if (isUncertainty(b)) {
-    return Uncertainty.from(a).lessThan(b);
+    return Uncertainty.from(a).lessThan(b, precision);
   } else {
     return null;
   }
@@ -44,9 +44,9 @@ export function lessThanOrEquals(a: any, b: any, precision?: any) {
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrBefore(b, precision);
   } else if (isUncertainty(a)) {
-    return a.lessThanOrEquals(b);
+    return a.lessThanOrEquals(b, precision);
   } else if (isUncertainty(b)) {
-    return Uncertainty.from(a).lessThanOrEquals(b);
+    return Uncertainty.from(a).lessThanOrEquals(b, precision);
   } else {
     return null;
   }
@@ -58,9 +58,9 @@ export function greaterThan(a: any, b: any, precision?: any) {
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.after(b, precision);
   } else if (isUncertainty(a)) {
-    return a.greaterThan(b);
+    return a.greaterThan(b, precision);
   } else if (isUncertainty(b)) {
-    return Uncertainty.from(a).greaterThan(b);
+    return Uncertainty.from(a).greaterThan(b, precision);
   } else {
     return null;
   }
@@ -72,9 +72,9 @@ export function greaterThanOrEquals(a: any, b: any, precision?: any) {
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrAfter(b, precision);
   } else if (isUncertainty(a)) {
-    return a.greaterThanOrEquals(b);
+    return a.greaterThanOrEquals(b, precision);
   } else if (isUncertainty(b)) {
-    return Uncertainty.from(a).greaterThanOrEquals(b);
+    return Uncertainty.from(a).greaterThanOrEquals(b, precision);
   } else {
     return null;
   }

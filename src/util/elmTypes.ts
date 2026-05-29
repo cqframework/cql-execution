@@ -1,4 +1,5 @@
 // Simple Types
+export const ELM_ANY_TYPE = '{urn:hl7-org:elm-types:r1}Any';
 export const ELM_BOOLEAN_TYPE = '{urn:hl7-org:elm-types:r1}Boolean';
 export const ELM_CONCEPT_TYPE = '{urn:hl7-org:elm-types:r1}Concept';
 export const ELM_DATE_TYPE = '{urn:hl7-org:elm-types:r1}Date';

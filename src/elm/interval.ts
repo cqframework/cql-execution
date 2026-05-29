@@ -1,11 +1,13 @@
 import { Expression } from './expression';
-import { Quantity, doAddition } from '../datatypes/quantity';
-import { successor, predecessor, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } from '../util/math';
+import { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } from '../datatypes/datetime';
+import { Quantity } from '../datatypes/quantity';
+import { add, successor, predecessor } from '../util/math';
 import { convertUnit, compareUnits, convertToCQLDateUnit } from '../util/units';
 import * as dtivl from '../datatypes/interval';
 import { Context } from '../runtime/context';
 import { build } from './builder';
-import { ELM_NAMED_TYPE_SPECIFIER } from '../util/elmTypes';
+import { IntervalTypeSpecifier, NamedTypeSpecifier } from '../types/type-specifiers.interfaces';
+import { ELM_ANY_TYPE, ELM_NAMED_TYPE_SPECIFIER } from '../util/elmTypes';
 
 export class Interval extends Expression {
   lowClosed: boolean;
@@ -14,6 +16,7 @@ export class Interval extends Expression {
   highClosedExpression: any;
   low: any;
   high: any;
+  pointType?: string;
 
   constructor(json: any) {
     super(json);
@@ -23,6 +26,9 @@ export class Interval extends Expression {
     this.highClosedExpression = build(json.highClosedExpression);
     this.low = build(json.low);
     this.high = build(json.high);
+    this.pointType = (
+      (this.resultTypeSpecifier as IntervalTypeSpecifier)?.pointType as NamedTypeSpecifier
+    )?.name;
   }
 
   // Define a simple getter to allow type-checking of this class without instanceof
@@ -42,19 +48,19 @@ export class Interval extends Expression {
       this.highClosed != null
         ? this.highClosed
         : this.highClosedExpression && (await this.highClosedExpression.execute(ctx));
-    let defaultPointType;
-    if (lowValue == null && highValue == null) {
-      // try to get the default point type from a cast
+    let effectivePointType = this.pointType;
+    if (effectivePointType == null || effectivePointType === ELM_ANY_TYPE) {
+      // try to get the point type from a cast
       if (this.low.asTypeSpecifier && this.low.asTypeSpecifier.type === ELM_NAMED_TYPE_SPECIFIER) {
-        defaultPointType = this.low.asTypeSpecifier.name;
+        effectivePointType = this.low.asTypeSpecifier.name;
       } else if (
         this.high.asTypeSpecifier &&
         this.high.asTypeSpecifier.type === ELM_NAMED_TYPE_SPECIFIER
       ) {
-        defaultPointType = this.high.asTypeSpecifier.name;
+        effectivePointType = this.high.asTypeSpecifier.name;
       }
     }
-    return new dtivl.Interval(lowValue, highValue, lowClosed, highClosed, defaultPointType);
+    return new dtivl.Interval(lowValue, highValue, lowClosed, highClosed, effectivePointType);
   }
 }
 
@@ -414,6 +420,7 @@ function intervalListType(intervals: any) {
   return type;
 }
 
+// TODO: Move and refactor Expand implementaton into src/datatypes/interval.ts
 export class Expand extends Expression {
   constructor(json: any) {
     super(json);
@@ -523,12 +530,18 @@ export class Expand extends Expression {
     high = this.truncateToPrecision(high, per.unit);
 
     let current_high = current_low.add(per.value, per.unit).predecessor();
-    let intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
+    let intervalToAdd = new dtivl.Interval(
+      current_low,
+      current_high,
+      true,
+      true,
+      interval.pointType
+    );
     while (intervalToAdd.high.sameOrBefore(high)) {
       results.push(intervalToAdd);
       current_low = current_low.add(per.value, per.unit);
       current_high = current_low.add(per.value, per.unit).predecessor();
-      intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
+      intervalToAdd = new dtivl.Interval(current_low, current_high, true, true, interval.pointType);
     }
 
     return results;
@@ -687,6 +700,7 @@ export class Expand extends Expression {
   }
 }
 
+// TODO: Move and refactor Collapse implementaton into src/datatypes/interval.ts
 export class Collapse extends Expression {
   constructor(json: any) {
     super(json);
@@ -791,7 +805,7 @@ function collapseIntervals(intervals: any, perWidth: any) {
           a = b;
         }
       } else if (b.low && typeof b.low.sameOrBefore === 'function') {
-        if (a.high != null && b.low.sameOrBefore(doAddition(a.high, perWidth))) {
+        if (a.high != null && b.low.sameOrBefore(add(a.high, perWidth))) {
           if (b.high == null || b.high.after(a.high)) {
             a.high = b.high;
           }

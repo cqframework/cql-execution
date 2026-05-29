@@ -3,10 +3,15 @@ import { Context } from '../runtime/context';
 import { Expression, UnimplementedExpression } from './expression';
 import { DateTime, Date } from '../datatypes/datetime';
 import { Concept } from '../datatypes/clinical';
+import { Interval as dtInterval } from '../datatypes/interval';
 import { Quantity, parseQuantity } from '../datatypes/quantity';
 import { isValidDecimal, isValidInteger, isValidLong, limitDecimalPrecision } from '../util/math';
 import { normalizeMillisecondsField } from '../util/util';
 import { Ratio } from '../datatypes/ratio';
+import {
+  IntervalTypeSpecifier as IntervalTypeSpecifierType,
+  NamedTypeSpecifier as NamedTypedSpecifierType
+} from '../types/type-specifiers.interfaces';
 import { Uncertainty } from '../datatypes/uncertainty';
 import {
   ELM_NAMED_TYPE_SPECIFIER,
@@ -25,6 +30,7 @@ import {
   ELM_INTERVAL_TYPE_SPECIFIER,
   ELM_CHOICE_TYPE_SPECIFIER
 } from '../util/elmTypes';
+import { Interval } from './interval';
 
 // TODO: Casting and Conversion needs unit tests!
 
@@ -53,6 +59,22 @@ export class As extends Expression {
       return null;
     }
     if (ctx.matchesTypeSpecifier(arg, this.asTypeSpecifier)) {
+      // intervals track their point type, so adjust the interval point type if it does not match
+      if (arg.isInterval && this.asTypeSpecifier.type === ELM_INTERVAL_TYPE_SPECIFIER) {
+        const argInterval = arg as Interval;
+        const asIntervalSpecifier = this.asTypeSpecifier as IntervalTypeSpecifierType;
+        const asIntervalPointType = (asIntervalSpecifier.pointType as NamedTypedSpecifierType)
+          ?.name;
+        if (asIntervalPointType && argInterval.pointType !== asIntervalPointType) {
+          return new dtInterval(
+            argInterval.low,
+            argInterval.high,
+            argInterval.lowClosed,
+            argInterval.highClosed,
+            asIntervalPointType
+          );
+        }
+      }
       // TODO: request patient source to change type identification
       return arg;
     } else if (this.strict) {

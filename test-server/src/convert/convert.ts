@@ -25,6 +25,7 @@ import {
 import { guessSpecifierType, typeToCqlTypeSpecifier, typeToCqlTypeString } from './cqlTypes';
 import { emptyListParameter, nullValueParameter, emptyTupleParameter } from './specialParameters';
 import logger from '../logger';
+import { ELM_ANY_TYPE } from '../../../lib/util/elmTypes';
 
 const CQL_TO_UCUM_PRECISION = {
   year: 'a',
@@ -38,7 +39,7 @@ const CQL_TO_UCUM_PRECISION = {
 
 export function toParameters(result: any | null, type?: string | AnyTypeSpecifier): Parameters {
   // If the type is null or is Any, try to guess a more specific type to get better conversion results
-  if (type == null || type === '{urn:hl7-org:elm-types:r1}Any') {
+  if (type == null || type === ELM_ANY_TYPE) {
     const guessedType = guessSpecifierType(result);
     if (guessedType) {
       type = guessedType;

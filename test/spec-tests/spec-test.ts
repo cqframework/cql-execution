@@ -52,42 +52,59 @@ describe('CQL Spec Tests (from XML)', () => {
                 const ctx = new PatientContext(library);
                 ctx.getExecutionDateTime().timezoneOffset = 0;
                 const actualExp = build(testCaseMap.get('expression')) as any;
-                let actual = await actualExp.execute(ctx);
+                const actual = await actualExp.execute(ctx);
                 const expectedExp = build(testCaseMap.get('output')) as any;
-                let expected = await expectedExp.execute(ctx);
-                if (expectedExp.json && expectedExp.json.type === 'Null') {
-                  should(actual).be.null();
-                } else if (actual && actual.isInterval && expected && expected.isInterval) {
-                  // Since intervals can be semantically equal w/ different representations, fall back on Interval.equal function.
-                  // E.g., Interval[1,3] == Interval[1,4)
-                  if (!actual.equals(expected)) {
-                    should.fail(actual, expected, 'Intervals are not equal');
-                  }
-                } else if (
-                  actual &&
-                  actual.isUncertainty &&
-                  expected &&
-                  expected.isInterval &&
-                  expected.highClosed &&
-                  expected.lowClosed
-                ) {
-                  // Since there is no literal representation of Uncertainty, the test framework used Interval.
-                  // Switch it back to an uncertainty.
-                  expected = new Uncertainty(expected.low, expected.high);
-                  actual.should.eql(expected);
-                } else {
-                  // The tests are somewhat inconsistent w/ number of decimal places used.
-                  // To get consistency (and avoid false negatives), always round to 8 places.
-                  actual = roundDecimalsWhenApplicable(actual);
-                  expected = roundDecimalsWhenApplicable(expected);
-                  if (actual == null) {
-                    should.deepEqual(actual, expected);
-                  } else {
-                    actual.should.eql(expected);
-                  }
-                }
+                const expected = await expectedExp.execute(ctx);
+                assertEqual(actual, expected, expectedExp);
               }
             });
+
+            function assertEqual(actual: any, expected: any, expectedExp?: any) {
+              if (expectedExp?.json?.type === 'Null') {
+                should(actual).be.null();
+              } else if (actual && actual.isInterval && expected && expected.isInterval) {
+                // Since intervals can be semantically equal w/ different representations, fall back on Interval.equal function.
+                // E.g., Interval[1,3] == Interval[1,4)
+                if (!actual.equals(expected)) {
+                  should.fail(actual, expected, 'Intervals are not equal');
+                }
+              } else if (
+                actual &&
+                actual.isUncertainty &&
+                expected &&
+                expected.isInterval &&
+                expected.highClosed &&
+                expected.lowClosed
+              ) {
+                // Since there is no literal representation of Uncertainty, the test framework used Interval.
+                // Switch it back to an uncertainty.
+                expected = new Uncertainty(expected.low, expected.high);
+                actual.should.eql(expected);
+              } else if (
+                Array.isArray(actual) &&
+                Array.isArray(expected) &&
+                actual.length === expected.length
+              ) {
+                try {
+                  for (let i = 0; i < actual.length; i++) {
+                    assertEqual(actual[i], expected[i]);
+                  }
+                } catch {
+                  should.fail(actual, expected, 'Lists are not equal');
+                }
+              } else {
+                // The tests are somewhat inconsistent w/ number of decimal places used.
+                // To get consistency (and avoid false negatives), always round to 8 places.
+                actual = roundDecimalsWhenApplicable(actual);
+                expected = roundDecimalsWhenApplicable(expected);
+                if (actual == null) {
+                  should.deepEqual(actual, expected);
+                } else {
+                  actual.should.eql(expected);
+                }
+              }
+              return { actual, expected };
+            }
           });
         });
       });
