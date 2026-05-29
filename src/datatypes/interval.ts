@@ -78,19 +78,22 @@ export class Interval {
       newHigh = this.high.copy();
     }
 
-    return new Interval(newLow, newHigh, this.lowClosed, this.highClosed);
+    return new Interval(newLow, newHigh, this.lowClosed, this.highClosed, this.defaultPointType);
   }
 
   contains(item: any, precision?: any) {
-    // These first two checks ensure correct handling of edge case where an item equals the closed boundary
+    if (item != null && item.isInterval) {
+      throw new Error('Argument to contains must be a point');
+    }
+    if (this.isBoundlessInterval) {
+      return true;
+    }
+    // Ensure correct handling of edge case where an item equals the closed boundary
     if (this.lowClosed && this.low != null && cmp.equals(this.low, item)) {
       return true;
     }
     if (this.highClosed && this.high != null && cmp.equals(this.high, item)) {
       return true;
-    }
-    if (item != null && item.isInterval) {
-      throw new Error('Argument to contains must be a point');
     }
     let lowFn;
     if (this.lowClosed && this.low == null) {
@@ -125,6 +128,11 @@ export class Interval {
   }
 
   includes(other: any, precision?: any) {
+    if (this.isBoundlessInterval) {
+      return true;
+    } else if (other?.isBoundlessInterval) {
+      return this.isUnknownInterval ? null : false;
+    }
     if (other == null || !other.isInterval) {
       return this.contains(other, precision);
     }
@@ -204,6 +212,11 @@ export class Interval {
     if (other == null || !other.isInterval) {
       throw new Error('Argument to union must be an interval');
     }
+    if (this.isBoundlessInterval) {
+      return this.copy();
+    } else if (other.isBoundlessInterval) {
+      return other.copy();
+    }
     // Note that interval union is only defined if the arguments overlap or meet.
     if (this.overlaps(other) || this.meets(other)) {
       const [a, b] = [this.toClosed(), other.toClosed()];
@@ -243,7 +256,12 @@ export class Interval {
     if (other == null || !other.isInterval) {
       throw new Error('Argument to union must be an interval');
     }
-    // Note that interval union is only defined if the arguments overlap.
+    if (this.isBoundlessInterval) {
+      return other.copy();
+    } else if (other.isBoundlessInterval) {
+      return this.copy();
+    }
+    // Note that interval intersect is only defined if the arguments overlap.
     if (this.overlaps(other)) {
       const [a, b] = [this.toClosed(), other.toClosed()];
       let l, lc;
@@ -385,6 +403,9 @@ export class Interval {
   }
 
   sameOrBefore(other: any, precision?: any) {
+    if (this.isBoundlessInterval || other?.isBoundlessInterval) {
+      return this.equals(other);
+    }
     if (this.end() == null || other == null || other.start() == null) {
       return null;
     } else {
@@ -393,6 +414,9 @@ export class Interval {
   }
 
   sameOrAfter(other: any, precision?: any) {
+    if (this.isBoundlessInterval || other?.isBoundlessInterval) {
+      return this.equals(other);
+    }
     if (this.start() == null || other == null || other.end() == null) {
       return null;
     } else {
@@ -402,6 +426,11 @@ export class Interval {
 
   equals(other: any) {
     if (other != null && other.isInterval) {
+      if (this.isBoundlessInterval) {
+        return other.isBoundlessInterval ? true : other.isUnknownInterval ? null : false;
+      } else if (other.isBoundlessInterval) {
+        return this.isUnknownInterval ? null : false;
+      }
       const [a, b] = [this.toClosed(), other.toClosed()];
       return ThreeValuedLogic.and(cmp.equals(a.low, b.low), cmp.equals(a.high, b.high));
     } else {
@@ -410,6 +439,9 @@ export class Interval {
   }
 
   after(other: any, precision?: any) {
+    if (this.isBoundlessInterval || other?.isBoundlessInterval) {
+      return false;
+    }
     const closed = this.toClosed();
     // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
     // Simple way to fix it: and w/ not overlaps
@@ -421,6 +453,9 @@ export class Interval {
   }
 
   before(other: any, precision?: any) {
+    if (this.isBoundlessInterval || other?.isBoundlessInterval) {
+      return false;
+    }
     const closed = this.toClosed();
     // Meets spec, but not 100% correct (e.g., (null, 5] after [6, 10] --> null)
     // Simple way to fix it: and w/ not overlaps
@@ -432,6 +467,9 @@ export class Interval {
   }
 
   meets(other: any, precision?: any) {
+    if (this.isBoundlessInterval || other?.isBoundlessInterval) {
+      return false;
+    }
     return ThreeValuedLogic.or(
       this.meetsBefore(other, precision),
       this.meetsAfter(other, precision)
@@ -439,6 +477,9 @@ export class Interval {
   }
 
   meetsAfter(other: any, precision?: any) {
+    if (this.isBoundlessInterval || other?.isBoundlessInterval) {
+      return false;
+    }
     try {
       if (precision != null && this.low != null && this.low.isDateTime) {
         return this.toClosed().low.sameAs(
@@ -454,6 +495,9 @@ export class Interval {
   }
 
   meetsBefore(other: any, precision?: any) {
+    if (this.isBoundlessInterval || other?.isBoundlessInterval) {
+      return false;
+    }
     try {
       if (precision != null && this.high != null && this.high.isDateTime) {
         return this.toClosed().high.sameAs(
@@ -491,6 +535,11 @@ export class Interval {
   }
 
   starts(other: any, precision?: any) {
+    if (this.isBoundlessInterval) {
+      return other.isBoundlessInterval ? true : other.isUnknownInterval ? null : false;
+    } else if (other?.isBoundlessInterval) {
+      return this.isUnknownInterval ? null : false;
+    }
     let startEqual;
     if (precision != null && this.low != null && this.low.isDateTime) {
       startEqual = this.low.sameAs(other.low, precision);
@@ -502,6 +551,11 @@ export class Interval {
   }
 
   ends(other: any, precision?: any) {
+    if (this.isBoundlessInterval) {
+      return other.isBoundlessInterval ? true : other.isUnknownInterval ? null : false;
+    } else if (other?.isBoundlessInterval) {
+      return this.isUnknownInterval ? null : false;
+    }
     let endEqual;
     const startGreaterThanOrEqual = cmp.greaterThanOrEquals(this.low, other.low, precision);
     if (precision != null && (this.low != null ? this.low.isDateTime : undefined)) {
