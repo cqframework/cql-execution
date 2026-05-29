@@ -1799,6 +1799,12 @@ class Interval {
     get isInterval() {
         return true;
     }
+    get isBoundlessInterval() {
+        return this.low == null && this.lowClosed && this.high == null && this.highClosed;
+    }
+    get isUnknownInterval() {
+        return this.low == null && !this.lowClosed && this.high == null && !this.highClosed;
+    }
     get pointType() {
         let pointType = null;
         const point = this.low != null ? this.low : this.high;
@@ -1894,6 +1900,12 @@ class Interval {
         }
     }
     overlaps(item, precision) {
+        if (this.isUnknownInterval || item == null || item.isUnknownInterval) {
+            return null;
+        }
+        else if (this.isBoundlessInterval || (item === null || item === void 0 ? void 0 : item.isBoundlessInterval)) {
+            return true;
+        }
         const closed = this.toClosed();
         const [low, high] = (() => {
             if (item != null && item.isInterval) {
@@ -1907,13 +1919,31 @@ class Interval {
         return logic_1.ThreeValuedLogic.and(cmp.lessThanOrEquals(closed.low, high, precision), cmp.greaterThanOrEquals(closed.high, low, precision));
     }
     overlapsAfter(item, precision) {
-        const closed = this.toClosed();
+        if (this.isUnknownInterval || item == null || item.isUnknownInterval) {
+            return null;
+        }
         const high = item != null && item.isInterval ? item.toClosed().high : item;
+        if (this.isBoundlessInterval) {
+            return cmp.lessThan(high, (0, math_1.maxValueForInstance)(high), precision);
+        }
+        else if (item === null || item === void 0 ? void 0 : item.isBoundlessInterval) {
+            return false;
+        }
+        const closed = this.toClosed();
         return logic_1.ThreeValuedLogic.and(cmp.lessThanOrEquals(closed.low, high, precision), cmp.greaterThan(closed.high, high, precision));
     }
     overlapsBefore(item, precision) {
-        const closed = this.toClosed();
+        if (this.isUnknownInterval || item == null || item.isUnknownInterval) {
+            return null;
+        }
         const low = item != null && item.isInterval ? item.toClosed().low : item;
+        if (this.isBoundlessInterval) {
+            return cmp.greaterThan(low, (0, math_1.minValueForInstance)(low), precision);
+        }
+        else if (item === null || item === void 0 ? void 0 : item.isBoundlessInterval) {
+            return false;
+        }
+        const closed = this.toClosed();
         return logic_1.ThreeValuedLogic.and(cmp.lessThan(closed.low, low, precision), cmp.greaterThanOrEquals(closed.high, low, precision));
     }
     union(other) {

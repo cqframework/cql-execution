@@ -5,6 +5,8 @@ import { Uncertainty } from '../../src/datatypes/uncertainty';
 import data from './interval-data';
 
 const xy = (obj: any) => [obj.x, obj.y];
+const boundlessInterval = () => new Interval(null, null);
+const unknownInterval = () => new Interval(null, null, false, false);
 
 describe('Interval', () => {
   it('should properly set all properties when constructed as DateTime interval', () => {
@@ -451,6 +453,15 @@ describe('DateTimeInterval.overlaps(DateTimeInterval)', () => {
     y.open.overlaps(x.open).should.be.true();
   });
 
+  it('should properly handle boundless and unknown intervals', () => {
+    boundlessInterval().overlaps(boundlessInterval()).should.be.true();
+    boundlessInterval().overlaps(d.all2012.closed).should.be.true();
+    d.all2012.closed.overlaps(boundlessInterval()).should.be.true();
+    should(boundlessInterval().overlaps(unknownInterval())).be.null();
+    should(unknownInterval().overlaps(boundlessInterval())).be.null();
+    should(unknownInterval().overlaps(d.all2012.closed)).be.null();
+  });
+
   it('should properly handle imprecision', () => {
     let [x, y] = Array.from(xy(d.dIvl.sameAs));
     x.closed.overlaps(y.toMinute).should.be.true();
@@ -511,6 +522,12 @@ describe('DateTimeInterval.overlaps(DateTime)', () => {
     d.all2012.closed.overlaps(d.aft2012.full).should.be.false();
   });
 
+  it('should properly handle boundless and unknown intervals', () => {
+    boundlessInterval().overlaps(d.mid2012.full).should.be.true();
+    should(boundlessInterval().overlaps(null)).be.null();
+    should(unknownInterval().overlaps(d.mid2012.full)).be.null();
+  });
+
   it('should properly handle imprecision', () => {
     d.all2012.closed.overlaps(d.bef2012.toMonth).should.be.false();
     should.not.exist(d.all2012.closed.overlaps(d.beg2012.toMonth));
@@ -531,6 +548,34 @@ describe('DateTimeInterval.overlaps(DateTime)', () => {
     d.all2012.toMonth.overlaps(d.aft2012.full).should.be.false();
 
     should.not.exist(d.all2012.closed.overlaps(d.mid2012.toYear));
+  });
+});
+
+describe('DateTimeInterval.overlapsBefore', () => {
+  let d: any;
+  beforeEach(() => {
+    d = data();
+  });
+
+  it('should properly handle boundless intervals', () => {
+    boundlessInterval().overlapsBefore(d.mid2012.full).should.be.true();
+    d.all2012.closed.overlapsBefore(boundlessInterval()).should.be.false();
+    should(boundlessInterval().overlapsBefore(unknownInterval())).be.null();
+    should(unknownInterval().overlapsBefore(boundlessInterval())).be.null();
+  });
+});
+
+describe('DateTimeInterval.overlapsAfter', () => {
+  let d: any;
+  beforeEach(() => {
+    d = data();
+  });
+
+  it('should properly handle boundless intervals', () => {
+    boundlessInterval().overlapsAfter(d.mid2012.full).should.be.true();
+    d.all2012.closed.overlapsAfter(boundlessInterval()).should.be.false();
+    should(boundlessInterval().overlapsAfter(unknownInterval())).be.null();
+    should(unknownInterval().overlapsAfter(boundlessInterval())).be.null();
   });
 });
 
@@ -2171,6 +2216,15 @@ describe('IntegerInterval.overlaps(IntegerInterval)', () => {
     y.open.overlaps(x.open).should.be.true();
   });
 
+  it('should properly handle boundless and unknown intervals', () => {
+    boundlessInterval().overlaps(boundlessInterval()).should.be.true();
+    boundlessInterval().overlaps(d.zeroToHundred.closed).should.be.true();
+    d.zeroToHundred.closed.overlaps(boundlessInterval()).should.be.true();
+    should(boundlessInterval().overlaps(unknownInterval())).be.null();
+    should(unknownInterval().overlaps(boundlessInterval())).be.null();
+    should(unknownInterval().overlaps(d.zeroToHundred.closed)).be.null();
+  });
+
   it('should properly handle imprecision', () => {
     const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
@@ -2222,6 +2276,12 @@ describe('IntegerInterval.overlaps(Integer)', () => {
     d.zeroToHundred.closed.overlaps(105).should.be.false();
   });
 
+  it('should properly handle boundless and unknown intervals', () => {
+    boundlessInterval().overlaps(5).should.be.true();
+    should(boundlessInterval().overlaps(null)).be.null();
+    should(unknownInterval().overlaps(5)).be.null();
+  });
+
   it('should properly handle imprecision', () => {
     d.zeroToHundred.closed.overlaps(new Uncertainty(-20, -10)).should.be.false();
     should.not.exist(d.zeroToHundred.closed.overlaps(new Uncertainty(-20, 20)));
@@ -2249,6 +2309,36 @@ describe('IntegerInterval.overlaps(Integer)', () => {
     should.not.exist(uIvl.overlaps(new Uncertainty(15, 20)));
     should.not.exist(uIvl.overlaps(new Uncertainty(20, 25)));
     uIvl.overlaps(new Uncertainty(25, 30)).should.be.false();
+  });
+});
+
+describe('IntegerInterval.overlapsBefore', () => {
+  let d: any;
+  beforeEach(() => {
+    d = data();
+  });
+
+  it('should properly handle boundless intervals', () => {
+    boundlessInterval().overlapsBefore(d.zeroToHundred.closed).should.be.true();
+    boundlessInterval().overlapsBefore(5).should.be.true();
+    d.zeroToHundred.closed.overlapsBefore(boundlessInterval()).should.be.false();
+    should(boundlessInterval().overlapsBefore(unknownInterval())).be.null();
+    should(unknownInterval().overlapsBefore(boundlessInterval)).be.null();
+  });
+});
+
+describe('IntegerInterval.overlapsAfter', () => {
+  let d: any;
+  beforeEach(() => {
+    d = data();
+  });
+
+  it('should properly handle boundless intervals', () => {
+    boundlessInterval().overlapsAfter(d.zeroToHundred.closed).should.be.true();
+    boundlessInterval().overlapsAfter(5).should.be.true();
+    d.zeroToHundred.closed.overlapsAfter(boundlessInterval()).should.be.false();
+    should(boundlessInterval().overlapsAfter(unknownInterval())).be.null();
+    should(unknownInterval().overlapsAfter(boundlessInterval)).be.null();
   });
 });
 

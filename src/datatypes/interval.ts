@@ -27,6 +27,14 @@ export class Interval {
     return true;
   }
 
+  get isBoundlessInterval() {
+    return this.low == null && this.lowClosed && this.high == null && this.highClosed;
+  }
+
+  get isUnknownInterval() {
+    return this.low == null && !this.lowClosed && this.high == null && !this.highClosed;
+  }
+
   get pointType() {
     let pointType = null;
     const point = this.low != null ? this.low : this.high;
@@ -129,6 +137,11 @@ export class Interval {
   }
 
   overlaps(item: any, precision?: any) {
+    if (this.isUnknownInterval || item == null || item.isUnknownInterval) {
+      return null;
+    } else if (this.isBoundlessInterval || item?.isBoundlessInterval) {
+      return true;
+    }
     const closed = this.toClosed();
     const [low, high] = (() => {
       if (item != null && item.isInterval) {
@@ -145,8 +158,16 @@ export class Interval {
   }
 
   overlapsAfter(item: any, precision?: any) {
-    const closed = this.toClosed();
+    if (this.isUnknownInterval || item == null || item.isUnknownInterval) {
+      return null;
+    }
     const high = item != null && item.isInterval ? item.toClosed().high : item;
+    if (this.isBoundlessInterval) {
+      return cmp.lessThan(high, maxValueForInstance(high), precision);
+    } else if (item?.isBoundlessInterval) {
+      return false;
+    }
+    const closed = this.toClosed();
     return ThreeValuedLogic.and(
       cmp.lessThanOrEquals(closed.low, high, precision),
       cmp.greaterThan(closed.high, high, precision)
@@ -154,8 +175,16 @@ export class Interval {
   }
 
   overlapsBefore(item: any, precision?: any) {
-    const closed = this.toClosed();
+    if (this.isUnknownInterval || item == null || item.isUnknownInterval) {
+      return null;
+    }
     const low = item != null && item.isInterval ? item.toClosed().low : item;
+    if (this.isBoundlessInterval) {
+      return cmp.greaterThan(low, minValueForInstance(low), precision);
+    } else if (item?.isBoundlessInterval) {
+      return false;
+    }
+    const closed = this.toClosed();
     return ThreeValuedLogic.and(
       cmp.lessThan(closed.low, low, precision),
       cmp.greaterThanOrEquals(closed.high, low, precision)
