@@ -26699,51 +26699,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "value": {
-                        "type": "Overlaps",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Interval",
-                            "lowClosed": true,
-                            "highClosed": true,
-                            "annotation": [],
-                            "low": {
-                              "type": "Null",
-                              "annotation": []
-                            },
-                            "high": {
-                              "type": "Null",
-                              "annotation": []
-                            }
-                          },
-                          {
-                            "type": "Interval",
-                            "lowClosed": true,
-                            "highClosed": true,
-                            "annotation": [],
-                            "low": {
-                              "type": "Literal",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                              "value": "1",
-                              "annotation": []
-                            },
-                            "high": {
-                              "type": "Literal",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                              "value": "10",
-                              "annotation": []
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "value": {
-                        "type": "Null",
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (Interval[null, null] should overlap everything)",
                         "annotation": []
                       }
                     }
@@ -28927,51 +28887,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "value": {
-                        "type": "OverlapsBefore",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Interval",
-                            "lowClosed": true,
-                            "highClosed": true,
-                            "annotation": [],
-                            "low": {
-                              "type": "Null",
-                              "annotation": []
-                            },
-                            "high": {
-                              "type": "Null",
-                              "annotation": []
-                            }
-                          },
-                          {
-                            "type": "Interval",
-                            "lowClosed": true,
-                            "highClosed": true,
-                            "annotation": [],
-                            "low": {
-                              "type": "Literal",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                              "value": "1",
-                              "annotation": []
-                            },
-                            "high": {
-                              "type": "Literal",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                              "value": "10",
-                              "annotation": []
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "value": {
-                        "type": "Null",
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (Interval[null, null] should overlap before anything but another interval w/ null low closed boundary)",
                         "annotation": []
                       }
                     }
@@ -30405,51 +30325,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "value": {
-                        "type": "OverlapsAfter",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Interval",
-                            "lowClosed": true,
-                            "highClosed": true,
-                            "annotation": [],
-                            "low": {
-                              "type": "Null",
-                              "annotation": []
-                            },
-                            "high": {
-                              "type": "Null",
-                              "annotation": []
-                            }
-                          },
-                          {
-                            "type": "Interval",
-                            "lowClosed": true,
-                            "highClosed": true,
-                            "annotation": [],
-                            "low": {
-                              "type": "Literal",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                              "value": "1",
-                              "annotation": []
-                            },
-                            "high": {
-                              "type": "Literal",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                              "value": "10",
-                              "annotation": []
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "value": {
-                        "type": "Null",
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (Interval[null, null] should overlap after anything but another interval w/ null high closed boundary)",
                         "annotation": []
                       }
                     }
@@ -35825,51 +35705,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "value": {
-                        "type": "Union",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Interval",
-                            "lowClosed": true,
-                            "highClosed": true,
-                            "annotation": [],
-                            "low": {
-                              "type": "Null",
-                              "annotation": []
-                            },
-                            "high": {
-                              "type": "Null",
-                              "annotation": []
-                            }
-                          },
-                          {
-                            "type": "Interval",
-                            "lowClosed": true,
-                            "highClosed": true,
-                            "annotation": [],
-                            "low": {
-                              "type": "Literal",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                              "value": "1",
-                              "annotation": []
-                            },
-                            "high": {
-                              "type": "Literal",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                              "value": "10",
-                              "annotation": []
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "value": {
-                        "type": "Null",
+                        "type": "Literal",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong answer (Interval[null, null] union any valid interval of the same point type is Interval[null, null])",
                         "annotation": []
                       }
                     }

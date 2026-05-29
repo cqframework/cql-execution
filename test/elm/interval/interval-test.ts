@@ -1023,6 +1023,11 @@ describe('Overlaps', () => {
     (await this.noOverlapsRealIvl.exec(this.ctx)).should.be.false();
   });
 
+  it('should accept overlaps (closed null boundaries)', async function () {
+    (await this.overlapsClosedNullIntervalLHS.exec(this.ctx)).should.be.true();
+    (await this.overlapsClosedNullIntervalRHS.exec(this.ctx)).should.be.true();
+  });
+
   it('should return null for null value', async function () {
     should(await this.overlapsIsNull.exec(this.ctx)).be.null();
   });
@@ -1058,6 +1063,11 @@ describe('OverlapsDateTime', () => {
 
   it('should return true for imprecise overlaps with matching precision', async function () {
     (await this.matchingPrecisionOverlap.exec(this.ctx)).should.be.true();
+  });
+
+  it('should accept overlaps (closed null boundaries)', async function () {
+    (await this.overlapsClosedNullIntervalLHS.exec(this.ctx)).should.be.true();
+    (await this.overlapsClosedNullIntervalRHS.exec(this.ctx)).should.be.true();
   });
 
   it('should correctly compare using the requested precision', async function () {
