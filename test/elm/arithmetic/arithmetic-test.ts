@@ -1227,7 +1227,7 @@ describe('OutOfBounds', () => {
       should(await this.decimalPredecessorUnderflow.exec(this.ctx)).be.null();
     });
 
-    // NOTE: skipping successor/predecessor tests near overflow due to JS Number impreciision
+    // NOTE: skipping successor/predecessor tests near overflow due to JS Number imprecision
     it.skip('should return value for successor near overflow', async function () {
       should(await this.decimalSuccessorNearOverflow.exec(this.ctx)).equal(MAX_FLOAT_VALUE);
     });
@@ -1330,7 +1330,7 @@ describe('OutOfBounds', () => {
       should(await this.quantityPredecessorUnderflow.exec(this.ctx)).be.null();
     });
 
-    // NOTE: skipping successor/predecessor tests near overflow due to JS Number impreciision
+    // NOTE: skipping successor/predecessor tests near overflow due to JS Number imprecision
     it.skip('should return value for successor near overflow', async function () {
       const result = await this.quantitySuccessorNearOverflow.exec(this.ctx);
       should(result).not.be.null();

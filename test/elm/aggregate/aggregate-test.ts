@@ -31,7 +31,7 @@ describe('Sum', () => {
     setup(this, data);
   });
 
-  it('should be able to sum lists with integers nulls', async function () {
+  it('should be able to sum lists with integers', async function () {
     (await this.integers.exec(this.ctx)).should.equal(15);
   });
 
