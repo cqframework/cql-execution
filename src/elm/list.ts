@@ -1,4 +1,4 @@
-import Immutable from 'immutable';
+import { Set as ImmutableSet } from 'immutable';
 import { Context } from '../runtime/context';
 import { equals } from '../util/comparison';
 import { NormalizedKey, toNormalizedKey } from '../util/immutableUtil';
@@ -188,7 +188,7 @@ export class Distinct extends Expression {
 
 export const toDistinctList = (list: unknown[]): unknown[] => {
   const list_keys = list.map(toNormalizedKey);
-  const set = Immutable.Set<NormalizedKey>().asMutable();
+  const set = ImmutableSet<NormalizedKey>().asMutable();
   const distinct: unknown[] = [];
 
   set.withMutations(y => {
