@@ -1,5 +1,5 @@
 import * as ucum from '@lhncbc/ucum-lhc';
-import { Map as ImmutableMap, Seq as ImmutableSeq } from 'immutable';
+import { type Collection, Map as ImmutableMap, Seq as ImmutableSeq } from 'immutable';
 import { Code, DateTime, Interval, Quantity, Ratio, Uncertainty } from '../datatypes/datatypes';
 import { decimalAdjust } from './math';
 import { convertUnit } from './units';
@@ -7,7 +7,7 @@ import { convertUnit } from './units';
 const ucumUtilInstance = ucum.UcumLhcUtils.getInstance();
 
 type Primitive = string | number | boolean | bigint | symbol | undefined | null;
-export type NormalizedKey = Primitive | Immutable.Collection<NormalizedKey, unknown>;
+export type NormalizedKey = Primitive | Collection<NormalizedKey, unknown>;
 
 /**
  * Provide a unique key for an object to be used for value equality
