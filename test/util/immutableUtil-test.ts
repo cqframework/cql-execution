@@ -1,4 +1,4 @@
-import Immutable from 'immutable';
+import { is as immutableIs } from 'immutable';
 import should from 'should';
 import { Code, CodeSystem, Concept, DateTime, Quantity, Ratio, CQLValueSet } from '../../src/cql';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
@@ -15,8 +15,8 @@ describe('ImmutableUtil Tests', () => {
 
     equals(c1, c2).should.be.true();
     equals(c2, c1).should.be.true();
-    Immutable.is(ic1, ic2).should.be.true();
-    Immutable.is(ic2, ic1).should.be.true();
+    immutableIs(ic1, ic2).should.be.true();
+    immutableIs(ic2, ic1).should.be.true();
   });
 
   it('should properly match quantities', () => {
@@ -32,9 +32,9 @@ describe('ImmutableUtil Tests', () => {
     equals(q1, q3).should.be.false();
     equals(q2, q3).should.be.false();
 
-    Immutable.is(iq1, iq2).should.be.true();
-    Immutable.is(iq1, iq3).should.be.false();
-    Immutable.is(iq2, iq3).should.be.false();
+    immutableIs(iq1, iq2).should.be.true();
+    immutableIs(iq1, iq3).should.be.false();
+    immutableIs(iq2, iq3).should.be.false();
   });
 
   it('should properly match ratios', () => {
@@ -49,8 +49,8 @@ describe('ImmutableUtil Tests', () => {
     equals(r2, r1).should.be.true();
 
     // Immutable
-    Immutable.is(ir1, ir2).should.be.true();
-    Immutable.is(ir2, ir1).should.be.true();
+    immutableIs(ir1, ir2).should.be.true();
+    immutableIs(ir2, ir1).should.be.true();
   });
 
   it('should properly match uncertainties', () => {
@@ -66,7 +66,7 @@ describe('ImmutableUtil Tests', () => {
     const id1 = toNormalizedKey(d1);
     const iu1 = toNormalizedKey(u1);
 
-    Immutable.is(id1, iu1).should.be.true();
+    immutableIs(id1, iu1).should.be.true();
 
     // Dates and Datetimes
     const d2 = new Date(2000, 1, 1);
@@ -138,42 +138,42 @@ describe('ImmutableUtil Tests', () => {
     equals(u9, u10).should.be.true();
 
     // Immutable
-    Immutable.is(id2, id3).should.be.false();
-    Immutable.is(id3, id2).should.be.false();
-    Immutable.is(id2, iu2).should.be.true();
-    Immutable.is(id2, iu3).should.be.false();
-    Immutable.is(id3, iu2).should.be.false();
-    Immutable.is(id3, iu3).should.be.true();
-    Immutable.is(iu2, iu3).should.be.false();
-    Immutable.is(iu3, iu2).should.be.false();
+    immutableIs(id2, id3).should.be.false();
+    immutableIs(id3, id2).should.be.false();
+    immutableIs(id2, iu2).should.be.true();
+    immutableIs(id2, iu3).should.be.false();
+    immutableIs(id3, iu2).should.be.false();
+    immutableIs(id3, iu3).should.be.true();
+    immutableIs(iu2, iu3).should.be.false();
+    immutableIs(iu3, iu2).should.be.false();
 
-    Immutable.is(iu2, iu4).should.be.true();
-    Immutable.is(iu3, iu5).should.be.true();
-    Immutable.is(iu2, iu5).should.be.false();
-    Immutable.is(iu3, iu4).should.be.false();
-    Immutable.is(iu4, iu5).should.be.false();
+    immutableIs(iu2, iu4).should.be.true();
+    immutableIs(iu3, iu5).should.be.true();
+    immutableIs(iu2, iu5).should.be.false();
+    immutableIs(iu3, iu4).should.be.false();
+    immutableIs(iu4, iu5).should.be.false();
 
-    Immutable.is(iu2, iu6).should.be.false();
-    Immutable.is(iu2, iu7).should.be.false();
-    Immutable.is(iu3, iu7).should.be.false();
-    Immutable.is(iu4, iu6).should.be.false();
-    Immutable.is(iu4, iu7).should.be.false();
-    Immutable.is(iu5, iu6).should.be.false();
-    Immutable.is(iu5, iu7).should.be.false();
-    Immutable.is(iu6, iu7).should.be.false();
-    Immutable.is(iu7, iu6).should.be.false();
+    immutableIs(iu2, iu6).should.be.false();
+    immutableIs(iu2, iu7).should.be.false();
+    immutableIs(iu3, iu7).should.be.false();
+    immutableIs(iu4, iu6).should.be.false();
+    immutableIs(iu4, iu7).should.be.false();
+    immutableIs(iu5, iu6).should.be.false();
+    immutableIs(iu5, iu7).should.be.false();
+    immutableIs(iu6, iu7).should.be.false();
+    immutableIs(iu7, iu6).should.be.false();
 
-    Immutable.is(iu4, iu8).should.be.false();
-    Immutable.is(iu5, iu8).should.be.false();
-    Immutable.is(iu6, iu8).should.be.false();
-    Immutable.is(iu7, iu8).should.be.false();
-    Immutable.is(iu8, iu4).should.be.false();
-    Immutable.is(iu8, iu5).should.be.false();
-    Immutable.is(iu8, iu6).should.be.false();
-    Immutable.is(iu8, iu7).should.be.false();
+    immutableIs(iu4, iu8).should.be.false();
+    immutableIs(iu5, iu8).should.be.false();
+    immutableIs(iu6, iu8).should.be.false();
+    immutableIs(iu7, iu8).should.be.false();
+    immutableIs(iu8, iu4).should.be.false();
+    immutableIs(iu8, iu5).should.be.false();
+    immutableIs(iu8, iu6).should.be.false();
+    immutableIs(iu8, iu7).should.be.false();
 
-    Immutable.is(iu5, iu9).should.be.false();
-    Immutable.is(iu9, iu10).should.be.true();
+    immutableIs(iu5, iu9).should.be.false();
+    immutableIs(iu9, iu10).should.be.true();
   });
 
   it('should properly match primitives', () => {
@@ -235,47 +235,47 @@ describe('ImmutableUtil Tests', () => {
     equals(c6, c6).should.be.true();
 
     // Immutable
-    Immutable.is(ic1, ic1).should.be.true();
-    Immutable.is(ic1, ic2).should.be.false();
-    Immutable.is(ic1, ic3).should.be.false();
-    Immutable.is(ic1, ic4).should.be.false();
-    Immutable.is(ic1, ic5).should.be.false();
-    Immutable.is(ic1, ic6).should.be.false();
+    immutableIs(ic1, ic1).should.be.true();
+    immutableIs(ic1, ic2).should.be.false();
+    immutableIs(ic1, ic3).should.be.false();
+    immutableIs(ic1, ic4).should.be.false();
+    immutableIs(ic1, ic5).should.be.false();
+    immutableIs(ic1, ic6).should.be.false();
 
-    Immutable.is(ic2, ic1).should.be.false();
-    Immutable.is(ic2, ic2).should.be.true();
-    Immutable.is(ic2, ic3).should.be.false();
-    Immutable.is(ic2, ic4).should.be.false();
-    Immutable.is(ic2, ic5).should.be.false();
-    Immutable.is(ic2, ic6).should.be.false();
+    immutableIs(ic2, ic1).should.be.false();
+    immutableIs(ic2, ic2).should.be.true();
+    immutableIs(ic2, ic3).should.be.false();
+    immutableIs(ic2, ic4).should.be.false();
+    immutableIs(ic2, ic5).should.be.false();
+    immutableIs(ic2, ic6).should.be.false();
 
-    Immutable.is(ic3, ic1).should.be.false();
-    Immutable.is(ic3, ic2).should.be.false();
-    Immutable.is(ic3, ic3).should.be.true();
-    Immutable.is(ic3, ic4).should.be.false();
-    Immutable.is(ic3, ic5).should.be.false();
-    Immutable.is(ic3, ic6).should.be.false();
+    immutableIs(ic3, ic1).should.be.false();
+    immutableIs(ic3, ic2).should.be.false();
+    immutableIs(ic3, ic3).should.be.true();
+    immutableIs(ic3, ic4).should.be.false();
+    immutableIs(ic3, ic5).should.be.false();
+    immutableIs(ic3, ic6).should.be.false();
 
-    Immutable.is(ic4, ic1).should.be.false();
-    Immutable.is(ic4, ic2).should.be.false();
-    Immutable.is(ic4, ic3).should.be.false();
-    Immutable.is(ic4, ic4).should.be.true();
-    Immutable.is(ic4, ic5).should.be.false();
-    Immutable.is(ic4, ic6).should.be.false();
+    immutableIs(ic4, ic1).should.be.false();
+    immutableIs(ic4, ic2).should.be.false();
+    immutableIs(ic4, ic3).should.be.false();
+    immutableIs(ic4, ic4).should.be.true();
+    immutableIs(ic4, ic5).should.be.false();
+    immutableIs(ic4, ic6).should.be.false();
 
-    Immutable.is(ic5, ic1).should.be.false();
-    Immutable.is(ic5, ic2).should.be.false();
-    Immutable.is(ic5, ic3).should.be.false();
-    Immutable.is(ic5, ic4).should.be.false();
-    Immutable.is(ic5, ic5).should.be.true();
-    Immutable.is(ic5, ic6).should.be.false();
+    immutableIs(ic5, ic1).should.be.false();
+    immutableIs(ic5, ic2).should.be.false();
+    immutableIs(ic5, ic3).should.be.false();
+    immutableIs(ic5, ic4).should.be.false();
+    immutableIs(ic5, ic5).should.be.true();
+    immutableIs(ic5, ic6).should.be.false();
 
-    Immutable.is(ic6, ic1).should.be.false();
-    Immutable.is(ic6, ic2).should.be.false();
-    Immutable.is(ic6, ic3).should.be.false();
-    Immutable.is(ic6, ic4).should.be.false();
-    Immutable.is(ic6, ic5).should.be.false();
-    Immutable.is(ic6, ic6).should.be.true();
+    immutableIs(ic6, ic1).should.be.false();
+    immutableIs(ic6, ic2).should.be.false();
+    immutableIs(ic6, ic3).should.be.false();
+    immutableIs(ic6, ic4).should.be.false();
+    immutableIs(ic6, ic5).should.be.false();
+    immutableIs(ic6, ic6).should.be.true();
   });
 
   it('should properly match classes', () => {
@@ -298,12 +298,12 @@ describe('ImmutableUtil Tests', () => {
     equals(c4, c1).should.be.false();
 
     // Immutable
-    Immutable.is(ic1, ic2).should.be.true();
-    Immutable.is(ic2, ic1).should.be.true();
-    Immutable.is(ic1, ic3).should.be.false();
-    Immutable.is(ic3, ic1).should.be.false();
-    Immutable.is(ic1, ic4).should.be.false();
-    Immutable.is(ic4, ic1).should.be.false();
+    immutableIs(ic1, ic2).should.be.true();
+    immutableIs(ic2, ic1).should.be.true();
+    immutableIs(ic1, ic3).should.be.false();
+    immutableIs(ic3, ic1).should.be.false();
+    immutableIs(ic1, ic4).should.be.false();
+    immutableIs(ic4, ic1).should.be.false();
   });
 
   it('should properly match javascript dates', () => {
@@ -322,10 +322,10 @@ describe('ImmutableUtil Tests', () => {
     equals(d3, d1).should.be.false();
 
     // Immutable
-    Immutable.is(id1, id2).should.be.true();
-    Immutable.is(id2, id1).should.be.true();
-    Immutable.is(id1, id3).should.be.false();
-    Immutable.is(id3, id1).should.be.false();
+    immutableIs(id1, id2).should.be.true();
+    immutableIs(id2, id1).should.be.true();
+    immutableIs(id1, id3).should.be.false();
+    immutableIs(id3, id1).should.be.false();
   });
 
   it('should properly match regular expressions', () => {
@@ -344,10 +344,10 @@ describe('ImmutableUtil Tests', () => {
     equals(r3, r1).should.be.false();
 
     // Immutable
-    Immutable.is(ir1, ir2).should.be.true();
-    Immutable.is(ir2, ir1).should.be.true();
-    Immutable.is(ir1, ir3).should.be.false();
-    Immutable.is(ir3, ir1).should.be.false();
+    immutableIs(ir1, ir2).should.be.true();
+    immutableIs(ir2, ir1).should.be.true();
+    immutableIs(ir1, ir3).should.be.false();
+    immutableIs(ir3, ir1).should.be.false();
   });
 
   it('should properly match arrays', () => {
@@ -372,8 +372,8 @@ describe('ImmutableUtil Tests', () => {
     // define "Example":
     //     ({ {1, null}, {1, null} }) q
     //     return q
-    Immutable.is(ic1, ic2).should.be.true();
-    Immutable.is(ic1, ic3).should.be.false();
+    immutableIs(ic1, ic2).should.be.true();
+    immutableIs(ic1, ic3).should.be.false();
   });
 
   it('should properly match functions', () => {
@@ -391,10 +391,10 @@ describe('ImmutableUtil Tests', () => {
     equals(f1, f3).should.be.false();
     equals(f3, f1).should.be.false();
 
-    Immutable.is(if1, if2).should.be.true();
-    Immutable.is(if2, if1).should.be.true();
-    Immutable.is(if1, if3).should.be.false();
-    Immutable.is(if3, if1).should.be.false();
+    immutableIs(if1, if2).should.be.true();
+    immutableIs(if2, if1).should.be.true();
+    immutableIs(if1, if3).should.be.false();
+    immutableIs(if3, if1).should.be.false();
   });
 
   it('should properly match Codes/Concepts/Valuesets', () => {
@@ -426,13 +426,13 @@ describe('ImmutableUtil Tests', () => {
     equals(c1, c5).should.be.false();
 
     // Immutable
-    Immutable.is(ic1, ic2).should.be.false();
-    Immutable.is(ic2, ic1).should.be.false();
-    Immutable.is(ic1, ic3).should.be.false();
-    Immutable.is(ic2, ic3).should.be.false();
-    Immutable.is(ic3, ic1).should.be.false();
-    Immutable.is(ic3, ic2).should.be.false();
-    Immutable.is(ic1, ic4).should.be.false();
-    Immutable.is(ic1, ic5).should.be.false();
+    immutableIs(ic1, ic2).should.be.false();
+    immutableIs(ic2, ic1).should.be.false();
+    immutableIs(ic1, ic3).should.be.false();
+    immutableIs(ic2, ic3).should.be.false();
+    immutableIs(ic3, ic1).should.be.false();
+    immutableIs(ic3, ic2).should.be.false();
+    immutableIs(ic1, ic4).should.be.false();
+    immutableIs(ic1, ic5).should.be.false();
   });
 });

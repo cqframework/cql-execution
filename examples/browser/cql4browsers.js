@@ -5715,9 +5715,6 @@ exports.Library = Library;
 
 },{"./expressions":23}],28:[function(require,module,exports){
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Slice = exports.Last = exports.First = exports.Current = exports.toDistinctList = exports.Distinct = exports.Flatten = exports.ForEach = exports.IndexOf = exports.ToList = exports.SingletonFrom = exports.Filter = exports.Times = exports.Exists = exports.List = void 0;
 exports.doUnion = doUnion;
@@ -5726,7 +5723,7 @@ exports.doIntersect = doIntersect;
 exports.doContains = doContains;
 exports.doIncludes = doIncludes;
 exports.doProperIncludes = doProperIncludes;
-const immutable_1 = __importDefault(require("immutable"));
+const immutable_1 = require("immutable");
 const comparison_1 = require("../util/comparison");
 const immutableUtil_1 = require("../util/immutableUtil");
 const util_1 = require("../util/util");
@@ -5898,7 +5895,7 @@ class Distinct extends expression_1.Expression {
 exports.Distinct = Distinct;
 const toDistinctList = (list) => {
     const list_keys = list.map(immutableUtil_1.toNormalizedKey);
-    const set = immutable_1.default.Set().asMutable();
+    const set = (0, immutable_1.Set)().asMutable();
     const distinct = [];
     set.withMutations(y => {
         list_keys.forEach((key, i) => {
@@ -9183,13 +9180,10 @@ var __importStar = (this && this.__importStar) || (function () {
         return result;
     };
 })();
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toNormalizedKey = void 0;
 const ucum = __importStar(require("@lhncbc/ucum-lhc"));
-const immutable_1 = __importDefault(require("immutable"));
+const immutable_1 = require("immutable");
 const datatypes_1 = require("../datatypes/datatypes");
 const math_1 = require("./math");
 const units_1 = require("./units");
@@ -9207,7 +9201,7 @@ const toNormalizedKey = (js) => {
     }
     // Handle the edge case of functions
     if (typeof js === 'function') {
-        return immutable_1.default.Map({
+        return (0, immutable_1.Map)({
             name: js.toString(),
             __instance: 'JS.Function'
         });
@@ -9219,11 +9213,11 @@ const toNormalizedKey = (js) => {
     // Handle objects - normalize as necessary to generate unique keys
     switch (js.constructor) {
         case Array:
-            return immutable_1.default.Seq(js)
+            return (0, immutable_1.Seq)(js)
                 .map((x) => (0, exports.toNormalizedKey)(x))
                 .toList();
         case datatypes_1.Code:
-            return immutable_1.default.Map({
+            return (0, immutable_1.Map)({
                 code: (0, exports.toNormalizedKey)(js.code),
                 system: (0, exports.toNormalizedKey)(js.system),
                 version: (0, exports.toNormalizedKey)(js.version),
@@ -9231,31 +9225,31 @@ const toNormalizedKey = (js) => {
                 __instance: js.constructor
             });
         case Date:
-            return immutable_1.default.Map({
+            return (0, immutable_1.Map)({
                 epochMs: js.getTime(),
                 __instance: js.constructor
             });
         case datatypes_1.DateTime:
             if (typeof js.timezoneOffset === 'number' && js.timezoneOffset !== 0) {
-                return immutable_1.default.Seq(js.convertToTimezoneOffset(0))
+                return (0, immutable_1.Seq)(js.convertToTimezoneOffset(0))
                     .map((x) => (0, exports.toNormalizedKey)(x))
                     .toMap()
                     .set('__instance', js.constructor);
             }
             else {
-                return immutable_1.default.Seq(js)
+                return (0, immutable_1.Seq)(js)
                     .map((x) => (0, exports.toNormalizedKey)(x))
                     .toMap()
                     .set('__instance', js.constructor);
             }
         case datatypes_1.Interval:
-            return immutable_1.default.Seq(js.toClosed())
+            return (0, immutable_1.Seq)(js.toClosed())
                 .map((x) => (0, exports.toNormalizedKey)(x))
                 .toMap()
                 .set('__instance', js.constructor);
         case datatypes_1.Quantity:
             if (!js.unit) {
-                return immutable_1.default.Map({
+                return (0, immutable_1.Map)({
                     value: (_a = js.value) !== null && _a !== void 0 ? _a : null,
                     unit: null,
                     __instance: js.constructor
@@ -9265,7 +9259,7 @@ const toNormalizedKey = (js) => {
             const baseUnitKey = ucumUtilInstance.commensurablesList(js.unit)[0];
             if (!baseUnitKey) {
                 // No units found - normalization not possible and use provided values
-                return immutable_1.default.Map({
+                return (0, immutable_1.Map)({
                     value: (_b = js.value) !== null && _b !== void 0 ? _b : null,
                     unit: (_c = js.unit) !== null && _c !== void 0 ? _c : null,
                     __instance: js.constructor
@@ -9276,20 +9270,20 @@ const toNormalizedKey = (js) => {
                 const baseUnitKeyCode = baseUnitKey[0].csCode_;
                 const conversionValue = (0, units_1.convertUnit)(js.value, js.unit, baseUnitKeyCode);
                 const finalValue = conversionValue ? (0, math_1.decimalAdjust)('round', conversionValue, -8) : null;
-                return immutable_1.default.Map({
+                return (0, immutable_1.Map)({
                     value: finalValue !== null && finalValue !== void 0 ? finalValue : null,
                     unit: baseUnitKeyCode !== null && baseUnitKeyCode !== void 0 ? baseUnitKeyCode : null,
                     __instance: js.constructor
                 });
             }
         case datatypes_1.Ratio:
-            return immutable_1.default.Map({
+            return (0, immutable_1.Map)({
                 numerator: (0, exports.toNormalizedKey)(js.numerator),
                 denominator: (0, exports.toNormalizedKey)(js.denominator),
                 __instance: js.constructor
             });
         case RegExp:
-            return immutable_1.default.Map({
+            return (0, immutable_1.Map)({
                 source: (0, exports.toNormalizedKey)(js.source),
                 global: (0, exports.toNormalizedKey)(js.global),
                 ignoreCase: (0, exports.toNormalizedKey)(js.ignoreCase),
@@ -9301,7 +9295,7 @@ const toNormalizedKey = (js) => {
                 return (0, exports.toNormalizedKey)(js.low);
             }
             else {
-                return immutable_1.default.Seq(js)
+                return (0, immutable_1.Seq)(js)
                     .map((x) => (0, exports.toNormalizedKey)(x))
                     .toMap()
                     .set('__instance', js.constructor);
@@ -9310,7 +9304,7 @@ const toNormalizedKey = (js) => {
             // If the object is a model object (e.g. FHIRObject) with a _typeHierarchy function,
             // then use the typeHierarchy information for the __instance value.
             // Otherwise, use the constructor for the __instance value.
-            return immutable_1.default.Seq(js)
+            return (0, immutable_1.Seq)(js)
                 .map((x) => (0, exports.toNormalizedKey)(x))
                 .toMap()
                 .set('__instance', (_e = (0, exports.toNormalizedKey)((_d = js._typeHierarchy) === null || _d === void 0 ? void 0 : _d.call(js))) !== null && _e !== void 0 ? _e : js.constructor);
