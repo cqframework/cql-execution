@@ -2288,18 +2288,16 @@ class Interval {
             if (closed.low.unit !== closed.high.unit) {
                 throw new Error('Cannot calculate width of Quantity Interval with different units');
             }
-            const lowValue = closed.low.value;
-            const highValue = closed.high.value;
-            let diff = Math.abs(highValue - lowValue);
+            let diff = closed.high.value - closed.low.value;
             diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
             return new quantity_1.Quantity(diff, closed.low.unit);
         }
         else if (typeof closed.low === 'bigint') {
-            return closed.high >= closed.low ? closed.high - closed.low : closed.low - closed.high;
+            return closed.high - closed.low;
         }
         else {
             // TODO: Fix precision to 8 decimals in other places that return numbers
-            const diff = Math.abs(closed.high - closed.low);
+            const diff = closed.high - closed.low;
             return Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
         }
     }
@@ -2318,18 +2316,15 @@ class Interval {
             if (closed.low.unit !== closed.high.unit) {
                 throw new Error('Cannot calculate size of Quantity Interval with different units');
             }
-            const lowValue = closed.low.value;
-            const highValue = closed.high.value;
-            let diff = Math.abs(highValue - lowValue) + pointSize.value;
+            let diff = closed.high.value - closed.low.value + pointSize.value;
             diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
             return new quantity_1.Quantity(diff, closed.low.unit);
         }
         else if (typeof closed.low === 'bigint') {
-            const diff = closed.high >= closed.low ? closed.high - closed.low : closed.low - closed.high;
-            return diff + 1n;
+            return closed.high - closed.low + pointSize;
         }
         else {
-            const diff = Math.abs(closed.high - closed.low) + pointSize.value;
+            const diff = closed.high - closed.low + pointSize;
             return Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
         }
     }
@@ -2351,17 +2346,14 @@ class Interval {
                 pointSize = new quantity_1.Quantity(1, this.high.getPrecision());
             }
             else if (this.high.isQuantity) {
-                pointSize = (0, quantity_1.doSubtraction)((0, math_1.successor)(this.high), this.high);
+                pointSize = (0, quantity_1.doSubtraction)(this.high, (0, math_1.predecessor)(this.high));
             }
             else {
-                pointSize = (0, math_1.successor)(this.high) - this.high;
+                pointSize = this.high - (0, math_1.predecessor)(this.high);
             }
         }
         else {
-            throw new Error('Point type of intervals cannot be determined.');
-        }
-        if (typeof pointSize === 'number' || typeof pointSize === 'bigint') {
-            pointSize = new quantity_1.Quantity(Number(pointSize), '1');
+            throw new Error('Point type of interval cannot be determined.');
         }
         return pointSize;
     }
@@ -5587,7 +5579,8 @@ function collapseIntervals(intervals, perWidth) {
         // of the intervals involved will be used (i.e. the interval that has a
         // width equal to the result of the successor function for the point type).
         if (perWidth == null) {
-            perWidth = intervalsClone[0].getPointSize();
+            const pointSize = intervalsClone[0].getPointSize();
+            perWidth = pointSize.isQuantity ? pointSize : new quantity_1.Quantity(Number(pointSize), '1');
         }
         // sort intervalsClone by start
         intervalsClone.sort(function (a, b) {
@@ -5677,7 +5670,7 @@ function collapseIntervals(intervals, perWidth) {
                     ? BigInt(perWidth.value)
                     : perWidth.value;
                 const withinPerWidth = typeof distance === 'bigint' && typeof comparablePerWidth !== 'bigint'
-                    ? Number(b.low) - Number(a.high) <= comparablePerWidth
+                    ? Number(distance) <= comparablePerWidth
                     : distance <= comparablePerWidth;
                 if (withinPerWidth) {
                     if (b.high > a.high || b.high == null) {

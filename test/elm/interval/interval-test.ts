@@ -202,14 +202,12 @@ describe('Contains', () => {
   it('should correctly handle null endpoints (int)', async function () {
     (await this.negInfBegContainsInt.exec(this.ctx)).should.be.true();
     (await this.negInfBegNotContainsInt.exec(this.ctx)).should.be.false();
-    (await this.unknownOpenBegContainsInt.exec(this.ctx)).should.be.true();
-    (await this.unknownClosedBegContainsInt.exec(this.ctx)).should.be.true();
+    (await this.unknownBegContainsInt.exec(this.ctx)).should.be.true();
     should(await this.unknownBegMayContainInt.exec(this.ctx)).be.null();
     (await this.unknownBegNotContainsInt.exec(this.ctx)).should.be.false();
     (await this.posInfEndContainsInt.exec(this.ctx)).should.be.true();
     (await this.posInfEndNotContainsInt.exec(this.ctx)).should.be.false();
-    (await this.unknownOpenEndContainsInt.exec(this.ctx)).should.be.true();
-    (await this.unknownClosedEndContainsInt.exec(this.ctx)).should.be.true();
+    (await this.unknownEndContainsInt.exec(this.ctx)).should.be.true();
     should(await this.unknownEndMayContainInt.exec(this.ctx)).be.null();
     (await this.unknownEndNotContainsInt.exec(this.ctx)).should.be.false();
   });
@@ -217,14 +215,12 @@ describe('Contains', () => {
   it('should correctly handle null endpoints (long)', async function () {
     (await this.negInfBegContainsLong.exec(this.ctx)).should.be.true();
     (await this.negInfBegNotContainsLong.exec(this.ctx)).should.be.false();
-    (await this.unknownOpenBegContainsLong.exec(this.ctx)).should.be.true();
-    (await this.unknownClosedBegContainsLong.exec(this.ctx)).should.be.true();
+    (await this.unknownBegContainsLong.exec(this.ctx)).should.be.true();
     should(await this.unknownBegMayContainLong.exec(this.ctx)).be.null();
     (await this.unknownBegNotContainsLong.exec(this.ctx)).should.be.false();
     (await this.posInfEndContainsLong.exec(this.ctx)).should.be.true();
     (await this.posInfEndNotContainsLong.exec(this.ctx)).should.be.false();
-    (await this.unknownOpenEndContainsLong.exec(this.ctx)).should.be.true();
-    (await this.unknownClosedEndContainsLong.exec(this.ctx)).should.be.true();
+    (await this.unknownEndContainsLong.exec(this.ctx)).should.be.true();
     should(await this.unknownEndMayContainLong.exec(this.ctx)).be.null();
     (await this.unknownEndNotContainsLong.exec(this.ctx)).should.be.false();
   });
@@ -232,14 +228,12 @@ describe('Contains', () => {
   it('should correctly handle null endpoints (date)', async function () {
     (await this.negInfBegContainsDate.exec(this.ctx)).should.be.true();
     (await this.negInfBegNotContainsDate.exec(this.ctx)).should.be.false();
-    should(await this.unknownOpenBegMayContainDate.exec(this.ctx)).be.null();
-    (await this.unknownClosedBegContainsDate.exec(this.ctx)).should.be.true();
+    (await this.unknownBegContainsDate.exec(this.ctx)).should.be.true();
     should(await this.unknownBegMayContainDate.exec(this.ctx)).be.null();
     (await this.unknownBegNotContainsDate.exec(this.ctx)).should.be.false();
     (await this.posInfEndContainsDate.exec(this.ctx)).should.be.true();
     (await this.posInfEndNotContainsDate.exec(this.ctx)).should.be.false();
-    (await this.unknownOpenEndContainsDate.exec(this.ctx)).should.be.true();
-    (await this.unknownClosedEndContainsDate.exec(this.ctx)).should.be.true();
+    (await this.unknownEndContainsDate.exec(this.ctx)).should.be.true();
     should(await this.unknownEndMayContainDate.exec(this.ctx)).be.null();
     (await this.unknownEndNotContainsDate.exec(this.ctx)).should.be.false();
   });
@@ -297,14 +291,12 @@ describe('In', () => {
   it('should correctly handle null endpoints (int)', async function () {
     (await this.negInfBegContainsInt.exec(this.ctx)).should.be.true();
     (await this.negInfBegNotContainsInt.exec(this.ctx)).should.be.false();
-    (await this.unknownOpenBegContainsInt.exec(this.ctx)).should.be.true();
-    (await this.unknownClosedBegContainsInt.exec(this.ctx)).should.be.true();
+    (await this.unknownBegContainsInt.exec(this.ctx)).should.be.true();
     should(await this.unknownBegMayContainInt.exec(this.ctx)).be.null();
     (await this.unknownBegNotContainsInt.exec(this.ctx)).should.be.false();
     (await this.posInfEndContainsInt.exec(this.ctx)).should.be.true();
     (await this.posInfEndNotContainsInt.exec(this.ctx)).should.be.false();
-    (await this.unknownOpenEndContainsInt.exec(this.ctx)).should.be.true();
-    (await this.unknownClosedEndContainsInt.exec(this.ctx)).should.be.true();
+    (await this.unknownEndContainsInt.exec(this.ctx)).should.be.true();
     should(await this.unknownEndMayContainInt.exec(this.ctx)).be.null();
     (await this.unknownEndNotContainsInt.exec(this.ctx)).should.be.false();
   });
@@ -312,14 +304,12 @@ describe('In', () => {
   it('should correctly handle null endpoints (long)', async function () {
     (await this.negInfBegContainsLong.exec(this.ctx)).should.be.true();
     (await this.negInfBegNotContainsLong.exec(this.ctx)).should.be.false();
-    (await this.unknownOpenBegContainsLong.exec(this.ctx)).should.be.true();
-    (await this.unknownClosedBegContainsLong.exec(this.ctx)).should.be.true();
+    (await this.unknownBegContainsLong.exec(this.ctx)).should.be.true();
     should(await this.unknownBegMayContainLong.exec(this.ctx)).be.null();
     (await this.unknownBegNotContainsLong.exec(this.ctx)).should.be.false();
     (await this.posInfEndContainsLong.exec(this.ctx)).should.be.true();
     (await this.posInfEndNotContainsLong.exec(this.ctx)).should.be.false();
-    (await this.unknownOpenEndContainsLong.exec(this.ctx)).should.be.true();
-    (await this.unknownClosedEndContainsLong.exec(this.ctx)).should.be.true();
+    (await this.unknownEndContainsLong.exec(this.ctx)).should.be.true();
     should(await this.unknownEndMayContainLong.exec(this.ctx)).be.null();
     (await this.unknownEndNotContainsLong.exec(this.ctx)).should.be.false();
   });
@@ -327,14 +317,12 @@ describe('In', () => {
   it('should correctly handle null endpoints (date)', async function () {
     (await this.negInfBegContainsDate.exec(this.ctx)).should.be.true();
     (await this.negInfBegNotContainsDate.exec(this.ctx)).should.be.false();
-    should(await this.unknownOpenBegMayContainDate.exec(this.ctx)).be.null();
-    (await this.unknownClosedBegContainsDate.exec(this.ctx)).should.be.true();
+    (await this.unknownBegContainsDate.exec(this.ctx)).should.be.true();
     should(await this.unknownBegMayContainDate.exec(this.ctx)).be.null();
     (await this.unknownBegNotContainsDate.exec(this.ctx)).should.be.false();
     (await this.posInfEndContainsDate.exec(this.ctx)).should.be.true();
     (await this.posInfEndNotContainsDate.exec(this.ctx)).should.be.false();
-    (await this.unknownOpenEndContainsDate.exec(this.ctx)).should.be.true();
-    (await this.unknownClosedEndContainsDate.exec(this.ctx)).should.be.true();
+    (await this.unknownEndContainsDate.exec(this.ctx)).should.be.true();
     should(await this.unknownEndMayContainDate.exec(this.ctx)).be.null();
     (await this.unknownEndNotContainsDate.exec(this.ctx)).should.be.false();
   });

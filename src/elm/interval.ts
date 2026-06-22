@@ -704,7 +704,8 @@ function collapseIntervals(intervals: any, perWidth: any) {
     // of the intervals involved will be used (i.e. the interval that has a
     // width equal to the result of the successor function for the point type).
     if (perWidth == null) {
-      perWidth = intervalsClone[0].getPointSize();
+      const pointSize = intervalsClone[0].getPointSize();
+      perWidth = pointSize.isQuantity ? pointSize : new Quantity(Number(pointSize), '1');
     }
 
     // sort intervalsClone by start
@@ -790,7 +791,7 @@ function collapseIntervals(intervals: any, perWidth: any) {
             : perWidth.value;
         const withinPerWidth =
           typeof distance === 'bigint' && typeof comparablePerWidth !== 'bigint'
-            ? Number(b.low) - Number(a.high) <= comparablePerWidth
+            ? Number(distance) <= comparablePerWidth
             : distance <= comparablePerWidth;
         if (withinPerWidth) {
           if (b.high > a.high || b.high == null) {

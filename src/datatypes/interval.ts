@@ -530,16 +530,15 @@ export class Interval {
       if (closed.low.unit !== closed.high.unit) {
         throw new Error('Cannot calculate width of Quantity Interval with different units');
       }
-      const lowValue = closed.low.value;
-      const highValue = closed.high.value;
-      let diff = Math.abs(highValue - lowValue);
+
+      let diff = closed.high.value - closed.low.value;
       diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
       return new Quantity(diff, closed.low.unit);
     } else if (typeof closed.low === 'bigint') {
-      return closed.high >= closed.low ? closed.high - closed.low : closed.low - closed.high;
+      return closed.high - closed.low;
     } else {
       // TODO: Fix precision to 8 decimals in other places that return numbers
-      const diff = Math.abs(closed.high - closed.low);
+      const diff = closed.high - closed.low;
       return Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
     }
   }
@@ -563,16 +562,14 @@ export class Interval {
       if (closed.low.unit !== closed.high.unit) {
         throw new Error('Cannot calculate size of Quantity Interval with different units');
       }
-      const lowValue = closed.low.value;
-      const highValue = closed.high.value;
-      let diff = Math.abs(highValue - lowValue) + pointSize.value;
+
+      let diff = closed.high.value - closed.low.value + pointSize.value;
       diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
       return new Quantity(diff, closed.low.unit);
     } else if (typeof closed.low === 'bigint') {
-      const diff = closed.high >= closed.low ? closed.high - closed.low : closed.low - closed.high;
-      return diff + 1n;
+      return closed.high - closed.low + pointSize;
     } else {
-      const diff = Math.abs(closed.high - closed.low) + pointSize.value;
+      const diff = closed.high - closed.low + pointSize;
       return Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
     }
   }
@@ -591,16 +588,12 @@ export class Interval {
       if (this.high.isDateTime || this.high.isDate || this.high.isTime) {
         pointSize = new Quantity(1, this.high.getPrecision());
       } else if (this.high.isQuantity) {
-        pointSize = doSubtraction(successor(this.high), this.high);
+        pointSize = doSubtraction(this.high, predecessor(this.high));
       } else {
-        pointSize = successor(this.high) - this.high;
+        pointSize = this.high - predecessor(this.high);
       }
     } else {
-      throw new Error('Point type of intervals cannot be determined.');
-    }
-
-    if (typeof pointSize === 'number' || typeof pointSize === 'bigint') {
-      pointSize = new Quantity(Number(pointSize), '1');
+      throw new Error('Point type of interval cannot be determined.');
     }
 
     return pointSize;

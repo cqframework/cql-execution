@@ -151,14 +151,14 @@ define longs_above_max_value_product: Product({2L, 4611686018427387904L}) // 922
 define longs_at_min_value_product: Product({-1L, 2L, 4611686018427387904L}) // -9223372036854775808
 define longs_below_min_value_product: Product({-1L, 3L, 3074457345618258603L}) // -9223372036854775809
 define decimal_product: Product({1.0, 2.0, 3.0, 4.0})
-define decimals_at_max_value_product: Product({99999999999999999999.99999999})
+define decimals_at_max_value_product: Product({99999999999999999999.99999999, 1.0})
 define decimals_above_max_value_product: Product({99999999999999999999.99999999, 2.0})
-define decimals_at_min_value_product: Product({-99999999999999999999.99999999})
+define decimals_at_min_value_product: Product({-99999999999999999999.99999999, 1.0})
 define decimals_below_min_value_product: Product({-99999999999999999999.99999999, 2.0})
 define quantity_product: Product({1.0 'g', 2.0 'g', 3.0 'g', 4.0 'g'})
-define quantities_at_max_value_product: Product({99999999999999999999.99999999 'g'})
+define quantities_at_max_value_product: Product({99999999999999999999.99999999 'g', 1.0 'g'})
 define quantities_above_max_value_product: Product({99999999999999999999.99999999 'g', 2.0 'g'})
-define quantities_at_min_value_product: Product({-99999999999999999999.99999999 'g'})
+define quantities_at_min_value_product: Product({-99999999999999999999.99999999 'g', 1.0 'g'})
 define quantities_below_min_value_product: Product({-99999999999999999999.99999999 'g', 2.0 'g'})
 define quantity_zero_product: Product({1.0 'g', 2.0 'g', 0 'g'})
 define zero_product: Product({0, 5, 10})

@@ -15135,14 +15135,14 @@ define longs_above_max_value_product: Product({2L, 4611686018427387904L}) // 922
 define longs_at_min_value_product: Product({-1L, 2L, 4611686018427387904L}) // -9223372036854775808
 define longs_below_min_value_product: Product({-1L, 3L, 3074457345618258603L}) // -9223372036854775809
 define decimal_product: Product({1.0, 2.0, 3.0, 4.0})
-define decimals_at_max_value_product: Product({99999999999999999999.99999999})
+define decimals_at_max_value_product: Product({99999999999999999999.99999999, 1.0})
 define decimals_above_max_value_product: Product({99999999999999999999.99999999, 2.0})
-define decimals_at_min_value_product: Product({-99999999999999999999.99999999})
+define decimals_at_min_value_product: Product({-99999999999999999999.99999999, 1.0})
 define decimals_below_min_value_product: Product({-99999999999999999999.99999999, 2.0})
 define quantity_product: Product({1.0 'g', 2.0 'g', 3.0 'g', 4.0 'g'})
-define quantities_at_max_value_product: Product({99999999999999999999.99999999 'g'})
+define quantities_at_max_value_product: Product({99999999999999999999.99999999 'g', 1.0 'g'})
 define quantities_above_max_value_product: Product({99999999999999999999.99999999 'g', 2.0 'g'})
-define quantities_at_min_value_product: Product({-99999999999999999999.99999999 'g'})
+define quantities_at_min_value_product: Product({-99999999999999999999.99999999 'g', 1.0 'g'})
 define quantities_below_min_value_product: Product({-99999999999999999999.99999999 'g', 2.0 'g'})
 define quantity_zero_product: Product({1.0 'g', 2.0 'g', 0 'g'})
 define zero_product: Product({0, 5, 10})
@@ -15166,7 +15166,7 @@ module.exports['Product'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "666",
+        "r" : "670",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -16228,14 +16228,14 @@ module.exports['Product'] = {
             "s" : [ {
               "value" : [ "", "define ", "decimals_at_max_value_product", ": " ]
             }, {
-              "r" : "403",
+              "r" : "404",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
                 "r" : "395",
                 "s" : [ {
                   "r" : "396",
-                  "value" : [ "{", "99999999999999999999.99999999", "}" ]
+                  "value" : [ "{", "99999999999999999999.99999999", ", ", "1.0", "}" ]
                 } ]
               }, {
                 "value" : [ ")" ]
@@ -16245,16 +16245,16 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "403",
+          "localId" : "404",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "404",
+            "localId" : "405",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "405",
+              "localId" : "406",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             }
@@ -16265,11 +16265,11 @@ module.exports['Product'] = {
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "397",
+              "localId" : "398",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "398",
+                "localId" : "399",
                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ]
               }
@@ -16281,11 +16281,18 @@ module.exports['Product'] = {
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
               "value" : "99999999999999999999.99999999",
               "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "397",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
             } ]
           }
         }
       }, {
-        "localId" : "408",
+        "localId" : "409",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "decimals_above_max_value_product",
         "context" : "Patient",
@@ -16294,17 +16301,17 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "408",
+            "r" : "409",
             "s" : [ {
               "value" : [ "", "define ", "decimals_above_max_value_product", ": " ]
             }, {
-              "r" : "418",
+              "r" : "419",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "409",
+                "r" : "410",
                 "s" : [ {
-                  "r" : "410",
+                  "r" : "411",
                   "value" : [ "{", "99999999999999999999.99999999", ", ", "2.0", "}" ]
                 } ]
               }, {
@@ -16315,45 +16322,45 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "418",
+          "localId" : "419",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "419",
+            "localId" : "420",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "420",
+              "localId" : "421",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "409",
+            "localId" : "410",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "412",
+              "localId" : "413",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "413",
+                "localId" : "414",
                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Literal",
-              "localId" : "410",
+              "localId" : "411",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
               "value" : "99999999999999999999.99999999",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "411",
+              "localId" : "412",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
               "value" : "2.0",
@@ -16362,7 +16369,7 @@ module.exports['Product'] = {
           }
         }
       }, {
-        "localId" : "423",
+        "localId" : "424",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "decimals_at_min_value_product",
         "context" : "Patient",
@@ -16371,25 +16378,26 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "423",
+            "r" : "424",
             "s" : [ {
               "value" : [ "", "define ", "decimals_at_min_value_product", ": " ]
             }, {
-              "r" : "434",
+              "r" : "436",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "424",
+                "r" : "425",
                 "s" : [ {
                   "value" : [ "{" ]
                 }, {
-                  "r" : "425",
+                  "r" : "426",
                   "s" : [ {
-                    "r" : "426",
+                    "r" : "427",
                     "value" : [ "-", "99999999999999999999.99999999" ]
                   } ]
                 }, {
-                  "value" : [ "}" ]
+                  "r" : "429",
+                  "value" : [ ", ", "1.0", "}" ]
                 } ]
               }, {
                 "value" : [ ")" ]
@@ -16399,59 +16407,66 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "434",
+          "localId" : "436",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "435",
+            "localId" : "437",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "436",
+              "localId" : "438",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "424",
+            "localId" : "425",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "428",
+              "localId" : "430",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "429",
+                "localId" : "431",
                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Negate",
-              "localId" : "425",
+              "localId" : "426",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ],
               "signature" : [ {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "427",
+                "localId" : "428",
                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ]
               } ],
               "operand" : {
                 "type" : "Literal",
-                "localId" : "426",
+                "localId" : "427",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "value" : "99999999999999999999.99999999",
                 "annotation" : [ ]
               }
+            }, {
+              "type" : "Literal",
+              "localId" : "429",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
             } ]
           }
         }
       }, {
-        "localId" : "439",
+        "localId" : "441",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "decimals_below_min_value_product",
         "context" : "Patient",
@@ -16460,25 +16475,25 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "439",
+            "r" : "441",
             "s" : [ {
               "value" : [ "", "define ", "decimals_below_min_value_product", ": " ]
             }, {
-              "r" : "451",
+              "r" : "453",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "440",
+                "r" : "442",
                 "s" : [ {
                   "value" : [ "{" ]
                 }, {
-                  "r" : "441",
+                  "r" : "443",
                   "s" : [ {
-                    "r" : "442",
+                    "r" : "444",
                     "value" : [ "-", "99999999999999999999.99999999" ]
                   } ]
                 }, {
-                  "r" : "444",
+                  "r" : "446",
                   "value" : [ ", ", "2.0", "}" ]
                 } ]
               }, {
@@ -16489,49 +16504,49 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "451",
+          "localId" : "453",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "452",
+            "localId" : "454",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "453",
+              "localId" : "455",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "440",
+            "localId" : "442",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "445",
+              "localId" : "447",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "446",
+                "localId" : "448",
                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Negate",
-              "localId" : "441",
+              "localId" : "443",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ],
               "signature" : [ {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "443",
+                "localId" : "445",
                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ]
               } ],
               "operand" : {
                 "type" : "Literal",
-                "localId" : "442",
+                "localId" : "444",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "value" : "99999999999999999999.99999999",
@@ -16539,7 +16554,7 @@ module.exports['Product'] = {
               }
             }, {
               "type" : "Literal",
-              "localId" : "444",
+              "localId" : "446",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
               "value" : "2.0",
@@ -16548,7 +16563,7 @@ module.exports['Product'] = {
           }
         }
       }, {
-        "localId" : "456",
+        "localId" : "458",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "quantity_product",
         "context" : "Patient",
@@ -16557,40 +16572,40 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "456",
+            "r" : "458",
             "s" : [ {
               "value" : [ "", "define ", "quantity_product", ": " ]
             }, {
-              "r" : "468",
+              "r" : "470",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "457",
+                "r" : "459",
                 "s" : [ {
                   "value" : [ "{" ]
                 }, {
-                  "r" : "458",
+                  "r" : "460",
                   "s" : [ {
                     "value" : [ "1.0 ", "'g'" ]
                   } ]
                 }, {
                   "value" : [ ", " ]
                 }, {
-                  "r" : "459",
+                  "r" : "461",
                   "s" : [ {
                     "value" : [ "2.0 ", "'g'" ]
                   } ]
                 }, {
                   "value" : [ ", " ]
                 }, {
-                  "r" : "460",
+                  "r" : "462",
                   "s" : [ {
                     "value" : [ "3.0 ", "'g'" ]
                   } ]
                 }, {
                   "value" : [ ", " ]
                 }, {
-                  "r" : "461",
+                  "r" : "463",
                   "s" : [ {
                     "value" : [ "4.0 ", "'g'" ]
                   } ]
@@ -16605,59 +16620,59 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "468",
+          "localId" : "470",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "469",
+            "localId" : "471",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "470",
+              "localId" : "472",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "457",
+            "localId" : "459",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "462",
+              "localId" : "464",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "463",
+                "localId" : "465",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Quantity",
-              "localId" : "458",
+              "localId" : "460",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1.0,
               "unit" : "g",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "459",
+              "localId" : "461",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 2.0,
               "unit" : "g",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "460",
+              "localId" : "462",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 3.0,
               "unit" : "g",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "461",
+              "localId" : "463",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 4.0,
               "unit" : "g",
@@ -16666,7 +16681,7 @@ module.exports['Product'] = {
           }
         }
       }, {
-        "localId" : "473",
+        "localId" : "475",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "quantities_at_max_value_product",
         "context" : "Patient",
@@ -16675,21 +16690,28 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "473",
+            "r" : "475",
             "s" : [ {
               "value" : [ "", "define ", "quantities_at_max_value_product", ": " ]
             }, {
-              "r" : "482",
+              "r" : "485",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "474",
+                "r" : "476",
                 "s" : [ {
                   "value" : [ "{" ]
                 }, {
-                  "r" : "475",
+                  "r" : "477",
                   "s" : [ {
                     "value" : [ "99999999999999999999.99999999 ", "'g'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "478",
+                  "s" : [ {
+                    "value" : [ "1.0 ", "'g'" ]
                   } ]
                 }, {
                   "value" : [ "}" ]
@@ -16702,47 +16724,54 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "482",
+          "localId" : "485",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "483",
+            "localId" : "486",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "484",
+              "localId" : "487",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "474",
+            "localId" : "476",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "476",
+              "localId" : "479",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "477",
+                "localId" : "480",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Quantity",
-              "localId" : "475",
+              "localId" : "477",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1.0E20,
+              "unit" : "g",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "478",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 1.0,
               "unit" : "g",
               "annotation" : [ ]
             } ]
           }
         }
       }, {
-        "localId" : "487",
+        "localId" : "490",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "quantities_above_max_value_product",
         "context" : "Patient",
@@ -16751,26 +16780,26 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "487",
+            "r" : "490",
             "s" : [ {
               "value" : [ "", "define ", "quantities_above_max_value_product", ": " ]
             }, {
-              "r" : "497",
+              "r" : "500",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "488",
+                "r" : "491",
                 "s" : [ {
                   "value" : [ "{" ]
                 }, {
-                  "r" : "489",
+                  "r" : "492",
                   "s" : [ {
                     "value" : [ "99999999999999999999.99999999 ", "'g'" ]
                   } ]
                 }, {
                   "value" : [ ", " ]
                 }, {
-                  "r" : "490",
+                  "r" : "493",
                   "s" : [ {
                     "value" : [ "2.0 ", "'g'" ]
                   } ]
@@ -16785,45 +16814,45 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "497",
+          "localId" : "500",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "498",
+            "localId" : "501",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "499",
+              "localId" : "502",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "488",
+            "localId" : "491",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "491",
+              "localId" : "494",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "492",
+                "localId" : "495",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Quantity",
-              "localId" : "489",
+              "localId" : "492",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1.0E20,
               "unit" : "g",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "490",
+              "localId" : "493",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 2.0,
               "unit" : "g",
@@ -16832,7 +16861,7 @@ module.exports['Product'] = {
           }
         }
       }, {
-        "localId" : "502",
+        "localId" : "505",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "quantities_at_min_value_product",
         "context" : "Patient",
@@ -16841,26 +16870,33 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "502",
+            "r" : "505",
             "s" : [ {
               "value" : [ "", "define ", "quantities_at_min_value_product", ": " ]
             }, {
-              "r" : "513",
+              "r" : "517",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "503",
+                "r" : "506",
                 "s" : [ {
                   "value" : [ "{" ]
                 }, {
-                  "r" : "504",
+                  "r" : "507",
                   "s" : [ {
                     "value" : [ "-" ]
                   }, {
-                    "r" : "505",
+                    "r" : "508",
                     "s" : [ {
                       "value" : [ "99999999999999999999.99999999 ", "'g'" ]
                     } ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "510",
+                  "s" : [ {
+                    "value" : [ "1.0 ", "'g'" ]
                   } ]
                 }, {
                   "value" : [ "}" ]
@@ -16873,59 +16909,66 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "513",
+          "localId" : "517",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "514",
+            "localId" : "518",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "515",
+              "localId" : "519",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "503",
+            "localId" : "506",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "507",
+              "localId" : "511",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "508",
+                "localId" : "512",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Negate",
-              "localId" : "504",
+              "localId" : "507",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ],
               "signature" : [ {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "506",
+                "localId" : "509",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               } ],
               "operand" : {
                 "type" : "Quantity",
-                "localId" : "505",
+                "localId" : "508",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "value" : 1.0E20,
                 "unit" : "g",
                 "annotation" : [ ]
               }
+            }, {
+              "type" : "Quantity",
+              "localId" : "510",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 1.0,
+              "unit" : "g",
+              "annotation" : [ ]
             } ]
           }
         }
       }, {
-        "localId" : "518",
+        "localId" : "522",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "quantities_below_min_value_product",
         "context" : "Patient",
@@ -16934,23 +16977,23 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "518",
+            "r" : "522",
             "s" : [ {
               "value" : [ "", "define ", "quantities_below_min_value_product", ": " ]
             }, {
-              "r" : "530",
+              "r" : "534",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "519",
+                "r" : "523",
                 "s" : [ {
                   "value" : [ "{" ]
                 }, {
-                  "r" : "520",
+                  "r" : "524",
                   "s" : [ {
                     "value" : [ "-" ]
                   }, {
-                    "r" : "521",
+                    "r" : "525",
                     "s" : [ {
                       "value" : [ "99999999999999999999.99999999 ", "'g'" ]
                     } ]
@@ -16958,7 +17001,7 @@ module.exports['Product'] = {
                 }, {
                   "value" : [ ", " ]
                 }, {
-                  "r" : "523",
+                  "r" : "527",
                   "s" : [ {
                     "value" : [ "2.0 ", "'g'" ]
                   } ]
@@ -16973,49 +17016,49 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "530",
+          "localId" : "534",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "531",
+            "localId" : "535",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "532",
+              "localId" : "536",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "519",
+            "localId" : "523",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "524",
+              "localId" : "528",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "525",
+                "localId" : "529",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Negate",
-              "localId" : "520",
+              "localId" : "524",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ],
               "signature" : [ {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "522",
+                "localId" : "526",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               } ],
               "operand" : {
                 "type" : "Quantity",
-                "localId" : "521",
+                "localId" : "525",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "value" : 1.0E20,
                 "unit" : "g",
@@ -17023,7 +17066,7 @@ module.exports['Product'] = {
               }
             }, {
               "type" : "Quantity",
-              "localId" : "523",
+              "localId" : "527",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 2.0,
               "unit" : "g",
@@ -17032,7 +17075,7 @@ module.exports['Product'] = {
           }
         }
       }, {
-        "localId" : "535",
+        "localId" : "539",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "quantity_zero_product",
         "context" : "Patient",
@@ -17041,33 +17084,33 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "535",
+            "r" : "539",
             "s" : [ {
               "value" : [ "", "define ", "quantity_zero_product", ": " ]
             }, {
-              "r" : "546",
+              "r" : "550",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "536",
+                "r" : "540",
                 "s" : [ {
                   "value" : [ "{" ]
                 }, {
-                  "r" : "537",
+                  "r" : "541",
                   "s" : [ {
                     "value" : [ "1.0 ", "'g'" ]
                   } ]
                 }, {
                   "value" : [ ", " ]
                 }, {
-                  "r" : "538",
+                  "r" : "542",
                   "s" : [ {
                     "value" : [ "2.0 ", "'g'" ]
                   } ]
                 }, {
                   "value" : [ ", " ]
                 }, {
-                  "r" : "539",
+                  "r" : "543",
                   "s" : [ {
                     "value" : [ "0 ", "'g'" ]
                   } ]
@@ -17082,52 +17125,52 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "546",
+          "localId" : "550",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "547",
+            "localId" : "551",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "548",
+              "localId" : "552",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "536",
+            "localId" : "540",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "540",
+              "localId" : "544",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "541",
+                "localId" : "545",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Quantity",
-              "localId" : "537",
+              "localId" : "541",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1.0,
               "unit" : "g",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "538",
+              "localId" : "542",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 2.0,
               "unit" : "g",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "539",
+              "localId" : "543",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 0,
               "unit" : "g",
@@ -17136,7 +17179,7 @@ module.exports['Product'] = {
           }
         }
       }, {
-        "localId" : "551",
+        "localId" : "555",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
         "name" : "zero_product",
         "context" : "Patient",
@@ -17145,17 +17188,17 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "551",
+            "r" : "555",
             "s" : [ {
               "value" : [ "", "define ", "zero_product", ": " ]
             }, {
-              "r" : "562",
+              "r" : "566",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "552",
+                "r" : "556",
                 "s" : [ {
-                  "r" : "553",
+                  "r" : "557",
                   "value" : [ "{", "0", ", ", "5", ", ", "10", "}" ]
                 } ]
               }, {
@@ -17166,52 +17209,52 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "562",
+          "localId" : "566",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "563",
+            "localId" : "567",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "564",
+              "localId" : "568",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "552",
+            "localId" : "556",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "556",
+              "localId" : "560",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "557",
+                "localId" : "561",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Literal",
-              "localId" : "553",
+              "localId" : "557",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "0",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "554",
+              "localId" : "558",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "5",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "555",
+              "localId" : "559",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "10",
@@ -17220,7 +17263,7 @@ module.exports['Product'] = {
           }
         }
       }, {
-        "localId" : "567",
+        "localId" : "571",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
         "name" : "product_with_null",
         "context" : "Patient",
@@ -17229,17 +17272,17 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "567",
+            "r" : "571",
             "s" : [ {
               "value" : [ "", "define ", "product_with_null", ": " ]
             }, {
-              "r" : "579",
+              "r" : "583",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "568",
+                "r" : "572",
                 "s" : [ {
-                  "r" : "569",
+                  "r" : "573",
                   "value" : [ "{", "5", ", ", "4", ", ", "null", "}" ]
                 } ]
               }, {
@@ -17250,58 +17293,58 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "579",
+          "localId" : "583",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "580",
+            "localId" : "584",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "581",
+              "localId" : "585",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "568",
+            "localId" : "572",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "573",
+              "localId" : "577",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "574",
+                "localId" : "578",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Literal",
-              "localId" : "569",
+              "localId" : "573",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "5",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "570",
+              "localId" : "574",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "4",
               "annotation" : [ ]
             }, {
               "type" : "As",
-              "localId" : "572",
+              "localId" : "576",
               "asType" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ],
               "signature" : [ ],
               "operand" : {
                 "type" : "Null",
-                "localId" : "571",
+                "localId" : "575",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                 "annotation" : [ ]
               }
@@ -17309,7 +17352,7 @@ module.exports['Product'] = {
           }
         }
       }, {
-        "localId" : "584",
+        "localId" : "588",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
         "name" : "product_of_nulls",
         "context" : "Patient",
@@ -17318,30 +17361,30 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "584",
+            "r" : "588",
             "s" : [ {
               "value" : [ "", "define ", "product_of_nulls", ": " ]
             }, {
-              "r" : "599",
+              "r" : "603",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "585",
+                "r" : "589",
                 "s" : [ {
                   "value" : [ "{" ]
                 }, {
-                  "r" : "586",
+                  "r" : "590",
                   "s" : [ {
-                    "r" : "587",
+                    "r" : "591",
                     "value" : [ "null", " as " ]
                   }, {
-                    "r" : "588",
+                    "r" : "592",
                     "s" : [ {
                       "value" : [ "Integer" ]
                     } ]
                   } ]
                 }, {
-                  "r" : "589",
+                  "r" : "593",
                   "value" : [ ", ", "null", ", ", "null", "}" ]
                 } ]
               }, {
@@ -17352,76 +17395,76 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "599",
+          "localId" : "603",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "600",
+            "localId" : "604",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "601",
+              "localId" : "605",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "585",
+            "localId" : "589",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "593",
+              "localId" : "597",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "594",
+                "localId" : "598",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "As",
-              "localId" : "586",
+              "localId" : "590",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "strict" : false,
               "annotation" : [ ],
               "signature" : [ ],
               "operand" : {
                 "type" : "Null",
-                "localId" : "587",
+                "localId" : "591",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                 "annotation" : [ ]
               },
               "asTypeSpecifier" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "588",
+                "localId" : "592",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             }, {
               "type" : "As",
-              "localId" : "591",
+              "localId" : "595",
               "asType" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ],
               "signature" : [ ],
               "operand" : {
                 "type" : "Null",
-                "localId" : "589",
+                "localId" : "593",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                 "annotation" : [ ]
               }
             }, {
               "type" : "As",
-              "localId" : "592",
+              "localId" : "596",
               "asType" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ],
               "signature" : [ ],
               "operand" : {
                 "type" : "Null",
-                "localId" : "590",
+                "localId" : "594",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                 "annotation" : [ ]
               }
@@ -17429,7 +17472,7 @@ module.exports['Product'] = {
           }
         }
       }, {
-        "localId" : "604",
+        "localId" : "608",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
         "name" : "product_null",
         "context" : "Patient",
@@ -17438,24 +17481,24 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "604",
+            "r" : "608",
             "s" : [ {
               "value" : [ "", "define ", "product_null", ": " ]
             }, {
-              "r" : "617",
+              "r" : "621",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "605",
+                "r" : "609",
                 "s" : [ {
-                  "r" : "606",
+                  "r" : "610",
                   "value" : [ "null", " as " ]
                 }, {
-                  "r" : "607",
+                  "r" : "611",
                   "s" : [ {
                     "value" : [ "List<" ]
                   }, {
-                    "r" : "608",
+                    "r" : "612",
                     "s" : [ {
                       "value" : [ "Decimal" ]
                     } ]
@@ -17471,32 +17514,32 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "617",
+          "localId" : "621",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "618",
+            "localId" : "622",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "619",
+              "localId" : "623",
               "name" : "{urn:hl7-org:elm-types:r1}Decimal",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "As",
-            "localId" : "605",
+            "localId" : "609",
             "strict" : false,
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "611",
+              "localId" : "615",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "612",
+                "localId" : "616",
                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ]
               }
@@ -17504,28 +17547,28 @@ module.exports['Product'] = {
             "signature" : [ ],
             "operand" : {
               "type" : "Null",
-              "localId" : "606",
+              "localId" : "610",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             },
             "asTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "607",
+              "localId" : "611",
               "annotation" : [ ],
               "resultTypeSpecifier" : {
                 "type" : "ListTypeSpecifier",
-                "localId" : "609",
+                "localId" : "613",
                 "annotation" : [ ],
                 "elementType" : {
                   "type" : "NamedTypeSpecifier",
-                  "localId" : "610",
+                  "localId" : "614",
                   "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                   "annotation" : [ ]
                 }
               },
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "608",
+                "localId" : "612",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "name" : "{urn:hl7-org:elm-types:r1}Decimal",
                 "annotation" : [ ]
@@ -17534,7 +17577,7 @@ module.exports['Product'] = {
           }
         }
       }, {
-        "localId" : "622",
+        "localId" : "626",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "product_quantity_null",
         "context" : "Patient",
@@ -17543,37 +17586,24 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "622",
+            "r" : "626",
             "s" : [ {
               "value" : [ "", "define ", "product_quantity_null", ": " ]
             }, {
-              "r" : "639",
+              "r" : "643",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "623",
+                "r" : "627",
                 "s" : [ {
                   "value" : [ "{" ]
                 }, {
-                  "r" : "624",
+                  "r" : "628",
                   "s" : [ {
-                    "r" : "625",
-                    "value" : [ "null", " as " ]
-                  }, {
-                    "r" : "626",
-                    "s" : [ {
-                      "value" : [ "Quantity" ]
-                    } ]
-                  } ]
-                }, {
-                  "value" : [ ", " ]
-                }, {
-                  "r" : "627",
-                  "s" : [ {
-                    "r" : "628",
-                    "value" : [ "null", " as " ]
-                  }, {
                     "r" : "629",
+                    "value" : [ "null", " as " ]
+                  }, {
+                    "r" : "630",
                     "s" : [ {
                       "value" : [ "Quantity" ]
                     } ]
@@ -17581,12 +17611,25 @@ module.exports['Product'] = {
                 }, {
                   "value" : [ ", " ]
                 }, {
-                  "r" : "630",
+                  "r" : "631",
                   "s" : [ {
-                    "r" : "631",
+                    "r" : "632",
                     "value" : [ "null", " as " ]
                   }, {
-                    "r" : "632",
+                    "r" : "633",
+                    "s" : [ {
+                      "value" : [ "Quantity" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "634",
+                  "s" : [ {
+                    "r" : "635",
+                    "value" : [ "null", " as " ]
+                  }, {
+                    "r" : "636",
                     "s" : [ {
                       "value" : [ "Quantity" ]
                     } ]
@@ -17602,91 +17645,91 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "639",
+          "localId" : "643",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "640",
+            "localId" : "644",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "641",
+              "localId" : "645",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "623",
+            "localId" : "627",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "633",
+              "localId" : "637",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "634",
+                "localId" : "638",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "As",
-              "localId" : "624",
+              "localId" : "628",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "strict" : false,
               "annotation" : [ ],
               "signature" : [ ],
               "operand" : {
                 "type" : "Null",
-                "localId" : "625",
-                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                "annotation" : [ ]
-              },
-              "asTypeSpecifier" : {
-                "type" : "NamedTypeSpecifier",
-                "localId" : "626",
-                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                "annotation" : [ ]
-              }
-            }, {
-              "type" : "As",
-              "localId" : "627",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-              "strict" : false,
-              "annotation" : [ ],
-              "signature" : [ ],
-              "operand" : {
-                "type" : "Null",
-                "localId" : "628",
-                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-                "annotation" : [ ]
-              },
-              "asTypeSpecifier" : {
-                "type" : "NamedTypeSpecifier",
                 "localId" : "629",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              },
+              "asTypeSpecifier" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "630",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               }
             }, {
               "type" : "As",
-              "localId" : "630",
+              "localId" : "631",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "strict" : false,
               "annotation" : [ ],
               "signature" : [ ],
               "operand" : {
                 "type" : "Null",
-                "localId" : "631",
+                "localId" : "632",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
                 "annotation" : [ ]
               },
               "asTypeSpecifier" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "632",
+                "localId" : "633",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "annotation" : [ ]
+              }
+            }, {
+              "type" : "As",
+              "localId" : "634",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "strict" : false,
+              "annotation" : [ ],
+              "signature" : [ ],
+              "operand" : {
+                "type" : "Null",
+                "localId" : "635",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              },
+              "asTypeSpecifier" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "636",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
@@ -17695,7 +17738,7 @@ module.exports['Product'] = {
           }
         }
       }, {
-        "localId" : "644",
+        "localId" : "648",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "NumbersAndQuantities",
         "context" : "Patient",
@@ -17704,48 +17747,48 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "644",
+            "r" : "648",
             "s" : [ {
               "value" : [ "", "define ", "NumbersAndQuantities", ": " ]
             }, {
-              "r" : "661",
+              "r" : "665",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "645",
+                "r" : "649",
                 "s" : [ {
-                  "r" : "646",
+                  "r" : "650",
                   "value" : [ "{", "1", " ," ]
                 }, {
-                  "r" : "647",
+                  "r" : "651",
                   "s" : [ {
                     "value" : [ "2 ", "'ml'" ]
                   } ]
                 }, {
                   "value" : [ "," ]
                 }, {
-                  "r" : "648",
+                  "r" : "652",
                   "s" : [ {
                     "value" : [ "3 ", "'ml'" ]
                   } ]
                 }, {
                   "value" : [ "," ]
                 }, {
-                  "r" : "649",
+                  "r" : "653",
                   "s" : [ {
                     "value" : [ "4 ", "'ml'" ]
                   } ]
                 }, {
                   "value" : [ "," ]
                 }, {
-                  "r" : "650",
+                  "r" : "654",
                   "s" : [ {
                     "value" : [ "5 ", "'ml'" ]
                   } ]
                 }, {
                   "value" : [ "," ]
                 }, {
-                  "r" : "651",
+                  "r" : "655",
                   "s" : [ {
                     "value" : [ "0 ", "'ml'" ]
                   } ]
@@ -17760,48 +17803,48 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "661",
+          "localId" : "665",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "662",
+            "localId" : "666",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "663",
+              "localId" : "667",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "645",
+            "localId" : "649",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "655",
+              "localId" : "659",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "656",
+                "localId" : "660",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "ToQuantity",
-              "localId" : "653",
+              "localId" : "657",
               "annotation" : [ ],
               "signature" : [ {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "654",
+                "localId" : "658",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               } ],
               "operand" : {
                 "type" : "Literal",
-                "localId" : "646",
+                "localId" : "650",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "1",
@@ -17809,35 +17852,35 @@ module.exports['Product'] = {
               }
             }, {
               "type" : "Quantity",
-              "localId" : "647",
+              "localId" : "651",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 2,
               "unit" : "ml",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "648",
+              "localId" : "652",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 3,
               "unit" : "ml",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "649",
+              "localId" : "653",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 4,
               "unit" : "ml",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "650",
+              "localId" : "654",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 5,
               "unit" : "ml",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "651",
+              "localId" : "655",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 0,
               "unit" : "ml",
@@ -17846,7 +17889,7 @@ module.exports['Product'] = {
           }
         }
       }, {
-        "localId" : "666",
+        "localId" : "670",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "IncompatibleUnitsNull",
         "context" : "Patient",
@@ -17855,26 +17898,26 @@ module.exports['Product'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "666",
+            "r" : "670",
             "s" : [ {
               "value" : [ "", "define ", "IncompatibleUnitsNull", ": " ]
             }, {
-              "r" : "676",
+              "r" : "680",
               "s" : [ {
                 "value" : [ "Product", "(" ]
               }, {
-                "r" : "667",
+                "r" : "671",
                 "s" : [ {
                   "value" : [ "{" ]
                 }, {
-                  "r" : "668",
+                  "r" : "672",
                   "s" : [ {
                     "value" : [ "1 ", "'mg/d'" ]
                   } ]
                 }, {
                   "value" : [ ", " ]
                 }, {
-                  "r" : "669",
+                  "r" : "673",
                   "s" : [ {
                     "value" : [ "0.002 ", "'/d'" ]
                   } ]
@@ -17889,45 +17932,45 @@ module.exports['Product'] = {
         } ],
         "expression" : {
           "type" : "Product",
-          "localId" : "676",
+          "localId" : "680",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "677",
+            "localId" : "681",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "678",
+              "localId" : "682",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "667",
+            "localId" : "671",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "670",
+              "localId" : "674",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "671",
+                "localId" : "675",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Quantity",
-              "localId" : "668",
+              "localId" : "672",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "mg/d",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "669",
+              "localId" : "673",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 0.002,
               "unit" : "/d",
