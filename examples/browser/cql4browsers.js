@@ -2302,7 +2302,6 @@ class Interval {
         }
     }
     size() {
-        const pointSize = this.getPointSize();
         if ((this.low != null && (this.low.isDateTime || this.low.isDate)) ||
             (this.high != null && (this.high.isDateTime || this.high.isDate))) {
             throw new Error('Size of Date, DateTime, and Time intervals is not supported');
@@ -2312,7 +2311,8 @@ class Interval {
             (closed.high != null && closed.high.isUncertainty)) {
             return null;
         }
-        else if (closed.low.isQuantity) {
+        const pointSize = this.getPointSize();
+        if (closed.low.isQuantity) {
             if (closed.low.unit !== closed.high.unit) {
                 throw new Error('Cannot calculate size of Quantity Interval with different units');
             }
@@ -3736,7 +3736,7 @@ class Power extends expression_1.Expression {
         if (args == null || args.some((x) => x == null)) {
             return null;
         }
-        const power = args.reduce((x, y) => x ** y);
+        const power = args.reduce((x, y) => doPower(x, y));
         // Note: The resultTypeName may be wrong if the exponent is a negative number. Math.overflowsOrUnderflows
         // already accounts for this possibility by only considering it an integer if Number.isInteger(value).
         // E.g., CQL-to-ELM says 10^-1 is an Integer result type, but the correct result is a 0.1 (a Decimal)
@@ -3747,6 +3747,25 @@ class Power extends expression_1.Expression {
     }
 }
 exports.Power = Power;
+function doPower(x, y) {
+    if (typeof x === 'bigint' && typeof y === 'bigint' && y < 0n) {
+        // x ** y does not support negative exponents for bigint, so downgrade to number if possible, otherwise return null
+        if (x < BigInt(Number.MIN_SAFE_INTEGER) ||
+            x > BigInt(Number.MAX_SAFE_INTEGER) ||
+            y < BigInt(Number.MIN_SAFE_INTEGER)) {
+            // can't safely convert to number so just return null
+            return null;
+        }
+        return Number(x) ** Number(y);
+    }
+    try {
+        return x ** y;
+    }
+    catch {
+        // will throw if BigInt goes out of range
+        return null;
+    }
+}
 class MinValue extends expression_1.Expression {
     constructor(json) {
         super(json);

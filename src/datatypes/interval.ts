@@ -544,7 +544,6 @@ export class Interval {
   }
 
   size() {
-    const pointSize = this.getPointSize();
     if (
       (this.low != null && (this.low.isDateTime || this.low.isDate)) ||
       (this.high != null && (this.high.isDateTime || this.high.isDate))
@@ -558,7 +557,10 @@ export class Interval {
       (closed.high != null && closed.high.isUncertainty)
     ) {
       return null;
-    } else if (closed.low.isQuantity) {
+    }
+
+    const pointSize = this.getPointSize();
+    if (closed.low.isQuantity) {
       if (closed.low.unit !== closed.high.unit) {
         throw new Error('Cannot calculate size of Quantity Interval with different units');
       }

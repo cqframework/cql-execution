@@ -79,6 +79,8 @@ define NegPow: 10 ^ -1
 define ThreeExpFourLong: 3L ^ 4L
 define ThreeExpFourMixed: 3 ^ 4L
 define ThreeExpFourReverseMixed: 3L ^ 4
+define TenLongExpNegativeOneLong: 10L ^ -1L
+define TwoLongExpMaxLong: 2L ^ maximum Long
 
 // @Test: MinValue
 define MinInteger: minimum Integer

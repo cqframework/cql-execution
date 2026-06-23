@@ -333,6 +333,14 @@ describe('Power', () => {
   it('should be able to calculate the integer power of a long', async function () {
     (await this.threeExpFourReverseMixed.exec(this.ctx)).should.equal(81n);
   });
+
+  it('should be able to calculate the negative power of a long', async function () {
+    (await this.tenLongExpNegativeOneLong.exec(this.ctx)).should.equal(0.1);
+  });
+
+  it('should return null when a long power exponent is too large', async function () {
+    should(await this.twoLongExpMaxLong.exec(this.ctx)).be.null();
+  });
 });
 
 describe('MinValue', () => {

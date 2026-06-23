@@ -412,7 +412,7 @@ export class Power extends Expression {
       return null;
     }
 
-    const power = args.reduce((x: any, y: any) => x ** y);
+    const power = args.reduce((x: any, y: any) => doPower(x, y));
 
     // Note: The resultTypeName may be wrong if the exponent is a negative number. Math.overflowsOrUnderflows
     // already accounts for this possibility by only considering it an integer if Number.isInteger(value).
@@ -421,6 +421,28 @@ export class Power extends Expression {
       return null;
     }
     return power;
+  }
+}
+
+function doPower(x: any, y: any) {
+  if (typeof x === 'bigint' && typeof y === 'bigint' && y < 0n) {
+    // x ** y does not support negative exponents for bigint, so downgrade to number if possible, otherwise return null
+    if (
+      x < BigInt(Number.MIN_SAFE_INTEGER) ||
+      x > BigInt(Number.MAX_SAFE_INTEGER) ||
+      y < BigInt(Number.MIN_SAFE_INTEGER)
+    ) {
+      // can't safely convert to number so just return null
+      return null;
+    }
+    return Number(x) ** Number(y);
+  }
+
+  try {
+    return x ** y;
+  } catch {
+    // will throw if BigInt goes out of range
+    return null;
   }
 }
 

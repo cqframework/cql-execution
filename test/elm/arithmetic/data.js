@@ -5391,6 +5391,8 @@ define NegPow: 10 ^ -1
 define ThreeExpFourLong: 3L ^ 4L
 define ThreeExpFourMixed: 3 ^ 4L
 define ThreeExpFourReverseMixed: 3L ^ 4
+define TenLongExpNegativeOneLong: 10L ^ -1L
+define TwoLongExpMaxLong: 2L ^ maximum Long
 */
 
 module.exports['Power'] = {
@@ -5405,7 +5407,7 @@ module.exports['Power'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "251",
+        "r" : "272",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -5785,6 +5787,141 @@ module.exports['Power'] = {
               "value" : "4",
               "annotation" : [ ]
             }
+          } ]
+        }
+      }, {
+        "localId" : "262",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "TenLongExpNegativeOneLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "262",
+            "s" : [ {
+              "value" : [ "", "define ", "TenLongExpNegativeOneLong", ": " ]
+            }, {
+              "r" : "263",
+              "s" : [ {
+                "r" : "264",
+                "value" : [ "10L", " ^ " ]
+              }, {
+                "r" : "265",
+                "s" : [ {
+                  "r" : "266",
+                  "value" : [ "-", "1L" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Power",
+          "localId" : "263",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "268",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "269",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "264",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "value" : "10",
+            "annotation" : [ ]
+          }, {
+            "type" : "Negate",
+            "localId" : "265",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "267",
+              "name" : "{urn:hl7-org:elm-types:r1}Long",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "266",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+              "value" : "1",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "272",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "TwoLongExpMaxLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "272",
+            "s" : [ {
+              "value" : [ "", "define ", "TwoLongExpMaxLong", ": " ]
+            }, {
+              "r" : "273",
+              "s" : [ {
+                "r" : "274",
+                "value" : [ "2L", " ^ " ]
+              }, {
+                "r" : "276",
+                "s" : [ {
+                  "value" : [ "maximum", " " ]
+                }, {
+                  "r" : "275",
+                  "s" : [ {
+                    "value" : [ "Long" ]
+                  } ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Power",
+          "localId" : "273",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "277",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "278",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "274",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "value" : "2",
+            "annotation" : [ ]
+          }, {
+            "type" : "MaxValue",
+            "localId" : "276",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
           } ]
         }
       } ]
