@@ -5241,7 +5241,7 @@ class Ends extends expression_1.Expression {
 }
 exports.Ends = Ends;
 function intervalListType(intervals) {
-    // Returns one of null, 'time', 'date', 'datetime', 'quantity', 'integer', 'decimal' or 'mismatch'
+    // Returns one of null, 'time', 'date', 'datetime', 'quantity', 'long', 'integer', 'decimal' or 'mismatch'
     let type = null;
     for (const itvl of intervals) {
         if (itvl == null) {
@@ -5301,8 +5301,18 @@ function intervalListType(intervals) {
                 return 'mismatch';
             }
         }
-        else if ((Number.isInteger(low) && Number.isInteger(high)) ||
-            (typeof low === 'bigint' && typeof high === 'bigint')) {
+        else if (typeof low === 'bigint' && typeof high === 'bigint') {
+            if (type == null) {
+                type = 'long';
+            }
+            else if (type === 'long') {
+                continue;
+            }
+            else {
+                return 'mismatch';
+            }
+        }
+        else if (Number.isInteger(low) && Number.isInteger(high)) {
             if (type == null) {
                 type = 'integer';
             }
@@ -5363,7 +5373,7 @@ class Expand extends expression_1.Expression {
             expandFunction = this.expandQuantityInterval;
             defaultPer = (interval) => new quantity_1.Quantity(1, interval.low.unit);
         }
-        else if (['integer', 'decimal'].includes(type)) {
+        else if (['long', 'integer', 'decimal'].includes(type)) {
             expandFunction = this.expandNumericInterval;
             defaultPer = (_interval) => new quantity_1.Quantity(1, '1');
         }

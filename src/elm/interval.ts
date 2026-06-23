@@ -321,7 +321,7 @@ export class Ends extends Expression {
 }
 
 function intervalListType(intervals: any) {
-  // Returns one of null, 'time', 'date', 'datetime', 'quantity', 'integer', 'decimal' or 'mismatch'
+  // Returns one of null, 'time', 'date', 'datetime', 'quantity', 'long', 'integer', 'decimal' or 'mismatch'
   let type = null;
 
   for (const itvl of intervals) {
@@ -376,10 +376,15 @@ function intervalListType(intervals: any) {
       } else {
         return 'mismatch';
       }
-    } else if (
-      (Number.isInteger(low) && Number.isInteger(high)) ||
-      (typeof low === 'bigint' && typeof high === 'bigint')
-    ) {
+    } else if (typeof low === 'bigint' && typeof high === 'bigint') {
+      if (type == null) {
+        type = 'long';
+      } else if (type === 'long') {
+        continue;
+      } else {
+        return 'mismatch';
+      }
+    } else if (Number.isInteger(low) && Number.isInteger(high)) {
       if (type == null) {
         type = 'integer';
       } else if (type === 'integer' || type === 'decimal') {
@@ -437,7 +442,7 @@ export class Expand extends Expression {
     } else if (['quantity'].includes(type)) {
       expandFunction = this.expandQuantityInterval;
       defaultPer = (interval: any) => new Quantity(1, interval.low.unit);
-    } else if (['integer', 'decimal'].includes(type)) {
+    } else if (['long', 'integer', 'decimal'].includes(type)) {
       expandFunction = this.expandNumericInterval;
       defaultPer = (_interval: any) => new Quantity(1, '1');
     } else {
