@@ -222,7 +222,13 @@ export class Modulo extends Expression {
       return null;
     }
 
-    const modulo = args.reduce((x: number, y: number) => x % y);
+    let modulo: number | bigint;
+    try {
+      modulo = args.reduce((x: any, y: any) => x % y);
+    } catch {
+      // modulo divide by zero results in null according to specification
+      return null;
+    }
 
     return MathUtil.decimalLongOrNull(modulo);
   }
@@ -284,9 +290,15 @@ export class Abs extends Expression {
     } else if (arg.isQuantity) {
       return new Quantity(Math.abs(arg.value), arg.unit);
     } else if (typeof arg === 'bigint') {
-      return arg < 0n ? -arg : arg;
+      const absoluteValue = arg < 0n ? -arg : arg;
+      return MathUtil.overflowsOrUnderflows(absoluteValue, this.resultTypeName)
+        ? null
+        : absoluteValue;
     } else {
-      return Math.abs(arg);
+      const absoluteValue = Math.abs(arg);
+      return MathUtil.overflowsOrUnderflows(absoluteValue, this.resultTypeName)
+        ? null
+        : absoluteValue;
     }
   }
 }
@@ -303,9 +315,15 @@ export class Negate extends Expression {
     } else if (arg.isQuantity) {
       return new Quantity(arg.value * -1, arg.unit);
     } else if (typeof arg === 'bigint') {
-      return arg * -1n;
+      const negatedValue = arg * -1n;
+      return MathUtil.overflowsOrUnderflows(negatedValue, this.resultTypeName)
+        ? null
+        : negatedValue;
     } else {
-      return arg * -1;
+      const negatedValue = arg * -1;
+      return MathUtil.overflowsOrUnderflows(negatedValue, this.resultTypeName)
+        ? null
+        : negatedValue;
     }
   }
 }
@@ -396,11 +414,10 @@ export class Power extends Expression {
 
     const power = args.reduce((x: any, y: any) => x ** y);
 
-    // Only pass in resultTypeName when it is Decimal, because translator returns wrong type in some other cases.
+    // Note: The resultTypeName may be wrong if the exponent is a negative number. Math.overflowsOrUnderflows
+    // already accounts for this possibility by only considering it an integer if Number.isInteger(value).
     // E.g., CQL-to-ELM says 10^-1 is an Integer result type, but the correct result is a 0.1 (a Decimal)
-    const fixedResultType =
-      this.resultTypeName === ELM_DECIMAL_TYPE ? this.resultTypeName : undefined;
-    if (MathUtil.overflowsOrUnderflows(power, fixedResultType)) {
+    if (MathUtil.overflowsOrUnderflows(power, this.resultTypeName)) {
       return null;
     }
     return power;

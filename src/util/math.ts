@@ -67,7 +67,10 @@ export function overflowsOrUnderflows(value: any, type?: string): boolean {
       return true;
     }
   } else if (typeof value === 'number') {
-    const isInteger = type === ELM_INTEGER_TYPE || (type == null && Number.isInteger(value));
+    // Only consider it an integer if it looks like an integer (even if the type says it's an integer).
+    // We need to do this because the CQL-to-ELM Translator's implementation of Power may incorrectly tag
+    // a result as an Integer when it really is a decimal (e.g., when the exponent is a negative number).
+    const isInteger = Number.isInteger(value) && (type === ELM_INTEGER_TYPE || type == null);
     if (isInteger) {
       if (!isValidInteger(value)) {
         return true;

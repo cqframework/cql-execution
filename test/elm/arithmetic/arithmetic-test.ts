@@ -282,8 +282,16 @@ describe('Negate', () => {
     (await this.negativeOne.exec(this.ctx)).should.equal(-1);
   });
 
+  it('should return null when negating minimum Integer', async function () {
+    should(await this.negateMinInteger.exec(this.ctx)).be.null();
+  });
+
   it('should negate a long', async function () {
     (await this.negativeOneLong.exec(this.ctx)).should.equal(-1n);
+  });
+
+  it('should return null when negating minimum Long', async function () {
+    should(await this.negateMinLong.exec(this.ctx)).be.null();
   });
 });
 
@@ -562,6 +570,10 @@ describe('Modulo', () => {
     (await this.mod.exec(this.ctx)).should.equal(1);
   });
 
+  it('should return null for Integer modulo by zero', async function () {
+    should(await this.threeModZero.exec(this.ctx)).be.null();
+  });
+
   it('should be able to return the long remainder of a division', async function () {
     (await this.threeModTwoLong.exec(this.ctx)).should.equal(1n);
   });
@@ -572,6 +584,14 @@ describe('Modulo', () => {
 
   it('should be able to return the long remainder of a dividing a long by an integer', async function () {
     (await this.threeModTwoReverseMixed.exec(this.ctx)).should.equal(1n);
+  });
+
+  it('should return null for Long modulo by zero', async function () {
+    should(await this.threeModZeroLong.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for Decimal modulo by zero', async function () {
+    should(await this.threeModZeroDecimal.exec(this.ctx)).be.null();
   });
 });
 
@@ -589,8 +609,14 @@ describe('Abs', () => {
   it('should be able to return the absolute value of 0', async function () {
     (await this.zero.exec(this.ctx)).should.equal(0);
   });
+  it('should return null for absolute value of minimum Integer', async function () {
+    should(await this.absMinInteger.exec(this.ctx)).be.null();
+  });
   it('should be able to return the absolute value of a negative long', async function () {
     (await this.absNegTenLong.exec(this.ctx)).should.equal(10n);
+  });
+  it('should return null for absolute value of minimum Long', async function () {
+    should(await this.absMinLong.exec(this.ctx)).be.null();
   });
 });
 

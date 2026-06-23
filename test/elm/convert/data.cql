@@ -93,6 +93,9 @@ define TooLargeLong: ToInteger(2147483648L)
 define TooSmallLong: ToInteger(-2147483649L)
 define BooleanTrue: ToInteger(true)
 define BooleanFalse: ToInteger(false)
+define EmptyString: ToInteger('')
+define WhitespaceString: ToInteger('   ')
+define InvalidString: ToInteger('abc')
 
 // @Test: ToLong
 define NoSign: ToLong('12345')
@@ -104,6 +107,9 @@ define WithConvertKeyword: convert '101' to Long
 define Int: ToLong(12345)
 define BooleanTrue: ToLong(true)
 define BooleanFalse: ToLong(false)
+define EmptyString: ToLong('')
+define WhitespaceString: ToLong('   ')
+define InvalidString: ToLong('abc')
 
 // @Test: ToQuantity
 define DecimalOverload: ToQuantity(0.1)
@@ -207,6 +213,8 @@ define IsTrueWithLong: ConvertsToInteger(101L)
 define IsTrueWithBooleanTrue: ConvertsToInteger(true)
 define IsTrueWithBooleanFalse: ConvertsToInteger(false)
 define IsFalse: ConvertsToInteger('foo')
+define IsFalseWithEmptyString: ConvertsToInteger('')
+define IsFalseWithWhitespaceString: ConvertsToInteger('   ')
 define IsNull: ConvertsToInteger(null as Integer)
 
 // @Test: ConvertsToLong
@@ -215,6 +223,8 @@ define IsTrueWithInteger: ConvertsToLong(101)
 define IsTrueWithBooleanTrue: ConvertsToLong(true)
 define IsTrueWithBooleanFalse: ConvertsToLong(false)
 define IsFalse: ConvertsToLong('foo')
+define IsFalseWithEmptyString: ConvertsToLong('')
+define IsFalseWithWhitespaceString: ConvertsToLong('   ')
 define IsNull: ConvertsToLong(null as Integer)
 
 // @Test: ConvertsToQuantity

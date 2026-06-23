@@ -3562,7 +3562,14 @@ class Modulo extends expression_1.Expression {
         if (args == null || args.some((x) => x == null)) {
             return null;
         }
-        const modulo = args.reduce((x, y) => x % y);
+        let modulo;
+        try {
+            modulo = args.reduce((x, y) => x % y);
+        }
+        catch {
+            // modulo divide by zero results in null according to specification
+            return null;
+        }
         return MathUtil.decimalLongOrNull(modulo);
     }
 }
@@ -3619,10 +3626,16 @@ class Abs extends expression_1.Expression {
             return new quantity_1.Quantity(Math.abs(arg.value), arg.unit);
         }
         else if (typeof arg === 'bigint') {
-            return arg < 0n ? -arg : arg;
+            const absoluteValue = arg < 0n ? -arg : arg;
+            return MathUtil.overflowsOrUnderflows(absoluteValue, this.resultTypeName)
+                ? null
+                : absoluteValue;
         }
         else {
-            return Math.abs(arg);
+            const absoluteValue = Math.abs(arg);
+            return MathUtil.overflowsOrUnderflows(absoluteValue, this.resultTypeName)
+                ? null
+                : absoluteValue;
         }
     }
 }
@@ -3640,10 +3653,16 @@ class Negate extends expression_1.Expression {
             return new quantity_1.Quantity(arg.value * -1, arg.unit);
         }
         else if (typeof arg === 'bigint') {
-            return arg * -1n;
+            const negatedValue = arg * -1n;
+            return MathUtil.overflowsOrUnderflows(negatedValue, this.resultTypeName)
+                ? null
+                : negatedValue;
         }
         else {
-            return arg * -1;
+            const negatedValue = arg * -1;
+            return MathUtil.overflowsOrUnderflows(negatedValue, this.resultTypeName)
+                ? null
+                : negatedValue;
         }
     }
 }
@@ -3718,10 +3737,10 @@ class Power extends expression_1.Expression {
             return null;
         }
         const power = args.reduce((x, y) => x ** y);
-        // Only pass in resultTypeName when it is Decimal, because translator returns wrong type in some other cases.
+        // Note: The resultTypeName may be wrong if the exponent is a negative number. Math.overflowsOrUnderflows
+        // already accounts for this possibility by only considering it an integer if Number.isInteger(value).
         // E.g., CQL-to-ELM says 10^-1 is an Integer result type, but the correct result is a 0.1 (a Decimal)
-        const fixedResultType = this.resultTypeName === elmTypes_1.ELM_DECIMAL_TYPE ? this.resultTypeName : undefined;
-        if (MathUtil.overflowsOrUnderflows(power, fixedResultType)) {
+        if (MathUtil.overflowsOrUnderflows(power, this.resultTypeName)) {
             return null;
         }
         return power;
@@ -7825,7 +7844,18 @@ class ToInteger extends expression_1.Expression {
                 return arg;
             }
         }
-        else if (typeof arg === 'string' || typeof arg === 'bigint') {
+        else if (typeof arg === 'bigint') {
+            const integer = Number(arg);
+            if ((0, math_1.isValidInteger)(integer)) {
+                return integer;
+            }
+        }
+        else if (typeof arg === 'string') {
+            // check for blank string because Number('') and Number(' ') evaluate to 0.
+            if (arg.trim().length === 0) {
+                return null;
+            }
+            // note: invalid strings will result in NaN and fail isValidInteger
             const integer = Number(arg);
             if ((0, math_1.isValidInteger)(integer)) {
                 return integer;
@@ -7849,7 +7879,7 @@ class ToLong extends expression_1.Expression {
                 return arg;
             }
         }
-        else if (typeof arg === 'number' || typeof arg === 'string') {
+        else if (typeof arg === 'number') {
             try {
                 const long = BigInt(arg);
                 if ((0, math_1.isValidLong)(long)) {
@@ -7858,6 +7888,16 @@ class ToLong extends expression_1.Expression {
             }
             catch {
                 return null;
+            }
+        }
+        else if (typeof arg === 'string') {
+            // check string format because BigInt throws for invalid strings
+            if (!/^[+-]?\d+$/.test(arg)) {
+                return null;
+            }
+            const long = BigInt(arg);
+            if ((0, math_1.isValidLong)(long)) {
+                return long;
             }
         }
         else if (typeof arg === 'boolean') {
@@ -9592,7 +9632,10 @@ function overflowsOrUnderflows(value, type) {
         }
     }
     else if (typeof value === 'number') {
-        const isInteger = type === elmTypes_1.ELM_INTEGER_TYPE || (type == null && Number.isInteger(value));
+        // Only consider it an integer if it looks like an integer (even if the type says it's an integer).
+        // We need to do this because the CQL-to-ELM Translator's implementation of Power may incorrectly tag
+        // a result as an Integer when it really is a decimal (e.g., when the exponent is a negative number).
+        const isInteger = Number.isInteger(value) && (type === elmTypes_1.ELM_INTEGER_TYPE || type == null);
         if (isInteger) {
             if (!isValidInteger(value)) {
                 return true;

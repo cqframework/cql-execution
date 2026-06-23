@@ -168,7 +168,17 @@ export class ToInteger extends Expression {
       if (isValidInteger(arg)) {
         return arg;
       }
-    } else if (typeof arg === 'string' || typeof arg === 'bigint') {
+    } else if (typeof arg === 'bigint') {
+      const integer = Number(arg);
+      if (isValidInteger(integer)) {
+        return integer;
+      }
+    } else if (typeof arg === 'string') {
+      // check for blank string because Number('') and Number(' ') evaluate to 0.
+      if (arg.trim().length === 0) {
+        return null;
+      }
+      // note: invalid strings will result in NaN and fail isValidInteger
       const integer = Number(arg);
       if (isValidInteger(integer)) {
         return integer;
@@ -191,7 +201,7 @@ export class ToLong extends Expression {
       if (isValidLong(arg)) {
         return arg;
       }
-    } else if (typeof arg === 'number' || typeof arg === 'string') {
+    } else if (typeof arg === 'number') {
       try {
         const long = BigInt(arg);
         if (isValidLong(long)) {
@@ -199,6 +209,15 @@ export class ToLong extends Expression {
         }
       } catch {
         return null;
+      }
+    } else if (typeof arg === 'string') {
+      // check string format because BigInt throws for invalid strings
+      if (!/^[+-]?\d+$/.test(arg)) {
+        return null;
+      }
+      const long = BigInt(arg);
+      if (isValidLong(long)) {
+        return long;
       }
     } else if (typeof arg === 'boolean') {
       return arg ? 1n : 0n;

@@ -65,7 +65,9 @@ define DivideNumberByUncertainty: 36 / UncertaintySixToEighteen
 
 // @Test: Negate
 define NegativeOne: -1
+define NegateMinInteger: -(minimum Integer)
 define NegativeOneLong: -1L
+define NegateMinLong: -(minimum Long)
 
 // @Test: MathPrecedence
 define Mixed: 1 + 5 * 10 - 15 / 3
@@ -103,9 +105,12 @@ define TenDivThreeReverseMixed: 10L div 3
 
 // @Test: Modulo
 define Mod: 3 mod 2
+define ThreeModZero: 3 mod 0
 define ThreeModTwoLong: 3L mod 2L
 define ThreeModTwoMixed: 3 mod 2L
 define ThreeModTwoReverseMixed: 3L mod 2
+define ThreeModZeroLong: 3L mod 0L
+define ThreeModZeroDecimal: 3.0 mod 0.0
 
 
 // @Test: Ceiling
@@ -127,7 +132,9 @@ define TruncTenLong: Truncate(10L)
 define Pos: Abs(10)
 define Neg: Abs(-10)
 define Zero: Abs(0)
+define AbsMinInteger: Abs(minimum Integer)
 define AbsNegTenLong: Abs(-10L)
+define AbsMinLong: Abs(minimum Long)
 
 // @Test: Round
 define Up: Round(4.56)

@@ -421,6 +421,18 @@ describe('ToInteger', () => {
   it('should return 0 for boolean false', async function () {
     (await this.booleanFalse.exec(this.ctx)).should.equal(0);
   });
+
+  it('should return null for an empty string', async function () {
+    should(await this.emptyString.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for a whitespace string', async function () {
+    should(await this.whitespaceString.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for a invalid string', async function () {
+    should(await this.invalidString.exec(this.ctx)).be.null();
+  });
 });
 
 describe('ToLong', () => {
@@ -462,6 +474,18 @@ describe('ToLong', () => {
 
   it('should return 0 for boolean false', async function () {
     (await this.booleanFalse.exec(this.ctx)).should.equal(0n);
+  });
+
+  it('should return null for an empty string', async function () {
+    should(await this.emptyString.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for a whitespace string', async function () {
+    should(await this.whitespaceString.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for a invalid string', async function () {
+    should(await this.invalidString.exec(this.ctx)).be.null();
   });
 });
 
@@ -865,6 +889,14 @@ describe('ConvertsToInteger', () => {
     (await this.isFalse.exec(this.ctx)).should.equal(false);
   });
 
+  it('should return false for an empty string', async function () {
+    (await this.isFalseWithEmptyString.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return false for a whitespace string', async function () {
+    (await this.isFalseWithWhitespaceString.exec(this.ctx)).should.equal(false);
+  });
+
   it('should return null for null input', async function () {
     should(await this.isNull.exec(this.ctx)).be.null();
   });
@@ -893,6 +925,14 @@ describe('ConvertsToLong', () => {
 
   it('should return false for invalid integer string', async function () {
     (await this.isFalse.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return false for an empty string', async function () {
+    (await this.isFalseWithEmptyString.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return false for a whitespace string', async function () {
+    (await this.isFalseWithWhitespaceString.exec(this.ctx)).should.equal(false);
   });
 
   it('should return null for null input', async function () {

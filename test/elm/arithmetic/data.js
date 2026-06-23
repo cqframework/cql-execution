@@ -4638,7 +4638,9 @@ library TestSnippet version '1'
 using Simple version '1.0.0'
 context Patient
 define NegativeOne: -1
+define NegateMinInteger: -(minimum Integer)
 define NegativeOneLong: -1L
+define NegateMinLong: -(minimum Long)
 */
 
 module.exports['Negate'] = {
@@ -4653,7 +4655,7 @@ module.exports['Negate'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "220",
+        "r" : "233",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -4769,8 +4771,8 @@ module.exports['Negate'] = {
         }
       }, {
         "localId" : "220",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-        "name" : "NegativeOneLong",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "NegateMinInteger",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -4779,12 +4781,28 @@ module.exports['Negate'] = {
           "s" : {
             "r" : "220",
             "s" : [ {
-              "value" : [ "", "define ", "NegativeOneLong", ": " ]
+              "value" : [ "", "define ", "NegateMinInteger", ": " ]
             }, {
               "r" : "221",
               "s" : [ {
-                "r" : "222",
-                "value" : [ "-", "1L" ]
+                "value" : [ "-" ]
+              }, {
+                "r" : "223",
+                "s" : [ {
+                  "value" : [ "(" ]
+                }, {
+                  "r" : "223",
+                  "s" : [ {
+                    "value" : [ "minimum", " " ]
+                  }, {
+                    "r" : "222",
+                    "s" : [ {
+                      "value" : [ "Integer" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ ")" ]
+                } ]
               } ]
             } ]
           }
@@ -4792,20 +4810,118 @@ module.exports['Negate'] = {
         "expression" : {
           "type" : "Negate",
           "localId" : "221",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "224",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "MinValue",
+            "localId" : "223",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "227",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "NegativeOneLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "227",
+            "s" : [ {
+              "value" : [ "", "define ", "NegativeOneLong", ": " ]
+            }, {
+              "r" : "228",
+              "s" : [ {
+                "r" : "229",
+                "value" : [ "-", "1L" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Negate",
+          "localId" : "228",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "223",
+            "localId" : "230",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Literal",
-            "localId" : "222",
+            "localId" : "229",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "1",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "233",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "NegateMinLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "233",
+            "s" : [ {
+              "value" : [ "", "define ", "NegateMinLong", ": " ]
+            }, {
+              "r" : "234",
+              "s" : [ {
+                "value" : [ "-" ]
+              }, {
+                "r" : "236",
+                "s" : [ {
+                  "value" : [ "(" ]
+                }, {
+                  "r" : "236",
+                  "s" : [ {
+                    "value" : [ "minimum", " " ]
+                  }, {
+                    "r" : "235",
+                    "s" : [ {
+                      "value" : [ "Long" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ ")" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Negate",
+          "localId" : "234",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "237",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "MinValue",
+            "localId" : "236",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }
         }
@@ -6671,9 +6787,12 @@ library TestSnippet version '1'
 using Simple version '1.0.0'
 context Patient
 define Mod: 3 mod 2
+define ThreeModZero: 3 mod 0
 define ThreeModTwoLong: 3L mod 2L
 define ThreeModTwoMixed: 3 mod 2L
 define ThreeModTwoReverseMixed: 3L mod 2
+define ThreeModZeroLong: 3L mod 0L
+define ThreeModZeroDecimal: 3.0 mod 0.0
 */
 
 module.exports['Modulo'] = {
@@ -6688,7 +6807,7 @@ module.exports['Modulo'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "241",
+        "r" : "268",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -6816,8 +6935,8 @@ module.exports['Modulo'] = {
         }
       }, {
         "localId" : "222",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-        "name" : "ThreeModTwoLong",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "ThreeModZero",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -6826,12 +6945,12 @@ module.exports['Modulo'] = {
           "s" : {
             "r" : "222",
             "s" : [ {
-              "value" : [ "", "define ", "ThreeModTwoLong", ": " ]
+              "value" : [ "", "define ", "ThreeModZero", ": " ]
             }, {
               "r" : "223",
               "s" : [ {
                 "r" : "224",
-                "value" : [ "3L", " mod ", "2L" ]
+                "value" : [ "3", " mod ", "0" ]
               } ]
             } ]
           }
@@ -6839,39 +6958,39 @@ module.exports['Modulo'] = {
         "expression" : {
           "type" : "Modulo",
           "localId" : "223",
-          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
             "localId" : "226",
-            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
             "localId" : "227",
-            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "Literal",
             "localId" : "224",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
             "value" : "3",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
             "localId" : "225",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
-            "value" : "2",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0",
             "annotation" : [ ]
           } ]
         }
       }, {
         "localId" : "230",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-        "name" : "ThreeModTwoMixed",
+        "name" : "ThreeModTwoLong",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -6880,12 +6999,12 @@ module.exports['Modulo'] = {
           "s" : {
             "r" : "230",
             "s" : [ {
-              "value" : [ "", "define ", "ThreeModTwoMixed", ": " ]
+              "value" : [ "", "define ", "ThreeModTwoLong", ": " ]
             }, {
               "r" : "231",
               "s" : [ {
                 "r" : "232",
-                "value" : [ "3", " mod ", "2L" ]
+                "value" : [ "3L", " mod ", "2L" ]
               } ]
             } ]
           }
@@ -6897,33 +7016,22 @@ module.exports['Modulo'] = {
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "237",
+            "localId" : "234",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "238",
+            "localId" : "235",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
-            "type" : "ToLong",
-            "localId" : "235",
-            "annotation" : [ ],
-            "signature" : [ {
-              "type" : "NamedTypeSpecifier",
-              "localId" : "236",
-              "name" : "{urn:hl7-org:elm-types:r1}Integer",
-              "annotation" : [ ]
-            } ],
-            "operand" : {
-              "type" : "Literal",
-              "localId" : "232",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-              "value" : "3",
-              "annotation" : [ ]
-            }
+            "type" : "Literal",
+            "localId" : "232",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "value" : "3",
+            "annotation" : [ ]
           }, {
             "type" : "Literal",
             "localId" : "233",
@@ -6934,7 +7042,72 @@ module.exports['Modulo'] = {
           } ]
         }
       }, {
-        "localId" : "241",
+        "localId" : "238",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "ThreeModTwoMixed",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "238",
+            "s" : [ {
+              "value" : [ "", "define ", "ThreeModTwoMixed", ": " ]
+            }, {
+              "r" : "239",
+              "s" : [ {
+                "r" : "240",
+                "value" : [ "3", " mod ", "2L" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Modulo",
+          "localId" : "239",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "245",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "246",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "ToLong",
+            "localId" : "243",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "244",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "240",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "3",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "241",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "value" : "2",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "249",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
         "name" : "ThreeModTwoReverseMixed",
         "context" : "Patient",
@@ -6943,13 +7116,13 @@ module.exports['Modulo'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "241",
+            "r" : "249",
             "s" : [ {
               "value" : [ "", "define ", "ThreeModTwoReverseMixed", ": " ]
             }, {
-              "r" : "242",
+              "r" : "250",
               "s" : [ {
-                "r" : "243",
+                "r" : "251",
                 "value" : [ "3L", " mod ", "2" ]
               } ]
             } ]
@@ -6957,45 +7130,153 @@ module.exports['Modulo'] = {
         } ],
         "expression" : {
           "type" : "Modulo",
-          "localId" : "242",
+          "localId" : "250",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "248",
+            "localId" : "256",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           }, {
             "type" : "NamedTypeSpecifier",
-            "localId" : "249",
+            "localId" : "257",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : [ {
             "type" : "Literal",
-            "localId" : "243",
+            "localId" : "251",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "value" : "3",
             "annotation" : [ ]
           }, {
             "type" : "ToLong",
-            "localId" : "246",
+            "localId" : "254",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "247",
+              "localId" : "255",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "244",
+              "localId" : "252",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "2",
               "annotation" : [ ]
             }
+          } ]
+        }
+      }, {
+        "localId" : "260",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "ThreeModZeroLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "260",
+            "s" : [ {
+              "value" : [ "", "define ", "ThreeModZeroLong", ": " ]
+            }, {
+              "r" : "261",
+              "s" : [ {
+                "r" : "262",
+                "value" : [ "3L", " mod ", "0L" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Modulo",
+          "localId" : "261",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "264",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "265",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "262",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "value" : "3",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "263",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "value" : "0",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "268",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "ThreeModZeroDecimal",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "268",
+            "s" : [ {
+              "value" : [ "", "define ", "ThreeModZeroDecimal", ": " ]
+            }, {
+              "r" : "269",
+              "s" : [ {
+                "r" : "270",
+                "value" : [ "3.0", " mod ", "0.0" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Modulo",
+          "localId" : "269",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "272",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "273",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "270",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "3.0",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "271",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.0",
+            "annotation" : [ ]
           } ]
         }
       } ]
@@ -7748,7 +8029,9 @@ context Patient
 define Pos: Abs(10)
 define Neg: Abs(-10)
 define Zero: Abs(0)
+define AbsMinInteger: Abs(minimum Integer)
 define AbsNegTenLong: Abs(-10L)
+define AbsMinLong: Abs(minimum Long)
 */
 
 module.exports['Abs'] = {
@@ -7763,7 +8046,7 @@ module.exports['Abs'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "243",
+        "r" : "264",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -7982,8 +8265,8 @@ module.exports['Abs'] = {
         }
       }, {
         "localId" : "243",
-        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
-        "name" : "AbsNegTenLong",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "AbsMinInteger",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -7992,15 +8275,67 @@ module.exports['Abs'] = {
           "s" : {
             "r" : "243",
             "s" : [ {
-              "value" : [ "", "define ", "AbsNegTenLong", ": " ]
+              "value" : [ "", "define ", "AbsMinInteger", ": " ]
             }, {
-              "r" : "250",
+              "r" : "249",
               "s" : [ {
                 "value" : [ "Abs", "(" ]
               }, {
-                "r" : "244",
+                "r" : "245",
                 "s" : [ {
-                  "r" : "245",
+                  "value" : [ "minimum", " " ]
+                }, {
+                  "r" : "244",
+                  "s" : [ {
+                    "value" : [ "Integer" ]
+                  } ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Abs",
+          "localId" : "249",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "250",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "MinValue",
+            "localId" : "245",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }
+        }
+      }, {
+        "localId" : "253",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "AbsNegTenLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "253",
+            "s" : [ {
+              "value" : [ "", "define ", "AbsNegTenLong", ": " ]
+            }, {
+              "r" : "260",
+              "s" : [ {
+                "value" : [ "Abs", "(" ]
+              }, {
+                "r" : "254",
+                "s" : [ {
+                  "r" : "255",
                   "value" : [ "-", "10L" ]
                 } ]
               }, {
@@ -8011,34 +8346,86 @@ module.exports['Abs'] = {
         } ],
         "expression" : {
           "type" : "Abs",
-          "localId" : "250",
+          "localId" : "260",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "NamedTypeSpecifier",
-            "localId" : "251",
+            "localId" : "261",
             "name" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
           } ],
           "operand" : {
             "type" : "Negate",
-            "localId" : "244",
+            "localId" : "254",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "246",
+              "localId" : "256",
               "name" : "{urn:hl7-org:elm-types:r1}Long",
               "annotation" : [ ]
             } ],
             "operand" : {
               "type" : "Literal",
-              "localId" : "245",
+              "localId" : "255",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
               "valueType" : "{urn:hl7-org:elm-types:r1}Long",
               "value" : "10",
               "annotation" : [ ]
             }
+          }
+        }
+      }, {
+        "localId" : "264",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "AbsMinLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "264",
+            "s" : [ {
+              "value" : [ "", "define ", "AbsMinLong", ": " ]
+            }, {
+              "r" : "270",
+              "s" : [ {
+                "value" : [ "Abs", "(" ]
+              }, {
+                "r" : "266",
+                "s" : [ {
+                  "value" : [ "minimum", " " ]
+                }, {
+                  "r" : "265",
+                  "s" : [ {
+                    "value" : [ "Long" ]
+                  } ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Abs",
+          "localId" : "270",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "271",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "MinValue",
+            "localId" : "266",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
           }
         }
       } ]
