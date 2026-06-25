@@ -87,7 +87,7 @@ The CQL execution framework contains a very simplistic data model to support dem
 
 When the CQL execution framework executes a CQL library, it iterates over the patients provided by the `PatientSource`, calculating each expression in the library’s `Patient` context for each patient. In the `Patient` context, retrieves are always executed against the current patient record. In order to support patient-specific retrieves and record access, the `Patient` class must implement a small number of predefined functions (such as `findRecords` and `get`).
 
-Ideally, a `PatientSource` should provide the pre-filtered set of patients, based on the initial data requiremements (gleaned from the library’s retrieve statements). In the current reference implementation, the `PatientSource` is populated with an array of JSON-formatted patients, usually from a flat file.
+Ideally, a `PatientSource` should provide the pre-filtered set of patients, based on the initial data requirements (gleaned from the library’s retrieve statements). In the current reference implementation, the `PatientSource` is populated with an array of JSON-formatted patients, usually from a flat file.
 
 ### CodeService
 
@@ -103,11 +103,11 @@ onMessage(source: any, code: string, severity: string, message: string) {
 ```
 The `source` argument may be of any type (depending on where the `Message` operator is used in the CQL), but the `code`, `severity`, and `message` arguments are all strings. According to the specification, the `source` argument is supplied for messages w/ Trace severity and implementers should take care to ensure that no PII or PHI is logged as part of the trace message. The CQL execution framework does not redact any PII/PHI, so it is up to the implementer of the MessageListener to ensure appropriate precautions are taken.
 
-Implementers are encouraged to supply their own MessageListener, but the CQL execution framework exports two basic MessageListener classes: `NullMessageListener`, and `ConsoleMessageListener`. The `NullMessageListener` does nothing and is mainly used internally when no other MessageListener is supplied.  The `ConsoleMessageListener` logs Trace, Message, and Warning messages to stdout, and logs Error messages to stderr. It also take a boolean argument to indicate if Trace messages should log the source (as JSON); this defaults to `false` and should only be set to `true` in test environments using synthetic data.
+Implementers are encouraged to supply their own MessageListener, but the CQL execution framework exports two basic MessageListener classes: `NullMessageListener`, and `ConsoleMessageListener`. The `NullMessageListener` does nothing and is mainly used internally when no other MessageListener is supplied.  The `ConsoleMessageListener` logs Trace, Message, and Warning messages to stdout, and logs Error messages to stderr. It also takes a boolean argument to indicate if Trace messages should log the source (as JSON); this defaults to `false` and should only be set to `true` in test environments using synthetic data.
 
 ### Executor
 
-The CQL execution framework provides a basic Executor class for executing a cql document over a PatientSource. An instance of the Executor class provides a wrapping element around a Library instance, a CodeService instance (if required) and a set of CQL input parameters. Once configured, an Executor class can be used multiple times to execute over an arbitary number of PatientSource instances.
+The CQL execution framework provides a basic Executor class for executing a cql document over a PatientSource. An instance of the Executor class provides a wrapping element around a Library instance, a CodeService instance (if required) and a set of CQL input parameters. Once configured, an Executor class can be used multiple times to execute over an arbitrary number of PatientSource instances.
 
 Executing CQL Libraries
 -----------------------

@@ -273,7 +273,7 @@ describe('Median', () => {
     (await this.dup_vals_odd.exec(this.ctx)).should.equal(3);
   });
 
-  it('should be able to find median of even numbered list that contians duplicates', async function () {
+  it('should be able to find median of even numbered list that contains duplicates', async function () {
     (await this.dup_vals_even.exec(this.ctx)).should.equal(2.5);
   });
 
@@ -296,7 +296,7 @@ describe('Median', () => {
     validateQuantity(q, 3, 'ml');
   });
 
-  it('should be able to find median of even numbered list that contians duplicates', async function () {
+  it('should be able to find median of even numbered list that contains duplicates', async function () {
     const q = await this.dup_vals_even_q.exec(this.ctx);
     validateQuantity(q, 2.5, 'ml');
   });
