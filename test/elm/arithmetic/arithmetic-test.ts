@@ -338,8 +338,13 @@ describe('Power', () => {
     (await this.tenLongExpNegativeOneLong.exec(this.ctx)).should.equal(0.1);
   });
 
-  it('should return null when a long power exponent is too large', async function () {
+  it('should return null when a long power exponent is too large (beyond max Long value)', async function () {
     should(await this.twoLongExpMaxLong.exec(this.ctx)).be.null();
+  });
+
+  // TOODO: Unskip this test when we properly handle negative Long exponents that can't be safely converted to Number
+  it.skip('should return an infinitesimally small number when the exponent is the minimum Long value', async function () {
+    (await this.twoLongExpMinLong.exec(this.ctx)).should.be(0.0);
   });
 });
 

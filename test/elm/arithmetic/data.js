@@ -5393,6 +5393,7 @@ define ThreeExpFourMixed: 3 ^ 4L
 define ThreeExpFourReverseMixed: 3L ^ 4
 define TenLongExpNegativeOneLong: 10L ^ -1L
 define TwoLongExpMaxLong: 2L ^ maximum Long
+define TwoLongExpMinLong: 2L ^ minimum Long
 */
 
 module.exports['Power'] = {
@@ -5407,7 +5408,7 @@ module.exports['Power'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "272",
+        "r" : "281",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -5919,6 +5920,69 @@ module.exports['Power'] = {
           }, {
             "type" : "MaxValue",
             "localId" : "276",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "281",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "TwoLongExpMinLong",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "281",
+            "s" : [ {
+              "value" : [ "", "define ", "TwoLongExpMinLong", ": " ]
+            }, {
+              "r" : "282",
+              "s" : [ {
+                "r" : "283",
+                "value" : [ "2L", " ^ " ]
+              }, {
+                "r" : "285",
+                "s" : [ {
+                  "value" : [ "minimum", " " ]
+                }, {
+                  "r" : "284",
+                  "s" : [ {
+                    "value" : [ "Long" ]
+                  } ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Power",
+          "localId" : "282",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "286",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "287",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "283",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+            "value" : "2",
+            "annotation" : [ ]
+          }, {
+            "type" : "MinValue",
+            "localId" : "285",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
             "valueType" : "{urn:hl7-org:elm-types:r1}Long",
             "annotation" : [ ]
