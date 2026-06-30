@@ -2210,7 +2210,7 @@ class Interval {
                 return this.toClosed().low.sameAs(other.toClosed().high != null ? other.toClosed().high.add(1, precision) : null, precision);
             }
             else {
-                return cmp.equals(this.toClosed().low, (0, math_1.successor)(other.toClosed().high));
+                return cmp.equals(this.toClosed().low, (0, math_1.successor)(other.toClosed().high, other.pointType));
             }
         }
         catch {
@@ -2223,7 +2223,7 @@ class Interval {
                 return this.toClosed().high.sameAs(other.toClosed().low != null ? other.toClosed().low.add(-1, precision) : null, precision);
             }
             else {
-                return cmp.equals(this.toClosed().high, (0, math_1.predecessor)(other.toClosed().low));
+                return cmp.equals(this.toClosed().high, (0, math_1.predecessor)(other.toClosed().low, other.pointType));
             }
         }
         catch {
@@ -2335,10 +2335,10 @@ class Interval {
                 pointSize = new quantity_1.Quantity(1, this.low.getPrecision());
             }
             else if (this.low.isQuantity) {
-                pointSize = (0, quantity_1.doSubtraction)((0, math_1.successor)(this.low), this.low);
+                pointSize = (0, quantity_1.doSubtraction)((0, math_1.successor)(this.low, this.pointType), this.low);
             }
             else {
-                pointSize = (0, math_1.successor)(this.low) - this.low;
+                pointSize = (0, math_1.successor)(this.low, this.pointType) - this.low;
             }
         }
         else if (this.high != null) {
@@ -2346,10 +2346,10 @@ class Interval {
                 pointSize = new quantity_1.Quantity(1, this.high.getPrecision());
             }
             else if (this.high.isQuantity) {
-                pointSize = (0, quantity_1.doSubtraction)(this.high, (0, math_1.predecessor)(this.high));
+                pointSize = (0, quantity_1.doSubtraction)(this.high, (0, math_1.predecessor)(this.high, this.pointType));
             }
             else {
-                pointSize = this.high - (0, math_1.predecessor)(this.high);
+                pointSize = this.high - (0, math_1.predecessor)(this.high, this.pointType);
             }
         }
         else {
@@ -2368,7 +2368,7 @@ class Interval {
                 low = (0, math_1.minValueForType)(this.pointType);
             }
             else if (!this.lowClosed && this.low != null) {
-                low = (0, math_1.successor)(this.low);
+                low = (0, math_1.successor)(this.low, this.pointType);
             }
             else {
                 low = this.low;
@@ -2378,7 +2378,7 @@ class Interval {
                 high = (0, math_1.maxValueForType)(this.pointType);
             }
             else if (!this.highClosed && this.high != null) {
-                high = (0, math_1.predecessor)(this.high);
+                high = (0, math_1.predecessor)(this.high, this.pointType);
             }
             else {
                 high = this.high;
@@ -5387,6 +5387,10 @@ class Expand extends expression_1.Expression {
         // expand(argument List<Interval<T>>, per Quantity) List<Interval<T>>
         let defaultPer, expandFunction;
         let [intervals, per] = await this.execArgs(ctx);
+        if (per?.value === 0) {
+            // a per of 0 is basically like a divide-by-zero; since spec says divide-by-zero returns null, we'll return null here too
+            return null;
+        }
         // CQL 1.5 introduced an overload to allow singular intervals; make it a list so we can use the same logic for either overload
         if (!Array.isArray(intervals)) {
             intervals = [intervals];
@@ -9788,7 +9792,7 @@ function successor(val, type) {
                 return val.high;
             }
         })();
-        return new uncertainty_1.Uncertainty(successor(val.low), high);
+        return new uncertainty_1.Uncertainty(successor(val.low, type), high);
     }
     else if (val && val.isQuantity) {
         const succ = val.clone();
@@ -9861,7 +9865,7 @@ function predecessor(val, type) {
                 return val.low;
             }
         })();
-        return new uncertainty_1.Uncertainty(low, predecessor(val.high));
+        return new uncertainty_1.Uncertainty(low, predecessor(val.high, type));
     }
     else if (val && val.isQuantity) {
         const pred = val.clone();

@@ -418,6 +418,12 @@ export class Expand extends Expression {
     // expand(argument List<Interval<T>>, per Quantity) List<Interval<T>>
     let defaultPer, expandFunction;
     let [intervals, per] = await this.execArgs(ctx);
+
+    if (per?.value === 0) {
+      // a per of 0 is basically like a divide-by-zero; since spec says divide-by-zero returns null, we'll return null here too
+      return null;
+    }
+
     // CQL 1.5 introduced an overload to allow singular intervals; make it a list so we can use the same logic for either overload
     if (!Array.isArray(intervals)) {
       intervals = [intervals];

@@ -1481,6 +1481,7 @@ define OpenBothDecimalTrunc: expand { Interval(2.1 'g', 4.101 'g') } per 1 'g'
 
 define EmptyList: List<Interval<Date>>{}
 define PerTooBig: expand { Interval[2 'g', 4 'g'], null } per 5 'g'
+define PerZero: expand { Interval[2 'g', 4 'g'], null } per 0 'g'
 define NullOpen: expand { Interval[null, 4 'g'] } per 1 'g'
 define NullClose: expand { Interval[2 'g', null] } per 1 'g'
 define NullBoth: expand { Interval[null, null] } per 1 'g'
@@ -1505,6 +1506,7 @@ define OpenBoth: expand { Interval(2, 4) } per 1 '1'
 
 define EmptyList: List<Interval<Integer>>{}
 define PerTooBig: expand { Interval[2, 4], null } per 5 '1'
+define PerZero: expand { Interval[2, 4], null } per 0 '1'
 define NullOpen: expand { Interval[null, 4] } per 1 '1'
 define NullClose: expand { Interval[2, null] } per 1 '1'
 define NullBoth: expand { Interval[null, null] } per 1 '1'
@@ -1529,6 +1531,7 @@ define LongOpenBoth: expand { Interval(2L, 4L) } per 1 '1'
 
 define LongEmptyList: List<Interval<Long>>{}
 define LongPerTooBig: expand { Interval[2L, 4L], null } per 5 '1'
+define LongPerZero: expand { Interval[2L, 4L], null } per 0 '1'
 define LongNullOpen: expand { Interval[null, 4L] } per 1 '1'
 define LongNullClose: expand { Interval[2L, null] } per 1 '1'
 define LongNullBoth: expand { Interval[null, null] } per 1 '1'
@@ -1553,6 +1556,7 @@ define OpenBoth: expand { Interval(2, 5) } per 1.5 '1'
 
 define EmptyList: List<Interval<Decimal>>{}
 define PerTooBig: expand { Interval[2, 4], null } per 5.5 '1'
+define PerZero: expand { Interval[2.2, 4.4], null } per 0 '1'
 define NullOpen: expand { Interval[null, 4] } per 1.5 '1'
 define NullClose: expand { Interval[2, null] } per 1.5 '1'
 define NullBoth: expand { Interval[null, null] } per 1.5 '1'

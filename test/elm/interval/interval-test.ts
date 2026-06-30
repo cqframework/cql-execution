@@ -3313,9 +3313,13 @@ describe('QuantityIntervalExpand', () => {
     should.not.exist(a);
   });
 
-  it('returns null when per not applicable or mismatch interval', async function () {
+  it('returns null when per zero, not applicable, or mismatch interval', async function () {
+    // define perZero: expand { Interval[2 'g', 4 'g'] } per 0 'g'
+    let a = await this.perZero.exec(this.ctx);
+    should.not.exist(a);
+
     // define BadPerMinute: expand { Interval(2 'g', 4 'g'] } per 1 minute
-    let a = await this.badPerMinute.exec(this.ctx);
+    a = await this.badPerMinute.exec(this.ctx);
     should.not.exist(a);
 
     // define BadPerGram: expand { Interval(2 'km', 4 'km'] }  per 1 'g'
@@ -3401,9 +3405,13 @@ describe('IntegerIntervalExpand', () => {
     should.not.exist(a);
   });
 
-  it('returns null when per not applicable or mismatch interval', async function () {
+  it('returns null when per zero, not applicable, or mismatch interval', async function () {
+    // define perZero: expand { Interval[2, 4] } per 0 '1'
+    let a = await this.perZero.exec(this.ctx);
+    should.not.exist(a);
+
     // define BadPerMinute: expand { Interval(2, 4] } per 1 minute
-    const a = await this.badPerMinute.exec(this.ctx);
+    a = await this.badPerMinute.exec(this.ctx);
     should.not.exist(a);
   });
 
@@ -3472,8 +3480,11 @@ describe('LongIntervalExpand', () => {
     should.not.exist(a);
   });
 
-  it('returns null when per not applicable or mismatch interval', async function () {
-    const a = await this.longBadPerMinute.exec(this.ctx);
+  it('returns null when per zero, not applicable, or mismatch interval', async function () {
+    let a = await this.longPerZero.exec(this.ctx);
+    should.not.exist(a);
+
+    a = await this.longBadPerMinute.exec(this.ctx);
     should.not.exist(a);
   });
 
@@ -3565,9 +3576,13 @@ describe('DecimalIntervalExpand', () => {
     should.not.exist(a);
   });
 
-  it('returns null when per not applicable or mismatch interval', async function () {
+  it('returns null when per zero, not applicable, or mismatch interval', async function () {
+    // define perZero: expand { Interval[2.2, 4.4] } per 0 '1'
+    let a = await this.perZero.exec(this.ctx);
+    should.not.exist(a);
+
     // define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
-    const a = await this.badPerMinute.exec(this.ctx);
+    a = await this.badPerMinute.exec(this.ctx);
     should.not.exist(a);
   });
 });
