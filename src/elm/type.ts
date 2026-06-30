@@ -241,6 +241,10 @@ export class ToQuantity extends Expression {
     } else if (typeof val === 'number') {
       return new Quantity(val, '1');
     } else if (typeof val === 'bigint') {
+      // By definition, Quantity value is a Decimal in CQL, so we need to convert bigint to number.
+      // While this isn't perfect, in practice it is probably OK since the range of safer integers
+      // in JS number is pretty big: -(2^53 - 1) to 2^53 - 1, which is plus/minus 9 quadrillion.
+      // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isSafeInteger#description
       return new Quantity(Number(val), '1');
     } else if (val.isRatio) {
       // numerator and denominator are guaranteed non-null
