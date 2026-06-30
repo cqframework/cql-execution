@@ -141,7 +141,13 @@ export function doContains(container: any[], item: any) {
   );
 }
 
+// Delegated to by overloaded#ProperContains and overloaded#ProperIn
 export function doProperContains(container: any[], item: any) {
+  // The "proper" membership operators have list semantics, not set semantics.
+  // The intent here is that given list semantics and a `distinct` operator,
+  // one can achieve set semantics, but the reverse isn't possible.
+  // These proper membership operators can then be described as
+  // the regular membership operators, plus the list is strictly larger.
   return container.length > 1 && doContains(container, item);
 }
 
