@@ -2,6 +2,7 @@ import should from 'should';
 import { DateTime } from '../../src/datatypes/datetime';
 import { Interval } from '../../src/datatypes/interval';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
+import { ELM_DECIMAL_TYPE } from '../../src/util/elmTypes';
 import data from './interval-data';
 
 const xy = (obj: any) => [obj.x, obj.y];
@@ -5205,4 +5206,35 @@ describe('LongInterval', () => {
   });
 });
 
-// TODO: Tests for real numbers (i.e., floats)
+describe('DecimalInterval', () => {
+  it('should close open decimal uncertainty endpoints using decimal point size', () => {
+    const closed = new Interval(
+      new Uncertainty(1, 2),
+      new Uncertainty(3, 4),
+      false,
+      false,
+      ELM_DECIMAL_TYPE
+    ).toClosed();
+
+    closed.low.should.eql(new Uncertainty(1.00000001, 2.00000001));
+    closed.high.should.eql(new Uncertainty(2.99999999, 3.99999999));
+    closed.lowClosed.should.be.true();
+    closed.highClosed.should.be.true();
+  });
+
+  it('should use decimal point size for meetsBefore decimal uncertainty bounds', () => {
+    const earlier = new Interval(1, 1.99999999);
+    const later = new Interval(new Uncertainty(2, 2), null, true, false, ELM_DECIMAL_TYPE);
+
+    earlier.meetsBefore(later).should.be.true();
+  });
+
+  it('should use decimal point size for meetsAfter decimal uncertainty bounds', () => {
+    const earlier = new Interval(null, new Uncertainty(1, 1), false, true, ELM_DECIMAL_TYPE);
+    const later = new Interval(1.00000001, 2);
+
+    later.meetsAfter(earlier).should.be.true();
+  });
+
+  // TODO: More decimal tests, similar to IntegerInterval and LongInterval test suites
+});

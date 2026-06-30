@@ -194,7 +194,7 @@ export function successor(val: any, type?: string): any {
         return val.high;
       }
     })();
-    return new Uncertainty(successor(val.low), high);
+    return new Uncertainty(successor(val.low, type), high);
   } else if (val && val.isQuantity) {
     const succ = val.clone();
     succ.value = successor(val.value, ELM_DECIMAL_TYPE);
@@ -253,7 +253,7 @@ export function predecessor(val: any, type?: string): any {
         return val.low;
       }
     })();
-    return new Uncertainty(low, predecessor(val.high));
+    return new Uncertainty(low, predecessor(val.high, type));
   } else if (val && val.isQuantity) {
     const pred = val.clone();
     pred.value = predecessor(val.value, ELM_DECIMAL_TYPE);

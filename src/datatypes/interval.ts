@@ -446,7 +446,7 @@ export class Interval {
           precision
         );
       } else {
-        return cmp.equals(this.toClosed().low, successor(other.toClosed().high));
+        return cmp.equals(this.toClosed().low, successor(other.toClosed().high, other.pointType));
       }
     } catch {
       return false;
@@ -461,7 +461,7 @@ export class Interval {
           precision
         );
       } else {
-        return cmp.equals(this.toClosed().high, predecessor(other.toClosed().low));
+        return cmp.equals(this.toClosed().high, predecessor(other.toClosed().low, other.pointType));
       }
     } catch {
       return false;
@@ -582,17 +582,17 @@ export class Interval {
       if (this.low.isDateTime || this.low.isDate || this.low.isTime) {
         pointSize = new Quantity(1, this.low.getPrecision());
       } else if (this.low.isQuantity) {
-        pointSize = doSubtraction(successor(this.low), this.low);
+        pointSize = doSubtraction(successor(this.low, this.pointType), this.low);
       } else {
-        pointSize = successor(this.low) - this.low;
+        pointSize = successor(this.low, this.pointType) - this.low;
       }
     } else if (this.high != null) {
       if (this.high.isDateTime || this.high.isDate || this.high.isTime) {
         pointSize = new Quantity(1, this.high.getPrecision());
       } else if (this.high.isQuantity) {
-        pointSize = doSubtraction(this.high, predecessor(this.high));
+        pointSize = doSubtraction(this.high, predecessor(this.high, this.pointType));
       } else {
-        pointSize = this.high - predecessor(this.high);
+        pointSize = this.high - predecessor(this.high, this.pointType);
       }
     } else {
       throw new Error('Point type of interval cannot be determined.');
@@ -611,7 +611,7 @@ export class Interval {
       if (this.lowClosed && this.low == null) {
         low = minValueForType(this.pointType);
       } else if (!this.lowClosed && this.low != null) {
-        low = successor(this.low);
+        low = successor(this.low, this.pointType);
       } else {
         low = this.low;
       }
@@ -619,7 +619,7 @@ export class Interval {
       if (this.highClosed && this.high == null) {
         high = maxValueForType(this.pointType);
       } else if (!this.highClosed && this.high != null) {
-        high = predecessor(this.high);
+        high = predecessor(this.high, this.pointType);
       } else {
         high = this.high;
       }
