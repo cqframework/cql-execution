@@ -5072,6 +5072,7 @@ exports.Interval = Interval;
 function doContains(interval, item, precision) {
     return interval.contains(item, precision);
 }
+// Delegated to by overloaded#ProperContains and overloaded#ProperIn
 function doProperContains(interval, item, precision) {
     return interval.properContains(item, precision);
 }
@@ -6016,7 +6017,13 @@ exports.IndexOf = IndexOf;
 function doContains(container, item) {
     return container.some((element) => (0, comparison_1.equals)(element, item) || (element == null && item == null));
 }
+// Delegated to by overloaded#ProperContains and overloaded#ProperIn
 function doProperContains(container, item) {
+    // The "proper" membership operators have list semantics, not set semantics.
+    // The intent here is that given list semantics and a `distinct` operator,
+    // one can achieve set semantics, but the reverse isn't possible.
+    // These proper membership operators can then be described as
+    // the regular membership operators, plus the list is strictly larger.
     return container.length > 1 && doContains(container, item);
 }
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
