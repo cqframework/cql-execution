@@ -1891,6 +1891,26 @@ class Interval {
         }
         return logic_1.ThreeValuedLogic.and(lowFn(this.low, item, precision), highFn(this.high, item, precision));
     }
+    properContains(item, precision) {
+        if (item != null && item.isInterval) {
+            throw new Error('Argument to contains must be a point');
+        }
+        let lowFn;
+        if (this.lowClosed && this.low == null) {
+            lowFn = () => true;
+        }
+        else {
+            lowFn = cmp.lessThan;
+        }
+        let highFn;
+        if (this.highClosed && this.high == null) {
+            highFn = () => true;
+        }
+        else {
+            highFn = cmp.greaterThan;
+        }
+        return logic_1.ThreeValuedLogic.and(lowFn(this.low, item, precision), highFn(this.high, item, precision));
+    }
     properlyIncludes(other, precision) {
         if (other == null || !other.isInterval) {
             throw new Error('Argument to properlyIncludes must be an interval');
@@ -4800,7 +4820,7 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.doContains = exports.doExcept = exports.doIncludes = exports.doIntersect = exports.doProperIncludes = exports.doAfter = exports.doUnion = exports.doBefore = void 0;
+exports.doProperContains = exports.doContains = exports.doExcept = exports.doIncludes = exports.doIntersect = exports.doProperIncludes = exports.doAfter = exports.doUnion = exports.doBefore = void 0;
 __exportStar(require("./expression"), exports);
 __exportStar(require("./aggregate"), exports);
 __exportStar(require("./arithmetic"), exports);
@@ -4839,6 +4859,7 @@ Object.defineProperty(exports, "doIntersect", { enumerable: true, get: function 
 Object.defineProperty(exports, "doIncludes", { enumerable: true, get: function () { return interval_1.doIncludes; } });
 Object.defineProperty(exports, "doExcept", { enumerable: true, get: function () { return interval_1.doExcept; } });
 Object.defineProperty(exports, "doContains", { enumerable: true, get: function () { return interval_1.doContains; } });
+Object.defineProperty(exports, "doProperContains", { enumerable: true, get: function () { return interval_1.doProperContains; } });
 
 },{"./aggregate":15,"./arithmetic":16,"./clinical":18,"./comparison":19,"./conditional":20,"./datetime":21,"./declaration":22,"./expression":23,"./external":25,"./instance":26,"./interval":27,"./list":29,"./literal":30,"./logical":31,"./message":32,"./nullological":33,"./overloaded":34,"./parameters":35,"./quantity":36,"./query":37,"./ratio":38,"./reusable":39,"./string":40,"./structured":41,"./type":42}],25:[function(require,module,exports){
 "use strict";
@@ -4991,6 +5012,7 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Collapse = exports.Expand = exports.Ends = exports.Starts = exports.End = exports.Start = exports.Size = exports.Width = exports.OverlapsBefore = exports.OverlapsAfter = exports.Overlaps = exports.MeetsBefore = exports.MeetsAfter = exports.Meets = exports.Interval = void 0;
 exports.doContains = doContains;
+exports.doProperContains = doProperContains;
 exports.doIncludes = doIncludes;
 exports.doProperIncludes = doProperIncludes;
 exports.doAfter = doAfter;
@@ -5049,6 +5071,9 @@ exports.Interval = Interval;
 // Delegated to by overloaded#Contains and overloaded#In
 function doContains(interval, item, precision) {
     return interval.contains(item, precision);
+}
+function doProperContains(interval, item, precision) {
+    return interval.properContains(item, precision);
 }
 // Delegated to by overloaded#Includes and overloaded#IncludedIn
 function doIncludes(interval, subinterval, precision) {
@@ -5861,6 +5886,7 @@ exports.doUnion = doUnion;
 exports.doExcept = doExcept;
 exports.doIntersect = doIntersect;
 exports.doContains = doContains;
+exports.doProperContains = doProperContains;
 exports.doIncludes = doIncludes;
 exports.doProperIncludes = doProperIncludes;
 const immutable_1 = require("immutable");
@@ -5989,6 +6015,9 @@ exports.IndexOf = IndexOf;
 // Delegated to by overloaded#Contains and overloaded#In
 function doContains(container, item) {
     return container.some((element) => (0, comparison_1.equals)(element, item) || (element == null && item == null));
+}
+function doProperContains(container, item) {
+    return container.length > 1 && doContains(container, item);
 }
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
 function doIncludes(list, sublist) {
@@ -6427,7 +6456,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Precision = exports.SameOrBefore = exports.SameOrAfter = exports.SameAs = exports.Before = exports.After = exports.Length = exports.ProperIncludedIn = exports.ProperIncludes = exports.IncludedIn = exports.Includes = exports.Contains = exports.In = exports.Indexer = exports.Intersect = exports.Except = exports.Union = exports.NotEqual = exports.Equivalent = exports.Equal = void 0;
+exports.Precision = exports.SameOrBefore = exports.SameOrAfter = exports.SameAs = exports.Before = exports.After = exports.Length = exports.ProperContains = exports.ProperIn = exports.ProperIncludedIn = exports.ProperIncludes = exports.IncludedIn = exports.Includes = exports.Contains = exports.In = exports.Indexer = exports.Intersect = exports.Except = exports.Union = exports.NotEqual = exports.Equivalent = exports.Equal = void 0;
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 const expression_1 = require("./expression");
 const logic_1 = require("../datatypes/logic");
@@ -6675,6 +6704,50 @@ class ProperIncludedIn extends expression_1.Expression {
     }
 }
 exports.ProperIncludedIn = ProperIncludedIn;
+class ProperIn extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
+    }
+    async exec(ctx) {
+        const [item, container] = await this.execArgs(ctx);
+        if (container == null) {
+            return false;
+        }
+        if ((0, util_1.typeIsArray)(container)) {
+            return LIST.doProperContains(container, item);
+        }
+        else {
+            if (item == null) {
+                return null;
+            }
+            return IVL.doProperContains(container, item, this.precision);
+        }
+    }
+}
+exports.ProperIn = ProperIn;
+class ProperContains extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+        this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
+    }
+    async exec(ctx) {
+        const [container, item] = await this.execArgs(ctx);
+        if (container == null) {
+            return false;
+        }
+        if ((0, util_1.typeIsArray)(container)) {
+            return LIST.doProperContains(container, item);
+        }
+        else {
+            if (item == null) {
+                return null;
+            }
+            return IVL.doProperContains(container, item, this.precision);
+        }
+    }
+}
+exports.ProperContains = ProperContains;
 class Length extends expression_1.Expression {
     constructor(json) {
         super(json);

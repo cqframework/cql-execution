@@ -622,6 +622,78 @@ describe('ProperlyIncludedIn', () => {
   });
 });
 
+describe('ProperContains', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should accept properly contained items', async function () {
+    (await this.properContainsInt.exec(this.ctx)).should.be.true();
+    (await this.properContainsReal.exec(this.ctx)).should.be.true();
+    (await this.properContainsQuantity.exec(this.ctx)).should.be.true();
+    (await this.properContainsDate.exec(this.ctx)).should.be.true();
+    (await this.properContainsTime.exec(this.ctx)).should.be.true();
+  });
+
+  it('should reject items outside the interval or on an edge', async function () {
+    (await this.notProperContainsInt.exec(this.ctx)).should.be.false();
+    (await this.notProperContainsIntLowEdge.exec(this.ctx)).should.be.false();
+    (await this.notProperContainsIntHighEdge.exec(this.ctx)).should.be.false();
+    (await this.notProperContainsReal.exec(this.ctx)).should.be.false();
+    (await this.notProperContainsQuantityEdge.exec(this.ctx)).should.be.false();
+    (await this.notProperContainsDateHighEdgeOpen.exec(this.ctx)).should.be.false();
+    (await this.notProperContainsDateHighEdgeClosed.exec(this.ctx)).should.be.false();
+    (await this.notProperContainsTimeLowEdge.exec(this.ctx)).should.be.false();
+  });
+
+  it('should correctly compare using the requested precision', async function () {
+    (await this.properContainsSecondOfTime.exec(this.ctx)).should.be.true();
+    (await this.notProperContainsSecondOfTime.exec(this.ctx)).should.be.false();
+    should(await this.mayProperContainsTime.exec(this.ctx)).be.null();
+    should(await this.mayProperContainsMillisecondOfTime.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for a null item', async function () {
+    should(await this.properContainsNull.exec(this.ctx)).be.null();
+  });
+});
+
+describe('ProperIn', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should accept properly contained items', async function () {
+    (await this.properInInt.exec(this.ctx)).should.be.true();
+    (await this.properInReal.exec(this.ctx)).should.be.true();
+    (await this.properInQuantity.exec(this.ctx)).should.be.true();
+    (await this.properInDate.exec(this.ctx)).should.be.true();
+    (await this.properInTime.exec(this.ctx)).should.be.true();
+  });
+
+  it('should reject items outside the interval or on an edge', async function () {
+    (await this.notProperInInt.exec(this.ctx)).should.be.false();
+    (await this.notProperInIntLowEdge.exec(this.ctx)).should.be.false();
+    (await this.notProperInIntHighEdge.exec(this.ctx)).should.be.false();
+    (await this.notProperInReal.exec(this.ctx)).should.be.false();
+    (await this.notProperInQuantityEdge.exec(this.ctx)).should.be.false();
+    (await this.notProperInDateHighEdgeOpen.exec(this.ctx)).should.be.false();
+    (await this.notProperInDateHighEdgeClosed.exec(this.ctx)).should.be.false();
+    (await this.notProperInTimeLowEdge.exec(this.ctx)).should.be.false();
+  });
+
+  it('should correctly compare using the requested precision', async function () {
+    (await this.properInSecondOfTime.exec(this.ctx)).should.be.true();
+    (await this.notProperInSecondOfTime.exec(this.ctx)).should.be.false();
+    should(await this.mayProperInTime.exec(this.ctx)).be.null();
+    should(await this.mayProperInMillisecondOfTime.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for a null item', async function () {
+    should(await this.properInNull.exec(this.ctx)).be.null();
+  });
+});
+
 describe('After', () => {
   beforeEach(function () {
     setup(this, data);

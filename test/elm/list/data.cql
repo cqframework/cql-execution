@@ -177,7 +177,7 @@ define IsSameLong: {1L, 2L, 3L, 4L, 5L} properly includes {1L, 2L, 3L, 4L, 5L}
 define IsNotIncludedLong: {1L, 2L, 3L, 4L, 5L} properly includes {4L, 5L, 6L}
 define TuplesIncluded: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly includes {Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define TuplesNotIncluded: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly includes {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}}
-define NullIncluded: {1, 2, 3, 4, 5} properly includes null
+define NullIncluded: {1, 2, 3, 4, 5} properly includes (null as List<Integer>)
 define NullIncludes: null properly includes {1, 2, 3, 4, 5}
 
 // @Test: ProperIncludedIn
@@ -193,6 +193,30 @@ define TuplesIncluded: {Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly included 
 define TuplesNotIncluded: {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}} properly included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define NullIncludes: {1, 2, 3, 4, 5} properly included in null as List<Integer>
 define NullIncluded: (null as List<Integer>) properly included in {1, 2, 3, 4, 5}
+
+// @Test: ProperIn
+define IsIn: 4 properly included in { 3, 4, 5 }
+define IsNotIn: 4 properly included in { 3, 5, 6 }
+define IsNotProperlyIn: 4 properly included in { 4 }
+define IsInNotUnique: 4 properly included in { 4, 4 }
+define IsInWithNull: 4 properly included in { 4, null }
+define TupleIsIn: Tuple{a: 1, b: 'c'} properly included in {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}}
+define TupleIsNotIn: Tuple{a: 1, b: 'c'} properly included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
+define NullIn: null properly included in {1, 2, null, 3}
+define InNull: 1 properly included in null
+define NullNotIn: null properly included in {1, 2, 3}
+
+// @Test: ProperContains
+define IsIn: { 3, 4, 5 } properly includes 4
+define IsNotIn: { 3, 5, 6 } properly includes 4
+define IsNotProperlyIn: { 4 } properly includes 4
+define IsInNotUnique: { 4, 4 } properly includes 4
+define IsInWithNull: { 4, null } properly includes 4
+define TupleIsIn: {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}} properly includes Tuple{a: 1, b: 'c'}
+define TupleIsNotIn: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly includes Tuple{a: 1, b: 'c'}
+define InNull: (null as List<Integer>) properly includes 1
+define NullIn: {1, 2, null, 3} properly includes null
+define NullNotIn: {1, 2, 3} properly includes null
 
 // @Test: Flatten
 define ListOfLists: flatten { {1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {9, 8, 7, 6, 5}, {4}, {3, 2, 1} }

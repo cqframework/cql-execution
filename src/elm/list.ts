@@ -141,6 +141,10 @@ export function doContains(container: any[], item: any) {
   );
 }
 
+export function doProperContains(container: any[], item: any) {
+  return container.length > 1 && doContains(container, item);
+}
+
 // Delegated to by overloaded#Includes and overloaded@IncludedIn
 export function doIncludes(list: any, sublist: any) {
   if (list == null || sublist == null) {
