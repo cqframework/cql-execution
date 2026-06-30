@@ -1895,21 +1895,7 @@ class Interval {
         if (item != null && item.isInterval) {
             throw new Error('Argument to contains must be a point');
         }
-        let lowFn;
-        if (this.lowClosed && this.low == null) {
-            lowFn = () => true;
-        }
-        else {
-            lowFn = cmp.lessThan;
-        }
-        let highFn;
-        if (this.highClosed && this.high == null) {
-            highFn = () => true;
-        }
-        else {
-            highFn = cmp.greaterThan;
-        }
-        return logic_1.ThreeValuedLogic.and(lowFn(this.low, item, precision), highFn(this.high, item, precision));
+        return logic_1.ThreeValuedLogic.and(cmp.lessThan(this.start(), item, precision), cmp.greaterThan(this.end(), item, precision));
     }
     properlyIncludes(other, precision) {
         if (other == null || !other.isInterval) {

@@ -118,21 +118,9 @@ export class Interval {
     if (item != null && item.isInterval) {
       throw new Error('Argument to contains must be a point');
     }
-    let lowFn;
-    if (this.lowClosed && this.low == null) {
-      lowFn = () => true;
-    } else {
-      lowFn = cmp.lessThan;
-    }
-    let highFn;
-    if (this.highClosed && this.high == null) {
-      highFn = () => true;
-    } else {
-      highFn = cmp.greaterThan;
-    }
     return ThreeValuedLogic.and(
-      lowFn(this.low, item, precision),
-      highFn(this.high, item, precision)
+      cmp.lessThan(this.start(), item, precision),
+      cmp.greaterThan(this.end(), item, precision)
     );
   }
 
