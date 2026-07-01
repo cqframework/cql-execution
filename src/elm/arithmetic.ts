@@ -11,6 +11,14 @@ import { Uncertainty } from '../datatypes/uncertainty';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import { DateTime } from '../datatypes/datetime';
+import {
+  ELM_DECIMAL_TYPE,
+  ELM_DATETIME_TYPE,
+  ELM_DATE_TYPE,
+  ELM_INTEGER_TYPE,
+  ELM_LONG_TYPE,
+  ELM_TIME_TYPE
+} from '../util/elmTypes';
 
 export class Add extends Expression {
   constructor(json: any) {
@@ -48,7 +56,7 @@ export class Add extends Expression {
       }
     });
 
-    if (MathUtil.overflowsOrUnderflows(sum)) {
+    if (MathUtil.overflowsOrUnderflows(sum, this.resultTypeName)) {
       return null;
     }
     return sum;
@@ -86,7 +94,7 @@ export class Subtract extends Expression {
       }
     });
 
-    if (MathUtil.overflowsOrUnderflows(difference)) {
+    if (MathUtil.overflowsOrUnderflows(difference, this.resultTypeName)) {
       return null;
     }
     return difference;
@@ -124,7 +132,7 @@ export class Multiply extends Expression {
       }
     });
 
-    if (MathUtil.overflowsOrUnderflows(product)) {
+    if (MathUtil.overflowsOrUnderflows(product, this.resultTypeName)) {
       return null;
     }
     return product;
@@ -164,7 +172,7 @@ export class Divide extends Expression {
 
     // Note, anything divided by 0 is Infinity in Javascript, which will be
     // considered as overflow by this check.
-    if (MathUtil.overflowsOrUnderflows(quotient)) {
+    if (MathUtil.overflowsOrUnderflows(quotient, this.resultTypeName)) {
       return null;
     }
     return quotient;
@@ -182,10 +190,21 @@ export class TruncatedDivide extends Expression {
       return null;
     }
 
-    const quotient = args.reduce((x: number, y: number) => x / y);
-    const truncatedQuotient = quotient >= 0 ? Math.floor(quotient) : Math.ceil(quotient);
+    let truncatedQuotient: number | bigint;
+    if (typeof args[0] === 'bigint') {
+      // bigint division always truncates
+      try {
+        truncatedQuotient = args.reduce((x: bigint, y: bigint) => x / y);
+      } catch {
+        // bigint divide by 0 throws an error
+        return null;
+      }
+    } else {
+      const quotient = args.reduce((x: number, y: number) => x / y);
+      truncatedQuotient = quotient >= 0 ? Math.floor(quotient) : Math.ceil(quotient);
+    }
 
-    if (MathUtil.overflowsOrUnderflows(truncatedQuotient)) {
+    if (MathUtil.overflowsOrUnderflows(truncatedQuotient, this.resultTypeName)) {
       return null;
     }
     return truncatedQuotient;
@@ -203,9 +222,15 @@ export class Modulo extends Expression {
       return null;
     }
 
-    const modulo = args.reduce((x: number, y: number) => x % y);
+    let modulo: number | bigint;
+    try {
+      modulo = args.reduce((x: any, y: any) => x % y);
+    } catch {
+      // modulo divide by zero results in null according to specification
+      return null;
+    }
 
-    return MathUtil.decimalOrNull(modulo);
+    return MathUtil.decimalLongOrNull(modulo);
   }
 }
 
@@ -264,8 +289,16 @@ export class Abs extends Expression {
       return null;
     } else if (arg.isQuantity) {
       return new Quantity(Math.abs(arg.value), arg.unit);
+    } else if (typeof arg === 'bigint') {
+      const absoluteValue = arg < 0n ? -arg : arg;
+      return MathUtil.overflowsOrUnderflows(absoluteValue, this.resultTypeName)
+        ? null
+        : absoluteValue;
     } else {
-      return Math.abs(arg);
+      const absoluteValue = Math.abs(arg);
+      return MathUtil.overflowsOrUnderflows(absoluteValue, this.resultTypeName)
+        ? null
+        : absoluteValue;
     }
   }
 }
@@ -281,8 +314,16 @@ export class Negate extends Expression {
       return null;
     } else if (arg.isQuantity) {
       return new Quantity(arg.value * -1, arg.unit);
+    } else if (typeof arg === 'bigint') {
+      const negatedValue = arg * -1n;
+      return MathUtil.overflowsOrUnderflows(negatedValue, this.resultTypeName)
+        ? null
+        : negatedValue;
     } else {
-      return arg * -1;
+      const negatedValue = arg * -1;
+      return MathUtil.overflowsOrUnderflows(negatedValue, this.resultTypeName)
+        ? null
+        : negatedValue;
     }
   }
 }
@@ -336,7 +377,7 @@ export class Exp extends Expression {
 
     const power = Math.exp(arg);
 
-    if (MathUtil.overflowsOrUnderflows(power)) {
+    if (MathUtil.overflowsOrUnderflows(power, this.resultTypeName)) {
       return null;
     }
     return power;
@@ -371,22 +412,48 @@ export class Power extends Expression {
       return null;
     }
 
-    const power = args.reduce((x: number, y: number) => Math.pow(x, y));
+    const power = args.reduce((x: any, y: any) => doPower(x, y));
 
-    if (MathUtil.overflowsOrUnderflows(power)) {
+    // Note: The resultTypeName may be wrong if the exponent is a negative number. Math.overflowsOrUnderflows
+    // already accounts for this possibility by only considering it an integer if Number.isInteger(value).
+    // E.g., CQL-to-ELM says 10^-1 is an Integer result type, but the correct result is a 0.1 (a Decimal)
+    if (MathUtil.overflowsOrUnderflows(power, this.resultTypeName)) {
       return null;
     }
     return power;
   }
 }
 
+function doPower(x: any, y: any) {
+  if (typeof x === 'bigint' && typeof y === 'bigint' && y < 0n) {
+    // x ** y does not support negative exponents for bigint, so downgrade to number if possible, otherwise return null
+    if (
+      x < BigInt(Number.MIN_SAFE_INTEGER) ||
+      x > BigInt(Number.MAX_SAFE_INTEGER) ||
+      y < BigInt(Number.MIN_SAFE_INTEGER)
+    ) {
+      // can't safely convert to number so just return null
+      return null;
+    }
+    return Number(x) ** Number(y);
+  }
+
+  try {
+    return x ** y;
+  } catch {
+    // will throw if BigInt goes out of range
+    return null;
+  }
+}
+
 export class MinValue extends Expression {
   static readonly MIN_VALUES = {
-    '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MIN_INT_VALUE,
-    '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MIN_FLOAT_VALUE,
-    '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MIN_DATETIME_VALUE,
-    '{urn:hl7-org:elm-types:r1}Date': MathUtil.MIN_DATE_VALUE,
-    '{urn:hl7-org:elm-types:r1}Time': MathUtil.MIN_TIME_VALUE
+    [ELM_INTEGER_TYPE]: MathUtil.MIN_INT_VALUE,
+    [ELM_LONG_TYPE]: MathUtil.MIN_LONG_VALUE,
+    [ELM_DECIMAL_TYPE]: MathUtil.MIN_FLOAT_VALUE,
+    [ELM_DATETIME_TYPE]: MathUtil.MIN_DATETIME_VALUE,
+    [ELM_DATE_TYPE]: MathUtil.MIN_DATE_VALUE,
+    [ELM_TIME_TYPE]: MathUtil.MIN_TIME_VALUE
   };
 
   valueType: keyof typeof MinValue.MIN_VALUES;
@@ -398,7 +465,7 @@ export class MinValue extends Expression {
 
   async exec(ctx: Context) {
     if (MinValue.MIN_VALUES[this.valueType]) {
-      if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
+      if (this.valueType === ELM_DATETIME_TYPE) {
         const minDateTime = (MinValue.MIN_VALUES[this.valueType] as DateTime).copy();
         minDateTime.timezoneOffset = ctx.getTimezoneOffset();
         return minDateTime;
@@ -413,11 +480,12 @@ export class MinValue extends Expression {
 
 export class MaxValue extends Expression {
   static readonly MAX_VALUES = {
-    '{urn:hl7-org:elm-types:r1}Integer': MathUtil.MAX_INT_VALUE,
-    '{urn:hl7-org:elm-types:r1}Decimal': MathUtil.MAX_FLOAT_VALUE,
-    '{urn:hl7-org:elm-types:r1}DateTime': MathUtil.MAX_DATETIME_VALUE,
-    '{urn:hl7-org:elm-types:r1}Date': MathUtil.MAX_DATE_VALUE,
-    '{urn:hl7-org:elm-types:r1}Time': MathUtil.MAX_TIME_VALUE
+    [ELM_INTEGER_TYPE]: MathUtil.MAX_INT_VALUE,
+    [ELM_LONG_TYPE]: MathUtil.MAX_LONG_VALUE,
+    [ELM_DECIMAL_TYPE]: MathUtil.MAX_FLOAT_VALUE,
+    [ELM_DATETIME_TYPE]: MathUtil.MAX_DATETIME_VALUE,
+    [ELM_DATE_TYPE]: MathUtil.MAX_DATE_VALUE,
+    [ELM_TIME_TYPE]: MathUtil.MAX_TIME_VALUE
   };
 
   valueType: keyof typeof MaxValue.MAX_VALUES;
@@ -429,7 +497,7 @@ export class MaxValue extends Expression {
 
   async exec(ctx: Context) {
     if (MaxValue.MAX_VALUES[this.valueType] != null) {
-      if (this.valueType === '{urn:hl7-org:elm-types:r1}DateTime') {
+      if (this.valueType === ELM_DATETIME_TYPE) {
         const maxDateTime = (MaxValue.MAX_VALUES[this.valueType] as DateTime).copy();
         maxDateTime.timezoneOffset = ctx.getTimezoneOffset();
         return maxDateTime;
@@ -457,14 +525,14 @@ export class Successor extends Expression {
     try {
       // MathUtil.successor throws on overflow, and the exception is used in
       // the logic for evaluating `meets`, so it can't be changed to just return null
-      successor = MathUtil.successor(arg);
+      successor = MathUtil.successor(arg, this.resultTypeName);
     } catch (e) {
       if (e instanceof MathUtil.OverFlowException) {
         return null;
       }
     }
 
-    if (MathUtil.overflowsOrUnderflows(successor)) {
+    if (MathUtil.overflowsOrUnderflows(successor, this.resultTypeName)) {
       return null;
     }
     return successor;
@@ -486,14 +554,14 @@ export class Predecessor extends Expression {
     try {
       // MathUtil.predecessor throws on underflow, and the exception is used in
       // the logic for evaluating `meets`, so it can't be changed to just return null
-      predecessor = MathUtil.predecessor(arg);
+      predecessor = MathUtil.predecessor(arg, this.resultTypeName);
     } catch (e) {
       if (e instanceof MathUtil.OverFlowException) {
         return null;
       }
     }
 
-    if (MathUtil.overflowsOrUnderflows(predecessor)) {
+    if (MathUtil.overflowsOrUnderflows(predecessor, this.resultTypeName)) {
       return null;
     }
     return predecessor;

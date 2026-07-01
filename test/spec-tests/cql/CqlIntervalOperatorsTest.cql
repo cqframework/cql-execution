@@ -572,7 +572,7 @@ define "Except": Tuple{
     output: null
   },
   "DecimalIntervalExcept1to3": Tuple{
-    skipped: '(Sort of) wrong answer (is open 4 end boundary 3 or 3.99999999?)'
+    skipped: 'Expected Interval[1.0, 3.99999999] but got Interval[1.0, 4) (closed boundary vs equivalent open boundary)'
     /*
     expression: Interval[1.0, 10.0] except Interval[4.0, 10.0],
     output: Interval [ 1.0, 3.99999999 ]
@@ -582,11 +582,9 @@ define "Except": Tuple{
     output: null
   },
   "QuantityIntervalExcept1to4": Tuple{
-    skipped: '(Sort of) wrong answer (is open 5 end boundary 4 or 4.99999999?)'
-    /*
     expression: Interval[1.0 'g', 10.0 'g'] except Interval[5.0 'g', 10.0 'g'],
     output: Interval [ 1.0 'g', 4.99999999 'g' ]
-    */  },
+  },
   "Except12": Tuple{
     expression: Interval[1, 4] except Interval[3, 6],
     output: Interval [ 1, 2 ]

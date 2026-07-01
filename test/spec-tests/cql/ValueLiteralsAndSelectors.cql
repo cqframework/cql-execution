@@ -169,39 +169,29 @@ define "Decimal": Tuple{
     output: -2147483647.0
   },
   "Decimal2Pow31": Tuple{
-    skipped: 'Overflows because it thinks it is an integer'
-    /*
     expression: Power(2.0,30.0)+Power(2.0,30.0),
     output: 2147483648.0
-    */  },
+  },
   "DecimalPos2Pow31": Tuple{
-    skipped: 'Overflows because it thinks it is an integer'
-    /*
     expression: +Power(2.0,30.0)+Power(2.0,30.0),
     output: 2147483648.0
-    */  },
+  },
   "DecimalNeg2Pow31": Tuple{
     expression: -Power(2.0,30.0)-Power(2.0,30.0),
     output: -2147483648.0
   },
   "Decimal2Pow31ToInf1": Tuple{
-    skipped: 'Overflows because it thinks it is an integer'
-    /*
     expression: Power(2.0,30.0)+1.0+Power(2.0,30.0),
     output: 2147483649.0
-    */  },
+  },
   "DecimalPos2Pow31ToInf1": Tuple{
-    skipped: 'Overflows because it thinks it is an integer'
-    /*
     expression: +Power(2.0,30.0)+1.0+Power(2.0,30.0),
     output: 2147483649.0
-    */  },
+  },
   "DecimalNeg2Pow31ToInf1": Tuple{
-    skipped: 'Underflows because it thinks it is an integer'
-    /*
     expression: -Power(2.0,30.0)-1.0-Power(2.0,30.0),
     output: -2147483649.0
-    */  },
+  },
   "DecimalZeroStep": Tuple{
     expression: 0.00000000,
     output: 0.00000000

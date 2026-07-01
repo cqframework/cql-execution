@@ -10,6 +10,15 @@ import {
   minValueForType
 } from '../util/math';
 import * as cmp from '../util/comparison';
+import {
+  ELM_INTEGER_TYPE,
+  ELM_DECIMAL_TYPE,
+  ELM_LONG_TYPE,
+  ELM_TIME_TYPE,
+  ELM_DATE_TYPE,
+  ELM_DATETIME_TYPE,
+  ELM_QUANTITY_TYPE
+} from '../util/elmTypes';
 
 export class Interval {
   constructor(
@@ -40,17 +49,17 @@ export class Interval {
     const point = this.low != null ? this.low : this.high;
     if (point != null) {
       if (typeof point === 'number') {
-        pointType = Number.isInteger(point)
-          ? '{urn:hl7-org:elm-types:r1}Integer'
-          : '{urn:hl7-org:elm-types:r1}Decimal';
+        pointType = Number.isInteger(point) ? ELM_INTEGER_TYPE : ELM_DECIMAL_TYPE;
+      } else if (typeof point === 'bigint') {
+        pointType = ELM_LONG_TYPE;
       } else if (point.isTime && point.isTime()) {
-        pointType = '{urn:hl7-org:elm-types:r1}Time';
+        pointType = ELM_TIME_TYPE;
       } else if (point.isDate) {
-        pointType = '{urn:hl7-org:elm-types:r1}Date';
+        pointType = ELM_DATE_TYPE;
       } else if (point.isDateTime) {
-        pointType = '{urn:hl7-org:elm-types:r1}DateTime';
+        pointType = ELM_DATETIME_TYPE;
       } else if (point.isQuantity) {
-        pointType = '{urn:hl7-org:elm-types:r1}Quantity';
+        pointType = ELM_QUANTITY_TYPE;
       }
     }
     if (pointType == null && this.defaultPointType != null) {
@@ -317,7 +326,7 @@ export class Interval {
         !other.highClosed &&
         !this.highClosed)
     ) {
-      if (typeof this.low === 'number') {
+      if (typeof this.low === 'number' || typeof this.low === 'bigint') {
         if (!(this.start() === other.start())) {
           return false;
         }
@@ -331,7 +340,7 @@ export class Interval {
       (this.low == null && other.low != null && this.high != null && other.high != null) ||
       (this.low == null && other.low == null && this.high != null && other.high != null)
     ) {
-      if (typeof this.high === 'number') {
+      if (typeof this.high === 'number' || typeof this.high === 'bigint') {
         if (!(this.end() === other.end())) {
           return false;
         }
@@ -366,7 +375,7 @@ export class Interval {
       return false;
     }
 
-    if (typeof this.low === 'number') {
+    if (typeof this.low === 'number' || typeof this.low === 'bigint') {
       return this.start() === other.start() && this.end() === other.end();
     } else {
       return (
@@ -437,7 +446,7 @@ export class Interval {
           precision
         );
       } else {
-        return cmp.equals(this.toClosed().low, successor(other.toClosed().high));
+        return cmp.equals(this.toClosed().low, successor(other.toClosed().high, other.pointType));
       }
     } catch {
       return false;
@@ -452,7 +461,7 @@ export class Interval {
           precision
         );
       } else {
-        return cmp.equals(this.toClosed().high, predecessor(other.toClosed().low));
+        return cmp.equals(this.toClosed().high, predecessor(other.toClosed().low, other.pointType));
       }
     } catch {
       return false;
@@ -521,20 +530,20 @@ export class Interval {
       if (closed.low.unit !== closed.high.unit) {
         throw new Error('Cannot calculate width of Quantity Interval with different units');
       }
-      const lowValue = closed.low.value;
-      const highValue = closed.high.value;
-      let diff = Math.abs(highValue - lowValue);
+
+      let diff = closed.high.value - closed.low.value;
       diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
       return new Quantity(diff, closed.low.unit);
+    } else if (typeof closed.low === 'bigint') {
+      return closed.high - closed.low;
     } else {
       // TODO: Fix precision to 8 decimals in other places that return numbers
-      const diff = Math.abs(closed.high - closed.low);
+      const diff = closed.high - closed.low;
       return Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
     }
   }
 
   size() {
-    const pointSize = this.getPointSize();
     if (
       (this.low != null && (this.low.isDateTime || this.low.isDate)) ||
       (this.high != null && (this.high.isDateTime || this.high.isDate))
@@ -548,17 +557,21 @@ export class Interval {
       (closed.high != null && closed.high.isUncertainty)
     ) {
       return null;
-    } else if (closed.low.isQuantity) {
+    }
+
+    const pointSize = this.getPointSize();
+    if (closed.low.isQuantity) {
       if (closed.low.unit !== closed.high.unit) {
         throw new Error('Cannot calculate size of Quantity Interval with different units');
       }
-      const lowValue = closed.low.value;
-      const highValue = closed.high.value;
-      let diff = Math.abs(highValue - lowValue) + pointSize.value;
+
+      let diff = closed.high.value - closed.low.value + pointSize.value;
       diff = Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
       return new Quantity(diff, closed.low.unit);
+    } else if (typeof closed.low === 'bigint') {
+      return closed.high - closed.low + pointSize;
     } else {
-      const diff = Math.abs(closed.high - closed.low) + pointSize.value;
+      const diff = closed.high - closed.low + pointSize;
       return Math.round(diff * Math.pow(10, 8)) / Math.pow(10, 8);
     }
   }
@@ -569,24 +582,20 @@ export class Interval {
       if (this.low.isDateTime || this.low.isDate || this.low.isTime) {
         pointSize = new Quantity(1, this.low.getPrecision());
       } else if (this.low.isQuantity) {
-        pointSize = doSubtraction(successor(this.low), this.low);
+        pointSize = doSubtraction(successor(this.low, this.pointType), this.low);
       } else {
-        pointSize = successor(this.low) - this.low;
+        pointSize = successor(this.low, this.pointType) - this.low;
       }
     } else if (this.high != null) {
       if (this.high.isDateTime || this.high.isDate || this.high.isTime) {
         pointSize = new Quantity(1, this.high.getPrecision());
       } else if (this.high.isQuantity) {
-        pointSize = doSubtraction(successor(this.high), this.high);
+        pointSize = doSubtraction(this.high, predecessor(this.high, this.pointType));
       } else {
-        pointSize = successor(this.high) - this.high;
+        pointSize = this.high - predecessor(this.high, this.pointType);
       }
     } else {
-      throw new Error('Point type of intervals cannot be determined.');
-    }
-
-    if (typeof pointSize === 'number') {
-      pointSize = new Quantity(pointSize, '1');
+      throw new Error('Point type of interval cannot be determined.');
     }
 
     return pointSize;
@@ -602,7 +611,7 @@ export class Interval {
       if (this.lowClosed && this.low == null) {
         low = minValueForType(this.pointType);
       } else if (!this.lowClosed && this.low != null) {
-        low = successor(this.low);
+        low = successor(this.low, this.pointType);
       } else {
         low = this.low;
       }
@@ -610,7 +619,7 @@ export class Interval {
       if (this.highClosed && this.high == null) {
         high = maxValueForType(this.pointType);
       } else if (!this.highClosed && this.high != null) {
-        high = predecessor(this.high);
+        high = predecessor(this.high, this.pointType);
       } else {
         high = this.high;
       }
@@ -639,7 +648,11 @@ function areDateTimes(x: any, y: any) {
 
 function areNumeric(x: any, y: any) {
   return [x, y].every(z => {
-    return typeof z === 'number' || (z != null && z.isUncertainty && typeof z.low === 'number');
+    return (
+      typeof z === 'number' ||
+      typeof z === 'bigint' ||
+      (z != null && z.isUncertainty && (typeof z.low === 'number' || typeof z.low === 'bigint'))
+    );
   });
 }
 

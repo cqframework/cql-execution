@@ -1,4 +1,11 @@
 import { Context } from '../runtime/context';
+import {
+  ELM_BOOLEAN_TYPE,
+  ELM_INTEGER_TYPE,
+  ELM_LONG_TYPE,
+  ELM_DECIMAL_TYPE,
+  ELM_STRING_TYPE
+} from '../util/elmTypes';
 import { Expression } from './expression';
 
 export class Literal extends Expression {
@@ -7,13 +14,15 @@ export class Literal extends Expression {
 
   static from(json: any) {
     switch (json.valueType) {
-      case '{urn:hl7-org:elm-types:r1}Boolean':
+      case ELM_BOOLEAN_TYPE:
         return new BooleanLiteral(json);
-      case '{urn:hl7-org:elm-types:r1}Integer':
+      case ELM_INTEGER_TYPE:
         return new IntegerLiteral(json);
-      case '{urn:hl7-org:elm-types:r1}Decimal':
+      case ELM_LONG_TYPE:
+        return new LongLiteral(json);
+      case ELM_DECIMAL_TYPE:
         return new DecimalLiteral(json);
-      case '{urn:hl7-org:elm-types:r1}String':
+      case ELM_STRING_TYPE:
         return new StringLiteral(json);
       default:
         return new Literal(json);
@@ -59,6 +68,23 @@ export class IntegerLiteral extends Literal {
   // Define a simple getter to allow type-checking of this class without instanceof
   // and in a way that survives minification (as opposed to checking constructor.name)
   get isIntegerLiteral() {
+    return true;
+  }
+
+  async exec(_ctx: Context) {
+    return this.value;
+  }
+}
+
+export class LongLiteral extends Literal {
+  constructor(json: any) {
+    super(json);
+    this.value = BigInt(this.value);
+  }
+
+  // Define a simple getter to allow type-checking of this class without instanceof
+  // and in a way that survives minification (as opposed to checking constructor.name)
+  get isLongLiteral() {
     return true;
   }
 

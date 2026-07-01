@@ -1,6 +1,7 @@
 // @Test: List
 define Three: 1 + 2
 define IntList: { 9, 7, 8 }
+define LongList: { 9L, 7L, 8L }
 define StringList: { 'a', 'bee', 'see' }
 define MixedList: List<Any>{ 1, 'two', Three }
 define EmptyList: List<Integer>{}
@@ -19,6 +20,9 @@ define NullExists: exists (null)
 define EqualIntList: {1, 2, 3} = {1, 2, 3}
 define UnequalIntList: {1, 2, 3} = {1, 2}
 define ReverseIntList: {1, 2, 3} = {3, 2, 1}
+define EqualLongList: {1L, 2L, 3L} = {1L, 2L, 3L}
+define UnequalLongList: {1L, 2L, 3L} = {1L, 2L}
+define ReverseLongList: {1L, 2L, 3L} = {3L, 2L, 1L}
 define EqualStringList: {'hello', 'world'} = {'hello', 'world'}
 define UnequalStringList: {'hello', 'world'} = {'foo', 'bar'}
 define EqualTupleList: List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z: 2} } = List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z: 2} }
@@ -31,6 +35,9 @@ define BothListsHaveNull: List<Integer>{(null as Integer)} = List<Integer>{(null
 define EqualIntList: {1, 2, 3} != {1, 2, 3}
 define UnequalIntList: {1, 2, 3} != {1, 2}
 define ReverseIntList: {1, 2, 3} != {3, 2, 1}
+define EqualLongList: {1L, 2L, 3L} != {1L, 2L, 3L}
+define UnequalLongList: {1L, 2L, 3L} != {1L, 2L}
+define ReverseLongList: {1L, 2L, 3L} != {3L, 2L, 1L}
 define EqualStringList: {'hello', 'world'} != {'hello', 'world'}
 define UnequalStringList: {'hello', 'world'} != {'foo', 'bar'}
 define EqualTupleList: List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z: 2} } != List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z: 2} }
@@ -39,6 +46,7 @@ define UnequalTupleList: List<Any>{ Tuple{a: 1, b: Tuple{c: 1}}, Tuple{x: 'y', z
 // @Test: Union
 define OneToTen: {1, 2, 3, 4, 5} union {6, 7, 8, 9, 10}
 define OneToFiveOverlapped: {1, 2, 3, 4} union {3, 4, 5}
+define OneToFiveLongOverlapped: {1L, 2L, 3L, 4L} union {3L, 4L, 5L}
 define OneToFiveOverlappedWithNulls: {1, null, 2, 3, 4} union {3, 4, 5, null}
 define Disjoint: {1, 2} union {4, 5}
 define NestedToFifteen: {1, 2, 3} union {4, 5, 6} union {7 ,8 , 9} union {10, 11, 12} union {13, 14, 15}
@@ -49,6 +57,7 @@ define nullUnionNull: (null as List<String>) union (null as List<String>)
 
 // @Test: Except
 define ExceptThreeFour: {1, 2, 3, 4, 5} except {3, 4}
+define ExceptThreeFourLong: {1L, 2L, 3L, 4L, 5L} except {3L, 4L}
 define ThreeFourExcept: {3, 4} except {1, 2, 3, 4, 5}
 define ExceptFiveThree: {1, 2, 3, 4, 5} except {5, 3}
 define ExceptNoOp: {1, 2, 3, 3, 4, 5} except {6, 7, 8, 9, 10}
@@ -64,6 +73,7 @@ define NullExcept: null except {1, 2, 3, 4, 5}
 // @Test: Intersect
 define NoIntersection: {1, 2, 2, 3} intersect {4, 5, 6}
 define IntersectOnFive: {4, 5, 5, 6} intersect {1, 3, 5, 7}
+define IntersectOnFiveLong: {4L, 5L, 5L, 6L} intersect {1L, 3L, 5L, 7L}
 define IntersectionOnFourDuplicates: {4, 4, 1, 1, 2} intersect {4, 4, 3, 9}
 define IntersectOnEvens: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10} intersect {0, 2, 4, 6, 8, 10, 12}
 define IntersectOnAll: {1, 2, 3, 4, 5} intersect {5, 4, 3, 2, 1}
@@ -75,6 +85,7 @@ define MultipleNullInListIntersect: {1, 2, 3, null} intersect {null, 3}
 
 // @Test: IndexOf
 define IndexOfSecond: IndexOf({'a', 'b', 'c', 'd'}, 'b')
+define IndexOfSecondLong: IndexOf({12L, 34L, 56L, 78L}, 34L)
 define IndexOfThirdTuple: IndexOf({Tuple{a: 1}, Tuple{a: 2}, Tuple{a: 3}}, Tuple{a: 3})
 define MultipleMatches: IndexOf({'a', 'b', 'c', 'd', 'd', 'e', 'd'}, 'd')
 define ItemNotFound: IndexOf({'a', 'b', 'c'}, 'd')
@@ -87,6 +98,7 @@ define ListWrongCodeSystem: IndexOf({Code{code: 'F', system: '1.16.840.1.113883.
 
 // @Test: Indexer
 define SecondItem: {'a', 'b', 'c', 'd'}[1]
+define SecondItemLong: {12L, 34L, 56L, 78L}[1]
 define ZeroIndex: {'a', 'b', 'c', 'd'}[0]
 define OutOfBounds: {'a', 'b', 'c', 'd'}[100]
 define NullList: (null as List<String>)[1]
@@ -95,6 +107,8 @@ define NullIndexer: {'a', 'b', 'c', 'd'}[null]
 // @Test: In
 define IsIn: 4 in { 3, 4, 5 }
 define IsNotIn: 4 in { 3, 5, 6 }
+define IsInLong: 4L in { 3L, 4L, 5L }
+define IsNotInLong: 4L in { 3L, 5L, 6L }
 define TupleIsIn: Tuple{a: 1, b: 'c'} in {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}}
 define TupleIsNotIn: Tuple{a: 1, b: 'c'} in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define NullIn: null in {1, 2, null, 3}
@@ -104,6 +118,8 @@ define NullNotIn: null in {1, 2, 3}
 // @Test: Contains
 define IsIn: { 3, 4, 5 } contains 4
 define IsNotIn: { 3, 5, 6 } contains 4
+define IsInLong: { 3L, 4L, 5L } contains 4L
+define IsNotInLong:{ 3L, 5L, 6L } contains 4L
 define TupleIsIn: {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}} contains Tuple{a: 1, b: 'c'}
 define TupleIsNotIn: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} contains Tuple{a: 1, b: 'c'}
 define InNull: (null as List<Integer>) contains 1
@@ -115,6 +131,10 @@ define IsIncluded: {1, 2, 3, 4, 5} includes {2, 3, 4}
 define IsIncludedReversed: {1, 2, 3, 4, 5} includes {4, 3, 2}
 define IsSame: {1, 2, 3, 4, 5} includes {1, 2, 3, 4, 5}
 define IsNotIncluded: {1, 2, 3, 4, 5} includes {4, 5, 6}
+define IsIncludedLong: {1L, 2L, 3L, 4L, 5L} includes {2L, 3L, 4L}
+define IsIncludedReversedLong: {1L, 2L, 3L, 4L, 5L} includes {4L, 3L, 2L}
+define IsSameLong: {1L, 2L, 3L, 4L, 5L} includes {1L, 2L, 3L, 4L, 5L}
+define IsNotIncludedLong: {1L, 2L, 3L, 4L, 5L} includes {4L, 5L, 6L}
 define TuplesIncluded: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} includes {Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define TuplesNotIncluded: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} includes {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}}
 define NullIncluded: {1, 2, 3, 4, 5} includes null
@@ -123,7 +143,7 @@ define DayIncluded: {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 
 define DayNotIncluded: {DateTime(2012, 3, 2), DateTime(2012, 3, 3), DateTime(2012, 3, 4)} includes DateTime(2014, 3, 3)
 define IntegerIncluded: {1, 2, 3, 4, 5} includes 3
 define IntegerNotIncluded: {1, 2, 3, 4, 5} includes 33
-define QuantityInList: { ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'') 
+define QuantityInList: { ToQuantity('1 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'')
 define QuantityNotInList: { ToQuantity('100 \'m\''), ToQuantity('1.995 \'m\''), ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')} includes ToQuantity('1 \'m\'')
 
 // @Test: IncludedIn
@@ -131,6 +151,10 @@ define IsIncluded: {2, 3, 4} included in {1, 2, 3, 4, 5}
 define IsIncludedReversed: {4, 3, 2} included in {1, 2, 3, 4, 5}
 define IsSame: {1, 2, 3, 4, 5} included in {1, 2, 3, 4, 5}
 define IsNotIncluded: {4, 5, 6} included in {1, 2, 3, 4, 5}
+define IsIncludedLong: {2L, 3L, 4L} included in {1L, 2L, 3L, 4L, 5L}
+define IsIncludedReversedLong: {4L, 3L, 2L} included in {1L, 2L, 3L, 4L, 5L}
+define IsSameLong: {1L, 2L, 3L, 4L, 5L} included in {1L, 2L, 3L, 4L, 5L}
+define IsNotIncludedLong: {4L, 5L, 6L} included in {1L, 2L, 3L, 4L, 5L}
 define TuplesIncluded: {Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define TuplesNotIncluded: {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}} included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define NullIncludes: {1, 2, 3, 4, 5} included in null
@@ -147,6 +171,10 @@ define IsIncluded: {1, 2, 3, 4, 5} properly includes {2, 3, 4, 5}
 define IsIncludedReversed: {1, 2, 3, 4, 5} properly includes {5, 4, 3, 2}
 define IsSame: {1, 2, 3, 4, 5} properly includes {1, 2, 3, 4, 5}
 define IsNotIncluded: {1, 2, 3, 4, 5} properly includes {3, 4, 5, 6}
+define IsIncludedLong: {1L, 2L, 3L, 4L, 5L} properly includes {2L, 3L, 4L}
+define IsIncludedReversedLong: {1L, 2L, 3L, 4L, 5L} properly includes {4L, 3L, 2L}
+define IsSameLong: {1L, 2L, 3L, 4L, 5L} properly includes {1L, 2L, 3L, 4L, 5L}
+define IsNotIncludedLong: {1L, 2L, 3L, 4L, 5L} properly includes {4L, 5L, 6L}
 define TuplesIncluded: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly includes {Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define TuplesNotIncluded: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly includes {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}}
 define NullIncluded: {1, 2, 3, 4, 5} properly includes null
@@ -157,6 +185,10 @@ define IsIncluded: {2, 3, 4} properly included in {1, 2, 3, 4, 5}
 define IsIncludedReversed: {4, 3, 2} properly included in {1, 2, 3, 4, 5}
 define IsSame: {1, 2, 3, 4, 5} properly included in {1, 2, 3, 4, 5}
 define IsNotIncluded: {4, 5, 6} properly included in {1, 2, 3, 4, 5}
+define IsIncludedLong: {2L, 3L, 4L} properly included in {1L, 2L, 3L, 4L, 5L}
+define IsIncludedReversedLong: {4L, 3L, 2L} properly included in {1L, 2L, 3L, 4L, 5L}
+define IsSameLong: {1L, 2L, 3L, 4L, 5L} properly included in {1L, 2L, 3L, 4L, 5L}
+define IsNotIncludedLong: {4L, 5L, 6L} properly included in {1L, 2L, 3L, 4L, 5L}
 define TuplesIncluded: {Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define TuplesNotIncluded: {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}} properly included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define NullIncludes: {1, 2, 3, 4, 5} properly included in null as List<Integer>
@@ -168,6 +200,7 @@ define NullValue: flatten null
 
 // @Test: Distinct
 define LotsOfDups: distinct {1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 4, 3, 2, 1}
+define LotsOfLongDups: distinct {1L, 2L, 2L, 3L, 3L, 3L, 4L, 4L, 4L, 4L, 5L, 5L, 5L, 5L, 5L, 4L, 3L, 2L, 1L}
 define NoDups: distinct {2, 4, 6, 8, 10}
 define DupsTuples: distinct { Tuple{ hello: 'world' }, Tuple{ hello: 'cleveland' }, Tuple{ hello: 'world' }, Tuple{ hello: 'dolly' } }
 define NoDupsTuples: distinct { Tuple{ hello: 'world' }, Tuple{ hello: 'cleveland' } }
@@ -175,6 +208,7 @@ define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
 
 // @Test: First
 define Numbers: First({1, 2, 3, 4})
+define Longs: First({1L, 2L, 3L, 4L})
 define Letters: First({'a', 'b', 'c'})
 define Lists: First({{'a','b','c'},{'d','e','f'}})
 define Tuples: First({ Tuple{a: 1, b: 2, c: 3}, Tuple{a: 24, b: 25, c: 26} })
@@ -184,6 +218,7 @@ define NullValue: First(null as List<Integer>)
 
 // @Test: Last
 define Numbers: Last({1, 2, 3, 4})
+define Longs: Last({1L, 2L, 3L, 4L})
 define Letters: Last({'a', 'b', 'c'})
 define Lists: Last({{'a','b','c'},{'d','e','f'}})
 define Tuples: Last({ Tuple{a: 1, b: 2, c: 3}, Tuple{a: 24, b: 25, c: 26} })
@@ -193,6 +228,7 @@ define NullValue: Last(null as List<Integer>)
 
 // @Test: Length
 define Numbers: Length({2, 4, 6, 8, 10})
+define Longs: Length({2L, 4L, 6L, 8L, 10L})
 define Lists: Length({ {1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {10, 11, 12}})
 define Tuples: Length({ Tuple{a: 1, b: 2, c: 3}, Tuple{a: 24, b: 25, c: 26} })
 define Empty: Length(List<Integer>{})

@@ -6,8 +6,11 @@ define boolFalse: convert 'false' to Boolean
 define decimalValid: convert '10.2' to Decimal
 define decimalInvalid: convert 'abc' to Decimal
 define integerValid: convert '10' to Integer
-define integerDropDecimal: convert '10.2' to Integer
+define integerWithDecimal: convert '10.2' to Integer
 define integerInvalid: convert 'abc' to Integer
+define longValid: convert '10' to Long
+define longWithDecimal: convert '10.2' to Long
+define longInvalid: convert 'abc' to Long
 define quantityStr: convert '10 \'A\'' to Quantity
 define posQuantityStr: convert '+10 \'A\'' to Quantity
 define negQuantityStr: convert '-10 \'A\'' to Quantity
@@ -21,9 +24,17 @@ define TimezoneTime: convert '14:30:00.0-07:00' to Time // 2:30PM Mountain Stand
 
 // @Test: FromInteger
 define string10: convert 10 to String
+define long10: convert 10 to Long
 define decimal10: convert 10 to Decimal
-define intNull: convert null to Decimal
+define intNull: convert (null as Integer) to Decimal
 define intInt: convert 10 to Integer
+
+// @Test: FromLong
+define string10: convert 10L to String
+define integer10: convert 10L to Integer
+define decimal10: convert 10L to Decimal
+define longNull: convert (null as Long) to Decimal
+define longLong: convert 10L to Long
 
 // @Test: FromQuantity
 define quantityStr: convert 10 'A' to String
@@ -77,12 +88,33 @@ define PositiveSign: ToInteger('+12345')
 define NegativeSign: ToInteger('-12345')
 define TooLargeInt: ToInteger('2147483648')
 define TooSmallInt: ToInteger('-2147483649')
+define LongTwenty: ToInteger(20L)
+define TooLargeLong: ToInteger(2147483648L)
+define TooSmallLong: ToInteger(-2147483649L)
 define BooleanTrue: ToInteger(true)
 define BooleanFalse: ToInteger(false)
+define EmptyString: ToInteger('')
+define WhitespaceString: ToInteger('   ')
+define InvalidString: ToInteger('abc')
+
+// @Test: ToLong
+define NoSign: ToLong('12345')
+define PositiveSign: ToLong('+12345')
+define NegativeSign: ToLong('-12345')
+define TooLargeLong: ToLong('9223372036854775808')
+define TooSmallLong: ToLong('-9223372036854775809')
+define WithConvertKeyword: convert '101' to Long
+define Int: ToLong(12345)
+define BooleanTrue: ToLong(true)
+define BooleanFalse: ToLong(false)
+define EmptyString: ToLong('')
+define WhitespaceString: ToLong('   ')
+define InvalidString: ToLong('abc')
 
 // @Test: ToQuantity
 define DecimalOverload: ToQuantity(0.1)
 define IntegerOverload: ToQuantity(13)
+define LongOverload: ToQuantity(14L)
 define UncertaintySixToEighteen: months between DateTime(2005) and DateTime(2006, 7)
 define UncertaintyOverload: ToQuantity(UncertaintySixToEighteen)
 define StringOverload: ToQuantity('-0.1 \'mg\'')
@@ -124,6 +156,15 @@ define LowerCaseF: ToBoolean('f')
 define IsTrue: ToBoolean('y')
 define IsFalse: ToBoolean('0')
 define IsNull: ToBoolean('falsetto')
+define IsTrueWithInteger: ToBoolean(1)
+define IsFalseWithInteger: ToBoolean(0)
+define IsNullWithInteger: ToBoolean(2)
+define IsTrueWithLong: ToBoolean(1L)
+define IsFalseWithLong: ToBoolean(0L)
+define IsNullWithLong: ToBoolean(2L)
+define IsTrueWithDecimal: ToBoolean(1.0)
+define IsFalseWithDecimal: ToBoolean(0.0)
+define IsNullWithDecimal: ToBoolean(1.5)
 
 // @Test: ToConcept
 define IsValid: ToConcept(Code { system: 'http://loinc.org', code: '8480-6' }) // Concept { codes: { Code { system: 'http://loinc.org', code: '8480-6' } } }
@@ -138,6 +179,15 @@ define ToDateDateTimeString: ToDate(@2014-01-01T12:30:00)
 // @Test: ConvertsToBoolean
 define IsTrueWithTrueValue: ConvertsToBoolean('y')
 define IsTrueWithFalseValue: ConvertsToBoolean('0')
+define IsTrueWithIntegerTrueValue: ConvertsToBoolean(1)
+define IsTrueWithIntegerFalseValue: ConvertsToBoolean(0)
+define IsFalseWithIntegerInvalidValue: ConvertsToBoolean(2)
+define IsTrueWithLongTrueValue: ConvertsToBoolean(1L)
+define IsTrueWithLongFalseValue: ConvertsToBoolean(0L)
+define IsFalseWithLongInvalidValue: ConvertsToBoolean(2L)
+define IsTrueWithDecimalTrueValue: ConvertsToBoolean(1.0)
+define IsTrueWithDecimalFalseValue: ConvertsToBoolean(0.0)
+define IsFalseWithDecimalInvalidValue: ConvertsToBoolean(1.5)
 define IsFalse: ConvertsToBoolean('foo')
 define IsNull: ConvertsToBoolean(null as String)
 
@@ -159,14 +209,28 @@ define IsNull: ConvertsToDecimal(null as Decimal)
 
 // @Test: ConvertsToInteger
 define IsTrue: ConvertsToInteger('101')
+define IsTrueWithLong: ConvertsToInteger(101L)
 define IsTrueWithBooleanTrue: ConvertsToInteger(true)
 define IsTrueWithBooleanFalse: ConvertsToInteger(false)
 define IsFalse: ConvertsToInteger('foo')
+define IsFalseWithEmptyString: ConvertsToInteger('')
+define IsFalseWithWhitespaceString: ConvertsToInteger('   ')
 define IsNull: ConvertsToInteger(null as Integer)
+
+// @Test: ConvertsToLong
+define IsTrue: ConvertsToLong('101')
+define IsTrueWithInteger: ConvertsToLong(101)
+define IsTrueWithBooleanTrue: ConvertsToLong(true)
+define IsTrueWithBooleanFalse: ConvertsToLong(false)
+define IsFalse: ConvertsToLong('foo')
+define IsFalseWithEmptyString: ConvertsToLong('')
+define IsFalseWithWhitespaceString: ConvertsToLong('   ')
+define IsNull: ConvertsToLong(null as Integer)
 
 // @Test: ConvertsToQuantity
 define IsTrueWithDecimal: ConvertsToQuantity(0.1)
 define IsTrueWithInteger: ConvertsToQuantity(101)
+define IsTrueWithLong: ConvertsToQuantity(101L)
 define IsTrueWithString: ConvertsToQuantity('1.0 \'mg\'')
 define IsFalse: ConvertsToQuantity('foo')
 define IsFalseWithInvalidUcum: ConvertsToQuantity('1.0 \'cc\'')

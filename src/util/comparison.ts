@@ -4,6 +4,10 @@ function areNumbers(a: any, b: any) {
   return typeof a === 'number' && typeof b === 'number';
 }
 
+function areBigInts(a: any, b: any) {
+  return typeof a === 'bigint' && typeof b === 'bigint';
+}
+
 function areStrings(a: any, b: any) {
   return typeof a === 'string' && typeof b === 'string';
 }
@@ -21,7 +25,7 @@ function isUncertainty(x: any) {
 }
 
 export function lessThan(a: any, b: any, precision?: any) {
-  if (areNumbers(a, b) || areStrings(a, b)) {
+  if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
     return a < b;
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.before(b, precision);
@@ -35,7 +39,7 @@ export function lessThan(a: any, b: any, precision?: any) {
 }
 
 export function lessThanOrEquals(a: any, b: any, precision?: any) {
-  if (areNumbers(a, b) || areStrings(a, b)) {
+  if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
     return a <= b;
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrBefore(b, precision);
@@ -49,7 +53,7 @@ export function lessThanOrEquals(a: any, b: any, precision?: any) {
 }
 
 export function greaterThan(a: any, b: any, precision?: any) {
-  if (areNumbers(a, b) || areStrings(a, b)) {
+  if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
     return a > b;
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.after(b, precision);
@@ -63,7 +67,7 @@ export function greaterThan(a: any, b: any, precision?: any) {
 }
 
 export function greaterThanOrEquals(a: any, b: any, precision?: any) {
-  if (areNumbers(a, b) || areStrings(a, b)) {
+  if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
     return a >= b;
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrAfter(b, precision);
@@ -219,6 +223,7 @@ export function equals(a: any, b: any) {
   if (
     (typeof a === typeof b && typeof a === 'string') ||
     typeof a === 'number' ||
+    typeof a === 'bigint' ||
     typeof a === 'boolean'
   ) {
     return a === b;

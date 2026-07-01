@@ -39,12 +39,24 @@ describe('FromString', () => {
     (await this.integerValid.exec(this.ctx)).should.equal(10);
   });
 
-  it("should convert '10.2' to Integer 10", async function () {
-    (await this.integerDropDecimal.exec(this.ctx)).should.equal(10);
+  it("should be null trying to convert '10.2' to Integer", async function () {
+    should(await this.integerWithDecimal.exec(this.ctx)).be.null();
   });
 
   it("should be null trying to convert 'abc' to Integer", async function () {
     should(await this.integerInvalid.exec(this.ctx)).be.null();
+  });
+
+  it("should convert '10' to Long", async function () {
+    (await this.longValid.exec(this.ctx)).should.equal(10n);
+  });
+
+  it("should be null trying to convert '10.2' to Long", async function () {
+    should(await this.longWithDecimal.exec(this.ctx)).be.null();
+  });
+
+  it("should be null trying to convert 'abc' to Long", async function () {
+    should(await this.longInvalid.exec(this.ctx)).be.null();
   });
 
   it('should convert "10 \'A\'" to Quantity', async function () {
@@ -111,6 +123,10 @@ describe('FromInteger', () => {
     (await this.string10.exec(this.ctx)).should.equal('10');
   });
 
+  it('should convert 10 to 10L', async function () {
+    (await this.long10.exec(this.ctx)).should.equal(10n);
+  });
+
   it('should convert 10 to 10.0', async function () {
     (await this.decimal10.exec(this.ctx)).should.equal(10.0);
   });
@@ -121,6 +137,32 @@ describe('FromInteger', () => {
 
   it('should convert 10 to 10', async function () {
     (await this.intInt.exec(this.ctx)).should.equal(10);
+  });
+});
+
+describe('FromLong', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it("should convert 10L to '10'", async function () {
+    (await this.string10.exec(this.ctx)).should.equal('10');
+  });
+
+  it('should convert 10L to 10', async function () {
+    (await this.integer10.exec(this.ctx)).should.equal(10);
+  });
+
+  it('should convert 10L to 10.0', async function () {
+    (await this.decimal10.exec(this.ctx)).should.equal(10.0);
+  });
+
+  it('should convert null to null', async function () {
+    isNull(await this.longNull.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should convert 10L to 10L', async function () {
+    (await this.longLong.exec(this.ctx)).should.equal(10n);
   });
 });
 
@@ -269,11 +311,11 @@ describe('FromTime', () => {
     setup(this, data);
   });
 
-  it.skip("should convert @T11:57 to '11:57'", async function () {
+  it("should convert @T11:57 to '11:57'", async function () {
     (await this.timeStr.exec(this.ctx)).should.equal('11:57');
   });
 
-  it.skip('should convert @T11:57 to @11:57', async function () {
+  it('should convert @T11:57 to @11:57', async function () {
     const time = await this.timeTime.exec(this.ctx);
     time.hour.should.equal(11);
     time.minute.should.equal(57);
@@ -360,12 +402,90 @@ describe('ToInteger', () => {
     should(await this.tooSmallInt.exec(this.ctx)).be.null();
   });
 
+  it('should return 20 for 20L', async function () {
+    (await this.longTwenty.exec(this.ctx)).should.equal(20);
+  });
+
+  it('should return null if long larger than max integer', async function () {
+    should(await this.tooLargeLong.exec(this.ctx)).be.null();
+  });
+
+  it('should return null if long smaller than min integer', async function () {
+    should(await this.tooSmallLong.exec(this.ctx)).be.null();
+  });
+
   it('should return 1 for boolean true', async function () {
     (await this.booleanTrue.exec(this.ctx)).should.equal(1);
   });
 
   it('should return 0 for boolean false', async function () {
     (await this.booleanFalse.exec(this.ctx)).should.equal(0);
+  });
+
+  it('should return null for an empty string', async function () {
+    should(await this.emptyString.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for a whitespace string', async function () {
+    should(await this.whitespaceString.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for a invalid string', async function () {
+    should(await this.invalidString.exec(this.ctx)).be.null();
+  });
+});
+
+describe('ToLong', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should return positive long without polarity sign', async function () {
+    (await this.noSign.exec(this.ctx)).should.equal(12345n);
+  });
+
+  it('should return positive long with polarity sign', async function () {
+    (await this.positiveSign.exec(this.ctx)).should.equal(12345n);
+  });
+
+  it('should return negative long', async function () {
+    (await this.negativeSign.exec(this.ctx)).should.equal(-12345n);
+  });
+
+  it('should return null if long larger than max', async function () {
+    should(await this.tooLargeLong.exec(this.ctx)).be.null();
+  });
+
+  it('should return null if long smaller than min', async function () {
+    should(await this.tooSmallLong.exec(this.ctx)).be.null();
+  });
+
+  it('should return 101 for "101" using convert keyword', async function () {
+    (await this.withConvertKeyword.exec(this.ctx)).should.equal(101n);
+  });
+
+  it('should return 12345 for integer 12345', async function () {
+    (await this.int.exec(this.ctx)).should.equal(12345n);
+  });
+
+  it('should return 1 for boolean true', async function () {
+    (await this.booleanTrue.exec(this.ctx)).should.equal(1n);
+  });
+
+  it('should return 0 for boolean false', async function () {
+    (await this.booleanFalse.exec(this.ctx)).should.equal(0n);
+  });
+
+  it('should return null for an empty string', async function () {
+    should(await this.emptyString.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for a whitespace string', async function () {
+    should(await this.whitespaceString.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for a invalid string', async function () {
+    should(await this.invalidString.exec(this.ctx)).be.null();
   });
 });
 
@@ -380,6 +500,10 @@ describe('ToQuantity', () => {
 
   it('should convert an integer to a quantity with unit 1', async function () {
     (await this.integerOverload.exec(this.ctx)).should.eql(new Quantity(13, '1'));
+  });
+
+  it('should convert a long to a quantity with unit 1', async function () {
+    (await this.longOverload.exec(this.ctx)).should.eql(new Quantity(14, '1'));
   });
 
   it('should convert an integer uncertainty to a quantity uncertainty', async function () {
@@ -513,7 +637,7 @@ describe('ToBoolean', () => {
     (await this.upperCaseTrue.exec(this.ctx)).should.equal(true);
   });
 
-  it('should return true for FALSE', async function () {
+  it('should return false for FALSE', async function () {
     (await this.upperCaseFalse.exec(this.ctx)).should.equal(false);
   });
 
@@ -521,7 +645,7 @@ describe('ToBoolean', () => {
     (await this.lowerCaseT.exec(this.ctx)).should.equal(true);
   });
 
-  it('should return true for false', async function () {
+  it('should return false for false', async function () {
     (await this.lowerCaseF.exec(this.ctx)).should.equal(false);
   });
 
@@ -531,6 +655,54 @@ describe('ToBoolean', () => {
 
   it('should return false for F', async function () {
     (await this.upperCaseF.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return true for "y"', async function () {
+    (await this.isTrue.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return false for "0"', async function () {
+    (await this.isFalse.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return null for "falsetto"', async function () {
+    should(await this.isNull.exec(this.ctx)).be.null();
+  });
+
+  it('should return true for 1', async function () {
+    (await this.isTrueWithInteger.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return false for 0', async function () {
+    (await this.isFalseWithInteger.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return null for 2', async function () {
+    should(await this.isNullWithInteger.exec(this.ctx)).be.null();
+  });
+
+  it('should return true for 1L', async function () {
+    (await this.isTrueWithLong.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return false for 0L', async function () {
+    (await this.isFalseWithLong.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return null for 2L', async function () {
+    should(await this.isNullWithLong.exec(this.ctx)).be.null();
+  });
+
+  it('should return true for 1.0', async function () {
+    (await this.isTrueWithDecimal.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return false for 0.0', async function () {
+    (await this.isFalseWithDecimal.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return null for 1.5', async function () {
+    should(await this.isNullWithDecimal.exec(this.ctx)).be.null();
   });
 });
 
@@ -591,6 +763,42 @@ describe('ConvertsToBoolean', () => {
 
   it('should return false for invalid argument', async function () {
     (await this.isFalse.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return true for 1', async function () {
+    (await this.isTrueWithIntegerTrueValue.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return true for 0', async function () {
+    (await this.isTrueWithIntegerFalseValue.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return false for 2', async function () {
+    (await this.isFalseWithIntegerInvalidValue.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return true for 1L', async function () {
+    (await this.isTrueWithLongTrueValue.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return true for 0L', async function () {
+    (await this.isTrueWithLongFalseValue.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return false for 2L', async function () {
+    (await this.isFalseWithLongInvalidValue.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return true for 1.0', async function () {
+    (await this.isTrueWithDecimalTrueValue.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return true for 0.0', async function () {
+    (await this.isTrueWithDecimalFalseValue.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return false for 1.5', async function () {
+    (await this.isFalseWithDecimalInvalidValue.exec(this.ctx)).should.equal(false);
   });
 
   it('should return null for null input', async function () {
@@ -661,8 +869,12 @@ describe('ConvertsToInteger', () => {
     setup(this, data);
   });
 
-  it('should return true for valid integer', async function () {
+  it('should return true for valid integer string', async function () {
     (await this.isTrue.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return true for valid long', async function () {
+    (await this.isTrueWithLong.exec(this.ctx)).should.equal(true);
   });
 
   it('should return true for boolean true', async function () {
@@ -675,6 +887,52 @@ describe('ConvertsToInteger', () => {
 
   it('should return false for invalid integer', async function () {
     (await this.isFalse.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return false for an empty string', async function () {
+    (await this.isFalseWithEmptyString.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return false for a whitespace string', async function () {
+    (await this.isFalseWithWhitespaceString.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return null for null input', async function () {
+    should(await this.isNull.exec(this.ctx)).be.null();
+  });
+});
+
+describe('ConvertsToLong', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should return true for valid integer string', async function () {
+    (await this.isTrue.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return true for valid integer', async function () {
+    (await this.isTrueWithInteger.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return true for boolean true', async function () {
+    (await this.isTrueWithBooleanTrue.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return true for boolean false', async function () {
+    (await this.isTrueWithBooleanFalse.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return false for invalid integer string', async function () {
+    (await this.isFalse.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return false for an empty string', async function () {
+    (await this.isFalseWithEmptyString.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should return false for a whitespace string', async function () {
+    (await this.isFalseWithWhitespaceString.exec(this.ctx)).should.equal(false);
   });
 
   it('should return null for null input', async function () {
@@ -693,6 +951,10 @@ describe('ConvertsToQuantity', () => {
 
   it('should return true for valid integer', async function () {
     (await this.isTrueWithInteger.exec(this.ctx)).should.equal(true);
+  });
+
+  it('should return true for valid long', async function () {
+    (await this.isTrueWithLong.exec(this.ctx)).should.equal(true);
   });
 
   it('should return true for valid string', async function () {

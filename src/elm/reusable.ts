@@ -2,6 +2,7 @@ import { Context } from '../runtime/context';
 import { Expression } from './expression';
 import { build } from './builder';
 import { Parameter } from '../types/runtime.types';
+import { ELM_NAMED_TYPE_SPECIFIER } from '../util/elmTypes';
 
 export class ExpressionDef extends Expression {
   name: string;
@@ -92,7 +93,7 @@ export class FunctionRef extends Expression {
               // convert it to a NamedTypedSpecifier
               operandTypeSpecifier = {
                 name: f.parameters[i].operandType,
-                type: 'NamedTypeSpecifier'
+                type: ELM_NAMED_TYPE_SPECIFIER
               };
             }
             match = ctx.matchesTypeSpecifier(args[i], operandTypeSpecifier);
