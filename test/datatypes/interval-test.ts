@@ -184,6 +184,14 @@ describe('DateTimeInterval', () => {
       new Interval(date, null, true, false).properContains(early).should.be.false();
     });
 
+    it.skip('should properly handle unbounded and unknown intervals', () => {
+      const date = DateTime.parse('2012-01-01T00:00:00.0');
+      new Interval(null, null, true, true, ELM_DATETIME_TYPE).properContains(date).should.be.true();
+      should(
+        new Interval(null, null, false, false, ELM_DATETIME_TYPE).properContains(date)
+      ).be.null();
+    });
+
     it('should properly handle imprecision', () => {
       d.all2012.closed.properContains(d.bef2012.toMonth).should.be.false();
       should.not.exist(d.all2012.closed.properContains(d.beg2012.toMonth));
@@ -2045,6 +2053,11 @@ describe('IntegerInterval', () => {
       new Interval(0, null, true, false).properContains(0).should.be.false();
       should(new Interval(0, null, true, false).properContains(123456789)).be.null();
       new Interval(0, null, true, false).properContains(-1).should.be.false();
+    });
+
+    it.skip('should properly handle unbounded and unknown intervals', () => {
+      new Interval(null, null, true, true, ELM_INTEGER_TYPE).properContains(0).should.be.true();
+      should(new Interval(null, null, false, false, ELM_INTEGER_TYPE).properContains(0)).be.null();
     });
 
     it('should properly handle imprecision', () => {
