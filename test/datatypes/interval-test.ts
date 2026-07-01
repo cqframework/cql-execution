@@ -133,6 +133,14 @@ describe('DateTimeInterval', () => {
     it('should properly calculate the left boundary date', () => {
       d.all2012.closed.properContains(d.beg2012.full).should.be.false();
       d.all2012.open.properContains(d.beg2012.full).should.be.false();
+
+      let next = d.beg2012.full.successor();
+      d.all2012.closed.properContains(next).should.be.true();
+      d.all2012.open.properContains(next).should.be.false();
+
+      next = next.successor();
+      d.all2012.closed.properContains(next).should.be.true();
+      d.all2012.open.properContains(next).should.be.true();
     });
 
     it('should properly calculate dates in the middle of it', () => {
@@ -142,6 +150,14 @@ describe('DateTimeInterval', () => {
     it('should properly calculate the right boundary date', () => {
       d.all2012.closed.properContains(d.end2012.full).should.be.false();
       d.all2012.open.properContains(d.end2012.full).should.be.false();
+
+      let prev = d.end2012.full.predecessor();
+      d.all2012.closed.properContains(prev).should.be.true();
+      d.all2012.open.properContains(prev).should.be.false();
+
+      prev = prev.predecessor();
+      d.all2012.closed.properContains(prev).should.be.true();
+      d.all2012.open.properContains(prev).should.be.true();
     });
 
     it('should properly calculate dates after it', () => {
@@ -1995,6 +2011,10 @@ describe('IntegerInterval', () => {
     it('should properly calculate the left boundary integer', () => {
       d.zeroToHundred.closed.properContains(0).should.be.false();
       d.zeroToHundred.open.properContains(0).should.be.false();
+      d.zeroToHundred.closed.properContains(1).should.be.true();
+      d.zeroToHundred.open.properContains(1).should.be.false();
+      d.zeroToHundred.closed.properContains(2).should.be.true();
+      d.zeroToHundred.open.properContains(2).should.be.true();
     });
 
     it('should properly calculate integers in the middle of it', () => {
@@ -2004,6 +2024,10 @@ describe('IntegerInterval', () => {
     it('should properly calculate the right boundary integer', () => {
       d.zeroToHundred.closed.properContains(100).should.be.false();
       d.zeroToHundred.open.properContains(100).should.be.false();
+      d.zeroToHundred.closed.properContains(99).should.be.true();
+      d.zeroToHundred.open.properContains(99).should.be.false();
+      d.zeroToHundred.closed.properContains(98).should.be.true();
+      d.zeroToHundred.open.properContains(98).should.be.true();
     });
 
     it('should properly calculate integers greater than it', () => {
