@@ -1709,8 +1709,8 @@ describe('Starts', () => {
     setup(this, data);
   });
 
-  it('should calculate to null', async function () {
-    should(await this.testStartsNull.exec(this.ctx)).be.null();
+  it('should calculate to false for boundless interval starts bounded interval', async function () {
+    should(await this.testStartsNull.exec(this.ctx)).be.false();
   });
 
   it('should calculate integer intervals properly', async function () {
@@ -1750,8 +1750,8 @@ describe('Ends', () => {
     setup(this, data);
   });
 
-  it('should calculate to null', async function () {
-    should(await this.testEndsNull.exec(this.ctx)).be.null();
+  it('should calculate to false for boundless interval ends bounded interval', async function () {
+    should(await this.testEndsNull.exec(this.ctx)).be.false();
   });
 
   it('should calculate integer intervals properly', async function () {
