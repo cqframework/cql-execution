@@ -2,7 +2,12 @@ import should from 'should';
 import { DateTime, MIN_DATETIME_VALUE, MAX_DATETIME_VALUE } from '../../src/datatypes/datetime';
 import { Interval } from '../../src/datatypes/interval';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
-import { ELM_DECIMAL_TYPE } from '../../src/util/elmTypes';
+import {
+  ELM_DATETIME_TYPE,
+  ELM_DECIMAL_TYPE,
+  ELM_INTEGER_TYPE,
+  ELM_LONG_TYPE
+} from '../../src/util/elmTypes';
 import data from './interval-data';
 
 const xy = (obj: any) => [obj.x, obj.y];
@@ -3783,6 +3788,96 @@ describe('LongInterval', () => {
 
     it('should throw when the argument is an interval', () => {
       should(() => d.zeroToHundredLong.closed.contains(new Interval(5n, 10n))).throw(Error);
+    });
+  });
+
+  describe('properContains', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly calculate longs less than it', () => {
+      d.zeroToHundredLong.closed.properContains(-5n).should.be.false();
+    });
+
+    it('should properly calculate the left boundary long', () => {
+      d.zeroToHundredLong.closed.properContains(0n).should.be.false();
+      d.zeroToHundredLong.open.properContains(0n).should.be.false();
+      d.zeroToHundredLong.closed.properContains(1n).should.be.true();
+      d.zeroToHundredLong.open.properContains(1n).should.be.false();
+      d.zeroToHundredLong.closed.properContains(2n).should.be.true();
+      d.zeroToHundredLong.open.properContains(2n).should.be.true();
+    });
+
+    it('should properly calculate longs in the middle of it', () => {
+      d.zeroToHundredLong.closed.properContains(50n).should.be.true();
+    });
+
+    it('should properly calculate the right boundary long', () => {
+      d.zeroToHundredLong.closed.properContains(100n).should.be.false();
+      d.zeroToHundredLong.open.properContains(100n).should.be.false();
+      d.zeroToHundredLong.closed.properContains(99n).should.be.true();
+      d.zeroToHundredLong.open.properContains(99n).should.be.false();
+      d.zeroToHundredLong.closed.properContains(98n).should.be.true();
+      d.zeroToHundredLong.open.properContains(98n).should.be.true();
+    });
+
+    it('should properly calculate longs greater than it', () => {
+      d.zeroToHundredLong.closed.properContains(105n).should.be.false();
+    });
+
+    it('should properly handle null endpoints', () => {
+      new Interval(null, 0n).properContains(-123456789n).should.be.true();
+      new Interval(null, 0n).properContains(1n).should.be.false();
+      new Interval(null, 0n, false, true).properContains(0n).should.be.false();
+      should(new Interval(null, 0n, false, true).properContains(-123456789n)).be.null();
+      new Interval(null, 0n, false, true).properContains(1n).should.be.false();
+      new Interval(0n, null).properContains(123456789n).should.be.true();
+      new Interval(0n, null).properContains(-1n).should.be.false();
+      new Interval(0n, null, true, false).properContains(0n).should.be.false();
+      should(new Interval(0n, null, true, false).properContains(123456789n)).be.null();
+      new Interval(0n, null, true, false).properContains(-1n).should.be.false();
+    });
+
+    it.skip('should properly handle unbounded and unknown intervals', () => {
+      new Interval(null, null, true, true, ELM_LONG_TYPE).properContains(0).should.be.true();
+      should(new Interval(null, null, false, false, ELM_LONG_TYPE).properContains(0)).be.null();
+    });
+
+    it('should properly handle imprecision', () => {
+      d.zeroToHundredLong.closed.properContains(new Uncertainty(-20n, -10n)).should.be.false();
+      should.not.exist(d.zeroToHundredLong.closed.properContains(new Uncertainty(-20n, 20n)));
+      should.not.exist(d.zeroToHundredLong.closed.properContains(new Uncertainty(0n, 100n)));
+      d.zeroToHundredLong.closed.properContains(new Uncertainty(1n, 99n)).should.be.true();
+      should.not.exist(d.zeroToHundredLong.closed.properContains(new Uncertainty(80n, 120n)));
+      d.zeroToHundredLong.closed.properContains(new Uncertainty(120n, 140n)).should.be.false();
+      should.not.exist(d.zeroToHundredLong.closed.properContains(new Uncertainty(-20n, 120n)));
+
+      const uIvl = new Interval(new Uncertainty(5n, 10n), new Uncertainty(15n, 20n));
+
+      uIvl.properContains(0n).should.be.false();
+      uIvl.properContains(5n).should.be.false();
+      should.not.exist(uIvl.properContains(6n));
+      should.not.exist(uIvl.properContains(10n));
+      uIvl.properContains(12n).should.be.true();
+      should.not.exist(uIvl.properContains(15n));
+      should.not.exist(uIvl.properContains(16n));
+      uIvl.properContains(20n).should.be.false();
+      uIvl.properContains(25n).should.be.false();
+
+      uIvl.properContains(new Uncertainty(0n, 4n)).should.be.false();
+      uIvl.properContains(new Uncertainty(0n, 5n)).should.be.false();
+      should.not.exist(uIvl.properContains(new Uncertainty(5n, 10n)));
+      should.not.exist(uIvl.properContains(new Uncertainty(10n, 15n)));
+      uIvl.properContains(new Uncertainty(11n, 14n)).should.be.true();
+      should.not.exist(uIvl.properContains(new Uncertainty(15n, 20n)));
+      uIvl.properContains(new Uncertainty(20n, 25n)).should.be.false();
+      uIvl.properContains(new Uncertainty(25n, 30n)).should.be.false();
+    });
+
+    it('should throw when the argument is an interval', () => {
+      should(() => d.zeroToHundredLong.closed.properContains(new Interval(5n, 10n))).throw(Error);
     });
   });
 
