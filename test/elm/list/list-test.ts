@@ -646,8 +646,7 @@ describe('ProperIncludes', () => {
     (await this.tuplesNotIncluded.exec(this.ctx)).should.be.false();
   });
 
-  // TODO: Support for ProperContains
-  it.skip('should return null if either arg is null', async function () {
+  it('should return null if either arg is null', async function () {
     should(await this.nullIncluded.exec(this.ctx)).be.null();
     should(await this.nullIncludes.exec(this.ctx)).be.null();
   });
@@ -701,6 +700,98 @@ describe('ProperIncludedIn', () => {
   it('should return null if either arg is null', async function () {
     should(await this.nullIncluded.exec(this.ctx)).be.null();
     should(await this.nullIncludes.exec(this.ctx)).be.null();
+  });
+});
+
+describe('ProperIn', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should execute to true when item is in list', async function () {
+    (await this.isIn.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to false when item is not in list', async function () {
+    (await this.isNotIn.exec(this.ctx)).should.be.false();
+  });
+
+  it('should execute to false when item is the only item in list', async function () {
+    (await this.isNotProperlyIn.exec(this.ctx)).should.be.false();
+  });
+
+  it('should execute to true when item is in the list multiple times', async function () {
+    (await this.isInNotUnique.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to true when item is in list with null', async function () {
+    (await this.isInWithNull.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to true when tuple is in list', async function () {
+    (await this.tupleIsIn.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to false when tuple is not in list', async function () {
+    (await this.tupleIsNotIn.exec(this.ctx)).should.be.false();
+  });
+
+  it('should return false if list is null', async function () {
+    (await this.inNull.exec(this.ctx)).should.be.false();
+  });
+
+  it('should return true if null is in list', async function () {
+    (await this.nullIn.exec(this.ctx)).should.be.true();
+  });
+
+  it('should return false if null is not in list', async function () {
+    (await this.nullNotIn.exec(this.ctx)).should.be.false();
+  });
+});
+
+describe('ProperContains', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should execute to true when item is in list', async function () {
+    (await this.isIn.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to false when item is not in list', async function () {
+    (await this.isNotIn.exec(this.ctx)).should.be.false();
+  });
+
+  it('should execute to false when item is the only item in list', async function () {
+    (await this.isNotProperlyIn.exec(this.ctx)).should.be.false();
+  });
+
+  it('should execute to true when item is in the list multiple times', async function () {
+    (await this.isInNotUnique.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to true when item is in list with null', async function () {
+    (await this.isInWithNull.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to true when tuple is in list', async function () {
+    (await this.tupleIsIn.exec(this.ctx)).should.be.true();
+  });
+
+  it('should execute to false when tuple is not in list', async function () {
+    (await this.tupleIsNotIn.exec(this.ctx)).should.be.false();
+  });
+
+  it('should return true if null is contained in the list', async function () {
+    (await this.nullIn.exec(this.ctx)).should.be.true();
+  });
+
+  it('should return false if null is not contained in the list', async function () {
+    (await this.nullNotIn.exec(this.ctx)).should.be.false();
+  });
+
+  it('should return false if list is null', async function () {
+    (await this.inNull.exec(this.ctx)).should.be.false();
   });
 });
 

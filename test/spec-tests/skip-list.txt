@@ -3,17 +3,11 @@ CqlIntervalOperatorsTest.Expand.ExpandPer0D1        Translation Error: Could not
 
 # Invalid Translation (translates, but translates wrong)
 CqlAggregateTest.AggregateTests.RolledOutIntervals  CQL adds an integer to a date ("S + duration in days of X"). Should be "S + Quantity{ value: duration in days of X, unit: 'days' }". Translator translates it, but probably shouldn't.
-CqlListOperatorsTest.IncludedIn.IncludedInNullRight Converts included in to in, which has different semantics when second argument is null
 
 # Potentially Invalid Translation (translates, but potentially translates wrong)
-CqlListOperatorsTest.IncludedIn.IncludedInNullLeft    Treats null as point overload, translating to "In" operator, which has different semantics (and different result)
-CqlListOperatorsTest.Includes.IncludesNullRight       Treats null as point overload, translating to "Contains" operator, which has different semantics (and different result)
 
 # Incorrect Expected Output
 CqlIntervalOperatorsTest.In.TestInNullBoundaries                Wrong output: According to spec, comparison against null closed boundaries should result in true
-CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
-CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
-CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 
 # Potentially Incorrect Expected Output
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
@@ -56,12 +50,6 @@ CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not impleme
 CqlArithmeticFunctionsTest.LowBoundary                  LowBoundary not implemented
 CqlArithmeticFunctionsTest.Precision.PrecisionDecimal   Precision for Decimal not implemented
 CqlIntervalOperatorsTest.PointFrom                      PointFrom not implemented
-CqlIntervalOperatorsTest.ProperContains                 ProperContains not implemented
-CqlIntervalOperatorsTest.ProperIn                       ProperIn not implemented
-CqlListOperatorsTest.Descendents                        Descendents not implemented
-CqlListOperatorsTest.ProperContains                     ProperContains not implemented
-CqlListOperatorsTest.ProperIn                           ProperIn not implemented
-CqlListOperatorsTest.ProperlyIncludedIn.ProperlyIncludedInNulRight  ProperIn not implemented
 
 # Unimplemented (New in CQL 1.5)
 CqlArithmeticFunctionsTest.Modulo.ModuloQuantity                      Modulo not implemented for Quantity

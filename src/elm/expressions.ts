@@ -36,7 +36,8 @@ import {
   doIntersect,
   doIncludes,
   doExcept,
-  doContains
+  doContains,
+  doProperContains
 } from './interval';
 
 export {
@@ -47,5 +48,6 @@ export {
   doIntersect,
   doIncludes,
   doExcept,
-  doContains
+  doContains,
+  doProperContains
 };

@@ -1430,80 +1430,56 @@ define "PointFrom": Tuple{
 
 define "ProperContains": Tuple{
   "TimeProperContainsTrue": Tuple{
-    skipped: 'ProperContains not implemented'
-    /*
     expression: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.001,
     output: true
-    */  },
+  },
   "TimeProperContainsFalse": Tuple{
-    skipped: 'ProperContains not implemented'
-    /*
     expression: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.000,
     output: false
-    */  },
+  },
   "TimeProperContainsNull": Tuple{
-    skipped: 'ProperContains not implemented'
-    /*
     expression: Interval[@T12:00:00.001, @T21:59:59.999] properly includes @T12:00:00,
     output: null
-    */  },
+  },
   "TimeProperContainsPrecisionTrue": Tuple{
-    skipped: 'ProperContains not implemented'
-    /*
     expression: Interval[@T12:00:00.000, @T21:59:59.999] properly includes second of @T12:00:01,
     output: true
-    */  },
+  },
   "TimeProperContainsPrecisionFalse": Tuple{
-    skipped: 'ProperContains not implemented'
-    /*
     expression: Interval[@T12:00:00.001, @T21:59:59.999] properly includes second of @T12:00:00,
     output: false
-    */  },
+  },
   "TimeProperContainsPrecisionNull": Tuple{
-    skipped: 'ProperContains not implemented'
-    /*
     expression: Interval[@T12:00:00.001, @T21:59:59.999] properly includes millisecond of @T12:00:00,
     output: null
-    */  }
+  }
 }
 
 define "ProperIn": Tuple{
   "TimeProperInTrue": Tuple{
-    skipped: 'ProperIn not implemented'
-    /*
     expression: @T12:00:00.001 properly included in Interval[@T12:00:00.000, @T21:59:59.999],
     output: true
-    */  },
+  },
   "TimeProperInFalse": Tuple{
-    skipped: 'ProperIn not implemented'
-    /*
     expression: @T12:00:00.000 properly included in  Interval[@T12:00:00.000, @T21:59:59.999],
     output: false
-    */  },
+  },
   "TimeProperInNull": Tuple{
-    skipped: 'ProperIn not implemented'
-    /*
     expression: @T12:00:00 properly included in Interval[@T12:00:00.001, @T21:59:59.999],
     output: null
-    */  },
+  },
   "TimeProperInPrecisionTrue": Tuple{
-    skipped: 'ProperIn not implemented'
-    /*
     expression: @T12:00:01 properly included in second of Interval[@T12:00:00.000, @T21:59:59.999],
     output: true
-    */  },
+  },
   "TimeProperInPrecisionFalse": Tuple{
-    skipped: 'ProperIn not implemented'
-    /*
     expression: @T12:00:00 properly included in second of Interval[@T12:00:00.001, @T21:59:59.999],
     output: false
-    */  },
+  },
   "TimeProperInPrecisionNull": Tuple{
-    skipped: 'ProperIn not implemented'
-    /*
     expression: @T12:00:00 properly included in millisecond of Interval[@T12:00:00.001, @T21:59:59.999],
     output: null
-    */  }
+  }
 }
 
 define "ProperlyIncludes": Tuple{
