@@ -115,7 +115,9 @@ export class Interval {
   }
 
   properContains(item: any, precision?: any) {
-    if (item != null && item.isInterval) {
+    if (item == null) {
+      return null;
+    } else if (item.isInterval) {
       throw new Error('Argument to contains must be a point');
     }
     return ThreeValuedLogic.and(

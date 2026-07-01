@@ -1892,7 +1892,10 @@ class Interval {
         return logic_1.ThreeValuedLogic.and(lowFn(this.low, item, precision), highFn(this.high, item, precision));
     }
     properContains(item, precision) {
-        if (item != null && item.isInterval) {
+        if (item == null) {
+            return null;
+        }
+        else if (item.isInterval) {
             throw new Error('Argument to contains must be a point');
         }
         return logic_1.ThreeValuedLogic.and(cmp.lessThan(this.start(), item, precision), cmp.greaterThan(this.end(), item, precision));
