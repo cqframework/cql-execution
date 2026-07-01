@@ -3968,6 +3968,8 @@ describe('LongInterval', () => {
       new Interval(0n, null, true, false).contains(0n).should.be.true();
       should(new Interval(0n, null, true, false).contains(123456789n)).be.null();
       new Interval(0n, null, true, false).contains(-1n).should.be.false();
+      new Interval(null, null).contains(5n).should.be.true();
+      should(new Interval(null, null, false, false).contains(5n)).be.null();
     });
 
     it('should properly handle imprecision', () => {
@@ -4119,6 +4121,15 @@ describe('LongInterval', () => {
     it('should include a point Long', () => {
       d.zeroToHundredLong.closed.includes(50n).should.be.true();
     });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().includes(50n).should.be.true();
+      boundlessInterval().includes(d.zeroToHundredLong.closed).should.be.true();
+      boundlessInterval().includes(unknownInterval()).should.be.true();
+      d.zeroToHundredLong.closed.includes(boundlessInterval()).should.be.false();
+      should(unknownInterval().includes(d.zeroToHundredLong.closed)).be.null();
+      should(unknownInterval().includes(boundlessInterval())).be.null();
+    });
   });
 
   describe('includedIn', () => {
@@ -4238,6 +4249,57 @@ describe('LongInterval', () => {
       d.zeroToHundredLong.closed.includedIn(50n).should.be.true();
       d.zeroToHundredLong.closed.includedIn(500n).should.be.false();
     });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      d.zeroToHundredLong.closed.includedIn(boundlessInterval()).should.be.true();
+      boundlessInterval().includedIn(d.zeroToHundredLong.closed).should.be.false();
+      boundlessInterval().includedIn(boundlessInterval()).should.be.true();
+      unknownInterval().includedIn(boundlessInterval()).should.be.true();
+    });
+  });
+
+  describe('properlyIncludes', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().properlyIncludes(d.zeroToHundredLong.closed).should.be.true();
+      boundlessInterval().properlyIncludes(boundlessInterval()).should.be.false();
+      should(boundlessInterval().properlyIncludes(unknownInterval())).be.null();
+      should(unknownInterval().properlyIncludes(d.zeroToHundredLong.closed)).be.null();
+    });
+  });
+
+  describe('starts', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().starts(boundlessInterval()).should.be.true();
+      boundlessInterval().starts(d.zeroToHundredLong.closed).should.be.false();
+      d.zeroToHundredLong.closed.starts(boundlessInterval()).should.be.false();
+      should(boundlessInterval().starts(unknownInterval())).be.null();
+      should(unknownInterval().starts(boundlessInterval())).be.null();
+    });
+  });
+
+  describe('ends', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().ends(boundlessInterval()).should.be.true();
+      boundlessInterval().ends(d.zeroToHundredLong.closed).should.be.false();
+      d.zeroToHundredLong.closed.ends(boundlessInterval()).should.be.false();
+      should(boundlessInterval().ends(unknownInterval())).be.null();
+      should(unknownInterval().ends(boundlessInterval())).be.null();
+    });
   });
 
   describe('overlaps(LongInterval)', () => {
@@ -4330,6 +4392,30 @@ describe('LongInterval', () => {
       y.open.overlaps(x.open).should.be.true();
     });
 
+    it('should properly handle null endpoints', () => {
+      const negativeInterval = new Interval(-123456789n, -1n);
+      const positiveInterval = new Interval(1n, 123456789n);
+      const startsAtZero = new Interval(0n, 123456789n);
+      const endsAtZero = new Interval(-123456789n, 0n);
+
+      should(new Interval(null, 0n).overlaps(negativeInterval)).be.true();
+      should(new Interval(null, 0n).overlaps(positiveInterval)).be.false();
+      should(new Interval(null, 0n, false, true).overlaps(startsAtZero)).be.true();
+      should(new Interval(null, 0n, false, true).overlaps(negativeInterval)).be.null();
+      should(new Interval(null, 0n, false, true).overlaps(positiveInterval)).be.false();
+
+      should(new Interval(0n, null).overlaps(positiveInterval)).be.true();
+      should(new Interval(0n, null).overlaps(negativeInterval)).be.false();
+      should(new Interval(0n, null, true, false).overlaps(endsAtZero)).be.true();
+      should(new Interval(0n, null, true, false).overlaps(positiveInterval)).be.null();
+      should(new Interval(0n, null, true, false).overlaps(negativeInterval)).be.false();
+
+      should(new Interval(null, null).overlaps(d.zeroToHundredLong.closed)).be.true();
+      should(new Interval(null, null, false, false).overlaps(d.zeroToHundredLong.closed)).be.null();
+      should(d.zeroToHundredLong.closed.overlaps(new Interval(null, null))).be.true();
+      should(d.zeroToHundredLong.closed.overlaps(new Interval(null, null, false, false))).be.null();
+    });
+
     it('should properly handle boundless and unknown intervals', () => {
       boundlessInterval().overlaps(boundlessInterval()).should.be.true();
       boundlessInterval().overlaps(d.zeroToHundredLong.closed).should.be.true();
@@ -4388,6 +4474,21 @@ describe('LongInterval', () => {
 
     it('should properly calculate longs greater than it', () => {
       d.zeroToHundredLong.closed.overlaps(105n).should.be.false();
+    });
+
+    it('should properly handle null endpoints', () => {
+      should(new Interval(null, 0n).overlaps(-123456789n)).be.true();
+      should(new Interval(null, 0n).overlaps(1n)).be.false();
+      should(new Interval(null, 0n, false, true).overlaps(0n)).be.true();
+      should(new Interval(null, 0n, false, true).overlaps(-123456789n)).be.null();
+      should(new Interval(null, 0n, false, true).overlaps(1n)).be.false();
+      should(new Interval(0n, null).overlaps(123456789n)).be.true();
+      should(new Interval(0n, null).overlaps(-1n)).be.false();
+      should(new Interval(0n, null, true, false).overlaps(0n)).be.true();
+      should(new Interval(0n, null, true, false).overlaps(123456789n)).be.null();
+      should(new Interval(0n, null, true, false).overlaps(-1n)).be.false();
+      should(new Interval(null, null).overlaps(5n)).be.true();
+      should(new Interval(null, null, false, false).overlaps(5n)).be.null();
     });
 
     it('should properly handle boundless and unknown intervals', () => {
@@ -4596,6 +4697,31 @@ describe('LongInterval', () => {
 
       ivl.equals(point).should.be.false();
     });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().equals(boundlessInterval()).should.be.true();
+      boundlessInterval().equals(d.zeroToHundredLong.closed).should.be.false();
+      d.zeroToHundredLong.closed.equals(boundlessInterval()).should.be.false();
+      should(boundlessInterval().equals(unknownInterval())).be.null();
+      should(unknownInterval().equals(boundlessInterval())).be.null();
+      should(unknownInterval().equals(unknownInterval())).be.null();
+    });
+  });
+
+  describe('sameAs', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().sameAs(boundlessInterval()).should.be.true();
+      boundlessInterval().sameAs(d.zeroToHundredLong.closed).should.be.false();
+      d.zeroToHundredLong.closed.sameAs(boundlessInterval()).should.be.false();
+      should(boundlessInterval().sameAs(unknownInterval())).be.null();
+      should(unknownInterval().sameAs(boundlessInterval())).be.null();
+      should(unknownInterval().sameAs(unknownInterval())).be.null();
+    });
   });
 
   describe('union', () => {
@@ -4740,6 +4866,14 @@ describe('LongInterval', () => {
     it('should throw when the argument is a point', () => {
       should(() => d.zeroToHundredLong.union(300n)).throw(Error);
     });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().union(d.zeroToHundredLong.closed).should.eql(boundlessInterval());
+      d.zeroToHundredLong.closed.union(boundlessInterval()).should.eql(boundlessInterval());
+      boundlessInterval().union(unknownInterval()).should.eql(boundlessInterval());
+      unknownInterval().union(boundlessInterval()).should.eql(boundlessInterval());
+      should(unknownInterval().union(unknownInterval())).be.null();
+    });
   });
 
   describe('intersect', () => {
@@ -4875,6 +5009,18 @@ describe('LongInterval', () => {
 
     it('should throw when the argument is a point', () => {
       should(() => d.zeroToHundredLong.intersect(50n)).throw(Error);
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval()
+        .intersect(d.zeroToHundredLong.closed)
+        .should.eql(d.zeroToHundredLong.closed);
+      d.zeroToHundredLong.closed
+        .intersect(boundlessInterval())
+        .should.eql(d.zeroToHundredLong.closed);
+      boundlessInterval().intersect(unknownInterval()).should.eql(unknownInterval());
+      unknownInterval().intersect(boundlessInterval()).should.eql(unknownInterval());
+      should(unknownInterval().intersect(unknownInterval())).be.null();
     });
   });
 
@@ -5131,6 +5277,29 @@ describe('LongInterval', () => {
 
       uIvl.after(uIvl).should.be.false();
     });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().after(boundlessInterval()).should.be.false();
+      boundlessInterval().after(d.zeroToHundredLong.closed).should.be.false();
+      d.zeroToHundredLong.closed.after(boundlessInterval()).should.be.false();
+      unknownInterval().after(boundlessInterval()).should.be.false();
+      should(unknownInterval().after(unknownInterval())).be.null();
+    });
+  });
+
+  describe('sameOrAfter', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().sameOrAfter(boundlessInterval()).should.be.true();
+      boundlessInterval().sameOrAfter(d.zeroToHundredLong.closed).should.be.false();
+      d.zeroToHundredLong.closed.sameOrAfter(boundlessInterval()).should.be.false();
+      should(unknownInterval().sameOrAfter(boundlessInterval())).be.null();
+      should(unknownInterval().sameOrAfter(unknownInterval())).be.null();
+    });
   });
 
   describe('before', () => {
@@ -5251,6 +5420,29 @@ describe('LongInterval', () => {
       uIvl.before(ivl).should.be.false();
 
       uIvl.before(uIvl).should.be.false();
+    });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().before(boundlessInterval()).should.be.false();
+      boundlessInterval().before(d.zeroToHundredLong.closed).should.be.false();
+      d.zeroToHundredLong.closed.before(boundlessInterval()).should.be.false();
+      unknownInterval().before(boundlessInterval()).should.be.false();
+      should(unknownInterval().before(unknownInterval())).be.null();
+    });
+  });
+
+  describe('sameOrBefore', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should properly handle boundless and unknown intervals', () => {
+      boundlessInterval().sameOrBefore(boundlessInterval()).should.be.true();
+      boundlessInterval().sameOrBefore(d.zeroToHundredLong.closed).should.be.false();
+      d.zeroToHundredLong.closed.sameOrBefore(boundlessInterval()).should.be.false();
+      should(unknownInterval().sameOrBefore(boundlessInterval())).be.null();
+      should(unknownInterval().sameOrBefore(unknownInterval())).be.null();
     });
   });
 
@@ -5373,6 +5565,14 @@ describe('LongInterval', () => {
 
       uIvl.meets(uIvl).should.be.false();
     });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().meets(boundlessInterval()).should.be.false();
+      boundlessInterval().meets(d.zeroToHundredLong.closed).should.be.false();
+      d.zeroToHundredLong.closed.meets(boundlessInterval()).should.be.false();
+      unknownInterval().meets(boundlessInterval()).should.be.false();
+      should(unknownInterval().meets(unknownInterval())).be.null();
+    });
   });
 
   describe('meetsAfter', () => {
@@ -5494,6 +5694,14 @@ describe('LongInterval', () => {
 
       uIvl.meetsAfter(uIvl).should.be.false();
     });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().meetsAfter(boundlessInterval()).should.be.false();
+      boundlessInterval().meetsAfter(d.zeroToHundredLong.closed).should.be.false();
+      d.zeroToHundredLong.closed.meetsAfter(boundlessInterval()).should.be.false();
+      unknownInterval().meetsAfter(boundlessInterval()).should.be.false();
+      should(unknownInterval().meetsAfter(unknownInterval())).be.null();
+    });
   });
 
   describe('meetsBefore', () => {
@@ -5614,6 +5822,14 @@ describe('LongInterval', () => {
       should.not.exist(uIvl.meetsBefore(ivl));
 
       uIvl.meetsBefore(uIvl).should.be.false();
+    });
+
+    it('should properly handle boundless intervals', () => {
+      boundlessInterval().meetsBefore(boundlessInterval()).should.be.false();
+      boundlessInterval().meetsBefore(d.zeroToHundredLong.closed).should.be.false();
+      d.zeroToHundredLong.closed.meetsBefore(boundlessInterval()).should.be.false();
+      unknownInterval().meetsBefore(boundlessInterval()).should.be.false();
+      should(unknownInterval().meetsBefore(unknownInterval())).be.null();
     });
   });
 });
