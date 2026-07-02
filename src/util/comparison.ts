@@ -1,4 +1,4 @@
-import { Uncertainty } from '../datatypes/datatypes';
+import { Uncertainty } from '../datatypes/uncertainty';
 
 function areNumbers(a: any, b: any) {
   return typeof a === 'number' && typeof b === 'number';

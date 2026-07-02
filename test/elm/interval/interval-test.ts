@@ -3,6 +3,7 @@ import setup from '../../setup';
 const data = require('./data');
 import { Interval } from '../../../src/datatypes/interval';
 import { DateTime } from '../../../src/datatypes/datetime';
+import { Uncertainty } from '../../../src/datatypes/uncertainty';
 import {
   MIN_INT_VALUE,
   MAX_INT_VALUE,
@@ -869,12 +870,12 @@ describe('BeforeOrOn', () => {
     (await this.beforeNullEndIvl.exec(this.ctx)).should.be.true();
     (await this.afterStartNullEndIvl.exec(this.ctx)).should.be.false();
     should(await this.nullEndStartBeforeIvl.exec(this.ctx)).be.null();
-    should(await this.nullEndStartAfterIvl.exec(this.ctx)).be.null();
+    (await this.nullEndStartAfterIvl.exec(this.ctx)).should.be.false();
   });
 
   it('should handle intervals with null start', async function () {
     should(await this.endsBeforeNullStartIvlEnds.exec(this.ctx)).be.null();
-    should(await this.afterEndOfNullStartIvl.exec(this.ctx)).be.null();
+    (await this.afterEndOfNullStartIvl.exec(this.ctx)).should.be.false();
     (await this.nullStartStartBeforeIvl.exec(this.ctx)).should.be.true();
     (await this.nullStartStartAfterIvl.exec(this.ctx)).should.be.false();
   });
@@ -935,7 +936,7 @@ describe('AfterOrOn', () => {
   });
 
   it('should handle intervals with null end', async function () {
-    should(await this.beforeNullEndIvl.exec(this.ctx)).be.null();
+    (await this.beforeNullEndIvl.exec(this.ctx)).should.be.false();
     should(await this.afterStartNullEndIvl.exec(this.ctx)).be.null();
     (await this.nullEndStartBeforeIvl.exec(this.ctx)).should.be.false();
     (await this.nullEndStartAfterIvl.exec(this.ctx)).should.be.true();
@@ -944,7 +945,7 @@ describe('AfterOrOn', () => {
   it('should handle intervals with null start', async function () {
     (await this.endsBeforeNullStartIvlEnds.exec(this.ctx)).should.be.false();
     (await this.afterEndOfNullStartIvl.exec(this.ctx)).should.be.true();
-    should(await this.nullStartStartBeforeIvl.exec(this.ctx)).be.null();
+    (await this.nullStartStartBeforeIvl.exec(this.ctx)).should.be.false();
     should(await this.nullStartStartAfterIvl.exec(this.ctx)).be.null();
   });
 
@@ -1723,8 +1724,10 @@ describe('Start', () => {
     (await this.openLongNotNull.exec(this.ctx)).should.eql(2n);
   });
 
-  it('should return null for open interval with null high value', async function () {
-    should(await this.openNull.exec(this.ctx)).be.null();
+  it('should return uncertainty for open interval with null low value', async function () {
+    (await this.openNull.exec(this.ctx)).should.eql(
+      new Uncertainty(MIN_DATETIME_VALUE, new DateTime(2012, 12, 31))
+    );
   });
 });
 
@@ -1771,8 +1774,10 @@ describe('End', () => {
     (await this.openLongNotNull.exec(this.ctx)).should.eql(2n);
   });
 
-  it('should return null for open interval with null low value', async function () {
-    should(await this.openNull.exec(this.ctx)).be.null();
+  it('should return uncertainty for open interval with null high value', async function () {
+    (await this.openNull.exec(this.ctx)).should.eql(
+      new Uncertainty(new DateTime(2013, 1, 2), MAX_DATETIME_VALUE)
+    );
   });
 });
 

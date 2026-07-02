@@ -1,5 +1,11 @@
 import { ELM_DECIMAL_TYPE } from '../util/elmTypes';
-import { decimalAdjust, isValidDecimal, overflowsOrUnderflows } from '../util/math';
+import {
+  decimalAdjust,
+  isValidDecimal,
+  MIN_FLOAT_VALUE,
+  MAX_FLOAT_VALUE,
+  overflowsOrUnderflows
+} from '../util/math';
 import {
   checkUnit,
   convertUnit,
@@ -156,6 +162,11 @@ export class Quantity {
     return new Quantity(decimalAdjust('round', resultValue, -8), resultUnit);
   }
 }
+
+// Require MIN/MAX here because math.js requires this file, and when we make this file require
+// math.js before it exports DateTime and Date, it errors due to the circular dependency...
+export const MIN_QUANTITY_VALUE = new Quantity(MIN_FLOAT_VALUE, '1');
+export const MAX_QUANTITY_VALUE = new Quantity(MAX_FLOAT_VALUE, '1');
 
 export function parseQuantity(str: string) {
   const components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec(str);

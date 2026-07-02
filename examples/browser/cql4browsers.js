@@ -2289,25 +2289,31 @@ class Interval {
     }
     start() {
         if (this.low == null) {
-            if (this.lowClosed) {
-                return (0, math_1.minValueForInstance)(this.high);
+            const quantityInstance = this.high && this.pointType == elmTypes_1.ELM_QUANTITY_TYPE ? this.high : undefined;
+            const minValue = (0, math_1.minValueForType)(this.pointType, quantityInstance);
+            if (this.lowClosed || minValue == null) {
+                return minValue;
             }
             else {
-                return this.low;
+                const end = ((end) => (end.isUncertainty ? end.high : end))(this.high == null ? (0, math_1.maxValueForType)(this.pointType) : this.end());
+                return new uncertainty_1.Uncertainty(minValue, end);
             }
         }
-        return this.toClosed().low;
+        return this.lowClosed ? this.low : (0, math_1.successor)(this.low, this.pointType);
     }
     end() {
         if (this.high == null) {
-            if (this.highClosed) {
-                return (0, math_1.maxValueForInstance)(this.low);
+            const quantityInstance = this.low && this.pointType == elmTypes_1.ELM_QUANTITY_TYPE ? this.low : undefined;
+            const maxValue = (0, math_1.maxValueForType)(this.pointType, quantityInstance);
+            if (this.highClosed || maxValue == null) {
+                return maxValue;
             }
             else {
-                return this.high;
+                const start = ((start) => (start.isUncertainty ? start.low : start))(this.low == null ? (0, math_1.minValueForType)(this.pointType) : this.start());
+                return new uncertainty_1.Uncertainty(start, maxValue);
             }
         }
-        return this.toClosed().high;
+        return this.highClosed ? this.high : (0, math_1.predecessor)(this.high, this.pointType);
     }
     starts(other, precision) {
         if (this.isBoundlessInterval) {
@@ -2576,7 +2582,7 @@ exports.ThreeValuedLogic = ThreeValuedLogic;
 },{}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Quantity = void 0;
+exports.MAX_QUANTITY_VALUE = exports.MIN_QUANTITY_VALUE = exports.Quantity = void 0;
 exports.parseQuantity = parseQuantity;
 exports.doAddition = doAddition;
 exports.doSubtraction = doSubtraction;
@@ -2716,6 +2722,10 @@ class Quantity {
     }
 }
 exports.Quantity = Quantity;
+// Require MIN/MAX here because math.js requires this file, and when we make this file require
+// math.js before it exports DateTime and Date, it errors due to the circular dependency...
+exports.MIN_QUANTITY_VALUE = new Quantity(math_1.MIN_FLOAT_VALUE, '1');
+exports.MAX_QUANTITY_VALUE = new Quantity(math_1.MAX_FLOAT_VALUE, '1');
 function parseQuantity(str) {
     const components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec(str);
     if (components != null && components[1] != null) {
@@ -9261,7 +9271,7 @@ exports.greaterThan = greaterThan;
 exports.greaterThanOrEquals = greaterThanOrEquals;
 exports.equivalent = equivalent;
 exports.equals = equals;
-const datatypes_1 = require("../datatypes/datatypes");
+const uncertainty_1 = require("../datatypes/uncertainty");
 function areNumbers(a, b) {
     return typeof a === 'number' && typeof b === 'number';
 }
@@ -9277,7 +9287,7 @@ function areDateTimesOrQuantities(a, b) {
         (a && a.isQuantity && b && b.isQuantity));
 }
 function isUncertainty(x) {
-    return x instanceof datatypes_1.Uncertainty;
+    return x instanceof uncertainty_1.Uncertainty;
 }
 function lessThan(a, b, precision) {
     if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
@@ -9290,7 +9300,7 @@ function lessThan(a, b, precision) {
         return a.lessThan(b);
     }
     else if (isUncertainty(b)) {
-        return datatypes_1.Uncertainty.from(a).lessThan(b);
+        return uncertainty_1.Uncertainty.from(a).lessThan(b);
     }
     else {
         return null;
@@ -9307,7 +9317,7 @@ function lessThanOrEquals(a, b, precision) {
         return a.lessThanOrEquals(b);
     }
     else if (isUncertainty(b)) {
-        return datatypes_1.Uncertainty.from(a).lessThanOrEquals(b);
+        return uncertainty_1.Uncertainty.from(a).lessThanOrEquals(b);
     }
     else {
         return null;
@@ -9324,7 +9334,7 @@ function greaterThan(a, b, precision) {
         return a.greaterThan(b);
     }
     else if (isUncertainty(b)) {
-        return datatypes_1.Uncertainty.from(a).greaterThan(b);
+        return uncertainty_1.Uncertainty.from(a).greaterThan(b);
     }
     else {
         return null;
@@ -9341,7 +9351,7 @@ function greaterThanOrEquals(a, b, precision) {
         return a.greaterThanOrEquals(b);
     }
     else if (isUncertainty(b)) {
-        return datatypes_1.Uncertainty.from(a).greaterThanOrEquals(b);
+        return uncertainty_1.Uncertainty.from(a).greaterThanOrEquals(b);
     }
     else {
         return null;
@@ -9454,11 +9464,11 @@ function equals(a, b) {
         return a.equals(b);
     }
     // If one is an Uncertainty, convert the other to an Uncertainty
-    if (a instanceof datatypes_1.Uncertainty) {
-        b = datatypes_1.Uncertainty.from(b);
+    if (a instanceof uncertainty_1.Uncertainty) {
+        b = uncertainty_1.Uncertainty.from(b);
     }
-    else if (b instanceof datatypes_1.Uncertainty) {
-        a = datatypes_1.Uncertainty.from(a);
+    else if (b instanceof uncertainty_1.Uncertainty) {
+        a = uncertainty_1.Uncertainty.from(a);
     }
     // Use overloaded 'equals' function if it is available
     if (typeof a.equals === 'function') {
@@ -9500,7 +9510,7 @@ function equals(a, b) {
     return false;
 }
 
-},{"../datatypes/datatypes":7}],54:[function(require,module,exports){
+},{"../datatypes/uncertainty":14}],54:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AnnotatedError = void 0;
@@ -9727,6 +9737,7 @@ exports.decimalAdjust = decimalAdjust;
 exports.decimalOrNull = decimalOrNull;
 exports.decimalLongOrNull = decimalLongOrNull;
 const exception_1 = require("../datatypes/exception");
+const quantity_1 = require("../datatypes/quantity");
 const datetime_1 = require("../datatypes/datetime");
 const uncertainty_1 = require("../datatypes/uncertainty");
 const elmTypes_1 = require("./elmTypes");
@@ -10025,9 +10036,14 @@ function maxValueForInstance(val) {
         return exports.MAX_DATE_VALUE?.copy();
     }
     else if (val && val.isQuantity) {
-        const val2 = val.clone();
-        val2.value = maxValueForInstance(val2.value);
-        return val2;
+        // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
+        // especially if this is being used in the context of an interval or uncertainty since the
+        // left and right sides need to be comparable in those cases.
+        const maxQuantity = quantity_1.MAX_QUANTITY_VALUE.clone();
+        if (val.unit) {
+            maxQuantity.unit = val.unit;
+        }
+        return maxQuantity;
     }
     else {
         return null;
@@ -10048,13 +10064,17 @@ function maxValueForType(type, quantityInstance) {
         case elmTypes_1.ELM_TIME_TYPE:
             return exports.MAX_TIME_VALUE?.copy();
         case elmTypes_1.ELM_QUANTITY_TYPE: {
+            // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
+            // especially if this is being used in the context of an interval or uncertainty since the
+            // left and right sides need to be comparable in those cases.
+            const maxQuantity = quantity_1.MAX_QUANTITY_VALUE.clone();
             if (quantityInstance == null) {
-                // can't infer a quantity unit type from nothing]
-                return null;
+                return maxQuantity;
             }
-            const maxQty = quantityInstance.clone();
-            maxQty.value = exports.MAX_FLOAT_VALUE;
-            return maxQty;
+            if (quantityInstance.unit) {
+                maxQuantity.unit = quantityInstance.unit;
+            }
+            return maxQuantity;
         }
     }
     return null;
@@ -10081,9 +10101,14 @@ function minValueForInstance(val) {
         return exports.MIN_DATE_VALUE?.copy();
     }
     else if (val && val.isQuantity) {
-        const val2 = val.clone();
-        val2.value = minValueForInstance(val2.value);
-        return val2;
+        // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
+        // especially if this is being used in the context of an interval or uncertainty since the
+        // left and right sides need to be comparable in those cases.
+        const minQuantity = quantity_1.MIN_QUANTITY_VALUE.clone();
+        if (val.unit) {
+            minQuantity.unit = val.unit;
+        }
+        return minQuantity;
     }
     else {
         return null;
@@ -10104,13 +10129,17 @@ function minValueForType(type, quantityInstance) {
         case elmTypes_1.ELM_TIME_TYPE:
             return exports.MIN_TIME_VALUE?.copy();
         case elmTypes_1.ELM_QUANTITY_TYPE: {
+            // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
+            // especially if this is being used in the context of an interval or uncertainty since the
+            // left and right sides need to be comparable in those cases.
+            const minQuantity = quantity_1.MIN_QUANTITY_VALUE.clone();
             if (quantityInstance == null) {
-                // can't infer a quantity unit type from nothing]
-                return null;
+                return minQuantity;
             }
-            const minQty = quantityInstance.clone();
-            minQty.value = exports.MIN_FLOAT_VALUE;
-            return minQty;
+            if (quantityInstance.unit) {
+                minQuantity.unit = quantityInstance.unit;
+            }
+            return minQuantity;
         }
     }
     return null;
@@ -10145,7 +10174,7 @@ function decimalLongOrNull(value) {
         : null;
 }
 
-},{"../datatypes/datetime":8,"../datatypes/exception":9,"../datatypes/uncertainty":14,"./elmTypes":55}],58:[function(require,module,exports){
+},{"../datatypes/datetime":8,"../datatypes/exception":9,"../datatypes/quantity":12,"../datatypes/uncertainty":14,"./elmTypes":55}],58:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;

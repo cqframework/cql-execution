@@ -526,24 +526,36 @@ export class Interval {
 
   start() {
     if (this.low == null) {
-      if (this.lowClosed) {
-        return minValueForInstance(this.high);
+      const quantityInstance =
+        this.high && this.pointType == ELM_QUANTITY_TYPE ? this.high : undefined;
+      const minValue = minValueForType(this.pointType, quantityInstance);
+      if (this.lowClosed || minValue == null) {
+        return minValue;
       } else {
-        return this.low;
+        const end = ((end: any) => (end.isUncertainty ? end.high : end))(
+          this.high == null ? maxValueForType(this.pointType) : this.end()
+        );
+        return new Uncertainty(minValue, end);
       }
     }
-    return this.toClosed().low;
+    return this.lowClosed ? this.low : successor(this.low, this.pointType);
   }
 
   end() {
     if (this.high == null) {
-      if (this.highClosed) {
-        return maxValueForInstance(this.low);
+      const quantityInstance =
+        this.low && this.pointType == ELM_QUANTITY_TYPE ? this.low : undefined;
+      const maxValue = maxValueForType(this.pointType, quantityInstance);
+      if (this.highClosed || maxValue == null) {
+        return maxValue;
       } else {
-        return this.high;
+        const start = ((start: any) => (start.isUncertainty ? start.low : start))(
+          this.low == null ? minValueForType(this.pointType) : this.start()
+        );
+        return new Uncertainty(start, maxValue);
       }
     }
-    return this.toClosed().high;
+    return this.highClosed ? this.high : predecessor(this.high, this.pointType);
   }
 
   starts(other: any, precision?: any) {

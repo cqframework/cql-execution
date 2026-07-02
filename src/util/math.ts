@@ -1,5 +1,5 @@
 import { Exception } from '../datatypes/exception';
-import { Quantity } from '../datatypes/quantity';
+import { Quantity, MIN_QUANTITY_VALUE, MAX_QUANTITY_VALUE } from '../datatypes/quantity';
 import {
   MIN_DATETIME_VALUE as dtMinDateTimeValue,
   MAX_DATETIME_VALUE as dtMaxDateTimeValue,
@@ -279,9 +279,14 @@ export function maxValueForInstance(val: any) {
   } else if (val && val.isDate) {
     return MAX_DATE_VALUE?.copy();
   } else if (val && val.isQuantity) {
-    const val2 = val.clone();
-    val2.value = maxValueForInstance(val2.value);
-    return val2;
+    // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
+    // especially if this is being used in the context of an interval or uncertainty since the
+    // left and right sides need to be comparable in those cases.
+    const maxQuantity = MAX_QUANTITY_VALUE.clone();
+    if (val.unit) {
+      maxQuantity.unit = val.unit;
+    }
+    return maxQuantity;
   } else {
     return null;
   }
@@ -302,13 +307,17 @@ export function maxValueForType(type: string, quantityInstance?: Quantity) {
     case ELM_TIME_TYPE:
       return MAX_TIME_VALUE?.copy();
     case ELM_QUANTITY_TYPE: {
+      // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
+      // especially if this is being used in the context of an interval or uncertainty since the
+      // left and right sides need to be comparable in those cases.
+      const maxQuantity = MAX_QUANTITY_VALUE.clone();
       if (quantityInstance == null) {
-        // can't infer a quantity unit type from nothing]
-        return null;
+        return maxQuantity;
       }
-      const maxQty = quantityInstance.clone();
-      maxQty.value = MAX_FLOAT_VALUE;
-      return maxQty;
+      if (quantityInstance.unit) {
+        maxQuantity.unit = quantityInstance.unit;
+      }
+      return maxQuantity;
     }
   }
   return null;
@@ -330,9 +339,14 @@ export function minValueForInstance(val: any) {
   } else if (val && val.isDate) {
     return MIN_DATE_VALUE?.copy();
   } else if (val && val.isQuantity) {
-    const val2 = val.clone();
-    val2.value = minValueForInstance(val2.value);
-    return val2;
+    // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
+    // especially if this is being used in the context of an interval or uncertainty since the
+    // left and right sides need to be comparable in those cases.
+    const minQuantity = MIN_QUANTITY_VALUE.clone();
+    if (val.unit) {
+      minQuantity.unit = val.unit;
+    }
+    return minQuantity;
   } else {
     return null;
   }
@@ -353,13 +367,17 @@ export function minValueForType(type: string, quantityInstance?: Quantity) {
     case ELM_TIME_TYPE:
       return MIN_TIME_VALUE?.copy();
     case ELM_QUANTITY_TYPE: {
+      // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
+      // especially if this is being used in the context of an interval or uncertainty since the
+      // left and right sides need to be comparable in those cases.
+      const minQuantity = MIN_QUANTITY_VALUE.clone();
       if (quantityInstance == null) {
-        // can't infer a quantity unit type from nothing]
-        return null;
+        return minQuantity;
       }
-      const minQty = quantityInstance.clone();
-      minQty.value = MIN_FLOAT_VALUE;
-      return minQty;
+      if (quantityInstance.unit) {
+        minQuantity.unit = quantityInstance.unit;
+      }
+      return minQuantity;
     }
   }
   return null;

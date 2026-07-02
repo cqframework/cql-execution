@@ -1,5 +1,6 @@
 import { Interval } from '../../src/datatypes/interval';
-import { DateTime } from '../../src/datatypes/datetime';
+import { DateTime, Date } from '../../src/datatypes/datetime';
+import { Quantity } from '../../src/datatypes/quantity';
 
 class TestDateTime {
   static parse(string: string) {
@@ -43,23 +44,33 @@ class TestInterval {
   toMinute: Interval;
   toSecond: Interval;
   toMillisecond: Interval;
+  withNullStart: TestInterval;
+  withNullEnd: TestInterval;
 
-  constructor(low: any, high: any) {
-    const [thLow, thHigh] = Array.from([
-      TestDateTime.fromDateTime(low),
-      TestDateTime.fromDateTime(high)
-    ]);
+  constructor(low: any, high: any, createNullVariants = true) {
     this.closed = new Interval(low, high, true, true);
     this.open = new Interval(low, high, false, false);
     this.closedOpen = new Interval(low, high, true, false);
     this.openClosed = new Interval(low, high, false, true);
-    this.toYear = new Interval(thLow.toYear, thHigh.toYear);
-    this.toMonth = new Interval(thLow.toMonth, thHigh.toMonth);
-    this.toDay = new Interval(thLow.toDay, thHigh.toDay);
-    this.toHour = new Interval(thLow.toHour, thHigh.toHour);
-    this.toMinute = new Interval(thLow.toMinute, thHigh.toMinute);
-    this.toSecond = new Interval(thLow.toSecond, thHigh.toSecond);
-    this.toMillisecond = new Interval(thLow.toMillisecond, thHigh.toMillisecond);
+
+    if (low != null && high != null) {
+      const [thLow, thHigh] = Array.from([
+        TestDateTime.fromDateTime(low),
+        TestDateTime.fromDateTime(high)
+      ]);
+      this.toYear = new Interval(thLow.toYear, thHigh.toYear);
+      this.toMonth = new Interval(thLow.toMonth, thHigh.toMonth);
+      this.toDay = new Interval(thLow.toDay, thHigh.toDay);
+      this.toHour = new Interval(thLow.toHour, thHigh.toHour);
+      this.toMinute = new Interval(thLow.toMinute, thHigh.toMinute);
+      this.toSecond = new Interval(thLow.toSecond, thHigh.toSecond);
+      this.toMillisecond = new Interval(thLow.toMillisecond, thHigh.toMillisecond);
+    }
+
+    if (createNullVariants) {
+      this.withNullStart = new TestInterval(null, high, false);
+      this.withNullEnd = new TestInterval(low, null, false);
+    }
   }
 }
 
@@ -94,6 +105,11 @@ export default () => {
   data['mid2012'] = TestDateTime.parse('2012-06-01T00:00:00.0');
   data['end2012'] = TestDateTime.parse('2012-12-31T23:59:59.999');
   data['aft2012'] = TestDateTime.parse('2013-06-01T00:00:00.0');
+  data['all2012date'] = new TestInterval(Date.parse('2012-01-01'), Date.parse('2012-12-31'));
+  data['alldaytime'] = new TestInterval(
+    DateTime.parse('0001-01-01T00:00:00.0').getTime(),
+    DateTime.parse('0001-01-01T23:59:59.999').getTime()
+  );
   data['dIvl'] = {
     sameAs: {
       //    |----------X----------|
@@ -276,5 +292,7 @@ export default () => {
       y: new TestInterval(0n, 100n)
     }
   };
+  data['zeroPointFiveToNinePointFive'] = new TestInterval(0.5, 9.5);
+  data['zeroToHundredMg'] = new TestInterval(new Quantity(0, 'mg'), new Quantity(100, 'mg'));
   return data;
 };

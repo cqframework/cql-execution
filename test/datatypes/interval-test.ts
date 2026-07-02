@@ -1,13 +1,34 @@
 import should from 'should';
-import { DateTime, MIN_DATETIME_VALUE, MAX_DATETIME_VALUE } from '../../src/datatypes/datetime';
+import {
+  DateTime,
+  Date,
+  MIN_DATETIME_VALUE,
+  MAX_DATETIME_VALUE
+} from '../../src/datatypes/datetime';
 import { Interval } from '../../src/datatypes/interval';
+import { Quantity, MAX_QUANTITY_VALUE, MIN_QUANTITY_VALUE } from '../../src/datatypes/quantity';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 import {
+  ELM_DATE_TYPE,
   ELM_DATETIME_TYPE,
   ELM_DECIMAL_TYPE,
   ELM_INTEGER_TYPE,
-  ELM_LONG_TYPE
+  ELM_LONG_TYPE,
+  ELM_QUANTITY_TYPE,
+  ELM_TIME_TYPE
 } from '../../src/util/elmTypes';
+import {
+  MAX_DATE_VALUE,
+  MAX_FLOAT_VALUE,
+  MAX_INT_VALUE,
+  MAX_LONG_VALUE,
+  MAX_TIME_VALUE,
+  MIN_DATE_VALUE,
+  MIN_FLOAT_VALUE,
+  MIN_INT_VALUE,
+  MIN_LONG_VALUE,
+  MIN_TIME_VALUE
+} from '../../src/util/math';
 import data from './interval-data';
 
 const xy = (obj: any) => [obj.x, obj.y];
@@ -59,6 +80,270 @@ describe('Interval', () => {
     const allCopy = all.copy();
     allCopy.should.eql(all);
     allCopy.should.not.equal(all);
+  });
+
+  describe('start', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should return low for intervals with closed low', () => {
+      d.zeroToHundred.closed.start().should.equal(0);
+      d.zeroPointFiveToNinePointFive.closed.start().should.equal(0.5);
+      d.zeroToHundredLong.closed.start().should.equal(0n);
+      d.zeroToHundredMg.closed.start().should.eql(new Quantity(0, 'mg'));
+      d.all2012date.closed.start().should.eql(Date.parse('2012-01-01'));
+      d.all2012.closed.start().should.eql(DateTime.parse('2012-01-01T00:00:00.0'));
+      d.alldaytime.closed.start().should.eql(DateTime.parse('0001-01-01T00:00:00.0').getTime());
+    });
+
+    it('should return successor of low for intervals with open low', () => {
+      d.zeroToHundred.openClosed.start().should.equal(1);
+      d.zeroPointFiveToNinePointFive.openClosed.start().should.equal(0.50000001);
+      d.zeroToHundredLong.openClosed.start().should.equal(1n);
+      d.zeroToHundredMg.openClosed.start().should.eql(new Quantity(0.00000001, 'mg'));
+      d.all2012date.openClosed.start().should.eql(Date.parse('2012-01-02'));
+      d.all2012.openClosed.start().should.eql(DateTime.parse('2012-01-01T00:00:00.001'));
+      d.alldaytime.openClosed
+        .start()
+        .should.eql(DateTime.parse('0001-01-01T00:00:00.001').getTime());
+    });
+
+    it('should return type minimum for closed null low endpoints', () => {
+      d.zeroToHundred.withNullStart.closed.start().should.equal(MIN_INT_VALUE);
+      d.zeroToHundredLong.withNullStart.closed.start().should.equal(MIN_LONG_VALUE);
+      d.zeroPointFiveToNinePointFive.withNullStart.closed.start().should.equal(MIN_FLOAT_VALUE);
+      d.zeroToHundredMg.withNullStart.closed
+        .start()
+        .should.eql(new Quantity(MIN_FLOAT_VALUE, 'mg'));
+      d.all2012date.withNullStart.closed.start().should.eql(MIN_DATE_VALUE);
+      d.all2012.withNullStart.closed.start().should.eql(MIN_DATETIME_VALUE);
+      d.alldaytime.withNullStart.closed.start().should.eql(MIN_TIME_VALUE);
+    });
+
+    it('should return null for closed null low endpoints when no point type is available', () => {
+      should(new Interval(null, null, true, true).start()).be.null();
+      should(new Interval(null, null, true, true, 'Any').start()).be.null();
+    });
+
+    it('should return uncertainty for open null low endpoints', () => {
+      d.zeroToHundred.withNullStart.openClosed
+        .start()
+        .should.eql(new Uncertainty(MIN_INT_VALUE, 100));
+      d.zeroToHundredLong.withNullStart.openClosed
+        .start()
+        .should.eql(new Uncertainty(MIN_LONG_VALUE, 100n));
+      d.zeroPointFiveToNinePointFive.withNullStart.openClosed
+        .start()
+        .should.eql(new Uncertainty(MIN_FLOAT_VALUE, 9.5));
+      d.zeroToHundredMg.withNullStart.openClosed
+        .start()
+        .should.eql(new Uncertainty(new Quantity(MIN_FLOAT_VALUE, 'mg'), new Quantity(100, 'mg')));
+      d.all2012date.withNullStart.openClosed
+        .start()
+        .should.eql(new Uncertainty(MIN_DATE_VALUE, Date.parse('2012-12-31')));
+      d.all2012.withNullStart.openClosed
+        .start()
+        .should.eql(new Uncertainty(MIN_DATETIME_VALUE, DateTime.parse('2012-12-31T23:59:59.999')));
+      d.alldaytime.withNullStart.openClosed
+        .start()
+        .should.eql(
+          new Uncertainty(MIN_TIME_VALUE, DateTime.parse('0001-01-01T23:59:59.999').getTime())
+        );
+    });
+
+    it('should use the closed end as the high value for open null low endpoint uncertainty', () => {
+      d.zeroToHundred.withNullStart.open.start().should.eql(new Uncertainty(MIN_INT_VALUE, 99));
+      d.zeroToHundredLong.withNullStart.open
+        .start()
+        .should.eql(new Uncertainty(MIN_LONG_VALUE, 99n));
+      d.zeroPointFiveToNinePointFive.withNullStart.open
+        .start()
+        .should.eql(new Uncertainty(MIN_FLOAT_VALUE, 9.49999999));
+      d.zeroToHundredMg.withNullStart.open
+        .start()
+        .should.eql(
+          new Uncertainty(new Quantity(MIN_FLOAT_VALUE, 'mg'), new Quantity(99.99999999, 'mg'))
+        );
+      d.all2012date.withNullStart.open
+        .start()
+        .should.eql(new Uncertainty(MIN_DATE_VALUE, Date.parse('2012-12-30')));
+      d.all2012.withNullStart.open
+        .start()
+        .should.eql(new Uncertainty(MIN_DATETIME_VALUE, DateTime.parse('2012-12-31T23:59:59.998')));
+      d.alldaytime.withNullStart.open
+        .start()
+        .should.eql(
+          new Uncertainty(MIN_TIME_VALUE, DateTime.parse('0001-01-01T23:59:59.998').getTime())
+        );
+    });
+
+    it('should return null for open null low endpoints without a finite type minimum', () => {
+      should(new Interval(null, null, false, false).start()).be.null();
+      should(new Interval(null, null, false, false, 'Any').start()).be.null();
+    });
+
+    it('should use default point type when both endpoints are null', () => {
+      new Interval(null, null, true, true, ELM_INTEGER_TYPE).start().should.equal(MIN_INT_VALUE);
+      new Interval(null, null, true, true, ELM_LONG_TYPE).start().should.equal(MIN_LONG_VALUE);
+      new Interval(null, null, true, true, ELM_DECIMAL_TYPE).start().should.equal(MIN_FLOAT_VALUE);
+      new Interval(null, null, true, true, ELM_QUANTITY_TYPE)
+        .start()
+        .should.eql(MIN_QUANTITY_VALUE);
+      new Interval(null, null, true, true, ELM_DATETIME_TYPE)
+        .start()
+        .should.eql(MIN_DATETIME_VALUE);
+      new Interval(null, null, true, true, ELM_DATE_TYPE).start().should.eql(MIN_DATE_VALUE);
+      new Interval(null, null, true, true, ELM_TIME_TYPE).start().should.eql(MIN_TIME_VALUE);
+    });
+
+    it('should return full type uncertainty for open intervals with null endpoints and default point type', () => {
+      new Interval(null, null, false, false, ELM_INTEGER_TYPE)
+        .start()
+        .should.eql(new Uncertainty(MIN_INT_VALUE, MAX_INT_VALUE));
+      new Interval(null, null, false, false, ELM_LONG_TYPE)
+        .start()
+        .should.eql(new Uncertainty(MIN_LONG_VALUE, MAX_LONG_VALUE));
+      new Interval(null, null, false, false, ELM_DECIMAL_TYPE)
+        .start()
+        .should.eql(new Uncertainty(MIN_FLOAT_VALUE, MAX_FLOAT_VALUE));
+      new Interval(null, null, false, false, ELM_QUANTITY_TYPE)
+        .start()
+        .should.eql(new Uncertainty(MIN_QUANTITY_VALUE, MAX_QUANTITY_VALUE));
+      new Interval(null, null, false, false, ELM_DATETIME_TYPE)
+        .start()
+        .should.eql(new Uncertainty(MIN_DATETIME_VALUE, MAX_DATETIME_VALUE));
+      new Interval(null, null, false, false, ELM_TIME_TYPE)
+        .start()
+        .should.eql(new Uncertainty(MIN_TIME_VALUE, MAX_TIME_VALUE));
+    });
+  });
+
+  describe('end', () => {
+    let d: any;
+    beforeEach(() => {
+      d = data();
+    });
+
+    it('should return high for intervals with closed high', () => {
+      d.zeroToHundred.closed.end().should.equal(100);
+      d.zeroPointFiveToNinePointFive.closed.end().should.equal(9.5);
+      d.zeroToHundredLong.closed.end().should.equal(100n);
+      d.zeroToHundredMg.closed.end().should.eql(new Quantity(100, 'mg'));
+      d.all2012date.closed.end().should.eql(Date.parse('2012-12-31'));
+      d.all2012.closed.end().should.eql(DateTime.parse('2012-12-31T23:59:59.999'));
+      d.alldaytime.closed.end().should.eql(DateTime.parse('0001-01-01T23:59:59.999').getTime());
+    });
+
+    it('should return predecessor of high for intervals with open high', () => {
+      d.zeroToHundred.closedOpen.end().should.equal(99);
+      d.zeroPointFiveToNinePointFive.closedOpen.end().should.equal(9.49999999);
+      d.zeroToHundredLong.closedOpen.end().should.equal(99n);
+      d.zeroToHundredMg.closedOpen.end().should.eql(new Quantity(99.99999999, 'mg'));
+      d.all2012date.closedOpen.end().should.eql(Date.parse('2012-12-30'));
+      d.all2012.closedOpen.end().should.eql(DateTime.parse('2012-12-31T23:59:59.998'));
+      d.alldaytime.closedOpen.end().should.eql(DateTime.parse('0001-01-01T23:59:59.998').getTime());
+    });
+
+    it('should return type maximum for closed null high endpoints', () => {
+      d.zeroToHundred.withNullEnd.closed.end().should.equal(MAX_INT_VALUE);
+      d.zeroToHundredLong.withNullEnd.closed.end().should.equal(MAX_LONG_VALUE);
+      d.zeroPointFiveToNinePointFive.withNullEnd.closed.end().should.equal(MAX_FLOAT_VALUE);
+      d.zeroToHundredMg.withNullEnd.closed.end().should.eql(new Quantity(MAX_FLOAT_VALUE, 'mg'));
+      d.all2012date.withNullEnd.closed.end().should.eql(MAX_DATE_VALUE);
+      d.all2012.withNullEnd.closed.end().should.eql(MAX_DATETIME_VALUE);
+      d.alldaytime.withNullEnd.closed.end().should.eql(MAX_TIME_VALUE);
+    });
+
+    it('should return null for closed null high endpoints when no point type is available', () => {
+      should(new Interval(null, null, true, true).end()).be.null();
+      should(new Interval(null, null, true, true, 'Any').end()).be.null();
+    });
+
+    it('should return uncertainty for open null high endpoints with inferred finite point type', () => {
+      d.zeroToHundred.withNullEnd.closedOpen.end().should.eql(new Uncertainty(0, MAX_INT_VALUE));
+      d.zeroToHundredLong.withNullEnd.closedOpen
+        .end()
+        .should.eql(new Uncertainty(0n, MAX_LONG_VALUE));
+      d.zeroPointFiveToNinePointFive.withNullEnd.closedOpen
+        .end()
+        .should.eql(new Uncertainty(0.5, MAX_FLOAT_VALUE));
+      d.zeroToHundredMg.withNullEnd.closedOpen
+        .end()
+        .should.eql(new Uncertainty(new Quantity(0, 'mg'), new Quantity(MAX_FLOAT_VALUE, 'mg')));
+      d.all2012date.withNullEnd.closedOpen
+        .end()
+        .should.eql(new Uncertainty(Date.parse('2012-01-01'), MAX_DATE_VALUE));
+      d.all2012.withNullEnd.closedOpen
+        .end()
+        .should.eql(new Uncertainty(DateTime.parse('2012-01-01T00:00:00.0'), MAX_DATETIME_VALUE));
+      d.alldaytime.withNullEnd.closedOpen
+        .end()
+        .should.eql(
+          new Uncertainty(DateTime.parse('0001-01-01T00:00:00.0').getTime(), MAX_TIME_VALUE)
+        );
+    });
+
+    it('should use the closed start as the low value for open null high endpoint uncertainty', () => {
+      d.zeroToHundred.withNullEnd.open.end().should.eql(new Uncertainty(1, MAX_INT_VALUE));
+      d.zeroToHundredLong.withNullEnd.open.end().should.eql(new Uncertainty(1n, MAX_LONG_VALUE));
+      d.zeroPointFiveToNinePointFive.withNullEnd.open
+        .end()
+        .should.eql(new Uncertainty(0.50000001, MAX_FLOAT_VALUE));
+      d.zeroToHundredMg.withNullEnd.open
+        .end()
+        .should.eql(
+          new Uncertainty(new Quantity(0.00000001, 'mg'), new Quantity(MAX_FLOAT_VALUE, 'mg'))
+        );
+      d.all2012date.withNullEnd.open
+        .end()
+        .should.eql(new Uncertainty(Date.parse('2012-01-02'), MAX_DATE_VALUE));
+      d.all2012.withNullEnd.open
+        .end()
+        .should.eql(new Uncertainty(DateTime.parse('2012-01-01T00:00:00.001'), MAX_DATETIME_VALUE));
+      d.alldaytime.withNullEnd.open
+        .end()
+        .should.eql(
+          new Uncertainty(DateTime.parse('0001-01-01T00:00:00.001').getTime(), MAX_TIME_VALUE)
+        );
+    });
+
+    it('should return null for open null high endpoints without a finite type maximum', () => {
+      should(new Interval(null, null, false, false).end()).be.null();
+      should(new Interval(null, null, false, false, 'Any').end()).be.null();
+    });
+
+    it('should use default point type when both endpoints are null', () => {
+      new Interval(null, null, true, true, ELM_INTEGER_TYPE).end().should.equal(MAX_INT_VALUE);
+      new Interval(null, null, true, true, ELM_LONG_TYPE).end().should.equal(MAX_LONG_VALUE);
+      new Interval(null, null, true, true, ELM_DECIMAL_TYPE).end().should.equal(MAX_FLOAT_VALUE);
+      new Interval(null, null, true, true, ELM_QUANTITY_TYPE).end().should.eql(MAX_QUANTITY_VALUE);
+      new Interval(null, null, true, true, ELM_DATETIME_TYPE).end().should.eql(MAX_DATETIME_VALUE);
+      new Interval(null, null, true, true, ELM_DATE_TYPE).end().should.eql(MAX_DATE_VALUE);
+      new Interval(null, null, true, true, ELM_TIME_TYPE).end().should.eql(MAX_TIME_VALUE);
+    });
+
+    it('should return full type uncertainty for open intervals with null endpoints and default point type', () => {
+      new Interval(null, null, false, false, ELM_INTEGER_TYPE)
+        .end()
+        .should.eql(new Uncertainty(MIN_INT_VALUE, MAX_INT_VALUE));
+      new Interval(null, null, false, false, ELM_LONG_TYPE)
+        .end()
+        .should.eql(new Uncertainty(MIN_LONG_VALUE, MAX_LONG_VALUE));
+      new Interval(null, null, false, false, ELM_DECIMAL_TYPE)
+        .end()
+        .should.eql(new Uncertainty(MIN_FLOAT_VALUE, MAX_FLOAT_VALUE));
+      new Interval(null, null, false, false, ELM_QUANTITY_TYPE)
+        .end()
+        .should.eql(new Uncertainty(MIN_QUANTITY_VALUE, MAX_QUANTITY_VALUE));
+      new Interval(null, null, false, false, ELM_DATETIME_TYPE)
+        .end()
+        .should.eql(new Uncertainty(MIN_DATETIME_VALUE, MAX_DATETIME_VALUE));
+      new Interval(null, null, false, false, ELM_TIME_TYPE)
+        .end()
+        .should.eql(new Uncertainty(MIN_TIME_VALUE, MAX_TIME_VALUE));
+    });
   });
 });
 
