@@ -83,7 +83,7 @@ define "Contains": Tuple{
     output: false
   },
   "ContainsNullLeft": Tuple{
-    expression: null contains 'a',
+    expression: null as List<String> contains 'a',
     output: false
   }
 }
@@ -164,15 +164,15 @@ define "Equal": Tuple{
     output: false
   },
   "EqualABCAnd123": Tuple{
-    expression: { 'a', 'b', 'c' } = { 1, 2, 3 },
+    expression: { 'a', 'b', 'c' } as List<Any> ~ { 1, 2, 3 } as List<Any>,
     output: false
   },
   "Equal123AndABC": Tuple{
-    expression: { 1, 2, 3 } = { 'a', 'b', 'c' },
+    expression: { 1, 2, 3 } as List<Any> = { 'a', 'b', 'c' } as List<Any>,
     output: false
   },
   "Equal123AndString123": Tuple{
-    expression: { 1, 2, 3 } = { '1', '2', '3' },
+    expression: { 1, 2, 3 } as List<Any> = { '1', '2', '3' } as List<Any>,
     output: false
   },
   "Equal12And123": Tuple{
@@ -323,7 +323,7 @@ define "In": Tuple{
     output: true
   },
   "In1Null": Tuple{
-    expression: 1 in null,
+    expression: 1 in null as List<Integer>,
     output: false
   },
   "In1And12": Tuple{
@@ -390,15 +390,13 @@ define "Includes": Tuple{
     output: false
   },
   "IncludesNullLeft": Tuple{
-    expression: null includes {2},
+    expression: null as List<Integer> includes {2},
     output: null
   },
   "IncludesNullRight": Tuple{
-    skipped: 'Treats null as point overload, translating to "Contains" operator, which has different semantics (and different result)'
-    /*
-    expression: {'s', 'a', 'm'} includes null,
+    expression: {'s', 'a', 'm'} includes null as List<String>,
     output: null
-    */  }
+  }
 }
 
 define "IncludedIn": Tuple{
@@ -439,17 +437,13 @@ define "IncludedIn": Tuple{
     output: false
   },
   "IncludedInNullLeft": Tuple{
-    skipped: 'Treats null as point overload, translating to "In" operator, which has different semantics (and different result)'
-    /*
-    expression: null included in {2},
+    expression: null as List<Integer> included in {2},
     output: null
-    */  },
+  },
   "IncludedInNullRight": Tuple{
-    skipped: 'Converts included in to in, which has different semantics when second argument is null'
-    /*
-    expression: {'s', 'a', 'm'} included in null,
+    expression: {'s', 'a', 'm'} included in null as List<String>,
     output: null
-    */  }
+  }
 }
 
 define "Indexer": Tuple{
@@ -613,15 +607,15 @@ define "Equivalent": Tuple{
     output: false
   },
   "EquivalentABCAnd123": Tuple{
-    expression: { 'a', 'b', 'c' } ~ { 1, 2, 3 },
+    expression: { 'a', 'b', 'c' } as List<Any> ~ { 1, 2, 3 } as List<Any>,
     output: false
   },
   "Equivalent123AndABC": Tuple{
-    expression: { 1, 2, 3 } ~ { 'a', 'b', 'c' },
+    expression: { 1, 2, 3 } as List<Any> ~ { 'a', 'b', 'c' } as List<Any>,
     output: false
   },
   "Equivalent123AndString123": Tuple{
-    expression: { 1, 2, 3 } ~ { '1', '2', '3' },
+    expression: { 1, 2, 3 } as List<Any> ~ { '1', '2', '3' } as List<Any>,
     output: false
   },
   "EquivalentDateTimeTrue": Tuple{
@@ -664,15 +658,15 @@ define "NotEqual": Tuple{
     output: true
   },
   "NotEqualABCAnd123": Tuple{
-    expression: { 'a', 'b', 'c' } != { 1, 2, 3 },
+    expression: { 'a', 'b', 'c' } as List<Any> != { 1, 2, 3 } as List<Any>,
     output: true
   },
   "NotEqual123AndABC": Tuple{
-    expression: { 1, 2, 3 } != { 'a', 'b', 'c' },
+    expression: { 1, 2, 3 } as List<Any> != { 'a', 'b', 'c' } as List<Any>,
     output: true
   },
   "NotEqual123AndString123": Tuple{
-    expression: { 1, 2, 3 } != { '1', '2', '3' },
+    expression: { 1, 2, 3 } as List<Any> != { '1', '2', '3' } as List<Any>,
     output: true
   },
   "NotEqualDateTimeTrue": Tuple{
@@ -694,57 +688,121 @@ define "NotEqual": Tuple{
 }
 
 define "ProperContains": Tuple{
-  "ProperContainsNullRightFalse": Tuple{
-    skipped: 'ProperContains not implemented'
-    /*
-    expression: {'s', 'u', 'n'} properly includes null,
+  "ProperContains1": Tuple{
+    expression: null as List<String> properly includes 'a',
     output: false
-    */  },
-  "ProperContainsNullRightTrue": Tuple{
-    skipped: 'ProperContains not implemented'
-    /*
-    expression: {'s', 'u', 'n', null} properly includes null,
+  },
+  "ProperContains2": Tuple{
+    expression: {} properly includes 'a',
+    output: false
+  },
+  "ProperContains3": Tuple{
+    expression: { 'a' } properly includes 'a',
+    output: false
+  },
+  "ProperContains4": Tuple{
+    expression: { null } properly includes null as String,
+    output: false
+  },
+  "ProperContainsNullRightFalse": Tuple{
+    expression: {'s', 'u', 'n'} properly includes null as String,
+    output: false
+  },
+  "ProperContains5": Tuple{
+    expression: { null, null } properly includes null as String,
     output: true
-    */  },
+  },
+  "ProperContainsNullRightTrue": Tuple{
+    expression: {'s', 'u', 'n', null} properly includes null as String,
+    output: true
+  },
+  "ProperContains6": Tuple{
+    expression: { 'a', 'b' } properly includes 'a',
+    output: true
+  },
+  "ProperContains7": Tuple{
+    expression: { 'a', 'a' } properly includes 'a',
+    output: true
+  },
+  "ProperContains8": Tuple{
+    expression: { 'a', 'b' } properly includes 'c',
+    output: false
+  },
+  "ProperContains9": Tuple{
+    expression: { 'a', null } properly includes 'a',
+    output: true
+  },
+  "ProperContains10": Tuple{
+    expression: { 'a', 'b', null } properly includes 'a',
+    output: true
+  },
   "ProperContainsTimeTrue": Tuple{
-    skipped: 'ProperContains not implemented'
-    /*
     expression: { @T15:59:59, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59,
     output: true
-    */  },
+  },
   "ProperContainsTimeNull": Tuple{
-    skipped: 'ProperContains not implemented'
-    /*
     expression: { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 } properly includes @T15:59:59,
-    output: null
-    */  }
+    output: false
+  }
 }
 
 define "ProperIn": Tuple{
-  "ProperInNullRightFalse": Tuple{
-    skipped: 'ProperIn not implemented'
-    /*
-    expression: null properly included in {'s', 'u', 'n'},
+  "ProperIn1": Tuple{
+    expression: 'a' properly included in null as List<String>,
     output: false
-    */  },
+  },
+  "ProperIn2": Tuple{
+    expression: 'a' properly included in {},
+    output: false
+  },
+  "ProperIn3": Tuple{
+    expression: 'a' properly included in { 'a' },
+    output: false
+  },
+  "ProperIn4": Tuple{
+    expression: null as String properly included in { null },
+    output: false
+  },
+  "ProperInNullRightFalse": Tuple{
+    expression: null as String properly included in {'s', 'u', 'n'},
+    output: false
+  },
+  "ProperIn5": Tuple{
+    expression: null as String properly included in { null, null },
+    output: true
+  },
   "ProperInNullRightTrue": Tuple{
-    skipped: 'ProperIn not implemented'
-    /*
     expression: null properly included in {'s', 'u', 'n', null},
     output: true
-    */  },
+  },
+  "ProperIn6": Tuple{
+    expression: 'a' properly included in { 'a', 'b' },
+    output: true
+  },
+  "ProperIn7": Tuple{
+    expression: 'a' properly included in { 'a', 'a' },
+    output: true
+  },
+  "ProperIn8": Tuple{
+    expression: 'c' properly included in { 'a', 'b' },
+    output: false
+  },
+  "ProperIn9": Tuple{
+    expression: 'a' properly included in { 'a', null },
+    output: true
+  },
+  "ProperIn10": Tuple{
+    expression: 'a' properly included in { 'a', 'b', null },
+    output: true
+  },
   "ProperInTimeTrue": Tuple{
-    skipped: 'ProperIn not implemented'
-    /*
     expression: @T15:59:59 properly included in { @T15:59:59, @T20:59:59.999, @T20:59:49.999 },
     output: true
-    */  },
+  },
   "ProperInTimeNull": Tuple{
-    skipped: 'ProperIn not implemented'
-    /*
     expression: @T15:59:59 properly included in { @T15:59:59.999, @T20:59:59.999, @T20:59:49.999 },
-    output: null
-    */  }
+    output: false
+  }
 }
 
 define "ProperlyIncludes": Tuple{
@@ -785,7 +843,7 @@ define "ProperlyIncludes": Tuple{
     output: false
   },
   "ProperlyIncludesNullLeft": Tuple{
-    expression: null properly includes {2},
+    expression: null as List<Integer> properly includes {2},
     output: null
   }
 }
@@ -828,11 +886,9 @@ define "ProperlyIncludedIn": Tuple{
     output: false
   },
   "ProperlyIncludedInNulRight": Tuple{
-    skipped: 'ProperIn not implemented'
-    /*
-    expression: {'s', 'u', 'n'} properly included in null,
+    expression: {'s', 'u', 'n'} properly included in null as List<String>,
     output: null
-    */  }
+  }
 }
 
 define "SingletonFrom": Tuple{
@@ -883,6 +939,69 @@ define "Skip": Tuple{
     expression: Skip({1,2,3,4,5}, 5),
     output: {}
   }
+}
+
+define "Slice": Tuple{
+  "SliceAll": Tuple{
+    skipped: 'Slice not implemented'
+    /*
+    expression: Slice({ 1, 2, 3, 4, 5 }),
+    output: { 1, 2, 3, 4, 5 }
+    */  },
+  "SliceEmpty": Tuple{
+    skipped: 'Slice not implemented'
+    /*
+    expression: Slice({ }),
+    output: { }
+    */  },
+  "SliceNull": Tuple{
+    skipped: 'Slice not implemented'
+    /*
+    expression: Slice(null),
+    output: null
+    */  },
+  "SliceStart": Tuple{
+    skipped: 'Slice not implemented'
+    /*
+    expression: Slice({ 1, 2, 3, 4, 5 }, 1),
+    output: { 2, 3, 4, 5 }
+    */  },
+  "SliceStartNull": Tuple{
+    skipped: 'Slice not implemented'
+    /*
+    expression: Slice({ 1, 2, 3, 4, 5 }, null),
+    output: { 1, 2, 3, 4, 5 }
+    */  },
+  "SliceEnd": Tuple{
+    skipped: 'Slice not implemented'
+    /*
+    expression: Slice({ 1, 2, 3, 4, 5 }, 1, 3),
+    output: { 2, 3 }
+    */  },
+  "SliceEndNull": Tuple{
+    skipped: 'Slice not implemented'
+    /*
+    expression: Slice({ 1, 2, 3, 4, 5 }, 1, null),
+    output: { 2, 3, 4, 5 }
+    */  },
+  "SliceNegative": Tuple{
+    skipped: 'Slice not implemented'
+    /*
+    expression: Slice({ 1, 2, 3, 4, 5 }, -2),
+    output: { 4, 5 }
+    */  },
+  "SliceStartAndNegative": Tuple{
+    skipped: 'Slice not implemented'
+    /*
+    expression: Slice({ 1, 2, 3, 4, 5 }, 1, -1),
+    output: { 2, 3, 4 }
+    */  },
+  "SlicePast": Tuple{
+    skipped: 'Slice not implemented'
+    /*
+    expression: Slice({ 1, 2, 3, 4, 5 }, 5),
+    output: { }
+    */  }
 }
 
 define "Tail": Tuple{

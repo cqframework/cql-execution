@@ -27425,7 +27425,7 @@ define IsSameLong: {1L, 2L, 3L, 4L, 5L} properly includes {1L, 2L, 3L, 4L, 5L}
 define IsNotIncludedLong: {1L, 2L, 3L, 4L, 5L} properly includes {4L, 5L, 6L}
 define TuplesIncluded: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly includes {Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
 define TuplesNotIncluded: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly includes {Tuple{a:2, b:'d'}, Tuple{a:3, b:'c'}}
-define NullIncluded: {1, 2, 3, 4, 5} properly includes null
+define NullIncluded: {1, 2, 3, 4, 5} properly includes (null as List<Integer>)
 define NullIncludes: null properly includes {1, 2, 3, 4, 5}
 */
 
@@ -27548,10 +27548,21 @@ module.exports['ProperIncludes'] = {
       "errorType" : "semantic",
       "errorSeverity" : "warning"
     }, {
+      "type" : "CqlToElmError",
+      "libraryId" : "TestSnippet",
+      "libraryVersion" : "1",
+      "startLine" : 14,
+      "startChar" : 57,
+      "endLine" : 14,
+      "endChar" : 77,
+      "message" : "List-valued expression was demoted to a singleton.",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "666",
+        "r" : "674",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -29990,7 +30001,7 @@ module.exports['ProperIncludes'] = {
             "s" : [ {
               "value" : [ "", "define ", "NullIncluded", ": " ]
             }, {
-              "r" : "659",
+              "r" : "660",
               "s" : [ {
                 "r" : "642",
                 "s" : [ {
@@ -29998,15 +30009,40 @@ module.exports['ProperIncludes'] = {
                   "value" : [ "{", "1", ", ", "2", ", ", "3", ", ", "4", ", ", "5", "}" ]
                 } ]
               }, {
-                "r" : "659",
-                "value" : [ " ", "properly includes", " ", "null" ]
+                "r" : "660",
+                "value" : [ " ", "properly includes", " " ]
+              }, {
+                "r" : "650",
+                "s" : [ {
+                  "value" : [ "(" ]
+                }, {
+                  "r" : "650",
+                  "s" : [ {
+                    "r" : "651",
+                    "value" : [ "null", " as " ]
+                  }, {
+                    "r" : "652",
+                    "s" : [ {
+                      "value" : [ "List<" ]
+                    }, {
+                      "r" : "653",
+                      "s" : [ {
+                        "value" : [ "Integer" ]
+                      } ]
+                    }, {
+                      "value" : [ ">" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ ")" ]
+                } ]
               } ]
             } ]
           }
         } ],
         "expression" : {
-          "type" : "ProperContains",
-          "localId" : "659",
+          "type" : "ProperIncludes",
+          "localId" : "660",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
           "annotation" : [ ],
           "signature" : [ {
@@ -30020,10 +30056,15 @@ module.exports['ProperIncludes'] = {
               "annotation" : [ ]
             }
           }, {
-            "type" : "NamedTypeSpecifier",
+            "type" : "ListTypeSpecifier",
             "localId" : "663",
-            "name" : "{urn:hl7-org:elm-types:r1}Integer",
-            "annotation" : [ ]
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "664",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
           } ],
           "operand" : [ {
             "type" : "List",
@@ -30078,20 +30119,54 @@ module.exports['ProperIncludes'] = {
             } ]
           }, {
             "type" : "As",
-            "localId" : "660",
-            "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "localId" : "650",
+            "strict" : false,
             "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "658",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "659",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
             "signature" : [ ],
             "operand" : {
               "type" : "Null",
-              "localId" : "650",
+              "localId" : "651",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "652",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "localId" : "654",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "655",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+                }
+              },
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "653",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
             }
           } ]
         }
       }, {
-        "localId" : "666",
+        "localId" : "674",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
         "name" : "NullIncludes",
         "context" : "Patient",
@@ -30100,18 +30175,18 @@ module.exports['ProperIncludes'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "666",
+            "r" : "674",
             "s" : [ {
               "value" : [ "", "define ", "NullIncludes", ": " ]
             }, {
-              "r" : "676",
+              "r" : "684",
               "s" : [ {
-                "r" : "667",
+                "r" : "675",
                 "value" : [ "null", " ", "properly includes", " " ]
               }, {
-                "r" : "668",
+                "r" : "676",
                 "s" : [ {
-                  "r" : "669",
+                  "r" : "677",
                   "value" : [ "{", "1", ", ", "2", ", ", "3", ", ", "4", ", ", "5", "}" ]
                 } ]
               } ]
@@ -30120,98 +30195,98 @@ module.exports['ProperIncludes'] = {
         } ],
         "expression" : {
           "type" : "ProperIncludes",
-          "localId" : "676",
+          "localId" : "684",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "680",
+            "localId" : "688",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "681",
+              "localId" : "689",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
           }, {
             "type" : "ListTypeSpecifier",
-            "localId" : "682",
+            "localId" : "690",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "683",
+              "localId" : "691",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
           } ],
           "operand" : [ {
             "type" : "As",
-            "localId" : "677",
+            "localId" : "685",
             "annotation" : [ ],
             "signature" : [ ],
             "operand" : {
               "type" : "Null",
-              "localId" : "667",
+              "localId" : "675",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             },
             "asTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "678",
+              "localId" : "686",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "679",
+                "localId" : "687",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             }
           }, {
             "type" : "List",
-            "localId" : "668",
+            "localId" : "676",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "674",
+              "localId" : "682",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "675",
+                "localId" : "683",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Literal",
-              "localId" : "669",
+              "localId" : "677",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "1",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "670",
+              "localId" : "678",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "2",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "671",
+              "localId" : "679",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "3",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "672",
+              "localId" : "680",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "4",
               "annotation" : [ ]
             }, {
               "type" : "Literal",
-              "localId" : "673",
+              "localId" : "681",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "5",
@@ -33137,6 +33212,3453 @@ module.exports['ProperIncludedIn'] = {
               "value" : "5",
               "annotation" : [ ]
             } ]
+          } ]
+        }
+      } ]
+    }
+  }
+}
+
+/* ProperIn
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define IsIn: 4 properly included in { 3, 4, 5 }
+define IsNotIn: 4 properly included in { 3, 5, 6 }
+define IsNotProperlyIn: 4 properly included in { 4 }
+define IsInNotUnique: 4 properly included in { 4, 4 }
+define IsInWithNull: 4 properly included in { 4, null }
+define TupleIsIn: Tuple{a: 1, b: 'c'} properly included in {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}}
+define TupleIsNotIn: Tuple{a: 1, b: 'c'} properly included in {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}}
+define NullIn: null properly included in {1, 2, null, 3}
+define InNull: 1 properly included in null
+define NullNotIn: null properly included in {1, 2, 3}
+*/
+
+module.exports['ProperIn'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "501",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "211",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "209",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "210",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "208",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "214",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "214",
+            "s" : [ {
+              "value" : [ "", "define ", "IsIn", ": " ]
+            }, {
+              "r" : "228",
+              "s" : [ {
+                "r" : "215",
+                "value" : [ "4", " ", "properly included in", " " ]
+              }, {
+                "r" : "216",
+                "s" : [ {
+                  "r" : "217",
+                  "value" : [ "{ ", "3", ", ", "4", ", ", "5", " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "228",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "229",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "230",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "231",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "215",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          }, {
+            "type" : "List",
+            "localId" : "216",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "220",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "221",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "217",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "3",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "218",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "219",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "5",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "234",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNotIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "234",
+            "s" : [ {
+              "value" : [ "", "define ", "IsNotIn", ": " ]
+            }, {
+              "r" : "248",
+              "s" : [ {
+                "r" : "235",
+                "value" : [ "4", " ", "properly included in", " " ]
+              }, {
+                "r" : "236",
+                "s" : [ {
+                  "r" : "237",
+                  "value" : [ "{ ", "3", ", ", "5", ", ", "6", " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "248",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "249",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "250",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "251",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "235",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          }, {
+            "type" : "List",
+            "localId" : "236",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "240",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "241",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "237",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "3",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "238",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "5",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "239",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "6",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "254",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNotProperlyIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "254",
+            "s" : [ {
+              "value" : [ "", "define ", "IsNotProperlyIn", ": " ]
+            }, {
+              "r" : "266",
+              "s" : [ {
+                "r" : "255",
+                "value" : [ "4", " ", "properly included in", " " ]
+              }, {
+                "r" : "256",
+                "s" : [ {
+                  "r" : "257",
+                  "value" : [ "{ ", "4", " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "266",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "267",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "268",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "269",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "255",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          }, {
+            "type" : "List",
+            "localId" : "256",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "258",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "259",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "257",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "272",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsInNotUnique",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "272",
+            "s" : [ {
+              "value" : [ "", "define ", "IsInNotUnique", ": " ]
+            }, {
+              "r" : "285",
+              "s" : [ {
+                "r" : "273",
+                "value" : [ "4", " ", "properly included in", " " ]
+              }, {
+                "r" : "274",
+                "s" : [ {
+                  "r" : "275",
+                  "value" : [ "{ ", "4", ", ", "4", " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "285",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "286",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "287",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "288",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "273",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          }, {
+            "type" : "List",
+            "localId" : "274",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "277",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "278",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "275",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "276",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "291",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsInWithNull",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "291",
+            "s" : [ {
+              "value" : [ "", "define ", "IsInWithNull", ": " ]
+            }, {
+              "r" : "305",
+              "s" : [ {
+                "r" : "292",
+                "value" : [ "4", " ", "properly included in", " " ]
+              }, {
+                "r" : "293",
+                "s" : [ {
+                  "r" : "294",
+                  "value" : [ "{ ", "4", ", ", "null", " }" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "305",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "306",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "307",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "308",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "292",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          }, {
+            "type" : "List",
+            "localId" : "293",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "297",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "298",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "294",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            }, {
+              "type" : "As",
+              "localId" : "296",
+              "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "operand" : {
+                "type" : "Null",
+                "localId" : "295",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              }
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "311",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "TupleIsIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "311",
+            "s" : [ {
+              "value" : [ "", "define ", "TupleIsIn", ": " ]
+            }, {
+              "r" : "369",
+              "s" : [ {
+                "r" : "312",
+                "s" : [ {
+                  "value" : [ "Tuple{" ]
+                }, {
+                  "s" : [ {
+                    "r" : "313",
+                    "value" : [ "a", ": ", "1" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "b", ": " ]
+                  }, {
+                    "r" : "314",
+                    "s" : [ {
+                      "value" : [ "'c'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ "}" ]
+                } ]
+              }, {
+                "r" : "369",
+                "value" : [ " ", "properly included in", " " ]
+              }, {
+                "r" : "321",
+                "s" : [ {
+                  "value" : [ "{" ]
+                }, {
+                  "r" : "322",
+                  "s" : [ {
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "323",
+                      "value" : [ "a", ":", "1" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "b", ":" ]
+                    }, {
+                      "r" : "324",
+                      "s" : [ {
+                        "value" : [ "'d'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "331",
+                  "s" : [ {
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "332",
+                      "value" : [ "a", ":", "1" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "b", ":" ]
+                    }, {
+                      "r" : "333",
+                      "s" : [ {
+                        "value" : [ "'c'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "340",
+                  "s" : [ {
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "341",
+                      "value" : [ "a", ":", "2" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "b", ":" ]
+                    }, {
+                      "r" : "342",
+                      "s" : [ {
+                        "value" : [ "'c'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
+                  } ]
+                }, {
+                  "value" : [ "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "369",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "TupleTypeSpecifier",
+            "localId" : "370",
+            "annotation" : [ ],
+            "element" : [ {
+              "localId" : "371",
+              "name" : "a",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "372",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            }, {
+              "localId" : "373",
+              "name" : "b",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "374",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            } ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "375",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "TupleTypeSpecifier",
+              "localId" : "376",
+              "annotation" : [ ],
+              "element" : [ {
+                "localId" : "377",
+                "name" : "a",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "378",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+                }
+              }, {
+                "localId" : "379",
+                "name" : "b",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "380",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "annotation" : [ ]
+                }
+              } ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Tuple",
+            "localId" : "312",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "TupleTypeSpecifier",
+              "localId" : "316",
+              "annotation" : [ ],
+              "element" : [ {
+                "localId" : "317",
+                "name" : "a",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "318",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+                }
+              }, {
+                "localId" : "319",
+                "name" : "b",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "320",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "annotation" : [ ]
+                }
+              } ]
+            },
+            "element" : [ {
+              "name" : "a",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "313",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              }
+            }, {
+              "name" : "b",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "314",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "c",
+                "annotation" : [ ]
+              }
+            } ]
+          }, {
+            "type" : "List",
+            "localId" : "321",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "349",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "350",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "351",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "352",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "353",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "354",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              }
+            },
+            "element" : [ {
+              "type" : "Tuple",
+              "localId" : "322",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "326",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "327",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "328",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "329",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "330",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "a",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "323",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "b",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "324",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "d",
+                  "annotation" : [ ]
+                }
+              } ]
+            }, {
+              "type" : "Tuple",
+              "localId" : "331",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "335",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "336",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "337",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "338",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "339",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "a",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "332",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "b",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "333",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "c",
+                  "annotation" : [ ]
+                }
+              } ]
+            }, {
+              "type" : "Tuple",
+              "localId" : "340",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "344",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "345",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "346",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "347",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "348",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "a",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "341",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "b",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "342",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "c",
+                  "annotation" : [ ]
+                }
+              } ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "383",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "TupleIsNotIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "383",
+            "s" : [ {
+              "value" : [ "", "define ", "TupleIsNotIn", ": " ]
+            }, {
+              "r" : "441",
+              "s" : [ {
+                "r" : "384",
+                "s" : [ {
+                  "value" : [ "Tuple{" ]
+                }, {
+                  "s" : [ {
+                    "r" : "385",
+                    "value" : [ "a", ": ", "1" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "b", ": " ]
+                  }, {
+                    "r" : "386",
+                    "s" : [ {
+                      "value" : [ "'c'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ "}" ]
+                } ]
+              }, {
+                "r" : "441",
+                "value" : [ " ", "properly included in", " " ]
+              }, {
+                "r" : "393",
+                "s" : [ {
+                  "value" : [ "{" ]
+                }, {
+                  "r" : "394",
+                  "s" : [ {
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "395",
+                      "value" : [ "a", ":", "1" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "b", ":" ]
+                    }, {
+                      "r" : "396",
+                      "s" : [ {
+                        "value" : [ "'d'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "403",
+                  "s" : [ {
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "404",
+                      "value" : [ "a", ":", "2" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "b", ":" ]
+                    }, {
+                      "r" : "405",
+                      "s" : [ {
+                        "value" : [ "'d'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "412",
+                  "s" : [ {
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "413",
+                      "value" : [ "a", ":", "2" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "b", ":" ]
+                    }, {
+                      "r" : "414",
+                      "s" : [ {
+                        "value" : [ "'c'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
+                  } ]
+                }, {
+                  "value" : [ "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "441",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "TupleTypeSpecifier",
+            "localId" : "442",
+            "annotation" : [ ],
+            "element" : [ {
+              "localId" : "443",
+              "name" : "a",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "444",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            }, {
+              "localId" : "445",
+              "name" : "b",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "446",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            } ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "447",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "TupleTypeSpecifier",
+              "localId" : "448",
+              "annotation" : [ ],
+              "element" : [ {
+                "localId" : "449",
+                "name" : "a",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "450",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+                }
+              }, {
+                "localId" : "451",
+                "name" : "b",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "452",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "annotation" : [ ]
+                }
+              } ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Tuple",
+            "localId" : "384",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "TupleTypeSpecifier",
+              "localId" : "388",
+              "annotation" : [ ],
+              "element" : [ {
+                "localId" : "389",
+                "name" : "a",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "390",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+                }
+              }, {
+                "localId" : "391",
+                "name" : "b",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "392",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "annotation" : [ ]
+                }
+              } ]
+            },
+            "element" : [ {
+              "name" : "a",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "385",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              }
+            }, {
+              "name" : "b",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "386",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "c",
+                "annotation" : [ ]
+              }
+            } ]
+          }, {
+            "type" : "List",
+            "localId" : "393",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "421",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "422",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "423",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "424",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "425",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "426",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              }
+            },
+            "element" : [ {
+              "type" : "Tuple",
+              "localId" : "394",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "398",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "399",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "400",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "401",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "402",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "a",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "395",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "b",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "396",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "d",
+                  "annotation" : [ ]
+                }
+              } ]
+            }, {
+              "type" : "Tuple",
+              "localId" : "403",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "407",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "408",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "409",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "410",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "411",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "a",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "404",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "b",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "405",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "d",
+                  "annotation" : [ ]
+                }
+              } ]
+            }, {
+              "type" : "Tuple",
+              "localId" : "412",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "416",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "417",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "418",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "419",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "420",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "a",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "413",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "b",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "414",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "c",
+                  "annotation" : [ ]
+                }
+              } ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "455",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "NullIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "455",
+            "s" : [ {
+              "value" : [ "", "define ", "NullIn", ": " ]
+            }, {
+              "r" : "473",
+              "s" : [ {
+                "r" : "456",
+                "value" : [ "null", " ", "properly included in", " " ]
+              }, {
+                "r" : "457",
+                "s" : [ {
+                  "r" : "458",
+                  "value" : [ "{", "1", ", ", "2", ", ", "null", ", ", "3", "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "473",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "475",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "476",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "477",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "474",
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "456",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "List",
+            "localId" : "457",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "463",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "464",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "458",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "459",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2",
+              "annotation" : [ ]
+            }, {
+              "type" : "As",
+              "localId" : "462",
+              "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "operand" : {
+                "type" : "Null",
+                "localId" : "460",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              }
+            }, {
+              "type" : "Literal",
+              "localId" : "461",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "3",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "480",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "InNull",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "480",
+            "s" : [ {
+              "value" : [ "", "define ", "InNull", ": " ]
+            }, {
+              "r" : "492",
+              "s" : [ {
+                "r" : "481",
+                "value" : [ "1", " ", "properly included in", " ", "null" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "492",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "496",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }, {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "497",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "498",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "Literal",
+            "localId" : "481",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1",
+            "annotation" : [ ]
+          }, {
+            "type" : "As",
+            "localId" : "493",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "482",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "494",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "495",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            }
+          } ]
+        }
+      }, {
+        "localId" : "501",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "NullNotIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "501",
+            "s" : [ {
+              "value" : [ "", "define ", "NullNotIn", ": " ]
+            }, {
+              "r" : "517",
+              "s" : [ {
+                "r" : "502",
+                "value" : [ "null", " ", "properly included in", " " ]
+              }, {
+                "r" : "503",
+                "s" : [ {
+                  "r" : "504",
+                  "value" : [ "{", "1", ", ", "2", ", ", "3", "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperIn",
+          "localId" : "517",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "519",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }, {
+            "type" : "ListTypeSpecifier",
+            "localId" : "520",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "521",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "518",
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "502",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "List",
+            "localId" : "503",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "507",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "508",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "504",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "505",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "506",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "3",
+              "annotation" : [ ]
+            } ]
+          } ]
+        }
+      } ]
+    }
+  }
+}
+
+/* ProperContains
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define IsIn: { 3, 4, 5 } properly includes 4
+define IsNotIn: { 3, 5, 6 } properly includes 4
+define IsNotProperlyIn: { 4 } properly includes 4
+define IsInNotUnique: { 4, 4 } properly includes 4
+define IsInWithNull: { 4, null } properly includes 4
+define TupleIsIn: {Tuple{a:1, b:'d'}, Tuple{a:1, b:'c'}, Tuple{a:2, b:'c'}} properly includes Tuple{a: 1, b: 'c'}
+define TupleIsNotIn: {Tuple{a:1, b:'d'}, Tuple{a:2, b:'d'}, Tuple{a:2, b:'c'}} properly includes Tuple{a: 1, b: 'c'}
+define InNull: (null as List<Integer>) properly includes 1
+define NullIn: {1, 2, null, 3} properly includes null
+define NullNotIn: {1, 2, 3} properly includes null
+*/
+
+module.exports['ProperContains'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "504",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "211",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "209",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "210",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "208",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "214",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "214",
+            "s" : [ {
+              "value" : [ "", "define ", "IsIn", ": " ]
+            }, {
+              "r" : "228",
+              "s" : [ {
+                "r" : "215",
+                "s" : [ {
+                  "r" : "216",
+                  "value" : [ "{ ", "3", ", ", "4", ", ", "5", " }" ]
+                } ]
+              }, {
+                "r" : "228",
+                "value" : [ " ", "properly includes", " ", "4" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperContains",
+          "localId" : "228",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "229",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "230",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "231",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "215",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "219",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "220",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "216",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "3",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "217",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "218",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "5",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "Literal",
+            "localId" : "221",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "234",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNotIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "234",
+            "s" : [ {
+              "value" : [ "", "define ", "IsNotIn", ": " ]
+            }, {
+              "r" : "248",
+              "s" : [ {
+                "r" : "235",
+                "s" : [ {
+                  "r" : "236",
+                  "value" : [ "{ ", "3", ", ", "5", ", ", "6", " }" ]
+                } ]
+              }, {
+                "r" : "248",
+                "value" : [ " ", "properly includes", " ", "4" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperContains",
+          "localId" : "248",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "249",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "250",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "251",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "235",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "239",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "240",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "236",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "3",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "237",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "5",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "238",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "6",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "Literal",
+            "localId" : "241",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "254",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNotProperlyIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "254",
+            "s" : [ {
+              "value" : [ "", "define ", "IsNotProperlyIn", ": " ]
+            }, {
+              "r" : "266",
+              "s" : [ {
+                "r" : "255",
+                "s" : [ {
+                  "r" : "256",
+                  "value" : [ "{ ", "4", " }" ]
+                } ]
+              }, {
+                "r" : "266",
+                "value" : [ " ", "properly includes", " ", "4" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperContains",
+          "localId" : "266",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "267",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "268",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "269",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "255",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "257",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "258",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "256",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "Literal",
+            "localId" : "259",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "272",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsInNotUnique",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "272",
+            "s" : [ {
+              "value" : [ "", "define ", "IsInNotUnique", ": " ]
+            }, {
+              "r" : "285",
+              "s" : [ {
+                "r" : "273",
+                "s" : [ {
+                  "r" : "274",
+                  "value" : [ "{ ", "4", ", ", "4", " }" ]
+                } ]
+              }, {
+                "r" : "285",
+                "value" : [ " ", "properly includes", " ", "4" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperContains",
+          "localId" : "285",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "286",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "287",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "288",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "273",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "276",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "277",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "274",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "275",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "Literal",
+            "localId" : "278",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "291",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsInWithNull",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "291",
+            "s" : [ {
+              "value" : [ "", "define ", "IsInWithNull", ": " ]
+            }, {
+              "r" : "305",
+              "s" : [ {
+                "r" : "292",
+                "s" : [ {
+                  "r" : "293",
+                  "value" : [ "{ ", "4", ", ", "null", " }" ]
+                } ]
+              }, {
+                "r" : "305",
+                "value" : [ " ", "properly includes", " ", "4" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperContains",
+          "localId" : "305",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "306",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "307",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "308",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "292",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "296",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "297",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "293",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            }, {
+              "type" : "As",
+              "localId" : "295",
+              "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "operand" : {
+                "type" : "Null",
+                "localId" : "294",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              }
+            } ]
+          }, {
+            "type" : "Literal",
+            "localId" : "298",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "4",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "311",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "TupleIsIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "311",
+            "s" : [ {
+              "value" : [ "", "define ", "TupleIsIn", ": " ]
+            }, {
+              "r" : "369",
+              "s" : [ {
+                "r" : "312",
+                "s" : [ {
+                  "value" : [ "{" ]
+                }, {
+                  "r" : "313",
+                  "s" : [ {
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "314",
+                      "value" : [ "a", ":", "1" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "b", ":" ]
+                    }, {
+                      "r" : "315",
+                      "s" : [ {
+                        "value" : [ "'d'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "322",
+                  "s" : [ {
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "323",
+                      "value" : [ "a", ":", "1" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "b", ":" ]
+                    }, {
+                      "r" : "324",
+                      "s" : [ {
+                        "value" : [ "'c'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "331",
+                  "s" : [ {
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "332",
+                      "value" : [ "a", ":", "2" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "b", ":" ]
+                    }, {
+                      "r" : "333",
+                      "s" : [ {
+                        "value" : [ "'c'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
+                  } ]
+                }, {
+                  "value" : [ "}" ]
+                } ]
+              }, {
+                "r" : "369",
+                "value" : [ " ", "properly includes", " " ]
+              }, {
+                "r" : "346",
+                "s" : [ {
+                  "value" : [ "Tuple{" ]
+                }, {
+                  "s" : [ {
+                    "r" : "347",
+                    "value" : [ "a", ": ", "1" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "b", ": " ]
+                  }, {
+                    "r" : "348",
+                    "s" : [ {
+                      "value" : [ "'c'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperContains",
+          "localId" : "369",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "370",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "TupleTypeSpecifier",
+              "localId" : "371",
+              "annotation" : [ ],
+              "element" : [ {
+                "localId" : "372",
+                "name" : "a",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "373",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+                }
+              }, {
+                "localId" : "374",
+                "name" : "b",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "375",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "annotation" : [ ]
+                }
+              } ]
+            }
+          }, {
+            "type" : "TupleTypeSpecifier",
+            "localId" : "376",
+            "annotation" : [ ],
+            "element" : [ {
+              "localId" : "377",
+              "name" : "a",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "378",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            }, {
+              "localId" : "379",
+              "name" : "b",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "380",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            } ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "312",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "340",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "341",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "342",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "343",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "344",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "345",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              }
+            },
+            "element" : [ {
+              "type" : "Tuple",
+              "localId" : "313",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "317",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "318",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "319",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "320",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "321",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "a",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "314",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "b",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "315",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "d",
+                  "annotation" : [ ]
+                }
+              } ]
+            }, {
+              "type" : "Tuple",
+              "localId" : "322",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "326",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "327",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "328",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "329",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "330",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "a",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "323",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "b",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "324",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "c",
+                  "annotation" : [ ]
+                }
+              } ]
+            }, {
+              "type" : "Tuple",
+              "localId" : "331",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "335",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "336",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "337",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "338",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "339",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "a",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "332",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "b",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "333",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "c",
+                  "annotation" : [ ]
+                }
+              } ]
+            } ]
+          }, {
+            "type" : "Tuple",
+            "localId" : "346",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "TupleTypeSpecifier",
+              "localId" : "350",
+              "annotation" : [ ],
+              "element" : [ {
+                "localId" : "351",
+                "name" : "a",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "352",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+                }
+              }, {
+                "localId" : "353",
+                "name" : "b",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "354",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "annotation" : [ ]
+                }
+              } ]
+            },
+            "element" : [ {
+              "name" : "a",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "347",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              }
+            }, {
+              "name" : "b",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "348",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "c",
+                "annotation" : [ ]
+              }
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "383",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "TupleIsNotIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "383",
+            "s" : [ {
+              "value" : [ "", "define ", "TupleIsNotIn", ": " ]
+            }, {
+              "r" : "441",
+              "s" : [ {
+                "r" : "384",
+                "s" : [ {
+                  "value" : [ "{" ]
+                }, {
+                  "r" : "385",
+                  "s" : [ {
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "386",
+                      "value" : [ "a", ":", "1" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "b", ":" ]
+                    }, {
+                      "r" : "387",
+                      "s" : [ {
+                        "value" : [ "'d'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "394",
+                  "s" : [ {
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "395",
+                      "value" : [ "a", ":", "2" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "b", ":" ]
+                    }, {
+                      "r" : "396",
+                      "s" : [ {
+                        "value" : [ "'d'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "403",
+                  "s" : [ {
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "404",
+                      "value" : [ "a", ":", "2" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "b", ":" ]
+                    }, {
+                      "r" : "405",
+                      "s" : [ {
+                        "value" : [ "'c'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
+                  } ]
+                }, {
+                  "value" : [ "}" ]
+                } ]
+              }, {
+                "r" : "441",
+                "value" : [ " ", "properly includes", " " ]
+              }, {
+                "r" : "418",
+                "s" : [ {
+                  "value" : [ "Tuple{" ]
+                }, {
+                  "s" : [ {
+                    "r" : "419",
+                    "value" : [ "a", ": ", "1" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "s" : [ {
+                    "value" : [ "b", ": " ]
+                  }, {
+                    "r" : "420",
+                    "s" : [ {
+                      "value" : [ "'c'" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ "}" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperContains",
+          "localId" : "441",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "442",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "TupleTypeSpecifier",
+              "localId" : "443",
+              "annotation" : [ ],
+              "element" : [ {
+                "localId" : "444",
+                "name" : "a",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "445",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+                }
+              }, {
+                "localId" : "446",
+                "name" : "b",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "447",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "annotation" : [ ]
+                }
+              } ]
+            }
+          }, {
+            "type" : "TupleTypeSpecifier",
+            "localId" : "448",
+            "annotation" : [ ],
+            "element" : [ {
+              "localId" : "449",
+              "name" : "a",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "450",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            }, {
+              "localId" : "451",
+              "name" : "b",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "452",
+                "name" : "{urn:hl7-org:elm-types:r1}String",
+                "annotation" : [ ]
+              }
+            } ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "384",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "412",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "413",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "414",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "415",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "416",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "417",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              }
+            },
+            "element" : [ {
+              "type" : "Tuple",
+              "localId" : "385",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "389",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "390",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "391",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "392",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "393",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "a",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "386",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "b",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "387",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "d",
+                  "annotation" : [ ]
+                }
+              } ]
+            }, {
+              "type" : "Tuple",
+              "localId" : "394",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "398",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "399",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "400",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "401",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "402",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "a",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "395",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "b",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "396",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "d",
+                  "annotation" : [ ]
+                }
+              } ]
+            }, {
+              "type" : "Tuple",
+              "localId" : "403",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "localId" : "407",
+                "annotation" : [ ],
+                "element" : [ {
+                  "localId" : "408",
+                  "name" : "a",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "409",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                }, {
+                  "localId" : "410",
+                  "name" : "b",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "411",
+                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "a",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "404",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "b",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "405",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "c",
+                  "annotation" : [ ]
+                }
+              } ]
+            } ]
+          }, {
+            "type" : "Tuple",
+            "localId" : "418",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "TupleTypeSpecifier",
+              "localId" : "422",
+              "annotation" : [ ],
+              "element" : [ {
+                "localId" : "423",
+                "name" : "a",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "424",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+                }
+              }, {
+                "localId" : "425",
+                "name" : "b",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "426",
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "annotation" : [ ]
+                }
+              } ]
+            },
+            "element" : [ {
+              "name" : "a",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "419",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              }
+            }, {
+              "name" : "b",
+              "value" : {
+                "type" : "Literal",
+                "localId" : "420",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "c",
+                "annotation" : [ ]
+              }
+            } ]
+          } ]
+        }
+      }, {
+        "localId" : "455",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "InNull",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "455",
+            "s" : [ {
+              "value" : [ "", "define ", "InNull", ": " ]
+            }, {
+              "r" : "473",
+              "s" : [ {
+                "r" : "456",
+                "s" : [ {
+                  "value" : [ "(" ]
+                }, {
+                  "r" : "456",
+                  "s" : [ {
+                    "r" : "457",
+                    "value" : [ "null", " as " ]
+                  }, {
+                    "r" : "458",
+                    "s" : [ {
+                      "value" : [ "List<" ]
+                    }, {
+                      "r" : "459",
+                      "s" : [ {
+                        "value" : [ "Integer" ]
+                      } ]
+                    }, {
+                      "value" : [ ">" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ ")" ]
+                } ]
+              }, {
+                "r" : "473",
+                "value" : [ " ", "properly includes", " ", "1" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperContains",
+          "localId" : "473",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "474",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "475",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "476",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "As",
+            "localId" : "456",
+            "strict" : false,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "464",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "465",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "457",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "458",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "localId" : "460",
+                "annotation" : [ ],
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "461",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+                }
+              },
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "459",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            }
+          }, {
+            "type" : "Literal",
+            "localId" : "466",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "479",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "NullIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "479",
+            "s" : [ {
+              "value" : [ "", "define ", "NullIn", ": " ]
+            }, {
+              "r" : "497",
+              "s" : [ {
+                "r" : "480",
+                "s" : [ {
+                  "r" : "481",
+                  "value" : [ "{", "1", ", ", "2", ", ", "null", ", ", "3", "}" ]
+                } ]
+              }, {
+                "r" : "497",
+                "value" : [ " ", "properly includes", " ", "null" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperContains",
+          "localId" : "497",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "499",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "500",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "501",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "480",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "486",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "487",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "481",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "482",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2",
+              "annotation" : [ ]
+            }, {
+              "type" : "As",
+              "localId" : "485",
+              "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "operand" : {
+                "type" : "Null",
+                "localId" : "483",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              }
+            }, {
+              "type" : "Literal",
+              "localId" : "484",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "3",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "As",
+            "localId" : "498",
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "488",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            }
+          } ]
+        }
+      }, {
+        "localId" : "504",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "NullNotIn",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "504",
+            "s" : [ {
+              "value" : [ "", "define ", "NullNotIn", ": " ]
+            }, {
+              "r" : "520",
+              "s" : [ {
+                "r" : "505",
+                "s" : [ {
+                  "r" : "506",
+                  "value" : [ "{", "1", ", ", "2", ", ", "3", "}" ]
+                } ]
+              }, {
+                "r" : "520",
+                "value" : [ " ", "properly includes", " ", "null" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ProperContains",
+          "localId" : "520",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "522",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "523",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "524",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "List",
+            "localId" : "505",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "509",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "510",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "506",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "507",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "508",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "3",
+              "annotation" : [ ]
+            } ]
+          }, {
+            "type" : "As",
+            "localId" : "521",
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ],
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "511",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            }
           } ]
         }
       } ]

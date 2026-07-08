@@ -269,6 +269,48 @@ export class ProperIncludedIn extends Expression {
   }
 }
 
+export class ProperIn extends Expression {
+  precision?: any;
+
+  constructor(json: any) {
+    super(json);
+    this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
+  }
+
+  async exec(ctx: Context) {
+    const [item, container] = await this.execArgs(ctx);
+    if (container == null) {
+      return false;
+    }
+    if (typeIsArray(container)) {
+      return LIST.doProperContains(container, item);
+    } else {
+      return IVL.doProperContains(container, item, this.precision);
+    }
+  }
+}
+
+export class ProperContains extends Expression {
+  precision?: any;
+
+  constructor(json: any) {
+    super(json);
+    this.precision = json.precision != null ? json.precision.toLowerCase() : undefined;
+  }
+
+  async exec(ctx: Context) {
+    const [container, item] = await this.execArgs(ctx);
+    if (container == null) {
+      return false;
+    }
+    if (typeIsArray(container)) {
+      return LIST.doProperContains(container, item);
+    } else {
+      return IVL.doProperContains(container, item, this.precision);
+    }
+  }
+}
+
 export class Length extends Expression {
   constructor(json: any) {
     super(json);

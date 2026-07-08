@@ -114,6 +114,18 @@ export class Interval {
     );
   }
 
+  properContains(item: any, precision?: any) {
+    if (item == null) {
+      return null;
+    } else if (item.isInterval) {
+      throw new Error('Argument to contains must be a point');
+    }
+    return ThreeValuedLogic.and(
+      cmp.lessThan(this.start(), item, precision),
+      cmp.greaterThan(this.end(), item, precision)
+    );
+  }
+
   properlyIncludes(other: any, precision?: any) {
     if (other == null || !other.isInterval) {
       throw new Error('Argument to properlyIncludes must be an interval');

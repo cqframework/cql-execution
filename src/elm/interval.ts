@@ -67,6 +67,11 @@ export function doContains(interval: any, item: any, precision?: any) {
   return interval.contains(item, precision);
 }
 
+// Delegated to by overloaded#ProperContains and overloaded#ProperIn
+export function doProperContains(interval: any, item: any, precision?: any) {
+  return interval.properContains(item, precision);
+}
+
 // Delegated to by overloaded#Includes and overloaded#IncludedIn
 export function doIncludes(interval: any, subinterval: any, precision?: any) {
   return interval.includes(subinterval, precision);
