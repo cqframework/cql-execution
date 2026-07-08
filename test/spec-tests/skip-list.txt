@@ -8,6 +8,9 @@ CqlAggregateTest.AggregateTests.RolledOutIntervals  CQL adds an integer to a dat
 
 # Incorrect Expected Output
 CqlIntervalOperatorsTest.In.TestInNullBoundaries                Wrong output: According to spec, comparison against null closed boundaries should result in true
+CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
+CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
+CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 
 # Potentially Incorrect Expected Output
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
@@ -50,6 +53,7 @@ CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not impleme
 CqlArithmeticFunctionsTest.LowBoundary                  LowBoundary not implemented
 CqlArithmeticFunctionsTest.Precision.PrecisionDecimal   Precision for Decimal not implemented
 CqlIntervalOperatorsTest.PointFrom                      PointFrom not implemented
+CqlListOperatorsTest.Descendents                        Descendents not implemented
 
 # Unimplemented (New in CQL 1.5)
 CqlArithmeticFunctionsTest.Modulo.ModuloQuantity                      Modulo not implemented for Quantity

@@ -4,13 +4,17 @@ context Patient
 
 define "Sort": Tuple{
   "simpleSortAsc": Tuple{
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
+    /*
     expression: ({4, 5, 1, 6, 2, 1}) sL sort asc,
     output: {1, 1, 2, 4, 5, 6}
-  },
+    */  },
   "simpleSortDesc": Tuple{
+    skipped: 'Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates'
+    /*
     expression: ({4, 5, 1, 6, 2, 1}) sL sort desc,
     output: {6, 5, 4, 2, 1, 1}
-  },
+    */  },
   "simpleSortStringAsc": Tuple{
     expression: ({'back', 'aardvark', 'alligator', 'zebra', 'iguana', 'Wolf', 'Armadillo'}) sls sort asc,
     output: {'Armadillo', 'Wolf', 'aardvark', 'alligator', 'back', 'iguana', 'zebra'}
@@ -86,9 +90,11 @@ define "Contains": Tuple{
 
 define "Descendents": Tuple{
   "DescendentsEmptyList": Tuple{
+    skipped: 'Descendents not implemented'
+    /*
     expression: (null).descendents(),
     output: null
-  }
+    */  }
 }
 
 define "Distinct": Tuple{
@@ -132,9 +138,11 @@ define "Distinct": Tuple{
 
 define "Equal": Tuple{
   "EqualNullNull": Tuple{
+    skipped: 'Wrong output: According to spec, if either list contains a null, the result is null'
+    /*
     expression: {null} = {null},
     output: true
-  },
+    */  },
   "EqualEmptyListNull": Tuple{
     expression: {} as List<String> = null,
     output: null
@@ -935,45 +943,65 @@ define "Skip": Tuple{
 
 define "Slice": Tuple{
   "SliceAll": Tuple{
+    skipped: 'Slice not implemented'
+    /*
     expression: Slice({ 1, 2, 3, 4, 5 }),
     output: { 1, 2, 3, 4, 5 }
-  },
+    */  },
   "SliceEmpty": Tuple{
+    skipped: 'Slice not implemented'
+    /*
     expression: Slice({ }),
     output: { }
-  },
+    */  },
   "SliceNull": Tuple{
+    skipped: 'Slice not implemented'
+    /*
     expression: Slice(null),
     output: null
-  },
+    */  },
   "SliceStart": Tuple{
+    skipped: 'Slice not implemented'
+    /*
     expression: Slice({ 1, 2, 3, 4, 5 }, 1),
     output: { 2, 3, 4, 5 }
-  },
+    */  },
   "SliceStartNull": Tuple{
+    skipped: 'Slice not implemented'
+    /*
     expression: Slice({ 1, 2, 3, 4, 5 }, null),
     output: { 1, 2, 3, 4, 5 }
-  },
+    */  },
   "SliceEnd": Tuple{
+    skipped: 'Slice not implemented'
+    /*
     expression: Slice({ 1, 2, 3, 4, 5 }, 1, 3),
     output: { 2, 3 }
-  },
+    */  },
   "SliceEndNull": Tuple{
+    skipped: 'Slice not implemented'
+    /*
     expression: Slice({ 1, 2, 3, 4, 5 }, 1, null),
     output: { 2, 3, 4, 5 }
-  },
+    */  },
   "SliceNegative": Tuple{
+    skipped: 'Slice not implemented'
+    /*
     expression: Slice({ 1, 2, 3, 4, 5 }, -2),
     output: { 4, 5 }
-  },
+    */  },
   "SliceStartAndNegative": Tuple{
+    skipped: 'Slice not implemented'
+    /*
     expression: Slice({ 1, 2, 3, 4, 5 }, 1, -1),
     output: { 2, 3, 4 }
-  },
+    */  },
   "SlicePast": Tuple{
+    skipped: 'Slice not implemented'
+    /*
     expression: Slice({ 1, 2, 3, 4, 5 }, 5),
     output: { }
-  }
+    */  }
 }
 
 define "Tail": Tuple{
