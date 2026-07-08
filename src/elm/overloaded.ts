@@ -285,9 +285,6 @@ export class ProperIn extends Expression {
     if (typeIsArray(container)) {
       return LIST.doProperContains(container, item);
     } else {
-      if (item == null) {
-        return null;
-      }
       return IVL.doProperContains(container, item, this.precision);
     }
   }
@@ -309,9 +306,6 @@ export class ProperContains extends Expression {
     if (typeIsArray(container)) {
       return LIST.doProperContains(container, item);
     } else {
-      if (item == null) {
-        return null;
-      }
       return IVL.doProperContains(container, item, this.precision);
     }
   }

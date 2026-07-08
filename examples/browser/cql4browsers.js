@@ -6714,9 +6714,6 @@ class ProperIn extends expression_1.Expression {
             return LIST.doProperContains(container, item);
         }
         else {
-            if (item == null) {
-                return null;
-            }
             return IVL.doProperContains(container, item, this.precision);
         }
     }
@@ -6736,9 +6733,6 @@ class ProperContains extends expression_1.Expression {
             return LIST.doProperContains(container, item);
         }
         else {
-            if (item == null) {
-                return null;
-            }
             return IVL.doProperContains(container, item, this.precision);
         }
     }
