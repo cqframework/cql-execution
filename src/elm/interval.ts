@@ -5,6 +5,7 @@ import { convertUnit, compareUnits, convertToCQLDateUnit } from '../util/units';
 import * as dtivl from '../datatypes/interval';
 import { Context } from '../runtime/context';
 import { build } from './builder';
+import { equals } from '../util/comparison';
 import { ELM_NAMED_TYPE_SPECIFIER } from '../util/elmTypes';
 
 export class Interval extends Expression {
@@ -197,6 +198,29 @@ export class OverlapsBefore extends Expression {
     } else {
       return null;
     }
+  }
+}
+
+export class PointFrom extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const interval = await this.arg?.execute(ctx);
+    if (interval == null) {
+      return null;
+    }
+    const start = interval.start();
+    const end = interval.end();
+
+    if (start == end || equals(start, end)) {
+      return start;
+    }
+
+    throw new Error(
+      'PointFrom operator may only be used on an interval containing a single point.'
+    );
   }
 }
 

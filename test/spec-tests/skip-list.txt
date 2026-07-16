@@ -52,7 +52,6 @@ ValueLiteralsAndSelectors.Decimal.DecimalNeg10Pow28ToZeroOneStepDecimalMinValue 
 CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not implemented
 CqlArithmeticFunctionsTest.LowBoundary                  LowBoundary not implemented
 CqlArithmeticFunctionsTest.Precision.PrecisionDecimal   Precision for Decimal not implemented
-CqlIntervalOperatorsTest.PointFrom                      PointFrom not implemented
 CqlListOperatorsTest.Descendents                        Descendents not implemented
 
 # Unimplemented (New in CQL 1.5)

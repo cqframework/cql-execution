@@ -4999,7 +4999,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Collapse = exports.Expand = exports.Ends = exports.Starts = exports.End = exports.Start = exports.Size = exports.Width = exports.OverlapsBefore = exports.OverlapsAfter = exports.Overlaps = exports.MeetsBefore = exports.MeetsAfter = exports.Meets = exports.Interval = void 0;
+exports.Collapse = exports.Expand = exports.Ends = exports.Starts = exports.End = exports.Start = exports.Size = exports.Width = exports.PointFrom = exports.OverlapsBefore = exports.OverlapsAfter = exports.Overlaps = exports.MeetsBefore = exports.MeetsAfter = exports.Meets = exports.Interval = void 0;
 exports.doContains = doContains;
 exports.doProperContains = doProperContains;
 exports.doIncludes = doIncludes;
@@ -5015,6 +5015,7 @@ const math_1 = require("../util/math");
 const units_1 = require("../util/units");
 const dtivl = __importStar(require("../datatypes/interval"));
 const builder_1 = require("./builder");
+const comparison_1 = require("../util/comparison");
 const elmTypes_1 = require("../util/elmTypes");
 class Interval extends expression_1.Expression {
     constructor(json) {
@@ -5177,6 +5178,24 @@ class OverlapsBefore extends expression_1.Expression {
     }
 }
 exports.OverlapsBefore = OverlapsBefore;
+class PointFrom extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    async exec(ctx) {
+        const interval = await this.arg?.execute(ctx);
+        if (interval == null) {
+            return null;
+        }
+        const start = interval.start();
+        const end = interval.end();
+        if (start == end || (0, comparison_1.equals)(start, end)) {
+            return start;
+        }
+        throw new Error('PointFrom operator may only be used on an interval containing a single point.');
+    }
+}
+exports.PointFrom = PointFrom;
 // Delegated to by overloaded#Union
 function doUnion(a, b) {
     return a.union(b);
@@ -5762,7 +5781,7 @@ function truncateDecimal(decimal, decimalPlaces) {
     return parseFloat(decimal.toString().match(re)[0]);
 }
 
-},{"../datatypes/interval":10,"../datatypes/quantity":12,"../util/elmTypes":55,"../util/math":57,"../util/units":58,"./builder":17,"./expression":23}],28:[function(require,module,exports){
+},{"../datatypes/interval":10,"../datatypes/quantity":12,"../util/comparison":53,"../util/elmTypes":55,"../util/math":57,"../util/units":58,"./builder":17,"./expression":23}],28:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Library = void 0;
