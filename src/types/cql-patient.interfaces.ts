@@ -17,6 +17,7 @@ export interface RecordObject {
   get(field: any): any;
   getId(): any;
   getCode(field: any): any;
+  getCodeOrCodes(field: any): Code[] | undefined;
   getDate(field: any): any;
   getDateOrInterval(field: any): any;
   _is?(typeSpecifier: AnyTypeSpecifier): boolean;
@@ -31,6 +32,7 @@ export interface RetrieveDetails {
   datatype: string;
   templateId?: string;
   codeProperty?: string;
+  codeComparator?: 'in' | '=' | '~';
   codes?: Code[] | ValueSet;
   dateProperty?: string;
   dateRange?: Interval;

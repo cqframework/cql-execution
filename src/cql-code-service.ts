@@ -10,7 +10,7 @@ export class CodeService implements TerminologyProvider {
       this.valueSets[oid] = {};
       for (const version in valueSetsJson[oid]) {
         const codes = valueSetsJson[oid][version].map(
-          (code: any) => new Code(code.code, code.system, code.version)
+          (code: any) => new Code(code.code, code.system, code.version, code.display)
         );
         this.valueSets[oid][version] = new ValueSet(oid, version, codes);
       }

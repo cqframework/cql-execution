@@ -44,7 +44,14 @@ describe('Record', () => {
   it('should get codes', () => {
     encRecord
       .getCode('code')
-      .should.eql(new DT.Code('185349003', '2.16.840.1.113883.6.96', '2013-09'));
+      .should.eql(
+        new DT.Code(
+          '185349003',
+          '2.16.840.1.113883.6.96',
+          '2013-09',
+          'Encounter for "check-up" (procedure)'
+        )
+      );
   });
 
   it('should get dates', () => {

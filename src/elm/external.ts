@@ -1,14 +1,16 @@
 import { Expression } from './expression';
 import { resolveValueSet, typeIsArray } from '../util/util';
+import { equals } from '../util/comparison';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import { RetrieveDetails } from '../types/cql-patient.interfaces';
-import { Code, CQLValueSet } from '../datatypes/clinical';
+import { Code, CodeSystem, CQLValueSet, ValueSet } from '../datatypes/clinical';
 
 export class Retrieve extends Expression {
   datatype: string;
   templateId?: string;
   codeProperty?: string;
+  codeComparator?: 'in' | '=' | '~';
   codes?: Expression | null;
   dateProperty?: string;
   dateRange?: Expression | null;
@@ -18,6 +20,7 @@ export class Retrieve extends Expression {
     this.datatype = json.dataType;
     this.templateId = json.templateId;
     this.codeProperty = json.codeProperty;
+    this.codeComparator = json.codeComparator;
     this.codes = build(json.codes) as Expression;
     this.dateProperty = json.dateProperty;
     this.dateRange = build(json.dateRange) as Expression;
@@ -25,10 +28,11 @@ export class Retrieve extends Expression {
 
   async exec(ctx: Context) {
     // Object with retrieve information to pass back to patient source
-    // Always assign datatype. Assign codeProperty and dateProperty if present
+    // Always assign datatype. Assign the others only if present
     const retrieveDetails: RetrieveDetails = {
       datatype: this.datatype,
       ...(this.codeProperty ? { codeProperty: this.codeProperty } : {}),
+      ...(this.codeComparator ? { codeComparator: this.codeComparator } : {}),
       ...(this.dateProperty ? { dateProperty: this.dateProperty } : {})
     };
 
@@ -79,10 +83,50 @@ export class Retrieve extends Expression {
   }
 
   recordMatchesCodesOrVS(record: any, codes: any) {
-    if (typeIsArray(codes)) {
-      return (codes as any[]).some(c => c.hasMatch(record.getCode(this.codeProperty)));
-    } else {
-      return codes.hasMatch(record.getCode(this.codeProperty));
+    const recordCodeValue = record.getCodeOrCodes(this.codeProperty);
+
+    if (!recordCodeValue || recordCodeValue.length == 0) {
+      return false;
     }
+
+    switch (this.codeComparator) {
+      case 'in':
+        return this._in(recordCodeValue, codes);
+
+      case '~':
+        return this._equivalent(recordCodeValue, codes);
+
+      case '=':
+        return this._equal(recordCodeValue, codes);
+    }
+  }
+
+  _in(lhs: Code[], rhs: any) {
+    if (rhs instanceof ValueSet || rhs instanceof CodeSystem) {
+      return rhs.hasMatch(lhs);
+    } else {
+      // for code lists, fallback to the implementation in ~
+      return this._equivalent(lhs, rhs);
+    }
+  }
+
+  _equivalent(lhs: Code[], rhs: any) {
+    if (rhs instanceof CodeSystem) {
+      throw new Error("Operator '~' is not defined for Code ~ CodeSystem");
+    } else if (rhs instanceof ValueSet) {
+      // TODO: explain
+      return rhs.hasMatch(lhs);
+    } else {
+      return (rhs as Code[]).some(c => c.hasMatch(lhs));
+    }
+  }
+
+  _equal(lhs: Code[], rhs: any) {
+    if (rhs instanceof CodeSystem) {
+      throw new Error("Operator '=' is not defined for Code = CodeSystem");
+    }
+
+    const rhsCodes = rhs instanceof ValueSet ? rhs.expand() : (rhs as Code[]);
+    return rhsCodes.some(c => lhs.some(v => equals(c, v)));
   }
 }

@@ -45,7 +45,7 @@ class CodeService {
         for (const oid in valueSetsJson) {
             this.valueSets[oid] = {};
             for (const version in valueSetsJson[oid]) {
-                const codes = valueSetsJson[oid][version].map((code) => new datatypes_1.Code(code.code, code.system, code.version));
+                const codes = valueSetsJson[oid][version].map((code) => new datatypes_1.Code(code.code, code.system, code.version, code.display));
                 this.valueSets[oid][version] = new datatypes_1.ValueSet(oid, version, codes);
             }
         }
@@ -192,7 +192,18 @@ class Record {
     getCode(field) {
         const val = this._recursiveGet(field);
         if (val != null && typeof val === 'object') {
-            return new DT.Code(val.code, val.system, val.version);
+            return new DT.Code(val.code, val.system, val.version, val.display);
+        }
+    }
+    getCodeOrCodes(field) {
+        const val = this._recursiveGet(field);
+        if (val != null) {
+            if (Array.isArray(val)) {
+                return val.map(v => new DT.Code(v.code, v.system, v.version, v.display));
+            }
+            else if (typeof val === 'object') {
+                return [new DT.Code(val.code, val.system, val.version, val.display)];
+            }
         }
     }
 }
@@ -400,6 +411,9 @@ class CodeSystem extends Vocabulary {
         this.id = id;
         this.version = version;
         this.name = name;
+    }
+    hasMatch(_code) {
+        throw new Error('In CodeSystem operation not yet supported.');
     }
 }
 exports.CodeSystem = CodeSystem;
@@ -4856,23 +4870,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Retrieve = void 0;
 const expression_1 = require("./expression");
 const util_1 = require("../util/util");
+const comparison_1 = require("../util/comparison");
 const builder_1 = require("./builder");
+const clinical_1 = require("../datatypes/clinical");
 class Retrieve extends expression_1.Expression {
     constructor(json) {
         super(json);
         this.datatype = json.dataType;
         this.templateId = json.templateId;
         this.codeProperty = json.codeProperty;
+        this.codeComparator = json.codeComparator;
         this.codes = (0, builder_1.build)(json.codes);
         this.dateProperty = json.dateProperty;
         this.dateRange = (0, builder_1.build)(json.dateRange);
     }
     async exec(ctx) {
         // Object with retrieve information to pass back to patient source
-        // Always assign datatype. Assign codeProperty and dateProperty if present
+        // Always assign datatype. Assign the others only if present
         const retrieveDetails = {
             datatype: this.datatype,
             ...(this.codeProperty ? { codeProperty: this.codeProperty } : {}),
+            ...(this.codeComparator ? { codeComparator: this.codeComparator } : {}),
             ...(this.dateProperty ? { dateProperty: this.dateProperty } : {})
         };
         if (this.codes) {
@@ -4910,17 +4928,51 @@ class Retrieve extends expression_1.Expression {
         return records;
     }
     recordMatchesCodesOrVS(record, codes) {
-        if ((0, util_1.typeIsArray)(codes)) {
-            return codes.some(c => c.hasMatch(record.getCode(this.codeProperty)));
+        const recordCodeValue = record.getCodeOrCodes(this.codeProperty);
+        if (!recordCodeValue || recordCodeValue.length == 0) {
+            return false;
+        }
+        switch (this.codeComparator) {
+            case 'in':
+                return this._in(recordCodeValue, codes);
+            case '~':
+                return this._equivalent(recordCodeValue, codes);
+            case '=':
+                return this._equal(recordCodeValue, codes);
+        }
+    }
+    _in(lhs, rhs) {
+        if (rhs instanceof clinical_1.ValueSet || rhs instanceof clinical_1.CodeSystem) {
+            return rhs.hasMatch(lhs);
         }
         else {
-            return codes.hasMatch(record.getCode(this.codeProperty));
+            // for code lists, fallback to the implementation in ~
+            return this._equivalent(lhs, rhs);
         }
+    }
+    _equivalent(lhs, rhs) {
+        if (rhs instanceof clinical_1.CodeSystem) {
+            throw new Error("Operator '~' is not defined for Code ~ CodeSystem");
+        }
+        else if (rhs instanceof clinical_1.ValueSet) {
+            // TODO: explain
+            return rhs.hasMatch(lhs);
+        }
+        else {
+            return rhs.some(c => c.hasMatch(lhs));
+        }
+    }
+    _equal(lhs, rhs) {
+        if (rhs instanceof clinical_1.CodeSystem) {
+            throw new Error("Operator '=' is not defined for Code = CodeSystem");
+        }
+        const rhsCodes = rhs instanceof clinical_1.ValueSet ? rhs.expand() : rhs;
+        return rhsCodes.some(c => lhs.some(v => (0, comparison_1.equals)(c, v)));
     }
 }
 exports.Retrieve = Retrieve;
 
-},{"../util/util":59,"./builder":17,"./expression":23}],26:[function(require,module,exports){
+},{"../datatypes/clinical":6,"../util/comparison":53,"../util/util":59,"./builder":17,"./expression":23}],26:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Instance = void 0;
