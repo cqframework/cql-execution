@@ -190032,6 +190032,861 @@ module.exports['End'] = {
   }
 }
 
+/* PointFrom
+library TestSnippet version '1'
+using Simple version '1.0.0'
+context Patient
+define IntegerPoint: point from Interval[4, 4]
+define IntegerOpenHighPoint: point from Interval[4, 5)
+define LongPoint: point from Interval[4294967296L, 4294967296L]
+define EmptyIntervalPoint: point from Interval(0, 0)
+define DateTimePoint: point from Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 1)]
+define NullPoint: point from (null as Interval<Integer>)
+define NonUnitPoint: point from Interval[1, 4]
+define NullHighPoint: point from Interval[1, null]
+*/
+
+module.exports['PointFrom'] = {
+  "library" : {
+    "localId" : "0",
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorVersion" : "4.2.0",
+      "translatorOptions" : "EnableDateRangeOptimization,EnableAnnotations,EnableResultTypes",
+      "signatureLevel" : "All"
+    }, {
+      "type" : "Annotation",
+      "t" : [ ],
+      "s" : {
+        "r" : "318",
+        "s" : [ {
+          "value" : [ "", "library TestSnippet version '1'" ]
+        } ]
+      }
+    } ],
+    "identifier" : {
+      "id" : "TestSnippet",
+      "version" : "1"
+    },
+    "schemaIdentifier" : {
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "def" : [ {
+        "localId" : "1",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1",
+        "annotation" : [ ]
+      }, {
+        "localId" : "206",
+        "localIdentifier" : "Simple",
+        "uri" : "https://github.com/cqframework/cql-execution/simple",
+        "version" : "1.0.0",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "206",
+            "s" : [ {
+              "value" : [ "", "using " ]
+            }, {
+              "s" : [ {
+                "value" : [ "Simple" ]
+              } ]
+            }, {
+              "value" : [ " version '1.0.0'" ]
+            } ]
+          }
+        } ]
+      } ]
+    },
+    "contexts" : {
+      "def" : [ {
+        "localId" : "211",
+        "name" : "Patient",
+        "annotation" : [ ]
+      } ]
+    },
+    "statements" : {
+      "def" : [ {
+        "localId" : "209",
+        "name" : "Patient",
+        "context" : "Patient",
+        "annotation" : [ ],
+        "expression" : {
+          "type" : "SingletonFrom",
+          "localId" : "210",
+          "annotation" : [ ],
+          "signature" : [ ],
+          "operand" : {
+            "type" : "Retrieve",
+            "localId" : "208",
+            "dataType" : "{https://github.com/cqframework/cql-execution/simple}Patient",
+            "annotation" : [ ],
+            "include" : [ ],
+            "codeFilter" : [ ],
+            "dateFilter" : [ ],
+            "otherFilter" : [ ]
+          }
+        }
+      }, {
+        "localId" : "214",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "IntegerPoint",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "214",
+            "s" : [ {
+              "value" : [ "", "define ", "IntegerPoint", ": " ]
+            }, {
+              "r" : "215",
+              "s" : [ {
+                "value" : [ "point from " ]
+              }, {
+                "r" : "218",
+                "s" : [ {
+                  "r" : "216",
+                  "value" : [ "Interval[", "4", ", ", "4", "]" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "PointFrom",
+          "localId" : "215",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "221",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "222",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : {
+            "type" : "Interval",
+            "localId" : "218",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "219",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "220",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "Literal",
+              "localId" : "216",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            },
+            "high" : {
+              "type" : "Literal",
+              "localId" : "217",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "225",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "IntegerOpenHighPoint",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "225",
+            "s" : [ {
+              "value" : [ "", "define ", "IntegerOpenHighPoint", ": " ]
+            }, {
+              "r" : "226",
+              "s" : [ {
+                "value" : [ "point from " ]
+              }, {
+                "r" : "229",
+                "s" : [ {
+                  "r" : "227",
+                  "value" : [ "Interval[", "4", ", ", "5", ")" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "PointFrom",
+          "localId" : "226",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "232",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "233",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : {
+            "type" : "Interval",
+            "localId" : "229",
+            "lowClosed" : true,
+            "highClosed" : false,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "230",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "231",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "Literal",
+              "localId" : "227",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            },
+            "high" : {
+              "type" : "Literal",
+              "localId" : "228",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "5",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "236",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+        "name" : "LongPoint",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "236",
+            "s" : [ {
+              "value" : [ "", "define ", "LongPoint", ": " ]
+            }, {
+              "r" : "237",
+              "s" : [ {
+                "value" : [ "point from " ]
+              }, {
+                "r" : "240",
+                "s" : [ {
+                  "r" : "238",
+                  "value" : [ "Interval[", "4294967296L", ", ", "4294967296L", "]" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "PointFrom",
+          "localId" : "237",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "243",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "244",
+              "name" : "{urn:hl7-org:elm-types:r1}Long",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : {
+            "type" : "Interval",
+            "localId" : "240",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "241",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "242",
+                "name" : "{urn:hl7-org:elm-types:r1}Long",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "Literal",
+              "localId" : "238",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+              "value" : "4294967296",
+              "annotation" : [ ]
+            },
+            "high" : {
+              "type" : "Literal",
+              "localId" : "239",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+              "value" : "4294967296",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "247",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "EmptyIntervalPoint",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "247",
+            "s" : [ {
+              "value" : [ "", "define ", "EmptyIntervalPoint", ": " ]
+            }, {
+              "r" : "248",
+              "s" : [ {
+                "value" : [ "point from " ]
+              }, {
+                "r" : "251",
+                "s" : [ {
+                  "r" : "249",
+                  "value" : [ "Interval(", "0", ", ", "0", ")" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "PointFrom",
+          "localId" : "248",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "254",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "255",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : {
+            "type" : "Interval",
+            "localId" : "251",
+            "lowClosed" : false,
+            "highClosed" : false,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "252",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "253",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "Literal",
+              "localId" : "249",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            },
+            "high" : {
+              "type" : "Literal",
+              "localId" : "250",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "258",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimePoint",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "258",
+            "s" : [ {
+              "value" : [ "", "define ", "DateTimePoint", ": " ]
+            }, {
+              "r" : "259",
+              "s" : [ {
+                "value" : [ "point from " ]
+              }, {
+                "r" : "284",
+                "s" : [ {
+                  "value" : [ "Interval[" ]
+                }, {
+                  "r" : "268",
+                  "s" : [ {
+                    "r" : "260",
+                    "value" : [ "DateTime", "(", "2012", ", ", "1", ", ", "1", ")" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "280",
+                  "s" : [ {
+                    "r" : "272",
+                    "value" : [ "DateTime", "(", "2012", ", ", "1", ", ", "1", ")" ]
+                  } ]
+                }, {
+                  "value" : [ "]" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "PointFrom",
+          "localId" : "259",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "287",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "288",
+              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : {
+            "type" : "Interval",
+            "localId" : "284",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "285",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "286",
+                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "DateTime",
+              "localId" : "268",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ],
+              "signature" : [ {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "269",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }, {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "270",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }, {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "271",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              } ],
+              "year" : {
+                "type" : "Literal",
+                "localId" : "260",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2012",
+                "annotation" : [ ]
+              },
+              "month" : {
+                "type" : "Literal",
+                "localId" : "261",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              },
+              "day" : {
+                "type" : "Literal",
+                "localId" : "262",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              }
+            },
+            "high" : {
+              "type" : "DateTime",
+              "localId" : "280",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+              "annotation" : [ ],
+              "signature" : [ {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "281",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }, {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "282",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }, {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "283",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              } ],
+              "year" : {
+                "type" : "Literal",
+                "localId" : "272",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2012",
+                "annotation" : [ ]
+              },
+              "month" : {
+                "type" : "Literal",
+                "localId" : "273",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              },
+              "day" : {
+                "type" : "Literal",
+                "localId" : "274",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              }
+            }
+          }
+        }
+      }, {
+        "localId" : "291",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "NullPoint",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "291",
+            "s" : [ {
+              "value" : [ "", "define ", "NullPoint", ": " ]
+            }, {
+              "r" : "292",
+              "s" : [ {
+                "value" : [ "point from " ]
+              }, {
+                "r" : "293",
+                "s" : [ {
+                  "value" : [ "(" ]
+                }, {
+                  "r" : "293",
+                  "s" : [ {
+                    "r" : "294",
+                    "value" : [ "null", " as " ]
+                  }, {
+                    "r" : "295",
+                    "s" : [ {
+                      "value" : [ "Interval<" ]
+                    }, {
+                      "r" : "296",
+                      "s" : [ {
+                        "value" : [ "Integer" ]
+                      } ]
+                    }, {
+                      "value" : [ ">" ]
+                    } ]
+                  } ]
+                }, {
+                  "value" : [ ")" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "PointFrom",
+          "localId" : "292",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "303",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "304",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : {
+            "type" : "As",
+            "localId" : "293",
+            "strict" : false,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "301",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "302",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "signature" : [ ],
+            "operand" : {
+              "type" : "Null",
+              "localId" : "294",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            },
+            "asTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "295",
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "IntervalTypeSpecifier",
+                "localId" : "297",
+                "annotation" : [ ],
+                "pointType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "298",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+                }
+              },
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "296",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            }
+          }
+        }
+      }, {
+        "localId" : "307",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "NonUnitPoint",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "307",
+            "s" : [ {
+              "value" : [ "", "define ", "NonUnitPoint", ": " ]
+            }, {
+              "r" : "308",
+              "s" : [ {
+                "value" : [ "point from " ]
+              }, {
+                "r" : "311",
+                "s" : [ {
+                  "r" : "309",
+                  "value" : [ "Interval[", "1", ", ", "4", "]" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "PointFrom",
+          "localId" : "308",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "314",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "315",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : {
+            "type" : "Interval",
+            "localId" : "311",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "312",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "313",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "Literal",
+              "localId" : "309",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "high" : {
+              "type" : "Literal",
+              "localId" : "310",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "318",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "NullHighPoint",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "318",
+            "s" : [ {
+              "value" : [ "", "define ", "NullHighPoint", ": " ]
+            }, {
+              "r" : "319",
+              "s" : [ {
+                "value" : [ "point from " ]
+              }, {
+                "r" : "322",
+                "s" : [ {
+                  "r" : "320",
+                  "value" : [ "Interval[", "1", ", ", "null", "]" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "PointFrom",
+          "localId" : "319",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "326",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "327",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          } ],
+          "operand" : {
+            "type" : "Interval",
+            "localId" : "322",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "324",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "325",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "Literal",
+              "localId" : "320",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1",
+              "annotation" : [ ]
+            },
+            "high" : {
+              "type" : "As",
+              "localId" : "323",
+              "asType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ],
+              "signature" : [ ],
+              "operand" : {
+                "type" : "Null",
+                "localId" : "321",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              }
+            }
+          }
+        }
+      } ]
+    }
+  }
+}
+
 /* Starts
 library TestSnippet version '1'
 using Simple version '1.0.0'
