@@ -5326,11 +5326,13 @@ using Simple version '1.0.0'
 context Patient
 define function Echo(Val Any): Val // fool CQL-to-ELM into letting the casts compile
 define IntervalOfIntegersAsIntervalOfIntegers: Echo(Interval[1, 5]) as Interval<Integer>
+define UnboundedIntervalAsIntervalOfIntegers: Echo(Interval[null, null]) as Interval<Integer>
 define IntervalOfDatesAsIntervalOfIntegers: Echo(Interval[@2000-01-01, @2000-12-31]) as Interval<Integer>
 define IntegerAsIntervalOfIntegers: Echo(5) as Interval<Integer>
 define ListAsIntervalOfIntegers: Echo({1, 2, 3, 4, 5}) as Interval<Integer>
 define TupleAsIntervalOfIntegers: Echo(Tuple{A: 5}) as Interval<Integer>
 define CastIntervalOfIntegersAsIntervalOfIntegers: cast Echo(Interval[1, 5]) as Interval<Integer>
+define CastUnboundedIntervalAsIntervalOfIntegers: cast Echo(Interval[null, null]) as Interval<Integer>
 define CastIntervalOfDatesAsIntervalOfIntegers: cast Echo(Interval[@2000-01-01, @2000-12-31]) as Interval<Integer>
 define CastIntegerAsIntervalOfIntegers: cast Echo(5) as Interval<Integer>
 define CastListAsIntervalOfIntegers: cast Echo({1, 2, 3, 4, 5}) as Interval<Integer>
@@ -5349,7 +5351,7 @@ module.exports['AsIntervalType'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "405",
+        "r" : "443",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -5611,7 +5613,7 @@ module.exports['AsIntervalType'] = {
         }
       }, {
         "localId" : "239",
-        "name" : "IntervalOfDatesAsIntervalOfIntegers",
+        "name" : "UnboundedIntervalAsIntervalOfIntegers",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -5620,18 +5622,18 @@ module.exports['AsIntervalType'] = {
           "s" : {
             "r" : "239",
             "s" : [ {
-              "value" : [ "", "define ", "IntervalOfDatesAsIntervalOfIntegers", ": " ]
+              "value" : [ "", "define ", "UnboundedIntervalAsIntervalOfIntegers", ": " ]
             }, {
               "r" : "240",
               "s" : [ {
-                "r" : "254",
+                "r" : "246",
                 "s" : [ {
                   "value" : [ "Echo", "(" ]
                 }, {
-                  "r" : "251",
+                  "r" : "243",
                   "s" : [ {
-                    "r" : "245",
-                    "value" : [ "Interval[", "@2000-01-01", ", ", "@2000-12-31", "]" ]
+                    "r" : "241",
+                    "value" : [ "Interval[", "null", ", ", "null", "]" ]
                   } ]
                 }, {
                   "value" : [ ")" ]
@@ -5639,11 +5641,11 @@ module.exports['AsIntervalType'] = {
               }, {
                 "value" : [ " as " ]
               }, {
-                "r" : "256",
+                "r" : "248",
                 "s" : [ {
                   "value" : [ "Interval<" ]
                 }, {
-                  "r" : "257",
+                  "r" : "249",
                   "s" : [ {
                     "value" : [ "Integer" ]
                   } ]
@@ -5656,11 +5658,11 @@ module.exports['AsIntervalType'] = {
         } ],
         "resultTypeSpecifier" : {
           "type" : "IntervalTypeSpecifier",
-          "localId" : "262",
+          "localId" : "254",
           "annotation" : [ ],
           "pointType" : {
             "type" : "NamedTypeSpecifier",
-            "localId" : "263",
+            "localId" : "255",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }
@@ -5672,11 +5674,11 @@ module.exports['AsIntervalType'] = {
           "annotation" : [ ],
           "resultTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "260",
+            "localId" : "252",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "261",
+              "localId" : "253",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
@@ -5684,56 +5686,196 @@ module.exports['AsIntervalType'] = {
           "signature" : [ ],
           "operand" : {
             "type" : "FunctionRef",
-            "localId" : "254",
+            "localId" : "246",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
             "name" : "Echo",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "255",
+              "localId" : "247",
               "name" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "Interval",
-              "localId" : "251",
+              "localId" : "243",
               "lowClosed" : true,
               "highClosed" : true,
               "annotation" : [ ],
               "resultTypeSpecifier" : {
                 "type" : "IntervalTypeSpecifier",
-                "localId" : "252",
+                "localId" : "244",
                 "annotation" : [ ],
                 "pointType" : {
                   "type" : "NamedTypeSpecifier",
-                  "localId" : "253",
+                  "localId" : "245",
+                  "name" : "{urn:hl7-org:elm-types:r1}Any",
+                  "annotation" : [ ]
+                }
+              },
+              "low" : {
+                "type" : "Null",
+                "localId" : "241",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              },
+              "high" : {
+                "type" : "Null",
+                "localId" : "242",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              }
+            } ]
+          },
+          "asTypeSpecifier" : {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "248",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "250",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "251",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "249",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "258",
+        "name" : "IntervalOfDatesAsIntervalOfIntegers",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "258",
+            "s" : [ {
+              "value" : [ "", "define ", "IntervalOfDatesAsIntervalOfIntegers", ": " ]
+            }, {
+              "r" : "259",
+              "s" : [ {
+                "r" : "273",
+                "s" : [ {
+                  "value" : [ "Echo", "(" ]
+                }, {
+                  "r" : "270",
+                  "s" : [ {
+                    "r" : "264",
+                    "value" : [ "Interval[", "@2000-01-01", ", ", "@2000-12-31", "]" ]
+                  } ]
+                }, {
+                  "value" : [ ")" ]
+                } ]
+              }, {
+                "value" : [ " as " ]
+              }, {
+                "r" : "275",
+                "s" : [ {
+                  "value" : [ "Interval<" ]
+                }, {
+                  "r" : "276",
+                  "s" : [ {
+                    "value" : [ "Integer" ]
+                  } ]
+                }, {
+                  "value" : [ ">" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "IntervalTypeSpecifier",
+          "localId" : "281",
+          "annotation" : [ ],
+          "pointType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "282",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "As",
+          "localId" : "259",
+          "strict" : false,
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "279",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "280",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ ],
+          "operand" : {
+            "type" : "FunctionRef",
+            "localId" : "273",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "name" : "Echo",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "274",
+              "name" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            } ],
+            "operand" : [ {
+              "type" : "Interval",
+              "localId" : "270",
+              "lowClosed" : true,
+              "highClosed" : true,
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "IntervalTypeSpecifier",
+                "localId" : "271",
+                "annotation" : [ ],
+                "pointType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "272",
                   "name" : "{urn:hl7-org:elm-types:r1}Date",
                   "annotation" : [ ]
                 }
               },
               "low" : {
                 "type" : "Date",
-                "localId" : "245",
+                "localId" : "264",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                 "annotation" : [ ],
                 "signature" : [ ],
                 "year" : {
                   "type" : "Literal",
-                  "localId" : "242",
+                  "localId" : "261",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2000",
                   "annotation" : [ ]
                 },
                 "month" : {
                   "type" : "Literal",
-                  "localId" : "243",
+                  "localId" : "262",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "annotation" : [ ]
                 },
                 "day" : {
                   "type" : "Literal",
-                  "localId" : "244",
+                  "localId" : "263",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "annotation" : [ ]
@@ -5741,27 +5883,27 @@ module.exports['AsIntervalType'] = {
               },
               "high" : {
                 "type" : "Date",
-                "localId" : "250",
+                "localId" : "269",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                 "annotation" : [ ],
                 "signature" : [ ],
                 "year" : {
                   "type" : "Literal",
-                  "localId" : "247",
+                  "localId" : "266",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2000",
                   "annotation" : [ ]
                 },
                 "month" : {
                   "type" : "Literal",
-                  "localId" : "248",
+                  "localId" : "267",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "12",
                   "annotation" : [ ]
                 },
                 "day" : {
                   "type" : "Literal",
-                  "localId" : "249",
+                  "localId" : "268",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "31",
                   "annotation" : [ ]
@@ -5771,22 +5913,22 @@ module.exports['AsIntervalType'] = {
           },
           "asTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "256",
+            "localId" : "275",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "258",
+              "localId" : "277",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "259",
+                "localId" : "278",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             },
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "257",
+              "localId" : "276",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
@@ -5794,7 +5936,7 @@ module.exports['AsIntervalType'] = {
           }
         }
       }, {
-        "localId" : "266",
+        "localId" : "285",
         "name" : "IntegerAsIntervalOfIntegers",
         "context" : "Patient",
         "accessLevel" : "Public",
@@ -5802,25 +5944,25 @@ module.exports['AsIntervalType'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "266",
+            "r" : "285",
             "s" : [ {
               "value" : [ "", "define ", "IntegerAsIntervalOfIntegers", ": " ]
             }, {
-              "r" : "267",
+              "r" : "286",
               "s" : [ {
-                "r" : "269",
+                "r" : "288",
                 "s" : [ {
-                  "r" : "268",
+                  "r" : "287",
                   "value" : [ "Echo", "(", "5", ")" ]
                 } ]
               }, {
                 "value" : [ " as " ]
               }, {
-                "r" : "271",
+                "r" : "290",
                 "s" : [ {
                   "value" : [ "Interval<" ]
                 }, {
-                  "r" : "272",
+                  "r" : "291",
                   "s" : [ {
                     "value" : [ "Integer" ]
                   } ]
@@ -5833,27 +5975,27 @@ module.exports['AsIntervalType'] = {
         } ],
         "resultTypeSpecifier" : {
           "type" : "IntervalTypeSpecifier",
-          "localId" : "277",
+          "localId" : "296",
           "annotation" : [ ],
           "pointType" : {
             "type" : "NamedTypeSpecifier",
-            "localId" : "278",
+            "localId" : "297",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }
         },
         "expression" : {
           "type" : "As",
-          "localId" : "267",
+          "localId" : "286",
           "strict" : false,
           "annotation" : [ ],
           "resultTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "275",
+            "localId" : "294",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "276",
+              "localId" : "295",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
@@ -5861,19 +6003,19 @@ module.exports['AsIntervalType'] = {
           "signature" : [ ],
           "operand" : {
             "type" : "FunctionRef",
-            "localId" : "269",
+            "localId" : "288",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
             "name" : "Echo",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "270",
+              "localId" : "289",
               "name" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "Literal",
-              "localId" : "268",
+              "localId" : "287",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "5",
@@ -5882,22 +6024,22 @@ module.exports['AsIntervalType'] = {
           },
           "asTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "271",
+            "localId" : "290",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "273",
+              "localId" : "292",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "274",
+                "localId" : "293",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             },
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "272",
+              "localId" : "291",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
@@ -5905,7 +6047,7 @@ module.exports['AsIntervalType'] = {
           }
         }
       }, {
-        "localId" : "281",
+        "localId" : "300",
         "name" : "ListAsIntervalOfIntegers",
         "context" : "Patient",
         "accessLevel" : "Public",
@@ -5913,188 +6055,20 @@ module.exports['AsIntervalType'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "281",
+            "r" : "300",
             "s" : [ {
               "value" : [ "", "define ", "ListAsIntervalOfIntegers", ": " ]
             }, {
-              "r" : "282",
-              "s" : [ {
-                "r" : "291",
-                "s" : [ {
-                  "value" : [ "Echo", "(" ]
-                }, {
-                  "r" : "283",
-                  "s" : [ {
-                    "r" : "284",
-                    "value" : [ "{", "1", ", ", "2", ", ", "3", ", ", "4", ", ", "5", "}" ]
-                  } ]
-                }, {
-                  "value" : [ ")" ]
-                } ]
-              }, {
-                "value" : [ " as " ]
-              }, {
-                "r" : "293",
-                "s" : [ {
-                  "value" : [ "Interval<" ]
-                }, {
-                  "r" : "294",
-                  "s" : [ {
-                    "value" : [ "Integer" ]
-                  } ]
-                }, {
-                  "value" : [ ">" ]
-                } ]
-              } ]
-            } ]
-          }
-        } ],
-        "resultTypeSpecifier" : {
-          "type" : "IntervalTypeSpecifier",
-          "localId" : "299",
-          "annotation" : [ ],
-          "pointType" : {
-            "type" : "NamedTypeSpecifier",
-            "localId" : "300",
-            "name" : "{urn:hl7-org:elm-types:r1}Integer",
-            "annotation" : [ ]
-          }
-        },
-        "expression" : {
-          "type" : "As",
-          "localId" : "282",
-          "strict" : false,
-          "annotation" : [ ],
-          "resultTypeSpecifier" : {
-            "type" : "IntervalTypeSpecifier",
-            "localId" : "297",
-            "annotation" : [ ],
-            "pointType" : {
-              "type" : "NamedTypeSpecifier",
-              "localId" : "298",
-              "name" : "{urn:hl7-org:elm-types:r1}Integer",
-              "annotation" : [ ]
-            }
-          },
-          "signature" : [ ],
-          "operand" : {
-            "type" : "FunctionRef",
-            "localId" : "291",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
-            "name" : "Echo",
-            "annotation" : [ ],
-            "signature" : [ {
-              "type" : "NamedTypeSpecifier",
-              "localId" : "292",
-              "name" : "{urn:hl7-org:elm-types:r1}Any",
-              "annotation" : [ ]
-            } ],
-            "operand" : [ {
-              "type" : "List",
-              "localId" : "283",
-              "annotation" : [ ],
-              "resultTypeSpecifier" : {
-                "type" : "ListTypeSpecifier",
-                "localId" : "289",
-                "annotation" : [ ],
-                "elementType" : {
-                  "type" : "NamedTypeSpecifier",
-                  "localId" : "290",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "annotation" : [ ]
-                }
-              },
-              "element" : [ {
-                "type" : "Literal",
-                "localId" : "284",
-                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "1",
-                "annotation" : [ ]
-              }, {
-                "type" : "Literal",
-                "localId" : "285",
-                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "2",
-                "annotation" : [ ]
-              }, {
-                "type" : "Literal",
-                "localId" : "286",
-                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "3",
-                "annotation" : [ ]
-              }, {
-                "type" : "Literal",
-                "localId" : "287",
-                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "4",
-                "annotation" : [ ]
-              }, {
-                "type" : "Literal",
-                "localId" : "288",
-                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "5",
-                "annotation" : [ ]
-              } ]
-            } ]
-          },
-          "asTypeSpecifier" : {
-            "type" : "IntervalTypeSpecifier",
-            "localId" : "293",
-            "annotation" : [ ],
-            "resultTypeSpecifier" : {
-              "type" : "IntervalTypeSpecifier",
-              "localId" : "295",
-              "annotation" : [ ],
-              "pointType" : {
-                "type" : "NamedTypeSpecifier",
-                "localId" : "296",
-                "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                "annotation" : [ ]
-              }
-            },
-            "pointType" : {
-              "type" : "NamedTypeSpecifier",
-              "localId" : "294",
-              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-              "name" : "{urn:hl7-org:elm-types:r1}Integer",
-              "annotation" : [ ]
-            }
-          }
-        }
-      }, {
-        "localId" : "303",
-        "name" : "TupleAsIntervalOfIntegers",
-        "context" : "Patient",
-        "accessLevel" : "Public",
-        "annotation" : [ {
-          "type" : "Annotation",
-          "t" : [ ],
-          "s" : {
-            "r" : "303",
-            "s" : [ {
-              "value" : [ "", "define ", "TupleAsIntervalOfIntegers", ": " ]
-            }, {
-              "r" : "304",
+              "r" : "301",
               "s" : [ {
                 "r" : "310",
                 "s" : [ {
                   "value" : [ "Echo", "(" ]
                 }, {
-                  "r" : "305",
+                  "r" : "302",
                   "s" : [ {
-                    "value" : [ "Tuple{" ]
-                  }, {
-                    "s" : [ {
-                      "r" : "306",
-                      "value" : [ "A", ": ", "5" ]
-                    } ]
-                  }, {
-                    "value" : [ "}" ]
+                    "r" : "303",
+                    "value" : [ "{", "1", ", ", "2", ", ", "3", ", ", "4", ", ", "5", "}" ]
                   } ]
                 }, {
                   "value" : [ ")" ]
@@ -6130,7 +6104,7 @@ module.exports['AsIntervalType'] = {
         },
         "expression" : {
           "type" : "As",
-          "localId" : "304",
+          "localId" : "301",
           "strict" : false,
           "annotation" : [ ],
           "resultTypeSpecifier" : {
@@ -6158,35 +6132,55 @@ module.exports['AsIntervalType'] = {
               "annotation" : [ ]
             } ],
             "operand" : [ {
-              "type" : "Tuple",
-              "localId" : "305",
+              "type" : "List",
+              "localId" : "302",
               "annotation" : [ ],
               "resultTypeSpecifier" : {
-                "type" : "TupleTypeSpecifier",
-                "localId" : "307",
+                "type" : "ListTypeSpecifier",
+                "localId" : "308",
                 "annotation" : [ ],
-                "element" : [ {
-                  "localId" : "308",
-                  "name" : "A",
-                  "annotation" : [ ],
-                  "elementType" : {
-                    "type" : "NamedTypeSpecifier",
-                    "localId" : "309",
-                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                    "annotation" : [ ]
-                  }
-                } ]
-              },
-              "element" : [ {
-                "name" : "A",
-                "value" : {
-                  "type" : "Literal",
-                  "localId" : "306",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "value" : "5",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "309",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "annotation" : [ ]
                 }
+              },
+              "element" : [ {
+                "type" : "Literal",
+                "localId" : "303",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              }, {
+                "type" : "Literal",
+                "localId" : "304",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2",
+                "annotation" : [ ]
+              }, {
+                "type" : "Literal",
+                "localId" : "305",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "3",
+                "annotation" : [ ]
+              }, {
+                "type" : "Literal",
+                "localId" : "306",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "4",
+                "annotation" : [ ]
+              }, {
+                "type" : "Literal",
+                "localId" : "307",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "5",
+                "annotation" : [ ]
               } ]
             } ]
           },
@@ -6216,7 +6210,7 @@ module.exports['AsIntervalType'] = {
         }
       }, {
         "localId" : "322",
-        "name" : "CastIntervalOfIntegersAsIntervalOfIntegers",
+        "name" : "TupleAsIntervalOfIntegers",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -6225,20 +6219,24 @@ module.exports['AsIntervalType'] = {
           "s" : {
             "r" : "322",
             "s" : [ {
-              "value" : [ "", "define ", "CastIntervalOfIntegersAsIntervalOfIntegers", ": " ]
+              "value" : [ "", "define ", "TupleAsIntervalOfIntegers", ": " ]
             }, {
               "r" : "323",
               "s" : [ {
-                "value" : [ "cast " ]
-              }, {
                 "r" : "329",
                 "s" : [ {
                   "value" : [ "Echo", "(" ]
                 }, {
-                  "r" : "326",
+                  "r" : "324",
                   "s" : [ {
-                    "r" : "324",
-                    "value" : [ "Interval[", "1", ", ", "5", "]" ]
+                    "value" : [ "Tuple{" ]
+                  }, {
+                    "s" : [ {
+                      "r" : "325",
+                      "value" : [ "A", ": ", "5" ]
+                    } ]
+                  }, {
+                    "value" : [ "}" ]
                   } ]
                 }, {
                   "value" : [ ")" ]
@@ -6275,7 +6273,7 @@ module.exports['AsIntervalType'] = {
         "expression" : {
           "type" : "As",
           "localId" : "323",
-          "strict" : true,
+          "strict" : false,
           "annotation" : [ ],
           "resultTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
@@ -6302,38 +6300,36 @@ module.exports['AsIntervalType'] = {
               "annotation" : [ ]
             } ],
             "operand" : [ {
-              "type" : "Interval",
-              "localId" : "326",
-              "lowClosed" : true,
-              "highClosed" : true,
+              "type" : "Tuple",
+              "localId" : "324",
               "annotation" : [ ],
               "resultTypeSpecifier" : {
-                "type" : "IntervalTypeSpecifier",
-                "localId" : "327",
+                "type" : "TupleTypeSpecifier",
+                "localId" : "326",
                 "annotation" : [ ],
-                "pointType" : {
-                  "type" : "NamedTypeSpecifier",
-                  "localId" : "328",
-                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "element" : [ {
+                  "localId" : "327",
+                  "name" : "A",
+                  "annotation" : [ ],
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "localId" : "328",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "annotation" : [ ]
+                  }
+                } ]
+              },
+              "element" : [ {
+                "name" : "A",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "325",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "5",
                   "annotation" : [ ]
                 }
-              },
-              "low" : {
-                "type" : "Literal",
-                "localId" : "324",
-                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "1",
-                "annotation" : [ ]
-              },
-              "high" : {
-                "type" : "Literal",
-                "localId" : "325",
-                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                "value" : "5",
-                "annotation" : [ ]
-              }
+              } ]
             } ]
           },
           "asTypeSpecifier" : {
@@ -6362,7 +6358,7 @@ module.exports['AsIntervalType'] = {
         }
       }, {
         "localId" : "341",
-        "name" : "CastIntervalOfDatesAsIntervalOfIntegers",
+        "name" : "CastIntervalOfIntegersAsIntervalOfIntegers",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -6371,20 +6367,20 @@ module.exports['AsIntervalType'] = {
           "s" : {
             "r" : "341",
             "s" : [ {
-              "value" : [ "", "define ", "CastIntervalOfDatesAsIntervalOfIntegers", ": " ]
+              "value" : [ "", "define ", "CastIntervalOfIntegersAsIntervalOfIntegers", ": " ]
             }, {
               "r" : "342",
               "s" : [ {
                 "value" : [ "cast " ]
               }, {
-                "r" : "356",
+                "r" : "348",
                 "s" : [ {
                   "value" : [ "Echo", "(" ]
                 }, {
-                  "r" : "353",
+                  "r" : "345",
                   "s" : [ {
-                    "r" : "347",
-                    "value" : [ "Interval[", "@2000-01-01", ", ", "@2000-12-31", "]" ]
+                    "r" : "343",
+                    "value" : [ "Interval[", "1", ", ", "5", "]" ]
                   } ]
                 }, {
                   "value" : [ ")" ]
@@ -6392,11 +6388,11 @@ module.exports['AsIntervalType'] = {
               }, {
                 "value" : [ " as " ]
               }, {
-                "r" : "358",
+                "r" : "350",
                 "s" : [ {
                   "value" : [ "Interval<" ]
                 }, {
-                  "r" : "359",
+                  "r" : "351",
                   "s" : [ {
                     "value" : [ "Integer" ]
                   } ]
@@ -6409,11 +6405,11 @@ module.exports['AsIntervalType'] = {
         } ],
         "resultTypeSpecifier" : {
           "type" : "IntervalTypeSpecifier",
-          "localId" : "364",
+          "localId" : "356",
           "annotation" : [ ],
           "pointType" : {
             "type" : "NamedTypeSpecifier",
-            "localId" : "365",
+            "localId" : "357",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }
@@ -6425,11 +6421,11 @@ module.exports['AsIntervalType'] = {
           "annotation" : [ ],
           "resultTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "362",
+            "localId" : "354",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "363",
+              "localId" : "355",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
@@ -6437,56 +6433,344 @@ module.exports['AsIntervalType'] = {
           "signature" : [ ],
           "operand" : {
             "type" : "FunctionRef",
-            "localId" : "356",
+            "localId" : "348",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
             "name" : "Echo",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "357",
+              "localId" : "349",
               "name" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "Interval",
-              "localId" : "353",
+              "localId" : "345",
               "lowClosed" : true,
               "highClosed" : true,
               "annotation" : [ ],
               "resultTypeSpecifier" : {
                 "type" : "IntervalTypeSpecifier",
-                "localId" : "354",
+                "localId" : "346",
                 "annotation" : [ ],
                 "pointType" : {
                   "type" : "NamedTypeSpecifier",
-                  "localId" : "355",
+                  "localId" : "347",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "annotation" : [ ]
+                }
+              },
+              "low" : {
+                "type" : "Literal",
+                "localId" : "343",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1",
+                "annotation" : [ ]
+              },
+              "high" : {
+                "type" : "Literal",
+                "localId" : "344",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "5",
+                "annotation" : [ ]
+              }
+            } ]
+          },
+          "asTypeSpecifier" : {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "350",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "352",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "353",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "351",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "360",
+        "name" : "CastUnboundedIntervalAsIntervalOfIntegers",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "360",
+            "s" : [ {
+              "value" : [ "", "define ", "CastUnboundedIntervalAsIntervalOfIntegers", ": " ]
+            }, {
+              "r" : "361",
+              "s" : [ {
+                "value" : [ "cast " ]
+              }, {
+                "r" : "367",
+                "s" : [ {
+                  "value" : [ "Echo", "(" ]
+                }, {
+                  "r" : "364",
+                  "s" : [ {
+                    "r" : "362",
+                    "value" : [ "Interval[", "null", ", ", "null", "]" ]
+                  } ]
+                }, {
+                  "value" : [ ")" ]
+                } ]
+              }, {
+                "value" : [ " as " ]
+              }, {
+                "r" : "369",
+                "s" : [ {
+                  "value" : [ "Interval<" ]
+                }, {
+                  "r" : "370",
+                  "s" : [ {
+                    "value" : [ "Integer" ]
+                  } ]
+                }, {
+                  "value" : [ ">" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "IntervalTypeSpecifier",
+          "localId" : "375",
+          "annotation" : [ ],
+          "pointType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "376",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "As",
+          "localId" : "361",
+          "strict" : true,
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "373",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "374",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ ],
+          "operand" : {
+            "type" : "FunctionRef",
+            "localId" : "367",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "name" : "Echo",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "368",
+              "name" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            } ],
+            "operand" : [ {
+              "type" : "Interval",
+              "localId" : "364",
+              "lowClosed" : true,
+              "highClosed" : true,
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "IntervalTypeSpecifier",
+                "localId" : "365",
+                "annotation" : [ ],
+                "pointType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "366",
+                  "name" : "{urn:hl7-org:elm-types:r1}Any",
+                  "annotation" : [ ]
+                }
+              },
+              "low" : {
+                "type" : "Null",
+                "localId" : "362",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              },
+              "high" : {
+                "type" : "Null",
+                "localId" : "363",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                "annotation" : [ ]
+              }
+            } ]
+          },
+          "asTypeSpecifier" : {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "369",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "371",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "372",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                "annotation" : [ ]
+              }
+            },
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "370",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          }
+        }
+      }, {
+        "localId" : "379",
+        "name" : "CastIntervalOfDatesAsIntervalOfIntegers",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "379",
+            "s" : [ {
+              "value" : [ "", "define ", "CastIntervalOfDatesAsIntervalOfIntegers", ": " ]
+            }, {
+              "r" : "380",
+              "s" : [ {
+                "value" : [ "cast " ]
+              }, {
+                "r" : "394",
+                "s" : [ {
+                  "value" : [ "Echo", "(" ]
+                }, {
+                  "r" : "391",
+                  "s" : [ {
+                    "r" : "385",
+                    "value" : [ "Interval[", "@2000-01-01", ", ", "@2000-12-31", "]" ]
+                  } ]
+                }, {
+                  "value" : [ ")" ]
+                } ]
+              }, {
+                "value" : [ " as " ]
+              }, {
+                "r" : "396",
+                "s" : [ {
+                  "value" : [ "Interval<" ]
+                }, {
+                  "r" : "397",
+                  "s" : [ {
+                    "value" : [ "Integer" ]
+                  } ]
+                }, {
+                  "value" : [ ">" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "IntervalTypeSpecifier",
+          "localId" : "402",
+          "annotation" : [ ],
+          "pointType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "403",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "As",
+          "localId" : "380",
+          "strict" : true,
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "400",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "401",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ ],
+          "operand" : {
+            "type" : "FunctionRef",
+            "localId" : "394",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "name" : "Echo",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "395",
+              "name" : "{urn:hl7-org:elm-types:r1}Any",
+              "annotation" : [ ]
+            } ],
+            "operand" : [ {
+              "type" : "Interval",
+              "localId" : "391",
+              "lowClosed" : true,
+              "highClosed" : true,
+              "annotation" : [ ],
+              "resultTypeSpecifier" : {
+                "type" : "IntervalTypeSpecifier",
+                "localId" : "392",
+                "annotation" : [ ],
+                "pointType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "localId" : "393",
                   "name" : "{urn:hl7-org:elm-types:r1}Date",
                   "annotation" : [ ]
                 }
               },
               "low" : {
                 "type" : "Date",
-                "localId" : "347",
+                "localId" : "385",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                 "annotation" : [ ],
                 "signature" : [ ],
                 "year" : {
                   "type" : "Literal",
-                  "localId" : "344",
+                  "localId" : "382",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2000",
                   "annotation" : [ ]
                 },
                 "month" : {
                   "type" : "Literal",
-                  "localId" : "345",
+                  "localId" : "383",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "annotation" : [ ]
                 },
                 "day" : {
                   "type" : "Literal",
-                  "localId" : "346",
+                  "localId" : "384",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "1",
                   "annotation" : [ ]
@@ -6494,27 +6778,27 @@ module.exports['AsIntervalType'] = {
               },
               "high" : {
                 "type" : "Date",
-                "localId" : "352",
+                "localId" : "390",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                 "annotation" : [ ],
                 "signature" : [ ],
                 "year" : {
                   "type" : "Literal",
-                  "localId" : "349",
+                  "localId" : "387",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "2000",
                   "annotation" : [ ]
                 },
                 "month" : {
                   "type" : "Literal",
-                  "localId" : "350",
+                  "localId" : "388",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "12",
                   "annotation" : [ ]
                 },
                 "day" : {
                   "type" : "Literal",
-                  "localId" : "351",
+                  "localId" : "389",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "31",
                   "annotation" : [ ]
@@ -6524,22 +6808,22 @@ module.exports['AsIntervalType'] = {
           },
           "asTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "358",
+            "localId" : "396",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "360",
+              "localId" : "398",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "361",
+                "localId" : "399",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             },
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "359",
+              "localId" : "397",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
@@ -6547,7 +6831,7 @@ module.exports['AsIntervalType'] = {
           }
         }
       }, {
-        "localId" : "368",
+        "localId" : "406",
         "name" : "CastIntegerAsIntervalOfIntegers",
         "context" : "Patient",
         "accessLevel" : "Public",
@@ -6555,27 +6839,27 @@ module.exports['AsIntervalType'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "368",
+            "r" : "406",
             "s" : [ {
               "value" : [ "", "define ", "CastIntegerAsIntervalOfIntegers", ": " ]
             }, {
-              "r" : "369",
+              "r" : "407",
               "s" : [ {
                 "value" : [ "cast " ]
               }, {
-                "r" : "371",
+                "r" : "409",
                 "s" : [ {
-                  "r" : "370",
+                  "r" : "408",
                   "value" : [ "Echo", "(", "5", ")" ]
                 } ]
               }, {
                 "value" : [ " as " ]
               }, {
-                "r" : "373",
+                "r" : "411",
                 "s" : [ {
                   "value" : [ "Interval<" ]
                 }, {
-                  "r" : "374",
+                  "r" : "412",
                   "s" : [ {
                     "value" : [ "Integer" ]
                   } ]
@@ -6588,27 +6872,27 @@ module.exports['AsIntervalType'] = {
         } ],
         "resultTypeSpecifier" : {
           "type" : "IntervalTypeSpecifier",
-          "localId" : "379",
+          "localId" : "417",
           "annotation" : [ ],
           "pointType" : {
             "type" : "NamedTypeSpecifier",
-            "localId" : "380",
+            "localId" : "418",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }
         },
         "expression" : {
           "type" : "As",
-          "localId" : "369",
+          "localId" : "407",
           "strict" : true,
           "annotation" : [ ],
           "resultTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "377",
+            "localId" : "415",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "378",
+              "localId" : "416",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
@@ -6616,19 +6900,19 @@ module.exports['AsIntervalType'] = {
           "signature" : [ ],
           "operand" : {
             "type" : "FunctionRef",
-            "localId" : "371",
+            "localId" : "409",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
             "name" : "Echo",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "372",
+              "localId" : "410",
               "name" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "Literal",
-              "localId" : "370",
+              "localId" : "408",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
               "value" : "5",
@@ -6637,22 +6921,22 @@ module.exports['AsIntervalType'] = {
           },
           "asTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "373",
+            "localId" : "411",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "375",
+              "localId" : "413",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "376",
+                "localId" : "414",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             },
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "374",
+              "localId" : "412",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
@@ -6660,7 +6944,7 @@ module.exports['AsIntervalType'] = {
           }
         }
       }, {
-        "localId" : "383",
+        "localId" : "421",
         "name" : "CastListAsIntervalOfIntegers",
         "context" : "Patient",
         "accessLevel" : "Public",
@@ -6668,21 +6952,21 @@ module.exports['AsIntervalType'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "383",
+            "r" : "421",
             "s" : [ {
               "value" : [ "", "define ", "CastListAsIntervalOfIntegers", ": " ]
             }, {
-              "r" : "384",
+              "r" : "422",
               "s" : [ {
                 "value" : [ "cast " ]
               }, {
-                "r" : "393",
+                "r" : "431",
                 "s" : [ {
                   "value" : [ "Echo", "(" ]
                 }, {
-                  "r" : "385",
+                  "r" : "423",
                   "s" : [ {
-                    "r" : "386",
+                    "r" : "424",
                     "value" : [ "{", "1", ", ", "2", ", ", "3", ", ", "4", ", ", "5", "}" ]
                   } ]
                 }, {
@@ -6691,11 +6975,11 @@ module.exports['AsIntervalType'] = {
               }, {
                 "value" : [ " as " ]
               }, {
-                "r" : "395",
+                "r" : "433",
                 "s" : [ {
                   "value" : [ "Interval<" ]
                 }, {
-                  "r" : "396",
+                  "r" : "434",
                   "s" : [ {
                     "value" : [ "Integer" ]
                   } ]
@@ -6708,27 +6992,27 @@ module.exports['AsIntervalType'] = {
         } ],
         "resultTypeSpecifier" : {
           "type" : "IntervalTypeSpecifier",
-          "localId" : "401",
+          "localId" : "439",
           "annotation" : [ ],
           "pointType" : {
             "type" : "NamedTypeSpecifier",
-            "localId" : "402",
+            "localId" : "440",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }
         },
         "expression" : {
           "type" : "As",
-          "localId" : "384",
+          "localId" : "422",
           "strict" : true,
           "annotation" : [ ],
           "resultTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "399",
+            "localId" : "437",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "400",
+              "localId" : "438",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
@@ -6736,62 +7020,62 @@ module.exports['AsIntervalType'] = {
           "signature" : [ ],
           "operand" : {
             "type" : "FunctionRef",
-            "localId" : "393",
+            "localId" : "431",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
             "name" : "Echo",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "394",
+              "localId" : "432",
               "name" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "List",
-              "localId" : "385",
+              "localId" : "423",
               "annotation" : [ ],
               "resultTypeSpecifier" : {
                 "type" : "ListTypeSpecifier",
-                "localId" : "391",
+                "localId" : "429",
                 "annotation" : [ ],
                 "elementType" : {
                   "type" : "NamedTypeSpecifier",
-                  "localId" : "392",
+                  "localId" : "430",
                   "name" : "{urn:hl7-org:elm-types:r1}Integer",
                   "annotation" : [ ]
                 }
               },
               "element" : [ {
                 "type" : "Literal",
-                "localId" : "386",
+                "localId" : "424",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "1",
                 "annotation" : [ ]
               }, {
                 "type" : "Literal",
-                "localId" : "387",
+                "localId" : "425",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "2",
                 "annotation" : [ ]
               }, {
                 "type" : "Literal",
-                "localId" : "388",
+                "localId" : "426",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "3",
                 "annotation" : [ ]
               }, {
                 "type" : "Literal",
-                "localId" : "389",
+                "localId" : "427",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "4",
                 "annotation" : [ ]
               }, {
                 "type" : "Literal",
-                "localId" : "390",
+                "localId" : "428",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "5",
@@ -6801,22 +7085,22 @@ module.exports['AsIntervalType'] = {
           },
           "asTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "395",
+            "localId" : "433",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "397",
+              "localId" : "435",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "398",
+                "localId" : "436",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             },
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "396",
+              "localId" : "434",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
@@ -6824,7 +7108,7 @@ module.exports['AsIntervalType'] = {
           }
         }
       }, {
-        "localId" : "405",
+        "localId" : "443",
         "name" : "CastTupleAsIntervalOfIntegers",
         "context" : "Patient",
         "accessLevel" : "Public",
@@ -6832,24 +7116,24 @@ module.exports['AsIntervalType'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "405",
+            "r" : "443",
             "s" : [ {
               "value" : [ "", "define ", "CastTupleAsIntervalOfIntegers", ": " ]
             }, {
-              "r" : "406",
+              "r" : "444",
               "s" : [ {
                 "value" : [ "cast " ]
               }, {
-                "r" : "412",
+                "r" : "450",
                 "s" : [ {
                   "value" : [ "Echo", "(" ]
                 }, {
-                  "r" : "407",
+                  "r" : "445",
                   "s" : [ {
                     "value" : [ "Tuple{" ]
                   }, {
                     "s" : [ {
-                      "r" : "408",
+                      "r" : "446",
                       "value" : [ "A", ": ", "5" ]
                     } ]
                   }, {
@@ -6861,11 +7145,11 @@ module.exports['AsIntervalType'] = {
               }, {
                 "value" : [ " as " ]
               }, {
-                "r" : "414",
+                "r" : "452",
                 "s" : [ {
                   "value" : [ "Interval<" ]
                 }, {
-                  "r" : "415",
+                  "r" : "453",
                   "s" : [ {
                     "value" : [ "Integer" ]
                   } ]
@@ -6878,27 +7162,27 @@ module.exports['AsIntervalType'] = {
         } ],
         "resultTypeSpecifier" : {
           "type" : "IntervalTypeSpecifier",
-          "localId" : "420",
+          "localId" : "458",
           "annotation" : [ ],
           "pointType" : {
             "type" : "NamedTypeSpecifier",
-            "localId" : "421",
+            "localId" : "459",
             "name" : "{urn:hl7-org:elm-types:r1}Integer",
             "annotation" : [ ]
           }
         },
         "expression" : {
           "type" : "As",
-          "localId" : "406",
+          "localId" : "444",
           "strict" : true,
           "annotation" : [ ],
           "resultTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "418",
+            "localId" : "456",
             "annotation" : [ ],
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "419",
+              "localId" : "457",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]
             }
@@ -6906,31 +7190,31 @@ module.exports['AsIntervalType'] = {
           "signature" : [ ],
           "operand" : {
             "type" : "FunctionRef",
-            "localId" : "412",
+            "localId" : "450",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
             "name" : "Echo",
             "annotation" : [ ],
             "signature" : [ {
               "type" : "NamedTypeSpecifier",
-              "localId" : "413",
+              "localId" : "451",
               "name" : "{urn:hl7-org:elm-types:r1}Any",
               "annotation" : [ ]
             } ],
             "operand" : [ {
               "type" : "Tuple",
-              "localId" : "407",
+              "localId" : "445",
               "annotation" : [ ],
               "resultTypeSpecifier" : {
                 "type" : "TupleTypeSpecifier",
-                "localId" : "409",
+                "localId" : "447",
                 "annotation" : [ ],
                 "element" : [ {
-                  "localId" : "410",
+                  "localId" : "448",
                   "name" : "A",
                   "annotation" : [ ],
                   "elementType" : {
                     "type" : "NamedTypeSpecifier",
-                    "localId" : "411",
+                    "localId" : "449",
                     "name" : "{urn:hl7-org:elm-types:r1}Integer",
                     "annotation" : [ ]
                   }
@@ -6940,7 +7224,7 @@ module.exports['AsIntervalType'] = {
                 "name" : "A",
                 "value" : {
                   "type" : "Literal",
-                  "localId" : "408",
+                  "localId" : "446",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                   "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                   "value" : "5",
@@ -6951,22 +7235,22 @@ module.exports['AsIntervalType'] = {
           },
           "asTypeSpecifier" : {
             "type" : "IntervalTypeSpecifier",
-            "localId" : "414",
+            "localId" : "452",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "IntervalTypeSpecifier",
-              "localId" : "416",
+              "localId" : "454",
               "annotation" : [ ],
               "pointType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "417",
+                "localId" : "455",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               }
             },
             "pointType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "415",
+              "localId" : "453",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
               "name" : "{urn:hl7-org:elm-types:r1}Integer",
               "annotation" : [ ]

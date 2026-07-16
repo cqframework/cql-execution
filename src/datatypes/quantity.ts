@@ -1,16 +1,9 @@
 import { ELM_DECIMAL_TYPE } from '../util/elmTypes';
-import {
-  decimalAdjust,
-  isValidDecimal,
-  MIN_FLOAT_VALUE,
-  MAX_FLOAT_VALUE,
-  overflowsOrUnderflows
-} from '../util/math';
+import { decimalAdjust, add, subtract, isValidDecimal, overflowsOrUnderflows } from '../util/math';
 import {
   checkUnit,
   convertUnit,
   normalizeUnitsWhenPossible,
-  convertToCQLDateUnit,
   getProductOfUnits,
   getQuotientOfUnits
 } from '../util/units';
@@ -163,11 +156,6 @@ export class Quantity {
   }
 }
 
-// Require MIN/MAX here because math.js requires this file, and when we make this file require
-// math.js before it exports DateTime and Date, it errors due to the circular dependency...
-export const MIN_QUANTITY_VALUE = new Quantity(MIN_FLOAT_VALUE, '1');
-export const MAX_QUANTITY_VALUE = new Quantity(MAX_FLOAT_VALUE, '1');
-
 export function parseQuantity(str: string) {
   const components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec(str);
   if (components != null && components[1] != null) {
@@ -187,38 +175,12 @@ export function parseQuantity(str: string) {
   }
 }
 
-function doScaledAddition(a: any, b: any, scaleForB: any) {
-  if (a != null && a.isQuantity && b != null && b.isQuantity) {
-    const [val1, unit1, val2, unit2] = normalizeUnitsWhenPossible(
-      a.value,
-      a.unit,
-      b.value * scaleForB,
-      b.unit
-    );
-    if (unit1 !== unit2) {
-      // not compatible units, so we can't do addition
-      return null;
-    }
-    const sum = val1 + val2;
-    if (overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE)) {
-      return null;
-    }
-    return new Quantity(sum, unit1);
-  } else if (a.copy && a.add) {
-    // Date / DateTime require a CQL time unit
-    const cqlUnitB = convertToCQLDateUnit(b.unit) || b.unit;
-    return a.copy().add(b.value * scaleForB, cqlUnitB);
-  } else {
-    throw new Error('Unsupported argument types.');
-  }
-}
-
 export function doAddition(a: any, b: any) {
-  return doScaledAddition(a, b, 1);
+  return add(a, b);
 }
 
 export function doSubtraction(a: any, b: any) {
-  return doScaledAddition(a, b, -1);
+  return subtract(a, b);
 }
 
 export function doDivision(a: any, b: any) {

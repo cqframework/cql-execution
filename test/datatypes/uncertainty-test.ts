@@ -164,6 +164,82 @@ describe('Uncertainty', () => {
       .should.be.false();
   });
 
+  it('should properly calculate sameness for point uncertainties', () => {
+    new Uncertainty(1).sameAs(1).should.be.true();
+    new Uncertainty(1).sameAs(new Uncertainty(1)).should.be.true();
+    new Uncertainty(1).sameAs(2).should.be.false();
+    new Uncertainty(1).sameAs('1').should.be.false();
+
+    const first = DateTime.parse('2022-01-01T12:30:15.123');
+    const second = DateTime.parse('2022-01-01T12:30:15.456');
+    new Uncertainty(first).sameAs(second, DateTime.Unit.MILLISECOND).should.be.false();
+    new Uncertainty(first).sameAs(second, DateTime.Unit.SECOND).should.be.true();
+    new Uncertainty(first)
+      .sameAs(new Uncertainty(second), DateTime.Unit.MILLISECOND)
+      .should.be.false();
+    new Uncertainty(first).sameAs(new Uncertainty(second), DateTime.Unit.SECOND).should.be.true();
+
+    new Uncertainty(new Date(2022, 1, 1)).sameAs(new DateTime(2022, 1, 1)).should.be.false();
+    new Uncertainty(new DateTime(2022, 1, 1)).sameAs(new Date(2022, 1, 1)).should.be.false();
+  });
+
+  it('should handle imprecise DateTimes', () => {
+    const precise = new Uncertainty(DateTime.parse('2022-01-01T12:30:15.123'));
+    const imprecise = new Uncertainty(DateTime.parse('2022-01-01T12:30'));
+    const sameImprecise = new Uncertainty(DateTime.parse('2022-01-01T12:30'));
+    const laterImprecise = new Uncertainty(DateTime.parse('2022-01-01T12:31'));
+
+    should.not.exist(precise.sameAs(imprecise));
+    should.not.exist(precise.sameAs(imprecise, DateTime.Unit.SECOND));
+    precise.sameAs(imprecise, DateTime.Unit.MINUTE).should.be.true();
+    imprecise.sameAs(sameImprecise).should.be.true();
+    should.not.exist(imprecise.sameAs(sameImprecise, DateTime.Unit.SECOND));
+    imprecise.sameAs(sameImprecise, DateTime.Unit.MINUTE).should.be.true();
+
+    imprecise.lessThan(laterImprecise, DateTime.Unit.SECOND).should.be.true();
+    laterImprecise.greaterThan(imprecise, DateTime.Unit.SECOND).should.be.true();
+    imprecise.lessThanOrEquals(laterImprecise, DateTime.Unit.SECOND).should.be.true();
+    imprecise.greaterThanOrEquals(laterImprecise, DateTime.Unit.SECOND).should.be.false();
+  });
+
+  it('should properly calculate sameness for non-point uncertainties', () => {
+    new Uncertainty(1, 2).sameAs(new Uncertainty(3, 4)).should.be.false();
+    should.not.exist(new Uncertainty(1, 3).sameAs(new Uncertainty(2, 4)));
+    new Uncertainty(1, 2).sameAs(3).should.be.false();
+    should.not.exist(new Uncertainty(1, 3).sameAs(2));
+
+    const first = new Uncertainty(
+      DateTime.parse('2022-01-01T12:30:15.123'),
+      DateTime.parse('2022-01-01T12:30:15.124')
+    );
+    const second = new Uncertainty(
+      DateTime.parse('2022-01-01T12:30:15.125'),
+      DateTime.parse('2022-01-01T12:30:15.126')
+    );
+    first.sameAs(second, DateTime.Unit.MILLISECOND).should.be.false();
+    first.sameAs(second, DateTime.Unit.SECOND).should.be.true();
+  });
+
+  it('should use precision when calculating inequalities', () => {
+    const first = new Uncertainty(
+      DateTime.parse('2022-01-01T12:30:15.123'),
+      DateTime.parse('2022-01-01T12:30:15.124')
+    );
+    const second = new Uncertainty(
+      DateTime.parse('2022-01-01T12:30:15.125'),
+      DateTime.parse('2022-01-01T12:30:15.126')
+    );
+
+    first.lessThan(second, DateTime.Unit.MILLISECOND).should.be.true();
+    first.lessThan(second, DateTime.Unit.SECOND).should.be.false();
+    second.greaterThan(first, DateTime.Unit.MILLISECOND).should.be.true();
+    second.greaterThan(first, DateTime.Unit.SECOND).should.be.false();
+    first.lessThanOrEquals(second, DateTime.Unit.MILLISECOND).should.be.true();
+    first.lessThanOrEquals(second, DateTime.Unit.SECOND).should.be.true();
+    first.greaterThanOrEquals(second, DateTime.Unit.MILLISECOND).should.be.false();
+    first.greaterThanOrEquals(second, DateTime.Unit.SECOND).should.be.true();
+  });
+
   it('should properly calculate "less than" inequality', () => {
     // Equality
     new Uncertainty(1, 1).lessThan(new Uncertainty(1, 1)).should.be.false();

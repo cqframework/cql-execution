@@ -327,7 +327,7 @@ define "Expand": Tuple{
     output: { }
   },
   "ExpandPer0D1": Tuple{
-    skipped: 'Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Integer>>,System.Decimal).'
+    skipped: 'Wrong answer (interval elements\'s decimals do not match expected output)'
     /*
     expression: expand { Interval[10, 10] } per 0.1,
     output: { Interval[10.0, 10.0], Interval[10.1, 10.1], Interval[10.2, 10.2], Interval[10.3, 10.3], Interval[10.4, 10.4], Interval[10.5, 10.5], Interval[10.6, 10.6], Interval[10.7, 10.7], Interval[10.8, 10.8], Interval[10.9, 10.9] }
@@ -572,11 +572,9 @@ define "Except": Tuple{
     output: null
   },
   "DecimalIntervalExcept1to3": Tuple{
-    skipped: 'Expected Interval[1.0, 3.99999999] but got Interval[1.0, 4) (closed boundary vs equivalent open boundary)'
-    /*
     expression: Interval[1.0, 10.0] except Interval[4.0, 10.0],
     output: Interval [ 1.0, 3.99999999 ]
-    */  },
+  },
   "DecimalIntervalExceptNull": Tuple{
     expression: Interval[1.0, 10.0] except Interval[3.0, 7.0],
     output: null
@@ -1140,11 +1138,9 @@ define "OnOrBefore": Tuple{
 
 define "Overlaps": Tuple{
   "TestOverlapsNull": Tuple{
-    skipped: 'Wrong answer (Interval[null, null] should overlap everything)'
-    /*
     expression: Interval[null, null] overlaps Interval[1, 10],
     output: null
-    */  },
+  },
   "IntegerIntervalOverlapsTrue": Tuple{
     expression: Interval[1, 10] overlaps Interval[4, 10],
     output: true
@@ -1249,11 +1245,9 @@ define "Overlaps": Tuple{
 
 define "OverlapsBefore": Tuple{
   "TestOverlapsBeforeNull": Tuple{
-    skipped: 'Wrong answer (Interval[null, null] should overlap before anything but another interval w/ null low closed boundary)'
-    /*
     expression: Interval[null, null] overlaps before Interval[1, 10],
     output: null
-    */  },
+  },
   "IntegerIntervalOverlapsBeforeTrue": Tuple{
     expression: Interval[1, 10] overlaps before Interval[4, 10],
     output: true
@@ -1326,11 +1320,9 @@ define "OverlapsBefore": Tuple{
 
 define "OverlapsAfter": Tuple{
   "TestOverlapsAfterNull": Tuple{
-    skipped: 'Wrong answer (Interval[null, null] should overlap after anything but another interval w/ null high closed boundary)'
-    /*
     expression: Interval[null, null] overlaps after Interval[1, 10],
     output: null
-    */  },
+  },
   "IntegerIntervalOverlapsAfterTrue": Tuple{
     expression: Interval[4, 15] overlaps after Interval[1, 10],
     output: true
@@ -1601,11 +1593,9 @@ define "Start": Tuple{
 
 define "Starts": Tuple{
   "TestStartsNull": Tuple{
-    skipped: 'Wrong answer (Interval[null, null] can only start Interval[null, null])'
-    /*
     expression: Interval[null, null] starts Interval[1, 10],
     output: null
-    */  },
+  },
   "IntegerIntervalStartsTrue": Tuple{
     expression: Interval[4, 10] starts Interval[4, 15],
     output: true
@@ -1650,11 +1640,9 @@ define "Starts": Tuple{
 
 define "Union": Tuple{
   "TestUnionNull": Tuple{
-    skipped: 'Wrong answer (Interval[null, null] union any valid interval of the same point type is Interval[null, null])'
-    /*
     expression: Interval[null, null] union Interval[1, 10],
     output: null
-    */  },
+  },
   "IntegerIntervalUnion1To15": Tuple{
     expression: Interval[1, 10] union Interval[4, 15],
     output: Interval [ 1, 15 ]

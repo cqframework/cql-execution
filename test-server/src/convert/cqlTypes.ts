@@ -8,9 +8,10 @@ import {
   AnyTypeSpecifier,
   Interval
 } from '../../..';
+import { ELM_ANY_TYPE } from '../../../lib/util/elmTypes';
 
 export function typeToCqlTypeSpecifier(
-  typeOrSpecifier: string | AnyTypeSpecifier = '{urn:hl7-org:elm-types:r1}Any'
+  typeOrSpecifier: string | AnyTypeSpecifier = ELM_ANY_TYPE
 ): AnyTypeSpecifier {
   if (typeof typeOrSpecifier === 'string') {
     return {
@@ -23,7 +24,7 @@ export function typeToCqlTypeSpecifier(
 
 // NOTE: Slightly modified from code in cql-execution: src/elm/type.ts
 export function typeToCqlTypeString(
-  typeOrSpecifier: string | AnyTypeSpecifier = '{urn:hl7-org:elm-types:r1}Any'
+  typeOrSpecifier: string | AnyTypeSpecifier = ELM_ANY_TYPE
 ): string {
   if (typeof typeOrSpecifier === 'string') {
     return typeOrSpecifier.replace('{urn:hl7-org:elm-types:r1}', 'System.');

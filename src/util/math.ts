@@ -1,12 +1,12 @@
 import { Exception } from '../datatypes/exception';
-import { Quantity, MIN_QUANTITY_VALUE, MAX_QUANTITY_VALUE } from '../datatypes/quantity';
+import { Quantity } from '../datatypes/quantity';
 import {
-  MIN_DATETIME_VALUE as dtMinDateTimeValue,
-  MAX_DATETIME_VALUE as dtMaxDateTimeValue,
-  MIN_DATE_VALUE as dtMinDateValue,
-  MAX_DATE_VALUE as dtMaxDateValue,
-  MIN_TIME_VALUE as dtMinTimeValue,
-  MAX_TIME_VALUE as dtMaxTimeValue
+  MIN_DATETIME_VALUE,
+  MAX_DATETIME_VALUE,
+  MIN_DATE_VALUE,
+  MAX_DATE_VALUE,
+  MIN_TIME_VALUE,
+  MAX_TIME_VALUE
 } from '../datatypes/datetime';
 import { Uncertainty } from '../datatypes/uncertainty';
 import {
@@ -18,20 +18,16 @@ import {
   ELM_TIME_TYPE,
   ELM_QUANTITY_TYPE
 } from './elmTypes';
-
-export const MAX_INT_VALUE = Math.pow(2, 31) - 1; // 2147483647
-export const MIN_INT_VALUE = Math.pow(-2, 31); // -2147483648
-export const MAX_LONG_VALUE = 9223372036854775807n;
-export const MIN_LONG_VALUE = -9223372036854775808n;
-export const MAX_FLOAT_VALUE = 99999999999999999999.99999999;
-export const MIN_FLOAT_VALUE = -99999999999999999999.99999999;
-export const MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
-export const MIN_DATETIME_VALUE = dtMinDateTimeValue;
-export const MAX_DATETIME_VALUE = dtMaxDateTimeValue;
-export const MIN_DATE_VALUE = dtMinDateValue;
-export const MAX_DATE_VALUE = dtMaxDateValue;
-export const MIN_TIME_VALUE = dtMinTimeValue;
-export const MAX_TIME_VALUE = dtMaxTimeValue;
+import {
+  MAX_FLOAT_VALUE,
+  MAX_INT_VALUE,
+  MAX_LONG_VALUE,
+  MIN_FLOAT_PRECISION_VALUE,
+  MIN_FLOAT_VALUE,
+  MIN_INT_VALUE,
+  MIN_LONG_VALUE
+} from './limits';
+import { convertToCQLDateUnit, normalizeUnitsWhenPossible } from './units';
 
 export function overflowsOrUnderflows(value: any, type?: string): boolean {
   if (value == null) {
@@ -126,26 +122,103 @@ export function isValidDecimal(decimal: any) {
   return true;
 }
 
-export function limitDecimalPrecision(decimal: any) {
-  let decimalString = decimal.toString();
-  // For decimals so large that they are represented in scientific notation, javascript has already limited
-  // the decimal to its own constraints, so we can't determine the original precision.  Leave as-is unless
-  // this becomes problematic, in which case we would need our own parseFloat.
-  if (decimalString.indexOf('e') !== -1) {
-    return decimal;
+export function add(a: any, b: any, type?: string): any {
+  if (a == null || b == null) {
+    return null;
+  }
+  if (a?.isUncertainty || b?.isUncertainty) {
+    const aLow = a?.isUncertainty ? a.low : a;
+    const aHigh = a?.isUncertainty ? a.high : a;
+    const bLow = b?.isUncertainty ? b.low : b;
+    const bHigh = b?.isUncertainty ? b.high : b;
+    const low = add(aLow, bLow, type);
+    const high = add(aHigh, bHigh, type);
+    return low == null || high == null ? null : new Uncertainty(low, high);
   }
 
-  const splitDecimalString = decimalString.split('.');
-  const decimalPoints = splitDecimalString[1];
-  if (decimalPoints != null && decimalPoints.length > 8) {
-    decimalString = splitDecimalString[0] + '.' + splitDecimalString[1].substring(0, 8);
+  if (typeof a === 'bigint') {
+    const sum = a + (typeof b === 'bigint' ? b : BigInt(b));
+    return overflowsOrUnderflows(sum, ELM_LONG_TYPE) ? null : sum;
   }
-  return parseFloat(decimalString);
+  if (typeof b === 'bigint') {
+    const sum = BigInt(a) + b;
+    return overflowsOrUnderflows(sum, ELM_LONG_TYPE) ? null : sum;
+  }
+  if (typeof a === 'number' && typeof b === 'number') {
+    const sum = a + b;
+    const numberType =
+      type ?? (Number.isInteger(a) && Number.isInteger(b) ? ELM_INTEGER_TYPE : ELM_DECIMAL_TYPE);
+    return overflowsOrUnderflows(sum, numberType) ? null : sum;
+  }
+  if (a?.isQuantity && b?.isQuantity) {
+    const [aValue, aUnit, bValue, bUnit] = normalizeUnitsWhenPossible(
+      a.value,
+      a.unit,
+      b.value,
+      b.unit
+    );
+    if (aUnit !== bUnit) {
+      return null;
+    }
+    const sum = aValue + bValue;
+    return overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE) ? null : new Quantity(sum, aUnit);
+  }
+  if (b?.isQuantity && (a?.isDate || a?.isDateTime || (a?.isTime && a.isTime()))) {
+    const unit = convertToCQLDateUnit(b.unit) || b.unit;
+    const sum = a.copy().add(b.value, unit);
+    return overflowsOrUnderflows(sum) ? null : sum;
+  }
+
+  throw new Error('Unsupported argument types.');
+}
+
+export function subtract(a: any, b: any, type?: string): any {
+  if (a == null || b == null) {
+    return null;
+  }
+  if (a?.isUncertainty || b?.isUncertainty) {
+    const aLow = a?.isUncertainty ? a.low : a;
+    const aHigh = a?.isUncertainty ? a.high : a;
+    const bLow = b?.isUncertainty ? b.low : b;
+    const bHigh = b?.isUncertainty ? b.high : b;
+    const low = subtract(aLow, bHigh, type);
+    const high = subtract(aHigh, bLow, type);
+    return low == null || high == null ? null : new Uncertainty(low, high);
+  }
+  if (typeof b === 'number' || typeof b === 'bigint') {
+    return add(a, -b, type);
+  }
+  if (b?.isQuantity) {
+    return add(a, { isQuantity: true, value: -b.value, unit: b.unit }, type);
+  }
+
+  throw new Error('Unsupported argument types.');
+}
+
+export function limitDecimalPrecision<T extends number | bigint | Quantity | Uncertainty>(
+  val?: T
+): T | undefined {
+  if (val == null) {
+    return val;
+  } else if (typeof val === 'number') {
+    return (Math.round(val * Math.pow(10, 8)) / Math.pow(10, 8)) as T;
+  } else if ((val as Quantity).isQuantity) {
+    return new Quantity(
+      limitDecimalPrecision((val as Quantity).value),
+      (val as Quantity).unit
+    ) as T;
+  } else if ((val as Uncertainty).isUncertainty) {
+    return new Uncertainty(
+      limitDecimalPrecision((val as Uncertainty).low),
+      limitDecimalPrecision((val as Uncertainty).high)
+    ) as T;
+  }
+  return val;
 }
 
 export class OverFlowException extends Exception {}
 
-export function successor(val: any, type?: string): any {
+export function successor(val: any, type?: string, precision?: string): any {
   if (typeof val === 'number') {
     const isInteger = type === ELM_INTEGER_TYPE || (type == null && Number.isInteger(val));
     if (isInteger) {
@@ -171,30 +244,30 @@ export function successor(val: any, type?: string): any {
     if (val.sameAs(MAX_TIME_VALUE)) {
       throw new OverFlowException();
     } else {
-      return val.successor();
+      return val.successor(precision);
     }
   } else if (val && val.isDateTime) {
     if (val.sameAs(MAX_DATETIME_VALUE)) {
       throw new OverFlowException();
     } else {
-      return val.successor();
+      return val.successor(precision);
     }
   } else if (val && val.isDate) {
     if (val.sameAs(MAX_DATE_VALUE)) {
       throw new OverFlowException();
     } else {
-      return val.successor();
+      return val.successor(precision);
     }
   } else if (val && val.isUncertainty) {
     // For uncertainties, if the high is the max val, don't increment it
     const high = (() => {
       try {
-        return successor(val.high, type);
+        return successor(val.high, type, precision);
       } catch {
         return val.high;
       }
     })();
-    return new Uncertainty(successor(val.low, type), high);
+    return new Uncertainty(successor(val.low, type, precision), high);
   } else if (val && val.isQuantity) {
     const succ = val.clone();
     succ.value = successor(val.value, ELM_DECIMAL_TYPE);
@@ -204,7 +277,7 @@ export function successor(val: any, type?: string): any {
   }
 }
 
-export function predecessor(val: any, type?: string): any {
+export function predecessor(val: any, type?: string, precision?: string): any {
   if (typeof val === 'number') {
     const isInteger = type === ELM_INTEGER_TYPE || (type == null && Number.isInteger(val));
     if (isInteger) {
@@ -230,30 +303,30 @@ export function predecessor(val: any, type?: string): any {
     if (val.sameAs(MIN_TIME_VALUE)) {
       throw new OverFlowException();
     } else {
-      return val.predecessor();
+      return val.predecessor(precision);
     }
   } else if (val && val.isDateTime) {
     if (val.sameAs(MIN_DATETIME_VALUE)) {
       throw new OverFlowException();
     } else {
-      return val.predecessor();
+      return val.predecessor(precision);
     }
   } else if (val && val.isDate) {
     if (val.sameAs(MIN_DATE_VALUE)) {
       throw new OverFlowException();
     } else {
-      return val.predecessor();
+      return val.predecessor(precision);
     }
   } else if (val && val.isUncertainty) {
     // For uncertainties, if the low is the min val, don't decrement it
     const low = ((): any => {
       try {
-        return predecessor(val.low, type);
+        return predecessor(val.low, type, precision);
       } catch {
         return val.low;
       }
     })();
-    return new Uncertainty(low, predecessor(val.high, type));
+    return new Uncertainty(low, predecessor(val.high, type, precision));
   } else if (val && val.isQuantity) {
     const pred = val.clone();
     pred.value = predecessor(val.value, ELM_DECIMAL_TYPE);
@@ -282,11 +355,7 @@ export function maxValueForInstance(val: any) {
     // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
     // especially if this is being used in the context of an interval or uncertainty since the
     // left and right sides need to be comparable in those cases.
-    const maxQuantity = MAX_QUANTITY_VALUE.clone();
-    if (val.unit) {
-      maxQuantity.unit = val.unit;
-    }
-    return maxQuantity;
+    return new Quantity(MAX_FLOAT_VALUE, val.unit || '1');
   } else {
     return null;
   }
@@ -310,14 +379,7 @@ export function maxValueForType(type: string, quantityInstance?: Quantity) {
       // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
       // especially if this is being used in the context of an interval or uncertainty since the
       // left and right sides need to be comparable in those cases.
-      const maxQuantity = MAX_QUANTITY_VALUE.clone();
-      if (quantityInstance == null) {
-        return maxQuantity;
-      }
-      if (quantityInstance.unit) {
-        maxQuantity.unit = quantityInstance.unit;
-      }
-      return maxQuantity;
+      return new Quantity(MAX_FLOAT_VALUE, quantityInstance?.unit || '1');
     }
   }
   return null;
@@ -342,11 +404,7 @@ export function minValueForInstance(val: any) {
     // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
     // especially if this is being used in the context of an interval or uncertainty since the
     // left and right sides need to be comparable in those cases.
-    const minQuantity = MIN_QUANTITY_VALUE.clone();
-    if (val.unit) {
-      minQuantity.unit = val.unit;
-    }
-    return minQuantity;
+    return new Quantity(MIN_FLOAT_VALUE, val.unit || '1');
   } else {
     return null;
   }
@@ -370,14 +428,7 @@ export function minValueForType(type: string, quantityInstance?: Quantity) {
       // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
       // especially if this is being used in the context of an interval or uncertainty since the
       // left and right sides need to be comparable in those cases.
-      const minQuantity = MIN_QUANTITY_VALUE.clone();
-      if (quantityInstance == null) {
-        return minQuantity;
-      }
-      if (quantityInstance.unit) {
-        minQuantity.unit = quantityInstance.unit;
-      }
-      return minQuantity;
+      return new Quantity(MIN_FLOAT_VALUE, quantityInstance?.unit || '1');
     }
   }
   return null;
