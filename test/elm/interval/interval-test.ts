@@ -628,21 +628,23 @@ describe('ProperContains', () => {
 
   it('should accept properly contained items', async function () {
     (await this.properContainsInt.exec(this.ctx)).should.be.true();
+    (await this.notProperContainsIntLowEdge.exec(this.ctx)).should.be.true();
+    (await this.notProperContainsIntHighEdge.exec(this.ctx)).should.be.true();
     (await this.properContainsReal.exec(this.ctx)).should.be.true();
     (await this.properContainsQuantity.exec(this.ctx)).should.be.true();
+    (await this.properContainsQuantityEdge.exec(this.ctx)).should.be.true();
     (await this.properContainsDate.exec(this.ctx)).should.be.true();
+    (await this.properContainsDateHighEdgeClosed.exec(this.ctx)).should.be.true();
     (await this.properContainsTime.exec(this.ctx)).should.be.true();
+    (await this.properContainsTimeLowEdge.exec(this.ctx)).should.be.true();
   });
 
   it('should reject items outside the interval or on an edge', async function () {
     (await this.notProperContainsInt.exec(this.ctx)).should.be.false();
-    (await this.notProperContainsIntLowEdge.exec(this.ctx)).should.be.false();
-    (await this.notProperContainsIntHighEdge.exec(this.ctx)).should.be.false();
     (await this.notProperContainsReal.exec(this.ctx)).should.be.false();
-    (await this.notProperContainsQuantityEdge.exec(this.ctx)).should.be.false();
+    (await this.notProperContainsQuantity.exec(this.ctx)).should.be.false();
     (await this.notProperContainsDateHighEdgeOpen.exec(this.ctx)).should.be.false();
-    (await this.notProperContainsDateHighEdgeClosed.exec(this.ctx)).should.be.false();
-    (await this.notProperContainsTimeLowEdge.exec(this.ctx)).should.be.false();
+    (await this.notProperContainsTime.exec(this.ctx)).should.be.false();
   });
 
   it('should correctly compare using the requested precision', async function () {
@@ -664,21 +666,23 @@ describe('ProperIn', () => {
 
   it('should accept properly contained items', async function () {
     (await this.properInInt.exec(this.ctx)).should.be.true();
+    (await this.properInIntLowEdge.exec(this.ctx)).should.be.true();
+    (await this.properInIntHighEdge.exec(this.ctx)).should.be.true();
     (await this.properInReal.exec(this.ctx)).should.be.true();
     (await this.properInQuantity.exec(this.ctx)).should.be.true();
+    (await this.properInQuantityEdge.exec(this.ctx)).should.be.true();
     (await this.properInDate.exec(this.ctx)).should.be.true();
+    (await this.properInDateHighEdgeClosed.exec(this.ctx)).should.be.true();
     (await this.properInTime.exec(this.ctx)).should.be.true();
+    (await this.properInTimeLowEdge.exec(this.ctx)).should.be.true();
   });
 
-  it('should reject items outside the interval or on an edge', async function () {
+  it('should reject items outside the interval', async function () {
     (await this.notProperInInt.exec(this.ctx)).should.be.false();
-    (await this.notProperInIntLowEdge.exec(this.ctx)).should.be.false();
-    (await this.notProperInIntHighEdge.exec(this.ctx)).should.be.false();
     (await this.notProperInReal.exec(this.ctx)).should.be.false();
-    (await this.notProperInQuantityEdge.exec(this.ctx)).should.be.false();
+    (await this.notProperInQuantity.exec(this.ctx)).should.be.false();
     (await this.notProperInDateHighEdgeOpen.exec(this.ctx)).should.be.false();
-    (await this.notProperInDateHighEdgeClosed.exec(this.ctx)).should.be.false();
-    (await this.notProperInTimeLowEdge.exec(this.ctx)).should.be.false();
+    (await this.notProperInTime.exec(this.ctx)).should.be.false();
   });
 
   it('should correctly compare using the requested precision', async function () {

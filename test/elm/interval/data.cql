@@ -395,17 +395,19 @@ define NotProperContainsIntHighEdge: Interval[1, 5] properly includes 5
 define ProperContainsReal: Interval[1.234, 3.456] properly includes 2.345
 define NotProperContainsReal: Interval[1.234, 3.456] properly includes 4.567
 define ProperContainsQuantity: Interval[1 'mg', 5 'mg'] properly includes 3 'mg'
-define NotProperContainsQuantityEdge: Interval[1 'mg', 5 'mg'] properly includes 5 'mg'
+define ProperContainsQuantityEdge: Interval[1 'mg', 5 'mg'] properly includes 5 'mg'
+define NotProperContainsQuantity: Interval[1 'mg', 5 'mg'] properly includes 5.00000001 'mg'
 define DateIvlHighOpen: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define DateIvlHighClosed: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
 define ProperContainsDate: DateIvlHighOpen properly includes DateTime(2012, 6, 1, 0, 0, 0, 0)
 define NotProperContainsDateHighEdgeOpen: DateIvlHighOpen properly includes DateTime(2012, 9, 1, 0, 0, 0, 0)
-define NotProperContainsDateHighEdgeClosed: DateIvlHighClosed properly includes DateTime(2012, 9, 1, 0, 0, 0, 0)
+define ProperContainsDateHighEdgeClosed: DateIvlHighClosed properly includes DateTime(2012, 9, 1, 0, 0, 0, 0)
 define ProperContainsTime: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.001
-define NotProperContainsTimeLowEdge: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.000
+define ProperContainsTimeLowEdge: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.000
+define NotProperContainsTime: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T22:00:00.000
 define MayProperContainsTime: Interval[@T12:00:00.001, @T21:59:59.999] properly includes @T12:00:00
 define ProperContainsSecondOfTime: Interval[@T12:00:00.000, @T21:59:59.999] properly includes second of @T12:00:01
-define NotProperContainsSecondOfTime: Interval[@T12:00:00.001, @T21:59:59.999] properly includes second of @T12:00:00
+define NotProperContainsSecondOfTime: Interval[@T12:00:00.001, @T12:00:00.001] properly includes second of @T12:00:00
 define MayProperContainsMillisecondOfTime: Interval[@T12:00:00.001, @T21:59:59.999] properly includes millisecond of @T12:00:00
 define ProperContainsNull: Interval[1, 5] properly includes null
 
@@ -413,22 +415,24 @@ define ProperContainsNull: Interval[1, 5] properly includes null
 // @Test: ProperIn
 define ProperInInt: 3 properly included in Interval[1, 5]
 define NotProperInInt: 7 properly included in Interval[1, 5]
-define NotProperInIntLowEdge: 1 properly included in Interval[1, 5]
-define NotProperInIntHighEdge: 5 properly included in Interval[1, 5]
+define ProperInIntLowEdge: 1 properly included in Interval[1, 5]
+define ProperInIntHighEdge: 5 properly included in Interval[1, 5]
 define ProperInReal: 2.345 properly included in Interval[1.234, 3.456]
 define NotProperInReal: 4.567 properly included in Interval[1.234, 3.456]
 define ProperInQuantity: 3 'mg' properly included in Interval[1 'mg', 5 'mg']
-define NotProperInQuantityEdge: 5 'mg' properly included in Interval[1 'mg', 5 'mg']
+define ProperInQuantityEdge: 5 'mg' properly included in Interval[1 'mg', 5 'mg']
+define NotProperInQuantity: 0.99999999 'mg' properly included in Interval[1 'mg', 5 'mg']
 define DateIvlHighOpen: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define DateIvlHighClosed: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
 define ProperInDate: DateTime(2012, 6, 1, 0, 0, 0, 0) properly included in DateIvlHighOpen
 define NotProperInDateHighEdgeOpen: DateTime(2012, 9, 1, 0, 0, 0, 0) properly included in DateIvlHighOpen
-define NotProperInDateHighEdgeClosed: DateTime(2012, 9, 1, 0, 0, 0, 0) properly included in DateIvlHighClosed
+define ProperInDateHighEdgeClosed: DateTime(2012, 9, 1, 0, 0, 0, 0) properly included in DateIvlHighClosed
 define ProperInTime: @T12:00:00.001 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
-define NotProperInTimeLowEdge: @T12:00:00.000 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
+define ProperInTimeLowEdge: @T12:00:00.000 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
+define NotProperInTime: @T22:00:00.000 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
 define MayProperInTime: @T12:00:00 properly included in Interval[@T12:00:00.001, @T21:59:59.999]
 define ProperInSecondOfTime: @T12:00:01 properly included in second of Interval[@T12:00:00.000, @T21:59:59.999]
-define NotProperInSecondOfTime: @T12:00:00 properly included in second of Interval[@T12:00:00.001, @T21:59:59.999]
+define NotProperInSecondOfTime: @T12:00:00 properly included in second of Interval[@T12:00:00.000, @T12:00:00.000]
 define MayProperInMillisecondOfTime: @T12:00:00 properly included in millisecond of Interval[@T12:00:00.001, @T21:59:59.999]
 define ProperInNull: null properly included in Interval[1, 5]
 
