@@ -1874,14 +1874,19 @@ class Interval {
         // comparisons used in the operation are performed at the specified precision."
         return logic_1.ThreeValuedLogic.and(cmp.greaterThanOrEquals(item, this.start(), precision), cmp.lessThanOrEquals(item, this.end(), precision));
     }
+    // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#properly-includes
     properContains(item, precision) {
+        // From contains: "If the second argument is null, the result is null."
         if (item == null) {
             return null;
         }
         else if (item.isInterval) {
             throw new Error('Argument to contains must be a point');
         }
-        return logic_1.ThreeValuedLogic.and(cmp.lessThan(this.start(), item, precision), cmp.greaterThan(this.end(), item, precision));
+        // "For the interval-point overload, this operator returns true if the interval contains
+        // (i.e. includes) the point, and the interval is not a unit interval containing only the
+        // point."
+        return logic_1.ThreeValuedLogic.and(this.contains(item, precision), logic_1.ThreeValuedLogic.not(cmp.equals(this.start(), this.end())));
     }
     // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#properly-includes
     properlyIncludes(other, precision) {

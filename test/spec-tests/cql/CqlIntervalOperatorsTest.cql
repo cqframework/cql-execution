@@ -1426,9 +1426,11 @@ define "ProperContains": Tuple{
     output: true
   },
   "TimeProperContainsFalse": Tuple{
+    skipped: 'Wrong output: According to spec, a contained point is properly contained as long as the interval is not a unit interval'
+    /*
     expression: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.000,
     output: false
-  },
+    */  },
   "TimeProperContainsNull": Tuple{
     expression: Interval[@T12:00:00.001, @T21:59:59.999] properly includes @T12:00:00,
     output: null
@@ -1438,9 +1440,11 @@ define "ProperContains": Tuple{
     output: true
   },
   "TimeProperContainsPrecisionFalse": Tuple{
+    skipped: 'Wrong output: According to spec, a contained point is properly contained as long as the interval is not a unit interval'
+    /*
     expression: Interval[@T12:00:00.001, @T21:59:59.999] properly includes second of @T12:00:00,
     output: false
-  },
+    */  },
   "TimeProperContainsPrecisionNull": Tuple{
     expression: Interval[@T12:00:00.001, @T21:59:59.999] properly includes millisecond of @T12:00:00,
     output: null
@@ -1453,9 +1457,11 @@ define "ProperIn": Tuple{
     output: true
   },
   "TimeProperInFalse": Tuple{
+    skipped: 'Wrong output: According to spec, a contained point is properly in as long as the interval is not a unit interval'
+    /*
     expression: @T12:00:00.000 properly included in  Interval[@T12:00:00.000, @T21:59:59.999],
     output: false
-  },
+    */  },
   "TimeProperInNull": Tuple{
     expression: @T12:00:00 properly included in Interval[@T12:00:00.001, @T21:59:59.999],
     output: null
@@ -1465,9 +1471,11 @@ define "ProperIn": Tuple{
     output: true
   },
   "TimeProperInPrecisionFalse": Tuple{
+    skipped: 'Wrong output: According to spec, a contained point is properly in as long as the interval is not a unit interval'
+    /*
     expression: @T12:00:00 properly included in second of Interval[@T12:00:00.001, @T21:59:59.999],
     output: false
-  },
+    */  },
   "TimeProperInPrecisionNull": Tuple{
     expression: @T12:00:00 properly included in millisecond of Interval[@T12:00:00.001, @T21:59:59.999],
     output: null
