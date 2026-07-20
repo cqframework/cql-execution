@@ -3,10 +3,12 @@
 # Invalid Translation (translates, but translates wrong)
 CqlAggregateTest.AggregateTests.RolledOutIntervals  CQL adds an integer to a date ("S + duration in days of X"). Should be "S + Quantity{ value: duration in days of X, unit: 'days' }". Translator translates it, but probably shouldn't.
 
-# Potentially Invalid Translation (translates, but potentially translates wrong)
-
 # Incorrect Expected Output
 CqlIntervalOperatorsTest.In.TestInNullBoundaries                Wrong output: According to spec, comparison against null closed boundaries should result in true
+CqlIntervalOperatorsTest.ProperContains.TimeProperContainsPrecisionFalse  Wrong output: According to spec, a contained point is properly contained as long as the interval is not a unit interval
+CqlIntervalOperatorsTest.ProperContains.TimeProperContainsFalse Wrong output: According to spec, a contained point is properly contained as long as the interval is not a unit interval
+CqlIntervalOperatorsTest.ProperIn.TimeProperInPrecisionFalse    Wrong output: According to spec, a contained point is properly in as long as the interval is not a unit interval
+CqlIntervalOperatorsTest.ProperIn.TimeProperInFalse             Wrong output: According to spec, a contained point is properly in as long as the interval is not a unit interval
 CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
 CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates

@@ -93,23 +93,26 @@ export class Interval {
     );
   }
 
+  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#properly-includes
   properContains(item: any, precision?: any) {
+    // From contains: "If the second argument is null, the result is null."
     if (item == null) {
       return null;
     } else if (item.isInterval) {
       throw new Error('Argument to contains must be a point');
     }
+    // "For the interval-point overload, this operator returns true if the interval contains
+    // (i.e. includes) the point, and the interval is not a unit interval containing only the
+    // point."
     return ThreeValuedLogic.and(
-      cmp.lessThan(this.start(), item, precision),
-      cmp.greaterThan(this.end(), item, precision)
+      this.contains(item, precision),
+      ThreeValuedLogic.not(cmp.equals(this.start(), this.end()))
     );
   }
 
   // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#properly-includes
   properlyIncludes(other: any, precision?: any) {
-    // TODO: "For the interval-point overload, this operator returns true if the interval contains
-    // (i.e. includes) the point, and the interval is not a unit interval containing only the
-    // point."
+    // "For the interval-interval overload, if either argument is null, the result is null."
     if (other == null || !other.isInterval) {
       throw new Error('Argument to properlyIncludes must be an interval');
     }

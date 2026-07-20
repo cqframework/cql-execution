@@ -471,14 +471,14 @@ describe('DateTimeInterval', () => {
     });
 
     it('should properly calculate the left boundary date', () => {
-      d.all2012.closed.properContains(d.beg2012.full).should.be.false();
+      d.all2012.closed.properContains(d.beg2012.full).should.be.true();
       d.all2012.open.properContains(d.beg2012.full).should.be.false();
 
-      let next = d.beg2012.full.successor();
-      d.all2012.closed.properContains(next).should.be.true();
-      d.all2012.open.properContains(next).should.be.false();
+      const prev = d.beg2012.full.predecessor();
+      d.all2012.closed.properContains(prev).should.be.false();
+      d.all2012.open.properContains(prev).should.be.false();
 
-      next = next.successor();
+      const next = d.beg2012.full.successor();
       d.all2012.closed.properContains(next).should.be.true();
       d.all2012.open.properContains(next).should.be.true();
     });
@@ -488,16 +488,16 @@ describe('DateTimeInterval', () => {
     });
 
     it('should properly calculate the right boundary date', () => {
-      d.all2012.closed.properContains(d.end2012.full).should.be.false();
+      d.all2012.closed.properContains(d.end2012.full).should.be.true();
       d.all2012.open.properContains(d.end2012.full).should.be.false();
 
-      let prev = d.end2012.full.predecessor();
-      d.all2012.closed.properContains(prev).should.be.true();
-      d.all2012.open.properContains(prev).should.be.false();
-
-      prev = prev.predecessor();
+      const prev = d.end2012.full.predecessor();
       d.all2012.closed.properContains(prev).should.be.true();
       d.all2012.open.properContains(prev).should.be.true();
+
+      const next = d.end2012.full.successor();
+      d.all2012.closed.properContains(next).should.be.false();
+      d.all2012.open.properContains(next).should.be.false();
     });
 
     it('should properly calculate dates after it', () => {
@@ -510,16 +510,16 @@ describe('DateTimeInterval', () => {
       const early = DateTime.parse('2000-01-01T00:00:00.0');
       const late = DateTime.parse('2999-01-01T00:00:00.0');
       const maxDate = MAX_DATETIME_VALUE;
-      new Interval(null, date).properContains(minDate).should.be.false();
+      new Interval(null, date).properContains(minDate).should.be.true();
       new Interval(null, date).properContains(early).should.be.true();
       new Interval(null, date).properContains(late).should.be.false();
-      new Interval(null, date, false, true).properContains(date).should.be.false();
+      should(new Interval(null, date, false, true).properContains(date)).be.null();
       should(new Interval(null, date, false, true).properContains(early)).be.null();
       new Interval(null, date, false, true).properContains(late).should.be.false();
       new Interval(date, null).properContains(late).should.be.true();
       new Interval(date, null).properContains(early).should.be.false();
-      new Interval(date, null).properContains(maxDate).should.be.false();
-      new Interval(date, null, true, false).properContains(date).should.be.false();
+      new Interval(date, null).properContains(maxDate).should.be.true();
+      should(new Interval(date, null, true, false).properContains(date)).be.null();
       should(new Interval(date, null, true, false).properContains(late)).be.null();
       new Interval(date, null, true, false).properContains(early).should.be.false();
       new Interval(null, null, true, true, ELM_DATETIME_TYPE).properContains(date).should.be.true();
@@ -536,9 +536,9 @@ describe('DateTimeInterval', () => {
       d.all2012.closed.properContains(d.aft2012.toMonth).should.be.false();
 
       d.all2012.toMonth.properContains(d.bef2012.toMonth).should.be.false();
-      d.all2012.toMonth.properContains(d.beg2012.toMonth).should.be.false();
+      d.all2012.toMonth.properContains(d.beg2012.toMonth).should.be.true();
       d.all2012.toMonth.properContains(d.mid2012.toMonth).should.be.true();
-      d.all2012.toMonth.properContains(d.end2012.toMonth).should.be.false();
+      d.all2012.toMonth.properContains(d.end2012.toMonth).should.be.true();
       d.all2012.toMonth.properContains(d.aft2012.toMonth).should.be.false();
 
       d.all2012.toMonth.properContains(d.bef2012.full).should.be.false();
@@ -2678,10 +2678,10 @@ describe('IntegerInterval', () => {
     });
 
     it('should properly calculate the left boundary integer', () => {
-      d.zeroToHundred.closed.properContains(0).should.be.false();
+      d.zeroToHundred.closed.properContains(0).should.be.true();
       d.zeroToHundred.open.properContains(0).should.be.false();
       d.zeroToHundred.closed.properContains(1).should.be.true();
-      d.zeroToHundred.open.properContains(1).should.be.false();
+      d.zeroToHundred.open.properContains(1).should.be.true();
       d.zeroToHundred.closed.properContains(2).should.be.true();
       d.zeroToHundred.open.properContains(2).should.be.true();
     });
@@ -2691,10 +2691,10 @@ describe('IntegerInterval', () => {
     });
 
     it('should properly calculate the right boundary integer', () => {
-      d.zeroToHundred.closed.properContains(100).should.be.false();
+      d.zeroToHundred.closed.properContains(100).should.be.true();
       d.zeroToHundred.open.properContains(100).should.be.false();
       d.zeroToHundred.closed.properContains(99).should.be.true();
-      d.zeroToHundred.open.properContains(99).should.be.false();
+      d.zeroToHundred.open.properContains(99).should.be.true();
       d.zeroToHundred.closed.properContains(98).should.be.true();
       d.zeroToHundred.open.properContains(98).should.be.true();
     });
@@ -2706,12 +2706,12 @@ describe('IntegerInterval', () => {
     it('should properly handle null endpoints', () => {
       new Interval(null, 0).properContains(-123456789).should.be.true();
       new Interval(null, 0).properContains(1).should.be.false();
-      new Interval(null, 0, false, true).properContains(0).should.be.false();
+      should(new Interval(null, 0, false, true).properContains(0)).be.null();
       should(new Interval(null, 0, false, true).properContains(-123456789)).be.null();
       new Interval(null, 0, false, true).properContains(1).should.be.false();
       new Interval(0, null).properContains(123456789).should.be.true();
       new Interval(0, null).properContains(-1).should.be.false();
-      new Interval(0, null, true, false).properContains(0).should.be.false();
+      should(new Interval(0, null, true, false).properContains(0)).be.null();
       should(new Interval(0, null, true, false).properContains(123456789)).be.null();
       new Interval(0, null, true, false).properContains(-1).should.be.false();
       new Interval(null, null, true, true, ELM_INTEGER_TYPE).properContains(0).should.be.true();
@@ -2721,8 +2721,8 @@ describe('IntegerInterval', () => {
     it('should properly handle imprecision', () => {
       d.zeroToHundred.closed.properContains(new Uncertainty(-20, -10)).should.be.false();
       should.not.exist(d.zeroToHundred.closed.properContains(new Uncertainty(-20, 20)));
-      should.not.exist(d.zeroToHundred.closed.properContains(new Uncertainty(0, 100)));
-      d.zeroToHundred.closed.properContains(new Uncertainty(1, 99)).should.be.true();
+      should.not.exist(d.zeroToHundred.closed.properContains(new Uncertainty(0, 101)));
+      d.zeroToHundred.closed.properContains(new Uncertainty(0, 100)).should.be.true();
       should.not.exist(d.zeroToHundred.closed.properContains(new Uncertainty(80, 120)));
       d.zeroToHundred.closed.properContains(new Uncertainty(120, 140)).should.be.false();
       should.not.exist(d.zeroToHundred.closed.properContains(new Uncertainty(-20, 120)));
@@ -2730,22 +2730,22 @@ describe('IntegerInterval', () => {
       const uIvl = new Interval(new Uncertainty(5, 10), new Uncertainty(15, 20));
 
       uIvl.properContains(0).should.be.false();
-      uIvl.properContains(5).should.be.false();
+      should.not.exist(uIvl.properContains(5));
       should.not.exist(uIvl.properContains(6));
-      should.not.exist(uIvl.properContains(10));
+      uIvl.properContains(10).should.be.true();
       uIvl.properContains(12).should.be.true();
-      should.not.exist(uIvl.properContains(15));
+      uIvl.properContains(15).should.be.true();
       should.not.exist(uIvl.properContains(16));
-      uIvl.properContains(20).should.be.false();
+      should.not.exist(uIvl.properContains(20));
       uIvl.properContains(25).should.be.false();
 
       uIvl.properContains(new Uncertainty(0, 4)).should.be.false();
-      uIvl.properContains(new Uncertainty(0, 5)).should.be.false();
+      should.not.exist(uIvl.properContains(new Uncertainty(0, 5)));
       should.not.exist(uIvl.properContains(new Uncertainty(5, 10)));
-      should.not.exist(uIvl.properContains(new Uncertainty(10, 15)));
+      uIvl.properContains(new Uncertainty(10, 15)).should.be.true();
       uIvl.properContains(new Uncertainty(11, 14)).should.be.true();
       should.not.exist(uIvl.properContains(new Uncertainty(15, 20)));
-      uIvl.properContains(new Uncertainty(20, 25)).should.be.false();
+      should.not.exist(uIvl.properContains(new Uncertainty(20, 25)));
       uIvl.properContains(new Uncertainty(25, 30)).should.be.false();
     });
 
@@ -4643,10 +4643,10 @@ describe('LongInterval', () => {
     });
 
     it('should properly calculate the left boundary long', () => {
-      d.zeroToHundredLong.closed.properContains(0n).should.be.false();
+      d.zeroToHundredLong.closed.properContains(0n).should.be.true();
       d.zeroToHundredLong.open.properContains(0n).should.be.false();
       d.zeroToHundredLong.closed.properContains(1n).should.be.true();
-      d.zeroToHundredLong.open.properContains(1n).should.be.false();
+      d.zeroToHundredLong.open.properContains(1n).should.be.true();
       d.zeroToHundredLong.closed.properContains(2n).should.be.true();
       d.zeroToHundredLong.open.properContains(2n).should.be.true();
     });
@@ -4656,10 +4656,10 @@ describe('LongInterval', () => {
     });
 
     it('should properly calculate the right boundary long', () => {
-      d.zeroToHundredLong.closed.properContains(100n).should.be.false();
+      d.zeroToHundredLong.closed.properContains(100n).should.be.true();
       d.zeroToHundredLong.open.properContains(100n).should.be.false();
       d.zeroToHundredLong.closed.properContains(99n).should.be.true();
-      d.zeroToHundredLong.open.properContains(99n).should.be.false();
+      d.zeroToHundredLong.open.properContains(99n).should.be.true();
       d.zeroToHundredLong.closed.properContains(98n).should.be.true();
       d.zeroToHundredLong.open.properContains(98n).should.be.true();
     });
@@ -4671,12 +4671,12 @@ describe('LongInterval', () => {
     it('should properly handle null endpoints', () => {
       new Interval(null, 0n).properContains(-123456789n).should.be.true();
       new Interval(null, 0n).properContains(1n).should.be.false();
-      new Interval(null, 0n, false, true).properContains(0n).should.be.false();
+      should(new Interval(null, 0n, false, true).properContains(0n)).be.null();
       should(new Interval(null, 0n, false, true).properContains(-123456789n)).be.null();
       new Interval(null, 0n, false, true).properContains(1n).should.be.false();
       new Interval(0n, null).properContains(123456789n).should.be.true();
       new Interval(0n, null).properContains(-1n).should.be.false();
-      new Interval(0n, null, true, false).properContains(0n).should.be.false();
+      should(new Interval(0n, null, true, false).properContains(0n)).be.null();
       should(new Interval(0n, null, true, false).properContains(123456789n)).be.null();
       new Interval(0n, null, true, false).properContains(-1n).should.be.false();
       new Interval(null, null, true, true, ELM_LONG_TYPE).properContains(0n).should.be.true();
@@ -4686,8 +4686,8 @@ describe('LongInterval', () => {
     it('should properly handle imprecision', () => {
       d.zeroToHundredLong.closed.properContains(new Uncertainty(-20n, -10n)).should.be.false();
       should.not.exist(d.zeroToHundredLong.closed.properContains(new Uncertainty(-20n, 20n)));
-      should.not.exist(d.zeroToHundredLong.closed.properContains(new Uncertainty(0n, 100n)));
-      d.zeroToHundredLong.closed.properContains(new Uncertainty(1n, 99n)).should.be.true();
+      should.not.exist(d.zeroToHundredLong.closed.properContains(new Uncertainty(0n, 101n)));
+      d.zeroToHundredLong.closed.properContains(new Uncertainty(0n, 100n)).should.be.true();
       should.not.exist(d.zeroToHundredLong.closed.properContains(new Uncertainty(80n, 120n)));
       d.zeroToHundredLong.closed.properContains(new Uncertainty(120n, 140n)).should.be.false();
       should.not.exist(d.zeroToHundredLong.closed.properContains(new Uncertainty(-20n, 120n)));
@@ -4695,22 +4695,22 @@ describe('LongInterval', () => {
       const uIvl = new Interval(new Uncertainty(5n, 10n), new Uncertainty(15n, 20n));
 
       uIvl.properContains(0n).should.be.false();
-      uIvl.properContains(5n).should.be.false();
+      should.not.exist(uIvl.properContains(5n));
       should.not.exist(uIvl.properContains(6n));
-      should.not.exist(uIvl.properContains(10n));
+      uIvl.properContains(10n).should.be.true();
       uIvl.properContains(12n).should.be.true();
-      should.not.exist(uIvl.properContains(15n));
+      uIvl.properContains(15n).should.be.true();
       should.not.exist(uIvl.properContains(16n));
-      uIvl.properContains(20n).should.be.false();
+      should.not.exist(uIvl.properContains(20n));
       uIvl.properContains(25n).should.be.false();
 
       uIvl.properContains(new Uncertainty(0n, 4n)).should.be.false();
-      uIvl.properContains(new Uncertainty(0n, 5n)).should.be.false();
+      should.not.exist(uIvl.properContains(new Uncertainty(0n, 5n)));
       should.not.exist(uIvl.properContains(new Uncertainty(5n, 10n)));
-      should.not.exist(uIvl.properContains(new Uncertainty(10n, 15n)));
+      uIvl.properContains(new Uncertainty(10n, 15n)).should.be.true();
       uIvl.properContains(new Uncertainty(11n, 14n)).should.be.true();
       should.not.exist(uIvl.properContains(new Uncertainty(15n, 20n)));
-      uIvl.properContains(new Uncertainty(20n, 25n)).should.be.false();
+      should.not.exist(uIvl.properContains(new Uncertainty(20n, 25n)));
       uIvl.properContains(new Uncertainty(25n, 30n)).should.be.false();
     });
 
