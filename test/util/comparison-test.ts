@@ -1,6 +1,7 @@
 import should from 'should';
 import { Date as CQLDate, DateTime as CQLDateTime } from '../../src/datatypes/datetime';
 import { Quantity } from '../../src/datatypes/quantity';
+import { Uncertainty } from '../../src/datatypes/uncertainty';
 import {
   equals,
   equivalent,
@@ -400,5 +401,47 @@ describe('comparison helpers', () => {
         should(greaterThanOrEquals(low, high)).be.false();
       });
     });
+  });
+
+  it('should use precision when comparing uncertainties', () => {
+    const first = new Uncertainty(
+      CQLDateTime.parse('2022-01-01T12:30:15.123'),
+      CQLDateTime.parse('2022-01-01T12:30:15.124')
+    );
+    const second = new Uncertainty(
+      CQLDateTime.parse('2022-01-01T12:30:15.125'),
+      CQLDateTime.parse('2022-01-01T12:30:15.126')
+    );
+
+    lessThan(first, second, CQLDateTime.Unit.MILLISECOND).should.be.true();
+    lessThan(first, second, CQLDateTime.Unit.SECOND).should.be.false();
+    greaterThan(second, first, CQLDateTime.Unit.MILLISECOND).should.be.true();
+    greaterThan(second, first, CQLDateTime.Unit.SECOND).should.be.false();
+    lessThanOrEquals(second, first, CQLDateTime.Unit.MILLISECOND).should.be.false();
+    lessThanOrEquals(second, first, CQLDateTime.Unit.SECOND).should.be.true();
+    greaterThanOrEquals(first, second, CQLDateTime.Unit.MILLISECOND).should.be.false();
+    greaterThanOrEquals(first, second, CQLDateTime.Unit.SECOND).should.be.true();
+  });
+
+  it('should use precision when the second argument is an uncertainty', () => {
+    const firstPoint = CQLDateTime.parse('2022-01-01T12:30:15.123');
+    const first = new Uncertainty(
+      CQLDateTime.parse('2022-01-01T12:30:15.123'),
+      CQLDateTime.parse('2022-01-01T12:30:15.124')
+    );
+    const second = new Uncertainty(
+      CQLDateTime.parse('2022-01-01T12:30:15.125'),
+      CQLDateTime.parse('2022-01-01T12:30:15.126')
+    );
+    const secondPoint = CQLDateTime.parse('2022-01-01T12:30:15.127');
+
+    lessThan(firstPoint, second, CQLDateTime.Unit.MILLISECOND).should.be.true();
+    lessThan(firstPoint, second, CQLDateTime.Unit.SECOND).should.be.false();
+    greaterThan(secondPoint, first, CQLDateTime.Unit.MILLISECOND).should.be.true();
+    greaterThan(secondPoint, first, CQLDateTime.Unit.SECOND).should.be.false();
+    lessThanOrEquals(secondPoint, first, CQLDateTime.Unit.MILLISECOND).should.be.false();
+    lessThanOrEquals(secondPoint, first, CQLDateTime.Unit.SECOND).should.be.true();
+    greaterThanOrEquals(firstPoint, second, CQLDateTime.Unit.MILLISECOND).should.be.false();
+    greaterThanOrEquals(firstPoint, second, CQLDateTime.Unit.SECOND).should.be.true();
   });
 });

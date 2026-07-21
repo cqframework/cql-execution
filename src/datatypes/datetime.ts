@@ -12,6 +12,14 @@ import {
   DateTime as LuxonDateTime,
   FixedOffsetZone
 } from 'luxon';
+import {
+  MAX_DATE_VALUE_STRING,
+  MAX_DATETIME_VALUE_STRING,
+  MAX_TIME_VALUE_STRING,
+  MIN_DATE_VALUE_STRING,
+  MIN_DATETIME_VALUE_STRING,
+  MIN_TIME_VALUE_STRING
+} from '../util/limits';
 
 // It's easiest and most performant to organize formats by length of the supported strings.
 // This way we can test strings only against the formats that have a chance of working.
@@ -550,7 +558,7 @@ abstract class AbstractDate {
       case 'millisecond':
         return 999;
       default:
-        throw new Error('Tried to clieling a field that has no cieling value: ' + field);
+        throw new Error('Tried to ceiling a field that has no cieling value: ' + field);
     }
   }
 }
@@ -722,8 +730,10 @@ export class DateTime extends AbstractDate {
     );
   }
 
-  successor() {
-    if (this.millisecond != null) {
+  successor(precision?: string) {
+    if (precision) {
+      return this.add(1, precision);
+    } else if (this.millisecond != null) {
       return this.add(1, DateTime.Unit.MILLISECOND);
     } else if (this.second != null) {
       return this.add(1, DateTime.Unit.SECOND);
@@ -740,8 +750,10 @@ export class DateTime extends AbstractDate {
     }
   }
 
-  predecessor() {
-    if (this.millisecond != null) {
+  predecessor(precision?: string) {
+    if (precision) {
+      return this.add(-1, precision);
+    } else if (this.millisecond != null) {
       return this.add(-1, DateTime.Unit.MILLISECOND);
     } else if (this.second != null) {
       return this.add(-1, DateTime.Unit.SECOND);
@@ -1078,8 +1090,10 @@ export class Date extends AbstractDate {
     return new Date(this.year, this.month, this.day);
   }
 
-  successor() {
-    if (this.day != null) {
+  successor(precision?: string) {
+    if (precision) {
+      return this.add(1, precision);
+    } else if (this.day != null) {
       return this.add(1, Date.Unit.DAY);
     } else if (this.month != null) {
       return this.add(1, Date.Unit.MONTH);
@@ -1088,8 +1102,10 @@ export class Date extends AbstractDate {
     }
   }
 
-  predecessor() {
-    if (this.day != null) {
+  predecessor(precision?: string) {
+    if (precision) {
+      return this.add(-1, precision);
+    } else if (this.day != null) {
       return this.add(-1, Date.Unit.DAY);
     } else if (this.month != null) {
       return this.add(-1, Date.Unit.MONTH);
@@ -1252,15 +1268,12 @@ export class Date extends AbstractDate {
   }
 }
 
-// Require MIN/MAX here because math.js requires this file, and when we make this file require
-// math.js before it exports DateTime and Date, it errors due to the circular dependency...
-// const { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } = require('../util/math');
-export const MIN_DATETIME_VALUE = DateTime.parse('0001-01-01T00:00:00.000');
-export const MAX_DATETIME_VALUE = DateTime.parse('9999-12-31T23:59:59.999');
-export const MIN_DATE_VALUE = Date.parse('0001-01-01');
-export const MAX_DATE_VALUE = Date.parse('9999-12-31');
-export const MIN_TIME_VALUE = DateTime.parse('0000-01-01T00:00:00.000')?.getTime();
-export const MAX_TIME_VALUE = DateTime.parse('0000-01-01T23:59:59.999')?.getTime();
+export const MIN_DATETIME_VALUE = DateTime.parse(MIN_DATETIME_VALUE_STRING);
+export const MAX_DATETIME_VALUE = DateTime.parse(MAX_DATETIME_VALUE_STRING);
+export const MIN_DATE_VALUE = Date.parse(MIN_DATE_VALUE_STRING);
+export const MAX_DATE_VALUE = Date.parse(MAX_DATE_VALUE_STRING);
+export const MIN_TIME_VALUE = DateTime.parse(MIN_TIME_VALUE_STRING)?.getTime();
+export const MAX_TIME_VALUE = DateTime.parse(MAX_TIME_VALUE_STRING)?.getTime();
 
 const DATETIME_PRECISION_VALUE_MAP = (() => {
   const dtpvMap = new Map();

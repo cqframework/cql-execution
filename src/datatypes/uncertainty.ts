@@ -89,6 +89,36 @@ export class Uncertainty {
     );
   }
 
+  sameAs(other: any, precision?: any) {
+    // if this is a point, and other is not an uncertainty or a point, then we can compare directly
+    if (this.isPoint()) {
+      const sameFn = (a: any, b: any) => {
+        if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
+          return false;
+        }
+
+        if (typeof a.sameAs === 'function') {
+          return a.sameAs(b, precision);
+        } else {
+          return equals(a, b);
+        }
+      };
+
+      if (!(other instanceof Uncertainty)) {
+        return sameFn(this.low, other);
+      }
+
+      if (other.isPoint()) {
+        return sameFn(this.low, other.low);
+      }
+    }
+
+    other = Uncertainty.from(other);
+    return ThreeValuedLogic.not(
+      ThreeValuedLogic.or(this.lessThan(other, precision), this.greaterThan(other, precision))
+    );
+  }
+
   equals(other: any) {
     // if this is a point, and other is not an uncertainty or a point, then we can compare directly
     if (this.isPoint()) {
@@ -105,14 +135,14 @@ export class Uncertainty {
     return ThreeValuedLogic.not(ThreeValuedLogic.or(this.lessThan(other), this.greaterThan(other)));
   }
 
-  lessThan(other: any) {
+  lessThan(other: any, precision?: any) {
     const lt = (a: any, b: any) => {
       if (typeof a !== typeof b || a?.constructor !== b?.constructor) {
         return null;
       }
 
       if (typeof a.before === 'function') {
-        return a.before(b);
+        return a.before(b, precision);
       } else {
         return a < b;
       }
@@ -127,15 +157,15 @@ export class Uncertainty {
     }
   }
 
-  greaterThan(other: any) {
-    return Uncertainty.from(other).lessThan(this);
+  greaterThan(other: any, precision?: any) {
+    return Uncertainty.from(other).lessThan(this, precision);
   }
 
-  lessThanOrEquals(other: any) {
-    return ThreeValuedLogic.not(this.greaterThan(Uncertainty.from(other)));
+  lessThanOrEquals(other: any, precision?: any) {
+    return ThreeValuedLogic.not(this.greaterThan(Uncertainty.from(other), precision));
   }
 
-  greaterThanOrEquals(other: any) {
-    return ThreeValuedLogic.not(this.lessThan(Uncertainty.from(other)));
+  greaterThanOrEquals(other: any, precision?: any) {
+    return ThreeValuedLogic.not(this.lessThan(Uncertainty.from(other), precision));
   }
 }

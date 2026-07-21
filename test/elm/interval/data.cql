@@ -77,12 +77,12 @@ define MayContainImpreciseDate: DateIvlHighOpen contains DateTime(2012)
 define PrecisionDateIvlHighOpen: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 define PrecisionDateIvlHighClosed: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678)]
 define ContainsDayOfDateLowEdge: PrecisionDateIvlHighOpen contains day of DateTime(2012, 3, 2, 0, 0, 0, 0)
-define NotContainsDayOfDateHighEdgeOpen: PrecisionDateIvlHighOpen contains day of DateTime(2012, 9, 2, 23, 59, 59, 999)
+define ContainsDayOfDateHighEdgeOpen: PrecisionDateIvlHighOpen contains day of DateTime(2012, 9, 2, 23, 59, 59, 999)
 define ContainsDayOfDateHighEdgeClosed: PrecisionDateIvlHighClosed contains day of DateTime(2012, 9, 2, 23, 59, 59, 999)
 define NotContainsDayOfDateLowEdge: PrecisionDateIvlHighOpen contains day of DateTime(2012, 3, 1, 23, 59, 59, 999)
 define NotContainsDayOfDateBeyondHighEdge: PrecisionDateIvlHighOpen contains day of DateTime(2012, 9, 3, 0, 0, 0, 0)
 define ContainsDayOfDateImpreciseLowEdge: PrecisionDateIvlHighOpen contains day of DateTime(2012, 3, 2)
-define NotContainsDayOfDateImpreciseHighEdgeOpen: PrecisionDateIvlHighOpen contains day of DateTime(2012, 9, 2)
+define ContainsDayOfDateImpreciseHighEdgeOpen: PrecisionDateIvlHighOpen contains day of DateTime(2012, 9, 2)
 define ContainsDayOfDateImpreciseHighEdgeClosed: PrecisionDateIvlHighClosed contains day of DateTime(2012, 9, 2)
 define ContainsDayOfDateVeryImpreciseMiddle: PrecisionDateIvlHighOpen contains day of DateTime(2012, 6)
 define NotContainsDayOfDateVeryImpreciseLow: PrecisionDateIvlHighOpen contains day of DateTime(2012, 2)
@@ -146,12 +146,12 @@ define MayContainImpreciseDate: DateTime(2012) in DateIvlHighClosed
 define PrecisionDateIvlHighOpen: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 define PrecisionDateIvlHighClosed: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678)]
 define ContainsDayOfDateLowEdge: DateTime(2012, 3, 2, 0, 0, 0, 0) in day of PrecisionDateIvlHighOpen
-define NotContainsDayOfDateHighEdgeOpen: DateTime(2012, 9, 2, 23, 59, 59, 999) in day of PrecisionDateIvlHighOpen
+define ContainsDayOfDateHighEdgeOpen: DateTime(2012, 9, 2, 23, 59, 59, 999) in day of PrecisionDateIvlHighOpen
 define ContainsDayOfDateHighEdgeClosed: DateTime(2012, 9, 2, 23, 59, 59, 999) in day of PrecisionDateIvlHighClosed
 define NotContainsDayOfDateLowEdge: DateTime(2012, 3, 1, 23, 59, 59, 999) in day of PrecisionDateIvlHighOpen
 define NotContainsDayOfDateBeyondHighEdge: DateTime(2012, 9, 3, 0, 0, 0, 0) in day of PrecisionDateIvlHighOpen
 define ContainsDayOfDateImpreciseLowEdge: DateTime(2012, 3, 2) in day of PrecisionDateIvlHighOpen
-define NotContainsDayOfDateImpreciseHighEdgeOpen: DateTime(2012, 9, 2) in day of PrecisionDateIvlHighOpen
+define ContainsDayOfDateImpreciseHighEdgeOpen: DateTime(2012, 9, 2) in day of PrecisionDateIvlHighOpen
 define ContainsDayOfDateImpreciseHighEdgeClosed: DateTime(2012, 9, 2) in day of PrecisionDateIvlHighClosed
 define ContainsDayOfDateVeryImpreciseMiddle: DateTime(2012, 6) in day of PrecisionDateIvlHighOpen
 define NotContainsDayOfDateVeryImpreciseLow: DateTime(2012, 2) in day of PrecisionDateIvlHighOpen
@@ -395,17 +395,19 @@ define NotProperContainsIntHighEdge: Interval[1, 5] properly includes 5
 define ProperContainsReal: Interval[1.234, 3.456] properly includes 2.345
 define NotProperContainsReal: Interval[1.234, 3.456] properly includes 4.567
 define ProperContainsQuantity: Interval[1 'mg', 5 'mg'] properly includes 3 'mg'
-define NotProperContainsQuantityEdge: Interval[1 'mg', 5 'mg'] properly includes 5 'mg'
+define ProperContainsQuantityEdge: Interval[1 'mg', 5 'mg'] properly includes 5 'mg'
+define NotProperContainsQuantity: Interval[1 'mg', 5 'mg'] properly includes 5.00000001 'mg'
 define DateIvlHighOpen: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define DateIvlHighClosed: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
 define ProperContainsDate: DateIvlHighOpen properly includes DateTime(2012, 6, 1, 0, 0, 0, 0)
 define NotProperContainsDateHighEdgeOpen: DateIvlHighOpen properly includes DateTime(2012, 9, 1, 0, 0, 0, 0)
-define NotProperContainsDateHighEdgeClosed: DateIvlHighClosed properly includes DateTime(2012, 9, 1, 0, 0, 0, 0)
+define ProperContainsDateHighEdgeClosed: DateIvlHighClosed properly includes DateTime(2012, 9, 1, 0, 0, 0, 0)
 define ProperContainsTime: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.001
-define NotProperContainsTimeLowEdge: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.000
+define ProperContainsTimeLowEdge: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T12:00:00.000
+define NotProperContainsTime: Interval[@T12:00:00.000, @T21:59:59.999] properly includes @T22:00:00.000
 define MayProperContainsTime: Interval[@T12:00:00.001, @T21:59:59.999] properly includes @T12:00:00
 define ProperContainsSecondOfTime: Interval[@T12:00:00.000, @T21:59:59.999] properly includes second of @T12:00:01
-define NotProperContainsSecondOfTime: Interval[@T12:00:00.001, @T21:59:59.999] properly includes second of @T12:00:00
+define NotProperContainsSecondOfTime: Interval[@T12:00:00.001, @T12:00:00.001] properly includes second of @T12:00:00
 define MayProperContainsMillisecondOfTime: Interval[@T12:00:00.001, @T21:59:59.999] properly includes millisecond of @T12:00:00
 define ProperContainsNull: Interval[1, 5] properly includes null
 
@@ -413,22 +415,24 @@ define ProperContainsNull: Interval[1, 5] properly includes null
 // @Test: ProperIn
 define ProperInInt: 3 properly included in Interval[1, 5]
 define NotProperInInt: 7 properly included in Interval[1, 5]
-define NotProperInIntLowEdge: 1 properly included in Interval[1, 5]
-define NotProperInIntHighEdge: 5 properly included in Interval[1, 5]
+define ProperInIntLowEdge: 1 properly included in Interval[1, 5]
+define ProperInIntHighEdge: 5 properly included in Interval[1, 5]
 define ProperInReal: 2.345 properly included in Interval[1.234, 3.456]
 define NotProperInReal: 4.567 properly included in Interval[1.234, 3.456]
 define ProperInQuantity: 3 'mg' properly included in Interval[1 'mg', 5 'mg']
-define NotProperInQuantityEdge: 5 'mg' properly included in Interval[1 'mg', 5 'mg']
+define ProperInQuantityEdge: 5 'mg' properly included in Interval[1 'mg', 5 'mg']
+define NotProperInQuantity: 0.99999999 'mg' properly included in Interval[1 'mg', 5 'mg']
 define DateIvlHighOpen: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define DateIvlHighClosed: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
 define ProperInDate: DateTime(2012, 6, 1, 0, 0, 0, 0) properly included in DateIvlHighOpen
 define NotProperInDateHighEdgeOpen: DateTime(2012, 9, 1, 0, 0, 0, 0) properly included in DateIvlHighOpen
-define NotProperInDateHighEdgeClosed: DateTime(2012, 9, 1, 0, 0, 0, 0) properly included in DateIvlHighClosed
+define ProperInDateHighEdgeClosed: DateTime(2012, 9, 1, 0, 0, 0, 0) properly included in DateIvlHighClosed
 define ProperInTime: @T12:00:00.001 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
-define NotProperInTimeLowEdge: @T12:00:00.000 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
+define ProperInTimeLowEdge: @T12:00:00.000 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
+define NotProperInTime: @T22:00:00.000 properly included in Interval[@T12:00:00.000, @T21:59:59.999]
 define MayProperInTime: @T12:00:00 properly included in Interval[@T12:00:00.001, @T21:59:59.999]
 define ProperInSecondOfTime: @T12:00:01 properly included in second of Interval[@T12:00:00.000, @T21:59:59.999]
-define NotProperInSecondOfTime: @T12:00:00 properly included in second of Interval[@T12:00:00.001, @T21:59:59.999]
+define NotProperInSecondOfTime: @T12:00:00 properly included in second of Interval[@T12:00:00.000, @T12:00:00.000]
 define MayProperInMillisecondOfTime: @T12:00:00 properly included in millisecond of Interval[@T12:00:00.001, @T21:59:59.999]
 define ProperInNull: null properly included in Interval[1, 5]
 
@@ -439,9 +443,19 @@ define AfterLongIvl: Interval[5L, 10L] after Interval[2L, 4L]
 define NotAfterLongIvl: Interval[5L, 10L] after Interval[2L, 5L]
 define AfterRealIvl: Interval[1.234, 2.345] after Interval[0.0, 1.23]
 define NotAfterRealIvl: Interval[1.234, 2.345] after Interval[0.0, 1.234]
+define AfterIntPoint: Interval[5, 10] after 4
+define NotAfterIntPoint: Interval[5, 10] after 5
+define AfterLongPoint: Interval[5L, 10L] after 4L
+define NotAfterLongPoint: Interval[5L, 10L] after 5L
+define AfterRealPoint: Interval[1.234, 2.345] after 1.23
+define NotAfterRealPoint: Interval[1.234, 2.345] after 1.234
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define AfterDateIvl: DateIvl after Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0))
 define NotAfterDateIvl: DateIvl after Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)]
+define AfterDatePoint: DateIvl after DateTime(2012, 2, 29, 23, 59, 59, 999)
+define NotAfterDatePoint: DateIvl after DateTime(2012, 3, 1, 0, 0, 0, 0)
+define AfterDayOfDatePoint: DateIvl after day of DateTime(2012, 2, 29, 23, 59, 59, 999)
+define NotAfterDayOfDatePoint: DateIvl after day of DateTime(2012, 3, 1, 23, 59, 59, 999)
 define AfterImpreciseDateIvl: DateIvl after Interval[DateTime(2012, 1), DateTime(2012, 2)]
 define NotAfterImpreciseDateIvl: DateIvl after Interval[DateTime(2012, 1), DateTime(2012, 3)]
 define MayBeAfterImpreciseDateIvl: DateIvl after Interval[DateTime(2012), DateTime(2012)]
@@ -477,6 +491,10 @@ define PosInfEndAfterDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null] a
 define PosInfEndNotAfterDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null] after Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2020, 1, 1, 0, 0, 0, 0)]
 define UnknownEndAfterDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) after Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2010, 1, 1, 0, 0, 0, 0)]
 define UnknownEndNotAfterDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) after Interval[DateTime(2020, 1, 1, 0, 0, 0, 0), DateTime(2040, 1, 1, 0, 0, 0, 0)]
+define AfterBoundlessInterval: Interval[5, 10] after Interval[null as Integer, null as Integer]
+define AfterUnknownInterval: Interval[5, 10] after Interval(null as Integer, 4]
+define NotAfterUnknownInterval: Interval[5, 10] after Interval(null as Integer, 5]
+define MayBeAfterUnknownEndInterval: Interval[5, 10] after Interval[1, null as Integer)
 
 // @Test: Before
 define BeforeIntIvl: Interval[2, 4] before Interval[5, 10]
@@ -485,9 +503,19 @@ define BeforeLongIvl: Interval[2L, 4L] before Interval[5L, 10L]
 define NotBeforeLongIvl: Interval[2L, 5L] before Interval[5L, 10L]
 define BeforeRealIvl: Interval[0.0, 1.23] before Interval[1.234, 2.345]
 define NotBeforeRealIvl: Interval[1.234, 2.345] before Interval[0.0, 1.234]
+define BeforeIntPoint: Interval[5, 10] before 11
+define NotBeforeIntPoint: Interval[5, 10] before 10
+define BeforeLongPoint: Interval[5L, 10L] before 11L
+define NotBeforeLongPoint: Interval[5L, 10L] before 10L
+define BeforeRealPoint: Interval[1.234, 2.345] before 2.346
+define NotBeforeRealPoint: Interval[1.234, 2.345] before 2.345
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define BeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)) before DateIvl
 define NotBeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)] before DateIvl
+define BeforeDatePoint: DateIvl before DateTime(2012, 9, 1, 0, 0, 0, 1)
+define NotBeforeDatePoint: DateIvl before DateTime(2012, 8, 31, 23, 59, 59, 999)
+define BeforeDayOfDatePoint: DateIvl before day of DateTime(2012, 9, 2, 0, 0, 0, 0)
+define NotBeforeDayOfDatePoint: DateIvl before day of DateTime(2012, 8, 31, 23, 59, 59, 999)
 define BeforeImpreciseDateIvl: DateIvl before Interval[DateTime(2012, 9), DateTime(2012, 12)]
 define NotBeforeImpreciseDateIvl: DateIvl before Interval[DateTime(2012, 8), DateTime(2012, 12)]
 define MayBeBeforeImpreciseDateIvl: DateIvl before Interval[DateTime(2012), DateTime(2012)]
@@ -523,6 +551,10 @@ define UnknownBegNotBeforeDateIvl: Interval(null, DateTime(2013, 1, 1, 0, 0, 0, 
 define PosInfEndNotBeforeDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null] before Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2020, 1, 1, 0, 0, 0, 0)]
 define UnknownEndMayBeBeforeDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) before Interval[DateTime(2020, 1, 1, 0, 0, 0, 0), DateTime(2040, 1, 1, 0, 0, 0, 0)]
 define UnknownEndNotBeforeDateIvl: Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), null) before Interval[DateTime(2000, 1, 1, 0, 0, 0, 0), DateTime(2013, 1, 1, 0, 0, 0, 0)]
+define BeforeBoundlessInterval: Interval[5, 10] before Interval[null as Integer, null as Integer]
+define BeforeUnknownInterval: Interval[5, 10] before Interval[11, null as Integer)
+define NotBeforeUnknownInterval: Interval[5, 10] before Interval[10, null as Integer)
+define MayBeBeforeUnknownStartInterval: Interval[5, 10] before Interval(null as Integer, 15]
 
 // @Test: BeforeOrOn
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
@@ -564,6 +596,10 @@ define DateOnlyIvl: Interval[Date(2012, 1, 1), Date(2012, 2, 20)]
 define DateOnlyIvlBeforeDateIvl: DateOnlyIvl before or on DateIvl
 define DateIvlAfterDateOnlyIvl: DateIvl before or on DateOnlyIvl
 define DateOnlyMeetsBeforeDateIvl: Interval[Date(2012, 1, 1), Date(2012, 3, 1)] before or on DateIvl
+define IntegerIvlBeforeOrOnPoint: Interval[1, 5] before or on 5
+define IntegerIvlNotBeforeOrOnPoint: Interval[1, 5] before or on 4
+define LongIvlBeforeOrOnPoint: Interval[1L, 5L] before or on 5L
+define LongIvlNotBeforeOrOnPoint: Interval[1L, 5L] before or on 4L
 
 // @Test: AfterOrOn
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0)]
@@ -605,6 +641,10 @@ define DateOnlyIvl: Interval[Date(2012, 1, 1), Date(2012, 2, 20)]
 define DateOnlyIvlBeforeDateIvl: DateOnlyIvl after or on DateIvl
 define DateIvlAfterDateOnlyIvl: DateIvl after or on DateOnlyIvl
 define DateOnlyMeetsAfterDateIvl: Interval[Date(2012, 9, 1), Date(2012, 10, 1)] after or on DateIvl
+define IntegerIvlAfterOrOnPoint: Interval[1, 5] after or on 1
+define IntegerIvlNotAfterOrOnPoint: Interval[1, 5] after or on 2
+define LongIvlAfterOrOnPoint: Interval[1L, 5L] after or on 1L
+define LongIvlNotAfterOrOnPoint: Interval[1L, 5L] after or on 2L
 
 // @Test: Meets
 define MeetsAfterIntIvl: Interval[11, 15] meets Interval[5, 10]
@@ -832,8 +872,8 @@ define OverlapsBeforeRealIvl: Interval[1.234, 1.567] overlaps Interval[1.345, 1.
 define OverlapsAfterRealIvl: Interval[1.345, 1.678] overlaps Interval[1.234, 1.567]
 define OverlapsBoundaryRealIvl: Interval[1.0, 1.234] overlaps Interval[1.234, 2.0]
 define NoOverlapsRealIvl: Interval[1.0, 1.23456789) overlaps Interval[1.23456789, 2.0]
-define OverlapsClosedNullIntervalLHS: Interval[null, null] overlaps Interval[6, 10]
-define OverlapsClosedNullIntervalRHS: Interval[6, 10] overlaps Interval[null, null]
+define OverlapsClosedNullIntervalLHS: Interval[null as Integer, null as Integer] overlaps Interval[6, 10]
+define OverlapsClosedNullIntervalRHS: Interval[6, 10] overlaps (Interval[null as Integer, null as Integer])
 define OverlapsIsNull: Interval[6, 10] overlaps (null as Interval<Integer>)
 
 // @Test: OverlapsDateTime
@@ -854,8 +894,8 @@ define NoOverlap: ivlC overlaps ivlD
 define NoImpreciseOverlap: ivlE overlaps ivlG
 define UnknownOverlap: ivlE overlaps ivlH
 define MatchingPrecisionOverlap: ivlF overlaps ivlG
-define OverlapsClosedNullIntervalLHS: Interval[null, null] overlaps ivlA
-define OverlapsClosedNullIntervalRHS: ivlA overlaps Interval[null, null]
+define OverlapsClosedNullIntervalLHS: Interval[null as DateTime, null as DateTime] overlaps ivlA
+define OverlapsClosedNullIntervalRHS: ivlA overlaps Interval[null as DateTime, null as DateTime]
 define PrecisionDateIvl: Interval[DateTime(2012, 3, 2, 12, 34, 56, 789), DateTime(2012, 9, 2, 1, 23, 45, 678))
 // NOTE: There appears to be a bug in cql-to-elm that translates these 'overlaps' to 'OverlapsAfter'!
 define OverlapsBeforeDayOfIvlEdge: PrecisionDateIvl overlaps day of Interval[DateTime(2012, 9, 2, 23, 59, 59, 999), DateTime(2012, 10, 1, 0, 0, 0, 0)]
@@ -1009,7 +1049,7 @@ define OpenLongNotNull: end of Interval(1L, 3L)
 define OpenNull: end of Interval(DateTime(2013, 1, 1), null)
 
 // @Test: Starts
-define TestStartsNull: Interval[null, null] starts Interval[1, 10]
+define TestStartsNull: Interval[null as Integer, null as Integer] starts Interval[1, 10]
 define IntegerIntervalStartsTrue: Interval[4,10] starts Interval[4, 15]
 define IntegerIntervalStartsFalse: Interval[1, 10] starts Interval[4, 10]
 define IntegerIntervalStartEndsFalse: Interval[4, 10] starts Interval[4, 9]
@@ -1028,7 +1068,7 @@ define DateTimeIntervalStartsDayOfTrue: Interval[DateTime(2012, 1, 5), DateTime(
 define DateTimeIntervalStartsEndsFalse: Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] starts day of Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 24)]
 
 // @Test: Ends
-define TestEndsNull: Interval[1, 10] ends Interval[null, null]
+define TestEndsNull: Interval[1, 10] ends Interval[null as Integer, null as Integer]
 define IntegerIntervalEndsTrue: Interval[4,10] ends Interval[1,10]
 define IntegerIntervalEndsFalse: Interval[4, 9] ends Interval[1,10]
 define IntegerIntervalEndsStartsFalse: Interval[0, 10] ends Interval[1,10]
@@ -1336,7 +1376,7 @@ define DateTimeNullStartCollapseNoOverlap: collapse { DateTime9_10Interval, Date
 define DateTimeNullStartCollapseNoOverlapExpected: { DateTimeNull_5Interval, DateTime9_10Interval }
 define DateTimeNullEndCollapseExpected: { Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), null] }
 define DateTimeNullStartEndCollapse: collapse { DateTimeNull_5Interval, DateTime1_10Interval, DateTime5_NullInterval }
-define DateTimeNullStartEndCollapseExpected: { Interval[null, null] }
+define DateTimeNullStartEndCollapseExpected: { Interval[null as DateTime, null as DateTime] }
 define QuantityMeterNullLowIntervalList: { Interval[null, ToQuantity('1.995 \'m\'')], Interval[ToQuantity('2 \'m\''), ToQuantity('3 \'m\'')] }
 define CollapseQuantityNullLowUnitsWithinPer: collapse QuantityMeterNullLowIntervalList per ToQuantity('1 \'cm\'')
 define CollapseQuantityNullLowUnitsWithinPerExpected : { Interval[null, ToQuantity('3 \'m\'')] }
@@ -1345,7 +1385,7 @@ define CollapseQuantityNullHighUnitsWithinPer: collapse QuantityMeterNullHighInt
 define CollapseQuantityNullHighUnitsWithinPerExpected : { Interval[ToQuantity('1 \'m\''), null] }
 define QuantityIntervalListWithNulls: { Interval[ToQuantity(4), ToQuantity(8)], Interval[null, ToQuantity(2)], Interval[ToQuantity(1), ToQuantity(4)], Interval[ToQuantity(7), null] }
 define CollapseQuantityIntervalListWithNulls: collapse QuantityIntervalListWithNulls
-define CollapseQuantityIntervalListWithNullsExpected: { Interval[null, null] }
+define CollapseQuantityIntervalListWithNullsExpected: { Interval[null as Quantity, null as Quantity] }
 define QuantityIntervalListWithNullLowNoOverlap: { Interval[ToQuantity(4), ToQuantity(8)], Interval[null, ToQuantity(2)] }
 define CollapseQuantityIntervalListWithNullLowNoOverlap: collapse QuantityIntervalListWithNullLowNoOverlap
 define CollapseQuantityIntervalListWithNullLowNoOverlapExpected: { Interval[null, ToQuantity(2)], Interval[ToQuantity(4), ToQuantity(8)]}
@@ -1608,8 +1648,8 @@ define NullBoth: expand { Interval[null, null] } per 1.5 '1'
 define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
 
 // @Test: SameAs
-define NullBoth: Interval[null,null] same as Interval[null,null]
-define NullOne: Interval[DateTime(2018,01,01), DateTime(2018,02,02)] same as Interval[null,null]
+define NullBoth: Interval[null as DateTime, null as DateTime] same as Interval[null as DateTime, null as DateTime]
+define NullOne: Interval[DateTime(2018,01,01), DateTime(2018,02,02)] same as Interval[null as DateTime, null as DateTime]
 define Equal: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,01,01), DateTime(2018,01,01)]
 define NotEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[DateTime(2018,02,01), DateTime(2018,05,01)]
 define DateTimeAndDateComparisonEqual: Interval[DateTime(2018,01,01), DateTime(2018,01,01)] same as Interval[Date(2018,01,01), Date(2018,01,01)]

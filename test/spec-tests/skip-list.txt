@@ -1,13 +1,14 @@
 # Invalid CQL (does not translate)
-CqlIntervalOperatorsTest.Expand.ExpandPer0D1        Translation Error: Could not resolve call to operator Expand with signature (list<interval<System.Integer>>,System.Decimal).
 
 # Invalid Translation (translates, but translates wrong)
 CqlAggregateTest.AggregateTests.RolledOutIntervals  CQL adds an integer to a date ("S + duration in days of X"). Should be "S + Quantity{ value: duration in days of X, unit: 'days' }". Translator translates it, but probably shouldn't.
 
-# Potentially Invalid Translation (translates, but potentially translates wrong)
-
 # Incorrect Expected Output
 CqlIntervalOperatorsTest.In.TestInNullBoundaries                Wrong output: According to spec, comparison against null closed boundaries should result in true
+CqlIntervalOperatorsTest.ProperContains.TimeProperContainsPrecisionFalse  Wrong output: According to spec, a contained point is properly contained as long as the interval is not a unit interval
+CqlIntervalOperatorsTest.ProperContains.TimeProperContainsFalse Wrong output: According to spec, a contained point is properly contained as long as the interval is not a unit interval
+CqlIntervalOperatorsTest.ProperIn.TimeProperInPrecisionFalse    Wrong output: According to spec, a contained point is properly in as long as the interval is not a unit interval
+CqlIntervalOperatorsTest.ProperIn.TimeProperInFalse             Wrong output: According to spec, a contained point is properly in as long as the interval is not a unit interval
 CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
 CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
@@ -16,7 +17,6 @@ CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Qu
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
 
 # Equivalent answer but represented differently than expected output
-CqlIntervalOperatorsTest.Except.DecimalIntervalExcept1to3       Expected Interval[1.0, 3.99999999] but got Interval[1.0, 4) (closed boundary vs equivalent open boundary)
 
 # Incorrect answer
 CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)
@@ -31,22 +31,18 @@ CqlIntervalOperatorsTest.Expand.ExpandListWithNull                        Wrong 
 CqlIntervalOperatorsTest.Expand.ExpandPerDayIntervalOverload              Wrong answer (single interval overload should return list of points)
 CqlIntervalOperatorsTest.Expand.ExpandPerHourIntervalOverload             Wrong answer (single interval overload should return list of points)
 CqlIntervalOperatorsTest.Expand.ExpandPerHourOpenIntervalOverload         Wrong answer (single interval overload should return list of points)
+CqlIntervalOperatorsTest.Expand.ExpandPer0D1                              Wrong answer (interval elements's decimals do not match expected output)
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1IntervalOverload              Wrong answer (single interval overload should return list of points)
 CqlIntervalOperatorsTest.Expand.ExpandPer1IntervalOverload                Wrong answer (single interval overload should return list of points)
 CqlIntervalOperatorsTest.Expand.ExpandPer1OpenIntervalOverload            Wrong answer (single interval overload should return list of points)
 CqlIntervalOperatorsTest.Expand.ExpandPer2DaysIntervalOverload            Wrong answer (single interval overload should return list of points)
 CqlIntervalOperatorsTest.Intersect.TestIntersectNull            Wrong answer (Interval[5, 10] vs Interval[5, null))
-CqlIntervalOperatorsTest.Overlaps.TestOverlapsNull              Wrong answer (Interval[null, null] should overlap everything)
-CqlIntervalOperatorsTest.OverlapsBefore.TestOverlapsBeforeNull  Wrong answer (Interval[null, null] should overlap before anything but another interval w/ null low closed boundary)
-CqlIntervalOperatorsTest.OverlapsAfter.TestOverlapsAfterNull    Wrong answer (Interval[null, null] should overlap after anything but another interval w/ null high closed boundary)
-CqlIntervalOperatorsTest.Union.TestUnionNull                    Wrong answer (Interval[null, null] union any valid interval of the same point type is Interval[null, null])
 CqlTypeOperatorsTest.Convert.StringToDateTime                   Wrong answer (different offsets)
 CqlTypeOperatorsTest.ToDateTime.ToDateTime1                     Wrong answer (different offsets)
 CqlTypeOperatorsTest.ToDateTime.ToDateTime2                     Wrong answer (different offsets)
 CqlTypeOperatorsTest.ToDateTime.ToDateTime3                     Wrong answer (different offsets)
 ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number)
 ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number)
-ValueLiteralsAndSelectors.Decimal.DecimalNeg10Pow28ToZeroOneStepDecimalMinValue Wrong answer (null vs big number)
 
 # Unimplemented
 CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not implemented
@@ -63,4 +59,3 @@ CqlArithmeticFunctionsTest.Modulo.Modulo10By3Quantity                 Modulo not
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide414By206DQuantity"        Truncated divide not implemented for Quantity
 
 # Unimplemented (New in CQL 2.0)
-CqlListOperatorsTest.Slice                              Slice not implemented

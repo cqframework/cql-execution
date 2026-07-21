@@ -61,11 +61,13 @@ define CastTupleAsListOfIntegers: cast Echo(Tuple{A: 5}) as List<Integer>
 // @Test: AsIntervalType
 define function Echo(Val Any): Val // fool CQL-to-ELM into letting the casts compile
 define IntervalOfIntegersAsIntervalOfIntegers: Echo(Interval[1, 5]) as Interval<Integer>
+define UnboundedIntervalAsIntervalOfIntegers: Echo(Interval[null, null]) as Interval<Integer>
 define IntervalOfDatesAsIntervalOfIntegers: Echo(Interval[@2000-01-01, @2000-12-31]) as Interval<Integer>
 define IntegerAsIntervalOfIntegers: Echo(5) as Interval<Integer>
 define ListAsIntervalOfIntegers: Echo({1, 2, 3, 4, 5}) as Interval<Integer>
 define TupleAsIntervalOfIntegers: Echo(Tuple{A: 5}) as Interval<Integer>
 define CastIntervalOfIntegersAsIntervalOfIntegers: cast Echo(Interval[1, 5]) as Interval<Integer>
+define CastUnboundedIntervalAsIntervalOfIntegers: cast Echo(Interval[null, null]) as Interval<Integer>
 define CastIntervalOfDatesAsIntervalOfIntegers: cast Echo(Interval[@2000-01-01, @2000-12-31]) as Interval<Integer>
 define CastIntegerAsIntervalOfIntegers: cast Echo(5) as Interval<Integer>
 define CastListAsIntervalOfIntegers: cast Echo({1, 2, 3, 4, 5}) as Interval<Integer>

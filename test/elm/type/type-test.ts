@@ -200,6 +200,13 @@ describe('AsIntervalType', () => {
     );
   });
 
+  it('should apply the cast point type to unbounded intervals', async function () {
+    const expected = new Interval(null, null, true, true, '{urn:hl7-org:elm-types:r1}Integer');
+
+    (await this.unboundedIntervalAsIntervalOfIntegers.exec(this.ctx)).should.eql(expected);
+    (await this.castUnboundedIntervalAsIntervalOfIntegers.exec(this.ctx)).should.eql(expected);
+  });
+
   it('should return null on non-matching types for non-strict cast', async function () {
     should(await this.intervalOfDatesAsIntervalOfIntegers.exec(this.ctx)).be.null();
     should(await this.integerAsIntervalOfIntegers.exec(this.ctx)).be.null();
