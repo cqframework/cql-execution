@@ -10,7 +10,7 @@ import {
 import { Uncertainty } from '../datatypes/uncertainty';
 import { Context } from '../runtime/context';
 import { build } from './builder';
-import { DateTime } from '../datatypes/datetime';
+import { Date, DateTime } from '../datatypes/datetime';
 import {
   ELM_DECIMAL_TYPE,
   ELM_DATETIME_TYPE,
@@ -565,5 +565,46 @@ export class Predecessor extends Expression {
       return null;
     }
     return predecessor;
+  }
+}
+
+export class HighBoundary extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const [input, precision] = await this.execArgs(ctx);
+    if (input == null) {
+      return null;
+    }
+    // Decimal, Date, DateTime, and Time values.
+    if (input instanceof DateTime || input instanceof Date) {
+      // CQL Time is a DateTime
+      return input.highBoundary(precision);
+    } else {
+      // Decimal not yet implemented
+    }
+  }
+}
+
+export class LowBoundary extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const [input, precision] = await this.execArgs(ctx);
+    if (input == null) {
+      return null;
+    }
+
+    // Decimal, Date, DateTime, and Time values.
+    if (input instanceof DateTime || input instanceof Date) {
+      // CQL Time is a DateTime
+      return input.lowBoundary(precision);
+    } else {
+      // Decimal not yet implemented
+    }
   }
 }
