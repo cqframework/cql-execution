@@ -103,7 +103,12 @@ export class Retrieve extends Expression {
         return this.equivalent(recordCodeValue, codes);
 
       case '=':
-        return this._equal(recordCodeValue, codes);
+        return this.equal(recordCodeValue, codes);
+
+      default:
+        // if there's a terminology filter, there should always be a comparator,
+        // but just in case, default to ~
+        return this.equivalent(recordCodeValue, codes);
     }
   }
 
@@ -124,6 +129,9 @@ export class Retrieve extends Expression {
       return rhs.hasMatch(lhs);
     } else {
       return (rhs as Code[]).some(c => c.hasMatch(lhs));
+    } else {
+      // Unexpected, but just in case a single code came through
+      return (rhs as Code).hasMatch(lhs);
     }
   }
 
@@ -132,7 +140,17 @@ export class Retrieve extends Expression {
       throw new Error("Operator '=' is not defined for Code = CodeSystem");
     }
 
-    const rhsCodes = rhs instanceof ValueSet ? rhs.expand() : (rhs as Code[]);
+    let rhsCodes: Code[];
+
+    if (rhs instanceof ValueSet) {
+      rhsCodes = rhs.expand();
+    } else if (Array.isArray(rhs)) {
+      rhsCodes = rhs as Code[];
+    } else {
+      // unexpected, but just in case a single code came through
+      rhsCodes = [rhs];
+    }
+
     return rhsCodes.some(c => lhs.some(v => equals(c, v)));
   }
 }
