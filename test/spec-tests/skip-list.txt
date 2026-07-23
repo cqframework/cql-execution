@@ -11,6 +11,7 @@ CqlIntervalOperatorsTest.In.TestInNullBoundaries                Wrong output: Ac
 CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
 CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
+CqlIntervalOperatorsTest.PointFrom.TestPointFromNull            Wrong output: Interval[null, null] is not a unit interval, nor is it null
 
 # Potentially Incorrect Expected Output
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment

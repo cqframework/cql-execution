@@ -1403,9 +1403,11 @@ define "OverlapsAfter": Tuple{
 
 define "PointFrom": Tuple{
   "TestPointFromNull": Tuple{
+    skipped: 'Wrong output: Interval[null, null] is not a unit interval, nor is it null'
+    /*
     expression: point from Interval[null, null],
     output: null
-  },
+    */  },
   "TestPointFromInteger": Tuple{
     expression: point from Interval[1, 1],
     output: 1
