@@ -89,18 +89,11 @@ export class Record implements RecordObject {
 
   getCode(field: any) {
     const val = this._recursiveGet(field);
-    if (val != null && typeof val === 'object') {
-      return new DT.Code(val.code, val.system, val.version, val.display);
-    }
-  }
-
-  getCodeOrCodes(field: any): DT.Code[] | undefined {
-    const val = this._recursiveGet(field);
     if (val != null) {
       if (Array.isArray(val)) {
         return val.map(v => new DT.Code(v.code, v.system, v.version, v.display));
       } else if (typeof val === 'object') {
-        return [new DT.Code(val.code, val.system, val.version, val.display)];
+        return new DT.Code(val.code, val.system, val.version, val.display);
       }
     }
   }
