@@ -22,40 +22,42 @@ concept "Viral pharyngitis": { "Viral pharyngitis code" } display 'Viral pharyng
 valueset "Body locations": '2.16.840.1.113762.1.4.1181.77' // Pain body location reference set
 code "Nose code": '45206002' from "SNOMED" display 'Nasal structure (body structure)'
 
-// duplicated definitions purely for readability of the large cross-product of test cases
-codesystem "myCodesystem": '2.16.840.1.113883.6.96' version '2013-09'
-valueset "myValueSet": '2.16.840.1.113883.3.464.1003.102.12.1011'
-code "myCode": '1532007' from "myCodesystem" display 'Viral pharyngitis (disorder)'
-concept "myConcept": { "myCode" } display 'Viral pharyngitis (disorder)'
+// NOTE: These are duplicated definitions of the above terminology,
+// purely so that the cross-product of test cases in this file is obvious.
+// These names do not follow CQL best practice; don't copy this example.
+codesystem "TestCodeSystem": '2.16.840.1.113883.6.96' version '2013-09'
+valueset "TestValueSet": '2.16.840.1.113883.3.464.1003.102.12.1011'
+code "TestCode": '1532007' from "TestCodeSystem" display 'Viral pharyngitis (disorder)'
+concept "TestConcept": { "TestCode" } display 'Viral pharyngitis (disorder)'
 context Patient
-define myCodeList: { myCode }
+define TestCodeList: { TestCode }
 
 define Conditions: [Condition]
-define ConditionsByVS: [Condition: "myValueSet"]
-define ConditionsByCS: [Condition: "myCodesystem"]
-define ConditionsByCode: [Condition: "myCode"]
-define ConditionsByConcept: [Condition: "myConcept"]
-define ConditionsByCodeList: [Condition: "myCodeList"]
+define ConditionsByVS: [Condition: "TestValueSet"]
+define ConditionsByCS: [Condition: "TestCodeSystem"]
+define ConditionsByCode: [Condition: "TestCode"]
+define ConditionsByConcept: [Condition: "TestConcept"]
+define ConditionsByCodeList: [Condition: "TestCodeList"]
 
-define ConditionsByCodeInCS:     [Condition: code in "myCodesystem"]
-define ConditionsByCodeEqualsCS: [Condition: code = "myCodesystem"]
-define ConditionsByCodeEquivCS:  [Condition: code ~ "myCodesystem"]
+define ConditionsByCodeInCS:     [Condition: code in "TestCodeSystem"]
+define ConditionsByCodeEqualsCS: [Condition: code = "TestCodeSystem"]
+define ConditionsByCodeEquivCS:  [Condition: code ~ "TestCodeSystem"]
 
-define ConditionsByCodeInVS:     [Condition: code in "myValueSet"]
-define ConditionsByCodeEqualsVS: [Condition: code = "myValueSet"]
-define ConditionsByCodeEquivVS:  [Condition: code ~ "myValueSet"]
+define ConditionsByCodeInVS:     [Condition: code in "TestValueSet"]
+define ConditionsByCodeEqualsVS: [Condition: code = "TestValueSet"]
+define ConditionsByCodeEquivVS:  [Condition: code ~ "TestValueSet"]
 
-define ConditionsByCodeInCode:     [Condition: code in "myCode"]
-define ConditionsByCodeEqualsCode: [Condition: code = "myCode"]
-define ConditionsByCodeEquivCode:  [Condition: code ~ "myCode"]
+define ConditionsByCodeInCode:     [Condition: code in "TestCode"]
+define ConditionsByCodeEqualsCode: [Condition: code = "TestCode"]
+define ConditionsByCodeEquivCode:  [Condition: code ~ "TestCode"]
 
-define ConditionsByCodeInConcept:     [Condition: code in "myConcept"]
-define ConditionsByCodeEqualsConcept: [Condition: code = "myConcept"]
-define ConditionsByCodeEquivConcept:  [Condition: code ~ "myConcept"]
+define ConditionsByCodeInConcept:     [Condition: code in "TestConcept"]
+define ConditionsByCodeEqualsConcept: [Condition: code = "TestConcept"]
+define ConditionsByCodeEquivConcept:  [Condition: code ~ "TestConcept"]
 
-define ConditionsByCodeInCodeList:     [Condition: code in "myCodeList"]
-define ConditionsByCodeEqualsCodeList: [Condition: code = "myCodeList"]
-define ConditionsByCodeEquivCodeList:  [Condition: code ~ "myCodeList"]
+define ConditionsByCodeInCodeList:     [Condition: code in "TestCodeList"]
+define ConditionsByCodeEqualsCodeList: [Condition: code = "TestCodeList"]
+define ConditionsByCodeEquivCodeList:  [Condition: code ~ "TestCodeList"]
 
 
 define ConditionsByBodySiteInVS:     [Condition: bodySite in "Body locations"]
@@ -88,10 +90,10 @@ module.exports['Retrieve'] = {
       "type" : "CqlToElmError",
       "libraryId" : "TestSnippet",
       "libraryVersion" : "1",
-      "startLine" : 30,
+      "startLine" : 32,
       "startChar" : 34,
-      "endLine" : 30,
-      "endChar" : 67,
+      "endLine" : 32,
+      "endChar" : 69,
       "message" : "Could not resolve membership operator for terminology target of the retrieve.",
       "errorType" : "semantic",
       "errorSeverity" : "warning"
@@ -99,10 +101,10 @@ module.exports['Retrieve'] = {
       "type" : "CqlToElmError",
       "libraryId" : "TestSnippet",
       "libraryVersion" : "1",
-      "startLine" : 31,
+      "startLine" : 33,
       "startChar" : 34,
-      "endLine" : 31,
-      "endChar" : 67,
+      "endLine" : 33,
+      "endChar" : 69,
       "message" : "Could not resolve membership operator for terminology target of the retrieve.",
       "errorType" : "semantic",
       "errorSeverity" : "warning"
@@ -110,10 +112,10 @@ module.exports['Retrieve'] = {
       "type" : "CqlToElmError",
       "libraryId" : "TestSnippet",
       "libraryVersion" : "1",
-      "startLine" : 46,
+      "startLine" : 48,
       "startChar" : 59,
-      "endLine" : 46,
-      "endChar" : 70,
+      "endLine" : 48,
+      "endChar" : 72,
       "message" : "List-valued expression was demoted to a singleton.",
       "errorType" : "semantic",
       "errorSeverity" : "warning"
@@ -121,55 +123,11 @@ module.exports['Retrieve'] = {
       "type" : "CqlToElmError",
       "libraryId" : "TestSnippet",
       "libraryVersion" : "1",
-      "startLine" : 47,
+      "startLine" : 49,
       "startChar" : 59,
-      "endLine" : 47,
-      "endChar" : 70,
+      "endLine" : 49,
+      "endChar" : 72,
       "message" : "List-valued expression was demoted to a singleton.",
-      "errorType" : "semantic",
-      "errorSeverity" : "warning"
-    }, {
-      "type" : "CqlToElmError",
-      "libraryId" : "TestSnippet",
-      "libraryVersion" : "1",
-      "startLine" : 50,
-      "startChar" : 38,
-      "endLine" : 50,
-      "endChar" : 78,
-      "message" : "Could not resolve code path bodySite for the type of the retrieve Simple.Condition.",
-      "errorType" : "semantic",
-      "errorSeverity" : "warning"
-    }, {
-      "type" : "CqlToElmError",
-      "libraryId" : "TestSnippet",
-      "libraryVersion" : "1",
-      "startLine" : 50,
-      "startChar" : 38,
-      "endLine" : 50,
-      "endChar" : 78,
-      "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-      "errorType" : "semantic",
-      "errorSeverity" : "warning"
-    }, {
-      "type" : "CqlToElmError",
-      "libraryId" : "TestSnippet",
-      "libraryVersion" : "1",
-      "startLine" : 51,
-      "startChar" : 38,
-      "endLine" : 51,
-      "endChar" : 77,
-      "message" : "Could not resolve code path bodySite for the type of the retrieve Simple.Condition.",
-      "errorType" : "semantic",
-      "errorSeverity" : "warning"
-    }, {
-      "type" : "CqlToElmError",
-      "libraryId" : "TestSnippet",
-      "libraryVersion" : "1",
-      "startLine" : 51,
-      "startChar" : 38,
-      "endLine" : 51,
-      "endChar" : 77,
-      "message" : "Could not resolve membership operator for terminology target of the retrieve.",
       "errorType" : "semantic",
       "errorSeverity" : "warning"
     }, {
@@ -179,7 +137,7 @@ module.exports['Retrieve'] = {
       "startLine" : 52,
       "startChar" : 38,
       "endLine" : 52,
-      "endChar" : 77,
+      "endChar" : 78,
       "message" : "Could not resolve code path bodySite for the type of the retrieve Simple.Condition.",
       "errorType" : "semantic",
       "errorSeverity" : "warning"
@@ -190,6 +148,28 @@ module.exports['Retrieve'] = {
       "startLine" : 52,
       "startChar" : 38,
       "endLine" : 52,
+      "endChar" : 78,
+      "message" : "Could not resolve membership operator for terminology target of the retrieve.",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "CqlToElmError",
+      "libraryId" : "TestSnippet",
+      "libraryVersion" : "1",
+      "startLine" : 53,
+      "startChar" : 38,
+      "endLine" : 53,
+      "endChar" : 77,
+      "message" : "Could not resolve code path bodySite for the type of the retrieve Simple.Condition.",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "CqlToElmError",
+      "libraryId" : "TestSnippet",
+      "libraryVersion" : "1",
+      "startLine" : 53,
+      "startChar" : 38,
+      "endLine" : 53,
       "endChar" : 77,
       "message" : "Could not resolve membership operator for terminology target of the retrieve.",
       "errorType" : "semantic",
@@ -199,9 +179,9 @@ module.exports['Retrieve'] = {
       "libraryId" : "TestSnippet",
       "libraryVersion" : "1",
       "startLine" : 54,
-      "startChar" : 40,
+      "startChar" : 38,
       "endLine" : 54,
-      "endChar" : 75,
+      "endChar" : 77,
       "message" : "Could not resolve code path bodySite for the type of the retrieve Simple.Condition.",
       "errorType" : "semantic",
       "errorSeverity" : "warning"
@@ -210,8 +190,30 @@ module.exports['Retrieve'] = {
       "libraryId" : "TestSnippet",
       "libraryVersion" : "1",
       "startLine" : 54,
-      "startChar" : 40,
+      "startChar" : 38,
       "endLine" : 54,
+      "endChar" : 77,
+      "message" : "Could not resolve membership operator for terminology target of the retrieve.",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "CqlToElmError",
+      "libraryId" : "TestSnippet",
+      "libraryVersion" : "1",
+      "startLine" : 56,
+      "startChar" : 40,
+      "endLine" : 56,
+      "endChar" : 75,
+      "message" : "Could not resolve code path bodySite for the type of the retrieve Simple.Condition.",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "CqlToElmError",
+      "libraryId" : "TestSnippet",
+      "libraryVersion" : "1",
+      "startLine" : 56,
+      "startChar" : 40,
+      "endLine" : 56,
       "endChar" : 75,
       "message" : "Could not resolve membership operator for terminology target of the retrieve.",
       "errorType" : "semantic",
@@ -220,9 +222,9 @@ module.exports['Retrieve'] = {
       "type" : "CqlToElmError",
       "libraryId" : "TestSnippet",
       "libraryVersion" : "1",
-      "startLine" : 55,
+      "startLine" : 57,
       "startChar" : 40,
-      "endLine" : 55,
+      "endLine" : 57,
       "endChar" : 74,
       "message" : "Could not resolve code path bodySite for the type of the retrieve Simple.Condition.",
       "errorType" : "semantic",
@@ -231,9 +233,9 @@ module.exports['Retrieve'] = {
       "type" : "CqlToElmError",
       "libraryId" : "TestSnippet",
       "libraryVersion" : "1",
-      "startLine" : 55,
+      "startLine" : 57,
       "startChar" : 40,
-      "endLine" : 55,
+      "endLine" : 57,
       "endChar" : 74,
       "message" : "Could not resolve membership operator for terminology target of the retrieve.",
       "errorType" : "semantic",
@@ -242,9 +244,9 @@ module.exports['Retrieve'] = {
       "type" : "CqlToElmError",
       "libraryId" : "TestSnippet",
       "libraryVersion" : "1",
-      "startLine" : 56,
+      "startLine" : 58,
       "startChar" : 40,
-      "endLine" : 56,
+      "endLine" : 58,
       "endChar" : 74,
       "message" : "Could not resolve code path bodySite for the type of the retrieve Simple.Condition.",
       "errorType" : "semantic",
@@ -253,9 +255,9 @@ module.exports['Retrieve'] = {
       "type" : "CqlToElmError",
       "libraryId" : "TestSnippet",
       "libraryVersion" : "1",
-      "startLine" : 56,
+      "startLine" : 58,
       "startChar" : 40,
-      "endLine" : 56,
+      "endLine" : 58,
       "endChar" : 74,
       "message" : "Could not resolve membership operator for terminology target of the retrieve.",
       "errorType" : "semantic",
@@ -352,7 +354,7 @@ module.exports['Retrieve'] = {
       }, {
         "localId" : "226",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-        "name" : "myCodesystem",
+        "name" : "TestCodeSystem",
         "id" : "2.16.840.1.113883.6.96",
         "version" : "2013-09",
         "accessLevel" : "Public",
@@ -362,7 +364,7 @@ module.exports['Retrieve'] = {
           "s" : {
             "r" : "226",
             "s" : [ {
-              "value" : [ "// duplicated definitions purely for readability of the large cross-product of test cases\n", "codesystem ", "\"myCodesystem\"", ": ", "'2.16.840.1.113883.6.96'", " version ", "'2013-09'" ]
+              "value" : [ "// NOTE: These are duplicated definitions of the above terminology,\n// purely so that the cross-product of test cases in this file is obvious.\n// These names do not follow CQL best practice; don't copy this example.\n", "codesystem ", "\"TestCodeSystem\"", ": ", "'2.16.840.1.113883.6.96'", " version ", "'2013-09'" ]
             } ]
           }
         } ]
@@ -423,7 +425,7 @@ module.exports['Retrieve'] = {
       }, {
         "localId" : "228",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-        "name" : "myValueSet",
+        "name" : "TestValueSet",
         "id" : "2.16.840.1.113883.3.464.1003.102.12.1011",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -432,7 +434,7 @@ module.exports['Retrieve'] = {
           "s" : {
             "r" : "228",
             "s" : [ {
-              "value" : [ "", "valueset ", "\"myValueSet\"", ": ", "'2.16.840.1.113883.3.464.1003.102.12.1011'" ]
+              "value" : [ "", "valueset ", "\"TestValueSet\"", ": ", "'2.16.840.1.113883.3.464.1003.102.12.1011'" ]
             } ]
           }
         } ],
@@ -503,7 +505,7 @@ module.exports['Retrieve'] = {
       }, {
         "localId" : "230",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-        "name" : "myCode",
+        "name" : "TestCode",
         "id" : "1532007",
         "display" : "Viral pharyngitis (disorder)",
         "accessLevel" : "Public",
@@ -513,11 +515,11 @@ module.exports['Retrieve'] = {
           "s" : {
             "r" : "230",
             "s" : [ {
-              "value" : [ "", "code ", "\"myCode\"", ": ", "'1532007'", " from " ]
+              "value" : [ "", "code ", "\"TestCode\"", ": ", "'1532007'", " from " ]
             }, {
               "r" : "231",
               "s" : [ {
-                "value" : [ "\"myCodesystem\"" ]
+                "value" : [ "\"TestCodeSystem\"" ]
               } ]
             }, {
               "value" : [ " display ", "'Viral pharyngitis (disorder)'" ]
@@ -527,7 +529,7 @@ module.exports['Retrieve'] = {
         "codeSystem" : {
           "localId" : "231",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-          "name" : "myCodesystem",
+          "name" : "TestCodeSystem",
           "annotation" : [ ]
         }
       } ]
@@ -565,7 +567,7 @@ module.exports['Retrieve'] = {
       }, {
         "localId" : "233",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-        "name" : "myConcept",
+        "name" : "TestConcept",
         "display" : "Viral pharyngitis (disorder)",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -574,11 +576,11 @@ module.exports['Retrieve'] = {
           "s" : {
             "r" : "233",
             "s" : [ {
-              "value" : [ "", "concept ", "\"myConcept\"", ": { " ]
+              "value" : [ "", "concept ", "\"TestConcept\"", ": { " ]
             }, {
               "r" : "234",
               "s" : [ {
-                "value" : [ "\"myCode\"" ]
+                "value" : [ "\"TestCode\"" ]
               } ]
             }, {
               "value" : [ " } display ", "'Viral pharyngitis (disorder)'" ]
@@ -588,7 +590,7 @@ module.exports['Retrieve'] = {
         "code" : [ {
           "localId" : "234",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-          "name" : "myCode",
+          "name" : "TestCode",
           "annotation" : [ ]
         } ]
       } ]
@@ -624,7 +626,7 @@ module.exports['Retrieve'] = {
         }
       }, {
         "localId" : "241",
-        "name" : "myCodeList",
+        "name" : "TestCodeList",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -633,7 +635,7 @@ module.exports['Retrieve'] = {
           "s" : {
             "r" : "241",
             "s" : [ {
-              "value" : [ "", "define ", "myCodeList", ": " ]
+              "value" : [ "", "define ", "TestCodeList", ": " ]
             }, {
               "r" : "242",
               "s" : [ {
@@ -641,7 +643,7 @@ module.exports['Retrieve'] = {
               }, {
                 "r" : "243",
                 "s" : [ {
-                  "value" : [ "myCode" ]
+                  "value" : [ "TestCode" ]
                 } ]
               }, {
                 "value" : [ " }" ]
@@ -679,7 +681,7 @@ module.exports['Retrieve'] = {
             "type" : "CodeRef",
             "localId" : "243",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-            "name" : "myCode",
+            "name" : "TestCode",
             "annotation" : [ ]
           } ]
         }
@@ -753,7 +755,7 @@ module.exports['Retrieve'] = {
                 "value" : [ "[", "Condition", ": " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myValueSet\"" ]
+                  "value" : [ "\"TestValueSet\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -794,7 +796,7 @@ module.exports['Retrieve'] = {
             "type" : "ValueSetRef",
             "localId" : "260",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-            "name" : "myValueSet",
+            "name" : "TestValueSet",
             "preserve" : true,
             "annotation" : [ ]
           },
@@ -821,7 +823,7 @@ module.exports['Retrieve'] = {
                 "value" : [ "[", "Condition", ": " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myCodesystem\"" ]
+                  "value" : [ "\"TestCodeSystem\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -862,7 +864,7 @@ module.exports['Retrieve'] = {
             "type" : "CodeSystemRef",
             "localId" : "272",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-            "name" : "myCodesystem",
+            "name" : "TestCodeSystem",
             "annotation" : [ ]
           },
           "include" : [ ],
@@ -888,7 +890,7 @@ module.exports['Retrieve'] = {
                 "value" : [ "[", "Condition", ": " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myCode\"" ]
+                  "value" : [ "\"TestCode\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -934,7 +936,7 @@ module.exports['Retrieve'] = {
               "type" : "CodeRef",
               "localId" : "284",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-              "name" : "myCode",
+              "name" : "TestCode",
               "annotation" : [ ]
             }
           },
@@ -961,7 +963,7 @@ module.exports['Retrieve'] = {
                 "value" : [ "[", "Condition", ": " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myConcept\"" ]
+                  "value" : [ "\"TestConcept\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1007,7 +1009,7 @@ module.exports['Retrieve'] = {
               "type" : "ConceptRef",
               "localId" : "298",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-              "name" : "myConcept",
+              "name" : "TestConcept",
               "annotation" : [ ]
             }
           },
@@ -1034,7 +1036,7 @@ module.exports['Retrieve'] = {
                 "value" : [ "[", "Condition", ": " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myCodeList\"" ]
+                  "value" : [ "\"TestCodeList\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1074,7 +1076,7 @@ module.exports['Retrieve'] = {
           "codes" : {
             "type" : "ExpressionRef",
             "localId" : "316",
-            "name" : "myCodeList",
+            "name" : "TestCodeList",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
@@ -1117,7 +1119,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "in", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myCodesystem\"" ]
+                  "value" : [ "\"TestCodeSystem\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1158,7 +1160,7 @@ module.exports['Retrieve'] = {
             "type" : "CodeSystemRef",
             "localId" : "332",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-            "name" : "myCodesystem",
+            "name" : "TestCodeSystem",
             "annotation" : [ ]
           },
           "include" : [ ],
@@ -1190,7 +1192,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "=", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myCodesystem\"" ]
+                  "value" : [ "\"TestCodeSystem\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1231,7 +1233,7 @@ module.exports['Retrieve'] = {
             "type" : "CodeSystemRef",
             "localId" : "344",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-            "name" : "myCodesystem",
+            "name" : "TestCodeSystem",
             "annotation" : [ ]
           },
           "include" : [ ],
@@ -1263,7 +1265,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "~", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myCodesystem\"" ]
+                  "value" : [ "\"TestCodeSystem\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1304,7 +1306,7 @@ module.exports['Retrieve'] = {
             "type" : "CodeSystemRef",
             "localId" : "355",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
-            "name" : "myCodesystem",
+            "name" : "TestCodeSystem",
             "annotation" : [ ]
           },
           "include" : [ ],
@@ -1336,7 +1338,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "in", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myValueSet\"" ]
+                  "value" : [ "\"TestValueSet\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1377,7 +1379,7 @@ module.exports['Retrieve'] = {
             "type" : "ValueSetRef",
             "localId" : "366",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-            "name" : "myValueSet",
+            "name" : "TestValueSet",
             "preserve" : true,
             "annotation" : [ ]
           },
@@ -1410,7 +1412,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "=", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myValueSet\"" ]
+                  "value" : [ "\"TestValueSet\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1461,7 +1463,7 @@ module.exports['Retrieve'] = {
               "type" : "ValueSetRef",
               "localId" : "378",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-              "name" : "myValueSet",
+              "name" : "TestValueSet",
               "preserve" : true,
               "annotation" : [ ]
             }
@@ -1495,7 +1497,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "~", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myValueSet\"" ]
+                  "value" : [ "\"TestValueSet\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1546,7 +1548,7 @@ module.exports['Retrieve'] = {
               "type" : "ValueSetRef",
               "localId" : "397",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-              "name" : "myValueSet",
+              "name" : "TestValueSet",
               "preserve" : true,
               "annotation" : [ ]
             }
@@ -1580,7 +1582,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "in", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myCode\"" ]
+                  "value" : [ "\"TestCode\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1626,7 +1628,7 @@ module.exports['Retrieve'] = {
               "type" : "CodeRef",
               "localId" : "416",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-              "name" : "myCode",
+              "name" : "TestCode",
               "annotation" : [ ]
             }
           },
@@ -1659,7 +1661,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "=", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myCode\"" ]
+                  "value" : [ "\"TestCode\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1705,7 +1707,7 @@ module.exports['Retrieve'] = {
               "type" : "CodeRef",
               "localId" : "431",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-              "name" : "myCode",
+              "name" : "TestCode",
               "annotation" : [ ]
             }
           },
@@ -1738,7 +1740,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "~", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myCode\"" ]
+                  "value" : [ "\"TestCode\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1784,7 +1786,7 @@ module.exports['Retrieve'] = {
               "type" : "CodeRef",
               "localId" : "445",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-              "name" : "myCode",
+              "name" : "TestCode",
               "annotation" : [ ]
             }
           },
@@ -1817,7 +1819,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "in", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myConcept\"" ]
+                  "value" : [ "\"TestConcept\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1863,7 +1865,7 @@ module.exports['Retrieve'] = {
               "type" : "ConceptRef",
               "localId" : "459",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-              "name" : "myConcept",
+              "name" : "TestConcept",
               "annotation" : [ ]
             }
           },
@@ -1896,7 +1898,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "=", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myConcept\"" ]
+                  "value" : [ "\"TestConcept\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -1942,7 +1944,7 @@ module.exports['Retrieve'] = {
               "type" : "ConceptRef",
               "localId" : "478",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-              "name" : "myConcept",
+              "name" : "TestConcept",
               "annotation" : [ ]
             }
           },
@@ -1975,7 +1977,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "~", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myConcept\"" ]
+                  "value" : [ "\"TestConcept\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -2021,7 +2023,7 @@ module.exports['Retrieve'] = {
               "type" : "ConceptRef",
               "localId" : "496",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-              "name" : "myConcept",
+              "name" : "TestConcept",
               "annotation" : [ ]
             }
           },
@@ -2054,7 +2056,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "in", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myCodeList\"" ]
+                  "value" : [ "\"TestCodeList\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -2094,7 +2096,7 @@ module.exports['Retrieve'] = {
           "codes" : {
             "type" : "ExpressionRef",
             "localId" : "514",
-            "name" : "myCodeList",
+            "name" : "TestCodeList",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
@@ -2137,7 +2139,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "=", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myCodeList\"" ]
+                  "value" : [ "\"TestCodeList\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -2197,7 +2199,7 @@ module.exports['Retrieve'] = {
               "operand" : {
                 "type" : "ExpressionRef",
                 "localId" : "530",
-                "name" : "myCodeList",
+                "name" : "TestCodeList",
                 "annotation" : [ ],
                 "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",
@@ -2242,7 +2244,7 @@ module.exports['Retrieve'] = {
                 "value" : [ " ", "~", " " ]
               }, {
                 "s" : [ {
-                  "value" : [ "\"myCodeList\"" ]
+                  "value" : [ "\"TestCodeList\"" ]
                 } ]
               }, {
                 "value" : [ "]" ]
@@ -2302,7 +2304,7 @@ module.exports['Retrieve'] = {
               "operand" : {
                 "type" : "ExpressionRef",
                 "localId" : "549",
-                "name" : "myCodeList",
+                "name" : "TestCodeList",
                 "annotation" : [ ],
                 "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",

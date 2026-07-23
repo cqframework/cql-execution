@@ -191,18 +191,12 @@ class Record {
     }
     getCode(field) {
         const val = this._recursiveGet(field);
-        if (val != null && typeof val === 'object') {
-            return new DT.Code(val.code, val.system, val.version, val.display);
-        }
-    }
-    getCodeOrCodes(field) {
-        const val = this._recursiveGet(field);
         if (val != null) {
             if (Array.isArray(val)) {
                 return val.map(v => new DT.Code(v.code, v.system, v.version, v.display));
             }
             else if (typeof val === 'object') {
-                return [new DT.Code(val.code, val.system, val.version, val.display)];
+                return new DT.Code(val.code, val.system, val.version, val.display);
             }
         }
     }
@@ -4928,45 +4922,84 @@ class Retrieve extends expression_1.Expression {
         return records;
     }
     recordMatchesCodesOrVS(record, codes) {
-        const recordCodeValue = record.getCodeOrCodes(this.codeProperty);
-        if (!recordCodeValue || recordCodeValue.length == 0) {
+        let recordCodeValue = record.getCode(this.codeProperty);
+        if (Array.isArray(recordCodeValue)) {
+            if (recordCodeValue.length == 0) {
+                return false;
+            }
+        }
+        else if (!recordCodeValue) {
             return false;
+        }
+        else {
+            recordCodeValue = [recordCodeValue];
         }
         switch (this.codeComparator) {
             case 'in':
-                return this._in(recordCodeValue, codes);
+                return this.in(recordCodeValue, codes);
             case '~':
-                return this._equivalent(recordCodeValue, codes);
+                return this.equivalent(recordCodeValue, codes);
             case '=':
-                return this._equal(recordCodeValue, codes);
+                return this.equal(recordCodeValue, codes);
+            default:
+                // if there's a terminology filter, there should always be a comparator,
+                // but just in case, default to ~
+                return this.equivalent(recordCodeValue, codes);
         }
     }
-    _in(lhs, rhs) {
+    in(lhs, rhs) {
         if (rhs instanceof clinical_1.ValueSet || rhs instanceof clinical_1.CodeSystem) {
             return rhs.hasMatch(lhs);
         }
         else {
-            // for code lists, fallback to the implementation in ~
-            return this._equivalent(lhs, rhs);
+            // For code lists, fallback to the implementation in ~ . See comments below.
+            return this.equivalent(lhs, rhs);
         }
     }
-    _equivalent(lhs, rhs) {
+    equivalent(lhs, rhs) {
         if (rhs instanceof clinical_1.CodeSystem) {
             throw new Error("Operator '~' is not defined for Code ~ CodeSystem");
         }
         else if (rhs instanceof clinical_1.ValueSet) {
-            // TODO: explain
+            // It's not obvious that this combination should even be allowed.
+            // If in the CQL representation of the Retrieve, the terminology is a ValueSet,
+            // eg [Condition: code ~ "SomeValueSet"],
+            // the CQL-to-ELM translation may turn that into either:
+            //  - a `ValueSetRef` expression (appears here as a `ValueSet`)
+            //  -  or an `ExpandValueSet` expression wrapping the `ValueSetRef` (appears here as a `Code[]`).
+            // Because we can't tell the original intent here, we treat the ValueSet as if it were a Code[].
             return rhs.hasMatch(lhs);
         }
-        else {
+        else if (Array.isArray(rhs)) {
+            // It's also not obvious that this should be allowed.
+            // But because the RHS is always list-promoted, there's no way to tell
+            // if the original CQL referred to a single code or to a list.
+            // So, we treat the operators ~ and = to mean
+            // "some match exists between the LHS and RHS, with the appropriate operator"
+            // instead of the usual meaning
+            // "the LHS and RHS themselves are a match, with the appropriate operator"
             return rhs.some(c => c.hasMatch(lhs));
         }
+        else {
+            // Unexpected, but just in case a single code came through
+            return rhs.hasMatch(lhs);
+        }
     }
-    _equal(lhs, rhs) {
+    equal(lhs, rhs) {
         if (rhs instanceof clinical_1.CodeSystem) {
             throw new Error("Operator '=' is not defined for Code = CodeSystem");
         }
-        const rhsCodes = rhs instanceof clinical_1.ValueSet ? rhs.expand() : rhs;
+        let rhsCodes;
+        if (rhs instanceof clinical_1.ValueSet) {
+            rhsCodes = rhs.expand();
+        }
+        else if (Array.isArray(rhs)) {
+            rhsCodes = rhs;
+        }
+        else {
+            // unexpected, but just in case a single code came through
+            rhsCodes = [rhs];
+        }
         return rhsCodes.some(c => lhs.some(v => (0, comparison_1.equals)(c, v)));
     }
 }
@@ -16537,6 +16570,26 @@ const UnitTables = exports.UnitTables = {
         }
         return smi(hashed);
     }
+    // Per-process seed for the secondary collision hash. Never exposed nor
+    // serialized, so the public `hash()` stays deterministic. An odd base in
+    // [3, 2^20) keeps `base * h` exact as a double (no `Math.imul`).
+    var COLLISION_HASH_BASE = ((Math.random() * 0x100000) | 1) % 0x100000 || 0x9e37;
+    // Secondary hash to index entries within a `HashCollisionNode`, where every key
+    // shares the same primary `hash()`. Using a different, seeded base scatters
+    // crafted collision families (e.g. "Aa"/"BB", which only collide under base 31)
+    // that an attacker cannot precompute without the seed. It only narrows
+    // candidates — `is()` still decides equality — so non-string keys can safely
+    // fall back to the (here constant) primary hash and a linear scan.
+    function hashCollisionKey(key) {
+        if (typeof key !== 'string') {
+            return hash(key);
+        }
+        var hashed = 0;
+        for (var ii = 0; ii < key.length; ii++) {
+            hashed = (COLLISION_HASH_BASE * hashed + key.charCodeAt(ii)) | 0;
+        }
+        return hashed;
+    }
     function hashSymbol(sym) {
         var hashed = symbolMap[sym];
         if (hashed !== undefined) {
@@ -18469,20 +18522,79 @@ const UnitTables = exports.UnitTables = {
       return new HashArrayMapNode(ownerID, newCount, newNodes);
     };
 
+    /**
+     * Trie leaf gathering entries whose keys all share the same 32-bit `hash()`.
+     * The trie routes by hash, so colliding keys cannot be separated and land here
+     * in a flat `entries` array, disambiguated by `is()`.
+     *
+     * To guard against hash-flooding DoS (CWE-407), large buckets build a secondary
+     * index keyed by a per-process seeded hash (`hashCollisionKey`). `is()` still
+     * decides equality, so the index can only ever narrow candidates, never lose a key.
+     */
     var HashCollisionNode = function HashCollisionNode(ownerID, keyHash, entries) {
       this.ownerID = ownerID;
       this.keyHash = keyHash;
       this.entries = entries;
+      // Lazy `{ [secondaryHash]: number[] }`, built only past
+      // MIN_HASH_COLLISION_INDEX_SIZE so small buckets keep their linear path.
+      this._index = undefined;
+    };
+
+    // Returns the position of `key` in `this.entries`, or -1. Uses the secondary
+    // index when present; builds it only when `buildIndex` is true (reads and
+    // transient inserts, where the node is reused so the O(n) build amortizes).
+    // Persistent inserts already pay an O(n) copy, so a throwaway index is skipped.
+    HashCollisionNode.prototype._positionOf = function _positionOf (key, buildIndex) {
+      var entries = this.entries;
+      var index = this._index;
+      if (
+        index === undefined &&
+        buildIndex &&
+        entries.length >= MIN_HASH_COLLISION_INDEX_SIZE
+      ) {
+        index = this._buildIndex();
+      }
+      if (index !== undefined) {
+        var positions = index[hashCollisionKey(key)];
+        if (positions !== undefined) {
+          for (var jj = 0; jj < positions.length; jj++) {
+            var ii = positions[jj];
+            if (is(key, entries[ii][0])) {
+              return ii;
+            }
+          }
+        }
+        return -1;
+      }
+      for (var ii$1 = 0, len = entries.length; ii$1 < len; ii$1++) {
+        if (is(key, entries[ii$1][0])) {
+          return ii$1;
+        }
+      }
+      return -1;
+    };
+
+    // Builds and memoizes the secondary index. A plain object, not `Map` — which
+    // in this module resolves to the *Immutable* Map, not the native one.
+    HashCollisionNode.prototype._buildIndex = function _buildIndex () {
+      var index = Object.create(null);
+      var entries = this.entries;
+      for (var ii = 0, len = entries.length; ii < len; ii++) {
+        var secondaryHash = hashCollisionKey(entries[ii][0]);
+        var positions = index[secondaryHash];
+        if (positions !== undefined) {
+          positions.push(ii);
+        } else {
+          index[secondaryHash] = [ii];
+        }
+      }
+      this._index = index;
+      return index;
     };
 
     HashCollisionNode.prototype.get = function get (shift, keyHash, key, notSetValue) {
-      var entries = this.entries;
-      for (var ii = 0, len = entries.length; ii < len; ii++) {
-        if (is(key, entries[ii][0])) {
-          return entries[ii][1];
-        }
-      }
-      return notSetValue;
+      var idx = this._positionOf(key, true);
+      return idx === -1 ? notSetValue : this.entries[idx][1];
     };
 
     HashCollisionNode.prototype.update = function update (ownerID, shift, keyHash, key, value, didChangeSize, didAlter) {
@@ -18502,14 +18614,11 @@ const UnitTables = exports.UnitTables = {
       }
 
       var entries = this.entries;
-      var idx = 0;
       var len = entries.length;
-      for (; idx < len; idx++) {
-        if (is(key, entries[idx][0])) {
-          break;
-        }
-      }
-      var exists = idx < len;
+      var isEditable = ownerID && ownerID === this.ownerID;
+      var foundIdx = this._positionOf(key, isEditable);
+      var idx = foundIdx === -1 ? len : foundIdx;
+      var exists = foundIdx !== -1;
 
       if (exists ? entries[idx][1] === value : removed) {
         return this;
@@ -18523,7 +18632,6 @@ const UnitTables = exports.UnitTables = {
         return new ValueNode(ownerID, this.keyHash, entries[idx ^ 1]);
       }
 
-      var isEditable = ownerID && ownerID === this.ownerID;
       var newEntries = isEditable ? entries : arrCopy(entries);
 
       if (exists) {
@@ -18532,11 +18640,27 @@ const UnitTables = exports.UnitTables = {
           idx === len - 1
             ? newEntries.pop()
             : (newEntries[idx] = newEntries.pop());
+          // The swap-pop reshuffles positions; drop the stale index (rebuilt lazily).
+          if (isEditable) {
+            this._index = undefined;
+          }
         } else {
+          // Same key, same position: the index stays valid.
           newEntries[idx] = [key, value];
         }
       } else {
         newEntries.push([key, value]);
+        // Keep the index in sync on the transient insert path. Persistent inserts
+        // return a fresh node below whose index rebuilds lazily, so skip them.
+        if (isEditable && this._index !== undefined) {
+          var secondaryHash = hashCollisionKey(key);
+          var positions = this._index[secondaryHash];
+          if (positions !== undefined) {
+            positions.push(len);
+          } else {
+            this._index[secondaryHash] = [len];
+          }
+        }
       }
 
       if (isEditable) {
@@ -18870,6 +18994,12 @@ const UnitTables = exports.UnitTables = {
     var MAX_BITMAP_INDEXED_SIZE = SIZE / 2;
     var MIN_HASH_ARRAY_MAP_SIZE = SIZE / 4;
 
+    // Above this many colliding entries, a `HashCollisionNode` builds a seeded
+    // secondary index instead of scanning linearly. Kept small so the rare,
+    // naturally-occurring collision buckets stay overhead-free, while adversarial
+    // hash-flooding (thousands of keys sharing one hash) degrades gracefully.
+    var MIN_HASH_COLLISION_INDEX_SIZE = 16;
+
     function coerceKeyPath(keyPath) {
         if (isArrayLike(keyPath) && typeof keyPath !== 'string') {
             return keyPath;
@@ -19058,7 +19188,7 @@ const UnitTables = exports.UnitTables = {
         assertNotInfinite(size);
         if (size > 0 && size < SIZE) {
           // eslint-disable-next-line no-constructor-return
-          return makeList(0, size, SHIFT, null, new VNode(iter.toArray()));
+          return makeList(0, size, SHIFT, undefined, new VNode(iter.toArray()));
         }
         // eslint-disable-next-line no-constructor-return
         return empty.withMutations(function (list) {
@@ -19301,6 +19431,13 @@ const UnitTables = exports.UnitTables = {
       return obj.asImmutable();
     };
 
+    /**
+     * A node in the List's 32-wide trie. At inner levels `array` holds child
+     * `VNode`s; at the leaf level it holds the List's values. Missing slots are
+     * `undefined` array holes.
+     *
+     * @template T
+     */
     var VNode = function VNode(array, ownerID) {
       this.array = array;
       this.ownerID = ownerID;
@@ -19437,6 +19574,16 @@ const UnitTables = exports.UnitTables = {
       }
     }
 
+    /**
+     * @param {number} origin
+     * @param {number} capacity
+     * @param {number} level
+     * @param {VNode | undefined} [root] The trie root, or `undefined` when every
+     *   in-range value lives in the tail (or is a virtual `undefined`).
+     * @param {VNode | undefined} [tail]
+     * @param {OwnerID} [ownerID]
+     * @param {number} [hash]
+     */
     function makeList(origin, capacity, level, root, tail, ownerID, hash) {
       var list = Object.create(ListPrototype);
       list.size = capacity - origin;
@@ -19554,6 +19701,14 @@ const UnitTables = exports.UnitTables = {
       return new VNode(node ? node.array.slice() : [], ownerID);
     }
 
+    /**
+     * Returns the leaf `VNode` holding `rawIndex`, or `undefined` when no node is
+     * allocated for it (an all-`undefined` region).
+     *
+     * @param {List} list
+     * @param {number} rawIndex
+     * @returns {VNode | undefined}
+     */
     function listNodeFor(list, rawIndex) {
       if (rawIndex >= getTailOffset(list._capacity)) {
         return list._tail;
@@ -19569,7 +19724,39 @@ const UnitTables = exports.UnitTables = {
       }
     }
 
+    /**
+     * Validates requested bounds before int32 coercion in setListBounds().
+     * Throws when origin/capacity would exceed the trie's safe range.
+     */
+    function validateListBoundsRequest(list, begin, end) {
+      var requestedOrigin = list._origin + (begin === undefined ? 0 : begin);
+      var requestedCapacity =
+        end === undefined
+          ? list._capacity
+          : end < 0
+            ? list._capacity + end
+            : list._origin + end;
+
+      // Keep origin/capacity within the trie's safe signed 32-bit range.
+      if (
+        (Number.isFinite(requestedCapacity) && requestedCapacity > MAX_LIST_SIZE) ||
+        (Number.isFinite(requestedOrigin) && requestedOrigin < -MAX_LIST_SIZE) ||
+        (Number.isFinite(requestedCapacity) &&
+          Number.isFinite(requestedOrigin) &&
+          requestedCapacity - requestedOrigin > MAX_LIST_SIZE)
+      ) {
+        throw new RangeError(
+          'Invalid List size: a List cannot hold more than ' +
+            MAX_LIST_SIZE +
+            ' (2 ** 30) values.'
+        );
+      }
+    }
+
     function setListBounds(list, begin, end) {
+      // Validate full-precision bounds before int32 coercion.
+      validateListBoundsRequest(list, begin, end);
+
       // Sanitize begin & end using this shorthand for ToInt32(argument)
       // http://www.ecma-international.org/ecma-262/6.0/#sec-toint32
       if (begin !== undefined) {
@@ -19608,7 +19795,8 @@ const UnitTables = exports.UnitTables = {
           owner
         );
         newLevel += SHIFT;
-        offsetShift += 1 << newLevel;
+        // Shift origin into non-negative space as trie height grows.
+        offsetShift += levelCapacity(newLevel);
       }
       if (offsetShift) {
         newOrigin += offsetShift;
@@ -19621,7 +19809,7 @@ const UnitTables = exports.UnitTables = {
       var newTailOffset = getTailOffset(newCapacity);
 
       // New size might need creating a higher root.
-      while (newTailOffset >= 1 << (newLevel + SHIFT)) {
+      while (newTailOffset >= levelCapacity(newLevel + SHIFT)) {
         newRoot = new VNode(
           newRoot && newRoot.array.length ? [newRoot] : [],
           owner
@@ -19664,7 +19852,7 @@ const UnitTables = exports.UnitTables = {
         newOrigin -= newTailOffset;
         newCapacity -= newTailOffset;
         newLevel = SHIFT;
-        newRoot = null;
+        newRoot = undefined;
         newTail = newTail && newTail.removeBefore(owner, 0, newOrigin);
 
         // Otherwise, if the root has been trimmed, garbage collect.
@@ -19717,6 +19905,19 @@ const UnitTables = exports.UnitTables = {
 
     function getTailOffset(size) {
       return size < SIZE ? 0 : ((size - 1) >>> SHIFT) << SHIFT;
+    }
+
+    // The largest number of values a List can hold. Above this the 32-bit trie math
+    // in setListBounds() stays in the safe signed 32-bit range.
+    var MAX_LIST_SIZE = Math.pow( 2, 30 ); // 1073741824
+
+    /**
+     * Computes 2 ** exp for the trie level-raising loops in setListBounds().
+     * Use the cheap bitwise operator shift whenever possible, otherwise fall back to exponentiation.
+     * This is necessary because bitwise operators in JavaScript only work on 32-bit signed integers, so for exp >= 31, we need to use exponentiation to avoid overflow.
+     */
+    function levelCapacity(exp) {
+      return exp < 31 ? 1 << exp : Math.pow( 2, exp );
     }
 
     /**
@@ -20134,6 +20335,9 @@ const UnitTables = exports.UnitTables = {
                 reduction = v;
             }
             else {
+                // `reduction` has already been seeded here (either with the provided
+                // initial value or with the first iterated value), so it is never the
+                // `undefined` placeholder — only a `V` or a `R`.
                 reduction = reducer.call(context, reduction, v, k, c);
             }
         }, reverse);
@@ -21318,11 +21522,12 @@ const UnitTables = exports.UnitTables = {
 
       has: function has(index) {
         index = wrapIndex(this, index);
+
         return (
           index >= 0 &&
           (this.size !== undefined
             ? this.size === Infinity || index < this.size
-            : this.indexOf(index) !== -1)
+            : this.find(function (_, key) { return key === index; }, undefined, NOT_SET) !== NOT_SET)
         );
       },
 
@@ -21783,15 +21988,15 @@ const UnitTables = exports.UnitTables = {
       };
 
       Repeat.prototype.indexOf = function indexOf (searchValue) {
-        if (is(this._value, searchValue)) {
+        if (this.size !== 0 && is(this._value, searchValue)) {
           return 0;
         }
         return -1;
       };
 
       Repeat.prototype.lastIndexOf = function lastIndexOf (searchValue) {
-        if (is(this._value, searchValue)) {
-          return this.size;
+        if (this.size !== 0 && is(this._value, searchValue)) {
+          return this.size - 1;
         }
         return -1;
       };
@@ -21872,7 +22077,7 @@ const UnitTables = exports.UnitTables = {
       return isIndexed(v) ? v.toList() : isKeyed(v) ? v.toMap() : v.toSet();
     }
 
-    var version = "5.1.6";
+    var version = "5.1.9";
 
     /* eslint-disable import/order */
 
