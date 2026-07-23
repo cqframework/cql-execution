@@ -2404,6 +2404,13 @@ class Interval {
             return new Interval(this.low, this.high, lowClosed, highClosed);
         }
     }
+    pointFrom() {
+        const start = this.start();
+        if (cmp.equals(start, this.end())) {
+            return start;
+        }
+        throw new Error('PointFrom operator may only be used on an interval containing a single point.');
+    }
     toString() {
         const start = this.lowClosed ? '[' : '(';
         const end = this.highClosed ? ']' : ')';
@@ -5015,7 +5022,6 @@ const math_1 = require("../util/math");
 const units_1 = require("../util/units");
 const dtivl = __importStar(require("../datatypes/interval"));
 const builder_1 = require("./builder");
-const comparison_1 = require("../util/comparison");
 const elmTypes_1 = require("../util/elmTypes");
 class Interval extends expression_1.Expression {
     constructor(json) {
@@ -5187,12 +5193,7 @@ class PointFrom extends expression_1.Expression {
         if (interval == null) {
             return null;
         }
-        const start = interval.start();
-        const end = interval.end();
-        if (start == end || (0, comparison_1.equals)(start, end)) {
-            return start;
-        }
-        throw new Error('PointFrom operator may only be used on an interval containing a single point.');
+        return interval.pointFrom();
     }
 }
 exports.PointFrom = PointFrom;
@@ -5781,7 +5782,7 @@ function truncateDecimal(decimal, decimalPlaces) {
     return parseFloat(decimal.toString().match(re)[0]);
 }
 
-},{"../datatypes/interval":10,"../datatypes/quantity":12,"../util/comparison":53,"../util/elmTypes":55,"../util/math":57,"../util/units":58,"./builder":17,"./expression":23}],28:[function(require,module,exports){
+},{"../datatypes/interval":10,"../datatypes/quantity":12,"../util/elmTypes":55,"../util/math":57,"../util/units":58,"./builder":17,"./expression":23}],28:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Library = void 0;
