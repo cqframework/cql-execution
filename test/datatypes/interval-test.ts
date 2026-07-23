@@ -1950,13 +1950,22 @@ describe('DateTimeInterval', () => {
       should(() => ivl.pointFrom()).throw(Error);
     });
 
-    it('should throw for an interval with null high bound', function () {
-      const ivl = new Interval(DateTime.parse('2012-01-01T00:00:00.0+00'), null);
-      should(() => ivl.pointFrom()).throw(Error);
+    it('should return the point value for a unit interval with open high bound', () => {
+      const point = DateTime.parse('2012-01-01T00:00:00.0+00');
+      const ivl = new Interval(point, point.successor(), true, false);
+
+      ivl.pointFrom().should.eql(point);
     });
 
-    it('should throw for an interval with undefined width', function () {
-      const ivl = new Interval(0, 0, false, false);
+    it('should return the point value for a unit interval with limited precision', () => {
+      const point = DateTime.parse('2012-01-01');
+      const ivl = new Interval(point, point);
+
+      ivl.pointFrom().should.eql(point);
+    });
+
+    it('should throw for an interval with null high bound', function () {
+      const ivl = new Interval(DateTime.parse('2012-01-01T00:00:00.0+00'), null);
       should(() => ivl.pointFrom()).throw(Error);
     });
   });
