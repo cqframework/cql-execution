@@ -83,10 +83,16 @@ export class Retrieve extends Expression {
   }
 
   recordMatchesCodesOrVS(record: any, codes: any) {
-    const recordCodeValue = record.getCodeOrCodes(this.codeProperty);
+    let recordCodeValue = record.getCode(this.codeProperty);
 
-    if (!recordCodeValue || recordCodeValue.length == 0) {
+    if (Array.isArray(recordCodeValue)) {
+      if (recordCodeValue.length == 0) {
+        return false;
+      }
+    } else if (!recordCodeValue) {
       return false;
+    } else {
+      recordCodeValue = [recordCodeValue];
     }
 
     switch (this.codeComparator) {
