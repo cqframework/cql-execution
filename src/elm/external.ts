@@ -97,26 +97,26 @@ export class Retrieve extends Expression {
 
     switch (this.codeComparator) {
       case 'in':
-        return this._in(recordCodeValue, codes);
+        return this.in(recordCodeValue, codes);
 
       case '~':
-        return this._equivalent(recordCodeValue, codes);
+        return this.equivalent(recordCodeValue, codes);
 
       case '=':
         return this._equal(recordCodeValue, codes);
     }
   }
 
-  _in(lhs: Code[], rhs: any) {
+  private in(lhs: Code[], rhs: any) {
     if (rhs instanceof ValueSet || rhs instanceof CodeSystem) {
       return rhs.hasMatch(lhs);
     } else {
-      // for code lists, fallback to the implementation in ~
-      return this._equivalent(lhs, rhs);
+      // For code lists, fallback to the implementation in ~ . See comments below.
+      return this.equivalent(lhs, rhs);
     }
   }
 
-  _equivalent(lhs: Code[], rhs: any) {
+  private equivalent(lhs: Code[], rhs: any) {
     if (rhs instanceof CodeSystem) {
       throw new Error("Operator '~' is not defined for Code ~ CodeSystem");
     } else if (rhs instanceof ValueSet) {
@@ -127,7 +127,7 @@ export class Retrieve extends Expression {
     }
   }
 
-  _equal(lhs: Code[], rhs: any) {
+  private equal(lhs: Code[], rhs: any) {
     if (rhs instanceof CodeSystem) {
       throw new Error("Operator '=' is not defined for Code = CodeSystem");
     }
