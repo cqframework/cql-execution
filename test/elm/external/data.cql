@@ -10,39 +10,41 @@ concept "Viral pharyngitis": { "Viral pharyngitis code" } display 'Viral pharyng
 valueset "Body locations": '2.16.840.1.113762.1.4.1181.77' // Pain body location reference set
 code "Nose code": '45206002' from "SNOMED" display 'Nasal structure (body structure)'
 
-// duplicated definitions purely for readability of the large cross-product of test cases
-codesystem "myCodesystem": '2.16.840.1.113883.6.96' version '2013-09'
-valueset "myValueSet": '2.16.840.1.113883.3.464.1003.102.12.1011'
-code "myCode": '1532007' from "myCodesystem" display 'Viral pharyngitis (disorder)'
-concept "myConcept": { "myCode" } display 'Viral pharyngitis (disorder)'
-define myCodeList: { myCode }
+// NOTE: These are duplicated definitions of the above terminology,
+// purely so that the cross-product of test cases in this file is obvious.
+// These names do not follow CQL best practice; don't copy this example.
+codesystem "TestCodeSystem": '2.16.840.1.113883.6.96' version '2013-09'
+valueset "TestValueSet": '2.16.840.1.113883.3.464.1003.102.12.1011'
+code "TestCode": '1532007' from "TestCodeSystem" display 'Viral pharyngitis (disorder)'
+concept "TestConcept": { "TestCode" } display 'Viral pharyngitis (disorder)'
+define TestCodeList: { TestCode }
 
 define Conditions: [Condition]
-define ConditionsByVS: [Condition: "myValueSet"]
-define ConditionsByCS: [Condition: "myCodesystem"]
-define ConditionsByCode: [Condition: "myCode"]
-define ConditionsByConcept: [Condition: "myConcept"]
-define ConditionsByCodeList: [Condition: "myCodeList"]
+define ConditionsByVS: [Condition: "TestValueSet"]
+define ConditionsByCS: [Condition: "TestCodeSystem"]
+define ConditionsByCode: [Condition: "TestCode"]
+define ConditionsByConcept: [Condition: "TestConcept"]
+define ConditionsByCodeList: [Condition: "TestCodeList"]
 
-define ConditionsByCodeInCS:     [Condition: code in "myCodesystem"]
-define ConditionsByCodeEqualsCS: [Condition: code = "myCodesystem"]
-define ConditionsByCodeEquivCS:  [Condition: code ~ "myCodesystem"]
+define ConditionsByCodeInCS:     [Condition: code in "TestCodeSystem"]
+define ConditionsByCodeEqualsCS: [Condition: code = "TestCodeSystem"]
+define ConditionsByCodeEquivCS:  [Condition: code ~ "TestCodeSystem"]
 
-define ConditionsByCodeInVS:     [Condition: code in "myValueSet"]
-define ConditionsByCodeEqualsVS: [Condition: code = "myValueSet"]
-define ConditionsByCodeEquivVS:  [Condition: code ~ "myValueSet"]
+define ConditionsByCodeInVS:     [Condition: code in "TestValueSet"]
+define ConditionsByCodeEqualsVS: [Condition: code = "TestValueSet"]
+define ConditionsByCodeEquivVS:  [Condition: code ~ "TestValueSet"]
 
-define ConditionsByCodeInCode:     [Condition: code in "myCode"]
-define ConditionsByCodeEqualsCode: [Condition: code = "myCode"]
-define ConditionsByCodeEquivCode:  [Condition: code ~ "myCode"]
+define ConditionsByCodeInCode:     [Condition: code in "TestCode"]
+define ConditionsByCodeEqualsCode: [Condition: code = "TestCode"]
+define ConditionsByCodeEquivCode:  [Condition: code ~ "TestCode"]
 
-define ConditionsByCodeInConcept:     [Condition: code in "myConcept"]
-define ConditionsByCodeEqualsConcept: [Condition: code = "myConcept"]
-define ConditionsByCodeEquivConcept:  [Condition: code ~ "myConcept"]
+define ConditionsByCodeInConcept:     [Condition: code in "TestConcept"]
+define ConditionsByCodeEqualsConcept: [Condition: code = "TestConcept"]
+define ConditionsByCodeEquivConcept:  [Condition: code ~ "TestConcept"]
 
-define ConditionsByCodeInCodeList:     [Condition: code in "myCodeList"]
-define ConditionsByCodeEqualsCodeList: [Condition: code = "myCodeList"]
-define ConditionsByCodeEquivCodeList:  [Condition: code ~ "myCodeList"]
+define ConditionsByCodeInCodeList:     [Condition: code in "TestCodeList"]
+define ConditionsByCodeEqualsCodeList: [Condition: code = "TestCodeList"]
+define ConditionsByCodeEquivCodeList:  [Condition: code ~ "TestCodeList"]
 
 
 define ConditionsByBodySiteInVS:     [Condition: bodySite in "Body locations"]
