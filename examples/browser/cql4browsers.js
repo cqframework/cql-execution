@@ -4943,8 +4943,8 @@ class Retrieve extends expression_1.Expression {
                 return this.equal(recordCodeValue, codes);
             default:
                 // if there's a terminology filter, there should always be a comparator,
-                // but just in case, default to ~
-                return this.equivalent(recordCodeValue, codes);
+                // but just in case, default to "in"
+                return this.in(recordCodeValue, codes);
         }
     }
     in(lhs, rhs) {
