@@ -125,9 +125,22 @@ export class Retrieve extends Expression {
     if (rhs instanceof CodeSystem) {
       throw new Error("Operator '~' is not defined for Code ~ CodeSystem");
     } else if (rhs instanceof ValueSet) {
-      // TODO: explain
+      // It's not obvious that this combination should even be allowed.
+      // If in the CQL representation of the Retrieve, the terminology is a ValueSet,
+      // eg [Condition: code ~ "SomeValueSet"],
+      // the CQL-to-ELM translation may turn that into either:
+      //  - a `ValueSetRef` expression (appears here as a `ValueSet`)
+      //  -  or an `ExpandValueSet` expression wrapping the `ValueSetRef` (appears here as a `Code[]`).
+      // Because we can't tell the original intent here, we treat the ValueSet as if it were a Code[].
       return rhs.hasMatch(lhs);
-    } else {
+    } else if (Array.isArray(rhs)) {
+      // It's also not obvious that this should be allowed.
+      // But because the RHS is always list-promoted, there's no way to tell
+      // if the original CQL referred to a single code or to a list.
+      // So, we treat the operators ~ and = to mean
+      // "some match exists between the LHS and RHS, with the appropriate operator"
+      // instead of the usual meaning
+      // "the LHS and RHS themselves are a match, with the appropriate operator"
       return (rhs as Code[]).some(c => c.hasMatch(lhs));
     } else {
       // Unexpected, but just in case a single code came through
