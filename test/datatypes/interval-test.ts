@@ -1950,11 +1950,25 @@ describe('DateTimeInterval', () => {
       should(() => ivl.pointFrom()).throw(Error);
     });
 
+    it('should return the point value for a unit interval with open low bound', () => {
+      const point = DateTime.parse('2012-01-01T00:00:00.0+00');
+      const ivl = new Interval(point.predecessor(), point, false, true);
+
+      ivl.pointFrom().should.eql(point);
+    });
+
     it('should return the point value for a unit interval with open high bound', () => {
       const point = DateTime.parse('2012-01-01T00:00:00.0+00');
       const ivl = new Interval(point, point.successor(), true, false);
 
       ivl.pointFrom().should.eql(point);
+    });
+
+    it('should throw for a non-unit interval with closed high bound', () => {
+      const point = DateTime.parse('2012-01-01T00:00:00.0+00');
+      const ivl = new Interval(point, point.successor(), true, true);
+
+      should(() => ivl.pointFrom()).throw(Error);
     });
 
     it('should return the point value for a unit interval with limited precision', () => {
@@ -1964,8 +1978,23 @@ describe('DateTimeInterval', () => {
       ivl.pointFrom().should.eql(point);
     });
 
-    it('should throw for an interval with null high bound', function () {
+    it('should throw for an interval with closed null high bound', function () {
       const ivl = new Interval(DateTime.parse('2012-01-01T00:00:00.0+00'), null);
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should throw for an interval with open null high bound', function () {
+      const ivl = new Interval(DateTime.parse('2012-01-01T00:00:00.0+00'), null, true, false);
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should throw for an interval with closed null low bound', function () {
+      const ivl = new Interval(null, DateTime.parse('2012-01-01T00:00:00.0+00'));
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should throw for an interval with open null low bound', function () {
+      const ivl = new Interval(null, DateTime.parse('2012-01-01T00:00:00.0+00'), false, true);
       should(() => ivl.pointFrom()).throw(Error);
     });
   });
