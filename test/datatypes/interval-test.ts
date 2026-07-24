@@ -1971,6 +1971,18 @@ describe('DateTimeInterval', () => {
       should(() => ivl.pointFrom()).throw(Error);
     });
 
+    it('should return the value for a unit interval with null (max) high bound', () => {
+      const ivl = new Interval(MAX_DATETIME_VALUE, null);
+
+      ivl.pointFrom().should.eql(MAX_DATETIME_VALUE);
+    });
+
+    it('should return the value for a unit interval with null (min) low bound', () => {
+      const ivl = new Interval(null, MIN_DATETIME_VALUE);
+
+      ivl.pointFrom().should.eql(MIN_DATETIME_VALUE);
+    });
+
     it('should return the point value for a unit interval with limited precision', () => {
       const point = DateTime.parse('2012-01-01');
       const ivl = new Interval(point, point);
