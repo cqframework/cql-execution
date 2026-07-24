@@ -26,6 +26,20 @@ const p1 = {
         version: '2013-09',
         display: 'Viral pharyngitis (disorder)'
       },
+      bodySite: [
+        {
+          code: '2175005',
+          system: '2.16.840.1.113883.6.96',
+          version: '2013-09',
+          display: 'Structure of pharyngeal cavity (body structure)'
+        },
+        {
+          code: '45206002',
+          system: '2.16.840.1.113883.6.96',
+          version: '2013-09',
+          display: 'Nasal structure (body structure)'
+        }
+      ],
       period: { low: '1982-03-12', high: '1982-03-26' }
     },
     {

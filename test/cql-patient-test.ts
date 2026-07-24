@@ -27,6 +27,20 @@ describe('Record', () => {
             version: '2013-09',
             display: 'Viral pharyngitis (disorder)'
           },
+          bodySite: [
+            {
+              code: '2175005',
+              system: '2.16.840.1.113883.6.96',
+              version: '2013-09',
+              display: 'Structure of pharyngeal cavity (body structure)'
+            },
+            {
+              code: '45206002',
+              system: '2.16.840.1.113883.6.96',
+              version: '2013-09',
+              display: 'Nasal structure (body structure)'
+            }
+          ],
           period: { low: '1982-03-12', high: '1982-03-26' }
         }
       ]
@@ -41,10 +55,36 @@ describe('Record', () => {
     cndRecord.get('recordType').should.equal('Condition');
   });
 
-  it('should get codes', () => {
+  it('should get code for a single code', () => {
     encRecord
       .getCode('code')
-      .should.eql(new DT.Code('185349003', '2.16.840.1.113883.6.96', '2013-09'));
+      .should.eql(
+        new DT.Code(
+          '185349003',
+          '2.16.840.1.113883.6.96',
+          '2013-09',
+          'Encounter for "check-up" (procedure)'
+        )
+      );
+  });
+
+  it('should get code for a code list', () => {
+    cndRecord
+      .getCode('bodySite')
+      .should.eql([
+        new DT.Code(
+          '2175005',
+          '2.16.840.1.113883.6.96',
+          '2013-09',
+          'Structure of pharyngeal cavity (body structure)'
+        ),
+        new DT.Code(
+          '45206002',
+          '2.16.840.1.113883.6.96',
+          '2013-09',
+          'Nasal structure (body structure)'
+        )
+      ]);
   });
 
   it('should get dates', () => {
