@@ -89,6 +89,10 @@ export default () => {
     DateTime.parse('2012-01-01T00:00:00.0'),
     DateTime.parse('2012-07-01T00:00:00.0')
   );
+  data['unitIvl'] = new TestInterval(
+    DateTime.parse('2012-01-01T00:00:00.0'),
+    DateTime.parse('2012-01-01T00:00:00.0')
+  );
   data['bef2012'] = TestDateTime.parse('2011-06-01T00:00:00.0');
   data['beg2012'] = TestDateTime.parse('2012-01-01T00:00:00.0');
   data['mid2012'] = TestDateTime.parse('2012-06-01T00:00:00.0');

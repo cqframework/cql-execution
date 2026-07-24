@@ -647,6 +647,17 @@ export class Interval {
     }
   }
 
+  pointFrom() {
+    const start = this.start();
+    if (cmp.equals(start, this.end())) {
+      return start;
+    }
+
+    throw new Error(
+      'PointFrom operator may only be used on an interval containing a single point.'
+    );
+  }
+
   toString() {
     const start = this.lowClosed ? '[' : '(';
     const end = this.highClosed ? ']' : ')';

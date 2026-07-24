@@ -1008,6 +1008,16 @@ define OpenNotNull: end of Interval(DateTime(2012, 1, 1), DateTime(2013, 1, 1))
 define OpenLongNotNull: end of Interval(1L, 3L)
 define OpenNull: end of Interval(DateTime(2013, 1, 1), null)
 
+// @Test: PointFrom
+define IntegerPoint: point from Interval[4, 4]
+define IntegerOpenHighPoint: point from Interval[4, 5)
+define LongPoint: point from Interval[4294967296L, 4294967296L]
+define EmptyIntervalPoint: point from Interval(0, 0)
+define DateTimePoint: point from Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 1)]
+define NullPoint: point from (null as Interval<Integer>)
+define NonUnitPoint: point from Interval[1, 4]
+define NullHighPoint: point from Interval[1, null]
+
 // @Test: Starts
 define TestStartsNull: Interval[null, null] starts Interval[1, 10]
 define IntegerIntervalStartsTrue: Interval[4,10] starts Interval[4, 15]

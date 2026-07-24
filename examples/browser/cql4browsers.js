@@ -2412,6 +2412,13 @@ class Interval {
             return new Interval(this.low, this.high, lowClosed, highClosed);
         }
     }
+    pointFrom() {
+        const start = this.start();
+        if (cmp.equals(start, this.end())) {
+            return start;
+        }
+        throw new Error('PointFrom operator may only be used on an interval containing a single point.');
+    }
     toString() {
         const start = this.lowClosed ? '[' : '(';
         const end = this.highClosed ? ']' : ')';
@@ -5085,7 +5092,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Collapse = exports.Expand = exports.Ends = exports.Starts = exports.End = exports.Start = exports.Size = exports.Width = exports.OverlapsBefore = exports.OverlapsAfter = exports.Overlaps = exports.MeetsBefore = exports.MeetsAfter = exports.Meets = exports.Interval = void 0;
+exports.Collapse = exports.Expand = exports.Ends = exports.Starts = exports.End = exports.Start = exports.Size = exports.Width = exports.PointFrom = exports.OverlapsBefore = exports.OverlapsAfter = exports.Overlaps = exports.MeetsBefore = exports.MeetsAfter = exports.Meets = exports.Interval = void 0;
 exports.doContains = doContains;
 exports.doProperContains = doProperContains;
 exports.doIncludes = doIncludes;
@@ -5263,6 +5270,19 @@ class OverlapsBefore extends expression_1.Expression {
     }
 }
 exports.OverlapsBefore = OverlapsBefore;
+class PointFrom extends expression_1.Expression {
+    constructor(json) {
+        super(json);
+    }
+    async exec(ctx) {
+        const interval = await this.arg?.execute(ctx);
+        if (interval == null) {
+            return null;
+        }
+        return interval.pointFrom();
+    }
+}
+exports.PointFrom = PointFrom;
 // Delegated to by overloaded#Union
 function doUnion(a, b) {
     return a.union(b);

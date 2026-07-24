@@ -200,6 +200,20 @@ export class OverlapsBefore extends Expression {
   }
 }
 
+export class PointFrom extends Expression {
+  constructor(json: any) {
+    super(json);
+  }
+
+  async exec(ctx: Context) {
+    const interval = await this.arg?.execute(ctx);
+    if (interval == null) {
+      return null;
+    }
+    return interval.pointFrom();
+  }
+}
+
 // Delegated to by overloaded#Union
 export function doUnion(a: any, b: any) {
   return a.union(b);

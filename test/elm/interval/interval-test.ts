@@ -1776,6 +1776,44 @@ describe('End', () => {
   });
 });
 
+describe('PointFrom', () => {
+  beforeEach(function () {
+    setup(this, data);
+  });
+
+  it('should return the point from a unit interval', async function () {
+    (await this.integerPoint.exec(this.ctx)).should.equal(4);
+  });
+
+  it('should return the point from an interval with an open high bound', async function () {
+    (await this.integerOpenHighPoint.exec(this.ctx)).should.equal(4);
+  });
+
+  it('should return the point from a unit interval of type Long', async function () {
+    (await this.longPoint.exec(this.ctx)).should.equal(4294967296n);
+  });
+
+  it('should return the point from a unit interval of type DateTime', async function () {
+    (await this.dateTimePoint.exec(this.ctx)).should.eql(new DateTime(2012, 1, 1));
+  });
+
+  it('should return null for a null interval', async function () {
+    should(await this.nullPoint.exec(this.ctx)).be.null();
+  });
+
+  it('should throw for an interval with more than one point', function () {
+    return this.nonUnitPoint.exec(this.ctx).should.be.rejected();
+  });
+
+  it('should throw for an interval with null high bound', function () {
+    return this.nullHighPoint.exec(this.ctx).should.be.rejected();
+  });
+
+  it('should throw for an interval with undefined width', function () {
+    return this.emptyIntervalPoint.exec(this.ctx).should.be.rejected();
+  });
+});
+
 describe('Starts', () => {
   beforeEach(function () {
     setup(this, data);
