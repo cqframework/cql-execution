@@ -125,18 +125,19 @@ export class Retrieve extends Expression {
     if (rhs instanceof CodeSystem) {
       throw new Error("Operator '~' is not defined for Code ~ CodeSystem");
     } else if (rhs instanceof ValueSet) {
-      // It's not obvious that this combination should even be allowed.
-      // If in the CQL representation of the Retrieve, the terminology is a ValueSet,
-      // eg [Condition: code ~ "SomeValueSet"],
-      // the CQL-to-ELM translation may turn that into either:
-      //  - a `ValueSetRef` expression (appears here as a `ValueSet`)
-      //  -  or an `ExpandValueSet` expression wrapping the `ValueSetRef` (appears here as a `Code[]`).
-      // Because we can't tell the original intent here, we treat the ValueSet as if it were a Code[].
+      // It's not obvious that code ~ ValueSet and code ~ Code[] should be allowed,
+      // when code ~ CodeSystem is disallowed. Same for operator = below.
+      // In short, due to various translator behaviors, when `rhs` here is Code[],
+      // it's possible it was originally written in the CQL as a Code, a List<Code>, or a ValueSet.
+      // We can't distinguish, so we have to allow all of them.
+      // Then, again because of translator behaviors, x ~ ValueSet could reach this point
+      // with `rhs` either being a Code[] or a ValueSet object.
+      // Because we can't filter it out in the Code[] path, we should allow it in the ValueSet path as well
+      // to reduce unexpected inconsistencies.
+      // See full description and discussion at https://github.com/cqframework/cql-execution/pull/370
       return rhs.hasMatch(lhs);
     } else if (Array.isArray(rhs)) {
-      // It's also not obvious that this should be allowed.
-      // But because the RHS is always list-promoted, there's no way to tell
-      // if the original CQL referred to a single code or to a list.
+      // As noted above, there's no way to tell if the original CQL referred to a single code or to a list.
       // So, we treat the operators ~ and = to mean
       // "some match exists between the LHS and RHS, with the appropriate operator"
       // instead of the usual meaning
