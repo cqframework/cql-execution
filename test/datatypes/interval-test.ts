@@ -1933,6 +1933,83 @@ describe('DateTimeInterval', () => {
       x.toYear.meetsBefore(y.closed).should.be.false();
     });
   });
+
+  describe('pointFrom', () => {
+    it('should return the point value for a unit interval', () => {
+      const point = DateTime.parse('2012-01-01T00:00:00.0+00');
+      const ivl = new Interval(point, point);
+
+      ivl.pointFrom().should.eql(point);
+    });
+
+    it('should throw on pointFrom call if not a unit interval', () => {
+      const ivl = new Interval(
+        DateTime.parse('2012-01-01T00:00:00.0+00'),
+        DateTime.parse('2025-01-01T00:00:00.0+00')
+      );
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should return the point value for a unit interval with open low bound', () => {
+      const point = DateTime.parse('2012-01-01T00:00:00.0+00');
+      const ivl = new Interval(point.predecessor(), point, false, true);
+
+      ivl.pointFrom().should.eql(point);
+    });
+
+    it('should return the point value for a unit interval with open high bound', () => {
+      const point = DateTime.parse('2012-01-01T00:00:00.0+00');
+      const ivl = new Interval(point, point.successor(), true, false);
+
+      ivl.pointFrom().should.eql(point);
+    });
+
+    it('should throw for a non-unit interval with closed high bound', () => {
+      const point = DateTime.parse('2012-01-01T00:00:00.0+00');
+      const ivl = new Interval(point, point.successor(), true, true);
+
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should return the value for a unit interval with null (max) high bound', () => {
+      const ivl = new Interval(MAX_DATETIME_VALUE, null);
+
+      ivl.pointFrom().should.eql(MAX_DATETIME_VALUE);
+    });
+
+    it('should return the value for a unit interval with null (min) low bound', () => {
+      const ivl = new Interval(null, MIN_DATETIME_VALUE);
+
+      ivl.pointFrom().should.eql(MIN_DATETIME_VALUE);
+    });
+
+    it('should return the point value for a unit interval with limited precision', () => {
+      const point = DateTime.parse('2012-01-01');
+      const ivl = new Interval(point, point);
+
+      ivl.pointFrom().should.eql(point);
+    });
+
+    it('should throw for an interval with closed null high bound', function () {
+      const ivl = new Interval(DateTime.parse('2012-01-01T00:00:00.0+00'), null);
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should throw for an interval with open null high bound', function () {
+      const ivl = new Interval(DateTime.parse('2012-01-01T00:00:00.0+00'), null, true, false);
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should throw for an interval with closed null low bound', function () {
+      const ivl = new Interval(null, DateTime.parse('2012-01-01T00:00:00.0+00'));
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should throw for an interval with open null low bound', function () {
+      const ivl = new Interval(null, DateTime.parse('2012-01-01T00:00:00.0+00'), false, true);
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+  });
 });
 
 describe('IntegerInterval', () => {
@@ -3713,6 +3790,43 @@ describe('IntegerInterval', () => {
       uIvl.meetsBefore(uIvl).should.be.false();
     });
   });
+
+  describe('pointFrom', () => {
+    it('should return the point value for a unit interval', () => {
+      const ivl = new Interval(0, 0);
+      ivl.pointFrom().should.eql(0);
+    });
+
+    it('should throw on pointFrom call if not a unit interval', () => {
+      const ivl = new Interval(0, 1);
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should return the point value for a unit interval', () => {
+      const ivl = new Interval(12, 12);
+      ivl.pointFrom().should.eql(12);
+    });
+
+    it('should throw on pointFrom call if not a unit interval', () => {
+      const ivl = new Interval(8, 9);
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should return the point from an interval with an open high bound', async function () {
+      const ivl = new Interval(100, 101, true, false);
+      ivl.pointFrom().should.eql(100);
+    });
+
+    it('should throw for an interval with null high bound', function () {
+      const ivl = new Interval(23, null);
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should throw for an interval with undefined width', function () {
+      const ivl = new Interval(0, 0, false, false);
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+  });
 });
 
 describe('LongInterval', () => {
@@ -5491,6 +5605,33 @@ describe('LongInterval', () => {
       should.not.exist(uIvl.meetsBefore(ivl));
 
       uIvl.meetsBefore(uIvl).should.be.false();
+    });
+  });
+
+  describe('pointFrom', () => {
+    it('should return the point value for a unit interval', () => {
+      const ivl = new Interval(10n, 10n);
+      ivl.pointFrom().should.eql(10n);
+    });
+
+    it('should throw on pointFrom call if not a unit interval', () => {
+      const ivl = new Interval(0n, 1n);
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should return the point from an interval with an open high bound', async function () {
+      const ivl = new Interval(5n, 6n, true, false);
+      ivl.pointFrom().should.eql(5n);
+    });
+
+    it('should throw for an interval with null high bound', function () {
+      const ivl = new Interval(0n, null);
+      should(() => ivl.pointFrom()).throw(Error);
+    });
+
+    it('should throw for an interval with undefined width', function () {
+      const ivl = new Interval(0n, 0n, false, false);
+      should(() => ivl.pointFrom()).throw(Error);
     });
   });
 });
