@@ -31,6 +31,7 @@ export interface RetrieveDetails {
   datatype: string;
   templateId?: string;
   codeProperty?: string;
+  codeComparator?: 'in' | '=' | '~';
   codes?: Code[] | ValueSet;
   dateProperty?: string;
   dateRange?: Interval;
