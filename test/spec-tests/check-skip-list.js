@@ -102,7 +102,7 @@ async function main() {
   );
 
   // Iterate through skip-list entries
-  for (let i = 0; i < lines.length; ) {
+  for (let i = 0; i < lines.length;) {
     const line = lines[i];
     if (isBlank(line) || isComment(line)) {
       i++;
