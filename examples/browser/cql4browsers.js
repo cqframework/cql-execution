@@ -2213,7 +2213,7 @@ class Interval {
         // "If the low boundary of the interval is closed and null, this operator returns the minimum
         // value for the point type of the interval."
         if (this.low == null) {
-            const quantityInstance = this.high && this.pointType == elmTypes_1.ELM_QUANTITY_TYPE ? this.high : undefined;
+            const quantityInstance = getQuantityInstanceForMinMax(this);
             const minValue = (0, math_1.minValueForType)(this.pointType, quantityInstance);
             if (this.lowClosed || minValue == null) {
                 return minValue;
@@ -2222,7 +2222,7 @@ class Interval {
                 // "If the low boundary of the interval is open and null, this operator returns an
                 // uncertainty from the minimum value for the point type of the interval to the high
                 // boundary of the interval (using End operator semantics to determine the high boundary)."
-                const end = ((end) => (end.isUncertainty ? end.high : end))(this.high == null ? (0, math_1.maxValueForType)(this.pointType) : this.end());
+                const end = ((end) => (end.isUncertainty ? end.high : end))(this.high == null ? (0, math_1.maxValueForType)(this.pointType, quantityInstance) : this.end());
                 return new uncertainty_1.Uncertainty(minValue, end);
             }
         }
@@ -2236,7 +2236,7 @@ class Interval {
         // "If the high boundary of the interval is closed and null, this operator returns the maximum
         // value for the point type of the interval."
         if (this.high == null) {
-            const quantityInstance = this.low && this.pointType == elmTypes_1.ELM_QUANTITY_TYPE ? this.low : undefined;
+            const quantityInstance = getQuantityInstanceForMinMax(this);
             const maxValue = (0, math_1.maxValueForType)(this.pointType, quantityInstance);
             if (this.highClosed || maxValue == null) {
                 return maxValue;
@@ -2245,7 +2245,7 @@ class Interval {
                 // "If the high boundary of the interval is open and null, this operator returns an
                 // uncertainty from the low boundary of the interval (using Start operator semantics to
                 // determine the low boundary) to the maximum value for the point type of the interval."
-                const start = ((start) => (start.isUncertainty ? start.low : start))(this.low == null ? (0, math_1.minValueForType)(this.pointType) : this.start());
+                const start = ((start) => (start.isUncertainty ? start.low : start))(this.low == null ? (0, math_1.minValueForType)(this.pointType, quantityInstance) : this.start());
                 return new uncertainty_1.Uncertainty(start, maxValue);
             }
         }
@@ -2323,13 +2323,7 @@ class Interval {
     // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#size
     getPointSize() {
         // "... point-size is determined by successor of minimum T - minimum T"
-        let minValue;
-        if (this.pointType != null && this.pointType !== elmTypes_1.ELM_ANY_TYPE) {
-            minValue = (0, math_1.minValueForType)(this.pointType, this.pointType === elmTypes_1.ELM_QUANTITY_TYPE ? (this.low ?? this.high) : undefined);
-        }
-        else {
-            minValue = (0, math_1.minValueForInstance)(this.low ?? this.high);
-        }
+        let minValue = (0, math_1.minValueForType)(this.pointType, getQuantityInstanceForMinMax(this));
         // due to floating point issues in JS, we must use 0.0 for Decimal/Quantity instead of min
         if (minValue === limits_1.MIN_FLOAT_VALUE) {
             minValue = 0.0;
@@ -2365,9 +2359,10 @@ class Interval {
         const lowClosed = this.lowClosed || this.low != null;
         const highClosed = this.highClosed || this.high != null;
         if (this.pointType != null && this.pointType !== elmTypes_1.ELM_ANY_TYPE) {
+            const quantityInstance = getQuantityInstanceForMinMax(this);
             let low;
             if (this.lowClosed && this.low == null) {
-                low = (0, math_1.minValueForType)(this.pointType);
+                low = (0, math_1.minValueForType)(this.pointType, quantityInstance);
             }
             else if (!this.lowClosed && this.low != null) {
                 low = (0, math_1.successor)(this.low, this.pointType);
@@ -2377,7 +2372,7 @@ class Interval {
             }
             let high;
             if (this.highClosed && this.high == null) {
-                high = (0, math_1.maxValueForType)(this.pointType);
+                high = (0, math_1.maxValueForType)(this.pointType, quantityInstance);
             }
             else if (!this.highClosed && this.high != null) {
                 high = (0, math_1.predecessor)(this.high, this.pointType);
@@ -2386,10 +2381,10 @@ class Interval {
                 high = this.high;
             }
             if (low == null) {
-                low = new uncertainty_1.Uncertainty((0, math_1.minValueForType)(this.pointType), high);
+                low = new uncertainty_1.Uncertainty((0, math_1.minValueForType)(this.pointType, quantityInstance), high);
             }
             if (high == null) {
-                high = new uncertainty_1.Uncertainty(low, (0, math_1.maxValueForType)(this.pointType));
+                high = new uncertainty_1.Uncertainty(low, (0, math_1.maxValueForType)(this.pointType, quantityInstance));
             }
             return new Interval(low, high, lowClosed, highClosed);
         }
@@ -2416,35 +2411,60 @@ exports.Interval = Interval;
 // meaning? This does affect test expectations and representation of returned results for callers.
 function normalizeInterval(interval) {
     const ivl = interval.copy();
+    const minValue = (0, math_1.minValueForType)(ivl.pointType, getQuantityInstanceForMinMax(ivl));
+    const maxValue = (0, math_1.maxValueForType)(ivl.pointType, getQuantityInstanceForMinMax(ivl));
     if (ivl.low != null && ivl.lowClosed !== false) {
         if (ivl.low.isUncertainty) {
-            const minValue = (0, math_1.minValueForInstance)(ivl.low.low);
-            const maxValue = (0, math_1.maxValueForInstance)(ivl.low.low);
             if (cmp.equals(ivl.low.low, minValue) &&
                 (cmp.equals(ivl.low.high, maxValue) || cmp.equals(ivl.low.high, ivl.high))) {
                 ivl.low = null;
                 ivl.lowClosed = false;
             }
         }
-        else if (cmp.equals(ivl.low, (0, math_1.minValueForInstance)(ivl.low))) {
+        else if (cmp.equals(ivl.low, minValue)) {
             ivl.low = null;
         }
     }
     if (ivl.high != null && ivl.highClosed !== false) {
         if (ivl.high.isUncertainty) {
-            const minValue = (0, math_1.minValueForInstance)(ivl.high.low);
-            const maxValue = (0, math_1.maxValueForInstance)(ivl.high.low);
             if (cmp.equals(ivl.high.high, maxValue) &&
                 (cmp.equals(ivl.high.low, minValue) || cmp.equals(ivl.high.low, ivl.low))) {
                 ivl.high = null;
                 ivl.highClosed = false;
             }
         }
-        else if (cmp.equals(ivl.high, (0, math_1.maxValueForInstance)(ivl.high))) {
+        else if (cmp.equals(ivl.high, maxValue)) {
             ivl.high = null;
         }
     }
     return ivl;
+}
+function getQuantityInstanceForMinMax(ivl) {
+    if (ivl?.pointType !== elmTypes_1.ELM_QUANTITY_TYPE) {
+        return;
+    }
+    if (ivl.low?.isQuantity) {
+        return ivl.low;
+    }
+    if (ivl.high?.isQuantity) {
+        return ivl.high;
+    }
+    if (ivl.low?.isUncertainty) {
+        if (ivl.low.low?.isQuantity) {
+            return ivl.low.low;
+        }
+        if (ivl.low.high?.isQuantity) {
+            return ivl.low.high;
+        }
+    }
+    if (ivl.high?.isUncertainty) {
+        if (ivl.high.low?.isQuantity) {
+            return ivl.high.low;
+        }
+        if (ivl.high.high?.isQuantity) {
+            return ivl.high.high;
+        }
+    }
 }
 function performConversionIfNecessary(left, right) {
     if (left.pointType === elmTypes_1.ELM_DATE_TYPE && right.pointType === elmTypes_1.ELM_DATETIME_TYPE) {
@@ -9811,9 +9831,7 @@ exports.subtract = subtract;
 exports.limitDecimalPrecision = limitDecimalPrecision;
 exports.successor = successor;
 exports.predecessor = predecessor;
-exports.maxValueForInstance = maxValueForInstance;
 exports.maxValueForType = maxValueForType;
-exports.minValueForInstance = minValueForInstance;
 exports.minValueForType = minValueForType;
 exports.decimalAdjust = decimalAdjust;
 exports.decimalOrNull = decimalOrNull;
@@ -10147,37 +10165,6 @@ function predecessor(val, type, precision) {
         return null;
     }
 }
-function maxValueForInstance(val) {
-    if (typeof val === 'number') {
-        if (Number.isInteger(val)) {
-            return limits_1.MAX_INT_VALUE;
-        }
-        else {
-            return limits_1.MAX_FLOAT_VALUE;
-        }
-    }
-    else if (typeof val === 'bigint') {
-        return limits_1.MAX_LONG_VALUE;
-    }
-    else if (val && val.isTime && val.isTime()) {
-        return datetime_1.MAX_TIME_VALUE?.copy();
-    }
-    else if (val && val.isDateTime) {
-        return datetime_1.MAX_DATETIME_VALUE?.copy();
-    }
-    else if (val && val.isDate) {
-        return datetime_1.MAX_DATE_VALUE?.copy();
-    }
-    else if (val && val.isQuantity) {
-        // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
-        // especially if this is being used in the context of an interval or uncertainty since the
-        // left and right sides need to be comparable in those cases.
-        return new quantity_1.Quantity(limits_1.MAX_FLOAT_VALUE, val.unit || '1');
-    }
-    else {
-        return null;
-    }
-}
 function maxValueForType(type, quantityInstance) {
     switch (type) {
         case elmTypes_1.ELM_INTEGER_TYPE:
@@ -10196,41 +10183,11 @@ function maxValueForType(type, quantityInstance) {
             // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
             // especially if this is being used in the context of an interval or uncertainty since the
             // left and right sides need to be comparable in those cases.
+            // See: https://jira.hl7.org/browse/FHIR-57935
             return new quantity_1.Quantity(limits_1.MAX_FLOAT_VALUE, quantityInstance?.unit || '1');
         }
     }
     return null;
-}
-function minValueForInstance(val) {
-    if (typeof val === 'number') {
-        if (Number.isInteger(val)) {
-            return limits_1.MIN_INT_VALUE;
-        }
-        else {
-            return limits_1.MIN_FLOAT_VALUE;
-        }
-    }
-    else if (typeof val === 'bigint') {
-        return limits_1.MIN_LONG_VALUE;
-    }
-    else if (val && val.isTime && val.isTime()) {
-        return datetime_1.MIN_TIME_VALUE?.copy();
-    }
-    else if (val && val.isDateTime) {
-        return datetime_1.MIN_DATETIME_VALUE?.copy();
-    }
-    else if (val && val.isDate) {
-        return datetime_1.MIN_DATE_VALUE?.copy();
-    }
-    else if (val && val.isQuantity) {
-        // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
-        // especially if this is being used in the context of an interval or uncertainty since the
-        // left and right sides need to be comparable in those cases.
-        return new quantity_1.Quantity(limits_1.MIN_FLOAT_VALUE, val.unit || '1');
-    }
-    else {
-        return null;
-    }
 }
 function minValueForType(type, quantityInstance) {
     switch (type) {
@@ -10250,6 +10207,7 @@ function minValueForType(type, quantityInstance) {
             // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
             // especially if this is being used in the context of an interval or uncertainty since the
             // left and right sides need to be comparable in those cases.
+            // See: https://jira.hl7.org/browse/FHIR-57935
             return new quantity_1.Quantity(limits_1.MIN_FLOAT_VALUE, quantityInstance?.unit || '1');
         }
     }

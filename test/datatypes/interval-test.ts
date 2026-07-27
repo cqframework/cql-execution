@@ -13,7 +13,6 @@ import { Interval } from '../../src/datatypes/interval';
 import { Quantity } from '../../src/datatypes/quantity';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 import {
-  ELM_ANY_TYPE,
   ELM_DATE_TYPE,
   ELM_DATETIME_TYPE,
   ELM_DECIMAL_TYPE,
@@ -141,19 +140,6 @@ describe('Interval', () => {
       new Interval(new Quantity(0, 'mg'), new Quantity(100, 'mg'))
         .getPointSize()
         .should.eql(new Quantity(0.00000001, 'mg'));
-    });
-
-    it('should use low or high input to determine point size when point type is not specific', () => {
-      let ivl = new Interval(new Quantity(0, 'mg'), null);
-      ivl.pointType = ELM_ANY_TYPE;
-      ivl.getPointSize().should.eql(new Quantity(0.00000001, 'mg'));
-      ivl.pointType = null;
-      ivl.getPointSize().should.eql(new Quantity(0.00000001, 'mg'));
-      ivl = new Interval(null, new Quantity(100, 'mg'));
-      ivl.pointType = ELM_ANY_TYPE;
-      ivl.getPointSize().should.eql(new Quantity(0.00000001, 'mg'));
-      ivl.pointType = null;
-      ivl.getPointSize().should.eql(new Quantity(0.00000001, 'mg'));
     });
 
     it('should throw an error if the point type cannot be determined', () => {

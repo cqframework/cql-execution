@@ -5,8 +5,6 @@ import {
   predecessor,
   maxValueForType,
   minValueForType,
-  minValueForInstance,
-  maxValueForInstance,
   limitDecimalPrecision,
   subtract,
   add
@@ -556,8 +554,7 @@ export class Interval {
     // "If the low boundary of the interval is closed and null, this operator returns the minimum
     // value for the point type of the interval."
     if (this.low == null) {
-      const quantityInstance =
-        this.high && this.pointType == ELM_QUANTITY_TYPE ? this.high : undefined;
+      const quantityInstance = getQuantityInstanceForMinMax(this);
       const minValue = minValueForType(this.pointType, quantityInstance);
       if (this.lowClosed || minValue == null) {
         return minValue;
@@ -566,7 +563,7 @@ export class Interval {
         // uncertainty from the minimum value for the point type of the interval to the high
         // boundary of the interval (using End operator semantics to determine the high boundary)."
         const end = ((end: any) => (end.isUncertainty ? end.high : end))(
-          this.high == null ? maxValueForType(this.pointType) : this.end()
+          this.high == null ? maxValueForType(this.pointType, quantityInstance) : this.end()
         );
         return new Uncertainty(minValue, end);
       }
@@ -582,8 +579,7 @@ export class Interval {
     // "If the high boundary of the interval is closed and null, this operator returns the maximum
     // value for the point type of the interval."
     if (this.high == null) {
-      const quantityInstance =
-        this.low && this.pointType == ELM_QUANTITY_TYPE ? this.low : undefined;
+      const quantityInstance = getQuantityInstanceForMinMax(this);
       const maxValue = maxValueForType(this.pointType, quantityInstance);
       if (this.highClosed || maxValue == null) {
         return maxValue;
@@ -592,7 +588,7 @@ export class Interval {
         // uncertainty from the low boundary of the interval (using Start operator semantics to
         // determine the low boundary) to the maximum value for the point type of the interval."
         const start = ((start: any) => (start.isUncertainty ? start.low : start))(
-          this.low == null ? minValueForType(this.pointType) : this.start()
+          this.low == null ? minValueForType(this.pointType, quantityInstance) : this.start()
         );
         return new Uncertainty(start, maxValue);
       }
@@ -700,15 +696,7 @@ export class Interval {
   // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#size
   getPointSize() {
     // "... point-size is determined by successor of minimum T - minimum T"
-    let minValue;
-    if (this.pointType != null && this.pointType !== ELM_ANY_TYPE) {
-      minValue = minValueForType(
-        this.pointType,
-        this.pointType === ELM_QUANTITY_TYPE ? (this.low ?? this.high) : undefined
-      );
-    } else {
-      minValue = minValueForInstance(this.low ?? this.high);
-    }
+    let minValue = minValueForType(this.pointType, getQuantityInstanceForMinMax(this));
 
     // due to floating point issues in JS, we must use 0.0 for Decimal/Quantity instead of min
     if (minValue === MIN_FLOAT_VALUE) {
@@ -751,9 +739,10 @@ export class Interval {
     const lowClosed = this.lowClosed || this.low != null;
     const highClosed = this.highClosed || this.high != null;
     if (this.pointType != null && this.pointType !== ELM_ANY_TYPE) {
+      const quantityInstance = getQuantityInstanceForMinMax(this);
       let low;
       if (this.lowClosed && this.low == null) {
-        low = minValueForType(this.pointType);
+        low = minValueForType(this.pointType, quantityInstance);
       } else if (!this.lowClosed && this.low != null) {
         low = successor(this.low, this.pointType);
       } else {
@@ -761,17 +750,17 @@ export class Interval {
       }
       let high;
       if (this.highClosed && this.high == null) {
-        high = maxValueForType(this.pointType);
+        high = maxValueForType(this.pointType, quantityInstance);
       } else if (!this.highClosed && this.high != null) {
         high = predecessor(this.high, this.pointType);
       } else {
         high = this.high;
       }
       if (low == null) {
-        low = new Uncertainty(minValueForType(this.pointType), high);
+        low = new Uncertainty(minValueForType(this.pointType, quantityInstance), high);
       }
       if (high == null) {
-        high = new Uncertainty(low, maxValueForType(this.pointType));
+        high = new Uncertainty(low, maxValueForType(this.pointType, quantityInstance));
       }
       return new Interval(low, high, lowClosed, highClosed);
     } else {
@@ -798,10 +787,10 @@ export class Interval {
 // meaning? This does affect test expectations and representation of returned results for callers.
 function normalizeInterval(interval: Interval) {
   const ivl = interval.copy();
+  const minValue = minValueForType(ivl.pointType, getQuantityInstanceForMinMax(ivl));
+  const maxValue = maxValueForType(ivl.pointType, getQuantityInstanceForMinMax(ivl));
   if (ivl.low != null && ivl.lowClosed !== false) {
     if (ivl.low.isUncertainty) {
-      const minValue = minValueForInstance(ivl.low.low);
-      const maxValue = maxValueForInstance(ivl.low.low);
       if (
         cmp.equals(ivl.low.low, minValue) &&
         (cmp.equals(ivl.low.high, maxValue) || cmp.equals(ivl.low.high, ivl.high))
@@ -809,14 +798,12 @@ function normalizeInterval(interval: Interval) {
         ivl.low = null;
         ivl.lowClosed = false;
       }
-    } else if (cmp.equals(ivl.low, minValueForInstance(ivl.low))) {
+    } else if (cmp.equals(ivl.low, minValue)) {
       ivl.low = null;
     }
   }
   if (ivl.high != null && ivl.highClosed !== false) {
     if (ivl.high.isUncertainty) {
-      const minValue = minValueForInstance(ivl.high.low);
-      const maxValue = maxValueForInstance(ivl.high.low);
       if (
         cmp.equals(ivl.high.high, maxValue) &&
         (cmp.equals(ivl.high.low, minValue) || cmp.equals(ivl.high.low, ivl.low))
@@ -824,12 +811,40 @@ function normalizeInterval(interval: Interval) {
         ivl.high = null;
         ivl.highClosed = false;
       }
-    } else if (cmp.equals(ivl.high, maxValueForInstance(ivl.high))) {
+    } else if (cmp.equals(ivl.high, maxValue)) {
       ivl.high = null;
     }
   }
 
   return ivl;
+}
+
+function getQuantityInstanceForMinMax(ivl?: Interval): Quantity | undefined {
+  if (ivl?.pointType !== ELM_QUANTITY_TYPE) {
+    return;
+  }
+  if (ivl.low?.isQuantity) {
+    return ivl.low;
+  }
+  if (ivl.high?.isQuantity) {
+    return ivl.high;
+  }
+  if (ivl.low?.isUncertainty) {
+    if (ivl.low.low?.isQuantity) {
+      return ivl.low.low;
+    }
+    if (ivl.low.high?.isQuantity) {
+      return ivl.low.high;
+    }
+  }
+  if (ivl.high?.isUncertainty) {
+    if (ivl.high.low?.isQuantity) {
+      return ivl.high.low;
+    }
+    if (ivl.high.high?.isQuantity) {
+      return ivl.high.high;
+    }
+  }
 }
 
 function performConversionIfNecessary(left: Interval, right: Interval) {

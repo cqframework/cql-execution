@@ -336,31 +336,6 @@ export function predecessor(val: any, type?: string, precision?: string): any {
   }
 }
 
-export function maxValueForInstance(val: any) {
-  if (typeof val === 'number') {
-    if (Number.isInteger(val)) {
-      return MAX_INT_VALUE;
-    } else {
-      return MAX_FLOAT_VALUE;
-    }
-  } else if (typeof val === 'bigint') {
-    return MAX_LONG_VALUE;
-  } else if (val && val.isTime && val.isTime()) {
-    return MAX_TIME_VALUE?.copy();
-  } else if (val && val.isDateTime) {
-    return MAX_DATETIME_VALUE?.copy();
-  } else if (val && val.isDate) {
-    return MAX_DATE_VALUE?.copy();
-  } else if (val && val.isQuantity) {
-    // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
-    // especially if this is being used in the context of an interval or uncertainty since the
-    // left and right sides need to be comparable in those cases.
-    return new Quantity(MAX_FLOAT_VALUE, val.unit || '1');
-  } else {
-    return null;
-  }
-}
-
 export function maxValueForType(type: string, quantityInstance?: Quantity) {
   switch (type) {
     case ELM_INTEGER_TYPE:
@@ -379,35 +354,11 @@ export function maxValueForType(type: string, quantityInstance?: Quantity) {
       // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
       // especially if this is being used in the context of an interval or uncertainty since the
       // left and right sides need to be comparable in those cases.
+      // See: https://jira.hl7.org/browse/FHIR-57935
       return new Quantity(MAX_FLOAT_VALUE, quantityInstance?.unit || '1');
     }
   }
   return null;
-}
-
-export function minValueForInstance(val: any) {
-  if (typeof val === 'number') {
-    if (Number.isInteger(val)) {
-      return MIN_INT_VALUE;
-    } else {
-      return MIN_FLOAT_VALUE;
-    }
-  } else if (typeof val === 'bigint') {
-    return MIN_LONG_VALUE;
-  } else if (val && val.isTime && val.isTime()) {
-    return MIN_TIME_VALUE?.copy();
-  } else if (val && val.isDateTime) {
-    return MIN_DATETIME_VALUE?.copy();
-  } else if (val && val.isDate) {
-    return MIN_DATE_VALUE?.copy();
-  } else if (val && val.isQuantity) {
-    // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
-    // especially if this is being used in the context of an interval or uncertainty since the
-    // left and right sides need to be comparable in those cases.
-    return new Quantity(MIN_FLOAT_VALUE, val.unit || '1');
-  } else {
-    return null;
-  }
 }
 
 export function minValueForType(type: string, quantityInstance?: Quantity) {
@@ -428,6 +379,7 @@ export function minValueForType(type: string, quantityInstance?: Quantity) {
       // Although the spec says max Quantity has unit '1', it doesn't make sense to change the unit,
       // especially if this is being used in the context of an interval or uncertainty since the
       // left and right sides need to be comparable in those cases.
+      // See: https://jira.hl7.org/browse/FHIR-57935
       return new Quantity(MIN_FLOAT_VALUE, quantityInstance?.unit || '1');
     }
   }
