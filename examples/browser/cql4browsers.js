@@ -2392,6 +2392,16 @@ class Interval {
         }
         throw new Error('Point type of interval cannot be determined.');
     }
+    // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#point-from
+    pointFrom() {
+        // "The point from operator extracts the single point from a unit interval."
+        const start = this.start();
+        if (cmp.equals(start, this.end())) {
+            return start;
+        }
+        // "If the argument is not a unit interval, a run-time error is thrown."
+        throw new Error('PointFrom operator may only be used on an interval containing a single point.');
+    }
     toClosed() {
         // Calculate the closed flags. Despite the name of this function, if a boundary is null open,
         // we cannot close the boundary because that changes its meaning from "unknown" to "max/min value"
@@ -2429,13 +2439,6 @@ class Interval {
         else {
             return new Interval(this.low, this.high, lowClosed, highClosed);
         }
-    }
-    pointFrom() {
-        const start = this.start();
-        if (cmp.equals(start, this.end())) {
-            return start;
-        }
-        throw new Error('PointFrom operator may only be used on an interval containing a single point.');
     }
     toString() {
         const start = this.lowClosed ? '[' : '(';
