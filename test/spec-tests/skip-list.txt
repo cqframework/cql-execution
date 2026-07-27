@@ -59,3 +59,4 @@ CqlArithmeticFunctionsTest.Modulo.Modulo10By3Quantity                 Modulo not
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide414By206DQuantity"        Truncated divide not implemented for Quantity
 
 # Unimplemented (New in CQL 2.0)
+CqlListOperatorsTest.Slice                              Slice not implemented
