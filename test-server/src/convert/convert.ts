@@ -328,7 +328,6 @@ function toFhirQuantity(val: CqlQuantity | number, isIntegerOrLong = false): Fhi
     }
   }
   if (isIntegerOrLong) {
-    // @ts-expect-error R4 Quantity type should allow _value for setting id and extension on decimal value
     fq._value = {
       extension: [
         { url: 'http://hl7.org/fhir/StructureDefinition/quantity-precision', valueInteger: 0 }

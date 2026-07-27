@@ -89,7 +89,7 @@
     "sinon": "^22.1.0",
     "test-console": "^2.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "xml-js": "^1.6.11"
   },
   "dependencies": {
