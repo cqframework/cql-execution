@@ -1034,42 +1034,6 @@ class AbstractDate {
             return result;
         }
     }
-    getFieldFloor(field) {
-        switch (field) {
-            case 'month':
-                return 1;
-            case 'day':
-                return 1;
-            case 'hour':
-                return 0;
-            case 'minute':
-                return 0;
-            case 'second':
-                return 0;
-            case 'millisecond':
-                return 0;
-            default:
-                throw new Error('Tried to floor a field that has no floor value: ' + field);
-        }
-    }
-    getFieldCieling(field) {
-        switch (field) {
-            case 'month':
-                return 12;
-            case 'day':
-                return daysInMonth(this.year, this.month);
-            case 'hour':
-                return 23;
-            case 'minute':
-                return 59;
-            case 'second':
-                return 59;
-            case 'millisecond':
-                return 999;
-            default:
-                throw new Error('Tried to ceiling a field that has no cieling value: ' + field);
-        }
-    }
 }
 class DateTime extends AbstractDate {
     static parse(string) {
@@ -1724,13 +1688,6 @@ function compareWithDefaultResult(a, b, defaultResult) {
     }
     // if we made it here, then all fields matched.
     return true;
-}
-function daysInMonth(year, month) {
-    if (year == null || month == null) {
-        throw new Error('daysInMonth requires year and month as arguments');
-    }
-    // Month is 1-indexed here because of the 0 day
-    return new util_1.jsDate(year, month, 0).getDate();
 }
 function isValidDateStringFormat(string) {
     if (typeof string !== 'string') {
