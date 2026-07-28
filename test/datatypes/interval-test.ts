@@ -1416,6 +1416,46 @@ describe('DateTimeInterval', () => {
       dateTimeIntervalWithBoundlessLow.sameAs(dateIntervalWithBoundlessLow).should.be.true();
     });
 
+    it('should convert uncertain Date interval boundaries to DateTime', () => {
+      const dateLow = Date.parse('2012-01-01');
+      const dateHigh = Date.parse('2012-12-31');
+      const dateTimeLow = DateTime.parse('2012-01-01');
+      const dateTimeHigh = DateTime.parse('2012-12-31');
+      const dateIntervalWithUncertainLow = new Interval(
+        new Uncertainty(dateLow),
+        dateHigh,
+        true,
+        true,
+        ELM_DATE_TYPE
+      );
+      const dateTimeIntervalWithUncertainLow = new Interval(
+        new Uncertainty(dateTimeLow),
+        dateTimeHigh,
+        true,
+        true,
+        ELM_DATETIME_TYPE
+      );
+      const dateIntervalWithUncertainHigh = new Interval(
+        dateLow,
+        new Uncertainty(dateHigh),
+        true,
+        true,
+        ELM_DATE_TYPE
+      );
+      const dateTimeIntervalWithUncertainHigh = new Interval(
+        dateTimeLow,
+        new Uncertainty(dateTimeHigh),
+        true,
+        true,
+        ELM_DATETIME_TYPE
+      );
+
+      dateIntervalWithUncertainLow.sameAs(dateTimeIntervalWithUncertainLow).should.be.true();
+      dateTimeIntervalWithUncertainLow.sameAs(dateIntervalWithUncertainLow).should.be.true();
+      dateIntervalWithUncertainHigh.sameAs(dateTimeIntervalWithUncertainHigh).should.be.true();
+      dateTimeIntervalWithUncertainHigh.sameAs(dateIntervalWithUncertainHigh).should.be.true();
+    });
+
     it('should properly handle boundless and unknown intervals', () => {
       boundlessInterval(ELM_DATETIME_TYPE)
         .sameAs(boundlessInterval(ELM_DATETIME_TYPE))
@@ -1918,6 +1958,30 @@ describe('DateTimeInterval', () => {
       y.toDay
         .except(x.toMinute)
         .should.equalInterval(new Interval(x.toMinute.high, y.toDay.high, false, true));
+    });
+
+    it('should handle null temporal boundaries when determining precision', () => {
+      const a = new Interval(null, DateTime.parse('2012-12-31'));
+      const b = new Interval(DateTime.parse('2012-06-01'), DateTime.parse('2013-01-01'));
+      a.except(b).should.equalInterval(
+        new Interval(null, DateTime.parse('2012-06-01'), true, false)
+      );
+    });
+
+    it('should handle uncertain temporal boundaries when determining precision', () => {
+      const a = new Interval(
+        new Uncertainty(DateTime.parse('2012-01-01'), DateTime.parse('2012-01-31')),
+        DateTime.parse('2012-12-31')
+      );
+      const b = new Interval(DateTime.parse('2012-06-01'), DateTime.parse('2013-01-01'));
+      a.except(b).should.equalInterval(
+        new Interval(
+          new Uncertainty(DateTime.parse('2012-01-01'), DateTime.parse('2012-01-31')),
+          DateTime.parse('2012-06-01'),
+          true,
+          false
+        )
+      );
     });
 
     it('should throw when the argument is a point', () => {

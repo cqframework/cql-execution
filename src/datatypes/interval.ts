@@ -23,6 +23,8 @@ import {
 import { MIN_FLOAT_VALUE } from '../util/limits';
 import { Quantity } from './quantity';
 
+// TODO: Replace all build.fhir.org URL references with stable references once CQL 2.0 is pulished
+
 export class Interval {
   constructor(
     public low: any,
@@ -308,10 +310,15 @@ export class Interval {
       this.pointType === ELM_DATETIME_TYPE ||
       this.pointType === ELM_TIME_TYPE
     ) {
-      const boundaries = [this.low, this.high, other.low, other.high];
-      const leastPreciseBoundary = boundaries.reduce((least, boundary) =>
-        boundary?.isLessPrecise(least) ? boundary : least
+      const boundaries = [this.low, this.high, other.low, other.high].flatMap(boundary =>
+        boundary?.isUncertainty ? [boundary.low, boundary.high] : [boundary]
       );
+      const leastPreciseBoundary = boundaries
+        .filter(boundary => boundary != null)
+        .reduce(
+          (least, boundary) => (least == null || boundary.isLessPrecise(least) ? boundary : least),
+          null
+        );
       precision = leastPreciseBoundary?.getPrecision();
     }
 
@@ -850,22 +857,30 @@ function getQuantityInstanceForMinMax(ivl?: Interval): Quantity | undefined {
 function performConversionIfNecessary(left: Interval, right: Interval) {
   if (left.pointType === ELM_DATE_TYPE && right.pointType === ELM_DATETIME_TYPE) {
     left = new Interval(
-      left.low?.getDateTime(),
-      left.high?.getDateTime(),
+      convertDateBoundaryToDateTime(left.low),
+      convertDateBoundaryToDateTime(left.high),
       left.lowClosed,
       left.highClosed,
       ELM_DATETIME_TYPE
     );
   } else if (left.pointType === ELM_DATETIME_TYPE && right.pointType === ELM_DATE_TYPE) {
     right = new Interval(
-      right.low?.getDateTime(),
-      right.high?.getDateTime(),
+      convertDateBoundaryToDateTime(right.low),
+      convertDateBoundaryToDateTime(right.high),
       right.lowClosed,
       right.highClosed,
       ELM_DATETIME_TYPE
     );
   }
   return [left, right];
+}
+
+function convertDateBoundaryToDateTime(boundary: any) {
+  const convert = (value: any) => value?.getDateTime() ?? value;
+  if (boundary?.isUncertainty) {
+    return new Uncertainty(convert(boundary.low), convert(boundary.high));
+  }
+  return convert(boundary);
 }
 
 function lowestUncertainty(x: any, y: any) {
