@@ -852,6 +852,23 @@ describe('Date.getPrecisionValue', () => {
   });
 });
 
+describe('Date boundary functions', () => {
+  it('returns the high boundary at the requested precision', () => {
+    Date.parse('2014').highBoundary(6).should.eql(Date.parse('2014-12'));
+    Date.parse('2014').highBoundary().should.eql(Date.parse('2014-12-31'));
+  });
+
+  it('returns the low boundary at the requested precision', () => {
+    Date.parse('2014').lowBoundary(6).should.eql(Date.parse('2014-01'));
+    Date.parse('2014').lowBoundary().should.eql(Date.parse('2014-01-01'));
+  });
+
+  it('returns null when the requested precision exceeds the implementation maximum', () => {
+    should(Date.parse('2014').highBoundary(9)).be.null();
+    should(Date.parse('2014').lowBoundary(9)).be.null();
+  });
+});
+
 describe('Date.getDateTime', () => {
   it('should return a DateTime that has the passed in timeZoneOffset', () => {
     const d = new Date(2000, 12, 1);

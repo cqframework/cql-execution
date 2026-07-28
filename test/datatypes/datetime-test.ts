@@ -3985,3 +3985,29 @@ describe('DateTime.getPrecisionValue', () => {
     DateTime.parse('0000-01-01T12:55:14.456').getPrecisionValue().should.equal(9);
   });
 });
+
+describe('DateTime.highBoundary', () => {
+  it('should properly get high boundary for a date', () => {
+    DateTime.parse('2014').highBoundary(6).should.eql(DateTime.parse('2014-12'));
+
+  });
+
+  it('should properly get high boundary for a datetime', () => {
+    DateTime.parse('2014-01-01T08').highBoundary(17).should.eql(DateTime.parse('2014-01-01T08:59:59.999'));
+  });
+
+  it('should properly get high boundary through day precision', () => {
+    DateTime.parse('2014').highBoundary().should.eql(DateTime.parse('2014-12-31T23:59:59.999'));
+  });
+});
+
+describe('DateTime.lowBoundary', () => {
+  it('should properly get low boundary for a date', () => {
+    DateTime.parse('2014').lowBoundary(6).should.eql(DateTime.parse('2014-01'));
+
+  });
+
+  it('should properly get high boundary for a datetime', () => {
+    DateTime.parse('2014-01-01T08').lowBoundary(17).should.eql(DateTime.parse('2014-01-01T08:00:00.000'));
+  });
+});

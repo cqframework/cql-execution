@@ -844,6 +844,61 @@ export class DateTime extends AbstractDate {
     );
   }
 
+  highBoundary(precision?: number) {
+    return this._boundary('high', precision);
+  }
+
+  lowBoundary(precision?: number) {
+    return this._boundary('low', precision);
+  }
+
+  _boundary(mode: 'high' | 'low', precision?: number) {
+    const currentPrecision = this.getPrecisionValue();
+
+    if (precision === currentPrecision) {
+      return this.copy();
+    }
+
+    const precisionValueMap = this.isTime()
+      ? TIME_PRECISION_VALUE_MAP
+      : DATETIME_PRECISION_VALUE_MAP;
+
+    const maxPossiblePrecision = Math.max(...precisionValueMap.values());
+    if (precision == null) {
+      precision = maxPossiblePrecision;
+    } else if (precision > maxPossiblePrecision) {
+      return null;
+    }
+
+    // find the field that maps to the given precision integer
+    // TODO: be permissive or not?
+    const fieldEntry = precisionValueMap.entries().find(([_k, v]) => v === precision);
+    if (!fieldEntry) {
+      throw new Error(`Invalid precision: ${precision}`);
+    }
+    const precisionKey = fieldEntry[0];
+
+    if (precision < currentPrecision) {
+      return this.reducedPrecision(precisionKey);
+    }
+
+    const returnVal = this.copy();
+
+    const startFieldIndex = DateTime.FIELDS.indexOf(this.getPrecision()!);
+    const endFieldIndex = DateTime.FIELDS.indexOf(precisionKey);
+    const fieldsToSet = DateTime.FIELDS.slice(startFieldIndex + 1, endFieldIndex + 1);
+    // startFieldIndex +1 because we don't want to set that field, that's the highest precision field currently set
+    // endFieldIndex +1 because we do want to set that field, and slice end param is exclusive
+
+    for (const field of fieldsToSet) {
+      // @ts-ignore
+      returnVal[field] =
+        mode === 'high' ? returnVal.getFieldCieling(field) : returnVal.getFieldFloor(field);
+    }
+
+    return returnVal;
+  }
+
   isUTC() {
     // A timezoneOffset of 0 indicates UTC time.
     return !this.timezoneOffset;
@@ -1139,6 +1194,52 @@ export class Date extends AbstractDate {
       wholeLuxonDuration(b.low.diff(a.high, unitField), unitField),
       wholeLuxonDuration(b.high.diff(a.low, unitField), unitField)
     );
+  }
+
+  highBoundary(precision?: number) {
+    return this._boundary('high', precision);
+  }
+
+  lowBoundary(precision?: number) {
+    return this._boundary('low', precision);
+  }
+
+  _boundary(mode: 'high' | 'low', precision?: number) {
+    const currentPrecision = this.getPrecisionValue();
+
+    if (precision === currentPrecision) {
+      return this.copy();
+    }
+
+    const maxPossiblePrecision = DATETIME_PRECISION_VALUE_MAP.get(Date.Unit.DAY)!;
+    const requestedPrecision = precision ?? maxPossiblePrecision;
+    if (requestedPrecision > maxPossiblePrecision) {
+      return null;
+    }
+
+    const fieldEntry = DATETIME_PRECISION_VALUE_MAP.entries().find(
+      ([_key, value]) => value === requestedPrecision
+    );
+    if (!fieldEntry) {
+      throw new Error(`Invalid precision: ${requestedPrecision}`);
+    }
+    const precisionKey = fieldEntry[0];
+
+    if (requestedPrecision < currentPrecision) {
+      return this.reducedPrecision(precisionKey);
+    }
+
+    const result = this.copy();
+    const startFieldIndex = Date.FIELDS.indexOf(this.getPrecision()!);
+    const endFieldIndex = Date.FIELDS.indexOf(precisionKey);
+    const fieldsToSet = Date.FIELDS.slice(startFieldIndex + 1, endFieldIndex + 1);
+
+    for (const field of fieldsToSet) {
+      // @ts-ignore
+      result[field] = mode === 'high' ? result.getFieldCieling(field) : result.getFieldFloor(field);
+    }
+
+    return result;
   }
 
   getPrecision() {
