@@ -83,7 +83,7 @@
     "sinon": "^22.1.0",
     "test-console": "^2.0.0",
     "tsx": "^4.23.1",
-    "typescript": "^6.0.3",
+    "typescript": "^7.0.2",
     "xml-js": "^1.6.11"
   },
   "dependencies": {
