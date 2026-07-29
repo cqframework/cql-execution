@@ -1775,6 +1775,7 @@ const cmp = __importStar(require("../util/comparison"));
 const elmTypes_1 = require("../util/elmTypes");
 const limits_1 = require("../util/limits");
 const quantity_1 = require("./quantity");
+// TODO: Replace all build.fhir.org URL references with stable references once CQL 2.0 is pulished
 class Interval {
     constructor(low, high, lowClosed, highClosed, pointType = elmTypes_1.ELM_ANY_TYPE) {
         this.low = low;
@@ -2020,8 +2021,10 @@ class Interval {
         if (this.pointType === elmTypes_1.ELM_DATE_TYPE ||
             this.pointType === elmTypes_1.ELM_DATETIME_TYPE ||
             this.pointType === elmTypes_1.ELM_TIME_TYPE) {
-            const boundaries = [this.low, this.high, other.low, other.high];
-            const leastPreciseBoundary = boundaries.reduce((least, boundary) => boundary?.isLessPrecise(least) ? boundary : least);
+            const boundaries = [this.low, this.high, other.low, other.high].flatMap(boundary => boundary?.isUncertainty ? [boundary.low, boundary.high] : [boundary]);
+            const leastPreciseBoundary = boundaries
+                .filter(boundary => boundary != null)
+                .reduce((least, boundary) => (least == null || boundary.isLessPrecise(least) ? boundary : least), null);
             precision = leastPreciseBoundary?.getPrecision();
         }
         if (this.overlaps(other, precision) === false) {
@@ -2468,12 +2471,19 @@ function getQuantityInstanceForMinMax(ivl) {
 }
 function performConversionIfNecessary(left, right) {
     if (left.pointType === elmTypes_1.ELM_DATE_TYPE && right.pointType === elmTypes_1.ELM_DATETIME_TYPE) {
-        left = new Interval(left.low?.getDateTime(), left.high?.getDateTime(), left.lowClosed, left.highClosed, elmTypes_1.ELM_DATETIME_TYPE);
+        left = new Interval(convertDateBoundaryToDateTime(left.low), convertDateBoundaryToDateTime(left.high), left.lowClosed, left.highClosed, elmTypes_1.ELM_DATETIME_TYPE);
     }
     else if (left.pointType === elmTypes_1.ELM_DATETIME_TYPE && right.pointType === elmTypes_1.ELM_DATE_TYPE) {
-        right = new Interval(right.low?.getDateTime(), right.high?.getDateTime(), right.lowClosed, right.highClosed, elmTypes_1.ELM_DATETIME_TYPE);
+        right = new Interval(convertDateBoundaryToDateTime(right.low), convertDateBoundaryToDateTime(right.high), right.lowClosed, right.highClosed, elmTypes_1.ELM_DATETIME_TYPE);
     }
     return [left, right];
+}
+function convertDateBoundaryToDateTime(boundary) {
+    const convert = (value) => value?.getDateTime() ?? value;
+    if (boundary?.isUncertainty) {
+        return new uncertainty_1.Uncertainty(convert(boundary.low), convert(boundary.high));
+    }
+    return convert(boundary);
 }
 function lowestUncertainty(x, y) {
     if (!x?.isUncertainty) {
