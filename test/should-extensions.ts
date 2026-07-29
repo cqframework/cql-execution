@@ -12,5 +12,19 @@ declare module 'should' {
 
   should(this.obj?.isInterval).be.ok();
   should(expected?.isInterval).be.ok();
-  this.obj.toClosed().should.eql(expected.toClosed());
+  const normalizedThis = new Interval(
+    this.obj.start(),
+    this.obj.end(),
+    true,
+    true,
+    this.obj.pointType
+  );
+  const normalizedExpected = new Interval(
+    expected.start(),
+    expected.end(),
+    true,
+    true,
+    expected.pointType
+  );
+  normalizedThis.should.eql(normalizedExpected);
 });
