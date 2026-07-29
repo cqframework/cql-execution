@@ -7,7 +7,7 @@
     "copyfiles": "copyfiles -u 1 src/translate/**/*.{xml,cql} dist",
     "start": "node dist/app.js",
     "dev": "npm --prefix .. run build && tsx watch --include \"src/**/*.ts\" src/app.ts",
-    "check": "npm run test && npm run lint && npm run prettier",
+    "check": "tsc && npm run test && npm run lint && npm run prettier",
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
     "prettier": "prettier --check \"**/*.{js,mjs,ts}\"",
@@ -32,7 +32,6 @@
     "copyfiles": "^2.4.1",
     "oxlint": "^1.76.0",
     "prettier": "^3.9.6",
-    "ts-node": "^10.9.2",
     "tsx": "^4.23.1",
     "typescript": "^6.0.3",
     "vitest": "^4.1.10"

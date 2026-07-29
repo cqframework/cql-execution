@@ -151,10 +151,10 @@ In the above file, we've assumed the JSON ELM JSON file for the measure is calle
 also assumed a couple of very simple patients.  Let's call the file we just created
 `exec-age.ts`.
 
-Now we can execute the measure using [ts-node](https://www.npmjs.com/package/ts-node):
+Now we can execute the measure using [tsx](https://tsx.is/):
 
 ``` bash
-npx ts-node -O '{ "resolveJsonModule": true }' --files ${path_to_cql-execution}/customCQL/exec-age.ts
+npx tsx ${path_to_cql-execution}/customCQL/exec-age.ts
 ```
 
 If all is well, it should print the result object to standard out.

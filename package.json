@@ -82,7 +82,7 @@
     "should-sinon": "0.0.6",
     "sinon": "^22.1.0",
     "test-console": "^2.0.0",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.23.1",
     "typescript": "^6.0.3",
     "xml-js": "^1.6.11"
   },
@@ -110,14 +110,15 @@
     "build:all": "npm run build && npm run build:browserify && npm run build:test-data && npm run build:spec-test-data",
     "watch:test-data": "cd \"./test/generator\" && \"./gradlew\" watchTestData && cd ..",
     "check-skip-list": "node \"test/spec-tests/check-skip-list.js\"",
-    "test": "cross-env TS_NODE_PROJECT=\"./test/tsconfig.json\" TS_NODE_FILES=true mocha --reporter spec --recursive",
-    "test:nyc": "cross-env TS_NODE_PROJECT=\"./test/tsconfig.json\" TS_NODE_FILES=true nyc --reporter=html npx mocha --reporter spec --recursive",
-    "test:watch": "cross-env TS_NODE_PROJECT=\"./test/tsconfig.json\" TS_NODE_FILES=true mocha --reporter spec --recursive --watch",
+    "test": "cross-env TSX_TSCONFIG_PATH=\"./test/tsconfig.json\" mocha --reporter spec --recursive",
+    "test:nyc": "cross-env TSX_TSCONFIG_PATH=\"./test/tsconfig.json\" nyc --reporter=html npx mocha --reporter spec --recursive",
+    "test:watch": "cross-env TSX_TSCONFIG_PATH=\"./test/tsconfig.json\" mocha --reporter spec --recursive --watch",
+    "test:typecheck": "tsc --project test/tsconfig.json --noEmit",
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
     "prettier": "prettier --check \"**/*.{js,mjs,ts}\"",
     "prettier:fix": "prettier --write \"**/*.{js,mjs,ts}\"",
-    "check": "npm test && npm run build && npm run lint && npm run prettier",
+    "check": "npm run build:all && npm run test:typecheck && npm test && npm run lint && npm run prettier",
     "test:plus": "echo 'Please use `npm check` instead.'"
   },
   "license": "Apache-2.0"
