@@ -22,7 +22,7 @@ mv ./examples/browser/cql4browsers.js.original ./examples/browser/cql4browsers.j
 
 # Exit with a non-zero code if the diff isn't empty
 if [ "$diff" != "" ]; then
-  echo "cql4browsers.js is out of date. Please run 'npm install' locally and commit/push the result"
+  echo "cql4browsers.js is out of date. Please run 'npm run build:browser' locally and commit/push the result"
   exit 1
 fi
 

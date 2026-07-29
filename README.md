@@ -358,5 +358,5 @@ If TypeScript source code is modified, `cql4browsers.js` needs to be included in
 otherwise GitHub Actions CI will fail. To generate this file, run:
 
 ```
-npm run build:browserify
+npm run build:browser
 ```
