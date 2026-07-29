@@ -1,6 +1,5 @@
-/* eslint-disable
-    no-console,
-*/
+/* oxlint-disable no-console */
+
 const cql = require('../../lib/cql');
 const measure = require('./age.json');
 

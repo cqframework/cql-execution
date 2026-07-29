@@ -188,7 +188,6 @@ describe('Date.add', () => {
 
   it('should return a different object (copy)', () => {
     const date1 = Date.parse('2000-06-15');
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const date2 = date1.add(0, Date.Unit.SECOND);
     date1.should.eql(date2);

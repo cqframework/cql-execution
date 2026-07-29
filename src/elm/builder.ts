@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as E from './expressions';
 import { typeIsArray } from '../util/util';
 

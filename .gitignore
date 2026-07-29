@@ -3,7 +3,9 @@ lib-test
 node_modules
 .DS_Store
 .nyc_output
-.vscode
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.sample.json
 coverage
 *.original.coffee
 yarn-error.log

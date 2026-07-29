@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-/* eslint-disable no-console */
+/* oxlint-disable no-console */
 
 // We cannot use browserify CLI because there is no way to pass options into presets
 

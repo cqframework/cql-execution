@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as luxon from 'luxon';
 import should from 'should';
 import { DateTime, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } from '../../src/datatypes/datetime';

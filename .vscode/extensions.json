@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    // recommended for lint and code formatting
+    "oxc.oxc-vscode",
+    "esbenp.prettier-vscode"
+  ]
+}

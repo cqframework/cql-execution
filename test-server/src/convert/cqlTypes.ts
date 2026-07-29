@@ -82,7 +82,7 @@ export function guessSpecifierType(val: any): AnyTypeSpecifier | undefined {
   } else if (Array.isArray(val)) {
     // Get unique types from the array (by converting to string and putting in a Set)
     const typesAsStrings = Array.from(new Set(val.map(v => JSON.stringify(guessSpecifierType(v)))));
-    const types = typesAsStrings.map(ts => (/^{/.test(ts) ? JSON.parse(ts) : ts));
+    const types = typesAsStrings.map(ts => (ts.startsWith('{') ? JSON.parse(ts) : ts));
     return {
       type: 'ListTypeSpecifier',
       elementType: types.length == 1 ? types[0] : { type: 'ChoiceTypeSpecifier', choice: types }

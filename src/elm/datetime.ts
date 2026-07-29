@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Expression } from './expression';
 import { build } from './builder';
 import { Literal } from './literal';

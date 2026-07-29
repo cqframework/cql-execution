@@ -38,8 +38,8 @@ This project uses Node.js. It has been tested using Node 24 but should work with
 
 The `package.json` file defines scripts to support development of the test-server source code. These include:
 
-- `npm run lint`: run eslint against the test-server source code
-- `npm run lint:fix`: fix eslint errors (as possible)
+- `npm run lint`: run oxlint against the test-server source code
+- `npm run lint:fix`: fix oxlint errors (as possible)
 - `npm run prettier`: run prettier against the test-server source code
 - `npm run prettier:fix`: fix prettier violations (as possible)
 - `npm test`: run the unit tests
@@ -119,4 +119,3 @@ This server is designed to be a `$cql` target for the [cql-tests-runner](https:/
   ```
 
 The runner will POST each test expression to `http://localhost:8000/fhir/$cql` and expect FHIR `Parameters` responses per the mapping. The test-server logs each incoming expression, the raw result, and the result mapped to `FHIR Parameters`. When the run is done, you can find the results in the cql-tests-runner folder's `results` sub-folder.
-

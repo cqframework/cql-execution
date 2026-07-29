@@ -27,10 +27,12 @@ export class If extends Expression {
 
 export class CaseItem {
   when: any;
+  // oxlint-disable-next-line unicorn/no-thenable -- CaseItem mirrors ELM's `then` field.
   then: any;
 
   constructor(json: any) {
     this.when = build(json.when);
+    // oxlint-disable-next-line unicorn/no-thenable -- CaseItem mirrors ELM's `then` field.
     this.then = build(json.then);
   }
 }

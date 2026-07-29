@@ -560,7 +560,6 @@ __exportStar(require("./ratio"), exports);
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MAX_TIME_VALUE = exports.MIN_TIME_VALUE = exports.MAX_DATE_VALUE = exports.MIN_DATE_VALUE = exports.MAX_DATETIME_VALUE = exports.MIN_DATETIME_VALUE = exports.Date = exports.DateTime = void 0;
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 const uncertainty_1 = require("./uncertainty");
 const util_1 = require("../util/util");
 const luxon_1 = require("luxon");
@@ -1216,7 +1215,7 @@ class DateTime extends AbstractDate {
         // consider seconds and milliseconds as a single combined precision with decimal semantics
         // this means that if milliseconds are not specified, then we treat it as though their
         // millisecond value is "0" so that no Uncertainty will be produced
-        /* eslint-disable @typescript-eslint/no-this-alias */
+        /* oxlint-disable @typescript/no-this-alias */
         let aDateTime = this;
         let bDateTime = other;
         if (this.second !== null &&
@@ -2601,7 +2600,6 @@ class ThreeValuedLogic {
             return null;
         }
         else {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             return val.reduce((a, b) => (!a ^ !b) === 1);
         }
@@ -3993,7 +3991,6 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.build = build;
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 const E = __importStar(require("./expressions"));
 const util_1 = require("../util/util");
 function build(json) {
@@ -4440,6 +4437,7 @@ exports.If = If;
 class CaseItem {
     constructor(json) {
         this.when = (0, builder_1.build)(json.when);
+        // oxlint-disable-next-line unicorn/no-thenable -- CaseItem mirrors ELM's `then` field.
         this.then = (0, builder_1.build)(json.then);
     }
 }
@@ -4518,7 +4516,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DurationBetween = exports.DifferenceBetween = exports.TimezoneOffsetFrom = exports.TimeFrom = exports.DateFrom = exports.DateTimeComponentFrom = exports.TimeOfDay = exports.Now = exports.Today = exports.Time = exports.Date = exports.DateTime = void 0;
 exports.doAfter = doAfter;
 exports.doBefore = doBefore;
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 const expression_1 = require("./expression");
 const builder_1 = require("./builder");
 const literal_1 = require("./literal");
@@ -6617,7 +6614,6 @@ var __importStar = (this && this.__importStar) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Precision = exports.SameOrBefore = exports.SameOrAfter = exports.SameAs = exports.Before = exports.After = exports.Length = exports.ProperContains = exports.ProperIn = exports.ProperIncludedIn = exports.ProperIncludes = exports.IncludedIn = exports.Includes = exports.Contains = exports.In = exports.Indexer = exports.Intersect = exports.Except = exports.Union = exports.NotEqual = exports.Equivalent = exports.Equal = void 0;
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 const expression_1 = require("./expression");
 const logic_1 = require("../datatypes/logic");
 const datetime_1 = require("../datatypes/datetime");
@@ -7179,7 +7175,6 @@ class ByDirection extends expression_1.Expression {
         this.low_order = this.direction === 'asc' || this.direction === 'ascending' ? -1 : 1;
         this.high_order = this.low_order * -1;
     }
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     async exec(ctx, a, b) {
         if (a === b) {
@@ -7210,7 +7205,6 @@ class ByExpression extends expression_1.Expression {
         this.low_order = this.direction === 'asc' || this.direction === 'ascending' ? -1 : 1;
         this.high_order = this.low_order * -1;
     }
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     async exec(ctx, a, b) {
         let sctx = ctx.childContext(a);
@@ -8662,7 +8656,7 @@ function guessSpecifierType(val) {
     else if (Array.isArray(val)) {
         // Get unique types from the array (by converting to string and putting in a Set)
         const typesAsStrings = Array.from(new Set(val.map(v => JSON.stringify(guessSpecifierType(v)))));
-        const types = typesAsStrings.map(ts => (/^{/.test(ts) ? JSON.parse(ts) : ts));
+        const types = typesAsStrings.map(ts => (ts.startsWith('{') ? JSON.parse(ts) : ts));
         return {
             type: elmTypes_1.ELM_LIST_TYPE_SPECIFIER,
             elementType: types.length == 1 ? types[0] : { type: elmTypes_1.ELM_CHOICE_TYPE_SPECIFIER, choice: types }
@@ -9250,7 +9244,7 @@ class ConsoleMessageListener {
         this.logSourceOnTrace = logSourceOnTrace;
     }
     onMessage(source, code, severity, message) {
-        // eslint-disable-next-line no-console
+        // oxlint-disable-next-line no-console
         const print = severity === 'Error' ? console.error : console.log;
         let content = `${severity}: [${code}] ${message}`;
         if (severity === 'Trace' && this.logSourceOnTrace) {

@@ -66,23 +66,17 @@
     "url": "https://github.com/cqframework/cql-execution.git"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.5",
-    "@eslint/js": "^10.0.1",
     "@types/luxon": "^3.7.2",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.13.3",
     "@types/should-sinon": "^0.0.13",
     "@types/sinon": "^22.0.0",
     "@types/test-console": "^2.0.3",
-    "@typescript-eslint/eslint-plugin": "^8.65.0",
-    "@typescript-eslint/parser": "^8.65.0",
     "browserify": "^17.0.1",
     "cross-env": "^10.1.0",
-    "eslint": "^10.8.0",
-    "eslint-config-prettier": "^10.1.8",
-    "globals": "^17.8.0",
     "mocha": "^11.7.6",
     "nyc": "^18.0.0",
+    "oxlint": "^1.76.0",
     "prettier": "^3.9.6",
     "should": "^13.2.3",
     "should-sinon": "0.0.6",
@@ -119,11 +113,12 @@
     "test": "cross-env TS_NODE_PROJECT=\"./test/tsconfig.json\" TS_NODE_FILES=true mocha --reporter spec --recursive",
     "test:nyc": "cross-env TS_NODE_PROJECT=\"./test/tsconfig.json\" TS_NODE_FILES=true nyc --reporter=html npx mocha --reporter spec --recursive",
     "test:watch": "cross-env TS_NODE_PROJECT=\"./test/tsconfig.json\" TS_NODE_FILES=true mocha --reporter spec --recursive --watch",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
     "prettier": "prettier --check \"**/*.{js,mjs,ts}\"",
     "prettier:fix": "prettier --write \"**/*.{js,mjs,ts}\"",
-    "test:plus": "npm test && npm run build && npm run lint && npm run prettier"
+    "check": "npm test && npm run build && npm run lint && npm run prettier",
+    "test:plus": "echo 'Please use `npm check` instead.'"
   },
   "license": "Apache-2.0"
 }
