@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CQL Execution Browser Example</title>
+    <script src="dist/cql4browsers.js"></script>
+    <script>
+      function renderPatients() {
+        const tableBody = document.getElementById('patients');
+
+        for (const patient of patients) {
+          const row = tableBody.insertRow();
+
+          for (const value of [patient.id, patient.name, patient.gender, patient.birthDate]) {
+            const cell = row.insertCell();
+            cell.textContent = value;
+          }
+        }
+      }
+
+      async function runExample() {
+        const button = document.getElementById('run');
+        const results = document.getElementById('results');
+
+        button.disabled = true;
+        results.textContent = 'Executing…';
+
+        try {
+          const executionResults = await executeAgeExample();
+          results.textContent = JSON.stringify(executionResults.patientResults, null, 2);
+        } catch (error) {
+          results.textContent = error.stack ?? String(error);
+        } finally {
+          button.disabled = false;
+        }
+      }
+    </script>
+  </head>
+  <body onload="renderPatients()">
+    <main>
+      <h1>CQL Execution Browser Example</h1>
+      <p>
+        This runs the <code>AgeAtMP</code> CQL used by the Node.js and TypeScript examples against
+        the same two patients. The CQL counts patients as <code>InDemographic</code> if they were
+        2 - 17 years old at the start of the measurement period (January 1, 2013).
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Birth date</th>
+          </tr>
+        </thead>
+        <tbody id="patients"></tbody>
+      </table>
+      <p>
+        <button id="run" type="button" onclick="runExample()">Execute CQL</button>
+      </p>
+      <pre id="results" aria-live="polite">Select “Execute CQL” to see the results.</pre>
+    </main>
+  </body>
+</html>

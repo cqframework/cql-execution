@@ -69,7 +69,7 @@ To use this project, you should perform the following steps:
 
 Please note that while the CQL Execution library supports many aspects of CQL, it does not support
 everything in the CQL specification.  You should check to see what is implemented (by referencing
-the unit tests) before expecting it to work! For a working example, see `examples`.
+the unit tests) before expecting it to work! For working examples, see the `examples` directory.
 
 There are several steps involved to execute CQL.  First, you must create a JSON representation of
 the ELM. For the easiest integration, we will generate a JSON file using cql-to-elm:
@@ -82,10 +82,9 @@ the ELM. For the easiest integration, we will generate a JSON file using cql-to-
 4. `./gradlew :cql-to-elm-cli:installDist`
 5. `./cql-to-elm-cli/build/install/cql-to-elm-cli/bin/cql-to-elm-cli --format=JSON --input ${path_to_cql} --output ${path_to_cql-execution}/customCQL`
 
-The above example puts the example CQL into a subfolder of the `cql-execution` project to make the
-relative paths to `cql-execution` libraries easier, but it doesn't _have_ to go there.  If you put
-it elsewhere, you'll need to modify the examples below so that the `require` statements point to
-the correct location of the `cql` export.
+This repository contains self-contained Node.js and TypeScript mini-projects under `examples`.
+They depend on the repository's local `cql-execution` package; projects outside this repository
+should install `cql-execution` from npm instead.
 
 In the rest of the examples, we'll assume an `age.cql` file with the following contents. This
 follows the example already in the "examples" folder (but of course you can use your own CQL):
@@ -110,12 +109,11 @@ define InDemographic:
 Next, we can create a TypeScript file to execute the above CQL. This file will need to contain (or
 `import`) JSON patient representations for testing as well. Our example CQL uses a "Simple"
 data model developed only for demonstration and testing purposes.  In this model, each patient is
-represented using a simple JSON object.  For ease of use, let's put the file in the `customCQL`
-directory:
+represented using a simple JSON object.
 
 ``` typescript
-import cql from '../../src/cql';
-import * as measure from './age.json'; // Requires the "resolveJsonModule" compiler option to be "true"
+import cql from 'cql-execution';
+import measure from './age.json'; // Requires the "resolveJsonModule" compiler option to be "true"
 
 const lib = new cql.Library(measure);
 const executor = new cql.Executor(lib);
@@ -125,14 +123,14 @@ const psource = new cql.PatientSource([
     recordType: 'Patient',
     name: 'John Smith',
     gender: 'M',
-    birthDate: '1980-02-17T06:15'
+    birthDate: '1980-02-17'
   },
   {
     id: '2',
     recordType: 'Patient',
     name: 'Sally Smith',
     gender: 'F',
-    birthDate: '2007-08-02T11:47'
+    birthDate: '2007-08-02'
   }
 ]);
 
@@ -151,30 +149,27 @@ In the above file, we've assumed the JSON ELM JSON file for the measure is calle
 also assumed a couple of very simple patients.  Let's call the file we just created
 `exec-age.ts`.
 
-Now we can execute the measure using [tsx](https://tsx.is/):
+The complete TypeScript example has its own dependencies, scripts, and tests. Run it with:
 
-``` bash
-npx tsx ${path_to_cql-execution}/customCQL/exec-age.ts
+```bash
+cd examples/typescript
+npm install
+npm start
 ```
 
 If all is well, it should print the result object to standard out.
 
 ## JavaScript Example
 
-For usage in regular JavaScript, we can refer to the compiled JavaScript in the `lib` directory.
-Ensure that this JavaScript is present by running `npm run build` before continuing on to the example.
-We will follow the same steps as the above TypeScript example, but our JavaScript code must use `require`
-instead of `import`, and will load the `cql-execution` library from the `lib` directory. As before,
-let's put the file in the `customCQL` directory:
+For regular JavaScript, we use `require` to load the installed `cql-execution` package:
 
 Next, create a JavaScript file to execute the CQL above.  This file will need to contain (or
 `require`) JSON patient representations for testing as well.  Our example CQL uses a "Simple"
 data model developed only for demonstration and testing purposes.  In this model, each patient is
-represented using a simple JSON object.  For ease of use, let's put the file in the `customCQL`
-directory:
+represented using a simple JSON object.
 
 ```js
-const cql = require('../lib/cql');
+const cql = require('cql-execution');
 const measure = require('./age.json');
 
 const lib = new cql.Library(measure);
@@ -184,13 +179,13 @@ const psource = new cql.PatientSource([ {
   'recordType' : 'Patient',
   'name': 'John Smith',
   'gender': 'M',
-  'birthDate' : '1980-02-17T06:15'
+  'birthDate' : '1980-02-17'
 }, {
   'id' : '2',
   'recordType' : 'Patient',
   'name': 'Sally Smith',
   'gender': 'F',
-  'birthDate' : '2007-08-02T11:47'
+  'birthDate' : '2007-08-02'
 } ]);
 
 executor
@@ -207,10 +202,12 @@ executor
 The above file has the same assumptions as the TypeScript example above. Let's call the file we just created
 `exec-age.js`.
 
-Now we can execute the measure using Node.js:
+The complete Node.js example has its own dependencies, scripts, and tests. Run it with:
 
 ```shell
-node ${path_to_cql-execution}/customCQL/exec-age.js
+cd examples/node
+npm install
+npm start
 ```
 
 If all is well, it should print the result object to standard out, and the output should be identical to that of the TypeScript example.
@@ -351,12 +348,3 @@ execute `npm run watch:test-data`.
 # Using the Test Server and CQL Tests Runner
 
 See [test-server/README.md](test-server/README.md).
-
-# Pull Requests
-
-If TypeScript source code is modified, `cql4browsers.js` needs to be included in the pull request,
-otherwise GitHub Actions CI will fail. To generate this file, run:
-
-```
-npm run build:browser
-```

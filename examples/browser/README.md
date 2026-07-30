@@ -1,11 +1,24 @@
-This example demonstrates a static html page running a _browserified_ version of the
-CQL execution engine.  It currently only supports CQL using the System datatypes.  It
-does not support other data models or execution on patients.
+This mini-project demonstrates the CQL execution engine in a static browser page. It
+uses the same `AgeAtMP` CQL and example patients as the Node.js and TypeScript
+mini-projects. It depends on the repository's local `cql-execution` package and owns
+its browser build tooling and generated output. The bundle assigns the example patients
+to `window.patients`, which is used by both the execution code and the page's patient
+table.
 
-The browserified code is checked into source control, but if you need to update it,
-you can follow these steps:
+From the repository root, install and build `cql-execution`:
 
-1. Install [Node.js](http://nodejs.org/) (Note: `npm` version `6.x.x` recommended)
-2. Execute the following from the _cql-execution_ directory:
-   1. `npm install`
-   2. `npm run build:all`
+```sh
+npm install
+```
+
+Then install and build the browser example:
+
+```sh
+cd examples/browser
+npm install
+npm run build
+```
+
+Open `index.html` in a browser to run the example. For development, `npm run dev`
+builds the bundle, serves this directory, and rebuilds when its inputs change. Run
+`npm test` to build the bundle and verify both patients' `InDemographic` results.

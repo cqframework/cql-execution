@@ -12,15 +12,6 @@ jobs:
         with:
           node-version: 24.x
       - run: npm audit --omit=dev
-  cql4browsers:
-    name: Check cql4browsers
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24.x
-      - run: ./bin/validate_cql4browsers.sh
   lint:
     name: Check lint and prettier
     runs-on: ubuntu-latest
@@ -73,3 +64,24 @@ jobs:
         working-directory: test-server
       - run: npm run check
         working-directory: test-server
+  examples:
+    name: Check examples
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+      - run: npm ci
+      - run: npm ci
+        working-directory: examples/browser
+      - run: npm test
+        working-directory: examples/browser
+      - run: npm ci
+        working-directory: examples/node
+      - run: npm test
+        working-directory: examples/node
+      - run: npm ci
+        working-directory: examples/typescript
+      - run: npm test
+        working-directory: examples/typescript

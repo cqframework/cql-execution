@@ -9,8 +9,8 @@
   "ignorePatterns": [
     "**/lib",
     "**/lib-test",
-    "test-server/**",
-    "examples/browser/cql4browsers.js"
+    "**/dist",
+    "test-server/**"
   ],
   "rules": {
     "no-loss-of-precision": "off",

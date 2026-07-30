@@ -1,0 +1,22 @@
+{
+  "name": "cql-execution-typescript-example",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "tsx exec-age.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run typecheck && tsx --test test/typescript.test.ts"
+  },
+  "dependencies": {
+    "cql-execution": "file:../.."
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

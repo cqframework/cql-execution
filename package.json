@@ -73,7 +73,6 @@
     "@types/sinon": "^22.0.0",
     "@types/test-console": "^2.0.3",
     "cross-env": "^10.1.0",
-    "esbuild": "^0.28.1",
     "mocha": "^11.7.6",
     "nyc": "^18.0.0",
     "oxlint": "^1.76.0",
@@ -102,12 +101,11 @@
     "lib": "lib"
   },
   "scripts": {
-    "prepare": "npm run build:browser",
+    "prepare": "npm run build",
     "build": "tsc",
-    "build:browser": "npm run build && esbuild ./examples/browser/simple-browser-support.js --bundle --platform=browser --format=iife --target=es2020 --outfile=./examples/browser/cql4browsers.js",
     "build:test-data": "cd \"./test/generator\" && \"./gradlew\" generateTestData && cd ..",
     "build:spec-test-data": "node \"test/spec-tests/generate-cql.js\" && cd \"./test/generator\" && \"./gradlew\" generateSpecTestData && cd ../.. && node \"test/spec-tests/prettify-json.js\"",
-    "build:all": "npm run build:browser && npm run build:test-data && npm run build:spec-test-data",
+    "build:all": "npm run build && npm run build:test-data && npm run build:spec-test-data",
     "watch:test-data": "cd \"./test/generator\" && \"./gradlew\" watchTestData && cd ..",
     "check-skip-list": "node \"test/spec-tests/check-skip-list.js\"",
     "test": "cross-env TSX_TSCONFIG_PATH=\"./test/tsconfig.json\" mocha --reporter spec --recursive",
@@ -119,6 +117,7 @@
     "prettier": "prettier --check \"**/*.{js,mjs,ts}\"",
     "prettier:fix": "prettier --write \"**/*.{js,mjs,ts}\"",
     "check": "npm run build:all && npm run test:typecheck && npm test && npm run lint && npm run prettier",
+    "check:all": "npm run check && npm --prefix test-server install && npm --prefix test-server run check && npm --prefix examples/browser install && npm --prefix examples/browser test && npm --prefix examples/node install && npm --prefix examples/node test && npm --prefix examples/typescript install && npm --prefix examples/typescript test && echo \"\nAll checks passed.\"",
     "test:plus": "echo 'Please use `npm check` instead.'"
   },
   "license": "Apache-2.0"

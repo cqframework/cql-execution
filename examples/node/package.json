@@ -1,0 +1,16 @@
+{
+  "name": "cql-execution-node-example",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "node exec-age.js",
+    "test": "node --test test/node.test.js"
+  },
+  "dependencies": {
+    "cql-execution": "file:../.."
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
