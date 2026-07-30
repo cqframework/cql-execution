@@ -11,6 +11,6 @@
     "cql-execution": "file:../.."
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   }
 }
