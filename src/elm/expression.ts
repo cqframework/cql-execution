@@ -3,6 +3,7 @@ import { typeIsArray } from '../util/util';
 import { AnnotatedError } from '../util/customErrors';
 import { build } from './builder';
 import { Library } from './library';
+import { AnyTypeSpecifier } from '../types';
 
 export class Expression {
   localId?: string;
@@ -10,6 +11,7 @@ export class Expression {
   arg?: Expression;
   args?: Expression[];
   resultTypeName?: string;
+  resultTypeSpecifier?: AnyTypeSpecifier;
 
   constructor(json: any) {
     if (json.operand != null) {
@@ -31,6 +33,10 @@ export class Expression {
 
     if (json.resultTypeName != null) {
       this.resultTypeName = json.resultTypeName;
+    }
+
+    if (json.resultTypeSpecifier != null) {
+      this.resultTypeSpecifier = json.resultTypeSpecifier;
     }
   }
 

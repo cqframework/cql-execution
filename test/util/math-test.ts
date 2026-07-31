@@ -1,5 +1,6 @@
 import { Uncertainty } from '../../src/datatypes/uncertainty';
-import { MAX_FLOAT_VALUE, MIN_FLOAT_VALUE, predecessor, successor } from '../../src/util/math';
+import { MAX_FLOAT_VALUE, MIN_FLOAT_VALUE } from '../../src/util/limits';
+import { predecessor, successor } from '../../src/util/math';
 import { ELM_DECIMAL_TYPE, ELM_INTEGER_TYPE } from '../../src/util/elmTypes';
 
 describe('successor', () => {

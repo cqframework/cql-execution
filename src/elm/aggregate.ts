@@ -249,10 +249,7 @@ export class Mode extends AggregateExpression {
 }
 
 type StatisticType =
-  | 'standard_deviation'
-  | 'population_deviation'
-  | 'standard_variance'
-  | 'population_variance';
+  'standard_deviation' | 'population_deviation' | 'standard_variance' | 'population_variance';
 
 export class StdDev extends AggregateExpression {
   // TODO: This should be a derived class of an abstract base class 'Statistic'

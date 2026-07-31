@@ -1,6 +1,6 @@
 import * as DT from './datatypes/datatypes';
 import { DataProvider, NamedTypeSpecifier, PatientObject, RecordObject } from './types';
-import { ELM_NAMED_TYPE_SPECIFIER } from './util/elmTypes';
+import { ELM_ANY_TYPE, ELM_NAMED_TYPE_SPECIFIER } from './util/elmTypes';
 
 export class Record implements RecordObject {
   json: any;
@@ -27,7 +27,7 @@ export class Record implements RecordObject {
         name: '{https://github.com/cqframework/cql-execution/simple}Record',
         type: ELM_NAMED_TYPE_SPECIFIER
       },
-      { name: '{urn:hl7-org:elm-types:r1}Any', type: ELM_NAMED_TYPE_SPECIFIER }
+      { name: ELM_ANY_TYPE, type: ELM_NAMED_TYPE_SPECIFIER }
     ];
   }
 

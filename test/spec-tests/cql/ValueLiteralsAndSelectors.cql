@@ -265,11 +265,9 @@ define "Decimal": Tuple{
     output: 9999999999999999999999999999.99999999
     */  },
   "DecimalNeg10Pow28ToZeroOneStepDecimalMinValue": Tuple{
-    skipped: 'Wrong answer (null vs big number)'
-    /*
     expression: -10*1000000000000000000000000000.00000000+0.00000001,
     output: -9999999999999999999999999999.99999999
-    */  },
+  },
   "Decimal10Pow28": Tuple{
     expression: 10000000000000000000000000000.00000000,
     invalid: true

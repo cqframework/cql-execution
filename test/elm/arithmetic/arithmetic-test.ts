@@ -15,7 +15,7 @@ import {
   MIN_FLOAT_VALUE,
   MIN_INT_VALUE,
   MIN_LONG_VALUE
-} from '../../../src/util/math';
+} from '../../../src/util/limits';
 import {
   MAX_DATE_VALUE,
   MAX_DATETIME_VALUE,

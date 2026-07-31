@@ -1,5 +1,5 @@
 {
   "ignore": ["test/spec-tests/*.js"],
   "extension": ["ts"],
-  "require": "ts-node/register"
+  "require": ["ts-node/register", "./test/should-extensions.ts"]
 }
