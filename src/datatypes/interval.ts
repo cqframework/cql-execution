@@ -790,8 +790,25 @@ export class Interval {
 // - high open boundary that is uncertainty from min value of type or interval low value to max
 //   value of type is changed to null open boundary
 //
-// TODO: Is this necessary? Do we care how it is represented if the representations have the same
-// meaning? This does affect test expectations and representation of returned results for callers.
+// Justification: Since interval operations now use start() and end() to calculate and construct
+// intervals, results involving unbounded lows and highs will return boundaries with concrete
+// minimum and maximum values instead of the more familiar closed null boundary representations.
+// Similarly, results involving unknown lows and highs will return boundaries with uncertainty
+// ranges rather than the more familiar open null boundary representations. In other words,
+// intervals that started out looking "simple", such as Interval[null, 0], can result in new
+// intervals with specific values that are not obvious to users, such as Interval[-2147483648, 0].
+//
+// The normalizeInterval function recognizes those situations and converts the interval back to an
+// equivalent form that is more likely to be familiar to all users. The results of this approach
+// are also more consistent with previous implementations that did not use start() and end().
+// Note that in all cases, the pre-normalized and normalized intervals are semantically the same
+// (i.e., they represent the same exact range) even if they are represented using different
+// individual component values (i.e., low, high, lowClosed, and highClosed values).
+//
+// Examples:
+// - Interval[-2147483648, 10] --> Interval[null, 10]
+// - Interval[Uncertainty(-2147483648, 0), 10] --> Interval(null, 10]
+// - Interval[-10, 10] --> Interval[-10, 10] (no change)
 function normalizeInterval(interval: Interval) {
   const ivl = interval.copy();
   const minValue = minValueForType(ivl.pointType, getQuantityInstanceForMinMax(ivl));
