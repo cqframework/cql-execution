@@ -21,6 +21,7 @@
   "description": "",
   "dependencies": {
     "@cqframework/cql": "^4.0.0-beta.1",
+    "cql-exec-fhir": "^2.1.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "tslog": "^4.11.0"

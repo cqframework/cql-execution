@@ -2,7 +2,7 @@ import 'dotenv/config';
 import express, { type Request, type Response } from 'express';
 import path from 'node:path';
 import logger from './logger';
-import { $cql, executeExpression } from './operation';
+import { $cql, executeExpression, executeFhirLibrary } from './operation';
 
 const app = express();
 app.use(express.json({ type: ['application/json', 'application/fhir+json'] }));
@@ -22,6 +22,28 @@ function getCql(body: unknown): string | undefined {
   return undefined;
 }
 
+function hasBundle(body: unknown): body is { bundle: unknown } {
+  return typeof body === 'object' && body !== null && 'bundle' in body;
+}
+
+function getBundle(body: unknown): Record<string, unknown> | undefined {
+  if (!hasBundle(body)) {
+    return undefined;
+  }
+
+  const { bundle } = body;
+  if (
+    typeof bundle === 'object' &&
+    bundle !== null &&
+    'resourceType' in bundle &&
+    bundle.resourceType === 'Bundle'
+  ) {
+    return bundle as Record<string, unknown>;
+  }
+
+  return undefined;
+}
+
 app.post('/api/execute', async (req: Request, res: Response) => {
   const cql = getCql(req.body);
   if (!cql) {
@@ -29,11 +51,22 @@ app.post('/api/execute', async (req: Request, res: Response) => {
   }
 
   try {
+    const bundle = getBundle(req.body);
+    if (hasBundle(req.body) && !bundle) {
+      return res.status(400).json({
+        error: "If provided, 'bundle' must be a FHIR Bundle object with resourceType 'Bundle'"
+      });
+    }
+
+    if (bundle) {
+      return res.json(await executeFhirLibrary(cql, bundle));
+    }
+
     return res.json(await executeExpression(cql));
   } catch (err) {
-    logger.error('Error executing CQL expression:', err);
+    logger.error('Error executing CQL request:', err);
     return res.status(422).json({
-      error: err instanceof Error ? err.message : 'Unable to translate or execute the CQL expression'
+      error: err instanceof Error ? err.message : 'Unable to translate or execute the supplied CQL'
     });
   }
 });

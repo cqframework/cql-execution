@@ -33,9 +33,14 @@ A barebones implementation of the FHIR [$cql](https://build.fhir.org/ig/HL7/cql-
 ## CQL Execution Workbench
 
 When the server is running, open `http://localhost:8000` in a browser. The workbench
-accepts a **System-only CQL expression** (for example, `1 + 2`), translates it to ELM,
-and executes it against the current checkout of `cql-execution`. It displays both the
-native execution result and the translated ELM.
+supports two local testing modes:
+
+- **Expression** mode accepts a System-only CQL expression (for example, `1 + 2`),
+  wraps it in a temporary `Unfiltered` library, translates it to ELM, and executes it
+  against the current checkout of `cql-execution`.
+- **FHIR Bundle** mode accepts a full CQL library plus a FHIR Bundle JSON payload,
+  translates the library to ELM, and executes it in `Patient` context so CQL
+  **Retrieves** such as `[Condition]` run against the supplied Bundle.
 
 The page calls `POST /api/execute` with a JSON body such as:
 
@@ -43,9 +48,27 @@ The page calls `POST /api/execute` with a JSON body such as:
 { "cql": "1 + 2" }
 ```
 
-It returns a JSON object containing `result` and `elm`. Invalid or non-executable CQL
-returns HTTP 422 with an error message. This endpoint is intended for local testing and
-demos; `/fhir/$cql` remains the FHIR-operation endpoint.
+FHIR mode includes a `bundle` field:
+
+```json
+{
+  "cql": "library BundleDemo version '1.0.0' ...",
+  "bundle": {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": []
+  }
+}
+```
+
+The response always includes `elm` and `result`. In FHIR mode, `result` contains
+`patientResults` and `unfilteredResults`. Invalid or non-executable CQL returns HTTP 422
+with an error message. Invalid Bundle payloads return HTTP 400. This endpoint is intended
+for local testing and demos; `/fhir/$cql` remains the FHIR-operation endpoint.
+
+FHIR Bundle execution depends on the optional `cql-exec-fhir` package. If it is not
+available in the local environment yet, the workbench returns a clear error explaining
+that the dependency must be installed before FHIR mode can run.
 
 ## Prerequisites
 

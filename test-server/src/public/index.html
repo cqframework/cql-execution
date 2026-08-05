@@ -5,63 +5,423 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>CQL Execution Workbench</title>
     <style>
-      :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
-      body { margin: 0; background: Canvas; color: CanvasText; }
-      main { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem 4rem; }
-      h1 { margin-bottom: .25rem; }
-      .intro { margin-top: 0; color: GrayText; }
-      label { display: block; font-weight: 650; margin: 1.5rem 0 .5rem; }
-      textarea, pre { box-sizing: border-box; width: 100%; border: 1px solid color-mix(in srgb, CanvasText 25%, Canvas); border-radius: 6px; background: color-mix(in srgb, Canvas 92%, CanvasText); color: inherit; font: 14px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; }
-      textarea { min-height: 240px; padding: .85rem; resize: vertical; }
-      pre { min-height: 100px; margin: 0; padding: .85rem; overflow: auto; white-space: pre-wrap; }
-      button { margin: 1rem 0; padding: .65rem 1rem; font: inherit; font-weight: 650; cursor: pointer; }
-      #status { min-height: 1.5rem; color: GrayText; }
-      #status.error { color: #c62828; }
-      details { margin-top: 1rem; }
-      summary { cursor: pointer; font-weight: 650; }
+      :root {
+        color-scheme: light;
+        --page: #f2efe8;
+        --panel: rgba(255, 252, 246, 0.92);
+        --ink: #1f2933;
+        --muted: #58626d;
+        --accent: #9d3f2f;
+        --accent-soft: #ead4c5;
+        --line: rgba(31, 41, 51, 0.16);
+        --shadow: 0 24px 60px rgba(75, 51, 33, 0.16);
+        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(157, 63, 47, 0.18), transparent 28rem),
+          radial-gradient(circle at top right, rgba(87, 117, 144, 0.16), transparent 24rem),
+          linear-gradient(180deg, #f8f5ee 0%, var(--page) 100%);
+      }
+
+      main {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2.5rem 1rem 4rem;
+      }
+
+      .shell {
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        border-radius: 28px;
+        background: var(--panel);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(12px);
+      }
+
+      .hero {
+        padding: 2rem 2rem 1.25rem;
+        border-bottom: 1px solid rgba(31, 41, 51, 0.08);
+        background: linear-gradient(135deg, rgba(157, 63, 47, 0.08), rgba(255, 255, 255, 0.55));
+      }
+
+      h1 {
+        margin: 0 0 0.35rem;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+      }
+
+      .intro {
+        max-width: 52rem;
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+
+      .workspace {
+        padding: 1.5rem 2rem 2rem;
+      }
+
+      .results {
+        padding: 1.5rem 2rem 2rem;
+        border-left: 1px solid rgba(31, 41, 51, 0.08);
+        background: rgba(255, 255, 255, 0.42);
+      }
+
+      .mode-toggle {
+        display: inline-grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.35rem;
+        padding: 0.35rem;
+        border-radius: 999px;
+        background: rgba(31, 41, 51, 0.06);
+      }
+
+      .mode-toggle button {
+        margin: 0;
+        padding: 0.7rem 1rem;
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
+        color: var(--muted);
+        font: 600 0.95rem/1.1 system-ui, sans-serif;
+        cursor: pointer;
+      }
+
+      .mode-toggle button.active {
+        background: var(--ink);
+        color: white;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      }
+
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 1.5rem 0 1rem;
+      }
+
+      .toolbar button {
+        padding: 0.75rem 1.1rem;
+        border: 0;
+        border-radius: 999px;
+        font: 600 0.95rem/1 system-ui, sans-serif;
+        cursor: pointer;
+      }
+
+      #execute {
+        background: var(--accent);
+        color: white;
+      }
+
+      #load-sample {
+        background: var(--accent-soft);
+        color: var(--ink);
+      }
+
+      #status {
+        min-height: 1.5rem;
+        color: var(--muted);
+        font: 500 0.95rem/1.4 system-ui, sans-serif;
+      }
+
+      #status.error {
+        color: #a61b17;
+      }
+
+      .field {
+        margin-top: 1.1rem;
+      }
+
+      label {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 0.45rem;
+        font: 700 0.95rem/1.2 system-ui, sans-serif;
+      }
+
+      .hint {
+        color: var(--muted);
+        font-weight: 500;
+        font-size: 0.82rem;
+      }
+
+      textarea,
+      pre {
+        width: 100%;
+        margin: 0;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(252, 249, 244, 0.9);
+        color: inherit;
+        font: 14px/1.55 ui-monospace, "SFMono-Regular", Menlo, monospace;
+      }
+
+      textarea {
+        min-height: 260px;
+        padding: 1rem;
+        resize: vertical;
+      }
+
+      textarea.bundle {
+        min-height: 360px;
+      }
+
+      pre {
+        min-height: 140px;
+        padding: 1rem;
+        overflow: auto;
+        white-space: pre-wrap;
+      }
+
+      .panel-title {
+        margin: 0 0 0.35rem;
+        font: 700 1.2rem/1.2 system-ui, sans-serif;
+      }
+
+      .panel-copy {
+        margin: 0 0 1rem;
+        color: var(--muted);
+        font: 500 0.95rem/1.5 system-ui, sans-serif;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      details {
+        margin-top: 1rem;
+      }
+
+      summary {
+        cursor: pointer;
+        font: 700 0.95rem/1.2 system-ui, sans-serif;
+      }
+
+      @media (max-width: 900px) {
+        .content {
+          grid-template-columns: 1fr;
+        }
+
+        .results {
+          border-top: 1px solid rgba(31, 41, 51, 0.08);
+          border-left: 0;
+        }
+
+        .hero,
+        .workspace,
+        .results {
+          padding-right: 1.2rem;
+          padding-left: 1.2rem;
+        }
+      }
     </style>
   </head>
   <body>
     <main>
-      <h1>CQL Execution Workbench</h1>
-      <p class="intro">Evaluate a System-only CQL expression with this checkout of cql-execution.</p>
+      <div class="shell">
+        <section class="hero">
+          <h1>CQL Execution Workbench</h1>
+          <p class="intro">
+            Translate and execute CQL against this checkout of <code>cql-execution</code>.
+            Use expression mode for fast System-only checks, or FHIR mode to run a full patient-context library with CQL Retrieves against a Bundle.
+          </p>
+        </section>
 
-      <label for="cql">CQL expression</label>
-      <textarea id="cql" spellcheck="false">1 + 2</textarea>
-      <button id="execute" type="button">Execute</button>
-      <div id="status" role="status"></div>
+        <div class="content">
+          <section class="workspace">
+            <div class="mode-toggle" role="tablist" aria-label="Execution mode">
+              <button id="mode-expression" class="active" type="button" data-mode="expression">Expression</button>
+              <button id="mode-fhir" type="button" data-mode="fhir">FHIR Bundle</button>
+            </div>
 
-      <label for="result">Result</label>
-      <pre id="result" aria-live="polite">Run an expression to see its result.</pre>
+            <div class="toolbar">
+              <button id="execute" type="button">Execute</button>
+              <button id="load-sample" type="button">Load sample</button>
+            </div>
 
-      <details>
-        <summary>Translated ELM</summary>
-        <pre id="elm">Run an expression to inspect its ELM.</pre>
-      </details>
+            <div id="status" role="status"></div>
+
+            <div class="field">
+              <label for="cql">
+                <span id="cql-label">CQL expression</span>
+                <span id="cql-hint" class="hint">Wrapped in a temporary `Unfiltered` library.</span>
+              </label>
+              <textarea id="cql" spellcheck="false"></textarea>
+            </div>
+
+            <div id="bundle-field" class="field hidden">
+              <label for="bundle">
+                <span>FHIR Bundle JSON</span>
+                <span class="hint">A single Bundle is loaded into the FHIR patient source.</span>
+              </label>
+              <textarea id="bundle" class="bundle" spellcheck="false"></textarea>
+            </div>
+          </section>
+
+          <aside class="results">
+            <h2 class="panel-title">Results</h2>
+            <p id="result-copy" class="panel-copy">
+              Expression mode returns the native execution result for the wrapped `expression` definition.
+            </p>
+
+            <label for="result">Execution output</label>
+            <pre id="result" aria-live="polite">Run a request to see its output.</pre>
+
+            <details>
+              <summary>Translated ELM</summary>
+              <pre id="elm">Run a request to inspect its ELM.</pre>
+            </details>
+          </aside>
+        </div>
+      </div>
     </main>
     <script>
+      const expressionSample = `1 + 2`;
+
+      const fhirLibrarySample = `library BundleDemo version '1.0.0'
+
+using FHIR version '4.0.1'
+include FHIRHelpers version '4.0.1'
+
+context Patient
+
+define "Active Conditions":
+  [Condition] C
+    where C.clinicalStatus.coding.code contains 'active'
+
+define "Condition Count":
+  Count("Active Conditions")
+
+define "Patient Name":
+  First(Patient.name).given[0] & ' ' & Patient.name.family`;
+
+      const fhirBundleSample = `{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "demo-patient",
+        "name": [
+          {
+            "family": "Example",
+            "given": ["Ada"]
+          }
+        ]
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Condition",
+        "id": "demo-condition",
+        "subject": {
+          "reference": "Patient/demo-patient"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "44054006",
+              "display": "Diabetes mellitus type 2"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}`;
+
       const cql = document.getElementById('cql');
+      const bundle = document.getElementById('bundle');
       const execute = document.getElementById('execute');
+      const loadSample = document.getElementById('load-sample');
       const status = document.getElementById('status');
       const result = document.getElementById('result');
       const elm = document.getElementById('elm');
+      const bundleField = document.getElementById('bundle-field');
+      const cqlLabel = document.getElementById('cql-label');
+      const cqlHint = document.getElementById('cql-hint');
+      const resultCopy = document.getElementById('result-copy');
+      const modeButtons = Array.from(document.querySelectorAll('[data-mode]'));
+      let mode = 'expression';
 
       function display(value) {
         return JSON.stringify(value, null, 2);
       }
 
+      function applyMode(nextMode) {
+        mode = nextMode;
+        for (const button of modeButtons) {
+          button.classList.toggle('active', button.dataset.mode === mode);
+        }
+
+        if (mode === 'fhir') {
+          cqlLabel.textContent = 'FHIR CQL library';
+          cqlHint.textContent = 'Full library source. Use `context Patient` for CQL Retrieves.';
+          resultCopy.textContent = 'FHIR mode returns patient-context results and any unfiltered definitions from the executed library.';
+          bundleField.classList.remove('hidden');
+        } else {
+          cqlLabel.textContent = 'CQL expression';
+          cqlHint.textContent = 'Wrapped in a temporary `Unfiltered` library.';
+          resultCopy.textContent = 'Expression mode returns the native execution result for the wrapped `expression` definition.';
+          bundleField.classList.add('hidden');
+        }
+      }
+
+      function setSamples() {
+        if (mode === 'fhir') {
+          cql.value = fhirLibrarySample;
+          bundle.value = fhirBundleSample;
+        } else {
+          cql.value = expressionSample;
+        }
+      }
+
       async function run() {
         execute.disabled = true;
+        loadSample.disabled = true;
         status.className = '';
-        status.textContent = 'Translating and executing…';
+        status.textContent = 'Translating and executing...';
+
         try {
+          const body = { cql: cql.value };
+          if (mode === 'fhir') {
+            body.bundle = JSON.parse(bundle.value);
+          }
+
           const response = await fetch('/api/execute', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ cql: cql.value })
+            body: JSON.stringify(body)
           });
           const payload = await response.json();
-          if (!response.ok) throw new Error(payload.error || 'Execution failed');
+          if (!response.ok) {
+            throw new Error(payload.error || 'Execution failed');
+          }
+
           result.textContent = display(payload.result);
           elm.textContent = display(payload.elm);
           status.textContent = 'Completed.';
@@ -69,12 +429,25 @@
           status.className = 'error';
           status.textContent = error instanceof Error ? error.message : 'Execution failed';
           result.textContent = 'No result.';
+          elm.textContent = 'No ELM.';
         } finally {
           execute.disabled = false;
+          loadSample.disabled = false;
         }
       }
 
+      for (const button of modeButtons) {
+        button.addEventListener('click', () => {
+          applyMode(button.dataset.mode);
+          setSamples();
+        });
+      }
+
+      loadSample.addEventListener('click', setSamples);
       execute.addEventListener('click', run);
+
+      applyMode(mode);
+      setSamples();
     </script>
   </body>
 </html>
