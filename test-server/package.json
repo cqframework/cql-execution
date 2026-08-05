@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "build": "npm --prefix .. run build && tsc && npm run copyfiles",
-    "copyfiles": "copyfiles -u 1 src/translate/**/*.{xml,cql} dist",
+    "copyfiles": "copyfiles -u 1 src/translate/**/*.{xml,cql} src/public/**/* dist",
     "start": "node dist/app.js",
     "dev": "npm --prefix .. run build && tsx watch --include \"src/**/*.ts\" src/app.ts",
     "check": "npm run test && npm run lint && npm run prettier",

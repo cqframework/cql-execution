@@ -8,7 +8,12 @@ const USE_TRANSLATION_SERVICE = process.env['USE_TRANSLATION_SERVICE'] === 'true
 
 let counter = 0;
 
-export async function $cql(expression: string): Promise<Parameters> {
+export interface ExpressionExecution {
+  elm: unknown;
+  result: unknown;
+}
+
+export async function executeExpression(expression: string): Promise<ExpressionExecution> {
   const id = counter++;
   logger.debug(`[${id}] Expression:   ${expression}`);
 
@@ -24,14 +29,21 @@ export async function $cql(expression: string): Promise<Parameters> {
   const result = await executor.exec(patientSource, executionDateTime);
   logger.debug(`[${id}] Raw Result:  `, result.unfilteredResults.expression);
 
-  // 3: Convert the result to a FHIR Parameter
+  return { elm, result: result.unfilteredResults.expression };
+}
+
+export async function $cql(expression: string): Promise<Parameters> {
+  const execution = await executeExpression(expression);
+
+  // Convert the result to a FHIR Parameter
+  const elm = execution.elm as any;
   const resultType = elm.library?.statements?.def?.[0]?.resultTypeName;
   const resultTypeSpecifier = elm.library?.statements?.def?.[0]?.resultTypeSpecifier;
   const parameters = toParameters(
-    result.unfilteredResults.expression,
+    execution.result,
     resultTypeSpecifier ?? resultType
   );
-  logger.debug(`[${id}] FHIR Result: `, parameters);
+  logger.debug(`FHIR Result: `, parameters);
 
   return parameters;
 }

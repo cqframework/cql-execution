@@ -30,6 +30,23 @@ A barebones implementation of the FHIR [$cql](https://build.fhir.org/ig/HL7/cql-
     - HTTP 400 if the `expression` parameter is missing or empty
     - HTTP 500 if there is an unexpected / unrecoverable server-side error
 
+## CQL Execution Workbench
+
+When the server is running, open `http://localhost:8000` in a browser. The workbench
+accepts a **System-only CQL expression** (for example, `1 + 2`), translates it to ELM,
+and executes it against the current checkout of `cql-execution`. It displays both the
+native execution result and the translated ELM.
+
+The page calls `POST /api/execute` with a JSON body such as:
+
+```json
+{ "cql": "1 + 2" }
+```
+
+It returns a JSON object containing `result` and `elm`. Invalid or non-executable CQL
+returns HTTP 422 with an error message. This endpoint is intended for local testing and
+demos; `/fhir/$cql` remains the FHIR-operation endpoint.
+
 ## Prerequisites
 
 This project uses Node.js. It has been tested using Node 24 but should work with any recent LTS version.
@@ -119,4 +136,3 @@ This server is designed to be a `$cql` target for the [cql-tests-runner](https:/
   ```
 
 The runner will POST each test expression to `http://localhost:8000/fhir/$cql` and expect FHIR `Parameters` responses per the mapping. The test-server logs each incoming expression, the raw result, and the result mapped to `FHIR Parameters`. When the run is done, you can find the results in the cql-tests-runner folder's `results` sub-folder.
-

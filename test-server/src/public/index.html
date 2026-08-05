@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CQL Execution Workbench</title>
+    <style>
+      :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+      body { margin: 0; background: Canvas; color: CanvasText; }
+      main { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+      h1 { margin-bottom: .25rem; }
+      .intro { margin-top: 0; color: GrayText; }
+      label { display: block; font-weight: 650; margin: 1.5rem 0 .5rem; }
+      textarea, pre { box-sizing: border-box; width: 100%; border: 1px solid color-mix(in srgb, CanvasText 25%, Canvas); border-radius: 6px; background: color-mix(in srgb, Canvas 92%, CanvasText); color: inherit; font: 14px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; }
+      textarea { min-height: 240px; padding: .85rem; resize: vertical; }
+      pre { min-height: 100px; margin: 0; padding: .85rem; overflow: auto; white-space: pre-wrap; }
+      button { margin: 1rem 0; padding: .65rem 1rem; font: inherit; font-weight: 650; cursor: pointer; }
+      #status { min-height: 1.5rem; color: GrayText; }
+      #status.error { color: #c62828; }
+      details { margin-top: 1rem; }
+      summary { cursor: pointer; font-weight: 650; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>CQL Execution Workbench</h1>
+      <p class="intro">Evaluate a System-only CQL expression with this checkout of cql-execution.</p>
+
+      <label for="cql">CQL expression</label>
+      <textarea id="cql" spellcheck="false">1 + 2</textarea>
+      <button id="execute" type="button">Execute</button>
+      <div id="status" role="status"></div>
+
+      <label for="result">Result</label>
+      <pre id="result" aria-live="polite">Run an expression to see its result.</pre>
+
+      <details>
+        <summary>Translated ELM</summary>
+        <pre id="elm">Run an expression to inspect its ELM.</pre>
+      </details>
+    </main>
+    <script>
+      const cql = document.getElementById('cql');
+      const execute = document.getElementById('execute');
+      const status = document.getElementById('status');
+      const result = document.getElementById('result');
+      const elm = document.getElementById('elm');
+
+      function display(value) {
+        return JSON.stringify(value, null, 2);
+      }
+
+      async function run() {
+        execute.disabled = true;
+        status.className = '';
+        status.textContent = 'Translating and executing…';
+        try {
+          const response = await fetch('/api/execute', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ cql: cql.value })
+          });
+          const payload = await response.json();
+          if (!response.ok) throw new Error(payload.error || 'Execution failed');
+          result.textContent = display(payload.result);
+          elm.textContent = display(payload.elm);
+          status.textContent = 'Completed.';
+        } catch (error) {
+          status.className = 'error';
+          status.textContent = error instanceof Error ? error.message : 'Execution failed';
+          result.textContent = 'No result.';
+        } finally {
+          execute.disabled = false;
+        }
+      }
+
+      execute.addEventListener('click', run);
+    </script>
+  </body>
+</html>
