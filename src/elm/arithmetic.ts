@@ -13,6 +13,7 @@ import {
   MIN_DATETIME_VALUE,
   MIN_TIME_VALUE
 } from '../datatypes/datetime';
+import { Decimal, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../datatypes/decimal';
 import {
   ELM_DECIMAL_TYPE,
   ELM_DATETIME_TYPE,
@@ -22,13 +23,46 @@ import {
   ELM_TIME_TYPE
 } from '../util/elmTypes';
 import {
-  MAX_FLOAT_VALUE,
   MAX_INT_VALUE,
   MAX_LONG_VALUE,
-  MIN_FLOAT_VALUE,
   MIN_INT_VALUE,
   MIN_LONG_VALUE
 } from '../util/limits';
+
+function isDecimal(value: any): boolean {
+  return value != null && value.isDecimal;
+}
+
+function decimalResult(value: any, resultTypeName?: string): any {
+  if (isDecimal(value) || (typeof value === 'number' && !Number.isFinite(value))) {
+    return value;
+  }
+  return resultTypeName === ELM_DECIMAL_TYPE || (typeof value === 'number' && !Number.isInteger(value))
+    ? Decimal.from(value).setScale(8, 'half-up')
+    : value;
+}
+
+function add(x: any, y: any) {
+  return isDecimal(x) || isDecimal(y) ? Decimal.from(x).add(y).setScale(8, 'half-up') : x + y;
+}
+
+function subtract(x: any, y: any) {
+  return isDecimal(x) || isDecimal(y)
+    ? Decimal.from(x).subtract(y).setScale(8, 'half-up')
+    : x - y;
+}
+
+function multiply(x: any, y: any) {
+  return isDecimal(x) || isDecimal(y)
+    ? Decimal.from(x).multiplyBy(y).setScale(8, 'half-up')
+    : x * y;
+}
+
+function divide(x: any, y: any) {
+  return isDecimal(x) || isDecimal(y)
+    ? Decimal.from(x).divideBy(y).setScale(8, 'half-up')
+    : x / y;
+}
 
 export class Add extends Expression {
   constructor(json: any) {
@@ -84,10 +118,10 @@ export class Multiply extends Expression {
         if (x.low.isQuantity) {
           return new Uncertainty(doMultiplication(x.low, y.low), doMultiplication(x.high, y.high));
         } else {
-          return new Uncertainty(x.low * y.low, x.high * y.high);
+          return new Uncertainty(multiply(x.low, y.low), multiply(x.high, y.high));
         }
       } else {
-        return x * y;
+        return multiply(x, y);
       }
     });
 
@@ -109,7 +143,9 @@ export class Divide extends Expression {
       return null;
     }
 
-    const quotient = args.reduce((x: any, y: any) => {
+    let quotient;
+    let [x, y] = args;
+    try {
       if (x.isUncertainty && !y.isUncertainty) {
         y = new Uncertainty(y, y);
       } else if (y.isUncertainty && !x.isUncertainty) {
@@ -117,17 +153,20 @@ export class Divide extends Expression {
       }
 
       if (x.isQuantity) {
-        return doDivision(x, y);
+        quotient = doDivision(x, y);
       } else if (x.isUncertainty && y.isUncertainty) {
         if (x.low.isQuantity) {
-          return new Uncertainty(doDivision(x.low, y.high), doDivision(x.high, y.low));
+          quotient = new Uncertainty(doDivision(x.low, y.high), doDivision(x.high, y.low));
         } else {
-          return new Uncertainty(x.low / y.high, x.high / y.low);
+          quotient = new Uncertainty(divide(x.low, y.high), divide(x.high, y.low));
         }
       } else {
-        return x / y;
+        quotient = divide(x, y);
       }
-    });
+    } catch {
+      // Decimal division by zero throws; CQL defines the result as null.
+      return null;
+    }
 
     // Note, anything divided by 0 is Infinity in Javascript, which will be
     // considered as overflow by this check.
@@ -149,7 +188,7 @@ export class TruncatedDivide extends Expression {
       return null;
     }
 
-    let truncatedQuotient: number | bigint;
+    let truncatedQuotient: number | bigint | Decimal;
     if (typeof args[0] === 'bigint') {
       // bigint division always truncates
       try {
@@ -159,8 +198,17 @@ export class TruncatedDivide extends Expression {
         return null;
       }
     } else {
-      const quotient = args.reduce((x: number, y: number) => x / y);
-      truncatedQuotient = quotient >= 0 ? Math.floor(quotient) : Math.ceil(quotient);
+      try {
+        const quotient = args.reduce((x: any, y: any) => divide(x, y));
+        const truncated = isDecimal(quotient)
+          ? quotient.truncate()
+          : quotient >= 0
+            ? Math.floor(quotient)
+            : Math.ceil(quotient);
+        truncatedQuotient = decimalResult(truncated, this.resultTypeName);
+      } catch {
+        return null;
+      }
     }
 
     if (MathUtil.overflowsOrUnderflows(truncatedQuotient, this.resultTypeName)) {
@@ -181,15 +229,17 @@ export class Modulo extends Expression {
       return null;
     }
 
-    let modulo: number | bigint;
+    let modulo: number | bigint | Decimal;
     try {
-      modulo = args.reduce((x: any, y: any) => x % y);
+      modulo = args.reduce((x: any, y: any) =>
+        isDecimal(x) || isDecimal(y) ? Decimal.from(x).modulo(y) : x % y
+      );
     } catch {
       // modulo divide by zero results in null according to specification
       return null;
     }
 
-    return MathUtil.decimalLongOrNull(modulo);
+    return MathUtil.decimalLongOrNull(decimalResult(modulo, this.resultTypeName));
   }
 }
 
@@ -204,7 +254,7 @@ export class Ceiling extends Expression {
       return null;
     }
 
-    return Math.ceil(arg);
+    return isDecimal(arg) ? arg.ceil() : Math.ceil(arg);
   }
 }
 
@@ -219,7 +269,7 @@ export class Floor extends Expression {
       return null;
     }
 
-    return Math.floor(arg);
+    return isDecimal(arg) ? arg.floor() : Math.floor(arg);
   }
 }
 
@@ -234,7 +284,7 @@ export class Truncate extends Expression {
       return null;
     }
 
-    return arg >= 0 ? Math.floor(arg) : Math.ceil(arg);
+    return isDecimal(arg) ? arg.truncate() : arg >= 0 ? Math.floor(arg) : Math.ceil(arg);
   }
 }
 export class Abs extends Expression {
@@ -247,9 +297,14 @@ export class Abs extends Expression {
     if (arg == null) {
       return null;
     } else if (arg.isQuantity) {
-      return new Quantity(Math.abs(arg.value), arg.unit);
+      return new Quantity(arg.value.abs(), arg.unit);
     } else if (typeof arg === 'bigint') {
       const absoluteValue = arg < 0n ? -arg : arg;
+      return MathUtil.overflowsOrUnderflows(absoluteValue, this.resultTypeName)
+        ? null
+        : absoluteValue;
+    } else if (isDecimal(arg)) {
+      const absoluteValue = arg.abs();
       return MathUtil.overflowsOrUnderflows(absoluteValue, this.resultTypeName)
         ? null
         : absoluteValue;
@@ -272,9 +327,14 @@ export class Negate extends Expression {
     if (arg == null) {
       return null;
     } else if (arg.isQuantity) {
-      return new Quantity(arg.value * -1, arg.unit);
+      return new Quantity(arg.value.negate(), arg.unit);
     } else if (typeof arg === 'bigint') {
       const negatedValue = arg * -1n;
+      return MathUtil.overflowsOrUnderflows(negatedValue, this.resultTypeName)
+        ? null
+        : negatedValue;
+    } else if (isDecimal(arg)) {
+      const negatedValue = arg.negate();
       return MathUtil.overflowsOrUnderflows(negatedValue, this.resultTypeName)
         ? null
         : negatedValue;
@@ -302,7 +362,10 @@ export class Round extends Expression {
     }
 
     const dec = this.precision != null ? await this.precision.execute(ctx) : 0;
-    return Math.round(arg * Math.pow(10, dec)) / Math.pow(10, dec);
+    if (isDecimal(arg)) {
+      return arg.round(dec);
+    }
+    return decimalResult(Math.round(arg * Math.pow(10, dec)) / Math.pow(10, dec), this.resultTypeName);
   }
 }
 
@@ -317,9 +380,13 @@ export class Ln extends Expression {
       return null;
     }
 
-    const ln = Math.log(arg);
-
-    return MathUtil.decimalOrNull(ln);
+    try {
+      return isDecimal(arg)
+        ? arg.ln()
+        : MathUtil.decimalOrNull(decimalResult(Math.log(arg), ELM_DECIMAL_TYPE));
+    } catch {
+      return null;
+    }
   }
 }
 
@@ -334,7 +401,14 @@ export class Exp extends Expression {
       return null;
     }
 
-    const power = Math.exp(arg);
+    let power;
+    try {
+      power = isDecimal(arg)
+        ? arg.exp()
+        : decimalResult(Math.exp(arg), ELM_DECIMAL_TYPE);
+    } catch {
+      return null;
+    }
 
     if (MathUtil.overflowsOrUnderflows(power, this.resultTypeName)) {
       return null;
@@ -354,9 +428,16 @@ export class Log extends Expression {
       return null;
     }
 
-    const log = args.reduce((x: number, y: number) => Math.log(x) / Math.log(y));
-
-    return MathUtil.decimalOrNull(log);
+    try {
+      const log = args.reduce((x: any, y: any) =>
+        isDecimal(x) || isDecimal(y)
+          ? Decimal.from(x).log(y)
+          : Math.log(x) / Math.log(y)
+      );
+      return isDecimal(log) ? log : MathUtil.decimalOrNull(decimalResult(log, ELM_DECIMAL_TYPE));
+    } catch {
+      return null;
+    }
   }
 }
 
@@ -371,7 +452,7 @@ export class Power extends Expression {
       return null;
     }
 
-    const power = args.reduce((x: any, y: any) => doPower(x, y));
+    const power = decimalResult(args.reduce((x: any, y: any) => doPower(x, y)), this.resultTypeName);
 
     // Note: The resultTypeName may be wrong if the exponent is a negative number. Math.overflowsOrUnderflows
     // already accounts for this possibility by only considering it an integer if Number.isInteger(value).
@@ -384,6 +465,9 @@ export class Power extends Expression {
 }
 
 function doPower(x: any, y: any) {
+  if (isDecimal(x) || isDecimal(y)) {
+    return Decimal.from(x).power(y);
+  }
   if (typeof x === 'bigint' && typeof y === 'bigint' && y < 0n) {
     // x ** y does not support negative exponents for bigint, so downgrade to number if possible, otherwise return null
     if (
@@ -409,7 +493,7 @@ export class MinValue extends Expression {
   static readonly MIN_VALUES = {
     [ELM_INTEGER_TYPE]: MIN_INT_VALUE,
     [ELM_LONG_TYPE]: MIN_LONG_VALUE,
-    [ELM_DECIMAL_TYPE]: MIN_FLOAT_VALUE,
+    [ELM_DECIMAL_TYPE]: MIN_DECIMAL_VALUE,
     [ELM_DATETIME_TYPE]: MIN_DATETIME_VALUE,
     [ELM_DATE_TYPE]: MIN_DATE_VALUE,
     [ELM_TIME_TYPE]: MIN_TIME_VALUE
@@ -441,7 +525,7 @@ export class MaxValue extends Expression {
   static readonly MAX_VALUES = {
     [ELM_INTEGER_TYPE]: MAX_INT_VALUE,
     [ELM_LONG_TYPE]: MAX_LONG_VALUE,
-    [ELM_DECIMAL_TYPE]: MAX_FLOAT_VALUE,
+    [ELM_DECIMAL_TYPE]: MAX_DECIMAL_VALUE,
     [ELM_DATETIME_TYPE]: MAX_DATETIME_VALUE,
     [ELM_DATE_TYPE]: MAX_DATE_VALUE,
     [ELM_TIME_TYPE]: MAX_TIME_VALUE

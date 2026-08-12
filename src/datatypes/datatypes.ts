@@ -1,4 +1,5 @@
 export * from './bigint';
+export * from './decimal';
 export * from './logic';
 export * from './clinical';
 export * from './uncertainty';

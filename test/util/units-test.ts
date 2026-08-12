@@ -1,4 +1,5 @@
 import should from 'should';
+import { Decimal } from '../../src/datatypes/decimal';
 import {
   checkUnit,
   compareUnits,
@@ -108,41 +109,41 @@ describe('checkUnit', () => {
 
 describe('convertUnit', () => {
   it('should convert compatible units', () => {
-    convertUnit(18, '[in_i]', '[ft_i]').should.eql(1.5);
+    convertUnit(Decimal.from(18), '[in_i]', '[ft_i]').should.eql(Decimal.from(1.5));
   });
 
   it('should return same value for same units', () => {
-    convertUnit(18, '[in_i]', '[in_i]').should.eql(18);
+    convertUnit(Decimal.from(18), '[in_i]', '[in_i]').should.eql(Decimal.from(18));
   });
 
   it('should consider empty as 1 during conversion', () => {
-    convertUnit(18, '', '').should.eql(18);
-    convertUnit(18, null, null).should.eql(18);
-    convertUnit(18, '', null).should.eql(18);
-    convertUnit(18, null, '').should.eql(18);
+    convertUnit(Decimal.from(18), '', '').should.eql(Decimal.from(18));
+    convertUnit(Decimal.from(18), null, null).should.eql(Decimal.from(18));
+    convertUnit(Decimal.from(18), '', null).should.eql(Decimal.from(18));
+    convertUnit(Decimal.from(18), null, '').should.eql(Decimal.from(18));
   });
 
   it('should support CQL date units during conversion', () => {
-    convertUnit(18, 'months', 'years').should.eql(1.5);
-    convertUnit(1.5, 'years', 'months').should.eql(18);
-    convertUnit(2, 'seconds', 'milliseconds').should.eql(2000);
-    convertUnit(2000, 'milliseconds', 'seconds').should.eql(2);
+    convertUnit(Decimal.from(18), 'months', 'years').should.eql(Decimal.from(1.5));
+    convertUnit(Decimal.from(1.5), 'years', 'months').should.eql(Decimal.from(18));
+    convertUnit(Decimal.from(2), 'seconds', 'milliseconds').should.eql(Decimal.from(2000));
+    convertUnit(Decimal.from(2000), 'milliseconds', 'seconds').should.eql(Decimal.from(2));
   });
 
   it('should truncate precision to 8 decimals by default', () => {
-    const result = convertUnit(1, '[ft_i]', '[mi_i]');
-    result.should.equal(0.00018939);
+    const result = convertUnit(Decimal.from(1), '[ft_i]', '[mi_i]');
+    result.should.eql(Decimal.from("0.00018939"));
   });
 
   it('should note truncate precision to 8 decimals when adjustPrecision is false', () => {
-    const result = convertUnit(1, '[ft_i]', '[mi_i]', false);
-    result.should.not.equal(0.00018939);
+    const result = convertUnit(Decimal.from(1), '[ft_i]', '[mi_i]', false);
+    result.should.not.eql(Decimal.from("0.00018939"));
     result.toString().length.should.be.greaterThan(10);
     result.toString().should.startWith('0.000189393939393');
   });
 
   it('should return undefined for incompatible units', () => {
-    should(convertUnit(18, '[in_i]', '[in_i]2')).be.undefined();
+    should(convertUnit(Decimal.from(18), '[in_i]', '[in_i]2')).be.undefined();
   });
 });
 

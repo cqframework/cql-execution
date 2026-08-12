@@ -5,6 +5,7 @@ import { isNull } from '../../../src/util/util';
 import { DateTime } from '../../../src/datatypes/datetime';
 import { Quantity } from '../../../src/datatypes/quantity';
 import { Uncertainty } from '../../../src/datatypes/uncertainty';
+import { Decimal } from '../../../src/datatypes/decimal';
 
 describe('FromString', () => {
   beforeEach(function () {
@@ -28,7 +29,7 @@ describe('FromString', () => {
   });
 
   it("should convert '10.2' to Decimal", async function () {
-    (await this.decimalValid.exec(this.ctx)).should.equal(10.2);
+    (await this.decimalValid.exec(this.ctx)).should.eql(Decimal.from(10.2));
   });
 
   it("should be null trying to convert 'abc' to Decimal", async function () {
@@ -61,25 +62,25 @@ describe('FromString', () => {
 
   it('should convert "10 \'A\'" to Quantity', async function () {
     const quantity = await this.quantityStr.exec(this.ctx);
-    quantity.value.should.equal(10);
+    quantity.value.should.eql(Decimal.from(10));
     quantity.unit.should.equal('A');
   });
 
   it('should convert "+10 \'A\'" to Quantity', async function () {
     const quantity = await this.posQuantityStr.exec(this.ctx);
-    quantity.value.should.equal(10);
+    quantity.value.should.eql(Decimal.from(10));
     quantity.unit.should.equal('A');
   });
 
   it('should convert "-10 \'A\'" to Quantity', async function () {
     const quantity = await this.negQuantityStr.exec(this.ctx);
-    quantity.value.should.equal(-10);
+    quantity.value.should.eql(Decimal.from(-10));
     quantity.unit.should.equal('A');
   });
 
   it('should convert "10.0\'mA\'" to Quantity', async function () {
     const quantity = await this.quantityStrDecimal.exec(this.ctx);
-    quantity.value.should.equal(10.0);
+    quantity.value.should.eql(Decimal.from(10.0));
     quantity.unit.should.equal('mA');
   });
 
@@ -128,7 +129,7 @@ describe('FromInteger', () => {
   });
 
   it('should convert 10 to 10.0', async function () {
-    (await this.decimal10.exec(this.ctx)).should.equal(10.0);
+    (await this.decimal10.exec(this.ctx)).should.eql(Decimal.from(10.0));
   });
 
   it('should convert null to null', async function () {
@@ -154,7 +155,7 @@ describe('FromLong', () => {
   });
 
   it('should convert 10L to 10.0', async function () {
-    (await this.decimal10.exec(this.ctx)).should.equal(10.0);
+    (await this.decimal10.exec(this.ctx)).should.eql(Decimal.from(10.0));
   });
 
   it('should convert null to null', async function () {
@@ -185,7 +186,7 @@ describe('FromQuantity', () => {
 
   it('should convert "10 \'A\'" to "10 \'A\'"', async function () {
     const quantity = await this.quantityQuantity.exec(this.ctx);
-    quantity.value.should.equal(10);
+    quantity.value.should.eql(Decimal.from(10));
     quantity.unit.should.equal('A');
   });
 });
@@ -242,7 +243,7 @@ describe('FromDateTime', () => {
     dateTime.minute.should.equal(1);
     dateTime.second.should.equal(2);
     dateTime.millisecond.should.equal(321);
-    dateTime.timezoneOffset.should.equal(-6);
+    dateTime.timezoneOffset.should.eql(Decimal.from(-6));
   });
 });
 
@@ -344,19 +345,19 @@ describe('ToDecimal', () => {
   });
 
   it("should convert '0.0' to 0.0", async function () {
-    (await this.noSign.exec(this.ctx)).should.equal(0.0);
+    (await this.noSign.exec(this.ctx)).should.eql(Decimal.from(0.0));
   });
 
   it("should convert '+1.1' to 1.1", async function () {
-    (await this.positiveSign.exec(this.ctx)).should.equal(1.1);
+    (await this.positiveSign.exec(this.ctx)).should.eql(Decimal.from(1.1));
   });
 
   it("should convert '-1.1' to -1.1", async function () {
-    (await this.negativeSign.exec(this.ctx)).should.equal(-1.1);
+    (await this.negativeSign.exec(this.ctx)).should.eql(Decimal.from(-1.1));
   });
 
   it('should truncate decimal to 8 digits after decimal point', async function () {
-    (await this.tooPrecise.exec(this.ctx)).should.equal(0.44444444);
+    (await this.tooPrecise.exec(this.ctx)).should.eql(Decimal.from(0.44444444));
   });
 
   it('should be null for decimal that is above max decimal value', async function () {
@@ -560,17 +561,17 @@ describe('ToRatio', () => {
 
   it('should be valid given quantities with custom UCUM units', async function () {
     const ratio = await this.isValidWithCustomUCUM.exec(this.ctx);
-    ratio.numerator.value.should.eql(1.0);
+    ratio.numerator.value.should.eql(Decimal.from(1.0));
     ratio.numerator.unit.should.eql('{foo:bar}');
-    ratio.denominator.value.should.eql(2.0);
+    ratio.denominator.value.should.eql(Decimal.from(2.0));
     ratio.denominator.unit.should.eql('mg');
   });
 
   it('should create valid ratio', async function () {
     const ratio = await this.isValid.exec(this.ctx);
-    ratio.numerator.value.should.eql(1.0);
+    ratio.numerator.value.should.eql(Decimal.from(1.0));
     ratio.numerator.unit.should.eql('mg');
-    ratio.denominator.value.should.eql(2.0);
+    ratio.denominator.value.should.eql(Decimal.from(2.0));
     ratio.denominator.unit.should.eql('mg');
   });
 });

@@ -1,5 +1,6 @@
 import * as ucum from '@lhncbc/ucum-lhc';
 import { decimalAdjust } from './math';
+import { Decimal } from '../datatypes/decimal';
 const utils = ucum.UcumLhcUtils.getInstance();
 
 // The CQL specification says that dates are based on the Gregorian calendar, so CQL-based year and month
@@ -69,12 +70,16 @@ export function checkUnit(unit: any, allowEmptyUnits = true, allowCQLDateUnits =
 
 export function convertUnit(fromVal: any, fromUnit: any, toUnit: any, adjustPrecision = true) {
   [fromUnit, toUnit] = [fromUnit, toUnit].map(fixUnit);
-  const result = utils.convertUnitTo(fixUnit(fromUnit), fromVal, fixUnit(toUnit));
+  // IMPORTANT: the UCUM library operates on raw JS numbers, not our Decimal
+  const rawFromVal = fromVal.isDecimal ? fromVal.value : fromVal;
+
+  const result = utils.convertUnitTo(fixUnit(fromUnit), rawFromVal, fixUnit(toUnit));
   if (result.status !== 'succeeded') {
     return;
   }
   // note: convert result.toVal to number (by prefixing +) to keep typescript happy
-  return adjustPrecision ? decimalAdjust('round', result.toVal, -8) : +result.toVal;
+  const rawRetVal = adjustPrecision ? decimalAdjust('round', result.toVal, -8) : +result.toVal;
+  return fromVal.isDecimal ? Decimal.from(rawRetVal) : rawRetVal;
 }
 
 export function normalizeUnitsWhenPossible(val1: any, unit1: any, val2: any, unit2: any) {
@@ -121,7 +126,7 @@ export function convertToCQLDateUnit(unit: any) {
 
 export function compareUnits(unit1: any, unit2: any) {
   try {
-    const c = convertUnit(1, unit1, unit2);
+    const c = convertUnit(1, unit1, unit2) as number;
     if (c && c > 1) {
       // unit1 is bigger (less precise)
       return 1;

@@ -22,6 +22,7 @@ import {
 } from '../util/elmTypes';
 import { MIN_FLOAT_VALUE } from '../util/limits';
 import { Quantity } from './quantity';
+import { Decimal, MIN_DECIMAL_VALUE } from './decimal';
 
 export class Interval {
   constructor(
@@ -40,9 +41,11 @@ export class Interval {
       }
       if (point != null) {
         if (typeof point === 'number') {
-          this.pointType = Number.isInteger(point) ? ELM_INTEGER_TYPE : ELM_DECIMAL_TYPE;
+          this.pointType = ELM_INTEGER_TYPE;
         } else if (typeof point === 'bigint') {
           this.pointType = ELM_LONG_TYPE;
+        } else if (point.isDecimal) {
+          this.pointType = ELM_DECIMAL_TYPE;
         } else if (point.isTime && point.isTime()) {
           this.pointType = ELM_TIME_TYPE;
         } else if (point.isDate) {
@@ -704,10 +707,11 @@ export class Interval {
     let minValue = minValueForType(this.pointType, getQuantityInstanceForMinMax(this));
 
     // due to floating point issues in JS, we must use 0.0 for Decimal/Quantity instead of min
-    if (minValue === MIN_FLOAT_VALUE) {
-      minValue = 0.0;
+    // TODO: remove this when changing to decimal.js
+    if (minValue === MIN_DECIMAL_VALUE) {
+      minValue = Decimal.from(0.0);
     } else if ((minValue as any)?.isQuantity) {
-      (minValue as Quantity).value = 0.0;
+      minValue = new Quantity(0.0, (minValue as Quantity)?.unit);
     }
 
     if (minValue != null) {
@@ -776,7 +780,9 @@ export class Interval {
   toString() {
     const start = this.lowClosed ? '[' : '(';
     const end = this.highClosed ? ']' : ')';
-    return start + this.low.toString() + ', ' + this.high.toString() + end;
+    const lowString = this.low == null ? "null" : this.low.toString();
+    const highString = this.high == null ? "null" : this.high.toString();
+    return start + lowString + ', ' + highString + end;
   }
 }
 
