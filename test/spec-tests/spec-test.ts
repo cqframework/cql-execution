@@ -44,6 +44,9 @@ describe('CQL Spec Tests (from XML)', () => {
           }
           suite.expression.element.forEach((t: any) => {
             it(`should properly evaluate ${t.name}`, async function () {
+              if (t.name === 'beans') {
+                debugger;
+              }
               const testCaseMap = convertTupleToMap(t.value);
               if (testCaseMap.has('skipped')) {
                 this.skip();

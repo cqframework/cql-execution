@@ -12,6 +12,10 @@ function areStrings(a: any, b: any) {
   return typeof a === 'string' && typeof b === 'string';
 }
 
+function areDecimals(a: any, b: any) {
+  return a && a.isDecimal && b && b.isDecimal;
+}
+
 function areDateTimesOrQuantities(a: any, b: any) {
   return (
     (a && a.isDateTime && b && b.isDateTime) ||
@@ -27,6 +31,8 @@ function isUncertainty(x: any) {
 export function lessThan(a: any, b: any, precision?: any) {
   if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
     return a < b;
+  } else if (areDecimals(a, b)) {
+    return a.lessThan(b);
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.before(b, precision);
   } else if (isUncertainty(a)) {
@@ -41,7 +47,9 @@ export function lessThan(a: any, b: any, precision?: any) {
 export function lessThanOrEquals(a: any, b: any, precision?: any) {
   if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
     return a <= b;
-  } else if (areDateTimesOrQuantities(a, b)) {
+  }else if (areDecimals(a, b)) {
+    return a.lessThanOrEquals(b);
+  }  else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrBefore(b, precision);
   } else if (isUncertainty(a)) {
     return a.lessThanOrEquals(b, precision);
@@ -55,6 +63,8 @@ export function lessThanOrEquals(a: any, b: any, precision?: any) {
 export function greaterThan(a: any, b: any, precision?: any) {
   if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
     return a > b;
+  } else if (areDecimals(a, b)) {
+    return a.greaterThan(b);
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.after(b, precision);
   } else if (isUncertainty(a)) {
@@ -69,6 +79,8 @@ export function greaterThan(a: any, b: any, precision?: any) {
 export function greaterThanOrEquals(a: any, b: any, precision?: any) {
   if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
     return a >= b;
+  } else if (areDecimals(a, b)) {
+    return a.greaterThanOrEquals(b);
   } else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrAfter(b, precision);
   } else if (isUncertainty(a)) {

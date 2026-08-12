@@ -1,6 +1,7 @@
 import { Expression } from './expression';
 import { typeIsArray, allTrue, anyTrue, removeNulls, numerical_sort } from '../util/util';
 import { Quantity } from '../datatypes/datatypes';
+import { Decimal } from '../datatypes/decimal';
 import { Context } from '../runtime/context';
 import { Exception } from '../datatypes/exception';
 import { greaterThan, lessThan } from '../util/comparison';
@@ -15,6 +16,32 @@ class AggregateExpression extends Expression {
     super(json);
     this.source = build(json.source);
   }
+}
+
+function hasDecimals(values: any[]) {
+  return values.some(value => value && value.isDecimal);
+}
+
+function isDecimal(value: any): value is Decimal {
+  return value != null && value.isDecimal;
+}
+
+function numberValue(value: any) {
+  return value && value.isDecimal ? value.toNumber() : value;
+}
+
+function sumDecimals(values: Decimal[]) {
+  return values.reduce((sum, value) => sum.add(value)).setScale(8, 'half-up');
+}
+
+function productDecimals(values: Decimal[]) {
+  return values.reduce((product, value) => product.multiplyBy(value)).setScale(8, 'half-up');
+}
+
+function decimalResult(value: number, values: any[], resultTypeName?: string) {
+  return hasDecimals(values) || resultTypeName === ELM_DECIMAL_TYPE
+    ? Decimal.from(value).setScale(8, 'half-up')
+    : value;
 }
 
 export class Count extends AggregateExpression {
@@ -53,11 +80,12 @@ export class Sum extends AggregateExpression {
     }
 
     if (hasOnlyQuantities(items)) {
-      const values = getValuesFromQuantities(items);
-      const sum = values.reduce((x, y) => x + y);
+      const sum = sumDecimals(getValuesFromQuantities(items));
       return overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE) ? null : new Quantity(sum, items[0].unit);
     } else {
-      const sum = items.reduce((x: any, y: any) => x + y);
+      const sum = hasDecimals(items)
+        ? sumDecimals(items.map(Decimal.from))
+        : items.reduce((x: any, y: any) => x + y);
       return overflowsOrUnderflows(sum, this.resultTypeName) ? null : sum;
     }
   }
@@ -153,12 +181,14 @@ export class Avg extends AggregateExpression {
     }
 
     if (hasOnlyQuantities(items)) {
-      const values = getValuesFromQuantities(items);
-      const sum = values.reduce((x, y) => x + y);
-      return new Quantity(sum / values.length, items[0].unit);
+      const sum = sumDecimals(getValuesFromQuantities(items));
+      return new Quantity(sum.divideBy(items.length).setScale(8, 'half-up'), items[0].unit);
     } else {
+      if (hasDecimals(items)) {
+        return sumDecimals(items.map(Decimal.from)).divideBy(items.length).setScale(8, 'half-up');
+      }
       const sum = items.reduce((x: number, y: number) => x + y);
-      return sum / items.length;
+      return decimalResult(sum / items.length, items, this.resultTypeName);
     }
   }
 }
@@ -184,11 +214,12 @@ export class Median extends AggregateExpression {
     }
 
     if (!hasOnlyQuantities(items)) {
-      return medianOfNumbers(items);
+      return hasDecimals(items)
+        ? medianOfDecimals(items.map(Decimal.from))
+        : decimalResult(medianOfNumbers(items), items, this.resultTypeName);
     }
 
-    const values = getValuesFromQuantities(items);
-    const median = medianOfNumbers(values);
+    const median = medianOfDecimals(getValuesFromQuantities(items));
     return new Quantity(median, items[0].unit);
   }
 }
@@ -218,9 +249,10 @@ export class Mode extends AggregateExpression {
       const values = getValuesFromQuantities(filtered);
       let mode = this.mode(values);
       if (mode.length === 1) {
-        mode = mode[0];
+        return new Quantity(mode[0], items[0].unit);
+      } else {
+        return mode.map(m => new Quantity(m, items[0].unit));
       }
-      return new Quantity(mode, items[0].unit);
     } else {
       const mode = this.mode(filtered);
       if (mode.length === 1) {
@@ -278,11 +310,14 @@ export class StdDev extends AggregateExpression {
     }
 
     if (hasOnlyQuantities(items)) {
-      const values = getValuesFromQuantities(items);
+      const values = getValuesFromQuantities(items).map(numberValue);
       const stdDev = this.standardDeviation(values);
       return new Quantity(stdDev, items[0].unit);
     } else {
-      return this.standardDeviation(items);
+      const standardDeviation = this.standardDeviation(items.map(numberValue));
+      return standardDeviation == null
+        ? null
+        : decimalResult(standardDeviation, items, this.resultTypeName);
     }
   }
 
@@ -336,15 +371,17 @@ export class Product extends AggregateExpression {
     }
 
     if (hasOnlyQuantities(items)) {
-      const values = getValuesFromQuantities(items);
-      const product = values.reduce((x, y) => x * y);
+      const product = productDecimals(getValuesFromQuantities(items));
       // Units are not multiplied for the geometric product
       return overflowsOrUnderflows(product, ELM_DECIMAL_TYPE)
         ? null
         : new Quantity(product, items[0].unit);
     } else {
-      const product = items.reduce((x: any, y: any) => x * y);
-      return overflowsOrUnderflows(product, this.resultTypeName) ? null : product;
+      const product = hasDecimals(items)
+        ? productDecimals(items.map(Decimal.from))
+        : items.reduce((x: number, y: number) => x * y);
+      const result = isDecimal(product) ? product : decimalResult(product, items, this.resultTypeName);
+      return overflowsOrUnderflows(result, this.resultTypeName) ? null : result;
     }
   }
 }
@@ -371,13 +408,17 @@ export class GeometricMean extends AggregateExpression {
     }
 
     if (hasOnlyQuantities(items)) {
-      const values = getValuesFromQuantities(items);
-      const product = values.reduce((x, y) => x * y);
-      const geoMean = Math.pow(product, 1.0 / items.length);
+      const product = productDecimals(getValuesFromQuantities(items));
+      const geoMean = product.power(1.0 / items.length).setScale(8, 'half-up');
       return new Quantity(geoMean, items[0].unit);
     } else {
+      if (hasDecimals(items)) {
+        return productDecimals(items.map(Decimal.from))
+          .power(1.0 / items.length)
+          .setScale(8, 'half-up');
+      }
       const product = items.reduce((x: number, y: number) => x * y);
-      return Math.pow(product, 1.0 / items.length);
+      return decimalResult(Math.pow(product, 1.0 / items.length), items, this.resultTypeName);
     }
   }
 }
@@ -444,7 +485,7 @@ function processQuantities(values: any[]) {
   }
 }
 
-function getValuesFromQuantities(quantities: Quantity[]): number[] {
+function getValuesFromQuantities(quantities: Quantity[]): Decimal[] {
   return quantities.map(quantity => quantity.value);
 }
 
@@ -470,4 +511,12 @@ function medianOfNumbers(numbers: number[]) {
     // Even number of items
     return (items[items.length / 2 - 1] + items[items.length / 2]) / 2;
   }
+}
+
+function medianOfDecimals(decimals: Decimal[]) {
+  const items = [...decimals].sort((a, b) => a.compareTo(b));
+  const middle = Math.floor(items.length / 2);
+  return items.length % 2 === 1
+    ? items[middle]
+    : items[middle - 1].add(items[middle]).divideBy(2).setScale(8, 'half-up');
 }

@@ -4,6 +4,7 @@ const data = require('./data');
 import * as DT from '../../../src/datatypes/datatypes';
 import { PatientContext } from '../../../src/cql';
 import { Uncertainty } from '../../../src/datatypes/uncertainty';
+import { Decimal } from '../../../src/datatypes/decimal';
 
 describe('DateTime', () => {
   beforeEach(function () {
@@ -99,7 +100,7 @@ describe('DateTime', () => {
     d.minute.should.equal(10);
     d.second.should.equal(59);
     d.millisecond.should.equal(456);
-    d.timezoneOffset.should.equal(-8);
+    d.timezoneOffset.should.eql(Decimal.from(-8));
   });
 });
 
@@ -408,8 +409,8 @@ describe('TimezoneOffsetFrom', () => {
   });
 
   it('should return the timezoneoffset from a fully defined DateTime', async function () {
-    (await this.centralEuropean.exec(this.ctx)).should.equal(1);
-    (await this.easternStandard.exec(this.ctx)).should.equal(-5);
+    (await this.centralEuropean.exec(this.ctx)).should.eql(Decimal.from(1));
+    (await this.easternStandard.exec(this.ctx)).should.eql(Decimal.from(-5));
   });
 
   it('should return the default timezone when not specified', async function () {

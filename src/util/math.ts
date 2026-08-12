@@ -8,6 +8,13 @@ import {
   MIN_TIME_VALUE,
   MAX_TIME_VALUE
 } from '../datatypes/datetime';
+
+import { 
+  Decimal,
+  MAX_DECIMAL_VALUE,
+  MIN_DECIMAL_VALUE
+} from '../datatypes/decimal';
+
 import { Uncertainty } from '../datatypes/uncertainty';
 import {
   ELM_INTEGER_TYPE,
@@ -19,11 +26,8 @@ import {
   ELM_QUANTITY_TYPE
 } from './elmTypes';
 import {
-  MAX_FLOAT_VALUE,
   MAX_INT_VALUE,
   MAX_LONG_VALUE,
-  MIN_FLOAT_PRECISION_VALUE,
-  MIN_FLOAT_VALUE,
   MIN_INT_VALUE,
   MIN_LONG_VALUE
 } from './limits';
@@ -63,15 +67,11 @@ export function overflowsOrUnderflows(value: any, type?: string): boolean {
       return true;
     }
   } else if (typeof value === 'number') {
-    // Only consider it an integer if it looks like an integer (even if the type says it's an integer).
-    // We need to do this because the CQL-to-ELM Translator's implementation of Power may incorrectly tag
-    // a result as an Integer when it really is a decimal (e.g., when the exponent is a negative number).
-    const isInteger = Number.isInteger(value) && (type === ELM_INTEGER_TYPE || type == null);
-    if (isInteger) {
       if (!isValidInteger(value)) {
         return true;
       }
-    } else if (!isValidDecimal(value)) {
+  } else if (value.isDecimal) { 
+    if (!isValidDecimal(value)) {
       return true;
     }
   } else if (value.isUncertainty) {
@@ -107,16 +107,13 @@ export function isValidLong(long: any) {
 }
 
 export function isValidDecimal(decimal: any) {
-  if (isNaN(decimal)) {
+  if (!decimal.isDecimal) {
     return false;
   }
-  if (typeof decimal !== 'number') {
+  if (decimal.greaterThan(MAX_DECIMAL_VALUE)) {
     return false;
   }
-  if (decimal > MAX_FLOAT_VALUE) {
-    return false;
-  }
-  if (decimal < MIN_FLOAT_VALUE) {
+  if (decimal.lessThan(MIN_DECIMAL_VALUE)) {
     return false;
   }
   return true;
@@ -146,9 +143,11 @@ export function add(a: any, b: any, type?: string): any {
   }
   if (typeof a === 'number' && typeof b === 'number') {
     const sum = a + b;
-    const numberType =
-      type ?? (Number.isInteger(a) && Number.isInteger(b) ? ELM_INTEGER_TYPE : ELM_DECIMAL_TYPE);
-    return overflowsOrUnderflows(sum, numberType) ? null : sum;
+    return overflowsOrUnderflows(sum, ELM_INTEGER_TYPE) ? null : sum;
+  }
+  if (a?.isDecimal && b?.isDecimal) {
+    const sum = a.add(b);
+    return overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE) ? null : sum;
   }
   if (a?.isQuantity && b?.isQuantity) {
     const [aValue, aUnit, bValue, bUnit] = normalizeUnitsWhenPossible(
@@ -160,7 +159,7 @@ export function add(a: any, b: any, type?: string): any {
     if (aUnit !== bUnit) {
       return null;
     }
-    const sum = aValue + bValue;
+    const sum = aValue.add(bValue);
     return overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE) ? null : new Quantity(sum, aUnit);
   }
   if (b?.isQuantity && (a?.isDate || a?.isDateTime || (a?.isTime && a.isTime()))) {
@@ -188,14 +187,18 @@ export function subtract(a: any, b: any, type?: string): any {
   if (typeof b === 'number' || typeof b === 'bigint') {
     return add(a, -b, type);
   }
+  if (a?.isDecimal && b?.isDecimal) {
+    const difference = a.subtract(b);
+    return overflowsOrUnderflows(difference, ELM_DECIMAL_TYPE) ? null : difference;
+  }
   if (b?.isQuantity) {
-    return add(a, { isQuantity: true, value: -b.value, unit: b.unit }, type);
+    return add(a, { isQuantity: true, value: b.value.negate(), unit: b.unit }, type);
   }
 
   throw new Error('Unsupported argument types.');
 }
 
-export function limitDecimalPrecision<T extends number | bigint | Quantity | Uncertainty>(
+export function limitDecimalPrecision<T extends number | bigint | Quantity | Uncertainty | Decimal | undefined>(
   val?: T
 ): T | undefined {
   if (val == null) {
@@ -204,7 +207,7 @@ export function limitDecimalPrecision<T extends number | bigint | Quantity | Unc
     return (Math.round(val * Math.pow(10, 8)) / Math.pow(10, 8)) as T;
   } else if ((val as Quantity).isQuantity) {
     return new Quantity(
-      limitDecimalPrecision((val as Quantity).value),
+      limitDecimalPrecision((val as Quantity).value) as Decimal,
       (val as Quantity).unit
     ) as T;
   } else if ((val as Uncertainty).isUncertainty) {
@@ -220,25 +223,22 @@ export class OverFlowException extends Exception {}
 
 export function successor(val: any, type?: string, precision?: string): any {
   if (typeof val === 'number') {
-    const isInteger = type === ELM_INTEGER_TYPE || (type == null && Number.isInteger(val));
-    if (isInteger) {
-      if (val >= MAX_INT_VALUE) {
-        throw new OverFlowException();
-      } else {
-        return val + 1;
-      }
+    if (val >= MAX_INT_VALUE) {
+      throw new OverFlowException();
     } else {
-      if (val >= MAX_FLOAT_VALUE) {
-        throw new OverFlowException();
-      } else {
-        return val + MIN_FLOAT_PRECISION_VALUE;
-      }
+      return val + 1;
     }
   } else if (typeof val === 'bigint') {
     if (val >= MAX_LONG_VALUE) {
       throw new OverFlowException();
     } else {
       return val + 1n;
+    }
+  } else if (val && val.isDecimal) {
+    if (val.greaterThanOrEquals(MAX_DECIMAL_VALUE)) {
+      throw new OverFlowException();
+    } else {
+      return val.successor();
     }
   } else if (val && val.isTime && val.isTime()) {
     if (val.sameAs(MAX_TIME_VALUE)) {
@@ -279,25 +279,22 @@ export function successor(val: any, type?: string, precision?: string): any {
 
 export function predecessor(val: any, type?: string, precision?: string): any {
   if (typeof val === 'number') {
-    const isInteger = type === ELM_INTEGER_TYPE || (type == null && Number.isInteger(val));
-    if (isInteger) {
-      if (val <= MIN_INT_VALUE) {
-        throw new OverFlowException();
-      } else {
-        return val - 1;
-      }
+    if (val <= MIN_INT_VALUE) {
+      throw new OverFlowException();
     } else {
-      if (val <= MIN_FLOAT_VALUE) {
-        throw new OverFlowException();
-      } else {
-        return val - MIN_FLOAT_PRECISION_VALUE;
-      }
+      return val - 1;
     }
   } else if (typeof val === 'bigint') {
     if (val <= MIN_LONG_VALUE) {
       throw new OverFlowException();
     } else {
       return val - 1n;
+    }
+  } else if (val && val.isDecimal) {
+    if (val.lessThanOrEquals(MIN_DECIMAL_VALUE)) {
+      throw new OverFlowException();
+    } else {
+      return val.predecessor();
     }
   } else if (val && val.isTime && val.isTime()) {
     if (val.sameAs(MIN_TIME_VALUE)) {
@@ -343,7 +340,7 @@ export function maxValueForType(type: string, quantityInstance?: Quantity) {
     case ELM_LONG_TYPE:
       return MAX_LONG_VALUE;
     case ELM_DECIMAL_TYPE:
-      return MAX_FLOAT_VALUE;
+      return MAX_DECIMAL_VALUE;
     case ELM_DATETIME_TYPE:
       return MAX_DATETIME_VALUE?.copy();
     case ELM_DATE_TYPE:
@@ -355,7 +352,7 @@ export function maxValueForType(type: string, quantityInstance?: Quantity) {
       // especially if this is being used in the context of an interval or uncertainty since the
       // left and right sides need to be comparable in those cases.
       // See: https://jira.hl7.org/browse/FHIR-57935
-      return new Quantity(MAX_FLOAT_VALUE, quantityInstance?.unit || '1');
+      return new Quantity(MAX_DECIMAL_VALUE, quantityInstance?.unit || '1');
     }
   }
   return null;
@@ -368,7 +365,7 @@ export function minValueForType(type: string, quantityInstance?: Quantity) {
     case ELM_LONG_TYPE:
       return MIN_LONG_VALUE;
     case ELM_DECIMAL_TYPE:
-      return MIN_FLOAT_VALUE;
+      return MIN_DECIMAL_VALUE;
     case ELM_DATETIME_TYPE:
       return MIN_DATETIME_VALUE?.copy();
     case ELM_DATE_TYPE:
@@ -380,7 +377,7 @@ export function minValueForType(type: string, quantityInstance?: Quantity) {
       // especially if this is being used in the context of an interval or uncertainty since the
       // left and right sides need to be comparable in those cases.
       // See: https://jira.hl7.org/browse/FHIR-57935
-      return new Quantity(MIN_FLOAT_VALUE, quantityInstance?.unit || '1');
+      return new Quantity(MIN_DECIMAL_VALUE, quantityInstance?.unit || '1');
     }
   }
   return null;
@@ -414,7 +411,8 @@ export function decimalOrNull(value: any) {
 }
 
 export function decimalLongOrNull(value: any) {
-  return (typeof value === 'number' && isValidDecimal(value)) ||
+  return (typeof value === 'number' && Number.isFinite(value)) ||
+    ((value && value.isDecimal) && isValidDecimal(value)) ||
     (typeof value === 'bigint' && isValidLong(value))
     ? value
     : null;

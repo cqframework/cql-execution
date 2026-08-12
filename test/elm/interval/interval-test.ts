@@ -4,14 +4,13 @@ const data = require('./data');
 import { Interval } from '../../../src/datatypes/interval';
 import { DateTime, MIN_DATETIME_VALUE, MAX_DATETIME_VALUE } from '../../../src/datatypes/datetime';
 import { Uncertainty } from '../../../src/datatypes/uncertainty';
+import { Decimal, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../../../src/datatypes/decimal';
 import {
   MIN_INT_VALUE,
   MAX_INT_VALUE,
   MIN_LONG_VALUE,
   MAX_LONG_VALUE,
-  MIN_FLOAT_VALUE,
-  MIN_FLOAT_PRECISION_VALUE,
-  MAX_FLOAT_VALUE
+  MIN_FLOAT_PRECISION_VALUE
 } from '../../../src/util/limits';
 
 describe('Interval', () => {
@@ -1620,9 +1619,9 @@ describe('Width', () => {
 
   it('should calculate the width of real intervals', async function () {
     // define RealWidth: width of Interval[1.23, 4.56]
-    (await this.realWidth.exec(this.ctx)).should.equal(3.33);
+    (await this.realWidth.exec(this.ctx)).should.eql(Decimal.from(3.33));
     // define RealOpenWidth: width of Interval(1.23, 4.56)
-    (await this.realOpenWidth.exec(this.ctx)).should.equal(3.32999998);
+    (await this.realOpenWidth.exec(this.ctx)).should.eql(Decimal.from(3.32999998));
   });
 
   it('should calculate the width of infinite intervals', async function () {
@@ -1646,7 +1645,7 @@ describe('Width', () => {
   it('should calculate the width of interval of quantities', async function () {
     // define WidthOfQuantityInterval: width of Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}]
     const width = await this.widthOfQuantityInterval.exec(this.ctx);
-    width.value.should.equal(9);
+    width.value.should.eql(Decimal.from(9));
     width.unit.should.equal('mm');
   });
 
@@ -1687,9 +1686,9 @@ describe('Size', () => {
 
   it('should calculate the size of real intervals', async function () {
     // define RealSize: Size(Interval[1.23, 4.56])
-    (await this.realSize.exec(this.ctx)).should.equal(3.33 + MIN_FLOAT_PRECISION_VALUE);
+    (await this.realSize.exec(this.ctx)).should.eql(Decimal.from(3.33 + MIN_FLOAT_PRECISION_VALUE));
     // define RealOpenSize: Size(Interval(1.23, 4.56))
-    (await this.realOpenSize.exec(this.ctx)).should.equal(3.32999998 + MIN_FLOAT_PRECISION_VALUE);
+    (await this.realOpenSize.exec(this.ctx)).should.eql(Decimal.from(3.32999998 + MIN_FLOAT_PRECISION_VALUE));
   });
 
   it('should calculate the size of infinite intervals', async function () {
@@ -1723,7 +1722,7 @@ describe('Size', () => {
   it('should calculate size of interval of quantities', async function () {
     // define SizeOfQuantityInterval: Size(Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}])
     const size = await this.sizeOfQuantityInterval.exec(this.ctx);
-    size.value.should.equal(9.00000001);
+    size.value.should.eql(Decimal.from(9.00000001));
     size.unit.should.equal('mm');
   });
 
@@ -1771,7 +1770,7 @@ describe('Start', () => {
   });
 
   it('should return the minimum possible Decimal', async function () {
-    (await this.closedNullDecimal.exec(this.ctx)).should.eql(MIN_FLOAT_VALUE);
+    (await this.closedNullDecimal.exec(this.ctx)).should.eql(MIN_DECIMAL_VALUE);
   });
 
   it('should return null when the interval is null', async function () {
@@ -1821,7 +1820,7 @@ describe('End', () => {
   });
 
   it('should return the maximum possible Decimal', async function () {
-    (await this.closedNullDecimal.exec(this.ctx)).should.eql(MAX_FLOAT_VALUE);
+    (await this.closedNullDecimal.exec(this.ctx)).should.eql(MAX_DECIMAL_VALUE);
   });
 
   it('should return null when the interval is null', async function () {
@@ -3491,6 +3490,9 @@ describe('QuantityIntervalExpand', () => {
   });
 
   it('returns null when per zero, not applicable, or mismatch interval', async function () {
+
+    console.log('debuggger')
+    
     // define perZero: expand { Interval[2 'g', 4 'g'] } per 0 'g'
     let a = await this.perZero.exec(this.ctx);
     should.not.exist(a);
@@ -3619,6 +3621,7 @@ describe('LongIntervalExpand', () => {
   it('expands lists of multiple intervals', async function () {
     let a = await this.longNullInList.exec(this.ctx);
     prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4] }');
+    // define LongOverlapping: expand { Interval[2L, 4L], Interval[3L, 5L] } per 1 '1'
     a = await this.longOverlapping.exec(this.ctx);
     prettyList(a).should.equal('{ [2, 2], [3, 3], [4, 4], [5, 5] }');
     a = await this.longNonOverlapping.exec(this.ctx);

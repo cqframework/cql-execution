@@ -3,6 +3,7 @@ import setup from '../../setup';
 const data = require('./data');
 import { Code, Concept } from '../../../src/datatypes/clinical';
 import { Quantity } from '../../../src/datatypes/quantity';
+import { Decimal } from '../../../src/datatypes/decimal';
 
 describe('Instance', () => {
   beforeEach(function () {
@@ -13,9 +14,10 @@ describe('Instance', () => {
     const q = await this.quantityA.exec(this.ctx);
     should(q).be.instanceof(Quantity);
     q.unit.should.eql('a');
-    q.value.should.eql(12);
+    const decimal12 = Decimal.from(12);
+    q.value.should.eql(decimal12);
     q.toString().should.equal("12 'a'");
-    (await this.val.exec(this.ctx)).should.eql(12);
+    (await this.val.exec(this.ctx)).should.eql(decimal12);
   });
 
   it('should be able to construct a Code', async function () {

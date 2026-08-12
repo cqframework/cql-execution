@@ -2,6 +2,7 @@ import should from 'should';
 import setup from '../../setup';
 const data = require('./data');
 import { Repository } from '../../../src/cql';
+import { Decimal } from '../../../src/datatypes/decimal';
 
 describe('Message', () => {
   let messageCollector: any;
@@ -13,7 +14,7 @@ describe('Message', () => {
   });
 
   it('should always return the first argument as-is', async function () {
-    (await this.oneOverTwo.exec(this.ctx)).should.equal(0.5);
+    (await this.oneOverTwo.exec(this.ctx)).should.eql(Decimal.from(0.5));
     should(await this.oneOverZero.exec(this.ctx)).be.null();
   });
 
@@ -39,7 +40,7 @@ describe('Retrieve', () => {
   });
 
   it('should always return the first argument as-is', async function () {
-    (await this.oneOverTwo.exec(this.ctx)).should.equal(0.5);
+    (await this.oneOverTwo.exec(this.ctx)).should.eql(Decimal.from(0.5));
     should(await this.oneOverZero.exec(this.ctx)).be.null();
   });
 
