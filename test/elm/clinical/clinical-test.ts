@@ -484,7 +484,7 @@ describe('CalculateAge: Date-Only Birth Date as DateTime', () => {
     // Execute these tests as if it is 2020-10-01 at 12:01:02.003 GMT
     this.ctx.executionDateTime = new DT.DateTime(2020, 10, 1, 12, 1, 2, 3, 0);
     // Fix the timezone offset to 0 to make things more predictable
-    this.ctx.patient.birthDate.timezoneOffset = 0;
+    this.ctx.patient.birthDate.timezoneOffset = DT.Decimal.from(0);
   });
 
   it('should execute age in years', async function () {
@@ -529,7 +529,7 @@ describe('CalculateAge: Date-Only Birth Date as DateTime on Today', () => {
     // Execute these tests as if it is 2020-10-01 at 12:01:02.003 GMT
     this.ctx.executionDateTime = new DT.DateTime(2020, 10, 1, 12, 1, 2, 3, 0);
     // Fix the timezone offset to 0 to make things more predictable
-    this.ctx.patient.birthDate.timezoneOffset = 0;
+    this.ctx.patient.birthDate.timezoneOffset = DT.Decimal.from(0);
   });
 
   it('should execute age in years', async function () {

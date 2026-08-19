@@ -250,7 +250,7 @@ define LongMultiplyNearUnderflow: minimum Long * 1L
 // NOTE: Long division results in decimal, so it must overflow/underflow decimal
 define LongDivideOverflow: maximum Long / 0.05
 define LongDivideUnderflow: minimum Long / 0.05
-define LongDivideNearOverflow: maximum Long / 1024L
+define LongDivideNearOverflow: maximum Long / 92737L
 define LongDivideNearUnderflow: minimum Long / 1024L
 define LongDivideByZero: 1L / 0L
 define LongPowerOverflow: (maximum Long)^3L

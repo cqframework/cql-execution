@@ -63,7 +63,7 @@ describe('Quantity', () => {
     const denominator = new Quantity(2.0, 'mg');
     const result = numerator.dividedBy(denominator);
     result.unit.should.equal('1');
-    result.value.should.eql(Decimal.from(-2.75));
+    result.value.should.equalDecimal(Decimal.from(-2.75));
   });
 
   it('should allow for singular time units', () => {

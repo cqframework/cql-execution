@@ -14,7 +14,7 @@ describe('Message', () => {
   });
 
   it('should always return the first argument as-is', async function () {
-    (await this.oneOverTwo.exec(this.ctx)).should.eql(Decimal.from(0.5));
+    (await this.oneOverTwo.exec(this.ctx)).should.equalDecimal(Decimal.from(0.5));
     should(await this.oneOverZero.exec(this.ctx)).be.null();
   });
 
@@ -40,7 +40,7 @@ describe('Retrieve', () => {
   });
 
   it('should always return the first argument as-is', async function () {
-    (await this.oneOverTwo.exec(this.ctx)).should.eql(Decimal.from(0.5));
+    (await this.oneOverTwo.exec(this.ctx)).should.equalDecimal(Decimal.from(0.5));
     should(await this.oneOverZero.exec(this.ctx)).be.null();
   });
 

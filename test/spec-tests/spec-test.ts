@@ -6,6 +6,7 @@ import '../../src/elm/expressions'; // Needed for side-effect
 import { build } from '../../src/elm/builder';
 import { Library } from '../../src/elm/library';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
+import { Decimal } from '../../src/datatypes/decimal';
 
 describe('CQL Spec Tests (from XML)', () => {
   fs.readdirSync(path.join(__dirname, 'cql')).forEach(f => {
@@ -53,7 +54,7 @@ describe('CQL Spec Tests (from XML)', () => {
               }
               if (testCaseMap.has('expression') && testCaseMap.has('output')) {
                 const ctx = new PatientContext(library);
-                ctx.getExecutionDateTime().timezoneOffset = 0;
+                ctx.getExecutionDateTime().timezoneOffset = Decimal.from(0);
                 const actualExp = build(testCaseMap.get('expression')) as any;
                 const actual = await actualExp.execute(ctx);
                 const expectedExp = build(testCaseMap.get('output')) as any;
@@ -95,11 +96,17 @@ describe('CQL Spec Tests (from XML)', () => {
                 } catch {
                   should.fail(actual, expected, 'Lists are not equal');
                 }
-              } else {
+              } else if (expected instanceof Decimal) {
                 // The tests are somewhat inconsistent w/ number of decimal places used.
                 // To get consistency (and avoid false negatives), always round to 8 places.
                 actual = roundDecimalsWhenApplicable(actual);
                 expected = roundDecimalsWhenApplicable(expected);
+                if (actual == null) {
+                  should.deepEqual(actual, expected);
+                } else {
+                  actual.should.equalDecimal(expected);
+                }
+              } else {
                 if (actual == null) {
                   should.deepEqual(actual, expected);
                 } else {
@@ -121,9 +128,9 @@ describe('CQL Spec Tests (from XML)', () => {
   }
 
   function roundDecimalsWhenApplicable(item: any) {
-    if (typeof item === 'number') {
+    if (item instanceof Decimal) {
       // Round to 8 places since that's the number of places used by expected outputs
-      item = Math.round(item * 100000000) / 100000000;
+      item = item.setScale(8);
     }
     return item;
   }

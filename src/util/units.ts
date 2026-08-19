@@ -68,21 +68,24 @@ export function checkUnit(unit: any, allowEmptyUnits = true, allowCQLDateUnits =
   return unitValidityCache.get(unit);
 }
 
-export function convertUnit(fromVal: any, fromUnit: any, toUnit: any, adjustPrecision = true) {
+export function convertUnit(fromVal: Decimal, fromUnit: any, toUnit: any) {
   [fromUnit, toUnit] = [fromUnit, toUnit].map(fixUnit);
+  if (fromUnit === toUnit) {
+    return fromVal;
+  }
   // IMPORTANT: the UCUM library operates on raw JS numbers, not our Decimal
-  const rawFromVal = fromVal.isDecimal ? fromVal.value : fromVal;
-
-  const result = utils.convertUnitTo(fixUnit(fromUnit), rawFromVal, fixUnit(toUnit));
+  // this means that extremely large or extremely small numbers would lose precision via this function.
+  // To prevent this, instead of converting fromVal directly, convert 1 unit to get the conversion factor,
+  // and manually multiply the fromVal by it.
+  const result = utils.convertUnitTo(fromUnit, 1, toUnit);
   if (result.status !== 'succeeded') {
     return;
   }
-  // note: convert result.toVal to number (by prefixing +) to keep typescript happy
-  const rawRetVal = adjustPrecision ? decimalAdjust('round', result.toVal, -8) : +result.toVal;
-  return fromVal.isDecimal ? Decimal.from(rawRetVal) : rawRetVal;
+  const conversionFactor = result.toVal;
+  return fromVal.multiplyBy(conversionFactor).normalized();
 }
 
-export function normalizeUnitsWhenPossible(val1: any, unit1: any, val2: any, unit2: any) {
+export function normalizeUnitsWhenPossible(val1: Decimal, unit1: any, val2: Decimal, unit2: any) {
   // If both units are CQL date units, return CQL date units
   const useCQLDateUnits = unit1 in CQL_TO_UCUM_DATE_UNITS && unit2 in CQL_TO_UCUM_DATE_UNITS;
   const resultConverter = (unit: any) => {
@@ -100,8 +103,8 @@ export function normalizeUnitsWhenPossible(val1: any, unit1: any, val2: any, uni
     // it was not convertible, so just return the quantities as-is
     return [val1, resultConverter(unit1), val2, resultConverter(unit2)];
   }
-  // If the new val2 > old val2, return since we prefer conversion to smaller units
-  if (newVal2 >= val2) {
+  // If the new val2 >= old val2, return since we prefer conversion to smaller units
+  if (newVal2.greaterThanOrEquals(val2)) {
     return [val1, resultConverter(unit1), newVal2, resultConverter(newUnit2)];
   }
   // else it was a conversion to a larger unit, so go the other way around
@@ -126,11 +129,11 @@ export function convertToCQLDateUnit(unit: any) {
 
 export function compareUnits(unit1: any, unit2: any) {
   try {
-    const c = convertUnit(1, unit1, unit2) as number;
-    if (c && c > 1) {
+    const c = convertUnit(Decimal.from(1), unit1, unit2);
+    if (c && c.greaterThan(1)) {
       // unit1 is bigger (less precise)
       return 1;
-    } else if (c && c < 1) {
+    } else if (c && c.lessThan(1)) {
       // unit1 is smaller
       return -1;
     }
@@ -245,7 +248,7 @@ export function getQuotientOfUnits(unit1: any, unit2: any) {
 
 // UNEXPORTED FUNCTIONS
 
-function convertToBaseUnit(fromVal: any, fromUnit: any, toBaseUnit: any) {
+function convertToBaseUnit(fromVal: Decimal, fromUnit: any, toBaseUnit: any) {
   const fromPower = getBaseUnitAndPower(fromUnit)[1];
   const toUnit = fromPower === 1 ? toBaseUnit : `${toBaseUnit}${fromPower}`;
   const newVal = convertUnit(fromVal, fromUnit, toUnit);

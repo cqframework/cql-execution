@@ -21,10 +21,14 @@ define decimals_above_max_value: Sum({99999999999999999999.99999999, 99999999999
 define decimals_at_min_value: Sum({-99999999999999999999.99999999})
 define decimals_below_min_value: Sum({-99999999999999999999.99999999, -99999999999999999999.99999999})
 define quantities: Sum({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
-define quantities_at_max_value: Sum({99999999999999999999.99999999 'ml'})
-define quantities_above_max_value: Sum({99999999999999999999.99999999 'ml', 99999999999999999999.99999999 'ml'})
-define quantities_at_min_value: Sum({-99999999999999999999.99999999 'ml'})
-define quantities_below_min_value: Sum({-99999999999999999999.99999999 'ml', -99999999999999999999.99999999 'ml'})
+// Max/Min-valued quantities are described using the "maximum" and "minimum" operators
+// to avoid the translator rounding them to +/-1.0e20, which is not a legal Decimal
+define MaxValueMLQuantity: Quantity { value: maximum Decimal, unit: 'ml' }
+define MinValueMLQuantity: Quantity { value: minimum Decimal, unit: 'ml' }
+define quantities_at_max_value: Sum({MaxValueMLQuantity})
+define quantities_above_max_value: Sum({MaxValueMLQuantity, MaxValueMLQuantity})
+define quantities_at_min_value: Sum({MinValueMLQuantity})
+define quantities_below_min_value: Sum({MinValueMLQuantity, MinValueMLQuantity})
 define has_null: Sum({1,null,null,null,2})
 define has_null_q: Sum({1 'ml',null,null,null,2 'ml'})
 define unmatched_units_q: Min({1 'ml',2 'm',3 'ml',4 'ml',5 'ml',0 'ml'})
@@ -156,10 +160,14 @@ define decimals_above_max_value_product: Product({99999999999999999999.99999999,
 define decimals_at_min_value_product: Product({-99999999999999999999.99999999, 1.0})
 define decimals_below_min_value_product: Product({-99999999999999999999.99999999, 2.0})
 define quantity_product: Product({1.0 'g', 2.0 'g', 3.0 'g', 4.0 'g'})
-define quantities_at_max_value_product: Product({99999999999999999999.99999999 'g', 1.0 'g'})
-define quantities_above_max_value_product: Product({99999999999999999999.99999999 'g', 2.0 'g'})
-define quantities_at_min_value_product: Product({-99999999999999999999.99999999 'g', 1.0 'g'})
-define quantities_below_min_value_product: Product({-99999999999999999999.99999999 'g', 2.0 'g'})
+// Max/Min-valued quantities are described using the "maximum" and "minimum" operators
+// to avoid the translator rounding them to +/-1.0e20, which is not a legal Decimal
+define MaxValueGramQuantity: Quantity { value: maximum Decimal, unit: 'g' }
+define MinValueGramQuantity: Quantity { value: minimum Decimal, unit: 'g' }
+define quantities_at_max_value_product: Product({MaxValueGramQuantity, 1.0 'g'})
+define quantities_above_max_value_product: Product({MaxValueGramQuantity, 2.0 'g'})
+define quantities_at_min_value_product: Product({MinValueGramQuantity, 1.0 'g'})
+define quantities_below_min_value_product: Product({MinValueGramQuantity, 2.0 'g'})
 define quantity_zero_product: Product({1.0 'g', 2.0 'g', 0 'g'})
 define zero_product: Product({0, 5, 10})
 define product_with_null: Product({5, 4, null})

@@ -1619,9 +1619,9 @@ describe('Width', () => {
 
   it('should calculate the width of real intervals', async function () {
     // define RealWidth: width of Interval[1.23, 4.56]
-    (await this.realWidth.exec(this.ctx)).should.eql(Decimal.from(3.33));
+    (await this.realWidth.exec(this.ctx)).should.equalDecimal(Decimal.from(3.33));
     // define RealOpenWidth: width of Interval(1.23, 4.56)
-    (await this.realOpenWidth.exec(this.ctx)).should.eql(Decimal.from(3.32999998));
+    (await this.realOpenWidth.exec(this.ctx)).should.equalDecimal(Decimal.from(3.32999998));
   });
 
   it('should calculate the width of infinite intervals', async function () {
@@ -1645,7 +1645,7 @@ describe('Width', () => {
   it('should calculate the width of interval of quantities', async function () {
     // define WidthOfQuantityInterval: width of Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}]
     const width = await this.widthOfQuantityInterval.exec(this.ctx);
-    width.value.should.eql(Decimal.from(9));
+    width.value.should.equalDecimal(Decimal.from(9));
     width.unit.should.equal('mm');
   });
 
@@ -1686,9 +1686,9 @@ describe('Size', () => {
 
   it('should calculate the size of real intervals', async function () {
     // define RealSize: Size(Interval[1.23, 4.56])
-    (await this.realSize.exec(this.ctx)).should.eql(Decimal.from(3.33 + MIN_FLOAT_PRECISION_VALUE));
+    (await this.realSize.exec(this.ctx)).should.equalDecimal(Decimal.from(3.33 + MIN_FLOAT_PRECISION_VALUE));
     // define RealOpenSize: Size(Interval(1.23, 4.56))
-    (await this.realOpenSize.exec(this.ctx)).should.eql(Decimal.from(3.32999998 + MIN_FLOAT_PRECISION_VALUE));
+    (await this.realOpenSize.exec(this.ctx)).should.equalDecimal(Decimal.from(3.32999998 + MIN_FLOAT_PRECISION_VALUE));
   });
 
   it('should calculate the size of infinite intervals', async function () {
@@ -1722,7 +1722,7 @@ describe('Size', () => {
   it('should calculate size of interval of quantities', async function () {
     // define SizeOfQuantityInterval: Size(Interval[Quantity{value: 1, unit: 'mm'}, Quantity{value: 10, unit: 'mm'}])
     const size = await this.sizeOfQuantityInterval.exec(this.ctx);
-    size.value.should.eql(Decimal.from(9.00000001));
+    size.value.should.equalDecimal(Decimal.from(9.00000001));
     size.unit.should.equal('mm');
   });
 
@@ -1758,7 +1758,7 @@ describe('Start', () => {
   it('should return the minimum possible DateTime in timzoneOffset of context', async function () {
     // set execution timestamp to be +5
     this.ctx.executionDateTime = new DateTime(2019, 10, 1, 12, 31, 31, 2, 5);
-    (await this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.eql(5);
+    (await this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.equalDecimal(Decimal.from(5));
   });
 
   it('should return the minimum possible Integer', async function () {
@@ -1808,7 +1808,7 @@ describe('End', () => {
   it('should return the maximum possible DateTime in timzoneOffset of context', async function () {
     // set execution timestamp to be +5
     this.ctx.executionDateTime = new DateTime(2019, 10, 1, 12, 31, 31, 2, 5);
-    (await this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.eql(5);
+    (await this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.equalDecimal(Decimal.from(5));
   });
 
   it('should return the maximum possible Integer', async function () {

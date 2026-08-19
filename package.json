@@ -87,6 +87,7 @@
   },
   "dependencies": {
     "@lhncbc/ucum-lhc": "^7.1.9",
+    "decimal.js": "^10.6.0",
     "immutable": "^5.1.6",
     "luxon": "^3.7.2"
   },

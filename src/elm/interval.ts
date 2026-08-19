@@ -516,12 +516,11 @@ export class Expand extends Expression {
     return results;
   }
 
-  expandDTishInterval(interval: any, per: any) {
+  expandDTishInterval(interval: any, per: Quantity) {
     per.unit = convertToCQLDateUnit(per.unit);
 
     if (per.unit === 'week') {
-      per.value *= 7;
-      per.unit = 'day';
+      per = new Quantity(per.value.multiplyBy(7), 'day');
     }
 
     // Precision Checks
@@ -679,9 +678,9 @@ export class Expand extends Expression {
     high: any,
     perValue: any
   ) {
-    // If the per value is a Decimal (has a .), 8 decimal places are appropriate
+    // If the per value is a decimal, 8 decimal places are appropriate
     // Integers should have 0 Decimal places
-    const perIsIntegral = !perValue.toString().includes('.');
+    const perIsIntegral = perValue.isInteger();
     const decimalPrecision = perIsIntegral ? 0 : 8;    
 
     // For the purposes of this function, we'll perform all the arithmetic using Decimals,
@@ -707,8 +706,8 @@ export class Expand extends Expression {
     // If the interval boundaries are more precise than the per quantity, the
     // more precise values will be truncated to the precision specified by the
     // per quantity.
-    low = truncateDecimal(low, decimalPrecision);
-    high = truncateDecimal(high, decimalPrecision);
+    low = low.setScale(decimalPrecision);
+    high = high.setScale(decimalPrecision);
 
     if (low == null || high == null) {
       return [];
@@ -783,7 +782,7 @@ function collapseIntervals(intervals: any, perWidth: any) {
     // width equal to the result of the successor function for the point type).
     if (perWidth == null) {
       const pointSize = intervalsClone[0].getPointSize();
-      perWidth = pointSize.isQuantity ? pointSize : new Quantity(Number(pointSize), '1');
+      perWidth = pointSize.isQuantity ? pointSize : new Quantity(pointSize, '1');
     }
 
     // sort intervalsClone by start
@@ -844,8 +843,7 @@ function collapseIntervals(intervals: any, perWidth: any) {
             a.high = b.high;
           }
         } else if (
-          (a.high != null ? a.high.durationBetween(b.low, perWidth.unit).high : undefined) <=
-          perWidth.value
+          perWidth.value.greaterThanOrEquals(a.high != null ? a.high.durationBetween(b.low, perWidth.unit).high : undefined)
         ) {
           a.high = b.high;
         } else {
