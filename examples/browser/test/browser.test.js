@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
 
-const bundleUrl = new URL('../dist/cql4browsers.js', import.meta.url);
+const bundleUrl = new URL('../dist/exec-age.js', import.meta.url);
 
 function loadBrowserBundle() {
   const context = vm.createContext({ console });

@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "esbuild exec-age.js --bundle --platform=browser --format=iife --target=es2020 --outfile=dist/cql4browsers.js",
-    "dev": "esbuild exec-age.js --bundle --platform=browser --format=iife --target=es2020 --outfile=dist/cql4browsers.js --servedir=. --watch",
+    "build": "esbuild exec-age.js --bundle --platform=browser --format=iife --target=es2020 --outfile=dist/exec-age.js",
+    "dev": "esbuild exec-age.js --bundle --platform=browser --format=iife --target=es2020 --outfile=dist/exec-age.js --servedir=. --watch",
     "test": "npm run build && node --test test/browser.test.js"
   },
   "dependencies": {
