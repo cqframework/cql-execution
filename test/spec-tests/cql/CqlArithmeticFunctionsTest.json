@@ -26454,7 +26454,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Truncated divide not implemented for Quantity",
+                        "value": "Wrong output: The resulting Quantity should have an appropriate unit; 'g' / 'g' should be '1', not 'g'. See test Divide1Q1Q which is correct",
                         "annotation": []
                       }
                     }
@@ -26488,7 +26488,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Truncated divide not implemented for Quantity",
+                        "value": "Wrong output: The resulting Quantity should have an appropriate unit",
                         "annotation": []
                       }
                     }
@@ -26522,7 +26522,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Truncated divide not implemented for Quantity",
+                        "value": "Wrong output: The resulting Quantity should have an appropriate unit",
                         "annotation": []
                       }
                     }

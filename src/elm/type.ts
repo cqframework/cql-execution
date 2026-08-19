@@ -166,14 +166,14 @@ export class ToDecimal extends Expression {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
       if (arg.isUncertainty) {
-        const low = Decimal.from(arg.low);
-        const high = Decimal.from(arg.high);
+        const low = Decimal.from(arg.low).normalized()
+        const high = Decimal.from(arg.high).normalized();
         return new Uncertainty(low, high);
       } else {
         try {
           const decimal = Decimal.from(arg.toString());
           if (isValidDecimal(decimal)) {
-            return decimal;
+            return decimal.normalized();
           }
         } catch (_e) {
           return null;

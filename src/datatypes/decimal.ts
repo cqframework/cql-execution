@@ -1,48 +1,75 @@
 
+import { Decimal as DecimalJS } from 'decimal.js';
+
+// Default precision is set to 30 significant figures. (Not decimal places)
+// MAX_DECIMAL_VALUE = 99999999999999999999.99999999 is 28 significant figures,
+// 30 is just a cleaner number.
+DecimalJS.set({ precision: 30 });
 
 export type DecimalInput = Decimal | string | number | bigint;
 
-export type DecimalRoundingMode = 'down' | 'half-up' | 'half-even' | 'half-ceil' | 'ceil' | 'floor';
+export type DecimalRoundingMode = DecimalJS.Rounding;
 
-const MIN_FLOAT_PRECISION_VALUE = Math.pow(10, -8);
+const MIN_FLOAT_PRECISION_VALUE = DecimalJS.pow(10, -8);
+
+const CQL_IMPLICIT_SCALE = 8;
+const CQL_IMPLICIT_ROUNDING = DecimalJS.ROUND_HALF_UP;
 
 export class Decimal {
-  public readonly value: number;
+  private value: DecimalJS;
 
-  private constructor(value: DecimalInput) {
-    const numericValue = toNumber(value);
-    if (!Number.isFinite(numericValue)) {
+  private constructor(value: string | number | bigint | DecimalJS) {
+    this.value = new DecimalJS(value);
+    if (!this.value.isFinite()) {
       throw new Error('Cannot create a decimal with a non-finite value');
     }
-    this.value = numericValue;
   }
 
   static from(value: DecimalInput) {
-    return value instanceof Decimal ? value : new Decimal(value);
+    if (value instanceof Decimal) {
+      return value;
+    }
+
+    return new Decimal(value);
   }
 
   get isDecimal() {
     return true;
   }
 
-  add(other: DecimalInput) {
-    return new Decimal(this.value + toNumber(other));
+  normalized() {
+    if (this.value.decimalPlaces() <= CQL_IMPLICIT_SCALE) {
+      return this;
+    }
+    return this.setScale(CQL_IMPLICIT_SCALE, CQL_IMPLICIT_ROUNDING);
   }
 
-  subtract(other: DecimalInput) {
-    return new Decimal(this.value - toNumber(other));
+  private applyWrapper(
+    operation: (value: any) => DecimalJS,
+    other: DecimalInput
+  ): Decimal {
+    const operand = other instanceof Decimal ? other.value : other;
+
+    return new Decimal(operation.call(this.value, operand));
   }
 
-  multiplyBy(other: DecimalInput) {
-    return new Decimal(this.value * toNumber(other));
+  add(other: DecimalInput) : Decimal {
+    return this.applyWrapper(this.value.add, other);
   }
 
-  divideBy(other: DecimalInput) {
-    const divisor = toNumber(other);
-    if (divisor === 0) {
+  subtract(other: DecimalInput) : Decimal {
+    return this.applyWrapper(this.value.minus, other);
+  }
+
+  multiplyBy(other: DecimalInput) : Decimal {
+    return this.applyWrapper(this.value.times, other);
+  }
+
+  divideBy(other: DecimalInput) : Decimal {
+    if (toNumber(other) === 0) {
       throw new RangeError('Cannot divide a decimal by zero');
     }
-    return new Decimal(this.value / divisor);
+    return this.applyWrapper(this.value.dividedBy, other);
   }
 
   modulo(other: DecimalInput) {
@@ -50,12 +77,14 @@ export class Decimal {
     if (divisor === 0) {
       throw new RangeError('Cannot calculate decimal modulo by zero');
     }
-    return new Decimal(this.value % divisor);
+    return this.applyWrapper(this.value.mod, other);
   }
 
   compareTo(other: DecimalInput) {
-    const otherValue = toNumber(other);
-    return this.value - otherValue;
+    if (other instanceof Decimal) {
+      return this.value.comparedTo(other.value)
+    }
+    return this.value.comparedTo(other);
   }
 
   greaterThan(other: DecimalInput) {
@@ -79,72 +108,77 @@ export class Decimal {
   }
 
   successor() {
-    return new Decimal(this.value + MIN_FLOAT_PRECISION_VALUE);
+    return new Decimal(this.value.add(MIN_FLOAT_PRECISION_VALUE));
   }
 
   predecessor() {
-    return new Decimal(this.value - MIN_FLOAT_PRECISION_VALUE);
+    return new Decimal(this.value.minus(MIN_FLOAT_PRECISION_VALUE));
   }
 
   negate() {
-    return new Decimal(-this.value);
+    return new Decimal(this.value.neg());
   }
 
   abs() {
-    return new Decimal(Math.abs(this.value));
+    return new Decimal(this.value.abs());
   }
 
-  truncate() {
-    return Math.trunc(this.value);
+  truncate() : number {
+    return this.value.truncated().toNumber();
   }
 
-  ceil() {
-    return Math.ceil(this.value);
+  truncated() : Decimal {
+    return new Decimal(this.value.truncated());
   }
 
-  floor() {
-    return Math.floor(this.value);
+  ceil() : number {
+    return this.value.ceil().toNumber();
+  }
+
+  floor() : number {
+    return this.value.floor().toNumber();
   }
 
   isInteger() {
-    return Number.isInteger(this.value);
-  }
-
-  round(scale = 0) {
-    return this.setScale(scale, 'half-ceil');
+    return this.value.isInteger();
   }
 
   power(exponent: DecimalInput) {
-    return new Decimal(Math.pow(this.value, toNumber(exponent)));
+    return this.applyWrapper(this.value.toPower, exponent);
   }
 
   sqrt() {
-    return new Decimal(Math.sqrt(this.value));
+    return new Decimal(this.value.sqrt());
   }
 
   ln() {
-    return new Decimal(Math.log(this.value));
+    return new Decimal(this.value.ln());
   }
 
   exp() {
-    return new Decimal(Math.exp(this.value));
+    return new Decimal(this.value.exp());
   }
 
   log(base: DecimalInput) {
-    return this.ln().divideBy(Decimal.from(base).ln());
+    return this.applyWrapper(this.value.log, base);
   }
 
-  /**
-   * Return a value at the requested number of digits after the decimal point.
-   * `down` truncates toward zero, matching the current ToDecimal behavior.
-   */
-  setScale(scale: number, roundingMode: DecimalRoundingMode = 'down') {
+  round(scale: number) {
+    // notes on rounding modes
+    // ROUND_HALF_UP "Rounds towards nearest neighbour. If equidistant, rounds away from zero"
+    // rounds 0.5 -> 1.0, -0.5 -> -1.0
+    // ROUND_HALF_CEIL "Rounds towards nearest neighbour. If equidistant, rounds towards Infinity"
+    // rounds 0.5 -> 1.0, -0.5 -> 0.0
+    // https://mikemcl.github.io/decimal.js/#modes
+    return this.setScale(scale, DecimalJS.ROUND_HALF_CEIL);
+  }
+
+  setScale(scale: number, roundingMode: DecimalRoundingMode = DecimalJS.ROUND_DOWN) {
     if (!Number.isInteger(scale) || scale < 0) {
       throw new RangeError('Decimal scale must be a non-negative integer');
     }
-
-    const factor = Math.pow(10, scale);
-    return new Decimal(round(this.value * factor, roundingMode) / factor);
+    
+    return new Decimal(this.value.toDecimalPlaces(scale, roundingMode));
   }
 
   toInteger() {
@@ -152,12 +186,12 @@ export class Decimal {
   }
 
   toNumber() {
-    return this.value;
+    return this.value.toNumber();
   }
 
   toLong() {
-    // TODO: this is wrong
-    return BigInt(this.toNumber());
+    // TODO
+    return BigInt(this.toString());
   }
 
   toString() {
@@ -177,40 +211,11 @@ export const MIN_DECIMAL_VALUE = Decimal.from(MIN_DECIMAL_STRING);
 
 function toNumber(value: DecimalInput) {
   if (value instanceof Decimal) {
-    return value.value;
+    return value.toNumber();
   }
   if (typeof value === 'string' && value.trim() === '') {
     // Number() and Number('') return 0 instead of NaN, so catch that case
     return NaN;
   }
   return Number(value);
-}
-
-function round(value: number, mode: DecimalRoundingMode) {
-  switch (mode) {
-    case 'down':
-      return Math.trunc(value);
-    case 'half-up':
-      return value < 0 ? -Math.round(-value) : Math.round(value);
-    case 'half-even':
-      return roundHalfEven(value);
-    case 'half-ceil':
-      return Math.round(value);
-    case 'ceil':
-      return Math.ceil(value);
-    case 'floor':
-      return Math.floor(value);
-  }
-}
-
-function roundHalfEven(value: number) {
-  const lower = Math.floor(value);
-  const fraction = value - lower;
-  if (fraction < 0.5) {
-    return lower;
-  }
-  if (fraction > 0.5) {
-    return lower + 1;
-  }
-  return lower % 2 === 0 ? lower : lower + 1;
 }

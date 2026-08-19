@@ -2,6 +2,7 @@ import * as luxon from 'luxon';
 import should from 'should';
 import { DateTime, MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } from '../../src/datatypes/datetime';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
+import { Decimal } from '../../src/datatypes/decimal';
 
 const tzDate = function (
   y: number,
@@ -59,13 +60,13 @@ describe('DateTime', () => {
     d.minute.should.equal(25);
     d.second.should.equal(59);
     d.millisecond.should.equal(246);
-    d.timezoneOffset.should.equal(5.5);
+    d.timezoneOffset.should.equalDecimal(Decimal.from(5.5));
   });
 
   it('should leave unset properties as undefined', () => {
     const d = new DateTime(2000);
     d.year.should.equal(2000);
-    d.timezoneOffset.should.equal((new Date().getTimezoneOffset() / 60) * -1);
+    d.timezoneOffset.should.equalDecimal(Decimal.from((new Date().getTimezoneOffset() / 60) * -1));
     should.not.exist(d.month);
     should.not.exist(d.day);
     should.not.exist(d.hour);

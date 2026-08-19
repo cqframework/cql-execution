@@ -253,13 +253,13 @@ define "Decimal": Tuple{
     invalid: true
   },
   "Decimal10Pow28ToZeroOneStepDecimalMaxValue": Tuple{
-    skipped: 'Wrong answer (null vs big number)'
+    skipped: 'Wrong answer (null vs big number); intermediate value exceeds max Decimal'
     /*
     expression: 10*1000000000000000000000000000.00000000-0.00000001,
     output: 9999999999999999999999999999.99999999
     */  },
   "DecimalPos10Pow28ToZeroOneStepDecimalMaxValue": Tuple{
-    skipped: 'Wrong answer (null vs big number)'
+    skipped: 'Wrong answer (null vs big number); intermediate value exceeds max Decimal'
     /*
     expression: +10*1000000000000000000000000000.00000000-0.00000001,
     output: 9999999999999999999999999999.99999999

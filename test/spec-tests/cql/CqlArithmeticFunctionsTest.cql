@@ -924,19 +924,19 @@ define "Truncated Divide": Tuple{
     output: 2.0
   },
   "TruncatedDivide10d1ByNeg3D1Quantity": Tuple{
-    skipped: 'Truncated divide not implemented for Quantity'
+    skipped: 'Wrong output: The resulting Quantity should have an appropriate unit; \'g\' / \'g\' should be \'1\', not \'g\'. See test Divide1Q1Q which is correct'
     /*
     expression: 10.1 'cm' div -3.1 'cm',
     output: -3.0 'cm'
     */  },
   "TruncatedDivide10By5DQuantity": Tuple{
-    skipped: 'Truncated divide not implemented for Quantity'
+    skipped: 'Wrong output: The resulting Quantity should have an appropriate unit'
     /*
     expression: 10.0 'g' div 5.0 'g',
     output: 2.0 'g'
     */  },
   "TruncatedDivide414By206DQuantity": Tuple{
-    skipped: 'Truncated divide not implemented for Quantity'
+    skipped: 'Wrong output: The resulting Quantity should have an appropriate unit'
     /*
     expression: 4.14 'm' div 2.06 'm',
     output: 2.0 'm'

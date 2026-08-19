@@ -13,13 +13,13 @@ export class Quantity {
   public readonly value: Decimal;
 
   constructor(
-    value: Decimal | string | number | bigint,
+    value?: Decimal | string | number | bigint,
     public unit?: any
   ) {
     if (value == null || typeof value === 'number' && isNaN(value)) {
       throw new Error('Cannot create a quantity with an undefined value');
     }
-    this.value = Decimal.from(value);
+    this.value = Decimal.from(value).normalized();
     if (!isValidDecimal(this.value)) {
       throw new Error('Cannot create a quantity with an invalid decimal value');
     }
@@ -93,14 +93,15 @@ export class Quantity {
     if (other != null && other.isQuantity) {
       if ((!this.unit && other.unit) || (this.unit && !other.unit)) {
         return false;
-      } else if (!this.unit && !other.unit) {
-        return this.value === other.value;
+      } else if (this.unit === other.unit) {
+        // same unit, or both are null
+        return this.value.equals(other.value);
       } else {
         const otherVal = convertUnit(other.value, other.unit, this.unit);
         if (otherVal == null) {
           return null;
         } else {
-          return this.value.round(8).equals(Decimal.from(otherVal));
+          return this.value.equals(otherVal);
         }
       }
     }
@@ -121,19 +122,19 @@ export class Quantity {
     }
 
     const [val1, unit1, val2, unit2] = normalizeUnitsWhenPossible(
-      this.value.toNumber(),
+      this.value,
       this.unit,
-      Decimal.from(other.value).toNumber(),
+      other.value,
       other.unit
     );
-    const resultValue = Decimal.from(val1 / val2);
+    const resultValue = val1.divideBy(val2);
     const resultUnit = getQuotientOfUnits(unit1, unit2);
 
     // Check for invalid unit or value
     if (resultUnit == null || overflowsOrUnderflows(resultValue, ELM_DECIMAL_TYPE)) {
       return null;
     }
-    return new Quantity(resultValue.round(8), resultUnit);
+    return new Quantity(resultValue, resultUnit);
   }
 
   multiplyBy(other: any) {
@@ -145,19 +146,19 @@ export class Quantity {
     }
 
     const [val1, unit1, val2, unit2] = normalizeUnitsWhenPossible(
-      this.value.toNumber(),
+      this.value,
       this.unit,
-      Decimal.from(other.value).toNumber(),
+      other.value,
       other.unit
     );
-    const resultValue = Decimal.from(val1 * val2);
+    const resultValue = val1.multiplyBy(val2);
     const resultUnit = getProductOfUnits(unit1, unit2);
 
     // Check for invalid unit or value
     if (resultUnit == null || overflowsOrUnderflows(resultValue, ELM_DECIMAL_TYPE)) {
       return null;
     }
-    return new Quantity(resultValue.round(8), resultUnit);
+    return new Quantity(resultValue, resultUnit);
   }
 }
 

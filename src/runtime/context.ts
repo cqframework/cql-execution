@@ -126,7 +126,7 @@ export class Context {
     }
   }
 
-  getTimezoneOffset(): number | null {
+  getTimezoneOffset(): dt.Decimal | null {
     if (this.executionDateTime != null) {
       return this.executionDateTime.timezoneOffset;
     } else if (this.parent && this.parent.getTimezoneOffset != null) {

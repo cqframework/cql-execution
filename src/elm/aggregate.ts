@@ -26,21 +26,17 @@ function isDecimal(value: any): value is Decimal {
   return value != null && value.isDecimal;
 }
 
-function numberValue(value: any) {
-  return value && value.isDecimal ? value.toNumber() : value;
-}
-
 function sumDecimals(values: Decimal[]) {
-  return values.reduce((sum, value) => sum.add(value)).setScale(8, 'half-up');
+  return values.reduce((sum, value) => sum.add(value));
 }
 
 function productDecimals(values: Decimal[]) {
-  return values.reduce((product, value) => product.multiplyBy(value)).setScale(8, 'half-up');
+  return values.reduce((product, value) => product.multiplyBy(value));
 }
 
 function decimalResult(value: number, values: any[], resultTypeName?: string) {
   return hasDecimals(values) || resultTypeName === ELM_DECIMAL_TYPE
-    ? Decimal.from(value).setScale(8, 'half-up')
+    ? Decimal.from(value).normalized()
     : value;
 }
 
@@ -182,13 +178,10 @@ export class Avg extends AggregateExpression {
 
     if (hasOnlyQuantities(items)) {
       const sum = sumDecimals(getValuesFromQuantities(items));
-      return new Quantity(sum.divideBy(items.length).setScale(8, 'half-up'), items[0].unit);
+      return new Quantity(sum.divideBy(items.length), items[0].unit);
     } else {
-      if (hasDecimals(items)) {
-        return sumDecimals(items.map(Decimal.from)).divideBy(items.length).setScale(8, 'half-up');
-      }
-      const sum = items.reduce((x: number, y: number) => x + y);
-      return decimalResult(sum / items.length, items, this.resultTypeName);
+      // return type is always Decimal, so just map everything to Decimals
+      return sumDecimals(items.map(Decimal.from)).divideBy(items.length).normalized();
     }
   }
 }
@@ -310,37 +303,35 @@ export class StdDev extends AggregateExpression {
     }
 
     if (hasOnlyQuantities(items)) {
-      const values = getValuesFromQuantities(items).map(numberValue);
+      const values = getValuesFromQuantities(items);
       const stdDev = this.standardDeviation(values);
       return new Quantity(stdDev, items[0].unit);
     } else {
-      const standardDeviation = this.standardDeviation(items.map(numberValue));
-      return standardDeviation == null
-        ? null
-        : decimalResult(standardDeviation, items, this.resultTypeName);
+      const standardDeviation = this.standardDeviation(items.map(Decimal.from));
+      return standardDeviation?.normalized(); // TODO: review function signatures. always return Decimal makes sense but is it correct?
     }
   }
 
-  standardDeviation(list: any[]) {
+  standardDeviation(list: Decimal[]) {
     const val = this.stats(list);
     if (val) {
       return val[this.type];
     }
   }
 
-  stats(list: any[]) {
-    const sum = list.reduce((x, y) => x + y);
-    const mean = sum / list.length;
-    let sumOfSquares = 0;
+  stats(list: Decimal[]) {
+    const sum = list.reduce((x, y) => x.add(y), Decimal.from(0));
+    const mean = sum.divideBy(list.length);
 
-    for (const sq of list) {
-      sumOfSquares += Math.pow(sq - mean, 2);
-    }
+    const sumOfSquares = list.reduce((total, value) => {
+      const difference = value.subtract(mean);
+      return total.add(difference.power(2));
+    }, Decimal.from(0));
 
-    const std_var = (1 / (list.length - 1)) * sumOfSquares;
-    const pop_var = (1 / list.length) * sumOfSquares;
-    const std_dev = Math.sqrt(std_var);
-    const pop_dev = Math.sqrt(pop_var);
+    const std_var = sumOfSquares.divideBy(list.length - 1);
+    const pop_var = sumOfSquares.divideBy(list.length);
+    const std_dev = std_var.sqrt();
+    const pop_dev = pop_var.sqrt();
     return {
       standard_variance: std_var,
       population_variance: pop_var,
@@ -409,16 +400,11 @@ export class GeometricMean extends AggregateExpression {
 
     if (hasOnlyQuantities(items)) {
       const product = productDecimals(getValuesFromQuantities(items));
-      const geoMean = product.power(1.0 / items.length).setScale(8, 'half-up');
+      const geoMean = product.power(1.0 / items.length);
       return new Quantity(geoMean, items[0].unit);
     } else {
-      if (hasDecimals(items)) {
-        return productDecimals(items.map(Decimal.from))
-          .power(1.0 / items.length)
-          .setScale(8, 'half-up');
-      }
-      const product = items.reduce((x: number, y: number) => x * y);
-      return decimalResult(Math.pow(product, 1.0 / items.length), items, this.resultTypeName);
+      return productDecimals(items.map(Decimal.from))
+          .power(1.0 / items.length).normalized();
     }
   }
 }
@@ -518,5 +504,5 @@ function medianOfDecimals(decimals: Decimal[]) {
   const middle = Math.floor(items.length / 2);
   return items.length % 2 === 1
     ? items[middle]
-    : items[middle - 1].add(items[middle]).divideBy(2).setScale(8, 'half-up');
+    : items[middle - 1].add(items[middle]).divideBy(2);
 }

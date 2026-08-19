@@ -133,21 +133,17 @@ export function add(a: any, b: any, type?: string): any {
     return low == null || high == null ? null : new Uncertainty(low, high);
   }
 
-  if (typeof a === 'bigint') {
-    const sum = a + (typeof b === 'bigint' ? b : BigInt(b));
-    return overflowsOrUnderflows(sum, ELM_LONG_TYPE) ? null : sum;
+  if (a.isDecimal || b.isDecimal || type === ELM_DECIMAL_TYPE) {
+    const sum = Decimal.from(a).add(Decimal.from(b));
+    return overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE) ? null : sum;
   }
-  if (typeof b === 'bigint') {
-    const sum = BigInt(a) + b;
+  if (typeof a === 'bigint' || typeof b === 'bigint' || type === ELM_LONG_TYPE) {
+    const sum = BigInt(a) + BigInt(b);
     return overflowsOrUnderflows(sum, ELM_LONG_TYPE) ? null : sum;
   }
   if (typeof a === 'number' && typeof b === 'number') {
     const sum = a + b;
     return overflowsOrUnderflows(sum, ELM_INTEGER_TYPE) ? null : sum;
-  }
-  if (a?.isDecimal && b?.isDecimal) {
-    const sum = a.add(b);
-    return overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE) ? null : sum;
   }
   if (a?.isQuantity && b?.isQuantity) {
     const [aValue, aUnit, bValue, bUnit] = normalizeUnitsWhenPossible(
@@ -187,14 +183,60 @@ export function subtract(a: any, b: any, type?: string): any {
   if (typeof b === 'number' || typeof b === 'bigint') {
     return add(a, -b, type);
   }
-  if (a?.isDecimal && b?.isDecimal) {
-    const difference = a.subtract(b);
-    return overflowsOrUnderflows(difference, ELM_DECIMAL_TYPE) ? null : difference;
+  if (b?.isDecimal) {
+    return add(a, (b as Decimal).negate(), type);
   }
   if (b?.isQuantity) {
+    // Note - this path uses a fake Quantity object to defer validation of the unit
     return add(a, { isQuantity: true, value: b.value.negate(), unit: b.unit }, type);
   }
 
+  throw new Error('Unsupported argument types.');
+}
+
+export function multiply(a: any, b: any, type?: string) {
+  if (a.isDecimal || b.isDecimal || type === ELM_DECIMAL_TYPE) {
+    const product = Decimal.from(a).multiplyBy(b);
+    return overflowsOrUnderflows(product, ELM_DECIMAL_TYPE) ? null : product;
+  }
+  if (typeof a === 'bigint' || typeof b === 'bigint' || type === ELM_LONG_TYPE) {
+    const product = BigInt(a) * BigInt(b);
+    return overflowsOrUnderflows(product, ELM_LONG_TYPE) ? null : product;
+  }
+  if (typeof a === 'number' && typeof b === 'number') {
+    const product = a * b;
+    return overflowsOrUnderflows(product, ELM_INTEGER_TYPE) ? null : product;
+  }
+
+  throw new Error('Unsupported argument types.');
+}
+
+export function divide(a: any, b: any, type?: string) {
+  if (a.isDecimal || b.isDecimal || type === ELM_DECIMAL_TYPE) {
+    b = Decimal.from(b);
+    if (b.equals(0)) {
+      return null;
+    }
+    const quotient = Decimal.from(a).divideBy(b);
+    return overflowsOrUnderflows(quotient, ELM_DECIMAL_TYPE) ? null : quotient;
+  }
+  if (typeof a === 'bigint' || typeof b === 'bigint' || type === ELM_LONG_TYPE) {
+    if (b === 0 || b === 0n) {
+      return null;
+    }
+    // BigInt division is inherently truncated, eg 10n / 3n = 3n
+    const quotient = BigInt(a) / BigInt(b);
+    return overflowsOrUnderflows(quotient, ELM_LONG_TYPE) ? null : quotient;
+  }
+  if (typeof a === 'number' && typeof b === 'number') {
+    if (b === 0) {
+      return null;
+    }
+    // here we need to truncate manually to ensure the value is an integer
+    const quotient = Math.trunc(a / b);
+    return overflowsOrUnderflows(quotient, ELM_INTEGER_TYPE) ? null : quotient;
+  }
+  
   throw new Error('Unsupported argument types.');
 }
 

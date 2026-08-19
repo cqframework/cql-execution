@@ -8284,7 +8284,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong answer (null vs big number)",
+                        "value": "Wrong answer (null vs big number); intermediate value exceeds max Decimal",
                         "annotation": []
                       }
                     }
@@ -8318,7 +8318,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong answer (null vs big number)",
+                        "value": "Wrong answer (null vs big number); intermediate value exceeds max Decimal",
                         "annotation": []
                       }
                     }

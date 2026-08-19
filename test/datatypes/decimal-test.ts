@@ -28,10 +28,10 @@ describe('Decimal', () => {
     Decimal.from('-1.9').truncate().should.equal(-1);
     Decimal.from('1.1').ceil().should.equal(2);
     Decimal.from('1.9').floor().should.equal(1);
-    Decimal.from('-0.5').round().should.eql(Decimal.from(0));
-    Decimal.from('2').power(3).should.eql(Decimal.from(8));
-    Decimal.from('9').sqrt().should.eql(Decimal.from(3));
-    Decimal.from('8').log(2).should.eql(Decimal.from(3));
+    Decimal.from('-0.5').setScale(0).should.equalDecimal(Decimal.from(0));
+    Decimal.from('2').power(3).should.equalDecimal(Decimal.from(8));
+    Decimal.from('9').sqrt().should.equalDecimal(Decimal.from(3));
+    Decimal.from('8').log(2).should.equalDecimal(Decimal.from(3));
   });
 
   it('should reject non-finite and divide-by-zero values', () => {

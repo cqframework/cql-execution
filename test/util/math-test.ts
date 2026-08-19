@@ -13,8 +13,8 @@ describe('successor', () => {
 
   it('should preserve decimals in an Uncertainty', () => {
     const result = successor(new Uncertainty(Decimal.from(1.0), Decimal.from(2.0)), ELM_DECIMAL_TYPE);
-    result.low.should.eql(Decimal.from(1.00000001));
-    result.high.should.eql(Decimal.from(2.00000001));
+    result.low.should.equalDecimal(Decimal.from(1.00000001));
+    result.high.should.equalDecimal(Decimal.from(2.00000001));
   });
 
   it('should leave the uncertainty high unchanged when it overflows', () => {
@@ -32,8 +32,8 @@ describe('predecessor', () => {
 
   it('should preserve decimals in an Uncertainty', () => {
     const result = successor(new Uncertainty(Decimal.from(1.0), Decimal.from(2.0)), ELM_DECIMAL_TYPE);
-    result.low.should.eql(Decimal.from(1.00000001));
-    result.high.should.eql(Decimal.from(2.00000001));
+    result.low.should.equalDecimal(Decimal.from(1.00000001));
+    result.high.should.equalDecimal(Decimal.from(2.00000001));
   });
 
   it('should leave the uncertainty low unchanged when it underflows', () => {

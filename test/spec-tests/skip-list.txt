@@ -13,6 +13,9 @@ CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: Ac
 CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlIntervalOperatorsTest.PointFrom.TestPointFromNull            Wrong output: Interval[null, null] is not a unit interval, nor is it null
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Wrong output: The resulting Quantity should have an appropriate unit; 'g' / 'g' should be '1', not 'g'. See test Divide1Q1Q which is correct
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10By5DQuantity"           Wrong output: The resulting Quantity should have an appropriate unit
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide414By206DQuantity"        Wrong output: The resulting Quantity should have an appropriate unit
 
 # Potentially Incorrect Expected Output
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
@@ -42,8 +45,8 @@ CqlTypeOperatorsTest.Convert.StringToDateTime                   Wrong answer (di
 CqlTypeOperatorsTest.ToDateTime.ToDateTime1                     Wrong answer (different offsets)
 CqlTypeOperatorsTest.ToDateTime.ToDateTime2                     Wrong answer (different offsets)
 CqlTypeOperatorsTest.ToDateTime.ToDateTime3                     Wrong answer (different offsets)
-ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number)
-ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number)
+ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number); intermediate value exceeds max Decimal
+ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number); intermediate value exceeds max Decimal
 
 # Unimplemented
 CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not implemented
@@ -54,9 +57,6 @@ CqlListOperatorsTest.Descendents                        Descendents not implemen
 # Unimplemented (New in CQL 1.5)
 CqlArithmeticFunctionsTest.Modulo.ModuloQuantity                      Modulo not implemented for Quantity
 CqlArithmeticFunctionsTest.Modulo.Modulo10By3Quantity                 Modulo not implemented for Quantity
-"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Truncated divide not implemented for Quantity
-"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10By5DQuantity"           Truncated divide not implemented for Quantity
-"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide414By206DQuantity"        Truncated divide not implemented for Quantity
 
 # Unimplemented (New in CQL 2.0)
 CqlListOperatorsTest.Slice                              Slice not implemented

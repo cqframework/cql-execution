@@ -3,6 +3,7 @@ import should from 'should';
 import { Date, DateTime, MAX_DATE_VALUE, MIN_DATE_VALUE } from '../../src/datatypes/datetime';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 import { jsDate } from '../../src/util/util';
+import { Decimal } from '../../src/datatypes/decimal';
 
 describe('Date', () => {
   it('should properly set all properties when constructed', () => {
@@ -884,11 +885,11 @@ describe('Date.getPrecisionValue', () => {
 describe('Date.getDateTime', () => {
   it('should return a DateTime that has the passed in timeZoneOffset', () => {
     const d = new Date(2000, 12, 1);
-    const dateTime = d.getDateTime(2);
+    const dateTime = d.getDateTime(Decimal.from(2));
     dateTime.year.should.equal(2000);
     dateTime.month.should.equal(12);
     dateTime.day.should.equal(1);
-    dateTime.timezoneOffset.should.equal(2);
+    dateTime.timezoneOffset.should.equalDecimal(Decimal.from(2));
   });
 
   it('should return a DateTime with a timeZoneOffset when one is not passed in', () => {
@@ -897,7 +898,7 @@ describe('Date.getDateTime', () => {
     dateTime.year.should.equal(2000);
     dateTime.month.should.equal(12);
     dateTime.day.should.equal(1);
-    dateTime.timezoneOffset.should.equal((new jsDate().getTimezoneOffset() / 60) * -1);
+    dateTime.timezoneOffset.should.equalDecimal(Decimal.from((new jsDate().getTimezoneOffset() / 60) * -1));
   });
 
   it('should return a DateTime without a timeZoneOffset when a null timeZoneOffset is passed in', () => {

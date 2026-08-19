@@ -1,6 +1,6 @@
 import * as ucum from '@lhncbc/ucum-lhc';
 import { type Collection, Map as ImmutableMap, Seq as ImmutableSeq } from 'immutable';
-import { Code, DateTime, Interval, Quantity, Ratio, Uncertainty } from '../datatypes/datatypes';
+import { Code, DateTime, Decimal, Interval, Quantity, Ratio, Uncertainty } from '../datatypes/datatypes';
 import { decimalAdjust } from './math';
 import { convertUnit } from './units';
 
@@ -56,7 +56,7 @@ export const toNormalizedKey = (js: any): NormalizedKey => {
       });
 
     case DateTime:
-      if (typeof js.timezoneOffset === 'number' && js.timezoneOffset !== 0) {
+      if (js.timezoneOffset?.isDecimal && !js.timezoneOffset.equals(0)) {
         return ImmutableSeq(js.convertToTimezoneOffset(0))
           .map((x: any) => toNormalizedKey(x))
           .toMap()
@@ -68,6 +68,12 @@ export const toNormalizedKey = (js: any): NormalizedKey => {
           .set('__instance', js.constructor);
       }
 
+    case Decimal:
+      return ImmutableMap({
+        value: js.toString(),
+        __instance: js.constructor
+      });
+
     case Interval:
       return ImmutableSeq(js.toClosed())
         .map((x: any) => toNormalizedKey(x))
@@ -77,7 +83,7 @@ export const toNormalizedKey = (js: any): NormalizedKey => {
     case Quantity:
       if (!js.unit) {
         return ImmutableMap({
-          value: js.value ?? null,
+          value: js.value ? toNormalizedKey(js.value) : null,
           unit: null,
           __instance: js.constructor
         });
@@ -89,7 +95,7 @@ export const toNormalizedKey = (js: any): NormalizedKey => {
       if (!baseUnitKey) {
         // No units found - normalization not possible and use provided values
         return ImmutableMap({
-          value: js.value ?? null,
+          value:  js.value ? toNormalizedKey(js.value) : null,
           unit: js.unit ?? null,
           __instance: js.constructor
         });
@@ -99,7 +105,7 @@ export const toNormalizedKey = (js: any): NormalizedKey => {
         const conversionValue = convertUnit(js.value, js.unit, baseUnitKeyCode);
         const finalValue = conversionValue ? decimalAdjust('round', conversionValue, -8) : null;
         return ImmutableMap({
-          value: finalValue ?? null,
+          value: finalValue ? toNormalizedKey(finalValue) : null,
           unit: baseUnitKeyCode ?? null,
           __instance: js.constructor
         });
