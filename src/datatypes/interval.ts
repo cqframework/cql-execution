@@ -23,8 +23,6 @@ import {
 import { MIN_FLOAT_VALUE } from '../util/limits';
 import { Quantity } from './quantity';
 
-// TODO: Replace all build.fhir.org URL references with stable references once CQL 2.0 is pulished
-
 export class Interval {
   constructor(
     public low: any,
