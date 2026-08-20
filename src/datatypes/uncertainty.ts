@@ -143,7 +143,7 @@ export class Uncertainty {
 
       if (typeof a.before === 'function') {
         return a.before(b, precision);
-      } else if (a.isDecimal) { 
+      } else if (a.isDecimal) {
         return a.lessThan(b);
       } else {
         return a < b;

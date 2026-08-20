@@ -98,11 +98,7 @@ describe('Sum', () => {
   });
 
   it('should be able to sum quantities up to max decimal value', async function () {
-    validateQuantity(
-      await this.quantities_at_max_value.exec(this.ctx),
-      MAX_DECIMAL_VALUE,
-      'ml'
-    );
+    validateQuantity(await this.quantities_at_max_value.exec(this.ctx), MAX_DECIMAL_VALUE, 'ml');
   });
 
   it('should return null when overflowing the max quantity value', async function () {
@@ -110,11 +106,7 @@ describe('Sum', () => {
   });
 
   it('should be able to sum quantities down to min decimal value', async function () {
-    validateQuantity(
-      await this.quantities_at_min_value.exec(this.ctx),
-      MIN_DECIMAL_VALUE,
-      'ml'
-    );
+    validateQuantity(await this.quantities_at_min_value.exec(this.ctx), MIN_DECIMAL_VALUE, 'ml');
   });
 
   it('should return null when underflowing the min quantity value', async function () {
@@ -480,13 +472,13 @@ describe('StdDev', () => {
     setup(this, data);
   });
   it('should be able to find Standard Dev of a list ', async function () {
-    (await this.std.exec(this.ctx)).should.equalDecimal(Decimal.from("1.58113883"));
+    (await this.std.exec(this.ctx)).should.equalDecimal(Decimal.from('1.58113883'));
   });
   it('should be able to find Standard Dev of a list of like quantities', async function () {
-    validateQuantity(await this.std_q.exec(this.ctx), "1.58113883", 'ml');
+    validateQuantity(await this.std_q.exec(this.ctx), '1.58113883', 'ml');
   });
   it('should be able to find Standard Dev of a list of related quantities', async function () {
-    validateQuantity(await this.q_diff_units.exec(this.ctx), "1.58113883", 'ml');
+    validateQuantity(await this.q_diff_units.exec(this.ctx), '1.58113883', 'ml');
   });
   it('should be null if some are numbers and some are quantities', async function () {
     should(await this.numbersAndQuantities.exec(this.ctx)).be.null();
@@ -501,13 +493,13 @@ describe('PopulationStdDev', () => {
     setup(this, data);
   });
   it('should be able to find Population Standard Dev of a list ', async function () {
-    (await this.dev.exec(this.ctx)).should.equalDecimal(Decimal.from("1.41421356"));
+    (await this.dev.exec(this.ctx)).should.equalDecimal(Decimal.from('1.41421356'));
   });
   it('should be able to find Population Standard Dev of a list of quantities', async function () {
-    validateQuantity(await this.dev_q.exec(this.ctx), "1.41421356", 'ml');
+    validateQuantity(await this.dev_q.exec(this.ctx), '1.41421356', 'ml');
   });
   it('should be able to find Population Standard Dev of a list of related quantities', async function () {
-    validateQuantity(await this.q_diff_units.exec(this.ctx), "1.41421356", 'ml');
+    validateQuantity(await this.q_diff_units.exec(this.ctx), '1.41421356', 'ml');
   });
   it('should be null if some are numbers and some are quantities', async function () {
     should(await this.numbersAndQuantities.exec(this.ctx)).be.null();
@@ -567,9 +559,7 @@ describe('Product', () => {
   });
 
   it('should return decimal product up to max decimal value', async function () {
-    (await this.decimals_at_max_value_product.exec(this.ctx)).should.eql(
-      MAX_DECIMAL_VALUE
-    );
+    (await this.decimals_at_max_value_product.exec(this.ctx)).should.eql(MAX_DECIMAL_VALUE);
   });
 
   it('should return null when decimal product overflows max decimal value', async function () {
@@ -577,9 +567,7 @@ describe('Product', () => {
   });
 
   it('should return decimal product down to min decimal value', async function () {
-    (await this.decimals_at_min_value_product.exec(this.ctx)).should.eql(
-      MIN_DECIMAL_VALUE
-    );
+    (await this.decimals_at_min_value_product.exec(this.ctx)).should.eql(MIN_DECIMAL_VALUE);
   });
 
   it('should return null when decimal product underflows min decimal value', async function () {
@@ -662,7 +650,7 @@ describe('GeometricMean', () => {
   });
 
   it('should return value when pass in list that contains nulls', async function () {
-    (await this.null_geometric_mean.exec(this.ctx)).should.equalDecimal(Decimal.from("1.41421356"));
+    (await this.null_geometric_mean.exec(this.ctx)).should.equalDecimal(Decimal.from('1.41421356'));
   });
 
   it('should return null when list is all null', async function () {

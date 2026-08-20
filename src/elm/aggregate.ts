@@ -6,7 +6,7 @@ import { Context } from '../runtime/context';
 import { Exception } from '../datatypes/exception';
 import { greaterThan, lessThan } from '../util/comparison';
 import { build } from './builder';
-import { overflowsOrUnderflows } from '../util/math';
+import { overflowsOrUnderflows, finalizeNumericResult } from '../util/math';
 import { ELM_DECIMAL_TYPE } from '../util/elmTypes';
 
 class AggregateExpression extends Expression {
@@ -16,28 +16,6 @@ class AggregateExpression extends Expression {
     super(json);
     this.source = build(json.source);
   }
-}
-
-function hasDecimals(values: any[]) {
-  return values.some(value => value && value.isDecimal);
-}
-
-function isDecimal(value: any): value is Decimal {
-  return value != null && value.isDecimal;
-}
-
-function sumDecimals(values: Decimal[]) {
-  return values.reduce((sum, value) => sum.add(value));
-}
-
-function productDecimals(values: Decimal[]) {
-  return values.reduce((product, value) => product.multiplyBy(value));
-}
-
-function decimalResult(value: number, values: any[], resultTypeName?: string) {
-  return hasDecimals(values) || resultTypeName === ELM_DECIMAL_TYPE
-    ? Decimal.from(value).normalized()
-    : value;
 }
 
 export class Count extends AggregateExpression {
@@ -76,12 +54,16 @@ export class Sum extends AggregateExpression {
     }
 
     if (hasOnlyQuantities(items)) {
-      const sum = sumDecimals(getValuesFromQuantities(items));
+      const sum = sumOfDecimals(getValuesFromQuantities(items));
       return overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE) ? null : new Quantity(sum, items[0].unit);
     } else {
-      const sum = hasDecimals(items)
-        ? sumDecimals(items.map(Decimal.from))
-        : items.reduce((x: any, y: any) => x + y);
+      let sum;
+      if (hasDecimals(items)) {
+        sum = sumOfDecimals(items.map(Decimal.from));
+      } else {
+        sum = items.reduce((x: any, y: any) => x + y);
+      }
+      sum = finalizeNumericResult(sum);
       return overflowsOrUnderflows(sum, this.resultTypeName) ? null : sum;
     }
   }
@@ -177,11 +159,11 @@ export class Avg extends AggregateExpression {
     }
 
     if (hasOnlyQuantities(items)) {
-      const sum = sumDecimals(getValuesFromQuantities(items));
+      const sum = sumOfDecimals(getValuesFromQuantities(items));
       return new Quantity(sum.divideBy(items.length), items[0].unit);
     } else {
       // return type is always Decimal, so just map everything to Decimals
-      return sumDecimals(items.map(Decimal.from)).divideBy(items.length).normalized();
+      return sumOfDecimals(items.map(Decimal.from)).divideBy(items.length).normalized();
     }
   }
 }
@@ -206,14 +188,17 @@ export class Median extends AggregateExpression {
       return null;
     }
 
-    if (!hasOnlyQuantities(items)) {
-      return hasDecimals(items)
-        ? medianOfDecimals(items.map(Decimal.from))
-        : decimalResult(medianOfNumbers(items), items, this.resultTypeName);
+    if (hasOnlyQuantities(items)) {
+      const median = medianOfDecimals(getValuesFromQuantities(items));
+      return new Quantity(median, items[0].unit);
     }
 
-    const median = medianOfDecimals(getValuesFromQuantities(items));
-    return new Quantity(median, items[0].unit);
+    if (hasDecimals(items)) {
+      const decimals = items.map(Decimal.from);
+      return finalizeNumericResult(medianOfDecimals(decimals));
+    }
+
+    return medianOfNumbers(items);
   }
 }
 
@@ -240,7 +225,7 @@ export class Mode extends AggregateExpression {
 
     if (hasOnlyQuantities(filtered)) {
       const values = getValuesFromQuantities(filtered);
-      let mode = this.mode(values);
+      const mode = this.mode(values);
       if (mode.length === 1) {
         return new Quantity(mode[0], items[0].unit);
       } else {
@@ -362,16 +347,19 @@ export class Product extends AggregateExpression {
     }
 
     if (hasOnlyQuantities(items)) {
-      const product = productDecimals(getValuesFromQuantities(items));
+      const product = productOfDecimals(getValuesFromQuantities(items));
       // Units are not multiplied for the geometric product
       return overflowsOrUnderflows(product, ELM_DECIMAL_TYPE)
         ? null
         : new Quantity(product, items[0].unit);
     } else {
-      const product = hasDecimals(items)
-        ? productDecimals(items.map(Decimal.from))
-        : items.reduce((x: number, y: number) => x * y);
-      const result = isDecimal(product) ? product : decimalResult(product, items, this.resultTypeName);
+      let result;
+      if (hasDecimals(items)) {
+        result = productOfDecimals(items.map(Decimal.from));
+      } else {
+        result = items.reduce((x: number, y: number) => x * y);
+      }
+      result = finalizeNumericResult(result);
       return overflowsOrUnderflows(result, this.resultTypeName) ? null : result;
     }
   }
@@ -399,12 +387,13 @@ export class GeometricMean extends AggregateExpression {
     }
 
     if (hasOnlyQuantities(items)) {
-      const product = productDecimals(getValuesFromQuantities(items));
+      const product = productOfDecimals(getValuesFromQuantities(items));
       const geoMean = product.power(1.0 / items.length);
       return new Quantity(geoMean, items[0].unit);
     } else {
-      return productDecimals(items.map(Decimal.from))
-          .power(1.0 / items.length).normalized();
+      return productOfDecimals(items.map(Decimal.from))
+        .power(1.0 / items.length)
+        .normalized();
     }
   }
 }
@@ -458,6 +447,10 @@ export class AnyTrue extends AggregateExpression {
   }
 }
 
+function hasDecimals(values: any[]) {
+  return values.some(value => value && value.isDecimal);
+}
+
 function processQuantities(values: any[]) {
   const items = removeNulls(values);
   if (hasOnlyQuantities(items)) {
@@ -502,7 +495,13 @@ function medianOfNumbers(numbers: number[]) {
 function medianOfDecimals(decimals: Decimal[]) {
   const items = [...decimals].sort((a, b) => a.compareTo(b));
   const middle = Math.floor(items.length / 2);
-  return items.length % 2 === 1
-    ? items[middle]
-    : items[middle - 1].add(items[middle]).divideBy(2);
+  return items.length % 2 === 1 ? items[middle] : items[middle - 1].add(items[middle]).divideBy(2);
+}
+
+function sumOfDecimals(values: Decimal[]) {
+  return values.reduce((sum, value) => sum.add(value));
+}
+
+function productOfDecimals(values: Decimal[]) {
+  return values.reduce((product, value) => product.multiplyBy(value));
 }

@@ -623,11 +623,7 @@ export class Expand extends Expression {
       return null;
     }
 
-    const results = this.makeDecimalIntervalList(
-      low_value,
-      high_value,
-      per_value
-    );
+    const results = this.makeDecimalIntervalList(low_value, high_value, per_value);
 
     for (const itvl of results) {
       itvl.low = new Quantity(itvl.low, result_units);
@@ -636,31 +632,27 @@ export class Expand extends Expression {
     return results;
   }
 
-  expandIntegerInterval(interval: any, per: any) { 
+  expandIntegerInterval(interval: any, per: any) {
     if (per.unit !== '1' && per.unit !== '') {
       return null;
     }
     const low = interval.lowClosed ? interval.low : successor(interval.low);
     const high = interval.highClosed ? interval.high : predecessor(interval.high);
 
-    return this.makeDecimalIntervalList(
-      low, high, per.value
-    );
+    return this.makeDecimalIntervalList(low, high, per.value);
   }
 
-  expandDecimalInterval(interval: any, per: any) { 
+  expandDecimalInterval(interval: any, per: any) {
     if (per.unit !== '1' && per.unit !== '') {
       return null;
     }
     const low = interval.lowClosed ? interval.low : successor(interval.low);
     const high = interval.highClosed ? interval.high : predecessor(interval.high);
 
-    return this.makeDecimalIntervalList(
-      low, high, per.value
-    );
+    return this.makeDecimalIntervalList(low, high, per.value);
   }
 
-  expandLongInterval(interval: any, per: any) { 
+  expandLongInterval(interval: any, per: any) {
     if (per.unit !== '1' && per.unit !== '') {
       return null;
     }
@@ -668,35 +660,32 @@ export class Expand extends Expression {
     const low = interval.lowClosed ? interval.low : successor(interval.low);
     const high = interval.highClosed ? interval.high : predecessor(interval.high);
 
-    return this.makeDecimalIntervalList(
-      low, high, per.value
-    );
+    return this.makeDecimalIntervalList(low, high, per.value);
   }
 
-  makeDecimalIntervalList(
-    low: any,
-    high: any,
-    perValue: any
-  ) {
+  makeDecimalIntervalList(low: any, high: any, perValue: any) {
     // If the per value is a decimal, 8 decimal places are appropriate
     // Integers should have 0 Decimal places
     const perIsIntegral = perValue.isInteger();
-    const decimalPrecision = perIsIntegral ? 0 : 8;    
+    const decimalPrecision = perIsIntegral ? 0 : 8;
 
     // For the purposes of this function, we'll perform all the arithmetic using Decimals,
     // then convert the results back to the required type if necessary
-    let makeInterval: Function;
+    let makeInterval: (l: Decimal, h: Decimal) => dtivl.Interval;
     if (!perIsIntegral) {
       // If per is not an integer value, then regardless of the original point types, the values will be Decimals
       makeInterval = (l: Decimal, h: Decimal) => new dtivl.Interval(l, h, true, true);
     } else if (typeof low === 'bigint' || typeof high === 'bigint') {
-      makeInterval = (l: Decimal, h: Decimal) => new dtivl.Interval(l.toLong(), h.toLong(), true, true);
+      makeInterval = (l: Decimal, h: Decimal) =>
+        new dtivl.Interval(l.toLong(), h.toLong(), true, true);
     } else if (typeof low === 'number' || typeof high === 'number') {
-      makeInterval = (l: Decimal, h: Decimal) => new dtivl.Interval(l.toInteger(), h.toInteger(), true, true);
+      makeInterval = (l: Decimal, h: Decimal) =>
+        new dtivl.Interval(l.toInteger(), h.toInteger(), true, true);
     } else {
       // per is an integer but the original bounds of the interval were Decimal.
       // TODO: for now just make them integers
-      makeInterval = (l: Decimal, h: Decimal) => new dtivl.Interval(l.toInteger(), h.toInteger(), true, true);
+      makeInterval = (l: Decimal, h: Decimal) =>
+        new dtivl.Interval(l.toInteger(), h.toInteger(), true, true);
     }
 
     // treat everything as a Decimal, convert back later if needed
@@ -843,7 +832,9 @@ function collapseIntervals(intervals: any, perWidth: any) {
             a.high = b.high;
           }
         } else if (
-          perWidth.value.greaterThanOrEquals(a.high != null ? a.high.durationBetween(b.low, perWidth.unit).high : undefined)
+          perWidth.value.greaterThanOrEquals(
+            a.high != null ? a.high.durationBetween(b.low, perWidth.unit).high : undefined
+          )
         ) {
           a.high = b.high;
         } else {
@@ -860,13 +851,12 @@ function collapseIntervals(intervals: any, perWidth: any) {
           a = b;
         }
       } else {
-        
         const distance = subtract(b.low, a.high);
         // TODO: perWidth.value is a Decimal, but distance could be anything
         // lessThanOrEquals requires that its args be the same type
         // so I guess for now, make distance a Decimal
         const distanceDecimal = Decimal.from(distance);
-        const withinPerWidth = lessThanOrEquals(distanceDecimal, perWidth.value); 
+        const withinPerWidth = lessThanOrEquals(distanceDecimal, perWidth.value);
         if (withinPerWidth) {
           if (greaterThan(b.high, a.high) || b.high == null) {
             a.high = b.high;
@@ -881,11 +871,4 @@ function collapseIntervals(intervals: any, perWidth: any) {
     collapsedIntervals.push(a);
     return collapsedIntervals;
   }
-}
-
-function truncateDecimal(decimal: any, decimalPlaces: number) {
-  // like parseFloat().toFixed() but floor rather than round
-  // Needed for when per precision is less than the interval input precision
-  const re = new RegExp('^-?\\d+(?:.\\d{0,' + (decimalPlaces || -1) + '})?');
-  return Decimal.from(decimal.toString().match(re)[0]);
 }

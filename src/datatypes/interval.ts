@@ -20,7 +20,6 @@ import {
   ELM_QUANTITY_TYPE,
   ELM_ANY_TYPE
 } from '../util/elmTypes';
-import { MIN_FLOAT_VALUE } from '../util/limits';
 import { Quantity } from './quantity';
 import { Decimal, MIN_DECIMAL_VALUE } from './decimal';
 
@@ -780,8 +779,8 @@ export class Interval {
   toString() {
     const start = this.lowClosed ? '[' : '(';
     const end = this.highClosed ? ']' : ')';
-    const lowString = this.low == null ? "null" : this.low.toString();
-    const highString = this.high == null ? "null" : this.high.toString();
+    const lowString = this.low == null ? 'null' : this.low.toString();
+    const highString = this.high == null ? 'null' : this.high.toString();
     return start + lowString + ', ' + highString + end;
   }
 }

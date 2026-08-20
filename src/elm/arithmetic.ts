@@ -22,30 +22,7 @@ import {
   ELM_LONG_TYPE,
   ELM_TIME_TYPE
 } from '../util/elmTypes';
-import {
-  MAX_INT_VALUE,
-  MAX_LONG_VALUE,
-  MIN_INT_VALUE,
-  MIN_LONG_VALUE
-} from '../util/limits';
-
-function finalizeNumericResult(result: any, type?: string) {
-
-    if (result instanceof Decimal) {
-      return result.normalized();
-    } else if (result instanceof Quantity) {
-      return new Quantity(result.value.normalized(), result.unit);
-    } else if (result instanceof Uncertainty) {
-      if (result.low instanceof Quantity || result.low instanceof Decimal) {
-        result.low = finalizeNumericResult(result.low);
-      }
-      if (result.high instanceof Quantity || result.high instanceof Decimal) {
-        result.high = finalizeNumericResult(result.high);
-      }
-    }
-
-    return result;
-}
+import { MAX_INT_VALUE, MAX_LONG_VALUE, MIN_INT_VALUE, MIN_LONG_VALUE } from '../util/limits';
 
 export class Add extends Expression {
   constructor(json: any) {
@@ -59,7 +36,7 @@ export class Add extends Expression {
     }
 
     const sum = MathUtil.add(args[0], args[1], this.resultTypeName);
-    return finalizeNumericResult(sum, this.resultTypeName);
+    return MathUtil.finalizeNumericResult(sum, this.resultTypeName);
   }
 }
 
@@ -75,7 +52,7 @@ export class Subtract extends Expression {
     }
 
     const difference = MathUtil.subtract(args[0], args[1], this.resultTypeName);
-    return finalizeNumericResult(difference, this.resultTypeName);
+    return MathUtil.finalizeNumericResult(difference, this.resultTypeName);
   }
 }
 
@@ -91,7 +68,7 @@ export class Multiply extends Expression {
     }
 
     let [x, y] = args;
-    
+
     if (x.isUncertainty && !y.isUncertainty) {
       y = new Uncertainty(y, y);
     } else if (y.isUncertainty && !x.isUncertainty) {
@@ -105,7 +82,10 @@ export class Multiply extends Expression {
       if (x.low.isQuantity) {
         product = new Uncertainty(doMultiplication(x.low, y.low), doMultiplication(x.high, y.high));
       } else {
-        product = new Uncertainty(MathUtil.multiply(x.low, y.low), MathUtil.multiply(x.high, y.high));
+        product = new Uncertainty(
+          MathUtil.multiply(x.low, y.low),
+          MathUtil.multiply(x.high, y.high)
+        );
       }
     } else {
       product = MathUtil.multiply(x, y);
@@ -114,8 +94,8 @@ export class Multiply extends Expression {
     if (MathUtil.overflowsOrUnderflows(product, this.resultTypeName)) {
       return null;
     }
-    
-    return finalizeNumericResult(product, this.resultTypeName);
+
+    return MathUtil.finalizeNumericResult(product, this.resultTypeName);
   }
 }
 
@@ -163,7 +143,7 @@ export class Divide extends Expression {
     if (MathUtil.overflowsOrUnderflows(quotient, this.resultTypeName)) {
       return null;
     }
-    return finalizeNumericResult(quotient, this.resultTypeName);
+    return MathUtil.finalizeNumericResult(quotient, this.resultTypeName);
   }
 }
 
@@ -177,8 +157,8 @@ export class TruncatedDivide extends Expression {
     if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
-    
-    let [x, y] = args;
+
+    const [x, y] = args;
     let quotient;
     if (x.isQuantity) {
       quotient = doDivision(x, y);
@@ -189,7 +169,10 @@ export class TruncatedDivide extends Expression {
       quotient = MathUtil.divide(x, y);
 
       // MathUtil.divide performs truncated division for Integers and Longs implicitly
-      if (quotient != null && (x.isDecimal || y.isDecimal || this.resultTypeName === ELM_DECIMAL_TYPE)) {
+      if (
+        quotient != null &&
+        (x.isDecimal || y.isDecimal || this.resultTypeName === ELM_DECIMAL_TYPE)
+      ) {
         quotient = (quotient as Decimal).truncated();
       }
     }
@@ -215,14 +198,13 @@ export class Modulo extends Expression {
     let modulo: number | bigint | Decimal;
     const [x, y] = args;
     try {
-      modulo = 
-        x.isDecimal || y.isDecimal ? Decimal.from(x).modulo(y) : x % y;
+      modulo = x.isDecimal || y.isDecimal ? Decimal.from(x).modulo(y) : x % y;
     } catch {
       // modulo divide by zero results in null according to specification
       return null;
     }
 
-    return MathUtil.decimalLongOrNull(finalizeNumericResult(modulo, this.resultTypeName))
+    return MathUtil.decimalLongOrNull(MathUtil.finalizeNumericResult(modulo, this.resultTypeName));
   }
 }
 
@@ -439,7 +421,12 @@ export class Power extends Expression {
 }
 
 function doPower(x: any, y: any) {
-  if (x.isDecimal || y.isDecimal || (typeof y == 'number' && y < 0) || (typeof y === 'bigint' && y < 0n)) {
+  if (
+    x.isDecimal ||
+    y.isDecimal ||
+    (typeof y == 'number' && y < 0) ||
+    (typeof y === 'bigint' && y < 0n)
+  ) {
     // Decimal values or negative powers always produce Decimal result
     return Decimal.from(x).power(y);
   }

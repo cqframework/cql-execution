@@ -1,5 +1,5 @@
 import { ELM_DECIMAL_TYPE } from '../util/elmTypes';
-import { decimalAdjust, add, subtract, isValidDecimal, overflowsOrUnderflows } from '../util/math';
+import { add, subtract, isValidDecimal, overflowsOrUnderflows } from '../util/math';
 import { Decimal } from './decimal';
 import {
   checkUnit,
@@ -16,7 +16,7 @@ export class Quantity {
     value?: Decimal | string | number | bigint,
     public unit?: any
   ) {
-    if (value == null || typeof value === 'number' && isNaN(value)) {
+    if (value == null || (typeof value === 'number' && isNaN(value))) {
       throw new Error('Cannot create a quantity with an undefined value');
     }
     this.value = Decimal.from(value).normalized();
@@ -114,7 +114,11 @@ export class Quantity {
   }
 
   dividedBy(other: any) {
-    if (other == null || other === 0 || (other.value != null && Decimal.from(other.value).equals(0))) {
+    if (
+      other == null ||
+      other === 0 ||
+      (other.value != null && Decimal.from(other.value).equals(0))
+    ) {
       return null;
     } else if (!other.isQuantity) {
       // convert it to a quantity w/ unit 1

@@ -26,7 +26,11 @@ import { Decimal, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../../../src/data
 
 const data = require('./data');
 
-const validateQuantity = function (object: any, expectedValue: number | Decimal, expectedUnit: string) {
+const validateQuantity = function (
+  object: any,
+  expectedValue: number | Decimal,
+  expectedUnit: string
+) {
   object.isQuantity.should.be.true();
   const q = new Quantity(expectedValue, expectedUnit);
   q.equals(object).should.be.true('Expected ' + object + ' to equal ' + q);
@@ -255,7 +259,7 @@ describe('Divide', () => {
 
   it('should divide uncertainty by uncertainty', async function () {
     const result = await this.divideUncertainties.exec(this.ctx);
-    result.low.should.equalDecimal(Decimal.from("0.42857143")); // 6/14
+    result.low.should.equalDecimal(Decimal.from('0.42857143')); // 6/14
     result.high.should.equalDecimal(Decimal.from(9));
   });
 
@@ -537,12 +541,12 @@ describe('Ln', () => {
   });
 
   it('should be able to return the natural log of a number', async function () {
-    const log4 = Decimal.from("1.3862943611198906").normalized();
+    const log4 = Decimal.from('1.3862943611198906').normalized();
     (await this.ln.exec(this.ctx)).should.equalDecimal(log4);
   });
 
   it('should be able to return the natural log of a long', async function () {
-    const log4 = Decimal.from("1.3862943611198906").normalized();
+    const log4 = Decimal.from('1.3862943611198906').normalized();
     (await this.lnFourLong.exec(this.ctx)).should.equalDecimal(log4);
   });
 });
@@ -752,7 +756,7 @@ describe('Predecessor', () => {
   });
 
   it('should be able to get Real Predecessor', async function () {
-    (await this.rs.exec(this.ctx)).should.equalDecimal(Decimal.from("2.19999999"));
+    (await this.rs.exec(this.ctx)).should.equalDecimal(Decimal.from('2.19999999'));
   });
 
   it('should return null for Predecessor greater than Integer Max value', async function () {
@@ -1011,12 +1015,16 @@ describe('OutOfBounds', () => {
 
     it('should return value for Divide near overflow', async function () {
       // not really near overflow, but more than max integer and near JavaScript max safe number
-      should(await this.integerDivideNearOverflow.exec(this.ctx)).equalDecimal(Decimal.from(8589934588000000));
+      should(await this.integerDivideNearOverflow.exec(this.ctx)).equalDecimal(
+        Decimal.from(8589934588000000)
+      );
     });
 
     it('should return value for Divide near underflow', async function () {
       // not really near underflow, but less than min integer and near JavaScript min safe number
-      should(await this.integerDivideNearUnderflow.exec(this.ctx)).equalDecimal(Decimal.from(-8589934592000000));
+      should(await this.integerDivideNearUnderflow.exec(this.ctx)).equalDecimal(
+        Decimal.from(-8589934592000000)
+      );
     });
 
     it('should return null for Divide By Zero', async function () {
@@ -1118,12 +1126,16 @@ describe('OutOfBounds', () => {
       // note that all division in CQL (except truncated division) is really decimal division
       // note also that MAX_LONG_VALUE is (2^63)-1,
       // 9223372036854775807 = 7^2 * 73 * 127 * 337 * 92737 * 649657
-      should(await this.longDivideNearOverflow.exec(this.ctx)).equalDecimal(Decimal.from(99457304386111n));
+      should(await this.longDivideNearOverflow.exec(this.ctx)).equalDecimal(
+        Decimal.from(99457304386111n)
+      );
     });
 
     it('should return value for Divide near underflow', async function () {
       // not really near underflow, but near JavaScript min safe number
-      should(await this.longDivideNearUnderflow.exec(this.ctx)).equalDecimal(Decimal.from(-9007199254740992n));
+      should(await this.longDivideNearUnderflow.exec(this.ctx)).equalDecimal(
+        Decimal.from(-9007199254740992n)
+      );
     });
 
     it('should return null for Divide By Zero', async function () {
@@ -1257,11 +1269,15 @@ describe('OutOfBounds', () => {
     });
 
     it('should return value for successor near overflow', async function () {
-      should(await this.decimalSuccessorNearOverflow.exec(this.ctx)).equalDecimal(MAX_DECIMAL_VALUE);
+      should(await this.decimalSuccessorNearOverflow.exec(this.ctx)).equalDecimal(
+        MAX_DECIMAL_VALUE
+      );
     });
 
     it('should return value for predecessor near underflow', async function () {
-      should(await this.decimalPredecessorNearUnderflow.exec(this.ctx)).equalDecimal(MIN_DECIMAL_VALUE);
+      should(await this.decimalPredecessorNearUnderflow.exec(this.ctx)).equalDecimal(
+        MIN_DECIMAL_VALUE
+      );
     });
   });
 

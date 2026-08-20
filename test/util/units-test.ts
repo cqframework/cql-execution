@@ -132,7 +132,7 @@ describe('convertUnit', () => {
 
   it('should truncate precision to 8 decimals by default', () => {
     const result = convertUnit(Decimal.from(1), '[ft_i]', '[mi_i]');
-    result.should.equalDecimal(Decimal.from("0.00018939"));
+    result.should.equalDecimal(Decimal.from('0.00018939'));
   });
 
   // it('should not truncate precision to 8 decimals when adjustPrecision is false', () => {
@@ -148,35 +148,79 @@ describe('convertUnit', () => {
 });
 
 describe('normalizeUnitsWhenPossible', () => {
-
   it('should keep same units', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), 'm', Decimal.from(1), 'm').should.eql([Decimal.from(10), 'm', Decimal.from(1), 'm']);
+    normalizeUnitsWhenPossible(Decimal.from(10), 'm', Decimal.from(1), 'm').should.eql([
+      Decimal.from(10),
+      'm',
+      Decimal.from(1),
+      'm'
+    ]);
   });
 
   it('should convert compatible units, preferring smaller units', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), 'cm', Decimal.from(1), 'm').should.eql([Decimal.from(10), 'cm', Decimal.from(100), 'cm']);
-    normalizeUnitsWhenPossible(Decimal.from(1), 'm', Decimal.from(10), 'cm').should.eql([Decimal.from(100), 'cm', Decimal.from(10), 'cm']);
+    normalizeUnitsWhenPossible(Decimal.from(10), 'cm', Decimal.from(1), 'm').should.eql([
+      Decimal.from(10),
+      'cm',
+      Decimal.from(100),
+      'cm'
+    ]);
+    normalizeUnitsWhenPossible(Decimal.from(1), 'm', Decimal.from(10), 'cm').should.eql([
+      Decimal.from(100),
+      'cm',
+      Decimal.from(10),
+      'cm'
+    ]);
   });
 
   it('should treat null or empty string units as 1', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), null, Decimal.from(1), '').should.eql([Decimal.from(10), '1', Decimal.from(1), '1']);
-    normalizeUnitsWhenPossible(Decimal.from(1), '', Decimal.from(10), null).should.eql([Decimal.from(1), '1', Decimal.from(10), '1']);
+    normalizeUnitsWhenPossible(Decimal.from(10), null, Decimal.from(1), '').should.eql([
+      Decimal.from(10),
+      '1',
+      Decimal.from(1),
+      '1'
+    ]);
+    normalizeUnitsWhenPossible(Decimal.from(1), '', Decimal.from(10), null).should.eql([
+      Decimal.from(1),
+      '1',
+      Decimal.from(10),
+      '1'
+    ]);
   });
 
   it('should normalize CQL date units and return CQL date units', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), 'year', Decimal.from(12), 'month').should.eql([Decimal.from(120), 'month', Decimal.from(12), 'month']);
+    normalizeUnitsWhenPossible(Decimal.from(10), 'year', Decimal.from(12), 'month').should.eql([
+      Decimal.from(120),
+      'month',
+      Decimal.from(12),
+      'month'
+    ]);
   });
 
   it('should return CQL date units when UCUM units are passed in', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), 'a_g', Decimal.from(12), 'mo_g').should.eql([Decimal.from(120), 'mo_g', Decimal.from(12), 'mo_g']);
+    normalizeUnitsWhenPossible(Decimal.from(10), 'a_g', Decimal.from(12), 'mo_g').should.eql([
+      Decimal.from(120),
+      'mo_g',
+      Decimal.from(12),
+      'mo_g'
+    ]);
   });
 
   it('should not convert units of different dimensions', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), 'm', Decimal.from(1), 'm2').should.eql([Decimal.from(10), 'm', Decimal.from(1), 'm2']);
+    normalizeUnitsWhenPossible(Decimal.from(10), 'm', Decimal.from(1), 'm2').should.eql([
+      Decimal.from(10),
+      'm',
+      Decimal.from(1),
+      'm2'
+    ]);
   });
 
   it('should not convert incompatible units', () => {
-    normalizeUnitsWhenPossible(Decimal.from(10), 'm', Decimal.from(1), 'mg').should.eql([Decimal.from(10), 'm', Decimal.from(1), 'mg']);
+    normalizeUnitsWhenPossible(Decimal.from(10), 'm', Decimal.from(1), 'mg').should.eql([
+      Decimal.from(10),
+      'm',
+      Decimal.from(1),
+      'mg'
+    ]);
   });
 });
 

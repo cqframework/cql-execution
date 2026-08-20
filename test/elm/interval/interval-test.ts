@@ -1686,9 +1686,13 @@ describe('Size', () => {
 
   it('should calculate the size of real intervals', async function () {
     // define RealSize: Size(Interval[1.23, 4.56])
-    (await this.realSize.exec(this.ctx)).should.equalDecimal(Decimal.from(3.33 + MIN_FLOAT_PRECISION_VALUE));
+    (await this.realSize.exec(this.ctx)).should.equalDecimal(
+      Decimal.from(3.33 + MIN_FLOAT_PRECISION_VALUE)
+    );
     // define RealOpenSize: Size(Interval(1.23, 4.56))
-    (await this.realOpenSize.exec(this.ctx)).should.equalDecimal(Decimal.from(3.32999998 + MIN_FLOAT_PRECISION_VALUE));
+    (await this.realOpenSize.exec(this.ctx)).should.equalDecimal(
+      Decimal.from(3.32999998 + MIN_FLOAT_PRECISION_VALUE)
+    );
   });
 
   it('should calculate the size of infinite intervals', async function () {
@@ -1758,7 +1762,9 @@ describe('Start', () => {
   it('should return the minimum possible DateTime in timzoneOffset of context', async function () {
     // set execution timestamp to be +5
     this.ctx.executionDateTime = new DateTime(2019, 10, 1, 12, 31, 31, 2, 5);
-    (await this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.equalDecimal(Decimal.from(5));
+    (await this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.equalDecimal(
+      Decimal.from(5)
+    );
   });
 
   it('should return the minimum possible Integer', async function () {
@@ -1808,7 +1814,9 @@ describe('End', () => {
   it('should return the maximum possible DateTime in timzoneOffset of context', async function () {
     // set execution timestamp to be +5
     this.ctx.executionDateTime = new DateTime(2019, 10, 1, 12, 31, 31, 2, 5);
-    (await this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.equalDecimal(Decimal.from(5));
+    (await this.closedNullDateTime.exec(this.ctx)).timezoneOffset.should.equalDecimal(
+      Decimal.from(5)
+    );
   });
 
   it('should return the maximum possible Integer', async function () {
@@ -3490,9 +3498,6 @@ describe('QuantityIntervalExpand', () => {
   });
 
   it('returns null when per zero, not applicable, or mismatch interval', async function () {
-
-    console.log('debuggger')
-    
     // define perZero: expand { Interval[2 'g', 4 'g'] } per 0 'g'
     let a = await this.perZero.exec(this.ctx);
     should.not.exist(a);

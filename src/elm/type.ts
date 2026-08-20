@@ -6,7 +6,7 @@ import { Concept } from '../datatypes/clinical';
 import { Interval as dtInterval } from '../datatypes/interval';
 import { Quantity, parseQuantity } from '../datatypes/quantity';
 import { Decimal } from '../datatypes/decimal';
-import { isValidDecimal, isValidInteger, isValidLong, limitDecimalPrecision } from '../util/math';
+import { isValidDecimal, isValidInteger, isValidLong } from '../util/math';
 import { normalizeMillisecondsField } from '../util/util';
 import { Ratio } from '../datatypes/ratio';
 import {
@@ -166,7 +166,7 @@ export class ToDecimal extends Expression {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
       if (arg.isUncertainty) {
-        const low = Decimal.from(arg.low).normalized()
+        const low = Decimal.from(arg.low).normalized();
         const high = Decimal.from(arg.high).normalized();
         return new Uncertainty(low, high);
       } else {
@@ -175,7 +175,7 @@ export class ToDecimal extends Expression {
           if (isValidDecimal(decimal)) {
             return decimal.normalized();
           }
-        } catch (_e) {
+        } catch {
           return null;
         }
       }
