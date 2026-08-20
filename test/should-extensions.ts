@@ -31,11 +31,15 @@ declare module 'should' {
   normalizedThis.should.eql(normalizedExpected);
 });
 
-(should as any).Assertion.add('equalDecimal', function (this: any, expected: number | bigint | Decimal) {
-    this.params = { operator: 'to equal Decimal', expected: expected.toString(), obj: this.obj.toString() };
+(should as any).Assertion.add(
+  'equalDecimal',
+  function (this: any, expected: number | bigint | Decimal) {
+    this.params = {
+      operator: 'to equal Decimal',
+      expected: expected.toString(),
+      obj: this.obj.toString()
+    };
 
-    this.assert(
-      this.obj instanceof Decimal &&
-        this.obj.equals(expected)
-    );
-});
+    this.assert(this.obj instanceof Decimal && this.obj.equals(expected));
+  }
+);

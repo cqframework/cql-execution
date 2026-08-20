@@ -1,6 +1,14 @@
 import * as ucum from '@lhncbc/ucum-lhc';
 import { type Collection, Map as ImmutableMap, Seq as ImmutableSeq } from 'immutable';
-import { Code, DateTime, Decimal, Interval, Quantity, Ratio, Uncertainty } from '../datatypes/datatypes';
+import {
+  Code,
+  DateTime,
+  Decimal,
+  Interval,
+  Quantity,
+  Ratio,
+  Uncertainty
+} from '../datatypes/datatypes';
 import { decimalAdjust } from './math';
 import { convertUnit } from './units';
 
@@ -95,7 +103,7 @@ export const toNormalizedKey = (js: any): NormalizedKey => {
       if (!baseUnitKey) {
         // No units found - normalization not possible and use provided values
         return ImmutableMap({
-          value:  js.value ? toNormalizedKey(js.value) : null,
+          value: js.value ? toNormalizedKey(js.value) : null,
           unit: js.unit ?? null,
           __instance: js.constructor
         });

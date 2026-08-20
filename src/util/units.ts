@@ -1,5 +1,4 @@
 import * as ucum from '@lhncbc/ucum-lhc';
-import { decimalAdjust } from './math';
 import { Decimal } from '../datatypes/decimal';
 const utils = ucum.UcumLhcUtils.getInstance();
 

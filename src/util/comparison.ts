@@ -47,9 +47,9 @@ export function lessThan(a: any, b: any, precision?: any) {
 export function lessThanOrEquals(a: any, b: any, precision?: any) {
   if (areNumbers(a, b) || areBigInts(a, b) || areStrings(a, b)) {
     return a <= b;
-  }else if (areDecimals(a, b)) {
+  } else if (areDecimals(a, b)) {
     return a.lessThanOrEquals(b);
-  }  else if (areDateTimesOrQuantities(a, b)) {
+  } else if (areDateTimesOrQuantities(a, b)) {
     return a.sameOrBefore(b, precision);
   } else if (isUncertainty(a)) {
     return a.lessThanOrEquals(b, precision);

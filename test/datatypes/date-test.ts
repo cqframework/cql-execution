@@ -898,7 +898,9 @@ describe('Date.getDateTime', () => {
     dateTime.year.should.equal(2000);
     dateTime.month.should.equal(12);
     dateTime.day.should.equal(1);
-    dateTime.timezoneOffset.should.equalDecimal(Decimal.from((new jsDate().getTimezoneOffset() / 60) * -1));
+    dateTime.timezoneOffset.should.equalDecimal(
+      Decimal.from((new jsDate().getTimezoneOffset() / 60) * -1)
+    );
   });
 
   it('should return a DateTime without a timeZoneOffset when a null timeZoneOffset is passed in', () => {

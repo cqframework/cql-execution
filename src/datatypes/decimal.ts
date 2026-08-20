@@ -1,4 +1,3 @@
-
 import { Decimal as DecimalJS } from 'decimal.js';
 
 // Default precision is set to 30 significant figures. (Not decimal places)
@@ -44,28 +43,25 @@ export class Decimal {
     return this.setScale(CQL_IMPLICIT_SCALE, CQL_IMPLICIT_ROUNDING);
   }
 
-  private applyWrapper(
-    operation: (value: any) => DecimalJS,
-    other: DecimalInput
-  ): Decimal {
+  private applyWrapper(operation: (value: any) => DecimalJS, other: DecimalInput): Decimal {
     const operand = other instanceof Decimal ? other.value : other;
 
     return new Decimal(operation.call(this.value, operand));
   }
 
-  add(other: DecimalInput) : Decimal {
+  add(other: DecimalInput): Decimal {
     return this.applyWrapper(this.value.add, other);
   }
 
-  subtract(other: DecimalInput) : Decimal {
+  subtract(other: DecimalInput): Decimal {
     return this.applyWrapper(this.value.minus, other);
   }
 
-  multiplyBy(other: DecimalInput) : Decimal {
+  multiplyBy(other: DecimalInput): Decimal {
     return this.applyWrapper(this.value.times, other);
   }
 
-  divideBy(other: DecimalInput) : Decimal {
+  divideBy(other: DecimalInput): Decimal {
     if (toNumber(other) === 0) {
       throw new RangeError('Cannot divide a decimal by zero');
     }
@@ -82,7 +78,7 @@ export class Decimal {
 
   compareTo(other: DecimalInput) {
     if (other instanceof Decimal) {
-      return this.value.comparedTo(other.value)
+      return this.value.comparedTo(other.value);
     }
     return this.value.comparedTo(other);
   }
@@ -94,7 +90,7 @@ export class Decimal {
   greaterThanOrEquals(other: DecimalInput) {
     return this.compareTo(other) >= 0;
   }
-  
+
   lessThan(other: DecimalInput) {
     return this.compareTo(other) < 0;
   }
@@ -123,19 +119,19 @@ export class Decimal {
     return new Decimal(this.value.abs());
   }
 
-  truncate() : number {
+  truncate(): number {
     return this.value.truncated().toNumber();
   }
 
-  truncated() : Decimal {
+  truncated(): Decimal {
     return new Decimal(this.value.truncated());
   }
 
-  ceil() : number {
+  ceil(): number {
     return this.value.ceil().toNumber();
   }
 
-  floor() : number {
+  floor(): number {
     return this.value.floor().toNumber();
   }
 
@@ -177,7 +173,7 @@ export class Decimal {
     if (!Number.isInteger(scale) || scale < 0) {
       throw new RangeError('Decimal scale must be a non-negative integer');
     }
-    
+
     return new Decimal(this.value.toDecimalPlaces(scale, roundingMode));
   }
 
@@ -203,8 +199,8 @@ export class Decimal {
   }
 }
 
-export const MAX_DECIMAL_STRING = "99999999999999999999.99999999";
-export const MIN_DECIMAL_STRING = "-99999999999999999999.99999999";
+export const MAX_DECIMAL_STRING = '99999999999999999999.99999999';
+export const MIN_DECIMAL_STRING = '-99999999999999999999.99999999';
 
 export const MAX_DECIMAL_VALUE = Decimal.from(MAX_DECIMAL_STRING);
 export const MIN_DECIMAL_VALUE = Decimal.from(MIN_DECIMAL_STRING);

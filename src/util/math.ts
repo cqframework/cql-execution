@@ -9,11 +9,7 @@ import {
   MAX_TIME_VALUE
 } from '../datatypes/datetime';
 
-import { 
-  Decimal,
-  MAX_DECIMAL_VALUE,
-  MIN_DECIMAL_VALUE
-} from '../datatypes/decimal';
+import { Decimal, MAX_DECIMAL_VALUE, MIN_DECIMAL_VALUE } from '../datatypes/decimal';
 
 import { Uncertainty } from '../datatypes/uncertainty';
 import {
@@ -25,12 +21,7 @@ import {
   ELM_TIME_TYPE,
   ELM_QUANTITY_TYPE
 } from './elmTypes';
-import {
-  MAX_INT_VALUE,
-  MAX_LONG_VALUE,
-  MIN_INT_VALUE,
-  MIN_LONG_VALUE
-} from './limits';
+import { MAX_INT_VALUE, MAX_LONG_VALUE, MIN_INT_VALUE, MIN_LONG_VALUE } from './limits';
 import { convertToCQLDateUnit, normalizeUnitsWhenPossible } from './units';
 
 export function overflowsOrUnderflows(value: any, type?: string): boolean {
@@ -67,10 +58,10 @@ export function overflowsOrUnderflows(value: any, type?: string): boolean {
       return true;
     }
   } else if (typeof value === 'number') {
-      if (!isValidInteger(value)) {
-        return true;
-      }
-  } else if (value.isDecimal) { 
+    if (!isValidInteger(value)) {
+      return true;
+    }
+  } else if (value.isDecimal) {
     if (!isValidDecimal(value)) {
       return true;
     }
@@ -236,13 +227,13 @@ export function divide(a: any, b: any, type?: string) {
     const quotient = Math.trunc(a / b);
     return overflowsOrUnderflows(quotient, ELM_INTEGER_TYPE) ? null : quotient;
   }
-  
+
   throw new Error('Unsupported argument types.');
 }
 
-export function limitDecimalPrecision<T extends number | bigint | Quantity | Uncertainty | Decimal | undefined>(
-  val?: T
-): T | undefined {
+export function limitDecimalPrecision<
+  T extends number | bigint | Quantity | Uncertainty | Decimal | undefined
+>(val?: T): T | undefined {
   if (val == null) {
     return val;
   } else if (typeof val === 'number') {
@@ -454,8 +445,25 @@ export function decimalOrNull(value: any) {
 
 export function decimalLongOrNull(value: any) {
   return (typeof value === 'number' && Number.isFinite(value)) ||
-    ((value && value.isDecimal) && isValidDecimal(value)) ||
+    (value && value.isDecimal && isValidDecimal(value)) ||
     (typeof value === 'bigint' && isValidLong(value))
     ? value
     : null;
+}
+
+export function finalizeNumericResult(result: any, _type?: string) {
+  if (result instanceof Decimal) {
+    return result.normalized();
+  } else if (result instanceof Quantity) {
+    return new Quantity(result.value.normalized(), result.unit);
+  } else if (result instanceof Uncertainty) {
+    if (result.low instanceof Quantity || result.low instanceof Decimal) {
+      result.low = finalizeNumericResult(result.low);
+    }
+    if (result.high instanceof Quantity || result.high instanceof Decimal) {
+      result.high = finalizeNumericResult(result.high);
+    }
+  }
+
+  return result;
 }
