@@ -78,7 +78,7 @@ export class Interval {
     return new Interval(newLow, newHigh, this.lowClosed, this.highClosed, this.pointType);
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#contains
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#contains
   contains(item: any, precision?: any) {
     if (item != null && item.isInterval) {
       throw new Error('Argument to contains must be a point');
@@ -93,7 +93,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#properly-includes
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#properly-includes
   properContains(item: any, precision?: any) {
     // From contains: "If the second argument is null, the result is null."
     if (item == null) {
@@ -110,7 +110,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#properly-includes
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#properly-includes
   properlyIncludes(other: any, precision?: any) {
     // "For the interval-interval overload, if either argument is null, the result is null."
     if (other == null) {
@@ -130,7 +130,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#includes
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#includes
   includes(other: any, precision?: any) {
     // "For the interval-interval overload, if either argument is null, the result is null."
     if (other == null) {
@@ -151,7 +151,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#included-in
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#included-in
   includedIn(other: any, precision?: any) {
     // "For the interval-interval overload, if either argument is null, the result is null."
     if (other == null) {
@@ -170,7 +170,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#overlaps
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#overlaps
   overlaps(other: any, precision?: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -187,7 +187,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#overlaps
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#overlaps
   overlapsAfter(other: any, precision?: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -201,7 +201,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#overlaps
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#overlaps
   overlapsBefore(other: any, precision?: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -215,7 +215,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#union
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#union
   union(other: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -253,7 +253,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#intersect
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#intersect
   intersect(other: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -292,7 +292,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#except
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#except
   except(other: any) {
     // "If either argument is null, the result is null."
     if (other === null) {
@@ -339,7 +339,7 @@ export class Interval {
     return null;
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#same-as-2
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#same-as-2
   sameAs(other: any, precision?: any) {
     // "If either or both arguments are null, the result is null."
     if (other === null) {
@@ -373,7 +373,7 @@ export class Interval {
     }
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#same-or-after-2
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#same-or-after-2
   sameOrBefore(other: any, precision?: any) {
     // "If either or both arguments are null, the result is null."
     if (other === null) {
@@ -401,7 +401,7 @@ export class Interval {
     return cmp.lessThanOrEquals(left.end(), right.start(), precision);
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#same-or-after-2
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#same-or-after-2
   sameOrAfter(other: any, precision?: any) {
     // "If either or both arguments are null, the result is null."
     if (other === null) {
@@ -429,7 +429,7 @@ export class Interval {
     return cmp.greaterThanOrEquals(left.start(), right.end(), precision);
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#equal-1
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#equal-1
   equals(other: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -449,7 +449,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#after-1
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#after-1
   after(other: any, precision?: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -467,7 +467,7 @@ export class Interval {
     return cmp.greaterThan(this.start(), other.end(), precision);
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#before-1
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#before-1
   before(other: any, precision?: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -485,7 +485,7 @@ export class Interval {
     return cmp.lessThan(this.end(), other.start(), precision);
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#meets
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#meets
   meets(other: any, precision?: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -503,7 +503,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#meets
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#meets
   meetsAfter(other: any, precision?: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -528,7 +528,7 @@ export class Interval {
     }
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#meets
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#meets
   meetsBefore(other: any, precision?: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -556,7 +556,7 @@ export class Interval {
     }
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#start
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#start
   start() {
     // "If the low boundary of the interval is closed and null, this operator returns the minimum
     // value for the point type of the interval."
@@ -581,7 +581,7 @@ export class Interval {
     return this.lowClosed ? this.low : successor(this.low, this.pointType);
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#end
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#end
   end() {
     // "If the high boundary of the interval is closed and null, this operator returns the maximum
     // value for the point type of the interval."
@@ -606,7 +606,7 @@ export class Interval {
     return this.highClosed ? this.high : predecessor(this.high, this.pointType);
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#starts
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#starts
   starts(other: any, precision?: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -634,7 +634,7 @@ export class Interval {
     }
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#ends
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#ends
   ends(other: any, precision?: any) {
     // "If either argument is null, the result is null."
     if (other == null) {
@@ -662,7 +662,7 @@ export class Interval {
     }
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#width
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#width
   width() {
     // "Note that because CQL defines duration and difference operations for date and time valued
     // intervals, width is not defined for intervals of these types."
@@ -680,7 +680,7 @@ export class Interval {
     return limitDecimalPrecision(subtract(end, start, this.pointType));
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#size
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#size
   size() {
     // "Note that because CQL defines duration and difference operations for date and time valued
     // intervals, size is not defined for intervals of these types."
@@ -700,7 +700,7 @@ export class Interval {
     );
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#size
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#size
   getPointSize() {
     // "... point-size is determined by successor of minimum T - minimum T"
     let minValue = minValueForType(this.pointType, getQuantityInstanceForMinMax(this));
@@ -726,7 +726,7 @@ export class Interval {
     throw new Error('Point type of interval cannot be determined.');
   }
 
-  // https://build.fhir.org/ig/HL7/cql/09-b-cqlreference.html#point-from
+  // https://cql.hl7.org/R2/09-b-cqlreference.html#point-from
   pointFrom() {
     // "The point from operator extracts the single point from a unit interval."
     const start = this.start();

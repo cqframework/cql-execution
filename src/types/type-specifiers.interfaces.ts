@@ -6,7 +6,7 @@ import {
   ELM_CHOICE_TYPE_SPECIFIER
 } from '../util/elmTypes';
 
-// Types derived from http://cql.hl7.org/04-logicalspecification.html#typespecifier
+// Types derived from http://cql.hl7.org/R2/04-logicalspecification.html#typespecifier
 
 /*
  * Utility type for any possible TypeSpecifier

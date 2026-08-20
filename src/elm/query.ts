@@ -247,7 +247,7 @@ export class Query extends Expression {
     });
 
     // Iterate over the cartesian product of the sources.
-    // See: https://cql.hl7.org/03-developersguide.html#multi-source-queries
+    // See: https://cql.hl7.org/R2/03-developersguide.html#multi-source-queries
     const cartesian = cartesianProductOf(sourceResults);
     let returnedValues: any[] = [];
     for (const combo of cartesian) {
