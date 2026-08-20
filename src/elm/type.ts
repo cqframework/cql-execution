@@ -758,7 +758,7 @@ function guessSpecifierType(val: any): any {
   } else if (Array.isArray(val)) {
     // Get unique types from the array (by converting to string and putting in a Set)
     const typesAsStrings = Array.from(new Set(val.map(v => JSON.stringify(guessSpecifierType(v)))));
-    const types = typesAsStrings.map(ts => (/^{/.test(ts) ? JSON.parse(ts) : ts));
+    const types = typesAsStrings.map(ts => (ts.startsWith('{') ? JSON.parse(ts) : ts));
     return {
       type: ELM_LIST_TYPE_SPECIFIER,
       elementType: types.length == 1 ? types[0] : { type: ELM_CHOICE_TYPE_SPECIFIER, choice: types }

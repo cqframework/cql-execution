@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Expression } from './expression';
 import { ThreeValuedLogic } from '../datatypes/logic';
 import { DateTime } from '../datatypes/datetime';

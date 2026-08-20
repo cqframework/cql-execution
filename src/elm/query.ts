@@ -74,7 +74,6 @@ export class ByDirection extends Expression {
     this.high_order = this.low_order * -1;
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   async exec(ctx: Context, a: any, b: any) {
     if (a === b) {
@@ -107,7 +106,6 @@ export class ByExpression extends Expression {
     this.high_order = this.low_order * -1;
   }
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   async exec(ctx: Context, a: any, b: any) {
     let sctx = ctx.childContext(a);

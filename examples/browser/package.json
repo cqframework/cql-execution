@@ -1,0 +1,20 @@
+{
+  "name": "cql-execution-browser-example",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild exec-age.js --bundle --platform=browser --format=iife --target=es2020 --outfile=dist/exec-age.js",
+    "dev": "esbuild exec-age.js --bundle --platform=browser --format=iife --target=es2020 --outfile=dist/exec-age.js --servedir=. --watch",
+    "test": "npm run build && node --test test/browser.test.js"
+  },
+  "dependencies": {
+    "cql-execution": "file:../.."
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

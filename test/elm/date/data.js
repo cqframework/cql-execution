@@ -6,7 +6,7 @@
        - From java dir: ./gradlew :cql-to-elm:generateTestData
 */
 
-/* eslint-disable */
+/* oxlint-disable */
 
 /* Date
 library TestSnippet version '1'

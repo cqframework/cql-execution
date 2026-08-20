@@ -2,7 +2,7 @@
 // rebuilding, and running tests. Keeps entries that still cause failures,
 // removes entries that now pass. Preserves all other lines as-is.
 
-/* eslint-disable no-console */
+/* oxlint-disable no-console */
 
 const fs = require('fs/promises');
 const path = require('path');
@@ -67,7 +67,7 @@ async function main() {
 
   const originalText = await fs.readFile(SKIP_LIST_PATH, 'utf8');
   const nl = originalText.includes('\r\n') ? '\r\n' : '\n';
-  let lines = originalText.split(/\r?\n/);
+  const lines = originalText.split(/\r?\n/);
 
   // Baseline: ensure tests pass before any changes
   console.log('Running baseline tests...');

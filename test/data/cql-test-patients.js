@@ -4,7 +4,7 @@ const P1 = {
   id: '1',
   name: 'John Smith',
   gender: 'M',
-  birthDate: '1980-02-17T06:15'
+  birthDate: '1980-02-17'
 };
 
 // Born in 2007
@@ -13,7 +13,7 @@ const P2 = {
   id: '2',
   name: 'Sally Smith',
   gender: 'F',
-  birthDate: '2007-08-02T11:47'
+  birthDate: '2007-08-02'
 };
 
 // Acute Pharyngitis and ED/Ambulatory Visits

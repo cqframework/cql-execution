@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import * as E from './expressions';
+// Keep the live exports object because this module and expressions have a circular dependency.
+// Otherwise, tsx fails when attempting to run this.
+import E = require('./expressions');
 import { typeIsArray } from '../util/util';
 
 export function build(json: any): E.Expression | E.Expression[] | null {

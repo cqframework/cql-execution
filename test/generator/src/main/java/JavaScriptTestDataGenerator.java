@@ -99,7 +99,7 @@ public class JavaScriptTestDataGenerator {
         pw.println("*/");
         pw.println();
         if (snippets.size() > 0) {
-            pw.println("/* eslint-disable */");
+            pw.println("/* oxlint-disable */");
             pw.println();
         }
 

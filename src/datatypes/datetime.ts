@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Uncertainty } from './uncertainty';
 import {
   jsDate,
@@ -791,7 +790,7 @@ export class DateTime extends AbstractDate {
     // consider seconds and milliseconds as a single combined precision with decimal semantics
     // this means that if milliseconds are not specified, then we treat it as though their
     // millisecond value is "0" so that no Uncertainty will be produced
-    /* eslint-disable @typescript-eslint/no-this-alias */
+    /* oxlint-disable @typescript/no-this-alias */
     let aDateTime: DateTime = this;
     let bDateTime: DateTime = other;
     if (
