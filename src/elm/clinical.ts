@@ -298,7 +298,7 @@ export class CalculateAge extends Expression {
     // From the spec: "Note that for AgeInYears and AgeInMonths, the birthDate is specified as a
     // Date and Today() is used to obtain the current date; whereas with the other precisions,
     // birthDate is specified as a DateTime, and Now() is used to obtain the current DateTime."
-    // See: https://cql.hl7.org/09-b-cqlreference.html#age
+    // See: https://cql.hl7.org/R2/09-b-cqlreference.html#age
     let asOf: dt.Date | dt.DateTime;
     if (
       this.precision.toLowerCase() === dt.DateTime.Unit.YEAR ||

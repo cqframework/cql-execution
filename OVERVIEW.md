@@ -95,7 +95,7 @@ In order for the CQL execution framework to determine if a code is in a valueset
 
 ### MessageListener
 
-The CQL specification defines a [Message](https://cql.hl7.org/09-b-cqlreference.html#message) operator that "provides a run-time mechanism for returning messages, warnings, traces, and errors to the calling environment." To support this, the CQL execution framework supports a "MessageListener" API. A MessageListener class must contain an `onMessage` function which will be called by the CQL execution framework if the `condition` passed to the `Message` operator is `true`:
+The CQL specification defines a [Message](https://cql.hl7.org/R2/09-b-cqlreference.html#message) operator that "provides a run-time mechanism for returning messages, warnings, traces, and errors to the calling environment." To support this, the CQL execution framework supports a "MessageListener" API. A MessageListener class must contain an `onMessage` function which will be called by the CQL execution framework if the `condition` passed to the `Message` operator is `true`:
 ```typescript
 onMessage(source: any, code: string, severity: string, message: string) {
   // do something with the message
