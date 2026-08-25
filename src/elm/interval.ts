@@ -707,16 +707,6 @@ export class Expand extends Expression {
 
     const perUnitSize = perIsIntegral ? 1 : 0.00000001;
 
-    // TODO: this supports one test case but it's not clear if the test case is correct
-    // if (
-    //   low === high &&
-    //   Number.isInteger(low) &&
-    //   Number.isInteger(high) &&
-    //   !Number.isInteger(perValue)
-    // ) {
-    //   high = parseFloat((high + 1).toFixed(decimalPrecision));
-    // }
-
     let current_low = low;
     const results = [];
 
