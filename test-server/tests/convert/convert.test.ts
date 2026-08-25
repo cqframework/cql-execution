@@ -6,6 +6,7 @@ import {
   Concept,
   Date as CqlDate,
   DateTime,
+  Decimal,
   Interval,
   IntervalTypeSpecifier,
   ListTypeSpecifier,
@@ -66,7 +67,7 @@ describe('convert.toParameters', () => {
     });
 
     it('converts decimal to valueDecimal', () => {
-      expect(toParameters(3.14159, 'System.Decimal')).toEqual({
+      expect(toParameters(Decimal.from('3.14159'), 'System.Decimal')).toEqual({
         resourceType: 'Parameters',
         parameter: [
           { extension: cqlTypeExt('System.Decimal'), name: 'return', valueDecimal: 3.14159 }
@@ -686,7 +687,7 @@ describe('convert.toParameters', () => {
     });
 
     it('guesses type when no type is passed in and converts value (Decimal example)', () => {
-      expect(toParameters(1.25)).toEqual({
+      expect(toParameters(Decimal.from('1.25'))).toEqual({
         resourceType: 'Parameters',
         parameter: [
           {
