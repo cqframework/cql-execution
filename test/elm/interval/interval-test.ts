@@ -3599,7 +3599,15 @@ describe('IntegerIntervalExpand', () => {
     should.not.exist(a);
   });
 
-  it('produces a more precise value for output intervals', async function () {
+  it.skip('produces a more precise value for output intervals', async function () {
+    // This example from the spec is incorrect.
+    // Skip for now until we have more clarity on what the expected result should be
+    // https://jira.hl7.org/browse/FHIR-58705 and
+    // https://chat.fhir.org/#narrow/channel/179220-cql/topic/Interval.20Expand.20example/with/619051021
+    // Note that as of this writing the produced result is { } (empty list)
+    // which I believe is the correct result.
+    // But an empty list doesn't clearly show the intent of the test.
+
     // define PerDecimalMorePrecise: expand { Interval[10, 10] } per 0.1
     const a = await this.perDecimalMorePrecise.exec(this.ctx);
     // JavaScript truncates 10.0 to 10.
@@ -3673,7 +3681,15 @@ describe('LongIntervalExpand', () => {
     should.not.exist(a);
   });
 
-  it('produces a more precise value for output intervals', async function () {
+  it.skip('produces a more precise value for output intervals', async function () {
+    // This example from the spec is incorrect.
+    // Skip for now until we have more clarity on what the expected result should be
+    // https://jira.hl7.org/browse/FHIR-58705 and
+    // https://chat.fhir.org/#narrow/channel/179220-cql/topic/Interval.20Expand.20example/with/619051021
+    // Note that as of this writing the produced result is { } (empty list)
+    // which I believe is the correct result.
+    // But an empty list doesn't clearly show the intent of the test.
+
     const a = await this.longPerDecimalMorePrecise.exec(this.ctx);
     prettyList(a).should.equal(
       '{ [10, 10.09999999], [10.1, 10.19999999], [10.2, 10.29999999], [10.3, 10.39999999], [10.4, 10.49999999], [10.5, 10.59999999], [10.6, 10.69999999], [10.7, 10.79999999], [10.8, 10.89999999], [10.9, 10.99999999] }'
