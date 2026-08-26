@@ -97,7 +97,7 @@ export class LongLiteral extends Literal {
 export class DecimalLiteral extends Literal {
   constructor(json: any) {
     super(json);
-    this.value = Decimal.from(this.value);
+    this.value = Decimal.from(this.value).normalized();
   }
 
   // Define a simple getter to allow type-checking of this class without instanceof

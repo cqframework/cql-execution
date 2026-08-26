@@ -1,3 +1,4 @@
+import { Decimal as DecimalJS } from 'decimal.js';
 import { Decimal } from '../../src/datatypes/decimal';
 
 describe('Decimal', () => {
@@ -48,5 +49,19 @@ describe('Decimal', () => {
 
   it('should not coerce a nonzero Decimal divisor through a JavaScript number', () => {
     (() => Decimal.from(1).divideBy('1e-1000')).should.not.throw();
+  });
+
+  it('should keep CQL Decimal precision independent from the base decimal.js constructor', () => {
+    const basePrecision = DecimalJS.precision;
+    try {
+      DecimalJS.set({ precision: 5 });
+
+      const oneThird = Decimal.from(1).divideBy(3);
+      oneThird.toString().should.equal('0.333333333333333333333333333333'); // we specify precision of 30 = significant figures
+
+      oneThird.normalized().toString().should.equal('0.33333333');
+    } finally {
+      DecimalJS.set({ precision: basePrecision });
+    }
   });
 });
