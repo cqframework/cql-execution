@@ -24,7 +24,7 @@ import {
 import { MAX_INT_VALUE, MAX_LONG_VALUE, MIN_INT_VALUE, MIN_LONG_VALUE } from './limits';
 import { convertToCQLDateUnit, normalizeUnitsWhenPossible } from './units';
 
-export function overflowsOrUnderflows(value: any, type?: string): boolean {
+export function overflowsOrUnderflows(value: any): boolean {
   if (value == null) {
     return false;
   }
@@ -66,7 +66,7 @@ export function overflowsOrUnderflows(value: any, type?: string): boolean {
       return true;
     }
   } else if (value.isUncertainty) {
-    return overflowsOrUnderflows(value.low, type) || overflowsOrUnderflows(value.high, type);
+    return overflowsOrUnderflows(value.low) || overflowsOrUnderflows(value.high);
   }
   return false;
 }
@@ -126,15 +126,15 @@ export function add(a: any, b: any, type?: string): any {
 
   if (a.isDecimal || b.isDecimal || type === ELM_DECIMAL_TYPE) {
     const sum = Decimal.from(a).add(Decimal.from(b));
-    return overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE) ? null : sum;
+    return overflowsOrUnderflows(sum) ? null : sum;
   }
   if (typeof a === 'bigint' || typeof b === 'bigint' || type === ELM_LONG_TYPE) {
     const sum = BigInt(a) + BigInt(b);
-    return overflowsOrUnderflows(sum, ELM_LONG_TYPE) ? null : sum;
+    return overflowsOrUnderflows(sum) ? null : sum;
   }
   if (typeof a === 'number' && typeof b === 'number') {
     const sum = a + b;
-    return overflowsOrUnderflows(sum, ELM_INTEGER_TYPE) ? null : sum;
+    return overflowsOrUnderflows(sum) ? null : sum;
   }
   if (a?.isQuantity && b?.isQuantity) {
     const [aValue, aUnit, bValue, bUnit] = normalizeUnitsWhenPossible(
@@ -147,7 +147,7 @@ export function add(a: any, b: any, type?: string): any {
       return null;
     }
     const sum = aValue.add(bValue);
-    return overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE) ? null : new Quantity(sum, aUnit);
+    return overflowsOrUnderflows(sum) ? null : new Quantity(sum, aUnit);
   }
   if (b?.isQuantity && (a?.isDate || a?.isDateTime || (a?.isTime && a.isTime()))) {
     const unit = convertToCQLDateUnit(b.unit) || b.unit;
@@ -188,15 +188,15 @@ export function subtract(a: any, b: any, type?: string): any {
 export function multiply(a: any, b: any, type?: string) {
   if (a.isDecimal || b.isDecimal || type === ELM_DECIMAL_TYPE) {
     const product = Decimal.from(a).multiplyBy(b);
-    return overflowsOrUnderflows(product, ELM_DECIMAL_TYPE) ? null : product;
+    return overflowsOrUnderflows(product) ? null : product;
   }
   if (typeof a === 'bigint' || typeof b === 'bigint' || type === ELM_LONG_TYPE) {
     const product = BigInt(a) * BigInt(b);
-    return overflowsOrUnderflows(product, ELM_LONG_TYPE) ? null : product;
+    return overflowsOrUnderflows(product) ? null : product;
   }
   if (typeof a === 'number' && typeof b === 'number') {
     const product = a * b;
-    return overflowsOrUnderflows(product, ELM_INTEGER_TYPE) ? null : product;
+    return overflowsOrUnderflows(product) ? null : product;
   }
 
   throw new Error('Unsupported argument types.');
@@ -209,7 +209,7 @@ export function divide(a: any, b: any, type?: string) {
       return null;
     }
     const quotient = Decimal.from(a).divideBy(b);
-    return overflowsOrUnderflows(quotient, ELM_DECIMAL_TYPE) ? null : quotient;
+    return overflowsOrUnderflows(quotient) ? null : quotient;
   }
   if (typeof a === 'bigint' || typeof b === 'bigint' || type === ELM_LONG_TYPE) {
     if (b === 0 || b === 0n) {
@@ -217,7 +217,7 @@ export function divide(a: any, b: any, type?: string) {
     }
     // BigInt division is inherently truncated, eg 10n / 3n = 3n
     const quotient = BigInt(a) / BigInt(b);
-    return overflowsOrUnderflows(quotient, ELM_LONG_TYPE) ? null : quotient;
+    return overflowsOrUnderflows(quotient) ? null : quotient;
   }
   if (typeof a === 'number' && typeof b === 'number') {
     if (b === 0) {
@@ -225,7 +225,7 @@ export function divide(a: any, b: any, type?: string) {
     }
     // here we need to truncate manually to ensure the value is an integer
     const quotient = Math.trunc(a / b);
-    return overflowsOrUnderflows(quotient, ELM_INTEGER_TYPE) ? null : quotient;
+    return overflowsOrUnderflows(quotient) ? null : quotient;
   }
 
   throw new Error('Unsupported argument types.');
@@ -254,7 +254,7 @@ export function limitDecimalPrecision<
 
 export class OverFlowException extends Exception {}
 
-export function successor(val: any, type?: string, precision?: string): any {
+export function successor(val: any, _type?: string, precision?: string): any {
   if (typeof val === 'number') {
     if (val >= MAX_INT_VALUE) {
       throw new OverFlowException();
@@ -295,12 +295,12 @@ export function successor(val: any, type?: string, precision?: string): any {
     // For uncertainties, if the high is the max val, don't increment it
     const high = (() => {
       try {
-        return successor(val.high, type, precision);
+        return successor(val.high, undefined, precision);
       } catch {
         return val.high;
       }
     })();
-    return new Uncertainty(successor(val.low, type, precision), high);
+    return new Uncertainty(successor(val.low, undefined, precision), high);
   } else if (val && val.isQuantity) {
     const succ = val.clone();
     succ.value = successor(val.value, ELM_DECIMAL_TYPE);
@@ -310,7 +310,7 @@ export function successor(val: any, type?: string, precision?: string): any {
   }
 }
 
-export function predecessor(val: any, type?: string, precision?: string): any {
+export function predecessor(val: any, _type?: string, precision?: string): any {
   if (typeof val === 'number') {
     if (val <= MIN_INT_VALUE) {
       throw new OverFlowException();
@@ -351,12 +351,12 @@ export function predecessor(val: any, type?: string, precision?: string): any {
     // For uncertainties, if the low is the min val, don't decrement it
     const low = ((): any => {
       try {
-        return predecessor(val.low, type, precision);
+        return predecessor(val.low, undefined, precision);
       } catch {
         return val.low;
       }
     })();
-    return new Uncertainty(low, predecessor(val.high, type, precision));
+    return new Uncertainty(low, predecessor(val.high, undefined, precision));
   } else if (val && val.isQuantity) {
     const pred = val.clone();
     pred.value = predecessor(val.value, ELM_DECIMAL_TYPE);

@@ -2,7 +2,7 @@ import { Expression } from './expression';
 import { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } from '../datatypes/datetime';
 import { Quantity } from '../datatypes/quantity';
 import { add, successor, predecessor, subtract } from '../util/math';
-import { greaterThan, lessThan, lessThanOrEquals } from '../util/comparison';
+import { greaterThan, lessThan } from '../util/comparison';
 import { convertUnit, compareUnits, convertToCQLDateUnit } from '../util/units';
 import * as dtivl from '../datatypes/interval';
 import { Context } from '../runtime/context';
@@ -10,6 +10,7 @@ import { build } from './builder';
 import { IntervalTypeSpecifier, NamedTypeSpecifier } from '../types/type-specifiers.interfaces';
 import { ELM_ANY_TYPE, ELM_NAMED_TYPE_SPECIFIER } from '../util/elmTypes';
 import { Decimal } from '../datatypes/decimal';
+import { MAX_INT_VALUE, MIN_INT_VALUE } from '../util/limits';
 
 export class Interval extends Expression {
   lowClosed: boolean;
@@ -670,27 +671,38 @@ export class Expand extends Expression {
     const decimalPrecision = perIsIntegral ? 0 : 8;
 
     // For the purposes of this function, we'll perform all the arithmetic using Decimals,
-    // then convert the results back to the required type if necessary
-    let makeInterval: (l: Decimal, h: Decimal) => dtivl.Interval;
-    if (!perIsIntegral) {
-      // If per is not an integer value, then regardless of the original point types, the values will be Decimals
-      makeInterval = (l: Decimal, h: Decimal) => new dtivl.Interval(l, h, true, true);
-    } else if (typeof low === 'bigint' || typeof high === 'bigint') {
-      makeInterval = (l: Decimal, h: Decimal) =>
-        new dtivl.Interval(l.toLong(), h.toLong(), true, true);
-    } else if (typeof low === 'number' || typeof high === 'number') {
-      makeInterval = (l: Decimal, h: Decimal) =>
-        new dtivl.Interval(l.toInteger(), h.toInteger(), true, true);
-    } else {
-      // per is an integer but the original bounds of the interval were Decimal.
-      // TODO: for now just make them integers
-      makeInterval = (l: Decimal, h: Decimal) =>
-        new dtivl.Interval(l.toInteger(), h.toInteger(), true, true);
-    }
+    // then convert the results back to the required type as necessary
+    const origLow = low;
+    const origHigh = high;
 
-    // treat everything as a Decimal, convert back later if needed
     low = Decimal.from(low);
     high = Decimal.from(high);
+
+    let convertBound: (d: Decimal) => Decimal | number | bigint = d => d.toInteger();
+    if (!perIsIntegral) {
+      // If per is not an integer value, then regardless of the original point types, the values will be Decimals
+      convertBound = d => d;
+    } else if (typeof origLow === 'bigint' || typeof origHigh === 'bigint') {
+      convertBound = d => d.toLong();
+    } else if (typeof origLow === 'number' || typeof origHigh === 'number') {
+      convertBound = d => d.toInteger();
+    } else {
+      // per is an integer but the original bounds of the interval were Decimal.
+      // Make the resulting intervals either Long or Integer based on the original bounds.
+      if (
+        low.lessThan(MIN_INT_VALUE) ||
+        low.greaterThan(MAX_INT_VALUE) ||
+        high.lessThan(MIN_INT_VALUE) ||
+        high.greaterThan(MAX_INT_VALUE)
+      ) {
+        convertBound = d => d.toLong();
+      } else {
+        convertBound = d => d.toInteger();
+      }
+    }
+
+    const makeInterval = (l: Decimal, h: Decimal) =>
+      new dtivl.Interval(convertBound(l), convertBound(h), true, true);
 
     // If the interval boundaries are more precise than the per quantity, the
     // more precise values will be truncated to the precision specified by the
@@ -842,11 +854,7 @@ function collapseIntervals(intervals: any, perWidth: any) {
         }
       } else {
         const distance = subtract(b.low, a.high);
-        // TODO: perWidth.value is a Decimal, but distance could be anything
-        // lessThanOrEquals requires that its args be the same type
-        // so I guess for now, make distance a Decimal
-        const distanceDecimal = Decimal.from(distance);
-        const withinPerWidth = lessThanOrEquals(distanceDecimal, perWidth.value);
+        const withinPerWidth = perWidth.value.greaterThanOrEquals(distance);
         if (withinPerWidth) {
           if (greaterThan(b.high, a.high) || b.high == null) {
             a.high = b.high;

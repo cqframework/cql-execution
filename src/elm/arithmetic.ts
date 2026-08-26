@@ -91,7 +91,7 @@ export class Multiply extends Expression {
       product = MathUtil.multiply(x, y);
     }
 
-    if (MathUtil.overflowsOrUnderflows(product, this.resultTypeName)) {
+    if (MathUtil.overflowsOrUnderflows(product)) {
       return null;
     }
 
@@ -123,7 +123,6 @@ export class Divide extends Expression {
         quotient = doDivision(x, y);
       } else if (x.isUncertainty && y.isUncertainty) {
         let low, high;
-        // TODO change this section back
         if (x.low.isQuantity) {
           low = doDivision(x.low, y.high);
           high = doDivision(x.high, y.low);
@@ -140,7 +139,7 @@ export class Divide extends Expression {
       return null;
     }
 
-    if (MathUtil.overflowsOrUnderflows(quotient, this.resultTypeName)) {
+    if (MathUtil.overflowsOrUnderflows(quotient)) {
       return null;
     }
     return MathUtil.finalizeNumericResult(quotient, this.resultTypeName);
@@ -177,7 +176,7 @@ export class TruncatedDivide extends Expression {
       }
     }
 
-    if (MathUtil.overflowsOrUnderflows(quotient, this.resultTypeName)) {
+    if (MathUtil.overflowsOrUnderflows(quotient)) {
       return null;
     }
     return quotient;
@@ -265,19 +264,13 @@ export class Abs extends Expression {
       return new Quantity(arg.value.abs(), arg.unit);
     } else if (typeof arg === 'bigint') {
       const absoluteValue = arg < 0n ? -arg : arg;
-      return MathUtil.overflowsOrUnderflows(absoluteValue, this.resultTypeName)
-        ? null
-        : absoluteValue;
+      return MathUtil.overflowsOrUnderflows(absoluteValue) ? null : absoluteValue;
     } else if (arg.isDecimal) {
       const absoluteValue = arg.abs();
-      return MathUtil.overflowsOrUnderflows(absoluteValue, this.resultTypeName)
-        ? null
-        : absoluteValue;
+      return MathUtil.overflowsOrUnderflows(absoluteValue) ? null : absoluteValue;
     } else {
       const absoluteValue = Math.abs(arg);
-      return MathUtil.overflowsOrUnderflows(absoluteValue, this.resultTypeName)
-        ? null
-        : absoluteValue;
+      return MathUtil.overflowsOrUnderflows(absoluteValue) ? null : absoluteValue;
     }
   }
 }
@@ -295,19 +288,13 @@ export class Negate extends Expression {
       return new Quantity(arg.value.negate(), arg.unit);
     } else if (typeof arg === 'bigint') {
       const negatedValue = arg * -1n;
-      return MathUtil.overflowsOrUnderflows(negatedValue, this.resultTypeName)
-        ? null
-        : negatedValue;
+      return MathUtil.overflowsOrUnderflows(negatedValue) ? null : negatedValue;
     } else if (arg.isDecimal) {
       const negatedValue = arg.negate();
-      return MathUtil.overflowsOrUnderflows(negatedValue, this.resultTypeName)
-        ? null
-        : negatedValue;
+      return MathUtil.overflowsOrUnderflows(negatedValue) ? null : negatedValue;
     } else {
       const negatedValue = arg * -1;
-      return MathUtil.overflowsOrUnderflows(negatedValue, this.resultTypeName)
-        ? null
-        : negatedValue;
+      return MathUtil.overflowsOrUnderflows(negatedValue) ? null : negatedValue;
     }
   }
 }
@@ -343,8 +330,11 @@ export class Ln extends Expression {
     }
 
     try {
-      const ln = Decimal.from(arg).ln().normalized();
-      return MathUtil.decimalOrNull(ln);
+      const ln = Decimal.from(arg).ln();
+      if (MathUtil.overflowsOrUnderflows(ln)) {
+        return null;
+      }
+      return MathUtil.finalizeNumericResult(ln);
     } catch {
       return null;
     }
@@ -369,10 +359,10 @@ export class Exp extends Expression {
       return null;
     }
 
-    if (MathUtil.overflowsOrUnderflows(power, this.resultTypeName)) {
+    if (MathUtil.overflowsOrUnderflows(power)) {
       return null;
     }
-    return power;
+    return MathUtil.finalizeNumericResult(power);
   }
 }
 
@@ -389,7 +379,7 @@ export class Log extends Expression {
 
     try {
       const log = Decimal.from(args[0]).log(args[1]);
-      return MathUtil.decimalOrNull(log);
+      return MathUtil.finalizeNumericResult(log);
     } catch {
       return null;
     }
@@ -406,14 +396,13 @@ export class Power extends Expression {
     if (args == null || args.some((x: any) => x == null)) {
       return null;
     }
-    // TODO: cql spec shows the return type is always Decimal, but that's not true
-    const [x, y] = args;
-    const power = doPower(x, y);
 
-    // Note: The resultTypeName may be wrong if the exponent is a negative number. Math.overflowsOrUnderflows
-    // already accounts for this possibility by only considering it an integer if Number.isInteger(value).
+    // Note: The resultTypeName may be wrong if the exponent is a negative number.
     // E.g., CQL-to-ELM says 10^-1 is an Integer result type, but the correct result is a 0.1 (a Decimal)
-    if (MathUtil.overflowsOrUnderflows(power, this.resultTypeName)) {
+    // doPower handles this scenario
+    const power = doPower(args[0], args[1]);
+
+    if (MathUtil.overflowsOrUnderflows(power)) {
       return null;
     }
     return power;
@@ -525,7 +514,7 @@ export class Successor extends Expression {
       }
     }
 
-    if (MathUtil.overflowsOrUnderflows(successor, this.resultTypeName)) {
+    if (MathUtil.overflowsOrUnderflows(successor)) {
       return null;
     }
     return successor;
@@ -554,7 +543,7 @@ export class Predecessor extends Expression {
       }
     }
 
-    if (MathUtil.overflowsOrUnderflows(predecessor, this.resultTypeName)) {
+    if (MathUtil.overflowsOrUnderflows(predecessor)) {
       return null;
     }
     return predecessor;
