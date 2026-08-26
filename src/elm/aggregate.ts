@@ -177,8 +177,7 @@ export class Avg extends AggregateExpression {
       decimals = items.map(Decimal.from);
     }
     const sum = sumOfDecimals(decimals);
-    const avg = finalizeAggregateResult(sum.divideBy(items.length), items[0]);
-
+    const avg = sum.divideBy(items.length);
     return finalizeAggregateResult(avg, items[0]);
   }
 }
@@ -414,10 +413,15 @@ export class GeometricMean extends AggregateExpression {
     } else {
       decimals = items.map(Decimal.from);
     }
-    const product = productOfDecimals(decimals);
-    const oneOverLength = Decimal.from(1).divideBy(items.length);
-    const geoMean = product.power(oneOverLength);
-    return finalizeAggregateResult(geoMean, items[0]);
+
+    try {
+      const product = productOfDecimals(decimals);
+      const oneOverLength = Decimal.from(1).divideBy(items.length);
+      const geoMean = product.power(oneOverLength);
+      return finalizeAggregateResult(geoMean, items[0]);
+    } catch {
+      return null;
+    }
   }
 }
 

@@ -392,7 +392,12 @@ export class Power extends Expression {
     // Note: The resultTypeName may be wrong if the exponent is a negative number.
     // E.g., CQL-to-ELM says 10^-1 is an Integer result type, but the correct result is a 0.1 (a Decimal)
     // doPower handles this scenario
-    const power = doPower(args[0], args[1]);
+    let power;
+    try {
+      power = doPower(args[0], args[1]);
+    } catch {
+      return null;
+    }
 
     return finalizeArithmeticResult(power);
   }
