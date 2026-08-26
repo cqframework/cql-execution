@@ -216,7 +216,8 @@ export class Ceiling extends Expression {
       return null;
     }
 
-    return arg.isDecimal ? arg.ceil() : Math.ceil(arg);
+    const ceiling = arg.isDecimal ? arg.ceil() : Math.ceil(arg);
+    return MathUtil.isValidInteger(ceiling) ? ceiling : null;
   }
 }
 
@@ -231,7 +232,8 @@ export class Floor extends Expression {
       return null;
     }
 
-    return arg.isDecimal ? arg.floor() : Math.floor(arg);
+    const floor = arg.isDecimal ? arg.floor() : Math.floor(arg);
+    return MathUtil.isValidInteger(floor) ? floor : null;
   }
 }
 
@@ -246,7 +248,15 @@ export class Truncate extends Expression {
       return null;
     }
 
-    return arg.isDecimal ? arg.truncate() : arg >= 0 ? Math.floor(arg) : Math.ceil(arg);
+    let truncated;
+    if (arg.isDecimal) {
+      truncated = arg.truncate();
+    } else if (arg >= 0) {
+      truncated = Math.floor(arg);
+    } else {
+      truncated = Math.ceil(arg);
+    }
+    return MathUtil.isValidInteger(truncated) ? truncated : null;
   }
 }
 export class Abs extends Expression {
@@ -349,7 +359,7 @@ export class Exp extends Expression {
 
     let power;
     try {
-      power = Decimal.from(arg).exp().normalized();
+      power = Decimal.from(arg).exp();
     } catch {
       return null;
     }

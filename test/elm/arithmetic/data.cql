@@ -123,16 +123,19 @@ define ThreeModZeroDecimal: 3.0 mod 0.0
 define Ceil: Ceiling(10.1)
 define Even: Ceiling(10)
 define CeilTenLong: Ceiling(10L)
+define CeilingOverflow: Ceiling(2147483647.1)
 
 // @Test: Floor
 define flr: Floor(10.1)
 define Even: Floor(10)
 define FloorTenLong: Floor(10L)
+define FloorUnderflow: Floor(-2147483648.1)
 
 // @Test: Truncate
 define Trunc: Truncate(10.1)
 define Even: Truncate(10)
 define TruncTenLong: Truncate(10L)
+define TruncateOverflow: Truncate(2147483648.0)
 
 // @Test: Abs
 define Pos: Abs(10)

@@ -1,24 +1,26 @@
 import { Decimal as DecimalJS } from 'decimal.js';
 
-// Default precision is set to 30 significant figures. (Not decimal places)
-// MAX_DECIMAL_VALUE = 99999999999999999999.99999999 is 28 significant figures,
-// 30 is just a cleaner number.
-DecimalJS.set({ precision: 30 });
+// Use a clone rather than DecimalJS.set because decimal.js configuration is otherwise global.
+// This keeps our settings from changing the behavior of other decimal.js instances in
+// the same process.
+// Precision is significant figures (not decimal places);
+// CQL's maximum Decimal value has 28 significant figures, 30 is just a cleaner number.
+const CQLDecimalJS = DecimalJS.clone({ precision: 30 });
 
 export type DecimalInput = Decimal | string | number | bigint;
 
 export type DecimalRoundingMode = DecimalJS.Rounding;
 
-const MIN_PRECISION_VALUE = DecimalJS.pow(10, -8);
+const MIN_PRECISION_VALUE = CQLDecimalJS.pow(10, -8);
 
 const CQL_IMPLICIT_SCALE = 8;
-const CQL_IMPLICIT_ROUNDING = DecimalJS.ROUND_HALF_UP;
+const CQL_IMPLICIT_ROUNDING = CQLDecimalJS.ROUND_HALF_UP;
 
 export class Decimal {
   private value: DecimalJS;
 
   private constructor(value: string | number | bigint | DecimalJS) {
-    this.value = new DecimalJS(value);
+    this.value = new CQLDecimalJS(value);
     if (!this.value.isFinite()) {
       throw new Error('Cannot create a decimal with a non-finite value');
     }
@@ -167,10 +169,10 @@ export class Decimal {
     // ROUND_HALF_CEIL "Rounds towards nearest neighbour. If equidistant, rounds towards Infinity"
     // rounds 0.5 -> 1.0, -0.5 -> 0.0
     // https://mikemcl.github.io/decimal.js/#modes
-    return this.setScale(scale, DecimalJS.ROUND_HALF_CEIL);
+    return this.setScale(scale, CQLDecimalJS.ROUND_HALF_CEIL);
   }
 
-  setScale(scale: number, roundingMode: DecimalRoundingMode = DecimalJS.ROUND_DOWN) {
+  setScale(scale: number, roundingMode: DecimalRoundingMode = CQLDecimalJS.ROUND_DOWN) {
     if (!Number.isInteger(scale) || scale < 0) {
       throw new RangeError('Decimal scale must be a non-negative integer');
     }

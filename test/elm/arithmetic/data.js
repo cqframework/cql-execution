@@ -7700,6 +7700,7 @@ context Patient
 define Ceil: Ceiling(10.1)
 define Even: Ceiling(10)
 define CeilTenLong: Ceiling(10L)
+define CeilingOverflow: Ceiling(2147483647.1)
 */
 
 module.exports['Ceiling'] = {
@@ -7714,7 +7715,7 @@ module.exports['Ceiling'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "238",
+        "r" : "253",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -7934,6 +7935,48 @@ module.exports['Ceiling'] = {
             }
           }
         }
+      }, {
+        "localId" : "253",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "CeilingOverflow",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "253",
+            "s" : [ {
+              "value" : [ "", "define ", "CeilingOverflow", ": " ]
+            }, {
+              "r" : "258",
+              "s" : [ {
+                "r" : "254",
+                "value" : [ "Ceiling", "(", "2147483647.1", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Ceiling",
+          "localId" : "258",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "259",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "254",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2147483647.1",
+            "annotation" : [ ]
+          }
+        }
       } ]
     }
   }
@@ -7946,6 +7989,7 @@ context Patient
 define flr: Floor(10.1)
 define Even: Floor(10)
 define FloorTenLong: Floor(10L)
+define FloorUnderflow: Floor(-2147483648.1)
 */
 
 module.exports['Floor'] = {
@@ -7960,7 +8004,7 @@ module.exports['Floor'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "238",
+        "r" : "253",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -8180,6 +8224,67 @@ module.exports['Floor'] = {
             }
           }
         }
+      }, {
+        "localId" : "253",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "FloorUnderflow",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "253",
+            "s" : [ {
+              "value" : [ "", "define ", "FloorUnderflow", ": " ]
+            }, {
+              "r" : "260",
+              "s" : [ {
+                "value" : [ "Floor", "(" ]
+              }, {
+                "r" : "254",
+                "s" : [ {
+                  "r" : "255",
+                  "value" : [ "-", "2147483648.1" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Floor",
+          "localId" : "260",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "261",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Negate",
+            "localId" : "254",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ],
+            "signature" : [ {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "256",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            } ],
+            "operand" : {
+              "type" : "Literal",
+              "localId" : "255",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2147483648.1",
+              "annotation" : [ ]
+            }
+          }
+        }
       } ]
     }
   }
@@ -8192,6 +8297,7 @@ context Patient
 define Trunc: Truncate(10.1)
 define Even: Truncate(10)
 define TruncTenLong: Truncate(10L)
+define TruncateOverflow: Truncate(2147483648.0)
 */
 
 module.exports['Truncate'] = {
@@ -8206,7 +8312,7 @@ module.exports['Truncate'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "238",
+        "r" : "253",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -8424,6 +8530,48 @@ module.exports['Truncate'] = {
               "value" : "10",
               "annotation" : [ ]
             }
+          }
+        }
+      }, {
+        "localId" : "253",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "TruncateOverflow",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "253",
+            "s" : [ {
+              "value" : [ "", "define ", "TruncateOverflow", ": " ]
+            }, {
+              "r" : "258",
+              "s" : [ {
+                "r" : "254",
+                "value" : [ "Truncate", "(", "2147483648.0", ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Truncate",
+          "localId" : "258",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "259",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          } ],
+          "operand" : {
+            "type" : "Literal",
+            "localId" : "254",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2147483648.0",
+            "annotation" : [ ]
           }
         }
       } ]

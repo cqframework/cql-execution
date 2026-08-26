@@ -517,6 +517,10 @@ describe('Truncate', () => {
     // NOTE: Truncate returns an integer (not specified to return a Long)
     (await this.truncTenLong.exec(this.ctx)).should.equal(10);
   });
+
+  it('should return null when the result is outside the Integer range', async function () {
+    should(await this.truncateOverflow.exec(this.ctx)).be.null();
+  });
 });
 
 describe('Floor', () => {
@@ -530,6 +534,10 @@ describe('Floor', () => {
     // NOTE: Floor returns an Integer (not specified to return a Long)
     (await this.floorTenLong.exec(this.ctx)).should.equal(10);
   });
+
+  it('should return null when the result is outside the Integer range', async function () {
+    should(await this.floorUnderflow.exec(this.ctx)).be.null();
+  });
 });
 
 describe('Ceiling', () => {
@@ -542,6 +550,10 @@ describe('Ceiling', () => {
     (await this.even.exec(this.ctx)).should.equal(10);
     // Note: Ceiling returns an Integer (not specified to return a Long)
     (await this.ceilTenLong.exec(this.ctx)).should.equal(10);
+  });
+
+  it('should return null when the result is outside the Integer range', async function () {
+    should(await this.ceilingOverflow.exec(this.ctx)).be.null();
   });
 });
 
