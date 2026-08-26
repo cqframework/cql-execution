@@ -64,15 +64,14 @@ export class Decimal {
   }
 
   divideBy(other: DecimalInput): Decimal {
-    if (toNumber(other) === 0) {
+    if (Decimal.from(other).equals(0)) {
       throw new RangeError('Cannot divide a decimal by zero');
     }
     return this.applyWrapper(this.value.dividedBy, other);
   }
 
   modulo(other: DecimalInput) {
-    const divisor = toNumber(other);
-    if (divisor === 0) {
+    if (Decimal.from(other).equals(0)) {
       throw new RangeError('Cannot calculate decimal modulo by zero');
     }
     return this.applyWrapper(this.value.mod, other);
@@ -180,6 +179,7 @@ export class Decimal {
   }
 
   toInteger() {
+    // note that this is permissive and converts non-integral values
     return this.truncate();
   }
 
@@ -193,7 +193,16 @@ export class Decimal {
   }
 
   toString() {
-    return this.value.toString();
+    // decimal.js toString can return exponential notation,
+    // toFixed always returns normal notation
+    // CQL spec expects format (-)?#0.0#
+    // https://cql.hl7.org/R2/09-b-cqlreference.html#tostring
+    // meaning, optional minus sign, at least one digit, decimal point, at least one digit
+    // (# means any number of digits, including none; 0 means a digit must appear)
+    // a regex for this is -?\d+\.\d+
+    // so Decimal.from(1).toString() --> "1.0"
+    const places = Math.max(1, this.value.decimalPlaces());
+    return this.value.toFixed(places);
   }
 
   toJSON() {
@@ -206,14 +215,3 @@ export const MIN_DECIMAL_STRING = '-99999999999999999999.99999999';
 
 export const MAX_DECIMAL_VALUE = Decimal.from(MAX_DECIMAL_STRING);
 export const MIN_DECIMAL_VALUE = Decimal.from(MIN_DECIMAL_STRING);
-
-function toNumber(value: DecimalInput) {
-  if (value instanceof Decimal) {
-    return value.toNumber();
-  }
-  if (typeof value === 'string' && value.trim() === '') {
-    // Number() and Number('') return 0 instead of NaN, so catch that case
-    return NaN;
-  }
-  return Number(value);
-}

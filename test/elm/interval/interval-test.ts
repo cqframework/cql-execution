@@ -3394,83 +3394,83 @@ describe('QuantityIntervalExpand', () => {
   it('expands single intervals', async function () {
     // define ClosedSingleGPerG: expand { Interval[2 'g', 4 'g'] } per 1 'g'
     let a = await this.closedSingleGPerG.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
 
     // define ClosedSingleGPerGDecimal: expand { Interval[2.1 'g', 4.1 'g'] } per 1 'g'
     a = await this.closedSingleGPerGDecimal.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
 
     // define ClosedSingleGPerMG: expand { Interval[2 'g', 2.003 'g'] } per 1 'mg'
     a = await this.closedSingleGPerMG.exec(this.ctx);
     prettyList(a).should.equal(
-      "{ [2000 'mg', 2000 'mg'], [2001 'mg', 2001 'mg'], [2002 'mg', 2002 'mg'], [2003 'mg', 2003 'mg'] }"
+      "{ [2000.0 'mg', 2000.0 'mg'], [2001.0 'mg', 2001.0 'mg'], [2002.0 'mg', 2002.0 'mg'], [2003.0 'mg', 2003.0 'mg'] }"
     );
 
     // define ClosedSingleMGPerGTrunc: expand { Interval[2999 'mg', 4200 'mg'] } per 1 'g'
     a = await this.closedSingleMGPerGTrunc.exec(this.ctx);
-    prettyList(a).should.equal("{ [2999 'mg', 3998 'mg'] }");
+    prettyList(a).should.equal("{ [2999.0 'mg', 3998.0 'mg'] }");
 
     // define ClosedSingleMGPerMGTrunc: expand { Interval[2000 'mg', 4500 'mg'] } per 800 'mg'
     a = await this.closedSingleMGPerMGTrunc.exec(this.ctx);
     prettyList(a).should.equal(
-      "{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }"
+      "{ [2000.0 'mg', 2799.0 'mg'], [2800.0 'mg', 3599.0 'mg'], [3600.0 'mg', 4399.0 'mg'] }"
     );
 
     // define ClosedSingleMGPerMGDecimal: expand { Interval[2000.01 'mg', 4500 'mg'] } per 800 'mg'
     a = await this.closedSingleMGPerMGDecimal.exec(this.ctx);
     prettyList(a).should.equal(
-      "{ [2000 'mg', 2799 'mg'], [2800 'mg', 3599 'mg'], [3600 'mg', 4399 'mg'] }"
+      "{ [2000.0 'mg', 2799.0 'mg'], [2800.0 'mg', 3599.0 'mg'], [3600.0 'mg', 4399.0 'mg'] }"
     );
   });
 
   it('expands lists of multiple intervals', async function () {
     // define NullInList: expand { Interval[2 'g', 4 'g'], null } per 1 'g'
     let a = await this.nullInList.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
 
     // define Overlapping: expand { Interval[2 'g', 4 'g'], Interval[3 'g', 5 'g'] } per 1 'g'
     a = await this.overlapping.exec(this.ctx);
     prettyList(a).should.equal(
-      "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [5 'g', 5 'g'] }"
+      "{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'], [5.0 'g', 5.0 'g'] }"
     );
 
     // define NonOverlapping: expand { Interval[2 'g', 4 'g'], Interval[6 'g', 6 'g'] } per 1 'g'
     a = await this.nonOverlapping.exec(this.ctx);
     prettyList(a).should.equal(
-      "{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'], [6 'g', 6 'g'] }"
+      "{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'], [6.0 'g', 6.0 'g'] }"
     );
   });
 
   it('expands interval using the first items units if no per provided', async function () {
     // define NoPerDefaultM: expand { Interval[2 'm', 400 'cm'] }
     let a = await this.noPerDefaultM.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'm', 2 'm'], [3 'm', 3 'm'], [4 'm', 4 'm'] }");
+    prettyList(a).should.equal("{ [2.0 'm', 2.0 'm'], [3.0 'm', 3.0 'm'], [4.0 'm', 4.0 'm'] }");
 
     // define NoPerDefaultG: expand { Interval[2 'g', 4 'g'] }
     a = await this.noPerDefaultG.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
   });
 
   it('expands interval with open ends', async function () {
     // define OpenStart: expand { Interval(2 'g', 4 'g'] } per 1 'g'
     let a = await this.openStart.exec(this.ctx);
-    prettyList(a).should.equal("{ [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
 
     // define OpenEnd: expand { Interval[2 'g', 4 'g') } per 1 'g'
     a = await this.openEnd.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'] }");
 
     // define OpenBoth: expand { Interval(2 'g', 4 'g') } per 1 'g'
     a = await this.openBoth.exec(this.ctx);
-    prettyList(a).should.equal("{ [3 'g', 3 'g'] }");
+    prettyList(a).should.equal("{ [3.0 'g', 3.0 'g'] }");
 
     // define OpenBothDecimal: expand { Interval(2.1 'g', 4.1 'g') } per 1 'g'
     a = await this.openBothDecimal.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
 
     // define OpenBothDecimalTrunc: expand { Interval(2.1 'g', 4.101 'g') } per 1 'g'
     a = await this.openBothDecimalTrunc.exec(this.ctx);
-    prettyList(a).should.equal("{ [2 'g', 2 'g'], [3 'g', 3 'g'], [4 'g', 4 'g'] }");
+    prettyList(a).should.equal("{ [2.0 'g', 2.0 'g'], [3.0 'g', 3.0 'g'], [4.0 'g', 4.0 'g'] }");
   });
 
   it('returns an empty list if we get an empty list or if there are no results', async function () {
@@ -3705,7 +3705,7 @@ describe('DecimalIntervalExpand', () => {
   it('expands single intervals', async function () {
     // define ClosedSingle: expand { Interval[2, 5] } per 1.5 '1'
     let a = await this.closedSingle.exec(this.ctx);
-    prettyList(a).should.equal('{ [2, 3.49999999], [3.5, 4.99999999] }');
+    prettyList(a).should.equal('{ [2.0, 3.49999999], [3.5, 4.99999999] }');
 
     // define ClosedSingle1: expand { Interval[2.5, 10] } per 2 '1'
     a = await this.closedSingle1.exec(this.ctx);
@@ -3714,22 +3714,22 @@ describe('DecimalIntervalExpand', () => {
     // define ClosedSingle2: expand { Interval[2, 4.5] } per 0.5 '1'
     a = await this.closedSingle2.exec(this.ctx);
     prettyList(a).should.equal(
-      '{ [2, 2.49999999], [2.5, 2.99999999], [3, 3.49999999], [3.5, 3.99999999], [4, 4.49999999] }'
+      '{ [2.0, 2.49999999], [2.5, 2.99999999], [3.0, 3.49999999], [3.5, 3.99999999], [4.0, 4.49999999] }'
     );
   });
 
   it('expands lists of multiple intervals', async function () {
     // define NullInList: expand { Interval[2, 5], null } per 1.5 '1'
     let a = await this.nullInList.exec(this.ctx);
-    prettyList(a).should.equal('{ [2, 3.49999999], [3.5, 4.99999999] }');
+    prettyList(a).should.equal('{ [2.0, 3.49999999], [3.5, 4.99999999] }');
 
     // define Overlapping: expand { Interval[2, 5], Interval[4, 7] } per 1.5 '1'
     a = await this.overlapping.exec(this.ctx);
-    prettyList(a).should.equal('{ [2, 3.49999999], [3.5, 4.99999999], [5, 6.49999999] }');
+    prettyList(a).should.equal('{ [2.0, 3.49999999], [3.5, 4.99999999], [5.0, 6.49999999] }');
 
     // define NonOverlapping: expand { Interval[2, 4], Interval[6, 8] } per 1.5 '1'
     a = await this.nonOverlapping.exec(this.ctx);
-    prettyList(a).should.equal('{ [2, 3.49999999], [6, 7.49999999] }');
+    prettyList(a).should.equal('{ [2.0, 3.49999999], [6.0, 7.49999999] }');
   });
 
   it('expands interval using default per of 1', async function () {
@@ -3741,11 +3741,11 @@ describe('DecimalIntervalExpand', () => {
   it('expands interval with open ends', async function () {
     // define OpenStart: expand { Interval(2, 5] } per 1.5 '1'
     let a = await this.openStart.exec(this.ctx);
-    prettyList(a).should.equal('{ [3, 4.49999999] }');
+    prettyList(a).should.equal('{ [3.0, 4.49999999] }');
 
     // define OpenEnd: expand { Interval[2, 5) } per 1.5 '1'
     a = await this.openEnd.exec(this.ctx);
-    prettyList(a).should.equal('{ [2, 3.49999999] }');
+    prettyList(a).should.equal('{ [2.0, 3.49999999] }');
 
     // define OpenBoth: expand { Interval(2, 5) } per 1.5 '1'
     (await this.openBoth.exec(this.ctx)).should.be.empty();

@@ -350,9 +350,11 @@ define "Upper": Tuple{
 
 define "toString tests": Tuple{
   "QuantityToString": Tuple{
+    skipped: 'Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side'
+    /*
     expression: ToString(125 'cm'),
     output: '125 \'cm\''
-  },
+    */  },
   "DateTimeToString1": Tuple{
     expression: ToString(DateTime(2000, 1, 1)),
     output: '2000-01-01'

@@ -173,15 +173,15 @@ describe('FromQuantity', () => {
   });
 
   it('should convert "10 \'A\'" to "10 \'A\'"', async function () {
-    (await this.quantityStr.exec(this.ctx)).should.equal("10 'A'");
+    (await this.quantityStr.exec(this.ctx)).should.equal("10.0 'A'");
   });
 
   it('should convert "+10 \'A\'" to "10 \'A\'"', async function () {
-    (await this.posQuantityStr.exec(this.ctx)).should.equal("10 'A'");
+    (await this.posQuantityStr.exec(this.ctx)).should.equal("10.0 'A'");
   });
 
   it('should convert "-10 \'A\'" to "10 \'A\'"', async function () {
-    (await this.negQuantityStr.exec(this.ctx)).should.equal("-10 'A'");
+    (await this.negQuantityStr.exec(this.ctx)).should.equal("-10.0 'A'");
   });
 
   it('should convert "10 \'A\'" to "10 \'A\'"', async function () {
@@ -357,7 +357,7 @@ describe('ToDecimal', () => {
   });
 
   it('should truncate decimal to 8 digits after decimal point', async function () {
-    (await this.tooPrecise.exec(this.ctx)).should.equalDecimal(Decimal.from(0.44444444));
+    (await this.tooPrecise.exec(this.ctx)).should.equalDecimal(Decimal.from('0.44444444'));
   });
 
   it('should be null for decimal that is above max decimal value', async function () {
@@ -372,7 +372,7 @@ describe('ToDecimal', () => {
     should.not.exist(await this.nullDecimal.exec(this.ctx));
   });
 
-  it.skip('should be null if wrong format (+.1)', async function () {
+  it('should be null if wrong format (+.1)', async function () {
     // TODO: parseFloat is more forgiving than the CQL spec, so this does get converted
     should(await this.wrongFormat.exec(this.ctx)).be.null();
   });

@@ -439,30 +439,21 @@ export function decimalAdjust(type: MathFn, value: any, exp: any) {
   return +(value[0] + 'e' + v);
 }
 
-export function decimalOrNull(value: any) {
-  return isValidDecimal(value) ? value : null;
-}
-
-export function decimalLongOrNull(value: any) {
-  return (typeof value === 'number' && Number.isFinite(value)) ||
-    (value && value.isDecimal && isValidDecimal(value)) ||
-    (typeof value === 'bigint' && isValidLong(value))
-    ? value
-    : null;
-}
-
-export function finalizeNumericResult(result: any, _type?: string) {
+export function finalizeNumericResult(result: any) {
   if (result instanceof Decimal) {
     return result.normalized();
   } else if (result instanceof Quantity) {
     return new Quantity(result.value.normalized(), result.unit);
   } else if (result instanceof Uncertainty) {
-    if (result.low instanceof Quantity || result.low instanceof Decimal) {
-      result.low = finalizeNumericResult(result.low);
+    let low = result.low;
+    if (low instanceof Quantity || low instanceof Decimal) {
+      low = finalizeNumericResult(low);
     }
-    if (result.high instanceof Quantity || result.high instanceof Decimal) {
-      result.high = finalizeNumericResult(result.high);
+    let high = result.high;
+    if (high instanceof Quantity || high instanceof Decimal) {
+      high = finalizeNumericResult(high);
     }
+    return new Uncertainty(low, high);
   }
 
   return result;

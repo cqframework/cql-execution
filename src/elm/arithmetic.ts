@@ -24,6 +24,14 @@ import {
 } from '../util/elmTypes';
 import { MAX_INT_VALUE, MAX_LONG_VALUE, MIN_INT_VALUE, MIN_LONG_VALUE } from '../util/limits';
 
+function finalizeArithmeticResult<T>(result: T): T | null {
+  if (result == null) {
+    return null;
+  }
+  const finalized = MathUtil.finalizeNumericResult(result);
+  return MathUtil.overflowsOrUnderflows(finalized) ? null : finalized;
+}
+
 export class Add extends Expression {
   constructor(json: any) {
     super(json);
@@ -36,7 +44,7 @@ export class Add extends Expression {
     }
 
     const sum = MathUtil.add(args[0], args[1], this.resultTypeName);
-    return MathUtil.finalizeNumericResult(sum, this.resultTypeName);
+    return finalizeArithmeticResult(sum);
   }
 }
 
@@ -52,7 +60,7 @@ export class Subtract extends Expression {
     }
 
     const difference = MathUtil.subtract(args[0], args[1], this.resultTypeName);
-    return MathUtil.finalizeNumericResult(difference, this.resultTypeName);
+    return finalizeArithmeticResult(difference);
   }
 }
 
@@ -91,11 +99,7 @@ export class Multiply extends Expression {
       product = MathUtil.multiply(x, y);
     }
 
-    if (MathUtil.overflowsOrUnderflows(product)) {
-      return null;
-    }
-
-    return MathUtil.finalizeNumericResult(product, this.resultTypeName);
+    return finalizeArithmeticResult(product);
   }
 }
 
@@ -139,10 +143,7 @@ export class Divide extends Expression {
       return null;
     }
 
-    if (MathUtil.overflowsOrUnderflows(quotient)) {
-      return null;
-    }
-    return MathUtil.finalizeNumericResult(quotient, this.resultTypeName);
+    return finalizeArithmeticResult(quotient);
   }
 }
 
@@ -176,10 +177,7 @@ export class TruncatedDivide extends Expression {
       }
     }
 
-    if (MathUtil.overflowsOrUnderflows(quotient)) {
-      return null;
-    }
-    return quotient;
+    return finalizeArithmeticResult(quotient);
   }
 }
 
@@ -203,7 +201,7 @@ export class Modulo extends Expression {
       return null;
     }
 
-    return MathUtil.decimalLongOrNull(MathUtil.finalizeNumericResult(modulo, this.resultTypeName));
+    return finalizeArithmeticResult(modulo);
   }
 }
 
@@ -260,18 +258,18 @@ export class Abs extends Expression {
     const arg = await this.execArgs(ctx);
     if (arg == null) {
       return null;
-    } else if (arg.isQuantity) {
-      return new Quantity(arg.value.abs(), arg.unit);
-    } else if (typeof arg === 'bigint') {
-      const absoluteValue = arg < 0n ? -arg : arg;
-      return MathUtil.overflowsOrUnderflows(absoluteValue) ? null : absoluteValue;
-    } else if (arg.isDecimal) {
-      const absoluteValue = arg.abs();
-      return MathUtil.overflowsOrUnderflows(absoluteValue) ? null : absoluteValue;
-    } else {
-      const absoluteValue = Math.abs(arg);
-      return MathUtil.overflowsOrUnderflows(absoluteValue) ? null : absoluteValue;
     }
+    let absoluteValue;
+    if (arg.isQuantity) {
+      absoluteValue = new Quantity(arg.value.abs(), arg.unit);
+    } else if (typeof arg === 'bigint') {
+      absoluteValue = arg < 0n ? -arg : arg;
+    } else if (arg.isDecimal) {
+      absoluteValue = arg.abs();
+    } else {
+      absoluteValue = Math.abs(arg);
+    }
+    return finalizeArithmeticResult(absoluteValue);
   }
 }
 
@@ -284,18 +282,18 @@ export class Negate extends Expression {
     const arg = await this.execArgs(ctx);
     if (arg == null) {
       return null;
-    } else if (arg.isQuantity) {
-      return new Quantity(arg.value.negate(), arg.unit);
-    } else if (typeof arg === 'bigint') {
-      const negatedValue = arg * -1n;
-      return MathUtil.overflowsOrUnderflows(negatedValue) ? null : negatedValue;
-    } else if (arg.isDecimal) {
-      const negatedValue = arg.negate();
-      return MathUtil.overflowsOrUnderflows(negatedValue) ? null : negatedValue;
-    } else {
-      const negatedValue = arg * -1;
-      return MathUtil.overflowsOrUnderflows(negatedValue) ? null : negatedValue;
     }
+    let negatedValue;
+    if (arg.isQuantity) {
+      negatedValue = new Quantity(arg.value.negate(), arg.unit);
+    } else if (typeof arg === 'bigint') {
+      negatedValue = arg * -1n;
+    } else if (arg.isDecimal) {
+      negatedValue = arg.negate();
+    } else {
+      negatedValue = arg * -1;
+    }
+    return finalizeArithmeticResult(negatedValue);
   }
 }
 
@@ -331,10 +329,7 @@ export class Ln extends Expression {
 
     try {
       const ln = Decimal.from(arg).ln();
-      if (MathUtil.overflowsOrUnderflows(ln)) {
-        return null;
-      }
-      return MathUtil.finalizeNumericResult(ln);
+      return finalizeArithmeticResult(ln);
     } catch {
       return null;
     }
@@ -359,10 +354,7 @@ export class Exp extends Expression {
       return null;
     }
 
-    if (MathUtil.overflowsOrUnderflows(power)) {
-      return null;
-    }
-    return MathUtil.finalizeNumericResult(power);
+    return finalizeArithmeticResult(power);
   }
 }
 
@@ -379,7 +371,7 @@ export class Log extends Expression {
 
     try {
       const log = Decimal.from(args[0]).log(args[1]);
-      return MathUtil.finalizeNumericResult(log);
+      return finalizeArithmeticResult(log);
     } catch {
       return null;
     }
@@ -402,10 +394,7 @@ export class Power extends Expression {
     // doPower handles this scenario
     const power = doPower(args[0], args[1]);
 
-    if (MathUtil.overflowsOrUnderflows(power)) {
-      return null;
-    }
-    return power;
+    return finalizeArithmeticResult(power);
   }
 }
 
@@ -514,10 +503,7 @@ export class Successor extends Expression {
       }
     }
 
-    if (MathUtil.overflowsOrUnderflows(successor)) {
-      return null;
-    }
-    return successor;
+    return finalizeArithmeticResult(successor);
   }
 }
 
@@ -543,9 +529,6 @@ export class Predecessor extends Expression {
       }
     }
 
-    if (MathUtil.overflowsOrUnderflows(predecessor)) {
-      return null;
-    }
-    return predecessor;
+    return finalizeArithmeticResult(predecessor);
   }
 }
