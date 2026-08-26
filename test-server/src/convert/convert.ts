@@ -132,13 +132,10 @@ function toParameter(
     case cqlTypeString.match(/^Interval<System.Date(Time)?>$/)?.[0]:
       return toPeriodParameter(name, result);
     case cqlTypeString.match(/^Interval<System.Quantity>$/)?.[0]:
-      // Apparently the intention of the CQL-to-FHIR mappings is to map numeric intervals to Ranges too,
-      // but as of early April 2026, the CQL Test Runner fails all tests that map numeric intervals to
-      // Ranges, so for now let those cases fall through to Interval-to-Tuple conversion below.
-      // case cqlTypeString.match(/^Interval<System.Decimal>$/)?.[0]:
-      // case cqlTypeString.match(/^Interval<System.Integer>$/)?.[0]:
-      // case cqlTypeString.match(/^Interval<System.Long>$/)?.[0]:
-      const isIntegerOrLong = false; // /^Interval<System.(Integer|Long)>$/.test(cqlTypeString);
+    case cqlTypeString.match(/^Interval<System.Decimal>$/)?.[0]:
+    case cqlTypeString.match(/^Interval<System.Integer>$/)?.[0]:
+    case cqlTypeString.match(/^Interval<System.Long>$/)?.[0]:
+      const isIntegerOrLong = /^Interval<System.(Integer|Long)>$/.test(cqlTypeString);
       return toRangeParameter(name, result, isIntegerOrLong);
     case cqlTypeString.match(/^Interval<.+>$/)?.[0]:
       return toIntervalTupleParameter(name, result, typeSpecifier);
@@ -254,10 +251,10 @@ function toPeriodParameter(name: string, result: Interval) {
 function toRangeParameter(name: string, result: Interval, isIntegerOrLong: boolean) {
   const rangeResult = result.toClosed();
   const rangeParam = { name, valueRange: {} as Range };
-  if (rangeResult.low) {
+  if (rangeResult.low != null) {
     rangeParam.valueRange.low = toFhirQuantity(rangeResult.low, isIntegerOrLong);
   }
-  if (rangeResult.high) {
+  if (rangeResult.high != null) {
     rangeParam.valueRange.high = toFhirQuantity(rangeResult.high, isIntegerOrLong);
   }
   return rangeParam;
@@ -308,9 +305,9 @@ function toChoiceParameter(name: string, result: any, typeSpecifier: AnyTypeSpec
 function toFhirQuantity(val: CqlQuantity | number, isIntegerOrLong = false): FhirQuantity {
   let fq: FhirQuantity;
   if (typeof val === 'number') {
-    fq = { value: val };
+    fq = { value: val, system: 'http://unitsofmeasure.org', code: '1' };
   } else if (typeof val === 'bigint') {
-    fq = { value: Number(val) };
+    fq = { value: Number(val), system: 'http://unitsofmeasure.org', code: '1' };
   } else {
     const cq = val as CqlQuantity;
     fq = { value: cq.value } as FhirQuantity;

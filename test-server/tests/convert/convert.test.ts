@@ -20,6 +20,14 @@ function cqlTypeExt(type: string) {
   return [{ url: 'http://hl7.org/fhir/StructureDefinition/cqf-cqlType', valueString: type }];
 }
 
+function quantityPrecisionExt(precision: number) {
+  return {
+    extension: [
+      { url: 'http://hl7.org/fhir/StructureDefinition/quantity-precision', valueInteger: precision }
+    ]
+  };
+}
+
 function timePrecisionExt(code: string) {
   return {
     extension: [{ url: 'http://hl7.org/fhir/StructureDefinition/time-precision', valueCode: code }]
@@ -549,7 +557,7 @@ describe('convert.toParameters', () => {
       });
     });
 
-    it('maps Interval<Integer> to tuple parts (low/lowClosed/high/highClosed)', () => {
+    it('maps Interval<Integer> to FHIR Range', () => {
       const typeSpec = {
         type: 'IntervalTypeSpecifier',
         pointType: { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Integer' }
@@ -560,12 +568,20 @@ describe('convert.toParameters', () => {
           {
             extension: cqlTypeExt('Interval<System.Integer>'),
             name: 'return',
-            part: [
-              { name: 'low', valueInteger: 1 },
-              { name: 'lowClosed', valueBoolean: false },
-              { name: 'high', valueInteger: 5 },
-              { name: 'highClosed', valueBoolean: true }
-            ]
+            valueRange: {
+              low: {
+                value: 2,
+                _value: quantityPrecisionExt(0),
+                code: '1',
+                system: 'http://unitsofmeasure.org'
+              },
+              high: {
+                value: 5,
+                _value: quantityPrecisionExt(0),
+                code: '1',
+                system: 'http://unitsofmeasure.org'
+              }
+            }
           }
         ]
       });
@@ -692,7 +708,7 @@ describe('convert.toParameters', () => {
       });
     });
 
-    it('maps uncertainty with unequal low/high to an Interval tuple', () => {
+    it('maps uncertainty with unequal low/high to a Range', () => {
       const u = new Uncertainty(1, 5);
       expect(toParameters(u, 'System.Integer')).toEqual({
         resourceType: 'Parameters',
@@ -700,12 +716,20 @@ describe('convert.toParameters', () => {
           {
             extension: cqlTypeExt('System.Integer'),
             name: 'return',
-            part: [
-              { name: 'low', valueInteger: 1 },
-              { name: 'lowClosed', valueBoolean: true },
-              { name: 'high', valueInteger: 5 },
-              { name: 'highClosed', valueBoolean: true }
-            ]
+            valueRange: {
+              low: {
+                value: 1,
+                _value: quantityPrecisionExt(0),
+                code: '1',
+                system: 'http://unitsofmeasure.org'
+              },
+              high: {
+                value: 5,
+                _value: quantityPrecisionExt(0),
+                code: '1',
+                system: 'http://unitsofmeasure.org'
+              }
+            }
           }
         ]
       });
