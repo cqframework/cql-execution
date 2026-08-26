@@ -348,6 +348,17 @@ describe('Power', () => {
   it('should return an infinitesimally small number when the exponent is the minimum Long value', async function () {
     (await this.twoLongExpMinLong.exec(this.ctx)).should.equalDecimal(Decimal.from(0.0));
   });
+
+  it('should normalize Decimal power results at the ELM boundary', async function () {
+    (await this.decimalPowerNeedsNormalization.exec(this.ctx)).should.equalDecimal(
+      Decimal.from('1.52415788')
+    );
+  });
+
+  it('should return null for Decimal powers that cannot be represented', async function () {
+    should(await this.negativeFractionalPower.exec(this.ctx)).be.null();
+    should(await this.zeroNegativePower.exec(this.ctx)).be.null();
+  });
 });
 
 describe('MinValue', () => {
@@ -635,6 +646,11 @@ describe('Round', () => {
   it('should be able to round a number up or down to the closest decimal place ', async function () {
     (await this.up_percent.exec(this.ctx)).should.equalDecimal(Decimal.from(4.6));
     (await this.down_percent.exec(this.ctx)).should.equalDecimal(Decimal.from(4.4));
+  });
+
+  it('should round negative exact-half values toward positive infinity', async function () {
+    (await this.negativeHalf.exec(this.ctx)).should.equalDecimal(Decimal.from(0));
+    (await this.negativeOnePointFive.exec(this.ctx)).should.equalDecimal(Decimal.from(-1));
   });
 });
 

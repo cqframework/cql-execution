@@ -37,6 +37,14 @@ describe('ImmutableUtil Tests', () => {
     immutableIs(iq2, iq3).should.be.false();
   });
 
+  it('should normalize fractional unit conversions without JavaScript-number rounding', () => {
+    const inches = new Quantity(1, '[in_i]');
+    const centimeters = new Quantity('2.54', 'cm');
+
+    equals(inches, centimeters).should.be.true();
+    immutableIs(toNormalizedKey(inches), toNormalizedKey(centimeters)).should.be.true();
+  });
+
   it('should properly match ratios', () => {
     const r1 = new Ratio(new Quantity(1, 'km'), new Quantity(1, 'h'));
     const r2 = new Ratio(new Quantity(1000, 'm'), new Quantity(60, 'min'));

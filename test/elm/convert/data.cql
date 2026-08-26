@@ -81,6 +81,13 @@ define TooLargeDec: ToDecimal('444444444444444444444444444444')
 define TooSmallDec: ToDecimal('-444444444444444444444444444444')
 define NullDecimal: ToDecimal((null as String))
 define WrongFormat: ToDecimal('+.1')
+define ExponentNotation: ToDecimal('1e3')
+define ExponentNotationUpper: ToDecimal('1E-8')
+define TrailingDecimalPoint: ToDecimal('1.')
+define LeadingDecimalPoint: ToDecimal('.1')
+define IntegerFormat: ToDecimal('+1')
+define DecimalToString: ToString(1.0)
+define SmallDecimalToString: ToString(0.00000001)
 
 // @Test: ToInteger
 define NoSign: ToInteger('12345')
@@ -206,6 +213,8 @@ define IsNull: ConvertsToDateTime(null as DateTime)
 define IsTrue: ConvertsToDecimal('0.1')
 define IsFalse: ConvertsToDecimal('foo')
 define IsNull: ConvertsToDecimal(null as Decimal)
+define ExponentNotation: ConvertsToDecimal('1e3')
+define DecimalFormat: ConvertsToDecimal('1.0')
 
 // @Test: ConvertsToInteger
 define IsTrue: ConvertsToInteger('101')

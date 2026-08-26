@@ -376,6 +376,22 @@ describe('ToDecimal', () => {
     // TODO: parseFloat is more forgiving than the CQL spec, so this does get converted
     should(await this.wrongFormat.exec(this.ctx)).be.null();
   });
+
+  it('should reject exponent notation and malformed Decimal strings', async function () {
+    should(await this.exponentNotation.exec(this.ctx)).be.null();
+    should(await this.exponentNotationUpper.exec(this.ctx)).be.null();
+    should(await this.trailingDecimalPoint.exec(this.ctx)).be.null();
+    should(await this.leadingDecimalPoint.exec(this.ctx)).be.null();
+  });
+
+  it('should accept an integer-form Decimal string', async function () {
+    (await this.integerFormat.exec(this.ctx)).should.equalDecimal(Decimal.from(1));
+  });
+
+  it('should format Decimals in fixed-point notation', async function () {
+    (await this.decimalToString.exec(this.ctx)).should.equal('1.0');
+    (await this.smallDecimalToString.exec(this.ctx)).should.equal('0.00000001');
+  });
 });
 
 describe('ToInteger', () => {
@@ -858,6 +874,11 @@ describe('ConvertsToDecimal', () => {
 
   it('should return false for invalid decimal', async function () {
     (await this.isFalse.exec(this.ctx)).should.equal(false);
+  });
+
+  it('should reject exponent notation and accept fixed-point Decimal notation', async function () {
+    (await this.exponentNotation.exec(this.ctx)).should.equal(false);
+    (await this.decimalFormat.exec(this.ctx)).should.equal(true);
   });
 
   it('should return null for null input', async function () {

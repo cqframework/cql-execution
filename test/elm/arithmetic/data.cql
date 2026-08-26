@@ -82,6 +82,9 @@ define ThreeExpFourReverseMixed: 3L ^ 4
 define TenLongExpNegativeOneLong: 10L ^ -1L
 define TwoLongExpMaxLong: 2L ^ maximum Long
 define TwoLongExpMinLong: 2L ^ minimum Long
+define DecimalPowerNeedsNormalization: 1.23456789 ^ 2.0
+define NegativeFractionalPower: (-1.0) ^ 0.5
+define ZeroNegativePower: 0.0 ^ -1.0
 
 // @Test: MinValue
 define MinInteger: minimum Integer
@@ -144,6 +147,8 @@ define Up: Round(4.56)
 define Up_percent: Round(4.56,1)
 define Down: Round(4.49)
 define Down_percent: Round(4.43,1)
+define NegativeHalf: Round(-0.5)
+define NegativeOnePointFive: Round(-1.5)
 
 // @Test: Ln
 define ln: Ln(4)

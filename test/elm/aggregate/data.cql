@@ -84,6 +84,7 @@ define not_null_q: Avg({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define has_null_q: Avg({1 'ml',null,null,2 'ml'})
 define empty: Avg(List<Integer>{})
 define q_diff_units: Avg({1 'ml',0.002 'l',0.03 'dl',4 'ml',5 'ml'})
+define repeating_decimal: Avg({1.0, 2.0, 2.0})
 define NumbersAndQuantities: Avg({1 ,2 'ml',3 'ml',4 'ml',5 'ml',0 'ml'})
 define IncompatibleUnitsNull: Avg({1 'mg/d', 0.002 '/d'})
 
@@ -120,6 +121,7 @@ define v_q: Variance({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_diff_units: Variance({1.0 'ml',0.002 'l',0.003 'l',0.04 'dl',5.0 'ml'})
 define NumbersAndQuantities: Variance({1.0 ,2.0 ,3.0 ,4.0 'ml',5.0 'ml'})
 define IncompatibleUnitsNull: Variance({1 'mg/d', 0.002 '/d'})
+define single_value: Variance({2.0})
 
 // @Test: PopulationVariance
 define v: PopulationVariance({1.0,2.0,3.0,4.0,5.0})
@@ -127,6 +129,8 @@ define v_q: PopulationVariance({1.0 'ml',2.0 'ml',3.0 'ml',4.0 'ml',5.0 'ml'})
 define q_diff_units: PopulationVariance({1.0 'ml',0.002 'l',0.003 'l',0.04 'dl',5.0 'ml'})
 define NumbersAndQuantities: PopulationVariance({1.0 ,2.0 ,3.0 ,4.0 'ml',5.0 'ml'})
 define IncompatibleUnitsNull: PopulationVariance({1 'mg/d', 0.002 '/d'})
+define single_value: PopulationVariance({2.0})
+define single_value_q: PopulationVariance({2.0 'ml'})
 
 // @Test: StdDev
 define std: StdDev({1,2,3,4,5})
@@ -135,6 +139,7 @@ define q_diff_units: StdDev({1 'ml', 0.002 'l',3 'ml',4 'ml', 0.05 'dl'})
 define sq_throw1: StdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'm'})
 define NumbersAndQuantities: StdDev({1 ,2 ,3 ,4 'ml',5 })
 define IncompatibleUnitsNull: StdDev({1 'mg/d', 0.002 '/d'})
+define single_value: StdDev({2.0})
 
 // @Test: PopulationStdDev
 define dev: PopulationStdDev({1,2,3,4,5})
@@ -142,6 +147,8 @@ define dev_q: PopulationStdDev({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 define q_diff_units: PopulationStdDev({1 'ml', 0.002 'l',3 'ml',4 'ml', 0.05 'dl'})
 define NumbersAndQuantities: PopulationStdDev({1 ,2 ,3 ,4 'ml',5 })
 define IncompatibleUnitsNull: PopulationStdDev({1 'mg/d', 0.002 '/d'})
+define single_value: PopulationStdDev({2.0})
+define single_value_q: PopulationStdDev({2.0 'ml'})
 
 // @Test: Product
 define integer_product: Product({5, 4, 5})
@@ -183,6 +190,7 @@ define zero_geometric_mean: GeometricMean({2.0, 8.0, 0})
 define null_geometric_mean: GeometricMean({1, 2, null})
 define all_nulls: GeometricMean({null, null, null})
 define also_null_geometric_mean: GeometricMean(null as List<Decimal>)
+define negative_geometric_mean: GeometricMean({-1.0, 4.0})
 
 // @Test: AllTrue
 define at: AllTrue({true,true,true,true})

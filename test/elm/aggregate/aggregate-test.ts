@@ -309,6 +309,10 @@ describe('Avg', () => {
     (await this.has_null.exec(this.ctx)).should.equalDecimal(Decimal.from(1.5));
   });
 
+  it('should normalize repeating Decimal averages at the aggregate boundary', async function () {
+    (await this.repeating_decimal.exec(this.ctx)).should.equalDecimal(Decimal.from('1.66666667'));
+  });
+
   it('should return null for empty list', async function () {
     should(await this.empty.exec(this.ctx)).be.null();
   });
@@ -444,6 +448,11 @@ describe('PopulationVariance', () => {
   it('should be null if quantity units are not compatible', async function () {
     should(await this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
+
+  it('should return zero for a single-item population variance', async function () {
+    (await this.single_value.exec(this.ctx)).should.equalDecimal(Decimal.from(0));
+    validateQuantity(await this.single_value_q.exec(this.ctx), 0, 'ml');
+  });
 });
 
 describe('Variance', () => {
@@ -464,6 +473,10 @@ describe('Variance', () => {
   });
   it('should be null if quantity units are not compatible', async function () {
     should(await this.incompatibleUnitsNull.exec(this.ctx)).be.null();
+  });
+
+  it('should return null for a single-item sample variance', async function () {
+    should(await this.single_value.exec(this.ctx)).be.null();
   });
 });
 
@@ -486,6 +499,10 @@ describe('StdDev', () => {
   it('should be null if quantity units are not compatible', async function () {
     should(await this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
+
+  it('should return null for a single-item sample standard deviation', async function () {
+    should(await this.single_value.exec(this.ctx)).be.null();
+  });
 });
 
 describe('PopulationStdDev', () => {
@@ -506,6 +523,11 @@ describe('PopulationStdDev', () => {
   });
   it('should be null if quantity units are not compatible', async function () {
     should(await this.incompatibleUnitsNull.exec(this.ctx)).be.null();
+  });
+
+  it('should return zero for a single-item population standard deviation', async function () {
+    (await this.single_value.exec(this.ctx)).should.equalDecimal(Decimal.from(0));
+    validateQuantity(await this.single_value_q.exec(this.ctx), 0, 'ml');
   });
 });
 
@@ -659,6 +681,10 @@ describe('GeometricMean', () => {
 
   it('should return null when pass in list as null', async function () {
     should(await this.also_null_geometric_mean.exec(this.ctx)).be.null();
+  });
+
+  it('should return null when the geometric mean cannot be represented', async function () {
+    should(await this.negative_geometric_mean.exec(this.ctx)).be.null();
   });
 });
 
