@@ -254,7 +254,7 @@ export function limitDecimalPrecision<
 
 export class OverFlowException extends Exception {}
 
-export function successor(val: any, _type?: string, precision?: string): any {
+export function successor(val: any, precision?: string): any {
   if (typeof val === 'number') {
     if (val >= MAX_INT_VALUE) {
       throw new OverFlowException();
@@ -295,22 +295,22 @@ export function successor(val: any, _type?: string, precision?: string): any {
     // For uncertainties, if the high is the max val, don't increment it
     const high = (() => {
       try {
-        return successor(val.high, undefined, precision);
+        return successor(val.high, precision);
       } catch {
         return val.high;
       }
     })();
-    return new Uncertainty(successor(val.low, undefined, precision), high);
+    return new Uncertainty(successor(val.low, precision), high);
   } else if (val && val.isQuantity) {
     const succ = val.clone();
-    succ.value = successor(val.value, ELM_DECIMAL_TYPE);
+    succ.value = successor(val.value);
     return succ;
   } else if (val == null) {
     return null;
   }
 }
 
-export function predecessor(val: any, _type?: string, precision?: string): any {
+export function predecessor(val: any, precision?: string): any {
   if (typeof val === 'number') {
     if (val <= MIN_INT_VALUE) {
       throw new OverFlowException();
@@ -351,15 +351,15 @@ export function predecessor(val: any, _type?: string, precision?: string): any {
     // For uncertainties, if the low is the min val, don't decrement it
     const low = ((): any => {
       try {
-        return predecessor(val.low, undefined, precision);
+        return predecessor(val.low, precision);
       } catch {
         return val.low;
       }
     })();
-    return new Uncertainty(low, predecessor(val.high, undefined, precision));
+    return new Uncertainty(low, predecessor(val.high, precision));
   } else if (val && val.isQuantity) {
     const pred = val.clone();
-    pred.value = predecessor(val.value, ELM_DECIMAL_TYPE);
+    pred.value = predecessor(val.value);
     return pred;
   } else if (val == null) {
     return null;
