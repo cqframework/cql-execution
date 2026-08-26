@@ -9,7 +9,6 @@ import {
   Ratio,
   Uncertainty
 } from '../datatypes/datatypes';
-import { decimalAdjust } from './math';
 import { convertUnit } from './units';
 
 const ucumUtilInstance = ucum.UcumLhcUtils.getInstance();
@@ -108,12 +107,11 @@ export const toNormalizedKey = (js: any): NormalizedKey => {
           __instance: js.constructor
         });
       } else {
-        // Unit was found - convert to baseUnit and normalize
+        // Unit was found - convert to baseUnit
         const baseUnitKeyCode = baseUnitKey[0].csCode_;
         const conversionValue = convertUnit(js.value, js.unit, baseUnitKeyCode);
-        const finalValue = conversionValue ? decimalAdjust('round', conversionValue, -8) : null;
         return ImmutableMap({
-          value: finalValue ? toNormalizedKey(finalValue) : null,
+          value: conversionValue ? toNormalizedKey(conversionValue) : null,
           unit: baseUnitKeyCode ?? null,
           __instance: js.constructor
         });

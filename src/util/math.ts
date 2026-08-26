@@ -416,29 +416,6 @@ export function minValueForType(type: string, quantityInstance?: Quantity) {
   return null;
 }
 
-type MathFn = keyof typeof Math;
-
-export function decimalAdjust(type: MathFn, value: any, exp: any) {
-  //If the exp is undefined or zero...
-  if (typeof exp === 'undefined' || +exp === 0) {
-    return (Math[type] as (x: number) => number)(value);
-  }
-  value = +value;
-  exp = +exp;
-  //If the value is not a number or the exp is not an integer...
-  if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
-    return NaN;
-  }
-  //Shift
-  value = value.toString().split('e');
-  let v = value[1] ? +value[1] - exp : -exp;
-  value = (Math[type] as (x: number) => number)(+(value[0] + 'e' + v));
-  //Shift back
-  value = value.toString().split('e');
-  v = value[1] ? +value[1] + exp : exp;
-  return +(value[0] + 'e' + v);
-}
-
 export function finalizeNumericResult(result: any) {
   if (result instanceof Decimal) {
     return result.normalized();
