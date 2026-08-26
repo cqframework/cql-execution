@@ -16,6 +16,7 @@ CqlIntervalOperatorsTest.PointFrom.TestPointFromNull            Wrong output: In
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Wrong output: The resulting Quantity should have an appropriate unit; 'g' / 'g' should be '1', not 'g'. See test Divide1Q1Q which is correct
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10By5DQuantity"           Wrong output: The resulting Quantity should have an appropriate unit
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide414By206DQuantity"        Wrong output: The resulting Quantity should have an appropriate unit
+"CqlStringOperatorsTest.toString tests.QuantityToString"        Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side
 
 # Potentially Incorrect Expected Output
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment

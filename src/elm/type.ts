@@ -96,6 +96,21 @@ export class ToBoolean extends Expression {
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
+      if (typeof arg === 'boolean') {
+        return arg;
+      } else if (typeof arg === 'number' || typeof arg === 'bigint') {
+        if (arg == 1) {
+          return true;
+        } else if (arg == 0) {
+          return false;
+        }
+      } else if (arg instanceof Decimal) {
+        if (arg.equals('1.0')) {
+          return true;
+        } else if (arg.equals('0.0')) {
+          return false;
+        }
+      }
       const strArg = arg.toString().toLowerCase();
       if (['true', 't', 'yes', 'y', '1'].includes(strArg)) {
         return true;
@@ -157,6 +172,14 @@ export class ToDateTime extends Expression {
   }
 }
 
+// Described in the CQL spec as (+|-)?#0(.0#)?
+// Meaning an optional polarity indicator,
+// followed by any number of digits (including none),
+// followed by at least one digit,
+// followed optionally by a decimal point,
+// at least one digit, and any number of additional digits (including none).
+const CQL_DECIMAL_STRING = /^[+-]?\d+(\.\d+)?$/;
+
 export class ToDecimal extends Expression {
   constructor(json: any) {
     super(json);
@@ -170,6 +193,13 @@ export class ToDecimal extends Expression {
         const high = Decimal.from(arg.high).normalized();
         return new Uncertainty(low, high);
       } else {
+        if (typeof arg === 'string' && !CQL_DECIMAL_STRING.test(arg)) {
+          // reject anything that doesn't match the CQL Decimal format
+          // In particular, our Decimal.from could be more permissive
+          // and allow things like "1e8", which is not allowed by the spec
+          return null;
+        }
+
         try {
           const decimal = Decimal.from(arg.toString());
           if (isValidDecimal(decimal)) {

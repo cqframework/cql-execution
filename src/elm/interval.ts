@@ -474,18 +474,12 @@ export class Expand extends Expression {
     if (['time', 'date', 'datetime'].includes(type)) {
       expandFunction = this.expandDTishInterval;
       defaultPer = (interval: any) => new Quantity(1, interval.low.getPrecision());
-    } else if (type === 'quantity') {
+    } else if (['integer', 'long', 'decimal'].includes(type)) {
+      expandFunction = this.expandNumericInterval;
+      defaultPer = (_interval: any) => new Quantity(1, '1');
+    } else if (['quantity'].includes(type)) {
       expandFunction = this.expandQuantityInterval;
       defaultPer = (interval: any) => new Quantity(1, interval.low.unit);
-    } else if (type === 'integer') {
-      expandFunction = this.expandIntegerInterval;
-      defaultPer = (_interval: any) => new Quantity(1, '1');
-    } else if (type === 'long') {
-      expandFunction = this.expandLongInterval;
-      defaultPer = (_interval: any) => new Quantity(1, '1');
-    } else if (type === 'decimal') {
-      expandFunction = this.expandDecimalInterval;
-      defaultPer = (_interval: any) => new Quantity(1, '1');
     } else {
       throw new Error('Interval list type not yet supported.');
     }
@@ -624,7 +618,7 @@ export class Expand extends Expression {
       return null;
     }
 
-    const results = this.makeDecimalIntervalList(low_value, high_value, per_value);
+    const results = this.makeNumericIntervalList(low_value, high_value, per_value);
 
     for (const itvl of results) {
       itvl.low = new Quantity(itvl.low, result_units);
@@ -633,38 +627,17 @@ export class Expand extends Expression {
     return results;
   }
 
-  expandIntegerInterval(interval: any, per: any) {
+  expandNumericInterval(interval: any, per: any) {
     if (per.unit !== '1' && per.unit !== '') {
       return null;
     }
     const low = interval.lowClosed ? interval.low : successor(interval.low);
     const high = interval.highClosed ? interval.high : predecessor(interval.high);
 
-    return this.makeDecimalIntervalList(low, high, per.value);
+    return this.makeNumericIntervalList(low, high, per.value);
   }
 
-  expandDecimalInterval(interval: any, per: any) {
-    if (per.unit !== '1' && per.unit !== '') {
-      return null;
-    }
-    const low = interval.lowClosed ? interval.low : successor(interval.low);
-    const high = interval.highClosed ? interval.high : predecessor(interval.high);
-
-    return this.makeDecimalIntervalList(low, high, per.value);
-  }
-
-  expandLongInterval(interval: any, per: any) {
-    if (per.unit !== '1' && per.unit !== '') {
-      return null;
-    }
-
-    const low = interval.lowClosed ? interval.low : successor(interval.low);
-    const high = interval.highClosed ? interval.high : predecessor(interval.high);
-
-    return this.makeDecimalIntervalList(low, high, per.value);
-  }
-
-  makeDecimalIntervalList(low: any, high: any, perValue: any) {
+  makeNumericIntervalList(low: any, high: any, perValue: any) {
     // If the per value is a decimal, 8 decimal places are appropriate
     // Integers should have 0 Decimal places
     const perIsIntegral = perValue.isInteger();
@@ -678,7 +651,7 @@ export class Expand extends Expression {
     low = Decimal.from(low);
     high = Decimal.from(high);
 
-    let convertBound: (d: Decimal) => Decimal | number | bigint = d => d.toInteger();
+    let convertBound: (d: Decimal) => Decimal | number | bigint;
     if (!perIsIntegral) {
       // If per is not an integer value, then regardless of the original point types, the values will be Decimals
       convertBound = d => d;

@@ -16,8 +16,8 @@ describe('Instance', () => {
     q.unit.should.eql('a');
     const decimal12 = Decimal.from(12);
     q.value.should.eql(decimal12);
-    q.toString().should.equal("12 'a'");
-    (await this.val.exec(this.ctx)).should.eql(decimal12);
+    q.toString().should.equal("12.0 'a'");
+    (await this.val.exec(this.ctx)).should.equalDecimal(decimal12);
   });
 
   it('should be able to construct a Code', async function () {

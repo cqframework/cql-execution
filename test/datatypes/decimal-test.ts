@@ -13,10 +13,10 @@ describe('Decimal', () => {
     const value = Decimal.from('1.5').subtract('0.5');
 
     value.compareTo('1').should.equal(0);
-    value.add(2).toString().should.equal('3');
-    value.multiplyBy(2).toString().should.equal('2');
+    value.add(2).toString().should.equal('3.0');
+    value.multiplyBy(2).toString().should.equal('2.0');
     value.divideBy(2).toString().should.equal('0.5');
-    Decimal.from(3).modulo(2).toString().should.equal('1');
+    Decimal.from(3).modulo(2).toString().should.equal('1.0');
   });
 
   it('should provide an explicit scale and JSON representation', () => {

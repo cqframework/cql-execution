@@ -3849,7 +3849,7 @@ context Patient
 define NoSign: ToDecimal('0.0')
 define PositiveSign: ToDecimal('+1.1')
 define NegativeSign: ToDecimal('-1.1')
-define TooPrecise: ToDecimal('.444444444')
+define TooPrecise: ToDecimal('0.444444444')
 define TooLargeDec: ToDecimal('444444444444444444444444444444')
 define TooSmallDec: ToDecimal('-444444444444444444444444444444')
 define NullDecimal: ToDecimal((null as String))
@@ -4104,7 +4104,7 @@ module.exports['ToDecimal'] = {
               }, {
                 "r" : "245",
                 "s" : [ {
-                  "value" : [ "'.444444444'" ]
+                  "value" : [ "'0.444444444'" ]
                 } ]
               }, {
                 "value" : [ ")" ]
@@ -4128,7 +4128,7 @@ module.exports['ToDecimal'] = {
             "localId" : "245",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : ".444444444",
+            "value" : "0.444444444",
             "annotation" : [ ]
           }
         }
