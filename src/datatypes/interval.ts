@@ -518,10 +518,10 @@ export class Interval {
         this.pointType === ELM_DATETIME_TYPE ||
         this.pointType === ELM_TIME_TYPE
       ) {
-        return this.start()?.sameAs(successor(other.end(), other.pointType, precision), precision);
+        return this.start()?.sameAs(successor(other.end(), precision), precision);
       }
 
-      return cmp.equals(this.start(), successor(other.end(), other.pointType));
+      return cmp.equals(this.start(), successor(other.end()));
     } catch {
       return false;
     }
@@ -543,13 +543,10 @@ export class Interval {
         this.pointType === ELM_DATETIME_TYPE ||
         this.pointType === ELM_TIME_TYPE
       ) {
-        return this.end()?.sameAs(
-          predecessor(other.start(), other.pointType, precision),
-          precision
-        );
+        return this.end()?.sameAs(predecessor(other.start(), precision), precision);
       }
 
-      return cmp.equals(this.end(), predecessor(other.start(), other.pointType));
+      return cmp.equals(this.end(), predecessor(other.start()));
     } catch {
       return false;
     }
@@ -577,7 +574,7 @@ export class Interval {
     // "If the low boundary of the interval is closed and non-null, this operator returns the low
     // value of the interval... If the low boundary of the interval is open and non-null, this
     // operator returns the successor of the low value of the interval."
-    return this.lowClosed ? this.low : successor(this.low, this.pointType);
+    return this.lowClosed ? this.low : successor(this.low);
   }
 
   // https://cql.hl7.org/R2/09-b-cqlreference.html#end
@@ -602,7 +599,7 @@ export class Interval {
     // "If the high boundary of the interval is closed and non-null, this operator returns the high
     // value of the interval... If the high boundary of the interval is open and non-null, this
     // operator returns the predecessor of the high value of the interval."
-    return this.highClosed ? this.high : predecessor(this.high, this.pointType);
+    return this.highClosed ? this.high : predecessor(this.high);
   }
 
   // https://cql.hl7.org/R2/09-b-cqlreference.html#starts
@@ -712,7 +709,7 @@ export class Interval {
         // E.g., point size of Interval[@2012-01, @2012-12] is 1 month, not 1 ms.
         return new Quantity(1, (this.low ?? this.high).getPrecision());
       }
-      return subtract(successor(minValue, this.pointType), minValue, this.pointType);
+      return subtract(successor(minValue), minValue, this.pointType);
     }
 
     throw new Error('Point type of interval cannot be determined.');
@@ -743,7 +740,7 @@ export class Interval {
       if (this.lowClosed && this.low == null) {
         low = minValueForType(this.pointType, quantityInstance);
       } else if (!this.lowClosed && this.low != null) {
-        low = successor(this.low, this.pointType);
+        low = successor(this.low);
       } else {
         low = this.low;
       }
@@ -751,7 +748,7 @@ export class Interval {
       if (this.highClosed && this.high == null) {
         high = maxValueForType(this.pointType, quantityInstance);
       } else if (!this.highClosed && this.high != null) {
-        high = predecessor(this.high, this.pointType);
+        high = predecessor(this.high);
       } else {
         high = this.high;
       }

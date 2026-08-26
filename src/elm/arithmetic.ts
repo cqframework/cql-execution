@@ -507,7 +507,7 @@ export class Successor extends Expression {
     try {
       // MathUtil.successor throws on overflow, and the exception is used in
       // the logic for evaluating `meets`, so it can't be changed to just return null
-      successor = MathUtil.successor(arg, this.resultTypeName);
+      successor = MathUtil.successor(arg);
     } catch (e) {
       if (e instanceof MathUtil.OverFlowException) {
         return null;
@@ -536,7 +536,7 @@ export class Predecessor extends Expression {
     try {
       // MathUtil.predecessor throws on underflow, and the exception is used in
       // the logic for evaluating `meets`, so it can't be changed to just return null
-      predecessor = MathUtil.predecessor(arg, this.resultTypeName);
+      predecessor = MathUtil.predecessor(arg);
     } catch (e) {
       if (e instanceof MathUtil.OverFlowException) {
         return null;
