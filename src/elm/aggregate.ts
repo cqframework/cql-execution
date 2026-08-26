@@ -7,7 +7,6 @@ import { Exception } from '../datatypes/exception';
 import { greaterThan, lessThan } from '../util/comparison';
 import { build } from './builder';
 import { overflowsOrUnderflows, finalizeNumericResult } from '../util/math';
-import { ELM_DECIMAL_TYPE } from '../util/elmTypes';
 
 class AggregateExpression extends Expression {
   source: any;
@@ -55,7 +54,7 @@ export class Sum extends AggregateExpression {
 
     if (hasOnlyQuantities(items)) {
       const sum = sumOfDecimals(getValuesFromQuantities(items));
-      return overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE) ? null : new Quantity(sum, items[0].unit);
+      return overflowsOrUnderflows(sum) ? null : new Quantity(sum, items[0].unit);
     } else {
       let sum;
       if (hasDecimals(items)) {
@@ -64,7 +63,7 @@ export class Sum extends AggregateExpression {
         sum = items.reduce((x: any, y: any) => x + y);
       }
       sum = finalizeNumericResult(sum);
-      return overflowsOrUnderflows(sum, this.resultTypeName) ? null : sum;
+      return overflowsOrUnderflows(sum) ? null : sum;
     }
   }
 }
@@ -290,10 +289,13 @@ export class StdDev extends AggregateExpression {
     if (hasOnlyQuantities(items)) {
       const values = getValuesFromQuantities(items);
       const stdDev = this.standardDeviation(values);
+      if (stdDev === null) {
+        return null;
+      }
       return new Quantity(stdDev, items[0].unit);
     } else {
       const standardDeviation = this.standardDeviation(items.map(Decimal.from));
-      return standardDeviation?.normalized(); // TODO: review function signatures. always return Decimal makes sense but is it correct?
+      return standardDeviation?.normalized();
     }
   }
 
@@ -305,6 +307,14 @@ export class StdDev extends AggregateExpression {
   }
 
   stats(list: Decimal[]) {
+    if (list.length === 1) {
+      return {
+        standard_variance: null,
+        population_variance: Decimal.from(0),
+        standard_deviation: null,
+        population_deviation: Decimal.from(0)
+      };
+    }
     const sum = list.reduce((x, y) => x.add(y), Decimal.from(0));
     const mean = sum.divideBy(list.length);
 
@@ -349,9 +359,7 @@ export class Product extends AggregateExpression {
     if (hasOnlyQuantities(items)) {
       const product = productOfDecimals(getValuesFromQuantities(items));
       // Units are not multiplied for the geometric product
-      return overflowsOrUnderflows(product, ELM_DECIMAL_TYPE)
-        ? null
-        : new Quantity(product, items[0].unit);
+      return overflowsOrUnderflows(product) ? null : new Quantity(product, items[0].unit);
     } else {
       let result;
       if (hasDecimals(items)) {
@@ -360,7 +368,7 @@ export class Product extends AggregateExpression {
         result = items.reduce((x: number, y: number) => x * y);
       }
       result = finalizeNumericResult(result);
-      return overflowsOrUnderflows(result, this.resultTypeName) ? null : result;
+      return overflowsOrUnderflows(result) ? null : result;
     }
   }
 }

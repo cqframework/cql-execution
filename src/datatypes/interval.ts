@@ -21,7 +21,6 @@ import {
   ELM_ANY_TYPE
 } from '../util/elmTypes';
 import { Quantity } from './quantity';
-import { Decimal, MIN_DECIMAL_VALUE } from './decimal';
 
 export class Interval {
   constructor(
@@ -703,15 +702,7 @@ export class Interval {
   // https://cql.hl7.org/R2/09-b-cqlreference.html#size
   getPointSize() {
     // "... point-size is determined by successor of minimum T - minimum T"
-    let minValue = minValueForType(this.pointType, getQuantityInstanceForMinMax(this));
-
-    // due to floating point issues in JS, we must use 0.0 for Decimal/Quantity instead of min
-    // TODO: remove this when changing to decimal.js
-    if (minValue === MIN_DECIMAL_VALUE) {
-      minValue = Decimal.from(0.0);
-    } else if ((minValue as any)?.isQuantity) {
-      minValue = new Quantity(0.0, (minValue as Quantity)?.unit);
-    }
+    const minValue = minValueForType(this.pointType, getQuantityInstanceForMinMax(this));
 
     if (minValue != null) {
       if ((minValue as any).isDate || (minValue as any).isDatetime || (minValue as any).isTime) {

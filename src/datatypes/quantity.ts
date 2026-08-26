@@ -1,4 +1,3 @@
-import { ELM_DECIMAL_TYPE } from '../util/elmTypes';
 import { add, subtract, isValidDecimal, overflowsOrUnderflows } from '../util/math';
 import { Decimal } from './decimal';
 import {
@@ -135,7 +134,7 @@ export class Quantity {
     const resultUnit = getQuotientOfUnits(unit1, unit2);
 
     // Check for invalid unit or value
-    if (resultUnit == null || overflowsOrUnderflows(resultValue, ELM_DECIMAL_TYPE)) {
+    if (resultUnit == null || overflowsOrUnderflows(resultValue)) {
       return null;
     }
     return new Quantity(resultValue, resultUnit);
@@ -159,7 +158,7 @@ export class Quantity {
     const resultUnit = getProductOfUnits(unit1, unit2);
 
     // Check for invalid unit or value
-    if (resultUnit == null || overflowsOrUnderflows(resultValue, ELM_DECIMAL_TYPE)) {
+    if (resultUnit == null || overflowsOrUnderflows(resultValue)) {
       return null;
     }
     return new Quantity(resultValue, resultUnit);

@@ -345,9 +345,8 @@ describe('Power', () => {
     should(await this.twoLongExpMaxLong.exec(this.ctx)).be.null();
   });
 
-  // TODO: Unskip this test when we properly handle negative Long exponents that can't be safely converted to Number
-  it.skip('should return an infinitesimally small number when the exponent is the minimum Long value', async function () {
-    (await this.twoLongExpMinLong.exec(this.ctx)).should.be(0.0);
+  it('should return an infinitesimally small number when the exponent is the minimum Long value', async function () {
+    (await this.twoLongExpMinLong.exec(this.ctx)).should.equalDecimal(Decimal.from(0.0));
   });
 });
 

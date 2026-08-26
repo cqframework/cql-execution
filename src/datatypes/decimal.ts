@@ -9,7 +9,7 @@ export type DecimalInput = Decimal | string | number | bigint;
 
 export type DecimalRoundingMode = DecimalJS.Rounding;
 
-const MIN_FLOAT_PRECISION_VALUE = DecimalJS.pow(10, -8);
+const MIN_PRECISION_VALUE = DecimalJS.pow(10, -8);
 
 const CQL_IMPLICIT_SCALE = 8;
 const CQL_IMPLICIT_ROUNDING = DecimalJS.ROUND_HALF_UP;
@@ -43,6 +43,8 @@ export class Decimal {
     return this.setScale(CQL_IMPLICIT_SCALE, CQL_IMPLICIT_ROUNDING);
   }
 
+  // Helper function to reduce repeated boilerplate.
+  // Apply the given function with the given operand, and wrap the result in a Decimal.
   private applyWrapper(operation: (value: any) => DecimalJS, other: DecimalInput): Decimal {
     const operand = other instanceof Decimal ? other.value : other;
 
@@ -104,11 +106,11 @@ export class Decimal {
   }
 
   successor() {
-    return new Decimal(this.value.add(MIN_FLOAT_PRECISION_VALUE));
+    return new Decimal(this.value.add(MIN_PRECISION_VALUE));
   }
 
   predecessor() {
-    return new Decimal(this.value.minus(MIN_FLOAT_PRECISION_VALUE));
+    return new Decimal(this.value.minus(MIN_PRECISION_VALUE));
   }
 
   negate() {
@@ -186,8 +188,8 @@ export class Decimal {
   }
 
   toLong() {
-    // TODO
-    return BigInt(this.toString());
+    // note that this is permissive and converts non-integral values
+    return BigInt(this.value.truncated().toString());
   }
 
   toString() {
