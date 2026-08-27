@@ -10087,16 +10087,7 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
@@ -10227,16 +10218,7 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
@@ -10363,16 +10345,7 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
@@ -10384,28 +10357,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "ToString",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": {
-                          "type": "Quantity",
-                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "value": 125,
-                          "unit": "cm",
-                          "annotation": []
-                        }
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "125 'cm'",
+                        "value": "Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side",
                         "annotation": []
                       }
                     }

@@ -1,5 +1,5 @@
-import { ELM_DECIMAL_TYPE } from '../util/elmTypes';
-import { decimalAdjust, add, subtract, isValidDecimal, overflowsOrUnderflows } from '../util/math';
+import { add, subtract, isValidDecimal, overflowsOrUnderflows } from '../util/math';
+import { Decimal } from './decimal';
 import {
   checkUnit,
   convertUnit,
@@ -9,13 +9,17 @@ import {
 } from '../util/units';
 
 export class Quantity {
+  public readonly value: Decimal;
+
   constructor(
-    public value: any,
+    value?: Decimal | string | number | bigint,
     public unit?: any
   ) {
-    if (this.value == null || isNaN(this.value)) {
+    if (value == null || (typeof value === 'number' && isNaN(value))) {
       throw new Error('Cannot create a quantity with an undefined value');
-    } else if (!isValidDecimal(this.value)) {
+    }
+    this.value = Decimal.from(value).normalized();
+    if (!isValidDecimal(this.value)) {
       throw new Error('Cannot create a quantity with an invalid decimal value');
     }
 
@@ -46,7 +50,7 @@ export class Quantity {
       if (otherVal == null) {
         return null;
       } else {
-        return this.value <= otherVal;
+        return this.value.lessThanOrEquals(otherVal);
       }
     }
   }
@@ -57,7 +61,7 @@ export class Quantity {
       if (otherVal == null) {
         return null;
       } else {
-        return this.value >= otherVal;
+        return this.value.greaterThanOrEquals(otherVal);
       }
     }
   }
@@ -68,7 +72,7 @@ export class Quantity {
       if (otherVal == null) {
         return null;
       } else {
-        return this.value > otherVal;
+        return this.value.greaterThan(otherVal);
       }
     }
   }
@@ -79,7 +83,7 @@ export class Quantity {
       if (otherVal == null) {
         return null;
       } else {
-        return this.value < otherVal;
+        return this.value.lessThan(otherVal);
       }
     }
   }
@@ -88,14 +92,15 @@ export class Quantity {
     if (other != null && other.isQuantity) {
       if ((!this.unit && other.unit) || (this.unit && !other.unit)) {
         return false;
-      } else if (!this.unit && !other.unit) {
-        return this.value === other.value;
+      } else if (this.unit === other.unit) {
+        // same unit, or both are null
+        return this.value.equals(other.value);
       } else {
         const otherVal = convertUnit(other.value, other.unit, this.unit);
         if (otherVal == null) {
           return null;
         } else {
-          return decimalAdjust('round', this.value, -8) === otherVal;
+          return this.value.equals(otherVal);
         }
       }
     }
@@ -108,7 +113,11 @@ export class Quantity {
   }
 
   dividedBy(other: any) {
-    if (other == null || other === 0 || other.value === 0) {
+    if (
+      other == null ||
+      other === 0 ||
+      (other.value != null && Decimal.from(other.value).equals(0))
+    ) {
       return null;
     } else if (!other.isQuantity) {
       // convert it to a quantity w/ unit 1
@@ -121,14 +130,14 @@ export class Quantity {
       other.value,
       other.unit
     );
-    const resultValue = val1 / val2;
+    const resultValue = val1.divideBy(val2);
     const resultUnit = getQuotientOfUnits(unit1, unit2);
 
     // Check for invalid unit or value
-    if (resultUnit == null || overflowsOrUnderflows(resultValue, ELM_DECIMAL_TYPE)) {
+    if (resultUnit == null || overflowsOrUnderflows(resultValue)) {
       return null;
     }
-    return new Quantity(decimalAdjust('round', resultValue, -8), resultUnit);
+    return new Quantity(resultValue, resultUnit);
   }
 
   multiplyBy(other: any) {
@@ -145,21 +154,21 @@ export class Quantity {
       other.value,
       other.unit
     );
-    const resultValue = val1 * val2;
+    const resultValue = val1.multiplyBy(val2);
     const resultUnit = getProductOfUnits(unit1, unit2);
 
     // Check for invalid unit or value
-    if (resultUnit == null || overflowsOrUnderflows(resultValue, ELM_DECIMAL_TYPE)) {
+    if (resultUnit == null || overflowsOrUnderflows(resultValue)) {
       return null;
     }
-    return new Quantity(decimalAdjust('round', resultValue, -8), resultUnit);
+    return new Quantity(resultValue, resultUnit);
   }
 }
 
 export function parseQuantity(str: string) {
   const components = /([+|-]?\d+\.?\d*)\s*('(.+)')?/.exec(str);
   if (components != null && components[1] != null) {
-    const value = parseFloat(components[1]);
+    const value = Decimal.from(components[1]);
     if (!isValidDecimal(value)) {
       return null;
     }

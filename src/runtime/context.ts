@@ -126,7 +126,7 @@ export class Context {
     }
   }
 
-  getTimezoneOffset(): number | null {
+  getTimezoneOffset(): dt.Decimal | null {
     if (this.executionDateTime != null) {
       return this.executionDateTime.timezoneOffset;
     } else if (this.parent && this.parent.getTimezoneOffset != null) {
@@ -341,9 +341,9 @@ export class Context {
       case ELM_BOOLEAN_TYPE:
         return typeof val === 'boolean';
       case ELM_DECIMAL_TYPE:
-        return typeof val === 'number';
+        return val && val.isDecimal;
       case ELM_INTEGER_TYPE:
-        return typeof val === 'number' && Math.floor(val) === val;
+        return typeof val === 'number';
       case ELM_LONG_TYPE:
         return typeof val === 'bigint';
       case ELM_STRING_TYPE:
@@ -388,9 +388,9 @@ export class Context {
     if (inst.isBooleanLiteral) {
       return typeof val === 'boolean';
     } else if (inst.isDecimalLiteral) {
-      return typeof val === 'number';
+      return val && val.isDecimal;
     } else if (inst.isIntegerLiteral) {
-      return typeof val === 'number' && Math.floor(val) === val;
+      return typeof val === 'number';
     } else if (inst.isLongLiteral) {
       return typeof val === 'bigint';
     } else if (inst.isStringLiteral) {

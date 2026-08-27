@@ -9,10 +9,16 @@ CqlIntervalOperatorsTest.ProperContains.TimeProperContainsPrecisionFalse  Wrong 
 CqlIntervalOperatorsTest.ProperContains.TimeProperContainsFalse Wrong output: According to spec, a contained point is properly contained as long as the interval is not a unit interval
 CqlIntervalOperatorsTest.ProperIn.TimeProperInPrecisionFalse    Wrong output: According to spec, a contained point is properly in as long as the interval is not a unit interval
 CqlIntervalOperatorsTest.ProperIn.TimeProperInFalse             Wrong output: According to spec, a contained point is properly in as long as the interval is not a unit interval
+CqlIntervalOperatorsTest.Expand.ExpandPer0D1                    Wrong output: Clarification still needed but provided answer is incorrect. See https://jira.hl7.org/browse/FHIR-58705
+CqlIntervalOperatorsTest.Expand.ExpandPer0D1IntervalOverload    Wrong output: Clarification still needed but provided answer is incorrect. See https://jira.hl7.org/browse/FHIR-58705
 CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
 CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlIntervalOperatorsTest.PointFrom.TestPointFromNull            Wrong output: Interval[null, null] is not a unit interval, nor is it null
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Wrong output: The resulting Quantity should have an appropriate unit; 'g' / 'g' should be '1', not 'g'. See test Divide1Q1Q which is correct
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10By5DQuantity"           Wrong output: The resulting Quantity should have an appropriate unit
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide414By206DQuantity"        Wrong output: The resulting Quantity should have an appropriate unit
+"CqlStringOperatorsTest.toString tests.QuantityToString"        Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side
 
 # Potentially Incorrect Expected Output
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
@@ -23,27 +29,14 @@ CqlIntervalOperatorsTest.PointFrom.TestPointFromNull            Wrong output: In
 CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.Except.NullInterval                    Wrong answer (Interval(null, null) vs null)
-CqlIntervalOperatorsTest.Expand.ExpandEmptyList                           Wrong answer (should be empty list)
-CqlIntervalOperatorsTest.Expand.ExpandIntegerIntervalOverload             Wrong answer (single interval overload should return list of points)
-CqlIntervalOperatorsTest.Expand.ExpandIntegerOpenIntervalOverload         Wrong answer (single interval overload should return list of points)
-CqlIntervalOperatorsTest.Expand.ExpandIntervalOpenPer2IntervalOverload    Wrong answer (single interval overload should return list of points)
-CqlIntervalOperatorsTest.Expand.ExpandIntervalPer2IntervalOverload        Wrong answer (single interval overload should return list of points)
 CqlIntervalOperatorsTest.Expand.ExpandListWithNull                        Wrong answer (should be empty list due to removing nulls)
-CqlIntervalOperatorsTest.Expand.ExpandPerDayIntervalOverload              Wrong answer (single interval overload should return list of points)
-CqlIntervalOperatorsTest.Expand.ExpandPerHourIntervalOverload             Wrong answer (single interval overload should return list of points)
-CqlIntervalOperatorsTest.Expand.ExpandPerHourOpenIntervalOverload         Wrong answer (single interval overload should return list of points)
-CqlIntervalOperatorsTest.Expand.ExpandPer0D1                              Wrong answer (interval elements's decimals do not match expected output)
-CqlIntervalOperatorsTest.Expand.ExpandPer0D1IntervalOverload              Wrong answer (single interval overload should return list of points)
-CqlIntervalOperatorsTest.Expand.ExpandPer1IntervalOverload                Wrong answer (single interval overload should return list of points)
-CqlIntervalOperatorsTest.Expand.ExpandPer1OpenIntervalOverload            Wrong answer (single interval overload should return list of points)
-CqlIntervalOperatorsTest.Expand.ExpandPer2DaysIntervalOverload            Wrong answer (single interval overload should return list of points)
 CqlIntervalOperatorsTest.Intersect.TestIntersectNull            Wrong answer (Interval[5, 10] vs Interval[5, null))
 CqlTypeOperatorsTest.Convert.StringToDateTime                   Wrong answer (different offsets)
 CqlTypeOperatorsTest.ToDateTime.ToDateTime1                     Wrong answer (different offsets)
 CqlTypeOperatorsTest.ToDateTime.ToDateTime2                     Wrong answer (different offsets)
 CqlTypeOperatorsTest.ToDateTime.ToDateTime3                     Wrong answer (different offsets)
-ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number)
-ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number)
+ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number); intermediate value exceeds max Decimal
+ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number); intermediate value exceeds max Decimal
 
 # Unimplemented
 CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not implemented
@@ -54,9 +47,6 @@ CqlListOperatorsTest.Descendents                        Descendents not implemen
 # Unimplemented (New in CQL 1.5)
 CqlArithmeticFunctionsTest.Modulo.ModuloQuantity                      Modulo not implemented for Quantity
 CqlArithmeticFunctionsTest.Modulo.Modulo10By3Quantity                 Modulo not implemented for Quantity
-"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Truncated divide not implemented for Quantity
-"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10By5DQuantity"           Truncated divide not implemented for Quantity
-"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide414By206DQuantity"        Truncated divide not implemented for Quantity
 
 # Unimplemented (New in CQL 2.0)
 CqlListOperatorsTest.Slice                              Slice not implemented

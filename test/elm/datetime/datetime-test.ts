@@ -4,18 +4,19 @@ const data = require('./data');
 import * as DT from '../../../src/datatypes/datatypes';
 import { PatientContext } from '../../../src/cql';
 import { Uncertainty } from '../../../src/datatypes/uncertainty';
+import { Decimal } from '../../../src/datatypes/decimal';
 
 describe('DateTime', () => {
   beforeEach(function () {
     setup(this, data);
-    this.defaultOffset = (new Date().getTimezoneOffset() / 60) * -1;
+    this.defaultOffset = Decimal.from((new Date().getTimezoneOffset() / 60) * -1);
   });
 
   it('should execute year precision correctly', async function () {
     const d = await this.year.exec(this.ctx);
     d.isTime().should.be.false();
     d.year.should.equal(2012);
-    d.timezoneOffset.should.equal(this.defaultOffset);
+    d.timezoneOffset.should.equalDecimal(this.defaultOffset);
     ['month', 'day', 'hour', 'minute', 'second', 'millisecond'].forEach(field =>
       should.not.exist(d[field])
     );
@@ -26,7 +27,7 @@ describe('DateTime', () => {
     d.isTime().should.be.false();
     d.year.should.equal(2012);
     d.month.should.equal(2);
-    d.timezoneOffset.should.equal(this.defaultOffset);
+    d.timezoneOffset.should.equalDecimal(this.defaultOffset);
     ['day', 'hour', 'minute', 'second', 'millisecond'].forEach(field => should.not.exist(d[field]));
   });
 
@@ -36,7 +37,7 @@ describe('DateTime', () => {
     d.year.should.equal(2012);
     d.month.should.equal(2);
     d.day.should.equal(15);
-    d.timezoneOffset.should.equal(this.defaultOffset);
+    d.timezoneOffset.should.equalDecimal(this.defaultOffset);
     ['hour', 'minute', 'second', 'millisecond'].forEach(field => should.not.exist(d[field]));
   });
 
@@ -47,7 +48,7 @@ describe('DateTime', () => {
     d.month.should.equal(2);
     d.day.should.equal(15);
     d.hour.should.equal(12);
-    d.timezoneOffset.should.equal(this.defaultOffset);
+    d.timezoneOffset.should.equalDecimal(this.defaultOffset);
     ['minute', 'second', 'millisecond'].forEach(field => should.not.exist(d[field]));
   });
 
@@ -59,7 +60,7 @@ describe('DateTime', () => {
     d.day.should.equal(15);
     d.hour.should.equal(12);
     d.minute.should.equal(10);
-    d.timezoneOffset.should.equal(this.defaultOffset);
+    d.timezoneOffset.should.equalDecimal(this.defaultOffset);
     ['second', 'millisecond'].forEach(field => should.not.exist(d[field]));
   });
 
@@ -72,7 +73,7 @@ describe('DateTime', () => {
     d.hour.should.equal(12);
     d.minute.should.equal(10);
     d.second.should.equal(59);
-    d.timezoneOffset.should.equal(this.defaultOffset);
+    d.timezoneOffset.should.equalDecimal(this.defaultOffset);
     should.not.exist(d.millisecond);
   });
 
@@ -86,7 +87,7 @@ describe('DateTime', () => {
     d.minute.should.equal(10);
     d.second.should.equal(59);
     d.millisecond.should.equal(456);
-    d.timezoneOffset.should.equal(this.defaultOffset);
+    d.timezoneOffset.should.equalDecimal(this.defaultOffset);
   });
 
   it('should execute timezone offsets correctly', async function () {
@@ -99,7 +100,7 @@ describe('DateTime', () => {
     d.minute.should.equal(10);
     d.second.should.equal(59);
     d.millisecond.should.equal(456);
-    d.timezoneOffset.should.equal(-8);
+    d.timezoneOffset.should.equalDecimal(Decimal.from(-8));
   });
 });
 
@@ -218,7 +219,7 @@ describe('Now', () => {
     should.exist(now.minute);
     should.exist(now.second);
     should.exist(now.millisecond);
-    now.timezoneOffset.should.equal(this.ctx.getTimezoneOffset());
+    now.timezoneOffset.should.equalDecimal(this.ctx.getTimezoneOffset());
   });
 
   it('should return all date components representing now using a passed in timezone', async function () {
@@ -238,7 +239,7 @@ describe('Now', () => {
     should.exist(now.minute);
     should.exist(now.second);
     should.exist(now.millisecond);
-    now.timezoneOffset.should.equal('0');
+    now.timezoneOffset.should.equalDecimal(Decimal.from(0));
   });
 
   it('should return all date components representing now using a passed in timezone using a child context', async function () {
@@ -259,8 +260,8 @@ describe('Now', () => {
     should.exist(now.minute);
     should.exist(now.second);
     should.exist(now.millisecond);
-    now.timezoneOffset.should.equal(this.child_ctx.getTimezoneOffset());
-    now.timezoneOffset.should.equal('0');
+    now.timezoneOffset.should.equalDecimal(this.child_ctx.getTimezoneOffset());
+    now.timezoneOffset.should.equalDecimal(Decimal.from(0));
   });
 });
 
@@ -408,13 +409,13 @@ describe('TimezoneOffsetFrom', () => {
   });
 
   it('should return the timezoneoffset from a fully defined DateTime', async function () {
-    (await this.centralEuropean.exec(this.ctx)).should.equal(1);
-    (await this.easternStandard.exec(this.ctx)).should.equal(-5);
+    (await this.centralEuropean.exec(this.ctx)).should.equalDecimal(Decimal.from(1));
+    (await this.easternStandard.exec(this.ctx)).should.equalDecimal(Decimal.from(-5));
   });
 
   it('should return the default timezone when not specified', async function () {
-    (await this.defaultTimezone.exec(this.ctx)).should.equal(
-      (new Date().getTimezoneOffset() / 60) * -1
+    (await this.defaultTimezone.exec(this.ctx)).should.equalDecimal(
+      Decimal.from((new Date().getTimezoneOffset() / 60) * -1)
     );
   });
 

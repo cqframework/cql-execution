@@ -6,6 +6,7 @@ import {
   TupleTypeSpecifier,
   TupleElementDefinition,
   AnyTypeSpecifier,
+  Decimal,
   Interval
 } from '../../..';
 import { ELM_ANY_TYPE } from '../../../lib/util/elmTypes';
@@ -60,11 +61,10 @@ export function guessSpecifierType(val: any): AnyTypeSpecifier | undefined {
     return typeHierarchy[0];
   } else if (typeof val === 'boolean') {
     return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Boolean' };
-  } else if (typeof val === 'number' && Math.floor(val) === val) {
-    // It could still be a decimal, but we have to just take our best guess!
-    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Integer' };
-  } else if (typeof val === 'number') {
+  } else if (val instanceof Decimal) {
     return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Decimal' };
+  } else if (typeof val === 'number') {
+    return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}Integer' };
   } else if (typeof val === 'string') {
     return { type: 'NamedTypeSpecifier', name: '{urn:hl7-org:elm-types:r1}String' };
   } else if (val.isConcept) {

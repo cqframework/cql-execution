@@ -1,13 +1,16 @@
 import { Expression } from './expression';
 import { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } from '../datatypes/datetime';
 import { Quantity } from '../datatypes/quantity';
-import { add, successor, predecessor } from '../util/math';
+import { add, successor, predecessor, subtract } from '../util/math';
+import { greaterThan, lessThan } from '../util/comparison';
 import { convertUnit, compareUnits, convertToCQLDateUnit } from '../util/units';
 import * as dtivl from '../datatypes/interval';
 import { Context } from '../runtime/context';
 import { build } from './builder';
 import { IntervalTypeSpecifier, NamedTypeSpecifier } from '../types/type-specifiers.interfaces';
 import { ELM_ANY_TYPE, ELM_NAMED_TYPE_SPECIFIER } from '../util/elmTypes';
+import { Decimal } from '../datatypes/decimal';
+import { MAX_INT_VALUE, MIN_INT_VALUE } from '../util/limits';
 
 export class Interval extends Expression {
   lowClosed: boolean;
@@ -409,16 +412,16 @@ function intervalListType(intervals: any) {
       } else {
         return 'mismatch';
       }
-    } else if (Number.isInteger(low) && Number.isInteger(high)) {
+    } else if (typeof low === 'number' && typeof high === 'number') {
       if (type == null) {
         type = 'integer';
-      } else if (type === 'integer' || type === 'decimal') {
+      } else if (type === 'integer') {
         continue;
       } else {
         return 'mismatch';
       }
-    } else if (typeof low === 'number' && typeof high === 'number') {
-      if (type == null || type === 'integer') {
+    } else if (low.isDecimal && high.isDecimal) {
+      if (type == null) {
         type = 'decimal';
       } else if (type === 'decimal') {
         continue;
@@ -445,15 +448,22 @@ export class Expand extends Expression {
     let defaultPer, expandFunction;
     let [intervals, per] = await this.execArgs(ctx);
 
-    if (per?.value === 0) {
+    if (per?.value.equals(0)) {
       // a per of 0 is basically like a divide-by-zero; since spec says divide-by-zero returns null, we'll return null here too
       return null;
     }
 
-    // CQL 1.5 introduced an overload to allow singular intervals; make it a list so we can use the same logic for either overload
-    if (!Array.isArray(intervals)) {
+    const isSingleInterval = !Array.isArray(intervals);
+    // CQL 1.5 introduced an overload to allow singular intervals; make it a list so we can use the same logic for either overload.
+    if (isSingleInterval) {
       intervals = [intervals];
     }
+
+    // If the list of intervals is empty, the result is empty.
+    if (intervals.length === 0) {
+      return [];
+    }
+
     const type = intervalListType(intervals);
     if (type === 'mismatch') {
       throw new Error('List of intervals contains mismatched types.');
@@ -505,15 +515,22 @@ export class Expand extends Expression {
       results.push(...(items || []));
     }
 
+    // If the input argument is an interval, rather than a list of intervals,
+    // the result is a list of points, rather than a list of intervals.
+    // In this case, the calculation is performed the same way,
+    // but the starting point of each resulting interval is returned, rather than the interval.
+    if (isSingleInterval) {
+      return results.map(i => i.start());
+    }
+
     return results;
   }
 
-  expandDTishInterval(interval: any, per: any) {
+  expandDTishInterval(interval: any, per: Quantity) {
     per.unit = convertToCQLDateUnit(per.unit);
 
     if (per.unit === 'week') {
-      per.value *= 7;
-      per.unit = 'day';
+      per = new Quantity(per.value.multiplyBy(7), 'day');
     }
 
     // Precision Checks
@@ -587,8 +604,28 @@ export class Expand extends Expression {
     } else {
       result_units = interval.low.unit;
     }
-    const low_value = convertUnit(interval.low.value, interval.low.unit, result_units);
-    const high_value = convertUnit(interval.high.value, interval.high.unit, result_units);
+    let low_value = interval.low.value;
+    let high_value = interval.high.value;
+
+    // Quantity values are always Decimal, but successor is expected to know if the value is an integer
+    // this needs to happen before converting units
+    if (!interval.lowClosed) {
+      if (low_value.isInteger()) {
+        low_value = low_value.add(1);
+      } else {
+        low_value = successor(low_value);
+      }
+    }
+    if (!interval.highClosed) {
+      if (high_value.isInteger()) {
+        high_value = high_value.subtract(1);
+      } else {
+        high_value = predecessor(high_value);
+      }
+    }
+
+    low_value = convertUnit(low_value, interval.low.unit, result_units);
+    high_value = convertUnit(high_value, interval.high.unit, result_units);
     const per_value = convertUnit(per.value, per.unit, result_units);
 
     // return null if unit conversion failed, must have mismatched units
@@ -596,13 +633,7 @@ export class Expand extends Expression {
       return null;
     }
 
-    const results = this.makeNumericIntervalList(
-      low_value,
-      high_value,
-      interval.lowClosed,
-      interval.highClosed,
-      per_value
-    );
+    const results = this.makeNumericIntervalList(low_value, high_value, per_value);
 
     for (const itvl of results) {
       itvl.low = new Quantity(itvl.low, result_units);
@@ -615,99 +646,80 @@ export class Expand extends Expression {
     if (per.unit !== '1' && per.unit !== '') {
       return null;
     }
-    return this.makeNumericIntervalList(
-      interval.low,
-      interval.high,
-      interval.lowClosed,
-      interval.highClosed,
-      per.value
-    );
+    const low = interval.lowClosed ? interval.low : successor(interval.low);
+    const high = interval.highClosed ? interval.high : predecessor(interval.high);
+
+    return this.makeNumericIntervalList(low, high, per.value);
   }
 
-  makeNumericIntervalList(
-    low: any,
-    high: any,
-    lowClosed: boolean,
-    highClosed: boolean,
-    perValue: any
-  ) {
-    // If the per value is a Decimal (has a .), 8 decimal places are appropriate
+  makeNumericIntervalList(low: any, high: any, perValue: any) {
+    // If the per value is a decimal, 8 decimal places are appropriate
     // Integers should have 0 Decimal places
-    const perIsDecimal = perValue.toString().includes('.');
-    const decimalPrecision = perIsDecimal ? 8 : 0;
-    const hasLongBoundaries = typeof low === 'bigint' || typeof high === 'bigint';
+    const perIsIntegral = perValue.isInteger();
+    const decimalPrecision = perIsIntegral ? 0 : 8;
 
-    low = lowClosed ? low : successor(low);
-    high = highClosed ? high : predecessor(high);
+    // For the purposes of this function, we'll perform all the arithmetic using Decimals,
+    // then convert the results back to the required type as necessary
+    const origLow = low;
+    const origHigh = high;
 
-    if (hasLongBoundaries && !perIsDecimal) {
-      const longLow = low as bigint;
-      const longHigh = high as bigint;
+    low = Decimal.from(low);
+    high = Decimal.from(high);
 
-      if (longLow > longHigh) {
-        return [];
+    let convertBound: (d: Decimal) => Decimal | number | bigint;
+    if (!perIsIntegral) {
+      // If per is not an integer value, then regardless of the original point types, the values will be Decimals
+      convertBound = d => d;
+    } else if (typeof origLow === 'bigint' || typeof origHigh === 'bigint') {
+      convertBound = d => d.toLong();
+    } else if (typeof origLow === 'number' || typeof origHigh === 'number') {
+      convertBound = d => d.toInteger();
+    } else {
+      // per is an integer but the original bounds of the interval were Decimal.
+      // Make the resulting intervals either Long or Integer based on the original bounds.
+      if (
+        low.lessThan(MIN_INT_VALUE) ||
+        low.greaterThan(MAX_INT_VALUE) ||
+        high.lessThan(MIN_INT_VALUE) ||
+        high.greaterThan(MAX_INT_VALUE)
+      ) {
+        convertBound = d => d.toLong();
+      } else {
+        convertBound = d => d.toInteger();
       }
-      if (longLow == null || longHigh == null) {
-        return [];
-      }
-
-      const perBigInt = BigInt(perValue);
-      if (perBigInt > longHigh - longLow + 1n) {
-        return [];
-      }
-
-      let current_low = longLow;
-      let current_high = current_low + perBigInt - 1n;
-      const results = [];
-      while (current_high <= longHigh) {
-        results.push(new dtivl.Interval(current_low, current_high, true, true));
-        current_low += perBigInt;
-        current_high = current_low + perBigInt - 1n;
-      }
-
-      return results;
-    } else if (hasLongBoundaries) {
-      low = Number(low);
-      high = Number(high);
     }
+
+    const makeInterval = (l: Decimal, h: Decimal) =>
+      new dtivl.Interval(convertBound(l), convertBound(h), true, true);
 
     // If the interval boundaries are more precise than the per quantity, the
     // more precise values will be truncated to the precision specified by the
     // per quantity.
-    low = truncateDecimal(low, decimalPrecision);
-    high = truncateDecimal(high, decimalPrecision);
+    low = low.setScale(decimalPrecision);
+    high = high.setScale(decimalPrecision);
 
-    if (low > high) {
-      return [];
-    }
     if (low == null || high == null) {
       return [];
     }
-
-    const perUnitSize = perIsDecimal ? 0.00000001 : 1;
-
-    if (
-      low === high &&
-      Number.isInteger(low) &&
-      Number.isInteger(high) &&
-      !Number.isInteger(perValue)
-    ) {
-      high = parseFloat((high + 1).toFixed(decimalPrecision));
+    if (low.greaterThan(high)) {
+      return [];
     }
+
+    const perUnitSize = perIsIntegral ? 1 : 0.00000001;
 
     let current_low = low;
     const results = [];
 
-    if (perValue > high - low + perUnitSize) {
+    if (perValue.greaterThan(high.subtract(low).add(perUnitSize))) {
       return [];
     }
-    let current_high = parseFloat((current_low + perValue - perUnitSize).toFixed(decimalPrecision));
-    let intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
-    while (intervalToAdd.high <= high) {
+    let current_high = current_low.add(perValue).subtract(perUnitSize);
+    let intervalToAdd = makeInterval(current_low, current_high);
+    while (current_high.lessThanOrEquals(high)) {
       results.push(intervalToAdd);
-      current_low = parseFloat((current_low + perValue).toFixed(decimalPrecision));
-      current_high = parseFloat((current_low + perValue - perUnitSize).toFixed(decimalPrecision));
-      intervalToAdd = new dtivl.Interval(current_low, current_high, true, true);
+      current_low = current_low.add(perValue);
+      current_high = current_low.add(perValue).subtract(perUnitSize);
+      intervalToAdd = makeInterval(current_low, current_high);
     }
 
     return results;
@@ -749,7 +761,7 @@ function collapseIntervals(intervals: any, perWidth: any) {
     // width equal to the result of the successor function for the point type).
     if (perWidth == null) {
       const pointSize = intervalsClone[0].getPointSize();
-      perWidth = pointSize.isQuantity ? pointSize : new Quantity(Number(pointSize), '1');
+      perWidth = pointSize.isQuantity ? pointSize : new Quantity(pointSize, '1');
     }
 
     // sort intervalsClone by start
@@ -762,10 +774,10 @@ function collapseIntervals(intervals: any, perWidth: any) {
           return 1;
         }
       } else if (a.low != null && b.low != null) {
-        if (a.low < b.low) {
+        if (lessThan(a.low, b.low)) {
           return -1;
         }
-        if (a.low > b.low) {
+        if (greaterThan(a.low, b.low)) {
           return 1;
         }
       } else if (a.low != null && b.low == null) {
@@ -782,10 +794,10 @@ function collapseIntervals(intervals: any, perWidth: any) {
           return 1;
         }
       } else if (a.high != null && b.high != null) {
-        if (a.high < b.high) {
+        if (lessThan(a.high, b.high)) {
           return -1;
         }
-        if (a.high > b.high) {
+        if (greaterThan(a.high, b.high)) {
           return 1;
         }
       } else if (a.high != null && b.high == null) {
@@ -810,8 +822,9 @@ function collapseIntervals(intervals: any, perWidth: any) {
             a.high = b.high;
           }
         } else if (
-          (a.high != null ? a.high.durationBetween(b.low, perWidth.unit).high : undefined) <=
-          perWidth.value
+          perWidth.value.greaterThanOrEquals(
+            a.high != null ? a.high.durationBetween(b.low, perWidth.unit).high : undefined
+          )
         ) {
           a.high = b.high;
         } else {
@@ -828,17 +841,10 @@ function collapseIntervals(intervals: any, perWidth: any) {
           a = b;
         }
       } else {
-        const distance = b.low - a.high;
-        const comparablePerWidth =
-          typeof distance === 'bigint' && Number.isInteger(perWidth.value)
-            ? BigInt(perWidth.value)
-            : perWidth.value;
-        const withinPerWidth =
-          typeof distance === 'bigint' && typeof comparablePerWidth !== 'bigint'
-            ? Number(distance) <= comparablePerWidth
-            : distance <= comparablePerWidth;
+        const distance = subtract(b.low, a.high);
+        const withinPerWidth = perWidth.value.greaterThanOrEquals(distance);
         if (withinPerWidth) {
-          if (b.high > a.high || b.high == null) {
+          if (greaterThan(b.high, a.high) || b.high == null) {
             a.high = b.high;
           }
         } else {
@@ -851,11 +857,4 @@ function collapseIntervals(intervals: any, perWidth: any) {
     collapsedIntervals.push(a);
     return collapsedIntervals;
   }
-}
-
-function truncateDecimal(decimal: any, decimalPlaces: number) {
-  // like parseFloat().toFixed() but floor rather than round
-  // Needed for when per precision is less than the interval input precision
-  const re = new RegExp('^-?\\d+(?:.\\d{0,' + (decimalPlaces || -1) + '})?');
-  return parseFloat(decimal.toString().match(re)[0]);
 }

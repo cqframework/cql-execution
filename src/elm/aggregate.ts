@@ -1,12 +1,25 @@
 import { Expression } from './expression';
-import { typeIsArray, allTrue, anyTrue, removeNulls, numerical_sort } from '../util/util';
-import { Quantity } from '../datatypes/datatypes';
+import { typeIsArray, allTrue, anyTrue, removeNulls } from '../util/util';
+import { doAddition, Quantity } from '../datatypes/datatypes';
+import { Decimal } from '../datatypes/decimal';
 import { Context } from '../runtime/context';
 import { Exception } from '../datatypes/exception';
 import { greaterThan, lessThan } from '../util/comparison';
 import { build } from './builder';
-import { overflowsOrUnderflows } from '../util/math';
-import { ELM_DECIMAL_TYPE } from '../util/elmTypes';
+import * as MathUtil from '../util/math';
+
+function finalizeAggregateResult(result: any, firstItem: any) {
+  if (result == null) {
+    return null;
+  }
+  const finalized = MathUtil.finalizeNumericResult(result);
+  const bounded = MathUtil.overflowsOrUnderflows(finalized) ? null : finalized;
+  if (bounded && firstItem instanceof Quantity && !(bounded instanceof Quantity)) {
+    return new Quantity(bounded, firstItem.unit);
+  } else {
+    return bounded;
+  }
+}
 
 class AggregateExpression extends Expression {
   source: any;
@@ -52,14 +65,18 @@ export class Sum extends AggregateExpression {
       return null;
     }
 
+    let sum;
     if (hasOnlyQuantities(items)) {
-      const values = getValuesFromQuantities(items);
-      const sum = values.reduce((x, y) => x + y);
-      return overflowsOrUnderflows(sum, ELM_DECIMAL_TYPE) ? null : new Quantity(sum, items[0].unit);
+      // note doAddition is Quantity addition
+      sum = items.reduce(doAddition);
     } else {
-      const sum = items.reduce((x: any, y: any) => x + y);
-      return overflowsOrUnderflows(sum, this.resultTypeName) ? null : sum;
+      if (hasDecimals(items)) {
+        sum = sumOfDecimals(items.map(Decimal.from));
+      } else {
+        sum = items.reduce((x: any, y: any) => x + y);
+      }
     }
+    return finalizeAggregateResult(sum, items[0]);
   }
 }
 
@@ -152,14 +169,16 @@ export class Avg extends AggregateExpression {
       return null;
     }
 
+    let decimals;
     if (hasOnlyQuantities(items)) {
-      const values = getValuesFromQuantities(items);
-      const sum = values.reduce((x, y) => x + y);
-      return new Quantity(sum / values.length, items[0].unit);
+      decimals = getValuesFromQuantities(items);
     } else {
-      const sum = items.reduce((x: number, y: number) => x + y);
-      return sum / items.length;
+      // return type is always Decimal, so just map everything to Decimals
+      decimals = items.map(Decimal.from);
     }
+    const sum = sumOfDecimals(decimals);
+    const avg = sum.divideBy(items.length);
+    return finalizeAggregateResult(avg, items[0]);
   }
 }
 
@@ -183,13 +202,22 @@ export class Median extends AggregateExpression {
       return null;
     }
 
-    if (!hasOnlyQuantities(items)) {
-      return medianOfNumbers(items);
+    let decimals;
+    if (hasOnlyQuantities(items)) {
+      decimals = getValuesFromQuantities(items);
+    } else {
+      // Note that the Median signature is Median(argument List<Decimal>) Decimal
+      // because median on a list of even number of items takes the average of the 2 middle items
+      // so we can treat all the input as decimals
+      decimals = items.map(Decimal.from);
     }
 
-    const values = getValuesFromQuantities(items);
-    const median = medianOfNumbers(values);
-    return new Quantity(median, items[0].unit);
+    const sorted = [...decimals].sort((a, b) => a.compareTo(b));
+    const middle = Math.floor(items.length / 2);
+    const median =
+      items.length % 2 === 1 ? sorted[middle] : sorted[middle - 1].add(sorted[middle]).divideBy(2);
+
+    return finalizeAggregateResult(median, items[0]);
   }
 }
 
@@ -216,11 +244,12 @@ export class Mode extends AggregateExpression {
 
     if (hasOnlyQuantities(filtered)) {
       const values = getValuesFromQuantities(filtered);
-      let mode = this.mode(values);
+      const mode = this.mode(values);
       if (mode.length === 1) {
-        mode = mode[0];
+        return new Quantity(mode[0], items[0].unit);
+      } else {
+        return mode.map(m => new Quantity(m, items[0].unit));
       }
-      return new Quantity(mode, items[0].unit);
     } else {
       const mode = this.mode(filtered);
       if (mode.length === 1) {
@@ -276,36 +305,45 @@ export class StdDev extends AggregateExpression {
     if (items.length === 0) {
       return null;
     }
-
+    let values;
     if (hasOnlyQuantities(items)) {
-      const values = getValuesFromQuantities(items);
-      const stdDev = this.standardDeviation(values);
-      return new Quantity(stdDev, items[0].unit);
+      values = getValuesFromQuantities(items);
     } else {
-      return this.standardDeviation(items);
+      values = items.map(Decimal.from);
     }
+
+    const stdDev = this.standardDeviation(values);
+    return finalizeAggregateResult(stdDev, items[0]);
   }
 
-  standardDeviation(list: any[]) {
+  standardDeviation(list: Decimal[]) {
     const val = this.stats(list);
     if (val) {
       return val[this.type];
     }
   }
 
-  stats(list: any[]) {
-    const sum = list.reduce((x, y) => x + y);
-    const mean = sum / list.length;
-    let sumOfSquares = 0;
-
-    for (const sq of list) {
-      sumOfSquares += Math.pow(sq - mean, 2);
+  stats(list: Decimal[]) {
+    if (list.length === 1) {
+      return {
+        standard_variance: null,
+        population_variance: Decimal.from(0),
+        standard_deviation: null,
+        population_deviation: Decimal.from(0)
+      };
     }
+    const sum = list.reduce((x, y) => x.add(y), Decimal.from(0));
+    const mean = sum.divideBy(list.length);
 
-    const std_var = (1 / (list.length - 1)) * sumOfSquares;
-    const pop_var = (1 / list.length) * sumOfSquares;
-    const std_dev = Math.sqrt(std_var);
-    const pop_dev = Math.sqrt(pop_var);
+    const sumOfSquares = list.reduce((total, value) => {
+      const difference = value.subtract(mean);
+      return total.add(difference.power(2));
+    }, Decimal.from(0));
+
+    const std_var = sumOfSquares.divideBy(list.length - 1);
+    const pop_var = sumOfSquares.divideBy(list.length);
+    const std_dev = std_var.sqrt();
+    const pop_dev = pop_var.sqrt();
     return {
       standard_variance: std_var,
       population_variance: pop_var,
@@ -335,17 +373,16 @@ export class Product extends AggregateExpression {
       return null;
     }
 
+    let product;
     if (hasOnlyQuantities(items)) {
-      const values = getValuesFromQuantities(items);
-      const product = values.reduce((x, y) => x * y);
-      // Units are not multiplied for the geometric product
-      return overflowsOrUnderflows(product, ELM_DECIMAL_TYPE)
-        ? null
-        : new Quantity(product, items[0].unit);
+      product = productOfDecimals(getValuesFromQuantities(items));
+    } else if (hasDecimals(items)) {
+      product = productOfDecimals(items.map(Decimal.from));
     } else {
-      const product = items.reduce((x: any, y: any) => x * y);
-      return overflowsOrUnderflows(product, this.resultTypeName) ? null : product;
+      product = items.reduce((x: number, y: number) => x * y);
     }
+
+    return finalizeAggregateResult(product, items[0]);
   }
 }
 
@@ -370,14 +407,20 @@ export class GeometricMean extends AggregateExpression {
       return null;
     }
 
+    let decimals;
     if (hasOnlyQuantities(items)) {
-      const values = getValuesFromQuantities(items);
-      const product = values.reduce((x, y) => x * y);
-      const geoMean = Math.pow(product, 1.0 / items.length);
-      return new Quantity(geoMean, items[0].unit);
+      decimals = getValuesFromQuantities(items);
     } else {
-      const product = items.reduce((x: number, y: number) => x * y);
-      return Math.pow(product, 1.0 / items.length);
+      decimals = items.map(Decimal.from);
+    }
+
+    try {
+      const product = productOfDecimals(decimals);
+      const oneOverLength = Decimal.from(1).divideBy(items.length);
+      const geoMean = product.power(oneOverLength);
+      return finalizeAggregateResult(geoMean, items[0]);
+    } catch {
+      return null;
     }
   }
 }
@@ -431,6 +474,10 @@ export class AnyTrue extends AggregateExpression {
   }
 }
 
+function hasDecimals(values: any[]) {
+  return values.some(value => value && value.isDecimal);
+}
+
 function processQuantities(values: any[]) {
   const items = removeNulls(values);
   if (hasOnlyQuantities(items)) {
@@ -444,7 +491,7 @@ function processQuantities(values: any[]) {
   }
 }
 
-function getValuesFromQuantities(quantities: Quantity[]): number[] {
+function getValuesFromQuantities(quantities: Quantity[]): Decimal[] {
   return quantities.map(quantity => quantity.value);
 }
 
@@ -461,13 +508,10 @@ function convertAllUnits(arr: any[]) {
   return arr.map(q => q.convertUnit(arr[0].unit));
 }
 
-function medianOfNumbers(numbers: number[]) {
-  const items = numerical_sort(numbers, 'asc');
-  if (items.length % 2 === 1) {
-    // Odd number of items
-    return items[(items.length - 1) / 2];
-  } else {
-    // Even number of items
-    return (items[items.length / 2 - 1] + items[items.length / 2]) / 2;
-  }
+function sumOfDecimals(values: Decimal[]) {
+  return values.reduce((sum, value) => sum.add(value));
+}
+
+function productOfDecimals(values: Decimal[]) {
+  return values.reduce((product, value) => product.multiplyBy(value));
 }

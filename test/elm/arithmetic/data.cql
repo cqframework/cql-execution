@@ -82,6 +82,9 @@ define ThreeExpFourReverseMixed: 3L ^ 4
 define TenLongExpNegativeOneLong: 10L ^ -1L
 define TwoLongExpMaxLong: 2L ^ maximum Long
 define TwoLongExpMinLong: 2L ^ minimum Long
+define DecimalPowerNeedsNormalization: 1.23456789 ^ 2.0
+define NegativeFractionalPower: (-1.0) ^ 0.5
+define ZeroNegativePower: 0.0 ^ -1.0
 
 // @Test: MinValue
 define MinInteger: minimum Integer
@@ -105,6 +108,7 @@ define Even: 9 div 3
 define TenDivThreeLong: 10L div 3L
 define TenDivThreeMixed: 10 div 3L
 define TenDivThreeReverseMixed: 10L div 3
+define QuantityTruncatedDivide: 10.5 'g' div 2.0 'g'
 
 // @Test: Modulo
 define Mod: 3 mod 2
@@ -120,16 +124,19 @@ define ThreeModZeroDecimal: 3.0 mod 0.0
 define Ceil: Ceiling(10.1)
 define Even: Ceiling(10)
 define CeilTenLong: Ceiling(10L)
+define CeilingOverflow: Ceiling(2147483647.1)
 
 // @Test: Floor
 define flr: Floor(10.1)
 define Even: Floor(10)
 define FloorTenLong: Floor(10L)
+define FloorUnderflow: Floor(-2147483648.1)
 
 // @Test: Truncate
 define Trunc: Truncate(10.1)
 define Even: Truncate(10)
 define TruncTenLong: Truncate(10L)
+define TruncateOverflow: Truncate(2147483648.0)
 
 // @Test: Abs
 define Pos: Abs(10)
@@ -144,6 +151,8 @@ define Up: Round(4.56)
 define Up_percent: Round(4.56,1)
 define Down: Round(4.49)
 define Down_percent: Round(4.43,1)
+define NegativeHalf: Round(-0.5)
+define NegativeOnePointFive: Round(-1.5)
 
 // @Test: Ln
 define ln: Ln(4)
@@ -250,7 +259,7 @@ define LongMultiplyNearUnderflow: minimum Long * 1L
 // NOTE: Long division results in decimal, so it must overflow/underflow decimal
 define LongDivideOverflow: maximum Long / 0.05
 define LongDivideUnderflow: minimum Long / 0.05
-define LongDivideNearOverflow: maximum Long / 1024L
+define LongDivideNearOverflow: maximum Long / 92737L
 define LongDivideNearUnderflow: minimum Long / 1024L
 define LongDivideByZero: 1L / 0L
 define LongPowerOverflow: (maximum Long)^3L

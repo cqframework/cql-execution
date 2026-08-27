@@ -15,6 +15,7 @@ import {
   Concept,
   Date as CqlDate,
   DateTime as CqlDateTime,
+  Decimal as CqlDecimal,
   Quantity as CqlQuantity,
   Ratio as CqlRatio,
   Interval,
@@ -173,9 +174,9 @@ function toLongParameter(name: string, result: number): ParametersParameter {
   return { name, valueString: String(result) };
 }
 
-function toDecimalParameter(name: string, result: number): ParametersParameter {
+function toDecimalParameter(name: string, result: CqlDecimal | number): ParametersParameter {
   // TODO: use the quantity-precision extension to communicate precision of the value
-  return { name, valueDecimal: result };
+  return { name, valueDecimal: result instanceof CqlDecimal ? result.toNumber() : result };
 }
 
 function toDateParameter(name: string, result: CqlDate) {
@@ -305,15 +306,20 @@ function toChoiceParameter(name: string, result: any, typeSpecifier: AnyTypeSpec
   return { name };
 }
 
-function toFhirQuantity(val: CqlQuantity | number, isIntegerOrLong = false): FhirQuantity {
+function toFhirQuantity(
+  val: CqlQuantity | CqlDecimal | number,
+  isIntegerOrLong = false
+): FhirQuantity {
   let fq: FhirQuantity;
   if (typeof val === 'number') {
     fq = { value: val };
   } else if (typeof val === 'bigint') {
     fq = { value: Number(val) };
+  } else if (val instanceof CqlDecimal) {
+    fq = { value: val.toNumber() };
   } else {
     const cq = val as CqlQuantity;
-    fq = { value: cq.value } as FhirQuantity;
+    fq = { value: cq.value.toNumber() };
     if (cq.unit != null) {
       fq.unit = fq.code = cq.unit;
       if (

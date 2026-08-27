@@ -247,11 +247,9 @@ define "Expand": Tuple{
     output: null
   },
   "ExpandEmptyList": Tuple{
-    skipped: 'Wrong answer (should be empty list)'
-    /*
     expression: expand { },
     output: { }
-    */  },
+  },
   "ExpandListWithNull": Tuple{
     skipped: 'Wrong answer (should be empty list due to removing nulls)'
     /*
@@ -263,61 +261,49 @@ define "Expand": Tuple{
     output: { Interval[@2018-01-01, @2018-01-01], Interval[@2018-01-02, @2018-01-02], Interval[@2018-01-03, @2018-01-03], Interval[@2018-01-04, @2018-01-04] }
   },
   "ExpandPerDayIntervalOverload": Tuple{
-    skipped: 'Wrong answer (single interval overload should return list of points)'
-    /*
     expression: expand Interval[@2018-01-01, @2018-01-04] per day,
     output: { @2018-01-01, @2018-01-02, @2018-01-03, @2018-01-04 }
-    */  },
+  },
   "ExpandPer2Days": Tuple{
     expression: expand { Interval[@2018-01-01, @2018-01-04] } per 2 days,
     output: { Interval[@2018-01-01, @2018-01-02], Interval[@2018-01-03, @2018-01-04] }
   },
   "ExpandPer2DaysIntervalOverload": Tuple{
-    skipped: 'Wrong answer (single interval overload should return list of points)'
-    /*
     expression: expand Interval[@2018-01-01, @2018-01-04] per 2 days,
     output: { @2018-01-01, @2018-01-03 }
-    */  },
+  },
   "ExpandPerHour": Tuple{
     expression: expand { Interval[@T10:00, @T12:30] } per hour,
     output: { Interval[@T10, @T10], Interval[@T11, @T11], Interval[@T12, @T12] }
   },
   "ExpandPerHourIntervalOverload": Tuple{
-    skipped: 'Wrong answer (single interval overload should return list of points)'
-    /*
     expression: expand Interval[@T10:00, @T12:30] per hour,
     output: { @T10, @T11, @T12 }
-    */  },
+  },
   "ExpandPerHourOpen": Tuple{
     expression: expand { Interval[@T10:00, @T12:30) } per hour,
     output: { Interval[@T10, @T10], Interval[@T11, @T11], Interval[@T12, @T12] }
   },
   "ExpandPerHourOpenIntervalOverload": Tuple{
-    skipped: 'Wrong answer (single interval overload should return list of points)'
-    /*
     expression: expand Interval[@T10:00, @T12:30) per hour,
     output: { @T10, @T11, @T12 }
-    */  },
+  },
   "ExpandPer1": Tuple{
     expression: expand { Interval[10.0, 12.5] } per 1,
     output: { Interval[10, 10], Interval[11, 11], Interval[12, 12] }
   },
   "ExpandPer1IntervalOverload": Tuple{
-    skipped: 'Wrong answer (single interval overload should return list of points)'
-    /*
     expression: expand Interval[10.0, 12.5] per 1,
     output: { 10, 11, 12 }
-    */  },
+  },
   "ExpandPer1Open": Tuple{
     expression: expand { Interval[10.0, 12.5) } per 1,
     output: { Interval[10, 10], Interval[11, 11], Interval[12, 12] }
   },
   "ExpandPer1OpenIntervalOverload": Tuple{
-    skipped: 'Wrong answer (single interval overload should return list of points)'
-    /*
     expression: expand Interval[10.0, 12.5) per 1,
     output: { 10, 11, 12 }
-    */  },
+  },
   "ExpandPerMinute": Tuple{
     expression: expand { Interval[@T10, @T10] } per minute,
     output: { }
@@ -327,13 +313,13 @@ define "Expand": Tuple{
     output: { }
   },
   "ExpandPer0D1": Tuple{
-    skipped: 'Wrong answer (interval elements\'s decimals do not match expected output)'
+    skipped: 'Wrong output: Clarification still needed but provided answer is incorrect. See https://jira.hl7.org/browse/FHIR-58705'
     /*
     expression: expand { Interval[10, 10] } per 0.1,
     output: { Interval[10.0, 10.0], Interval[10.1, 10.1], Interval[10.2, 10.2], Interval[10.3, 10.3], Interval[10.4, 10.4], Interval[10.5, 10.5], Interval[10.6, 10.6], Interval[10.7, 10.7], Interval[10.8, 10.8], Interval[10.9, 10.9] }
     */  },
   "ExpandPer0D1IntervalOverload": Tuple{
-    skipped: 'Wrong answer (single interval overload should return list of points)'
+    skipped: 'Wrong output: Clarification still needed but provided answer is incorrect. See https://jira.hl7.org/browse/FHIR-58705'
     /*
     expression: expand Interval[10, 10] per 0.1,
     output: { 10.0, 10.1, 10.2, 10.3, 10.4, 10.5, 10.6, 10.7, 10.8, 10.9 }
@@ -343,41 +329,33 @@ define "Expand": Tuple{
     output: { Interval[1, 1], Interval[2, 2], Interval[3, 3], Interval[4, 4], Interval[5, 5], Interval[6, 6], Interval[7, 7], Interval[8, 8], Interval[9, 9], Interval[10, 10] }
   },
   "ExpandIntegerIntervalOverload": Tuple{
-    skipped: 'Wrong answer (single interval overload should return list of points)'
-    /*
     expression: expand Interval[1, 10],
     output: { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
-    */  },
+  },
   "ExpandIntervalOpen": Tuple{
     expression: expand { Interval[1, 10) },
     output: { Interval[1, 1], Interval[2, 2], Interval[3, 3], Interval[4, 4], Interval[5, 5], Interval[6, 6], Interval[7, 7], Interval[8, 8], Interval[9, 9] }
   },
   "ExpandIntegerOpenIntervalOverload": Tuple{
-    skipped: 'Wrong answer (single interval overload should return list of points)'
-    /*
     expression: expand Interval[1, 10),
     output: { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
-    */  },
+  },
   "ExpandIntervalPer2": Tuple{
     expression: expand { Interval[1, 10] } per 2,
     output: { Interval[1, 2], Interval[3, 4], Interval[5, 6], Interval[7, 8], Interval[9, 10] }
   },
   "ExpandIntervalPer2IntervalOverload": Tuple{
-    skipped: 'Wrong answer (single interval overload should return list of points)'
-    /*
     expression: expand Interval[1, 10] per 2,
     output: { 1, 3, 5, 7, 9 }
-    */  },
+  },
   "ExpandIntervalOpenPer2": Tuple{
     expression: expand { Interval[1, 10) } per 2,
     output: { Interval[1, 2], Interval[3, 4], Interval[5, 6], Interval[7, 8] }
   },
   "ExpandIntervalOpenPer2IntervalOverload": Tuple{
-    skipped: 'Wrong answer (single interval overload should return list of points)'
-    /*
     expression: expand Interval[1, 10) per 2,
     output: { 1, 3, 5, 7 }
-    */  }
+  }
 }
 
 define "Contains": Tuple{

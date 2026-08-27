@@ -7,6 +7,7 @@ import { Interval } from '../../../src/datatypes/interval';
 import { DateTime } from '../../../src/datatypes/datetime';
 import { Quantity } from '../../../src/datatypes/quantity';
 import { getLocalIdByPath } from '../../testHelpers';
+import { Decimal } from '../../../src/datatypes/decimal';
 
 describe('DateRangeOptimizedQuery', () => {
   beforeEach(function () {
@@ -196,12 +197,12 @@ describe('Sorting', () => {
   it('should correctly sort quantities asc', async function () {
     const e = await this.quantityListAsc.exec(this.ctx);
     e.should.have.length(2);
-    e[0]['value'].should.equal(2);
+    e[0]['value'].should.equalDecimal(Decimal.from(2));
   });
 
   it('should correctly sort quantities', async function () {
     const e = await this.quantityListSort.exec(this.ctx);
-    e[0]['N']['value'].should.equal(2);
+    e[0]['N']['value'].should.equalDecimal(Decimal.from(2));
   });
 
   it('should be able to sort by a tuple field asc', async function () {

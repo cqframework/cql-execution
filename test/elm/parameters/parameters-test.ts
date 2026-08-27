@@ -3,6 +3,7 @@ import { Code, Concept } from '../../../src/datatypes/clinical';
 import { Date, DateTime } from '../../../src/datatypes/datetime';
 import { Interval } from '../../../src/datatypes/interval';
 import { Quantity } from '../../../src/datatypes/quantity';
+import { Decimal } from '../../../src/datatypes/decimal';
 import setup from '../../setup';
 const data = require('./data');
 
@@ -99,7 +100,9 @@ describe('DecimalParameterTypes', () => {
   });
 
   it('should execute to provided valid value', async function () {
-    (await this.foo.exec(this.ctx.withParameters({ FooP: 3.0 }))).should.equal(3.0);
+    (await this.foo.exec(this.ctx.withParameters({ FooP: Decimal.from(3.0) }))).should.equalDecimal(
+      Decimal.from(3.0)
+    );
   });
 
   it('should throw when provided value is wrong type', function () {
@@ -107,11 +110,13 @@ describe('DecimalParameterTypes', () => {
   });
 
   it('should execute to default value', async function () {
-    (await this.foo2.exec(this.ctx)).should.equal(1.5);
+    (await this.foo2.exec(this.ctx)).should.equalDecimal(Decimal.from(1.5));
   });
 
   it('should execute to overriding valid value', async function () {
-    (await this.foo2.exec(this.ctx.withParameters({ FooDP: 3.0 }))).should.equal(3.0);
+    (
+      await this.foo2.exec(this.ctx.withParameters({ FooDP: Decimal.from(3.0) }))
+    ).should.equalDecimal(Decimal.from(3.0));
   });
 
   it('should throw when overriding value is wrong type', function () {
@@ -129,7 +134,9 @@ describe('IntegerParameterTypes', () => {
   });
 
   it('should throw when provided value is wrong type', function () {
-    should(() => this.foo.exec(this.ctx.withParameters({ FooP: 3.5 }))).throw(/.*wrong type.*/);
+    should(() => this.foo.exec(this.ctx.withParameters({ FooP: Decimal.from(3.5) }))).throw(
+      /.*wrong type.*/
+    );
   });
 
   it('should execute to default value', async function () {
@@ -141,7 +148,9 @@ describe('IntegerParameterTypes', () => {
   });
 
   it('should throw when overriding value is wrong type', function () {
-    should(() => this.foo2.exec(this.ctx.withParameters({ FooDP: 3.5 }))).throw(/.*wrong type.*/);
+    should(() => this.foo2.exec(this.ctx.withParameters({ FooDP: Decimal.from(3.5) }))).throw(
+      /.*wrong type.*/
+    );
   });
 });
 
@@ -423,9 +432,11 @@ describe('IntervalParameterTypes', () => {
   });
 
   it('should throw when interval contains a wrong point type', async function () {
-    should(() => this.foo.exec(this.ctx.withParameters({ FooP: new Interval(1.5, 5.5) }))).throw(
-      /.*wrong type.*/
-    );
+    should(() =>
+      this.foo.exec(
+        this.ctx.withParameters({ FooP: new Interval(Decimal.from(1.5), Decimal.from(5.5)) })
+      )
+    ).throw(/.*wrong type.*/);
   });
 
   it('should execute to default value', async function () {
@@ -443,9 +454,11 @@ describe('IntervalParameterTypes', () => {
   });
 
   it('should throw when overriding interval contains a wrong point type', async function () {
-    should(() => this.foo2.exec(this.ctx.withParameters({ FooP: new Interval(1.5, 5.5) }))).throw(
-      /.*wrong type.*/
-    );
+    should(() =>
+      this.foo2.exec(
+        this.ctx.withParameters({ FooP: new Interval(Decimal.from(1.5), Decimal.from(5.5)) })
+      )
+    ).throw(/.*wrong type.*/);
   });
 });
 

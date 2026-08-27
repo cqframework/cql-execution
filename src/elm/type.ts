@@ -5,7 +5,8 @@ import { DateTime, Date } from '../datatypes/datetime';
 import { Concept } from '../datatypes/clinical';
 import { Interval as dtInterval } from '../datatypes/interval';
 import { Quantity, parseQuantity } from '../datatypes/quantity';
-import { isValidDecimal, isValidInteger, isValidLong, limitDecimalPrecision } from '../util/math';
+import { Decimal } from '../datatypes/decimal';
+import { isValidDecimal, isValidInteger, isValidLong } from '../util/math';
 import { normalizeMillisecondsField } from '../util/util';
 import { Ratio } from '../datatypes/ratio';
 import {
@@ -95,6 +96,21 @@ export class ToBoolean extends Expression {
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
+      if (typeof arg === 'boolean') {
+        return arg;
+      } else if (typeof arg === 'number' || typeof arg === 'bigint') {
+        if (arg == 1) {
+          return true;
+        } else if (arg == 0) {
+          return false;
+        }
+      } else if (arg instanceof Decimal) {
+        if (arg.equals('1.0')) {
+          return true;
+        } else if (arg.equals('0.0')) {
+          return false;
+        }
+      }
       const strArg = arg.toString().toLowerCase();
       if (['true', 't', 'yes', 'y', '1'].includes(strArg)) {
         return true;
@@ -156,6 +172,14 @@ export class ToDateTime extends Expression {
   }
 }
 
+// Described in the CQL spec as (+|-)?#0(.0#)?
+// Meaning an optional polarity indicator,
+// followed by any number of digits (including none),
+// followed by at least one digit,
+// followed optionally by a decimal point,
+// at least one digit, and any number of additional digits (including none).
+const CQL_DECIMAL_STRING = /^[+-]?\d+(\.\d+)?$/;
+
 export class ToDecimal extends Expression {
   constructor(json: any) {
     super(json);
@@ -165,13 +189,24 @@ export class ToDecimal extends Expression {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
       if (arg.isUncertainty) {
-        const low = limitDecimalPrecision(parseFloat(arg.low.toString()));
-        const high = limitDecimalPrecision(parseFloat(arg.high.toString()));
+        const low = Decimal.from(arg.low).normalized();
+        const high = Decimal.from(arg.high).normalized();
         return new Uncertainty(low, high);
       } else {
-        const decimal = limitDecimalPrecision(parseFloat(arg.toString()));
-        if (isValidDecimal(decimal)) {
-          return decimal;
+        if (typeof arg === 'string' && !CQL_DECIMAL_STRING.test(arg)) {
+          // reject anything that doesn't match the CQL Decimal format
+          // In particular, our Decimal.from could be more permissive
+          // and allow things like "1e8", which is not allowed by the spec
+          return null;
+        }
+
+        try {
+          const decimal = Decimal.from(arg.toString());
+          if (isValidDecimal(decimal)) {
+            return decimal.normalized();
+          }
+        } catch {
+          return null;
         }
       }
     }
@@ -192,6 +227,11 @@ export class ToInteger extends Expression {
       }
     } else if (typeof arg === 'bigint') {
       const integer = Number(arg);
+      if (isValidInteger(integer)) {
+        return integer;
+      }
+    } else if (arg && arg.isDecimal) {
+      const integer = (arg as Decimal).toInteger();
       if (isValidInteger(integer)) {
         return integer;
       }
@@ -232,6 +272,11 @@ export class ToLong extends Expression {
       } catch {
         return null;
       }
+    } else if (arg && arg.isDecimal) {
+      const long = (arg as Decimal).toLong();
+      if (isValidLong(long)) {
+        return long;
+      }
     } else if (typeof arg === 'string') {
       // check string format because BigInt throws for invalid strings
       if (!/^[+-]?\d+$/.test(arg)) {
@@ -260,14 +305,8 @@ export class ToQuantity extends Expression {
   convertValue(val: any): any {
     if (val == null) {
       return null;
-    } else if (typeof val === 'number') {
+    } else if (typeof val === 'number' || typeof val === 'bigint' || val.isDecimal) {
       return new Quantity(val, '1');
-    } else if (typeof val === 'bigint') {
-      // By definition, Quantity value is a Decimal in CQL, so we need to convert bigint to number.
-      // While this isn't perfect, in practice it is probably OK since the range of safer integers
-      // in JS number is pretty big: -(2^53 - 1) to 2^53 - 1, which is plus/minus 9 quadrillion.
-      // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isSafeInteger#description
-      return new Quantity(Number(val), '1');
     } else if (val.isRatio) {
       // numerator and denominator are guaranteed non-null
       return val.numerator.dividedBy(val.denominator);
@@ -734,10 +773,9 @@ function guessSpecifierType(val: any): any {
     return typeHierarchy[0];
   } else if (typeof val === 'boolean') {
     return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_BOOLEAN_TYPE };
-  } else if (typeof val === 'number' && Math.floor(val) === val) {
-    // it could still be a decimal, but we have to just take our best guess!
-    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_INTEGER_TYPE };
   } else if (typeof val === 'number') {
+    return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_INTEGER_TYPE };
+  } else if (val.isDecimal) {
     return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_DECIMAL_TYPE };
   } else if (typeof val === 'bigint') {
     return { type: ELM_NAMED_TYPE_SPECIFIER, name: ELM_LONG_TYPE };
