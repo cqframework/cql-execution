@@ -42,6 +42,11 @@ describe('Decimal', () => {
     Decimal.from('8').log(2).should.equalDecimal(Decimal.from(3));
   });
 
+  it('should reject an invalid scale', () => {
+    (() => Decimal.from(1).setScale(-1)).should.throw(RangeError);
+    (() => Decimal.from(1).setScale(1.5)).should.throw(RangeError);
+  });
+
   it('should reject non-finite and divide-by-zero values', () => {
     (() => Decimal.from('not a number')).should.throw();
     (() => Decimal.from(1).divideBy(0)).should.throw();

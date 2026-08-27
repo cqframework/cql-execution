@@ -11421,6 +11421,8 @@ define has_null: Mode({1,null,null,2,2})
 define empty: Mode({})
 
 define bi_modal: Mode({1,2,2,2,3,3,3,4,5})
+define QuantitySingleMode: Mode({1.0 'g', 1.0 'g', 2.0 'g'})
+define QuantityBiModal: Mode({1.0 'g', 1.0 'g', 2.0 'g', 2.0 'g'})
 define NumbersAndQuantities: Mode({1 ,2 'ml',3 'ml',4 'ml',5 'ml',0 'ml'})
 define IncompatibleUnitsNull: Mode({1 'mg/d', 0.002 '/d'})
 */
@@ -11437,7 +11439,7 @@ module.exports['Mode'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "331",
+        "r" : "364",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -12026,7 +12028,7 @@ module.exports['Mode'] = {
       }, {
         "localId" : "309",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "NumbersAndQuantities",
+        "name" : "QuantitySingleMode",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -12035,46 +12037,268 @@ module.exports['Mode'] = {
           "s" : {
             "r" : "309",
             "s" : [ {
-              "value" : [ "", "define ", "NumbersAndQuantities", ": " ]
+              "value" : [ "", "define ", "QuantitySingleMode", ": " ]
             }, {
-              "r" : "326",
+              "r" : "320",
               "s" : [ {
                 "value" : [ "Mode", "(" ]
               }, {
                 "r" : "310",
                 "s" : [ {
+                  "value" : [ "{" ]
+                }, {
                   "r" : "311",
-                  "value" : [ "{", "1", " ," ]
+                  "s" : [ {
+                    "value" : [ "1.0 ", "'g'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
                 }, {
                   "r" : "312",
+                  "s" : [ {
+                    "value" : [ "1.0 ", "'g'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "313",
+                  "s" : [ {
+                    "value" : [ "2.0 ", "'g'" ]
+                  } ]
+                }, {
+                  "value" : [ "}" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Mode",
+          "localId" : "320",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "321",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "322",
+              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ]
+            }
+          } ],
+          "source" : {
+            "type" : "List",
+            "localId" : "310",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "314",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "315",
+                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Quantity",
+              "localId" : "311",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 1.0,
+              "unit" : "g",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "312",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 1.0,
+              "unit" : "g",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "313",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 2.0,
+              "unit" : "g",
+              "annotation" : [ ]
+            } ]
+          }
+        }
+      }, {
+        "localId" : "325",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "QuantityBiModal",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "325",
+            "s" : [ {
+              "value" : [ "", "define ", "QuantityBiModal", ": " ]
+            }, {
+              "r" : "337",
+              "s" : [ {
+                "value" : [ "Mode", "(" ]
+              }, {
+                "r" : "326",
+                "s" : [ {
+                  "value" : [ "{" ]
+                }, {
+                  "r" : "327",
+                  "s" : [ {
+                    "value" : [ "1.0 ", "'g'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "328",
+                  "s" : [ {
+                    "value" : [ "1.0 ", "'g'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "329",
+                  "s" : [ {
+                    "value" : [ "2.0 ", "'g'" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "330",
+                  "s" : [ {
+                    "value" : [ "2.0 ", "'g'" ]
+                  } ]
+                }, {
+                  "value" : [ "}" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Mode",
+          "localId" : "337",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "338",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "339",
+              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ]
+            }
+          } ],
+          "source" : {
+            "type" : "List",
+            "localId" : "326",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "331",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "332",
+                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Quantity",
+              "localId" : "327",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 1.0,
+              "unit" : "g",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "328",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 1.0,
+              "unit" : "g",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "329",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 2.0,
+              "unit" : "g",
+              "annotation" : [ ]
+            }, {
+              "type" : "Quantity",
+              "localId" : "330",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 2.0,
+              "unit" : "g",
+              "annotation" : [ ]
+            } ]
+          }
+        }
+      }, {
+        "localId" : "342",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "NumbersAndQuantities",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "342",
+            "s" : [ {
+              "value" : [ "", "define ", "NumbersAndQuantities", ": " ]
+            }, {
+              "r" : "359",
+              "s" : [ {
+                "value" : [ "Mode", "(" ]
+              }, {
+                "r" : "343",
+                "s" : [ {
+                  "r" : "344",
+                  "value" : [ "{", "1", " ," ]
+                }, {
+                  "r" : "345",
                   "s" : [ {
                     "value" : [ "2 ", "'ml'" ]
                   } ]
                 }, {
                   "value" : [ "," ]
                 }, {
-                  "r" : "313",
+                  "r" : "346",
                   "s" : [ {
                     "value" : [ "3 ", "'ml'" ]
                   } ]
                 }, {
                   "value" : [ "," ]
                 }, {
-                  "r" : "314",
+                  "r" : "347",
                   "s" : [ {
                     "value" : [ "4 ", "'ml'" ]
                   } ]
                 }, {
                   "value" : [ "," ]
                 }, {
-                  "r" : "315",
+                  "r" : "348",
                   "s" : [ {
                     "value" : [ "5 ", "'ml'" ]
                   } ]
                 }, {
                   "value" : [ "," ]
                 }, {
-                  "r" : "316",
+                  "r" : "349",
                   "s" : [ {
                     "value" : [ "0 ", "'ml'" ]
                   } ]
@@ -12089,48 +12313,48 @@ module.exports['Mode'] = {
         } ],
         "expression" : {
           "type" : "Mode",
-          "localId" : "326",
+          "localId" : "359",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "327",
+            "localId" : "360",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "328",
+              "localId" : "361",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "310",
+            "localId" : "343",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "320",
+              "localId" : "353",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "321",
+                "localId" : "354",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "ToQuantity",
-              "localId" : "318",
+              "localId" : "351",
               "annotation" : [ ],
               "signature" : [ {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "319",
+                "localId" : "352",
                 "name" : "{urn:hl7-org:elm-types:r1}Integer",
                 "annotation" : [ ]
               } ],
               "operand" : {
                 "type" : "Literal",
-                "localId" : "311",
+                "localId" : "344",
                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                 "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                 "value" : "1",
@@ -12138,35 +12362,35 @@ module.exports['Mode'] = {
               }
             }, {
               "type" : "Quantity",
-              "localId" : "312",
+              "localId" : "345",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 2,
               "unit" : "ml",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "313",
+              "localId" : "346",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 3,
               "unit" : "ml",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "314",
+              "localId" : "347",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 4,
               "unit" : "ml",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "315",
+              "localId" : "348",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 5,
               "unit" : "ml",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "316",
+              "localId" : "349",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 0,
               "unit" : "ml",
@@ -12175,7 +12399,7 @@ module.exports['Mode'] = {
           }
         }
       }, {
-        "localId" : "331",
+        "localId" : "364",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
         "name" : "IncompatibleUnitsNull",
         "context" : "Patient",
@@ -12184,26 +12408,26 @@ module.exports['Mode'] = {
           "type" : "Annotation",
           "t" : [ ],
           "s" : {
-            "r" : "331",
+            "r" : "364",
             "s" : [ {
               "value" : [ "", "define ", "IncompatibleUnitsNull", ": " ]
             }, {
-              "r" : "341",
+              "r" : "374",
               "s" : [ {
                 "value" : [ "Mode", "(" ]
               }, {
-                "r" : "332",
+                "r" : "365",
                 "s" : [ {
                   "value" : [ "{" ]
                 }, {
-                  "r" : "333",
+                  "r" : "366",
                   "s" : [ {
                     "value" : [ "1 ", "'mg/d'" ]
                   } ]
                 }, {
                   "value" : [ ", " ]
                 }, {
-                  "r" : "334",
+                  "r" : "367",
                   "s" : [ {
                     "value" : [ "0.002 ", "'/d'" ]
                   } ]
@@ -12218,45 +12442,45 @@ module.exports['Mode'] = {
         } ],
         "expression" : {
           "type" : "Mode",
-          "localId" : "341",
+          "localId" : "374",
           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
           "annotation" : [ ],
           "signature" : [ {
             "type" : "ListTypeSpecifier",
-            "localId" : "342",
+            "localId" : "375",
             "annotation" : [ ],
             "elementType" : {
               "type" : "NamedTypeSpecifier",
-              "localId" : "343",
+              "localId" : "376",
               "name" : "{urn:hl7-org:elm-types:r1}Quantity",
               "annotation" : [ ]
             }
           } ],
           "source" : {
             "type" : "List",
-            "localId" : "332",
+            "localId" : "365",
             "annotation" : [ ],
             "resultTypeSpecifier" : {
               "type" : "ListTypeSpecifier",
-              "localId" : "335",
+              "localId" : "368",
               "annotation" : [ ],
               "elementType" : {
                 "type" : "NamedTypeSpecifier",
-                "localId" : "336",
+                "localId" : "369",
                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
                 "annotation" : [ ]
               }
             },
             "element" : [ {
               "type" : "Quantity",
-              "localId" : "333",
+              "localId" : "366",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 1,
               "unit" : "mg/d",
               "annotation" : [ ]
             }, {
               "type" : "Quantity",
-              "localId" : "334",
+              "localId" : "367",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
               "value" : 0.002,
               "unit" : "/d",
