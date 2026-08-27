@@ -135,13 +135,6 @@ describe('convertUnit', () => {
     result.should.equalDecimal(Decimal.from('0.00018939'));
   });
 
-  // it('should not truncate precision to 8 decimals when adjustPrecision is false', () => {
-  //   const result = convertUnit(Decimal.from(1), '[ft_i]', '[mi_i]', false);
-  //   result.should.not.equalDecimal(Decimal.from("0.00018939"));
-  //   result.toString().length.should.be.greaterThan(10);
-  //   result.toString().should.startWith('0.000189393939393');
-  // });
-
   it('should return undefined for incompatible units', () => {
     should(convertUnit(Decimal.from(18), '[in_i]', '[in_i]2')).be.undefined();
   });
