@@ -3605,8 +3605,8 @@ describe('IntegerIntervalExpand', () => {
     // https://jira.hl7.org/browse/FHIR-58705 and
     // https://chat.fhir.org/#narrow/channel/179220-cql/topic/Interval.20Expand.20example/with/619051021
     // Note that as of this writing the produced result is { } (empty list)
-    // which I believe is the correct result.
-    // But an empty list doesn't clearly show the intent of the test.
+    // but I believe the correct answer is either { } or { [ Interval[10.0, 10.0 ] }
+    // depending on whether the size of the interval is based on the precision of the decimals (not currently supported)
 
     // define PerDecimalMorePrecise: expand { Interval[10, 10] } per 0.1
     const a = await this.perDecimalMorePrecise.exec(this.ctx);
