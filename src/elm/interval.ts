@@ -484,7 +484,7 @@ export class Expand extends Expression {
     } else if (['quantity'].includes(type)) {
       expandFunction = this.expandQuantityInterval;
       defaultPer = (interval: any) => new Quantity(1, interval.low.unit);
-    } else if (['integer', 'long', 'decimal'].includes(type)) {
+    } else if (['long', 'integer', 'decimal'].includes(type)) {
       expandFunction = this.expandNumericInterval;
       defaultPer = (_interval: any) => new Quantity(1, '1');
     } else {
