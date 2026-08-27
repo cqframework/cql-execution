@@ -481,12 +481,12 @@ export class Expand extends Expression {
     if (['time', 'date', 'datetime'].includes(type)) {
       expandFunction = this.expandDTishInterval;
       defaultPer = (interval: any) => new Quantity(1, interval.low.getPrecision());
-    } else if (['integer', 'long', 'decimal'].includes(type)) {
-      expandFunction = this.expandNumericInterval;
-      defaultPer = (_interval: any) => new Quantity(1, '1');
     } else if (['quantity'].includes(type)) {
       expandFunction = this.expandQuantityInterval;
       defaultPer = (interval: any) => new Quantity(1, interval.low.unit);
+    } else if (['integer', 'long', 'decimal'].includes(type)) {
+      expandFunction = this.expandNumericInterval;
+      defaultPer = (_interval: any) => new Quantity(1, '1');
     } else {
       throw new Error('Interval list type not yet supported.');
     }

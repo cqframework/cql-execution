@@ -373,7 +373,6 @@ describe('ToDecimal', () => {
   });
 
   it('should be null if wrong format (+.1)', async function () {
-    // TODO: parseFloat is more forgiving than the CQL spec, so this does get converted
     should(await this.wrongFormat.exec(this.ctx)).be.null();
   });
 
