@@ -453,10 +453,17 @@ export class Expand extends Expression {
       return null;
     }
 
-    // CQL 1.5 introduced an overload to allow singular intervals; make it a list so we can use the same logic for either overload
-    if (!Array.isArray(intervals)) {
+    const isSingleInterval = !Array.isArray(intervals);
+    // CQL 1.5 introduced an overload to allow singular intervals; make it a list so we can use the same logic for either overload.
+    if (isSingleInterval) {
       intervals = [intervals];
     }
+
+    // If the list of intervals is empty, the result is empty.
+    if (intervals.length === 0) {
+      return [];
+    }
+
     const type = intervalListType(intervals);
     if (type === 'mismatch') {
       throw new Error('List of intervals contains mismatched types.');
@@ -506,6 +513,14 @@ export class Expand extends Expression {
         return null;
       }
       results.push(...(items || []));
+    }
+
+    // If the input argument is an interval, rather than a list of intervals,
+    // the result is a list of points, rather than a list of intervals.
+    // In this case, the calculation is performed the same way,
+    // but the starting point of each resulting interval is returned, rather than the interval.
+    if (isSingleInterval) {
+      return results.map(i => i.start());
     }
 
     return results;
