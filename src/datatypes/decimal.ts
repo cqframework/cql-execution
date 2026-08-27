@@ -107,10 +107,14 @@ export class Decimal {
   }
 
   successor() {
+    // TODO: successor should be based on current precision
+    // For Decimal, successor is equivalent to adding 1 * the precision of the argument.
     return new Decimal(this.value.add(MIN_PRECISION_VALUE));
   }
 
   predecessor() {
+    // TODO: predecessor should be based on current precision
+    // For Decimal, predecessor is equivalent to subtracting 1 * the precision of the argument.
     return new Decimal(this.value.minus(MIN_PRECISION_VALUE));
   }
 
