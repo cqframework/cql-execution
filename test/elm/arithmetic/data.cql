@@ -108,6 +108,7 @@ define Even: 9 div 3
 define TenDivThreeLong: 10L div 3L
 define TenDivThreeMixed: 10 div 3L
 define TenDivThreeReverseMixed: 10L div 3
+define QuantityTruncatedDivide: 10.5 'g' div 2.0 'g'
 
 // @Test: Modulo
 define Mod: 3 mod 2

@@ -6808,6 +6808,7 @@ define Even: 9 div 3
 define TenDivThreeLong: 10L div 3L
 define TenDivThreeMixed: 10 div 3L
 define TenDivThreeReverseMixed: 10L div 3
+define QuantityTruncatedDivide: 10.5 'g' div 2.0 'g'
 */
 
 module.exports['TruncatedDivide'] = {
@@ -6822,7 +6823,7 @@ module.exports['TruncatedDivide'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "249",
+        "r" : "260",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -7184,6 +7185,69 @@ module.exports['TruncatedDivide'] = {
               "value" : "3",
               "annotation" : [ ]
             }
+          } ]
+        }
+      }, {
+        "localId" : "260",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "QuantityTruncatedDivide",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "260",
+            "s" : [ {
+              "value" : [ "", "define ", "QuantityTruncatedDivide", ": " ]
+            }, {
+              "r" : "261",
+              "s" : [ {
+                "r" : "262",
+                "s" : [ {
+                  "value" : [ "10.5 ", "'g'" ]
+                } ]
+              }, {
+                "value" : [ " div " ]
+              }, {
+                "r" : "263",
+                "s" : [ {
+                  "value" : [ "2.0 ", "'g'" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "TruncatedDivide",
+          "localId" : "261",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "264",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "265",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Quantity",
+            "localId" : "262",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 10.5,
+            "unit" : "g",
+            "annotation" : [ ]
+          }, {
+            "type" : "Quantity",
+            "localId" : "263",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 2.0,
+            "unit" : "g",
+            "annotation" : [ ]
           } ]
         }
       } ]

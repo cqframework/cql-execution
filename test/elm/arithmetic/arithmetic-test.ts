@@ -501,6 +501,10 @@ describe('TruncatedDivide', () => {
   it('should be able to return just the long portion of a dividing a long by an integer', async function () {
     (await this.tenDivThreeReverseMixed.exec(this.ctx)).should.equal(3n);
   });
+
+  it('should truncate quantity division results', async function () {
+    validateQuantity(await this.quantityTruncatedDivide.exec(this.ctx), 5, '1');
+  });
 });
 
 describe('Truncate', () => {

@@ -219,6 +219,10 @@ describe('DateTime', () => {
     DateTime.fromJSDate(new Date(Date.UTC(1999, 1, 16, 13, 56, 24, 123)), +4.5).should.eql(
       DateTime.parse('1999-02-16T18:26:24.123+04:30')
     );
+    DateTime.fromJSDate(
+      new Date(Date.UTC(1999, 1, 16, 13, 56, 24, 123)),
+      Decimal.from(-5)
+    ).should.eql(DateTime.parse('1999-02-16T08:56:24.123-05:00'));
   });
 
   it('should construct from a Luxon DateTime', () =>

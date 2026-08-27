@@ -420,6 +420,15 @@ describe('Mode', () => {
     (await this.bi_modal.exec(this.ctx)).should.eql([2, 3]);
   });
 
+  it('should preserve units for single and tied quantity modes', async function () {
+    validateQuantity(await this.quantitySingleMode.exec(this.ctx), 1, 'g');
+
+    const modes = await this.quantityBiModal.exec(this.ctx);
+    modes.should.have.length(2);
+    validateQuantity(modes[0], 1, 'g');
+    validateQuantity(modes[1], 2, 'g');
+  });
+
   it('should be null if some are numbers and some are quantities', async function () {
     should(await this.numbersAndQuantities.exec(this.ctx)).be.null();
   });
