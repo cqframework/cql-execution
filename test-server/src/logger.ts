@@ -1,9 +1,13 @@
 import { Logger } from 'tslog';
 
 const logger = new Logger({
-  hideLogPositionForProduction: true,
-  prettyInspectOptions: { depth: null },
-  prettyLogTemplate: '{{logLevelName}}\t'
+  stack: {
+    capture: 'off'
+  },
+  pretty: {
+    inspectOptions: { depth: null },
+    template: '{{logLevelName}}\t'
+  }
 });
 
 export default logger;

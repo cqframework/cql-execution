@@ -20,17 +20,17 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@cqframework/cql": "^4.0.0-beta.1",
+    "@cqframework/cql": "^5.2.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "tslog": "^4.11.0"
+    "tslog": "^5.1.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/fhir": "^0.0.44",
     "@types/node": "^24.13.3",
     "copyfiles": "^2.4.1",
-    "oxlint": "^1.79.0",
+    "oxlint": "^1.80.0",
     "prettier": "^3.9.6",
     "tsx": "^4.23.12",
     "typescript": "^7.0.2",
