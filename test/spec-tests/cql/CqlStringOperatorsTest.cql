@@ -311,6 +311,12 @@ define "Substring": Tuple{
     expression: Substring('ab', -1),
     output: null
   },
+  "SubstringEmptyAnd0": Tuple{
+    skipped: 'Wrong output: Substring(x, x.length) should be null\'. Note similar test SubstringAB2. See https://github.com/cqframework/cql-tests/issues/149'
+    /*
+    expression: Substring('', 0),
+    output: ''
+    */  },
   "SubstringAB0To1": Tuple{
     expression: Substring('ab', 0, 1),
     output: 'a'

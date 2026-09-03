@@ -8398,6 +8398,25 @@
                 }
               },
               {
+                "name": "SubstringEmptyAnd0",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
                 "name": "SubstringAB0To1",
                 "annotation": [],
                 "elementType": {
@@ -8680,6 +8699,25 @@
                         "elementType": {
                           "type": "NamedTypeSpecifier",
                           "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "SubstringEmptyAnd0",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -9241,6 +9279,40 @@
                       "value": {
                         "type": "Null",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "SubstringEmptyAnd0",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: Substring(x, x.length) should be null'. Note similar test SubstringAB2. See https://github.com/cqframework/cql-tests/issues/149",
                         "annotation": []
                       }
                     }

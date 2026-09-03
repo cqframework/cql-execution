@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
 	name="CqlArithmeticFunctionsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#arithmetic-operators-4" version="1.0">
+	<capability code="arithmetic-operators"/>
+	<capability code="decimal-precision-and-scale" value="28,8"/>
 	<group name="Abs" version="1.0">
+		<capability code="arithmetic-operators"/>
 		<test name="AbsNull" version="1.0">
 			<expression>Abs(null as Integer)</expression>
 			<output>null</output>
@@ -23,15 +26,18 @@
 			<output>0.0</output>
 		</test>
 		<test name="Abs1cm" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>Abs(-1.0'cm')</expression>
 			<output>1.0'cm'</output>
 		</test>
-		<test name="AbsLong" version="1.0">
+		<test name="AbsLong" version="1.5">
+			<capability code="system.long"/>
 			<expression>Abs(-1L)</expression>
 			<output>1L</output>
 		</test>
 	</group>
 	<group name="Add" version="1.0">
+		<capability code="arithmetic-operators"/>
 		<test name="AddNull" version="1.0">
 			<expression>1 + null</expression>
 			<output>null</output>
@@ -40,7 +46,8 @@
 			<expression>1 + 1</expression>
 			<output>2</output>
 		</test>
-		<test name="Add1L2L" version="1.0">
+		<test name="Add1L2L" version="1.5">
+			<capability code="system.long"/>
 			<expression>1L + 2L</expression>
 			<output>3L</output>
 		</test>
@@ -49,6 +56,7 @@
 			<output>2.0</output>
 		</test>
 		<test name="Add1Q1Q" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>1'g/cm3' + 1'g/cm3'</expression>
 			<output>2.0'g/cm3'</output>
 		</test>
@@ -56,12 +64,14 @@
 			<expression>1 + 2.0</expression>
 			<output>3.0</output>
 		</test>
-		<test name="Add1L1L" version="1.0">
+		<test name="Add1L1L" version="1.5">
+			<capability code="system.long"/>
 			<expression>1L + 1L</expression>
 			<output>2L</output>
 		</test>
 	</group>
 	<group name="Ceiling" version="1.0">
+		<capability code="precision-operators-for-decimal-and-date-time-types"/>
 		<test name="CeilingNull" version="1.0">
 			<expression>Ceiling(null as Decimal)</expression>
 			<output>null</output>
@@ -90,8 +100,49 @@
 			<expression>Ceiling(1)</expression>
 			<output>1</output>
 		</test>
+		<test name="CeilingMaxInteger" version="1.0">
+			<expression>Ceiling(2147483647)</expression>
+			<output>2147483647</output>
+		</test>
+		<test name="CeilingMaxIntegerAsDecimal" version="1.0">
+			<expression>Ceiling(2147483647.0)</expression>
+			<output>2147483647</output>
+		</test>
+		<test name="CeilingMaxIntegerAsDecimalWhereDecimalIsNonZero" version="1.0">
+			<expression>Ceiling(2147483647.2)</expression>
+			<output>null</output>
+		</test>
+		<test name="CeilingIntegerGreaterThanMaxInteger" version="1.0">
+			<expression invalid="syntax">Ceiling(2147483648)</expression>
+			<output>null</output>
+		</test>
+		<test name="CeilingDecimalGreaterThanMaxInteger" version="1.0">
+			<expression>Ceiling(2147483648.2)</expression>
+			<output>null</output>
+		</test>
+		<test name="CeilingMinInteger" version="1.0">
+			<expression>Ceiling(-2147483648)</expression>
+			<output>-2147483648</output>
+		</test>
+		<test name="CeilingMinIntegerAsDecimal" version="1.0">
+			<expression>Ceiling(-2147483648.0)</expression>
+			<output>-2147483648</output>
+		</test>
+		<test name="CeilingMinIntegerAsDecimalWhereDecimalIsNonZero" version="1.0">
+			<expression>Ceiling(-2147483648.2)</expression>
+			<output>-2147483648</output>
+		</test>
+		<test name="CeilingIntegerLessThanMinInteger" version="1.0">
+			<expression invalid="syntax">Ceiling(-2147483649)</expression>
+			<output>null</output>
+		</test>
+		<test name="CeilingDecimalLessThanMinInteger" version="1.0">
+			<expression>Ceiling(-2147483649.2)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Divide" version="1.0">
+		<capability code="arithmetic-operators"/>
 		<test name="DivideNull" version="1.0">
 			<expression>1 / null</expression>
 			<output>null</output>
@@ -108,7 +159,8 @@
 			<expression>1 / 1</expression>
 			<output>1.0</output>
 		</test>
-		<test name="Divide1L1L" version="1.0">
+		<test name="Divide1L1L" version="1.5">
+			<capability code="system.long"/>
 			<expression>1L / 1L</expression>
 			<output>1.0</output>
 		</test>
@@ -117,10 +169,12 @@
 			<output>1.0</output>
 		</test>
 		<test name="Divide103" version="1.0">
+			<capability code="precision-operators-for-decimal-and-date-time-types"/>
 			<expression>Round(10 / 3, 8)</expression>
 			<output>3.33333333</output>
 		</test>
 		<test name="Divide1Q1" version="1.4">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>1'g/cm3' / 1.0</expression>
 			<output>1.0'g/cm3'</output>
 			<!-- See HL7 STU comment #1443. -->
@@ -128,6 +182,7 @@
 			Decimal value to a Quantity, with the default UCUM unit of (`1`). -->
 		</test>
 		<test name="Divide1Q1Q" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>1'g/cm3' / 1'g/cm3'</expression>
 			<output>1.0'1'</output>
 			<!-- See http://unitsofmeasure.org/ucum.html#section-Semantics
@@ -148,11 +203,13 @@
 			<output>2.0</output>
 		</test>
 		<test name="Divide10Q5I" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>10.0 'g' / 5</expression>
 			<output>2.0'g'</output>
 		</test>
 	</group>
 	<group name="Floor" version="1.0">
+		<capability code="precision-operators-for-decimal-and-date-time-types"/>
 		<test name="FloorNull" version="1.0">
 			<expression>Floor(null as Decimal)</expression>
 			<output>null</output>
@@ -185,8 +242,49 @@
 			<expression>Floor(2)</expression>
 			<output>2</output>
 		</test>
+		<test name="FloorMaxInteger" version="1.0">
+			<expression>Floor(2147483647)</expression>
+			<output>2147483647</output>
+		</test>
+		<test name="FloorMaxIntegerAsDecimal" version="1.0">
+			<expression>Floor(2147483647.0)</expression>
+			<output>2147483647</output>
+		</test>
+		<test name="FloorMaxIntegerAsDecimalWhereDecimalIsNonZero" version="1.0">
+			<expression>Floor(2147483647.2)</expression>
+			<output>2147483647</output>
+		</test>
+		<test name="FloorIntegerGreaterThanMaxInteger" version="1.0">
+			<expression>Floor(2147483648)</expression>
+			<output>null</output>
+		</test>
+		<test name="FloorDecimalGreaterThanMaxInteger" version="1.0">
+			<expression>Floor(2147483648.2)</expression>
+			<output>null</output>
+		</test>
+		<test name="FloorMinInteger" version="1.0">
+			<expression>Floor(-2147483648)</expression>
+			<output>-2147483648</output>
+		</test>
+		<test name="FloorMinIntegerAsDecimal" version="1.0">
+			<expression>Floor(-2147483648.0)</expression>
+			<output>-2147483648</output>
+		</test>
+		<test name="FloorMinIntegerAsDecimalWhereDecimalIsNonZero" version="1.0">
+			<expression>Floor(-2147483648.2)</expression>
+			<output>null</output>
+		</test>
+		<test name="FloorIntegerLessThanMinInteger" version="1.0">
+			<expression>Floor(-2147483649)</expression>
+			<output>null</output>
+		</test>
+		<test name="FloorDecimalLessThanMinInteger" version="1.0">
+			<expression>Floor(-2147483649.2)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Exp" version="1.0">
+		<capability code="arithmetic-operators"/>
 		<test name="ExpNull" version="1.0">
 			<expression>Exp(null as Decimal)</expression>
 			<output>null</output>
@@ -200,14 +298,18 @@
 			<output>1.0</output>
 		</test>
 		<test name="Exp1" version="1.0">
+			<capability code="precision-operators-for-decimal-and-date-time-types"/>
 			<expression>Round(Exp(1), 8)</expression>
 			<output>2.71828183</output>
 		</test>
-		<test name="Exp1L" version="1.0">
+		<test name="Exp1L" version="1.5">
+			<capability code="system.long"/>
+			<capability code="precision-operators-for-decimal-and-date-time-types"/>
 			<expression>Round(Exp(1L), 8)</expression>
 			<output>2.71828183</output>
 		</test>
 		<test name="ExpNeg1" version="1.0">
+			<capability code="precision-operators-for-decimal-and-date-time-types"/>
 			<expression>Round(Exp(-1), 8)</expression>
 			<output>0.36787944</output>
 		</test>
@@ -221,6 +323,8 @@
 		</test>
 	</group>
 	<group name="HighBoundary" version="1.0">
+		<capability code="precision-operators-for-decimal-and-date-time-types"/>
+		<capability code="date-and-time-operators"/>
 		<test name="HighBoundaryDecimal" version="1.4">
 			<expression>HighBoundary(1.587, 8)</expression>
 			<output>1.58799999</output>
@@ -237,8 +341,17 @@
 			<expression>HighBoundary(@T10:30, 9)</expression>
 			<output>@T10:30:59.999</output>
 		</test>
+		<test name="HighBoundaryNull">
+			<expression>HighBoundary(null as Decimal, 8)</expression>
+			<output>null</output>
+		</test>
+		<test name="HighBoundaryNullPrecision">
+			<expression>HighBoundary(1.58888, null)</expression>
+			<output>1.58888999</output>
+		</test>
 	</group>
 	<group name="Log" version="1.4">
+		<capability code="arithmetic-operators"/>
 		<test name="LogNullNull" version="1.4">
 			<expression>Log(null, null)</expression>
 			<output>null</output>
@@ -263,7 +376,8 @@
 			<expression>Log(1, 100)</expression>
 			<output>0.0</output>
 		</test>
-		<test name="Log1Base100L" version="1.4">
+		<test name="Log1Base100L" version="1.5">
+			<capability code="system.long"/>
 			<expression>Log(1L, 100L)</expression>
 			<output>0.0</output>
 		</test>
@@ -277,6 +391,8 @@
 		</test>
 	</group>
 	<group name="LowBoundary" version="1.4">
+		<capability code="precision-operators-for-decimal-and-date-time-types"/>
+		<capability code="date-and-time-operators"/>
 		<test name="LowBoundaryDecimal" version="1.4">
 			<expression>LowBoundary(1.587, 8)</expression>
 			<output>1.58700000</output>
@@ -293,8 +409,17 @@
 			<expression>LowBoundary(@T10:30, 9)</expression>
 			<output>@T10:30:00.000</output>
 		</test>
+		<test name="LowBoundaryNull">
+			<expression>LowBoundary(null as Decimal, 8)</expression>
+			<output>null</output>
+		</test>
+		<test name="LowBoundaryNullPrecision">
+			<expression>LowBoundary(1.58888, null)</expression>
+			<output>1.58888000</output>
+		</test>
 	</group>
 	<group name="Ln" version="1.4">
+		<capability code="arithmetic-operators"/>
 		<test name="LnNull" version="1.4">
 			<expression>Ln(null)</expression>
 			<output>null</output>
@@ -311,7 +436,8 @@
 			<expression>Ln(1)</expression>
 			<output>0.0</output>
 		</test>
-		<test name="Ln1L" version="1.4">
+		<test name="Ln1L" version="1.5">
+			<capability code="system.long"/>
 			<expression>Ln(1L)</expression>
 			<output>0.0</output>
 		</test>
@@ -320,21 +446,25 @@
 			<output>null</output>
 		</test>
 		<test name="Ln1000" version="1.4">
+			<capability code="precision-operators-for-decimal-and-date-time-types"/>
 			<expression>Round(Ln(1000), 8)</expression>
 			<output>6.90775528</output>
 		</test>
 		<test name="Ln1000D" version="1.4">
+			<capability code="precision-operators-for-decimal-and-date-time-types"/>
 			<expression>Round(Ln(1000.0), 8)</expression>
 			<output>6.90775528</output>
 		</test>
 	</group>
 	<group name="MinValue" version="1.0">
+		<capability code="arithmetic-operators"/>
 		<test name="IntegerMinValue" version="1.0">
 			<expression>minimum Integer</expression>
 			<output>-2147483648</output>
 			<!-- TODO: make Engine parse -2147483648 holistically not as a negated positive -->
 		</test>
 		<test name="LongMinValue" version="1.5">
+			<capability code="system.long"/>
 			<expression>minimum Long</expression>
 			<output>-9223372036854775808L</output>
 		</test>
@@ -344,14 +474,17 @@
 		</test>
 		<!-- OBSOLETE: define QuantityMinValue: minimum Quantity -->
 		<test name="DateTimeMinValue" version="1.4">
+			<capability code="date-and-time-operators"/>
 			<expression>minimum DateTime</expression>
 			<output>@0001-01-01T00:00:00.000Z</output>
 		</test>
 		<test name="DateMinValue" version="1.4">
+			<capability code="date-and-time-operators"/>
 			<expression>minimum Date</expression>
 			<output>@0001-01-01</output>
 		</test>
 		<test name="TimeMinValue" version="1.4">
+			<capability code="date-and-time-operators"/>
 			<expression>minimum Time</expression>
 			<output>@T00:00:00.000</output>
 		</test>
@@ -361,11 +494,13 @@
 		</test>
 	</group>
 	<group name="MaxValue" version="1.0">
+		<capability code="arithmetic-operators"/>
 		<test name="IntegerMaxValue" version="1.0">
 			<expression>maximum Integer</expression>
 			<output>2147483647</output>
 		</test>
 		<test name="LongMaxValue" version="1.5">
+			<capability code="system.long"/>
 			<expression>maximum Long</expression>
 			<output>9223372036854775807L</output>
 		</test>
@@ -375,14 +510,17 @@
 		</test>
 		<!-- OBSOLETE: define QuantityMaxValue: maximum Quantity -->
 		<test name="DateTimeMaxValue" version="1.4">
+			<capability code="date-and-time-operators"/>
 			<expression>maximum DateTime</expression>
 			<output>@9999-12-31T23:59:59.999Z</output>
 		</test>
 		<test name="DateMaxValue" version="1.4">
+			<capability code="date-and-time-operators"/>
 			<expression>maximum Date</expression>
 			<output>@9999-12-31</output>
 		</test>
 		<test name="TimeMaxValue" version="1.4">
+			<capability code="date-and-time-operators"/>
 			<expression>maximum Time</expression>
 			<output>@T23:59:59.999</output>
 		</test>
@@ -392,6 +530,7 @@
 		</test>
 	</group>
 	<group name="Modulo" version="1.5">
+		<capability code="arithmetic-operators"/>
 		<test name="ModuloNull" version="1.5">
 			<expression>1 mod null</expression>
 			<output>null</output>
@@ -405,6 +544,7 @@
 			<output>0</output>
 		</test>
 		<test name="Modulo4LBy2L" version="1.5">
+			<capability code="system.long"/>
 			<expression>4L mod 2L</expression>
 			<output>0L</output>
 		</test>
@@ -429,19 +569,26 @@
 			<output>0.5</output>
 		</test>
 		<test name="ModuloQuantity" version="1.5">
+			<capability code="ucum-unit-conversion-support"/>
+			<capability code="modular-arithmetic-for-quantities"/>
 			<expression>3.5 'cm' mod 3 'cm'</expression>
 			<output>0.5 'cm'</output>
 		</test>
 		<test name="Modulo10By3Quantity" version="1.5">
+			<capability code="ucum-unit-conversion-support"/>
+			<capability code="modular-arithmetic-for-quantities"/>
 			<expression>10.0 'g' mod 3.0 'g'</expression>
 			<output>1.0 'g'</output>
 		</test>
 		<test name="Modulo10By0Quantity" version="1.5">
+			<capability code="ucum-unit-conversion-support"/>
+			<capability code="modular-arithmetic-for-quantities"/>
 			<expression>10.0 'g' mod 0.0 'g'</expression>
 			<output>null</output>
 		</test>
 	</group>
 	<group name="Multiply" version="1.0">
+		<capability code="arithmetic-operators"/>
 		<test name="MultiplyNull" version="1.0">
 			<expression>1 * null</expression>
 			<output>null</output>
@@ -450,7 +597,8 @@
 			<expression>1 * 1</expression>
 			<output>1</output>
 		</test>
-		<test name="Multiply2LBy3L" version="1.0">
+		<test name="Multiply2LBy3L" version="1.5">
+			<capability code="system.long"/>
 			<expression>2L * 3L</expression>
 			<output>6L</output>
 		</test>
@@ -458,7 +606,8 @@
 			<expression>1.0 * 2.0</expression>
 			<output>2.0</output>
 		</test>
-		<test name="Multiply1By1L" version="1.0">
+		<test name="Multiply1By1L" version="1.5">
+			<capability code="system.long"/>
 			<expression>1 * 1L</expression>
 			<output>1L</output>
 		</test>
@@ -467,12 +616,14 @@
 			<output>2.0</output>
 		</test>
 		<test name="Multiply1CMBy2CM" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>1.0 'cm' * 2.0 'cm'</expression>
 			<output>2.0'cm2'</output>
 			<!-- TODO: make the units multiply -->
 		</test>
 	</group>
 	<group name="Negate" version="1.0">
+		<capability code="arithmetic-operators"/>
 		<test name="NegateNull" version="1.0">
 			<expression>-(null as Integer)</expression>
 			<output>null</output>
@@ -489,11 +640,13 @@
 			<expression>-1</expression>
 			<output>-1</output>
 		</test>
-		<test name="Negate1L" version="1.0">
+		<test name="Negate1L" version="1.5">
+			<capability code="system.long"/>
 			<expression>-1L</expression>
 			<output>-1L</output>
 		</test>
-		<test name="NegateMaxLong" version="1.0">
+		<test name="NegateMaxLong" version="1.5">
+			<capability code="system.long"/>
 			<expression>-9223372036854775807L</expression>
 			<output>-9223372036854775807L</output>
 		</test>
@@ -501,7 +654,8 @@
 			<expression>-(-1)</expression>
 			<output>1</output>
 		</test>
-		<test name="NegateNeg1L" version="1.0">
+		<test name="NegateNeg1L" version="1.5">
+			<capability code="system.long"/>
 			<expression>-(-1L)</expression>
 			<output>1L</output>
 		</test>
@@ -522,11 +676,14 @@
 			<output>1.0</output>
 		</test>
 		<test name="Negate1CM" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>-(1'cm')</expression>
 			<output>-1.0'cm'</output>
 		</test>
 	</group>
 	<group name="Precision" version="1.4">
+		<capability code="precision-operators-for-decimal-and-date-time-types"/>
+		<capability code="date-and-time-operators"/>
 		<test name="PrecisionDecimal" version="1.4">
 			<expression>Precision(1.58700)</expression>
 			<output>5</output>
@@ -549,6 +706,8 @@
 		</test>
 	</group>
 	<group name="Predecessor" version="1.0">
+		<capability code="arithmetic-operators"/>
+		<capability code="date-and-time-operators"/>
 		<test name="PredecessorNull" version="1.0">
 			<expression>predecessor of (null as Integer)</expression>
 			<output>null</output>
@@ -561,7 +720,8 @@
 			<expression>predecessor of 1</expression>
 			<output>0</output>
 		</test>
-		<test name="PredecessorOf1L" version="1.0">
+		<test name="PredecessorOf1L" version="1.5">
+			<capability code="system.long"/>
 			<expression>predecessor of 1L</expression>
 			<output>0L</output>
 		</test>
@@ -574,6 +734,7 @@
 			<output>1.00999999</output>
 		</test>
 		<test name="PredecessorOf1QCM" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>predecessor of 1.0 'cm'</expression>
 			<output>0.99999999'cm'</output>
 		</test>
@@ -595,6 +756,7 @@
 		</test>
 	</group>
 	<group name="Power" version="1.0">
+		<capability code="arithmetic-operators"/>
 		<test name="PowerNullToNull" version="1.0">
 			<expression>Power(null as Integer, null as Integer)</expression>
 			<output>null</output>
@@ -615,7 +777,8 @@
 			<expression>Power(2, -2)</expression>
 			<output>0.25</output>
 		</test>
-		<test name="Power2LTo2L" version="1.0">
+		<test name="Power2LTo2L" version="1.5">
+			<capability code="system.long"/>
 			<expression>Power(2L, 2L)</expression>
 			<output>4L</output>
 		</test>
@@ -643,7 +806,8 @@
 			<expression>2^4</expression>
 			<output>16</output>
 		</test>
-		<test name="Power2LTo3L" version="1.0">
+		<test name="Power2LTo3L" version="1.5">
+			<capability code="system.long"/>
 			<expression>2L^3L</expression>
 			<output>8L</output>
 		</test>
@@ -657,6 +821,7 @@
 		</test>
 	</group>
 	<group name="Round" version="1.0">
+		<capability code="precision-operators-for-decimal-and-date-time-types"/>
 		<test name="RoundNull" version="1.0">
 			<expression>Round(null as Decimal)</expression>
 			<output>null</output>
@@ -679,7 +844,7 @@
 		</test>
 		<test name="RoundNeg0D5" version="1.0">
 			<expression>Round(-0.5)</expression>
-			<output>0.0</output>
+			<output>-1.0</output>
 		</test>
 		<test name="RoundNeg0D4" version="1.0">
 			<expression>Round(-0.4)</expression>
@@ -695,7 +860,7 @@
 		</test>
 		<test name="RoundNeg1D5" version="1.0">
 			<expression>Round(-1.5)</expression>
-			<output>-1.0</output>
+			<output>-2.0</output>
 		</test>
 		<test name="RoundNeg1D6" version="1.0">
 			<expression>Round(-1.6)</expression>
@@ -703,6 +868,7 @@
 		</test>
 	</group>
 	<group name="Subtract" version="1.0">
+		<capability code="arithmetic-operators"/>
 		<test name="SubtractNull" version="1.0">
 			<expression>1 - null</expression>
 			<output>null</output>
@@ -711,7 +877,8 @@
 			<expression>1 - 1</expression>
 			<output>0</output>
 		</test>
-		<test name="Subtract1LAnd1L" version="1.0">
+		<test name="Subtract1LAnd1L" version="1.5">
+			<capability code="system.long"/>
 			<expression>1L - 1L</expression>
 			<output>0L</output>
 		</test>
@@ -720,6 +887,7 @@
 			<output>-1.0</output>
 		</test>
 		<test name="Subtract1CMAnd2CM" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>1.0 'cm' - 2.0 'cm'</expression>
 			<output>-1.0'cm'</output>
 		</test>
@@ -729,6 +897,8 @@
 		</test>
 	</group>
 	<group name="Successor" version="1.0">
+		<capability code="arithmetic-operators"/>
+		<capability code="date-and-time-operators"/>
 		<test name="SuccessorNull" version="1.0">
 			<expression>successor of (null as Integer)</expression>
 			<output>null</output>
@@ -741,7 +911,8 @@
 			<expression>successor of 1</expression>
 			<output>2</output>
 		</test>
-		<test name="SuccessorOf1L" version="1.0">
+		<test name="SuccessorOf1L" version="1.5">
+			<capability code="system.long"/>
 			<expression>successor of 1L</expression>
 			<output>2L</output>
 		</test>
@@ -771,6 +942,7 @@
 		</test>
 	</group>
 	<group name="Truncate" version="1.0">
+		<capability code="precision-operators-for-decimal-and-date-time-types"/>
 		<test name="TruncateNull" version="1.0">
 			<expression>Truncate(null as Decimal)</expression>
 			<output>null</output>
@@ -821,6 +993,7 @@
 		</test>
 	</group>
 	<group name="Truncated Divide" version="1.0">
+		<capability code="arithmetic-operators"/>
 		<test name="TruncatedDivideNull" version="1.0">
 			<expression>(null as Integer) div (null as Integer)</expression>
 			<output>null</output>
@@ -837,11 +1010,13 @@
 			<expression>10 div 3</expression>
 			<output>3</output>
 		</test>
-		<test name="TruncatedDivide10LBy3L" version="1.0">
+		<test name="TruncatedDivide10LBy3L" version="1.5">
+			<capability code="system.long"/>
 			<expression>10L div 3L</expression>
 			<output>3L</output>
 		</test>
-		<test name="TruncatedDivide10LBy0L" version="1.0">
+		<test name="TruncatedDivide10LBy0L" version="1.5">
+			<capability code="system.long"/>
 			<expression>10L div 0L</expression>
 			<output>null</output>
 		</test>
@@ -894,18 +1069,22 @@
 			<output>2.0</output>
 		</test>
 		<test name="TruncatedDivide10d1ByNeg3D1Quantity" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>10.1 'cm' div -3.1 'cm'</expression>
 			<output>-3.0 'cm'</output>
 		</test>
 		<test name="TruncatedDivide10By5DQuantity" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>10.0 'g' div 5.0 'g'</expression>
 			<output>2.0 'g'</output>
 		</test>
 		<test name="TruncatedDivide414By206DQuantity" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>4.14 'm' div 2.06 'm'</expression>
 			<output>2.0 'm'</output>
 		</test>
 		<test name="TruncatedDivide10By0DQuantity" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
 			<expression>10.0 'g' div 0.0 'g'</expression>
 			<output>null</output>
 		</test>

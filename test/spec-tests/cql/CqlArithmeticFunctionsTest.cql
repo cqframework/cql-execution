@@ -92,6 +92,46 @@ define "Ceiling": Tuple{
   "Ceiling1I": Tuple{
     expression: Ceiling(1),
     output: 1
+  },
+  "CeilingMaxInteger": Tuple{
+    expression: Ceiling(2147483647),
+    output: 2147483647
+  },
+  "CeilingMaxIntegerAsDecimal": Tuple{
+    expression: Ceiling(2147483647.0),
+    output: 2147483647
+  },
+  "CeilingMaxIntegerAsDecimalWhereDecimalIsNonZero": Tuple{
+    expression: Ceiling(2147483647.2),
+    output: null
+  },
+  "CeilingIntegerGreaterThanMaxInteger": Tuple{
+    expression: Ceiling(2147483648),
+    output: null
+  },
+  "CeilingDecimalGreaterThanMaxInteger": Tuple{
+    expression: Ceiling(2147483648.2),
+    output: null
+  },
+  "CeilingMinInteger": Tuple{
+    expression: Ceiling(-2147483648),
+    output: -2147483648
+  },
+  "CeilingMinIntegerAsDecimal": Tuple{
+    expression: Ceiling(-2147483648.0),
+    output: -2147483648
+  },
+  "CeilingMinIntegerAsDecimalWhereDecimalIsNonZero": Tuple{
+    expression: Ceiling(-2147483648.2),
+    output: -2147483648
+  },
+  "CeilingIntegerLessThanMinInteger": Tuple{
+    expression: Ceiling(-2147483649),
+    output: null
+  },
+  "CeilingDecimalLessThanMinInteger": Tuple{
+    expression: Ceiling(-2147483649.2),
+    output: null
   }
 }
 
@@ -178,6 +218,46 @@ define "Floor": Tuple{
   "Floor2I": Tuple{
     expression: Floor(2),
     output: 2
+  },
+  "FloorMaxInteger": Tuple{
+    expression: Floor(2147483647),
+    output: 2147483647
+  },
+  "FloorMaxIntegerAsDecimal": Tuple{
+    expression: Floor(2147483647.0),
+    output: 2147483647
+  },
+  "FloorMaxIntegerAsDecimalWhereDecimalIsNonZero": Tuple{
+    expression: Floor(2147483647.2),
+    output: 2147483647
+  },
+  "FloorIntegerGreaterThanMaxInteger": Tuple{
+    expression: Floor(2147483648),
+    output: null
+  },
+  "FloorDecimalGreaterThanMaxInteger": Tuple{
+    expression: Floor(2147483648.2),
+    output: null
+  },
+  "FloorMinInteger": Tuple{
+    expression: Floor(-2147483648),
+    output: -2147483648
+  },
+  "FloorMinIntegerAsDecimal": Tuple{
+    expression: Floor(-2147483648.0),
+    output: -2147483648
+  },
+  "FloorMinIntegerAsDecimalWhereDecimalIsNonZero": Tuple{
+    expression: Floor(-2147483648.2),
+    output: null
+  },
+  "FloorIntegerLessThanMinInteger": Tuple{
+    expression: Floor(-2147483649),
+    output: null
+  },
+  "FloorDecimalLessThanMinInteger": Tuple{
+    expression: Floor(-2147483649.2),
+    output: null
   }
 }
 
@@ -240,6 +320,18 @@ define "HighBoundary": Tuple{
     /*
     expression: HighBoundary(@T10:30, 9),
     output: @T10:30:59.999
+    */  },
+  "HighBoundaryNull": Tuple{
+    skipped: 'HighBoundary not implemented'
+    /*
+    expression: HighBoundary(null as Decimal, 8),
+    output: null
+    */  },
+  "HighBoundaryNullPrecision": Tuple{
+    skipped: 'HighBoundary not implemented'
+    /*
+    expression: HighBoundary(1.58888, null),
+    output: 1.58888999
     */  }
 }
 
@@ -306,6 +398,18 @@ define "LowBoundary": Tuple{
     /*
     expression: LowBoundary(@T10:30, 9),
     output: @T10:30:00.000
+    */  },
+  "LowBoundaryNull": Tuple{
+    skipped: 'LowBoundary not implemented'
+    /*
+    expression: LowBoundary(null as Decimal, 8),
+    output: null
+    */  },
+  "LowBoundaryNullPrecision": Tuple{
+    skipped: 'LowBoundary not implemented'
+    /*
+    expression: LowBoundary(1.58888, null),
+    output: 1.58888000
     */  }
 }
 
@@ -590,17 +694,23 @@ define "Predecessor": Tuple{
     output: 0L
   },
   "PredecessorOf1D": Tuple{
+    skipped: 'Wrong output: As of 2.0 Successor of Decimal should be precision-aware. See https://github.com/cqframework/cql-tests/pull/147'
+    /*
     expression: predecessor of 1.0,
     output: 0.99999999
-  },
+    */  },
   "PredecessorOf101D": Tuple{
+    skipped: 'Wrong output: As of 2.0 Successor of Decimal should be precision-aware'
+    /*
     expression: predecessor of 1.01,
     output: 1.00999999
-  },
+    */  },
   "PredecessorOf1QCM": Tuple{
+    skipped: 'Wrong output: As of 2.0 Successor of Decimal should be precision-aware'
+    /*
     expression: predecessor of 1.0 'cm',
     output: 0.99999999'cm'
-  },
+    */  },
   "PredecessorOfJan12000": Tuple{
     expression: predecessor of DateTime(2000,1,1),
     output: @1999-12-31T
@@ -705,7 +815,7 @@ define "Round": Tuple{
   },
   "RoundNeg0D5": Tuple{
     expression: Round(-0.5),
-    output: 0.0
+    output: -1.0
   },
   "RoundNeg0D4": Tuple{
     expression: Round(-0.4),
@@ -721,7 +831,7 @@ define "Round": Tuple{
   },
   "RoundNeg1D5": Tuple{
     expression: Round(-1.5),
-    output: -1.0
+    output: -2.0
   },
   "RoundNeg1D6": Tuple{
     expression: Round(-1.6),
@@ -774,13 +884,17 @@ define "Successor": Tuple{
     output: 2L
   },
   "SuccessorOf1D": Tuple{
+    skipped: 'Wrong output: As of 2.0 Successor of Decimal should be precision-aware'
+    /*
     expression: successor of 1.0,
     output: 1.00000001
-  },
+    */  },
   "SuccessorOf101D": Tuple{
+    skipped: 'Wrong output: As of 2.0 Successor of Decimal should be precision-aware'
+    /*
     expression: successor of 1.01,
     output: 1.01000001
-  },
+    */  },
   "SuccessorOfJan12000": Tuple{
     expression: successor of DateTime(2000,1,1),
     output: @2000-01-02T
@@ -924,7 +1038,7 @@ define "Truncated Divide": Tuple{
     output: 2.0
   },
   "TruncatedDivide10d1ByNeg3D1Quantity": Tuple{
-    skipped: 'Wrong output: The resulting Quantity should have an appropriate unit; \'g\' / \'g\' should be \'1\', not \'g\'. See test Divide1Q1Q which is correct'
+    skipped: 'Wrong output: The resulting Quantity should have an appropriate unit; \'g\' / \'g\' should be \'1\', not \'g\'. See https://github.com/cqframework/cql-tests/pull/148'
     /*
     expression: 10.1 'cm' div -3.1 'cm',
     output: -3.0 'cm'

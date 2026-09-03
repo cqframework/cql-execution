@@ -1,232 +1,311 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
 	name="CqlAggregateFunctionsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#aggregate-functions" version="1.5">
+	<capability code="aggregate-functions"/>
 	<group name="AllTrue" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="AllTrueAllTrue" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AllTrue({true,true})</expression>
 			<output>true</output>
 		</test>
 		<test name="AllTrueTrueFirst" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AllTrue({true,false})</expression>
 			<output>false</output>
 		</test>
 		<test name="AllTrueFalseFirst" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AllTrue({false,true})</expression>
 			<output>false</output>
 		</test>
 		<test name="AllTrueAllTrueFalseTrue" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AllTrue({true,false,true})</expression>
 			<output>false</output>
 		</test>
 		<test name="AllTrueAllFalseTrueFalse" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AllTrue({false,true,false})</expression>
 			<output>false</output>
 		</test>
 		<test name="AllTrueNullFirst" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AllTrue({null,true,true})</expression>
 			<output>true</output>
 		</test>
 		<test name="AllTrueEmptyList" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AllTrue({})</expression>
 			<output>true</output>
 		</test>
 		<test name="AllTrueIsTrueWhenNull" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AllTrue(null)</expression>
 			<output>true</output>
 		</test>
 	</group>
 	<group name="AnyTrue" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="AnyTrueAllTrue" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AnyTrue({true,true})</expression>
 			<output>true</output>
 		</test>
 		<test name="AnyTrueAllFalse" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AnyTrue({false,false})</expression>
 			<output>false</output>
 		</test>
 		<test name="AnyTrueAllTrueFalseTrue" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AnyTrue({true,false,true})</expression>
 			<output>true</output>
 		</test>
 		<test name="AnyTrueAllFalseTrueFalse" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AnyTrue({false,true,false})</expression>
 			<output>true</output>
 		</test>
 		<test name="AnyTrueTrueFirst" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AnyTrue({true,false})</expression>
 			<output>true</output>
 		</test>
 		<test name="AnyTrueFalseFirst" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AnyTrue({false,true})</expression>
 			<output>true</output>
 		</test>
 		<test name="AnyTrueNullFirstThenTrue" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AnyTrue({null,true})</expression>
 			<output>true</output>
 		</test>
 		<test name="AnyTrueNullFirstThenFalse" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AnyTrue({null,false})</expression>
 			<output>false</output>
 		</test>
 		<test name="AnyTrueEmptyList" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AnyTrue({})</expression>
 			<output>false</output>
 		</test>
 		<test name="AnyTrueIsFalseWhenNull" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>AnyTrue(null)</expression>
 			<output>false</output>
 		</test>
 	</group>
 	<group name="Avg" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="AvgTest1" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>Avg({ 1.0, 2.0, 3.0, 6.0 })</expression>
 			<output>3.0</output>
 		</test>
 	</group>
 	<group name="Product" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="ProductLong" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="system.long"/>
 			<expression>Product({5L, 4L, 5L})</expression>
 			<output>100L</output>
 		</test>
 	</group>
 	<group name="Count" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="CountTest1" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>Count({ 15, 5, 99, null, 1 })</expression>
 			<output>4</output>
 		</test>
 		<test name="CountTestDateTime" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="date-and-time-operators"/>
 			<expression>Count({ DateTime(2014), DateTime(2001), DateTime(2010) })</expression>
 			<output>3</output>
 		</test>
 		<test name="CountTestTime" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="date-and-time-operators"/>
 			<expression>Count({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 })</expression>
 			<output>3</output>
 		</test>
 		<test name="CountTestNull" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>Count({})</expression>
 			<output>0</output>
 		</test>
 	</group>
 	<group name="Max" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="MaxTestInteger" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>Max({ 5, 12, 1, 15, 0, 4, 90, 44 })</expression>
 			<output>90</output>
 		</test>
 		<test name="MaxTestLong" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="system.long"/>
 			<expression>Max({ 5L, 12L, 1L, 15L, 0L, 4L, 90L, 44L })</expression>
 			<output>90L</output>
 		</test>
 		<test name="MaxTestString" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>Max({ 'hi', 'bye', 'zebra' })</expression>
 			<output>'zebra'</output>
 		</test>
 		<test name="MaxTestDateTime" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="date-and-time-operators"/>
 			<expression>Max({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6) })</expression>
 			<output>@2012-10-06T</output>
 		</test>
 		<test name="MaxTestTime" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="date-and-time-operators"/>
 			<expression>Max({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 })</expression>
 			<output>@T20:59:59.999</output>
 		</test>
 	</group>
 	<group name="Median" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="MedianTestDecimal" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>Median({6.0, 5.0, 4.0, 3.0, 2.0, 1.0})</expression>
 			<output>3.5</output>
 		</test>
 	</group>
 	<group name="Min" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="MinTestInteger" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>Min({5, 12, 1, 15, 0, 4, 90, 44})</expression>
 			<output>0</output>
 		</test>
 		<test name="MinTestLong" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="system.long"/>
 			<expression>Min({5L, 12L, 1L, 15L, 0L, 4L, 90L, 44L})</expression>
 			<output>0L</output>
 		</test>
 		<test name="MinTestString" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>Min({'hi', 'bye', 'zebra'})</expression>
 			<output>'bye'</output>
 		</test>
 		<test name="MinTestDateTime" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="date-and-time-operators"/>
 			<expression>Min({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6) })</expression>
 			<output>@2012-09-05T</output>
 		</test>
 		<test name="MinTestTime" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="date-and-time-operators"/>
 			<expression>Min({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 })</expression>
 			<output>@T05:59:59.999</output>
 		</test>
 	</group>
 	<group name="Mode" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="ModeTestInteger" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>Mode({ 2, 1, 8, 2, 9, 1, 9, 9 })</expression>
 			<output>9</output>
 		</test>
 		<test name="ModeTestDateTime" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="date-and-time-operators"/>
 			<expression>Mode({ DateTime(2012, 10, 5), DateTime(2012, 9, 5), DateTime(2012, 10, 6), DateTime(2012, 9, 5) })</expression>
 			<output>@2012-09-05T</output>
 		</test>
 		<test name="ModeTestDateTime2" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="date-and-time-operators"/>
 			<expression>Mode({ DateTime(2012, 10, 5), DateTime(2012, 10, 5), DateTime(2012, 10, 6), DateTime(2012, 9, 5) })</expression>
 			<output>@2012-10-05T</output>
 		</test>
 		<test name="ModeTestTime" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="date-and-time-operators"/>
 			<expression>Mode({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999, @T05:59:59.999 })</expression>
 			<output>@T05:59:59.999</output>
 		</test>
 	</group>
 	<group name="PopulationStdDev" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="PopStdDevTest1" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>PopulationStdDev({ 1.0, 2.0, 3.0, 4.0, 5.0 })</expression>
 			<output>1.41421356</output>
 			<!-- 23730951454746218587388284504413604736328125 -->
 		</test>
 		<test name="PopulationStdDevIsNull" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>PopulationStdDev({ null as Quantity, null as Quantity, null as Quantity })</expression>
 			<output>null</output>
 		</test>
 	</group>
 	<group name="PopulationVariance" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="PopVarianceTest1" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>PopulationVariance({ 1.0, 2.0, 3.0, 4.0, 5.0 })</expression>
 			<output>2.0</output>
 		</test>
 		<test name="PopVarianceIsNull" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>PopulationVariance({ null as Quantity, null as Quantity, null as Quantity })</expression>
 			<output>null</output>
 		</test>
 	</group>
 	<group name="StdDev" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="StdDevTest1" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>StdDev({ 1.0, 2.0, 3.0, 4.0, 5.0 })</expression>
 			<output>1.58113883</output>
 			<!-- 00841897613935316257993690669536590576171875 -->
 		</test>
 		<test name="StdDevIsNull" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>StdDev({ null as Quantity, null as Quantity, null as Quantity })</expression>
 			<output>null</output>
 		</test>
 	</group>
 	<group name="Sum" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="SumTest1" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>Sum({ 6.0, 2.0, 3.0, 4.0, 5.0 })</expression>
 			<output>20.0</output>
 		</test>
 		<test name="SumTestLong" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="system.long"/>
 			<expression>Sum({ 6L, 2L, 3L, 4L, 5L })</expression>
 			<output>20L</output>
 		</test>
 		<test name="SumTestQuantity" version="1.5">
+			<capability code="aggregate-functions"/>
+			<capability code="unit-conversion-support"/>
 			<expression>Sum({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})</expression>
 			<output>15 'ml'</output>
 		</test>
 		<test name="SumTestNull" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>Sum({ null, 1, null })</expression>
 			<output>1</output>
 		</test>
 	</group>
 	<group name="Variance" version="1.5">
+		<capability code="aggregate-functions"/>
 		<test name="VarianceTest1" version="1.5">
+			<capability code="aggregate-functions"/>
 			<expression>Variance({ 1.0, 2.0, 3.0, 4.0, 5.0 })</expression>
 			<output>2.5</output>
 		</test>

@@ -69,6 +69,13 @@ describe('CQL Spec Tests (from XML)', () => {
                 if (!actual.equals(expected)) {
                   should.fail(actual, expected, 'Intervals are not equal');
                 }
+              } else if (actual && actual.isDateTime && expected && expected.isDateTime) {
+                // DateTime equality includes its Decimal timezoneOffset.
+                // Use equals instead of eql (deep nested object equality)
+                // to apply CQL rules about Decimal equality
+                if (!actual.equals(expected)) {
+                  should.fail(actual, expected, 'DateTimes are not equal');
+                }
               } else if (
                 actual &&
                 actual.isUncertainty &&
