@@ -22113,7 +22113,17 @@
                         "operand": [
                           {
                             "type": "As",
+                            "strict": false,
                             "annotation": [],
+                            "resultTypeSpecifier": {
+                              "type": "IntervalTypeSpecifier",
+                              "annotation": [],
+                              "pointType": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                "annotation": []
+                              }
+                            },
                             "signature": [],
                             "operand": {
                               "type": "Null",
@@ -22123,8 +22133,20 @@
                             "asTypeSpecifier": {
                               "type": "IntervalTypeSpecifier",
                               "annotation": [],
+                              "resultTypeSpecifier": {
+                                "type": "IntervalTypeSpecifier",
+                                "localId": "4130",
+                                "annotation": [],
+                                "pointType": {
+                                  "type": "NamedTypeSpecifier",
+                                  "localId": "4131",
+                                  "name": "{urn:hl7-org:elm-types:r1}Integer",
+                                  "annotation": []
+                                }
+                              },
                               "pointType": {
                                 "type": "NamedTypeSpecifier",
+                                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                                 "name": "{urn:hl7-org:elm-types:r1}Integer",
                                 "annotation": []
                               }
@@ -29185,25 +29207,6 @@
             "annotation": [],
             "element": [
               {
-                "name": "NullInterval",
-                "annotation": [],
-                "elementType": {
-                  "type": "TupleTypeSpecifier",
-                  "annotation": [],
-                  "element": [
-                    {
-                      "name": "skipped",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}String",
-                        "annotation": []
-                      }
-                    }
-                  ]
-                }
-              },
-              {
                 "name": "TestExceptNull",
                 "annotation": [],
                 "elementType": {
@@ -29311,29 +29314,12 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
-                        "type": "IntervalTypeSpecifier",
-                        "annotation": [],
-                        "pointType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "IntervalTypeSpecifier",
-                        "annotation": [],
-                        "pointType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
                       }
                     }
                   ]
@@ -29379,29 +29365,12 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
-                        "type": "IntervalTypeSpecifier",
-                        "annotation": [],
-                        "pointType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "annotation": []
-                        }
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "IntervalTypeSpecifier",
-                        "annotation": [],
-                        "pointType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "annotation": []
-                        }
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
                       }
                     }
                   ]
@@ -29597,25 +29566,6 @@
               "annotation": [],
               "element": [
                 {
-                  "name": "NullInterval",
-                  "annotation": [],
-                  "elementType": {
-                    "type": "TupleTypeSpecifier",
-                    "annotation": [],
-                    "element": [
-                      {
-                        "name": "skipped",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
-                          "annotation": []
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
                   "name": "TestExceptNull",
                   "annotation": [],
                   "elementType": {
@@ -29723,29 +29673,12 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
-                          "type": "IntervalTypeSpecifier",
-                          "annotation": [],
-                          "pointType": {
-                            "type": "NamedTypeSpecifier",
-                            "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "annotation": []
-                          }
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "IntervalTypeSpecifier",
-                          "annotation": [],
-                          "pointType": {
-                            "type": "NamedTypeSpecifier",
-                            "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "annotation": []
-                          }
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
                         }
                       }
                     ]
@@ -29791,29 +29724,12 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
-                          "type": "IntervalTypeSpecifier",
-                          "annotation": [],
-                          "pointType": {
-                            "type": "NamedTypeSpecifier",
-                            "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                            "annotation": []
-                          }
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "IntervalTypeSpecifier",
-                          "annotation": [],
-                          "pointType": {
-                            "type": "NamedTypeSpecifier",
-                            "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                            "annotation": []
-                          }
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
                         }
                       }
                     ]
@@ -30002,40 +29918,6 @@
               ]
             },
             "element": [
-              {
-                "name": "NullInterval",
-                "value": {
-                  "type": "Tuple",
-                  "annotation": [],
-                  "resultTypeSpecifier": {
-                    "type": "TupleTypeSpecifier",
-                    "annotation": [],
-                    "element": [
-                      {
-                        "name": "skipped",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}String",
-                          "annotation": []
-                        }
-                      }
-                    ]
-                  },
-                  "element": [
-                    {
-                      "name": "skipped",
-                      "value": {
-                        "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
-                        "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong answer (Interval(null, null) vs null)",
-                        "annotation": []
-                      }
-                    }
-                  ]
-                }
-              },
               {
                 "name": "TestExceptNull",
                 "value": {
@@ -30432,141 +30314,25 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
-                          "type": "IntervalTypeSpecifier",
-                          "annotation": [],
-                          "pointType": {
-                            "type": "NamedTypeSpecifier",
-                            "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "annotation": []
-                          }
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "IntervalTypeSpecifier",
-                          "annotation": [],
-                          "pointType": {
-                            "type": "NamedTypeSpecifier",
-                            "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "annotation": []
-                          }
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
                         }
                       }
                     ]
                   },
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "value": {
-                        "type": "Except",
-                        "annotation": [],
-                        "resultTypeSpecifier": {
-                          "type": "IntervalTypeSpecifier",
-                          "annotation": [],
-                          "pointType": {
-                            "type": "NamedTypeSpecifier",
-                            "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "annotation": []
-                          }
-                        },
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Interval",
-                            "lowClosed": true,
-                            "highClosed": true,
-                            "annotation": [],
-                            "resultTypeSpecifier": {
-                              "type": "IntervalTypeSpecifier",
-                              "annotation": [],
-                              "pointType": {
-                                "type": "NamedTypeSpecifier",
-                                "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                                "annotation": []
-                              }
-                            },
-                            "low": {
-                              "type": "Literal",
-                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value": "1.0",
-                              "annotation": []
-                            },
-                            "high": {
-                              "type": "Literal",
-                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value": "10.0",
-                              "annotation": []
-                            }
-                          },
-                          {
-                            "type": "Interval",
-                            "lowClosed": true,
-                            "highClosed": true,
-                            "annotation": [],
-                            "resultTypeSpecifier": {
-                              "type": "IntervalTypeSpecifier",
-                              "annotation": [],
-                              "pointType": {
-                                "type": "NamedTypeSpecifier",
-                                "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                                "annotation": []
-                              }
-                            },
-                            "low": {
-                              "type": "Literal",
-                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value": "4.0",
-                              "annotation": []
-                            },
-                            "high": {
-                              "type": "Literal",
-                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                              "value": "10.0",
-                              "annotation": []
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "value": {
-                        "type": "Interval",
-                        "lowClosed": true,
-                        "highClosed": true,
-                        "annotation": [],
-                        "resultTypeSpecifier": {
-                          "type": "IntervalTypeSpecifier",
-                          "annotation": [],
-                          "pointType": {
-                            "type": "NamedTypeSpecifier",
-                            "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                            "annotation": []
-                          }
-                        },
-                        "low": {
-                          "type": "Literal",
-                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "value": "1.0",
-                          "annotation": []
-                        },
-                        "high": {
-                          "type": "Literal",
-                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "value": "3.99999999",
-                          "annotation": []
-                        }
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "# Wrong output: Interval Except should be precision-aware (based on interval Start/End).",
+                        "annotation": []
                       }
                     }
                   ]
@@ -30704,141 +30470,25 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
-                          "type": "IntervalTypeSpecifier",
-                          "annotation": [],
-                          "pointType": {
-                            "type": "NamedTypeSpecifier",
-                            "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                            "annotation": []
-                          }
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "IntervalTypeSpecifier",
-                          "annotation": [],
-                          "pointType": {
-                            "type": "NamedTypeSpecifier",
-                            "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                            "annotation": []
-                          }
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
                         }
                       }
                     ]
                   },
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "value": {
-                        "type": "Except",
-                        "annotation": [],
-                        "resultTypeSpecifier": {
-                          "type": "IntervalTypeSpecifier",
-                          "annotation": [],
-                          "pointType": {
-                            "type": "NamedTypeSpecifier",
-                            "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                            "annotation": []
-                          }
-                        },
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Interval",
-                            "lowClosed": true,
-                            "highClosed": true,
-                            "annotation": [],
-                            "resultTypeSpecifier": {
-                              "type": "IntervalTypeSpecifier",
-                              "annotation": [],
-                              "pointType": {
-                                "type": "NamedTypeSpecifier",
-                                "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                                "annotation": []
-                              }
-                            },
-                            "low": {
-                              "type": "Quantity",
-                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                              "value": 1,
-                              "unit": "g",
-                              "annotation": []
-                            },
-                            "high": {
-                              "type": "Quantity",
-                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                              "value": 10,
-                              "unit": "g",
-                              "annotation": []
-                            }
-                          },
-                          {
-                            "type": "Interval",
-                            "lowClosed": true,
-                            "highClosed": true,
-                            "annotation": [],
-                            "resultTypeSpecifier": {
-                              "type": "IntervalTypeSpecifier",
-                              "annotation": [],
-                              "pointType": {
-                                "type": "NamedTypeSpecifier",
-                                "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                                "annotation": []
-                              }
-                            },
-                            "low": {
-                              "type": "Quantity",
-                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                              "value": 5,
-                              "unit": "g",
-                              "annotation": []
-                            },
-                            "high": {
-                              "type": "Quantity",
-                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                              "value": 10,
-                              "unit": "g",
-                              "annotation": []
-                            }
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "value": {
-                        "type": "Interval",
-                        "lowClosed": true,
-                        "highClosed": true,
-                        "annotation": [],
-                        "resultTypeSpecifier": {
-                          "type": "IntervalTypeSpecifier",
-                          "annotation": [],
-                          "pointType": {
-                            "type": "NamedTypeSpecifier",
-                            "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                            "annotation": []
-                          }
-                        },
-                        "low": {
-                          "type": "Quantity",
-                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "value": 1,
-                          "unit": "g",
-                          "annotation": []
-                        },
-                        "high": {
-                          "type": "Quantity",
-                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "value": 4.99999999,
-                          "unit": "g",
-                          "annotation": []
-                        }
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "# Wrong output: Interval Except should be precision-aware (based on interval Start/End). Unrelated second issue: the ELM representation of Quantity is a plain number which does not preserve the value scale",
+                        "annotation": []
                       }
                     }
                   ]
@@ -55327,11 +54977,11 @@
                               "annotation": [],
                               "resultTypeSpecifier": {
                                 "type": "IntervalTypeSpecifier",
-                                "localId": "10275",
+                                "localId": "10219",
                                 "annotation": [],
                                 "pointType": {
                                   "type": "NamedTypeSpecifier",
-                                  "localId": "10276",
+                                  "localId": "10220",
                                   "name": "{urn:hl7-org:elm-types:r1}Date",
                                   "annotation": []
                                 }
@@ -57197,11 +56847,11 @@
                               "annotation": [],
                               "resultTypeSpecifier": {
                                 "type": "IntervalTypeSpecifier",
-                                "localId": "10600",
+                                "localId": "10544",
                                 "annotation": [],
                                 "pointType": {
                                   "type": "NamedTypeSpecifier",
-                                  "localId": "10601",
+                                  "localId": "10545",
                                   "name": "{urn:hl7-org:elm-types:r1}Date",
                                   "annotation": []
                                 }
@@ -83621,11 +83271,11 @@
                             "annotation": [],
                             "resultTypeSpecifier": {
                               "type": "IntervalTypeSpecifier",
-                              "localId": "15538",
+                              "localId": "15482",
                               "annotation": [],
                               "pointType": {
                                 "type": "NamedTypeSpecifier",
-                                "localId": "15539",
+                                "localId": "15483",
                                 "name": "{urn:hl7-org:elm-types:r1}Any",
                                 "annotation": []
                               }

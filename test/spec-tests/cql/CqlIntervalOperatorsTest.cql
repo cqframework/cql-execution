@@ -364,7 +364,7 @@ define "Contains": Tuple{
     output: null
   },
   "TestNullElement1": Tuple{
-    expression: null contains 5,
+    expression: null as Interval<Integer> contains 5,
     output: false
   },
   "TestNullElement2": Tuple{
@@ -531,12 +531,6 @@ define "Equal": Tuple{
 }
 
 define "Except": Tuple{
-  "NullInterval": Tuple{
-    skipped: 'Wrong answer (Interval(null, null) vs null)'
-    /*
-    expression: Interval[null, null],
-    output: null
-    */  },
   "TestExceptNull": Tuple{
     expression: Interval[null, null] except Interval[null, null],
     output: null
@@ -550,17 +544,21 @@ define "Except": Tuple{
     output: null
   },
   "DecimalIntervalExcept1to3": Tuple{
+    skipped: '# Wrong output: Interval Except should be precision-aware (based on interval Start/End).'
+    /*
     expression: Interval[1.0, 10.0] except Interval[4.0, 10.0],
     output: Interval [ 1.0, 3.99999999 ]
-  },
+    */  },
   "DecimalIntervalExceptNull": Tuple{
     expression: Interval[1.0, 10.0] except Interval[3.0, 7.0],
     output: null
   },
   "QuantityIntervalExcept1to4": Tuple{
+    skipped: '# Wrong output: Interval Except should be precision-aware (based on interval Start/End). Unrelated second issue: the ELM representation of Quantity is a plain number which does not preserve the value scale'
+    /*
     expression: Interval[1.0 'g', 10.0 'g'] except Interval[5.0 'g', 10.0 'g'],
     output: Interval [ 1.0 'g', 4.99999999 'g' ]
-  },
+    */  },
   "Except12": Tuple{
     expression: Interval[1, 4] except Interval[3, 6],
     output: Interval [ 1, 2 ]

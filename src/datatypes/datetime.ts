@@ -20,6 +20,7 @@ import {
   MIN_TIME_VALUE_STRING
 } from '../util/limits';
 import { Decimal } from './decimal';
+import { equals } from '../util/comparison';
 
 // It's easiest and most performant to organize formats by length of the supported strings.
 // This way we can test strings only against the formats that have a chance of working.
@@ -1274,7 +1275,8 @@ function compareWithDefaultResult(a: any, b: any, defaultResult: any) {
   }
 
   // make a copy of other in the correct timezone offset if they don't match.
-  if (a.timezoneOffset !== b.timezoneOffset) {
+  const differentTZ = (a.timeZoneOffset == null) ? (b.timezoneOffset != null) : !(a.timezoneOffset.equals(b.timezoneOffset));
+  if (differentTZ) {
     b = b.convertToTimezoneOffset(a.timezoneOffset);
   }
 
@@ -1296,7 +1298,7 @@ function compareWithDefaultResult(a: any, b: any, defaultResult: any) {
       }
 
       // if they are different then return with false
-      if (a[field] !== b[field]) {
+      if (!equals(a[field], b[field])) {
         return false;
       }
 

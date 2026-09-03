@@ -1,4 +1,9 @@
 # Invalid CQL (does not translate)
+CqlTypesTest.Time.TimeUpperBoundHours       Intentional Translator error: Invalid time input (T24:59:59.999). Use ISO 8601 time representation (hh:mm:ss.fff)
+CqlTypesTest.Time.TimeUpperBoundMinutes     Translator error: Invalid time input[...]
+CqlTypesTest.Time.TimeUpperBoundSeconds     Translator error: Invalid time input[...]
+"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision"       Translator error: Syntax error at Z
+CqlDateTimeOperatorsTest.DateTimeComponentFrom.DateTimeComponentFromTimezoneOffset      Translator error: Timezone keyword is only valid in 1.3 or lower
 
 # Invalid Translation (translates, but translates wrong)
 CqlAggregateTest.AggregateTests.RolledOutIntervals  CQL adds an integer to a date ("S + duration in days of X"). Should be "S + Quantity{ value: duration in days of X, unit: 'days' }". Translator translates it, but probably shouldn't.
@@ -11,14 +16,25 @@ CqlIntervalOperatorsTest.ProperIn.TimeProperInPrecisionFalse    Wrong output: Ac
 CqlIntervalOperatorsTest.ProperIn.TimeProperInFalse             Wrong output: According to spec, a contained point is properly in as long as the interval is not a unit interval
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1                    Wrong output: Clarification still needed but provided answer is incorrect. See https://jira.hl7.org/browse/FHIR-58705
 CqlIntervalOperatorsTest.Expand.ExpandPer0D1IntervalOverload    Wrong output: Clarification still needed but provided answer is incorrect. See https://jira.hl7.org/browse/FHIR-58705
+CqlIntervalOperatorsTest.Except.DecimalIntervalExcept1to3       # Wrong output: Interval Except should be precision-aware (based on interval Start/End).
+CqlIntervalOperatorsTest.Except.QuantityIntervalExcept1to4      # Wrong output: Interval Except should be precision-aware (based on interval Start/End). Unrelated second issue: the ELM representation of Quantity is a plain number which does not preserve the value scale
+
 CqlListOperatorsTest.Equal.EqualNullNull                        Wrong output: According to spec, if either list contains a null, the result is null
 CqlListOperatorsTest.Sort.simpleSortAsc                         Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlListOperatorsTest.Sort.simpleSortDesc                        Wrong output: Queries return distinct lists by default; need to use "all" to retain duplicates
 CqlIntervalOperatorsTest.PointFrom.TestPointFromNull            Wrong output: Interval[null, null] is not a unit interval, nor is it null
-"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Wrong output: The resulting Quantity should have an appropriate unit; 'g' / 'g' should be '1', not 'g'. See test Divide1Q1Q which is correct
+"CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10d1ByNeg3D1Quantity"     Wrong output: The resulting Quantity should have an appropriate unit; 'g' / 'g' should be '1', not 'g'. See https://github.com/cqframework/cql-tests/pull/148
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide10By5DQuantity"           Wrong output: The resulting Quantity should have an appropriate unit
 "CqlArithmeticFunctionsTest.Truncated Divide.TruncatedDivide414By206DQuantity"        Wrong output: The resulting Quantity should have an appropriate unit
 "CqlStringOperatorsTest.toString tests.QuantityToString"        Wrong output: Spec says Quantity and Decimal ToString must always contain a decimal point and at least 1 digit on each side
+CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1D          Wrong output: As of 2.0 Successor of Decimal should be precision-aware. See https://github.com/cqframework/cql-tests/pull/147
+CqlArithmeticFunctionsTest.Predecessor.PredecessorOf101D        Wrong output: As of 2.0 Successor of Decimal should be precision-aware
+CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1QCM        Wrong output: As of 2.0 Successor of Decimal should be precision-aware
+CqlArithmeticFunctionsTest.Successor.SuccessorOf1D              Wrong output: As of 2.0 Successor of Decimal should be precision-aware
+CqlArithmeticFunctionsTest.Successor.SuccessorOf101D            Wrong output: As of 2.0 Successor of Decimal should be precision-aware
+CqlComparisonOperatorsTest.Equal.TupleEqDifferentNamesWithOneNullId                 Wrong output: Tuple equality with a known-unequal element should return false
+"CqlComparisonOperatorsTest.Not Equal.TupleNotEqDifferingNamesWithOneNullId"        Wrong output: Tuple inequality with a known-unequal element should return true
+CqlStringOperatorsTest.Substring.SubstringEmptyAnd0                   Wrong output: Substring(x, x.length) should be null'. Note similar test SubstringAB2. See https://github.com/cqframework/cql-tests/issues/149
 
 # Potentially Incorrect Expected Output
 "CqlStringOperatorsTest.toString tests.DateTimeToString2"         Answer does not include timezone offset, but default offset depends on test environment
@@ -27,8 +43,20 @@ CqlIntervalOperatorsTest.PointFrom.TestPointFromNull            Wrong output: In
 
 # Incorrect answer
 CqlComparisonOperatorsTest.Equal.DateTimeEqNull                 Wrong answer (true vs null - due to not evaluating DateTime(null) as null)
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthEqualMo"           Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthNotEqualMo"        Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthEquivalentMo"      Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthsNotEqualMo"       Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityMonthsEquivalentMo"     Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityYearEqualA"             Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityYearNotEqualA"          Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityYearEquivalentA"        Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityYearsNotEqualA"         Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestQuantityYearsEquivalentA"       Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestYearEquivalentDays"             Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+"CqlComparisonOperatorsTest.Unit Comparison.TestMonthEquivalentDays"            Wrong answer: Quantity =/~ should have special semantics for calendar-based units
+
 CqlIntervalOperatorsTest.Collapse.TestCollapseNull              Wrong answer (Interval(null, null) vs null)
-CqlIntervalOperatorsTest.Except.NullInterval                    Wrong answer (Interval(null, null) vs null)
 CqlIntervalOperatorsTest.Expand.ExpandListWithNull                        Wrong answer (should be empty list due to removing nulls)
 CqlIntervalOperatorsTest.Intersect.TestIntersectNull            Wrong answer (Interval[5, 10] vs Interval[5, null))
 CqlTypeOperatorsTest.Convert.StringToDateTime                   Wrong answer (different offsets)
@@ -37,6 +65,13 @@ CqlTypeOperatorsTest.ToDateTime.ToDateTime2                     Wrong answer (di
 CqlTypeOperatorsTest.ToDateTime.ToDateTime3                     Wrong answer (different offsets)
 ValueLiteralsAndSelectors.Decimal.Decimal10Pow28ToZeroOneStepDecimalMaxValue    Wrong answer (null vs big number); intermediate value exceeds max Decimal
 ValueLiteralsAndSelectors.Decimal.DecimalPos10Pow28ToZeroOneStepDecimalMaxValue Wrong answer (null vs big number); intermediate value exceeds max Decimal
+
+"CqlDateTimeOperatorsTest.Uncertainty tests.DateTimeDurationBetweenUncertainInterval"   Wrong answer: [17, 44] vs [16, 44]
+"CqlDateTimeOperatorsTest.Uncertainty tests.TimeDurationBetweenHourDiffPrecision2"      Wrong answer: 1 vs uncertainty [0, 1]
+CqlDateTimeOperatorsTest.Subtract.DateTimeSubtract1YearInSeconds                        Wrong answer: Date math evaluates to 2015-06 vs expected 2015-05
+CqlTypesTest.DateTime.DateTimeNull                                                      Wrong answer: null vs DateTime with null components
+CqlTypesTest.Time.TimeMillisParsing                                                     Wrong answer: @T23:59:59.100 vs @T23:59:59.10000
+
 
 # Unimplemented
 CqlArithmeticFunctionsTest.HighBoundary                 HighBoundary not implemented

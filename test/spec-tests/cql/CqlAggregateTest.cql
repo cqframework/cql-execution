@@ -18,7 +18,7 @@ define "AggregateTests": Tuple{
 				  aggregate R starting (null as List<Interval<DateTime>>): R union ({
 				    M X
 				      let S: Max({ end of Last(R) + 1 day, start of X }),
-				        E: S + duration in days of X
+				        E: S + Quantity{ value: duration in days of X, unit: 'days' }
 				      return Interval[S, E]
 				  }),
     output: {

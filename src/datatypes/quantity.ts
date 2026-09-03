@@ -96,6 +96,10 @@ export class Quantity {
         // same unit, or both are null
         return this.value.equals(other.value);
       } else {
+        // TODO: time-based Quantities are defined to have separate calendar duration semantics,
+        //  not implemented here.
+        // eg, 1 year == 365 days. (Per UCUM unit conversion, 1 year is 365.25 days)
+        // https://cql.hl7.org/09-b-cqlreference.html#equal
         const otherVal = convertUnit(other.value, other.unit, this.unit);
         if (otherVal == null) {
           return null;

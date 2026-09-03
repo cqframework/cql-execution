@@ -2026,6 +2026,286 @@
                     }
                   ]
                 }
+              },
+              {
+                "name": "CeilingMaxInteger",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingMaxIntegerAsDecimal",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingMaxIntegerAsDecimalWhereDecimalIsNonZero",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingIntegerGreaterThanMaxInteger",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingDecimalGreaterThanMaxInteger",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingMinInteger",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingMinIntegerAsDecimal",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingMinIntegerAsDecimalWhereDecimalIsNonZero",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingIntegerLessThanMinInteger",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingDecimalLessThanMinInteger",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
               }
             ]
           },
@@ -2226,6 +2506,286 @@
                         "elementType": {
                           "type": "NamedTypeSpecifier",
                           "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CeilingMaxInteger",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CeilingMaxIntegerAsDecimal",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CeilingMaxIntegerAsDecimalWhereDecimalIsNonZero",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CeilingIntegerGreaterThanMaxInteger",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CeilingDecimalGreaterThanMaxInteger",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CeilingMinInteger",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CeilingMinIntegerAsDecimal",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CeilingMinIntegerAsDecimalWhereDecimalIsNonZero",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CeilingIntegerLessThanMinInteger",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "CeilingDecimalLessThanMinInteger",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
                           "annotation": []
                         }
                       }
@@ -2686,6 +3246,654 @@
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                         "value": "1",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingMaxInteger",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Ceiling",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "ToDecimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "2147483647",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "2147483647",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingMaxIntegerAsDecimal",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Ceiling",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "value": "2147483647.0",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "2147483647",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingMaxIntegerAsDecimalWhereDecimalIsNonZero",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Ceiling",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "value": "2147483647.2",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingIntegerGreaterThanMaxInteger",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Ceiling",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "ToDecimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "2147483648",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingDecimalGreaterThanMaxInteger",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Ceiling",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "value": "2147483648.2",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingMinInteger",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Ceiling",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "ToDecimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Negate",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Literal",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2147483648",
+                              "annotation": []
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Negate",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2147483648",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingMinIntegerAsDecimal",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Ceiling",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Negate",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "value": "2147483648.0",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Negate",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2147483648",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingMinIntegerAsDecimalWhereDecimalIsNonZero",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Ceiling",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Negate",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "value": "2147483648.2",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Negate",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2147483648",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingIntegerLessThanMinInteger",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Ceiling",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "ToDecimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Negate",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Literal",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2147483649",
+                              "annotation": []
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "CeilingDecimalLessThanMinInteger",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Ceiling",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Negate",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "value": "2147483649.2",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                         "annotation": []
                       }
                     }
@@ -4532,6 +5740,286 @@
                     }
                   ]
                 }
+              },
+              {
+                "name": "FloorMaxInteger",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorMaxIntegerAsDecimal",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorMaxIntegerAsDecimalWhereDecimalIsNonZero",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorIntegerGreaterThanMaxInteger",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorDecimalGreaterThanMaxInteger",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorMinInteger",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorMinIntegerAsDecimal",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorMinIntegerAsDecimalWhereDecimalIsNonZero",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorIntegerLessThanMinInteger",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorDecimalLessThanMinInteger",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "expression",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": []
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
               }
             ]
           },
@@ -4760,6 +6248,286 @@
                         "elementType": {
                           "type": "NamedTypeSpecifier",
                           "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "FloorMaxInteger",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "FloorMaxIntegerAsDecimal",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "FloorMaxIntegerAsDecimalWhereDecimalIsNonZero",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "FloorIntegerGreaterThanMaxInteger",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "FloorDecimalGreaterThanMaxInteger",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "FloorMinInteger",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "FloorMinIntegerAsDecimal",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "FloorMinIntegerAsDecimalWhereDecimalIsNonZero",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "FloorIntegerLessThanMinInteger",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "FloorDecimalLessThanMinInteger",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
                           "annotation": []
                         }
                       }
@@ -5290,6 +7058,648 @@
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
                         "valueType": "{urn:hl7-org:elm-types:r1}Integer",
                         "value": "2",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorMaxInteger",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Floor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "ToDecimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "2147483647",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "2147483647",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorMaxIntegerAsDecimal",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Floor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "value": "2147483647.0",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "2147483647",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorMaxIntegerAsDecimalWhereDecimalIsNonZero",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Floor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "value": "2147483647.2",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                        "value": "2147483647",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorIntegerGreaterThanMaxInteger",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Floor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "ToDecimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                            "value": "2147483648",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorDecimalGreaterThanMaxInteger",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Floor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "value": "2147483648.2",
+                          "annotation": []
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorMinInteger",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Floor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "ToDecimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Negate",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Literal",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2147483648",
+                              "annotation": []
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Negate",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2147483648",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorMinIntegerAsDecimal",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Floor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Negate",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "value": "2147483648.0",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Negate",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                          "value": "2147483648",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorMinIntegerAsDecimalWhereDecimalIsNonZero",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Floor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Negate",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "value": "2147483648.2",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorIntegerLessThanMinInteger",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Floor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "ToDecimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Negate",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                            "annotation": [],
+                            "signature": [],
+                            "operand": {
+                              "type": "Literal",
+                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                              "value": "2147483649",
+                              "annotation": []
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "FloorDecimalLessThanMinInteger",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "expression",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "annotation": []
+                        }
+                      },
+                      {
+                        "name": "output",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}Any",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "expression",
+                      "value": {
+                        "type": "Floor",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Negate",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "annotation": [],
+                          "signature": [],
+                          "operand": {
+                            "type": "Literal",
+                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                            "value": "2147483649.2",
+                            "annotation": []
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "name": "output",
+                      "value": {
+                        "type": "Null",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Any",
                         "annotation": []
                       }
                     }
@@ -6417,6 +8827,44 @@
                     }
                   ]
                 }
+              },
+              {
+                "name": "HighBoundaryNull",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "HighBoundaryNullPrecision",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
               }
             ]
           },
@@ -6486,6 +8934,44 @@
                 },
                 {
                   "name": "HighBoundaryTimeMillisecond",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "HighBoundaryNull",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "HighBoundaryNullPrecision",
                   "annotation": [],
                   "elementType": {
                     "type": "TupleTypeSpecifier",
@@ -6610,6 +9096,74 @@
               },
               {
                 "name": "HighBoundaryTimeMillisecond",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "HighBoundary not implemented",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "HighBoundaryNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "HighBoundary not implemented",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "HighBoundaryNullPrecision",
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
@@ -7949,6 +10503,44 @@
                     }
                   ]
                 }
+              },
+              {
+                "name": "LowBoundaryNull",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LowBoundaryNullPrecision",
+                "annotation": [],
+                "elementType": {
+                  "type": "TupleTypeSpecifier",
+                  "annotation": [],
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
               }
             ]
           },
@@ -8018,6 +10610,44 @@
                 },
                 {
                   "name": "LowBoundaryTimeMillisecond",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "LowBoundaryNull",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "LowBoundaryNullPrecision",
                   "annotation": [],
                   "elementType": {
                     "type": "TupleTypeSpecifier",
@@ -8142,6 +10772,74 @@
               },
               {
                 "name": "LowBoundaryTimeMillisecond",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "LowBoundary not implemented",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LowBoundaryNull",
+                "value": {
+                  "type": "Tuple",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "TupleTypeSpecifier",
+                    "annotation": [],
+                    "element": [
+                      {
+                        "name": "skipped",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
+                          "annotation": []
+                        }
+                      }
+                    ]
+                  },
+                  "element": [
+                    {
+                      "name": "skipped",
+                      "value": {
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "LowBoundary not implemented",
+                        "annotation": []
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "LowBoundaryNullPrecision",
                 "value": {
                   "type": "Tuple",
                   "annotation": [],
@@ -15614,20 +18312,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -15642,20 +18331,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -15670,20 +18350,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -15931,20 +18602,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -15959,20 +18621,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -15987,20 +18640,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -16383,20 +19027,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -16404,28 +19039,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "Predecessor",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": {
-                          "type": "Literal",
-                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "value": "1.0",
-                          "annotation": []
-                        }
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "value": "0.99999999",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: As of 2.0 Successor of Decimal should be precision-aware. See https://github.com/cqframework/cql-tests/pull/147",
                         "annotation": []
                       }
                     }
@@ -16442,20 +19061,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -16463,28 +19073,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "Predecessor",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": {
-                          "type": "Literal",
-                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "value": "1.01",
-                          "annotation": []
-                        }
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "value": "1.00999999",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: As of 2.0 Successor of Decimal should be precision-aware",
                         "annotation": []
                       }
                     }
@@ -16501,20 +19095,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Quantity",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -16522,28 +19107,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "value": {
-                        "type": "Predecessor",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": {
-                          "type": "Quantity",
-                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                          "value": 1,
-                          "unit": "cm",
-                          "annotation": []
-                        }
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "value": {
-                        "type": "Quantity",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Quantity",
-                        "value": 0.99999999,
-                        "unit": "cm",
+                        "type": "Literal",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: As of 2.0 Successor of Decimal should be precision-aware",
                         "annotation": []
                       }
                     }
@@ -19915,11 +22484,17 @@
                     {
                       "name": "output",
                       "value": {
-                        "type": "Literal",
+                        "type": "Negate",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "value": "0.0",
-                        "annotation": []
+                        "annotation": [],
+                        "signature": [],
+                        "operand": {
+                          "type": "Literal",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "value": "1.0",
+                          "annotation": []
+                        }
                       }
                     }
                   ]
@@ -20195,7 +22770,7 @@
                           "type": "Literal",
                           "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
                           "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "value": "1.0",
+                          "value": "2.0",
                           "annotation": []
                         }
                       }
@@ -21193,20 +23768,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -21221,20 +23787,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -21482,20 +24039,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -21510,20 +24058,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -21900,20 +24439,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -21921,28 +24451,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "Successor",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": {
-                          "type": "Literal",
-                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "value": "1.0",
-                          "annotation": []
-                        }
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "value": "1.00000001",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: As of 2.0 Successor of Decimal should be precision-aware",
                         "annotation": []
                       }
                     }
@@ -21959,20 +24473,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Decimal",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -21980,28 +24485,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "Successor",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": {
-                          "type": "Literal",
-                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                          "value": "1.01",
-                          "annotation": []
-                        }
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Decimal",
-                        "value": "1.01000001",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: As of 2.0 Successor of Decimal should be precision-aware",
                         "annotation": []
                       }
                     }
@@ -26454,7 +28943,7 @@
                         "type": "Literal",
                         "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
                         "valueType": "{urn:hl7-org:elm-types:r1}String",
-                        "value": "Wrong output: The resulting Quantity should have an appropriate unit; 'g' / 'g' should be '1', not 'g'. See test Divide1Q1Q which is correct",
+                        "value": "Wrong output: The resulting Quantity should have an appropriate unit; 'g' / 'g' should be '1', not 'g'. See https://github.com/cqframework/cql-tests/pull/148",
                         "annotation": []
                       }
                     }
