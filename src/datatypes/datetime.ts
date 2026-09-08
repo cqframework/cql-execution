@@ -829,7 +829,7 @@ export class DateTime extends AbstractDate {
 
   isUTC() {
     // A timezoneOffset of 0 indicates UTC time.
-    return !this.timezoneOffset;
+    return this.timezoneOffset?.equals(0);
   }
 
   getPrecision() {
