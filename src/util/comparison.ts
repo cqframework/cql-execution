@@ -13,7 +13,7 @@ function areStrings(a: any, b: any) {
 }
 
 function areDecimals(a: any, b: any) {
-  return a && a.isDecimal && b && b.isDecimal;
+  return a?.isDecimal && b?.isDecimal;
 }
 
 function areDateTimesOrQuantities(a: any, b: any) {

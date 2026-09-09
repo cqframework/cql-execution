@@ -1275,7 +1275,10 @@ function compareWithDefaultResult(a: any, b: any, defaultResult: any) {
   }
 
   // make a copy of other in the correct timezone offset if they don't match.
-  const differentTZ = (a.timeZoneOffset == null) ? (b.timezoneOffset != null) : !(a.timezoneOffset.equals(b.timezoneOffset));
+  const differentTZ =
+    a.timeZoneOffset == null
+      ? b.timezoneOffset != null
+      : !a.timezoneOffset.equals(b.timezoneOffset);
   if (differentTZ) {
     b = b.convertToTimezoneOffset(a.timezoneOffset);
   }
