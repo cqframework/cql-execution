@@ -1213,7 +1213,7 @@ export class Date extends AbstractDate {
     return str;
   }
 
-  getDateTime(timeZoneOffset?: Decimal | null) {
+  getDateTime(timeZoneOffset?: Decimal | number | null) {
     // from the spec: the result will be a DateTime with the time components unspecified,
     // except for the timezone offset, which will be set to the timezone offset of the evaluation
     // request timestamp. (this last part is achieved by passing in the timeZoneOffset from the context)
