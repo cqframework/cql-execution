@@ -73,15 +73,54 @@ export function convertUnit(fromVal: Decimal, fromUnit: any, toUnit: any) {
     return fromVal;
   }
   // IMPORTANT: the UCUM library operates on raw JS numbers, not our Decimal
-  // this means that extremely large or extremely small numbers would lose precision via this function.
+  // this means that extremely large or extremely small numbers could lose precision via this function.
   // To prevent this, instead of converting fromVal directly, convert 1 unit to get the conversion factor,
   // and manually multiply the fromVal by it.
-  const result = utils.convertUnitTo(fromUnit, 1, toUnit);
-  if (result.status !== 'succeeded') {
+  // First though, make sure the units can be safely converted by simple scalar factor.
+  // Units that cannot because they require a special function, such as C <--> F,
+  // fall back to calling the UCUM library directly.
+
+  const testFrom = utils.convertToBaseUnits(fromUnit, 1);
+  const testTo = utils.convertToBaseUnits(toUnit, 1);
+
+  if (testFrom.status !== 'succeeded' || testTo.status !== 'succeeded') {
     return;
   }
-  const conversionFactor = result.toVal;
-  return fromVal.multiplyBy(conversionFactor).normalized();
+
+  let rawResult: Decimal;
+  if (testFrom.fromUnitIsSpecial === false && testTo.fromUnitIsSpecial === false) {
+    // try both directions to see if one is more exact,
+    // eg, days to weeks is * 0.142857... but weeks to days is * 7, so days to weeks could be / 7 instead
+    const fromToTo = utils.convertUnitTo(fromUnit, 1, toUnit);
+    const toToFrom = utils.convertUnitTo(toUnit, 1, fromUnit);
+    if (fromToTo.status !== 'succeeded' || toToFrom.status !== 'succeeded') {
+      return;
+    }
+
+    const multFactor = fromToTo.toVal;
+    const divFactor = toToFrom.toVal;
+    // NOTE: conversion factor is a JS number and can itself be imprecise, eg, inches to m is 0.025400000000000002
+    if (Number.isInteger(divFactor)) {
+      rawResult = fromVal.divideBy(divFactor);
+    } else {
+      // We could consider more heuristics here, but for now just fall back to the multiplication factor
+      rawResult = fromVal.multiplyBy(multFactor);
+    }
+  } else {
+    // units are special, so call the library with the exact value
+    const result = utils.convertUnitTo(fromUnit, fromVal.toNumber(), toUnit);
+    if (result.status !== 'succeeded') {
+      return;
+    }
+    rawResult = Decimal.from(result.toVal);
+  }
+  // IMPORTANT: Experimentation shows JS number issues are more common than one might anticipate,
+  // eg 0 C to F produces "31.999999999999943" which gets normalized to "32.00000000".
+  // Since Decimal scale is relevant, drop trailing zeros here,
+  // then ensure a minimum scale matching the input value's scale.
+  // This may produce results with different scale than pure Decimal arithmetic would,
+  // but should never impact the value, only the scale.
+  return rawResult.normalized().withoutTrailingZeros().withMinimumScale(fromVal.scale);
 }
 
 export function normalizeUnitsWhenPossible(val1: Decimal, unit1: any, val2: Decimal, unit2: any) {

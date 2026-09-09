@@ -13476,6 +13476,7 @@ context Patient
 define ConvertQuantityGood: ConvertQuantity(5 'mg', 'g')
 define ConvertSyntax: convert 5 'mg' to 'g'
 define ConvertQuantityToKg: ConvertQuantity(5000 'g', 'kg')
+define ConvertQuantityToC: ConvertQuantity(32 '[degF]', 'Cel')
 define ConvertQuantityToWeeks: ConvertQuantity(28 'days', 'weeks')
 define NullConvertQuantity: ConvertQuantity(5 'mg', 'fox')
 */
@@ -13492,7 +13493,7 @@ module.exports['ConvertQuantity'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "261",
+        "r" : "274",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -13761,7 +13762,7 @@ module.exports['ConvertQuantity'] = {
       }, {
         "localId" : "248",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "ConvertQuantityToWeeks",
+        "name" : "ConvertQuantityToC",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -13770,7 +13771,7 @@ module.exports['ConvertQuantity'] = {
           "s" : {
             "r" : "248",
             "s" : [ {
-              "value" : [ "", "define ", "ConvertQuantityToWeeks", ": " ]
+              "value" : [ "", "define ", "ConvertQuantityToC", ": " ]
             }, {
               "r" : "256",
               "s" : [ {
@@ -13778,14 +13779,14 @@ module.exports['ConvertQuantity'] = {
               }, {
                 "r" : "249",
                 "s" : [ {
-                  "value" : [ "28 ", "'days'" ]
+                  "value" : [ "32 ", "'[degF]'" ]
                 } ]
               }, {
                 "value" : [ ", " ]
               }, {
                 "r" : "250",
                 "s" : [ {
-                  "value" : [ "'weeks'" ]
+                  "value" : [ "'Cel'" ]
                 } ]
               }, {
                 "value" : [ ")" ]
@@ -13813,22 +13814,22 @@ module.exports['ConvertQuantity'] = {
             "type" : "Quantity",
             "localId" : "249",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-            "value" : 28,
-            "unit" : "days",
+            "value" : 32,
+            "unit" : "[degF]",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
             "localId" : "250",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
-            "value" : "weeks",
+            "value" : "Cel",
             "annotation" : [ ]
           } ]
         }
       }, {
         "localId" : "261",
         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-        "name" : "NullConvertQuantity",
+        "name" : "ConvertQuantityToWeeks",
         "context" : "Patient",
         "accessLevel" : "Public",
         "annotation" : [ {
@@ -13837,7 +13838,7 @@ module.exports['ConvertQuantity'] = {
           "s" : {
             "r" : "261",
             "s" : [ {
-              "value" : [ "", "define ", "NullConvertQuantity", ": " ]
+              "value" : [ "", "define ", "ConvertQuantityToWeeks", ": " ]
             }, {
               "r" : "269",
               "s" : [ {
@@ -13845,14 +13846,14 @@ module.exports['ConvertQuantity'] = {
               }, {
                 "r" : "262",
                 "s" : [ {
-                  "value" : [ "5 ", "'mg'" ]
+                  "value" : [ "28 ", "'days'" ]
                 } ]
               }, {
                 "value" : [ ", " ]
               }, {
                 "r" : "263",
                 "s" : [ {
-                  "value" : [ "'fox'" ]
+                  "value" : [ "'weeks'" ]
                 } ]
               }, {
                 "value" : [ ")" ]
@@ -13880,12 +13881,79 @@ module.exports['ConvertQuantity'] = {
             "type" : "Quantity",
             "localId" : "262",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 28,
+            "unit" : "days",
+            "annotation" : [ ]
+          }, {
+            "type" : "Literal",
+            "localId" : "263",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "weeks",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "274",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "NullConvertQuantity",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "274",
+            "s" : [ {
+              "value" : [ "", "define ", "NullConvertQuantity", ": " ]
+            }, {
+              "r" : "282",
+              "s" : [ {
+                "value" : [ "ConvertQuantity", "(" ]
+              }, {
+                "r" : "275",
+                "s" : [ {
+                  "value" : [ "5 ", "'mg'" ]
+                } ]
+              }, {
+                "value" : [ ", " ]
+              }, {
+                "r" : "276",
+                "s" : [ {
+                  "value" : [ "'fox'" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "ConvertQuantity",
+          "localId" : "282",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "283",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "284",
+            "name" : "{urn:hl7-org:elm-types:r1}String",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Quantity",
+            "localId" : "275",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 5,
             "unit" : "mg",
             "annotation" : [ ]
           }, {
             "type" : "Literal",
-            "localId" : "263",
+            "localId" : "276",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
             "valueType" : "{urn:hl7-org:elm-types:r1}String",
             "value" : "fox",

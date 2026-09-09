@@ -1070,6 +1070,10 @@ describe('ConvertQuantity', () => {
     (await this.convertQuantityToKg.exec(this.ctx)).should.eql(new Quantity(5, 'kg'));
   });
 
+  it('should return converted Quantity with Celsius', async function () {
+    (await this.convertQuantityToC.exec(this.ctx)).should.eql(new Quantity(0, 'Cel'));
+  });
+
   it('should return converted Quantity with weeks', async function () {
     (await this.convertQuantityToWeeks.exec(this.ctx)).should.eql(new Quantity(4, 'weeks'));
   });
