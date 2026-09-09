@@ -58,29 +58,41 @@ define "Integer": Tuple{
     output: -2
   },
   "Integer10Pow9": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: Power(10,9),
     output: 1000000000
-  },
+    */  },
   "IntegerPos10Pow9": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: +Power(10,9),
     output: 1000000000
-  },
+    */  },
   "IntegerNeg10Pow9": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: -Power(10,9),
     output: -1000000000
-  },
+    */  },
   "Integer2Pow31ToZero1IntegerMaxValue": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: Power(2,30)-1+Power(2,30),
     output: 2147483647
-  },
+    */  },
   "IntegerPos2Pow31ToZero1IntegerMaxValue": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: +Power(2,30)-1+Power(2,30),
     output: 2147483647
-  },
+    */  },
   "IntegerNeg2Pow31ToZero1": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: -Power(2,30)+1-Power(2,30),
     output: -2147483647
-  },
+    */  },
   "Integer2Pow31": Tuple{
     expression: 2147483648,
     invalid: true
@@ -90,9 +102,11 @@ define "Integer": Tuple{
     invalid: true
   },
   "IntegerNeg2Pow31IntegerMinValue": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: -Power(2,30)-Power(2,30),
     output: -2147483648
-  },
+    */  },
   "Integer2Pow31ToInf1": Tuple{
     expression: 2147483649,
     invalid: true
