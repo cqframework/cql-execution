@@ -170,7 +170,9 @@ define decimals_at_min_value_product: Product({-99999999999999999999.99999999, 1
 define decimals_below_min_value_product: Product({-99999999999999999999.99999999, 2.0})
 define quantity_product: Product({1.0 'g', 2.0 'g', 3.0 'g', 4.0 'g'})
 // Max/Min-valued quantities are described using the "maximum" and "minimum" operators
-// to avoid the translator rounding them to +/-1.0e20, which is not a legal Decimal
+// to avoid them being represented in ELM as +/-1.0e20, which is not a legal Decimal
+// (Note that the ELM for Quantity literals uses a plain number for the value)
+// See https://jira.hl7.org/browse/FHIR-58825
 define MaxValueGramQuantity: Quantity { value: maximum Decimal, unit: 'g' }
 define MinValueGramQuantity: Quantity { value: minimum Decimal, unit: 'g' }
 define quantities_at_max_value_product: Product({MaxValueGramQuantity, 1.0 'g'})
