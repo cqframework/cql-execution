@@ -298,6 +298,9 @@ export default () => {
     }
   };
   data['zeroPointFiveToNinePointFive'] = new TestInterval(Decimal.from(0.5), Decimal.from(9.5));
-  data['zeroToHundredMg'] = new TestInterval(new Quantity(0, 'mg'), new Quantity(100, 'mg'));
+  data['zeroToHundredMg'] = new TestInterval(
+    new Quantity('0.0', 'mg'),
+    new Quantity('100.0', 'mg')
+  );
   return data;
 };

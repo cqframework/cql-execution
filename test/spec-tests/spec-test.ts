@@ -134,7 +134,7 @@ describe('CQL Spec Tests (from XML)', () => {
   function roundDecimalsWhenApplicable(item: any) {
     if (item instanceof Decimal) {
       // Round to 8 places since that's the number of places used by expected outputs
-      item = item.setScale(8);
+      item = item.withScale(8);
     }
     return item;
   }
