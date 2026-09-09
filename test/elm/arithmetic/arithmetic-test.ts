@@ -215,64 +215,64 @@ describe('Divide', () => {
   });
 
   it('should divide two numbers', async function () {
-    (await this.tenDividedByTwo.exec(this.ctx)).should.equalDecimal(Decimal.from(5));
+    (await this.tenDividedByTwo.exec(this.ctx)).should.equalDecimal(5);
   });
 
   it("should divide two numbers that don't evenly divide", async function () {
-    (await this.tenDividedByFour.exec(this.ctx)).should.equalDecimal(Decimal.from(2.5));
+    (await this.tenDividedByFour.exec(this.ctx)).should.equalDecimal(2.5);
   });
 
   it('should divide multiple numbers', async function () {
-    (await this.divideMultiple.exec(this.ctx)).should.equalDecimal(Decimal.from(5));
+    (await this.divideMultiple.exec(this.ctx)).should.equalDecimal(5);
   });
 
   it('should divide variables', async function () {
-    (await this.divideVariables.exec(this.ctx)).should.equalDecimal(Decimal.from(25));
+    (await this.divideVariables.exec(this.ctx)).should.equalDecimal(25);
   });
 
   it('should divide two longs', async function () {
     // NOTE: Divide always returns a Decimal
-    (await this.tenDividedByTwoLong.exec(this.ctx)).should.equalDecimal(Decimal.from(5));
+    (await this.tenDividedByTwoLong.exec(this.ctx)).should.equalDecimal(5);
   });
 
   it('should divide integer by long', async function () {
     // NOTE: Divide always returns a Decimal
-    (await this.tenDividedByTwoMixed.exec(this.ctx)).should.equalDecimal(Decimal.from(5));
+    (await this.tenDividedByTwoMixed.exec(this.ctx)).should.equalDecimal(5);
   });
 
   it('should divide long by integer', async function () {
     // NOTE: Divide always returns a Decimal
-    (await this.tenDividedByTwoReverseMixed.exec(this.ctx)).should.equalDecimal(Decimal.from(5));
+    (await this.tenDividedByTwoReverseMixed.exec(this.ctx)).should.equalDecimal(5);
   });
 
   it('should divide two longs with decimal result', async function () {
-    (await this.tenDividedByFourLong.exec(this.ctx)).should.equalDecimal(Decimal.from(2.5));
+    (await this.tenDividedByFourLong.exec(this.ctx)).should.equalDecimal(2.5);
   });
 
   it('should divide integer by long with decimal result', async function () {
-    (await this.tenDividedByFourMixed.exec(this.ctx)).should.equalDecimal(Decimal.from(2.5));
+    (await this.tenDividedByFourMixed.exec(this.ctx)).should.equalDecimal(2.5);
   });
 
   it('should divide long by integer with decimal result', async function () {
-    (await this.tenDividedByFourReverseMixed.exec(this.ctx)).should.equalDecimal(Decimal.from(2.5));
+    (await this.tenDividedByFourReverseMixed.exec(this.ctx)).should.equalDecimal(2.5);
   });
 
   it('should divide uncertainty by uncertainty', async function () {
     const result = await this.divideUncertainties.exec(this.ctx);
-    result.low.should.equalDecimal(Decimal.from('0.42857143')); // 6/14
-    result.high.should.equalDecimal(Decimal.from(9));
+    result.low.should.equalDecimal('0.42857143'); // 6/14
+    result.high.should.equalDecimal(9);
   });
 
   it('should divide uncertainty by number', async function () {
     const result = await this.divideUncertaintyByNumber.exec(this.ctx);
-    result.low.should.equalDecimal(Decimal.from(3));
-    result.high.should.equalDecimal(Decimal.from(9));
+    result.low.should.equalDecimal(3);
+    result.high.should.equalDecimal(9);
   });
 
   it('should divide number by uncertainty', async function () {
     const result = await this.divideNumberByUncertainty.exec(this.ctx);
-    result.low.should.equalDecimal(Decimal.from(2));
-    result.high.should.equalDecimal(Decimal.from(6));
+    result.low.should.equalDecimal(2);
+    result.high.should.equalDecimal(6);
   });
 });
 
@@ -304,11 +304,11 @@ describe('MathPrecedence', () => {
   });
 
   it('should follow order of operations', async function () {
-    (await this.mixed.exec(this.ctx)).should.equalDecimal(Decimal.from(46));
+    (await this.mixed.exec(this.ctx)).should.equalDecimal(46);
   });
 
   it('should allow parentheses to override order of operations', async function () {
-    (await this.parenthetical.exec(this.ctx)).should.equalDecimal(Decimal.from(-10));
+    (await this.parenthetical.exec(this.ctx)).should.equalDecimal(-10);
   });
 });
 
@@ -346,13 +346,11 @@ describe('Power', () => {
   });
 
   it('should return an infinitesimally small number when the exponent is the minimum Long value', async function () {
-    (await this.twoLongExpMinLong.exec(this.ctx)).should.equalDecimal(Decimal.from(0.0));
+    (await this.twoLongExpMinLong.exec(this.ctx)).should.equalDecimal(0.0);
   });
 
   it('should normalize Decimal power results at the ELM boundary', async function () {
-    (await this.decimalPowerNeedsNormalization.exec(this.ctx)).should.equalDecimal(
-      Decimal.from('1.52415788')
-    );
+    (await this.decimalPowerNeedsNormalization.exec(this.ctx)).should.equalDecimal('1.52415788');
   });
 
   it('should return null for Decimal powers that cannot be represented', async function () {
@@ -583,11 +581,11 @@ describe('Log', () => {
   });
 
   it('should be able to return the log of a number based on an arbitrary base value', async function () {
-    (await this.log.exec(this.ctx)).should.equalDecimal(Decimal.from(0.25));
+    (await this.log.exec(this.ctx)).should.equalDecimal(0.25);
   });
 
   it('should be able to return the log of a long based on an arbitrary base value', async function () {
-    (await this.logLong.exec(this.ctx)).should.equalDecimal(Decimal.from(0.25));
+    (await this.logLong.exec(this.ctx)).should.equalDecimal(0.25);
   });
 });
 
@@ -656,17 +654,17 @@ describe('Round', () => {
   });
 
   it('should be able to round a number up or down to the closest integer value', async function () {
-    (await this.up.exec(this.ctx)).should.equalDecimal(Decimal.from(5));
-    (await this.down.exec(this.ctx)).should.equalDecimal(Decimal.from(4));
+    (await this.up.exec(this.ctx)).should.equalDecimal(5);
+    (await this.down.exec(this.ctx)).should.equalDecimal(4);
   });
   it('should be able to round a number up or down to the closest decimal place ', async function () {
-    (await this.up_percent.exec(this.ctx)).should.equalDecimal(Decimal.from(4.6));
-    (await this.down_percent.exec(this.ctx)).should.equalDecimal(Decimal.from(4.4));
+    (await this.up_percent.exec(this.ctx)).should.equalDecimal(4.6);
+    (await this.down_percent.exec(this.ctx)).should.equalDecimal(4.4);
   });
 
   it('should round negative exact-half values toward nearest whole number', async function () {
-    (await this.negativeHalf.exec(this.ctx)).should.equalDecimal(Decimal.from(-1));
-    (await this.negativeOnePointFive.exec(this.ctx)).should.equalDecimal(Decimal.from(-2));
+    (await this.negativeHalf.exec(this.ctx)).should.equalDecimal(-1);
+    (await this.negativeOnePointFive.exec(this.ctx)).should.equalDecimal(-2);
   });
 });
 
@@ -685,7 +683,7 @@ describe('Successor', () => {
 
   it('should be able to get Decimal Successor', async function () {
     // successor of 2.2
-    (await this.rs.exec(this.ctx)).should.equalDecimal(Decimal.from(2.3));
+    (await this.rs.exec(this.ctx)).should.equalDecimal(2.3);
   });
 
   it('should return null for Successor greater than Integer Max value', async function () {
@@ -789,7 +787,7 @@ describe('Predecessor', () => {
 
   it('should be able to get Decimal Predecessor', async function () {
     // Rs: predecessor of 2.2
-    (await this.rs.exec(this.ctx)).should.equalDecimal(Decimal.from('2.1'));
+    (await this.rs.exec(this.ctx)).should.equalDecimal('2.1');
   });
 
   it('should return null for Predecessor greater than Integer Max value', async function () {
@@ -916,13 +914,13 @@ describe('Quantity', () => {
 
   it('should be able to perform Quantity Absolution', async function () {
     const q = await this.abs.exec(this.ctx);
-    q.value.should.equalDecimal(Decimal.from(10));
+    q.value.should.equalDecimal(10);
     q.unit.should.equal('days');
   });
 
   it('should be able to perform Quantity Negation', async function () {
     const q = await this.neg.exec(this.ctx);
-    q.value.should.equalDecimal(Decimal.from(-10));
+    q.value.should.equalDecimal(-10);
     q.unit.should.equal('days');
   });
 
@@ -1048,16 +1046,12 @@ describe('OutOfBounds', () => {
 
     it('should return value for Divide near overflow', async function () {
       // not really near overflow, but more than max integer and near JavaScript max safe number
-      should(await this.integerDivideNearOverflow.exec(this.ctx)).equalDecimal(
-        Decimal.from(8589934588000000)
-      );
+      should(await this.integerDivideNearOverflow.exec(this.ctx)).equalDecimal(8589934588000000);
     });
 
     it('should return value for Divide near underflow', async function () {
       // not really near underflow, but less than min integer and near JavaScript min safe number
-      should(await this.integerDivideNearUnderflow.exec(this.ctx)).equalDecimal(
-        Decimal.from(-8589934592000000)
-      );
+      should(await this.integerDivideNearUnderflow.exec(this.ctx)).equalDecimal(-8589934592000000);
     });
 
     it('should return null for Divide By Zero', async function () {
@@ -1159,16 +1153,12 @@ describe('OutOfBounds', () => {
       // note that all division in CQL (except truncated division) is really decimal division
       // note also that MAX_LONG_VALUE is (2^63)-1,
       // 9223372036854775807 = 7^2 * 73 * 127 * 337 * 92737 * 649657
-      should(await this.longDivideNearOverflow.exec(this.ctx)).equalDecimal(
-        Decimal.from(99457304386111n)
-      );
+      should(await this.longDivideNearOverflow.exec(this.ctx)).equalDecimal(99457304386111n);
     });
 
     it('should return value for Divide near underflow', async function () {
       // not really near underflow, but near JavaScript min safe number
-      should(await this.longDivideNearUnderflow.exec(this.ctx)).equalDecimal(
-        Decimal.from(-9007199254740992n)
-      );
+      should(await this.longDivideNearUnderflow.exec(this.ctx)).equalDecimal(-9007199254740992n);
     });
 
     it('should return null for Divide By Zero', async function () {

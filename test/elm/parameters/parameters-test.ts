@@ -101,7 +101,7 @@ describe('DecimalParameterTypes', () => {
 
   it('should execute to provided valid value', async function () {
     (await this.foo.exec(this.ctx.withParameters({ FooP: Decimal.from(3.0) }))).should.equalDecimal(
-      Decimal.from(3.0)
+      3.0
     );
   });
 
@@ -110,13 +110,13 @@ describe('DecimalParameterTypes', () => {
   });
 
   it('should execute to default value', async function () {
-    (await this.foo2.exec(this.ctx)).should.equalDecimal(Decimal.from(1.5));
+    (await this.foo2.exec(this.ctx)).should.equalDecimal(1.5);
   });
 
   it('should execute to overriding valid value', async function () {
     (
       await this.foo2.exec(this.ctx.withParameters({ FooDP: Decimal.from(3.0) }))
-    ).should.equalDecimal(Decimal.from(3.0));
+    ).should.equalDecimal(3.0);
   });
 
   it('should throw when overriding value is wrong type', function () {

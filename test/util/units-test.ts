@@ -109,30 +109,30 @@ describe('checkUnit', () => {
 
 describe('convertUnit', () => {
   it('should convert compatible units', () => {
-    convertUnit(Decimal.from(18), '[in_i]', '[ft_i]').should.equalDecimal(Decimal.from(1.5));
+    convertUnit(Decimal.from(18), '[in_i]', '[ft_i]').should.equalDecimal(1.5);
   });
 
   it('should return same value for same units', () => {
-    convertUnit(Decimal.from(18), '[in_i]', '[in_i]').should.equalDecimal(Decimal.from(18));
+    convertUnit(Decimal.from(18), '[in_i]', '[in_i]').should.equalDecimal(18);
   });
 
   it('should consider empty as 1 during conversion', () => {
-    convertUnit(Decimal.from(18), '', '').should.equalDecimal(Decimal.from(18));
-    convertUnit(Decimal.from(18), null, null).should.equalDecimal(Decimal.from(18));
-    convertUnit(Decimal.from(18), '', null).should.equalDecimal(Decimal.from(18));
-    convertUnit(Decimal.from(18), null, '').should.equalDecimal(Decimal.from(18));
+    convertUnit(Decimal.from(18), '', '').should.equalDecimal(18);
+    convertUnit(Decimal.from(18), null, null).should.equalDecimal(18);
+    convertUnit(Decimal.from(18), '', null).should.equalDecimal(18);
+    convertUnit(Decimal.from(18), null, '').should.equalDecimal(18);
   });
 
   it('should support CQL date units during conversion', () => {
-    convertUnit(Decimal.from(18), 'months', 'years').should.equalDecimal(Decimal.from(1.5));
-    convertUnit(Decimal.from(1.5), 'years', 'months').should.equalDecimal(Decimal.from(18));
-    convertUnit(Decimal.from(2), 'seconds', 'milliseconds').should.equalDecimal(Decimal.from(2000));
-    convertUnit(Decimal.from(2000), 'milliseconds', 'seconds').should.equalDecimal(Decimal.from(2));
+    convertUnit(Decimal.from(18), 'months', 'years').should.equalDecimal(1.5);
+    convertUnit(Decimal.from(1.5), 'years', 'months').should.equalDecimal(18);
+    convertUnit(Decimal.from(2), 'seconds', 'milliseconds').should.equalDecimal(2000);
+    convertUnit(Decimal.from(2000), 'milliseconds', 'seconds').should.equalDecimal(2);
   });
 
   it('should truncate precision to 8 decimals by default', () => {
     const result = convertUnit(Decimal.from(1), '[ft_i]', '[mi_i]');
-    result.should.equalDecimal(Decimal.from('0.00018939'));
+    result.should.equalDecimal('0.00018939');
   });
 
   it('should return undefined for incompatible units', () => {

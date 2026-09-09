@@ -134,7 +134,7 @@ describe('Interval', () => {
     it('should return the point size for Decimal intervals', () => {
       new Interval(Decimal.from(0.5), Decimal.from(9.5))
         .getPointSize()
-        .should.equalDecimal(Decimal.from(0.00000001));
+        .should.equalDecimal(0.00000001);
     });
 
     it('should return the point size for Quantity intervals', () => {
@@ -156,7 +156,7 @@ describe('Interval', () => {
 
     it('should return low for intervals with closed low', () => {
       d.zeroToHundred.closed.start().should.equal(0);
-      d.zeroPointFiveToNinePointFive.closed.start().should.equalDecimal(Decimal.from(0.5));
+      d.zeroPointFiveToNinePointFive.closed.start().should.equalDecimal(0.5);
       d.zeroToHundredLong.closed.start().should.equal(0n);
       d.zeroToHundredMg.closed.start().should.eql(new Quantity('0.0', 'mg'));
       d.all2012date.closed.start().should.eql(Date.parse('2012-01-01'));
@@ -166,7 +166,7 @@ describe('Interval', () => {
 
     it('should return successor of low for intervals with open low', () => {
       d.zeroToHundred.openClosed.start().should.equal(1);
-      d.zeroPointFiveToNinePointFive.openClosed.start().should.equalDecimal(Decimal.from('0.6'));
+      d.zeroPointFiveToNinePointFive.openClosed.start().should.equalDecimal('0.6');
       d.zeroToHundredLong.openClosed.start().should.equal(1n);
       d.zeroToHundredMg.openClosed.start().should.eql(new Quantity('0.1', 'mg'));
       d.all2012date.openClosed.start().should.eql(Date.parse('2012-01-02'));
@@ -303,7 +303,7 @@ describe('Interval', () => {
 
     it('should return high for intervals with closed high', () => {
       d.zeroToHundred.closed.end().should.equal(100);
-      d.zeroPointFiveToNinePointFive.closed.end().should.equalDecimal(Decimal.from('9.5'));
+      d.zeroPointFiveToNinePointFive.closed.end().should.equalDecimal('9.5');
       d.zeroToHundredLong.closed.end().should.equal(100n);
       d.zeroToHundredMg.closed.end().should.eql(new Quantity('100.0', 'mg'));
       d.all2012date.closed.end().should.eql(Date.parse('2012-12-31'));
@@ -313,7 +313,7 @@ describe('Interval', () => {
 
     it('should return predecessor of high for intervals with open high', () => {
       d.zeroToHundred.closedOpen.end().should.equal(99);
-      d.zeroPointFiveToNinePointFive.closedOpen.end().should.equalDecimal(Decimal.from('9.4'));
+      d.zeroPointFiveToNinePointFive.closedOpen.end().should.equalDecimal('9.4');
       d.zeroToHundredLong.closedOpen.end().should.equal(99n);
       d.zeroToHundredMg.closedOpen.end().should.eql(new Quantity('99.9', 'mg'));
       d.all2012date.closedOpen.end().should.eql(Date.parse('2012-12-30'));
@@ -7024,8 +7024,8 @@ describe('DecimalInterval', () => {
       ELM_DECIMAL_TYPE
     );
 
-    interval.width().should.equalDecimal(Decimal.from('3000000000.0'));
-    interval.size().should.equalDecimal(Decimal.from('3000000000.00000001'));
+    interval.width().should.equalDecimal('3000000000.0');
+    interval.size().should.equalDecimal('3000000000.00000001');
   });
 
   it('should close open decimal uncertainty endpoints using decimal precision', () => {
