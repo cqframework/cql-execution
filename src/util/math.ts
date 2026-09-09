@@ -231,27 +231,6 @@ export function divide(a: any, b: any) {
   throw new Error('Unsupported argument types.');
 }
 
-export function limitDecimalPrecision<
-  T extends number | bigint | Quantity | Uncertainty | Decimal | undefined
->(val?: T): T | undefined {
-  if (val == null) {
-    return val;
-  } else if (typeof val === 'number') {
-    return (Math.round(val * Math.pow(10, 8)) / Math.pow(10, 8)) as T;
-  } else if ((val as Quantity).isQuantity) {
-    return new Quantity(
-      limitDecimalPrecision((val as Quantity).value) as Decimal,
-      (val as Quantity).unit
-    ) as T;
-  } else if ((val as Uncertainty).isUncertainty) {
-    return new Uncertainty(
-      limitDecimalPrecision((val as Uncertainty).low),
-      limitDecimalPrecision((val as Uncertainty).high)
-    ) as T;
-  }
-  return val;
-}
-
 export class OverFlowException extends Exception {}
 
 export function successor(val: any, precision?: string): any {
