@@ -5,7 +5,7 @@ import { Decimal } from '../src/datatypes/decimal';
 declare module 'should' {
   interface Assertion {
     equalInterval(expected: Interval): this;
-    equalDecimal(expected: Decimal): this;
+    equalDecimal(expected: number | bigint | Decimal | string): this;
   }
 }
 
@@ -33,7 +33,7 @@ declare module 'should' {
 
 (should as any).Assertion.add(
   'equalDecimal',
-  function (this: any, expected: number | bigint | Decimal) {
+  function (this: any, expected: number | bigint | Decimal | string) {
     this.params = {
       operator: 'to equal Decimal',
       expected: expected.toString(),
