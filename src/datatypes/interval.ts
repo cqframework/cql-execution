@@ -5,7 +5,7 @@ import {
   predecessor,
   maxValueForType,
   minValueForType,
-  limitDecimalPrecision,
+  finalizeNumericResult,
   subtract,
   add
 } from '../util/math';
@@ -673,7 +673,7 @@ export class Interval {
     // "The result of this operator is equivalent to invoking: (end of argument – start of argument)."
     const end = this.end();
     const start = this.start();
-    return limitDecimalPrecision(subtract(end, start, this.pointType));
+    return finalizeNumericResult(subtract(end, start));
   }
 
   // https://cql.hl7.org/R2/09-b-cqlreference.html#size
@@ -691,9 +691,7 @@ export class Interval {
     // "The result of this operator is equivalent to invoking:
     // (end of argument – start of argument) + point-size, where point-size is determined by
     // successor of minimum T - minimum T."
-    return limitDecimalPrecision(
-      add(subtract(this.end(), this.start(), this.pointType), this.getPointSize(), this.pointType)
-    );
+    return finalizeNumericResult(add(subtract(this.end(), this.start()), this.getPointSize()));
   }
 
   // https://cql.hl7.org/R2/09-b-cqlreference.html#size
@@ -709,7 +707,7 @@ export class Interval {
         // E.g., point size of Interval[@2012-01, @2012-12] is 1 month, not 1 ms.
         return new Quantity(1, (this.low ?? this.high).getPrecision());
       }
-      return subtract(successor(minValue), minValue, this.pointType);
+      return subtract(successor(minValue), minValue);
     }
 
     throw new Error('Point type of interval cannot be determined.');
