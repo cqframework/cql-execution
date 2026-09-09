@@ -1,6 +1,6 @@
 import { Expression } from './expression';
 import * as MathUtil from '../util/math';
-import { Quantity, doMultiplication, doDivision } from '../datatypes/quantity';
+import { Quantity, doMultiplication as doQuantityMultiplication } from '../datatypes/quantity';
 import { Uncertainty } from '../datatypes/uncertainty';
 import { Context } from '../runtime/context';
 import { build } from './builder';
@@ -85,10 +85,13 @@ export class Multiply extends Expression {
 
     let product;
     if (x.isQuantity || y.isQuantity) {
-      product = doMultiplication(x, y);
+      product = doQuantityMultiplication(x, y);
     } else if (x.isUncertainty && y.isUncertainty) {
       if (x.low.isQuantity) {
-        product = new Uncertainty(doMultiplication(x.low, y.low), doMultiplication(x.high, y.high));
+        product = new Uncertainty(
+          doQuantityMultiplication(x.low, y.low),
+          doQuantityMultiplication(x.high, y.high)
+        );
       } else {
         product = new Uncertainty(
           MathUtil.multiply(x.low, y.low),
@@ -124,12 +127,12 @@ export class Divide extends Expression {
       }
 
       if (x.isQuantity) {
-        quotient = doDivision(x, y);
+        quotient = x.dividedBy(y);
       } else if (x.isUncertainty && y.isUncertainty) {
         let low, high;
         if (x.low.isQuantity) {
-          low = doDivision(x.low, y.high);
-          high = doDivision(x.high, y.low);
+          low = x.low.dividedBy(y.high);
+          high = x.high.dividedBy(y.low);
         } else {
           low = MathUtil.divide(x.low, y.high);
           high = MathUtil.divide(x.high, y.low);
@@ -161,7 +164,7 @@ export class TruncatedDivide extends Expression {
     const [x, y] = args;
     let quotient;
     if (x.isQuantity) {
-      quotient = doDivision(x, y);
+      quotient = x.dividedBy(y);
       if (quotient instanceof Quantity) {
         quotient = new Quantity(quotient.value.truncated(), quotient.unit);
       }
