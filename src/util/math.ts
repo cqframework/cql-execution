@@ -110,7 +110,7 @@ export function isValidDecimal(decimal: any) {
   return true;
 }
 
-export function add(a: any, b: any, type?: string): any {
+export function add(a: any, b: any): any {
   if (a == null || b == null) {
     return null;
   }
@@ -119,16 +119,16 @@ export function add(a: any, b: any, type?: string): any {
     const aHigh = a?.isUncertainty ? a.high : a;
     const bLow = b?.isUncertainty ? b.low : b;
     const bHigh = b?.isUncertainty ? b.high : b;
-    const low = add(aLow, bLow, type);
-    const high = add(aHigh, bHigh, type);
+    const low = add(aLow, bLow);
+    const high = add(aHigh, bHigh);
     return low == null || high == null ? null : new Uncertainty(low, high);
   }
 
-  if (a.isDecimal || b.isDecimal || type === ELM_DECIMAL_TYPE) {
+  if (a.isDecimal || b.isDecimal) {
     const sum = Decimal.from(a).add(Decimal.from(b));
     return overflowsOrUnderflows(sum) ? null : sum;
   }
-  if (typeof a === 'bigint' || typeof b === 'bigint' || type === ELM_LONG_TYPE) {
+  if (typeof a === 'bigint' || typeof b === 'bigint') {
     const sum = BigInt(a) + BigInt(b);
     return overflowsOrUnderflows(sum) ? null : sum;
   }
@@ -158,7 +158,7 @@ export function add(a: any, b: any, type?: string): any {
   throw new Error('Unsupported argument types.');
 }
 
-export function subtract(a: any, b: any, type?: string): any {
+export function subtract(a: any, b: any): any {
   if (a == null || b == null) {
     return null;
   }
@@ -167,30 +167,30 @@ export function subtract(a: any, b: any, type?: string): any {
     const aHigh = a?.isUncertainty ? a.high : a;
     const bLow = b?.isUncertainty ? b.low : b;
     const bHigh = b?.isUncertainty ? b.high : b;
-    const low = subtract(aLow, bHigh, type);
-    const high = subtract(aHigh, bLow, type);
+    const low = subtract(aLow, bHigh);
+    const high = subtract(aHigh, bLow);
     return low == null || high == null ? null : new Uncertainty(low, high);
   }
   if (typeof b === 'number' || typeof b === 'bigint') {
-    return add(a, -b, type);
+    return add(a, -b);
   }
   if (b?.isDecimal) {
-    return add(a, (b as Decimal).negate(), type);
+    return add(a, (b as Decimal).negate());
   }
   if (b?.isQuantity) {
     // Note - this path uses a fake Quantity object to defer validation of the unit
-    return add(a, { isQuantity: true, value: b.value.negate(), unit: b.unit }, type);
+    return add(a, { isQuantity: true, value: b.value.negate(), unit: b.unit });
   }
 
   throw new Error('Unsupported argument types.');
 }
 
-export function multiply(a: any, b: any, type?: string) {
-  if (a.isDecimal || b.isDecimal || type === ELM_DECIMAL_TYPE) {
+export function multiply(a: any, b: any) {
+  if (a.isDecimal || b.isDecimal) {
     const product = Decimal.from(a).multiplyBy(b);
     return overflowsOrUnderflows(product) ? null : product;
   }
-  if (typeof a === 'bigint' || typeof b === 'bigint' || type === ELM_LONG_TYPE) {
+  if (typeof a === 'bigint' || typeof b === 'bigint') {
     const product = BigInt(a) * BigInt(b);
     return overflowsOrUnderflows(product) ? null : product;
   }
@@ -202,8 +202,8 @@ export function multiply(a: any, b: any, type?: string) {
   throw new Error('Unsupported argument types.');
 }
 
-export function divide(a: any, b: any, type?: string) {
-  if (a.isDecimal || b.isDecimal || type === ELM_DECIMAL_TYPE) {
+export function divide(a: any, b: any) {
+  if (a.isDecimal || b.isDecimal) {
     b = Decimal.from(b);
     if (b.equals(0)) {
       return null;
@@ -211,7 +211,7 @@ export function divide(a: any, b: any, type?: string) {
     const quotient = Decimal.from(a).divideBy(b);
     return overflowsOrUnderflows(quotient) ? null : quotient;
   }
-  if (typeof a === 'bigint' || typeof b === 'bigint' || type === ELM_LONG_TYPE) {
+  if (typeof a === 'bigint' || typeof b === 'bigint') {
     if (b === 0 || b === 0n) {
       return null;
     }
