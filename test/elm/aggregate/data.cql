@@ -17,18 +17,18 @@ define longs_at_min_value: Sum({-1L,-2L,-9223372036854775805L}) // -922337203685
 define longs_below_min_value: Sum({-1L,-2L,-9223372036854775806L}) //-9223372036854775809
 define decimals: Sum({1.1,2.2,3.3,4.4,5.5})
 define decimals_at_max_value: Sum({99999999999999999999.99999999})
-define decimals_above_max_value: Sum({99999999999999999999.99999999, 99999999999999999999.99999999})
+define decimals_above_max_value: Sum({99999999999999999999.99999999, 0.00000001})
 define decimals_at_min_value: Sum({-99999999999999999999.99999999})
-define decimals_below_min_value: Sum({-99999999999999999999.99999999, -99999999999999999999.99999999})
+define decimals_below_min_value: Sum({-99999999999999999999.99999999, -0.00000001})
 define quantities: Sum({1 'ml',2 'ml',3 'ml',4 'ml',5 'ml'})
 // Max/Min-valued quantities are described using the "maximum" and "minimum" operators
 // to avoid the translator rounding them to +/-1.0e20, which is not a legal Decimal
 define MaxValueMLQuantity: Quantity { value: maximum Decimal, unit: 'ml' }
 define MinValueMLQuantity: Quantity { value: minimum Decimal, unit: 'ml' }
 define quantities_at_max_value: Sum({MaxValueMLQuantity})
-define quantities_above_max_value: Sum({MaxValueMLQuantity, MaxValueMLQuantity})
+define quantities_above_max_value: Sum({MaxValueMLQuantity, 0.00000001'ml' })
 define quantities_at_min_value: Sum({MinValueMLQuantity})
-define quantities_below_min_value: Sum({MinValueMLQuantity, MinValueMLQuantity})
+define quantities_below_min_value: Sum({MinValueMLQuantity, -0.00000001'ml'})
 define has_null: Sum({1,null,null,null,2})
 define has_null_q: Sum({1 'ml',null,null,null,2 'ml'})
 define unmatched_units_q: Min({1 'ml',2 'm',3 'ml',4 'ml',5 'ml',0 'ml'})
