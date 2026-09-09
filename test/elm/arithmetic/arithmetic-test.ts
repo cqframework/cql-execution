@@ -664,9 +664,9 @@ describe('Round', () => {
     (await this.down_percent.exec(this.ctx)).should.equalDecimal(Decimal.from(4.4));
   });
 
-  it('should round negative exact-half values toward positive infinity', async function () {
-    (await this.negativeHalf.exec(this.ctx)).should.equalDecimal(Decimal.from(0));
-    (await this.negativeOnePointFive.exec(this.ctx)).should.equalDecimal(Decimal.from(-1));
+  it('should round negative exact-half values toward nearest whole number', async function () {
+    (await this.negativeHalf.exec(this.ctx)).should.equalDecimal(Decimal.from(-1));
+    (await this.negativeOnePointFive.exec(this.ctx)).should.equalDecimal(Decimal.from(-2));
   });
 });
 
@@ -683,8 +683,9 @@ describe('Successor', () => {
     (await this.ls.exec(this.ctx)).should.equal(3n);
   });
 
-  it('should be able to get Real Successor', async function () {
-    (await this.rs.exec(this.ctx)).should.equalDecimal(Decimal.from(2.2 + Math.pow(10, -8)));
+  it('should be able to get Decimal Successor', async function () {
+    // successor of 2.2
+    (await this.rs.exec(this.ctx)).should.equalDecimal(Decimal.from(2.3));
   });
 
   it('should return null for Successor greater than Integer Max value', async function () {
@@ -786,8 +787,9 @@ describe('Predecessor', () => {
     (await this.ls.exec(this.ctx)).should.equal(1n);
   });
 
-  it('should be able to get Real Predecessor', async function () {
-    (await this.rs.exec(this.ctx)).should.equalDecimal(Decimal.from('2.19999999'));
+  it('should be able to get Decimal Predecessor', async function () {
+    // Rs: predecessor of 2.2
+    (await this.rs.exec(this.ctx)).should.equalDecimal(Decimal.from('2.1'));
   });
 
   it('should return null for Predecessor greater than Integer Max value', async function () {

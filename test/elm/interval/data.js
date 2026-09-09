@@ -125250,9 +125250,9 @@ define NotMeetsIntIvl: Interval[1, 2] meets Interval[5, 10]
 define MeetsAfterLongIvl: Interval[11L, 15L] meets Interval[5L, 10L]
 define MeetsBeforeLongIvl: Interval[1L, 4L] meets Interval[5L, 10L]
 define NotMeetsLongIvl: Interval[1L, 2L] meets Interval[5L, 10L]
-define MeetsAfterRealIvl: Interval[1.50000001, 2.5] meets Interval[0.5, 1.5]
-define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets Interval[1.50000001, 2.5]
-define NotMeetsRealIvl: Interval[0.0, 1.0] meets Interval[1.1, 2.0]
+define MeetsAfterRealIvl: Interval[1.6, 2.5] meets Interval[0.5, 1.5]
+define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets Interval[1.6, 2.5]
+define NotMeetsRealIvl: Interval[0.0, 1.0] meets Interval[1.2, 2.0]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define MeetsAfterDateIvl: Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)) meets DateIvl
 define MeetsBeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)) meets DateIvl
@@ -126186,7 +126186,7 @@ module.exports['Meets'] = {
                 "r" : "325",
                 "s" : [ {
                   "r" : "323",
-                  "value" : [ "Interval[", "1.50000001", ", ", "2.5", "]" ]
+                  "value" : [ "Interval[", "1.6", ", ", "2.5", "]" ]
                 } ]
               }, {
                 "r" : "333",
@@ -126249,7 +126249,7 @@ module.exports['Meets'] = {
               "localId" : "323",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-              "value" : "1.50000001",
+              "value" : "1.6",
               "annotation" : [ ]
             },
             "high" : {
@@ -126323,7 +126323,7 @@ module.exports['Meets'] = {
                 "r" : "348",
                 "s" : [ {
                   "r" : "346",
-                  "value" : [ "Interval[", "1.50000001", ", ", "2.5", "]" ]
+                  "value" : [ "Interval[", "1.6", ", ", "2.5", "]" ]
                 } ]
               } ]
             } ]
@@ -126410,7 +126410,7 @@ module.exports['Meets'] = {
               "localId" : "346",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-              "value" : "1.50000001",
+              "value" : "1.6",
               "annotation" : [ ]
             },
             "high" : {
@@ -126451,7 +126451,7 @@ module.exports['Meets'] = {
                 "r" : "366",
                 "s" : [ {
                   "r" : "364",
-                  "value" : [ "Interval[", "1.1", ", ", "2.0", "]" ]
+                  "value" : [ "Interval[", "1.2", ", ", "2.0", "]" ]
                 } ]
               } ]
             } ]
@@ -126538,7 +126538,7 @@ module.exports['Meets'] = {
               "localId" : "364",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-              "value" : "1.1",
+              "value" : "1.2",
               "annotation" : [ ]
             },
             "high" : {
@@ -140748,9 +140748,9 @@ define NotMeetsIntIvl: Interval[1, 2] meets after Interval[5, 10]
 define MeetsAfterLongIvl: Interval[11L, 15L] meets after Interval[5L, 10L]
 define MeetsBeforeLongIvl: Interval[1L, 4L] meets after Interval[5L, 10L]
 define NotMeetsLongIvl: Interval[1L, 2L] meets after Interval[5L, 10L]
-define MeetsAfterRealIvl: Interval[1.50000001, 2.5] meets after Interval[0.5, 1.5]
-define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets after Interval[1.50000001, 2.5]
-define NotMeetsRealIvl: Interval[0.0, 1.0] meets after Interval[1.1, 2.0]
+define MeetsAfterRealIvl: Interval[1.6, 2.5] meets after Interval[0.5, 1.5]
+define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets after Interval[1.6, 2.5]
+define NotMeetsRealIvl: Interval[0.0, 1.0] meets after Interval[1.2, 2.0]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define MeetsAfterDateIvl: Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)) meets after DateIvl
 define MeetsBeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)) meets after DateIvl
@@ -141684,7 +141684,7 @@ module.exports['MeetsAfter'] = {
                 "r" : "325",
                 "s" : [ {
                   "r" : "323",
-                  "value" : [ "Interval[", "1.50000001", ", ", "2.5", "]" ]
+                  "value" : [ "Interval[", "1.6", ", ", "2.5", "]" ]
                 } ]
               }, {
                 "r" : "333",
@@ -141747,7 +141747,7 @@ module.exports['MeetsAfter'] = {
               "localId" : "323",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-              "value" : "1.50000001",
+              "value" : "1.6",
               "annotation" : [ ]
             },
             "high" : {
@@ -141821,7 +141821,7 @@ module.exports['MeetsAfter'] = {
                 "r" : "348",
                 "s" : [ {
                   "r" : "346",
-                  "value" : [ "Interval[", "1.50000001", ", ", "2.5", "]" ]
+                  "value" : [ "Interval[", "1.6", ", ", "2.5", "]" ]
                 } ]
               } ]
             } ]
@@ -141908,7 +141908,7 @@ module.exports['MeetsAfter'] = {
               "localId" : "346",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-              "value" : "1.50000001",
+              "value" : "1.6",
               "annotation" : [ ]
             },
             "high" : {
@@ -141949,7 +141949,7 @@ module.exports['MeetsAfter'] = {
                 "r" : "366",
                 "s" : [ {
                   "r" : "364",
-                  "value" : [ "Interval[", "1.1", ", ", "2.0", "]" ]
+                  "value" : [ "Interval[", "1.2", ", ", "2.0", "]" ]
                 } ]
               } ]
             } ]
@@ -142036,7 +142036,7 @@ module.exports['MeetsAfter'] = {
               "localId" : "364",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-              "value" : "1.1",
+              "value" : "1.2",
               "annotation" : [ ]
             },
             "high" : {
@@ -156246,9 +156246,9 @@ define NotMeetsIntIvl: Interval[1, 2] meets before Interval[5, 10]
 define MeetsAfterLongIvl: Interval[11L, 15L] meets before Interval[5L, 10L]
 define MeetsBeforeLongIvl: Interval[1L, 4L] meets before Interval[5L, 10L]
 define NotMeetsLongIvl: Interval[1L, 2L] meets before Interval[5L, 10L]
-define MeetsAfterRealIvl: Interval[1.50000001, 2.5] meets before Interval[0.5, 1.5]
-define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets before Interval[1.50000001, 2.5]
-define NotMeetsRealIvl: Interval[0.0, 1.0] meets before Interval[1.1, 2.0]
+define MeetsAfterRealIvl: Interval[1.6, 2.5] meets before Interval[0.5, 1.5]
+define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets before Interval[1.6, 2.5]
+define NotMeetsRealIvl: Interval[0.0, 1.0] meets before Interval[1.2, 2.0]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define MeetsAfterDateIvl: Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)) meets before DateIvl
 define MeetsBeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)) meets before DateIvl
@@ -157182,7 +157182,7 @@ module.exports['MeetsBefore'] = {
                 "r" : "325",
                 "s" : [ {
                   "r" : "323",
-                  "value" : [ "Interval[", "1.50000001", ", ", "2.5", "]" ]
+                  "value" : [ "Interval[", "1.6", ", ", "2.5", "]" ]
                 } ]
               }, {
                 "r" : "333",
@@ -157245,7 +157245,7 @@ module.exports['MeetsBefore'] = {
               "localId" : "323",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-              "value" : "1.50000001",
+              "value" : "1.6",
               "annotation" : [ ]
             },
             "high" : {
@@ -157319,7 +157319,7 @@ module.exports['MeetsBefore'] = {
                 "r" : "348",
                 "s" : [ {
                   "r" : "346",
-                  "value" : [ "Interval[", "1.50000001", ", ", "2.5", "]" ]
+                  "value" : [ "Interval[", "1.6", ", ", "2.5", "]" ]
                 } ]
               } ]
             } ]
@@ -157406,7 +157406,7 @@ module.exports['MeetsBefore'] = {
               "localId" : "346",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-              "value" : "1.50000001",
+              "value" : "1.6",
               "annotation" : [ ]
             },
             "high" : {
@@ -157447,7 +157447,7 @@ module.exports['MeetsBefore'] = {
                 "r" : "366",
                 "s" : [ {
                   "r" : "364",
-                  "value" : [ "Interval[", "1.1", ", ", "2.0", "]" ]
+                  "value" : [ "Interval[", "1.2", ", ", "2.0", "]" ]
                 } ]
               } ]
             } ]
@@ -157534,7 +157534,7 @@ module.exports['MeetsBefore'] = {
               "localId" : "364",
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
-              "value" : "1.1",
+              "value" : "1.2",
               "annotation" : [ ]
             },
             "high" : {

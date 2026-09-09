@@ -158,7 +158,7 @@ describe('Interval', () => {
       d.zeroToHundred.closed.start().should.equal(0);
       d.zeroPointFiveToNinePointFive.closed.start().should.equalDecimal(Decimal.from(0.5));
       d.zeroToHundredLong.closed.start().should.equal(0n);
-      d.zeroToHundredMg.closed.start().should.eql(new Quantity(0, 'mg'));
+      d.zeroToHundredMg.closed.start().should.eql(new Quantity('0.0', 'mg'));
       d.all2012date.closed.start().should.eql(Date.parse('2012-01-01'));
       d.all2012.closed.start().should.eql(DateTime.parse('2012-01-01T00:00:00.0'));
       d.alldaytime.closed.start().should.eql(DateTime.parse('0001-01-01T00:00:00.0').getTime());
@@ -166,11 +166,9 @@ describe('Interval', () => {
 
     it('should return successor of low for intervals with open low', () => {
       d.zeroToHundred.openClosed.start().should.equal(1);
-      d.zeroPointFiveToNinePointFive.openClosed
-        .start()
-        .should.equalDecimal(Decimal.from('0.50000001'));
+      d.zeroPointFiveToNinePointFive.openClosed.start().should.equalDecimal(Decimal.from('0.6'));
       d.zeroToHundredLong.openClosed.start().should.equal(1n);
-      d.zeroToHundredMg.openClosed.start().should.eql(new Quantity(0.00000001, 'mg'));
+      d.zeroToHundredMg.openClosed.start().should.eql(new Quantity('0.1', 'mg'));
       d.all2012date.openClosed.start().should.eql(Date.parse('2012-01-02'));
       d.all2012.openClosed.start().should.eql(DateTime.parse('2012-01-01T00:00:00.001'));
       d.alldaytime.openClosed
@@ -210,7 +208,7 @@ describe('Interval', () => {
       d.zeroToHundredMg.withNullStart.openClosed
         .start()
         .should.eql(
-          new Uncertainty(new Quantity(MIN_DECIMAL_VALUE, 'mg'), new Quantity(100, 'mg'))
+          new Uncertainty(new Quantity(MIN_DECIMAL_VALUE, 'mg'), new Quantity('100.0', 'mg'))
         );
       d.all2012date.withNullStart.openClosed
         .start()
@@ -232,11 +230,11 @@ describe('Interval', () => {
         .should.eql(new Uncertainty(MIN_LONG_VALUE, 99n));
       d.zeroPointFiveToNinePointFive.withNullStart.open
         .start()
-        .should.eql(new Uncertainty(MIN_DECIMAL_VALUE, Decimal.from(9.49999999)));
+        .should.eql(new Uncertainty(MIN_DECIMAL_VALUE, Decimal.from(9.4)));
       d.zeroToHundredMg.withNullStart.open
         .start()
         .should.eql(
-          new Uncertainty(new Quantity(MIN_DECIMAL_VALUE, 'mg'), new Quantity(99.99999999, 'mg'))
+          new Uncertainty(new Quantity(MIN_DECIMAL_VALUE, 'mg'), new Quantity(99.9, 'mg'))
         );
       d.all2012date.withNullStart.open
         .start()
@@ -305,9 +303,9 @@ describe('Interval', () => {
 
     it('should return high for intervals with closed high', () => {
       d.zeroToHundred.closed.end().should.equal(100);
-      d.zeroPointFiveToNinePointFive.closed.end().should.equalDecimal(Decimal.from(9.5));
+      d.zeroPointFiveToNinePointFive.closed.end().should.equalDecimal(Decimal.from('9.5'));
       d.zeroToHundredLong.closed.end().should.equal(100n);
-      d.zeroToHundredMg.closed.end().should.eql(new Quantity(100, 'mg'));
+      d.zeroToHundredMg.closed.end().should.eql(new Quantity('100.0', 'mg'));
       d.all2012date.closed.end().should.eql(Date.parse('2012-12-31'));
       d.all2012.closed.end().should.eql(DateTime.parse('2012-12-31T23:59:59.999'));
       d.alldaytime.closed.end().should.eql(DateTime.parse('0001-01-01T23:59:59.999').getTime());
@@ -315,9 +313,9 @@ describe('Interval', () => {
 
     it('should return predecessor of high for intervals with open high', () => {
       d.zeroToHundred.closedOpen.end().should.equal(99);
-      d.zeroPointFiveToNinePointFive.closedOpen.end().should.equalDecimal(Decimal.from(9.49999999));
+      d.zeroPointFiveToNinePointFive.closedOpen.end().should.equalDecimal(Decimal.from('9.4'));
       d.zeroToHundredLong.closedOpen.end().should.equal(99n);
-      d.zeroToHundredMg.closedOpen.end().should.eql(new Quantity(99.99999999, 'mg'));
+      d.zeroToHundredMg.closedOpen.end().should.eql(new Quantity('99.9', 'mg'));
       d.all2012date.closedOpen.end().should.eql(Date.parse('2012-12-30'));
       d.all2012.closedOpen.end().should.eql(DateTime.parse('2012-12-31T23:59:59.998'));
       d.alldaytime.closedOpen.end().should.eql(DateTime.parse('0001-01-01T23:59:59.998').getTime());
@@ -348,7 +346,9 @@ describe('Interval', () => {
         .should.eql(new Uncertainty(Decimal.from(0.5), MAX_DECIMAL_VALUE));
       d.zeroToHundredMg.withNullEnd.closedOpen
         .end()
-        .should.eql(new Uncertainty(new Quantity(0, 'mg'), new Quantity(MAX_DECIMAL_VALUE, 'mg')));
+        .should.eql(
+          new Uncertainty(new Quantity('0.0', 'mg'), new Quantity(MAX_DECIMAL_VALUE, 'mg'))
+        );
       d.all2012date.withNullEnd.closedOpen
         .end()
         .should.eql(new Uncertainty(Date.parse('2012-01-01'), MAX_DATE_VALUE));
@@ -367,11 +367,11 @@ describe('Interval', () => {
       d.zeroToHundredLong.withNullEnd.open.end().should.eql(new Uncertainty(1n, MAX_LONG_VALUE));
       d.zeroPointFiveToNinePointFive.withNullEnd.open
         .end()
-        .should.eql(new Uncertainty(Decimal.from(0.50000001), MAX_DECIMAL_VALUE));
+        .should.eql(new Uncertainty(Decimal.from('0.6'), MAX_DECIMAL_VALUE));
       d.zeroToHundredMg.withNullEnd.open
         .end()
         .should.eql(
-          new Uncertainty(new Quantity(0.00000001, 'mg'), new Quantity(MAX_DECIMAL_VALUE, 'mg'))
+          new Uncertainty(new Quantity('0.1', 'mg'), new Quantity(MAX_DECIMAL_VALUE, 'mg'))
         );
       d.all2012date.withNullEnd.open
         .end()
@@ -7028,25 +7028,25 @@ describe('DecimalInterval', () => {
     interval.size().should.equalDecimal(Decimal.from('3000000000.00000001'));
   });
 
-  it('should close open decimal uncertainty endpoints using decimal point size', () => {
+  it('should close open decimal uncertainty endpoints using decimal precision', () => {
     const closed = new Interval(
-      new Uncertainty(Decimal.from(1), Decimal.from(2)),
-      new Uncertainty(Decimal.from(3), Decimal.from(4)),
+      new Uncertainty(Decimal.from('1.0'), Decimal.from('2.0')),
+      new Uncertainty(Decimal.from('3.0'), Decimal.from('4.0')),
       false,
       false,
       ELM_DECIMAL_TYPE
     ).toClosed();
 
-    closed.low.should.eql(new Uncertainty(Decimal.from(1.00000001), Decimal.from(2.00000001)));
-    closed.high.should.eql(new Uncertainty(Decimal.from(2.99999999), Decimal.from(3.99999999)));
+    closed.low.should.eql(new Uncertainty(Decimal.from('1.1'), Decimal.from('2.1')));
+    closed.high.should.eql(new Uncertainty(Decimal.from('2.9'), Decimal.from('3.9')));
     closed.lowClosed.should.be.true();
     closed.highClosed.should.be.true();
   });
 
-  it('should use decimal point size for meetsBefore decimal uncertainty bounds', () => {
-    const earlier = new Interval(Decimal.from(1), Decimal.from(1.99999999));
+  it('should use decimal precision for meetsBefore decimal uncertainty bounds', () => {
+    const earlier = new Interval(Decimal.from('1.0'), Decimal.from('1.9'));
     const later = new Interval(
-      new Uncertainty(Decimal.from(2), Decimal.from(2)),
+      new Uncertainty(Decimal.from('2.0'), Decimal.from('2.0')),
       null,
       true,
       false,
@@ -7056,15 +7056,15 @@ describe('DecimalInterval', () => {
     earlier.meetsBefore(later).should.be.true();
   });
 
-  it('should use decimal point size for meetsAfter decimal uncertainty bounds', () => {
+  it('should use decimal precision for meetsAfter decimal uncertainty bounds', () => {
     const earlier = new Interval(
       null,
-      new Uncertainty(Decimal.from(1), Decimal.from(1)),
+      new Uncertainty(Decimal.from('1.0'), Decimal.from('1.0')),
       false,
       true,
       ELM_DECIMAL_TYPE
     );
-    const later = new Interval(Decimal.from(1.00000001), Decimal.from(2));
+    const later = new Interval(Decimal.from('1.1'), Decimal.from('2.0'));
 
     later.meetsAfter(earlier).should.be.true();
   });

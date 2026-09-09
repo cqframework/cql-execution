@@ -653,9 +653,9 @@ define NotMeetsIntIvl: Interval[1, 2] meets Interval[5, 10]
 define MeetsAfterLongIvl: Interval[11L, 15L] meets Interval[5L, 10L]
 define MeetsBeforeLongIvl: Interval[1L, 4L] meets Interval[5L, 10L]
 define NotMeetsLongIvl: Interval[1L, 2L] meets Interval[5L, 10L]
-define MeetsAfterRealIvl: Interval[1.50000001, 2.5] meets Interval[0.5, 1.5]
-define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets Interval[1.50000001, 2.5]
-define NotMeetsRealIvl: Interval[0.0, 1.0] meets Interval[1.1, 2.0]
+define MeetsAfterRealIvl: Interval[1.6, 2.5] meets Interval[0.5, 1.5]
+define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets Interval[1.6, 2.5]
+define NotMeetsRealIvl: Interval[0.0, 1.0] meets Interval[1.2, 2.0]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define MeetsAfterDateIvl: Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)) meets DateIvl
 define MeetsBeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)) meets DateIvl
@@ -724,9 +724,9 @@ define NotMeetsIntIvl: Interval[1, 2] meets after Interval[5, 10]
 define MeetsAfterLongIvl: Interval[11L, 15L] meets after Interval[5L, 10L]
 define MeetsBeforeLongIvl: Interval[1L, 4L] meets after Interval[5L, 10L]
 define NotMeetsLongIvl: Interval[1L, 2L] meets after Interval[5L, 10L]
-define MeetsAfterRealIvl: Interval[1.50000001, 2.5] meets after Interval[0.5, 1.5]
-define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets after Interval[1.50000001, 2.5]
-define NotMeetsRealIvl: Interval[0.0, 1.0] meets after Interval[1.1, 2.0]
+define MeetsAfterRealIvl: Interval[1.6, 2.5] meets after Interval[0.5, 1.5]
+define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets after Interval[1.6, 2.5]
+define NotMeetsRealIvl: Interval[0.0, 1.0] meets after Interval[1.2, 2.0]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define MeetsAfterDateIvl: Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)) meets after DateIvl
 define MeetsBeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)) meets after DateIvl
@@ -795,9 +795,9 @@ define NotMeetsIntIvl: Interval[1, 2] meets before Interval[5, 10]
 define MeetsAfterLongIvl: Interval[11L, 15L] meets before Interval[5L, 10L]
 define MeetsBeforeLongIvl: Interval[1L, 4L] meets before Interval[5L, 10L]
 define NotMeetsLongIvl: Interval[1L, 2L] meets before Interval[5L, 10L]
-define MeetsAfterRealIvl: Interval[1.50000001, 2.5] meets before Interval[0.5, 1.5]
-define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets before Interval[1.50000001, 2.5]
-define NotMeetsRealIvl: Interval[0.0, 1.0] meets before Interval[1.1, 2.0]
+define MeetsAfterRealIvl: Interval[1.6, 2.5] meets before Interval[0.5, 1.5]
+define MeetsBeforeRealIvl: Interval[0.5, 1.5] meets before Interval[1.6, 2.5]
+define NotMeetsRealIvl: Interval[0.0, 1.0] meets before Interval[1.2, 2.0]
 define DateIvl: Interval[DateTime(2012, 3, 1, 0, 0, 0, 0), DateTime(2012, 9, 1, 0, 0, 0, 0))
 define MeetsAfterDateIvl: Interval[DateTime(2012, 9, 1, 0, 0, 0, 0), DateTime(2012, 12, 1, 0, 0, 0, 0)) meets before DateIvl
 define MeetsBeforeDateIvl: Interval[DateTime(2012, 1, 1, 0, 0, 0, 0), DateTime(2012, 3, 1, 0, 0, 0, 0)) meets before DateIvl
