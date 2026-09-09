@@ -3,7 +3,6 @@ import should from 'should';
 import { Date, DateTime, MAX_DATE_VALUE, MIN_DATE_VALUE } from '../../src/datatypes/datetime';
 import { Uncertainty } from '../../src/datatypes/uncertainty';
 import { jsDate } from '../../src/util/util';
-import { Decimal } from '../../src/datatypes/decimal';
 
 describe('Date', () => {
   it('should properly set all properties when constructed', () => {
@@ -885,7 +884,7 @@ describe('Date.getPrecisionValue', () => {
 describe('Date.getDateTime', () => {
   it('should return a DateTime that has the passed in timeZoneOffset', () => {
     const d = new Date(2000, 12, 1);
-    const dateTime = d.getDateTime(Decimal.from(2));
+    const dateTime = d.getDateTime(2);
     dateTime.year.should.equal(2000);
     dateTime.month.should.equal(12);
     dateTime.day.should.equal(1);
