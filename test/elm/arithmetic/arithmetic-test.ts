@@ -318,27 +318,27 @@ describe('Power', () => {
   });
 
   it('should be able to calculate the power of a number', async function () {
-    (await this.pow.exec(this.ctx)).should.eql(81);
+    (await this.pow.exec(this.ctx)).should.equalDecimal(81);
   });
 
   it('should be able to calculate the negative power of a number', async function () {
-    (await this.negPow.exec(this.ctx)).should.equalDecimal(Decimal.from(0.1));
+    (await this.negPow.exec(this.ctx)).should.equalDecimal(0.1);
   });
 
   it('should be able to calculate the power of a long', async function () {
-    (await this.threeExpFourLong.exec(this.ctx)).should.equal(81n);
+    (await this.threeExpFourLong.exec(this.ctx)).should.equalDecimal(81);
   });
 
   it('should be able to calculate the long power of an integer', async function () {
-    (await this.threeExpFourMixed.exec(this.ctx)).should.equal(81n);
+    (await this.threeExpFourMixed.exec(this.ctx)).should.equalDecimal(81);
   });
 
   it('should be able to calculate the integer power of a long', async function () {
-    (await this.threeExpFourReverseMixed.exec(this.ctx)).should.equal(81n);
+    (await this.threeExpFourReverseMixed.exec(this.ctx)).should.equalDecimal(81);
   });
 
   it('should be able to calculate the negative power of a long', async function () {
-    (await this.tenLongExpNegativeOneLong.exec(this.ctx)).should.equalDecimal(Decimal.from(0.1));
+    (await this.tenLongExpNegativeOneLong.exec(this.ctx)).should.equalDecimal(0.1);
   });
 
   it('should return null when a long power exponent is too large (beyond max Long value)', async function () {
@@ -1071,11 +1071,11 @@ describe('OutOfBounds', () => {
     });
 
     it('should return value for Power near overflow', async function () {
-      should(await this.integerPowerNearOverflow.exec(this.ctx)).equal(MAX_INT_VALUE);
+      should(await this.integerPowerNearOverflow.exec(this.ctx)).equalDecimal(MAX_INT_VALUE);
     });
 
     it('should return value for Power near underflow', async function () {
-      should(await this.integerPowerNearUnderflow.exec(this.ctx)).equal(MIN_INT_VALUE);
+      should(await this.integerPowerNearUnderflow.exec(this.ctx)).equalDecimal(MIN_INT_VALUE);
     });
 
     it('should return null for successor overflow', async function () {
@@ -1182,11 +1182,11 @@ describe('OutOfBounds', () => {
     });
 
     it('should return value for Power near overflow', async function () {
-      should(await this.longPowerNearOverflow.exec(this.ctx)).equal(MAX_LONG_VALUE);
+      should(await this.longPowerNearOverflow.exec(this.ctx)).equalDecimal(MAX_LONG_VALUE);
     });
 
     it('should return value for Power near underflow', async function () {
-      should(await this.longPowerNearUnderflow.exec(this.ctx)).equal(MIN_LONG_VALUE);
+      should(await this.longPowerNearUnderflow.exec(this.ctx)).equalDecimal(MIN_LONG_VALUE);
     });
 
     it('should return null for successor overflow', async function () {

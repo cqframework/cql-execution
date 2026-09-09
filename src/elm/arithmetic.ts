@@ -399,36 +399,14 @@ export class Power extends Expression {
       return null;
     }
 
-    // Note: The resultTypeName may be wrong if the exponent is a negative number.
-    // E.g., CQL-to-ELM says 10^-1 is an Integer result type, but the correct result is a 0.1 (a Decimal)
-    // doPower handles this scenario
-    let power;
+    // As of CQL 2.0.0, return type of Power is always a Decimal
     try {
-      power = doPower(args[0], args[1]);
+      const power = Decimal.from(args[0]).power(args[1]);
+      return finalizeArithmeticResult(power);
     } catch {
+      // if the value is too large to represent
       return null;
     }
-
-    return finalizeArithmeticResult(power);
-  }
-}
-
-function doPower(x: any, y: any) {
-  if (
-    x.isDecimal ||
-    y.isDecimal ||
-    (typeof y == 'number' && y < 0) ||
-    (typeof y === 'bigint' && y < 0n)
-  ) {
-    // Decimal values or negative powers always produce Decimal result
-    return Decimal.from(x).power(y);
-  }
-
-  try {
-    return x ** y;
-  } catch {
-    // will throw if BigInt goes out of range
-    return null;
   }
 }
 
