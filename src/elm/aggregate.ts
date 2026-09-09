@@ -1,6 +1,6 @@
 import { Expression } from './expression';
 import { typeIsArray, allTrue, anyTrue, removeNulls } from '../util/util';
-import { doAddition, Quantity } from '../datatypes/datatypes';
+import { Quantity } from '../datatypes/datatypes';
 import { Decimal } from '../datatypes/decimal';
 import { Context } from '../runtime/context';
 import { Exception } from '../datatypes/exception';
@@ -72,7 +72,7 @@ export class Sum extends AggregateExpression {
       sum = sumOfDecimals(items.map((q: Quantity) => q.value));
     } else {
       if (hasDecimals(items)) {
-        sum = sumOfDecimals(items.map(Decimal.from));
+        sum = sumOfDecimals(items.map((x: any) => Decimal.from(x)));
       } else {
         sum = items.reduce((x: any, y: any) => x + y);
       }
@@ -175,7 +175,7 @@ export class Avg extends AggregateExpression {
       decimals = getValuesFromQuantities(items);
     } else {
       // return type is always Decimal, so just map everything to Decimals
-      decimals = items.map(Decimal.from);
+      decimals = items.map((x: any) => Decimal.from(x));
     }
     const sum = sumOfDecimals(decimals);
     const avg = sum.divideBy(items.length);
@@ -210,7 +210,7 @@ export class Median extends AggregateExpression {
       // Note that the Median signature is Median(argument List<Decimal>) Decimal
       // because median on a list of even number of items takes the average of the 2 middle items
       // so we can treat all the input as decimals
-      decimals = items.map(Decimal.from);
+      decimals = items.map((x: any) => Decimal.from(x));
     }
 
     const sorted = [...decimals].sort((a, b) => a.compareTo(b));
@@ -310,7 +310,7 @@ export class StdDev extends AggregateExpression {
     if (hasOnlyQuantities(items)) {
       values = getValuesFromQuantities(items);
     } else {
-      values = items.map(Decimal.from);
+      values = items.map((x: any) => Decimal.from(x));
     }
 
     const stdDev = this.standardDeviation(values);
@@ -378,7 +378,7 @@ export class Product extends AggregateExpression {
     if (hasOnlyQuantities(items)) {
       product = productOfDecimals(getValuesFromQuantities(items));
     } else if (hasDecimals(items)) {
-      product = productOfDecimals(items.map(Decimal.from));
+      product = productOfDecimals(items.map((x: any) => Decimal.from(x)));
     } else {
       product = items.reduce((x: number, y: number) => x * y);
     }
@@ -412,7 +412,7 @@ export class GeometricMean extends AggregateExpression {
     if (hasOnlyQuantities(items)) {
       decimals = getValuesFromQuantities(items);
     } else {
-      decimals = items.map(Decimal.from);
+      decimals = items.map((x: any) => Decimal.from(x));
     }
 
     try {
@@ -476,7 +476,7 @@ export class AnyTrue extends AggregateExpression {
 }
 
 function hasDecimals(values: any[]) {
-  return values.some(value => value && value.isDecimal);
+  return values.some(value => value?.isDecimal);
 }
 
 function processQuantities(values: any[]) {
