@@ -735,25 +735,33 @@ define "Power": Tuple{
     output: null
   },
   "Power0To0": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: Power(0, 0),
     output: 1
-  },
+    */  },
   "Power2To2": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: Power(2, 2),
     output: 4
-  },
+    */  },
   "PowerNeg2To2": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: Power(-2, 2),
     output: 4
-  },
+    */  },
   "Power2ToNeg2": Tuple{
     expression: Power(2, -2),
     output: 0.25
   },
   "Power2LTo2L": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: Power(2L, 2L),
     output: 4L
-  },
+    */  },
   "Power2DTo2D": Tuple{
     expression: Power(2.0, 2.0),
     output: 4.0
@@ -775,13 +783,17 @@ define "Power": Tuple{
     output: 4.0
   },
   "Power2To4": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: 2^4,
     output: 16
-  },
+    */  },
   "Power2LTo3L": Tuple{
+    skipped: 'Wrong output: As of CQL 2.0, Power always returns Decimal'
+    /*
     expression: 2L^3L,
     output: 8L
-  },
+    */  },
   "Power2DTo4D": Tuple{
     expression: 2.0^4.0,
     output: 16.0

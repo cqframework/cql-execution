@@ -19557,20 +19557,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Integer",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -19585,20 +19576,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Integer",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -19613,20 +19595,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Integer",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -19669,20 +19642,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Long",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Long",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -19837,20 +19801,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Integer",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Integer",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -19865,20 +19820,11 @@
                   "annotation": [],
                   "element": [
                     {
-                      "name": "expression",
+                      "name": "skipped",
                       "annotation": [],
                       "elementType": {
                         "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Long",
-                        "annotation": []
-                      }
-                    },
-                    {
-                      "name": "output",
-                      "annotation": [],
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
-                        "name": "{urn:hl7-org:elm-types:r1}Long",
+                        "name": "{urn:hl7-org:elm-types:r1}String",
                         "annotation": []
                       }
                     }
@@ -19986,20 +19932,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -20014,20 +19951,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -20042,20 +19970,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -20098,20 +20017,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Long",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Long",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -20266,20 +20176,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -20294,20 +20195,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Long",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Long",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -20471,20 +20363,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -20492,37 +20375,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "Power",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                            "value": "0",
-                            "annotation": []
-                          },
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                            "value": "0",
-                            "annotation": []
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                        "value": "1",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: As of CQL 2.0, Power always returns Decimal",
                         "annotation": []
                       }
                     }
@@ -20539,20 +20397,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -20560,37 +20409,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "Power",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                            "value": "2",
-                            "annotation": []
-                          },
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                            "value": "2",
-                            "annotation": []
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                        "value": "4",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: As of CQL 2.0, Power always returns Decimal",
                         "annotation": []
                       }
                     }
@@ -20607,20 +20431,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -20628,43 +20443,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "Power",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Negate",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                            "annotation": [],
-                            "signature": [],
-                            "operand": {
-                              "type": "Literal",
-                              "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                              "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                              "value": "2",
-                              "annotation": []
-                            }
-                          },
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                            "value": "2",
-                            "annotation": []
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                        "value": "4",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: As of CQL 2.0, Power always returns Decimal",
                         "annotation": []
                       }
                     }
@@ -20755,20 +20539,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Long",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Long",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -20776,37 +20551,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "Power",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Long",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Long",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Long",
-                            "value": "2",
-                            "annotation": []
-                          },
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Long",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Long",
-                            "value": "2",
-                            "annotation": []
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Long",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Long",
-                        "value": "4",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: As of CQL 2.0, Power always returns Decimal",
                         "annotation": []
                       }
                     }
@@ -21185,20 +20935,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Integer",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -21206,37 +20947,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "Power",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                            "value": "2",
-                            "annotation": []
-                          },
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                            "value": "4",
-                            "annotation": []
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                        "value": "16",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: As of CQL 2.0, Power always returns Decimal",
                         "annotation": []
                       }
                     }
@@ -21253,20 +20969,11 @@
                     "annotation": [],
                     "element": [
                       {
-                        "name": "expression",
+                        "name": "skipped",
                         "annotation": [],
                         "elementType": {
                           "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Long",
-                          "annotation": []
-                        }
-                      },
-                      {
-                        "name": "output",
-                        "annotation": [],
-                        "elementType": {
-                          "type": "NamedTypeSpecifier",
-                          "name": "{urn:hl7-org:elm-types:r1}Long",
+                          "name": "{urn:hl7-org:elm-types:r1}String",
                           "annotation": []
                         }
                       }
@@ -21274,37 +20981,12 @@
                   },
                   "element": [
                     {
-                      "name": "expression",
-                      "value": {
-                        "type": "Power",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Long",
-                        "annotation": [],
-                        "signature": [],
-                        "operand": [
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Long",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Long",
-                            "value": "2",
-                            "annotation": []
-                          },
-                          {
-                            "type": "Literal",
-                            "resultTypeName": "{urn:hl7-org:elm-types:r1}Long",
-                            "valueType": "{urn:hl7-org:elm-types:r1}Long",
-                            "value": "3",
-                            "annotation": []
-                          }
-                        ]
-                      }
-                    },
-                    {
-                      "name": "output",
+                      "name": "skipped",
                       "value": {
                         "type": "Literal",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Long",
-                        "valueType": "{urn:hl7-org:elm-types:r1}Long",
-                        "value": "8",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}String",
+                        "valueType": "{urn:hl7-org:elm-types:r1}String",
+                        "value": "Wrong output: As of CQL 2.0, Power always returns Decimal",
                         "annotation": []
                       }
                     }
