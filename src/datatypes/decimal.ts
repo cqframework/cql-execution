@@ -271,7 +271,7 @@ export class Decimal {
   // if needed to represent the value.
   // Eg, 1.0 / 1.0 and 1.0 / 3.0 both have exactly the same input scales, but expect different output scales.
   withMinimumScale(scale: number, roundingMode: DecimalRoundingMode = CQL_IMPLICIT_ROUNDING) {
-    if (this.scale > scale) {
+    if (this.scale >= scale) {
       return this;
     }
     return this.withScale(scale, roundingMode);
