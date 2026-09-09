@@ -94,7 +94,8 @@
   "overrides": {
     "mocha": {
       "serialize-javascript": "^7.0.3"
-    }
+    },
+    "csv-parse": "^7.0.2"
   },
   "main": "lib/cql",
   "types": "lib/cql.d.ts",
