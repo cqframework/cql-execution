@@ -9,8 +9,7 @@ import {
   MIN_INT_VALUE,
   MAX_INT_VALUE,
   MIN_LONG_VALUE,
-  MAX_LONG_VALUE,
-  MIN_FLOAT_PRECISION_VALUE
+  MAX_LONG_VALUE
 } from '../../../src/util/limits';
 
 describe('Interval', () => {
@@ -1621,7 +1620,8 @@ describe('Width', () => {
     // define RealWidth: width of Interval[1.23, 4.56]
     (await this.realWidth.exec(this.ctx)).should.equalDecimal(Decimal.from(3.33));
     // define RealOpenWidth: width of Interval(1.23, 4.56)
-    (await this.realOpenWidth.exec(this.ctx)).should.equalDecimal(Decimal.from(3.32999998));
+    // width of Interval(1.23, 4.56) = predecessor(4.56) - successor (1.23) = 4.55 - 1.24 = 3.31
+    (await this.realOpenWidth.exec(this.ctx)).should.equalDecimal(Decimal.from(3.31));
   });
 
   it('should calculate the width of infinite intervals', async function () {
@@ -1686,13 +1686,10 @@ describe('Size', () => {
 
   it('should calculate the size of real intervals', async function () {
     // define RealSize: Size(Interval[1.23, 4.56])
-    (await this.realSize.exec(this.ctx)).should.equalDecimal(
-      Decimal.from(3.33 + MIN_FLOAT_PRECISION_VALUE)
-    );
+    (await this.realSize.exec(this.ctx)).should.equalDecimal(Decimal.from('3.33000001'));
     // define RealOpenSize: Size(Interval(1.23, 4.56))
-    (await this.realOpenSize.exec(this.ctx)).should.equalDecimal(
-      Decimal.from(3.32999998 + MIN_FLOAT_PRECISION_VALUE)
-    );
+    // (1.23, 4.56) --> [1.24, 4.55], 4.55 - 1.24 = 3.31
+    (await this.realOpenSize.exec(this.ctx)).should.equalDecimal(Decimal.from('3.31000001'));
   });
 
   it('should calculate the size of infinite intervals', async function () {
@@ -3604,16 +3601,17 @@ describe('IntegerIntervalExpand', () => {
     // Skip for now until we have more clarity on what the expected result should be
     // https://jira.hl7.org/browse/FHIR-58705 and
     // https://chat.fhir.org/#narrow/channel/179220-cql/topic/Interval.20Expand.20example/with/619051021
-    // Note that as of this writing the produced result is { } (empty list)
-    // but I believe the correct answer is either { } or { [ Interval[10.0, 10.0 ] }
-    // depending on whether the size of the interval is based on the precision of the decimals (not currently supported)
+    // There are two possible answers to consider:
+    // 1. { } (empty list) - I believe this is the correct answer per how the spec is currently written
+    // 2. { Interval[10.0, 10.0 ] } - this is the other possible answer, suggested in the Zulip thread.
+    //    This would be the correct answer if either:
+    //    - "intervals of size per" does not require the Size operator on the resulting intervals to = per
+    //    - the Size operator on an interval is based on the precision of its bounds, not Decimal point-size
+    //      (this one is likely the _intent_, but not how it is currently defined)
 
     // define PerDecimalMorePrecise: expand { Interval[10, 10] } per 0.1
     const a = await this.perDecimalMorePrecise.exec(this.ctx);
-    // JavaScript truncates 10.0 to 10.
-    prettyList(a).should.equal(
-      '{ [10, 10.09999999], [10.1, 10.19999999], [10.2, 10.29999999], [10.3, 10.39999999], [10.4, 10.49999999], [10.5, 10.59999999], [10.6, 10.69999999], [10.7, 10.79999999], [10.8, 10.89999999], [10.9, 10.99999999] }'
-    );
+    prettyList(a).should.equal('{  }');
   });
 });
 
@@ -3686,14 +3684,16 @@ describe('LongIntervalExpand', () => {
     // Skip for now until we have more clarity on what the expected result should be
     // https://jira.hl7.org/browse/FHIR-58705 and
     // https://chat.fhir.org/#narrow/channel/179220-cql/topic/Interval.20Expand.20example/with/619051021
-    // Note that as of this writing the produced result is { } (empty list)
-    // which I believe is the correct result.
-    // But an empty list doesn't clearly show the intent of the test.
+    // There are two possible answers to consider:
+    // 1. { } (empty list) - I believe this is the correct answer per how the spec is currently written
+    // 2. { Interval[10.0, 10.0 ] } - this is the other possible answer, suggested in the Zulip thread.
+    //    This would be the correct answer if either:
+    //    - "intervals of size per" does not require the Size operator on the resulting intervals to = per
+    //    - the Size operator on an interval is based on the precision of its bounds, not Decimal point-size
+    //      (this one is likely the _intent_, but not how it is currently defined)
 
     const a = await this.longPerDecimalMorePrecise.exec(this.ctx);
-    prettyList(a).should.equal(
-      '{ [10, 10.09999999], [10.1, 10.19999999], [10.2, 10.29999999], [10.3, 10.39999999], [10.4, 10.49999999], [10.5, 10.59999999], [10.6, 10.69999999], [10.7, 10.79999999], [10.8, 10.89999999], [10.9, 10.99999999] }'
-    );
+    prettyList(a).should.equal('{  }');
   });
 });
 

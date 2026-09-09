@@ -1,7 +1,7 @@
 import { Expression } from './expression';
 import { MAX_DATETIME_VALUE, MIN_DATETIME_VALUE } from '../datatypes/datetime';
 import { Quantity } from '../datatypes/quantity';
-import { add, successor, predecessor, subtract } from '../util/math';
+import { add, subtract } from '../util/math';
 import { greaterThan, lessThan } from '../util/comparison';
 import { convertUnit, compareUnits, convertToCQLDateUnit } from '../util/units';
 import * as dtivl from '../datatypes/interval';
@@ -594,7 +594,7 @@ export class Expand extends Expression {
     return value;
   }
 
-  expandQuantityInterval(interval: any, per: any) {
+  expandQuantityInterval(interval: dtivl.Interval, per: Quantity) {
     // we want to convert everything to the more precise of the interval.low or per
     let result_units;
     const res = compareUnits(interval.low.unit, per.unit);
@@ -604,28 +604,12 @@ export class Expand extends Expression {
     } else {
       result_units = interval.low.unit;
     }
-    let low_value = interval.low.value;
-    let high_value = interval.high.value;
 
-    // Quantity values are always Decimal, but successor is expected to know if the value is an integer
-    // this needs to happen before converting units
-    if (!interval.lowClosed) {
-      if (low_value.isInteger()) {
-        low_value = low_value.add(1);
-      } else {
-        low_value = successor(low_value);
-      }
-    }
-    if (!interval.highClosed) {
-      if (high_value.isInteger()) {
-        high_value = high_value.subtract(1);
-      } else {
-        high_value = predecessor(high_value);
-      }
-    }
+    const closed = interval.toClosed();
+    // getting the closed form of the interval needs to happen before unit conversion
 
-    low_value = convertUnit(low_value, interval.low.unit, result_units);
-    high_value = convertUnit(high_value, interval.high.unit, result_units);
+    const low_value = convertUnit(closed.low.value, closed.low.unit, result_units);
+    const high_value = convertUnit(closed.high.value, closed.high.unit, result_units);
     const per_value = convertUnit(per.value, per.unit, result_units);
 
     // return null if unit conversion failed, must have mismatched units
@@ -646,46 +630,49 @@ export class Expand extends Expression {
     if (per.unit !== '1' && per.unit !== '') {
       return null;
     }
-    const low = interval.lowClosed ? interval.low : successor(interval.low);
-    const high = interval.highClosed ? interval.high : predecessor(interval.high);
-
-    return this.makeNumericIntervalList(low, high, per.value);
+    const closed = interval.toClosed();
+    return this.makeNumericIntervalList(closed.low, closed.high, per.value);
   }
 
-  makeNumericIntervalList(low: any, high: any, perValue: any) {
-    // If the per value is a decimal, 8 decimal places are appropriate
-    // Integers should have 0 Decimal places
+  makeNumericIntervalList(lowValue: any, highValue: any, perValue: Decimal) {
+    if (lowValue == null || highValue == null) {
+      return [];
+    }
     const perIsIntegral = perValue.isInteger();
-    const decimalPrecision = perIsIntegral ? 0 : 8;
 
     // For the purposes of this function, we'll perform all the arithmetic using Decimals,
     // then convert the results back to the required type as necessary
-    const origLow = low;
-    const origHigh = high;
+    let low = Decimal.from(lowValue);
+    let high = Decimal.from(highValue);
 
-    low = Decimal.from(low);
-    high = Decimal.from(high);
+    if (low.greaterThan(high)) {
+      return [];
+    }
 
     let convertBound: (d: Decimal) => Decimal | number | bigint;
     if (!perIsIntegral) {
       // If per is not an integer value, then regardless of the original point types, the values will be Decimals
       convertBound = d => d;
-    } else if (typeof origLow === 'bigint' || typeof origHigh === 'bigint') {
-      convertBound = d => d.toLong();
-    } else if (typeof origLow === 'number' || typeof origHigh === 'number') {
-      convertBound = d => d.toInteger();
+    } else if (typeof lowValue === 'bigint' || typeof highValue === 'bigint') {
+      // the bounds were integral and the per was integral, so there should be no risk of non-integral values
+      convertBound = d => BigInt(d.truncate());
+    } else if (typeof lowValue === 'number' || typeof highValue === 'number') {
+      convertBound = d => d.truncate();
     } else {
-      // per is an integer but the original bounds of the interval were Decimal.
+      // per is integral but the original bounds of the interval were Decimal.
       // Make the resulting intervals either Long or Integer based on the original bounds.
+      // TODO: this approach is based on the literals shown in the spec examples and may be incorrect.
+      // It's possible the correct approach should be to keep the point type as Decimal.
+      // See Zulip thread https://chat.fhir.org/#narrow/channel/179220-cql/topic/Ambiguous.20Decimal.2FInteger.20Literals.20in.20Spec.20and.20Tests/with/621765103
       if (
         low.lessThan(MIN_INT_VALUE) ||
         low.greaterThan(MAX_INT_VALUE) ||
         high.lessThan(MIN_INT_VALUE) ||
         high.greaterThan(MAX_INT_VALUE)
       ) {
-        convertBound = d => d.toLong();
+        convertBound = d => BigInt(d.truncate());
       } else {
-        convertBound = d => d.toInteger();
+        convertBound = d => d.truncate();
       }
     }
 
@@ -695,17 +682,17 @@ export class Expand extends Expression {
     // If the interval boundaries are more precise than the per quantity, the
     // more precise values will be truncated to the precision specified by the
     // per quantity.
-    low = low.setScale(decimalPrecision);
-    high = high.setScale(decimalPrecision);
-
-    if (low == null || high == null) {
-      return [];
-    }
-    if (low.greaterThan(high)) {
-      return [];
-    }
+    low = low.truncated(perValue.scale);
+    high = high.truncated(perValue.scale);
 
     const perUnitSize = perIsIntegral ? 1 : 0.00000001;
+    // NOTE: This is based on the size of an interval being based on the point-size of the type.
+    // If, as currently seems to be the intent, the size of an interval changes to be based on
+    // Decimal precision, or if "intervals of size per" doesn't necessarily mean based on the size operator,
+    // use this:
+    // const perUnitSize = perValue.successor().subtract(perValue);
+    // And update both current_high below to:
+    // current_high = current_low.add(perValue).predecessor();
 
     let current_low = low;
     const results = [];
