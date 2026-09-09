@@ -100,7 +100,7 @@ describe('DateTime', () => {
     d.minute.should.equal(10);
     d.second.should.equal(59);
     d.millisecond.should.equal(456);
-    d.timezoneOffset.should.equalDecimal(Decimal.from(-8));
+    d.timezoneOffset.should.equalDecimal(-8);
   });
 });
 
@@ -239,7 +239,7 @@ describe('Now', () => {
     should.exist(now.minute);
     should.exist(now.second);
     should.exist(now.millisecond);
-    now.timezoneOffset.should.equalDecimal(Decimal.from(0));
+    now.timezoneOffset.should.equalDecimal(0);
   });
 
   it('should return all date components representing now using a passed in timezone using a child context', async function () {
@@ -261,7 +261,7 @@ describe('Now', () => {
     should.exist(now.second);
     should.exist(now.millisecond);
     now.timezoneOffset.should.equalDecimal(this.child_ctx.getTimezoneOffset());
-    now.timezoneOffset.should.equalDecimal(Decimal.from(0));
+    now.timezoneOffset.should.equalDecimal(0);
   });
 });
 
@@ -409,13 +409,13 @@ describe('TimezoneOffsetFrom', () => {
   });
 
   it('should return the timezoneoffset from a fully defined DateTime', async function () {
-    (await this.centralEuropean.exec(this.ctx)).should.equalDecimal(Decimal.from(1));
-    (await this.easternStandard.exec(this.ctx)).should.equalDecimal(Decimal.from(-5));
+    (await this.centralEuropean.exec(this.ctx)).should.equalDecimal(1);
+    (await this.easternStandard.exec(this.ctx)).should.equalDecimal(-5);
   });
 
   it('should return the default timezone when not specified', async function () {
     (await this.defaultTimezone.exec(this.ctx)).should.equalDecimal(
-      Decimal.from((new Date().getTimezoneOffset() / 60) * -1)
+      (new Date().getTimezoneOffset() / 60) * -1
     );
   });
 

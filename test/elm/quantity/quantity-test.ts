@@ -6,7 +6,6 @@ import {
   doSubtraction,
   Quantity
 } from '../../../src/datatypes/quantity';
-import { Decimal } from '../../../src/datatypes/decimal';
 
 describe('Quantity', () => {
   it('should allow creation of Quantity with valid ucum units', () =>
@@ -63,7 +62,7 @@ describe('Quantity', () => {
     const denominator = new Quantity(2.0, 'mg');
     const result = numerator.dividedBy(denominator);
     result.unit.should.equal('1');
-    result.value.should.equalDecimal(Decimal.from(-2.75));
+    result.value.should.equalDecimal(-2.75);
   });
 
   it('should allow for singular time units', () => {

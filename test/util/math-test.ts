@@ -12,8 +12,8 @@ describe('successor', () => {
 
   it('should preserve decimals in an Uncertainty', () => {
     const result = successor(new Uncertainty(Decimal.from('1.0'), Decimal.from('2.0')));
-    result.low.should.equalDecimal(Decimal.from('1.1'));
-    result.high.should.equalDecimal(Decimal.from('2.1'));
+    result.low.should.equalDecimal('1.1');
+    result.high.should.equalDecimal('2.1');
   });
 
   it('should leave the uncertainty high unchanged when it overflows', () => {
@@ -31,8 +31,8 @@ describe('predecessor', () => {
 
   it('should preserve decimals in an Uncertainty', () => {
     const result = successor(new Uncertainty(Decimal.from('1.0'), Decimal.from('2.0')));
-    result.low.should.equalDecimal(Decimal.from('1.1'));
-    result.high.should.equalDecimal(Decimal.from('2.1'));
+    result.low.should.equalDecimal('1.1');
+    result.high.should.equalDecimal('2.1');
   });
 
   it('should leave the uncertainty low unchanged when it underflows', () => {
@@ -45,7 +45,7 @@ describe('finalizeNumericResult', () => {
   it('should normalize Decimal results to eight places using the implicit rounding mode', () => {
     const result = finalizeNumericResult(Decimal.from('1.234567895'));
 
-    result.should.equalDecimal(Decimal.from('1.23456790'));
+    result.should.equalDecimal('1.23456790');
   });
 
   it('should return a new normalized Uncertainty without modifying the input', () => {
@@ -53,9 +53,9 @@ describe('finalizeNumericResult', () => {
     const result = finalizeNumericResult(input);
 
     result.should.not.equal(input);
-    input.low.should.equalDecimal(Decimal.from('1.234567895'));
-    input.high.should.equalDecimal(Decimal.from('2.345678995'));
-    result.low.should.equalDecimal(Decimal.from('1.23456790'));
-    result.high.should.equalDecimal(Decimal.from('2.34567900'));
+    input.low.should.equalDecimal('1.234567895');
+    input.high.should.equalDecimal('2.345678995');
+    result.low.should.equalDecimal('1.23456790');
+    result.high.should.equalDecimal('2.34567900');
   });
 });

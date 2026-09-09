@@ -1,6 +1,5 @@
 import should from 'should';
 import setup from '../../setup';
-import { Decimal } from '../../../src/datatypes/decimal';
 const data = require('./data');
 
 describe('Literal', () => {
@@ -41,11 +40,11 @@ describe('Literal', () => {
   });
 
   it('should convert .1 to decimal .1', function () {
-    this.decimalTenth.value.should.equalDecimal(Decimal.from(0.1));
+    this.decimalTenth.value.should.equalDecimal(0.1);
   });
 
   it('should execute .1 as .1', async function () {
-    (await this.decimalTenth.exec(this.ctx)).should.equalDecimal(Decimal.from(0.1));
+    (await this.decimalTenth.exec(this.ctx)).should.equalDecimal(0.1);
   });
 
   it("should convert 'true' to string 'true'", function () {
@@ -66,7 +65,7 @@ describe('Literal', () => {
     d.minute.should.equal(10);
     d.second.should.equal(59);
     d.millisecond.should.equal(456);
-    d.timezoneOffset.should.equalDecimal(Decimal.from(0));
+    d.timezoneOffset.should.equalDecimal(0);
   });
 
   it("should execute '' as correct Time", async function () {
