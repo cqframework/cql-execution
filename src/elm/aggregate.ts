@@ -67,8 +67,9 @@ export class Sum extends AggregateExpression {
 
     let sum;
     if (hasOnlyQuantities(items)) {
-      // note doAddition is Quantity addition
-      sum = items.reduce(doAddition);
+      // note that processQuantities above converted everything
+      // to match the unit of the first item in the list
+      sum = sumOfDecimals(items.map((q: Quantity) => q.value));
     } else {
       if (hasDecimals(items)) {
         sum = sumOfDecimals(items.map(Decimal.from));
