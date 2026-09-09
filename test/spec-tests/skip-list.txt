@@ -32,6 +32,19 @@ CqlArithmeticFunctionsTest.Predecessor.PredecessorOf101D        Wrong output: As
 CqlArithmeticFunctionsTest.Predecessor.PredecessorOf1QCM        Wrong output: As of 2.0 Successor of Decimal should be precision-aware
 CqlArithmeticFunctionsTest.Successor.SuccessorOf1D              Wrong output: As of 2.0 Successor of Decimal should be precision-aware
 CqlArithmeticFunctionsTest.Successor.SuccessorOf101D            Wrong output: As of 2.0 Successor of Decimal should be precision-aware
+CqlArithmeticFunctionsTest.Power.Power0To0                      Wrong output: As of CQL 2.0, Power always returns Decimal
+CqlArithmeticFunctionsTest.Power.Power2To2                      Wrong output: As of CQL 2.0, Power always returns Decimal
+CqlArithmeticFunctionsTest.Power.PowerNeg2To2                   Wrong output: As of CQL 2.0, Power always returns Decimal
+CqlArithmeticFunctionsTest.Power.Power2LTo2L                    Wrong output: As of CQL 2.0, Power always returns Decimal
+CqlArithmeticFunctionsTest.Power.Power2To4                      Wrong output: As of CQL 2.0, Power always returns Decimal
+CqlArithmeticFunctionsTest.Power.Power2LTo3L                    Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.Integer10Pow9                             Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.IntegerPos10Pow9                          Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.IntegerNeg10Pow9                          Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.Integer2Pow31ToZero1IntegerMaxValue       Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.IntegerPos2Pow31ToZero1IntegerMaxValue    Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.IntegerNeg2Pow31ToZero1                   Wrong output: As of CQL 2.0, Power always returns Decimal
+ValueLiteralsAndSelectors.Integer.IntegerNeg2Pow31IntegerMinValue           Wrong output: As of CQL 2.0, Power always returns Decimal
 CqlComparisonOperatorsTest.Equal.TupleEqDifferentNamesWithOneNullId                 Wrong output: Tuple equality with a known-unequal element should return false
 "CqlComparisonOperatorsTest.Not Equal.TupleNotEqDifferingNamesWithOneNullId"        Wrong output: Tuple inequality with a known-unequal element should return true
 CqlStringOperatorsTest.Substring.SubstringEmptyAnd0                   Wrong output: Substring(x, x.length) should be null'. Note similar test SubstringAB2. See https://github.com/cqframework/cql-tests/issues/149
