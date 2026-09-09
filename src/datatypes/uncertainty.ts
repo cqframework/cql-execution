@@ -22,6 +22,9 @@ export class Uncertainty {
       }
       if (typeof a.after === 'function') {
         return a.after(b);
+      }
+      if (typeof a.greaterThan === 'function') {
+        return a.greaterThan(b);
       } else {
         return a > b;
       }
@@ -66,6 +69,8 @@ export class Uncertainty {
 
       if (typeof a.sameOrBefore === 'function') {
         return a.sameOrBefore(b);
+      } else if (typeof a.lessThanOrEquals === 'function') {
+        return a.lessThanOrEquals(b);
       } else {
         return a <= b;
       }
@@ -75,8 +80,10 @@ export class Uncertainty {
         return null;
       }
 
-      if (typeof a.sameOrBefore === 'function') {
+      if (typeof a.sameOrAfter === 'function') {
         return a.sameOrAfter(b);
+      } else if (typeof a.greaterThanOrEquals === 'function') {
+        return a.greaterThanOrEquals(b);
       } else {
         return a >= b;
       }
@@ -143,7 +150,7 @@ export class Uncertainty {
 
       if (typeof a.before === 'function') {
         return a.before(b, precision);
-      } else if (a.isDecimal) {
+      } else if (typeof a.lessThan === 'function') {
         return a.lessThan(b);
       } else {
         return a < b;
