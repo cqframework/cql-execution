@@ -96,15 +96,10 @@ export class ToBoolean extends Expression {
   async exec(ctx: Context) {
     const arg = await this.execArgs(ctx);
     if (arg != null) {
-      if (typeof arg === 'boolean') {
-        return arg;
-      } else if (typeof arg === 'number' || typeof arg === 'bigint') {
-        if (arg == 1) {
-          return true;
-        } else if (arg == 0) {
-          return false;
-        }
-      } else if (arg instanceof Decimal) {
+      if (arg instanceof Decimal) {
+        // Unlike other types, Decimal.toString doesn't line up
+        // with the defined truthy/falsy values below.
+        // Check numeric equality (ignores scale) for the two values that map to boolean
         if (arg.equals('1.0')) {
           return true;
         } else if (arg.equals('0.0')) {
@@ -230,11 +225,6 @@ export class ToInteger extends Expression {
       if (isValidInteger(integer)) {
         return integer;
       }
-    } else if (arg && arg.isDecimal) {
-      const integer = (arg as Decimal).toInteger();
-      if (isValidInteger(integer)) {
-        return integer;
-      }
     } else if (typeof arg === 'string') {
       // check for blank string because Number('') and Number(' ') evaluate to 0.
       if (arg.trim().length === 0) {
@@ -271,11 +261,6 @@ export class ToLong extends Expression {
         }
       } catch {
         return null;
-      }
-    } else if (arg && arg.isDecimal) {
-      const long = (arg as Decimal).toLong();
-      if (isValidLong(long)) {
-        return long;
       }
     } else if (typeof arg === 'string') {
       // check string format because BigInt throws for invalid strings
