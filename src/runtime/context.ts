@@ -343,7 +343,7 @@ export class Context {
       case ELM_DECIMAL_TYPE:
         return val && val.isDecimal;
       case ELM_INTEGER_TYPE:
-        return typeof val === 'number';
+        return typeof val === 'number' && Number.isInteger(val);
       case ELM_LONG_TYPE:
         return typeof val === 'bigint';
       case ELM_STRING_TYPE:
@@ -390,7 +390,7 @@ export class Context {
     } else if (inst.isDecimalLiteral) {
       return val && val.isDecimal;
     } else if (inst.isIntegerLiteral) {
-      return typeof val === 'number';
+      return typeof val === 'number' && Number.isInteger(val);
     } else if (inst.isLongLiteral) {
       return typeof val === 'bigint';
     } else if (inst.isStringLiteral) {
