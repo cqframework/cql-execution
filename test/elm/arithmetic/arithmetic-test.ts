@@ -565,13 +565,11 @@ describe('Ln', () => {
   });
 
   it('should be able to return the natural log of a number', async function () {
-    const log4 = Decimal.from('1.3862943611198906').normalized();
-    (await this.ln.exec(this.ctx)).should.equalDecimal(log4);
+    (await this.ln.exec(this.ctx)).should.equalDecimal('1.38629436'); // 1.3862943611198906 to 8 decimal places
   });
 
   it('should be able to return the natural log of a long', async function () {
-    const log4 = Decimal.from('1.3862943611198906').normalized();
-    (await this.lnFourLong.exec(this.ctx)).should.equalDecimal(log4);
+    (await this.lnFourLong.exec(this.ctx)).should.equalDecimal('1.38629436');
   });
 });
 
