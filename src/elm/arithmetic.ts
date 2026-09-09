@@ -43,7 +43,7 @@ export class Add extends Expression {
       return null;
     }
 
-    const sum = MathUtil.add(args[0], args[1], this.resultTypeName);
+    const sum = MathUtil.add(args[0], args[1]);
     return finalizeArithmeticResult(sum);
   }
 }
@@ -59,7 +59,7 @@ export class Subtract extends Expression {
       return null;
     }
 
-    const difference = MathUtil.subtract(args[0], args[1], this.resultTypeName);
+    const difference = MathUtil.subtract(args[0], args[1]);
     return finalizeArithmeticResult(difference);
   }
 }
