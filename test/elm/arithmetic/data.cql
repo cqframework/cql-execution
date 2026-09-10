@@ -158,6 +158,12 @@ define Down: Round(4.49)
 define Down_percent: Round(4.43,1)
 define NegativeHalf: Round(-0.5)
 define NegativeOnePointFive: Round(-1.5)
+define RoundPositiveHalfOmittedPrecision: Round(1.5)
+define RoundPositiveHalfNullPrecision: Round(1.5, null as Integer)
+define RoundPositiveHalfZeroPrecision: Round(1.5, 0)
+define RoundNegativeHalfOmittedPrecision: Round(-1.5)
+define RoundNegativeHalfNullPrecision: Round(-1.5, null as Integer)
+define RoundNegativeHalfZeroPrecision: Round(-1.5, 0)
 
 // @Test: Ln
 define ln: Ln(4)
