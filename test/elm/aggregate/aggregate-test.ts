@@ -436,6 +436,14 @@ describe('Mode', () => {
   it('should be null if quantity units are not compatible', async function () {
     should(await this.incompatibleUnitsNull.exec(this.ctx)).be.null();
   });
+
+  it('should use value equality for Decimals (ignores trailing zeros)', async function () {
+    (await this.modeDecimalsAcrossScales.exec(this.ctx)).should.equalDecimal('1.0');
+  });
+
+  it('should use value equality for Quantities (ignores trailing zeros)', async function () {
+    validateQuantity(await this.modeDecimalQuantitiesAcrossScales.exec(this.ctx), '1.0', 'g');
+  });
 });
 
 describe('PopulationVariance', () => {

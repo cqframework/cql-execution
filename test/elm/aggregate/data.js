@@ -11444,6 +11444,8 @@ define QuantitySingleMode: Mode({1.0 'g', 1.0 'g', 2.0 'g'})
 define QuantityBiModal: Mode({1.0 'g', 1.0 'g', 2.0 'g', 2.0 'g'})
 define NumbersAndQuantities: Mode({1 ,2 'ml',3 'ml',4 'ml',5 'ml',0 'ml'})
 define IncompatibleUnitsNull: Mode({1 'mg/d', 0.002 '/d'})
+define ModeDecimalsAcrossScales: Mode({1.0, 1.00, 2.0})
+define ModeDecimalQuantitiesAcrossScales: Mode({ Quantity { value: 1.0, unit: 'g' }, Quantity { value: 1.00, unit: 'g' }, Quantity { value: 2.0, unit: 'g' } })
 */
 
 module.exports['Mode'] = {
@@ -11458,7 +11460,7 @@ module.exports['Mode'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "364",
+        "r" : "395",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -12504,6 +12506,308 @@ module.exports['Mode'] = {
               "value" : 0.002,
               "unit" : "/d",
               "annotation" : [ ]
+            } ]
+          }
+        }
+      }, {
+        "localId" : "379",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "ModeDecimalsAcrossScales",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "379",
+            "s" : [ {
+              "value" : [ "", "define ", "ModeDecimalsAcrossScales", ": " ]
+            }, {
+              "r" : "390",
+              "s" : [ {
+                "value" : [ "Mode", "(" ]
+              }, {
+                "r" : "380",
+                "s" : [ {
+                  "r" : "381",
+                  "value" : [ "{", "1.0", ", ", "1.00", ", ", "2.0", "}" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Mode",
+          "localId" : "390",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "391",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "392",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          } ],
+          "source" : {
+            "type" : "List",
+            "localId" : "380",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "384",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "385",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "381",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "382",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.00",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "383",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
+            } ]
+          }
+        }
+      }, {
+        "localId" : "395",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+        "name" : "ModeDecimalQuantitiesAcrossScales",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "395",
+            "s" : [ {
+              "value" : [ "", "define ", "ModeDecimalQuantitiesAcrossScales", ": " ]
+            }, {
+              "r" : "418",
+              "s" : [ {
+                "value" : [ "Mode", "(" ]
+              }, {
+                "r" : "396",
+                "s" : [ {
+                  "value" : [ "{ " ]
+                }, {
+                  "r" : "397",
+                  "s" : [ {
+                    "value" : [ "Quantity", " { " ]
+                  }, {
+                    "s" : [ {
+                      "r" : "399",
+                      "value" : [ "value", ": ", "1.0" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "unit", ": " ]
+                    }, {
+                      "r" : "400",
+                      "s" : [ {
+                        "value" : [ "'g'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ " }" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "402",
+                  "s" : [ {
+                    "value" : [ "Quantity", " { " ]
+                  }, {
+                    "s" : [ {
+                      "r" : "404",
+                      "value" : [ "value", ": ", "1.00" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "unit", ": " ]
+                    }, {
+                      "r" : "405",
+                      "s" : [ {
+                        "value" : [ "'g'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ " }" ]
+                  } ]
+                }, {
+                  "value" : [ ", " ]
+                }, {
+                  "r" : "407",
+                  "s" : [ {
+                    "value" : [ "Quantity", " { " ]
+                  }, {
+                    "s" : [ {
+                      "r" : "409",
+                      "value" : [ "value", ": ", "2.0" ]
+                    } ]
+                  }, {
+                    "value" : [ ", " ]
+                  }, {
+                    "s" : [ {
+                      "value" : [ "unit", ": " ]
+                    }, {
+                      "r" : "410",
+                      "s" : [ {
+                        "value" : [ "'g'" ]
+                      } ]
+                    } ]
+                  }, {
+                    "value" : [ " }" ]
+                  } ]
+                }, {
+                  "value" : [ " }" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "Mode",
+          "localId" : "418",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "419",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "420",
+              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ]
+            }
+          } ],
+          "source" : {
+            "type" : "List",
+            "localId" : "396",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "412",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "413",
+                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Instance",
+              "localId" : "397",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ],
+              "element" : [ {
+                "name" : "value",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "399",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "1.0",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "unit",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "400",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "g",
+                  "annotation" : [ ]
+                }
+              } ]
+            }, {
+              "type" : "Instance",
+              "localId" : "402",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ],
+              "element" : [ {
+                "name" : "value",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "404",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "1.00",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "unit",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "405",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "g",
+                  "annotation" : [ ]
+                }
+              } ]
+            }, {
+              "type" : "Instance",
+              "localId" : "407",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "classType" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "annotation" : [ ],
+              "element" : [ {
+                "name" : "value",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "409",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "2.0",
+                  "annotation" : [ ]
+                }
+              }, {
+                "name" : "unit",
+                "value" : {
+                  "type" : "Literal",
+                  "localId" : "410",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "g",
+                  "annotation" : [ ]
+                }
+              } ]
             } ]
           }
         }
@@ -18974,6 +19278,8 @@ define null_geometric_mean: GeometricMean({1, 2, null})
 define all_nulls: GeometricMean({null, null, null})
 define also_null_geometric_mean: GeometricMean(null as List<Decimal>)
 define negative_geometric_mean: GeometricMean({-1.0, 4.0})
+define GeometricMeanThreeIdenticalDecimals: GeometricMean({2.0, 2.0, 2.0})
+define GeometricMeanExactCubeRoot: GeometricMean({2.0, 4.0, 8.0})
 */
 
 module.exports['GeometricMean'] = {
@@ -18988,7 +19294,7 @@ module.exports['GeometricMean'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "325",
+        "r" : "358",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -19673,6 +19979,174 @@ module.exports['GeometricMean'] = {
               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
               "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
               "value" : "4.0",
+              "annotation" : [ ]
+            } ]
+          }
+        }
+      }, {
+        "localId" : "342",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "GeometricMeanThreeIdenticalDecimals",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "342",
+            "s" : [ {
+              "value" : [ "", "define ", "GeometricMeanThreeIdenticalDecimals", ": " ]
+            }, {
+              "r" : "353",
+              "s" : [ {
+                "value" : [ "GeometricMean", "(" ]
+              }, {
+                "r" : "343",
+                "s" : [ {
+                  "r" : "344",
+                  "value" : [ "{", "2.0", ", ", "2.0", ", ", "2.0", "}" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "GeometricMean",
+          "localId" : "353",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "354",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "355",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          } ],
+          "source" : {
+            "type" : "List",
+            "localId" : "343",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "347",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "348",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "344",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "345",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "346",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
+            } ]
+          }
+        }
+      }, {
+        "localId" : "358",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "GeometricMeanExactCubeRoot",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "358",
+            "s" : [ {
+              "value" : [ "", "define ", "GeometricMeanExactCubeRoot", ": " ]
+            }, {
+              "r" : "369",
+              "s" : [ {
+                "value" : [ "GeometricMean", "(" ]
+              }, {
+                "r" : "359",
+                "s" : [ {
+                  "r" : "360",
+                  "value" : [ "{", "2.0", ", ", "4.0", ", ", "8.0", "}" ]
+                } ]
+              }, {
+                "value" : [ ")" ]
+              } ]
+            } ]
+          }
+        } ],
+        "expression" : {
+          "type" : "GeometricMean",
+          "localId" : "369",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "annotation" : [ ],
+          "signature" : [ {
+            "type" : "ListTypeSpecifier",
+            "localId" : "370",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "371",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          } ],
+          "source" : {
+            "type" : "List",
+            "localId" : "359",
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "localId" : "363",
+              "annotation" : [ ],
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "364",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "element" : [ {
+              "type" : "Literal",
+              "localId" : "360",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "361",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "4.0",
+              "annotation" : [ ]
+            }, {
+              "type" : "Literal",
+              "localId" : "362",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "8.0",
               "annotation" : [ ]
             } ]
           }

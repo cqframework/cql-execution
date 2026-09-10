@@ -116,6 +116,8 @@ define QuantitySingleMode: Mode({1.0 'g', 1.0 'g', 2.0 'g'})
 define QuantityBiModal: Mode({1.0 'g', 1.0 'g', 2.0 'g', 2.0 'g'})
 define NumbersAndQuantities: Mode({1 ,2 'ml',3 'ml',4 'ml',5 'ml',0 'ml'})
 define IncompatibleUnitsNull: Mode({1 'mg/d', 0.002 '/d'})
+define ModeDecimalsAcrossScales: Mode({1.0, 1.00, 2.0})
+define ModeDecimalQuantitiesAcrossScales: Mode({ Quantity { value: 1.0, unit: 'g' }, Quantity { value: 1.00, unit: 'g' }, Quantity { value: 2.0, unit: 'g' } })
 
 // @Test: Variance
 define v: Variance({1,2,3,4,5})
