@@ -6,6 +6,8 @@ import { Context } from '../runtime/context';
 import { Exception } from '../datatypes/exception';
 import { greaterThan, lessThan } from '../util/comparison';
 import { build } from './builder';
+import { Map as ImmutableMap } from 'immutable';
+import { toNormalizedKey, NormalizedKey } from '../util/immutableUtil';
 import * as MathUtil from '../util/math';
 
 function finalizeAggregateResult(result: any, firstItem: any) {
@@ -263,10 +265,13 @@ export class Mode extends AggregateExpression {
 
   mode(arr: any[]) {
     let max = 0;
-    const counts: any = {};
+    // use ImmutableMap and NormalizedKeys, to compare objects using value equality
+    let counts = ImmutableMap<NormalizedKey, number>();
     let results: any[] = [];
     for (const elem of arr) {
-      const cnt = (counts[elem] = (counts[elem] != null ? counts[elem] : 0) + 1);
+      const key = toNormalizedKey(elem);
+      const cnt = (counts.get(key) ?? 0) + 1;
+      counts = counts.set(key, cnt); // note: set returns a new instance
       if (cnt === max && !results.includes(elem)) {
         results.push(elem);
       } else if (cnt > max) {

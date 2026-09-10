@@ -77,7 +77,8 @@ export const toNormalizedKey = (js: any): NormalizedKey => {
 
     case Decimal:
       return ImmutableMap({
-        value: js.toString(),
+        // Decimal value equality ignores trailing zeros, so scale is essentially ignored
+        value: js.withoutTrailingZeros().toString(),
         __instance: js.constructor
       });
 
