@@ -202,13 +202,14 @@ export function multiply(a: any, b: any) {
   throw new Error('Unsupported argument types.');
 }
 
-export function divide(a: any, b: any) {
+export function divide(a: any, b: any, truncated?: boolean) {
   if (a.isDecimal || b.isDecimal) {
-    b = Decimal.from(b);
-    if (b.equals(0)) {
+    const bDecimal = Decimal.from(b);
+    if (bDecimal.equals(0)) {
       return null;
     }
-    const quotient = Decimal.from(a).divideBy(b);
+    const aDecimal = Decimal.from(a);
+    const quotient = truncated ? aDecimal.truncatedDivideBy(b) : aDecimal.divideBy(b);
     return overflowsOrUnderflows(quotient) ? null : quotient;
   }
   if (typeof a === 'bigint' || typeof b === 'bigint') {

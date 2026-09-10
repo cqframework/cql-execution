@@ -95,6 +95,17 @@ describe('Decimal', () => {
     });
   });
 
+  describe('truncatedDivideBy', () => {
+    it('should truncate without rounding', () => {
+      Decimal.from('1.00000').truncatedDivideBy('2.0').should.equalDecimal('0');
+      Decimal.from('1.99999999').truncatedDivideBy('2.0').should.equalDecimal('0');
+    });
+
+    it('should reject a zero divisor', () => {
+      (() => Decimal.from(1).truncatedDivideBy(0)).should.throw(RangeError);
+    });
+  });
+
   describe('modulo', () => {
     it('should calculate a remainder', () => {
       Decimal.from('5.5').modulo(2).should.equalDecimal('1.5');
