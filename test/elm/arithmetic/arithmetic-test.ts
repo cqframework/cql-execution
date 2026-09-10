@@ -684,6 +684,16 @@ describe('Round', () => {
     (await this.negativeHalf.exec(this.ctx)).should.equalDecimal(-1);
     (await this.negativeOnePointFive.exec(this.ctx)).should.equalDecimal(-2);
   });
+
+  it('should treat omitted or null precision as 0 precision', async function () {
+    (await this.roundPositiveHalfOmittedPrecision.exec(this.ctx)).should.equalDecimal(2.0);
+    (await this.roundPositiveHalfNullPrecision.exec(this.ctx)).should.equalDecimal(2.0);
+    (await this.roundPositiveHalfZeroPrecision.exec(this.ctx)).should.equalDecimal(2.0);
+
+    (await this.roundNegativeHalfOmittedPrecision.exec(this.ctx)).should.equalDecimal(-2.0);
+    (await this.roundNegativeHalfNullPrecision.exec(this.ctx)).should.equalDecimal(-2.0);
+    (await this.roundNegativeHalfZeroPrecision.exec(this.ctx)).should.equalDecimal(-2.0);
+  });
 });
 
 describe('Successor', () => {

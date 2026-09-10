@@ -278,7 +278,12 @@ export class Decimal {
     return this.applyWrapper(this.value.log, base).withMinimumScale(this.scale);
   }
 
-  round(scale: number) {
+  round(scale?: number | null) {
+    // "If precision is not specified or null, 0 is assumed."
+    if (scale == null) {
+      scale = 0;
+    }
+
     // notes on rounding modes
     // ROUND_HALF_UP "Rounds towards nearest neighbour. If equidistant, rounds away from zero"
     // rounds 0.5 -> 1.0, -0.5 -> -1.0
