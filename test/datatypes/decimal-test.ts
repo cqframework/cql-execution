@@ -201,7 +201,16 @@ describe('Decimal', () => {
 
   describe('truncate', () => {
     it('should return the integer component', () => {
+      Decimal.from('1.9').truncate().should.equal(1);
       Decimal.from('-1.9').truncate().should.equal(-1);
+    });
+  });
+
+  describe('truncateToBigInt', () => {
+    it('should return the integer component as a BigInt', () => {
+      Decimal.from('1.9').truncateToBigInt().should.equal(1n);
+      Decimal.from('-1.9').truncateToBigInt().should.equal(-1n);
+      Decimal.from('9007199254740992').truncateToBigInt().should.equal(9007199254740992n);
     });
   });
 

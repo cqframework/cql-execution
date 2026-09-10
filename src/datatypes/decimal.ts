@@ -212,13 +212,17 @@ export class Decimal {
     return this.value.truncated().toNumber();
   }
 
+  truncateToBigInt(): bigint {
+    return BigInt(this.value.truncated().toString());
+  }
+
   truncated(scale?: number): Decimal {
     // specifying a scale here allows for "truncating to a precision"
     // this is currently used in Interval.expand
 
     if (!scale) {
       // undefined or 0 both mean truncated to an integer
-      return new Decimal(this.truncate(), 0);
+      return new Decimal(this.value.truncated(), 0);
     }
 
     return this.withScale(scale, TRUNCATE_TO_PRECISION);
