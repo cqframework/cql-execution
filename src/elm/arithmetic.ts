@@ -242,6 +242,9 @@ export class Truncate extends Expression {
 
     let truncated;
     if (arg.isDecimal) {
+      // Note that the CQL spec defines Truncate as returning an Integer,
+      // but the Decimal bounds are greater than allowed for Integer.
+      // If the spec changes, add another case here for truncating to Long.
       truncated = arg.truncate();
     } else if (arg >= 0) {
       truncated = Math.floor(arg);

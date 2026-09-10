@@ -655,7 +655,7 @@ export class Expand extends Expression {
       convertBound = d => d;
     } else if (typeof lowValue === 'bigint' || typeof highValue === 'bigint') {
       // the bounds were integral and the per was integral, so there should be no risk of non-integral values
-      convertBound = d => BigInt(d.truncate());
+      convertBound = d => d.truncateToBigInt();
     } else if (typeof lowValue === 'number' || typeof highValue === 'number') {
       convertBound = d => d.truncate();
     } else {
@@ -670,7 +670,7 @@ export class Expand extends Expression {
         high.lessThan(MIN_INT_VALUE) ||
         high.greaterThan(MAX_INT_VALUE)
       ) {
-        convertBound = d => BigInt(d.truncate());
+        convertBound = d => d.truncateToBigInt();
       } else {
         convertBound = d => d.truncate();
       }
