@@ -289729,6 +289729,7 @@ define LongNullBoth: expand { Interval[null, null] } per 1 '1'
 define LongBadPerMinute: expand { Interval(2L, 4L] } per 1 minute
 
 define LongPerDecimalMorePrecise: expand { Interval[10L, 10L] } per 0.1
+define ExpandLargePositiveLongInterval: expand Interval[9007199254740993L, 9007199254740995L]
 */
 
 module.exports['LongIntervalExpand'] = {
@@ -289743,7 +289744,7 @@ module.exports['LongIntervalExpand'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "652",
+        "r" : "678",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -292750,6 +292751,114 @@ module.exports['LongIntervalExpand'] = {
             "annotation" : [ ]
           } ]
         }
+      }, {
+        "localId" : "678",
+        "name" : "ExpandLargePositiveLongInterval",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "678",
+            "s" : [ {
+              "value" : [ "", "define ", "ExpandLargePositiveLongInterval", ": " ]
+            }, {
+              "r" : "685",
+              "s" : [ {
+                "value" : [ "expand " ]
+              }, {
+                "r" : "681",
+                "s" : [ {
+                  "r" : "679",
+                  "value" : [ "Interval[", "9007199254740993L", ", ", "9007199254740995L", "]" ]
+                } ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "localId" : "691",
+          "annotation" : [ ],
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "692",
+            "name" : "{urn:hl7-org:elm-types:r1}Long",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "Expand",
+          "localId" : "685",
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "localId" : "689",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "690",
+              "name" : "{urn:hl7-org:elm-types:r1}Long",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "686",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "687",
+              "name" : "{urn:hl7-org:elm-types:r1}Long",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "688",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Interval",
+            "localId" : "681",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "682",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "683",
+                "name" : "{urn:hl7-org:elm-types:r1}Long",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "Literal",
+              "localId" : "679",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+              "value" : "9007199254740993",
+              "annotation" : [ ]
+            },
+            "high" : {
+              "type" : "Literal",
+              "localId" : "680",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Long",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Long",
+              "value" : "9007199254740995",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Null",
+            "localId" : "684",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ]
+        }
       } ]
     }
   }
@@ -292780,6 +292889,7 @@ define NullOpen: expand { Interval[null, 4] } per 1.5 '1'
 define NullClose: expand { Interval[2, null] } per 1.5 '1'
 define NullBoth: expand { Interval[null, null] } per 1.5 '1'
 define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
+define ExpandLargeDecimalIntervalFractionalStep: expand Interval[9007199254740993.0, 9007199254740993.3] per 0.1
 */
 
 module.exports['DecimalIntervalExpand'] = {
@@ -292794,7 +292904,7 @@ module.exports['DecimalIntervalExpand'] = {
       "type" : "Annotation",
       "t" : [ ],
       "s" : {
-        "r" : "633",
+        "r" : "658",
         "s" : [ {
           "value" : [ "", "library TestSnippet version '1'" ]
         } ]
@@ -295665,6 +295775,118 @@ module.exports['DecimalIntervalExpand'] = {
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
             "value" : 0.5,
             "unit" : "minute",
+            "annotation" : [ ]
+          } ]
+        }
+      }, {
+        "localId" : "658",
+        "name" : "ExpandLargeDecimalIntervalFractionalStep",
+        "context" : "Patient",
+        "accessLevel" : "Public",
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ ],
+          "s" : {
+            "r" : "658",
+            "s" : [ {
+              "value" : [ "", "define ", "ExpandLargeDecimalIntervalFractionalStep", ": " ]
+            }, {
+              "r" : "667",
+              "s" : [ {
+                "value" : [ "expand " ]
+              }, {
+                "r" : "661",
+                "s" : [ {
+                  "r" : "659",
+                  "value" : [ "Interval[", "9007199254740993.0", ", ", "9007199254740993.3", "]" ]
+                } ]
+              }, {
+                "r" : "665",
+                "value" : [ " per ", "0.1" ]
+              } ]
+            } ]
+          }
+        } ],
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "localId" : "673",
+          "annotation" : [ ],
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "674",
+            "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "annotation" : [ ]
+          }
+        },
+        "expression" : {
+          "type" : "Expand",
+          "localId" : "667",
+          "annotation" : [ ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "localId" : "671",
+            "annotation" : [ ],
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "672",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          },
+          "signature" : [ {
+            "type" : "IntervalTypeSpecifier",
+            "localId" : "668",
+            "annotation" : [ ],
+            "pointType" : {
+              "type" : "NamedTypeSpecifier",
+              "localId" : "669",
+              "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "NamedTypeSpecifier",
+            "localId" : "670",
+            "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "annotation" : [ ]
+          } ],
+          "operand" : [ {
+            "type" : "Interval",
+            "localId" : "661",
+            "lowClosed" : true,
+            "highClosed" : true,
+            "annotation" : [ ],
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "localId" : "662",
+              "annotation" : [ ],
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "localId" : "663",
+                "name" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "annotation" : [ ]
+              }
+            },
+            "low" : {
+              "type" : "Literal",
+              "localId" : "659",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "9007199254740993.0",
+              "annotation" : [ ]
+            },
+            "high" : {
+              "type" : "Literal",
+              "localId" : "660",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "9007199254740993.3",
+              "annotation" : [ ]
+            }
+          }, {
+            "type" : "Quantity",
+            "localId" : "666",
+            "value" : 0.1,
+            "unit" : "1",
             "annotation" : [ ]
           } ]
         }

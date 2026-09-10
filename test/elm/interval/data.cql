@@ -1633,6 +1633,7 @@ define LongNullBoth: expand { Interval[null, null] } per 1 '1'
 define LongBadPerMinute: expand { Interval(2L, 4L] } per 1 minute
 
 define LongPerDecimalMorePrecise: expand { Interval[10L, 10L] } per 0.1
+define ExpandLargePositiveLongInterval: expand Interval[9007199254740993L, 9007199254740995L]
 
 // @Test: DecimalIntervalExpand
 define ClosedSingle: expand { Interval[2, 5] } per 1.5 '1'
@@ -1656,6 +1657,7 @@ define NullOpen: expand { Interval[null, 4] } per 1.5 '1'
 define NullClose: expand { Interval[2, null] } per 1.5 '1'
 define NullBoth: expand { Interval[null, null] } per 1.5 '1'
 define BadPerMinute: expand { Interval(2.1, 4.1] } per 0.5 minute
+define ExpandLargeDecimalIntervalFractionalStep: expand Interval[9007199254740993.0, 9007199254740993.3] per 0.1
 
 // @Test: SameAs
 define NullBoth: Interval[null as DateTime, null as DateTime] same as Interval[null as DateTime, null as DateTime]
