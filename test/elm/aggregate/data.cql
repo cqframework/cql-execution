@@ -195,6 +195,8 @@ define null_geometric_mean: GeometricMean({1, 2, null})
 define all_nulls: GeometricMean({null, null, null})
 define also_null_geometric_mean: GeometricMean(null as List<Decimal>)
 define negative_geometric_mean: GeometricMean({-1.0, 4.0})
+define GeometricMeanThreeIdenticalDecimals: GeometricMean({2.0, 2.0, 2.0})
+define GeometricMeanExactCubeRoot: GeometricMean({2.0, 4.0, 8.0})
 
 // @Test: AllTrue
 define at: AllTrue({true,true,true,true})

@@ -244,6 +244,24 @@ export class Decimal {
     return this.applyWrapper(this.value.toPower, exponent);
   }
 
+  nthRoot(root: DecimalInput) {
+    // The goal of this method is to preserve exact values in common cases,
+    // by leveraging the decimal.js sqrt() and cubeRoot() methods for roots 2 and 3.
+    // For other roots, fall back to the power method with the inverse of the provided value.
+    // See docs on decimal.js pow, in particular the note about non-integer exponents:
+    // https://mikemcl.github.io/decimal.js/#pow
+    const rootAsDecimal = Decimal.from(root);
+    if (rootAsDecimal.equals(0)) {
+      throw new RangeError('Cannot take the zero-th root of a decimal');
+    } else if (rootAsDecimal.equals(2)) {
+      return this.sqrt();
+    } else if (rootAsDecimal.equals(3)) {
+      return new Decimal(this.value.cubeRoot()).withMinimumScale(this.scale);
+    } else {
+      return this.power(Decimal.from(1).divideBy(root));
+    }
+  }
+
   sqrt() {
     return new Decimal(this.value.sqrt()).withMinimumScale(this.scale);
   }
