@@ -164,20 +164,9 @@ export class TruncatedDivide extends Expression {
     const [x, y] = args;
     let quotient;
     if (x.isQuantity) {
-      quotient = x.dividedBy(y);
-      if (quotient instanceof Quantity) {
-        quotient = new Quantity(quotient.value.truncated(), quotient.unit);
-      }
+      quotient = x.dividedBy(y, true);
     } else {
-      quotient = MathUtil.divide(x, y);
-
-      // MathUtil.divide performs truncated division for Integers and Longs implicitly
-      if (
-        quotient != null &&
-        (x.isDecimal || y.isDecimal || this.resultTypeName === ELM_DECIMAL_TYPE)
-      ) {
-        quotient = (quotient as Decimal).truncated();
-      }
+      quotient = MathUtil.divide(x, y, true);
     }
 
     return finalizeArithmeticResult(quotient);

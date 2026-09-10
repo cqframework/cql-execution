@@ -128,6 +128,13 @@ export class Decimal {
     return unscaledResult.withMinimumScale(preferredScale);
   }
 
+  truncatedDivideBy(other: DecimalInput) {
+    if (Decimal.from(other).equals(0)) {
+      throw new RangeError('Cannot divide a decimal by zero');
+    }
+    return this.applyWrapper(this.value.dividedToIntegerBy, other);
+  }
+
   modulo(other: DecimalInput) {
     if (Decimal.from(other).equals(0)) {
       throw new RangeError('Cannot calculate decimal modulo by zero');

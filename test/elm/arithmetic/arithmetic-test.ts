@@ -503,6 +503,26 @@ describe('TruncatedDivide', () => {
   it('should truncate quantity division results', async function () {
     validateQuantity(await this.quantityTruncatedDivide.exec(this.ctx), 5, '1');
   });
+
+  it('should truncate Decimal division results', async function () {
+    (await this.truncatedDivideDecimalJustAboveOne.exec(this.ctx)).should.equalDecimal(1);
+  });
+
+  it('should provide precise results above JS safe numbers', async function () {
+    (await this.truncatedDivideLargePositiveDecimal.exec(this.ctx)).should.equalDecimal(
+      '9007199254740993.0'
+    );
+    validateQuantity(
+      await this.truncatedDivideLargePositiveQuantity.exec(this.ctx),
+      Decimal.from('9007199254740993.0'),
+      '1'
+    );
+  });
+
+  it('should truncate before rounding the quotient', async function () {
+    (await this.truncatedDivideDecimalJustBelowOne.exec(this.ctx)).should.equalDecimal(0);
+    validateQuantity(await this.truncatedDivideQuantityJustBelowOne.exec(this.ctx), 0, '1');
+  });
 });
 
 describe('Truncate', () => {

@@ -116,7 +116,7 @@ export class Quantity {
     return new Quantity(value, toUnit);
   }
 
-  dividedBy(other: any) {
+  dividedBy(other: any, truncated?: boolean) {
     if (
       other == null ||
       other === 0 ||
@@ -134,7 +134,7 @@ export class Quantity {
       other.value,
       other.unit
     );
-    const resultValue = val1.divideBy(val2);
+    const resultValue = truncated ? val1.truncatedDivideBy(val2) : val1.divideBy(val2);
     const resultUnit = getQuotientOfUnits(unit1, unit2);
 
     // Check for invalid unit or value

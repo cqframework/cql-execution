@@ -109,6 +109,11 @@ define TenDivThreeLong: 10L div 3L
 define TenDivThreeMixed: 10 div 3L
 define TenDivThreeReverseMixed: 10L div 3
 define QuantityTruncatedDivide: 10.5 'g' div 2.0 'g'
+define TruncatedDivideLargePositiveDecimal: 9007199254740993.0 div 1.0
+define TruncatedDivideDecimalJustBelowOne: 1.99999999 div 2.0
+define TruncatedDivideDecimalJustAboveOne: 2.00000001 div 2.0
+define TruncatedDivideLargePositiveQuantity: Quantity { value: 9007199254740993.0, unit: 'g' } div Quantity { value: 1.0, unit: 'g' }
+define TruncatedDivideQuantityJustBelowOne: Quantity { value: 1.99999999, unit: 'g' } div Quantity { value: 2.0, unit: 'g' }
 
 // @Test: Modulo
 define Mod: 3 mod 2
