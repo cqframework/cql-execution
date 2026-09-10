@@ -417,8 +417,7 @@ export class GeometricMean extends AggregateExpression {
 
     try {
       const product = productOfDecimals(decimals);
-      const oneOverLength = Decimal.from(1).divideBy(items.length);
-      const geoMean = product.power(oneOverLength);
+      const geoMean = product.nthRoot(items.length);
       return finalizeAggregateResult(geoMean, items[0]);
     } catch {
       return null;

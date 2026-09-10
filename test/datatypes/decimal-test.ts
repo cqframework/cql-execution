@@ -255,6 +255,25 @@ describe('Decimal', () => {
     });
   });
 
+  describe('nthRoot', () => {
+    it('should take the provided root', () => {
+      Decimal.from(8).nthRoot(3).should.equalDecimal('2.0');
+      Decimal.from(32).nthRoot(5).should.equalDecimal('2.0');
+      Decimal.from(65536).nthRoot(16).should.equalDecimal('2.0');
+      Decimal.from(4294967296).nthRoot(32).should.equalDecimal('2.0');
+
+      Decimal.from(9).nthRoot(2).should.equalDecimal('3.0');
+      Decimal.from(81).nthRoot(4).should.equalDecimal('3.0');
+      Decimal.from(243).nthRoot(5).should.equalDecimal('3.0');
+
+      Decimal.from(1).nthRoot(12345).should.equalDecimal('1.0');
+    });
+
+    it('should reject a zero divisor', () => {
+      (() => Decimal.from(1).nthRoot(0)).should.throw(RangeError);
+    });
+  });
+
   describe('sqrt', () => {
     it('should calculate square roots', () => {
       const result = Decimal.from('9.00').sqrt();
