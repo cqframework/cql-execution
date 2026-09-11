@@ -1,12 +1,6 @@
 import should from 'should';
-import {
-  doAddition,
-  doDivision,
-  doMultiplication,
-  doSubtraction,
-  parseQuantity,
-  Quantity
-} from '../../../src/datatypes/quantity';
+import { doMultiplication, parseQuantity, Quantity } from '../../../src/datatypes/quantity';
+import * as MathUtil from '../../../src/util/math';
 import setup from '../../setup';
 import {
   MAX_INT_VALUE,
@@ -41,11 +35,11 @@ const doQuantityMathTests = function (tests: string[][], operator: string) {
   if (operator === '*') {
     func = doMultiplication;
   } else if (operator === '/') {
-    func = doDivision;
+    func = (a: Quantity, b: Quantity) => a.dividedBy(b);
   } else if (operator === '+') {
-    func = doAddition;
+    func = MathUtil.add;
   } else if (operator === '-') {
-    func = doSubtraction;
+    func = MathUtil.subtract;
   }
 
   for (const t of tests) {
