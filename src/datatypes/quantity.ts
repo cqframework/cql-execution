@@ -1,4 +1,4 @@
-import { add, subtract, isValidDecimal, overflowsOrUnderflows } from '../util/math';
+import { isValidDecimal, overflowsOrUnderflows } from '../util/math';
 import { Decimal } from './decimal';
 import {
   checkUnit,
@@ -185,20 +185,6 @@ export function parseQuantity(str: string) {
     return new Quantity(value, unit);
   } else {
     return null;
-  }
-}
-
-export function doAddition(a: any, b: any) {
-  return add(a, b);
-}
-
-export function doSubtraction(a: any, b: any) {
-  return subtract(a, b);
-}
-
-export function doDivision(a: any, b: any) {
-  if (a != null && a.isQuantity) {
-    return a.dividedBy(b);
   }
 }
 
