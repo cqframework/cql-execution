@@ -79,7 +79,6 @@ export function convertUnit(fromVal: Decimal, fromUnit: any, toUnit: any) {
   // First though, make sure the units can be safely converted by simple scalar factor.
   // Units that cannot because they require a special function, such as C <--> F,
   // fall back to calling the UCUM library directly.
-
   const testFrom = utils.convertToBaseUnits(fromUnit, 1);
   const testTo = utils.convertToBaseUnits(toUnit, 1);
 
@@ -89,23 +88,12 @@ export function convertUnit(fromVal: Decimal, fromUnit: any, toUnit: any) {
 
   let rawResult: Decimal;
   if (testFrom.fromUnitIsSpecial === false && testTo.fromUnitIsSpecial === false) {
-    // try both directions to see if one is more exact,
-    // eg, days to weeks is * 0.142857... but weeks to days is * 7, so days to weeks could be / 7 instead
-    const fromToTo = utils.convertUnitTo(fromUnit, 1, toUnit);
-    const toToFrom = utils.convertUnitTo(toUnit, 1, fromUnit);
-    if (fromToTo.status !== 'succeeded' || toToFrom.status !== 'succeeded') {
+    const conversion = utils.convertUnitTo(fromUnit, 1, toUnit);
+    if (conversion.status !== 'succeeded') {
       return;
     }
-
-    const multFactor = fromToTo.toVal;
-    const divFactor = toToFrom.toVal;
     // NOTE: conversion factor is a JS number and can itself be imprecise, eg, inches to m is 0.025400000000000002
-    if (Number.isInteger(divFactor)) {
-      rawResult = fromVal.divideBy(divFactor);
-    } else {
-      // We could consider more heuristics here, but for now just fall back to the multiplication factor
-      rawResult = fromVal.multiplyBy(multFactor);
-    }
+    rawResult = fromVal.multiplyBy(conversion.toVal);
   } else {
     // units are special, so call the library with the exact value
     const result = utils.convertUnitTo(fromUnit, fromVal.toNumber(), toUnit);
