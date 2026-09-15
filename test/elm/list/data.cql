@@ -54,7 +54,7 @@ define NullUnion: null union {1, 2, 3}
 define UnionNull: {1, 2, 3} union null
 define nullUnionNull: (null as List<String>) union (null as List<String>)
 define UnionDecimalsAcrossScales: {1.0, 2.0} union {1.00, 3.0}
-
+define UnionDecimalsEquivalentNotEqual: {1.0, 2.0} union {1.04, 3.0}
 
 // @Test: Except
 define ExceptThreeFour: {1, 2, 3, 4, 5} except {3, 4}
@@ -71,6 +71,7 @@ define ExceptTuples: {Tuple{a: 1}, Tuple{a: 2}, Tuple{a: 3}} except {Tuple{a: 2}
 define ExceptNull: {1, 2, 3, 4, 5} except null
 define NullExcept: null except {1, 2, 3, 4, 5}
 define ExceptDecimalsAcrossScales: {1.0, 2.0} except {1.00, 3.0}
+define ExceptDecimalsEquivalentNotEqual: {1.0, 2.0} except {1.04, 3.0}
 
 // @Test: Intersect
 define NoIntersection: {1, 2, 2, 3} intersect {4, 5, 6}
@@ -85,6 +86,7 @@ define NullIntersect: null intersect {1, 2, 3}
 define IntersectNull: {1, 2, 3} intersect null
 define MultipleNullInListIntersect: {1, 2, 3, null} intersect {null, 3}
 define IntersectDecimalsAcrossScales: {1.0, 2.0} intersect {1.00, 3.0}
+define IntersectDecimalsEquivalentNotEqual: {1.0, 2.0} intersect {1.04, 3.0}
 
 // @Test: IndexOf
 define IndexOfSecond: IndexOf({'a', 'b', 'c', 'd'}, 'b')
@@ -233,6 +235,7 @@ define DupsTuples: distinct { Tuple{ hello: 'world' }, Tuple{ hello: 'cleveland'
 define NoDupsTuples: distinct { Tuple{ hello: 'world' }, Tuple{ hello: 'cleveland' } }
 define DuplicateNulls: distinct {null, 1, 2, null, 3, 4, 5, null}
 define DistinctDecimalsAcrossScales: distinct {1.0, 1.00, 2.0}
+define DistinctDecimalsEquivalentNotEqual: distinct {1.0, 1.04, 2.0}
 
 // @Test: First
 define Numbers: First({1, 2, 3, 4})

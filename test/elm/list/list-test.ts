@@ -209,6 +209,12 @@ describe('Union', () => {
     const expected = ['1.0', '2.0', '3.0'].map(Decimal.from);
     should(await this.unionDecimalsAcrossScales.exec(this.ctx)).be.eql(expected);
   });
+
+  it('should use equality semantics for Decimal (not equivalence)', async function () {
+    // {1.0, 2.0} union {1.04, 3.0}
+    const expected = ['1.0', '2.0', '1.04', '3.0'].map(Decimal.from);
+    should(await this.unionDecimalsEquivalentNotEqual.exec(this.ctx)).be.eql(expected);
+  });
 });
 
 describe('Except', () => {
@@ -268,6 +274,11 @@ describe('Except', () => {
     const expected = [Decimal.from('2.0')];
     should(await this.exceptDecimalsAcrossScales.exec(this.ctx)).be.eql(expected);
   });
+
+  it('should use equality semantics for Decimal (not equivalence)', async function () {
+    const expected = [Decimal.from('1.0'), Decimal.from('2.0')];
+    should(await this.exceptDecimalsEquivalentNotEqual.exec(this.ctx)).be.eql(expected);
+  });
 });
 
 describe('Intersect', () => {
@@ -322,6 +333,11 @@ describe('Intersect', () => {
   it('should use equality semantics for Decimal (ignores scale)', async function () {
     const expected = [Decimal.from('1.0')];
     should(await this.intersectDecimalsAcrossScales.exec(this.ctx)).be.eql(expected);
+  });
+
+  it('should use equality semantics for Decimal (not equivalence)', async function () {
+    const expected: Array<Decimal> = [];
+    should(await this.intersectDecimalsEquivalentNotEqual.exec(this.ctx)).be.eql(expected);
   });
 });
 
@@ -867,6 +883,11 @@ describe('Distinct', () => {
   it('should use equality semantics for Decimal (ignores scale)', async function () {
     const expected = [Decimal.from('1.0'), Decimal.from('2.0')];
     should(await this.distinctDecimalsAcrossScales.exec(this.ctx)).be.eql(expected);
+  });
+
+  it('should use equality semantics for Decimal (not equivalence)', async function () {
+    const expected = [Decimal.from('1.0'), Decimal.from('1.04'), Decimal.from('2.0')];
+    should(await this.distinctDecimalsEquivalentNotEqual.exec(this.ctx)).be.eql(expected);
   });
 });
 
