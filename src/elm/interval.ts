@@ -9,7 +9,7 @@ import { Context } from '../runtime/context';
 import { build } from './builder';
 import { IntervalTypeSpecifier, NamedTypeSpecifier } from '../types/type-specifiers.interfaces';
 import { ELM_ANY_TYPE, ELM_NAMED_TYPE_SPECIFIER } from '../util/elmTypes';
-import { Decimal } from '../datatypes/decimal';
+import { Decimal, TRUNCATE_TO_PRECISION } from '../datatypes/decimal';
 import { MAX_INT_VALUE, MIN_INT_VALUE } from '../util/limits';
 
 export class Interval extends Expression {
@@ -682,8 +682,8 @@ export class Expand extends Expression {
     // If the interval boundaries are more precise than the per quantity, the
     // more precise values will be truncated to the precision specified by the
     // per quantity.
-    low = low.truncated(perValue.scale);
-    high = high.truncated(perValue.scale);
+    low = low.withScale(perValue.scale, TRUNCATE_TO_PRECISION);
+    high = high.withScale(perValue.scale, TRUNCATE_TO_PRECISION);
 
     const perUnitSize = perIsIntegral ? 1 : 0.00000001;
     // NOTE: This is based on the size of an interval being based on the point-size of the type.

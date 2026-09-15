@@ -1,4 +1,4 @@
-import { Decimal } from '../../src/datatypes/decimal';
+import { Decimal, TRUNCATE_TO_PRECISION } from '../../src/datatypes/decimal';
 
 describe('Decimal', () => {
   describe('from', () => {
@@ -214,19 +214,6 @@ describe('Decimal', () => {
     });
   });
 
-  describe('truncated', () => {
-    it('should truncate to an optional decimal scale', () => {
-      Decimal.from('-1.239').truncated(2).should.equalDecimal('-1.23');
-      Decimal.from('1.9').truncated().should.equalDecimal('1.0');
-    });
-
-    it('should treat scale zero as integer truncation', () => {
-      const result = Decimal.from('1.99').truncated(0);
-      result.should.equalDecimal('1.0');
-      result.scale.should.equal(0);
-    });
-  });
-
   describe('ceil', () => {
     it('should return the smallest integer not less than the value', () => {
       Decimal.from('1.1').ceil().should.equal(2);
@@ -310,9 +297,16 @@ describe('Decimal', () => {
   });
 
   describe('withScale', () => {
-    it('should use CQL half-up rounding', () => {
+    it('should use CQL half-up rounding if no rounding mode specified', () => {
       Decimal.from('-0.5').withScale(0).should.equalDecimal('-1.0');
       Decimal.from('0.444444444').withScale(8).should.equalDecimal('0.44444444');
+    });
+
+    it('should truncate to precision when specified', () => {
+      Decimal.from('-0.5').withScale(0, TRUNCATE_TO_PRECISION).should.equalDecimal('0');
+      Decimal.from('1.777').withScale(0, TRUNCATE_TO_PRECISION).should.equalDecimal('1');
+      Decimal.from('1.777').withScale(1, TRUNCATE_TO_PRECISION).should.equalDecimal('1.7');
+      Decimal.from('1.777').withScale(2, TRUNCATE_TO_PRECISION).should.equalDecimal('1.77');
     });
 
     it('should reject invalid scales', () => {

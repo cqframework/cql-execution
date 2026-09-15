@@ -12,8 +12,8 @@ export type DecimalInput = Decimal | string | number | bigint;
 export type DecimalRoundingMode = DecimalJS.Rounding;
 
 const CQL_IMPLICIT_SCALE = 8;
-const CQL_IMPLICIT_ROUNDING = CQLDecimalJS.ROUND_HALF_UP;
-const TRUNCATE_TO_PRECISION = CQLDecimalJS.ROUND_DOWN;
+export const CQL_IMPLICIT_ROUNDING = CQLDecimalJS.ROUND_HALF_UP;
+export const TRUNCATE_TO_PRECISION = CQLDecimalJS.ROUND_DOWN;
 
 export class Decimal {
   private readonly value: DecimalJS;
@@ -214,18 +214,6 @@ export class Decimal {
 
   truncateToBigInt(): bigint {
     return BigInt(this.value.truncated().toString());
-  }
-
-  truncated(scale?: number): Decimal {
-    // specifying a scale here allows for "truncating to a precision"
-    // this is currently used in Interval.expand
-
-    if (!scale) {
-      // undefined or 0 both mean truncated to an integer
-      return new Decimal(this.value.truncated(), 0);
-    }
-
-    return this.withScale(scale, TRUNCATE_TO_PRECISION);
   }
 
   ceil(): number {
