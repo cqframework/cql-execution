@@ -417,16 +417,22 @@ describe('Mode', () => {
     should(await this.empty.exec(this.ctx)).be.null();
   });
   it('should be able to find bimodal', async function () {
-    (await this.bi_modal.exec(this.ctx)).should.eql([2, 3]);
+    // TODO: until https://jira.hl7.org/browse/FHIR-58745 is resolved,
+    // only expect one value
+    // (await this.bi_modal.exec(this.ctx)).should.eql([2, 3]);
+    (await this.bi_modal.exec(this.ctx)).should.eql(2);
   });
 
   it('should preserve units for single and tied quantity modes', async function () {
     validateQuantity(await this.quantitySingleMode.exec(this.ctx), 1, 'g');
 
     const modes = await this.quantityBiModal.exec(this.ctx);
-    modes.should.have.length(2);
-    validateQuantity(modes[0], 1, 'g');
-    validateQuantity(modes[1], 2, 'g');
+    // TODO: until https://jira.hl7.org/browse/FHIR-58745 is resolved,
+    // only expect one value
+    // modes.should.have.length(2);
+    // validateQuantity(modes[0], 1, 'g');
+    // validateQuantity(modes[1], 2, 'g');
+    validateQuantity(modes, 1, 'g');
   });
 
   it('should be null if some are numbers and some are quantities', async function () {

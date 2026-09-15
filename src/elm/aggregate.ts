@@ -251,14 +251,22 @@ export class Mode extends AggregateExpression {
       if (mode.length === 1) {
         return new Quantity(mode[0], items[0].unit);
       } else {
-        return mode.map(m => new Quantity(m, items[0].unit));
+        // TODO: The spec does not currently support returning multiple modes in case of a tie,
+        // the method signature is `Mode(argument List<T>) T`.
+        // To avoid returning something unexpected that will cause errors in followup expressions,
+        // just return the first result here. (See also the non-Quantity branch below)
+        // See: https://jira.hl7.org/browse/FHIR-58745
+        // return mode.map(m => new Quantity(m, items[0].unit));
+        return new Quantity(mode[0], items[0].unit);
       }
     } else {
       const mode = this.mode(filtered);
       if (mode.length === 1) {
         return mode[0];
       } else {
-        return mode;
+        // For now, return only a single value. See note above.
+        // return mode;
+        return mode[0];
       }
     }
   }
