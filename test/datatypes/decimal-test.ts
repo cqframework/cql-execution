@@ -349,7 +349,7 @@ describe('Decimal', () => {
       (() => Decimal.from(1).withMinimumScale(4.5)).should.throw(RangeError);
 
       // fractional numbers don't need to throw if the minimum is satisfied
-      Decimal.from("1.0000").withMinimumScale(1.5).should.equalDecimal("1.0000");
+      Decimal.from('1.0000').withMinimumScale(1.5).should.equalDecimal('1.0000');
 
       // negative numbers don't need to throw because technically "scale > -x" is always satisfied
       Decimal.from(1).withMinimumScale(-5).should.equalDecimal(1);
