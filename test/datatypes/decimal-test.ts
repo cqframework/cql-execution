@@ -294,6 +294,20 @@ describe('Decimal', () => {
       Decimal.from('1.235').round(2).should.equalDecimal('1.24');
       Decimal.from('-1.235').round(2).should.equalDecimal('-1.24');
     });
+
+    it('should treat null and unspecified as scale 0', () => {
+      Decimal.from('1.235').round(0).should.equalDecimal('1');
+      Decimal.from('1.235').round(null).should.equalDecimal('1');
+      Decimal.from('1.235').round().should.equalDecimal('1');
+      Decimal.from('-1.235').round(0).should.equalDecimal('-1');
+      Decimal.from('-1.235').round(null).should.equalDecimal('-1');
+      Decimal.from('-1.235').round().should.equalDecimal('-1');
+    });
+
+    it('should reject invalid scales', () => {
+      (() => Decimal.from(1).round(-1)).should.throw(RangeError);
+      (() => Decimal.from(1).round(1.5)).should.throw(RangeError);
+    });
   });
 
   describe('withScale', () => {
@@ -328,6 +342,17 @@ describe('Decimal', () => {
       value.withMinimumScale(3).scale.should.equal(3);
       value.withMinimumScale(4).should.equalDecimal('1.2000');
       value.withMinimumScale(4).scale.should.equal(4);
+    });
+
+    it('should reject invalid scales when impossible to satisfy', () => {
+      (() => Decimal.from(1).withMinimumScale(NaN)).should.throw(RangeError);
+      (() => Decimal.from(1).withMinimumScale(4.5)).should.throw(RangeError);
+
+      // fractional numbers don't need to throw if the minimum is satisfied
+      Decimal.from("1.0000").withMinimumScale(1.5).should.equalDecimal("1.0000");
+
+      // negative numbers don't need to throw because technically "scale > -x" is always satisfied
+      Decimal.from(1).withMinimumScale(-5).should.equalDecimal(1);
     });
   });
 
